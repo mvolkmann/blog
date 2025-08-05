@@ -1127,7 +1127,132 @@ Wrec supports holding state outside of web components and
 creating two-way bindings between state properties and web component properties.
 This can be used as an alternative to holding state in a parent component
 of multiple components that use the state.
-For an example of this, see the file `src/examples/data-binding2.ts`.
+For examples of using the `State` class, see the files
+`src/examples/hello-world-with-state.html`
+and `src/examples/data-binding2.ts`.
+
+Let's walk through the `hello-world-with-state` example.
+First, we define the custom element `labeled-input`.
+
+```js
+import Wrec, {css, html} from '../wrec';
+
+class LabeledInput extends Wrec {
+  static properties = {
+    label: {type: String},
+    name: {type: String},
+    value: {type: String}
+  };
+
+  static css = css`
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  `;
+
+  static html = html`
+    <div>
+      <label>this.label</label>
+      <input name="this.name" type="text" value="this.value" />
+    </div>
+  `;
+}
+
+LabeledInput.register();
+```
+
+Next, we define the custom element `hello-world`.
+
+```js
+import Wrec, {css, html} from '../wrec';
+
+class HelloWorld extends Wrec {
+  static properties = {
+    name: {type: String, value: 'World'}
+  };
+
+  static css = css`
+    p {
+      color: purple;
+    }
+  `;
+
+  static html = html` <p>Hello, <span>this.name</span>!</p> `;
+}
+
+HelloWorld.register();
+```
+
+Finally, we use these components inside `hello-world-with-state.html`.
+Note below how we:
+
+- create a `State` object
+
+  ```js
+  const state = new State();
+  ```
+
+- add a "name" property to the `State` object
+
+  ```js
+  state.addProperty('name', 'World');
+  ```
+
+- associate the `State` property "name" with the `labeled-input` property "value"
+
+  ```js
+  li.useState(state, {name: 'value'});
+  ```
+
+- associate the `State` property "name" with the `hello-world` property "name"
+
+  ```js
+  hw.useState(state, {name: 'name'});
+  ```
+
+Changing the value of the input updates the `State`
+which updates the `hello-world` element.
+
+Clicking the "Reset" button updates the `State`,
+which updates both the `labeled-input` and `hello-world` elements.
+
+```html
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="hello-world.js" type="module"></script>
+    <script src="labeled-input.js" type="module"></script>
+    <script type="module">
+      import {State} from '../state.js';
+      const state = new State();
+      state.addProperty('name', 'World');
+
+      window.onload = () => {
+        const li = document.querySelector('labeled-input');
+        li.useState(state, {name: 'value'});
+        const hw = document.querySelector('hello-world');
+        hw.useState(state, {name: 'name'});
+
+        const button = document.querySelector('button');
+        button.addEventListener('click', () => {
+          state.name = 'World';
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <labeled-input label="Name"></labeled-input>
+    <hello-world></hello-world>
+    <button>Reset</button>
+  </body>
+</html>
+```
 
 ## Error Checking
 
