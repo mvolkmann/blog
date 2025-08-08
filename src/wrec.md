@@ -159,6 +159,12 @@ and the es6-string-html extension to add syntax highlighting.
 The `register` method registers a custom HTML element
 whose name is the kebab-case version of the class name.
 For `BasicWrec`, the element name is `basic-wrec`.
+This is an optional convenience method.
+An alternative is to use the `define` method as follows:
+
+```js
+customElements.define('element-name', SomeClass);
+```
 
 To use this in a web page or Markdown file, include the following:
 
