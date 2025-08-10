@@ -1659,16 +1659,14 @@ In `index.html`:
 </html>
 ```
 
-### Zit
+### wrec
 
 I wanted to see whether I could provide the primary benefits of Lit
 using much less code and avoid requiring a build process.
-All that is needed is the class `ZitElement`
-which is less than 300 lines of code including blank lines and comments.
 JavaScript classes that implement a web component
-simply extend `ZitElement` instead of `HTMLElement` or `LitElement`.
+simply extend `Wrec` instead of `HTMLElement` or `LitElement`.
 
-The following goals are achieved when using the `ZitElement` superclass:
+The following goals are achieved when using the `Wrec` superclass:
 
 - Simplify adding event listeners.
 
@@ -1715,7 +1713,7 @@ The following goals are achieved when using the `ZitElement` superclass:
   1. Open the DevTools.
   1. Click the "Elements" tab.
   1. Double-click the value of the `count` attribute
-     on the `counter-zit` custom element.
+     on the `counter-wrec` custom element.
   1. Change the value to another number.
   1. Note that the UI updates to display the new value.
   1. Click the "Console" tab.
@@ -1726,58 +1724,41 @@ The following goals are achieved when using the `ZitElement` superclass:
   1. Note that the `count` attribute on the custom element
      updates to the new value.
 
-TODO: Maybe choose a better name than Zit.
-
-In `counter-zit.ts`:
+In `counter-wrec.js`:
 
 ```js
-import ZitElement from './zit-element.js';
+import Wrec, {css, html} from '../wrec';
 
-class CounterZit extends ZitElement {
-  static properties = {count: 'number'};
+class CounterWrec extends Wrec {
+  static properties = {
+    label: {type: String},
+    count: {type: Number}
+  };
 
-  static css() {
-    return /*css*/ `
-      :not(:defined) {
-        visibility: hidden;
-      }
+  static css = css`
+    label {
+      font-weight: bold;
+    }
+    button {
+      background-color: lightgreen;
+    }
+    button:disabled {
+      opacity: 0.8;
+    }
+  `;
 
-      .counter {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      button {
-        background-color: lightgreen;
-      }
-
-      button:disabled {
-        background-color: gray;
-      }
-    `;
-  }
-
-  static html() {
-    return /*html*/ `
-      <div>
-        <button disabled="$: count === 0" onclick="decrement">-</button>
-        <span>$count</span>
-        <button onclick="increment">+</button>
-      </div>
-    `;
-  }
-
-  decrement() {
-    if (this.count > 0) this.count--;
-  }
-
-  increment() {
-    this.count++;
-  }
+  static html = html`
+    <label>this.label</label>
+    <button onClick="this.count--" type="button" disabled="this.count === 0">
+      -
+    </button>
+    <span>this.count</span>
+    <button onClick="this.count++" type="button">+</button>
+    <span>this.count < 10 ? "single" : "double"</span> digit
+  `;
 }
 
-CounterZit.register();
+CounterWrec.register();
 ```
 
 In `index.html`:
@@ -1785,10 +1766,12 @@ In `index.html`:
 ```html
 <html>
   <head>
-    <script src="counter-zit.ts" type="module"></script>
+    <script src="counter-wrec.js" type="module"></script>
   </head>
   <body>
-    <counter-zit count="3"></counter-zit>
+    <counter-wrec label="Level" count="1"></counter-wrec>
+    <br />
+    <counter-wrec label="Score" count="0"></counter-wrec>
   </body>
 </html>
 ```
