@@ -90,7 +90,7 @@ merged other feature branches back to main.
   - `git pull`
   - `git rebase -i my-feat`
 
-  The `-i` flag (for "interacive") causes git to open a text editor
+  The `-i` flag (for "interactive") causes git to open a text editor
   where you can make changes to commits. It uses Vim by default.
   To configure git to use a different editor such as nano,
   enter `git config --global core.editor "nano"`.

@@ -82,6 +82,14 @@ These are documented at
 Some events are triggered by more than one kind of activity.
 When this is the case, a particular activity type can be specified.
 
+### Linting
+
+To check a YAML file describing GitHub Actions for issues:
+
+- enter `brew install actionlint`
+- `cd` to the project root directory
+- enter `actionlint`
+
 ### Workflow Jobs
 
 In the workflow defined above, `build` is a job id.
