@@ -1775,3 +1775,33 @@ In `index.html`:
   </body>
 </html>
 ```
+
+## Web Component Documentation
+
+Hunter Smith from Microsoft created several open source tools
+that aid in documenting web components.
+
+### Code Bubble
+
+npm install code-bubble
+
+### Web Components Language Server
+
+This is a VS Code extension for VS Code that provides:
+
+- IntelliSense
+
+  This provides auto-completion for web component properties, methods, and events.
+  It also provides type-aware suggestions based on component definitions.
+
+- Advanced Code Analysis
+
+  This provides real-time validation of web component syntax and structure.
+  It also provides error detection for common web component patterns.
+
+- Code Navigation
+
+  - Executing the "Go to definition" command on a custom element
+    navigates to the relevant position the in the Custom Elements Manifest.
+
+In the future this will be available for other IDEs and editors.
