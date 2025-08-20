@@ -1781,9 +1781,123 @@ In `index.html`:
 Hunter Smith from Microsoft created several open source tools
 that aid in documenting web components.
 
+### Custom Elements Manifest
+
+Install the analyzer tool which generates a `.cem` file
+from a web component source file which can contain
+JSDoc comments that describe its API.
+
+- `cd` to the project root directory.
+
+- Enter `npm i -D @custom-elements-manifest/analyzer`
+
+- Add the following script in `package.json`:
+
+  ```json
+  "cem": "custom-elements-manifest analyze",
+  ```
+
+- Enter `npm run cem`
+
 ### Code Bubble
 
-npm install code-bubble
+Code Bubble ...
+
+1. Enter `npm install code-bubble`
+
+1. Add the following code to where the code bubble should be rendered.
+   If adding this in a `.html` file, wrap it in
+   `<script type="module">...</script>.
+
+   ```js
+   import {CodeBubble} from 'code-bubble';
+   const options = {};
+   new CodeBubble(options);
+   ```
+
+1. Add code like the following where the code bubble should be rendered.
+   Note how the "<" and ">" characters inside the `code` element
+   must be escaped by using "&lt;" and "&gt;".
+
+   ```html
+   <code-bubble>
+     <pre>
+       <code class="language-html">
+         &lt;hello-world greeting=&quot;What's up&quot; name=&quot;Mark&quot;&gt;
+           &lt;div slot="before"&gt;This line precedes the greeting.&lt;/div&gt;
+           &lt;div slot="after"&gt;This line follows the greeting.&lt;/div&gt;
+         &lt;/hello-world&gt;
+       </code>
+     </pre>
+   </code-bubble>
+   ```
+
+### wc-dox
+
+To display documentation for your web components in a web application
+using data in a custom element manifest file:
+
+1. Enter `npm install wc-dox`.
+1. Add the following code at the root of the web application:
+
+   ```js
+   import { setWcDoxConfig } from 'wc-dox/index.js';
+   import manifest from './custom-elements.json' with { type: 'json' };
+   setWcDoxConfig(manifest);
+   ```
+
+1. Add one of the following where the documentation should be rendered:
+
+   ```html
+   <wc-dox tag="my-element"></wc-dox>
+   <wc-dox component-name="MyElement"></wc-dox>
+   ```
+
+### Storybook
+
+Storybook can be used to demonstrate and debug web components.
+The steps to use it are:
+
+1. `cd` to the project root directory.
+1. Enter `npm create storybook@latest`.
+1. When prompted "What configuration should we install?", select
+   "Recommended: Component dev, docs, test"
+1. If you see the message "We couldn't detect your project type.
+   (code: UNDETECTED)", followed by the prompt
+   "Do you want to manually choose a Storybook project type to install?",
+   select "Y".
+1. Select "web_components".
+1. After a few minutes, Storybook will launch in your default web browser.
+1. Suppose your web component is defined in the file `src/components/hello-world.js`.
+1. Optionally delete the files in the `stories` directory
+   related to the `button`, `header`, and `page` components.
+1. Create the file `stories/hello-world.stories.js`
+   containing code like the following:
+
+   ```js
+   import '../src/hello-world.js';
+
+   export default {title: 'Components/hello-world'};
+
+   const html = String.raw;
+
+   export const Default = () => html`<hello-world></hello-world>`;
+
+   export const WithName = () => html`<hello-world name="Mark"></hello-world>`;
+
+   export const WithGreetingAndName = () =>
+     html`<hello-world greeting="What's up" name="Mark"></hello-world>`;
+
+   export const WithSlots = () => html` <hello-world
+     greeting="Welcome aboard"
+     name="Captain"
+   >
+     <div slot="before">This line precedes the greeting.</div>
+     <div slot="after">This line follows the greeting.</div>
+   </hello-world>`;
+   ```
+
+1. To run Storybook again, enter `npm run storybook`
 
 ### Web Components Language Server
 
@@ -1791,17 +1905,21 @@ This is a VS Code extension for VS Code that provides:
 
 - IntelliSense
 
-  This provides auto-completion for web component properties, methods, and events.
-  It also provides type-aware suggestions based on component definitions.
+This provides auto-completion for web component properties, methods, and events.
+It also provides type-aware suggestions based on component definitions.
 
 - Advanced Code Analysis
 
-  This provides real-time validation of web component syntax and structure.
-  It also provides error detection for common web component patterns.
+This provides real-time validation of web component syntax and structure.
+It also provides error detection for common web component patterns.
 
 - Code Navigation
 
-  - Executing the "Go to definition" command on a custom element
-    navigates to the relevant position the in the Custom Elements Manifest.
+- Executing the "Go to definition" command on a custom element
+  navigates to the relevant position the in the Custom Elements Manifest.
 
 In the future this will be available for other IDEs and editors.
+
+```
+
+```
