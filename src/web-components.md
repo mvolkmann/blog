@@ -21,6 +21,10 @@ See my talk on Web Components at
 <a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
 target="_blank">OCI Tech Lunch - July 2025</a>.
 
+See my updated slides from this talk at
+<a href="https://github.com/mvolkmann/talks/blob/master/lambda-calculus.key.pdf"
+target="_blank">Lambda Calculus slides</a>.
+
 {% aTargetBlank "https://www.webcomponents.org/introduction", "Web components" %}
 define custom HTML elements that can be used just like standard HTML elements.
 They are defined by a set of standards that include the
@@ -730,7 +734,7 @@ class RadioGroupShadow extends HTMLElement {
           > div {
             display: flex;
             align-items: center;
-          } 
+          }
         }
       </style>
       <div class="radio-group">
