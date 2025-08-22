@@ -34,11 +34,11 @@ class TableWired extends Wrec {
     <table>
       <thead>
         <tr>
-          this.headings.map(this.makeTh.bind(this)).join('')
+          this.headings.map(this.makeTh.bind(this))
         </tr>
       </thead>
       <tbody>
-        this.data.map(this.makeTr.bind(this)).join('')
+        this.data.map(this.makeTr.bind(this))
       </tbody>
     </table>
   `;
@@ -65,7 +65,7 @@ class TableWired extends Wrec {
   makeTr(obj, index) {
     return html`
       <tr>
-        this.properties.map(this.makeTd.bind(this, ${index})).join('')
+        this.properties.map(this.makeTd.bind(this, ${index}))
       </tr>
     `;
   }
