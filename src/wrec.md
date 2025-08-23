@@ -707,7 +707,7 @@ class RadioGroup extends Wrec {
       <!-- prettier-ignore -->
       this.values
         .split(",")
-        .map(this.makeRadio.bind(this))
+        .map(this.makeRadio)
         .join("")
     </div>
   `;
@@ -796,7 +796,7 @@ class SelectList extends Wrec {
       <!-- prettier-ignore -->
       this.values
         .split(",")
-        .map(this.makeOption.bind(this))
+        .map(this.makeOption)
         .join("")
     </select>
   `;
