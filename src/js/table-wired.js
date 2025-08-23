@@ -2,7 +2,7 @@ import Wrec, { css, html } from './wrec.min.js';
 class TableWired extends Wrec {
     static properties = {
         headings: { type: (Array) },
-        properties: { type: (Array) },
+        propNames: { type: (Array) },
         data: { type: (Array) }
     };
     static css = css `
@@ -38,21 +38,21 @@ class TableWired extends Wrec {
         </tr>
       </thead>
       <tbody>
-        this.data.map(this.makeTr.bind(this))
+        this.data.map((_obj, index) => this.makeTr(index))
       </tbody>
     </table>
   `;
     sortAscending = true;
     sortHeader = null;
-    makeTd(index, prop) {
-        const value = this.data[index][prop];
+    makeTd(dataIndex, prop) {
+        const value = this.data[dataIndex][prop];
         return html `<td>${value}</td>`;
     }
     makeTh(heading, index) {
         return html `
       <th
         aria-label="sort by ${heading}"
-        data-property="${this.properties[index]}"
+        data-property="${this.propNames[index]}"
         onclick="sort"
         role="button"
         tabindex="0"
@@ -62,10 +62,10 @@ class TableWired extends Wrec {
       </th>
     `;
     }
-    makeTr(obj, index) {
+    makeTr(dataIndex) {
         return html `
       <tr>
-        this.properties.map(this.makeTd.bind(this, ${index}))
+        this.propNames.map(propName => this.makeTd(${dataIndex}, propName))
       </tr>
     `;
     }
