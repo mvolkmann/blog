@@ -418,8 +418,7 @@ add a line like the following in the `connectedCallback` method:
 this.shadowRoot.appendChild(someElement);
 ```
 
-The CSS `display` property for the root element of custom elements
-defaults to "inline".
+The CSS `display` property for custom elements defaults to "inline".
 Often it is desirable to change this to "block" or "inline-block".
 To do this, use the `:host` CSS pseudo-class.
 For example:
