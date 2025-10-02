@@ -20,7 +20,10 @@ should be at least 4.5:1.
 ### Missing alt Text
 
 All `img` elements should include the `alt` attribute
-whose value
+whose value describes the image.
+The description should not include works like "image" or "picture"
+because the browser knows it is one of those.
+For images that are purely decorative, set `alt` to an empty string.
 
 ### Missing Labels
 
@@ -50,5 +53,12 @@ When this attribute is missing, assistive technologies can
 ## Tools
 
 The following tools are recommended for detecting accessibility issues.
-However, they typically only detect up to 30% of the issues,
-so human text is also needed.
+Each of these can be installed as a browser extension.
+These tools typically only detect up to 30% of accessibility issues,
+so human testing is also needed.
+
+### axe
+
+### Accessibility Insights fo Web
+
+### WAVE
