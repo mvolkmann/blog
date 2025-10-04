@@ -29,6 +29,11 @@ In Chrome, to see the contrast for a particular element in a popup,
 open the DevTools, click the inspect button in the upper left,
 and hover over an element.
 
+It is particularly challenging to achieve good color contrast for
+text that has a background image containing a wide variety of colors.
+This is especially true for responsive sites where the text moves
+to a different part of the background image for different screen sizes.
+
 ### Missing alt Text (56% of pages)
 
 All `img` elements should include the `alt` attribute
