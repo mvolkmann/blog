@@ -6,6 +6,9 @@ layout: topic-layout.njk
 
 ## Overview
 
+Much of this content was derived from an excellent talk by Tyler Hawkins
+at the 2025 iJS New York conference.
+
 Every year [WebAIM](https://webaim.org/projects/million/) evaluates
 the top one million web site home pages for accessibility errors
 using WAVE and publishes a report.
