@@ -102,6 +102,10 @@ It does not default to English (`en`).
 The value can specify only a language such as "fr" for French
 or a language and a locale such as "fr-CA" for French Canadian.
 
+The `lang` attribute can be added to any HTML element that can include text.
+This is useful when some elements contain text written in
+a different language than the one specified on the `html` element.
+
 When this attribute is missing, several issues can occur.
 
 1. Assistive technologies that speak text
@@ -119,19 +123,39 @@ When this attribute is missing, several issues can occur.
    if they cannot correctly determine the source language.
 
 1. Search Engine Optimization (SEO) tools can file to correctly tag the content.
-
+   a
 1. Web browsers can apply incorrect language-specific styling,
    hyphenation, and spell checking.
 
+## Other Issues
+
+Verify that all form controls can be
+navigated to and modified using only the keyboard.
+
 ## Tools
 
-The following tools are recommended for detecting accessibility issues.
-Each of these can be installed as a browser extension.
+The tools described below are recommended for detecting accessibility issues.
+Each of these can be installed as a Chrome browser extension.
+
 These tools typically only detect up to 30% of accessibility issues,
 so human testing is also needed.
+For example, tools can verify that all `img` elements have an `alt` attribute,
+but they cannot verify that the `alt` value is good.
 
-### axe
+### axe DevTools - Web Accessibility Testing
+
+To install this, launch Chrome, browse the
+[chrome web store](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd?hl=en-US)
+link, and click the "Add to Chrome" button.
 
 ### Accessibility Insights fo Web
 
-### WAVE
+To install this, launch Chrome, browse the
+[chrome web store](https://chromewebstore.google.com/detail/accessibility-insights-fo/pbjjkligggfmakdaogkfomddhfmpjeni?hl=en)
+link, and click the "Add to Chrome" button.
+
+### WAVE Evaluation Tool
+
+To install this, launch Chrome, browse the
+[chrome web store](https://chromewebstore.google.com/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh)
+link, and click the "Add to Chrome" button.
