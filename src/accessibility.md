@@ -15,8 +15,7 @@ the top one million web site home pages for accessibility errors
 using WAVE and publishes a report.
 
 In the 2025 evaluation, 95% of all errors found fell into six categories.
-
-TODO: Add something here.
+Each of these are easy to address, as described below.
 
 ## Top Errors
 
