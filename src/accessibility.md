@@ -42,16 +42,43 @@ to a different part of the background image for different screen sizes.
 
 All `img` elements should include the `alt` attribute
 whose value describes the image.
-The description should not include works like "image" or "picture"
+For images that are purely decorative, set `alt` to an empty string
+to hide the image from assistive technologies.
+
+Good `alt` values describe the intent of the image.
+For example, suppose we have an `img` element that displays a trash can and
+that is inside a `button` whose purpose is to delete something when clicked.
+The `alt` value of the `img` should be "delete", not "trash can".
+
+The description should not include words like "image" or "picture"
 because the browser knows it is one of those.
-For images that are purely decorative, set `alt` to an empty string.
 
 ### Missing Labels (48% of pages)
 
 All form control elements such as `input`, `textarea`, and `select`
-should have an associated `label` element.
+should have a visible label. For example:
+
+```html
+<label for="last-name-input">Last Name</label>
+<input id="last-name-input" name="lastName" />
+```
+
+Typically this is achieved by including associated `label` elements.
 Other elements that play the role of a form control should include
 the `aria-label`, `aria-labelledby`, or `title` attribute.
+
+The `placeholder` attribute is not a suitable alternative
+to the approaches described above.
+Formatting requirements should always be visible
+rather than describing them in `placeholder` attribute
+since that text disappears as soon as the user begins entering a value.
+
+If the design of a page calls for using `placeholder` attributes
+instead of `label` elements, do something like the following:
+
+```html
+<input aria-label="last name" name="lastName" placeholder="Last Name" />
+```
 
 ### Empty Links (45% of pages)
 

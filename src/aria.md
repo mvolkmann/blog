@@ -8,7 +8,8 @@ layout: topic-layout.njk
 
 {% aTargetBlank "https://www.w3.org/WAI/standards-guidelines/aria/",
 "Accessible Rich Internet Applications" %} ARIA defines
-attributes and roles that make web content more accessible.
+attributes and roles that make web content more accessible
+by providing information that can be used by assistive technologies.
 
 There are around 50 defined ARIA attributes and around 48 roles,
 but only a handful of these are commonly used.
