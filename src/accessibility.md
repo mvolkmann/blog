@@ -53,6 +53,9 @@ The `alt` value of the `img` should be "delete", not "trash can".
 The description should not include words like "image" or "picture"
 because the browser knows it is one of those.
 
+The `alt` attribute cannot be added to `svg` elements.
+Instead, `svg` elements should include a `title` child element.
+
 ### Missing Labels (48% of pages)
 
 All form control elements such as `input`, `textarea`, and `select`
@@ -83,8 +86,7 @@ instead of `label` elements, do something like the following:
 ### Empty Links (45% of pages)
 
 Anchor (`a`) elements whose content is an image rather than text
-should specify a concise name using the
-`aria-label` or `aria-labelledby` attribute.
+should specify a concise name using the `alt` attribute.
 
 ### Empty Buttons (30% of pages)
 
@@ -97,8 +99,29 @@ should specify a concise name using the
 
 The `html` element should always include the `lang` attribute.
 It does not default to English (`en`).
-When this attribute is missing, assistive technologies can
-(TODO: Describe what can go wrong.)
+The value can specify only a language such as "fr" for French
+or a language and a locale such as "fr-CA" for French Canadian.
+
+When this attribute is missing, several issues can occur.
+
+1. Assistive technologies that speak text
+   can choose the wrong sound library or phonetic rules,
+   resulting in incorrect pronunciations.
+
+1. Assistive technologies can choose to
+   read text using the default language of the user
+   despite the page text not being written in that language.
+
+1. Assistive technologies that present Braille text
+   can translate the text incorrectly
+
+1. Language translation tools can provide incorrect translations
+   if they cannot correctly determine the source language.
+
+1. Search Engine Optimization (SEO) tools can file to correctly tag the content.
+
+1. Web browsers can apply incorrect language-specific styling,
+   hyphenation, and spell checking.
 
 ## Tools
 
