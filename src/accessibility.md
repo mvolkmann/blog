@@ -148,14 +148,29 @@ To install this, launch Chrome, browse the
 [chrome web store](https://chromewebstore.google.com/detail/axe-devtools-web-accessib/lhdoppojpmngadmnindnejefpokejbdd?hl=en-US)
 link, and click the "Add to Chrome" button.
 
-### Accessibility Insights fo Web
+To run this, open the DevTools and select the "axe DevTools" tab.
+Then click one of the large buttons such as "Full Page Scan".
+
+### Accessibility Insights for Web
 
 To install this, launch Chrome, browse the
 [chrome web store](https://chromewebstore.google.com/detail/accessibility-insights-fo/pbjjkligggfmakdaogkfomddhfmpjeni?hl=en)
 link, and click the "Add to Chrome" button.
+
+To run this, click the extensions button (looks like a jigsaw puzzle piece)
+and select "Accessibility Insights for Web" from the drop down menu.
+Then click one of the following options:
+
+- FastPass: runs in under five minutes
+- Quick Assess: can run from around 30 minutes
+- Assessment: a guided process
+- Ad hoc tools: visualizations that identify issues
 
 ### WAVE Evaluation Tool
 
 To install this, launch Chrome, browse the
 [chrome web store](https://chromewebstore.google.com/detail/wave-evaluation-tool/jbbplnpkjmmeebjpijfedlgcdilocofh)
 link, and click the "Add to Chrome" button.
+
+To run this, click the extensions button (looks like a jigsaw puzzle piece)
+and select "WAVE Evaluation Tool" from the drop down menu.
