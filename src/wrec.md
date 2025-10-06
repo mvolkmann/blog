@@ -1309,8 +1309,14 @@ Compare the files `counter-vanilla.js` and `counter-wrec.js`
 to get a feel for how much using wrec
 simplifies the code required to define a web component.
 
-To try the examples, clone the repository, cd to that directory,
-enter `npm install`, enter `npm run dev`, and browse localhost:5173.
+To try the examples:
+
+1. Clone the wrec repository.
+1. Enter `cd wrec`.
+1. Enter `npm install`.
+1. Enter `npm run dev`.
+1. Browse localhost:5173/examples/index.html.
+
 Also try browsing other `.html` files besides `index.html`.
 
 ## Tests
