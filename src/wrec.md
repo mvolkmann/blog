@@ -374,7 +374,7 @@ Wrec supports two-way data binding for HTML form elements.
 - `input` and `select` elements can have a `value` attribute
   whose value is "this.somePropertyName".
   An event listener for "change" events will be added.
-  To instead listen for "input" events, use the attribute "value:input".
+  To instead listen for "input" events, use the attribute `value:input`.
 - `textarea` elements can have text content
   that is "this.somePropertyName".
   An event listener for "change" events will be added.
