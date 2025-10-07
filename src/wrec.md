@@ -217,6 +217,36 @@ Press the return key or tab key, or click away from the value
 to commit the change.
 Note how the page updates to greet you.
 
+The value of the static variable `properties` is
+an object describing each of the component instance properties.
+The keys are property names and
+the values are objects that describe the property.
+Those objects support the following keys:
+
+- `doc`: a documentation string used when generating a Custom Elements Manifest file
+- `type`: a class name such as `Boolean`, `Number`, `String`, or `Array<Object>`
+- `value`: the default value
+- `required`: set to `true` to throw an error when the corresponding argument is not supplied
+- `computed`: a JavaScript expression from which the value is computed
+- `uses`: a comma-separated list of other property names used to compute the value
+- `dispatch`: set to `true` to cause a "change" event to be dispatched
+  every time the value of the property changes
+
+The `value` and `computed` properties should not both be specified.
+
+The `uses` property should only be specified
+if the `computed` property is also specified.
+It is needed when the `computed` expression
+doesn't directly reference the listed properties.
+This situation arises when the expression is a method call
+where the properties are not explicitly passed.
+Supplying `uses` causes the `computed` expression to be re-evaluated
+every time the value of any of the listed properties changes.
+
+The `detail` property of the dispatched "change" events
+is set to a JSON object whose key is the modified property name
+and whose value is the new property value.
+
 ## Event Listeners
 
 To wire event listeners,
@@ -1023,6 +1053,9 @@ and then modified.
 
 A "change" event is dispatched each time
 the value of the `checked` property changes.
+The event `detail` property is set to an object
+whose key is the name of the changed property and
+whose value is the new property value.
 
 ```js
 import Wrec, {css, html} from './wrec.min.js';

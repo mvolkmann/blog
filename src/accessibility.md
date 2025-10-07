@@ -128,8 +128,29 @@ When this attribute is missing, several issues can occur.
 
 ## Other Issues
 
-Verify that all form controls can be
-navigated to and modified using only the keyboard.
+The issues described in this section generally cannot be detected by tooling.
+See the [demo app](https://github.com/thawkin3/assistive-technology-demo)
+created by Tyler Hawkins that can be used to manually check for these issues.
+
+- Keyboard-only navigation
+
+  Verify that all form controls can be
+  navigated to and modified using only the keyboard.
+  Reasons this sometimes does not work include:
+
+  - attempting to implement button-like functionality
+    without using a `button` element (e.g. `a` or `div`)
+  - TODO: list more
+
+- Browser zoom
+- Text zoom
+- Device responsiveness
+- Hover text magnification
+- Screen reader navigation
+- Reduced motion preference
+- Spoken content
+- Voice control
+- Pointer control
 
 ## Tools
 
@@ -173,3 +194,19 @@ link, and click the "Add to Chrome" button.
 
 To run this, click the extensions button (looks like a jigsaw puzzle piece)
 and select "WAVE Evaluation Tool" from the drop down menu.
+
+### @axe-core/playwright
+
+[@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/blob/develop/packages/playwright/README.md)
+enables Playwright end-to-end tests to find accessibility issues.
+
+### cypress-axe
+
+[cypress-axe](https://github.com/component-driven/cypress-axe)
+enables Cypress end-to-end tests to find accessibility issues.
+
+### ESLint
+
+The ESLint plugin
+[eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y)
+finds accessibility issues in JSX, commonly found in React components.
