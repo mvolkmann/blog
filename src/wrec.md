@@ -1174,6 +1174,9 @@ An instance could look like the following:
 ></number-input>
 ```
 
+Wrec automatically updates the form values to be submitted
+when the values of the specified properties change.
+
 The components must be included in a `form` element
 that provides a way for the user to submit the `form`.
 If the `method` attribute value is "POST",
