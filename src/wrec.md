@@ -705,7 +705,7 @@ We will also use `number-slider` which was defined above.
 
 Here is the class that defines the `radio-group` custom element.
 Note how properties that are mapped to required attributes,
-such as `name` and `values` below, specify that with `required: true`.
+such as `values` below, specify that with `required: true`.
 
 ```js
 import Wrec, {css, html} from './wrec.min.js';
@@ -715,7 +715,6 @@ class RadioGroup extends Wrec {
 
   static properties = {
     labels: {type: String, required: true},
-    name: {type: String, required: true},
     values: {type: String, required: true},
     value: {type: String}
   };
@@ -792,7 +791,6 @@ class RadioGroup extends Wrec {
         <input
           type="radio"
           id="${value}"
-          name="${this.name}"
           onchange="handleChange"
           value="${value}"
           ${value === this.value ? 'checked' : ''}
@@ -815,14 +813,13 @@ class SelectList extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    name: {type: String, required: true},
     labels: {type: String, required: true},
     values: {type: String, required: true},
     value: {type: String}
   };
 
   static html = html`
-    <select name="${this.name}" value="this.value">
+    <select value="this.value">
       <!-- prettier-ignore -->
       this.values
         .split(",")
@@ -914,18 +911,19 @@ class DataBinding extends Wrec {
       <input value="this.colors" />
     </div>
     <radio-group
-      name="color1"
+      form-assoc="value: color1"
       labels="this.labels"
       value="this.color"
       values="this.colors"
     ></radio-group>
     <select-list
-      name="color2"
+      form-assoc="value: color2"
       labels="this.labels"
       value="this.color"
       values="this.colors"
     ></select-list>
     <number-slider
+      form-assoc="value: size"
       label="Size"
       max="48"
       min="12"
