@@ -1152,12 +1152,41 @@ Here it is in action.
 
 ## Form Submissions
 
-Web components that extend `Wrec` can contribute a value to
+Web components that extend `Wrec` can contribute values to
 form submissions by adding the following line in their class definition.
 Wrec looks for this and automatically does the rest of the work.
 
 ```js
 static formAssociated = true;
+```
+
+The components must be included in a `form` element
+that provides a way for the user to submit the `form`.
+If the `method` attribute value is "POST",
+each of the component properties is added to the form data.
+If the `method` attribute value is "GET",
+each of the component properties is added as a query parameter.
+
+If multiple web components use the same property names,
+there will be duplicate form property names
+and the values for each will be included.
+
+Each web component can choose to opt out of automatic form data setting.
+This is useful to avoid adding a form property for each component property.
+It also enables customizing the names of the form properties.
+To opt out, define a `constructor` in the web component as follows:
+
+```js
+constructor() {
+  super();
+  this.autoForm = false;
+}
+```
+
+Then to manually set a form value, use the following:
+
+```js
+this.setFormValue('someName', someValue);
 ```
 
 ## State
