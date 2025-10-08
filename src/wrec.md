@@ -1188,19 +1188,7 @@ If multiple web components use the same property names,
 there will be duplicate form property names
 and the values for each will be included.
 
-Each web component can choose to opt out of automatic form data setting.
-This is useful to avoid adding a form property for each component property.
-It also enables customizing the names of the form properties.
-To opt out, define a `constructor` in the web component as follows:
-
-```js
-constructor() {
-  super();
-  this.autoForm = false;
-}
-```
-
-Then to manually set a form value, use the following:
+To set a form value that is not mapped to a property, use the following:
 
 ```js
 this.setFormValue('someName', someValue);
