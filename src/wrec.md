@@ -1154,10 +1154,24 @@ Here it is in action.
 
 Web components that extend `Wrec` can contribute values to
 form submissions by adding the following line in their class definition.
-Wrec looks for this and automatically does the rest of the work.
 
 ```js
 static formAssociated = true;
+```
+
+Each instance of the component must specify the properties to be contributed
+and the corresponding form keys to be used using the `form-assoc` attribute.
+The value of this attribute is a comma-separated list of pairs.
+Each pair is a property name and form key separated by a colon.
+For example, one of the properties in the `radio-group` component is `value`.
+An instance could look like the following:
+
+```html
+<number-input
+  form-assoc="value: rating"
+  label="Rating"
+  value="1"
+></number-input>
 ```
 
 The components must be included in a `form` element
