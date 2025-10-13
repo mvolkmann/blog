@@ -4868,6 +4868,65 @@ the `some-url` refers to a file that defines an SVG filter.
 </html>
 ```
 
+### backdrop-filter property
+
+The CSS property {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter",
+"backdrop-filter" %} applies an effect to the area behind an element.
+In order to see this, the element must be partially transparent.
+
+One use is to simulate the liquid glass effect
+used in the 2026 version of Apple OSes. For example:
+
+<img alt="CSS backdrop-filter" style="width: 100%"
+  src="/blog/assets/css-backdrop-filter.png?v={{pkg.version}}"
+  title="CSS backdrop-filter">
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>backdrop-filter demo</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background: url('new-york.jpg');
+        background-size: cover;
+      }
+      button {
+        border: 2px solid white;
+        border-radius: 0.5rem;
+        color: white;
+        font-size: 2rem;
+        padding: 0.5rem;
+        transition-property: border-radius, padding, font-size;
+        transition-duration: 0.25s;
+      }
+      button:hover {
+        border-radius: 1rem;
+        padding: 1rem;
+        font-size: 3rem;
+      }
+      .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .liquid-glass {
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(3px); /* for Safari */
+      }
+    </style>
+  </head>
+  <body>
+    <button class="center liquid-glass">Click Me</button>
+  </body>
+</html>
+```
+
 ### Linting
 
 The {% aTargetBlank "https://stylelint.io", "stylelint" %} linter
