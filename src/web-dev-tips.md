@@ -4187,9 +4187,80 @@ The following example uses a container query to change the
 
 ### Light and dark modes
 
-The CSS Object Model (CSSOM) {% aTargetBlank
+The easiest way to support light and dark modes is to use the {% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme",
+"color-scheme" %} CSS property and the
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark",
+"light-dark" %} CSS function.
+The example below demonstrates this.
+It also uses the {% aTargetBlank
+"https://bottosson.github.io/posts/oklab/",
+"Oklab" %} color space via the CSS function
+{% aTargetBlank
+"https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch",
+"oklch" %}.
+
+- `l` is for lightness: 0 to 1 or 0% to 100%
+- `c` is for chroma: 0 to 1 or 0% to 100%
+- `h` is for hue: 0 to 360 degrees
+
+This honors the light/dark system setting
+unless the "Force Dark Mode" checkbox is checked.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Light-Dark Modes</title>
+    <style>
+      body {
+        color-scheme: light dark;
+
+        --base-color: rebeccapurple;
+        --light-color: oklch(
+          from var(--base-color) clamp(0.2, l + 0.4, 0.9) c h
+        );
+        --dark-color: oklch(
+          from var(--base-color) clamp(0.2, l - 0.4, 0.9) c h
+        );
+
+        background-color: light-dark(var(--light-color), var(--dark-color));
+        font-family: sans-serif;
+        min-height: 100vh;
+      }
+
+      label,
+      p {
+        color: light-dark(var(--dark-color), var(--light-color));
+      }
+
+      p {
+        font-size: 2rem;
+      }
+
+      :has(#toggle:checked) {
+        color-scheme: dark;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      This text and the background colors<br />
+      will change based on light/dark mode.
+    </p>
+    <input type="checkbox" id="toggle" />
+    <label for="toggle">Force Dark Mode</label>
+  </body>
+</html>
+```
+
+Try changing the value of `--base-color` and refreshing the page.
+
+Another way to support light and dark modes is to use media queries
+and the CSS Object Model (CSSOM) method {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia",
-"window.matchMedia" %} method can be used to support light and dark modes.
+"window.matchMedia" %}.
 For example, the following line of JavaScript code
 determines if the user has configured their operating system
 to prefer dark mode:
