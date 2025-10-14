@@ -1192,6 +1192,13 @@ To set a form value that is not mapped to a property, use the following:
 this.setFormValue('someName', someValue);
 ```
 
+Wrec automatically handles form resets.
+The initial value of each component property is saved
+when each instance is created.
+When a `button` with `type="reset"` inside a `form` element is clicked,
+the provided `formResetCallback` method sets the values of
+each component property back to their initial values.
+
 ## State
 
 Wrec supports holding state outside of web components and
