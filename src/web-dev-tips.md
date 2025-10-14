@@ -4208,6 +4208,8 @@ It also uses the {% aTargetBlank
 This honors the light/dark system setting
 unless the "Force Dark Mode" checkbox is checked.
 
+{% include "_light-dark-mode.html" %}
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -4878,9 +4880,7 @@ In order to see this, the element must be partially transparent.
 One use is to simulate the liquid glass effect
 used in the 2026 version of Apple OSes. For example:
 
-<img alt="CSS backdrop-filter" style="width: 100%"
-  src="/blog/assets/css-backdrop-filter.png?v={{pkg.version}}"
-  title="CSS backdrop-filter">
+{% include "_backdrop-filter.html" %}
 
 ```html
 <!DOCTYPE html>

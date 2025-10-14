@@ -1,0 +1,37 @@
+<style>
+  .light-dark {
+    color-scheme: light dark;
+
+    --base-color: rebeccapurple;
+    --light-color: oklch(from var(--base-color) clamp(0.2, l + 0.4, 0.9) c h);
+    --dark-color: oklch(from var(--base-color) clamp(0.2, l - 0.4, 0.9) c h);
+
+    background-color: light-dark(var(--light-color), var(--dark-color));
+    font-family: sans-serif;
+
+    label {
+      width: auto;
+    }
+
+    label,
+    p {
+      color: light-dark(var(--dark-color), var(--light-color));
+    }
+
+    p {
+      font-size: 2rem;
+    }
+  }
+
+  .light-dark:has(#toggle:checked) {
+    color-scheme: dark;
+  }
+</style>
+<section class="light-dark">
+  <p>
+    This text and the background colors<br />
+    will change based on light/dark mode.
+  </p>
+  <input type="checkbox" id="toggle" />
+  <label for="toggle">Force Dark Mode</label>
+</section>

@@ -1,0 +1,43 @@
+<style>
+  .backdrop-filter {
+    aspect-ratio: 3974 / 2250;
+    background: url('../assets/new-york.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    margin: 0;
+    position: relative;
+    width: 100%;
+
+    button {
+      border: 2px solid white;
+      border-radius: 0.5rem;
+      color: white;
+      font-size: 2rem;
+      padding: 0.5rem;
+      transition-property: border-radius, padding, font-size;
+      transition-duration: 0.25s;
+    }
+
+    button:hover {
+      border-radius: 1rem;
+      padding: 1rem;
+      font-size: 3rem;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .liquid-glass {
+      background-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(3px); /* for Safari */
+    }
+  }
+</style>
+<section class="backdrop-filter">
+  <button class="center liquid-glass">Click Me</button>
+</section>
