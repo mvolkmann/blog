@@ -479,6 +479,15 @@ the parent listens for so it can update its own state.
 For an example of this, see
 [wrec-compare](https://github.com/mvolkmann/lit-examples/blob/main/wrec-compare/binding-demo.ts).
 
+## Disabling Components
+
+Adding the `disabled` attribute to a wrec component instance or removing it,
+automatically does the same to all applicable descendant elements,
+even those in nested shadow DOMs.
+Applicable elements include
+`button`, `fieldset`, `input`, `select`, and `textarea` elements,
+and also nested wrec component instances.
+
 ## Computed Properties
 
 The value of a property can be computed using the values of other properties.
