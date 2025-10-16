@@ -454,13 +454,19 @@ Make web pages appear and operate in predictable ways.
 #### 3.2.1 On Focus - Level A
 
 When any user interface component receives focus, it does not initiate
-a change of context.
+a change of context. A "change of context" means a significant change
+in the content that, if unexpected, can disorient the user.
 
 #### 3.2.2 On Input - Level A
 
 Changing the setting of any user interface component does not automatically
 cause a change of context unless the user has been advised of the behavior
 before using the component.
+
+"Changing the setting" here means altering the state or value
+of a form control or interactive element.
+An example of this would be automatically navigating to different page
+if the user enters the name of a color in an input.
 
 #### 3.2.3 Consistent Navigation - Level AA
 
