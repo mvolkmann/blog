@@ -10,6 +10,8 @@ Much of this content was derived from an excellent talk
 "Top 6 Accessibility Mistakes and How to Fix Them"
 by Tyler Hawkins at the 2025 iJS New York conference.
 
+Also see my [WCAG](/blog/wcag) page.
+
 Every year [WebAIM](https://webaim.org/projects/million/) evaluates
 the top one million web site home pages for accessibility errors
 using WAVE and publishes a report.
