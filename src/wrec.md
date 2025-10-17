@@ -1219,14 +1219,16 @@ For examples of using the `State` class, see the files
 and `src/examples/data-binding2.ts`.
 
 Let's walk through the `hello-world-with-state` example.
-First, we define the custom element `labeled-input`.
+First, we define the custom element `labeled-input`
+in the file `labeled-input.js`.
 
 ```js
 import Wrec, {css, html} from '../wrec';
 
 class LabeledInput extends Wrec {
   static properties = {
-    label: {type: String},
+    id: {type: String, required: true},
+    label: {type: String, required: true},
     name: {type: String},
     value: {type: String}
   };
@@ -1241,8 +1243,8 @@ class LabeledInput extends Wrec {
 
   static html = html`
     <div>
-      <label>this.label</label>
-      <input name="this.name" type="text" value="this.value" />
+      <label for="this.id">this.label</label>
+      <input id="this.id" name="this.name" type="text" value="this.value" />
     </div>
   `;
 }
@@ -1250,7 +1252,8 @@ class LabeledInput extends Wrec {
 LabeledInput.register();
 ```
 
-Next, we define the custom element `hello-world`.
+Next, we define the custom element `hello-world`
+in the file `hello-world.js`.
 
 ```js
 import Wrec, {css, html} from '../wrec';
@@ -1295,8 +1298,11 @@ Note below how we:
 
 - associate the `State` property "name" with the `hello-world` property "name"
 
+  It is not necessary to specify the mapping from state properties
+  to component properties when they are the same.
+
   ```js
-  hw.useState(state, {name: 'name'});
+  hw.useState(state);
   ```
 
 Changing the value of the input updates the `State`
@@ -1324,7 +1330,7 @@ which updates both the `labeled-input` and `hello-world` elements.
         const li = document.querySelector('labeled-input');
         li.useState(state, {name: 'value'});
         const hw = document.querySelector('hello-world');
-        hw.useState(state, {name: 'name'});
+        hw.useState(state);
 
         const button = document.querySelector('button');
         button.addEventListener('click', () => {
@@ -1334,7 +1340,7 @@ which updates both the `labeled-input` and `hello-world` elements.
     </script>
   </head>
   <body>
-    <labeled-input label="Name"></labeled-input>
+    <labeled-input id="name" label="Name"></labeled-input>
     <hello-world></hello-world>
     <button>Reset</button>
   </body>
