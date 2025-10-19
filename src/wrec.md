@@ -1159,8 +1159,11 @@ Here it is in action.
 
 ## Form Submissions
 
-Web components that extend `Wrec` can contribute values to
-form submissions by adding the following line in their class definition.
+Wrec components can use the same approach as vanilla web components
+to implement form submissions.
+But wrec also provides an easier way through the `form-assoc` attribute.
+
+Start by adding the following line in classes that extend `Wrec`:
 
 ```js
 static formAssociated = true;
