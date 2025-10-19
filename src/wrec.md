@@ -1347,6 +1347,10 @@ which updates both the `labeled-input` and `hello-world` elements.
 </html>
 ```
 
+This example creates a single `State` object,
+but any number can be created as a way of logically grouping
+the properties to be shared.
+
 ## Error Checking
 
 Wrec checks for many kinds of errors and throws an `Error` when they are found.
