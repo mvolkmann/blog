@@ -142,7 +142,8 @@ unless a specific display orientation is essential.
 
 #### 1.3.5 Identify Input Purpose - Level AA
 
-The purpose of each input field collecting information about the user can be programmatically determined when:
+The purpose of each input field collecting information about the user
+can be programmatically determined when:
 
 - The input field serves a purpose identified in the Input Purposes
   for user interface components section; and
@@ -308,9 +309,9 @@ additional content to become visible and then hidden, the following are true:
 Exception: The visual presentation of the additional content is controlled by
 the user agent and is not modified by the author.
 
-User interface components and navigation must be operable.
-
 ## Principle 2 - Operable
+
+User interface components and navigation must be operable.
 
 ### Guideline 2.1 – Keyboard Accessible
 
@@ -710,7 +711,7 @@ unless a change is initiated by the user:
 - Self-help option;
 - A fully automated contact mechanism.
 
-#### 3.3.7 Redundant Entry - Level A
+#### 3.2.7 Redundant Entry - Level A
 
 Information previously entered by or provided to the user that is
 required to be entered again in the same process is either:
@@ -724,7 +725,7 @@ Except when:
 - the information is required to ensure the security of the content, or
 - previously entered information is no longer valid.
 
-#### 3.3.8 Accessible Authentication (Minimum) - Level AA
+#### 3.2.8 Accessible Authentication (Minimum) - Level AA
 
 A cognitive function test (such as remembering a password or solving a puzzle)
 is not required for any step in an authentication process
@@ -738,7 +739,7 @@ unless that step provides at least one of the following:
 - Personal Content: The cognitive function test is to identify non-text content
   the user provided to the website.
 
-#### 3.3.9 Accessible Authentication (Enhanced) - Level AAA
+#### 3.2.9 Accessible Authentication (Enhanced) - Level AAA
 
 A cognitive function test (such as remembering a password or solving a puzzle)
 is not required for any step in an authentication process
