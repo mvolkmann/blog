@@ -5,7 +5,7 @@ layout: topic-layout.njk
 ---
 
 This page copies and summarizes the Web Content Accessibility Guidelines (WCAG)
-version 2.0 which were last updated on 22 Sep 2025.
+version 2.2 which were last updated on 22 Sep 2025.
 For the full content, see {% aTargetBlank
 "https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0",
 "How to Meet WCAG (Quick Reference)" %}.
@@ -134,6 +134,26 @@ Instructions provided for understanding and operating content do not
 rely solely on sensory characteristics of components such as
 shape, color, size, visual location, orientation, or sound.
 
+#### 1.3.4 Orientation - Level AA
+
+Content does not restrict its view and operation to a single
+display orientation, such as portrait or landscape,
+unless a specific display orientation is essential.
+
+#### 1.3.5 Identify Input Purpose - Level AA
+
+The purpose of each input field collecting information about the user can be programmatically determined when:
+
+- The input field serves a purpose identified in the Input Purposes
+  for user interface components section; and
+- The content is implemented using technologies with support for
+  identifying the expected meaning for form input data.
+
+#### Identify Purpose - Level AAA
+
+In content implemented using markup languages, the purpose of user interface
+components, icons, and regions can be programmatically determined.
+
 ### Guideline 1.4 – Distinguishable
 
 Make it easier for users to see and hear content
@@ -231,9 +251,66 @@ presentation of text is essential to the information being conveyed.
 Note: Logotypes (text that is part of a logo or brand name)
 are considered essential.
 
-## Principle 2 – Operable
+#### 1.4.10 Reflow - Level AA
+
+Content can be presented without loss of information or functionality,
+and without requiring scrolling in two dimensions for:
+
+- Vertical scrolling content at a width equivalent to 320 CSS pixels;
+- Horizontal scrolling content at a height equivalent to 256 CSS pixels.
+
+Except for parts of the content which require two-dimensional layout
+for usage or meaning.
+
+#### 1.4.11 Non-text Contrast - Level AA
+
+The visual presentation of the following have a contrast ratio
+of at least 3:1 against adjacent color(s):
+
+- User Interface Components: Visual information required to identify
+  user interface components and states, except for inactive components or
+  where the appearance of the component is determined by the user agent
+  and not modified by the author;
+- Graphical Objects: Parts of graphics required to understand the content,
+  except when a particular presentation of graphics is essential to the
+  information being conveyed.
+
+#### 1.4.12 Text Spacing - Level AA
+
+In content implemented using markup languages that support the following
+text style properties, no loss of content or functionality occurs by
+setting all of the following and by changing no other style property:
+
+- Line height (line spacing) to at least 1.5 times the font size;
+- Spacing following paragraphs to at least 2 times the font size;
+- Letter spacing (tracking) to at least 0.12 times the font size;
+- Word spacing to at least 0.16 times the font size.
+
+Exception: Human languages and scripts that do not make use of one or more
+of these text style properties in written text can conform using
+only the properties that exist for that combination of language and script.
+
+#### 1.4.13 Content on Hover or Focus - Level AA
+
+Where receiving and then removing pointer hover or keyboard focus triggers
+additional content to become visible and then hidden, the following are true:
+
+- Dismissible: A mechanism is available to dismiss the additional content
+  without moving pointer hover or keyboard focus, unless the additional content
+  communicates an input error or does not obscure or replace other content;
+- Hoverable: If pointer hover can trigger the additional content,
+  then the pointer can be moved over the additional content
+  without the additional content disappearing;
+- Persistent: The additional content remains visible until
+  the hover or focus trigger is removed, the user dismisses it,
+  or its information is no longer valid.
+
+Exception: The visual presentation of the additional content is controlled by
+the user agent and is not modified by the author.
 
 User interface components and navigation must be operable.
+
+## Principle 2 - Operable
 
 ### Guideline 2.1 – Keyboard Accessible
 
@@ -271,6 +348,18 @@ must meet this success criterion.
 
 All functionality of the content is operable through a keyboard interface
 without requiring specific timings for individual keystrokes.
+
+#### 2.1.4 Character Key Shortcuts - Level A
+
+If a keyboard shortcut is implemented in content using only letter
+(including upper- and lower-case letters), punctuation, number, or
+symbol characters, then at least one of the following is true:
+
+- Turn off: A mechanism is available to turn the shortcut off;
+- Remap: A mechanism is available to remap the shortcut to include
+  one or more non-printable keyboard keys (e.g., Ctrl, Alt);
+- Active only on focus: The keyboard shortcut for a user interface component
+  is only active when that component has focus.
 
 ### Guideline 2.2 – Enough Time
 
@@ -330,6 +419,12 @@ except interruptions involving an emergency.
 When an authenticated session expires, the user can continue the activity
 without loss of data after re-authenticating.
 
+#### 2.2.6 Timeouts - Level AAA
+
+Users are warned of the duration of any user inactivity
+that could cause data loss, unless the data is preserved
+for more than 20 hours when the user does not take any actions.
+
 ### Guideline 2.3 – Seizures and Physical Reactions
 
 Do not design content in a way that is known to
@@ -345,6 +440,12 @@ below the general flash and red flash thresholds.
 
 Web pages do not contain anything that flashes more than three times
 in any one second period.
+
+#### 2.3.3 Animation from Interactions - Level AAA
+
+Motion animation triggered by interaction can be disabled,
+unless the animation is essential to the functionality
+or the information being conveyed.
 
 ### Guideline 2.4 – Navigable
 
@@ -401,10 +502,122 @@ Section headings are used to organize the content.
 "Heading" is used in its general sense and includes titles and
 other ways to add a heading to different types of content.
 
+#### 2.4.11 Focus Not Obscured (Minimum) - Level AA
+
+When a user interface component receives keyboard focus,
+the component is not entirely hidden due to author-created content.
+
+#### 2.4.12 Focus Not Obscured (Enhanced) - Level AAA
+
+When a user interface component receives keyboard focus,
+no part of the component is hidden by author-created content.
+
+#### 2.4.13 Focus Appearance - Level AAA
+
+When the keyboard focus indicator is visible,
+an area of the focus indicator meets all the following:
+
+- is at least as large as the area of a 2 CSS pixel thick perimeter
+  of the unfocused component or sub-component, and
+- has a contrast ratio of at least 3:1 between the same pixels
+  in the focused and unfocused states.
+
+Exceptions:
+
+- The focus indicator is determined by the user agent
+  and cannot be adjusted by the author, or
+- The focus indicator and the indicator's background color
+  are not modified by the author.
+
 ### Guideline 2.5 – Input Modalities
 
 Make it easier for users to operate functionality through various inputs
 beyond keyboard.
+
+#### 2.5.1 Pointer Gestures - Level A
+
+All functionality that uses multipoint or path-based gestures for operation
+can be operated with a single pointer without a path-based gesture,
+unless a multipoint or path-based gesture is essential.
+
+#### 2.5.2 Pointer Cancellation - Level A
+
+For functionality that can be operated using a single pointer,
+at least one of the following is true:
+
+- No Down-Event: The down-event of the pointer is not used to
+  execute any part of the function;
+- Abort or Undo: Completion of the function is on the up-event,
+  and a mechanism is available to abort the function before completion
+  or to undo the function after completion;
+- Up Reversal: The up-event reverses any outcome of the preceding down-event;
+- Essential: Completing the function on the down-event is essential.
+
+#### 2.5.3 Label in Name - Level A
+
+For user interface components with labels that include text or images of text,
+the name contains the text that is presented visually.
+
+Note: A best practice is to have the text of the label at the start of the name.
+
+#### 2.5.4 Motion Actuation - Level A
+
+Functionality that can be operated by device motion or user motion can also be
+operated by user interface components and responding to the motion
+can be disabled to prevent accidental actuation, except when:
+
+- Supported Interface: The motion is used to operate functionality
+  through an accessibility supported interface;
+- Essential: The motion is essential for the function
+  and doing so would invalidate the activity.
+
+#### 2.5.5 Target Size (Enhanced) - Level AAA
+
+The size of the target for pointer inputs is at least 44 by 44 CSS pixels
+except when:
+
+- Equivalent: The target is available through an equivalent link or control
+  on the same page that is at least 44 by 44 CSS pixels;
+- Inline: The target is in a sentence or block of text;
+- User Agent Control: The size of the target is determined by the user agent
+  and is not modified by the author;
+- Essential: A particular presentation of the target is essential
+  to the information being conveyed.
+
+#### 2.5.6 Concurrent Input Mechanisms - Level AAA
+
+Web content does not restrict use of input modalities available on a platform
+except where the restriction is essential, required to ensure the security
+of the content, or required to respect user settings.
+
+#### 2.5.7 Dragging Movements - Level AA
+
+All functionality that uses a dragging movement for operation can be achieved
+by a single pointer without dragging, unless dragging is essential or
+the functionality is determined by the user agent and
+not modified by the author.
+
+Note: This requirement applies to web content that interprets pointer actions
+(i.e., this does not apply to actions that are required to operate
+the user agent or assistive technology).
+
+#### 2.5.8 Target Size (Minimum) - Level AA
+
+The size of the target for pointer inputs is at least 24 by 24 CSS pixels,
+except when:
+
+- Spacing: Undersized targets (those less than 24 by 24 CSS pixels) are
+  positioned so that if a 24 CSS pixel diameter circle is centered on
+  the bounding box of each, the circles do not intersect another target
+  or the circle for another undersized target;
+- Equivalent: The function can be achieved through a different control
+  on the same page that meets this criterion;
+- Inline: The target is in a sentence or its size is otherwise constrained
+  by the line-height of non-target text;
+- User Agent Control: The size of the target is determined by the user agent
+  and is not modified by the author;
+- Essential: A particular presentation of the target is essential or
+  is legally required for the information being conveyed.
 
 ## Principle 3 – Understandable
 
@@ -485,6 +698,57 @@ are identified consistently.
 Changes of context are initiated only by user request or a mechanism is
 available to turn off such changes.
 
+#### 3.2.6 Consistent Help - Level A
+
+If a web page contains any of the following help mechanisms, and
+those mechanisms are repeated on multiple web pages within a set of web pages,
+they occur in the same order relative to other page content,
+unless a change is initiated by the user:
+
+- Human contact details;
+- Human contact mechanism;
+- Self-help option;
+- A fully automated contact mechanism.
+
+#### 3.3.7 Redundant Entry - Level A
+
+Information previously entered by or provided to the user that is
+required to be entered again in the same process is either:
+
+- auto-populated, or
+- available for the user to select.
+
+Except when:
+
+- re-entering the information is essential,
+- the information is required to ensure the security of the content, or
+- previously entered information is no longer valid.
+
+#### 3.3.8 Accessible Authentication (Minimum) - Level AA
+
+A cognitive function test (such as remembering a password or solving a puzzle)
+is not required for any step in an authentication process
+unless that step provides at least one of the following:
+
+- Alternative: Another authentication method that does not rely on
+  a cognitive function test.
+- Mechanism: A mechanism is available to assist the user in completing
+  the cognitive function test.
+- Object Recognition: The cognitive function test is to recognize objects.
+- Personal Content: The cognitive function test is to identify non-text content
+  the user provided to the website.
+
+#### 3.3.9 Accessible Authentication (Enhanced) - Level AAA
+
+A cognitive function test (such as remembering a password or solving a puzzle)
+is not required for any step in an authentication process
+unless that step provides at least one of the following:
+
+- Alternative: Another authentication method that does not rely on
+  a cognitive function test.
+- Mechanism: A mechanism is available to assist the user in completing
+  the cognitive function test.
+
 ### Guideline 3.3 – Input Assistance
 
 Help users avoid and correct mistakes.
@@ -563,3 +827,10 @@ Note: This success criterion is primarily for web authors who
 develop or script their own user interface components.
 For example, standard HTML controls already meet this success criterion
 when used according to specification.
+
+#### 4.1.3 Status Messages - Level AA
+
+In content implemented using markup languages, status messages can be
+programmatically determined through role or properties
+such that they can be presented to the user
+by assistive technologies without receiving focus.
