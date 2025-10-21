@@ -920,22 +920,22 @@ class DataBinding extends Wrec {
       <input value="this.colors" />
     </div>
     <radio-group
-      form-assoc="value: color1"
       labels="this.labels"
+      name="color1"
       value="this.color"
       values="this.colors"
     ></radio-group>
     <select-list
-      form-assoc="value: color2"
       labels="this.labels"
+      name="color2"
       value="this.color"
       values="this.colors"
     ></select-list>
     <number-slider
-      form-assoc="value: size"
       label="Size"
       max="48"
       min="12"
+      name="size"
       value="this.size"
     ></number-slider>
     <p>You selected the color <span id="selected-color">this.color</span>.</p>
@@ -1161,7 +1161,7 @@ Here it is in action.
 
 Wrec components can use the same approach as vanilla web components
 to implement form submissions.
-But wrec also provides an easier way through the `form-assoc` attribute.
+But wrec also provides an easier approach.
 
 Start by adding the following line in classes that extend `Wrec`:
 
@@ -1169,19 +1169,25 @@ Start by adding the following line in classes that extend `Wrec`:
 static formAssociated = true;
 ```
 
-Each instance of the component must specify the properties to be contributed
+If a component only contributes a single value in form submissions,
+and that value is held in a property named `value` then each instance
+can specify the key to be contributed with the `name` attribute.
+This matches how the built-in elements `input`, `select`, and `textarea`
+contribute to form submissions.
+
+If a component contributes multiple values in form submissions than
+each instance must specify the properties to be contributed
 and the corresponding form keys to be used using the `form-assoc` attribute.
 The value of this attribute is a comma-separated list of pairs.
 Each pair is a property name and form key separated by a colon.
-For example, one of the properties in the `radio-group` component is `value`.
-An instance could look like the following:
+
+For example, suppose we have a `color-picker` component
+with the properties "red", "green", and "blue".
+An instance inside a `form` could look like the following
+in order to submit those values with the keys "r", "g", and "b":
 
 ```html
-<number-input
-  form-assoc="value: rating"
-  label="Rating"
-  value="1"
-></number-input>
+<color-picker form-assoc="red: r, green: g, blue: b"></color-picker>
 ```
 
 Wrec automatically updates the form values to be submitted
