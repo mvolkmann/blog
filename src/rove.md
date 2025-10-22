@@ -22,27 +22,27 @@ This document describes one way by specifying the following:
 
 The module cards are referred to by their first letter:
 
-B = brain
-C = coil
-G = gripper
-L = laser
-M = motor
-S = sensor
+- B = brain
+- C = coil
+- G = gripper
+- L = laser
+- M = motor
+- S = sensor
 
 The movement cards are referred to by their first two letters:
 
-BO = BOOST
-BR = BRIDGE
-CL = CLIMB
-DR = DRILL
-HA = HAUL
-JU = JUMP
-LE = LEARN
-NA = NAVIGATE
-RE = RECHARGE
-RO = ROLL
-SC = SCAN
-TR = TRANSMIT
+- BO = BOOST
+- BR = BRIDGE
+- CL = CLIMB
+- DR = DRILL
+- HA = HAUL
+- JU = JUMP
+- LE = LEARN
+- NA = NAVIGATE
+- RE = RECHARGE
+- RO = ROLL
+- SC = SCAN
+- TR = TRANSMIT
 
 Moves are described by a module letter, a direction,
 and a number of spaces that defaults to 1.
@@ -58,8 +58,10 @@ For example:
 
 The starting module arrangement is:
 
+```text
 G L C
 B S M
+```
 
 The order of the movement cards is:
 
@@ -69,85 +71,85 @@ HA RO BO JU CL SC LE BR DR TR RE NA
 
 The missions are solved as follows:
 
-### Mission 1 - HA
+### Mission 1 - HAUL
 
-play BO
+play BO  
 L↖
 
-### Mission 2 - LE
+### Mission 2 - LEARN
 
-play RO
-L→2
+play RO  
+L→2  
 G→
 
-### Mission 3 - DR
+### Mission 3 - DRILL
 
-play CL for 4
-B→3
-L↘
+play CL for 4  
+B→3  
+L↘  
 M↓
 
-### Mission 4 - RE
+### Mission 4 - RECHARGE
 
-play TR
-M↑
-G↑
+play TR  
+M↑  
+G↑  
 L↑
 
-### Mission 5 - BO
+### Mission 5 - BOOST
 
-play BR and JU
-M↑
-L↓
+play BR and JU  
+M↑  
+L↓  
 B←
 
-### Mission 6 - CL
+### Mission 6 - CLIMB
 
-play SC and NA
-L↑
-M←
+play SC and NA  
+L↑  
+M←  
 B←
 
-### Mission 7 - BR
+### Mission 7 - BRIDGE
 
-play TR
-G↘
-B↑3
+play TR  
+G↘  
+B↑3  
 B→
 
-### Mission 8 - SC
+### Mission 8 - SCAN
 
-play NA and JU
-G↓
-G↓
+play NA and JU  
+G↓  
+G↓  
 B↓4
 
-### Mission 9 - TR
+### Mission 9 - TRANSMIT
 
-play RO
-L↓
-L↙2
+play RO  
+L↓  
+L↙2  
 B↑
 
-### Mission 10 - JU
+### Mission 10 - JUMP
 
-play NA and RO
-S↗
-L↗
-M↑
+play NA and RO  
+S↗  
+L↗  
+M↑  
 B↑2
 
-### Mission 11 - NA
+### Mission 11 - NAVIGATE
 
-play RO
-B↓2
-L←
-G←
+play RO  
+B↓2  
+L←  
+G←  
 use B to place C under B
 
-### Mission 12 - RO
+### Mission 12 - ROLL
 
-use L to swap B and L
-use C to place C ↖ of B
-use M to shift G ←
+use L to swap B and L  
+use C to place C ↖ of B  
+use M to shift G ←  
 use G to activate B to place L ↘ of B
