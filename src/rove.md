@@ -29,21 +29,6 @@ The module cards are referred to by their first letter:
 - M = motor
 - S = sensor
 
-The movement cards are referred to by their first two letters:
-
-- BO = BOOST
-- BR = BRIDGE
-- CL = CLIMB
-- DR = DRILL
-- HA = HAUL
-- JU = JUMP
-- LE = LEARN
-- NA = NAVIGATE
-- RE = RECHARGE
-- RO = ROLL
-- SC = SCAN
-- TR = TRANSMIT
-
 Moves are described by a module letter, a direction,
 and a number of spaces that defaults to 1.
 
@@ -65,7 +50,10 @@ B S M
 
 The order of the movement cards is:
 
-HA RO BO JU CL SC LE BR DR TR RE NA
+HAUL ROLL BOOST JUMP CLIMB SCAN LEARN BRIDGE DRILL TRANSMIT RECHARGE NAVIGATE
+
+Make HAUL the first mission and deal yourself
+five movement cards from the top of the deck.
 
 ## Missions
 
@@ -73,67 +61,67 @@ The missions are solved as follows:
 
 ### Mission 1 - HAUL
 
-play BO  
+play BOOST  
 L↖
 
 ### Mission 2 - LEARN
 
-play RO  
+play ROLL  
 L→2  
 G→
 
 ### Mission 3 - DRILL
 
-play CL for 4  
+play CLIMB for 4 (the only time the higher move number on a card is used)  
 B→3  
 L↘  
 M↓
 
 ### Mission 4 - RECHARGE
 
-play TR  
+play TRANSMIT  
 M↑  
 G↑  
 L↑
 
 ### Mission 5 - BOOST
 
-play BR and JU  
-M↑  
+play BRIDGE and JUMP  
+M↑ pushing C  
 L↓  
 B←
 
 ### Mission 6 - CLIMB
 
-play SC and NA  
+play SCAN and NAVIGATE  
 L↑  
 M←  
-B←
+B↓
 
 ### Mission 7 - BRIDGE
 
-play TR  
+play TRANSMIT  
 G↘  
-B↑3  
+B↑4  
 B→
 
 ### Mission 8 - SCAN
 
-play NA and JU  
+play NAVIGATE and JUMP  
 G↓  
 G↓  
 B↓4
 
 ### Mission 9 - TRANSMIT
 
-play RO  
+play ROLL  
 L↓  
 L↙2  
 B↑
 
 ### Mission 10 - JUMP
 
-play NA and RO  
+play NAVIGATE and ROLL  
 S↗  
 L↗  
 M↑  
@@ -141,7 +129,7 @@ B↑2
 
 ### Mission 11 - NAVIGATE
 
-play RO  
+play ROLL  
 B↓2  
 L←  
 G←  
@@ -153,3 +141,5 @@ use L to swap B and L
 use C to place C ↖ of B  
 use M to shift G ←  
 use G to activate B to place L ↘ of B
+
+The S ability is never used.
