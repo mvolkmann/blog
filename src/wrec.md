@@ -1287,10 +1287,10 @@ HelloWorld.register();
 Finally, we use these components inside `hello-world-with-state.html`.
 Note below how we:
 
-- create a `State` object
+- create a `State` object with a name (ex. "vault")
 
   ```js
-  const state = new State({name: 'World'});
+  const state = new State('vault', {name: 'World'});
   ```
 
 - associate the `State` property "name" with the `labeled-input` property "value"
@@ -1326,7 +1326,7 @@ which updates both the `labeled-input` and `hello-world` elements.
     <script src="labeled-input.js" type="module"></script>
     <script type="module">
       import {State} from '../state.js';
-      const state = new State({name: 'World'});
+      const state = new State('vault', {name: 'World'});
 
       window.onload = () => {
         const li = document.querySelector('labeled-input');
@@ -1352,6 +1352,16 @@ which updates both the `labeled-input` and `hello-world` elements.
 This example creates a single `State` object,
 but any number can be created as a way of logically grouping
 the properties to be shared.
+
+When running in development mode (`NODE_ENV` set to "development"),
+`State` objects can be accessed from the DevTools console.
+For example:
+
+```js
+state = State.get('vault'); // gets a State object by name
+state.log(); // outputs all the key/value pairs
+state.color = 'red'; // reactively changes a state property
+```
 
 ## Error Checking
 
