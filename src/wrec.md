@@ -1290,13 +1290,7 @@ Note below how we:
 - create a `State` object
 
   ```js
-  const state = new State();
-  ```
-
-- add a "name" property to the `State` object
-
-  ```js
-  state.addProperty('name', 'World');
+  const state = new State({name: 'World'});
   ```
 
 - associate the `State` property "name" with the `labeled-input` property "value"
@@ -1332,8 +1326,7 @@ which updates both the `labeled-input` and `hello-world` elements.
     <script src="labeled-input.js" type="module"></script>
     <script type="module">
       import {State} from '../state.js';
-      const state = new State();
-      state.addProperty('name', 'World');
+      const state = new State({name: 'World'});
 
       window.onload = () => {
         const li = document.querySelector('labeled-input');
