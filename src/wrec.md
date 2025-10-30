@@ -1353,6 +1353,22 @@ This example creates a single `State` object,
 but any number can be created as a way of logically grouping
 the properties to be shared.
 
+A `State` object can contain properties whose values are objects.
+Nested properties can be mapped to component properties.
+For example:
+
+```js
+const state = new State('vault', {
+  color: 'red',
+  team: {leader: {name: 'World'}},
+  notUsed: 'not used'
+});
+const c1 = document.querySelector('component-one');
+// The second argument object keys are state property paths
+// and the values are component property names.
+c1.useState(state, {color: 'color', 'team.leader.name': 'name'});
+```
+
 When running in development mode (`NODE_ENV` set to "development"),
 `State` objects can be accessed from the DevTools console.
 For example:
