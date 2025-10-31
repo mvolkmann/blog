@@ -1377,6 +1377,7 @@ For example:
 state = State.get('vault'); // gets a State object by name
 state.log(); // outputs all the key/value pairs
 state.color = 'red'; // reactively changes a state property
+state.team.leader.name = 'Mark'; // reactively changes a state property
 ```
 
 ## Error Checking
