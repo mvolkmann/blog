@@ -19,6 +19,37 @@ This web site is used to:
 - view open orders
 - view all orders and charges
 
+## Library Downloads
+
+To checkout an ebook from the library and upload to Kindle:
+
+1. Browse your library website such as {% aTargetBlank
+   "https://www.stchlibrary.org", "St. Charles City-County Library" %}.
+   The following instructions are specific to this website.
+1. Enter a book title or author and click the "Search" button.
+1. Select a book.
+1. Click the "eBook" tab if available.
+   It may display "eBook Available from Libby".
+1. Click the "GET IT" button.
+1. If prompted, log in.
+1. If there is a "Read now with kindle" button ...
+   1. Click that button.
+   1. Wait for the book to appear on your Kindle.
+1. If there is a "download EPUBs or PDFs using Libby" link:
+   1. Click that link.
+   1. Browse {% aTargetBlank "libbyapp.com", "libbyapp.com" %}.
+   1. Find the book under "Recent Loans".
+   1. Click "Manage Loan".
+   1. Click "Read With...".
+   1. Click "ePUB" to download the book as an ePUB file.
+   1. Send an email to your special Kindle email address
+      with the ePUB file as an attachment.
+   1. Wait for an email with the subject
+      "Verify your Send to Kindle document request" to arrive.
+   1. Open the email.
+   1. Click the "Verify Request" button.
+   1. Wait for the book to appear on your Kindle.
+
 ## Document Conversion
 
 To have documents converted to a Kindle-compatible format (such as .azw),
