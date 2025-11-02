@@ -135,7 +135,7 @@ To define a web component using wrec:
 For example:
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class BasicWrec extends Wrec {
   static css = css`
@@ -184,7 +184,7 @@ Properties are automatically mapped to attributes in the custom element.
 Here's a simple example that enables specifying a name.
 
 ```js
-import Wrec, {html} from './wrec.min.js';
+import {html, Wrec} from './wrec.min.js';
 
 class HelloWorld extends Wrec {
   static properties = {
@@ -286,7 +286,7 @@ Wrec does not rerender the entire web component.
 Here's an example of a counter component that takes advantage of this feature:
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class CounterWrec extends Wrec {
   static properties = {
@@ -364,7 +364,7 @@ The following web component demonstrates conditional generation
 using the ternary operator.
 
 ```js
-import Wrec, {html} from './wrec.min.js';
+import {html, Wrec} from './wrec.min.js';
 
 class TemperatureEval extends Wrec {
   static properties = {
@@ -417,7 +417,7 @@ the form element is automatically updated.
 The following web component demonstrates this.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class NumberSlider extends Wrec {
   static properties = {
@@ -498,7 +498,7 @@ that compute the area of a rectangle.
 It shows three ways to accomplish this, with the first two commented out.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class RectangleArea extends Wrec {
   static properties = {
@@ -574,7 +574,7 @@ It also defines a computed property whose value
 can be any valid JavaScript expression.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class ColorPicker extends Wrec {
   static properties = {
@@ -649,7 +649,7 @@ to change the color of some text.
 It also uses a `number-slider` to change the size of the text.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class ColorDemo extends Wrec {
   static properties = {
@@ -717,7 +717,7 @@ Note how properties that are mapped to required attributes,
 such as `values` below, specify that with `required: true`.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class RadioGroup extends Wrec {
   static formAssociated = true;
@@ -816,7 +816,7 @@ RadioGroup.register();
 Here is the class that defines the `select-list` custom element:
 
 ```js
-import Wrec, {html} from './wrec.min.js';
+import {html, Wrec} from './wrec.min.js';
 
 class SelectList extends Wrec {
   static formAssociated = true;
@@ -882,7 +882,7 @@ The `label` property is a computed property that
 calls a method in the class to obtain its value.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
@@ -1065,7 +1065,7 @@ whose key is the name of the changed property and
 whose value is the new property value.
 
 ```js
-import Wrec, {css, html} from './wrec.min.js';
+import {css, html, Wrec} from './wrec.min.js';
 
 class ToggleSwitch extends Wrec {
   static properties = {
@@ -1232,7 +1232,7 @@ First, we define the custom element `labeled-input`
 in the file `labeled-input.js`.
 
 ```js
-import Wrec, {css, html} from '../wrec';
+import {css, html, Wrec} from '../wrec';
 
 class LabeledInput extends Wrec {
   static properties = {
@@ -1265,7 +1265,7 @@ Next, we define the custom element `hello-world`
 in the file `hello-world.js`.
 
 ```js
-import Wrec, {css, html} from '../wrec';
+import {css, html, Wrec} from '../wrec';
 
 class HelloWorld extends Wrec {
   static properties = {
