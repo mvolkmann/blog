@@ -1380,6 +1380,14 @@ state.color = 'red'; // reactively changes a state property
 state.team.leader.name = 'Mark'; // reactively changes a state property
 ```
 
+The data in each `State` object is automatically persisted
+to `sessionStorage` each time the user refreshes the page.
+The keys are "wrec-state-" followed by the `State` name.
+The data is automatically restored as long as each `State` object
+is created in a `Window` `onload` handler, as shown above.
+In addition to avoiding data loss, this enables sharing state
+between pages of a multi-page web app.
+
 ## Error Checking
 
 Wrec checks for many kinds of errors and throws an `Error` when they are found.
