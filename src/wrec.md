@@ -1223,7 +1223,7 @@ Wrec supports holding state outside of web components and
 creating two-way bindings between state properties and web component properties.
 This can be used as an alternative to holding state in a parent component
 of multiple components that use the state.
-For examples of using the `State` class, see the files
+For examples of using the `WrecState` class, see the files
 `src/examples/hello-world-with-state.html`
 and `src/examples/data-binding2.ts`.
 
@@ -1287,21 +1287,21 @@ HelloWorld.register();
 Finally, we use these components inside `hello-world-with-state.html`.
 Note below how we:
 
-- Create a `State` object with a name (ex. "vault").
+- Create a `WrecState` object with a name (ex. "vault").
   The second argument specifies whether the data
   should be persisted to `sessionStorage`.
 
   ```js
-  const state = new State('vault', true, {name: 'World'});
+  const state = new WrecState('vault', true, {name: 'World'});
   ```
 
-- associate the `State` property "name" with the `labeled-input` property "value"
+- associate the `WrecState` property "name" with the `labeled-input` property "value"
 
   ```js
   li.useState(state, {name: 'value'});
   ```
 
-- associate the `State` property "name" with the `hello-world` property "name"
+- associate the `WrecState` property "name" with the `hello-world` property "name"
 
   It is not necessary to specify the mapping from state properties
   to component properties when they are the same.
@@ -1310,10 +1310,10 @@ Note below how we:
   hw.useState(state);
   ```
 
-Changing the value of the input updates the `State`
+Changing the value of the input updates the `WrecState`
 which updates the `hello-world` element.
 
-Clicking the "Reset" button updates the `State`,
+Clicking the "Reset" button updates the `WrecState`,
 which updates both the `labeled-input` and `hello-world` elements.
 
 ```html
@@ -1327,8 +1327,8 @@ which updates both the `labeled-input` and `hello-world` elements.
     <script src="hello-world.js" type="module"></script>
     <script src="labeled-input.js" type="module"></script>
     <script type="module">
-      import {State} from '../state.js';
-      const state = new State('vault', true, {name: 'World'});
+      import {WrecState} from '../wrec-state.js';
+      const state = new WrecState('vault', true, {name: 'World'});
 
       window.onload = () => {
         const li = document.querySelector('labeled-input');
@@ -1351,13 +1351,13 @@ which updates both the `labeled-input` and `hello-world` elements.
 </html>
 ```
 
-This example creates a single `State` object,
+This example creates a single `WrecState` object,
 but any number can be created as a way of logically grouping
 the properties to be shared.
 
-A `State` object can contain properties whose values are objects.
+A `WrecState` object can contain properties whose values are objects.
 The constructor takes two required arguments and one optional argument.
-The first argument is a name associated with the `State`
+The first argument is a name associated with the `WrecState`
 which can be used to retrieve it later.
 The second argument is a `boolean` that specifies
 whether the data should be persisted to `sessionStorage`.
@@ -1365,14 +1365,14 @@ The optional third argument specifies initial data.
 For example:
 
 ```js
-const state = new State('vault', true, {
+const state = new WrecState('vault', true, {
   color: 'red',
   team: {leader: {name: 'World'}},
   notUsed: 'not used'
 });
 ```
 
-Nested `State` properties can be mapped to component properties.
+Nested `WrecState` properties can be mapped to component properties.
 For example:
 
 ```js
@@ -1383,27 +1383,27 @@ c1.useState(state, {color: 'color', 'team.leader.name': 'name'});
 ```
 
 When running in development mode (`NODE_ENV` set to "development"),
-`State` objects can be accessed from the DevTools console.
+`WrecState` objects can be accessed from the DevTools console.
 For example:
 
 ```js
-state = State.get('vault'); // gets a State object by name
+state = WrecState.get('vault'); // gets a WrecState object by name
 state.log(); // outputs all the key/value pairs
 state.color = 'red'; // reactively changes a state property
 state.team.leader.name = 'Mark'; // reactively changes a state property
 ```
 
-The data in each `State` object is automatically persisted
+The data in each `WrecState` object is automatically persisted
 to `sessionStorage` each time the user refreshes the page.
-The keys are "wrec-state-" followed by the `State` name.
-The data is automatically restored as long as each `State` object
+The keys are "wrec-state-" followed by the `WrecState` name.
+The data is automatically restored as long as each `WrecState` object
 is created in a `Window` `onload` handler, as shown above.
 In addition to avoiding data loss, this enables sharing state
 between pages of a multi-page web app.
 
-Data in `State` objects is subject to potential XSS attacks
+Data in `WrecState` objects is subject to potential XSS attacks
 and exposure to malicious browser extensions.
-For this reason, sensitive data should not be stored in `State` objects.
+For this reason, sensitive data should not be stored in `WrecState` objects.
 
 ## Error Checking
 
