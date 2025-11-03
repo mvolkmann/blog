@@ -1287,10 +1287,12 @@ HelloWorld.register();
 Finally, we use these components inside `hello-world-with-state.html`.
 Note below how we:
 
-- create a `State` object with a name (ex. "vault")
+- Create a `State` object with a name (ex. "vault").
+  The second argument specifies whether the data
+  should be persisted to `sessionStorage`.
 
   ```js
-  const state = new State('vault', {name: 'World'});
+  const state = new State('vault', true, {name: 'World'});
   ```
 
 - associate the `State` property "name" with the `labeled-input` property "value"
@@ -1326,7 +1328,7 @@ which updates both the `labeled-input` and `hello-world` elements.
     <script src="labeled-input.js" type="module"></script>
     <script type="module">
       import {State} from '../state.js';
-      const state = new State('vault', {name: 'World'});
+      const state = new State('vault', true, {name: 'World'});
 
       window.onload = () => {
         const li = document.querySelector('labeled-input');
@@ -1354,15 +1356,26 @@ but any number can be created as a way of logically grouping
 the properties to be shared.
 
 A `State` object can contain properties whose values are objects.
-Nested properties can be mapped to component properties.
+The constructor takes two required arguments and one optional argument.
+The first argument is a name associated with the `State`
+which can be used to retrieve it later.
+The second argument is a `boolean` that specifies
+whether the data should be persisted to `sessionStorage`.
+The optional third argument specifies initial data.
 For example:
 
 ```js
-const state = new State('vault', {
+const state = new State('vault', true, {
   color: 'red',
   team: {leader: {name: 'World'}},
   notUsed: 'not used'
 });
+```
+
+Nested `State` properties can be mapped to component properties.
+For example:
+
+```js
 const c1 = document.querySelector('component-one');
 // The second argument object keys are state property paths
 // and the values are component property names.
@@ -1387,6 +1400,10 @@ The data is automatically restored as long as each `State` object
 is created in a `Window` `onload` handler, as shown above.
 In addition to avoiding data loss, this enables sharing state
 between pages of a multi-page web app.
+
+Data in `State` objects is subject to potential XSS attacks
+and exposure to malicious browser extensions.
+For this reason, sensitive data should not be stored in `State` objects.
 
 ## Error Checking
 
