@@ -22,7 +22,7 @@ To install the `asciidoctor` command:
 1. `brew install ruby`
 1. Edit `.zshrc` and add the following:
 
-   ```zsh
+   ```bash
    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
    ```
 
