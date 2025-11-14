@@ -6,25 +6,52 @@ layout: topic-layout.njk
 
 ## Overview
 
-- alternative to Markdown
-- homepage is http://www.methods.co.nz/asciidoc/
-- recommended file extension is `.txt`
+[AsciiDoc](http://asciidoc.org/) is an alternative to Markdown
+that supports more features.
 
-## Installing
+The recommended file extension for AsciiDoc files is `.adoc`.
 
-- option #1
-  - brew install ruby
-  - gem install asciidoctor
+## Asciidoctor
 
-## AsciiDoctor
+Asciidoctor is an open-source tool that converts AsciiDoc files
+into other formats like HTML, PDF, EPUB, and DocBook.
 
-- Continuation of the AsciiDoc language and tools is happening
-  in the Asciidoctor project.
-- Asciidoctor is a modern implementation of AsciiDoc in Ruby
-  that adheres as closely as possible to the syntax in AsciiDoc Python
-  while offering numerous modern enhancements.
-- Asciidoctor also offers a much broader ecosystem of
-  extensions, tools, and integrations.
+To install the `asciidoctor` command:
+
+1. `brew install ruby` (also installs the `gem` command)
+1. `brew install ruby`
+1. Edit `.zshrc` and add the following:
+
+   ```zsh
+   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+   ```
+
+1. `gem install asciidoctor`
+
+## Converting to HTML
+
+To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
+This generates `{name}.html`.
+
+## Pandoc
+
+[Pandoc](http://pandoc.org/) converts between various markup formats.
+To install Pandoc in macOS, enter `brew install pandoc`.
+
+## Converting from Markdown
+
+To convert a Markdown file to AsciiDoc in macOS:
+
+```bash
+pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
+```
+
+## Converting to PDF
+
+To generate a PDF from an AsciiDoc file:
+
+- `gem install asciidoctor-pdf` (one time)
+- `asciidoctor-pdf {name}.adoc`
 
 ## Character Escaping
 
@@ -32,66 +59,31 @@ These characters must be escaped for literal versions: `+` and `{`.
 
 ## Previewing
 
-To preview `.adoc` files in Chrome
+To preview `.adoc` files in VS Code:
 
-- install "Asciidoctor.js Live Preview" at
-  <https://chrome.google.com/webstore/search/asciidoctor>
-- click the vertical ellipsis in the upper-right
-- select More Tools ... Extensions
-- find "Asciidoctor.js Live Preview" and click the "Details" button
-- toggle "Allow access to file URLs" to on
-- open a `.adoc` file in Chrome
-- it should not be necessary to refresh
-  to see results of changes in `.adoc` files
-
-## dblatex
-
-To install dblatex
-
-- download source from http://sourceforge.net/projects/dblatex/?source=dlp
-- unzip and cd to directory
-- sudo python setup.py install
-
-## Generating HTML
-
-To generate HTML, enter `asciidoctor {name}.txt`.
-This generates `{name}.html`.
+- Install the AsciiDoc extension.
+- Open an `.adoc` file.
+- Click the "Open Preview" button in the upper-left.
+  The icon looks like a two-column document
+  with a magnifier glass in the lower-left.
 
 ## Generating Slides
 
-To generate slidy slides
+To generate slidy slides, enter `asciidoctor -b slidy {input-file}`.
+This generates `{name}.html`, but it's in slidy format.
 
-- `asciidoctor -b slidy {input-file}`
+Level 1 & 2 headers start new slides.
 
-  This generates {name}.html, but it's in slidy format.
+Slidy supports the following keyboard shortcuts:
 
-- new slides
-
-  - level 1 & 2 headers start new slides
-
-- slidy keys
-  - left arrow goes to previous slide
-  - right arrow or spacebar goes to next slide
-    - can also mouse click anywhere on slide
-  - s or < makes font smaller
-  - b or > makes font bigger
-  - c shows table of contents
-  - f toggles display of status line
-  - home goes to first slide
-  - end goes to last slide
-  - a toggles between showing all slides on one page
-    and one slide at a time
-
-## Generating PDFs
-
-To generate a PDF:
-
-- `brew install fop`
-- `a2x --fop -f pdf --verbose {input-file}`
-
-## Pandoc
-
-[Pandoc](http://johnmacfarlane.net/pandoc/) converts various markup formats.
-There is a Mac `.dmg` installer file.
-Pandoc requires pdflatex to convert to PDF.
-You may be able to get this from http://www.tug.org/mactex/2012/.
+- left arrow goes to previous slide
+- right arrow or spacebar goes to next slide
+  (can also mouse click anywhere on slide)
+- s or < makes font smaller
+- b or > makes font bigger
+- c shows table of contents
+- f toggles display of status line
+- home goes to first slide
+- end goes to last slide
+- a toggles between showing all slides on one page
+  and one slide at a time
