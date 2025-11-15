@@ -1,0 +1,93 @@
+= AsciiDoc Cheatsheet
+:icons: font
+
+- bold: surround with asterisks as in *bold*
+- command: surround with backticks as in `command`
+- comment: // comment text
+- double-quoted: surround with two backticks and two apostrophes as in ``double-quoted'''
+- file path: surround with apostrophes as in 'file-path'
+- headings: =, ==, ===, ...
+- italic: surround with underscores as in _italic_
+- monospace: surround with plus signs as in +mono+
+- single-quoted: surround with a backtick and single apostrophes as in `single-quoted'
+- text color foreground: [red]#red foreground#
+  (background defaults to transparent)
+- text color background: [yellow-background]#yellow background#
+  (foreground defaults to gray)
+- text color both: [blue yellow-background]#blue on yellow#
+- text size: [big]#big text#
+
+== Lists
+
+For a bulleted lists, precede each item with * or -.
+Alternate for each nested level.
+
+* Fruit
+  - Apple
+  - Orange
+* Meat
+  - Beef
+  - Chicken
+  - Pork
+* Vegetable
+  - Corn
+  - Tomato
+
+Another option is to use multiple * characters to indicate the level.
+
+* Level 1
+** Level 2
+*** Level 3
+
+For ordered lists, 
+
+. Item 1
+.. Item 1.1
+... Item 1.1.1
+. Item 2
+.. Item 2.1
+. Item 3
+.. Item 3.1
+
+To explicitly specify each item "number",
+enter them as they should be rendered.
+The editor extension will provide warnings
+if any are skipped or they are out of order.
+
+A. Item 1
+   1. Item 1.1
+      a. Item 1.1.1
+B. Item 2
+   1. Item 2.1
+C. Item 3
+
+For definition lists, separate terms and definitions with ::.
+By default, definitions will be indented on their own line
+even if they aren't written that way.
+
+Term 1:: Definition 1
+Term 2::
+  Definition 2
+
+For non-indented definition lists,
+precede them with the "horizontal" attribute?
+
+[horizontal]
+Term 1:: Definition 1
+Term 2::
+  Definition 2
+
+== Callouts
+
+There are four supported kinds of callouts:
+CAUTION, IMPORTANT, TIP, and WARNING.
+By default, each is preceded by its type.
+To render icon instead, add ":icons: font" near the beginning of the document.
+
+CAUTION: This is a caution callout.
+
+IMPORTANT: This is an important callout.
+
+TIP: This is a tip callout.
+
+WARNING: This is a warning callout.
