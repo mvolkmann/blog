@@ -1,8 +1,7 @@
 = AsciiDoc Cheatsheet
-
 :icons: font
 :sectnums:
-//:source-highlighter: rouge
+:source-highlighter: rouge
 :toc:
 :toc-title: My TOC
 

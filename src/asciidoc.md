@@ -19,6 +19,8 @@ This fall into several categories such as document and table.
 User-defined attributes are used for text replacement.
 
 Document attributes configure global behavior.
+This must follow the level 1 header
+with no blank lines preceding them.
 
 - `:doctype: {type}` sets the document type to `article`, `book`,
   `inline` (for embedding in another document), or `manpage`.
