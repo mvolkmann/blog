@@ -52,6 +52,16 @@ paragraph 3
 ====
 ```
 
+Add a title to any admonition by preceding it with a line that
+begins with a period and is followed by the title
+with no space between the period and the first letter in the title.
+For example:
+
+```text
+.Don't do this!
+WARNING: Rock climbing without ropes is dangerous.
+```
+
 ## Attributes
 
 AsciiDoc supports built-in and user=defined attributes.
