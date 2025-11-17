@@ -285,6 +285,28 @@ and is followed by the caption. For example:
 image::assets/htmx-logo.png[htmx, 200]
 ```
 
+## Math Formulas
+
+To render math formulas, enable it with the document attribute
+`:stem: latexmath`.
+
+The examples below render the quadratic equation.
+
+For inline formulas, use the following syntax:
+
+```text
+stem:[x = {-b \pm \sqrt{b^2-4ac} \over 2a}]
+```
+
+For block formulas, use the following syntax:
+
+```text
+[stem]
+++++
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+++++
+```
+
 ## VS Code Extension
 
 Install the AsciiDoc extension.

@@ -10,8 +10,6 @@ R. Mark Volkmann <r.mark.volkmann@gmail.com>
 
 == Quick Tips
 
-The solution to the quadratic equation is $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$.
-
 - bold: surround with asterisks as in *bold*
 - command: surround with backticks as in `command`
 - comment: // comment text
@@ -210,5 +208,16 @@ precede them with the "horizontal" attribute?
 Term 1:: Definition 1
 Term 2::
   Definition 2
+
+== Math Formulas
+
+The solution to the quadratic equation is:
+
+foo stem:[x = {-b \pm \sqrt{b^2-4ac} \over 2a}] bar
+
+[stem]
+++++
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+++++
 
 == Tables
