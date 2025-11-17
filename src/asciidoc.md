@@ -82,6 +82,13 @@ To install the `asciidoctor` command:
 
 1. `gem install asciidoctor`
 
+## Comments
+
+Single-line comments begin with `//`.
+
+Multi-line comments begin with the line `////`
+and end with the same.
+
 ## Converting to HTML
 
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.

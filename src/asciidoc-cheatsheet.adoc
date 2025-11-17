@@ -2,9 +2,11 @@
 
 :icons: font
 :sectnums:
-:source-highlighter: rouge
+//:source-highlighter: rouge
 :toc:
 :toc-title: My TOC
+
+== Quick Tips
 
 - bold: surround with asterisks as in *bold*
 - command: surround with backticks as in `command`
