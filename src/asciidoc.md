@@ -138,6 +138,52 @@ To install the `asciidoctor` command:
 
 1. `gem install asciidoctor`
 
+## Code Blocks
+
+To mark a set of lines as source code, use the following syntax.
+
+```text
+[source]
+----
+code goes here
+----
+```
+
+By default, the code is not highlighted.
+To add syntax highlighting, specify a syntax highlighter
+using the `:source-highlighter:` document attribute.
+Its value is one of the following supported syntax highlighter libraries:
+
+- [coderay](http://coderay.rubychan.de) is an older option
+  implemented in Ruby that is replaced by `rouge`.
+  It doesn't seem to work!
+- [highlight.js](https://highlightjs.org) requires client-side JavaScript
+  in HTML. It is the only option that works in VS Code previews.
+- [pygments](https://pygments.org) is implemented in Python.
+  It doesn't seem to work!
+- [rouge](https://rouge.jneen.net) is a newer option implemented in Ruby
+  that does not require client-side JavaScript in HTML.
+
+For example, `:source-highlighter: highlight.js`.
+
+Then specify the programming language for each code block.
+For example:
+
+```text
+[source, javascript]
+----
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  return message;
+}
+----
+```
+
+The supported programming languages and the words used to specify them
+vary based on the selected syntax highlighting library.
+For highlight.js, see
+[Supported Languages](https://highlightjs.readthedocs.io/en/latest/supported-languages.html).
+
 ## Comments
 
 Single-line comments begin with `//`.

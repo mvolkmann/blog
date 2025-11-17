@@ -5,18 +5,6 @@
 :toc:
 :toc-title: My TOC
 
-== Code Highlighting
-
-Set the `:source-highlighter:` option.
-
-[source, javascript]
-----
-function greet(name) {
-  const message = `Hello, ${name}!`;
-  return message;
-}
-----
-
 == Quick Tips
 
 - bold: surround with asterisks as in *bold*
@@ -85,6 +73,20 @@ This is the first paragraph.
 
 This is the second paragraph.
 ____
+
+== Code
+
+[source, javascript]
+----
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  return message;
+}
+----
+
+To add syntax highlighting to code blocks,
+add the document attribute `:source-highlighter:`.
+highlight.js
 
 == Headings
 
