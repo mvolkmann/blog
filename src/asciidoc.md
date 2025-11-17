@@ -119,7 +119,19 @@ with no blank lines preceding them.
 
 Table attributes ...
 
-Custom attributes ...
+User-defined attributes are defined with the syntax `:name: value`.
+For example:
+
+```text
+:season: Fall
+```
+
+The values of user-defined attributes are inserted into the document
+with the syntax `{name}`. For example:
+
+```text
+The current season is {season}.
+```
 
 ## Asciidoctor
 

@@ -5,10 +5,16 @@ R. Mark Volkmann <r.mark.volkmann@gmail.com>
 :sectnums:
 :source-highlighter: highlight.js
 :stem: latexmath
+:text-align: justify
 :toc:
 :toc-title: My TOC
 
+// User-defined attributes
+:season: Fall
+
 == Quick Tips
+
+The current season is {season}.
 
 - bold: surround with asterisks as in *bold*
 - command: surround with backticks as in `command`
