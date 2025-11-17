@@ -78,12 +78,14 @@ near the beginning of the document..
 == Images
 
 To render an image, use the `image` macro.
-When followed by two colons, it renders an image on its own line.
+This takes a relative file path to an image file.
 Its attribute list can specify alt text,
 a width in pixels, and a height in pixels.
 If both a width and height are specified,
 the aspect ratio can differ from that of the image.
 So it's best to only specify one of those values.
+
+When followed by two colons, it renders an image on its own line.
 
 // Use default size.
 image::assets/htmx-logo.png[htmx]
@@ -95,6 +97,13 @@ image::assets/htmx-logo.png[htmx, , 100]
 An inline image uses the same syntax, except
 only a single colon follows the `image` macro name.
 The image image:assets/htmx-logo.png[htmx, 80] is inline.
+
+To add figure numbers and a caption to an image,
+add a line before the `image` macro that begins with a period
+and is followed by the caption.  For example:
+
+.htmx was created by Carson Gross.
+image::assets/htmx-logo.png[htmx, 200]
 
 == Lists
 
