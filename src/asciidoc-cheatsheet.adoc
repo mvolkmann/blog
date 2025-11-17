@@ -24,8 +24,6 @@ function greet(name) {
 - comment: // comment text
 - double-quoted: surround with two backticks and two apostrophes as in ``double-quoted'''
 - file path: surround with apostrophes as in 'file-path'
-- image: `image:{relative-file-path}[alt text]`
-  as in image:assets/htmx-logo.png[htmx logo, width=100]
 - italic: surround with underscores as in _italic_
 - link: TODO
 - monospace: surround with plus signs as in +mono+
@@ -76,6 +74,27 @@ that indicates their level, as in  =, ==, ===, ...
 By default the headings are not numbered.
 To automatically number them, specify the `:sectnums` attribute
 near the beginning of the document..
+
+== Images
+
+To render an image, use the `image` macro.
+When followed by two colons, it renders an image on its own line.
+Its attribute list can specify alt text,
+a width in pixels, and a height in pixels.
+If both a width and height are specified,
+the aspect ratio can differ from that of the image.
+So it's best to only specify one of those values.
+
+// Use default size.
+image::assets/htmx-logo.png[htmx]
+// Only specify a width.
+image::assets/htmx-logo.png[htmx, 200]
+// Only specify a height.
+image::assets/htmx-logo.png[htmx, , 100]
+
+An inline image uses the same syntax, except
+only a single colon follows the `image` macro name.
+The image image:assets/htmx-logo.png[htmx, 80] is inline.
 
 == Lists
 

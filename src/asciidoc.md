@@ -6,8 +6,14 @@ layout: topic-layout.njk
 
 ## Overview
 
-[AsciiDoc](http://asciidoc.org/) is an alternative to Markdown
-that supports more features.
+[AsciiDoc](http://asciidoc.org/) is an alternative to Markdown.
+
+AsciiDoc was created in 2002 by Stuart Rackham.
+It supports more features, can easily be converted
+to DocBook, HTML, and PDF formats, and is less popular.
+
+Markdown was created in 2004 by John Gruber and Aaron Swartz.
+It is simpler, a bit more readable, and more popular.
 
 The recommended file extension for AsciiDoc files is `.adoc`.
 
@@ -108,7 +114,7 @@ To install Pandoc in macOS, enter `brew install pandoc`.
 
 To convert a Markdown file to AsciiDoc in macOS:
 
-```bash
+```bashg
 pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
 ```
 
@@ -124,6 +130,29 @@ This automatically adds page numbers.
 ## Character Escaping
 
 These characters must be escaped for literal versions: `+` and `{`.
+
+## Images
+
+To render an image, use the `image` macro.
+When followed by two colons, it renders an image on its own line.
+Its attribute list can specify alt text,
+a width in pixels, and a height in pixels.
+If both a width and height are specified,
+the aspect ratio can differ from that of the image.
+So it's best to only specify one of those values.
+
+```text
+// Use default size.
+image::assets/htmx-logo.png[htmx]
+// Only specify a width.
+image::assets/htmx-logo.png[htmx, 200]
+// Only specify a height.
+image::assets/htmx-logo.png[htmx, , 100]
+```
+
+An inline image uses the same syntax, except
+only a single colon follows the `image` macro name.
+The image image:assets/htmx-logo.png[htmx, 80] is inline.
 
 ## VS Code Extension
 
