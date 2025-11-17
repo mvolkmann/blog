@@ -1,6 +1,10 @@
 = AsciiDoc Cheatsheet
+
 :icons: font
 :sectnums:
+:source-highlighter: rouge
+:toc:
+:toc-title: My TOC
 
 - bold: surround with asterisks as in *bold*
 - command: surround with backticks as in `command`
@@ -50,6 +54,18 @@ This is the first paragraph.
 
 This is the second paragraph.
 ____
+
+== Code Highlighting
+
+Set the `:source-highlighter:` option.
+
+[source, javascript]
+----
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  return message;
+}
+----
 
 == Headings
 
