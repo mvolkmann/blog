@@ -157,6 +157,9 @@ This document was written by {author}.
 Contact the author at {email}.
 ```
 
+To hide the author line at the top of the document,
+add the document attribute `:!author:`.
+
 ## Code Blocks
 
 To mark a set of lines as source code, use the following syntax.

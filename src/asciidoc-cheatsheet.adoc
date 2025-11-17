@@ -1,5 +1,6 @@
 = AsciiDoc Cheatsheet
 R. Mark Volkmann <r.mark.volkmann@gmail.com>
+:!author:
 :icons: font
 :sectnums:
 :source-highlighter: highlight.js
