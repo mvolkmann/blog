@@ -17,6 +17,41 @@ It is simpler, a bit more readable, and more popular.
 
 The recommended file extension for AsciiDoc files is `.adoc`.
 
+## Admonitions (Callouts)
+
+There are four supported kinds of admonitions:
+CAUTION, IMPORTANT, NOTE, TIP, and WARNING.
+By default, each is preceded by its type.
+To render icon instead, add the ":icons: font" document attribute
+near the beginning of the document.
+
+The following are examples of single paragraph admonitions:
+
+```text
+CAUTION: This is a caution admonition.
+
+IMPORTANT: This is an important admonition.
+
+NOTE: This is a note admonition.
+
+TIP: This is a tip admonition.
+
+WARNING: This is a warning admonition.
+```
+
+For multiple paragraph admonitions, use the following syntax:
+
+```text
+[{kind}]
+====
+paragraph 1
+
+paragraph 2
+
+paragraph 3
+====
+```
+
 ## Attributes
 
 AsciiDoc supports built-in and user=defined attributes.
@@ -114,7 +149,7 @@ To install Pandoc in macOS, enter `brew install pandoc`.
 
 To convert a Markdown file to AsciiDoc in macOS:
 
-```bashg
+```bash
 pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
 ```
 
@@ -205,3 +240,7 @@ Slidy supports the following keyboard shortcuts:
 - end goes to last slide
 - a toggles between showing all slides on one page
   and one slide at a time
+
+## Resources
+
+- [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)

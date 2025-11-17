@@ -37,10 +37,11 @@ function greet(name) {
 
 == Admonitions (Callouts)
 
-There are four supported kinds of callouts:
+There are four supported kinds of admonitions:
 CAUTION, IMPORTANT, NOTE, TIP, and WARNING.
 By default, each is preceded by its type.
-To render icon instead, add ":icons: font" near the beginning of the document.
+To render icon instead, add the ":icons: font" document attribute
+near the beginning of the document.
 
 CAUTION: This is a caution admonition.
 
@@ -51,6 +52,17 @@ NOTE: This is a note admonition.
 TIP: This is a tip admonition.
 
 WARNING: This is a warning admonition.
+
+For an admonition with multiple paragraphs, use the syntax
+
+[NOTE]
+====
+paragraph 1
+
+paragraph 2
+
+paragraph 3
+====
 
 == Block Quotes
 
