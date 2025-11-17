@@ -1,11 +1,15 @@
 = AsciiDoc Cheatsheet
+R. Mark Volkmann <r.mark.volkmann@gmail.com>
 :icons: font
 :sectnums:
 :source-highlighter: highlight.js
+:stem: latexmath
 :toc:
 :toc-title: My TOC
 
 == Quick Tips
+
+The solution to the quadratic equation is $x = {-b \pm \sqrt{b^2-4ac} \over 2a}$.
 
 - bold: surround with asterisks as in *bold*
 - command: surround with backticks as in `command`
@@ -59,6 +63,25 @@ For example:
 
 .Don't do this!
 WARNING: Rock climbing without ropes is dangerous.
+
+== Author
+
+Specify the author name and email address
+as the first line after the level 1 header.
+For example:
+
+----
+R. Mark Volkmann <r.mark.volkmann@gmail.com>
+----
+
+To insert the author name in the document, use `+{author}+`.
+To insert the author email in the document, use `+{email}+`.
+For example:
+
+----
+This document was written by {author}.
+Contact the author at {email}.
+----
 
 == Block Quotes
 

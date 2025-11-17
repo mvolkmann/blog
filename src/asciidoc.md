@@ -138,6 +138,25 @@ To install the `asciidoctor` command:
 
 1. `gem install asciidoctor`
 
+## Author
+
+Specify the author name and email address
+as the first line after the level 1 header.
+For example:
+
+```text
+R. Mark Volkmann <r.mark.volkmann@gmail.com>
+```
+
+To insert the author name in the document, use `{author}`.
+To insert the author email in the document, use `{email}`.
+For example:
+
+```text
+This document was written by {author}.
+Contact the author at {email}.
+```
+
 ## Code Blocks
 
 To mark a set of lines as source code, use the following syntax.
@@ -195,6 +214,13 @@ and end with the same.
 
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
 This generates `{name}.html`.
+
+## Escaping Text
+
+To escape text so special characters like curly braces are not
+interpreted specially, surround the text with `+` characters.
+To also render the text in a monospace font,
+additionally surround the text with backticks.
 
 ## Pandoc
 
