@@ -227,3 +227,38 @@ x = {-b \pm \sqrt{b^2-4ac} \over 2a}
 ++++
 
 == Tables
+
+To add a title to a table, add a line before the table that
+begins with a period followed by the title with no space between them.
+
+By default, the table width is 100% and each column has the same width.
+To automatically size the columns to the smallest width
+required for their content, add `[%autowidth]`. before the table.
+
+To specify the number of columns and their relative column widths,
+add `[cols="n1,n2,...]` before the table.
+For example, `[cols="1,2"]` means that
+the first column should use 1/3 of the page width
+and the second column should use 2/3.
+The numbers can be preceded by a character that specifies
+the horizontal alignment of the text in each column:
+`<` to left align (default), `^` to center, and `>` to right align.
+
+For example:
+
+.My Fancy Table
+[cols="1, ^1, >1"]
+|===
+|Header 1|Header 2|Header 3
+|row 1, column 1
+|row 1, column 2
+|row 1, column 3
+
+|row 2, column 1|row 2, column 2|row 2, column 3
+
+|apple|banana|cherry
+|===
+
+TODO: How can headings use different alignment than data cells?
+
+TODO: How can grid lines be controlled?

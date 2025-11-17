@@ -110,14 +110,14 @@ with no blank lines preceding them.
 - `:toc-title: Some Title` sets the title of the generated table of contents
   which defaults to "Table of Contents"
 
-  :sectnums:
-  source-highlighter,"Specifies the syntax highlighter used for code blocks (e.g., Rouge, highlight.js).",:source-highlighter: rouge
-  experimental,"Enables features still under development (e.g., DITA or other experimental syntax).",:experimental:
-  tabsize,Sets the number of spaces represented by a tab character in source code blocks.,:tabsize: 4
-  idprefix,Prefix to prepend to section IDs.,:idprefix: \_
-  idseparator,Character used to replace spaces in section titles when generating IDs.,:idseparator: -
+TODO: Finish summarizing the built-in attributes.
 
-Table attributes ...
+:sectnums:
+source-highlighter,"Specifies the syntax highlighter used for code blocks (e.g., Rouge, highlight.js).",:source-highlighter: rouge
+experimental,"Enables features still under development (e.g., DITA or other experimental syntax).",:experimental:
+tabsize,Sets the number of spaces represented by a tab character in source code blocks.,:tabsize: 4
+idprefix,Prefix to prepend to section IDs.,:idprefix: \_
+idseparator,Character used to replace spaces in section titles when generating IDs.,:idseparator: -
 
 User-defined attributes are defined with the syntax `:name: value`.
 For example:
@@ -360,6 +360,11 @@ Slidy supports the following keyboard shortcuts:
 - a toggles between showing all slides on one page
   and one slide at a time
 
+## Tables
+
+TODO: Describe how to render tables.
+
 ## Resources
 
 - [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
+- [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
