@@ -1,9 +1,21 @@
 = AsciiDoc Cheatsheet
 :icons: font
 :sectnums:
-:source-highlighter: rouge
+:source-highlighter: highlight.js
 :toc:
 :toc-title: My TOC
+
+== Code Highlighting
+
+Set the `:source-highlighter:` option.
+
+[source, javascript]
+----
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  return message;
+}
+----
 
 == Quick Tips
 
@@ -55,18 +67,6 @@ This is the first paragraph.
 
 This is the second paragraph.
 ____
-
-== Code Highlighting
-
-Set the `:source-highlighter:` option.
-
-[source, javascript]
-----
-function greet(name) {
-  const message = `Hello, ${name}!`;
-  return message;
-}
-----
 
 == Headings
 

@@ -42,10 +42,13 @@ with no blank lines preceding them.
   By default, code is not highlighted.
   The options are:
 
-  - `coderay`: older option implemented in Ruby that is replaced by `rouge`
+  - `coderay`: This is an older option implemented in Ruby that is replaced by `rouge`.
+    It doesn't seem to work!
   - `highlight.js`: requires client-side JavaScript in HTML
-  - `pygments`: implemented in Python
-  - `rouge`: newer option implmented in Ruby that
+    This is the only option that works in VS Code previews.
+  - `pygments`: This is implemented in Python.
+    It doesn't seem to work!
+  - `rouge`: newer option implemented in Ruby that
     does not require client-side JavaScript in HTML (recommended)
 
 - `:toc:` enables generation of a table of contents based on headings.
