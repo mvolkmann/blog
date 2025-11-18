@@ -172,6 +172,28 @@ Contact the author at {email}.
 To hide the author line at the top of the document,
 add the document attribute `:!author:`.
 
+## Block Quotes
+
+To create a block of quoted text with a single paragraph:
+
+```text
+[quote, Microsoft Haiku, late 1990's]
+Out of memory.
+We wish to hold the whole sky,
+But we never will.
+```
+
+To create a block of quoted text with multiple paragraphs:
+
+```text
+[quote, multiple paragraphs]
+____
+This is the first paragraph.
+
+This is the second paragraph.
+____
+```
+
 ## Comments
 
 Single-line comments begin with `//`.
