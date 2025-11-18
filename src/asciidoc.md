@@ -172,52 +172,6 @@ Contact the author at {email}.
 To hide the author line at the top of the document,
 add the document attribute `:!author:`.
 
-## Code Blocks
-
-To mark a set of lines as source code, use the following syntax.
-
-```text
-[source]
-----
-code goes here
-----
-```
-
-By default, the code is not highlighted.
-To add syntax highlighting, specify a syntax highlighter
-using the `:source-highlighter:` document attribute.
-Its value is one of the following supported syntax highlighter libraries:
-
-- [coderay](http://coderay.rubychan.de) is an older option
-  implemented in Ruby that is replaced by `rouge`.
-  It doesn't seem to work!
-- [highlight.js](https://highlightjs.org) requires client-side JavaScript
-  in HTML. It is the only option that works in VS Code previews.
-- [pygments](https://pygments.org) is implemented in Python.
-  It doesn't seem to work!
-- [rouge](https://rouge.jneen.net) is a newer option implemented in Ruby
-  that does not require client-side JavaScript in HTML.
-
-For example, `:source-highlighter: highlight.js`.
-
-Then specify the programming language for each code block.
-For example:
-
-```text
-[source, javascript]
-----
-function greet(name) {
-  const message = `Hello, ${name}!`;
-  return message;
-}
-----
-```
-
-The supported programming languages and the words used to specify them
-vary based on the selected syntax highlighting library.
-For highlight.js, see
-[Supported Languages](https://highlightjs.readthedocs.io/en/latest/supported-languages.html).
-
 ## Comments
 
 Single-line comments begin with `//`.
@@ -366,6 +320,12 @@ The `include` directive includes the contents of a text file
 into the current file, even other AsciiDoc files.
 It can be used to partition a large file into smaller ones.
 
+The `include` directive is commonly used to
+include files `[listing]` and `[source]` blocks.
+Listing blocks display verbatim text with no syntax highlighting.
+Source blocks display programming language source code
+with optional syntax highlighting.
+
 The syntax is `include::{file-path}[{attributes}]`.
 The file path can be absolute, relative to the current file, or a URL.
 All the attributes are optional, but the square brackets are required.
@@ -385,6 +345,69 @@ The supported attributes are:
 
 Specifying `[opts=optional]` causes AsciiDoc to silently ignore
 the `include` directive if the file it references is not found.
+
+## Listing Blocks
+
+To display text lines in a monospace font, add lines containing
+four consecutive dashes before and after the lines.
+
+```text
+----
+lines go here
+----
+```
+
+Optional preceded the first line of four dashes
+with a line containing `[listing]`.
+
+## Source Blocks
+
+To mark a set of lines as source code, use the following syntax.
+
+```text
+[source, {language}]
+----
+source code goes here
+----
+```
+
+To cause the source code lines to be numbered,
+add `, numbered` after the language.
+
+By default, the code is not highlighted.
+To add syntax highlighting, specify a syntax highlighter
+using the `:source-highlighter:` document attribute.
+Its value is one of the following supported syntax highlighter libraries:
+
+- [coderay](http://coderay.rubychan.de) is an older option
+  implemented in Ruby that is replaced by `rouge`.
+  It doesn't seem to work!
+- [highlight.js](https://highlightjs.org) requires client-side JavaScript
+  in HTML. It is the only option that works in VS Code previews.
+- [pygments](https://pygments.org) is implemented in Python.
+  It doesn't seem to work!
+- [rouge](https://rouge.jneen.net) is a newer option implemented in Ruby
+  that does not require client-side JavaScript in HTML.
+
+For example, `:source-highlighter: highlight.js`.
+
+Then specify the programming language for each code block.
+For example:
+
+```text
+[source, javascript]
+----
+function greet(name) {
+  const message = `Hello, ${name}!`;
+  return message;
+}
+----
+```
+
+The supported programming languages and the words used to specify them
+vary based on the selected syntax highlighting library.
+For highlight.js, see
+[Supported Languages](https://highlightjs.readthedocs.io/en/latest/supported-languages.html).
 
 ## Tables
 
