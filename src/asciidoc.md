@@ -360,6 +360,32 @@ Slidy supports the following keyboard shortcuts:
 - a toggles between showing all slides on one page
   and one slide at a time
 
+## Including Files
+
+The `include` directive includes the contents of a text file
+into the current file, even other AsciiDoc files.
+It can be used to partition a large file into smaller ones.
+
+The syntax is `include::{file-path}[{attributes}]`.
+The file path can be absolute, relative to the current file, or a URL.
+All the attributes are optional, but the square brackets are required.
+
+To temporarily disable an include, precede it with a backslash.
+
+The supported attributes are:
+
+- `encoding`: supported values are `UTF-8` (default),
+  `US-ASCII`, and `ISO-8850-1`
+- `indent`: controls indentation in `[source]` and `[listing]` blocks
+- `leveloffset`: adjusts the section/heading level of the
+  content being included, relative to the structure of this document
+- `lines`: specifies the range of lines to be included
+- `opts`: provides instructions that modify the inclusion process
+- `tags`: specifies named regions of lines to include
+
+Specifying `[opts=optional]` causes AsciiDoc to silently ignore
+the `include` directive if the file it references is not found.
+
 ## Tables
 
 TODO: Describe how to render tables.
