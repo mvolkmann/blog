@@ -204,6 +204,10 @@ To convert a Markdown file to AsciiDoc in macOS:
 pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
 ```
 
+## Character Escaping
+
+These characters must be escaped for literal versions: `+` and `{`.
+
 ## Converting to PDF
 
 To generate a PDF from an AsciiDoc file:
@@ -212,10 +216,6 @@ To generate a PDF from an AsciiDoc file:
 - `asciidoctor-pdf {name}.adoc`
 
 This automatically adds page numbers.
-
-## Character Escaping
-
-These characters must be escaped for literal versions: `+` and `{`.
 
 ## Images
 
@@ -250,48 +250,6 @@ and is followed by the caption. For example:
 .htmx was created by Carson Gross.
 image::assets/htmx-logo.png[htmx, 200]
 ```
-
-## Math Formulas
-
-To render math formulas, enable it with the document attribute
-`:stem: latexmath`.
-
-The examples below render the quadratic equation.
-
-For inline formulas, use the following syntax:
-
-```text
-stem:[x = {-b \pm \sqrt{b^2-4ac} \over 2a}]
-```
-
-For block formulas, use the following syntax:
-
-```text
-[stem]
-++++
-x = {-b \pm \sqrt{b^2-4ac} \over 2a}
-++++
-```
-
-## VS Code Extension
-
-Install the AsciiDoc extension.
-
-To preview an `.adoc` file in VS Code:
-
-- Open an `.adoc` file.
-- Click the "Open Preview" button in the upper-left.
-  The icon looks like a two-column document
-  with a magnifier glass in the lower-left.
-  Alternatively, press cmd-k v.
-
-The AsciiDoc VS Code extension can also:
-
-- export to DocBook, HTML, or PDF
-- paste Markup for an image in the clipboard
-
-  An image file with the current timestamp is created
-  in the same directory as the document.
 
 ## Generating Slides
 
@@ -360,6 +318,124 @@ lines go here
 Optional preceded the first line of four dashes
 with a line containing `[listing]`.
 
+## Lists
+
+For a bulleted lists, precede each item with \* or -.
+Alternate for each nested level.
+
+```text
+* Fruit
+  - Apple
+  - Orange
+* Meat
+  - Beef
+  - Chicken
+  - Pork
+* Vegetable
+  - Corn
+  - Tomato
+```
+
+To include paragraphs of text below a bullet,
+precede each blank line with a `+` character.
+For example:
+
+```text
+* Football
++
+American Football is a high-intensity team sport played between two teams
+of 11 players on a rectangular field with goalposts at each end.
+The objective is to score points by advancing the ball into the opposing
+team's end zone, primarily through running plays or passing plays.
++
+It’s known for its strategic complexity, physicality, and passionate fan base,
+especially in the United States where it's a cultural staple from high school
+to the NFL.
+
+* Hockey
++
+Ice hockey is a fast-paced, physical team sport played on an ice rink
+between two teams of six players each — five skaters and one goaltender.
+The objective is to score goals by shooting a puck into the opposing team's net
+using a hockey stick.
+```
+
+Another option is to use multiple \* characters to indicate the level.
+
+```text
+* Level 1
+** Level 2
+*** Level 3
+```
+
+For ordered lists:
+
+```text
+. Item 1
+.. Item 1.1
+... Item 1.1.1
+. Item 2
+.. Item 2.1
+. Item 3
+.. Item 3.1
+```
+
+To explicitly specify each item "number",
+enter them as they should be rendered.
+The editor extension will provide warnings
+if any are skipped or they are out of order.
+
+```text
+A. Item 1
+   1. Item 1.1
+      a. Item 1.1.1
+B. Item 2
+   1. Item 2.1
+C. Item 3
+```
+
+For definition lists, separate terms and definitions with ::.
+By default, definitions will be indented on their own line
+even if they aren't written that way.
+
+```text
+Term 1:: Definition 1
+Term 2::
+  Definition 2
+```
+
+For non-indented definition lists,
+precede them with the "horizontal" attribute?
+
+```text
+[horizontal]
+Term 1:: Definition 1
+Term 2::
+  Definition 2
+```
+
+## Math Formulas
+
+To render math formulas, enable it with the document attribute
+`:stem: latexmath`. Then use the `stem` directive.
+
+The examples below render the quadratic equation.
+
+For inline formulas, use the following syntax:
+
+```text
+stem:[x = {-b \pm \sqrt{b^2-4ac} \over 2a}]
+```
+
+For block formulas, use the following syntax:
+
+```text
+[stem]
+++++
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+++++
+```
+
 ## Source Blocks
 
 To mark a set of lines as source code, use the following syntax.
@@ -416,6 +492,26 @@ with highlight.js! Maybe the AsciiDoc book you ordered will show how.
 ## Tables
 
 TODO: Describe how to render tables.
+
+## VS Code Extension
+
+Install the AsciiDoc extension.
+
+To preview an `.adoc` file in VS Code:
+
+- Open an `.adoc` file.
+- Click the "Open Preview" button in the upper-left.
+  The icon looks like a two-column document
+  with a magnifier glass in the lower-left.
+  Alternatively, press cmd-k v.
+
+The AsciiDoc VS Code extension can also:
+
+- export to DocBook, HTML, or PDF
+- paste Markup for an image in the clipboard
+
+  An image file with the current timestamp is created
+  in the same directory as the document.
 
 ## Resources
 
