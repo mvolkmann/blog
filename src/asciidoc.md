@@ -371,9 +371,6 @@ source code goes here
 ----
 ```
 
-To cause the source code lines to be numbered,
-add `, numbered` after the language.
-
 By default, the code is not highlighted.
 To add syntax highlighting, specify a syntax highlighter
 using the `:source-highlighter:` document attribute.
@@ -388,6 +385,8 @@ Its value is one of the following supported syntax highlighter libraries:
   It doesn't seem to work!
 - [rouge](https://rouge.jneen.net) is a newer option implemented in Ruby
   that does not require client-side JavaScript in HTML.
+  It is the only option that works with `asciidoctor-pdf`.
+  To install this, run `gem install rouge`.
 
 For example, `:source-highlighter: highlight.js`.
 
@@ -408,6 +407,11 @@ The supported programming languages and the words used to specify them
 vary based on the selected syntax highlighting library.
 For highlight.js, see
 [Supported Languages](https://highlightjs.readthedocs.io/en/latest/supported-languages.html).
+
+To cause the source code lines to be numbered,
+add `, numbered` after the language.
+TODO: This works with rouge, but I haven't been able to get it to work
+with highlight.js! Maybe the AsciiDoc book you ordered will show how.
 
 ## Tables
 
