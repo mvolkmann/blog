@@ -83,6 +83,8 @@ To install the `asciidoctor` command:
 
 AsciiDoc supports built-in and user-defined attributes.
 
+### Built-in Attributes
+
 Built-in attributes configure how the document is rendered.
 They fall into several categories such as document and table.
 
@@ -300,11 +302,15 @@ digraph G {
 }
 ```
 
-The steps convert this file to HTML are:
+The installs required to support this are:
 
-1. Enter `brew install graphviz`.
+- `brew install graphviz`
+- `gem install bundler`
+- `gem install asciidoctor-diagram`.
+
+The steps convert the `.adoc` file to HTML are:
+
 1. `cd` to the directory containing the `.adoc` file to be converted.
-1. Enter `gem install bundler`.
 1. Create the file `Gemfile` containing the following:
 
    ```bash
@@ -313,7 +319,6 @@ The steps convert this file to HTML are:
    gem 'asciidoctor-diagram'
    ```
 
-1. Enter `gem install asciidoctor-diagram`.
 1. Enter `bundle install`.
 1. Enter `bundle exec asciidoctor -r asciidoctor-diagram {name}.adoc`
 
