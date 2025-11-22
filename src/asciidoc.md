@@ -81,14 +81,16 @@ To install the `asciidoctor` command:
 
 ## Attributes
 
-AsciiDoc supports built-in and user=defined attributes.
+AsciiDoc supports built-in and user-defined attributes.
+
 Built-in attributes configure how the document is rendered.
-This fall into several categories such as document and table.
-User-defined attributes are used for text replacement.
+They fall into several categories such as document and table.
 
 Document attributes configure global behavior.
-This must follow the level 1 header
+They must follow the level 1 header
 with no blank lines preceding them.
+
+Examples of document attributes include:
 
 - `:doctype: {type}` sets the document type to `article`, `book`,
   `inline` (for embedding in another document), or `manpage`.
@@ -136,18 +138,30 @@ tabsize,Sets the number of spaces represented by a tab character in source code 
 idprefix,Prefix to prepend to section IDs.,:idprefix: \_
 idseparator,Character used to replace spaces in section titles when generating IDs.,:idseparator: -
 
-User-defined attributes are defined with the syntax `:name: value`.
+### User-defined Attributes
+
+User-defined attributes are used for text replacement and conditional rendering.
+They are defined with the syntax `:name:[ value]`.
+
+The following attribute is Boolean in nature.
+Directives described under "Conditional Rendering" can test whether it is set.
+
+```text
+:black-friday:
+```
+
+The following attribute has an assigned value.
+Directives described under "Conditional Rendering" can test its value.
+
+```text
+:year: 2025
+```
+
+It can be substituted into text that follows with the syntax `{name}`.
 For example:
 
 ```text
-:season: Fall
-```
-
-The values of user-defined attributes are inserted into the document
-with the syntax `{name}`. For example:
-
-```text
-The current season is {season}.
+Year: {year}
 ```
 
 ## Author
