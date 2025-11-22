@@ -109,6 +109,8 @@ Each tab can contain any number of panes.
 
 To open a new tab, click the "+" to the right of the last open tab
 or press cmd-t.
+The new tab will appear to the right of the currently active tab,
+not after the last open tab.
 
 To rename a tab, right-click it, select "Rename",
 enter the new name, and press the return key.
