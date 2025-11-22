@@ -326,6 +326,36 @@ The supported attributes are:
 Specifying `[opts=optional]` causes AsciiDoc to silently ignore
 the `include` directive if the file it references is not found.
 
+## Links
+
+To add a link to a URL, enter the URL
+followed by the the link text inside square brackets.
+For example: `https://chatgpt.com[ChatGPT]`.
+For HTML output, to cause clicking the link to open in a
+new browser tab/window, add a caret at the end of the link text.
+For example: `https://chatgpt.com[ChatGPT^]`.
+
+For links that may need to appear multiple times,
+or just to manage all the links in one place,
+create a file with a name like `links.adoc`.
+Add lines that define attributes whose values are links.
+For example:
+
+```adoc
+:chatgpt-link: https://chatgpt.com[ChatGPT^]
+```
+
+To insert the links in other AsciiDoc files,
+include the file that defines the links
+and add attribute references where needed.
+For example:
+
+```adoc
+include::links.adoc[]
+...
+{chatgpt-link}
+```
+
 ## Listing Blocks
 
 To display text lines in a monospace font, add lines containing
