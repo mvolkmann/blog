@@ -228,7 +228,10 @@ unset it by adding an exclamation mark after the name.
 For example: `:happy!`.
 
 To test a condition other that an attribute being set,
-use the `ifeval` directive. For example:
+use the `ifeval` directive.
+It can use the relational operators `==`, `!=`, `<`, `<=`, `>=`, and `>`.
+It cannot use arithmetic operators like `+`, `-`, `*`, and `/`.
+For example:
 
 ```adoc
 :my-score: 7
