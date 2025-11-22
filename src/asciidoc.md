@@ -272,14 +272,17 @@ When followed by two colons, it renders an image on its own line.
 // Use default size.
 image::assets/htmx-logo.png[htmx]
 // Only specify a width.
-image::assets/htmx-logo.png[htmx, 200]
+image::assets/htmx-logo.png[htmx, width=200]
 // Only specify a height.
-image::assets/htmx-logo.png[htmx, , 100]
+image::assets/htmx-logo.png[htmx, height=100]
 ```
+
+The width and height can also be specified as the
+2nd and 3rd positional arguments.
 
 An inline image uses the same syntax, except
 only a single colon follows the `image` macro name.
-The image image:assets/htmx-logo.png[htmx, 80] is inline.
+The image `image:assets/htmx-logo.png[htmx, width=80]` is inline.
 
 To add figure numbers and a caption to an image,
 add a line before the `image` macro that begins with a period
@@ -611,15 +614,17 @@ To generate PDF output, open the command palette
 and select "AsciiDoc: Export Document as PDF".
 A file dialog will open where you can enter the file name to use
 and select the destination directory.
-TODO: Does the macOS Preview app automatically update
-each time a new version of the PDF is generated?
+If a previous version of the PDF is open in VS Code,
+it will update automatically.
+If a previous version of the PDF is open in the macOS Preview app,
+it will update automatically when that app becomes active.
 
 To paste an image in the system clipboard into an AsciiDoc document
-using the `image:` directory, open the command palette
+using the `image:` directive, open the command palette
 and select "AsciiDoc: Paste Image".
-An image file with the current timestamp is created
-in the same directory as the document.
-TODO: Does this really happen?
+An image file whose name is the current timestamp is
+created in the same directory as the document,
+and the `image:` directive will refer to that file.
 
 To generate DocBook output, open the command palette
 and select "AsciiDoc: Save to DocBook".
