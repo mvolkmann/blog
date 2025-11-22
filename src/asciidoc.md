@@ -273,6 +273,62 @@ You are winning!
 endif::[]
 ```
 
+## Diagrams
+
+GraphViz diagrams can be described in AsciiDoc files and rendered.
+For example, the following can be added in a `.adoc` file:
+
+```adoc
+[graphviz, flow-diagram, svg]
+----
+digraph G {
+    // Set some styling attributes
+    rankdir="LR"; // left to right layout
+    node [shape=box, style=rounded];
+
+    // Define the nodes
+    A [label="Start Process"];
+    B [label="Data Input"];
+    C [label="Data Validation"];
+    D [label="Finish"];
+
+    // Define the edges (connections)
+    A -> B;
+    B -> C [label="Success"];
+    B -> D [label="Failure"]; // Flow bypasses validation on failure
+    C -> D;
+}
+```
+
+The steps convert this file to HTML are:
+
+1. Enter `brew install graphviz`.
+1. `cd` to the directory containing the `.adoc` file to be converted.
+1. Enter `gem install bundler`.
+1. Create the file `Gemfile` containing the following:
+
+   ```bash
+   source 'https://rubygems.org'
+   gem 'asciidoctor'
+   gem 'asciidoctor-diagram'
+   ```
+
+1. Enter `gem install asciidoctor-diagram`.
+1. Enter `bundle install`.
+1. Enter `bundle exec asciidoctor -r asciidoctor-diagram {name}.adoc`
+
+This creates the file `flow-diagram.svg` in the same directory as `{name}.adoc`.
+
+The generated HTML will contain the following `img` element:
+
+```html
+<img src="flow-diagram.svg" alt="flow diagram" width="631" height="113" />
+```
+
+The rendered diagram will be the following:
+
+<img alt="generated diagram" src="/blog/assets/graphviz-in-asciidoc.svg?v={{pkg.version}}">
+
 ## DocBook Output
 
 DocBook is a standardized XML format for technical documentation.
