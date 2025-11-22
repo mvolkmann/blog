@@ -299,6 +299,8 @@ Slidy supports the following keyboard shortcuts:
 The `include` directive includes the contents of a text file
 into the current file, even other AsciiDoc files.
 It can be used to partition a large file into smaller ones.
+When the files represent chapters in a book,
+it may be necessary to include a blank line between each `include`.
 
 The `include` directive is commonly used to
 include files `[listing]` and `[source]` blocks.
