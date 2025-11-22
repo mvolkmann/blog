@@ -166,7 +166,8 @@ Year: {year}
 
 User-defined variables can be defined in a separate file
 that is included in files that use them.
-This enables changing their values without modifying the files that use them.
+This allows changing their values without modifying the files that use them.
+It enables generating multiple versions of the same base document.
 For example, the file `variables.adoc` can contain the following:
 
 ```adoc
