@@ -62,6 +62,23 @@ For example:
 WARNING: Rock climbing without ropes is dangerous.
 ```
 
+## Asciidoctor
+
+Asciidoctor is an open-source tool that converts AsciiDoc files
+into other formats like HTML, PDF, EPUB, and DocBook.
+
+To install the `asciidoctor` command:
+
+1. `brew install ruby` (also installs the `gem` command)
+1. `brew install ruby`
+1. Edit `.zshrc` and add the following:
+
+   ```bash
+   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+   ```
+
+1. `gem install asciidoctor`
+
 ## Attributes
 
 AsciiDoc supports built-in and user=defined attributes.
@@ -133,23 +150,6 @@ with the syntax `{name}`. For example:
 The current season is {season}.
 ```
 
-## Asciidoctor
-
-Asciidoctor is an open-source tool that converts AsciiDoc files
-into other formats like HTML, PDF, EPUB, and DocBook.
-
-To install the `asciidoctor` command:
-
-1. `brew install ruby` (also installs the `gem` command)
-1. `brew install ruby`
-1. Edit `.zshrc` and add the following:
-
-   ```bash
-   export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-   ```
-
-1. `gem install asciidoctor`
-
 ## Author
 
 Specify the author name and email address
@@ -201,7 +201,7 @@ Single-line comments begin with `//`.
 Multi-line comments begin with the line `////`
 and end with the same.
 
-## Conditional Logic
+## Conditional Content
 
 The `ifdef` and `ifndef` directives test whether an attribute is set or unset
 and conditionally include content up to the next `endif` directive.
@@ -242,43 +242,19 @@ You are winning!
 endif::[]
 ```
 
-## Converting to HTML
-
-To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
-This generates `{name}.html`.
-
 ## Escaping Text
+
+These characters must be escaped for literal versions: `+` and `{`.
 
 To escape text so special characters like curly braces are not
 interpreted specially, surround the text with `+` characters.
 To also render the text in a monospace font,
 additionally surround the text with backticks.
 
-## Pandoc
+## HTML Output
 
-[Pandoc](http://pandoc.org/) converts between various markup formats.
-To install Pandoc in macOS, enter `brew install pandoc`.
-
-## Converting from Markdown
-
-To convert a Markdown file to AsciiDoc in macOS:
-
-```bash
-pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
-```
-
-## Character Escaping
-
-These characters must be escaped for literal versions: `+` and `{`.
-
-## Converting to PDF
-
-To generate a PDF from an AsciiDoc file:
-
-- `gem install asciidoctor-pdf` (one time)
-- `asciidoctor-pdf {name}.adoc`
-
-This automatically adds page numbers.
+To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
+This generates `{name}.html`.
 
 ## Images
 
@@ -313,27 +289,6 @@ and is followed by the caption. For example:
 .htmx was created by Carson Gross.
 image::assets/htmx-logo.png[htmx, 200]
 ```
-
-## Generating Slides
-
-To generate slidy slides, enter `asciidoctor -b slidy {input-file}`.
-This generates `{name}.html`, but it's in slidy format.
-
-Level 1 & 2 headers start new slides.
-
-Slidy supports the following keyboard shortcuts:
-
-- left arrow goes to previous slide
-- right arrow or spacebar goes to next slide
-  (can also mouse click anywhere on slide)
-- s or < makes font smaller
-- b or > makes font bigger
-- c shows table of contents
-- f toggles display of status line
-- home goes to first slide
-- end goes to last slide
-- a toggles between showing all slides on one page
-  and one slide at a time
 
 ## Including Files
 
@@ -509,6 +464,17 @@ Term 2::
   Definition 2
 ```
 
+## Markdown to AsciiDoc
+
+[Pandoc](http://pandoc.org/) converts between various markup formats.
+To install Pandoc in macOS, enter `brew install pandoc`.
+
+To convert a Markdown file to AsciiDoc:
+
+```bash
+pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
+```
+
 ## Math Formulas
 
 To render math formulas, enable it with the document attribute
@@ -530,6 +496,42 @@ For block formulas, use the following syntax:
 x = {-b \pm \sqrt{b^2-4ac} \over 2a}
 ++++
 ```
+
+## Page Breaks
+
+To add a page break in PDF output,
+insert a blank line followed by a line containing only `<<<`.
+It's unclear when the blank line is needed.
+
+## PDF Output
+
+To generate a PDF from an AsciiDoc file:
+
+- `gem install asciidoctor-pdf` (one time)
+- `asciidoctor-pdf {name}.adoc`
+
+This automatically adds page numbers.
+
+## Slide Output
+
+To generate slidy slides, enter `asciidoctor -b slidy {input-file}`.
+This generates `{name}.html`, but it's in slidy format.
+
+Level 1 & 2 headers start new slides.
+
+Slidy supports the following keyboard shortcuts:
+
+- left arrow goes to previous slide
+- right arrow or spacebar goes to next slide
+  (can also mouse click anywhere on slide)
+- s or < makes font smaller
+- b or > makes font bigger
+- c shows table of contents
+- f toggles display of status line
+- home goes to first slide
+- end goes to last slide
+- a toggles between showing all slides on one page
+  and one slide at a time
 
 ## Source Blocks
 
@@ -600,13 +602,27 @@ To preview an `.adoc` file in VS Code:
   with a magnifier glass in the lower-left.
   Alternatively, press cmd-k v.
 
-The AsciiDoc VS Code extension can also:
+To generate HTML output, open the command palette
+and select "AsciiDoc: Save HTML Document".
+To view the rendered HTML, locate the `.html` file in the Explorer pane,
+right-click it, and select "Open with Live Server".
 
-- export to DocBook, HTML, or PDF
-- paste Markup for an image in the clipboard
+To generate PDF output, open the command palette
+and select "AsciiDoc: Export Document as PDF".
+A file dialog will open where you can enter the file name to use
+and select the destination directory.
 
-  An image file with the current timestamp is created
-  in the same directory as the document.
+To paste an image in the system clipboard into an AsciiDoc document
+using the `image:` directory, open the command palette
+and select "AsciiDoc: Paste Image".
+An image file with the current timestamp is created
+in the same directory as the document.
+TODO: Does this really happen?
+
+To generate DocBook output, open the command palette
+and select "AsciiDoc: Save to DocBook".
+
+TODO: See other "AsciiDoc: ?" commands in the command palette.
 
 ## Resources
 
