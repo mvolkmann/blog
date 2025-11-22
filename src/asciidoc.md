@@ -611,6 +611,8 @@ To generate PDF output, open the command palette
 and select "AsciiDoc: Export Document as PDF".
 A file dialog will open where you can enter the file name to use
 and select the destination directory.
+TODO: Does the macOS Preview app automatically update
+each time a new version of the PDF is generated?
 
 To paste an image in the system clipboard into an AsciiDoc document
 using the `image:` directory, open the command palette
