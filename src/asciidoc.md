@@ -201,6 +201,44 @@ Single-line comments begin with `//`.
 Multi-line comments begin with the line `////`
 and end with the same.
 
+## Conditional Logic
+
+The `ifdef` and `ifndef` directives test whether an attribute is set or unset
+and conditionally include content up to the next `endif` directive.
+For example:
+
+```adoc
+:happy:
+
+ifdef::happy[]
+Have a great day!
+endif::[]
+
+ifndef::happy[]
+Cheer up.  Things will get better soon.
+endif::[]
+```
+
+This will render "Have a great day!" because the `happy` attribute is set.
+To instead render "Cheer up.",
+delete the line that sets the `happy` attribute or comment it out.
+
+To have an attribute that is set for part of the document and unset later,
+unset it by adding an exclamation mark after the name.
+For example: `:happy!`.
+
+To test a condition other that an attribute being set,
+use the `ifeval` directive. For example:
+
+```adoc
+:my-score: 7
+:opponent-score: 3
+
+ifeval::[{my-score} > {opponent-score}]
+You are winning!
+endif::[]
+```
+
 ## Converting to HTML
 
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
