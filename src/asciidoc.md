@@ -164,6 +164,22 @@ For example:
 Year: {year}
 ```
 
+User-defined variables can be defined in a separate file
+that is included in files that use them.
+This enables changing their values without modifying the files that use them.
+For example, the file `variables.adoc` can contain the following:
+
+```adoc
+:black-friday:
+:year: 2025
+```
+
+Files that use these variables can include them with the following:
+
+```adoc
+include::variables.adoc[]
+```
+
 ## Author
 
 Specify the author name and email address
