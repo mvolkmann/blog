@@ -273,6 +273,21 @@ You are winning!
 endif::[]
 ```
 
+## DocBook Output
+
+DocBook is a standardized XML format for technical documentation.
+These files can be easily converted to EPUB, HTML, man pages, and PDF.
+AsciiDoc files can be directly converted to these formats
+without generating an intermediate DocBook file.
+
+To generate a DocBook file from an AsciiDoc file:
+
+```bash
+asciidoctor -b docbook5 {name}.adoc
+```
+
+This creates the file `{name}.xml`.
+
 ## Escaping Text
 
 These characters must be escaped for literal versions: `+` and `{`.
