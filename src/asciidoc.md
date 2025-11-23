@@ -473,6 +473,14 @@ and is followed by the caption. For example:
 image::assets/htmx-logo.png[htmx, 200]
 ```
 
+To make an image be a hyperlink that opens in a new browser tab,
+add the `link` and `window` attributes.
+For example:
+
+```adoc
+image::dog.png[dog, width=75, link="https://somesite.com", window="_blank"]
+```
+
 ## Including Files
 
 The `include` directive includes the contents of a text file
