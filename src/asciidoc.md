@@ -17,6 +17,10 @@ It is simpler, a bit more readable, and more popular.
 
 The recommended file extension for AsciiDoc files is `.adoc`.
 
+Some AsciiDoc features are only supported by specific backends.
+For example, something that works when converting to HTML
+may not work when converting to PDF.
+
 ## Admonitions (Callouts)
 
 There are four supported kinds of admonitions:
@@ -644,6 +648,15 @@ To generate a PDF from an AsciiDoc file:
 - `asciidoctor-pdf {name}.adoc`
 
 This automatically adds page numbers.
+
+## Sections
+
+The beginning of each section in a document is marked by a line that
+starts with a number of `=` characters, followed by a title.
+For example, `== Introduction`.
+
+The document begins with a level 0 section which uses a single `=`.
+Level 1 sections begin with `==`, level 2 with `===` and so on.
 
 ## Slide Output
 
