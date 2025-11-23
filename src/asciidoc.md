@@ -79,6 +79,29 @@ To install the `asciidoctor` command:
 
 1. `gem install asciidoctor`
 
+## Asciidoctor.js Live Preview
+
+The browser extension "Asciidoctor.js Live Preview"
+is supported in the Chrome and Firefox browsers.
+It provides a live preview of AsciiDoc files.
+Changes saved in any text editor are reflected in the browser
+after a couple of seconds.
+
+To install this in Chrome:
+
+- Click the vertical ellipsis button in the upper-right.
+- Select Extensions ... Visit Chrome Web Store.
+- Search for "asciidoc".
+- Click "Asciidoctor.js Live Preview".
+- Click the "Add to Chrome" button.
+- Click the "Add extension" button.
+- Click the extensions button (looks like a puzzle piece) in the upper-right.
+- Click the vertical ellipsis after "Asciidoctor.js Live Preview".
+- Select "Manage Extension".
+- Enable "Allow access to file URLs".
+
+To use this, select File ... Open File... and open any `.adoc` file.
+
 ## Attributes
 
 AsciiDoc supports built-in and user-defined attributes.
