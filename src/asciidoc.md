@@ -427,6 +427,10 @@ interpreted specially, surround the text with `+` characters.
 To also render the text in a monospace font,
 additionally surround the text with backticks.
 
+## Horizontal Rules
+
+To add a horizontal rule, add a line containing three single quotes.
+
 ## HTML Output
 
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
