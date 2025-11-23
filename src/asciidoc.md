@@ -658,6 +658,9 @@ For example, `== Introduction`.
 The document begins with a level 0 section which uses a single `=`.
 Level 1 sections begin with `==`, level 2 with `===` and so on.
 
+TODO: "The interpretation of the level 0 title depends entirely on
+the document's doctype setting." Where is the doctype set?
+
 ## Slide Output
 
 To generate slidy slides, enter `asciidoctor -b slidy {input-file}`.
