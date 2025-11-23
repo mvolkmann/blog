@@ -21,6 +21,48 @@ Some AsciiDoc features are only supported by specific backends.
 For example, something that works when converting to HTML
 may not work when converting to PDF.
 
+## Syntax Details
+
+The term "directive" encompasses attributes, macros,
+block delimiters, and replacement/flow syntax.
+
+Document attributes control document settings and belong in the document header.
+Examples include `= Document Title`, `:sectnum:`, and `:toc:`.
+
+User-defined attributes represent Boolean values (set or not set)
+or replacement values that can be inserted
+anywhere in the document after their definition.
+
+Macros are processed and replaced by some output.
+They have two syntaxes, one for inline use and one for block use.
+
+Inline macro syntax is `name:target[attributes]`.
+The square brackets are required even when no attributes are specified.
+For example, `link:https://example.com[Example Site]`
+and `footnote:[This is a note]`.
+
+Block macro syntax is `name::target[attributes]`.
+Note the use of two colons instead of one.
+For example, `image::logo.png[Logo]`
+and `include::common-attributes.adoc[]`.
+
+Block delimiters are lines that define
+the boundaries of specific kinds of blocks.
+For example, `----` for source blocks and `****` for example blocks.
+
+Replacement/flow syntax includes:
+
+- page breaks with `<<<`
+- horizontal rules with `'''`
+- paragraph continuation with `+`
+- conditional rendering with `ifdef` and `ifndef`
+
+Conclusion
+
+When speaking specifically about AsciiDoc syntax, you should use the term "macro" (inline macro or block macro) to refer to the named instructions that use the name: or name:: syntax.
+
+If you refer to the settings and instructions that control the parser's environment, "directive" can be understood, but "attribute" or "setting" is more precise.
+
 ## Admonitions (Callouts)
 
 There are four supported kinds of admonitions:
