@@ -341,7 +341,67 @@ to see the list filtered to only colors that match.
 
 ### Dialogs
 
-See <a href="/blog/html-dialog-element/" target="_blank">HTML dialog Element</a>
+The example below demonstrates creating a dialog
+with a close button and using the `closedby` attribute.
+The supported `closedby` attribute values are:
+
+- "none": only closed by calling close() method
+- "closerequest": closed by a platform-specific action
+  (such as pressing the esc key or clicking outside the dialog)
+  or a developer-specified mechanism
+- "any": closed by any of the three methods
+- not specified:
+  If modal then similar to "closerequest" (but clicking outside doesn't close).
+  If non-modal then same as "none".
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dialog Demo</title>
+    <style>
+      .close {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        position: absolute;
+        top: 0.2rem;
+        right: 0;
+      }
+      dialog {
+        position: relative;
+      }
+    </style>
+    <script>
+      window.onload = () => {
+        const button = document.querySelector('button');
+        const dialog = document.querySelector('dialog');
+        button.addEventListener('click', () => {
+          dialog.showModal();
+        });
+        const closeButton = dialog.querySelector('.close');
+        closeButton.addEventListener('click', () => {
+          dialog.close();
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <button>Show Dialog</button>
+    <dialog closedby="any">
+      <button class="close">✖</button>
+      <p>
+        Close me by pressing the esc key,<br />
+        clicking outside me, or<br />
+        clicking my close button.
+      </p>
+    </dialog>
+  </body>
+</html>
+```
+
+For more detail, see
+<a href="/blog/html-dialog-element/" target="_blank">HTML dialog Element</a>.
 
 ### Popovers
 

@@ -666,9 +666,9 @@ To convert a Markdown file to AsciiDoc:
 pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
 ```
 
-## Math Formulas
+## Math Equations
 
-To render math formulas, enable it with the document attribute
+To render math equations, enable it with the document attribute
 `:stem: latexmath`. Then use the `stem` directive.
 
 The examples below render the quadratic equation.
