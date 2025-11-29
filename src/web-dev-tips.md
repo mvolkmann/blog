@@ -178,6 +178,57 @@ For details on these attribute values, see the {% aTargetBlank
 "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input",
 "MDN input element" %} page.
 
+The following example demonstrates styling invalid inputs
+so they have a red border when their value is invalid.
+After the Submit button is clicked,
+if there are any invalid inputs, a popup giving the reason
+why the first invalid input is invalid is displayed.
+Users must correct that value and click the Submit button again
+to see the reason for the next invalid input.
+
+```css
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dialog Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      div {
+        display: flex;
+        align-items: start;
+        margin-bottom: 0.5rem;
+      }
+      input:invalid {
+        border-color: red !important;
+      }
+      label {
+        margin-right: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST" action="/process">
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" />
+      </div>
+      <div>
+        <label for="url">URL:</label>
+        <input type="url" id="url" />
+      </div>
+      <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" minlength="8" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</html>
+```
+
 ### Form validation
 
 HTML provides good form validation with nice error messages.
