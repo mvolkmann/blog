@@ -563,6 +563,56 @@ It is recommended to only add this attribute to `img` and `iframe` elements
 that do not require scrolling after the initial page load
 in order to view them.
 
+### Spell Checking
+
+The following example demonstrates using the "spellcheck" attribute
+on `input` and `textarea` elements.
+When these elements have focus and they have this attribute set to "true",
+misspelled words are given a dotted, red underline.
+Right-clicking a misspelled word offers suggested corrections
+and the option to add the word to the local dictionary.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dialog Demo</title>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+      div {
+        display: flex;
+        align-items: start;
+        margin-bottom: 15px;
+      }
+      label {
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <label for="my-input">My Input</label>
+      <input
+        id="my-input"
+        type="text"
+        size="30"
+        spellcheck="true"
+        value="Ths is a smple txt with erors."
+      />
+    </div>
+    <div>
+      <label for="my-textarea">My TextArea</label>
+      <textarea id="my-textarea" spellcheck="true">
+        Ths is a smple txt with erors.
+      </textarea>
+    </div>
+  </div>
+</html>
+```
+
 ## CSS
 
 ### CSS property sources
