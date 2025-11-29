@@ -572,6 +572,14 @@ misspelled words are given a dotted, red underline.
 Right-clicking a misspelled word offers suggested corrections
 and the option to add the word to the local dictionary.
 
+Browsers are not required to support this
+and can have different default behavior.
+Firefox v145 only performs spell checking when
+the "spellcheck" attribute is present with a value of "true".
+Chrome v142 and Safari v26 perform spell checking by default,
+even when the "spellcheck" attribute is not present.
+They both require `spellcheck="false"` to disable spell checking.
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
