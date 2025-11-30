@@ -839,6 +839,8 @@ There are two ways to use a custom theme.
 The first way is to add the following attributes in the header of `book.adoc`:
 This defaults to searching for the specified theme file
 in the same directory as `default-theme.yml`.
+Note that only the part of the custom theme file name
+that precedes `-theme.yml` is specified.
 
 ```adoc
 :pdf-themesdir: .
@@ -848,6 +850,7 @@ in the same directory as `default-theme.yml`.
 The second is to add the following option to the `asciidoctor-pdf` command.
 This defaults to searching for the specified theme file
 in the current directory.
+Note that the entire custom theme file name is specified.
 
 ```bash
 asciidoctor-pdf --theme custom-theme.yml book.adoc
