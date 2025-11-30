@@ -830,6 +830,9 @@ extends: default
 
 Let's create a custom theme that overrides
 the header and footer sections of each page.
+This is documented at {% aTargetBlank
+"https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/",
+"Add Running Content" %}.
 
 ```yaml
 extends: default
@@ -869,6 +872,8 @@ footer:
 TODO: The above has two issues.
 TODO: First, the section-title includes the section number which I do not want.
 TODO: Second, the verso center content is not rendering anything.
+The docs say "If you reference an attribute which is not defined,
+all the text on that same line in the running content will be dropped."
 TODO: See https://asciidoctor.zulipchat.com/#narrow/channel/288690-users.2Fasciidoctor-pdf/topic/custom.20theme.20header.2Ffooter.20substitutions/with/561002388
 
 Attribute substitutions that are commonly used in headers and footers include
