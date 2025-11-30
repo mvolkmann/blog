@@ -793,6 +793,32 @@ with highlight.js! Maybe the AsciiDoc book you ordered will show how.
 
 TODO: Describe how to render tables.
 
+```adoc
+[cols="<,<,<"]
+|===
+// Heading row
+^|Column 1 ^|Column 2 ^|Column 3
+
+// First data row - "foo" spans two columns
+|Hello 2+|I span two columns.
+
+// Second data row - "apple pie" spans two rows
+.2+|I span two rows. |apple |banana
+
+// Third data row - nothing in the first column
+|cherry |grape
+
+// Fourth data row
+2.2+|I span two columns and two rows. |lemon
+
+// Fifth data row - nothing in first two columns
+| orange
+
+// Sixth data row
+|raspberry |strawberry |watermelon
+|===
+```
+
 ## Themes
 
 Themes define many characteristics of PDF output including
