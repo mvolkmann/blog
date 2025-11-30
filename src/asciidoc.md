@@ -875,8 +875,9 @@ all the text on that same line in the running content will be dropped."
 TODO: See https://asciidoctor.zulipchat.com/#narrow/channel/288690-users.2Fasciidoctor-pdf/topic/custom.20theme.20header.2Ffooter.20substitutions/with/561002388
 
 Attribute substitutions that are commonly used in headers and footers include
-`page-number`, `page-count`, `section-number`, `section-number-level-{N}`,
-`section-title`, and `section-title-level-{N}`.
+`chapter-numeral`, `chapter-title`, `document-title`, `document-subtitle`,
+`page-number`, `page-count`, `part-numeral`, `part-title`,
+`section-number`, and `section-title`.
 
 There are two ways to use a custom theme.
 The first way is to add the following attributes in the header of `book.adoc`:
