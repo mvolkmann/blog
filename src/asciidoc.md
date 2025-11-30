@@ -840,6 +840,7 @@ extends: default
 page:
   # Order of values is [top, right, bottom, left].
   margin: [$base_line_height_length * 4, 0, $base_line_height_length * 2, 0]
+
   # This causes Roman numeral page numbers to be used before page 5
   # (which includes the preface and table of contents)
   # and Arabic numeral page numbers to be used starting on page 5
