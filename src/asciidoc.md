@@ -832,8 +832,48 @@ Let's create a custom theme that overrides
 the header and footer sections of each page.
 
 ```yaml
+extends: default
 
+header:
+  height: $base_line_height_length * 2.5
+  margin_bottom: 0.5in
+  padding: [0, 0, $base_line_height_length / 2]
+  vertical_align: bottom
+
+  verso:
+    left:
+      content: '*{page-number}*'
+    center:
+      content: 'Chapter {section-number-level-1}  {section-title-level-1}'
+    right:
+      content: ''
+  recto:
+    left:
+      content: ''
+    center:
+      content: '{section-title}'
+    right:
+      content: '*{page-number}*'
+
+footer:
+  border_width: 0
+  height: 0
+  recto:
+    right:
+      content: ~
+  verso:
+    left:
+      content: ~
 ```
+
+TODO: The above has two issues.
+TODO: First, the section-title includes the section number which I do not want.
+TODO: Second, the verso center content is not rendering anything.
+TODO: See https://asciidoctor.zulipchat.com/#narrow/channel/288690-users.2Fasciidoctor-pdf/topic/custom.20theme.20header.2Ffooter.20substitutions/with/561002388
+
+Attribute substitutions that are commonly used in headers and footers include
+`page-number`, `page-count`, `section-number`, `section-number-level-{N}`,
+`section-title`, and `section-title-level-{N}`.
 
 There are two ways to use a custom theme.
 The first way is to add the following attributes in the header of `book.adoc`:
