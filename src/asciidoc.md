@@ -793,6 +793,66 @@ with highlight.js! Maybe the AsciiDoc book you ordered will show how.
 
 TODO: Describe how to render tables.
 
+## Themes
+
+Themes define many characteristics of PDF output including
+page size, margins, headers, and footers.
+
+There is a default theme defined in the file `default-theme.yml`.
+The location of this file differs based on the operating system.
+Suppose the main `.adoc` file has the name `book.adoc`.
+One way to discover the location of yours is to run the following command:
+
+```bash
+asciidoctor-pdf --theme missing book.adoc
+```
+
+In macOS, this outputs the following error message
+which gives the location of the default theme file:
+
+```text
+asciidoctor: ERROR: could not locate or load the built-in pdf theme `missing'
+because of Errno::ENOENT No such file or directory @ rb_sysopen -
+/opt/homebrew/lib/ruby/gems/3.4.0/gems/asciidoctor-pdf-2.3.24/data/themes/missing-theme.yml;
+reverting to default theme
+```
+
+Study the contents of the `default-theme.yml` file in that directory
+to understand which settings you may wish to override in a custom theme.
+
+To define a custom theme, create a file in the same directory as the main
+`.adoc` file whose name ends with `-theme.yml` such as `custom-theme.yml`.
+This file typically begins with the following line:
+
+```yaml
+extends: default
+```
+
+Let's create a custom theme that overrides
+the header and footer sections of each page.
+
+```yaml
+
+```
+
+There are two ways to use a custom theme.
+The first way is to add the following attributes in the header of `book.adoc`:
+This defaults to searching for the specified theme file
+in the same directory as `default-theme.yml`.
+
+```adoc
+:pdf-themesdir: .
+:pdf-theme: custom
+```
+
+The second is to add the following option to the `asciidoctor-pdf` command.
+This defaults to searching for the specified theme file
+in the current directory.
+
+```bash
+asciidoctor-pdf --theme custom-theme.yml book.adoc
+```
+
 ## VS Code Extension
 
 Install the AsciiDoc extension.
