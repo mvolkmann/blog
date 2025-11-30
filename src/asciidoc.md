@@ -847,7 +847,16 @@ that precedes `-theme.yml` is specified.
 :pdf-theme: custom
 ```
 
-The second is to add the following option to the `asciidoctor-pdf` command.
+Interestingly, the same result is obtained by only
+adding the following attribute, in which case it defaults to
+searching for the theme file in the current directory:
+
+```adoc
+:pdf-theme: custom-theme.yml
+```
+
+The second way to use a custom theme is to
+add the following option to the `asciidoctor-pdf` command.
 This defaults to searching for the specified theme file
 in the current directory.
 Note that the entire custom theme file name is specified.
