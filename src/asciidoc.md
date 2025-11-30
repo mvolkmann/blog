@@ -837,17 +837,28 @@ This is documented at {% aTargetBlank
 ```yaml
 extends: default
 
+page:
+  # Order of values is [top, right, bottom, left].
+  margin: [$base_line_height_length * 4, 0, $base_line_height_length * 2, 0]
+  # This causes Roman numeral page numbers to be used before page 5
+  # (which includes the preface and table of contents)
+  # and Arabic numeral page numbers to be used starting on page 5
+  # (which is where the first chapter begins).
+  numbering:
+    start-at: 5
+
 header:
-  height: $base_line_height_length * 2.5
-  margin_bottom: 0.5in
-  padding: [0, 0, $base_line_height_length / 2]
-  vertical_align: bottom
+  height: $base_line_height_length * 4
+  padding: [$base_line_height_length, 0, 0, 0]
+  # This prevents {section-title} from including the section number.
+  title-style: basic
+  vertical_align: top
 
   verso:
     left:
       content: '*{page-number}*'
     center:
-      content: 'Chapter {section-number-level-1}  {section-title-level-1}'
+      content: 'Chapter {chapter-numeral} {nbsp} {chapter-title}'
     right:
       content: ''
   recto:
@@ -858,8 +869,10 @@ header:
     right:
       content: '*{page-number}*'
 
+# The default footer is suppressed by setting :nofooter:
+# in main .adoc file, so the following isn't strictly necessary.
 footer:
-  border_width: 0
+  border_width: ~
   height: 0
   recto:
     right:
@@ -898,6 +911,11 @@ searching for the theme file in the current directory:
 ```adoc
 :pdf-theme: custom-theme.yml
 ```
+
+This is not honored by the VS Code AsciiDoc extension.
+See {% aTargetBlank
+"https://github.com/asciidoctor/asciidoctor-vscode/issues/979",
+"issue 979" %}.
 
 The second way to use a custom theme is to
 add the following option to the `asciidoctor-pdf` command.
