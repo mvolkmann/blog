@@ -58,7 +58,8 @@ from streetsidesoftware.com.
 
 ## Syntax Details
 
-AsciiDoc documents have two parts, a header section and a body section.
+AsciiDoc documents have two parts, a header section and a body section,
+that are separated by a blank line.
 
 The term "directive" encompasses attributes, macros,
 block delimiters, and replacement/flow syntax.
@@ -104,12 +105,6 @@ Replacement/flow syntax includes:
 - horizontal rules with `'''`
 - paragraph continuation with `+`
 - conditional rendering with `ifdef` and `ifndef`
-
-Conclusion
-
-When speaking specifically about AsciiDoc syntax, you should use the term "macro" (inline macro or block macro) to refer to the named instructions that use the name: or name:: syntax.
-
-If you refer to the settings and instructions that control the parser's environment, "directive" can be understood, but "attribute" or "setting" is more precise.
 
 ## Admonitions (Callouts)
 
@@ -499,7 +494,7 @@ To add a horizontal rule, add a line containing three single quotes.
 ## HTML Output
 
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
-This generates `{name}.html`.
+This generates the file `{name}.html` in the same directory as the `.adoc` file.
 
 ## Images
 
@@ -769,7 +764,8 @@ To generate a PDF from an AsciiDoc file:
 
 1. `asciidoctor-pdf {name}.adoc`
 
-This automatically adds page numbers.
+This generates the file `{name}.pdf` in the same directory as the `.adoc` file.
+It automatically adds page numbers which are in the page footers by default.
 
 ## Sections
 
