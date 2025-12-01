@@ -125,6 +125,27 @@ For example, the following applies all four formatting effects:
 This is `#*_monospace, highlighted, bold, and italic text_*#`.
 ```
 
+Some styling is specified by surrounding the text to be styled
+with `#` characters and preceding it with square brackets
+that specify the styling to be applied.
+
+| Styling          | Syntax                             |
+| ---------------- | ---------------------------------- |
+| background color | `[.{color}-background]#some text#` |
+| text color       | `[.{color}]#some text#`            |
+| slightly bigger  | `[big]#some text#`                 |
+| slightly smaller | `[small]#some text#`               |
+| strikethrough    | `[line-through]#some text#`        |
+| underline        | `[underline]#some text#`           |
+
+The color must be one of these 16 colors:
+aqua, black, blue, fuchsia, gray, green, lime, maroon,
+navy, olive, purple, red, silver, teal, white, and
+yellow.
+
+TODO: How can multiple roles be applied?
+See https://asciidoctor.zulipchat.com/#narrow/channel/279642-users/topic/applying.20multiple.20roles/with/561287211.
+
 ## Admonitions (Callouts)
 
 There are four supported kinds of admonitions:
