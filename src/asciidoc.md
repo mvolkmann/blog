@@ -26,6 +26,23 @@ Some AsciiDoc features are only supported by specific backends.
 For example, a feature that works when converting to HTML
 may not work when converting to PDF or EPUB.
 
+## VS Code
+
+If VS Code is used to edit `.adoc` files,
+install the AsciiDoc extension from asciidoctor.org.
+It provides syntax highlighting, snippets, live preview, and
+the several command palette commands including:
+
+- AsciiDoc: Export Document as PDF
+- AsciiDoc: Save HTML Document
+- AsciiDoc: Save to DocBook
+- AsciiDoc: Open Preview
+- AsciiDoc: Open Preview to the Side
+- AsciiDoc: Open Locked Preview to the Side
+
+Also consider installing the "Code Spell Checker" extension
+from streetsidesoftware.com.
+
 ## Syntax Details
 
 The term "directive" encompasses attributes, macros,
@@ -645,7 +662,7 @@ For ordered lists:
 
 To explicitly specify each item "number",
 enter them as they should be rendered.
-The editor extension will provide warnings
+The VS Code AsciiDoc extension provides warnings
 if any are skipped or they are out of order.
 
 ```text
@@ -720,8 +737,11 @@ It's unclear when the blank line is needed.
 
 To generate a PDF from an AsciiDoc file:
 
-- `gem install asciidoctor-pdf` (one time)
-- `asciidoctor-pdf {name}.adoc`
+1. `gem install asciidoctor-pdf` (one time)
+
+   This assumes that `asciidoctor` has already been installed.
+
+1. `asciidoctor-pdf {name}.adoc`
 
 This automatically adds page numbers.
 
