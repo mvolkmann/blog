@@ -39,6 +39,16 @@ the several command palette commands including:
 - AsciiDoc: Open Preview
 - AsciiDoc: Open Preview to the Side
 
+A preview can also be opened to the side by clicking the icon in
+the upper-right that looks like a book with a magnifier glass on top.
+
+By default, previews use the same styling as other VS Code tabs
+which is typically white text on a black background.
+To instead display black text on a white background,
+modify the AsciiDoc extension settings so that
+"Asciidoc > Preview: Style" has no value and
+"Asciidoc > Preview: Use Editor Style" is unchecked.
+
 There are many AsciiDoc features that are not supported by VS Code previews.
 So if something doesn't seem to be working, generate HTML or PDF
 and verify that is works correctly there.
