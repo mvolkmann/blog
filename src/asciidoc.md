@@ -8,15 +8,15 @@ layout: topic-layout.njk
 
 [AsciiDoc](http://asciidoc.org/) is a markup language
 that is an alternative to Markdown.
-[Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
-and transforms them into output formats such as HTML, PDF, and EPUB.
-
+Markdown was created in 2004 by John Gruber and Aaron Swartz.
+It is simpler, a bit more readable, and more popular.
 AsciiDoc was created in 2002 by Stuart Rackham.
 It supports more features, can easily be converted
 to DocBook, HTML, and PDF formats, and is less popular.
 
-Markdown was created in 2004 by John Gruber and Aaron Swartz.
-It is simpler, a bit more readable, and more popular.
+[Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
+and transforms them into output formats such as HTML, PDF, and EPUB.
+It was created by Dan Allen, Sarah White, and Ryan Waldron.
 
 The recommended file extension for AsciiDoc files is `.adoc`.
 
