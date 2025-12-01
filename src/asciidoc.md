@@ -38,7 +38,10 @@ the several command palette commands including:
 - AsciiDoc: Save to DocBook
 - AsciiDoc: Open Preview
 - AsciiDoc: Open Preview to the Side
-- AsciiDoc: Open Locked Preview to the Side
+
+There are many AsciiDoc features that are not supported by VS Code previews.
+So if something doesn't seem to be working, generate HTML or PDF
+and verify that is works correctly there.
 
 Also consider installing the "Code Spell Checker" extension
 from streetsidesoftware.com.
