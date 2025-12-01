@@ -106,6 +106,19 @@ Replacement/flow syntax includes:
 - paragraph continuation with `+`
 - conditional rendering with `ifdef` and `ifndef`
 
+## Basic Formatting
+
+To format text, add specific characters before and after the text.
+
+| Formatting | Character        |
+| ---------- | ---------------- |
+| bold       | `*`              |
+| highlight  | `#`              |
+| italic     | `_` (underscore) |
+| monospace  | \` (backtick)    |
+
+To render text in bold, surround it with the `*` character.
+
 ## Admonitions (Callouts)
 
 There are four supported kinds of admonitions:
