@@ -117,7 +117,13 @@ To format text, add specific characters before and after the text.
 | italic     | `_` (underscore) |
 | monospace  | \` (backtick)    |
 
-To render text in bold, surround it with the `*` character.
+These special characters can be nested to apply multiple effects,
+but they must be nested in a specific order.
+For example, the following applies all four formatting effects:
+
+```text
+This is `#*_monospace, highlighted, bold, and italic text_*#`.
+```
 
 ## Admonitions (Callouts)
 
