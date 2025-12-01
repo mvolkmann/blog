@@ -9,20 +9,22 @@ layout: topic-layout.njk
 [AsciiDoc](http://asciidoc.org/) is a markup language
 that is an alternative to Markdown.
 Markdown was created in 2004 by John Gruber and Aaron Swartz.
-It is simpler, a bit more readable, and more popular.
+Markdown is simpler, a bit more readable, and more popular.
 AsciiDoc was created in 2002 by Stuart Rackham.
-It supports more features, can easily be converted
-to DocBook, HTML, and PDF formats, and is less popular.
+AsciiDoc supports more features that Markdown, can easily be
+converted to several output formats, and is less popular.
 
 [Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
-and transforms them into output formats such as HTML, PDF, and EPUB.
-It was created by Dan Allen, Sarah White, and Ryan Waldron.
+and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
+It is implemented in Ruby and was created by
+Dan Allen, Sarah White, and Ryan Waldron.
 
+AsciiDoc files are text files that can be edited in any text editor.
 The recommended file extension for AsciiDoc files is `.adoc`.
 
 Some AsciiDoc features are only supported by specific backends.
-For example, something that works when converting to HTML
-may not work when converting to PDF.
+For example, a feature that works when converting to HTML
+may not work when converting to PDF or EPUB.
 
 ## Syntax Details
 
@@ -113,20 +115,24 @@ WARNING: Rock climbing without ropes is dangerous.
 
 ## Asciidoctor
 
-Asciidoctor is an open-source tool that converts AsciiDoc files
-into other formats like HTML, PDF, EPUB, and DocBook.
+To install the `asciidoctor` command in macOS:
 
-To install the `asciidoctor` command:
+1. Install {% aTargetBlank "https://brew.sh", "Homebrew" %}.
+1. Install the latest version of Ruby.
 
-1. `brew install ruby` (also installs the `gem` command)
-1. `brew install ruby`
-1. Edit `.zshrc` and add the following:
+   Enter `brew install ruby` to install by the `ruby` and `gem` commands.
+
+1. Configure the shell to use this new version of Ruby
+   instead of the version that ships with macOS.
+
+   Edit `.zshrc` and add the following:
 
    ```bash
    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+   export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
    ```
 
-1. `gem install asciidoctor`
+1. Enter `gem install asciidoctor`.
 
 ## Asciidoctor.js Live Preview
 
@@ -420,6 +426,19 @@ asciidoctor -b docbook5 {name}.adoc
 ```
 
 This creates the file `{name}.xml`.
+
+## EPUB Output
+
+{% aTargetBlank "https://www.w3.org/TR/epub-33/", "EPUB" %}
+is a W3C standard data format typically used for e-books.
+It is supported by many e-readers, smartphones, and tablets.
+
+To generate an EPUB file from an AsciiDoc file:
+
+- `gem install asciidoctor-epub3` (one time)
+- `asciidoctor-epub {name}.adoc`
+
+This automatically adds page numbers.
 
 ## Escaping Text
 
