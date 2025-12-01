@@ -58,11 +58,16 @@ from streetsidesoftware.com.
 
 ## Syntax Details
 
+AsciiDoc documents have two parts, a header section and a body section.
+
 The term "directive" encompasses attributes, macros,
 block delimiters, and replacement/flow syntax.
 
-Document attributes control document settings and belong in the document header.
-Examples include `= Document Title`, `:sectnum:`, and `:toc:`.
+The header section contains directives that control document settings.
+Examples include `= Document Title`,
+`:sectnum:` (to enable section numbering),
+`:toc:` (to enable generating a table of contents),
+and user-defined attributes.
 
 User-defined attributes represent Boolean values (set or not set)
 or replacement values that can be inserted
@@ -81,9 +86,17 @@ Note the use of two colons instead of one.
 For example, `image::logo.png[Logo]`
 and `include::common-attributes.adoc[]`.
 
-Block delimiters are lines that define
-the boundaries of specific kinds of blocks.
-For example, `----` for source blocks and `****` for example blocks.
+Block delimiters are lines containing four of the same character
+that define the boundaries of a specific kind of block.
+
+| Block Type  | Delimiter Line |
+| ----------- | -------------- |
+| comment     | `////`         |
+| example     | `====`         |
+| listing     | `----`         |
+| literal     | `....`         |
+| passthrough | `++++`         |
+| sidebar     | `****`         |
 
 Replacement/flow syntax includes:
 
