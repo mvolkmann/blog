@@ -22,10 +22,17 @@ To install Vale in macOS:
    ```text
    StylesPath = vale-styles
    MinAlertLevel = suggestion
-   Packages = Google, Microsoft, proselint, write-good
+   Packages = Microsoft, proselint, write-good
 
+   # These settings apply to all file types.
    [*]
-   BasedOnStyles = Vale, Google, Microsoft, proselint, write-good
+   BasedOnStyles = Vale, Microsoft, proselint, write-good
+   Microsoft.Contractions = off
+   Microsoft.Quotes = off
+
+   # Only process AsciiDoc, Markdown, and plain text files.
+   [!(*.adoc|*.md|*.txt)]
+   BasedOnStyles = {}
    ```
 
 1. Enter the command `vale sync` to download
