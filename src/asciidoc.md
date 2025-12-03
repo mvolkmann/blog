@@ -162,14 +162,6 @@ For example:
 The following is [.red.big.underline]#special text#.
 ```
 
-The role syntax above is shorthand for the following:
-
-```adoc
-The following is [role="red big underline"]#special text#.
-```
-
-TODO: The above syntax does not seem to work!
-
 When converting to HTML, custom styles can be
 defined in a CSS file and used as roles.
 For example, suppose the file `styles.css` is created in
@@ -199,8 +191,9 @@ See my [.custom]#custom styling# defined in a CSS file.
 ```
 
 This does not work in VS Code previews or when converting to PDF and EPUB.
-To use custom roles in conversion to PDF, see {% aTargetBlank
-"https://docs.asciidoctor.org/pdf-converter/latest/roles/", "Roles" %}.
+To use custom roles in conversion to PDF, see
+{% aTargetBlank "https://docs.asciidoctor.org/pdf-converter/latest/roles/",
+"Roles" %}.
 This explains that the custom roles must be defined
 in a YAML theme file rather than in a CSS file.
 
@@ -371,12 +364,16 @@ Examples of document attributes include:
 
 TODO: Finish summarizing the built-in attributes.
 
-:sectnums:
-source-highlighter,"Specifies the syntax highlighter used for code blocks (e.g., Rouge, highlight.js).",:source-highlighter: rouge
-experimental,"Enables features still under development (e.g., DITA or other experimental syntax).",:experimental:
-tabsize,Sets the number of spaces represented by a tab character in source code blocks.,:tabsize: 4
-idprefix,Prefix to prepend to section IDs.,:idprefix: \_
-idseparator,Character used to replace spaces in section titles when generating IDs.,:idseparator: -
+- `:sectnums:`
+- `:source-highlighter:` specifies the syntax highlighter used for code blocks
+  (e.g. Rouge or highlight.js).
+- `:experimental:` enables features still under development
+  (e.g. DITA or other experimental syntax).
+- `:tabsize:` sets the number of spaces represented by a tab character
+  in source code blocks.
+- `:idprefix:` specifies the prefix to prepend to section IDs.
+- `:idseparator:` specifies the character used to replace spaces
+  in section titles when generating IDs.
 
 ### User-defined Attributes
 
