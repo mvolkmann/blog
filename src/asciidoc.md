@@ -126,8 +126,9 @@ This is `#*_monospace, highlighted, bold, and italic text_*#`.
 ```
 
 Other styling is specified by surrounding the text to be styled
-with `#` characters and preceding it with square brackets
-that contain references to CSS classes, referred to as "roles".
+with either single of double `#` characters
+and preceding it with square brackets that contain
+references to CSS classes, referred to as "roles".
 For example:
 
 | Styling          | Syntax                             |
@@ -137,7 +138,16 @@ For example:
 | slightly bigger  | `[.big]#some text#`                |
 | slightly smaller | `[.small]#some text#`              |
 | strikethrough    | `[.line-through]#some text#`       |
+| overline         | `[.overline]#some text#`           |
 | underline        | `[.underline]#some text#`          |
+
+Surrounding the text to be styled with double `#` characters
+is needed when that text contains single `#` characters.
+For example:
+
+```adoc
+Before I [.underline]##eat # cake## I will get milk.
+```
 
 The color must be one of these 16 colors:
 aqua, black, blue, fuchsia, gray, green, lime, maroon,
@@ -152,8 +162,43 @@ For example:
 The following is [.red.big.underline]#special text#.
 ```
 
-TODO: How can multiple roles be applied?
-See https://asciidoctor.zulipchat.com/#narrow/channel/279642-users/topic/applying.20multiple.20roles/with/561287211.
+The role syntax above is shorthand for the following:
+
+```adoc
+The following is [role="red big underline"]#special text#.
+```
+
+TODO: The above syntax does not seem to work!
+
+Custom styles can be defined in a CSS file and used as roles.
+For example, suppose the file `styles.css` is created in
+the same directory as the `.adoc` files that wish to use it.
+It can contain the following:
+
+```css
+.custom {
+  background-color: yellow;
+  color: blue;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+```
+
+To use this in a `.adoc` file, add the following attribute in the header:
+
+```adoc
+:stylesheet: styles.css
+```
+
+Use the CSS classes it defines as follows:
+
+```adoc
+See my [.custom]#custom styling# defined in a CSS file.
+```
+
+This works when converting to HTML, but not in VS Code previews
+and not when converting to PDF or EPUB.
 
 ## Admonitions (Callouts)
 
