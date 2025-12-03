@@ -170,7 +170,8 @@ The following is [role="red big underline"]#special text#.
 
 TODO: The above syntax does not seem to work!
 
-Custom styles can be defined in a CSS file and used as roles.
+When converting to HTML, custom styles can be
+defined in a CSS file and used as roles.
 For example, suppose the file `styles.css` is created in
 the same directory as the `.adoc` files that wish to use it.
 It can contain the following:
@@ -197,8 +198,35 @@ Use the CSS classes it defines as follows:
 See my [.custom]#custom styling# defined in a CSS file.
 ```
 
-This works when converting to HTML, but not in VS Code previews
-and not when converting to PDF or EPUB.
+This does not work in VS Code previews or when converting to PDF and EPUB.
+To use custom roles in conversion to PDF, see {% aTargetBlank
+"https://docs.asciidoctor.org/pdf-converter/latest/roles/", "Roles" %}.
+This explains that the custom roles must be defined
+in a YAML theme file rather than in a CSS file.
+
+The following theme file is the equivalent of the CSS above.
+
+```yaml
+extends: default
+
+role:
+  custom:
+    background-color: #FFFF00
+    font-color: #0000FF
+    font-size: 24
+    font-style: bold
+    text-decoration: underline
+```
+
+To use this, add the following attribute in the document header:
+
+```adoc
+:pdf-theme: custom-theme.yml
+```
+
+This will work when running the `asciidoctor-pdf` from a terminal,
+but it will not work when running the
+VS Code command "AsciiDoc: Export Document as PDF".
 
 ## Admonitions (Callouts)
 
