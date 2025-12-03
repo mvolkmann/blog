@@ -25,7 +25,7 @@ To install Vale in macOS:
    Packages = Microsoft, proselint, write-good
 
    # Only process AsciiDoc, Markdown, and plain text files.
-   [*.adoc|*.md|*.txt]
+   [*.{adoc,md,txt}]
    BasedOnStyles = Vale, Microsoft, proselint, write-good
    Microsoft.Contractions = off
    Microsoft.Quotes = off
