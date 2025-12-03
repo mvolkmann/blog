@@ -24,19 +24,20 @@ To install Vale in macOS:
    MinAlertLevel = suggestion
    Packages = Microsoft, proselint, write-good
 
-   # These settings apply to all file types.
-   [*]
+   # Only process AsciiDoc, Markdown, and plain text files.
+   [*.adoc|*.md|*.txt]
    BasedOnStyles = Vale, Microsoft, proselint, write-good
    Microsoft.Contractions = off
    Microsoft.Quotes = off
 
-   # Only process AsciiDoc, Markdown, and plain text files.
-   [!(*.adoc|*.md|*.txt)]
-   BasedOnStyles = {}
+   [*]
+   BasedOnStyles = Empty
    ```
 
 1. Enter the command `vale sync` to download
    each of the packages listed in the config file.
+
+1. Create the empty directory `~/vale-styles/Empty`.
 
 1. Set the environment variable `VALE_CONFIG_PATH`
    to point to the `.vale.ini` file.
