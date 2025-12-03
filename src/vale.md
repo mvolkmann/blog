@@ -12,36 +12,42 @@ reports on writing style issues found in text files.
 
 ## Installing
 
-To install Vale in macOS, enter `brew install vale`.
+To install Vale in macOS:
 
-Create a configuration file named `.vale.ini` in your home directory
-containing settings like the following:
+1. Enter `brew install vale`.
 
-```text
-StylesPath = vale-styles
-MinAlertLevel = suggestion
-Packages = Google, Microsoft, proselint, write-good
+1. Create a configuration file named `.vale.ini` in your home directory
+   containing settings like the following:
 
-[*]
-BasedOnStyles = Vale, Google, Microsoft, proselint, write-good
-```
+   ```text
+   StylesPath = vale-styles
+   MinAlertLevel = suggestion
+   Packages = Google, Microsoft, proselint, write-good
 
-Enter the command `vale sync` to download each of the packages
-listed in the config file.
+   [*]
+   BasedOnStyles = Vale, Google, Microsoft, proselint, write-good
+   ```
 
-Set the environment variable `VALE_CONFIG_PATH` to point to the `.vale.ini` file.
-For example, add the following in `.zshenv`:
+1. Enter the command `vale sync` to download
+   each of the packages listed in the config file.
 
-```bash
-export VALE_CONFIG_PATH=$HOME/.vale.ini
-```
+1. Set the environment variable `VALE_CONFIG_PATH`
+   to point to the `.vale.ini` file.
+   For example, add the following in `.zshenv`:
+
+   ```bash
+   export VALE_CONFIG_PATH=$HOME/.vale.ini
+   ```
 
 ## Running
 
-From a terminal, `cd` to the directory of a file the be checked.
-Enter the command `vale {file-name}`.
+1. Open a terminal window.
+1. `cd` to the directory of a file to check.
+1. Enter the command `vale {file-name}`.
 
 ## VS Code
 
-Install the "Vale VSCode" extension from Chris Chinchilla.
+Install the {% aTargetBlank
+"https://github.com/chrischinchilla/vale-vscode", "Vale VSCode" %}
+extension from Chris Chinchilla.
 This causes VS Code to flag writing style issues.
