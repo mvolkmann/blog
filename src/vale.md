@@ -61,4 +61,5 @@ Install the {% aTargetBlank
 extension from Chris Chinchilla.
 This causes VS Code to flag writing style issues.
 
-In settings, set "Vale > Vale CLI: Config" to "~/.vale.ini".
+In settings, set "Vale > Vale CLI: Config"
+to "/Users/{your-username}/.vale.ini".
