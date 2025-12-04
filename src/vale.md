@@ -28,6 +28,7 @@ To install Vale in macOS:
    [*.{adoc,md,txt}]
    BasedOnStyles = Vale, Microsoft, proselint, write-good
    Microsoft.Contractions = off
+   Microsoft.HeadingAcronyms = off
    Microsoft.Quotes = off
 
    [*]
@@ -59,3 +60,5 @@ Install the {% aTargetBlank
 "https://github.com/chrischinchilla/vale-vscode", "Vale VSCode" %}
 extension from Chris Chinchilla.
 This causes VS Code to flag writing style issues.
+
+In settings, set "Vale > Vale CLI: Config" to "~/.vale.ini".
