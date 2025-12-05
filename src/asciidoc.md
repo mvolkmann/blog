@@ -683,7 +683,7 @@ To add a light gray border around an image,
 precede it with the line `[.thumb]`.
 This works for HTML output, but not for PDF output or in VS Code previews.
 
-To float an image left or right so text wraps around it,
+In HTML output, to float an image left or right so text wraps around it,
 add the attribute `role=left` or `role=right`.
 For example:
 
@@ -710,6 +710,17 @@ To right-align the image over the caption, add `align=right`.
 
 To add a light gray border around the image, add "thumb" to the role.
 For example, `role=thumb right`.
+
+In PDF output, to float an image left or right so text wraps around it,
+specify the `float` attribute instead of the `role` attribute.
+For example:
+
+```adoc
+.Comet, the whippet
+image::comet.jpg[my whippet, width=125, float=right]
+```
+
+PDF output does not support the `align` attribute or the `thumb` value.
 
 ## Including Files
 
