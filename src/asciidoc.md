@@ -347,18 +347,8 @@ Examples of document attributes include:
 - `:sectnumlevels: {levels}` specifies the maximum number of levels to number.
   The default is 3.
 
-- `:source-highlighter:` specifies the syntax highlighter used for code blocks.
-  By default, code is not highlighted.
-  The options are:
-
-  - `coderay`: This is an older option implemented in Ruby that is replaced by `rouge`.
-    It doesn't seem to work!
-  - `highlight.js`: requires client-side JavaScript in HTML
-    This is the only option that works in VS Code previews.
-  - `pygments`: This is implemented in Python.
-    It doesn't seem to work!
-  - `rouge`: newer option implemented in Ruby that
-    does not require client-side JavaScript in HTML (recommended)
+- `:source-highlighter:` specifies the syntax highlighter
+  used for source blocks. By default, code is not highlighted.
 
 - `:toc:` enables generation of a table of contents based on headings.
 
@@ -529,15 +519,38 @@ A block delimiter consists of four of the same character.
 | ----------- | -------------- | --------------------------------------------------- |
 | comment     | `////`         | comment out a range of lines                        |
 | example     | `====`         | show results of an operation                        |
-| listing     | `----`         | show programming source code                        |
+| listing     | `----`         | show source code without syntax highlighting        |
 | literal     | `....`         | display text exactly as written in a monospace font |
 | passthrough | `++++`         | avoid processing Asciidoc substitutions             |
 | sidebar     | `****`         | separate auxiliary text from main text              |
+| source      | `----`         | show source code with syntax highlighting           |
+
+To get syntax highlighting in a source block,
+add the `:source-highlighter:` attribute
+followed by a syntax highlighter name in the header.
+The options are:
+
+- `coderay`: This is an older option implemented in Ruby
+  that is replaced by `rouge`. It doesn't seem to work!
+- `highlight.js`: This requires client-side JavaScript in HTML.
+  It is the only option that works in VS Code previews.
+- `pygments`: This is implemented in Python.
+  It doesn't seem to work!
+- `rouge`: This is a newer option implemented in Ruby that
+  does not require client-side JavaScript in HTML (recommended)
 
 For example:
 
 ```adoc
+:source-highlighter: highlightjs
+```
+
+The following are examples of listing and source blocks:
+
+```adoc
 // This block ends at the first blank line.
+// It does not render with syntax highlighting
+// because the block type is listing rather than source.
 [listing, javascript]
 function add(a, b) {
   return a + b;
@@ -545,7 +558,8 @@ function add(a, b) {
 
 // This block is referred to as a "delimited block".
 // It ends after the matching block delimiter.
-[listing, javascript]
+// It does render with syntax highlighting.
+[source, javascript]
 ----
 function add(a, b) {
   return a + b;
@@ -554,6 +568,9 @@ function add(a, b) {
 console.log(add(2, 3)); // outputs 5
 ----
 ```
+
+Any kind of block can be given a title by preceding it with
+a line that begins with a period, followed by a caption.
 
 ## Comments
 
