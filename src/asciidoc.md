@@ -644,6 +644,7 @@ the aspect ratio can differ from that of the image.
 So it's best to only specify one of those values.
 
 When followed by two colons, it renders an image on its own line.
+In the following examples, "htmx" is the alt text.
 
 ```text
 // Use default size.
@@ -661,7 +662,7 @@ An inline image uses the same syntax, except
 only a single colon follows the `image` macro name.
 The image `image:assets/htmx-logo.png[htmx, width=80]` is inline.
 
-To add figure numbers and a caption to an image,
+To automatically add figure numbers and a caption to an image,
 add a line before the `image` macro that begins with a period
 and is followed by the caption. For example:
 
@@ -677,6 +678,10 @@ For example:
 ```adoc
 image::dog.png[dog, width=75, link="https://somesite.com", window="_blank"]
 ```
+
+To add a light gray border around an image,
+precede it with the line `[.thumb]`.
+This works for HTML output, but not for PDF output or in VS Code previews.
 
 ## Including Files
 
