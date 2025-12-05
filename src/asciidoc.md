@@ -673,6 +673,7 @@ image::assets/htmx-logo.png[htmx, 200]
 
 To make an image be a hyperlink that opens in a new browser tab,
 add the `link` and `window` attributes.
+All of this must be on a single line.
 For example:
 
 ```adoc
@@ -682,6 +683,19 @@ image::dog.png[dog, width=75, link="https://somesite.com", window="_blank"]
 To add a light gray border around an image,
 precede it with the line `[.thumb]`.
 This works for HTML output, but not for PDF output or in VS Code previews.
+
+To turn an image into an link, add `link={url}`. For example:
+
+```adoc
+image::comet.jpg[my whippet, width=100, link=https://en.wikipedia.org/wiki/Whippet]
+```
+
+There will be no indication that this is a link.
+To add a blue outline around images that are links,
+add the CSS rule `a > img { border: 1px solid blue; }`.
+
+To cause the link to open in a new browser tab,
+add the attribute `window=_blank` inside the square brackets.
 
 In HTML output, to float an image left or right so text wraps around it,
 add the attribute `role=left` or `role=right`.
