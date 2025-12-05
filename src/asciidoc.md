@@ -642,8 +642,22 @@ It cannot use arithmetic operators like `+`, `-`, `*`, and `/`.
 For example:
 
 ```adoc
+// When assign a string value to an attribute,
+// do not surround the value in quotes.
+:city: St. Louis
+:season: Winter
 :my-score: 7
 :opponent-score: 3
+
+// Quotes are optional when the value is a single word.
+ifeval::[{season} == Winter]
+Keep warm!
+endif::[]
+
+// Quotes are needed when the value is a multiple words.
+ifeval::["{city}" == "St. Louis"]
+Welcome to St. Louis!
+endif::[]
 
 ifeval::[{my-score} > {opponent-score}]
 You are winning!
