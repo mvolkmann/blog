@@ -1382,7 +1382,11 @@ video::rabbit-waking.mp4[width=240, height=135]
 ```
 
 To play a YouTube video, specify its id and the `youtube` attribute.
-For example:
+The id can be obtained by opening the video in a web browser and
+noting the value of the `v` query parameter in the address bar.
+For example, let's enable playing the video at {% aTargetBlank
+"https://www.youtube.com/watch?v=gBhOg0Vriik",
+"Lambda Calculus iJS New York 2025" %}.
 
 ```adoc
 .Lambda Calculus
