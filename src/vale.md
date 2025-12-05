@@ -29,6 +29,8 @@ To install Vale in macOS:
    BasedOnStyles = Vale, Microsoft, proselint, write-good
    Microsoft.Contractions = off
    Microsoft.HeadingAcronyms = off
+   Microsoft.HeadingPunctuation = off
+   Microsoft.Headings = off
    Microsoft.Quotes = off
 
    [*]
