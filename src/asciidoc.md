@@ -731,6 +731,9 @@ For HTML output, to cause clicking the link to open in a
 new browser tab/window, add a caret at the end of the link text.
 For example: `https://chatgpt.com[ChatGPT^]`.
 
+If the link text contains commas or equal signs,
+it must be enclosed in double quotes.
+
 For links that may need to appear multiple times,
 or just to manage all the links in one place,
 create a file with a name like `links.adoc`.
@@ -750,6 +753,16 @@ For example:
 include::links.adoc[]
 ...
 {chatgpt-link}
+```
+
+To add a link to a location in the current document,
+mark the location with `[[{id}]]` and link to it with `<<{id}, {link-text}>>`.
+For example:
+
+```adoc
+<<details, Important Details>>
+...
+[[details]]Details you need to know:
 ```
 
 ## Listing Blocks
@@ -942,6 +955,9 @@ the document's doctype setting." Where is the doctype set?
 
 To include automatically generated section numbers,
 add `:sectnums:` in the header.
+
+By default, only section header levels 1, 2, and 3 are numbered.
+To change this, add `:sectnumlevels: {n}` in the header.
 
 ## Slide Output
 
