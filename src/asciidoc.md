@@ -266,6 +266,17 @@ For example:
 WARNING: Rock climbing without ropes is dangerous.
 ```
 
+## Aligning Text
+
+By default, text is left-aligned.
+To change this, add one of the following before the text:
+
+```adoc
+[.text-left]
+[.text-center]
+[.text-right]
+```
+
 ## Asciidoctor
 
 To install the `asciidoctor` command in macOS:
@@ -693,6 +704,16 @@ The supported attributes are:
 
 Specifying `[opts=optional]` causes AsciiDoc to silently ignore
 the `include` directive if the file it references is not found.
+
+## Line Breaks
+
+To force a line break, add a space and `+` at the end of a line.
+For example:
+
+```adoc
+first line +
+second line
+```
 
 ## Links
 
