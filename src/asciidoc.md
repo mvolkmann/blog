@@ -765,6 +765,9 @@ For example:
 [[details]]Details you need to know:
 ```
 
+To create a mailto link, add `mailto:{email-address}[{link-text}]`.
+For example, `Send email to mailto:r.mark.volkmann@gmail.com[Mark].`.
+
 ## Listing Blocks
 
 To display text lines in a monospace font, add lines containing
