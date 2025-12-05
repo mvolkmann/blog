@@ -455,16 +455,19 @@ add the document attribute `:!author:`.
 
 To create a block of quoted text with a single paragraph:
 
-```text
+```adoc
 [quote, Microsoft Haiku, late 1990's]
 Out of memory.
 We wish to hold the whole sky,
 But we never will.
 ```
 
+The `quote` keyword can be followed by one or two pieces of text
+that appear below the quote and right-aligned.
+
 To create a block of quoted text with multiple paragraphs:
 
-```text
+```adoc
 [quote, multiple paragraphs]
 ____
 This is the first paragraph.
