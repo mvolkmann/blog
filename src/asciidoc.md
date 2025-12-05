@@ -103,19 +103,21 @@ Replacement/flow syntax includes:
 
 - page breaks with `<<<`
 - horizontal rules with `'''`
-- paragraph continuation with `+`
+- paragraph continuation with `+` preceded by a space
 - conditional rendering with `ifdef` and `ifndef`
 
 ## Basic Formatting
 
 To format text, add specific characters before and after the text.
 
-| Formatting | Character        |
-| ---------- | ---------------- |
-| bold       | `*`              |
-| highlight  | `#`              |
-| italic     | `_` (underscore) |
-| monospace  | \` (backtick)    |
+| Formatting  | Character        |
+| ----------- | ---------------- |
+| bold        | `*`              |
+| highlight   | `#`              |
+| italic      | `_` (underscore) |
+| monospace   | \` (backtick)    |
+| superscript | `^`              |
+| subscript   | `~`              |
 
 These special characters can be nested to apply multiple effects,
 but they must be nested in a specific order.
@@ -128,8 +130,8 @@ This is `#*_monospace, highlighted, bold, and italic text_*#`.
 Other styling is specified by surrounding the text to be styled
 with either single of double `#` characters
 and preceding it with square brackets that contain
-references to CSS classes, referred to as "roles".
-For example:
+references to CSS classes (only for HTML output),
+referred to as "roles". For example:
 
 | Styling          | Syntax                             |
 | ---------------- | ---------------------------------- |
@@ -153,6 +155,7 @@ The color must be one of these 16 colors:
 aqua, black, blue, fuchsia, gray, green, lime, maroon,
 navy, olive, purple, red, silver, teal, white, and
 yellow.
+To use other colors in HTML output, specify a custom CSS class.
 
 To apply multiple roles, list them inside
 the square brackets with no spaces between them.
@@ -375,9 +378,6 @@ Examples of document attributes include:
 
 TODO: Finish summarizing the built-in attributes.
 
-- `:sectnums:`
-- `:source-highlighter:` specifies the syntax highlighter used for code blocks
-  (e.g. Rouge or highlight.js).
 - `:experimental:` enables features still under development
   (e.g. DITA or other experimental syntax).
 - `:tabsize:` sets the number of spaces represented by a tab character
@@ -595,6 +595,10 @@ asciidoctor -b docbook5 {name}.adoc
 
 This creates the file `{name}.xml`.
 
+## Em Dash
+
+To render an em dash, use two dashes (`--`) surrounded by spaces.
+
 ## EPUB Output
 
 {% aTargetBlank "https://www.w3.org/TR/epub-33/", "EPUB" %}
@@ -715,6 +719,9 @@ first line +
 second line
 ```
 
+To include an empty line, add a line containing only a space followed by `+`.
+Alternatively, include the line `{empty} +`.
+
 ## Links
 
 To add a link to a URL, enter the URL
@@ -777,6 +784,15 @@ Alternate for each nested level.
   - Tomato
 ```
 
+Another option is to use multiple \* characters to indicate the level.
+Indenting the lines to indicate their nesting level is optional.
+
+```adoc
+* Level 1
+** Level 2
+*** Level 3
+```
+
 To include paragraphs of text below a bullet,
 precede each blank line with a `+` character.
 For example:
@@ -801,15 +817,9 @@ The objective is to score goals by shooting a puck into the opposing team's net
 using a hockey stick.
 ```
 
-Another option is to use multiple \* characters to indicate the level.
-
-```text
-* Level 1
-** Level 2
-*** Level 3
-```
-
-For ordered lists:
+To create an ordered list (numbered),
+use multiple `.` characters to indicate the level.
+Indenting the lines to indicate their nesting level is optional.
 
 ```text
 . Item 1
@@ -853,6 +863,17 @@ precede them with the "horizontal" attribute?
 Term 1:: Definition 1
 Term 2::
   Definition 2
+```
+
+To create a checklist,
+precede each unchecked item with `* [ ]`
+and each checked item with `* [*]`.
+For example:
+
+```adoc
+* [ ] buy bread
+* [*] buy peanut butter
+* [ ] eat lunch
 ```
 
 ## Markdown to AsciiDoc
@@ -918,6 +939,9 @@ Level 1 sections begin with `==`, level 2 with `===` and so on.
 
 TODO: "The interpretation of the level 0 title depends entirely on
 the document's doctype setting." Where is the doctype set?
+
+To include automatically generated section numbers,
+add `:sectnums:` in the header.
 
 ## Slide Output
 
@@ -992,6 +1016,14 @@ To cause the source code lines to be numbered,
 add `, numbered` after the language.
 TODO: This works with rouge, but I haven't been able to get it to work
 with highlight.js! Maybe the AsciiDoc book you ordered will show how.
+
+## Table of Contents
+
+To enable automatically generating a table of contents,
+add `:toc:` in the header.
+
+By default, only section header levels 1, 2, and 3 are included.
+To change this, add `:toclevels: {n}` in the header.
 
 ## Tables
 
