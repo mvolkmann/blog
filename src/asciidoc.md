@@ -326,14 +326,17 @@ To use this, select File ... Open File... and open any `.adoc` file.
 
 ## Attributes
 
-AsciiDoc supports built-in and user-defined attributes.
+AsciiDoc supports system-defined (built-in) and user-defined attributes.
 
-### Built-in Attributes
+### System-defined Attributes
 
-Built-in attributes configure how the document is rendered.
-They fall into several categories such as document and table.
+System-defined attributes configure how the document is rendered.
+They fall into several categories such as
+document, table, and character replacement.
 
-Document attributes configure global behavior.
+{% aTargetBlank
+"https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/",
+"Document attributes" %} configure global behavior.
 They must follow the level 1 header
 with no blank lines preceding them.
 
@@ -379,7 +382,7 @@ Examples of document attributes include:
 - `:toc-title: Some Title` sets the title of the generated table of contents
   which defaults to "Table of Contents"
 
-TODO: Finish summarizing the built-in attributes.
+TODO: Finish summarizing the system-defined attributes.
 
 - `:experimental:` enables features still under development
   (e.g. DITA or other experimental syntax).
@@ -389,10 +392,27 @@ TODO: Finish summarizing the built-in attributes.
 - `:idseparator:` specifies the character used to replace spaces
   in section titles when generating IDs.
 
+{% aTargetBlank
+"https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/",
+"Character replacement" %} attributes are replaced by a specific character.
+For example, `{deg}` is replaced by the degree symbol.
+
+Commonly used character replacement attributes include:
+
+| Attribute | Replacement              |
+| --------- | ------------------------ |
+| `deg`     | degree symbol            |
+| `lsquo`   | left single curly quote  |
+| `rsquo`   | right single curly quote |
+| `ldquo`   | left double curly quote  |
+| `rdquo`   | right double curly quote |
+| `nbsp`    | non-breaking space       |
+
 ### User-defined Attributes
 
 User-defined attributes are used for text replacement and conditional rendering.
-They are defined with the syntax `:name:[ value]`.
+They are defined with the syntax `:name:[value]`.
+The value can be any text, including AsciiDoc markup such as `image` macros.
 
 The following attribute is Boolean in nature.
 Directives described under "Conditional Rendering" can test whether it is set.
