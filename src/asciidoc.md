@@ -456,6 +456,29 @@ Files that use these attributes can include them with the following:
 include::attributes.adoc[]
 ```
 
+## Audio
+
+The `audio` macro renders an audio player for playing a given audio file.
+Supported formats include MP3 (`.mp3`), Wave (`.wav`), and Ogg Vorbis (`.ogg`).
+The audio file is assumed to be in the same directory as the `.adoc` file
+or in the directory specified by the `:imagesdir:` attribute.
+For example:
+
+```adoc
+.Dog Barking
+audio::dog-bark.mp3[]
+```
+
+A URL can be specified to play an audio file on the internet.
+
+To play only a segment, specify start and end values in seconds.
+For example:
+
+```adoc
+.Dog Barking
+audio::dog-bark.mp3[start=2, end=4]
+```
+
 ## Author
 
 Specify the author name and email address
@@ -654,11 +677,28 @@ additionally surround the text with backticks.
 ## Footnotes
 
 The `footnote` macro inserts an automatically numbered footnote.
-The syntax is `footnote:{id}[{text}]`. For example:
+The syntax is `footnote:{id}[{text}]`.
+The id is optional and is only needed
+to add the same footnote in multiple locations.
+For example:
 
 ```adoc
-My whippet footnote:whippet[The Whippet is a British breed of dog of sighthound type.] is very fast!
+My whippet footnote:fn1[The Whippet is a British breed of dog of sighthound type.] is very fast!
+...
+Comet footnote:fn1[] is ready to play.
 ```
+
+No space is required before the `footnote` macro,
+but omitting it will cause spell checkers to complain.
+
+Adding footnotes in headings breaks footnote numbering.
+
+If HTML output, all the footnotes appear at the bottom of the last page.
+If PDF output, footnotes appear at the end of each chapter in which they appear.
+
+Footnote numbers are links.
+Clicking a footnote number in the text jumps to the footnote.
+Clicking a footnote number before a footnote jumps to where it is referenced.
 
 ## Horizontal Rules
 
@@ -1308,6 +1348,43 @@ Note that the entire custom theme file name is specified.
 
 ```bash
 asciidoctor-pdf --theme custom-theme.yml book.adoc
+```
+
+## Video
+
+The `video` macro renders a video player for playing a given video file.
+The video file is assumed to be in the same directory as the `.adoc` file
+or in the directory specified by the `:imagesdir:` attribute.
+
+```adoc
+.Rabbit Waking
+video::rabbit-waking.mp4[]
+```
+
+A URL can be specified to play a video file on the internet.
+
+To play only a segment, specify start and end values in seconds.
+For example:
+
+```adoc
+.Rabbit Waking
+video::rabbit-waking.mp4[start=2, end=4]
+```
+
+To specify the size of the video viewport,
+add the `width` and `height` attributes. For example:
+
+```adoc
+.Rabbit Waking
+video::rabbit-waking.mp4[width=240, height=135]
+```
+
+To play a YouTube video, specify its id and the `youtube` attribute.
+For example:
+
+```adoc
+.Lambda Calculus
+video::gBhOg0Vriik[youtube, width=600, height=338]
 ```
 
 ## VS Code Extension
