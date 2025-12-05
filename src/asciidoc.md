@@ -637,7 +637,8 @@ ifdef::attr1+attr2[] // tests whether both are set
 
 To test a condition other that an attribute being set,
 use the `ifeval` directive.
-It can use the relational operators `==`, `!=`, `<`, `<=`, `>=`, and `>`.
+It can use the relational operators `==`, `!=`, `<`, `<=`, `>=`, and `>`
+to test both numeric and string values.
 It cannot use arithmetic operators like `+`, `-`, `*`, and `/`.
 For example:
 
@@ -649,7 +650,8 @@ For example:
 :my-score: 7
 :opponent-score: 3
 
-// Quotes are optional when the value is a single word.
+// Quotes are optional when the value is a single word,
+// but including them is recommended.
 ifeval::[{season} == Winter]
 Keep warm!
 endif::[]
@@ -663,6 +665,10 @@ ifeval::[{my-score} > {opponent-score}]
 You are winning!
 endif::[]
 ```
+
+The `ifeval` macro cannot test multiple conditions
+and it cannot test the values of counter variables
+such as `counter:section`.
 
 ## Diagrams
 
