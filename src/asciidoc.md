@@ -87,18 +87,6 @@ Note the use of two colons instead of one.
 For example, `image::logo.png[Logo]`
 and `include::common-attributes.adoc[]`.
 
-Block delimiters are lines containing four of the same character
-that define the boundaries of a specific kind of block.
-
-| Block Type  | Delimiter Line |
-| ----------- | -------------- |
-| comment     | `////`         |
-| example     | `====`         |
-| listing     | `----`         |
-| literal     | `....`         |
-| passthrough | `++++`         |
-| sidebar     | `****`         |
-
 Replacement/flow syntax includes:
 
 - page breaks with `<<<`
@@ -525,6 +513,46 @@ This is the first paragraph.
 
 This is the second paragraph.
 ____
+```
+
+## Blocks
+
+A block is a range of lines that have a specific purpose.
+There are two ways to assign a block type to a range of lines.
+The first is to preceded a contiguous set of lines (no blank lines)
+with a block type in square brackets.
+The second is to add a line containing only a block delimiter
+before and after a range of lines.
+A block delimiter consists of four of the same character.
+
+| Block Type  | Delimiter Line | Purpose                                             |
+| ----------- | -------------- | --------------------------------------------------- |
+| comment     | `////`         | comment out a range of lines                        |
+| example     | `====`         | show results of an operation                        |
+| listing     | `----`         | show programming source code                        |
+| literal     | `....`         | display text exactly as written in a monospace font |
+| passthrough | `++++`         | avoid processing Asciidoc substitutions             |
+| sidebar     | `****`         | separate auxiliary text from main text              |
+
+For example:
+
+```adoc
+// This block ends at the first blank line.
+[listing, javascript]
+function add(a, b) {
+  return a + b;
+}
+
+// This block is referred to as a "delimited block".
+// It ends after the matching block delimiter.
+[listing, javascript]
+----
+function add(a, b) {
+  return a + b;
+}
+
+console.log(add(2, 3)); // outputs 5
+----
 ```
 
 ## Comments
@@ -1392,6 +1420,9 @@ For example, let's enable playing the video at {% aTargetBlank
 .Lambda Calculus
 video::gBhOg0Vriik[youtube, width=600, height=338]
 ```
+
+Supposedly there are options to cause the video to autoplay and loop,
+but I could not get them to work.
 
 ## VS Code Extension
 
