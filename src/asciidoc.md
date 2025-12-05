@@ -704,6 +704,13 @@ This renders the following:
 
 ![image float](/blog/assets/asciidoc-image-float.png)
 
+Note how the image is left-aligned with its caption.
+To center the image over the caption, add `align=center`.
+To right-align the image over the caption, add `align=right`.
+
+To add a light gray border around the image, add "thumb" to the role.
+For example, `role=thumb right`.
+
 ## Including Files
 
 The `include` directive includes the contents of a text file
