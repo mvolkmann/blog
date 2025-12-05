@@ -683,6 +683,27 @@ To add a light gray border around an image,
 precede it with the line `[.thumb]`.
 This works for HTML output, but not for PDF output or in VS Code previews.
 
+To float an image left or right so text wraps around it,
+add the attribute `role=left` or `role=right`.
+For example:
+
+```adoc
+.Comet, the whippet
+image::comet.jpg[my whippet, width=125, role=right]
+The Whippet is a British breed of dog of sighthound type. It closely resembles
+the Greyhound and the smaller Italian Greyhound, and is intermediate between
+them in size. In the nineteenth century it was sometimes called "the poor man's
+racehorse". It is commonly kept as a companion dog, for competitive showing or
+for amateur racing, and may participate in various dog sports, including lure
+coursing, agility, and flyball. It has the fastest running speed within its
+weight and size range, and is believed to have the fastest idle-to-running
+acceleration of any dog.
+```
+
+This renders the following:
+
+![image float](/blog/assets/asciidoc-image-float.png)
+
 ## Including Files
 
 The `include` directive includes the contents of a text file
