@@ -415,21 +415,27 @@ For example:
 Year: {year}
 ```
 
-User-defined variables can be defined in a separate file
+User-defined attributes can use any name except
+those reserved for system-defined attributes.
+They can be anywhere in an AsciiDoc file,
+but they are typically defined in the header.
+References to them can appear anywhere after they are defined.
+
+User-defined attributes can also be defined in a separate file
 that is included in files that use them.
 This allows changing their values without modifying the files that use them.
 It enables generating multiple versions of the same base document.
-For example, the file `variables.adoc` can contain the following:
+For example, the file `attributes.adoc` can contain the following:
 
 ```adoc
 :black-friday:
 :year: 2025
 ```
 
-Files that use these variables can include them with the following:
+Files that use these attributes can include them with the following:
 
 ```adoc
-include::variables.adoc[]
+include::attributes.adoc[]
 ```
 
 ## Author
