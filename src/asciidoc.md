@@ -350,6 +350,9 @@ Examples of document attributes include:
   - `image`: uses an image file for icons
   - `static`: uses plain text (default)
 
+- `:imagesdir:` specifies the directory to search for images
+  referenced using the `image` macro when not specified.
+
 - `:sectnums:` enables automatic section numbering for all headings.
 
 - `:sectnumlevels: {levels}` specifies the maximum number of levels to number.
@@ -661,6 +664,10 @@ The width and height can also be specified as the
 An inline image uses the same syntax, except
 only a single colon follows the `image` macro name.
 The image `image:assets/htmx-logo.png[htmx, width=80]` is inline.
+
+To specify the directory to search for images
+when not specified in an `image` macro,
+add `:imagesdir: {some-directory}` in the header.
 
 To automatically add figure numbers and a caption to an image,
 add a line before the `image` macro that begins with a period
