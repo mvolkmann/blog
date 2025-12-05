@@ -458,7 +458,8 @@ include::attributes.adoc[]
 
 ## Audio
 
-The `audio` macro renders an audio player for playing a given audio file.
+The `audio` macro renders an HTML-based audio player
+for playing a given audio file.
 Supported formats include MP3 (`.mp3`), Wave (`.wav`), and Ogg Vorbis (`.ogg`).
 The audio file is assumed to be in the same directory as the `.adoc` file
 or in the directory specified by the `:imagesdir:` attribute.
@@ -1352,7 +1353,8 @@ asciidoctor-pdf --theme custom-theme.yml book.adoc
 
 ## Video
 
-The `video` macro renders a video player for playing a given video file.
+The `video` macro renders an HTML-based video player
+for playing a given video file.
 The video file is assumed to be in the same directory as the `.adoc` file
 or in the directory specified by the `:imagesdir:` attribute.
 
