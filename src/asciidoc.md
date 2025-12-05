@@ -400,10 +400,10 @@ Commonly used character replacement attributes include:
 | Attribute | Replacement              |
 | --------- | ------------------------ |
 | `deg`     | degree symbol            |
-| `lsquo`   | left single curly quote  |
-| `rsquo`   | right single curly quote |
-| `ldquo`   | left double curly quote  |
-| `rdquo`   | right double curly quote |
+| `lsquo`   | smart left single quote  |
+| `rsquo`   | smart right single quote |
+| `ldquo`   | smart left double quote  |
+| `rdquo`   | smart right double quote |
 | `nbsp`    | non-breaking space       |
 
 ### User-defined Attributes
@@ -650,6 +650,15 @@ To escape text so special characters like curly braces are not
 interpreted specially, surround the text with `+` characters.
 To also render the text in a monospace font,
 additionally surround the text with backticks.
+
+## Footnotes
+
+The `footnote` macro inserts an automatically numbered footnote.
+The syntax is `footnote:{id}[{text}]`. For example:
+
+```adoc
+My whippet footnote:whippet[The Whippet is a British breed of dog of sighthound type.] is very fast!
+```
 
 ## Horizontal Rules
 
