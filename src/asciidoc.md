@@ -330,15 +330,13 @@ AsciiDoc supports system-defined (built-in) and user-defined attributes.
 
 ### System-defined Attributes
 
-System-defined attributes configure how the document is rendered.
-They fall into several categories such as
-document, table, and character replacement.
+There are two categories of system-defined attributes,
+document and character replacement.
 
 {% aTargetBlank
 "https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/",
-"Document attributes" %} configure global behavior.
-They must follow the level 1 header
-with no blank lines preceding them.
+"Document attributes" %} globally affect how the document is rendered.
+They must follow the level 1 header with no blank lines preceding them.
 
 Examples of document attributes include:
 
@@ -392,9 +390,9 @@ TODO: Finish summarizing the system-defined attributes.
 - `:idseparator:` specifies the character used to replace spaces
   in section titles when generating IDs.
 
-{% aTargetBlank
+References to {% aTargetBlank
 "https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/",
-"Character replacement" %} attributes are replaced by a specific character.
+"character replacement attributes" %} are replaced by a specific character.
 For example, `{deg}` is replaced by the degree symbol.
 
 Commonly used character replacement attributes include:
