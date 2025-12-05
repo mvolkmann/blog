@@ -86,6 +86,7 @@ Block macro syntax is `name::target[attributes]`.
 Note the use of two colons instead of one.
 For example, `image::logo.png[Logo]`
 and `include::common-attributes.adoc[]`.
+Some macros, such as `endif::[]`, do not require specifying a target.
 
 Replacement/flow syntax includes:
 
@@ -387,10 +388,11 @@ Commonly used character replacement attributes include:
 ### User-defined Attributes
 
 User-defined attributes are used for text replacement and conditional rendering.
-They are defined with the syntax `:name:[value]`.
+They are defined with the syntax `:name: [value]`.
 The value can be any text, including AsciiDoc markup such as `image` macros.
 
-The following attribute is Boolean in nature.
+The following attribute is Boolean in nature,
+meaning it is either set or not set.
 Directives described under "Conditional Rendering" can test whether it is set.
 
 ```text
@@ -581,8 +583,11 @@ and end with the same.
 
 ## Conditional Content
 
-The `ifdef` and `ifndef` directives test whether an attribute is set or unset
+The `ifdef` (short for "if defined") and `ifndef` (short for "if not defined")
+directives test whether an attribute is set or unset
 and conditionally include content up to the next `endif` directive.
+This enables generating multiple versions of output
+from the same input document.
 For example:
 
 ```adoc
@@ -604,6 +609,31 @@ delete the line that sets the `happy` attribute or comment it out.
 To have an attribute that is set for part of the document and unset later,
 unset it by adding an exclamation mark after the name.
 For example: `:happy!`.
+
+Content can be conditionally included based on the target output format.
+For example:
+
+```adoc
+ifdef::backend-html5[]
+I am HTML 5.
+endif::[]
+
+ifdef::backend-pdf[]
+I am PDF.
+endif::[]
+
+ifdef::backend-epub3[]
+I am EPUB 3.
+endif::[]
+```
+
+To test for multiple attributes, separate them by comma or plus characters.
+For example:
+
+```adoc
+ifdef::attr1,attr2[] // tests whether either is set
+ifdef::attr1+attr2[] // tests whether both are set
+```
 
 To test a condition other that an attribute being set,
 use the `ifeval` directive.
