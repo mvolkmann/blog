@@ -1404,7 +1404,87 @@ To change this, add `:toclevels: {n}` in the header.
 
 ## Tables
 
-TODO: Describe how to render tables.
+The markup for a table begins and ends with a line
+that contains a vertical bar followed by three equal signs.
+The first line inside those specifies the column headings
+where each is preceded by a vertical bar.
+These can all be on one line or be placed on separate lines.
+A blank line separates the heading row from the data rows.
+The data rows follow the same pattern as the heading rows.
+
+The basic syntax for tables is:
+
+```adoc
+|===
+| Heading 1 | Heading 2 | Heading 3
+
+| row 1 col 1 | row 1 col 2 | row 1 col 3
+| row 2 col 1 | row 2 col 2 | row 2 col 3
+|===
+```
+
+This table spans the width of the page and
+each column is given the same width.
+To change the table width, add a line before the table
+that specifies the `width` attribute inside square brackets.
+For example, `[width=50%]`.
+
+<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
+
+To specify the alignment of each column,
+add the `cols` attribute inside the square brackets.
+Its value specifies the alignment of each column,
+and thereby the number of columns.
+For example, the following specifies that
+the first column is left-aligned (`<`),
+the second column is centered (`^`), and
+the third column is right-aligned (`>`).
+
+```adoc
+[cols="<,^,>"]
+```
+
+When the columns are specified in this way,
+the value of each column within a data row (not the heading row)
+can be on its own line.
+For example, the previous table markup can be changed as follows:
+
+```adoc
+[cols="<,^,>"]
+|===
+| Heading 1 | Heading 2 | Heading 3
+
+| row 1 col 1
+| row 1 col 2
+| row 1 col 3
+| row 2 col 1
+| row 2 col 2
+| row 2 col 3
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-alignment.png" alt="AsciiDoc table alignment" />
+
+To specify the relative width of each column
+so they do not all have the same width, add the `cols` attribute
+with a value that is a comma-separated list of relative widths.
+For example, `[cols="2,1,3"]` specifies three columns
+where the first is twice as wide as the second
+and the third is three times as wide as the second.
+
+The alignment of each column can be specified
+before each of the relative widths.
+For example, `[cols="<2,^1,>3"]`.
+
+The alignment of a heading can differ from
+the alignment of the data in its column.
+To override the alignment for a heading,
+add an alignment character before its vertical bar.
+The following example demonstrates this,
+and also the ability for a data cell to
+span multiple columns and/or multiple rows.
+All the columns are left-aligned,
+but all the headings are centered.
 
 ```adoc
 [cols="<,<,<"]
@@ -1431,6 +1511,8 @@ TODO: Describe how to render tables.
 |raspberry |strawberry |watermelon
 |===
 ```
+
+<img src="/blog/assets/asciidoc-table-spanning.png" alt="AsciiDoc table with spanning" />
 
 ## Themes
 
