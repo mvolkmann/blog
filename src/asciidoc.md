@@ -49,9 +49,15 @@ modify the AsciiDoc extension settings so that
 "Asciidoc > Preview: Style" has no value and
 "Asciidoc > Preview: Use Editor Style" is unchecked.
 
-There are many AsciiDoc features that are not supported by VS Code previews.
-So if something doesn't seem to be working, generate HTML or PDF
-and verify that is works correctly there.
+VS Code previews and the "AsciiDoc: Save HTML Document" command
+use the JavaScript-based Asciidoctor.js library
+rather than the Ruby-based asciidoctor command.
+There are many AsciiDoc features that are not supported by Asciidoctor.js.
+If something doesn't seem to be working as expected in a VS Code preview
+or when running the "AsciiDoc: Save HTML Document" command,
+generate HTML using the `asciidoctor` command from a terminal
+or generate a PDF from VS Code
+and verify that produces the expected result.
 
 Also consider installing the "Code Spell Checker" extension
 from streetsidesoftware.com.
@@ -1470,6 +1476,8 @@ For example, the previous table markup can be changed as follows:
 To cause the last row to be treated as a footer
 with a light gray background and normal (not bold) text,
 add `%footer` or `options="footer"` inside the square brackets above the table.
+Adding a blank line before the footer row
+does not cause it to be treated as a footer.
 For example:
 
 ```adoc
