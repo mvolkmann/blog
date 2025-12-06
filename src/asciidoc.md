@@ -533,13 +533,18 @@ followed by a syntax highlighter name in the header.
 The options are:
 
 - `coderay`: This is an older option implemented in Ruby
-  that is replaced by `rouge`. It doesn't seem to work!
+  that is replaced by `rouge`.
+  It is supposed to work with HTML, PDF, and EPUB3 output,
+  but it doesn't work with HTML.
 - `highlight.js`: This requires client-side JavaScript in HTML.
-  It is the only option that works in VS Code previews.
+  It is the only option that works for HTML output and in VS Code previews.
 - `pygments`: This is implemented in Python.
-  It doesn't seem to work!
+  It is supposed to work with HTML, PDF, and EPUB3 output,
+  but it doesn't work with HTML.
 - `rouge`: This is a newer option implemented in Ruby that
-  does not require client-side JavaScript in HTML (recommended)
+  does not require client-side JavaScript in HTML (recommended).
+  It is supposed to work with HTML, PDF, and EPUB3 output,
+  but it doesn't work with HTML.
 
 For example:
 
@@ -864,7 +869,43 @@ This renders the following:
 
 <img alt="icon bullets"
   src="/blog/assets/asciidoc-icon-bullets.png?v={{pkg.version}}"
-  style="width: 20%">
+  style="width: 25%">
+
+The following additional icon libraries can be used for PDF output.
+
+| Library Name         | Library Abbreviation |
+| -------------------- | -------------------- |
+| Font Awesome Solid   | fas                  |
+| Font Awesome Brands  | fab                  |
+| Font Awesome Regular | far                  |
+| Foundation Icons     | fi                   |
+
+To specify the default library,
+add `:icon-set: {library-abbreviation}` in the header.
+For example:
+
+```adoc
+:icon-set: fab
+
+icon:apple[]
+icon:amazon[]
+icon:android[]
+icon:css3[]
+icon:github[]
+icon:google[]
+icon:html5[]
+icon:youtube[]
+```
+
+<img alt="fab icons"
+  src="/blog/assets/asciidoc-fab-icons.png?v={{pkg.version}}"
+  style="width: 30%">
+
+Icons from a library not specified with the `:icon-set` attribute,
+can used by including the library abbreviation and a dash before icon names.
+For example: `icon:fas-lightbulb[]`.
+However, it seems all the icon libraries are available
+without specifying their prefix. For example, `icon:lightbulb[]`.
 
 ## Images
 
