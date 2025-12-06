@@ -9,6 +9,7 @@ layout: topic-layout.njk
 {% aTargetBlank "https://vale.sh", "Vale CLI" %}
 is an open source, command-line tool that
 reports on writing style issues found in text files.
+It does not provide suggestions for fixing the issues.
 
 ## Installing
 
