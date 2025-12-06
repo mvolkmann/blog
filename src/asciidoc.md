@@ -1412,13 +1412,33 @@ To change this, add `:toclevels: {n}` in the header.
 
 The markup for a table begins and ends with a line
 that contains a vertical bar followed by three equal signs.
-The first line inside those specifies the column headings
-where each is preceded by a vertical bar.
-These can all be on one line or be placed on separate lines.
-A blank line separates the heading row from the data rows.
+Each cell is preceded by a vertical bar.
+
 The data rows follow the same pattern as the heading rows.
 
 The basic syntax for tables is:
+
+```adoc
+|===
+| row 1 col 1 | row 1 col 2 | row 1 col 3
+| row 2 col 1 | row 2 col 2 | row 2 col 3
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
+
+Heading cells have a light gray background and their text is bold.
+There are three ways to indicate that the first row contains column headings.
+
+1. Specify all the headings on a single line and add a blank line after it.
+   This is shown below.
+1. Add `[%header]` before the table.
+1. Add `[options="header"]` before the table.
+
+The last two options enable placing each heading on a separate line
+that begins with a vertical bar.
+
+For example:
 
 ```adoc
 |===
@@ -1429,20 +1449,9 @@ The basic syntax for tables is:
 |===
 ```
 
-There are three ways to indicate that the first row contains column headings.
+<img src="/blog/assets/asciidoc-table-with-header.png" alt="AsciiDoc table with header" />
 
-1. Specify all the headings on a single line and add a blank line after it.
-   This is shown above.
-1. Add `[%header]` before the table.
-1. Add `[options="header"]` before the table.
-
-The last two options enable placing each heading on a separate line
-that begins with a vertical bar.
-
-<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
-
-This table spans the width of the page,
-the heading row is given a light gray background,
+By default, tables span the width of the page
 and each column is allocated the same width.
 
 To change the table width, add a line before the table
@@ -1481,7 +1490,22 @@ For example, the previous table markup can be changed as follows:
 |===
 ```
 
-<img src="/blog/assets/asciidoc-table-alignment.png" alt="AsciiDoc table alignment" />
+To cause the last row to be treated as a footer
+with a light gray background and normal (not bold) text,
+add `%footer` or `options="footer"` inside the square brackets above the table.
+For example:
+
+```adoc
+[options="header, footer"]
+|===
+| Heading 1 | Heading 2 | Heading 3
+| row 1 col 1 | row 1 col 2 | row 1 col 3
+| row 2 col 1 | row 2 col 2 | row 2 col 3
+| Footer 1 | Footer 2 | Footer 3
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-footer.png" alt="AsciiDoc table footer" />
 
 To specify the relative width of each column
 so they do not all have the same width, add the `cols` attribute
