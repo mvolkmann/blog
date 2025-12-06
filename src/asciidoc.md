@@ -1621,6 +1621,12 @@ Their order must be:
 - vertical bar
 - cell content
 
+TODO: Cover table borders (`frame` attribute).
+TODO: Cover table striping.
+TODO: Cover table orientation.
+TODO: Cover CSV tables.
+TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
+
 ## Themes
 
 Themes define many characteristics of PDF output including
