@@ -1473,6 +1473,8 @@ For example, the previous table markup can be changed as follows:
 |===
 ```
 
+<img src="/blog/assets/asciidoc-table-horizontal-alignment.png" alt="AsciiDoc table horizontal alignment" />
+
 To cause the last row to be treated as a footer
 with a light gray background and normal (not bold) text,
 add `%footer` or `options="footer"` inside the square brackets above the table.
@@ -1506,7 +1508,7 @@ For example, `[cols="<2,^1,>3"]`.
 The alignment of any cell, including headings
 can differ from the alignment of its column.
 To override the alignment for a cell,
-add an alignment character before its vertical bar.
+add an alignment operator before its vertical bar.
 The following example demonstrates this,
 and also the ability for a data cell to
 span multiple columns and/or multiple rows.
@@ -1565,29 +1567,54 @@ line 4
 |===
 ```
 
+<img src="/blog/assets/asciidoc-table-vertical-alignment.png" alt="AsciiDoc table vertical alignment" />
+
 To specify both the horizontal and vertical alignment of a cell,
 add a horizontal alignment operator, a period, and
 a vertical alignment operator before its vertical bar.
 For example, `>.^|data` specifies a cell that is
 horizontally right aligned and vertically bottom aligned.
 
-To style the content of a cell, add a style operator before its vertical bar.
-These include:
+To style a column, add a style operator
+in its position of the `cols` attribute.
+To style the content of a specific cell,
+add a style operator before its vertical bar.
 
-- `a` for AsciiDoc (supports nested markup)
+The style operators include:
+
+- `a` for AsciiDoc (supports nested tables)
 - `d` for default (no styling applied)
 - `e` for emphasis (italicized)
-- `h` for header
+- `h` for header (bold with light gray background)
 - `l` for literal (same as when in a literal block)
 - `m` for monospace
 - `s` for strong (bold)
 
-Many operators can be specified before the vertical bar of a cell.
+The following example specifies the styling of each column.
+The first row utilizes those styles.
+The second row overrides them with different styles.
+
+```adoc
+[cols="d,e,h,l,m,s"]
+|===
+| default | emphasis | header | literal | monospace | strong
+s| strong
+m| monospace
+l| literal
+h| header
+e| emphasis
+d| default
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-styles.png" alt="AsciiDoc table styles" />
+
+A column or cell can specify many operators.
 Their order must be:
 
 - optional span operator
 - optional horizontal alignment operator
-- optional vertical alignment operator
+- optional vertical alignment operator (begins with a period)
 - optional style operator
 - vertical bar
 - cell content
