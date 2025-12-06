@@ -1518,9 +1518,9 @@ The alignment of each column can be specified
 before each of the relative widths.
 For example, `[cols="<2,^1,>3"]`.
 
-The alignment of a heading can differ from
-the alignment of the data in its column.
-To override the alignment for a heading,
+The alignment of any cell, including headings
+can differ from the alignment of its column.
+To override the alignment for a cell,
 add an alignment character before its vertical bar.
 The following example demonstrates this,
 and also the ability for a data cell to
@@ -1555,6 +1555,9 @@ but all the headings are centered.
 ```
 
 <img src="/blog/assets/asciidoc-table-spanning.png" alt="AsciiDoc table with spanning" />
+
+To specify the vertical alignment of data within a cell,
+TODO: FINISH THIS from https://docs.asciidoctor.org/asciidoc/latest/tables/align-by-cell/.
 
 ## Themes
 
