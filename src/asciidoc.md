@@ -805,6 +805,39 @@ To add a horizontal rule, add a line containing three single quotes.
 To generate HTML from an AsciiDoc file, enter `asciidoctor {name}.adoc`.
 This generates the file `{name}.html` in the same directory as the `.adoc` file.
 
+## Icons
+
+To enable access to the large set Font Awesome icons (over 2000),
+include the following in the header:
+
+```adoc
+:icons: font
+```
+
+To render an icon, use `icon:{name}[]`.
+For example: `icon:leaf[]`.
+
+Icons can be used as bullets in an unordered list.
+If multiple icons are used, adding the fixed width (fw) attribute
+causes the icons to all occupy the same width.
+The `hardbreaks` option causes each consecutive line below
+to return its line break.
+
+```adoc
+[%hardbreaks]
+icon:paw[fw] Comet
+icon:paw[fw] Greta
+icon:paw[fw] Oscar
+icon:paw[fw] Ramsay
+icon:thermometer[fw] Temperature
+```
+
+This renders the following:
+
+<img alt="icon bullets"
+  src="/blog/assets/asciidoc-icon-bullets.png?v={{pkg.version}}"
+  style="width: 20%">
+
 ## Images
 
 To render an image, use the `image` macro.
