@@ -1549,10 +1549,12 @@ For top alignment, which is the default, add `.<` before the vertical bar of the
 For center alignment add `.^` before the vertical bar of the cell.
 For bottom alignment add `.>` before the vertical bar of the cell.
 
-For example, the following specifies that
-the second cell in the row is top-aligned (`.<`) (the default),
-the third cell is center-aligned (`.^`), and
-the fourth cell is bottom-aligned (`.>`).
+The following table contains a single row.
+It specifies that the:
+
+- second cell is left-aligned (`<`) and top-aligned (`.<`, the default),
+- third cell is horizontally center-aligned (`^`) and vertically center-aligned (`.^`)
+- fourth cell is right-aligned (`>`) and bottom-aligned (`.>`).
 
 ```adoc
 [cols="1,1,1,1"]
@@ -1561,9 +1563,9 @@ the fourth cell is bottom-aligned (`.>`).
 line 2 +
 line 3 +
 line 4
-.<| apple
-.^| banana
-.>| cherry
+<.<| apple
+^.^| banana
+>.>| cherry
 |===
 ```
 
