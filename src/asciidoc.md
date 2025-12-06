@@ -1423,13 +1423,15 @@ The basic syntax for tables is:
 |===
 ```
 
-This table spans the width of the page and
-each column is given the same width.
+<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
+
+This table spans the width of the page,
+the heading row is given a light gray background,
+and each column is allocated the same width.
+
 To change the table width, add a line before the table
 that specifies the `width` attribute inside square brackets.
 For example, `[width=50%]`.
-
-<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
 
 To specify the alignment of each column,
 add the `cols` attribute inside the square brackets.
