@@ -817,6 +817,34 @@ include the following in the header:
 To render an icon, use `icon:{name}[]`.
 For example: `icon:leaf[]`.
 
+To change the size of an icon, include the `size` attribute
+with a value of `lg`, `2x`, `3x`, `4x`, or `5x`.
+The `lg` size is larger than the default size and smaller than `2x`.
+For example: `icon:leaf[size=3x]`.
+
+To change the color of an icon, add the `role` attribute
+with one of the following 16 color names:
+aqua, black, blue, fuchsia, gray, green, lime, maroon,
+navy, olive, purple, red, silver, teal, white, and yellow.
+For example:
+
+```adoc
+icon:leaf[role=green]
+```
+
+To rotate an icon, include the `rotate` attribute
+with a value of `90`, `180`, or `270`.
+
+To flip an icon, include the `flip` attribute
+with a value of `horizontal` or `vertical`.
+
+These attributes can be combined, but if both `flip` and `rotate`
+area specified, only `flip` is honored. For example:
+
+```adoc
+icon:leaf[size=2x, role=green, rotate=90]
+```
+
 Icons can be used as bullets in an unordered list.
 If multiple icons are used, adding the fixed width (fw) attribute
 causes the icons to all occupy the same width.
