@@ -576,19 +576,10 @@ console.log(add(2, 3)); // outputs 5
 ----
 ```
 
+For more detail on source blocks, see the "Source Blocks" section.
+
 Any kind of block can be given a title by preceding it with
 a line that begins with a period, followed by a caption.
-
-To add line numbers, add the `linenums` attribute.
-The highlight.js highlighter does not support line numbers.
-For example:
-
-```adoc
-[source, javascript, linenums]
-----
-code goes here
-----
-```
 
 ## Comments
 
@@ -1381,10 +1372,27 @@ vary based on the selected syntax highlighting library.
 For highlight.js, see
 [Supported Languages](https://highlightjs.readthedocs.io/en/latest/supported-languages.html).
 
-To cause the source code lines to be numbered,
-add `, numbered` after the language.
-TODO: This works with rouge, but I haven't been able to get it to work
-with highlight.js! Maybe the AsciiDoc book you ordered will show how.
+To cause the source code lines to be numbered, add the `linenums` attribute.
+This is not supported by highlight.js.
+For example:
+
+```adoc
+[source, javascript, linenums, highlight=1..3]
+----
+code goes here
+----
+```
+
+To highlight selected lines with a light yellow background,
+add the `highlight` attribute with a line range value.
+For example:
+
+```adoc
+[source, javascript, highlight=1..3]
+----
+code goes here
+----
+```
 
 ## Table of Contents
 
