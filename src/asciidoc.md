@@ -549,7 +549,7 @@ The options are:
 For example:
 
 ```adoc
-:source-highlighter: highlightjs
+:source-highlighter: highlight.js
 ```
 
 The following are examples of listing and source blocks:
@@ -578,6 +578,17 @@ console.log(add(2, 3)); // outputs 5
 
 Any kind of block can be given a title by preceding it with
 a line that begins with a period, followed by a caption.
+
+To add line numbers, add the `linenums` attribute.
+The highlight.js highlighter does not support line numbers.
+For example:
+
+```adoc
+[source, javascript, linenums]
+----
+code goes here
+----
+```
 
 ## Comments
 
