@@ -1443,7 +1443,7 @@ For example, `[width=50%]`.
 
 To specify the alignment of each column,
 add the `cols` attribute inside the square brackets.
-Its value specifies the alignment of each column,
+Its value can specify an alignment operator for each column,
 and thereby the number of columns.
 For example, the following specifies that
 the first column is left-aligned (`<`),
@@ -1499,8 +1499,8 @@ For example, `[cols="2,1,3"]` specifies three columns
 where the first is twice as wide as the second
 and the third is three times as wide as the second.
 
-The alignment of each column can be specified
-before each of the relative widths.
+An alignment operator for each column can be
+specified before its relative width.
 For example, `[cols="<2,^1,>3"]`.
 
 The alignment of any cell, including headings
@@ -1566,10 +1566,31 @@ line 4
 ```
 
 To specify both the horizontal and vertical alignment of a cell,
-add the horizontal alignment character, a period, and
-the vertical alignment character before its vertical bar.
+add a horizontal alignment operator, a period, and
+a vertical alignment operator before its vertical bar.
 For example, `>.^|data` specifies a cell that is
 horizontally right aligned and vertically bottom aligned.
+
+To style the content of a cell, add a style operator before its vertical bar.
+These include:
+
+- `a` for AsciiDoc (supports nested markup)
+- `d` for default (no styling applied)
+- `e` for emphasis (italicized)
+- `h` for header
+- `l` for literal (same as when in a literal block)
+- `m` for monospace
+- `s` for strong (bold)
+
+Many operators can be specified before the vertical bar of a cell.
+Their order must be:
+
+- optional span operator
+- optional horizontal alignment operator
+- optional vertical alignment operator
+- optional style operator
+- vertical bar
+- cell content
 
 ## Themes
 
