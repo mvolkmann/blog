@@ -1541,8 +1541,35 @@ but all the headings are centered.
 
 <img src="/blog/assets/asciidoc-table-spanning.png" alt="AsciiDoc table with spanning" />
 
-To specify the vertical alignment of data within a cell,
-TODO: FINISH THIS from https://docs.asciidoctor.org/asciidoc/latest/tables/align-by-cell/.
+Cells that contain fewer lines of data than others in the same row
+can specify the vertical alignment of their data.
+For top alignment, which is the default, add `.<` before the vertical bar of the cell.
+For center alignment add `.^` before the vertical bar of the cell.
+For bottom alignment add `.>` before the vertical bar of the cell.
+
+For example, the following specifies that
+the second cell in the row is top-aligned (`.<`) (the default),
+the third cell is center-aligned (`.^`), and
+the fourth cell is bottom-aligned (`.>`).
+
+```adoc
+[cols="1,1,1,1"]
+|===
+| line1 +
+line 2 +
+line 3 +
+line 4
+.<| apple
+.^| banana
+.>| cherry
+|===
+```
+
+To specify both the horizontal and vertical alignment of a cell,
+add the horizontal alignment character, a period, and
+the vertical alignment character before its vertical bar.
+For example, `>.^|data` specifies a cell that is
+horizontally right aligned and vertically bottom aligned.
 
 ## Themes
 
