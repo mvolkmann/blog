@@ -1429,6 +1429,16 @@ The basic syntax for tables is:
 |===
 ```
 
+There are three ways to indicate that the first row contains column headings.
+
+1. Specify all the headings on a single line and add a blank line after it.
+   This is shown above.
+1. Add `[%header]` before the table.
+1. Add `[options="header"]` before the table.
+
+The last two options enable placing each heading on a separate line
+that begins with a vertical bar.
+
 <img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
 
 This table spans the width of the page,
@@ -1452,16 +1462,16 @@ the third column is right-aligned (`>`).
 [cols="<,^,>"]
 ```
 
-When the columns are specified in this way,
-the value of each column within a data row (not the heading row)
-can be on its own line.
+The data for each column within a data row can be
+on its own line starting with a vertical bar.
 For example, the previous table markup can be changed as follows:
 
 ```adoc
-[cols="<,^,>"]
+[cols="<,^,>", options="header"]
 |===
-| Heading 1 | Heading 2 | Heading 3
-
+| Heading 1
+| Heading 2
+| Heading 3
 | row 1 col 1
 | row 1 col 2
 | row 1 col 3
