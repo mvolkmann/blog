@@ -1129,8 +1129,8 @@ There are three ways to mark a phrase to be included in the index.
   Alternatively, the following longer syntax can be used:
   `An indexterm:[Food, Fruit, Apple] apple is red.`
 
-The `indexterm:[{phrase}]` syntax can appear on a line
-before a section heading to cause that to appear in the index.
+The `indexterm:[{phrase}]` syntax can appear on the line
+immediately after a section heading to cause that to appear in the index.
 
 To generate an index on its own page,
 add the following to the end of the document:
