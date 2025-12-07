@@ -1741,17 +1741,6 @@ cherry,red
 ,===
 ```
 
-The `cols` attribute can specify many operators for each column.
-The vertical bar of a cell can be preceded by many operators.
-Their order must be:
-
-- optional span operator
-- optional horizontal alignment operator
-- optional vertical alignment operator (begins with a period)
-- optional style operator
-- vertical bar
-- cell content
-
 When a table has a width less than 100%, it can be horizontally aligned
 by adding the `role` attribute with a value of `left`, `center`, or `right`.
 
@@ -1760,6 +1749,18 @@ When this happens and the table has a header row, the header row
 is repeated on each page in which a portion of the table appears.
 To prevent a table from being split onto multiple pages,
 add the `options` attribute with a value that includes `unbreakable`.
+
+The `cols` attribute can specify many operators for each column.
+The vertical bar of a cell can be preceded by many operators
+that override the `cols` setting for their column.
+Their order must be:
+
+- optional span operator
+- optional horizontal alignment operator
+- optional vertical alignment operator (begins with a period)
+- optional style operator
+- vertical bar
+- cell content
 
 ## Themes
 
