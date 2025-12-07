@@ -1650,6 +1650,21 @@ For example:
 
 <img src="/blog/assets/asciidoc-table-frame-grid.png" alt="AsciiDoc table frame and grid" />
 
+Table rows can be shaded in various patterns with a background color.
+This is specified with the `stripes` attribute that accepts the following values:
+
+- `none` to shade none of the rows (default)
+- `even` to shade even numbered rows
+- `odd` to shade odd numbered rows
+- `all` to shade all rows
+- `hover` to shade only the row under the mouse cursor (only in HTML)
+
+For example, `[stripes=even]`.
+
+This attribute has no effect on the shading of
+the header and footer rows, if they exist, which are always shaded.
+Numbering of the rows begins with 1 on the first data row, not the header row.
+
 A column or cell can specify many operators. Their order must be:
 
 - optional span operator
@@ -1659,7 +1674,6 @@ A column or cell can specify many operators. Their order must be:
 - vertical bar
 - cell content
 
-TODO: Cover table striping.
 TODO: Cover table orientation.
 TODO: Cover CSV tables.
 TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
