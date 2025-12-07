@@ -19,21 +19,47 @@ layout: topic-layout.njk
 
 ## Overview
 
-[AsciiDoc](http://asciidoc.org/) is a markup language
-that is an alternative to Markdown.
-Markdown was created in 2004 by John Gruber and Aaron Swartz.
-Markdown is simpler, a bit more readable, and more popular.
+{% aTargetBlank "http://asciidoc.org/", "AsciiDoc" %}
+is a document creation language.
+It positions nicely between Markdown and LaTeX
+in terms learning curve and feature set.
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/markdown/", "Markdown" %}
+was created in 2004 by John Gruber and Aaron Swartz.
+AsciiDoc:
+
+- supports fewer features than AsciiDoc and its therefore easier to learn
+- has a syntax that is a bit more readable than AsciiDoc
+- is more popular than AsciiDoc
+
 AsciiDoc was created in 2002 by Stuart Rackham.
-AsciiDoc supports more features that Markdown, can easily be
-converted to several output formats, and is less popular.
+AsciiDoc:
+
+- supports many more features that Markdown
+- is easier to learn than LaTeX
+- can be easily converted to several output formats
+  including HTML, PDF, and EPUB (supported by e-readers)
+- is less popular than Markdown
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/latex/", "LaTeX" %}
+is a typesetting system created by Leslie Lamport in 1984.
+LaTeX:
+
+- supports even more features than AsciiDoc
+- has the steepest learning curve
+- like AsciiDoc, can be easily converted to several output formats
+- is popular in academia and scientific communities
+
+Markdown is not suitable for book publishing.
+Both AsciiDoc and LaTeX can be used for that purpose.
+
+AsciiDoc files are text files that can be edited in any text editor.
+The recommended file extension for AsciiDoc files is `.adoc`.
 
 [Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
 and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
 It is implemented in Ruby and was created by
 Dan Allen, Sarah White, and Ryan Waldron.
-
-AsciiDoc files are text files that can be edited in any text editor.
-The recommended file extension for AsciiDoc files is `.adoc`.
 
 Some AsciiDoc features are only supported by specific backends.
 For example, a feature that works when converting to HTML
