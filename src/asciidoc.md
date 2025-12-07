@@ -4,6 +4,19 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
+<div class="row">
+  <figure style="width: 25%">
+    <img alt="AsciiDoc logo" style="border: 0"
+      src="/blog/assets/asciidoc-logo.png?v={{pkg.version}}">
+    <figcaption>AsciiDoc logo</figcaption>
+  </figure>
+  <figure style="width: 25%">
+    <img alt="Asciidoctor logo" style="border: 0"
+      src="/blog/assets/asciidoctor-logo.svg?v={{pkg.version}}">
+    <figcaption>Asciidoctor logo</figcaption>
+  </figure>
+</div>
+
 ## Overview
 
 [AsciiDoc](http://asciidoc.org/) is a markup language
@@ -1482,6 +1495,11 @@ For example, the previous table markup can be changed as follows:
 
 <img src="/blog/assets/asciidoc-table-horizontal-alignment.png" alt="AsciiDoc table horizontal alignment" />
 
+If the `cols` attribute is not specified, the number of columns
+in the table is determined by the number of cells in the first row.
+If a row contains fewer cells than the number of columns,
+nothing will be rendered for that row.
+
 To duplicate a cell within a row a given number of times,
 add the number and the plus character before its vertical bar.
 For example:
@@ -1602,7 +1620,7 @@ add a style operator before its vertical bar.
 
 The style operators include:
 
-- `a` for AsciiDoc (supports nested tables)
+- `a` for AsciiDoc (supports nested markup)
 - `d` for default (no styling applied)
 - `e` for emphasis (italicized)
 - `h` for header (bold with light gray background)
@@ -1615,15 +1633,16 @@ The first row utilizes those styles.
 The second row overrides them with different styles.
 
 ```adoc
-[cols="d,e,h,l,m,s"]
+[cols="a,d,e,h,l,m,s"]
 |===
-| default | emphasis | header | literal | monospace | strong
+| image::asciidoc-logo.png[] | default | emphasis | header | literal | monospace | strong
 s| strong
 m| monospace
 l| literal
 h| header
 e| emphasis
 d| default
+a| image::asciidoc-logo.png[]
 |===
 ```
 
