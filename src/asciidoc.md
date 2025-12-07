@@ -1415,8 +1415,8 @@ There are three ways to indicate that the first row contains column headings.
 
 1. Specify all the headings on a single line and add a blank line after it.
    This is shown below.
-1. Add `[%header]` before the table.
 1. Add `[options="header"]` before the table.
+1. Add `[%header]` before the table.
 
 The last two options enable placing each heading on a separate line
 that begins with a vertical bar.
@@ -1488,7 +1488,7 @@ For example:
 
 To cause the last row to be treated as a footer
 with a light gray background and normal (not bold) text,
-add `%footer` or `options="footer"` inside the square brackets above the table.
+add `options="footer"` or `%footer` inside the square brackets above the table.
 Adding a blank line before the footer row
 does not cause it to be treated as a footer.
 For example:
@@ -1622,8 +1622,35 @@ d| default
 
 <img src="/blog/assets/asciidoc-table-styles.png" alt="AsciiDoc table styles" />
 
-A column or cell can specify many operators.
-Their order must be:
+The `frame` option controls the borders on the outside of the table.
+By default, a border is drawn on all four sides.
+Specify `frame=ends` to draws borders only at the top and bottom.
+Specify `frame=sides` to draw borders only on the left and right.
+Specify `frame=none` to omit all borders on the outside of the table.
+
+The `grid` option controls the borders between rows and columns.
+By default, a border is drawn between all rows and columns.
+Specify `grid=rows` to draw borders only between the rows.
+Specify `grid=cols` to draw borders only between the columns.
+Specify `grid=none` to omit all borders between rows or columns.
+It is generally not desirable to change the grid setting
+in tables where any cells span multiple rows or columns.
+
+For example:
+
+```adoc
+[frame=ends, grid=rows, options="header, footer"]
+|===
+| Heading 1 | Heading 2 | Heading 3
+| row 1 col 1 | row 1 col 2 | row 1 col 3
+| row 2 col 1 | row 2 col 2 | row 2 col 3
+| Footer 1 | Footer 2 | Footer 3
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-frame-grid.png" alt="AsciiDoc table frame and grid" />
+
+A column or cell can specify many operators. Their order must be:
 
 - optional span operator
 - optional horizontal alignment operator
@@ -1632,7 +1659,6 @@ Their order must be:
 - vertical bar
 - cell content
 
-TODO: Cover table borders (`frame` attribute).
 TODO: Cover table striping.
 TODO: Cover table orientation.
 TODO: Cover CSV tables.
