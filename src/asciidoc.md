@@ -394,6 +394,9 @@ Examples of document attributes include:
 - `:imagesdir:` specifies the directory to search for images
   referenced using the `image` macro when not specified.
 
+- `:media:` TODO: Document this!
+  Values include `prepress`, `print`, and `screen`.
+
 - `:sectnums:` enables automatic section numbering for all headings.
 
 - `:sectnumlevels: {levels}` specifies the maximum number of levels to number.
