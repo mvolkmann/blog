@@ -1410,6 +1410,8 @@ The basic syntax for tables is:
 
 <img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
 
+To include vertical bar characters in a cell, use the substitution `{vbar}`.
+
 Heading cells have a light gray background and their text is bold.
 There are three ways to indicate that the first row contains column headings.
 
@@ -1437,9 +1439,14 @@ For example:
 By default, tables span the width of the page
 and each column is allocated the same width.
 
-To change the table width, add a line before the table
-that specifies the `width` attribute inside square brackets.
-For example, `[width=50%]`.
+To change the table width, add a line before the table that specifies
+the `width` attribute with a percentage value inside square brackets.
+For example, `width=50%`. The `%` character is optional.
+
+Adding `%autowidth` as the first option inside the square brackets
+sets the width of each column to the smallest width
+that fits all the cell values in the column.
+This results in setting the table width to the sum of the column widths.
 
 To specify the alignment of each column,
 add the `cols` attribute inside the square brackets.
@@ -1665,6 +1672,42 @@ This attribute has no effect on the shading of
 the header and footer rows, if they exist, which are always shaded.
 Numbering of the rows begins with 1 on the first data row, not the header row.
 
+To include comma-separated values (CSV) or tab-separated values (TSV)
+in a table, add the `format` attribute with the value `csv` or `tsv`.
+For example:
+
+```adoc
+[%autowidth, format=csv, options="header"]
+|===
+Fruit,Color
+apple,red
+banana,yellow
+cherry,red
+|===
+```
+
+<img src="/blog/assets/asciidoc-table-csv.png"
+  alt="AsciiDoc table CSV" style="width: 20%">
+
+The table data can be included from an external CSV or TSV file.
+For example:
+
+```adoc
+[%autowidth, format=csv, options="header"]
+|===
+include::fruit.csv[]
+|===
+```
+
+The file `fruit.csv` would contain the following:
+
+```csv
+Fruit,Color
+apple,red
+banana,yellow
+cherry,red
+```
+
 A column or cell can specify many operators. Their order must be:
 
 - optional span operator
@@ -1674,8 +1717,6 @@ A column or cell can specify many operators. Their order must be:
 - vertical bar
 - cell content
 
-TODO: Cover table orientation.
-TODO: Cover CSV tables.
 TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
 
 ## Themes
