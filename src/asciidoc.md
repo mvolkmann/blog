@@ -533,6 +533,13 @@ Contact the author at {email}.
 To hide the author line at the top of the document,
 add the document attribute `:!author:`.
 
+## Bibliographies
+
+AsciiDoc supports generate bibliography pages
+using the extension {% aTargetBlank
+"https://github.com/asciidoctor-contrib/asciidoctor-bibtex",
+"asciidoctor-bibtex" %}.
+
 ## Block Quotes
 
 To create a block of quoted text with a single paragraph:
@@ -1075,6 +1082,65 @@ The supported attributes are:
 
 Specifying `[opts=optional]` causes AsciiDoc to silently ignore
 the `include` directive if the file it references is not found.
+
+## Index
+
+AsciiDoc can automatically generate index pages in PDF output.
+
+There are three ways to mark a phrase to be included in the index.
+
+- double parens to include a phrase as-is
+
+  The phrase inside the parentheses appears in both the text and the index.
+  For example, `An ((apple)) is red.`.
+
+  Alternatively, the following longer syntax can be used:
+  `indexterm2:[apple] is red.`
+
+- triple parens to provide an alternative index entry,
+  often just for different casing
+
+  The phrase inside the parentheses appears in the index, but not in the text.
+  For example, `An (((Apple))) apple is red.`
+
+  Alternatively, the following longer syntax can be used:
+  `An indexterm:[Apple] apple is red.`
+
+- triple parens for primary, secondary, and tertiary terms
+
+  The phrases inside the parentheses appears in the index, but not in the text.
+  For example, `An (((Fruit, Apple))) apple is red.`
+  The index will contain "Fruit" with a sub-entry of "Apple".
+
+  Alternatively, the following longer syntax can be used:
+  `indexterm:[Fruit, Apple] apple is red.`
+
+  For example, `An (((Food, Fruit, Apple))) apple is red.`
+  The index will contain "Food" with a sub-entry of "Fruit"
+  with a sub-sub-entry of "Apple".
+
+  Alternatively, the following longer syntax can be used:
+  `An indexterm:[Food, Fruit, Apple] apple is red.`
+
+To generate an index on its own page,
+add the following to the end of the document:
+
+```adoc
+<<<
+[index]
+== Index
+```
+
+To add pages after the index, add markup like the following:
+
+```adoc
+// It's not clear why the next line is needed.
+== {nbsp}
+<<<
+== Final Section
+
+More content goes here.
+```
 
 ## Line Breaks
 
