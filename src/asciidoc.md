@@ -1749,14 +1749,6 @@ A column or cell can specify many operators. Their order must be:
 - vertical bar
 - cell content
 
-TODO: Show creating a table where some cells contain images like this:
-
-[format=csv,cols="1h,1a"]
-|===
-Sky,image::sky.jpg[]
-Forest,image::forest.jpg[]
-|===
-
 TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
 
 ## Themes
