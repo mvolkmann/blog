@@ -1708,6 +1708,19 @@ banana,yellow
 cherry,red
 ```
 
+Tables can also be created from CSV data using this shorthand syntax.
+Note the blank line after the heading row.
+
+```adoc
+,===
+Fruit,Color
+
+apple,red
+banana,yellow
+cherry,red
+,===
+```
+
 A column or cell can specify many operators. Their order must be:
 
 - optional span operator
@@ -1716,6 +1729,14 @@ A column or cell can specify many operators. Their order must be:
 - optional style operator
 - vertical bar
 - cell content
+
+TODO: Show creating a table where some cells contain images like this:
+
+[format=csv,cols="1h,1a"]
+|===
+Sky,image::sky.jpg[]
+Forest,image::forest.jpg[]
+|===
 
 TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
 
