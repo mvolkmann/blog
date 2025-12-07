@@ -1475,6 +1475,17 @@ For example, the previous table markup can be changed as follows:
 
 <img src="/blog/assets/asciidoc-table-horizontal-alignment.png" alt="AsciiDoc table horizontal alignment" />
 
+To duplicate a cell within a row a given number of times,
+add the number and the plus character before its vertical bar.
+For example:
+
+```adoc
+|===
+| apple 3*| banana | cherry
+```
+
+<img src="/blog/assets/asciidoc-table-cell-duplication.png" alt="AsciiDoc table cell duplication" />
+
 To cause the last row to be treated as a footer
 with a light gray background and normal (not bold) text,
 add `%footer` or `options="footer"` inside the square brackets above the table.
