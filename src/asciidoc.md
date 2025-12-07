@@ -24,22 +24,43 @@ is a document creation language.
 It positions nicely between Markdown and LaTeX
 in terms learning curve and feature set.
 
-{% aTargetBlank "https://mvolkmann.github.io/blog/markdown/", "Markdown" %}
-was created in 2004 by John Gruber and Aaron Swartz.
-AsciiDoc:
-
-- supports fewer features than AsciiDoc and its therefore easier to learn
-- has a syntax that is a bit more readable than AsciiDoc
-- is more popular than AsciiDoc
-
 AsciiDoc was created in 2002 by Stuart Rackham.
 AsciiDoc:
 
-- supports many more features that Markdown
-- is easier to learn than LaTeX
+- supports many more features than Markdown
+  and fewer features than LaTeX
+- is harder to learn than Markdown and easier to learn than LaTeX
 - can be easily converted to several output formats
   including HTML, PDF, and EPUB (supported by e-readers)
 - is less popular than Markdown
+
+Markdown is not suitable for book publishing.
+Both AsciiDoc and LaTeX can be used for that purpose.
+
+AsciiDoc files are text files that can be edited in any text editor.
+The recommended file extension for AsciiDoc files is `.adoc`.
+
+AsciiDoc documentation uses the term "backend" to refer to software that
+converts AsciiDoc files to a specific format such as HTML, PDF, or EPUB.
+Some AsciiDoc features are only supported by specific backends.
+
+[Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
+and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
+It is implemented in Ruby and was created by
+Dan Allen, Sarah White, and Ryan Waldron.
+
+## Comparison to Markdown
+
+{% aTargetBlank "https://mvolkmann.github.io/blog/markdown/", "Markdown" %}
+was created in 2004 by John Gruber and Aaron Swartz.
+Markdown:
+
+- supports fewer features than AsciiDoc and its therefore easier to learn
+- has a syntax that is a bit more readable than AsciiDoc
+- targets simpler documents than AsciiDoc and LaTex
+- is more popular than AsciiDoc
+
+## Comparison to LaTeX
 
 {% aTargetBlank "https://mvolkmann.github.io/blog/latex/", "LaTeX" %}
 is a typesetting system created by Leslie Lamport in 1984.
@@ -49,21 +70,6 @@ LaTeX:
 - has the steepest learning curve
 - like AsciiDoc, can be easily converted to several output formats
 - is popular in academia and scientific communities
-
-Markdown is not suitable for book publishing.
-Both AsciiDoc and LaTeX can be used for that purpose.
-
-AsciiDoc files are text files that can be edited in any text editor.
-The recommended file extension for AsciiDoc files is `.adoc`.
-
-[Asciidoctor](https://asciidoctor.org) is software that reads AsciiDoc files
-and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
-It is implemented in Ruby and was created by
-Dan Allen, Sarah White, and Ryan Waldron.
-
-Some AsciiDoc features are only supported by specific backends.
-For example, a feature that works when converting to HTML
-may not work when converting to PDF or EPUB.
 
 ## VS Code
 
