@@ -395,7 +395,7 @@ Examples of document attributes include:
   referenced using the `image` macro when not specified.
 
 - `:media:` TODO: Document this!
-  Values include `prepress`, `print`, and `screen`.
+  Values include `prepress`, `print`, and `screen` (default).
 
 - `:sectnums:` enables automatic section numbering for all headings.
 
@@ -1089,7 +1089,9 @@ the `include` directive if the file it references is not found.
 ## Index
 
 AsciiDoc can automatically generate index pages in PDF output.
-The page numbers that appear in the index are links to the indexed text.
+
+If the `:media:` attribute is not specified or if its value is `screen`,
+the page numbers that appear in the index are links to the indexed text.
 However, the links are not operational when a PDF is viewed in VS Code.
 
 There are three ways to mark a phrase to be included in the index.
