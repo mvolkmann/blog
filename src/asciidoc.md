@@ -1456,9 +1456,10 @@ To change the table width, add a line before the table that specifies
 the `width` attribute with a percentage value inside square brackets.
 For example, `width=50%`. The `%` character is optional.
 
-Adding `%autowidth` as the first option inside the square brackets
-sets the width of each column to the smallest width
-that fits all the cell values in the column.
+To set the width of each column to the smallest width
+that fits all the cell values in the column,
+add the `options` attribute with a value that includes `autowidth`.
+Alternatively, add `%autowidth` as the first option inside the square brackets.
 This results in setting the table width to the sum of the column widths.
 
 To specify the alignment of each column,
@@ -1740,7 +1741,9 @@ cherry,red
 ,===
 ```
 
-A column or cell can specify many operators. Their order must be:
+The `cols` attribute can specify many operators for each column.
+The vertical bar of a cell can be preceded by many operators.
+Their order must be:
 
 - optional span operator
 - optional horizontal alignment operator
@@ -1749,7 +1752,14 @@ A column or cell can specify many operators. Their order must be:
 - vertical bar
 - cell content
 
-TODO: Cover table attributes described at https://docs.asciidoctor.org/asciidoc/latest/tables/table-ref/.
+When a table has a width less than 100%, it can be horizontally aligned
+by adding the `role` attribute with a value of `left`, `center`, or `right`.
+
+By default, a table can be split across a page boundary.
+When this happens and the table has a header row, the header row
+is repeated on each page in which a portion of the table appears.
+To prevent a table from being split onto multiple pages,
+add the `options` attribute with a value that includes `unbreakable`.
 
 ## Themes
 
