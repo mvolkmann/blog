@@ -1086,6 +1086,8 @@ the `include` directive if the file it references is not found.
 ## Index
 
 AsciiDoc can automatically generate index pages in PDF output.
+The page numbers that appear in the index are links to the indexed text.
+However, the links are not operational when a PDF is viewed in VS Code.
 
 There are three ways to mark a phrase to be included in the index.
 
@@ -1121,6 +1123,9 @@ There are three ways to mark a phrase to be included in the index.
 
   Alternatively, the following longer syntax can be used:
   `An indexterm:[Food, Fruit, Apple] apple is red.`
+
+The `indexterm:[{phrase}]` syntax can appear on a line
+before a section heading to cause that to appear in the index.
 
 To generate an index on its own page,
 add the following to the end of the document:
