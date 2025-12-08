@@ -84,8 +84,10 @@ the several command palette commands including:
 - AsciiDoc: Open Preview
 - AsciiDoc: Open Preview to the Side
 
-A preview can also be opened to the side by clicking the icon in
-the upper-right that looks like a book with a magnifier glass on top.
+To preview an opened `.adoc` file in VS Code,
+click the "Open Preview" button in the upper-left.
+The icon looks like a book with a magnifier glass on top.
+Alternatively, press cmd-k v.
 
 By default, previews use the same styling as other VS Code tabs
 which is typically white text on a black background.
@@ -106,6 +108,30 @@ and verify that produces the expected result.
 
 Also consider installing the "Code Spell Checker" extension
 from streetsidesoftware.com.
+
+To generate HTML output, open the command palette
+and select "AsciiDoc: Save HTML Document".
+To view the rendered HTML, locate the `.html` file in the Explorer pane,
+right-click it, and select "Open with Live Server".
+
+To generate PDF output, open the command palette
+and select "AsciiDoc: Export Document as PDF".
+A file dialog will open where you can enter the file name to use
+and select the destination directory.
+If a previous version of the PDF is open in VS Code,
+it will update automatically.
+If a previous version of the PDF is open in the macOS Preview app,
+it will update automatically when that app becomes active.
+
+To paste an image in the system clipboard into an AsciiDoc document
+using the `image:` directive, open the command palette
+and select "AsciiDoc: Paste Image".
+An image file whose name is the current timestamp is
+created in the same directory as the document,
+and the `image:` directive will refer to that file.
+
+To generate DocBook output, open the command palette
+and select "AsciiDoc: Save to DocBook".
 
 ## Syntax Details
 
@@ -2049,44 +2075,6 @@ video::gBhOg0Vriik[youtube, width=600, height=338]
 
 Supposedly there are options to cause the video to autoplay and loop,
 but I could not get them to work.
-
-## VS Code Extension
-
-Install the AsciiDoc extension.
-
-To preview an `.adoc` file in VS Code:
-
-- Open an `.adoc` file.
-- Click the "Open Preview" button in the upper-left.
-  The icon looks like a two-column document
-  with a magnifier glass in the lower-left.
-  Alternatively, press cmd-k v.
-
-To generate HTML output, open the command palette
-and select "AsciiDoc: Save HTML Document".
-To view the rendered HTML, locate the `.html` file in the Explorer pane,
-right-click it, and select "Open with Live Server".
-
-To generate PDF output, open the command palette
-and select "AsciiDoc: Export Document as PDF".
-A file dialog will open where you can enter the file name to use
-and select the destination directory.
-If a previous version of the PDF is open in VS Code,
-it will update automatically.
-If a previous version of the PDF is open in the macOS Preview app,
-it will update automatically when that app becomes active.
-
-To paste an image in the system clipboard into an AsciiDoc document
-using the `image:` directive, open the command palette
-and select "AsciiDoc: Paste Image".
-An image file whose name is the current timestamp is
-created in the same directory as the document,
-and the `image:` directive will refer to that file.
-
-To generate DocBook output, open the command palette
-and select "AsciiDoc: Save to DocBook".
-
-TODO: See other "AsciiDoc: ?" commands in the command palette.
 
 ## Resources
 
