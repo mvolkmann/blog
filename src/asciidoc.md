@@ -1529,8 +1529,8 @@ It will not be assigned a chapter number, which is the desired result.
 Text can include references to items in the document including
 images, sections, tables, and any kind of block.
 Give each item to be referenced an id
-by preceding it with the line `[#some-id]`.
-Add links to items with ids by adding references with `<<#some-id>>`.
+by preceding it with the line `[#some-id]` or `[[some-id]]`.
+Add links to items with ids by adding references with `<<some-id>>`.
 
 The text shown for each reference is
 controlled by the `:xrefstyle:` document attribute.
