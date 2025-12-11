@@ -854,9 +854,9 @@ In macOS, to open a `.epub` file,
 locate it in the Finder and double-click it.
 This will open the file in the Books app.
 
-To add a `.epub` file to a Kindle:
+To add a `.epub` file to your Kindle:
 
-1. Compress the file to a `.zip` file.
+1. Compress the `.epub` file to a `.zip` file.
    In macOS, locate the `.epub` file in the Finder,
    right-click it, and select "Compress".
 1. Determine your Kindle email address.
@@ -869,6 +869,23 @@ To add a `.epub` file to a Kindle:
 1. Email the `.zip` file to your Kindle email address.
 1. Wait a few minutes for the file to appear as a new "book" on the Kindle.
 1. Tap the new book to open it.
+
+The book title that appears on the Kindle will be the file name,
+so consider renaming the `.epub` file
+before compressing it and emailing the `.zip` file.
+The file name can contain spaces.
+
+Consider adding the document attributes like the following
+in the header of the `.adoc` file before generating the `.epub` file
+in order to add metadata:
+
+````adoc
+:producer: Manning
+:revdate: 2020
+:revnumber: 1
+:lang: en-US
+:uuid: 9781617297946
+:keywords: web,JavaScript,Svelte
 
 ## Escaping Text
 
@@ -891,7 +908,7 @@ For example:
 My whippet footnote:fn1[The Whippet is a British breed of dog of sighthound type.] is very fast!
 ...
 Comet footnote:fn1[] is ready to play.
-```
+````
 
 No space is required before the `footnote` macro,
 but omitting it will cause spell checkers to complain.

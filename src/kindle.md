@@ -19,6 +19,24 @@ This web site is used to:
 - view open orders
 - view all orders and charges
 
+## Adding an EPUB File
+
+To add a `.epub` file to your Kindle:
+
+1. Compress the `.epub` file to a `.zip` file.
+   In macOS, locate the `.epub` file in the Finder,
+   right-click it, and select "Compress".
+1. Determine your Kindle email address.
+
+   Browse amazon.com, sign in,
+   hover over "Accounts & Lists" in the upper-right,
+   click "Devices" under "Your Account", click the large "Kindle" button,
+   click your Kindle device, and see the email address after "Email".
+
+1. Email the `.zip` file to your Kindle email address.
+1. Wait a few minutes for the file to appear as a new "book" on the Kindle.
+1. Tap the new book to open it.
+
 ## Library Downloads
 
 To checkout an ebook from the library and upload to Kindle:
