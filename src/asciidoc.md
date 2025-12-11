@@ -1456,6 +1456,20 @@ To generate a PDF from an AsciiDoc file:
 This generates the file `{name}.pdf` in the same directory as the `.adoc` file.
 It automatically adds page numbers which are in the page footers by default.
 
+The `nodemon` command can watch a `.adoc` file and
+automatically run `asciidoctor-pdf` on it every time it is modified.
+Assuming that Node.js is installed,
+globally install `nodemon` by entering `npm install -g nodemon`.
+Then run the following command, substituting for `{name}`:
+
+```bash
+nodemon --watch {name}.adoc --exec "asciidoctor-pdf {name}.adoc"
+```
+
+The `--watch` flag can be followed by a comma-separated list of files to watch.
+This is useful when generating PDF from
+a `.adoc` file that includes other files.
+
 ## Preface
 
 To add a preface to a document, begin with the following
