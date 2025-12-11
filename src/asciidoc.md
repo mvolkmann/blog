@@ -440,8 +440,16 @@ Examples of document attributes include:
 - `:imagesdir:` specifies the directory to search for images
   referenced using the `image` macro when not specified.
 
-- `:media:` TODO: Document this!
-  Values include `prepress`, `print`, and `screen` (default).
+- `:media:` specifies how the output will be used.
+  Values include:
+
+  - `screen` for screen viewing (default).
+  - `print` for offline reading.
+    It renders full URLs instead of clickable links.
+  - `prepress` for two-sided printing in book style, including
+    margin mirroring and facing pages so chapters
+    (sections with a level 1 heading) always begin on an odd numbered page.
+    It also renders full URLs instead of clickable links.
 
 - `:sectnums:` enables automatic section numbering for all headings.
 
