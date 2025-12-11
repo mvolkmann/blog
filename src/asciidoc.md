@@ -1610,6 +1610,12 @@ add `:toc:` in the header.
 By default, only section header levels 1, 2, and 3 are included.
 To change this, add `:toclevels: {n}` in the header.
 
+By default, the table of contents appears at the beginning of the output.
+To place it elsewhere,
+perhaps to include a preface before the table of contents,
+change `:toc:` in the header to `:toc: macro`.
+Then add the line `toc::[]` where the table of contents should appear.
+
 ## Tables
 
 The markup for a table begins and ends with a line
