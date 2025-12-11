@@ -348,14 +348,23 @@ To change this, add one of the following before the text:
 
 ## Appendices
 
-To add appendices to a document, begin with the following
+To add appendices to a document, use the following markup:
 
 ```adoc
+<<<
 [appendix]
-== An appendix title
+== First Appendix
+
+Add first appendix content here.
+
+<<<
+[appendix]
+== Second Appendix
+
+Add second appendix content here.
 ```
 
-The appendices will be assigned the letters A, B, C, and so on.
+The appendices are assigned the letters A, B, C, and so on.
 
 ## Asciidoctor
 
@@ -375,8 +384,6 @@ To install the `asciidoctor` command in macOS:
    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
    export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
    ```
-
-````
 
 1. Enter `gem install asciidoctor`.
 
@@ -2119,4 +2126,7 @@ but I could not get them to work.
 
 - [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
 - [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
-````
+
+```
+
+```
