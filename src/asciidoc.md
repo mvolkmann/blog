@@ -346,16 +346,16 @@ To change this, add one of the following before the text:
 [.text-right]
 ```
 
-## Appendixes
+## Appendices
 
-To add appendixes to a document, begin with the following
+To add appendices to a document, begin with the following
 
 ```adoc
 [appendix]
 == An appendix title
 ```
 
-The appendixes will be assigned the letters A, B, C, and so on.
+The appendices will be assigned the letters A, B, C, and so on.
 
 ## Asciidoctor
 
