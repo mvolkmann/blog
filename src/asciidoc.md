@@ -845,10 +845,30 @@ It is supported by many e-readers, smartphones, and tablets.
 
 To generate an EPUB file from an AsciiDoc file:
 
-- `gem install asciidoctor-epub3` (one time)
-- `asciidoctor-epub {name}.adoc`
+- Enter `gem install asciidoctor-epub3` (one time)
+- Enter `asciidoctor-epub {name}.adoc`
 
 This automatically adds page numbers.
+
+In macOS, to open a `.epub` file,
+locate it in the Finder and double-click it.
+This will open the file in the Books app.
+
+To add a `.epub` file to a Kindle:
+
+1. Compress the file to a `.zip` file.
+   In macOS, locate the `.epub` file in the Finder,
+   right-click it, and select "Compress".
+1. Determine your Kindle email address.
+
+   Browse amazon.com, sign in,
+   hover over "Accounts & Lists" in the upper-right,
+   click "Devices" under "Your Account", click the large "Kindle" button,
+   click your Kindle device, and see the email address after "Email".
+
+1. Email the `.zip` file to your Kindle email address.
+1. Wait a few minutes for the file to appear as a new "book" on the Kindle.
+1. Tap the new book to open it.
 
 ## Escaping Text
 
