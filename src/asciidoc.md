@@ -346,6 +346,17 @@ To change this, add one of the following before the text:
 [.text-right]
 ```
 
+## Appendixes
+
+To add appendixes to a document, begin with the following
+
+```adoc
+[appendix]
+== An appendix title
+```
+
+The appendixes will be assigned the letters A, B, C, and so on.
+
 ## Asciidoctor
 
 To install the `asciidoctor` command in macOS:
@@ -364,6 +375,8 @@ To install the `asciidoctor` command in macOS:
    export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
    export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
    ```
+
+````
 
 1. Enter `gem install asciidoctor`.
 
@@ -1426,6 +1439,17 @@ To generate a PDF from an AsciiDoc file:
 This generates the file `{name}.pdf` in the same directory as the `.adoc` file.
 It automatically adds page numbers which are in the page footers by default.
 
+## Preface
+
+To add a preface to a document, begin with the following
+
+```adoc
+[preface]
+== Preface
+```
+
+It will not be assigned a chapter number, which is the desired result.
+
 ## Sections
 
 The beginning of each section in a document is marked by a line that
@@ -2095,3 +2119,4 @@ but I could not get them to work.
 
 - [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
 - [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
+````
