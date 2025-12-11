@@ -1524,7 +1524,7 @@ To add a preface to a document, begin with the following
 
 It will not be assigned a chapter number, which is the desired result.
 
-## References
+## References / Links
 
 Text can include references to items in the document including
 images, sections, tables, and any kind of block.
