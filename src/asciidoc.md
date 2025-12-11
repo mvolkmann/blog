@@ -1140,6 +1140,16 @@ It also means that if an included file changes a document attribute setting,
 the change will affect subsequently included documents
 unless the change is reversed.
 
+A file can be conditionally included by wrapping the `include` directive
+in an `ifdef`, `ifndef`, or `ifeval` directives.
+For example:
+
+```adoc
+ifdef::backend-pdf[]
+include::pdf-content.adoc[]
+endif::[]
+```
+
 ## Index
 
 AsciiDoc can automatically generate index pages in PDF output.
