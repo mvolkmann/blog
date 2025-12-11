@@ -1524,6 +1524,35 @@ To add a preface to a document, begin with the following
 
 It will not be assigned a chapter number, which is the desired result.
 
+## References
+
+Text can include references to items in the document including
+images, sections, tables, and any kind of block.
+Give each item to be referenced an id
+by preceding it with the line `[#some-id]`.
+Add links to items with ids by adding references with `<<#some-id>>`.
+
+The text shown for each reference is
+controlled by the `:xrefstyle:` document attribute.
+There are three supported values.
+Suppose the document contains
+an image with the caption "My Image",
+a source block with the caption "My Code",
+a section with the caption "My Section", and
+a table with the caption "My Table".
+Also, suppose the document attribute `:sectnums:` is in the header
+so sections are numbered.
+
+- `:xrefstyle: basic`, the default, results in the link text
+  "Figure 3", "Listing 3", "Section 3", and "Table 3".
+- `:xrefstyle: short` results in the link text
+  "My Image", "My Code", "My Section", and "My Table".
+- `:xrefstyle: short` results in the link text
+  'Figure 3, "My Image"',
+  'Listing 3, "My Code"',
+  'Section 3, "My Section"', and
+  'Table 3, "My Table"'.
+
 ## Sections
 
 The beginning of each section in a document is marked by a line that
@@ -2199,7 +2228,3 @@ but I could not get them to work.
 
 - [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
 - [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
-
-```
-
-```
