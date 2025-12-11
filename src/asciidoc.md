@@ -2029,7 +2029,9 @@ searching for the theme file in the current directory:
 :pdf-theme: custom-theme.yml
 ```
 
-This is not honored by the VS Code AsciiDoc extension.
+This is not honored when PDF output is generated
+using the VS Code AsciiDoc extension, but it is honored
+when the `asciidoctor-pdf` command is run from a terminal.
 See {% aTargetBlank
 "https://github.com/asciidoctor/asciidoctor-vscode/issues/979",
 "issue 979" %}.
