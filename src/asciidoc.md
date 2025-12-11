@@ -2083,6 +2083,18 @@ This is documented at {% aTargetBlank
 "https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/",
 "Add Running Content" %}.
 
+The term "verso" refers to even numbered pages
+that appear on the left side of an opened book.
+The term "recto" refers to odd numbered pages
+that appear on the right side of an opened book.
+
+When the `:media:` attribute is set to `prepress` or `print`,
+the `asciidoctor-pdf` command automatically uses margin mirroring.
+This means it assumes that pages will be printed on both sizes,
+so the verso and recto margins need to be mirrored.
+It does not automatically mirror pages numbers,
+but the example below does that.
+
 ```yaml
 extends: default
 
