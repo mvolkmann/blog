@@ -887,6 +887,8 @@ in order to add metadata:
 :uuid: 9781617297946
 :keywords: web,JavaScript,Svelte
 
+The `:uuid:` value can be a book ISBN.
+
 ## Escaping Text
 
 These characters must be escaped for literal versions: `+` and `{`.
