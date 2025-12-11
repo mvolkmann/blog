@@ -1087,7 +1087,7 @@ When the files represent chapters in a book,
 it may be necessary to include a blank line between each `include`.
 
 The `include` directive is commonly used to
-include files `[listing]` and `[source]` blocks.
+include files in `[listing]` and `[source]` blocks.
 Listing blocks display verbatim text with no syntax highlighting.
 Source blocks display programming language source code
 with optional syntax highlighting.
@@ -1111,6 +1111,14 @@ The supported attributes are:
 
 Specifying `[opts=optional]` causes AsciiDoc to silently ignore
 the `include` directive if the file it references is not found.
+
+Think of included files as being textually
+inserted into the document that includes them.
+This means that included files use
+document attribute settings from the main document.
+It also means that if an included file changes a document attribute setting,
+the change will affect subsequently included documents
+unless the change is reversed.
 
 ## Index
 
@@ -1393,6 +1401,11 @@ For block formulas, use the following syntax:
 x = {-b \pm \sqrt{b^2-4ac} \over 2a}
 ++++
 ```
+
+This works for HTML output.
+Producing PDF output requires installing the Ruby gem `asciidoctor-mathematical`.
+Unfortunately, running `gem install asciidoctor-mathematical` fails in macOS!
+See [issue #133](https://github.com/asciidoctor-contrib/asciidoctor-mathematical/issues/133).
 
 ## Page Breaks
 
