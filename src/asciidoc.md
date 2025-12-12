@@ -1577,6 +1577,23 @@ To add a page break in PDF output,
 insert a blank line followed by a line containing only `<<<`.
 It's unclear when the blank line is needed.
 
+## Parts
+
+Chapters of a book can be grouped into parts.
+To create each part, use the following markup:
+
+```adoc
+= Part Name
+```
+
+Follow this with the markup for all the chapters in the part.
+
+To automatically number the parts,
+add the attribute `:partnums:` in the header.
+
+To add a word at the beginning of each part title, such as "Part",
+add the attribute `:part-signifier: Part` in the header.
+
 ## PDF Output
 
 To generate a PDF from an AsciiDoc file:
