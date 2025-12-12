@@ -1586,13 +1586,64 @@ To create each part, use the following markup:
 = Part Name
 ```
 
-Follow this with the markup for all the chapters in the part.
+Follow this with the markup for all the chapters in the part
+where each chapter begins with a level 2 heading (`===`).
 
 To automatically number the parts,
 add the attribute `:partnums:` in the header.
 
 To add a word at the beginning of each part title, such as "Part",
 add the attribute `:part-signifier: Part` in the header.
+
+The following example shows markup for a book that
+contains two parts where each part contains two chapters.
+
+```adoc
+= My Book Title
+R. Mark Volkmann <r.mark.volkmann@gmail.com>
+:doctype: book
+:media: prepress
+:sectnums:
+:toc: macro
+:toclevels: 3
+
+[acknowledgements]
+== Acknowledgements
+
+Thank you to my wonderful wife, Tami.
+
+toc::[]
+
+[part]
+= Part I: Fundamentals
+
+This is the content for the first part.
+
+== Alpha
+
+This is the first chapter content.
+
+=== Sub-alpha
+
+This is the content in the first section of the first chapter.
+
+== Beta
+
+This is the second chapter content.
+
+[part]
+= Part II: Advanced Topics
+
+This is the content for the second part.
+
+== Gamma
+
+This is the third chapter content.
+
+== Delta
+
+This is the third chapter content.
+```
 
 ## PDF Output
 
