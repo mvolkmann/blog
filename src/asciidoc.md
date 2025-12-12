@@ -958,6 +958,63 @@ Footnote numbers are links.
 Clicking a footnote number in the text jumps to the footnote.
 Clicking a footnote number before a footnote jumps to where it is referenced.
 
+## Front Matter
+
+There are many kinds of content that sometimes
+appears before the first chapter of a book.
+This includes preface, acknowledgements, and dedication sections.
+
+To add a preface, begin with the following:
+
+```adoc
+[preface]
+== Preface
+```
+
+To add an acknowledgements section, begin with the following:
+
+```adoc
+<<<
+[acknowledgements]
+== Acknowledgements
+```
+
+To add a dedication section, begin with the following:
+
+```adoc
+<<<
+[dedication%notitle]
+== Dedication
+```
+
+None of these sections will be assigned a chapter number,
+which is the desired result.
+
+## Glossary
+
+To add a glossary section, add markup like the following:
+
+```adoc
+<<<
+[glossary]
+== Glossary of Key Terms
+
+AsciiDoc::
+A human-readable, plain-text documentation language that can be
+semantically converted to many formats like HTML, PDF, and EPUB,
+and is widely used for writing technical documentation, books, and articles.
+
+LaTeX::
+A document preparation system and markup language widely used in academia
+and technical fields for producing professional-quality documents,
+especially those containing complex mathematical formulas.
+
+Markdown::
+A lightweight markup language that uses plain text formatting syntax
+to enable conversion to HTML and other formats,
+focusing on simplicity and readability.
+```
+
 ## Horizontal Rules
 
 To add a horizontal rule, add a line containing three single quotes.
@@ -1546,17 +1603,6 @@ nodemon --watch {name}.adoc --exec "asciidoctor-pdf {name}.adoc"
 The `--watch` flag can be followed by a comma-separated list of files to watch.
 This is useful when generating PDF from
 a `.adoc` file that includes other files.
-
-## Preface
-
-To add a preface to a document, begin with the following
-
-```adoc
-[preface]
-== Preface
-```
-
-It will not be assigned a chapter number, which is the desired result.
 
 ## References / Links
 
@@ -2149,6 +2195,7 @@ heading:
   h1-font-color: #4F00FF
   h2-font-color: #006400
   h3-font-color: #8b4512
+  # Colors can also be specified using other syntaxes.
 
 header:
   height: $base_line_height_length * 4
