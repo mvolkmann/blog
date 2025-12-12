@@ -143,8 +143,8 @@ block delimiters, and replacement/flow syntax.
 
 The header section contains directives that control document settings.
 Examples include `= Document Title`,
-`:sectnum:` (to enable section numbering),
-`:toc:` (to enable generating a table of contents),
+`:sectnum:` to enable section numbering,
+`:toc:` to enable generating a table of contents,
 and user-defined attributes.
 
 User-defined attributes represent Boolean values (set or not set)
@@ -671,6 +671,20 @@ For more detail on source blocks, see the "Source Blocks" section.
 Any kind of block can be given a title by preceding it with
 a line that begins with a period, followed by a caption.
 
+## Chapters
+
+When the `:doctype:` attribute has the value `book`
+and the `:sectnums:` attribute is present,
+level 1 headings are treated as chapter titles
+and are preceded by "Chapter", the chapter number, and a period.
+For example, `== Introduction` is rendered as "Chapter 1. Introduction".
+The word "Chapter" is the default value
+of the `:chapter-signifier:` attribute.
+This can be set to a different value, including no value.
+
+There doesn't seem to be a way to prevent numbering of chapters
+and only number sections within chapters.
+
 ## Comments
 
 Single-line comments begin with `//`.
@@ -766,6 +780,18 @@ endif::[]
 The `ifeval` macro cannot test multiple conditions
 and it cannot test the values of counter variables
 such as `counter:section`.
+
+## Cover Images
+
+When writing a book, specify the document attributes like the following
+in the header to add front and back cover images:
+
+```adoc
+:front-cover-image: images/front-cover.png
+:back-cover-image: images/back-cover.png
+```
+
+Many image formats can be used including JPEG, PDF, and PNG.
 
 ## Diagrams
 
@@ -2053,7 +2079,7 @@ Their order must be:
 ## Themes
 
 Themes define many characteristics of PDF output including
-page size, margins, headers, and footers.
+page size, margins, headers, footers, and heading colors.
 
 There is a default theme defined in the file `default-theme.yml`.
 The location of this file differs based on the operating system.
@@ -2090,6 +2116,7 @@ the header and footer sections of each page.
 This is documented at {% aTargetBlank
 "https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/",
 "Add Running Content" %}.
+We will also specify heading colors.
 
 The term "verso" refers to even numbered pages
 that appear on the left side of an opened book.
@@ -2116,6 +2143,12 @@ page:
   # (which is where the first chapter begins).
   numbering:
     start-at: 5
+
+heading:
+  #font-color: #4F00FF
+  h1-font-color: #4F00FF
+  h2-font-color: #006400
+  h3-font-color: #8b4512
 
 header:
   height: $base_line_height_length * 4
