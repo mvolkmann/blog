@@ -459,23 +459,16 @@ Examples of document attributes include:
 - `:source-highlighter:` specifies the syntax highlighter
   used for source blocks. By default, code is not highlighted.
 
-- `:toc:` enables generation of a table of contents based on headings.
+- `:tabsize:` sets the number of spaces represented by a tab character
+  in source code blocks.
 
-- `:toclevels:` specifies the number of levels to include in the table of contents.
-  The default is 3.
+- `:toc:` enables generation of a table of contents based on headings.
 
 - `:toc-title: Some Title` sets the title of the generated table of contents
   which defaults to "Table of Contents"
 
-TODO: Finish summarizing the system-defined attributes.
-
-- `:experimental:` enables features still under development
-  (e.g. DITA or other experimental syntax).
-- `:tabsize:` sets the number of spaces represented by a tab character
-  in source code blocks.
-- `:idprefix:` specifies the prefix to prepend to section IDs.
-- `:idseparator:` specifies the character used to replace spaces
-  in section titles when generating IDs.
+- `:toclevels:` specifies the number of levels to include in the table of contents.
+  The default is 3.
 
 References to {% aTargetBlank
 "https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/",
@@ -1710,9 +1703,6 @@ For example, `== Introduction`.
 The document begins with a level 0 section which uses a single `=`.
 Level 1 sections begin with `==`, level 2 with `===` and so on.
 
-TODO: "The interpretation of the level 0 title depends entirely on
-the document's doctype setting." Where is the doctype set?
-
 To include automatically generated section numbers,
 add `:sectnums:` in the header.
 
@@ -2394,14 +2384,14 @@ but I could not get them to work.
 
 ## Resources
 
-- [AsciiDoc home page](https://asciidoc.org)
-- [AsciiDoc Language Documentation](https://docs.asciidoctor.org/asciidoc/latest/)
-- [AsciiDoc PDF Theming Guide](https://docs.asciidoctor.org/pdf-converter/latest/theme/)
-- [AsciiDoc Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf)
-- [AsciiDoc Syntax Quick Reference](https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/) from Dan Allen and Sarah White
-- [AsciiDoc Writer's Guide](https://asciidoctor.org/docs/asciidoc-writers-guide/)
-- [AsciiDoc: The Complete Guide in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
-- [AsciiDoctor EPUB3 Documentation](https://docs.asciidoctor.org/epub3-converter/latest/)
-- [AsciiDoctor Forum](https://asciidoctor.zulipchat.com)
-- [AsciiDoctor PDF Documentation](https://docs.asciidoctor.org/pdf-converter/latest/)
-- [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
+- {% aTargetBlank "https://asciidoc.org", "AsciiDoc home page" %}
+- {% aTargetBlank "https://docs.asciidoctor.org/asciidoc/latest/", "AsciiDoc Language Documentation" %}
+- {% aTargetBlank "https://docs.asciidoctor.org/pdf-converter/latest/theme/", "AsciiDoc PDF Theming Guide" %}
+- {% aTargetBlank "https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference", "AsciiDoc Syntax Quick Reference" %}
+- {% aTargetBlank "https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf", "AsciiDoc Syntax Quick Reference" %} from Dan Allen and Sarah White
+- {% aTargetBlank "https://asciidoctor.org/docs/asciidoc-writers-guide/", "AsciiDoc Writer's Guide" %}
+- {% aTargetBlank "https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla", "AsciiDoc: The Complete Guide in 2025" %}
+- {% aTargetBlank "https://docs.asciidoctor.org/epub3-converter/latest/", "AsciiDoctor EPUB3 Documentation" %}
+- {% aTargetBlank "https://asciidoctor.zulipchat.com", "AsciiDoctor Forum" %}
+- {% aTargetBlank "https://docs.asciidoctor.org/pdf-converter/latest/", "AsciiDoctor PDF Documentation" %}
+- {% aTargetBlank "https://powerman.name/doc/asciidoc/", "POWERMAN AsciiDoc cheatsheet" %}
