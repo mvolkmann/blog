@@ -619,9 +619,11 @@ ____
 
 A block is a range of lines that have a specific purpose.
 There are two ways to assign a block type to a range of lines.
-The first is to preceded a contiguous set of lines (no blank lines)
+The first option is to preceded a contiguous set of lines (no blank lines)
 with a block type in square brackets.
-The second is to add a line containing only a block delimiter
+This is a good choice when there are only a few lines and
+it is unlikely that blank lines will be added to the block in the future.
+The second option is to add a line containing only a block delimiter
 before and after a range of lines.
 A block delimiter consists of four of the same character.
 
