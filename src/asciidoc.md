@@ -2288,7 +2288,7 @@ header:
       content: '*{page-number}*'
 
 # The default footer is suppressed by setting :nofooter:
-# in main .adoc file, so the following isn't strictly necessary.
+# in main .adoc file, so the following strictly necessary.
 footer:
   border_width: ~
   height: 0
