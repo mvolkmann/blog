@@ -2394,5 +2394,14 @@ but I could not get them to work.
 
 ## Resources
 
-- [AsciiDoc: The Complete Guid in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
+- [AsciiDoc home page](https://asciidoc.org)
+- [AsciiDoc Language Documentation](https://docs.asciidoctor.org/asciidoc/latest/)
+- [AsciiDoc PDF Theming Guide](https://docs.asciidoctor.org/pdf-converter/latest/theme/)
+- [AsciiDoc Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf)
+- [AsciiDoc Syntax Quick Reference](https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/) from Dan Allen and Sarah White
+- [AsciiDoc Writer's Guide](https://asciidoctor.org/docs/asciidoc-writers-guide/)
+- [AsciiDoc: The Complete Guide in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
+- [AsciiDoctor EPUB3 Documentation](https://docs.asciidoctor.org/epub3-converter/latest/)
+- [AsciiDoctor Forum](https://asciidoctor.zulipchat.com)
+- [AsciiDoctor PDF Documentation](https://docs.asciidoctor.org/pdf-converter/latest/)
 - [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc)
