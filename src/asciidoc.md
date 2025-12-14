@@ -1667,6 +1667,24 @@ The `--watch` flag can be followed by a comma-separated list of files to watch.
 This is useful when generating PDF from
 a `.adoc` file that includes other files.
 
+Consider creating the following shell script
+to simplify using the `nodemon` command.
+
+```bash
+#!/usr/bin/env bash
+# Watches a .adoc file and generates a new PDF every time it is modified.
+if [ $# -ne 1 ]; then
+  echo usage: adpw {file-name}
+  exit 1
+fi
+nodemon --watch $1.adoc --exec "asciidoctor-pdf $1.adoc"
+```
+
+If this script is placed in an executable file named `adpw`
+(short for "AsciiDoc PDF Watch")
+within a directory that is in a `PATH` directory,
+it can be invoked with `adpw {file-name}`.
+
 ## References / Links
 
 Text can include references to items in the document including
