@@ -1677,7 +1677,14 @@ if [ $# -ne 1 ]; then
   echo usage: adpw {file-name}
   exit 1
 fi
-nodemon --watch $1.adoc --exec "asciidoctor-pdf $1.adoc"
+
+# Add .adoc extension if not present.
+file="$1"
+if [[ "$file" != *.adoc ]]; then
+  file="$file.adoc"
+fi
+
+nodemon --watch $file --exec "asciidoctor-pdf $file"
 ```
 
 If this script is placed in an executable file named `adpw`
