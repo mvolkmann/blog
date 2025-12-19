@@ -49,6 +49,11 @@ and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
 It is implemented in Ruby and was created by
 Dan Allen, Sarah White, and Ryan Waldron.
 
+An advantage of using a text-based markup language
+over using a WYSIWYG application like Word, Pages, or Google Docs
+is that the change history of documents can be maintained
+using version control software like Git.
+
 ## Comparison to Markdown
 
 {% aTargetBlank "https://mvolkmann.github.io/blog/markdown/", "Markdown" %}
