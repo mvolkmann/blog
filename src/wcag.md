@@ -814,6 +814,14 @@ start and end tags, elements are nested according to their specifications,
 elements do not contain duplicate attributes, and any IDs are unique,
 except where the specifications allow these features.
 
+This guideline was removed in WCAG 2.2 with the following note:
+
+"This criterion was originally adopted to address problems that
+assistive technology had directly parsing HTML.
+Assistive technology no longer has any need to directly parse HTML.
+Consequently, these problems either no longer exist or are addressed by
+other criteria. This criterion no longer has utility and is removed."
+
 #### 4.1.2 Name, Role, Value - Level A
 
 For all user interface components (including but not limited to:
