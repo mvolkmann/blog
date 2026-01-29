@@ -287,6 +287,10 @@ setting all of the following and by changing no other style property:
 - Letter spacing (tracking) to at least 0.12 times the font size;
 - Word spacing to at least 0.16 times the font size.
 
+The Chrome extension "Text Spacing Editor" makes it easy to
+test all these settings with a single button click.
+After changing the settings, refresh the page being tested.
+
 Exception: Human languages and scripts that do not make use of one or more
 of these text style properties in written text can conform using
 only the properties that exist for that combination of language and script.
