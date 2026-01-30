@@ -98,12 +98,11 @@ Wrec takes a more surgical approach to reactivity.
 
 - The first time an instance of a given web component class is used,
   wrec searches all attribute values, element text content, and
-  CSS variable declarations for expressions matching `this.{property-name}`
+  CSS properties for expressions matching `this.{property-name}`
   using a regular expression.
-- It creates a static map (one per `Wrec` subclass)
+- It creates a static map (one per `Wrec` subclass) named `propToExprsMap`
   whose keys are property names and
   whose values are the expressions where they are found.
-  This map is held in the Wrec property `propToExprsMap`.
 - It creates a map (one per instance of each `Wrec` subclass)
   whose keys are the expressions and whose values are references to
   the elements, attributes, and CSS variable declarations where they appear.
