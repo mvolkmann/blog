@@ -242,9 +242,8 @@ where the properties are not explicitly passed.
 Supplying `uses` causes the `computed` expression to be re-evaluated
 every time the value of any of the listed properties changes.
 
-The `detail` property of the dispatched "change" events
-is set to a JSON object whose key is the modified property name
-and whose value is the new property value.
+The `detail` property of the dispatched "change" events is set to an object
+with the properties `tagName`, `property`, `oldValue`, and `value`.
 
 ## Event Listeners
 
@@ -1060,8 +1059,7 @@ and then modified.
 A "change" event is dispatched each time
 the value of the `checked` property changes.
 The event `detail` property is set to an object
-whose key is the name of the changed property and
-whose value is the new property value.
+with the properties `tagName`, `property`, `oldValue`, and `value`.
 
 ```js
 import {css, html, Wrec} from './wrec.min.js';
