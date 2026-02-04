@@ -1409,15 +1409,14 @@ Look for messages in the DevTools console.
 The kinds of errors that are detected include:
 
 - use of custom elements that are not defined
-- attribute names in web component instances
-  with no matching property declaration
+- attribute names with no matching property declaration
 - attribute values with a type that differs from the declared property type
-- event handling function names that
-  don't match any method name in the web component
-- expressions in attribute values or element text content
+- expressions in element text content or attribute values
   that reference undeclared web component properties
 - expressions in element text content
   that do not evaluate to a string or number
+- event handling function names that
+  don't match any method name in the web component
 
 ## Security
 
