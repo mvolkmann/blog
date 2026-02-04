@@ -1408,6 +1408,7 @@ Wrec checks for many kinds of errors and throws an `Error` when they are found.
 Look for messages in the DevTools console.
 The kinds of errors that are detected include:
 
+- use of custom elements that are not defined
 - attribute names in web component instances
   with no matching property declaration
 - attribute values with a type that differs from the declared property type
@@ -1467,7 +1468,7 @@ wrec has an extensive set of Playwright tests.
 To run them:
 
 1. Clone the wrec repository.
-1. cd to the `src` directory.
+1. cd to the `wrec` directory.
 1. Enter `npm install`.
 1. Enter `npm run testui`.
 1. Click the right pointing triangle.
