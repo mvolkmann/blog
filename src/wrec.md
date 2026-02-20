@@ -129,7 +129,7 @@ To define a web component using wrec:
 1. Define a static property named `html`
    whose value is a string containing the HTML to render.
 1. Register the class as a custom element definition
-   by calling the `register` method.
+   by calling the `define` method.
 
 For example:
 
@@ -146,7 +146,7 @@ class BasicWrec extends Wrec {
   static html = html`<span>Hello, World!</span>`;
 }
 
-BasicWrec.register();
+BasicWrec.define('basic-wrec');
 ```
 
 The `css` and `html` properties above use tagged template literals.
@@ -155,8 +155,8 @@ The tags `css` and `html` are optional.
 They trigger the VS Code extension Prettier to format the code
 and the es6-string-html extension to add syntax highlighting.
 
-The `register` method registers a custom HTML element
-whose name is the kebab-case version of the class name.
+The `define` method registers a custom HTML element with
+a kebab-case name which is typically based on the class name.
 For `BasicWrec`, the element name is `basic-wrec`.
 This is an optional convenience method.
 An alternative is to use the `define` method as follows:
@@ -193,7 +193,7 @@ class HelloWorld extends Wrec {
   static html = html`<div>Hello, <span>this.name</span>!</div>`;
 }
 
-HelloWorld.register();
+HelloWorld.define('hello-world');
 ```
 
 We can use this custom element as follows:
@@ -314,7 +314,7 @@ class CounterWrec extends Wrec {
   `;
 }
 
-CounterWrec.register();
+CounterWrec.define('counter-wrec');
 ```
 
 When the value of an attribute is a Boolean,
@@ -374,7 +374,7 @@ class TemperatureEval extends Wrec {
   `;
 }
 
-TemperatureEval.register();
+TemperatureEval.define('temperature-eval');
 ```
 
 Here it is in action.
@@ -456,7 +456,7 @@ class NumberSlider extends Wrec {
   `;
 }
 
-NumberSlider.register();
+NumberSlider.define('number-slider');
 ```
 
 Here it is in action.
@@ -541,7 +541,7 @@ class RectangleArea extends Wrec {
   }
 }
 
-RectangleArea.register();
+RectangleArea.define('rectangle-area');
 ```
 
 Since the `rectangleArea` method uses properties
@@ -627,7 +627,7 @@ class ColorPicker extends Wrec {
   }
 }
 
-ColorPicker.register();
+ColorPicker.define('color-picker');
 ```
 
 Here it is in action.
@@ -680,7 +680,7 @@ class ColorDemo extends Wrec {
   `;
 }
 
-ColorDemo.register();
+ColorDemo.define('color-demo');
 ```
 
 Here it is in action.
@@ -808,7 +808,7 @@ class RadioGroup extends Wrec {
   }
 }
 
-RadioGroup.register();
+RadioGroup.define('radio-group');
 ```
 
 Here is the class that defines the `select-list` custom element:
@@ -871,7 +871,7 @@ class SelectList extends Wrec {
   }
 }
 
-SelectList.register();
+SelectList.define('select-list');
 ```
 
 Here is the class that defines the `data-binding` custom element.
@@ -944,7 +944,7 @@ class DataBinding extends Wrec {
   }
 }
 
-DataBinding.register();
+DataBinding.define('data-binding');
 ```
 
 Finally, here it is in action.
@@ -1143,7 +1143,7 @@ class ToggleSwitch extends Wrec {
   }
 }
 
-ToggleSwitch.register();
+ToggleSwitch.define('toggle-switch');
 ```
 
 Here it is in action.
@@ -1255,7 +1255,7 @@ class LabeledInput extends Wrec {
   `;
 }
 
-LabeledInput.register();
+LabeledInput.define('labeled-input');
 ```
 
 Next, we define the custom element `hello-world`
@@ -1278,7 +1278,7 @@ class HelloWorld extends Wrec {
   static html = html` <p>Hello, <span>this.name</span>!</p> `;
 }
 
-HelloWorld.register();
+HelloWorld.define('hello-world');
 ```
 
 Finally, we use these components inside `hello-world-with-state.html`.
