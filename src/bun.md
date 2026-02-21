@@ -363,6 +363,10 @@ Bun.build({
 });
 ```
 
+For an example of Bun bundling that uses the htmx and wrec libraries,
+{% aTargetBlank "https://github.com/mvolkmann/wrec-hono-htmx",
+"wrec-hono-htmx" %}.
+
 ## Unit Tests
 
 Bun has built-in support for implementing and running unit tests
