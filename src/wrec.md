@@ -1043,6 +1043,26 @@ Try these steps to experiment with the reactivity of the table.
 1. Change the data objects that are being rendered by entering
    `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`
 
+## Changing Multiple Properties
+
+Suppose a component has the properties `color` and `size`,
+and the variable `component` is set to a reference to an instance.
+To change both properties, you could use the following:
+
+```js
+component.color = 'yellow';
+component.size = 'large';
+```
+
+But that will cause two rounds of UI updates.
+Usually this will be imperceptible to users.
+But there is a way to only trigger a single round of UI updates.
+Use the following instead:
+
+```js
+component.batchSet({color: 'yellow'; size: 'large'});
+```
+
 ## Property Change Events
 
 Wrec components will dispatch "change" events whenever
