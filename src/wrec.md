@@ -515,7 +515,7 @@ class RectangleArea extends Wrec {
     area: {
       type: Number,
       computed: 'this.rectangleArea()',
-      uses: 'width,height'
+      uses: 'width, height'
     }
   };
 
