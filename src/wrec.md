@@ -341,6 +341,19 @@ Wrec will render only a single period.
 To follow the word "this" with an ellipsis,
 include a space before it as in "this ... and that".
 
+By default the JavaScript expressions in HTML only have access to
+the properties/methods of the component class and global functions.
+To enable access to other functions and variables,
+list them in the component `context` object.
+For example, suppose a component source file defines
+the function `average` and the constant `COUNT` outside its class definition.
+To allow using them in expressions,
+add the following line in the component class:
+
+```js
+static context = { average, COUNT };
+```
+
 ## Unchanging Expressions
 
 In insert the value of an expression
