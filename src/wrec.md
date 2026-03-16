@@ -1474,6 +1474,16 @@ to any domain except that of your web app:
 <meta http-equiv="Content-Security-Policy" content="connect-src 'self'" />
 ```
 
+## Server-Side Rendering
+
+A wrec component can use server-side rendering (SSR) if it
+imports the `Wrec` class from 'wrec-ssr' instead of 'wrec'.
+For an example, see
+https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo.
+The file `hello-world.ts` imports the `Wrec` class from 'wrec-ssr'.
+The file `server.ts` calls the `ssr` method on the `HelloWorld` class
+to generate HTML required for SSR.
+
 ## More Examples
 
 Check out the `src/examples` directory in the
