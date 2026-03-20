@@ -1817,7 +1817,7 @@ When using Vite with the Lit template:
 
    Copy `dist/assets/index_*.js` to a directory that is accessible
    to the server that servers the Markdown file.
-   For my 11ty-based blog, this is the `src/assets` directory.
+   For my Astro-based blog, this is the `src/assets` directory.
 
 1. Rename the copied file to something more meaningful.
 
