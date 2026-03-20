@@ -1,6 +1,7 @@
 {
   "arrowParens": "avoid",
   "bracketSpacing": false,
+  "plugins": ["prettier-plugin-astro"],
   "singleQuote": true,
   "trailingComma": "none"
 }

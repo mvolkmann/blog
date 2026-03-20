@@ -1,11 +1,11 @@
-import Wrec, { css, html } from './wrec.min.js';
+import Wrec, {css, html} from './wrec.min.js';
 class TableWired extends Wrec {
-    static properties = {
-        headings: { type: (Array) },
-        propNames: { type: (Array) },
-        data: { type: (Array) }
-    };
-    static css = css `
+  static properties = {
+    headings: {type: Array},
+    propNames: {type: Array},
+    data: {type: Array}
+  };
+  static css = css`
     .sort-indicator {
       color: white;
       display: inline-block;
@@ -30,7 +30,7 @@ class TableWired extends Wrec {
       }
     }
   `;
-    static html = html `
+  static html = html`
     <table>
       <thead>
         <tr>
@@ -42,14 +42,14 @@ class TableWired extends Wrec {
       </tbody>
     </table>
   `;
-    sortAscending = true;
-    sortHeader = null;
-    makeTd(dataIndex, prop) {
-        const value = this.data[dataIndex][prop];
-        return html `<td>${value}</td>`;
-    }
-    makeTh(heading, index) {
-        return html `
+  sortAscending = true;
+  sortHeader = null;
+  makeTd(dataIndex, prop) {
+    const value = this.data[dataIndex][prop];
+    return html`<td>${value}</td>`;
+  }
+  makeTh(heading, index) {
+    return html`
       <th
         aria-label="sort by ${heading}"
         data-property="${this.propNames[index]}"
@@ -61,43 +61,43 @@ class TableWired extends Wrec {
         <span class="sort-indicator"></span>
       </th>
     `;
-    }
-    makeTr(dataIndex) {
-        return html `
+  }
+  makeTr(dataIndex) {
+    return html`
       <tr>
         this.propNames.map(propName => this.makeTd(${dataIndex}, propName))
       </tr>
     `;
+  }
+  sort(event) {
+    let th = event.target;
+    const property = th.getAttribute('data-property');
+    this.sortAscending = th === this.sortHeader ? !this.sortAscending : true;
+    this.data.sort((a, b) => {
+      const aValue = a[property];
+      const bValue = b[property];
+      let compare =
+        typeof aValue === 'string'
+          ? aValue.localeCompare(bValue)
+          : typeof aValue === 'number'
+            ? aValue - bValue
+            : 0;
+      return this.sortAscending ? compare : -compare;
+    });
+    // Trigger the property set method by assigning a clone.
+    this.data = [...this.data];
+    // Clear sort indicator from previously selected header.
+    if (this.sortHeader) {
+      const sortIndicator = this.sortHeader.querySelector('.sort-indicator');
+      if (sortIndicator) sortIndicator.textContent = '';
     }
-    sort(event) {
-        let th = event.target;
-        const property = th.getAttribute('data-property');
-        this.sortAscending = th === this.sortHeader ? !this.sortAscending : true;
-        this.data.sort((a, b) => {
-            const aValue = a[property];
-            const bValue = b[property];
-            let compare = typeof aValue === 'string'
-                ? aValue.localeCompare(bValue)
-                : typeof aValue === 'number'
-                    ? aValue - bValue
-                    : 0;
-            return this.sortAscending ? compare : -compare;
-        });
-        // Trigger the property set method by assigning a clone.
-        this.data = [...this.data];
-        // Clear sort indicator from previously selected header.
-        if (this.sortHeader) {
-            const sortIndicator = this.sortHeader.querySelector('.sort-indicator');
-            if (sortIndicator)
-                sortIndicator.textContent = '';
-        }
-        // Add sort indicator to currently selected header.
-        const sortIndicator = th.querySelector('.sort-indicator');
-        if (sortIndicator) {
-            sortIndicator.textContent = this.sortAscending ? '\u25B2' : '\u25BC';
-        }
-        this.sortHeader = th;
+    // Add sort indicator to currently selected header.
+    const sortIndicator = th.querySelector('.sort-indicator');
+    if (sortIndicator) {
+      sortIndicator.textContent = this.sortAscending ? '\u25B2' : '\u25BC';
     }
+    this.sortHeader = th;
+  }
 }
 TableWired.register();
 //# sourceMappingURL=table-wired.js.map

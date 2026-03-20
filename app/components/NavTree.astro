@@ -10,25 +10,27 @@ const {items, topLevel = false} = Astro.props;
 ---
 
 <ul>
-  {items.map(item => {
-    const itemClass = topLevel
-      ? 'top'
-      : typeof item.order === 'number'
-        ? 'ordered'
-        : '';
+  {
+    items.map(item => {
+      const itemClass = topLevel
+        ? 'top'
+        : typeof item.order === 'number'
+          ? 'ordered'
+          : '';
 
-    return (
-      <li class={itemClass}>
-        <a
-          class="nav-link"
-          onclick={`handleLinkClick(this, '${item.url}')`}
-          target="frame"
-        >
-          {item.title}
-          {item.children?.length ? <div class="triangle">▶︎</div> : null}
-        </a>
-        {item.children?.length ? <Astro.self items={item.children} /> : null}
-      </li>
-    );
-  })}
+      return (
+        <li class={itemClass}>
+          <a
+            class="nav-link"
+            onclick={`handleLinkClick(this, '${item.url}')`}
+            target="frame"
+          >
+            {item.title}
+            {item.children?.length ? <div class="triangle">▶︎</div> : null}
+          </a>
+          {item.children?.length ? <Astro.self items={item.children} /> : null}
+        </li>
+      );
+    })
+  }
 </ul>

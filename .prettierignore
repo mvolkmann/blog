@@ -1,0 +1,5 @@
+# Generated and minified artifacts
+src/assets/lit-components.js
+src/js/wrec.min.js
+src/sass/*.css
+src/sass/*.css.map

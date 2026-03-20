@@ -1,4 +1,4 @@
-import {existsSync, readFileSync, readdirSync, statSync} from 'node:fs';
+import {existsSync, readFileSync, readdirSync} from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import MarkdownIt from 'markdown-it';
@@ -161,7 +161,11 @@ function replaceShortcodes(markdownText: string) {
       if (args.length < 2) return '';
 
       let [first, second] = args;
-      if (shortcode === 'aInternal' && !looksLikeUrl(first) && looksLikeUrl(second)) {
+      if (
+        shortcode === 'aInternal' &&
+        !looksLikeUrl(first) &&
+        looksLikeUrl(second)
+      ) {
         [first, second] = [second, first];
       }
 
@@ -169,21 +173,23 @@ function replaceShortcodes(markdownText: string) {
         return makeAnchor(first, second, false);
       }
 
-      const href = shortcode === 'aTargetBlankNoVersion' ? first : appendVersion(first);
+      const href =
+        shortcode === 'aTargetBlankNoVersion' ? first : appendVersion(first);
       return makeAnchor(href, second, true);
     }
   );
 }
 
 function preprocessMarkdown(markdownText: string) {
-  return replaceShortcodes(replaceIncludes(replaceRawBlocks(markdownText))).replaceAll(
-    '{{pkg.version}}',
-    pkg.version
-  );
+  return replaceShortcodes(
+    replaceIncludes(replaceRawBlocks(markdownText))
+  ).replaceAll('{{pkg.version}}', pkg.version);
 }
 
 function buildTocHtml(html: string) {
-  const headings = [...html.matchAll(/<h([2-6]) id="([^"]+)".*?>([\s\S]*?)<\/h\1>/g)];
+  const headings = [
+    ...html.matchAll(/<h([2-6]) id="([^"]+)".*?>([\s\S]*?)<\/h\1>/g)
+  ];
   if (headings.length === 0) return '';
 
   let result = '';
@@ -299,7 +305,8 @@ function loadData(): CachedData {
 
   for (const relativePath of getRelativeContentFiles()) {
     const sourcePath = path.join(CONTENT_ROOT, relativePath);
-    const frontmatter = matter(readFileSync(sourcePath, 'utf8')).data as Frontmatter;
+    const frontmatter = matter(readFileSync(sourcePath, 'utf8'))
+      .data as Frontmatter;
     const nav = frontmatter.eleventyNavigation;
     const page = pagesBySource.get(normalizePath(relativePath));
 
@@ -315,7 +322,8 @@ function loadData(): CachedData {
 
   for (const relativePath of getRelativeContentFiles()) {
     const sourcePath = path.join(CONTENT_ROOT, relativePath);
-    const frontmatter = matter(readFileSync(sourcePath, 'utf8')).data as Frontmatter;
+    const frontmatter = matter(readFileSync(sourcePath, 'utf8'))
+      .data as Frontmatter;
     const nav = frontmatter.eleventyNavigation;
 
     if (!nav?.key) continue;

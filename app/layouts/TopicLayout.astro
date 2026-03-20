@@ -11,7 +11,7 @@ const headingText = `${page.title}${page.extraTitle ? ` ${page.extraTitle}` : ''
 const generator = getGenerator();
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>{headingText}</title>
@@ -26,8 +26,7 @@ const generator = getGenerator();
     <script
       async
       is:inline
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
-    ></script>
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script>
       import '../scripts/prism';
     </script>
@@ -35,7 +34,7 @@ const generator = getGenerator();
   <body>
     <h2>{headingText}</h2>
 
-    <aside set:html={page.tocHtml}></aside>
-    <article set:html={page.html}></article>
+    <aside set:html={page.tocHtml} />
+    <article set:html={page.html} />
   </body>
 </html>
