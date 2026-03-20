@@ -1,1 +1,402 @@
-<link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><h2>Python itertools module</h2><aside><nav class="toc"><ol><li><a href="#infinite-iterators">Infinite iterators</a><ol><li><a href="#count">count</a></li><li><a href="#cycle">cycle</a></li><li><a href="#repeat">repeat</a></li></ol></li><li><a href="#iterators-that-terminate-based-on-a-sequence">Iterators that terminate based on a sequence</a><ol><li><a href="#accumulate">accumulate</a></li><li><a href="#chain">chain</a></li><li><a href="#chain.from_iterable">chain.from_iterable</a></li><li><a href="#compress">compress</a></li><li><a href="#dropwhile">dropwhile</a></li><li><a href="#filterfalse">filterfalse</a></li><li><a href="#groupby">groupby</a></li><li><a href="#islice">islice</a></li><li><a href="#starmap">starmap</a></li><li><a href="#takewhile">takewhile</a></li><li><a href="#zip_longest">zip_longest</a></li></ol></li><li><a href="#combinatoric-iterators">Combinatoric iterators</a><ol><li><a href="#combinations">combinations</a></li><li><a href="#combinations_with_replacement">combinations_with_replacement</a></li><li><a href="#permutations">permutations</a></li><li><a href="#product">product</a></li></ol></li></ol></nav></aside><article><p>The <a href="https://docs.python.org/3/library/itertools.html?v=1.1.1" rel="noopener" target="_blank"><code>itertools</code></a> module in the Python standard library provides functions for creating iterators. The most commonly used of these functions are demonstrated below.</p><h2 id="infinite-iterators" tabindex="-1">Infinite iterators</h2><p>The following functions return an iterator that never stop. This means they never raise the <code>StopIteration</code> error.</p><h3 id="count" tabindex="-1"><code>count</code></h3><p>This function returns an iterator that produces integers starting from a given value, in steps of one or a specified step. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> count<br><br><span class="token keyword">for</span> n <span class="token keyword">in</span> count<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><br>    <span class="token keyword">if</span> n <span class="token operator">>=</span> <span class="token number">30</span><span class="token punctuation">:</span><br>        <span class="token keyword">break</span></code></pre><h3 id="cycle" tabindex="-1"><code>cycle</code></h3><p>This function returns an iterator that produces provided values in an endless cycle. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> cycle<br><br>count <span class="token operator">=</span> <span class="token number">0</span><br><span class="token keyword">for</span> letter <span class="token keyword">in</span> cycle<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token string">'alpha'</span><span class="token punctuation">,</span> <span class="token string">'beta'</span><span class="token punctuation">,</span> <span class="token string">'gamma'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>letter<span class="token punctuation">)</span><br>    count <span class="token operator">+=</span> <span class="token number">1</span><br>    <span class="token keyword">if</span> count <span class="token operator">==</span> <span class="token number">6</span><span class="token punctuation">:</span><br>        <span class="token keyword">break</span></code></pre><h3 id="repeat" tabindex="-1"><code>repeat</code></h3><p>This function returns an iterator that produces an endless sequence of a single value, or optionally only a given number of times. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> repeat<br><br>count <span class="token operator">=</span> <span class="token number">0</span><br><span class="token keyword">for</span> result <span class="token keyword">in</span> repeat<span class="token punctuation">(</span><span class="token string">'win'</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token comment"># win 3 times</span><br>    count <span class="token operator">+=</span> <span class="token number">1</span><br>    <span class="token keyword">if</span> count <span class="token operator">==</span> <span class="token number">3</span><span class="token punctuation">:</span><br>        <span class="token keyword">break</span><br><br><span class="token keyword">for</span> result <span class="token keyword">in</span> repeat<span class="token punctuation">(</span><span class="token string">'lose'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>result<span class="token punctuation">)</span> <span class="token comment"># lose 2 times</span></code></pre><h2 id="iterators-that-terminate-based-on-a-sequence" tabindex="-1">Iterators that terminate based on a sequence</h2><h3 id="accumulate" tabindex="-1"><code>accumulate</code></h3><p>This function is similar to the <code>reduce</code> function in the <code>functools</code> module but returns an iterator that makes intermediate results available. By default it adds numbers in an iterable (using <code>operator.add</code>), but a different function can be supplied. By default the initial value is <code>None</code>, but a different initial value can be specified. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> accumulate<br><br>items <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'apples'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">:</span> <span class="token number">3.00</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'bananas'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">:</span> <span class="token number">2.50</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'grapes'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">:</span> <span class="token number">5.99</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'oranges'</span><span class="token punctuation">,</span> <span class="token string">'price'</span><span class="token punctuation">:</span> <span class="token number">4.50</span><span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token keyword">def</span> <span class="token function">add_price</span><span class="token punctuation">(</span>acc<span class="token punctuation">,</span> item<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">return</span> acc <span class="token operator">+</span> item<span class="token punctuation">[</span><span class="token string">'price'</span><span class="token punctuation">]</span><br><br><span class="token keyword">for</span> total <span class="token keyword">in</span> accumulate<span class="token punctuation">(</span>items<span class="token punctuation">,</span> func<span class="token operator">=</span>add_price<span class="token punctuation">,</span> initial<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>total<span class="token punctuation">)</span> <span class="token comment"># 0, 3.0, 5.5, 11.49, 15.99</span></code></pre><h3 id="chain" tabindex="-1"><code>chain</code></h3><p>This function creates an iterator over multiple iterables. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> chain<br><br>primary <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">)</span><br>secondary <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'purple'</span><span class="token punctuation">)</span><br>other <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'magenta'</span><span class="token punctuation">,</span> <span class="token string">'cyan'</span><span class="token punctuation">)</span><br><br><span class="token keyword">for</span> color <span class="token keyword">in</span> chain<span class="token punctuation">(</span>primary<span class="token punctuation">,</span> secondary<span class="token punctuation">,</span> other<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># each color in each tuple</span></code></pre><h3 id="chain.from_iterable" tabindex="-1"><code>chain.from_iterable</code></h3><p>This function is similar to <code>chain</code>, but its input is an iterable containing iterables. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> chain<br><br>primary <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">)</span><br>secondary <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'purple'</span><span class="token punctuation">)</span><br>other <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'magenta'</span><span class="token punctuation">,</span> <span class="token string">'cyan'</span><span class="token punctuation">)</span><br>colors <span class="token operator">=</span> <span class="token punctuation">(</span>primary<span class="token punctuation">,</span> secondary<span class="token punctuation">,</span> other<span class="token punctuation">)</span><br><br><span class="token keyword">for</span> color <span class="token keyword">in</span> chain<span class="token punctuation">.</span>from_iterable<span class="token punctuation">(</span>colors<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># each color in each tuple</span></code></pre><h3 id="compress" tabindex="-1"><code>compress</code></h3><p>This function creates an iterator that iterates over the values in on iterable called &quot;data&quot; whose corresponding value in another iterable called &quot;selectors&quot; evaluates to <code>True</code>. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> compress<br><br>colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token string">'purple'</span><span class="token punctuation">]</span><br>like <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">,</span> <span class="token boolean">True</span><span class="token punctuation">,</span> <span class="token boolean">False</span><span class="token punctuation">]</span><br><br><span class="token keyword">for</span> color <span class="token keyword">in</span> compress<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> like<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># orange, yellow, blue</span></code></pre><h3 id="dropwhile" tabindex="-1"><code>dropwhile</code></h3><p>This function creates an iterator that iterates over a given iterable, but skips all the initial elements for which a predicate function evaluates to <code>True</code>. It is the opposite of <code>takewhile</code>. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> dropwhile<br><span class="token keyword">from</span> operator <span class="token keyword">import</span> itemgetter<br><br>teams <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'49ers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Bears'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Cardinals'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Lions'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Packers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rams'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Seahawks'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Vikings'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token comment"># Sort teams on their records with best teams first.</span><br>teams<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span>itemgetter<span class="token punctuation">(</span><span class="token string">'wins'</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><br><br><span class="token keyword">def</span> <span class="token function">winning_record</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">return</span> team<span class="token punctuation">[</span><span class="token string">'wins'</span><span class="token punctuation">]</span> <span class="token operator">></span> team<span class="token punctuation">[</span><span class="token string">'losses'</span><span class="token punctuation">]</span><br><br><span class="token comment"># Iterate over teams that do not have a winning record.</span><br><span class="token keyword">for</span> team <span class="token keyword">in</span> dropwhile<span class="token punctuation">(</span>winning_record<span class="token punctuation">,</span> teams<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>team<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># 49ers, Lions, Vikings</span></code></pre><h3 id="filterfalse" tabindex="-1"><code>filterfalse</code></h3><p>This function creates an iterator that iterates over the elements of a given iterable for which a predicate function returns false. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> filterfalse<br><br>teams <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'49ers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Bears'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Cardinals'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Lions'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Packers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rams'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Seahawks'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Vikings'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token keyword">def</span> <span class="token function">winning_record</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">return</span> team<span class="token punctuation">[</span><span class="token string">'wins'</span><span class="token punctuation">]</span> <span class="token operator">></span> team<span class="token punctuation">[</span><span class="token string">'losses'</span><span class="token punctuation">]</span><br><br><span class="token comment"># Iterate over teams that do not have a winning record.</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Losing'</span><span class="token punctuation">)</span><br><span class="token keyword">for</span> team <span class="token keyword">in</span> filterfalse<span class="token punctuation">(</span>winning_record<span class="token punctuation">,</span> teams<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> team<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># 49ers, Lions, Vikings</span><br><br><span class="token comment"># Iterate over teams that have a winning record.</span><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'Winning'</span><span class="token punctuation">)</span><br><span class="token keyword">for</span> team <span class="token keyword">in</span> <span class="token builtin">filter</span><span class="token punctuation">(</span>winning_record<span class="token punctuation">,</span> teams<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> team<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># Bears, Cardinals, Packers, Rams, Seahawks</span></code></pre><h3 id="groupby" tabindex="-1"><code>groupby</code></h3><p>This function creates an iterator that iterates over tuples that each contain a unique key value and an iterable of objects that match that key. The example below groups football teams by their division. So the tuples will contain a division value and an iterable over the teams in that division. The data must be sorted so that all the elements with the same key value are together.</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> groupby<br><span class="token keyword">from</span> operator <span class="token keyword">import</span> itemgetter<br><br>teams <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC East'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'49ers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC North'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Bears'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC East'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Cardinals'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC North'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Lions'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC North'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Packers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC East'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rams'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC East'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Seahawks'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'division'</span><span class="token punctuation">:</span> <span class="token string">'NFC North'</span><span class="token punctuation">,</span> <span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Vikings'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token comment"># Sort teams on their division.</span><br>teams<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span>itemgetter<span class="token punctuation">(</span><span class="token string">'division'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><br><br><span class="token comment"># The teams list must be sorted on the groupby key,</span><br><span class="token comment"># "division" in this case.</span><br><span class="token keyword">for</span> division<span class="token punctuation">,</span> div_teams <span class="token keyword">in</span> groupby<span class="token punctuation">(</span>teams<span class="token punctuation">,</span> key<span class="token operator">=</span><span class="token keyword">lambda</span> team<span class="token punctuation">:</span> team<span class="token punctuation">[</span><span class="token string">'division'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>division<span class="token punctuation">)</span><br>    <span class="token keyword">for</span> team <span class="token keyword">in</span> div_teams<span class="token punctuation">:</span><br>        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'-'</span><span class="token punctuation">,</span> team<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><br><span class="token comment"># Output is:</span><br><span class="token comment"># NFC East</span><br><span class="token comment"># - 49ers</span><br><span class="token comment"># - Cardinals</span><br><span class="token comment"># - Rams</span><br><span class="token comment"># - Seahawks</span><br><span class="token comment"># NFC North</span><br><span class="token comment"># - Bears</span><br><span class="token comment"># - Lions</span><br><span class="token comment"># - Packers</span><br><span class="token comment"># - Vikings</span></code></pre><h3 id="islice" tabindex="-1"><code>islice</code></h3><p>This function creates an iterator that iterates over a subset of an iterable. In the examples below, we want to iterate over just some of the values in the <code>colors</code> list.</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> islice<br><br>colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'orange'</span><span class="token punctuation">,</span> <span class="token string">'yellow'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">,</span> <span class="token string">'purple'</span><span class="token punctuation">]</span><br><br><span class="token comment"># Iterate over the first two elements.</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> islice<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># red, orange</span><br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token comment"># Iterate over elements from index 2 inclusive to index 5 exclusive.</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> islice<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># yellow, green, blue</span><br><br><span class="token keyword">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><br><br><span class="token comment"># Iterate oer every other element starting from index 1</span><br><span class="token comment"># and going to the end of the list.</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> islice<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>colors<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span> <span class="token comment"># orange, green, purple</span></code></pre><h3 id="starmap" tabindex="-1"><code>starmap</code></h3><p>This function creates an iterator over the results of calling a given function, using the tuple elements from an iterable as the arguments. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> starmap<br><br>boxes <span class="token operator">=</span> <span class="token punctuation">[</span><br>  <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>  <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">,</span><br>  <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><br><span class="token punctuation">]</span><br><br><span class="token keyword">def</span> <span class="token function">compute_volume</span><span class="token punctuation">(</span>width<span class="token punctuation">,</span> depth<span class="token punctuation">,</span> height<span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">return</span> width <span class="token operator">*</span> depth <span class="token operator">*</span> height<br><br><span class="token keyword">for</span> volume <span class="token keyword">in</span> starmap<span class="token punctuation">(</span>compute_volume<span class="token punctuation">,</span> boxes<span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>volume<span class="token punctuation">)</span> <span class="token comment"># 24, 60, 48</span><br><br><span class="token comment"># Alternate approach, iterating over boxes.</span><br><span class="token keyword">for</span> box <span class="token keyword">in</span> boxes<span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>compute_volume<span class="token punctuation">(</span><span class="token operator">*</span>box<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment"># 24, 60, 48</span></code></pre><h3 id="takewhile" tabindex="-1"><code>takewhile</code></h3><p>This function creates an iterator that iterates over a given iterable, but skips all the initial elements for which a predicate function evaluates to <code>True</code>. It is the opposite of <code>dropwhile</code>. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> takewhile<br><span class="token keyword">from</span> operator <span class="token keyword">import</span> itemgetter<br><br>teams <span class="token operator">=</span> <span class="token punctuation">[</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'49ers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Bears'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Cardinals'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Lions'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Packers'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Rams'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Seahawks'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span><span class="token punctuation">,</span><br>    <span class="token punctuation">{</span><span class="token string">'name'</span><span class="token punctuation">:</span> <span class="token string">'Vikings'</span><span class="token punctuation">,</span> <span class="token string">'wins'</span><span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">:</span> <span class="token number">5</span><span class="token punctuation">}</span><br><span class="token punctuation">]</span><br><br><span class="token comment"># Sort teams on their records with best teams first.</span><br>teams<span class="token punctuation">.</span>sort<span class="token punctuation">(</span>key<span class="token operator">=</span>itemgetter<span class="token punctuation">(</span><span class="token string">'wins'</span><span class="token punctuation">,</span> <span class="token string">'losses'</span><span class="token punctuation">)</span><span class="token punctuation">,</span> reverse<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><br><br><span class="token keyword">def</span> <span class="token function">winning_record</span><span class="token punctuation">(</span>team<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">return</span> team<span class="token punctuation">[</span><span class="token string">'wins'</span><span class="token punctuation">]</span> <span class="token operator">></span> team<span class="token punctuation">[</span><span class="token string">'losses'</span><span class="token punctuation">]</span><br><br><span class="token comment"># Iterate over teams that have a winning record.</span><br><span class="token keyword">for</span> team <span class="token keyword">in</span> takewhile<span class="token punctuation">(</span>winning_record<span class="token punctuation">,</span> teams<span class="token punctuation">)</span><span class="token punctuation">:</span><br>    <span class="token keyword">print</span><span class="token punctuation">(</span>team<span class="token punctuation">[</span><span class="token string">'name'</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment"># Bears, Seahawks, Cardinals, Rams, Packers</span></code></pre><h3 id="zip_longest" tabindex="-1"><code>zip_longest</code></h3><p>This function creates an iterator that combines corresponding elements from multiple iterables. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> zip_longest<br><br>months <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'January'</span><span class="token punctuation">,</span> <span class="token string">'February'</span><span class="token punctuation">,</span> <span class="token string">'March'</span><span class="token punctuation">,</span> <span class="token string">'April'</span><span class="token punctuation">]</span><br>numbers <span class="token operator">=</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>months<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><br>people <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Laura'</span><span class="token punctuation">,</span> <span class="token string">'Pat'</span><span class="token punctuation">,</span> <span class="token string">'unknown'</span><span class="token punctuation">,</span> <span class="token string">'Mark'</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> <span class="token builtin">list</span> <span class="token keyword">in</span> zip_longest<span class="token punctuation">(</span>numbers<span class="token punctuation">,</span> months<span class="token punctuation">,</span> people<span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token builtin">list</span><span class="token punctuation">)</span><br><br><span class="token comment"># Output is:</span><br><span class="token comment"># (1, 'January', 'Laura')</span><br><span class="token comment"># (2, 'February', 'Pat')</span><br><span class="token comment"># (3, 'March', 'unknown')</span><br><span class="token comment"># (4, 'April', 'Mark')</span></code></pre><h2 id="combinatoric-iterators" tabindex="-1">Combinatoric iterators</h2><h3 id="combinations" tabindex="-1"><code>combinations</code></h3><p>This function creates an iterator over all the combinations of n items from an iterable taken k at a time (referred to as n choose k) where order does not matter. From the docs, &quot;Elements are treated as unique based on their position, not on their value.&quot; For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> combinations<br><br>colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> combinations<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><br><br><span class="token comment"># Output:</span><br><span class="token comment"># ('red', 'green')</span><br><span class="token comment"># ('red', 'blue')</span><br><span class="token comment"># ('green', 'blue')</span></code></pre><h3 id="combinations_with_replacement" tabindex="-1"><code>combinations_with_replacement</code></h3><p>This function is similar to <code>combinations</code>, but allows items to be repeated.</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> combinations_with_replacement<br><br>colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> combinations_with_replacement<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><br><br><span class="token comment"># Output:</span><br><span class="token comment"># ('red', 'red')</span><br><span class="token comment"># ('red', 'green')</span><br><span class="token comment"># ('red', 'blue')</span><br><span class="token comment"># ('green', 'green')</span><br><span class="token comment"># ('green', 'blue')</span><br><span class="token comment"># ('blue', 'blue')</span></code></pre><h3 id="permutations" tabindex="-1"><code>permutations</code></h3><p>This function creates an iterator over all the combinations of n items from an iterable taken k at a time (referred to as n choose k) where order matters. From the docs, &quot;Elements are treated as unique based on their position, not on their value.&quot; If the second argument (k) is not supplied, it defaults to the length of the first argument iterable. Note that the second argument is required in the <code>combinations</code> function. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> permutations<br><br>colors <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'red'</span><span class="token punctuation">,</span> <span class="token string">'green'</span><span class="token punctuation">,</span> <span class="token string">'blue'</span><span class="token punctuation">]</span><br><span class="token keyword">for</span> color <span class="token keyword">in</span> permutations<span class="token punctuation">(</span>colors<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>color<span class="token punctuation">)</span><br><br><span class="token comment"># Output:</span><br><span class="token comment"># ('red', 'green')</span><br><span class="token comment"># ('red', 'blue')</span><br><span class="token comment"># ('green', 'red')</span><br><span class="token comment"># ('green', 'blue')</span><br><span class="token comment"># ('blue', 'red')</span><br><span class="token comment"># ('blue', 'green')</span></code></pre><h3 id="product" tabindex="-1"><code>product</code></h3><p>This function creates an iterator over the cartesian product of a set of iterables. This is every combination of one item taken from each of the iterables. For example:</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> itertools <span class="token keyword">import</span> product<br><br>rank <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'Ace'</span><span class="token punctuation">,</span> <span class="token string">'King'</span><span class="token punctuation">,</span> <span class="token string">'Queen'</span><span class="token punctuation">,</span> <span class="token string">'Jack'</span><span class="token punctuation">]</span><br>suit <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'diamonds'</span><span class="token punctuation">,</span> <span class="token string">'clubs'</span><span class="token punctuation">,</span> <span class="token string">'hearts'</span><span class="token punctuation">,</span> <span class="token string">'spades'</span><span class="token punctuation">]</span><br><br><span class="token keyword">for</span> card <span class="token keyword">in</span> product<span class="token punctuation">(</span>rank<span class="token punctuation">,</span> suit<span class="token punctuation">)</span><span class="token punctuation">:</span><br>  <span class="token keyword">print</span><span class="token punctuation">(</span>card<span class="token punctuation">)</span><br><br><span class="token comment"># Output:</span><br><span class="token comment"># ('Ace', 'diamonds')</span><br><span class="token comment"># ('Ace', 'clubs')</span><br><span class="token comment"># ('Ace', 'hearts')</span><br><span class="token comment"># ('Ace', 'spades')</span><br><span class="token comment"># ('King', 'diamonds')</span><br><span class="token comment"># ('King', 'clubs')</span><br><span class="token comment"># ('King', 'hearts')</span><br><span class="token comment"># ('King', 'spades')</span><br><span class="token comment"># ('Queen', 'diamonds')</span><br><span class="token comment"># ('Queen', 'clubs')</span><br><span class="token comment"># ('Queen', 'hearts')</span><br><span class="token comment"># ('Queen', 'spades')</span><br><span class="token comment"># ('Jack', 'diamonds')</span><br><span class="token comment"># ('Jack', 'clubs')</span><br><span class="token comment"># ('Jack', 'hearts')</span><br><span class="token comment"># ('Jack', 'spades')</span></code></pre></article>
+<!DOCTYPE html><html lang="en"> <head><title>Python itertools module</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Python itertools module</h2> <aside><ul><li><a href="#infinite-iterators">Infinite iterators</a></li><ul><li><a href="#count">count</a></li><li><a href="#cycle">cycle</a></li><li><a href="#repeat">repeat</a></li></ul><li><a href="#iterators-that-terminate-based-on-a-sequence">Iterators that terminate based on a sequence</a></li><ul><li><a href="#accumulate">accumulate</a></li><li><a href="#chain">chain</a></li><li><a href="#chain.from_iterable">chain.from_iterable</a></li><li><a href="#compress">compress</a></li><li><a href="#dropwhile">dropwhile</a></li><li><a href="#filterfalse">filterfalse</a></li><li><a href="#groupby">groupby</a></li><li><a href="#islice">islice</a></li><li><a href="#starmap">starmap</a></li><li><a href="#takewhile">takewhile</a></li><li><a href="#zip_longest">zip_longest</a></li></ul><li><a href="#combinatoric-iterators">Combinatoric iterators</a></li><ul><li><a href="#combinations">combinations</a></li><li><a href="#combinations_with_replacement">combinations_with_replacement</a></li><li><a href="#permutations">permutations</a></li><li><a href="#product">product</a></li></ul></ul></aside> <article><!-- markdownlint-disable MD013 -->
+<p>The <a href="https://docs.python.org/3/library/itertools.html?v=1.1.1" rel="noopener" target="_blank"><code>itertools</code></a> module in the Python standard library
+provides functions for creating iterators.
+The most commonly used of these functions are demonstrated below.</p>
+<h2 id="infinite-iterators" tabindex="-1">Infinite iterators</h2>
+<p>The following functions return an iterator that never stop.
+This means they never raise the <code>StopIteration</code> error.</p>
+<h3 id="count" tabindex="-1"><code>count</code></h3>
+<p>This function returns an iterator that produces integers
+starting from a given value, in steps of one or a specified step.
+For example:</p>
+<pre><code class="language-python">from itertools import count
+
+for n in count(10, 5):
+    print(n)
+    if n &gt;= 30:
+        break
+</code></pre>
+<h3 id="cycle" tabindex="-1"><code>cycle</code></h3>
+<p>This function returns an iterator that produces provided values
+in an endless cycle.
+For example:</p>
+<pre><code class="language-python">from itertools import cycle
+
+count = 0
+for letter in cycle(('alpha', 'beta', 'gamma')):
+    print(letter)
+    count += 1
+    if count == 6:
+        break
+</code></pre>
+<h3 id="repeat" tabindex="-1"><code>repeat</code></h3>
+<p>This function returns an iterator that produces an endless sequence
+of a single value, or optionally only a given number of times.
+For example:</p>
+<pre><code class="language-python">from itertools import repeat
+
+count = 0
+for result in repeat('win'):
+    print(result) # win 3 times
+    count += 1
+    if count == 3:
+        break
+
+for result in repeat('lose', 2):
+    print(result) # lose 2 times
+</code></pre>
+<h2 id="iterators-that-terminate-based-on-a-sequence" tabindex="-1">Iterators that terminate based on a sequence</h2>
+<h3 id="accumulate" tabindex="-1"><code>accumulate</code></h3>
+<p>This function is similar to the <code>reduce</code> function in the <code>functools</code> module
+but returns an iterator that makes intermediate results available.
+By default it adds numbers in an iterable (using <code>operator.add</code>),
+but a different function can be supplied.
+By default the initial value is <code>None</code>,
+but a different initial value can be specified.
+For example:</p>
+<pre><code class="language-python">from itertools import accumulate
+
+items = [
+    {'name': 'apples', 'price': 3.00},
+    {'name': 'bananas', 'price': 2.50},
+    {'name': 'grapes', 'price': 5.99},
+    {'name': 'oranges', 'price': 4.50}
+]
+
+def add_price(acc, item):
+    return acc + item['price']
+
+for total in accumulate(items, func=add_price, initial=0):
+    print(total) # 0, 3.0, 5.5, 11.49, 15.99
+</code></pre>
+<h3 id="chain" tabindex="-1"><code>chain</code></h3>
+<p>This function creates an iterator over multiple iterables.
+For example:</p>
+<pre><code class="language-python">from itertools import chain
+
+primary = ('red', 'yellow', 'blue')
+secondary = ('orange', 'green', 'purple')
+other = ('magenta', 'cyan')
+
+for color in chain(primary, secondary, other):
+    print(color) # each color in each tuple
+</code></pre>
+<h3 id="chain.from_iterable" tabindex="-1"><code>chain.from_iterable</code></h3>
+<p>This function is similar to <code>chain</code>,
+but its input is an iterable containing iterables.
+For example:</p>
+<pre><code class="language-python">from itertools import chain
+
+primary = ('red', 'yellow', 'blue')
+secondary = ('orange', 'green', 'purple')
+other = ('magenta', 'cyan')
+colors = (primary, secondary, other)
+
+for color in chain.from_iterable(colors):
+    print(color) # each color in each tuple
+</code></pre>
+<h3 id="compress" tabindex="-1"><code>compress</code></h3>
+<p>This function creates an iterator that iterates over
+the values in on iterable called &quot;data&quot; whose
+corresponding value in another iterable called &quot;selectors&quot;
+evaluates to <code>True</code>.
+For example:</p>
+<pre><code class="language-python">from itertools import compress
+
+colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+like = [False, True, True, False, True, False]
+
+for color in compress(colors, like):
+    print(color) # orange, yellow, blue
+</code></pre>
+<h3 id="dropwhile" tabindex="-1"><code>dropwhile</code></h3>
+<p>This function creates an iterator that iterates over a given iterable,
+but skips all the initial elements
+for which a predicate function evaluates to <code>True</code>.
+It is the opposite of <code>takewhile</code>.
+For example:</p>
+<pre><code class="language-python">from itertools import dropwhile
+from operator import itemgetter
+
+teams = [
+    {'name': '49ers', 'wins': 3, 'losses': 3},
+    {'name': 'Bears', 'wins': 5, 'losses': 1},
+    {'name': 'Cardinals', 'wins': 4, 'losses': 2},
+    {'name': 'Lions', 'wins': 2, 'losses': 3},
+    {'name': 'Packers', 'wins': 4, 'losses': 1},
+    {'name': 'Rams', 'wins': 4, 'losses': 2},
+    {'name': 'Seahawks', 'wins': 5, 'losses': 0},
+    {'name': 'Vikings', 'wins': 1, 'losses': 5}
+]
+
+# Sort teams on their records with best teams first.
+teams.sort(key=itemgetter('wins', 'losses'), reverse=True)
+
+def winning_record(team):
+    return team['wins'] &gt; team['losses']
+
+# Iterate over teams that do not have a winning record.
+for team in dropwhile(winning_record, teams):
+    print(team['name']) # 49ers, Lions, Vikings
+</code></pre>
+<h3 id="filterfalse" tabindex="-1"><code>filterfalse</code></h3>
+<p>This function creates an iterator that
+iterates over the elements of a given iterable
+for which a predicate function returns false.
+For example:</p>
+<pre><code class="language-python">from itertools import filterfalse
+
+teams = [
+    {'name': '49ers', 'wins': 3, 'losses': 3},
+    {'name': 'Bears', 'wins': 5, 'losses': 1},
+    {'name': 'Cardinals', 'wins': 4, 'losses': 2},
+    {'name': 'Lions', 'wins': 2, 'losses': 3},
+    {'name': 'Packers', 'wins': 4, 'losses': 1},
+    {'name': 'Rams', 'wins': 4, 'losses': 2},
+    {'name': 'Seahawks', 'wins': 5, 'losses': 0},
+    {'name': 'Vikings', 'wins': 1, 'losses': 5}
+]
+
+def winning_record(team):
+    return team['wins'] &gt; team['losses']
+
+# Iterate over teams that do not have a winning record.
+print('Losing')
+for team in filterfalse(winning_record, teams):
+    print('-', team['name']) # 49ers, Lions, Vikings
+
+# Iterate over teams that have a winning record.
+print('Winning')
+for team in filter(winning_record, teams):
+    print('-', team['name']) # Bears, Cardinals, Packers, Rams, Seahawks
+</code></pre>
+<h3 id="groupby" tabindex="-1"><code>groupby</code></h3>
+<p>This function creates an iterator that iterates over tuples that
+each contain a unique key value and an iterable of objects that match that key.
+The example below groups football teams by their division.
+So the tuples will contain a division value
+and an iterable over the teams in that division.
+The data must be sorted so that
+all the elements with the same key value are together.</p>
+<pre><code class="language-python">from itertools import groupby
+from operator import itemgetter
+
+teams = [
+    {'division': 'NFC East', 'name': '49ers', 'wins': 3, 'losses': 3},
+    {'division': 'NFC North', 'name': 'Bears', 'wins': 5, 'losses': 1},
+    {'division': 'NFC East', 'name': 'Cardinals', 'wins': 4, 'losses': 2},
+    {'division': 'NFC North', 'name': 'Lions', 'wins': 2, 'losses': 3},
+    {'division': 'NFC North', 'name': 'Packers', 'wins': 4, 'losses': 1},
+    {'division': 'NFC East', 'name': 'Rams', 'wins': 4, 'losses': 2},
+    {'division': 'NFC East', 'name': 'Seahawks', 'wins': 5, 'losses': 0},
+    {'division': 'NFC North', 'name': 'Vikings', 'wins': 1, 'losses': 5}
+]
+
+# Sort teams on their division.
+teams.sort(key=itemgetter('division'))
+
+# The teams list must be sorted on the groupby key,
+# &quot;division&quot; in this case.
+for division, div_teams in groupby(teams, key=lambda team: team['division']):
+    print(division)
+    for team in div_teams:
+        print('-', team['name'])
+# Output is:
+# NFC East
+# - 49ers
+# - Cardinals
+# - Rams
+# - Seahawks
+# NFC North
+# - Bears
+# - Lions
+# - Packers
+# - Vikings
+</code></pre>
+<h3 id="islice" tabindex="-1"><code>islice</code></h3>
+<p>This function creates an iterator that iterates over a subset of an iterable.
+In the examples below, we want to iterate over
+just some of the values in the <code>colors</code> list.</p>
+<pre><code class="language-python">from itertools import islice
+
+colors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple']
+
+# Iterate over the first two elements.
+for color in islice(colors, 2):
+    print(color) # red, orange
+
+print()
+
+# Iterate over elements from index 2 inclusive to index 5 exclusive.
+for color in islice(colors, 2, 5):
+    print(color) # yellow, green, blue
+
+print()
+
+# Iterate oer every other element starting from index 1
+# and going to the end of the list.
+for color in islice(colors, 1, len(colors), 2):
+    print(color) # orange, green, purple
+</code></pre>
+<h3 id="starmap" tabindex="-1"><code>starmap</code></h3>
+<p>This function creates an iterator over the results of calling a given function,
+using the tuple elements from an iterable as the arguments.
+For example:</p>
+<pre><code class="language-python">from itertools import starmap
+
+boxes = [
+  (2, 3, 4),
+  (3, 4, 5),
+  (4, 2, 6)
+]
+
+def compute_volume(width, depth, height):
+  return width * depth * height
+
+for volume in starmap(compute_volume, boxes):
+  print(volume) # 24, 60, 48
+
+# Alternate approach, iterating over boxes.
+for box in boxes:
+  print(compute_volume(*box)) # 24, 60, 48
+</code></pre>
+<h3 id="takewhile" tabindex="-1"><code>takewhile</code></h3>
+<p>This function creates an iterator that iterates over a given iterable,
+but skips all the initial elements
+for which a predicate function evaluates to <code>True</code>.
+It is the opposite of <code>dropwhile</code>.
+For example:</p>
+<pre><code class="language-python">from itertools import takewhile
+from operator import itemgetter
+
+teams = [
+    {'name': '49ers', 'wins': 3, 'losses': 3},
+    {'name': 'Bears', 'wins': 5, 'losses': 1},
+    {'name': 'Cardinals', 'wins': 4, 'losses': 2},
+    {'name': 'Lions', 'wins': 2, 'losses': 3},
+    {'name': 'Packers', 'wins': 4, 'losses': 1},
+    {'name': 'Rams', 'wins': 4, 'losses': 2},
+    {'name': 'Seahawks', 'wins': 5, 'losses': 0},
+    {'name': 'Vikings', 'wins': 1, 'losses': 5}
+]
+
+# Sort teams on their records with best teams first.
+teams.sort(key=itemgetter('wins', 'losses'), reverse=True)
+
+def winning_record(team):
+    return team['wins'] &gt; team['losses']
+
+# Iterate over teams that have a winning record.
+for team in takewhile(winning_record, teams):
+    print(team['name']) # Bears, Seahawks, Cardinals, Rams, Packers
+</code></pre>
+<h3 id="zip_longest" tabindex="-1"><code>zip_longest</code></h3>
+<p>This function creates an iterator that
+combines corresponding elements from multiple iterables.
+For example:</p>
+<pre><code class="language-python">from itertools import zip_longest
+
+months = ['January', 'February', 'March', 'April']
+numbers = range(1, len(months) + 1)
+people = ['Laura', 'Pat', 'unknown', 'Mark']
+for list in zip_longest(numbers, months, people):
+  print(list)
+
+# Output is:
+# (1, 'January', 'Laura')
+# (2, 'February', 'Pat')
+# (3, 'March', 'unknown')
+# (4, 'April', 'Mark')
+</code></pre>
+<h2 id="combinatoric-iterators" tabindex="-1">Combinatoric iterators</h2>
+<h3 id="combinations" tabindex="-1"><code>combinations</code></h3>
+<p>This function creates an iterator over all the combinations
+of n items from an iterable taken k at a time (referred to as n choose k)
+where order does not matter.
+From the docs, &quot;Elements are treated as unique
+based on their position, not on their value.&quot;
+For example:</p>
+<pre><code class="language-python">from itertools import combinations
+
+colors = ['red', 'green', 'blue']
+for color in combinations(colors, 2):
+  print(color)
+
+# Output:
+# ('red', 'green')
+# ('red', 'blue')
+# ('green', 'blue')
+</code></pre>
+<h3 id="combinations_with_replacement" tabindex="-1"><code>combinations_with_replacement</code></h3>
+<p>This function is similar to <code>combinations</code>,
+but allows items to be repeated.</p>
+<pre><code class="language-python">from itertools import combinations_with_replacement
+
+colors = ['red', 'green', 'blue']
+for color in combinations_with_replacement(colors, 2):
+  print(color)
+
+# Output:
+# ('red', 'red')
+# ('red', 'green')
+# ('red', 'blue')
+# ('green', 'green')
+# ('green', 'blue')
+# ('blue', 'blue')
+</code></pre>
+<h3 id="permutations" tabindex="-1"><code>permutations</code></h3>
+<p>This function creates an iterator over all the combinations
+of n items from an iterable taken k at a time (referred to as n choose k)
+where order matters.
+From the docs, &quot;Elements are treated as unique
+based on their position, not on their value.&quot;
+If the second argument (k) is not supplied,
+it defaults to the length of the first argument iterable.
+Note that the second argument is required in the <code>combinations</code> function.
+For example:</p>
+<pre><code class="language-python">from itertools import permutations
+
+colors = ['red', 'green', 'blue']
+for color in permutations(colors, 2):
+  print(color)
+
+# Output:
+# ('red', 'green')
+# ('red', 'blue')
+# ('green', 'red')
+# ('green', 'blue')
+# ('blue', 'red')
+# ('blue', 'green')
+</code></pre>
+<h3 id="product" tabindex="-1"><code>product</code></h3>
+<p>This function creates an iterator over the cartesian product
+of a set of iterables.
+This is every combination of one item taken from each of the iterables.
+For example:</p>
+<pre><code class="language-python">from itertools import product
+
+rank = ['Ace', 'King', 'Queen', 'Jack']
+suit = ['diamonds', 'clubs', 'hearts', 'spades']
+
+for card in product(rank, suit):
+  print(card)
+
+# Output:
+# ('Ace', 'diamonds')
+# ('Ace', 'clubs')
+# ('Ace', 'hearts')
+# ('Ace', 'spades')
+# ('King', 'diamonds')
+# ('King', 'clubs')
+# ('King', 'hearts')
+# ('King', 'spades')
+# ('Queen', 'diamonds')
+# ('Queen', 'clubs')
+# ('Queen', 'hearts')
+# ('Queen', 'spades')
+# ('Jack', 'diamonds')
+# ('Jack', 'clubs')
+# ('Jack', 'hearts')
+# ('Jack', 'spades')
+</code></pre>
+</article> </body></html>

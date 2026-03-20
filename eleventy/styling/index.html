@@ -1,1 +1,40 @@
-<link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><h2>Eleventy Styling</h2><aside></aside><article><p>To add CSS styling, configure the build process as shown above and create <code>.css</code> files in the <code>assets/css</code> directory.</p><p>For example, to style nav links:</p><pre class="language-css"><code class="language-css"><span class="token selector">nav</span> <span class="token punctuation">{</span><br>  <span class="token property">background-color</span><span class="token punctuation">:</span> cornflowerblue<span class="token punctuation">;</span><br>  <span class="token property">color</span><span class="token punctuation">:</span> white<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token selector">li</span> <span class="token punctuation">{</span><br>  <span class="token property">margin-right</span><span class="token punctuation">:</span> 1rem<span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token selector">ul</span> <span class="token punctuation">{</span><br>  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span><br>  <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span><br>  <span class="token property">padding</span><span class="token punctuation">:</span> 0.5rem<span class="token punctuation">;</span><br><span class="token punctuation">}</span></code></pre><p>One way to use the <code>.css</code> files is to add <code>link</code> tags in layout files. Each layout file can include different <code>.css</code> files. For example:</p><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/css/layout.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>/assets/css/about.css<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre><p>Another approach is the set a variable in template files whose value is the path to a CSS file. The variable can be used in a layout to include a <code>link</code> tag to the CSS file. This allows each page template to include a different CSS file.</p><p>For example, a template can have this front matter:</p><pre class="language-yaml"><code class="language-yaml"><span class="token key atrule">css</span><span class="token punctuation">:</span> <span class="token string">'/assets/css/about.css'</span><br><span class="token key atrule">layout</span><span class="token punctuation">:</span> topic<span class="token punctuation">-</span>layout.njk</code></pre><p>A layout can use the variable like this:</p><pre class="language-liquid"><code class="language-liquid"><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> <span class="token keyword">if</span> css <span class="token delimiter punctuation">%}</span></span><br>  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span> <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span><span class="token liquid language-liquid"><span class="token delimiter punctuation">{{</span>css<span class="token delimiter punctuation">}}</span></span><span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span><br><span class="token liquid language-liquid"><span class="token delimiter punctuation">{%</span> <span class="token keyword">endif</span> <span class="token delimiter punctuation">%}</span></span></code></pre><p>There is no need to &quot;scope&quot; CSS to specific pages since each page is built separately and loaded separately into the browser.</p></article>
+<!DOCTYPE html><html lang="en"> <head><title>Styling</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Styling</h2> <aside></aside> <article><p>To add CSS styling, configure the build process as shown above
+and create <code>.css</code> files in the <code>assets/css</code> directory.</p>
+<p>For example, to style nav links:</p>
+<pre><code class="language-css">nav {
+  background-color: cornflowerblue;
+  color: white;
+}
+
+li {
+  margin-right: 1rem;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  padding: 0.5rem;
+}
+</code></pre>
+<p>One way to use the <code>.css</code> files is to add <code>link</code> tags in layout files.
+Each layout file can include different <code>.css</code> files.
+For example:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/layout.css&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;/assets/css/about.css&quot; /&gt;
+</code></pre>
+<p>Another approach is the set a variable in template files
+whose value is the path to a CSS file.
+The variable can be used in a layout to include a <code>link</code> tag to the CSS file.
+This allows each page template to include a different CSS file.</p>
+<p>For example, a template can have this front matter:</p>
+<pre><code class="language-yaml">css: '/assets/css/about.css'
+layout: topic-layout.njk
+</code></pre>
+<p>A layout can use the variable like this:</p>
+<pre><code class="language-liquid">{% if css %}
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;{{css}}&quot; /&gt;
+{% endif %}
+</code></pre>
+<p>There is no need to &quot;scope&quot; CSS to specific pages since each page
+is built separately and loaded separately into the browser.</p>
+</article> </body></html>

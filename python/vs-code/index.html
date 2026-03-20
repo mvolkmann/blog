@@ -1,1 +1,22 @@
-<link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><h2>VS Code Python support</h2><aside><nav class="toc"><ol><li><a href="#overview">Overview</a></li></ol></nav></aside><article><h2 id="overview" tabindex="-1">Overview</h2><p><a href="https://github.com/microsoft/pylance-release?v=1.1.1" rel="noopener" target="_blank">Pylance</a> is an extension from Microsoft that utilized the Language Server Protocol (LSP) to enable IDE features such as code completion, parameter suggestions, auto-imports, code outline, code navigation, syntax checking, type checking, and syntax highlighting.</p><p>Modify <code>settings.json</code> to enable this extension and configure options.</p><pre class="language-json"><code class="language-json">  <span class="token property">"python.languageServer"</span><span class="token operator">:</span> <span class="token string">"Pylance"</span><span class="token punctuation">,</span></code></pre><p>For strict type checking, add the following:</p><pre class="language-json"><code class="language-json">  <span class="token property">"python.analysis.typeCheckingMode"</span><span class="token operator">:</span> <span class="token string">"strict"</span><span class="token punctuation">,</span></code></pre><p>To avoid adding two blank lines before and after each function definition:</p><pre class="language-json"><code class="language-json">  <span class="token property">"python.formatting.autopep8Args"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"--ignore=E302,E305"</span><span class="token punctuation">]</span><span class="token punctuation">,</span></code></pre><p>To enable the Pyright type checker to use type stub files that you have downloaded, add the following (THIS DID NOT WORK!):</p><pre class="language-json"><code class="language-json">  <span class="token property">"pyright.stubPath"</span><span class="token operator">:</span> <span class="token string">"{directory-path}"</span><span class="token punctuation">,</span></code></pre><p>More detail is coming soon!</p></article>
+<!DOCTYPE html><html lang="en"> <head><title>VS Code Python support</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>VS Code Python support</h2> <aside><ul><li><a href="#overview">Overview</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<p><a href="https://github.com/microsoft/pylance-release?v=1.1.1" rel="noopener" target="_blank">Pylance</a>
+is an extension from Microsoft that utilized the Language Server Protocol (LSP)
+to enable IDE features such as code completion, parameter suggestions,
+auto-imports, code outline, code navigation, syntax checking, type checking,
+and syntax highlighting.</p>
+<p>Modify <code>settings.json</code> to enable this extension and configure options.</p>
+<pre><code class="language-json">  &quot;python.languageServer&quot;: &quot;Pylance&quot;,
+</code></pre>
+<p>For strict type checking, add the following:</p>
+<pre><code class="language-json">  &quot;python.analysis.typeCheckingMode&quot;: &quot;strict&quot;,
+</code></pre>
+<p>To avoid adding two blank lines before and after each function definition:</p>
+<pre><code class="language-json">  &quot;python.formatting.autopep8Args&quot;: [&quot;--ignore=E302,E305&quot;],
+</code></pre>
+<p>To enable the Pyright type checker to use type stub files
+that you have downloaded, add the following
+(THIS DID NOT WORK!):</p>
+<pre><code class="language-json">  &quot;pyright.stubPath&quot;: &quot;{directory-path}&quot;,
+</code></pre>
+<p>More detail is coming soon!</p>
+</article> </body></html>

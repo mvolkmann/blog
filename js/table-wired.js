@@ -80,8 +80,8 @@ class TableWired extends Wrec {
         typeof aValue === 'string'
           ? aValue.localeCompare(bValue)
           : typeof aValue === 'number'
-          ? aValue - bValue
-          : 0;
+            ? aValue - bValue
+            : 0;
       return this.sortAscending ? compare : -compare;
     });
     // Trigger the property set method by assigning a clone.
