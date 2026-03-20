@@ -1,0 +1,38 @@
+---
+import NavTree from '../components/NavTree.astro';
+import type {NavNode} from '../lib/content';
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  navTree: NavNode[];
+}
+
+const {navTree} = Astro.props;
+---
+
+<BaseLayout>
+  <script is:inline src="/blog/js/topics.js"></script>
+
+  <nav>
+    <NavTree items={navTree} topLevel={true} />
+  </nav>
+
+  <section class="topic-background">
+    <section class="topic-content">
+      <button
+        id="print-btn"
+        onclick="print()"
+        style="position: absolute; right: 20px"
+      >
+        Print
+      </button>
+      <iframe
+        id="topic-content"
+        name="frame"
+        onload="iframeLoaded(this)"
+        src="../welcome/"
+        title="topic content"
+      ></iframe>
+    </section>
+  </section>
+</BaseLayout>

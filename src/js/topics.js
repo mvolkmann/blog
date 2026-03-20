@@ -13,7 +13,7 @@ function handleLinkClick(link, url) {
 
   // Only toggle the "expanded" class for non-leaf links.
   // Links for leaf nodes do not have a next sibling.
-  if (link.nextSibling) {
+  if (link.nextElementSibling) {
     link.classList.toggle('expanded');
   } else {
     // Only change the main content area if a leaf link was clicked.

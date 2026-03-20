@@ -1,5 +1,7 @@
 /node_modules
 /_site
+/.astro
+/public
 secrets.json
 .DS_Store
 .*.swp
