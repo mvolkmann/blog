@@ -1,1 +1,8 @@
-img{display:block;width:800px}/*# sourceMappingURL=github-extensions.css.map */
+:root {
+  --github-extensions-image-width: 800px;
+}
+
+img {
+  display: block;
+  width: var(--github-extensions-image-width);
+}
