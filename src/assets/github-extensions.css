@@ -1,0 +1,8 @@
+:root {
+  --github-extensions-image-width: 800px;
+}
+
+img {
+  display: block;
+  width: var(--github-extensions-image-width);
+}

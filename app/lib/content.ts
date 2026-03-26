@@ -16,8 +16,7 @@ const SKIP_DIRECTORIES = new Set([
   '_includes',
   'actions',
   'assets',
-  'js',
-  'sass'
+  'js'
 ]);
 const GENERATOR = `Astro v${pkg.dependencies.astro.replace(/^[^\d]*/, '')}`;
 

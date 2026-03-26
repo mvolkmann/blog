@@ -19,21 +19,20 @@
   "scripts": {
     "add": "git add .",
     "all": "run-s build add commit push deploy",
-    "build": "npm run prepare:public && npm run sass && astro build",
+    "build": "npm run prepare:public && astro build",
     "clean": "rm -rf _site public/assets public/js",
     "commit": "git commit -av",
     "deploy": "gh-pages -d _site",
-    "dev": "npm run prepare:public && npm-run-all --parallel watch:sass watch:astro",
+    "dev": "npm run prepare:public && npm-run-all --parallel watch:public watch:astro",
     "format": "prettier --write 'app/**/*.{astro,ts}' 'src/**/*.{css,html,js}' 'scripts/**/*.mjs'",
     "lint": "oxlint",
     "prepare:public": "node scripts/prepare-public.mjs",
     "preview": "astro preview",
     "push": "git push origin master",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
-    "sass": "sass --style=compressed src/sass:public/assets",
     "serve": "npm run dev",
     "watch:astro": "astro dev",
-    "watch:sass": "npm run sass -- --watch"
+    "watch:public": "node scripts/watch-public.mjs"
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.6",
@@ -46,8 +45,7 @@
     "npm-run-all": "^4.1.5",
     "oxlint": "^1.9.0",
     "prettier": "^3.8.1",
-    "prettier-plugin-astro": "^0.14.1",
-    "sass": "^1.55.0"
+    "prettier-plugin-astro": "^0.14.1"
   },
   "dependencies": {
     "astro": "^6.0.7",

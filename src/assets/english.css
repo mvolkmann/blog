@@ -1,0 +1,11 @@
+:root {
+  --english-border-color: black;
+}
+
+.bordered {
+  border: solid var(--english-border-color) 1px;
+}
+
+p {
+  line-height: 1.2rem;
+}
