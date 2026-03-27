@@ -66,8 +66,6 @@ Wrec was inspired by {% aTargetBlank "https://lit.dev", "Lit" %}.
 It has the following advantages over Lit:
 
 - Wrec is simpler ... just a single class to extend (Wrec).
-- Wrec is smaller ... 8K (`wrec.min.js`) versus
-  16K (lit-core.min.js`) minified.
 - Wrec has a cleaner syntax ... no need to
   surround JS expressions with `${...}`.
 - Wrec provides automatic 2-way data binding ...
@@ -119,10 +117,7 @@ This approach is highly efficient.
 
 To define a web component using wrec:
 
-1. Copy the file `wrec.min.js` from the wrec
-   [GitHub](https://github.com/mvolkmann/wrec/tree/main/dist)
-   repository.
-   (Alternatively, install wrec using npm and use a bundler like Vite.)
+1. Install wrec by entering `npm install wrec`.
 1. Define a class that extends the `Wrec` class.
 1. Optionally define a static property named `css`
    whose value is a string containing CSS rules.
