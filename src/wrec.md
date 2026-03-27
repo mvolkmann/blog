@@ -148,7 +148,7 @@ The `css` and `html` properties above use tagged template literals.
 This allows the text to span multiple lines.
 The tags `css` and `html` are optional.
 They trigger the VS Code extension Prettier to format the code
-and the es6-string-html extension to add syntax highlighting.
+and the "Inline HTML" extension to add syntax highlighting.
 
 The `define` method registers a custom HTML element with
 a kebab-case name which is typically based on the class name.
