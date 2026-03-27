@@ -52,8 +52,6 @@ target="_blank">YouTube videos</a> on web components and the wrec library.</p>
 It has the following advantages over Lit:</p>
 <ul>
 <li>Wrec is simpler ... just a single class to extend (Wrec).</li>
-<li>Wrec is smaller ... 8K (<code>wrec.min.js</code>) versus
-16K (lit-core.min.js`) minified.</li>
 <li>Wrec has a cleaner syntax ... no need to
 surround JS expressions with <code>${...}</code>.</li>
 <li>Wrec provides automatic 2-way data binding ...
@@ -98,10 +96,7 @@ and updates them with the new value.</li>
 <h2 id="getting-started" tabindex="-1">Getting Started</h2>
 <p>To define a web component using wrec:</p>
 <ol>
-<li>Copy the file <code>wrec.min.js</code> from the wrec
-<a href="https://github.com/mvolkmann/wrec/tree/main/dist">GitHub</a>
-repository.
-(Alternatively, install wrec using npm and use a bundler like Vite.)</li>
+<li>Install wrec by entering <code>npm install wrec</code>.</li>
 <li>Define a class that extends the <code>Wrec</code> class.</li>
 <li>Optionally define a static property named <code>css</code>
 whose value is a string containing CSS rules.</li>
