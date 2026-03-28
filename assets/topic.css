@@ -38,7 +38,11 @@ h2 {
   text-align: center;
 }
 
-h2:not(:first-of-type) {
+article > h2 {
+  text-align: start;
+}
+
+article > h2:not(:first-of-type) {
   border-top: 1px solid var(--rule-color);
   padding-top: 1rem;
 }
