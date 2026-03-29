@@ -508,22 +508,17 @@ import {css, html, Wrec} from './wrec.min.js';
 
 class RectangleArea extends Wrec {
   static properties = {
-    width: {type: Number, value: 10},
-    height: {type: Number, value: 5},
+    width: {type: Number, value: 10, usedBy: ['rectangleArea']},
+    height: {type: Number, value: 5, usedBy: ['rectangleArea']},
     /*
     area: {
       type: Number,
       computed: "this.width * this.height",
     },
-    area: {
-      type: Number,
-      computed: "this.rectangleArea(this.width, this.height)",
-    },
     */
     area: {
       type: Number,
-      computed: 'this.rectangleArea()',
-      uses: 'width, height'
+      computed: 'this.rectangleArea()'
     }
   };
 
@@ -539,11 +534,6 @@ class RectangleArea extends Wrec {
     <div class="area">Area: <span>this.area</span></div>
   `;
 
-  /*
-  rectangleArea(width, height) {
-    return width * height;
-  }
-  */
   rectangleArea() {
     return this.width * this.height;
   }
@@ -896,12 +886,10 @@ const capitalize = str =>
 class DataBinding extends Wrec {
   static properties = {
     color: {type: String},
-    colors: {type: String, required: true},
+    colors: {type: String, required: true, usedBy: ['getLabels']},
     labels: {
       type: String,
-      //computed: "this.colors.split(',').map(color => this.capitalize(color)).join(',')",
-      computed: 'this.getLabels()',
-      uses: 'colors'
+      computed: 'this.getLabels()'
     },
     size: {type: Number, value: 18}
   };
