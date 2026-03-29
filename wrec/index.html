@@ -410,22 +410,17 @@ It shows three ways to accomplish this, with the first two commented out.</p>
 
 class RectangleArea extends Wrec {
   static properties = {
-    width: {type: Number, value: 10},
-    height: {type: Number, value: 5},
+    width: {type: Number, value: 10, usedBy: ['rectangleArea']},
+    height: {type: Number, value: 5, usedBy: ['rectangleArea']},
     /*
     area: {
       type: Number,
       computed: &quot;this.width * this.height&quot;,
     },
-    area: {
-      type: Number,
-      computed: &quot;this.rectangleArea(this.width, this.height)&quot;,
-    },
     */
     area: {
       type: Number,
-      computed: 'this.rectangleArea()',
-      uses: 'width, height'
+      computed: 'this.rectangleArea()'
     }
   };
 
@@ -441,11 +436,6 @@ class RectangleArea extends Wrec {
     &lt;div class=&quot;area&quot;&gt;Area: &lt;span&gt;this.area&lt;/span&gt;&lt;/div&gt;
   `;
 
-  /*
-  rectangleArea(width, height) {
-    return width * height;
-  }
-  */
   rectangleArea() {
     return this.width * this.height;
   }
@@ -759,12 +749,10 @@ const capitalize = str =&gt;
 class DataBinding extends Wrec {
   static properties = {
     color: {type: String},
-    colors: {type: String, required: true},
+    colors: {type: String, required: true, usedBy: ['getLabels']},
     labels: {
       type: String,
-      //computed: &quot;this.colors.split(',').map(color =&gt; this.capitalize(color)).join(',')&quot;,
-      computed: 'this.getLabels()',
-      uses: 'colors'
+      computed: 'this.getLabels()'
     },
     size: {type: Number, value: 18}
   };
