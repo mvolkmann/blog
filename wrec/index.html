@@ -843,7 +843,10 @@ The sort begins in ascending order.
 Clicking the heading currently used for sorting reverses the sort order.</p>
 <p>The <code>table-manual</code> component is similar to <code>table-wired</code>, but it provides an
 example of implementing reactivity through the <code>propertyChangedCallback</code> method
-rather than through JavaScript expressions embedded in HTML.</p>
+rather than through JavaScript expressions embedded in HTML.
+Wrec components can override the <code>propertyChangedCallback</code> method
+to be notified of changes to any of their properties,
+including computed properties.</p>
 <p>Here it is in action.</p>
 <pre><code class="language-html">&lt;table-wired&gt;&lt;/table-wired&gt;
 </code></pre>
