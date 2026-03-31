@@ -995,6 +995,9 @@ Clicking the heading currently used for sorting reverses the sort order.
 The `table-manual` component is similar to `table-wired`, but it provides an
 example of implementing reactivity through the `propertyChangedCallback` method
 rather than through JavaScript expressions embedded in HTML.
+Wrec components can override the `propertyChangedCallback` method
+to be notified of changes to any of their properties,
+including computed properties.
 
 Here it is in action.
 
