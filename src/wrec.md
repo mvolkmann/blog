@@ -171,6 +171,24 @@ Here it is in action.
 
 <basic-wrec></basic-wrec>
 
+## Tooling
+
+Wrec provides three tools.
+
+To check for issues in wrec component implementations,
+enter `npx wrec-lint [file-path]`.
+When no file path is specified, it runs on every `.js` and `.ts` file
+that defines a class that extends `Wrec`.
+
+To automatically run the wrec linter in VS Code
+when component source files are saved,
+install the "wrec" extension.
+
+To automatically add `usedBy` properties to
+the configuration objects of properties that need them,
+enter `npx wrec-usedby {file-path}`.
+See examples of the `usedBy` property later in this document.
+
 ## Properties
 
 Web components defined with wrec can define and use properties.
