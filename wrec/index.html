@@ -352,10 +352,7 @@ class LightController extends Wrec {
   static properties = {tl: {type: HTMLElement}};
   static html = html`&lt;traffic-light ref=&quot;tl&quot;&gt;&lt;/traffic-light&gt;`;
 
-  async connectedCallback() {
-    // Wait for wrec to finish building the DOM.
-    await super.connectedCallback();
-
+  async ready() {
     const {tl} = this;
     while (true) {
       const {state} = tl;
@@ -367,6 +364,12 @@ class LightController extends Wrec {
 }
 
 LightController.define('light-controller');
+</code></pre>
+<p>Overriding the <code>ready</code> lifecycle method is equivalent to the following:</p>
+<pre><code class="language-javascript">  async connectedCallback() {
+    await super.connectedCallback();
+    ...
+  }
 </code></pre>
 <h2 id="form-elements" tabindex="-1">Form Elements</h2>
 <p>Wrec supports two-way data binding for HTML form elements.</p>
