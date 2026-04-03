@@ -421,6 +421,44 @@ in a comma-delimited attribute value to determine what to render,
 see the `RadioGroup` and `SelectList` classes
 in the "Kicking it up a Notch" section below.
 
+## Element References
+
+HTML elements rendered by wrec can have a `ref` attribute
+whose value is the name of property of type `HTMLElement`.
+That property will be set to a reference to the element.
+
+For example, the component `light-controller` below
+uses this to get a reference to a `traffic-light` element.
+It uses that property in the `connectedCallback` method
+to call a method (`next`) on that element.
+
+```typescript
+import {html, Wrec} from 'wrec';
+import './traffic-light'; // register custom element
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+class LightController extends Wrec {
+  static properties = {tl: {type: HTMLElement}};
+  static html = html`<traffic-light ref="tl"></traffic-light>`;
+
+  async connectedCallback() {
+    // Wait for wrec to finish building the DOM.
+    await super.connectedCallback();
+
+    const {tl} = this;
+    while (true) {
+      const {state} = tl;
+      const seconds = state === 'stop' ? 3 : state === 'yield' ? 1 : 2;
+      await sleep(seconds * 1000);
+      tl.next();
+    }
+  }
+}
+
+LightController.define('light-controller');
+```
+
 ## Form Elements
 
 Wrec supports two-way data binding for HTML form elements.
