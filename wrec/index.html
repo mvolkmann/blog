@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"> <head><title>wrec</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>wrec</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#reactivity">Reactivity</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#properties">Properties</a></li><li><a href="#event-listeners">Event Listeners</a></li><li><a href="#javascript-expressions">JavaScript Expressions</a></li><li><a href="#unchanging-expressions">Unchanging Expressions</a></li><li><a href="#conditional-and-iterative-html-generation">Conditional and Iterative HTML Generation</a></li><li><a href="#form-elements">Form Elements</a></li><li><a href="#disabling-components">Disabling Components</a></li><li><a href="#computed-properties">Computed Properties</a></li><li><a href="#reactive-css">Reactive CSS</a></li><li><a href="#nested-web-components">Nested Web Components</a></li><li><a href="#kicking-it-up-a-notch">Kicking it up a Notch</a></li><li><a href="#non-primitive-properties">Non-primitive Properties</a></li><li><a href="#changing-multiple-properties">Changing Multiple Properties</a></li><li><a href="#property-change-events">Property Change Events</a></li><li><a href="#form-submissions">Form Submissions</a></li><li><a href="#state">State</a></li><li><a href="#error-checking">Error Checking</a></li><li><a href="#security">Security</a></li><li><a href="#server-side-rendering">Server-Side Rendering</a></li><li><a href="#more-examples">More Examples</a></li><li><a href="#tests">Tests</a></li></ul></aside> <article><script src="/blog/js/basic-wrec.js" type="module"></script>
+<!DOCTYPE html><html lang="en"> <head><title>wrec</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>wrec</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#reactivity">Reactivity</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#properties">Properties</a></li><li><a href="#event-listeners">Event Listeners</a></li><li><a href="#javascript-expressions">JavaScript Expressions</a></li><li><a href="#unchanging-expressions">Unchanging Expressions</a></li><li><a href="#conditional-and-iterative-html-generation">Conditional and Iterative HTML Generation</a></li><li><a href="#element-references">Element References</a></li><li><a href="#form-elements">Form Elements</a></li><li><a href="#disabling-components">Disabling Components</a></li><li><a href="#computed-properties">Computed Properties</a></li><li><a href="#reactive-css">Reactive CSS</a></li><li><a href="#nested-web-components">Nested Web Components</a></li><li><a href="#kicking-it-up-a-notch">Kicking it up a Notch</a></li><li><a href="#non-primitive-properties">Non-primitive Properties</a></li><li><a href="#changing-multiple-properties">Changing Multiple Properties</a></li><li><a href="#property-change-events">Property Change Events</a></li><li><a href="#form-submissions">Form Submissions</a></li><li><a href="#state">State</a></li><li><a href="#error-checking">Error Checking</a></li><li><a href="#security">Security</a></li><li><a href="#server-side-rendering">Server-Side Rendering</a></li><li><a href="#more-examples">More Examples</a></li><li><a href="#tests">Tests</a></li></ul></aside> <article><script src="/blog/js/basic-wrec.js" type="module"></script>
 <script src="/blog/js/color-demo.js" type="module"></script>
 <script src="/blog/js/color-picker.js" type="module"></script>
 <script src="/blog/js/counter-wrec.js" type="module"></script>
@@ -335,6 +335,39 @@ Note how the rendered output changes from &quot;not freezing&quot; to &quot;free
 in a comma-delimited attribute value to determine what to render,
 see the <code>RadioGroup</code> and <code>SelectList</code> classes
 in the &quot;Kicking it up a Notch&quot; section below.</p>
+<h2 id="element-references" tabindex="-1">Element References</h2>
+<p>HTML elements rendered by wrec can have a <code>ref</code> attribute
+whose value is the name of property of type <code>HTMLElement</code>.
+That property will be set to a reference to the element.</p>
+<p>For example, the component <code>light-controller</code> below
+uses this to get a reference to a <code>traffic-light</code> element.
+It uses that property in the <code>connectedCallback</code> method
+to call a method (<code>next</code>) on that element.</p>
+<pre><code class="language-typescript">import {html, Wrec} from 'wrec';
+import './traffic-light'; // register custom element
+
+const sleep = (ms: number) =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms));
+
+class LightController extends Wrec {
+  static properties = {tl: {type: HTMLElement}};
+  static html = html`&lt;traffic-light ref=&quot;tl&quot;&gt;&lt;/traffic-light&gt;`;
+
+  async connectedCallback() {
+    // Wait for wrec to finish building the DOM.
+    await super.connectedCallback();
+
+    const {tl} = this;
+    while (true) {
+      const {state} = tl;
+      const seconds = state === 'stop' ? 3 : state === 'yield' ? 1 : 2;
+      await sleep(seconds * 1000);
+      tl.next();
+    }
+  }
+}
+
+LightController.define('light-controller');
+</code></pre>
 <h2 id="form-elements" tabindex="-1">Form Elements</h2>
 <p>Wrec supports two-way data binding for HTML form elements.</p>
 <ul>
