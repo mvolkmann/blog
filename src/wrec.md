@@ -1408,17 +1408,26 @@ which updates both the `labeled-input` and `hello-world` elements.
       import {WrecState} from '../wrec-state.js';
       const state = new WrecState('vault', true, {name: 'World'});
 
-      window.onload = () => {
-        const li = document.querySelector('labeled-input');
-        li.useState(state, {name: 'value'});
-        const hw = document.querySelector('hello-world');
-        hw.useState(state);
+      const li = document.querySelector('labeled-input');
+      li.useState(state, {name: 'value'});
+      const hw = document.querySelector('hello-world');
+      hw.useState(state);
 
-        const button = document.querySelector('button');
-        button.addEventListener('click', () => {
-          state.name = 'World';
-        });
-      };
+      const button = document.querySelector('button');
+      button.addEventListener('click', () => {
+        state.name = 'World';
+      });
+
+      // This demonstrates listening for state changes
+      // and running arbitrary code.
+      // A callback function is passed to the addChangeCallback method.
+      // A second, optional argument can be supplied which is
+      // an array of strings that are the state paths of interest.
+      // When omitted, the callback function is called for all state changes.
+      state.addChangeCallback((statePath, newValue, oldValue) => {
+        const msg = `${statePath} changed from ${oldValue} to ${newValue}`;
+        console.log('state-demo.html:', msg);
+      });
     </script>
   </head>
   <body>
