@@ -606,11 +606,14 @@ RectangleArea.define('rectangle-area');
 
 Since the `rectangleArea` method uses properties
 that don't appear in the expression,
-we need to let wrec know which properties the method uses.
-The `uses` property value is a comma-separated list of properties names.
-When the value of any of those properties changes,
-the expression is reevaluated and
-a new value is assigned to the computed property.
+we need to let wrec know when the expression should be reevaluated.
+The configuration object for each component property can include
+the `usedBy` property to indicate which methods use the property.
+Its value is a method name or array of them.
+When the value of that property changes,
+all expressions that call those methods are reevaluated.
+In this case, the `width` and `height` properties
+are both used by the `rectangleArea` method.
 
 Here it is in action:
 
@@ -618,10 +621,8 @@ Here it is in action:
 <rectangle-area></rectangle-area>
 ```
 
-<rectangle-area></rectangle-area>
-
-Drag the "Width" and "Height" sliders.
-Note how the "Area" is automatically updated.
+Drag the "Width" and "Height" sliders and
+note how the "Area" is automatically updated.
 
 ## Reactive CSS
 
