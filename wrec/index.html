@@ -494,17 +494,19 @@ RectangleArea.define('rectangle-area');
 </code></pre>
 <p>Since the <code>rectangleArea</code> method uses properties
 that don't appear in the expression,
-we need to let wrec know which properties the method uses.
-The <code>uses</code> property value is a comma-separated list of properties names.
-When the value of any of those properties changes,
-the expression is reevaluated and
-a new value is assigned to the computed property.</p>
+we need to let wrec know when the expression should be reevaluated.
+The configuration object for each component property can include
+the <code>usedBy</code> property to indicate which methods use the property.
+Its value is a method name or array of them.
+When the value of that property changes,
+all expressions that call those methods are reevaluated.
+In this case, the <code>width</code> and <code>height</code> properties
+are both used by the <code>rectangleArea</code> method.</p>
 <p>Here it is in action:</p>
 <pre><code class="language-html">&lt;rectangle-area&gt;&lt;/rectangle-area&gt;
 </code></pre>
-<p><rectangle-area></rectangle-area></p>
-<p>Drag the &quot;Width&quot; and &quot;Height&quot; sliders.
-Note how the &quot;Area&quot; is automatically updated.</p>
+<p>Drag the &quot;Width&quot; and &quot;Height&quot; sliders and
+note how the &quot;Area&quot; is automatically updated.</p>
 <h2 id="reactive-css" tabindex="-1">Reactive CSS</h2>
 <p>Wrec supports JavaScript expressions in CSS property values.</p>
 <p>The following color picker component demonstrates this.
