@@ -1480,13 +1480,19 @@ state.color = 'red'; // reactively changes a state property
 state.team.leader.name = 'Mark'; // reactively changes a state property
 ```
 
-The data in each `WrecState` object is automatically persisted
-to `sessionStorage` each time the user refreshes the page.
+The data in each `WrecState` object can be persisted to `sessionStorage`
+so the data is not lost if the user refreshes the page.
 The keys are "wrec-state-" followed by the `WrecState` name.
 The data is automatically restored as long as each `WrecState` object
 is created in a `Window` `onload` handler, as shown above.
-In addition to avoiding data loss, this enables sharing state
-between pages of a multi-page web app.
+This also enables sharing state between pages of a multi-page web app.
+
+The `WrecState` `subscribe` method enables arbitrary code
+to listen for state changes at specified paths.
+To listen for changes at all paths, omit the second parameter.
+For example, if `myState` is a `WrecState` object that holds a "color" property,
+the following code listens for changes to it.
+When finished listening, call the `unsubscribe` function that is returned.
 
 Data in `WrecState` objects is subject to potential XSS attacks
 and exposure to malicious browser extensions.
