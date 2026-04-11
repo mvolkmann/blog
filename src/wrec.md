@@ -624,6 +624,11 @@ Here it is in action:
 Drag the "Width" and "Height" sliders and
 note how the "Area" is automatically updated.
 
+It is possible for computed property expressions to form a cycle.
+For example, given properties `a`, `b`, and `c`, they can be defined
+such that `a` depends on `b`, `b` depends on `c`, and `c` depends on `a`.
+Wrec detects these cycles and throws an error.
+
 ## Reactive CSS
 
 Wrec supports JavaScript expressions in CSS property values.
