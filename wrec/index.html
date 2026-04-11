@@ -507,6 +507,10 @@ are both used by the <code>rectangleArea</code> method.</p>
 </code></pre>
 <p>Drag the &quot;Width&quot; and &quot;Height&quot; sliders and
 note how the &quot;Area&quot; is automatically updated.</p>
+<p>It is possible for computed property expressions to form a cycle.
+For example, given properties <code>a</code>, <code>b</code>, and <code>c</code>, they can be defined
+such that <code>a</code> depends on <code>b</code>, <code>b</code> depends on <code>c</code>, and <code>c</code> depends on <code>a</code>.
+Wrec detects these cycles and throws an error.</p>
 <h2 id="reactive-css" tabindex="-1">Reactive CSS</h2>
 <p>Wrec supports JavaScript expressions in CSS property values.</p>
 <p>The following color picker component demonstrates this.
