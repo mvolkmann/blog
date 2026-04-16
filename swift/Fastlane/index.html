@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Fastlane</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Fastlane</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#provisioning-profiles-and-code-signing">Provisioning Profiles and Code Signing</a></li><li><a href="#installing">Installing</a></li><ul><li><a href="#ruby">Ruby</a></li><li><a href="#fastlane">Fastlane</a></li></ul><li><a href="#configuring">Configuring</a></li><ul><li><a href="#appfile">Appfile</a></li><li><a href="#snapfile">Snapfile</a></li></ul><li><a href="#registering-an-app">Registering an App</a></li><li><a href="#lanes">Lanes</a></li><li><a href="#.gitignore">.gitignore</a></li><li><a href="#running-tests">Running Tests</a></li><li><a href="#creating-a-signing-certificate">Creating a Signing Certificate</a></li><li><a href="#creating-a-provisioning-profile">Creating a Provisioning Profile</a></li><li><a href="#team-development">Team Development</a></li><li><a href="#building-an-app-archive">Building an App Archive</a></li><li><a href="#registering-beta-testers">Registering Beta Testers</a></li><li><a href="#deploying-to-testflight">Deploying to TestFlight</a></li><li><a href="#creating-screenshots">Creating Screenshots</a></li><li><a href="#adding-device-frames-to-screenshots">Adding Device Frames to Screenshots</a></li><li><a href="#uploading-screenshots">Uploading Screenshots</a></li><li><a href="#deploying-to-the-app-store">Deploying to the App Store</a></li><li><a href="#other-actions">Other Actions</a></li><li><a href="#ruby-vs.-swift">Ruby vs. Swift</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#complete-fastfile">Complete Fastfile</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Fastlane</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Fastlane</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#provisioning-profiles-and-code-signing">Provisioning Profiles and Code Signing</a></li><li><a href="#installing">Installing</a></li><ul><li><a href="#ruby">Ruby</a></li><li><a href="#fastlane">Fastlane</a></li></ul><li><a href="#configuring">Configuring</a></li><ul><li><a href="#appfile">Appfile</a></li><li><a href="#snapfile">Snapfile</a></li></ul><li><a href="#registering-an-app">Registering an App</a></li><li><a href="#lanes">Lanes</a></li><li><a href="#gitignore">.gitignore</a></li><li><a href="#running-tests">Running Tests</a></li><li><a href="#creating-a-signing-certificate">Creating a Signing Certificate</a></li><li><a href="#creating-a-provisioning-profile">Creating a Provisioning Profile</a></li><li><a href="#team-development">Team Development</a></li><li><a href="#building-an-app-archive">Building an App Archive</a></li><li><a href="#registering-beta-testers">Registering Beta Testers</a></li><li><a href="#deploying-to-testflight">Deploying to TestFlight</a></li><li><a href="#creating-screenshots">Creating Screenshots</a></li><li><a href="#adding-device-frames-to-screenshots">Adding Device Frames to Screenshots</a></li><li><a href="#uploading-screenshots">Uploading Screenshots</a></li><li><a href="#deploying-to-the-app-store">Deploying to the App Store</a></li><li><a href="#other-actions">Other Actions</a></li><li><a href="#ruby-vs-swift">Ruby vs. Swift</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#complete-fastfile">Complete Fastfile</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://fastlane.tools/?v=1.1.1" rel="noopener" target="_blank">Fastlane</a>
 is an open source platform managed by Google that automates
 many tasks related to iOS and Android mobile app deployment.
@@ -17,19 +19,19 @@ Fastlane provides a way to do this from the command line.</p>
 <p>Deploying apps to TestFlight and the App Store requires enrolling
 in the Apple Developer Program which is currently $99/year USD.</p>
 <p>Many of the sections below describe how to
-accomplish a specific task using a &quot;lane&quot;.
+accomplish a specific task using a “lane”.
 The final section pulls it all together into a complete <code>Fastfile</code>.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://fastlane.tools?v=1.1.1" rel="noopener" target="_blank">Fastlane home page</a></li>
 <li><a href="https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios?v=1.1.1" rel="noopener" target="_blank">How to build the perfect fastlane pipeline for iOS</a></li>
 </ul>
-<h2 id="provisioning-profiles-and-code-signing" tabindex="-1">Provisioning Profiles and Code Signing</h2>
-<p>For details on &quot;code signing&quot; and &quot;provisioning profiles&quot;,
+<h2 id="provisioning-profiles-and-code-signing">Provisioning Profiles and Code Signing</h2>
+<p>For details on “code signing” and “provisioning profiles”,
 see the Apple Tech Note <a href="https://developer.apple.com/documentation/technotes/tn3125-inside-code-signing-provisioning-profiles?v=1.1.1" rel="noopener" target="_blank">TN3125: Inside Code Signing: Provisioning Profiles</a>.
 This document says the following:</p>
 <blockquote>
-<p>Apple platforms, except macOS, won't run arbitrary third-party code.
+<p>Apple platforms, except macOS, won’t run arbitrary third-party code.
 All execution of third-party code must be authorized by Apple.
 This authorization comes in the form of a provisioning profile,
 which ties together five criteria:</p>
@@ -42,13 +44,13 @@ but can use a wildcard to match multiple apps)</li>
 after which the profile becomes invalid)</li>
 <li>How can those apps be entitled? (what apps are entitled to do)</li>
 </ul>
-<p>The exact format of provisioning profiles isn't documented
+<p>The exact format of provisioning profiles isn’t documented
 and could change at any time.</p>
 </blockquote>
 <p>Provisioning profiles include signing certificates, device identifiers,
 and a bundle ID. They are cryptographically signed.</p>
-<h2 id="installing" tabindex="-1">Installing</h2>
-<h3 id="ruby" tabindex="-1">Ruby</h3>
+<h2 id="installing">Installing</h2>
+<h3 id="ruby">Ruby</h3>
 <p>Ruby must be installed in order to use Fastlane.
 There are often issues with using the version of Ruby that comes with macOS.
 To avoid these issues, install a new version of Ruby using Homebrew.</p>
@@ -62,7 +64,7 @@ To avoid these issues, install a new version of Ruby using Homebrew.</p>
 the <code>PATH</code> environment variable value.
 When using zsh, the file to edit is <code>.zshrc</code> and
 the line to add is:</p>
-<pre><code class="language-bash">path=(&quot;/opt/homebrew/opt/ruby/bin&quot; $path)
+<pre><code class="language-bash">path=("/opt/homebrew/opt/ruby/bin" $path)
 </code></pre>
 </li>
 <li>
@@ -76,20 +78,20 @@ the line to add is:</p>
 <p>Enter <code>gem install bundler</code>.</p>
 </li>
 </ol>
-<h3 id="fastlane" tabindex="-1">Fastlane</h3>
+<h3 id="fastlane">Fastlane</h3>
 <ol>
 <li>Install fastlane by entering <code>brew install fastlane</code>.</li>
 <li>If git is not already installed, enter <code>brew install git</code>.</li>
 <li>If the Xcode Command Line Tools are not already installed:
 <ol>
 <li>Enter <code>xcode-select --install</code>.</li>
-<li>In the dialog that appears, click the &quot;Install&quot; button.</li>
+<li>In the dialog that appears, click the “Install” button.</li>
 <li>Agree to the terms.</li>
 <li>Wait about 10 minutes for the download and install to complete.</li>
 </ol>
 </li>
 </ol>
-<h2 id="configuring" tabindex="-1">Configuring</h2>
+<h2 id="configuring">Configuring</h2>
 <ol>
 <li>
 <p>Add the following environment variables in your shell configuration file
@@ -121,23 +123,23 @@ After each tip, press the return key to continue.</p>
 <p>Answer many more questions including your Apple ID and password.</p>
 <ul>
 <li>For the UI testing scheme, choose the default scheme.</li>
-<li>For &quot;Enable automatic upload&quot;, choose &quot;n&quot;.</li>
+<li>For “Enable automatic upload”, choose “n”.</li>
 </ul>
 </li>
 <li>
 <p>This results in a new directory named <code>fastlane</code>.
-When the option &quot;Manual&quot; is selected, this directory will
+When the option “Manual” is selected, this directory will
 contain the files <code>Appfile</code> and <code>Fastfile</code>.
-When the option &quot;Automate screenshots&quot; is selected, this directory will
+When the option “Automate screenshots” is selected, this directory will
 also contain the files <code>Snapfile</code>, and <code>SnapshotHelper.swift</code>.</p>
 </li>
 <li>
 <p>Add the <code>fastlane</code> directory and the files <code>Gemfile</code> and <code>Gemfile.lock</code>
 to the Xcode project.</p>
 <ol>
-<li>Select File ... Add Files to &quot;{project-name}&quot;...</li>
+<li>Select File … Add Files to “{project-name}”…</li>
 <li>Select the <code>fastlane</code> directory.</li>
-<li>Click the &quot;Add&quot; button.</li>
+<li>Click the “Add” button.</li>
 </ol>
 </li>
 <li>
@@ -145,26 +147,26 @@ to the Xcode project.</p>
 to the git repository.</p>
 </li>
 </ol>
-<h3 id="appfile" tabindex="-1">Appfile</h3>
+<h3 id="appfile">Appfile</h3>
 <p>This is a Ruby source file found in the <code>fastlane</code> directory
 that defines values used in the <code>Fastfile</code> file.
 It should contain the following:</p>
-<pre><code class="language-ruby">app_identifier &quot;{app-bundle-identifier}&quot;
-apple_id &quot;{my-apple-id}&quot;
+<pre><code class="language-ruby">app_identifier "{app-bundle-identifier}"
+apple_id "{my-apple-id}"
 
 # The steps below describe how to obtain this value.
-team_id &quot;{developer-portal-team-id}&quot; # 10 characters
+team_id "{developer-portal-team-id}" # 10 characters
 
 # The steps below describe how to obtain this value.
 # Omit this line until the value is known.
-itc_team_id &quot;{app-store-connect-team-id}&quot; # 9-digit number
+itc_team_id "{app-store-connect-team-id}" # 9-digit number
 </code></pre>
 <p>To get the Developer Portal Team ID:</p>
 <ol>
 <li>Browse <a href="https://developer.apple.com/?v=1.1.1" rel="noopener" target="_blank">developer.apple.com</a>.</li>
-<li>Click &quot;Account&quot; and sign in.</li>
-<li>Scroll down to the &quot;Membership Details&quot; section.</li>
-<li>Copy the &quot;Team ID&quot; value.</li>
+<li>Click “Account” and sign in.</li>
+<li>Scroll down to the “Membership Details” section.</li>
+<li>Copy the “Team ID” value.</li>
 <li>Paste it as the value for <code>team_id</code> in <code>fastlane/Appfile</code>.</li>
 </ol>
 <p>To get the AppStoreConnect Team ID:</p>
@@ -180,7 +182,7 @@ Copy the <code>itc_team_id</code> value.</li>
 </ol>
 <p>For more information about the file <code>Appfile</code>, see the fastlane docs on
 <a href="https://docs.fastlane.tools/advanced/#appfile?v=1.1.1" rel="noopener" target="_blank">Appfile</a>.</p>
-<h3 id="snapfile" tabindex="-1">Snapfile</h3>
+<h3 id="snapfile">Snapfile</h3>
 <p>This file is used to determine the variations of screenshots
 (device types and languages) that should be created.
 It is only needed if screenshots will be generated.
@@ -190,7 +192,7 @@ It is a Ruby source file found in the <code>fastlane</code> directory.</p>
 <p>If the file <code>fastlane/Snapfile</code> does not exist,
 cd to the project root directory and
 enter <code>fastlane snapshot init</code> to create it.</p>
-<p>If you get the error &quot;Could not determine installed iOS SDK version.&quot;,
+<p>If you get the error “Could not determine installed iOS SDK version.”,
 enter <code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code>
 and try again.
 Note that the app may have a different name that <code>Xcode</code>
@@ -203,21 +205,21 @@ such as <code>Xcode-beta</code>.</p>
 <p>Uncomment lines so it indicates the devices and languages
 to use for creating screenshots. For example:</p>
 <pre><code class="language-ruby">devices([
-  &quot;iPhone 8 Plus&quot;,
-  &quot;iPhone 13 Pro Max&quot;,
-  &quot;iPad Pro (12.9-inch) (2nd generation)&quot;,
-  &quot;iPad Pro (12.9-inch) (6th generation)&quot;
+  "iPhone 8 Plus",
+  "iPhone 13 Pro Max",
+  "iPad Pro (12.9-inch) (2nd generation)",
+  "iPad Pro (12.9-inch) (6th generation)"
 ])
 
 languages([
   # These are five most used languages in the world
   # in order from most to least used
   # including the region in which they are most used.
-  &quot;en-US&quot;, # English - USA
-  &quot;zh-CN&quot;, # Chinese Simplified - China
-  &quot;hi-IN&quot;, # Hindi - India
-  &quot;es-ES&quot;, # Spanish - Spain
-  &quot;fr-FR&quot; # French - France
+  "en-US", # English - USA
+  "zh-CN", # Chinese Simplified - China
+  "hi-IN", # Hindi - India
+  "es-ES", # Spanish - Spain
+  "fr-FR" # French - France
 ])
 </code></pre>
 </li>
@@ -225,7 +227,7 @@ languages([
 <p>Add simulators for each of the devices listed above.
 It may be necessary to add new versions of these devices
 that use a newer version of iOS if the app requires that.
-For example, you may have a simulator for &quot;iPhone 8 Plus&quot; running iOS 15.5,
+For example, you may have a simulator for “iPhone 8 Plus” running iOS 15.5,
 but not one running iOS 16.4.
 If when running Fastlane you get an error saying it cannot find
 a certain simulator and you have multiple version of Xcode installed,
@@ -234,16 +236,16 @@ verify that it is using the intended version by entering
 </li>
 <li>
 <p>Uncomment the line that calls the <code>scheme</code> function
-and change it to <code>scheme(&quot;ScreenshotTests&quot;)</code>.</p>
+and change it to <code>scheme("ScreenshotTests")</code>.</p>
 </li>
 <li>
-<p>Uncomment the line <code>output_directory(&quot;./screenshots&quot;)</code>
+<p>Uncomment the line <code>output_directory("./screenshots")</code>
 and change the path to <code>./fastlane/screenshots</code>.</p>
 </li>
 <li>
 <p>Uncomment the line <code>clear_previous_screenshots(true)</code>.
 This deletes all the <code>.png</code> files in the <code>fastlane/screenshots</code> directory.
-Perhaps this isn't always desirable.</p>
+Perhaps this isn’t always desirable.</p>
 </li>
 <li>
 <p>Uncomment the line <code>override_status_bar(true)</code> to set the status bar to
@@ -257,7 +259,7 @@ Tests that need to wait for elements to appear seem to fail without this.</p>
 <p>Add the file <code>fastlane/Snapfile</code> to the Git repository.</p>
 </li>
 </ol>
-<h2 id="registering-an-app" tabindex="-1">Registering an App</h2>
+<h2 id="registering-an-app">Registering an App</h2>
 <p>To register the app to be managed on the Apple Developer Portal
 and App Store Connect, see <a href="/blog/swift/TestFlight">TestFlight</a>.</p>
 <p>The fastlane action <a href="https://docs.fastlane.tools/actions/produce/?v=1.1.1" rel="noopener" target="_blank">produce</a>
@@ -265,8 +267,8 @@ which is an alias for <code>create_app_online</code>
 can be used to automate this process.
 Since new apps are not created frequently,
 it may be better to do this manually.</p>
-<h2 id="lanes" tabindex="-1">Lanes</h2>
-<p>The file <code>Fastfile</code> defines &quot;lanes&quot; which are sequences of actions
+<h2 id="lanes">Lanes</h2>
+<p>The file <code>Fastfile</code> defines “lanes” which are sequences of actions
 that automate a specific task.
 Lanes can be run from the command line or by CI/CD servers.
 A lane can be specific to a given platform (ex. ios or mac)
@@ -284,11 +286,11 @@ can be executed with <code>fastlane screenshots</code>.</p>
 enter <code>fastlane</code>.
 To execute one of the lanes, enter its number.
 To exit without executing a lane, enter 0 or press ctrl-c.</p>
-<h2 id=".gitignore" tabindex="-1">.gitignore</h2>
+<h2 id="gitignore">.gitignore</h2>
 <p>The following Fastlane-related files should be listed in the <code>.gitignore</code> file,
 either because they contain sensitive information or
 because they contain data that changes frequently
-and just doesn't need to be persisted.</p>
+and just doesn’t need to be persisted.</p>
 <pre><code class="language-text">fastlane/AuthKey_*.p8
 fastlane/builds
 fastlane/Preview.html
@@ -300,7 +302,7 @@ fastlane/.env.default
 *.mobileprovision
 *.p12
 </code></pre>
-<h2 id="running-tests" tabindex="-1">Running Tests</h2>
+<h2 id="running-tests">Running Tests</h2>
 <p>For information on creating unit and UI tests for a project,
 see <a href="/blog/swift/XCTest">XCTest</a>.</p>
 <p>To run all the automated unit and UI tests in the project,
@@ -310,17 +312,17 @@ The tests run in a Simulator or on a connected device.
 They run much faster in Xcode than they do from fastlane.</p>
 <p>Add the following lane in <code>fastlane/Fastfile</code>:</p>
 <pre><code class="language-ruby">platform :ios do
-  desc &quot;Run tests&quot;
+  desc "Run tests"
   lane :tests do
     run_tests(
-      scheme: &quot;{scheme-name}&quot;
+      scheme: "{scheme-name}"
       devices: ['iPhone 8 Plus', 'iPhone 13 Pro Max']
     )
   end
 end
 </code></pre>
 <p>From the project root directory enter <code>fastlane tests</code>.</p>
-<h2 id="creating-a-signing-certificate" tabindex="-1">Creating a Signing Certificate</h2>
+<h2 id="creating-a-signing-certificate">Creating a Signing Certificate</h2>
 <p>To create a signing certificate, use the fastlane action <a href="https://docs.fastlane.tools/actions/cert/?v=1.1.1" rel="noopener" target="_blank">cert</a>
 which is an alias for <code>get_certificates</code>.
 This determines if a new signing certificate is needed. If so it:</p>
@@ -336,14 +338,14 @@ This determines if a new signing certificate is needed. If so it:</p>
 This file should be excluded from Git by adding it in <code>.gitignore</code>.</p>
 <p>This can be combined with the next step.</p>
 <p>To see all your certificates, browse <a href="https://developer.apple.com?v=1.1.1" rel="noopener" target="_blank">developer.apple.com</a>,
-click &quot;Account&quot;, sign in, and click &quot;Certificates&quot; under the
-&quot;Certificates, Identifiers &amp; Profiles&quot; section.</p>
-<h2 id="creating-a-provisioning-profile" tabindex="-1">Creating a Provisioning Profile</h2>
+click “Account”, sign in, and click “Certificates” under the
+“Certificates, Identifiers &#x26; Profiles” section.</p>
+<h2 id="creating-a-provisioning-profile">Creating a Provisioning Profile</h2>
 <p>To create a provisioning profile, use the fastlane action <a href="https://docs.fastlane.tools/actions/sigh/?v=1.1.1" rel="noopener" target="_blank">sigh</a>
 which is an alias for <code>get_provisioning_profile</code>.
 This can create, renew, download, and repair provisioning profiles.</p>
 <p>Add the following lane in <code>fastlane/Fastfile</code>:</p>
-<pre><code class="language-ruby">desc &quot;Creates a signing certificate and provisioning profile&quot;
+<pre><code class="language-ruby">desc "Creates a signing certificate and provisioning profile"
 lane :certs do
   get_certificates(development: true)
   get_provisioning_profile(development: true)
@@ -352,7 +354,7 @@ end
 <p>From the project root directory enter <code>fastlane certs</code>.</p>
 <p>A <code>.mobileprovision</code> file is created in the project root directory.
 This file should be excluded from Git by adding it in <code>.gitignore</code>.</p>
-<h2 id="team-development" tabindex="-1">Team Development</h2>
+<h2 id="team-development">Team Development</h2>
 <p>To configure Fastlane for use by a development team,
 use the fastlane action <a href="https://docs.fastlane.tools/actions/match/?v=1.1.1" rel="noopener" target="_blank">match</a>
 which is an alias for <code>sync_code_signing</code>.
@@ -364,7 +366,7 @@ so a team of developers can share them.</p>
 when an app is being developed by more than one person.</p>
 <p>This is the most complex fastlane action
 and I have not used it yet.</p>
-<h2 id="building-an-app-archive" tabindex="-1">Building an App Archive</h2>
+<h2 id="building-an-app-archive">Building an App Archive</h2>
 <p>To build an app archive file (.ipa),
 use the fastlane tool <a href="https://docs.fastlane.tools/actions/gym/?v=1.1.1" rel="noopener" target="_blank">gym</a>
 which is an alias for <code>build_app</code>.
@@ -376,21 +378,21 @@ This builds and packages an app, creating a signed <code>.ipa</code> or <code>.a
 <li>Open the project in Xcode.</li>
 <li>Select the top entry in the Project Navigator.</li>
 <li>Select the main target.</li>
-<li>Select the &quot;Build Settings&quot; tab.</li>
-<li>Scroll down to the &quot;Versioning&quot; section.</li>
-<li>Set &quot;Versioning System&quot; to &quot;Apple Generic&quot;.</li>
+<li>Select the “Build Settings” tab.</li>
+<li>Scroll down to the “Versioning” section.</li>
+<li>Set “Versioning System” to “Apple Generic”.</li>
 </ol>
 </li>
 <li>
-<p>Verify that the scheme to be used is &quot;shared&quot;.</p>
+<p>Verify that the scheme to be used is “shared”.</p>
 <ol>
 <li>Open the project in Xcode.</li>
 <li>Select the main scheme from the dropdown
 to the left of the device dropdown at the top.</li>
 <li>Click the scheme dropdown again.</li>
-<li>Select &quot;Edit Scheme...&quot;.</li>
+<li>Select “Edit Scheme…”.</li>
 <li>In the dialog that appears,
-verify that &quot;Shared&quot; checkbox at the bottom is checked.
+verify that “Shared” checkbox at the bottom is checked.
 It should be checked by default.</li>
 </ol>
 </li>
@@ -400,9 +402,9 @@ to create the file <code>fastlane/Gymfile</code>.</p>
 </li>
 <li>
 <p>Edit the file <code>fastlane/Gymfile</code> and replace the contents with the following:</p>
-<pre><code class="language-ruby">scheme(&quot;{scheme-name}&quot;)
-export_options({method: &quot;app-store&quot;})
-output_directory(&quot;./fastlane/builds&quot;)
+<pre><code class="language-ruby">scheme("{scheme-name}")
+export_options({method: "app-store"})
+output_directory("./fastlane/builds")
 </code></pre>
 </li>
 <li>
@@ -425,7 +427,7 @@ end
 <p>Select the General tab.</p>
 </li>
 <li>
-<p>In the &quot;Identity&quot; section, update the &quot;Version&quot; and &quot;Build&quot; numbers.</p>
+<p>In the “Identity” section, update the “Version” and “Build” numbers.</p>
 <p>The version number should be a semantic version like 1.2.3.
 The build number should be a sequential integer number like 7.</p>
 </li>
@@ -438,26 +440,26 @@ in the <code>fastlane/builds</code> directory.</p>
 </li>
 <li>
 <p>If you get an error message that says
-&quot;Provisioning profile ... doesn't include signing certificate&quot;,
-launch the &quot;Keychain Access&quot; app, delete all certificates
+“Provisioning profile … doesn’t include signing certificate”,
+launch the “Keychain Access” app, delete all certificates
 with the name that appears in the error message,
 and enter <code>fastlane build</code> again.</p>
 </li>
 </ol>
-<h2 id="registering-beta-testers" tabindex="-1">Registering Beta Testers</h2>
+<h2 id="registering-beta-testers">Registering Beta Testers</h2>
 <p>To register beta testers in TestFlight:</p>
 <ol>
 <li>Browse <a href="https://appstoreconnect.apple.com?v=1.1.1" rel="noopener" target="_blank">App Store Connect</a>.</li>
-<li>Click the &quot;My Apps&quot; button.</li>
+<li>Click the “My Apps” button.</li>
 <li>Click the button for the app to be tested.</li>
-<li>Click the &quot;TestFlight&quot; tab.</li>
-<li>Create a group of testers by clicking the &quot;+&quot; button
-after either &quot;Internal Testers&quot; or &quot;External Testers&quot;.</li>
+<li>Click the “TestFlight” tab.</li>
+<li>Create a group of testers by clicking the ”+” button
+after either “Internal Testers” or “External Testers”.</li>
 <li>Enter a group name.</li>
-<li>For each tester to be added, click the &quot;+&quot; after &quot;Testers&quot;
+<li>For each tester to be added, click the ”+” after “Testers”
 and enter their email address and name.</li>
 </ol>
-<h2 id="deploying-to-testflight" tabindex="-1">Deploying to TestFlight</h2>
+<h2 id="deploying-to-testflight">Deploying to TestFlight</h2>
 <p>To deploy the app to TestFlight,
 use the fastlane tool <a href="https://docs.fastlane.tools/actions/pilot/?v=1.1.1" rel="noopener" target="_blank">pilot</a>
 which is an alias for <code>upload_to_testflight</code>.
@@ -469,14 +471,14 @@ and import or export data describing all the testers.</p>
 <p>Create an app-specific password.</p>
 <ol>
 <li>Browse <a href="https://appleid.apple.com/account/manage?v=1.1.1" rel="noopener" target="_blank">appleid.apple.com</a>.</li>
-<li>Click the &quot;Sign In&quot; button and sign in.</li>
-<li>Click &quot;App-Specific Passwords&quot;.</li>
+<li>Click the “Sign In” button and sign in.</li>
+<li>Click “App-Specific Passwords”.</li>
 <li>If there are no existing app-specific passwords,
-click the &quot;Generate an app-specific password&quot; button.</li>
+click the “Generate an app-specific password” button.</li>
 <li>If there are existing app-specific passwords,
-click the &quot;+&quot; after &quot;Passwords&quot;.</li>
+click the ”+” after “Passwords”.</li>
 <li>Enter the app name.</li>
-<li>Click the &quot;Create&quot; button.</li>
+<li>Click the “Create” button.</li>
 <li>Confirm your Apple ID password.</li>
 <li>Copy the generated password so it can be passed in the file described next.</li>
 </ol>
@@ -493,7 +495,7 @@ FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD={app-specific-password}
 <pre><code class="language-ruby">lane :beta do
 # I prefer to update the Version and Build numbers manually in Xcode.
 # increment_build_number
-# increment_version_number(bump_type: &quot;patch&quot;)
+# increment_version_number(bump_type: "patch")
 upload_to_testflight(
    ipa: './fastlane/builds/{ipa-name}.ipa', # in fastlane/builds
    # I prefer to submit manually on the App Store Connect web page
@@ -508,29 +510,29 @@ end
 This waits for processing to complete which takes around four minutes.</p>
 </li>
 <li>
-<p>If the error message &quot;The bundle version must be higher than
-the previously uploaded version&quot; appears:</p>
+<p>If the error message “The bundle version must be higher than
+the previously uploaded version” appears:</p>
 <ol>
-<li>See the steps in the &quot;Building an App Archive&quot; section
-to update the &quot;Version&quot; and &quot;Build&quot; numbers.</li>
+<li>See the steps in the “Building an App Archive” section
+to update the “Version” and “Build” numbers.</li>
 <li>Enter <code>fastlane build</code> to build a new a app archive.</li>
 <li>Enter <code>fastlane beta</code> again.</li>
 </ol>
 </li>
 </ol>
-<h2 id="creating-screenshots" tabindex="-1">Creating Screenshots</h2>
+<h2 id="creating-screenshots">Creating Screenshots</h2>
 <p>To create localized screenshots for each screen in the app,
 use the fastlane tool <a href="https://docs.fastlane.tools/actions/snapshot/?v=1.1.1" rel="noopener" target="_blank">snapshot</a>
 which is an alias for <code>capture_screenshots</code>
 which is an alias for <code>capture_ios_screenshots</code>.
 This automates generating screenshots for each screen navigated to in a UI Test.
 It repeats this for each supported device size and language.</p>
-<p>The following steps assume that &quot;Automate screenshots&quot; was selected
+<p>The following steps assume that “Automate screenshots” was selected
 when the <code>fastlane init</code> command was run.</p>
 <ol>
 <li>
 <p>Verify that <code>fastlane/Snapfile</code> was created
-as described in the &quot;Configuring&quot; section above.</p>
+as described in the “Configuring” section above.</p>
 </li>
 <li>
 <p>Create a new target.</p>
@@ -539,25 +541,25 @@ as described in the &quot;Configuring&quot; section above.</p>
 <p>Select the topmost entry in the Project Navigator.</p>
 </li>
 <li>
-<p>Click the &quot;+&quot; button at the bottom of the left nav to create another target
+<p>Click the ”+” button at the bottom of the left nav to create another target
 that is separate from the main unit and UI test targets.</p>
 </li>
 <li>
-<p>Enter &quot;test&quot; to filter the set of templates displayed.</p>
+<p>Enter “test” to filter the set of templates displayed.</p>
 </li>
 <li>
-<p>Select &quot;UI Testing Bundle&quot;.</p>
+<p>Select “UI Testing Bundle”.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
-<p>Change the &quot;Product Name&quot; to &quot;ScreenshotTests&quot;.</p>
+<p>Change the “Product Name” to “ScreenshotTests”.</p>
 </li>
 <li>
-<p>Click the &quot;Finish&quot; button.</p>
+<p>Click the “Finish” button.</p>
 <p>This creates a new folder that appears in the Project Navigator
-whose name is &quot;ScreenshotTests&quot;.
+whose name is “ScreenshotTests”.
 The new folder contains a <code>.swift</code> file with the same name
 containing starter test code.</p>
 </li>
@@ -565,26 +567,26 @@ containing starter test code.</p>
 </li>
 <li>
 <p>Delete the file <code>ScreenshotTests/ScreenshotTestsLaunchTests.swift</code>.
-This isn't needed for capturing screenshots.</p>
+This isn’t needed for capturing screenshots.</p>
 </li>
 <li>
 <p>Create a new scheme.</p>
 <ol>
-<li>Click the scheme dropdown at the top and select &quot;New Scheme...&quot;.</li>
-<li>Enter &quot;ScreenshotTests&quot; for the name.</li>
-<li>Click the &quot;OK&quot; button.</li>
-<li>Click the scheme dropdown at the top again and select &quot;Edit Scheme...&quot;.</li>
+<li>Click the scheme dropdown at the top and select “New Scheme…”.</li>
+<li>Enter “ScreenshotTests” for the name.</li>
+<li>Click the “OK” button.</li>
+<li>Click the scheme dropdown at the top again and select “Edit Scheme…”.</li>
 <li>In the dialog that appears, verify that
-the &quot;Shared&quot; checkbox at the bottom is checked.</li>
-<li>Select &quot;Test&quot; in the left nav.</li>
-<li>If &quot;ScreenshotTests&quot; does not appear in the list of &quot;Test Plans&quot;
+the “Shared” checkbox at the bottom is checked.</li>
+<li>Select “Test” in the left nav.</li>
+<li>If “ScreenshotTests” does not appear in the list of “Test Plans”
 <ol>
-<li>Click &quot;+&quot; at the bottom.</li>
-<li>In the dialog that appears, select the &quot;ScreenshotTests&quot; target
-and click the &quot;Add&quot; button.</li>
+<li>Click ”+” at the bottom.</li>
+<li>In the dialog that appears, select the “ScreenshotTests” target
+and click the “Add” button.</li>
 </ol>
 </li>
-<li>Click the &quot;Close&quot; button.</li>
+<li>Click the “Close” button.</li>
 </ol>
 </li>
 <li>
@@ -624,10 +626,10 @@ visits each screen in the app.</p>
 </li>
 <li>
 <p>After the code that visits each screen,
-call <code>snapshot(&quot;{sequence-number}-{screen-name}&quot;)</code>.</p>
+call <code>snapshot("{sequence-number}-{screen-name}")</code>.</p>
 <p>The sequence numbers keep the screenshots in the intended order.
-The actual file name will begin with the device name (ex. &quot;iPhone 14-&quot;)
-and end with &quot;.png&quot;.</p>
+The actual file name will begin with the device name (ex. “iPhone 14-”)
+and end with “.png”.</p>
 <p>Screenshots will only be captured when running in a simulator.
 The <code>snapshot</code> function does nothing when running on a real device.</p>
 </li>
@@ -635,9 +637,9 @@ The <code>snapshot</code> function does nothing when running on a real device.</
 </li>
 <li>
 <p>Add the following lane in <code>fastlane/Fastfile</code>:</p>
-<pre><code class="language-ruby">desc &quot;Generates localized screenshots&quot;
+<pre><code class="language-ruby">desc "Generates localized screenshots"
 lane :screenshots do
-  capture_screenshots(scheme: &quot;{screenshot-scheme-name}&quot;)
+  capture_screenshots(scheme: "{screenshot-scheme-name}")
 end
 </code></pre>
 </li>
@@ -646,16 +648,16 @@ end
 light/dark mode. Many seem to default to dark mode.</p>
 <ol>
 <li>Open Xcode.</li>
-<li>Select Xcode ... Open Developer Tool ... Simulator.</li>
+<li>Select Xcode … Open Developer Tool … Simulator.</li>
 <li>For each device
 <ul>
 <li>In the Simulator app, select
-File ... Open Simulator ... iOS {version} ... {device-type}.</li>
+File … Open Simulator … iOS {version} … {device-type}.</li>
 <li>In the device simulator
 <ul>
 <li>Open the Settings app.</li>
-<li>Select &quot;Developer&quot;.</li>
-<li>Toggle &quot;Dark Appearance&quot; to the desired setting.</li>
+<li>Select “Developer”.</li>
+<li>Toggle “Dark Appearance” to the desired setting.</li>
 </ul>
 </li>
 </ul>
@@ -665,8 +667,8 @@ File ... Open Simulator ... iOS {version} ... {device-type}.</li>
 <li>
 <p>From the project root directory, enter <code>fastlane screenshots</code>.
 This generates <code>.png</code> files in the <code>fastlane/screenshots</code> directory.
-Warning messages that say &quot;deviceType from ...
-was NULL when -platform called&quot; can be ignored.</p>
+Warning messages that say “deviceType from …
+was NULL when -platform called” can be ignored.</p>
 </li>
 <li>
 <p>An HTML file that displays all the screenshots
@@ -677,9 +679,9 @@ To skip this, add the following to the <code>screenshots</code> lane definition:
 </li>
 </ol>
 <p>For more information, see <a href="https://docs.fastlane.tools/getting-started/ios/screenshots/?v=1.1.1" rel="noopener" target="_blank">fastlane screenshots</a>.</p>
-<h2 id="adding-device-frames-to-screenshots" tabindex="-1">Adding Device Frames to Screenshots</h2>
+<h2 id="adding-device-frames-to-screenshots">Adding Device Frames to Screenshots</h2>
 <p>To add device frames around screenshots,
-use the fastlane tool &quot;frameit&quot; <a href="https://docs.fastlane.tools/actions/frameit/?v=1.1.1" rel="noopener" target="_blank">frameit</a>
+use the fastlane tool “frameit” <a href="https://docs.fastlane.tools/actions/frameit/?v=1.1.1" rel="noopener" target="_blank">frameit</a>
 which is an alias for <code>frame_screenshots</code>.</p>
 <p>Before running this, enter <code>brew install imagemagick</code>.</p>
 <p>This action creates new <code>.png</code> files below the <code>fastlane/screenshots</code> directory
@@ -688,13 +690,13 @@ The framed screenshots are beautiful, but they are all larger than
 the originals and are incompatible with the sizes the App Store accepts.
 See this <a href="https://github.com/fastlane/fastlane/issues/21067?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
 <p>Add the following lane in <code>fastlane/Fastfile</code>:</p>
-<pre><code class="language-ruby">desc &quot;Creates new screenshots from existing ones that have device frames&quot;
+<pre><code class="language-ruby">desc "Creates new screenshots from existing ones that have device frames"
 lane :frames do
   frame_screenshots
 end
 </code></pre>
 <p>From the project root directory enter <code>fastlane frames</code>.</p>
-<h2 id="uploading-screenshots" tabindex="-1">Uploading Screenshots</h2>
+<h2 id="uploading-screenshots">Uploading Screenshots</h2>
 <p>To upload the app to the App Store,
 use the fastlane tool <a href="https://docs.fastlane.tools/actions/deliver/?v=1.1.1" rel="noopener" target="_blank">deliver</a>
 which is an alias for <code>upload_to_app_store</code>.
@@ -702,9 +704,9 @@ This can upload screenshots, metadata, and binaries to App Store Connect.
 It can also update the app version number and submit the app for review.</p>
 <p>The app must already be registered in order to upload screenshots.</p>
 <p>Add the following lane in <code>fastlane/Fastfile</code>:</p>
-<pre><code class="language-ruby">  desc &quot;Uploads localized screenshots to App Store&quot;
-  # I needed to rename the &quot;hi-IN&quot; directory to &quot;hi&quot;
-  # and the &quot;zh-CN&quot; directory to &quot;zh-Hans&quot;.
+<pre><code class="language-ruby">  desc "Uploads localized screenshots to App Store"
+  # I needed to rename the "hi-IN" directory to "hi"
+  # and the "zh-CN" directory to "zh-Hans".
   lane :upload_screenshots do
     # Only uploading screenshots.
     upload_to_app_store(
@@ -715,7 +717,7 @@ It can also update the app version number and submit the app for review.</p>
   end
 </code></pre>
 <p>From the project root directory enter <code>fastlane upload_screenshots</code>.</p>
-<h2 id="deploying-to-the-app-store" tabindex="-1">Deploying to the App Store</h2>
+<h2 id="deploying-to-the-app-store">Deploying to the App Store</h2>
 <p>The same fastlane action used to upload screenshots, <a href="https://docs.fastlane.tools/actions/deliver/?v=1.1.1" rel="noopener" target="_blank">deliver</a>
 is used to upload an app to the App Store.</p>
 <p>I prefer to submit manually on the App Store Connect web page
@@ -744,7 +746,7 @@ end
 <p>From the project root directory, enter <code>fastlane prod</code>.</p>
 </li>
 </ol>
-<h2 id="other-actions" tabindex="-1">Other Actions</h2>
+<h2 id="other-actions">Other Actions</h2>
 <p>All the actions supported by fastlane are listed at <a href="https://docs.fastlane.tools/actions/?v=1.1.1" rel="noopener" target="_blank">fastlane actions</a>.
 There are many more than were described above!</p>
 <p>In addition to the actions already described, consider using these:</p>
@@ -752,24 +754,24 @@ There are many more than were described above!</p>
 <li>
 <p>The <a href="https://docs.fastlane.tools/actions/get_version_number/?v=1.1.1" rel="noopener" target="_blank">get_version_number</a> and <a href="https://docs.fastlane.tools/actions/get_build_number/?v=1.1.1" rel="noopener" target="_blank">get_build_number</a> actions return values.
 They can be combined in a lane like the following:</p>
-<pre><code class="language-ruby">desc &quot;Prints the version and build number&quot;
+<pre><code class="language-ruby">desc "Prints the version and build number"
 lane :version do
   version = get_version_number
   build = get_build_number
-  puts &quot;version #{version}, build #{build}&quot;
+  puts "version #{version}, build #{build}"
 end
 </code></pre>
 </li>
 <li>
 <p>The <a href="https://docs.fastlane.tools/actions/notification/?v=1.1.1" rel="noopener" target="_blank">notification</a> displays a macOS notification.
 The first time this is used, the System Settings app will open.
-To enable &quot;terminal-notifier&quot; to display notifications,
-toggle &quot;Allow Notifications&quot; to on and select &quot;Alerts&quot;.</p>
-<p>I tried the following, but haven't gotten it to work yet.</p>
+To enable “terminal-notifier” to display notifications,
+toggle “Allow Notifications” to on and select “Alerts”.</p>
+<p>I tried the following, but haven’t gotten it to work yet.</p>
 <pre><code class="language-ruby">notification(
-  title: &quot;Morning Greeting&quot;,
-  subtitle: &quot;Daily Advice&quot;,
-  message: &quot;Good morning Mark! Learn something today.&quot;
+  title: "Morning Greeting",
+  subtitle: "Daily Advice",
+  message: "Good morning Mark! Learn something today."
 )
 </code></pre>
 </li>
@@ -796,37 +798,37 @@ action generates a code coverage report.</p>
 action performs code validation using SwiftLint.</p>
 </li>
 </ul>
-<h2 id="ruby-vs.-swift" tabindex="-1">Ruby vs. Swift</h2>
+<h2 id="ruby-vs-swift">Ruby vs. Swift</h2>
 <p>By default <code>Fastfile</code> contains code written in the Ruby programming language.
 There is a option to use code written in the Swift programming language,
 but that executes more slowly because it still interacts with Ruby.
 See <a href="https://docs.fastlane.tools/getting-started/ios/fastlane-swift/?v=1.1.1" rel="noopener" target="_blank">Getting Started with Fastlane.swift</a>.</p>
-<h2 id="authentication" tabindex="-1">Authentication</h2>
+<h2 id="authentication">Authentication</h2>
 <p>The information in this section may only be needed
 when using the <code>match</code> action.</p>
 <ol>
 <li>Browse <a href="https://appstoreconnect.apple.com?v=1.1.1" rel="noopener" target="_blank">App Store Connect</a>.</li>
 <li>Login</li>
-<li>Click the &quot;Users and Access&quot; button.</li>
-<li>Select the &quot;Keys&quot; tab.</li>
-<li>Click the &quot;Request Access&quot; button.</li>
+<li>Click the “Users and Access” button.</li>
+<li>Select the “Keys” tab.</li>
+<li>Click the “Request Access” button.</li>
 <li>Check the checkbox to agree to terms.</li>
-<li>Click the &quot;Submit&quot; button.</li>
-<li>Click the &quot;Generate API Key&quot; button.</li>
-<li>Enter a key name such as &quot;fastlane key&quot;.</li>
-<li>Select an access role such as &quot;App Manager&quot;.</li>
-<li>Click the &quot;Generate&quot; button.</li>
-<li>Click &quot;Download API Key&quot;.</li>
-<li>Click the &quot;Download&quot; button.</li>
+<li>Click the “Submit” button.</li>
+<li>Click the “Generate API Key” button.</li>
+<li>Enter a key name such as “fastlane key”.</li>
+<li>Select an access role such as “App Manager”.</li>
+<li>Click the “Generate” button.</li>
+<li>Click “Download API Key”.</li>
+<li>Click the “Download” button.</li>
 <li>Move the downloaded <code>.p8</code> file to the project <code>fastlane</code> directory.</li>
 </ol>
 <p>To get base64 encoded key content enter <code>cat {key-name}.p8 | base64</code>.</p>
 <p>In the file <code>Fastfile</code> add the following
 before any action that requires authentication:</p>
 <pre><code class="language-ruby">app_store_connect_api_key(
-  key_id: &quot;{key-id}&quot;, # from downloaded key file name
-  issuer_id: &quot;{issuer-id}&quot;, # How can this be determined?
-  key_content: &quot;{base64-encoded-key}&quot;, # from base64 command above
+  key_id: "{key-id}", # from downloaded key file name
+  issuer_id: "{issuer-id}", # How can this be determined?
+  key_content: "{base64-encoded-key}", # from base64 command above
   is_key_content_base64: true,
   in_house: false # indicates whether the team is Enterprise
 )
@@ -845,7 +847,7 @@ For example:</p>
 <pre><code class="language-ruby">api_key = lane_context[SharedValues::APP_STORE_CONNECT_API_KEY]
 # Pass api_key to any action.
 </code></pre>
-<h2 id="complete-fastfile" tabindex="-1">Complete Fastfile</h2>
+<h2 id="complete-fastfile">Complete Fastfile</h2>
 <p>This is the <code>Fastfile</code> for my WeatherKitDemo a project.</p>
 <pre><code class="language-ruby"># Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
@@ -854,34 +856,34 @@ default_platform :ios
 
 platform :ios do
 
-  desc &quot;Runs all unit and UI tests&quot;
+  desc "Runs all unit and UI tests"
   # This works despite warnings that say
-  # &quot;deviceType from ... was NULL when -platform called&quot;.
+  # "deviceType from ... was NULL when -platform called".
   lane :tests do
     run_tests(
-      devices: [&quot;iPhone 8 Plus&quot;, &quot;iPhone 13 Pro Max&quot;],
-      scheme: &quot;WeatherKitDemo&quot;
+      devices: ["iPhone 8 Plus", "iPhone 13 Pro Max"],
+      scheme: "WeatherKitDemo"
     )
   end
 
-  desc &quot;Creates a signing certificate and provisioning profile&quot;
+  desc "Creates a signing certificate and provisioning profile"
   lane :certs do
     get_certificates(development: true)
     get_provisioning_profile(development: true)
   end
 
-  desc &quot;Builds the app and produces symbol and ipa files.&quot;
+  desc "Builds the app and produces symbol and ipa files."
   lane :build do
     build_app
   end
 
-  desc &quot;Uploads the app to TestFlight&quot;
+  desc "Uploads the app to TestFlight"
   # Update version and build number of target before running this.
   lane :beta do
     build
     # I prefer to update the Version and Build numbers manually in Xcode.
     # increment_build_number
-    # increment_version_number(bump_type: &quot;patch&quot;)
+    # increment_version_number(bump_type: "patch")
     upload_to_testflight(
       ipa: './fastlane/builds/WeatherKitDemo.ipa',
       # I prefer to submit manually on the App Store Connect web page
@@ -890,19 +892,19 @@ platform :ios do
     )
   end
 
-  desc &quot;Generates localized screenshots&quot;
+  desc "Generates localized screenshots"
   lane :screenshots do
-    capture_screenshots(scheme: &quot;ScreenshotTests&quot;)
+    capture_screenshots(scheme: "ScreenshotTests")
   end
 
-  desc &quot;Creates new screenshots from existing ones that have device frames&quot;
+  desc "Creates new screenshots from existing ones that have device frames"
   lane :frames do
     frame_screenshots
   end
 
-  desc &quot;Uploads localized screenshots to App Store&quot;
-  # I needed to rename the &quot;hi-IN&quot; directory to &quot;hi&quot;
-  # and the &quot;zh-CN&quot; directory to &quot;zh-Hans&quot;.
+  desc "Uploads localized screenshots to App Store"
+  # I needed to rename the "hi-IN" directory to "hi"
+  # and the "zh-CN" directory to "zh-Hans".
   lane :upload_screenshots do
     # Only uploading screenshots.
     upload_to_app_store(
@@ -912,7 +914,7 @@ platform :ios do
     )
   end
 
-  desc &quot;Uploads the app to the App Store&quot;
+  desc "Uploads the app to the App Store"
   # Update version and build number of target before running this.
   # See https://docs.fastlane.tools/actions/deliver/#submit-build.
   lane :prod do
@@ -931,5 +933,6 @@ platform :ios do
   end
 
 end
-</code></pre>
-</article> </body></html>
+</code></pre> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

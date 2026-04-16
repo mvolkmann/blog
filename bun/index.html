@@ -1,9 +1,10 @@
-<!DOCTYPE html><html lang="en"> <head><title>Bun</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Bun</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#benefits-over-npm-and-node.js">Benefits Over npm and Node.js</a></li><li><a href="#history">History</a></li><li><a href="#implementation">Implementation</a></li><li><a href="#framework-support">Framework Support</a></li><li><a href="#bun-apis">Bun APIs</a></li><li><a href="#installing">Installing</a></li><li><a href="#repl">REPL</a></li><li><a href="#projects">Projects</a></li><li><a href="#help">Help</a></li><li><a href="#package-manager">Package Manager</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#global-variables">Global Variables</a></li><li><a href="#importing-files">Importing Files</a></li><li><a href="#bun-global-variable">Bun Global Variable</a></li><li><a href="#http-server">HTTP Server</a></li><li><a href="#watch-mode">Watch Mode</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#executable-files">Executable Files</a></li><li><a href="#executing-without-installing">Executing Without Installing</a></li><li><a href="#import.meta">import.meta</a></li><li><a href="#console">Console</a></li><li><a href="#utilities">Utilities</a></li><li><a href="#jsx">JSX</a></li><li><a href="#serializing-objects">Serializing Objects</a></li><li><a href="#writing-and-reading-files">Writing and Reading Files</a></li><li><a href="#globbing">Globbing</a></li><li><a href="#websockets">WebSockets</a></li><li><a href="#sqlite">SQLite</a></li><li><a href="#foreign-function-interface-(ffi)">Foreign Function Interface (FFI)</a></li><li><a href="#bun-shell">Bun Shell</a></li><li><a href="#elysia">Elysia</a></li><li><a href="#todos">TODOs</a></li></ul></aside> <article><figure style="width: 33%">
-  <img alt="Bun logo" style="border: 0"
-    src="/blog/assets/bun-logo.svg?v=1.1.1">
+<!DOCTYPE html><html lang="en"> <head><title>Bun</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Bun</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#benefits-over-npm-and-nodejs">Benefits Over npm and Node.js</a></li><li><a href="#history">History</a></li><li><a href="#implementation">Implementation</a></li><li><a href="#framework-support">Framework Support</a></li><li><a href="#bun-apis">Bun APIs</a></li><li><a href="#installing">Installing</a></li><li><a href="#repl">REPL</a></li><li><a href="#projects">Projects</a></li><li><a href="#help">Help</a></li><li><a href="#package-manager">Package Manager</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#global-variables">Global Variables</a></li><li><a href="#importing-files">Importing Files</a></li><li><a href="#bun-global-variable">Bun Global Variable</a></li><li><a href="#http-server">HTTP Server</a></li><li><a href="#watch-mode">Watch Mode</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#executable-files">Executable Files</a></li><li><a href="#executing-without-installing">Executing Without Installing</a></li><li><a href="#importmeta">import.meta</a></li><li><a href="#console">Console</a></li><li><a href="#utilities">Utilities</a></li><li><a href="#jsx">JSX</a></li><li><a href="#serializing-objects">Serializing Objects</a></li><li><a href="#writing-and-reading-files">Writing and Reading Files</a></li><li><a href="#globbing">Globbing</a></li><li><a href="#websockets">WebSockets</a></li><li><a href="#sqlite">SQLite</a></li><li><a href="#foreign-function-interface-ffi">Foreign Function Interface (FFI)</a></li><li><a href="#bun-shell">Bun Shell</a></li><li><a href="#elysia">Elysia</a></li><li><a href="#todos">TODOs</a></li></ul></aside> <article> <figure style="width: 33%">
+  <img alt="Bun logo" style="border: 0" src="/blog/assets/bun-logo.svg?v=1.1.1">
 </figure>
-<h2 id="overview" tabindex="-1">Overview</h2>
-<p>&quot;<a href="https://bun.sh?v=1.1.1" rel="noopener" target="_blank">Bun</a> is a fast JavaScript all-in-one toolkit.&quot;
+<h2 id="overview">Overview</h2>
+<p>“<a href="https://bun.sh?v=1.1.1" rel="noopener" target="_blank">Bun</a> is a fast JavaScript all-in-one toolkit.”
 It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source under the MIT license.</p>
 <p>Bun can be used as a drop-in replacement for npm and Node.js.
@@ -11,7 +12,7 @@ The Bun runtime supports nearly all Node.js built-in modules (around 40 of them)
 Rarely used modules such as dgram, http2, inspector, and repl
 are not yet supported.
 The v8 module is specific to Webkit which Bun does not use.</p>
-<h2 id="benefits-over-npm-and-node.js" tabindex="-1">Benefits Over npm and Node.js</h2>
+<h2 id="benefits-over-npm-and-nodejs">Benefits Over npm and Node.js</h2>
 <p>The benefits of using Bun over npm and Node.js include:</p>
 <ul>
 <li>Bun provides significantly better performance.</li>
@@ -31,7 +32,7 @@ using the <code>bun:test</code> module.</li>
 <li>Bun has better support for Web APIs including
 <code>fetch</code>, <code>Request</code>, <code>Response</code>, <code>ReadableStream</code>, <code>WebSocket</code>, and more.
 There is no need to install dependencies such as <code>node-fetch</code> and <code>ws</code>.
-Bun's native implementation of these tends to be
+Bun’s native implementation of these tends to be
 faster than third-party libraries used with Node.js.</li>
 <li>Bun provides native hot reloading using the <code>--hot</code> flag
 which updates a running server without restarting it.
@@ -46,14 +47,14 @@ Many esbuild plugins work in Bun without modification.</li>
 </ul>
 <p>The Bun team makes the following additional performance claims:</p>
 <ul>
-<li>Bun is 4 times faster than Node.js for a &quot;hello world&quot; program.</li>
+<li>Bun is 4 times faster than Node.js for a “hello world” program.</li>
 <li>The time to build and run TS code in Bun is 4 times faster than esbuild,
 15 times faster than TSX, and 43 times faster than TSC + Node.</li>
 <li><code>bun install</code> is 29 times faster than npm and 17 times faster than pnpm.</li>
 <li><code>bun run</code> can be used in place of <code>npm run</code> and is 5 times faster.</li>
 <li><code>bun test</code> is 8 times faster than Vitest and 13 times faster than Jest.</li>
 </ul>
-<h2 id="history" tabindex="-1">History</h2>
+<h2 id="history">History</h2>
 <p>Development of Bun started in 2022 by Jarred Sumner with VC funding.
 Bun became stable (1.0) in September 2023.</p>
 <p>Bun was created by the startup company
@@ -61,29 +62,29 @@ Bun became stable (1.0) in September 2023.</p>
 because that’s what buns come out of.
 “Oven has decided to adopt a strategy twinned with Deno Company.
 They will launch sales of a cloud architecture based on Bun.”</p>
-<p>The name &quot;Bun&quot; came from a friend who suggested it
-because she has a bunny named &quot;Bun&quot;.
-The initial reaction was &quot;I'm not going to name it after your bunny.
-And then I thought about it more and it made some sense.&quot;
+<p>The name “Bun” came from a friend who suggested it
+because she has a bunny named “Bun”.
+The initial reaction was “I’m not going to name it after your bunny.
+And then I thought about it more and it made some sense.”
 It also makes sense because
-&quot;it’s a bundling of the JavaScript ecosystem and a bundler&quot;.</p>
-<h2 id="implementation" tabindex="-1">Implementation</h2>
+“it’s a bundling of the JavaScript ecosystem and a bundler”.</p>
+<h2 id="implementation">Implementation</h2>
 <p>Bun is built on JavaScriptCore (JSC) from Safari
 rather than V8 which is used by Chrome.
 JSC has faster startup time and lower memory usage than V8,
 but slightly less overall performance.</p>
 <p>Bun is implemented in Zig and some C++.
-&quot;Zig is sort of similar to writing C, but with better memory safety features
-in debug mode and modern features like defer (sort of similar to Go's)
+“Zig is sort of similar to writing C, but with better memory safety features
+in debug mode and modern features like defer (sort of similar to Go’s)
 and arbitrary code can be executed at compile-time via comptime.
-It's really good for writing performant low-level software.&quot;
-Zig &quot;has very few keywords so it's a lot easier to learn than,
-for example, C++ or Rust.&quot;</p>
+It’s really good for writing performant low-level software.”
+Zig “has very few keywords so it’s a lot easier to learn than,
+for example, C++ or Rust.”</p>
 <p>Oven will donate to the Zig Software Foundation to keep the project going.</p>
-<h2 id="framework-support" tabindex="-1">Framework Support</h2>
+<h2 id="framework-support">Framework Support</h2>
 <p>Bun works with nearly all major web frameworks including
 Next.js, SvelteKit, Astro, Nuxt, and Fastify.</p>
-<h2 id="bun-apis" tabindex="-1">Bun APIs</h2>
+<h2 id="bun-apis">Bun APIs</h2>
 <p>Bun provides bun-specific APIs that are alternatives to many npm modules.
 These are highly optimized and perform much better than their Node.js equivalents.</p>
 <p><code>Bun.file</code> returns a <code>File</code> object with the same properties as
@@ -104,20 +105,20 @@ without installing and using the <code>dotenv</code> package.</p>
 as the Node.js equivalent and is easier to use.</p>
 <p>Builtin password hashing using Bcrypt and Argon is provided.</p>
 <p>Bun provides many more APIs!</p>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>To install Bun for macOS, Linux, or Windows Subsystem for Linux (WSL),
 enter <code>curl -fsSL https://bun.sh/install | bash</code>.
 This adds the <code>bun</code> executable.</p>
 <p>To verify the installation and see the version that is installed,
 enter <code>bun --version</code> or <code>bun -v</code>.</p>
 <p>To upgrade to the latest version, enter <code>bun upgrade</code>.</p>
-<p>&quot;Bun provides a limited, experimental native build for Windows.
-At the moment, only the Bun runtime is supported.&quot;</p>
-<h2 id="repl" tabindex="-1">REPL</h2>
+<p>“Bun provides a limited, experimental native build for Windows.
+At the moment, only the Bun runtime is supported.”</p>
+<h2 id="repl">REPL</h2>
 <p>To start a Read-Evaluate-Print-Loop, enter <code>bun repl</code>.
 This takes a few seconds to install the first time it is run,
 but is much faster in subsequent runs.</p>
-<h2 id="projects" tabindex="-1">Projects</h2>
+<h2 id="projects">Projects</h2>
 <p>To create a new Bun project, create a directory, cd to it.
 For a vanilla Bun project, enter <code>bun init</code>.
 This creates the following files:</p>
@@ -162,12 +163,12 @@ enter <code>bun create svelte@latest my-svelte-app</code> (or <code>bun c</code>
 The destination defaults to the current directory.
 Some templates will ask questions about your preferences
 and some will output instructions about what to do next.</p>
-<h2 id="help" tabindex="-1">Help</h2>
+<h2 id="help">Help</h2>
 <p>To see all the subcommands supported by the <code>bun</code> command, enter <code>bun</code>.
 The subcommands include <code>init</code>, <code>run</code>, <code>test</code>, <code>repl</code>, <code>upgrade</code>, and more.</p>
 <p>To see all the options supported by the <code>bun</code> command, enter <code>bun --help</code>.</p>
 <p>To see a list of all scripts defined in <code>package.json</code>, enter <code>bun.run</code>.</p>
-<h2 id="package-manager" tabindex="-1">Package Manager</h2>
+<h2 id="package-manager">Package Manager</h2>
 <p>The Bun package manager works with npm packages.
 It uses <code>package.json</code> files just like npm,
 but it uses a binary <code>bun.lockb</code> file instead of <code>package-lock.json</code>.</p>
@@ -192,12 +193,12 @@ enter <code>bun install</code> (or <code>bun i</code>).</p>
 <code>~/.bun/install/cache</code>.
 When a project adds a dependency to a package version
 that is already in the global cache directory,
-it is &quot;copied&quot; from there instead of downloading it again.
+it is “copied” from there instead of downloading it again.
 In Linux this uses hard links.
-In MacOS, this uses &quot;clonefile&quot; which implements &quot;copy on write&quot;.
+In MacOS, this uses “clonefile” which implements “copy on write”.
 In both cases, the operation is extremely fast
 because the files are not actually copied.</p>
-<h2 id="linting" tabindex="-1">Linting</h2>
+<h2 id="linting">Linting</h2>
 <p>Bun does not include support for code linting.
 To add this using ESLint:</p>
 <ol>
@@ -209,13 +210,13 @@ and create an ESLint configuration file.</p>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;lint&quot;: &quot;eslint 'src/**/*.{css,html,ts,tsx}'&quot;,
+<pre><code class="language-json">"lint": "eslint 'src/**/*.{css,html,ts,tsx}'",
 </code></pre>
 </li>
 </ol>
 <p>To lint all the source files in the current project,
 enter <code>bun run lint</code>.</p>
-<h2 id="code-formatting" tabindex="-1">Code Formatting</h2>
+<h2 id="code-formatting">Code Formatting</h2>
 <p>Bun does not include support for code formatting.
 To add this using Prettier:</p>
 <ol>
@@ -225,22 +226,22 @@ To add this using Prettier:</p>
 <li>
 <p>Create the file <code>.prettierrc</code> with content similar to the following:</p>
 <pre><code class="language-text">{
-  &quot;arrowParens&quot;: &quot;avoid&quot;,
-  &quot;bracketSpacing&quot;: false,
-  &quot;singleQuote&quot;: true,
-  &quot;trailingComma&quot;: &quot;none&quot;
+  "arrowParens": "avoid",
+  "bracketSpacing": false,
+  "singleQuote": true,
+  "trailingComma": "none"
 }
 </code></pre>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;format&quot;: &quot;prettier --write 'src/**/*.{css,html,ts,tsx}'&quot;,
+<pre><code class="language-json">"format": "prettier --write 'src/**/*.{css,html,ts,tsx}'",
 </code></pre>
 </li>
 </ol>
 <p>To format all the source files in the current project,
 enter <code>bun run format</code>.</p>
-<h2 id="bundling" tabindex="-1">Bundling</h2>
+<h2 id="bundling">Bundling</h2>
 <p>Bun can bundle all the files for an application into a single JavaScript file.</p>
 <p>To demonstrate this:</p>
 <ol>
@@ -295,7 +296,7 @@ and run it by entering <code>bun run bundle.ts</code>:</p>
 </code></pre>
 <p>For an example of Bun bundling that uses the htmx and wrec libraries,
 <a href="https://github.com/mvolkmann/wrec-hono-htmx?v=1.1.1" rel="noopener" target="_blank">wrec-hono-htmx</a>.</p>
-<h2 id="unit-tests" tabindex="-1">Unit Tests</h2>
+<h2 id="unit-tests">Unit Tests</h2>
 <p>Bun has built-in support for implementing and running unit tests
 that are mostly compatible with Jest.</p>
 <p>Suppose we have the following code in the file <code>math.ts</code>:</p>
@@ -309,7 +310,7 @@ add the following code in the file <code>math.test.ts</code>:</p>
 // Can also import describe, beforeAll, beforeEach, afterAll, and afterEach.
 import {add} from './math';
 
-test('add', () =&gt; {
+test('add', () => {
   expect(add(2, 2)).toBe(4);
 });
 </code></pre>
@@ -323,7 +324,7 @@ enter <code>bun --watch test</code>.</p>
 <code>describe</code>, <code>beforeAll</code>, <code>afterAll</code>, <code>beforeEach</code>, and <code>afterEach</code>.</p>
 <p>By default tests timeout and are considered failed after five seconds.
 To change this, add the <code>--timeout {seconds}</code> option.</p>
-<h2 id="global-variables" tabindex="-1">Global Variables</h2>
+<h2 id="global-variables">Global Variables</h2>
 <p>Bun provides the following global variables.
 For details, see <a href="https://bun.sh/docs/api/globals?v=1.1.1" rel="noopener" target="_blank">Globals</a>.</p>
 <ul>
@@ -335,12 +336,12 @@ For details, see <a href="https://bun.sh/docs/api/globals?v=1.1.1" rel="noopener
 <li>ResolveMessage</li>
 </ul>
 <p>Add the following in <code>tsconfig.json</code> so VS Code
-doesn't complain about the <code>Bun</code> global variable.</p>
+doesn’t complain about the <code>Bun</code> global variable.</p>
 <pre><code class="language-json">{
-  &quot;compilerOptions&quot;: {
+  "compilerOptions": {
     ...
-    &quot;types&quot;: [
-      &quot;bun-types&quot; // add Bun global
+    "types": [
+      "bun-types" // add Bun global
     ]
     ...
   }
@@ -428,7 +429,7 @@ doesn't complain about the <code>Bun</code> global variable.</p>
 </ul>
 </li>
 </ul>
-<h2 id="importing-files" tabindex="-1">Importing Files</h2>
+<h2 id="importing-files">Importing Files</h2>
 <p>A text file can be imported as a string.</p>
 <p>The following text file <code>haiku.txt</code> contains three lines.</p>
 <pre><code class="language-text">Out of memory.
@@ -451,8 +452,8 @@ for (const line of lines) {
 <p>A JSON or TOML file can be imported as JavaScript object.</p>
 <p>The following text file <code>dogs.json</code> describes two dogs.</p>
 <pre><code class="language-json">[
-  {&quot;breed&quot;: &quot;Whippet&quot;, &quot;name&quot;: &quot;Comet&quot;},
-  {&quot;breed&quot;: &quot;German Shorthaired Pointer&quot;, &quot;name&quot;: &quot;Oscar&quot;}
+  {"breed": "Whippet", "name": "Comet"},
+  {"breed": "German Shorthaired Pointer", "name": "Oscar"}
 ]
 </code></pre>
 <p>The following code demonstrates importing and using the JSON file above.</p>
@@ -465,14 +466,14 @@ for (const dog of dogs) {
 <pre><code class="language-text">Comet is a Whippet.
 Oscar is a German Shorthaired Pointer.
 </code></pre>
-<h2 id="bun-global-variable" tabindex="-1">Bun Global Variable</h2>
+<h2 id="bun-global-variable">Bun Global Variable</h2>
 <p>The <code>Bun</code> global variable has many properties, most of which are functions.
 Highlights include:</p>
 <ul>
 <li><code>Bun.build</code>: compiles a collection of source files into a single source file</li>
 <li><code>Bun.serve</code>: function that starts an HTTP server</li>
 </ul>
-<h2 id="http-server" tabindex="-1">HTTP Server</h2>
+<h2 id="http-server">HTTP Server</h2>
 <p>Bun has built-in support for implementing HTTP servers
 using the <code>Bun.serve</code> function.</p>
 <p>To implement a basic HTTP server, create a Bun project and
@@ -498,15 +499,15 @@ console.log('Server started on port ', server.port);
 </code></pre>
 <p>To run this, enter <code>bun run index.js</code> and browse <code>localhost:3000</code>.</p>
 <p>To simplify starting the server, add the following in <code>package.json</code>:</p>
-<pre><code class="language-json">  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;bun run index.ts&quot;
+<pre><code class="language-json">  "scripts": {
+    "start": "bun run index.ts"
   }
 </code></pre>
 <p>Now the server can be started by entering <code>bun start</code> or <code>bun run start</code>.</p>
-<h2 id="watch-mode" tabindex="-1">Watch Mode</h2>
+<h2 id="watch-mode">Watch Mode</h2>
 <p>To automatically restart a server when code changes are detected,
 add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">    &quot;dev&quot;: &quot;bun --watch index.ts&quot;
+<pre><code class="language-json">    "dev": "bun --watch index.ts"
 </code></pre>
 <p>Then start the server with <code>bun dev</code>.</p>
 <p>To patch the code in place when code changes are detected
@@ -522,8 +523,8 @@ new WebSocket.Server({port: 1920});
 </code></pre>
 <p>Add the following in the client-side code:</p>
 <pre><code class="language-js">const ws = new WebSocket('ws://localhost:1920');
-ws.addEventListener('close', event =&gt; {
-  setTimeout(() =&gt; {
+ws.addEventListener('close', event => {
+  setTimeout(() => {
     window.location.reload();
   }, 500); // gives the server time to restart
 });
@@ -531,8 +532,8 @@ ws.addEventListener('close', event =&gt; {
 <p>The client will lose the WebSocket connect when the server restarts.
 It will wait 500ms and then reload the browser.
 By that time the server should be back up again.
-Even if it isn't, the browser will wait for it.</p>
-<h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
+Even if it isn’t, the browser will wait for it.</p>
+<h2 id="environment-variables">Environment Variables</h2>
 <p>Bun has built-in support for getting environment variable values
 from the file <code>.env</code> in the project root directory.
 For example, suppose this file contains <code>NAME=Mark</code>.
@@ -541,19 +542,19 @@ The value <code>Mark</code> can be obtained with <code>process.env.NAME</code> o
 previously defined environment variables.</p>
 <p>For example, suppose the <code>.env</code> file contains the following:</p>
 <pre><code class="language-text">NAME=Mark
-GREETING=&quot;Hello, ${NAME}!&quot;
+GREETING="Hello, ${NAME}!"
 </code></pre>
 <p>The following test will pass:</p>
 <pre><code class="language-ts">import {expect, test} from 'bun:test';
 
-test('environment variables', () =&gt; {
+test('environment variables', () => {
   expect(process.env.NAME).toBe('Mark');
   expect(Bun.env.GREETING).toBe('Hello, Mark!');
 });
 </code></pre>
 <p>Changes to the <code>.env</code> after a server is started
 are only available if the server is restarted.</p>
-<h2 id="executable-files" tabindex="-1">Executable Files</h2>
+<h2 id="executable-files">Executable Files</h2>
 <p>There are three ways to execute a JS/TS source file.</p>
 <p>The first approach is to enter <code>bun {file-name}</code>.</p>
 <p>The second way is to
@@ -563,20 +564,20 @@ and enter <code>./{file-name}</code>.</p>
 <p>The third way is to compile the file with
 <code>bun build ./{file-name} --outfile {exe-name} --compile</code>
 and enter <code>./{exe-name}</code>.</p>
-<h2 id="executing-without-installing" tabindex="-1">Executing Without Installing</h2>
+<h2 id="executing-without-installing">Executing Without Installing</h2>
 <p>The <code>npx</code> command can be used to execute a Node package
 that may not already be installed.
 For example, <code>npx cowsay Hello Cow!</code> outputs ASCII text
 that depicts a cow with a speech bubble.</p>
 <p>The same can be done with Bun using <code>bun x</code> (or <code>bunx</code>).
 The main difference is that the Bun approach is much faster.</p>
-<h2 id="import.meta" tabindex="-1">import.meta</h2>
+<h2 id="importmeta">import.meta</h2>
 <p>The global variable <code>import</code> has a <code>meta</code> property whose value is an object.
 This object contains several properties and one method,
 each of which are demonstrated in the following code.</p>
 <pre><code class="language-ts">import {expect, test} from 'bun:test';
 
-test('import.meta', async () =&gt; {
+test('import.meta', async () => {
   // import.meta.env is just an alias for process.env.
   expect(import.meta.env).toBe(process.env);
 
@@ -588,7 +589,7 @@ test('import.meta', async () =&gt; {
   expect(import.meta.path).toBe(`${dir}/${file}`);
 
   // This indicates whether the current file is the one
-  // that was directly executed by &quot;bun run&quot; or &quot;bun test&quot;.
+  // that was directly executed by "bun run" or "bun test".
   expect(import.meta.main).toBe(true);
 
   // This finds the path of a file relative to the current file.
@@ -597,7 +598,7 @@ test('import.meta', async () =&gt; {
   expect(resolved).toBe(`${dir}/${importName}`);
 });
 </code></pre>
-<h2 id="console" tabindex="-1">Console</h2>
+<h2 id="console">Console</h2>
 <p>The global <code>console</code> object in Bun supports
 all the same methods as in browsers and Node.js.</p>
 <p>It can also be used as an <code>AsyncIterable</code> to read from stdin.
@@ -606,132 +607,132 @@ It repeatedly prompts for text to be entered and
 reports the number of words and characters.
 Pressing return without entering any text ends the program.</p>
 <pre><code class="language-ts">// Using console.write avoids outputting a newline characters at the end.
-const prompt = () =&gt; console.write('Enter text: ');
+const prompt = () => console.write('Enter text: ');
 
 prompt();
 for await (const line of console) {
   const trimmed = line.trim();
   if (trimmed.length === 0) {
-    process.exit(0); // break does not exit a &quot;for await&quot; loop
+    process.exit(0); // break does not exit a "for await" loop
   }
   const words = trimmed.split(' ');
   console.log(`words: ${words.length}, characters: ${line.length}`);
   prompt();
 }
 </code></pre>
-<h2 id="utilities" tabindex="-1">Utilities</h2>
+<h2 id="utilities">Utilities</h2>
 <p>The <code>Bun</code> global variable refers to an object with many properties and methods
 including:</p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>deepEquals(obj1, obj2 [, strict])</code></td>
-<td>recursively compares two objects</td>
-</tr>
-<tr>
-<td><code>deflateSync(buffer)</code></td>
-<td>compresses using DEFLATE</td>
-</tr>
-<tr>
-<td><code>env</code></td>
-<td>alias for <code>process.env</code></td>
-</tr>
-<tr>
-<td><code>escapeHTML(value)</code></td>
-<td>escapes built-in entities in HTML</td>
-</tr>
-<tr>
-<td><code>fileURLToPath(url)</code></td>
-<td>converts a <code>file://</code> URL string to an absolute path</td>
-</tr>
-<tr>
-<td><code>gunzipSync(buffer)</code></td>
-<td>decompresses using GUNZIP</td>
-</tr>
-<tr>
-<td><code>gzipSync(buffer)</code></td>
-<td>compresses using GZIP</td>
-</tr>
-<tr>
-<td><code>inflateSync(buffer)</code></td>
-<td>decompresses using INFLATE</td>
-</tr>
-<tr>
-<td><code>inspect.custom</code></td>
-<td>symbol that can be defined as a method to customize what <code>inspect</code> returns</td>
-</tr>
-<tr>
-<td><code>inspect(obj)</code></td>
-<td>serializes an object to a string like <code>console.log</code></td>
-</tr>
-<tr>
-<td><code>main</code></td>
-<td>absolute path to entry point source file</td>
-</tr>
-<tr>
-<td><code>nanoseconds()</code></td>
-<td>returns nanoseconds since this <code>bun</code> process started</td>
-</tr>
-<tr>
-<td><code>openInEditor(file)</code></td>
-<td>opens a file in the default editor</td>
-</tr>
-<tr>
-<td><code>pathToFileURL(path)</code></td>
-<td>converts an absolute path to a <code>file://</code> URL string</td>
-</tr>
-<tr>
-<td><code>peek(promise)</code></td>
-<td>gets a promise result without <code>await</code> or <code>.then</code> when already settled</td>
-</tr>
-<tr>
-<td><code>readableStreamTo*(stream)</code></td>
-<td>set of functions that asynchronously consume a readable stream</td>
-</tr>
-<tr>
-<td><code>resolveSync(path, root)</code></td>
-<td>resolves a file path or module specifier</td>
-</tr>
-<tr>
-<td><code>revision</code></td>
-<td>string containing git commit id of bun version</td>
-</tr>
-<tr>
-<td><code>sleep(ms)</code></td>
-<td>returns Promise that resolves after <code>ms</code> milliseconds</td>
-</tr>
-<tr>
-<td><code>sleepSync(ms)</code></td>
-<td>blocks for <code>ms</code> milliseconds</td>
-</tr>
-<tr>
-<td><code>version</code></td>
-<td>string containing bun version</td>
-</tr>
-<tr>
-<td><code>which(executableName)</code></td>
-<td>returns absolute path to an executable</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Description</th></tr></thead><tbody><tr><td><code>deepEquals(obj1, obj2 [, strict])</code></td><td>recursively compares two objects</td></tr><tr><td><code>deflateSync(buffer)</code></td><td>compresses using DEFLATE</td></tr><tr><td><code>env</code></td><td>alias for <code>process.env</code></td></tr><tr><td><code>escapeHTML(value)</code></td><td>escapes built-in entities in HTML</td></tr><tr><td><code>fileURLToPath(url)</code></td><td>converts a <code>file://</code> URL string to an absolute path</td></tr><tr><td><code>gunzipSync(buffer)</code></td><td>decompresses using GUNZIP</td></tr><tr><td><code>gzipSync(buffer)</code></td><td>compresses using GZIP</td></tr><tr><td><code>inflateSync(buffer)</code></td><td>decompresses using INFLATE</td></tr><tr><td><code>inspect.custom</code></td><td>symbol that can be defined as a method to customize what <code>inspect</code> returns</td></tr><tr><td><code>inspect(obj)</code></td><td>serializes an object to a string like <code>console.log</code></td></tr><tr><td><code>main</code></td><td>absolute path to entry point source file</td></tr><tr><td><code>nanoseconds()</code></td><td>returns nanoseconds since this <code>bun</code> process started</td></tr><tr><td><code>openInEditor(file)</code></td><td>opens a file in the default editor</td></tr><tr><td><code>pathToFileURL(path)</code></td><td>converts an absolute path to a <code>file://</code> URL string</td></tr><tr><td><code>peek(promise)</code></td><td>gets a promise result without <code>await</code> or <code>.then</code> when already settled</td></tr><tr><td><code>readableStreamTo*(stream)</code></td><td>set of functions that asynchronously consume a readable stream</td></tr><tr><td><code>resolveSync(path, root)</code></td><td>resolves a file path or module specifier</td></tr><tr><td><code>revision</code></td><td>string containing git commit id of bun version</td></tr><tr><td><code>sleep(ms)</code></td><td>returns Promise that resolves after <code>ms</code> milliseconds</td></tr><tr><td><code>sleepSync(ms)</code></td><td>blocks for <code>ms</code> milliseconds</td></tr><tr><td><code>version</code></td><td>string containing bun version</td></tr><tr><td><code>which(executableName)</code></td><td>returns absolute path to an executable</td></tr></tbody></table>
 <p>For more detail see <a href="https://bun.sh/docs/api/utils?v=1.1.1" rel="noopener" target="_blank">Utils</a>.</p>
-<h2 id="jsx" tabindex="-1">JSX</h2>
+<h2 id="jsx">JSX</h2>
 <p>Bun supports embedding JSX for HTML templating
 in source files with <code>.jsx</code> or <code>.tsx</code> file extensions.</p>
 <p>The <code>compilerOptions</code> property in <code>tsconfig.json</code>
 determines how JSX is processed.
 For example, the following settings enable using JSX with the Hono framework:</p>
 <pre><code class="language-json">{
-  &quot;compilerOptions&quot;: {
+  "compilerOptions": {
     ...
-    &quot;jsx&quot;: &quot;react-jsx&quot;,
-    &quot;jsxImportSource&quot;: &quot;hono/jsx&quot;
+    "jsx": "react-jsx",
+    "jsxImportSource": "hono/jsx"
     ...
   }
 }
@@ -739,22 +740,22 @@ For example, the following settings enable using JSX with the Hono framework:</p
 <p>Depending on the JSX library used, calling <code>toString</code>
 on a variable set to a JSX value returns an HTML string.
 This works with the Hono framework.</p>
-<p>Bun supports &quot;prop punning&quot; which is a shorthand syntax
+<p>Bun supports “prop punning” which is a shorthand syntax
 for props that have the same name as an in-scope variable.
 For example, the following are equivalent
 when the variables <code>class</code> and <code>value</code> are in scope:</p>
-<pre><code class="language-xml">&lt;input class={class} type=&quot;text&quot; value={value} /&gt;
-&lt;input {class} type=&quot;text&quot; {value} /&gt;
+<pre><code class="language-xml">&#x3C;input class={class} type="text" value={value} />
+&#x3C;input {class} type="text" {value} />
 </code></pre>
 <p>For more detail, see the Bun documentation on
 <a href="https://bun.sh/docs/runtime/jsx?v=1.1.1" rel="noopener" target="_blank">JSX</a>.</p>
-<h2 id="serializing-objects" tabindex="-1">Serializing Objects</h2>
+<h2 id="serializing-objects">Serializing Objects</h2>
 <p>The <code>bun:jsc</code> module supports serializing and deserializing JavaScript values.
 For example:</p>
 <pre><code class="language-ts">import {serialize, deserialize} from 'bun:jsc';
 import {expect, test} from 'bun:test';
 
-test('serialize', () =&gt; {
+test('serialize', () => {
   const dogs = [
     {name: 'Comet', breed: 'Whippet'},
     {name: 'Oscar', breed: 'German Shorthaired Pointer'}
@@ -764,12 +765,12 @@ test('serialize', () =&gt; {
   expect(newDogs).toStrictEqual(dogs);
 });
 </code></pre>
-<h2 id="writing-and-reading-files" tabindex="-1">Writing and Reading Files</h2>
+<h2 id="writing-and-reading-files">Writing and Reading Files</h2>
 <p>The following code demonstrates how to write and read text files
 using the Bun APIs.</p>
 <pre><code class="language-ts">import {expect, test} from 'bun:test';
 
-test('write/read file', async () =&gt; {
+test('write/read file', async () => {
   const filePath = './data.txt';
   const content = 'Hello, World!';
   // The second argument to the write function can be a string,
@@ -782,7 +783,7 @@ test('write/read file', async () =&gt; {
   expect(actual).toBe(content);
 });
 </code></pre>
-<h2 id="globbing" tabindex="-1">Globbing</h2>
+<h2 id="globbing">Globbing</h2>
 <p>Bun provides a way to iterate over files that match a given glob pattern.</p>
 <p>The following code lists all TypeScript source files
 in and below the current directory,
@@ -798,7 +799,7 @@ for await (const file of glob.scan('.')) {
 }
 </code></pre>
 <p>For more detail see <a href="https://bun.sh/docs/api/glob?v=1.1.1" rel="noopener" target="_blank">Glob</a>.</p>
-<h2 id="websockets" tabindex="-1">WebSockets</h2>
+<h2 id="websockets">WebSockets</h2>
 <p>Bun has built-in support for WebSockets.</p>
 <p>The following code in the file <code>ws-server.ts</code>
 demonstrates writing a WebSocket server.
@@ -822,7 +823,7 @@ To run this, enter</p>
       }
     },
     close(ws, code, reason) {
-      console.log(`WebSocket closed with code ${code} and reason &quot;${reason}&quot;`);
+      console.log(`WebSocket closed with code ${code} and reason "${reason}"`);
     }
   }
 });
@@ -832,22 +833,22 @@ console.log('WebSocket server is listening on port', server.port);
 <p>The following code in the file <code>ws-client.html</code>
 demonstrates writing a WebSocket client.
 After starting the server above, open this in a web browser.
-Enter any text in the input and click the &quot;Send&quot; button.</p>
-<pre><code class="language-ts">&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;script&gt;
+Enter any text in the input and click the “Send” button.</p>
+<pre><code class="language-ts">&#x3C;html lang="en">
+  &#x3C;head>
+    &#x3C;script>
       let input, message, output;
-      window.onload = () =&gt; {
+      window.onload = () => {
         message = document.getElementById('message');
         input = document.getElementById('input');
         output = document.getElementById('output');
       };
 
       const ws = new WebSocket('ws://localhost:1919');
-      ws.addEventListener('open', event =&gt; {
+      ws.addEventListener('open', event => {
         send('opened connection');
       });
-      ws.addEventListener('message', event =&gt; {
+      ws.addEventListener('message', event => {
         output.innerHTML = event.data;
       });
 
@@ -855,33 +856,33 @@ Enter any text in the input and click the &quot;Send&quot; button.</p>
         input.innerHTML = text;
         ws.send(text);
       }
-    &lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;WebSocket Client&lt;/h1&gt;
-    &lt;input id=&quot;message&quot; /&gt;
-    &lt;button onclick=&quot;send(message.value)&quot;&gt;Send&lt;/button&gt;
-    &lt;div&gt;Input: &lt;span id=&quot;input&quot; /&gt;&lt;/div&gt;
-    &lt;div&gt;Output: &lt;span id=&quot;output&quot; /&gt;&lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;h1>WebSocket Client&#x3C;/h1>
+    &#x3C;input id="message" />
+    &#x3C;button onclick="send(message.value)">Send&#x3C;/button>
+    &#x3C;div>Input: &#x3C;span id="input" />&#x3C;/div>
+    &#x3C;div>Output: &#x3C;span id="output" />&#x3C;/div>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="sqlite" tabindex="-1">SQLite</h2>
+<h2 id="sqlite">SQLite</h2>
 <p>Bun has built-in support for SQLite databases.
 However, it does not install SQLite.
 For macOS, SQLite can be installed using Homebrew.</p>
 <p>After installing SQLite, a database containing a table with records
 can be created with the following steps:</p>
 <pre><code class="language-bash">sqlite3 todos.db
-sqlite&gt; create table todos(id string primary key, text string, completed numeric);
-sqlite&gt; .schema
+sqlite> create table todos(id string primary key, text string, completed numeric);
+sqlite> .schema
 CREATE TABLE todos(id string primary key, text string, completed numeric);
-sqlite&gt; insert into todos values('t1', 'cut grass', 0);
-sqlite&gt; insert into todos values('t2', 'buy milk', 1);
-sqlite&gt; select * from todos;
+sqlite> insert into todos values('t1', 'cut grass', 0);
+sqlite> insert into todos values('t2', 'buy milk', 1);
+sqlite> select * from todos;
 t1|cut grass|0
 t2|buy milk|1
-sqlite&gt; .exit
+sqlite> .exit
 </code></pre>
 <p>This creates the file <code>todos.db</code> that contains all the tables for this database
 (only one in this case).</p>
@@ -899,7 +900,7 @@ type Todo = {
 const db = new Database('todos.db');
 // Alternative way to access database in src directory:
 // import {Statement} from 'bun:sqlite';
-// import db from &quot;./todos.db&quot; with {&quot;type&quot;: &quot;sqlite&quot;};
+// import db from "./todos.db" with {"type": "sqlite"};
 const deleteAllTodosPS = db.prepare('delete from todos');
 const deleteTodoPS = db.prepare('delete from todos where id = ?');
 const getTodoQuery = db.query('select * from todos where id = ?');
@@ -909,7 +910,7 @@ const insertTodoQuery = db.query(
 );
 const updateTodoPS = db.prepare('update todos set completed=? where id = ?');
 
-test('sqlite', () =&gt; {
+test('sqlite', () => {
   deleteAllTodosPS.run();
 
   const text = 'buy milk';
@@ -933,7 +934,7 @@ test('sqlite', () =&gt; {
 });
 </code></pre>
 <p>Run this with <code>bun test sqlite.test.ts</code>.</p>
-<h2 id="foreign-function-interface-(ffi)" tabindex="-1">Foreign Function Interface (FFI)</h2>
+<h2 id="foreign-function-interface-ffi">Foreign Function Interface (FFI)</h2>
 <p>The <code>bun:ffi</code> module supports calling functions implemented in
 languages other than JavaScript that support the C ABI.
 These include C, C++, Kotlin, Rust, Zig, and more.</p>
@@ -973,13 +974,13 @@ const result = average(ptr(numbers), numbers.length);
 console.log('average is', result);
 </code></pre>
 <p>To run this, enter <code>bun run index.ts</code>.
-The expected output is &quot;average is 2.5&quot;.</p>
+The expected output is “average is 2.5”.</p>
 <p>For more detail, see <a href="https://bun.sh/docs/api/ffi?v=1.1.1" rel="noopener" target="_blank">FFI</a>.
 That page includes a list of all the supported FFI types.</p>
-<h2 id="bun-shell" tabindex="-1">Bun Shell</h2>
-<p>&quot;The <a href="https://bun.sh/blog/the-bun-shell?v=1.1.1" rel="noopener" target="_blank">Bun Shell</a>
+<h2 id="bun-shell">Bun Shell</h2>
+<p>“The <a href="https://bun.sh/blog/the-bun-shell?v=1.1.1" rel="noopener" target="_blank">Bun Shell</a>
 is a new experimental embedded language and interpreter in Bun
-that allows you to run cross-platform shell scripts in JavaScript &amp; TypeScript.&quot;</p>
+that allows you to run cross-platform shell scripts in JavaScript &#x26; TypeScript.”</p>
 <p>The following code uses Bun Shell to
 output the names of all the files in the current directory.</p>
 <pre><code class="language-ts">import {$} from 'bun';
@@ -989,10 +990,10 @@ for await (const line of lines) {
   console.log(line);
 }
 </code></pre>
-<h2 id="elysia" tabindex="-1">Elysia</h2>
+<h2 id="elysia">Elysia</h2>
 <p><a href="https://elysiajs.com?v=1.1.1" rel="noopener" target="_blank">Elysia</a> is a
-&quot;TypeScript framework supercharged by Bun with End-to-End Type Safety,
-unified type system and outstanding developer experience.&quot;</p>
+“TypeScript framework supercharged by Bun with End-to-End Type Safety,
+unified type system and outstanding developer experience.”</p>
 <p>Elysia is a bun-specific server framework that is 18 times faster than Express.
 <a href="https://hono.dev?v=1.1.1" rel="noopener" target="_blank">Hono</a> is a close competitor to Elysia.</p>
 <p>To create a new Bun project that uses Elysia:</p>
@@ -1012,18 +1013,19 @@ and can be <code>.</code> to create the project in the current directory.</p>
 <p>browse localhost:3000</p>
 </li>
 </ul>
-<p>To define new routes in the project ...</p>
+<p>To define new routes in the project …</p>
 <p>See the example at <a href="https://github.com/mvolkmann/bun-elysia-demo?v=1.1.1" rel="noopener" target="_blank">bun-elysia-demo</a>
 GitHub repository.</p>
 <p>When a URL path for hitting an Elysia server does not end in a file name,
-it does not default to rendering the file &quot;index.html&quot;.
-To do that, end the URL with &quot;/index.html&quot;.
+it does not default to rendering the file “index.html”.
+To do that, end the URL with “/index.html”.
 See this <a href="https://github.com/elysiajs/elysia/issues/327?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
 <p>For an alternative that runs in Bun and other JavaScript runtimes, see
 <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>.</p>
-<h2 id="todos" tabindex="-1">TODOs</h2>
+<h2 id="todos">TODOs</h2>
 <ul>
 <li>Compare performance of bun, deno, and node on your rush-hour code.</li>
 <li>Implement your rush-hour program in Zig and compare performance.</li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

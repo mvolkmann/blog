@@ -1,17 +1,18 @@
-<!DOCTYPE html><html lang="en"> <head><title>Docker</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Docker</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#installing">Installing</a></li><li><a href="#verifying-installation">Verifying Installation</a></li><li><a href="#docker-images">Docker Images</a></li><ul><li><a href="#official-base-images">Official Base Images</a></li></ul><li><a href="#examples">Examples</a></li><ul><li><a href="#bash-example">Bash Example</a></li><li><a href="#node-example">Node Example</a></li><li><a href="#volume-example">Volume Example</a></li><li><a href="#express-example">Express Example</a></li></ul><li><a href="#amazon-ec2">Amazon EC2</a></li><li><a href="#docker-machine">Docker Machine</a></li><li><a href="#dockerfile-contents">Dockerfile Contents</a></li><li><a href="#dockerfile-instructions">Dockerfile Instructions</a></li><ul><li><a href="#from">FROM</a></li><li><a href="#env">ENV</a></li><li><a href="#maintainer">MAINTAINER</a></li><li><a href="#workdir">WORKDIR</a></li><li><a href="#run">RUN</a></li><li><a href="#cmd">CMD</a></li><li><a href="#path">PATH</a></li><li><a href="#url">URL</a></li><li><a href="#copy">COPY</a></li><li><a href="#workpath">WORKPATH</a></li></ul><li><a href="#images">Images</a></li><ul><li><a href="#creating-images">Creating Images</a></li><li><a href="#listing-images">Listing Images</a></li><li><a href="#tagging-images">Tagging Images</a></li><li><a href="#deleting-images">Deleting Images</a></li><li><a href="#dangling-images">Dangling Images</a></li></ul><li><a href="#containers">Containers</a></li><ul><li><a href="#creating%2Frunning-containers">Creating/Running Containers</a></li><li><a href="#deleting-containers">Deleting Containers</a></li><li><a href="#opening-a-shell-inside-a-running-container">Opening a shell inside a running container</a></li></ul><li><a href="#volumes">Volumes</a></li><ul><li><a href="#sharing-an-image">Sharing an Image</a></li></ul><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Docker</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Docker</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#installing">Installing</a></li><li><a href="#verifying-installation">Verifying Installation</a></li><li><a href="#docker-images">Docker Images</a></li><ul><li><a href="#official-base-images">Official Base Images</a></li></ul><li><a href="#examples">Examples</a></li><ul><li><a href="#bash-example">Bash Example</a></li><li><a href="#node-example">Node Example</a></li><li><a href="#volume-example">Volume Example</a></li><li><a href="#express-example">Express Example</a></li></ul><li><a href="#amazon-ec2">Amazon EC2</a></li><li><a href="#docker-machine">Docker Machine</a></li><li><a href="#dockerfile-contents">Dockerfile Contents</a></li><li><a href="#dockerfile-instructions">Dockerfile Instructions</a></li><ul><li><a href="#from">FROM</a></li><li><a href="#env">ENV</a></li><li><a href="#maintainer">MAINTAINER</a></li><li><a href="#workdir">WORKDIR</a></li><li><a href="#run">RUN</a></li><li><a href="#cmd">CMD</a></li><li><a href="#path">PATH</a></li><li><a href="#url">URL</a></li><li><a href="#copy">COPY</a></li><li><a href="#workpath">WORKPATH</a></li></ul><li><a href="#images">Images</a></li><ul><li><a href="#creating-images">Creating Images</a></li><li><a href="#listing-images">Listing Images</a></li><li><a href="#tagging-images">Tagging Images</a></li><li><a href="#deleting-images">Deleting Images</a></li><li><a href="#dangling-images">Dangling Images</a></li></ul><li><a href="#containers">Containers</a></li><ul><li><a href="#creatingrunning-containers">Creating/Running Containers</a></li><li><a href="#deleting-containers">Deleting Containers</a></li><li><a href="#opening-a-shell-inside-a-running-container">Opening a shell inside a running container</a></li></ul><li><a href="#volumes">Volumes</a></li><ul><li><a href="#sharing-an-image">Sharing an Image</a></li></ul><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article> <style>
   img {
     border: 1px solid gray;
   }
 </style>
 <figure style="width: 30%">
-  <img alt="Docker logo" style="border: 0"
-    src="/blog/assets/docker.png?v=1.1.1">
+  <img alt="Docker logo" style="border: 0" src="/blog/assets/docker.png?v=1.1.1">
 </figure>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="https://www.docker.com?v=1.1.1" rel="noopener" target="_blank">Docker</a>
-&quot;helps developers build, share, run, and verify applications anywhere —
-without tedious environment configuration or management.&quot;</p>
-<p>The primary appeal of using Docker is that &quot;Dockerized&quot; apps can run anywhere.
+“helps developers build, share, run, and verify applications anywhere —
+without tedious environment configuration or management.”</p>
+<p>The primary appeal of using Docker is that “Dockerized” apps can run anywhere.
 This includes Windows, macOS, and Linux.
 Each platform must install Docker.
 Applications run in a virtual Linux environment.
@@ -20,40 +21,36 @@ Many Linux variants are supported.</p>
 For example, it can be used to run a web server or API server.</p>
 <p>At a high level, the steps involved in using Docker include:</p>
 <ul>
-<li>Create a file named <code>DockerFile</code> that describes an &quot;image&quot;.</li>
+<li>Create a file named <code>DockerFile</code> that describes an “image”.</li>
 <li>Build the image.</li>
-<li>Run the image in a &quot;container&quot;.</li>
+<li>Run the image in a “container”.</li>
 </ul>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>The steps to install Docker in Windows are:</p>
 <ul>
-<li>Browse <a href="https://docs.docker.com/docker-for-windows/"
-target="_blank">https://docs.docker.com/docker-for-windows/</a>.</li>
-<li>Scroll to and click &quot;Get Docker for Windows (stable)&quot; to download a <code>.msi</code> file.</li>
+<li>Browse <a href="https://docs.docker.com/docker-for-windows/" target="_blank"></a><a href="https://docs.docker.com/docker-for-windows/" rel="noopener" target="_blank">https://docs.docker.com/docker-for-windows/</a>.</li>
+<li>Scroll to and click “Get Docker for Windows (stable)” to download a <code>.msi</code> file.</li>
 <li>Double-click the downloaded .msi file and follow the instructions.</li>
 </ul>
 <p>The steps to install Docker in macOS are:</p>
 <ul>
-<li>Browse <a href="https://docs.docker.com/docker-for-mac/"
-target="_blank">https://docs.docker.com/docker-for-mac/</a>.</li>
-<li>Scroll to and click &quot;Get Docker for Mac (stable)&quot; to download a <code>.dmg</code> file.</li>
+<li>Browse <a href="https://docs.docker.com/docker-for-mac/" target="_blank"></a><a href="https://docs.docker.com/docker-for-mac/" rel="noopener" target="_blank">https://docs.docker.com/docker-for-mac/</a>.</li>
+<li>Scroll to and click “Get Docker for Mac (stable)” to download a <code>.dmg</code> file.</li>
 <li>Double-click the download <code>.dmg</code> file.</li>
 <li>In the install dialog, drag <code>Docker.app</code> to the <code>Applications</code> folder.</li>
 </ul>
 <p>It is also possible to install Docker in macOS using Homebrew,
 but it requires more steps.
-See <a href="https://nickcharlton.net/posts/docker-via-homebrew.html"
-target="_blank">https://nickcharlton.net/posts/docker-via-homebrew.html</a>.</p>
+See <a href="https://nickcharlton.net/posts/docker-via-homebrew.html" target="_blank"></a><a href="https://nickcharlton.net/posts/docker-via-homebrew.html" rel="noopener" target="_blank">https://nickcharlton.net/posts/docker-via-homebrew.html</a>.</p>
 <p>The steps to install Docker in Linux
 vary based on the Linux distribution being used.
-See <a href="https://docs.docker.com/engine/installation/linux/"
-target="_blank">https://docs.docker.com/engine/installation/linux/</a>.</p>
-<h2 id="verifying-installation" tabindex="-1">Verifying Installation</h2>
+See <a href="https://docs.docker.com/engine/installation/linux/" target="_blank"></a><a href="https://docs.docker.com/engine/installation/linux/" rel="noopener" target="_blank">https://docs.docker.com/engine/installation/linux/</a>.</p>
+<h2 id="verifying-installation">Verifying Installation</h2>
 <p>The easiest way to verify that the installation was successful
-is to download and run the &quot;hello-world&quot; image.
+is to download and run the “hello-world” image.
 To do this enter: <code>docker run hello-world</code>.
 This will download the image, and output information related to the download,
-the line &quot;<code>Hello from Docker!</code>&quot;,
+the line “<code>Hello from Docker!</code>”,
 and information to help you get started using Docker.
 It also results in creation of an image and a container.</p>
 <p>To see the new image, enter <code>docker images</code>.</p>
@@ -62,25 +59,23 @@ It also results in creation of an image and a container.</p>
 <p>To get help on a docker command, enter: <code>docker help {command}</code>.
 For example, <code>docker help start</code> briefly describes the <code>-a</code> option
 which is used to attach to an existing container.</p>
-<h2 id="docker-images" tabindex="-1">Docker Images</h2>
+<h2 id="docker-images">Docker Images</h2>
 <p>A Docker image is a filesystem and a set of parameters to use at runtime.
-It doesn't have state and never changes.
+It doesn’t have state and never changes.
 Images can run a set of commands and exit,
 but more commonly they continue running until stopped.
 Examples include web servers, API servers, and database daemons.
 An image runs inside a container.</p>
 <p>Images are described by and built from files that,
-by convention, are named &quot;<code>Dockerfile</code>&quot;.
+by convention, are named “<code>Dockerfile</code>”.
 When building an image, the <code>-f</code> option of the <code>docker build</code> commmand
 can be specified to use a file with a different name.</p>
-<h3 id="official-base-images" tabindex="-1">Official Base Images</h3>
-<p>Some images are labelled as &quot;official&quot;. For details on what this means, see
-<a href="https://github.com/docker-library/official-images"
-target="_blank">https://github.com/docker-library/official-images</a>.
+<h3 id="official-base-images">Official Base Images</h3>
+<p>Some images are labelled as “official”. For details on what this means, see
+<a href="https://github.com/docker-library/official-images" target="_blank"></a><a href="https://github.com/docker-library/official-images" rel="noopener" target="_blank">https://github.com/docker-library/official-images</a>.
 For a list of the official images, sorted on
-the number of times they have been &quot;pulled&quot;, see
-<a href="https://hub.docker.com/explore/"
-target="_blank">https://hub.docker.com/explore/</a>.</p>
+the number of times they have been “pulled”, see
+<a href="https://hub.docker.com/explore/" target="_blank"></a><a href="https://hub.docker.com/explore/" rel="noopener" target="_blank">https://hub.docker.com/explore/</a>.</p>
 <p>Official programming language images include
 clojure, dart, elixir, erlang, gcc, golang, groovy, haskell, haxe,
 ibmjava, java, julia, jruby, mono, node, openjdk, perl,
@@ -95,20 +90,20 @@ debian, centos, fedora, opensuse, and ubuntu.</p>
 <p>Other official images of note include
 bash, drupal, hello-world, jenkins, maven, rails,
 redmine, and wordpress.</p>
-<h2 id="examples" tabindex="-1">Examples</h2>
+<h2 id="examples">Examples</h2>
 <p>Before diving into details about Docker,
-let's walk through some simple examples.</p>
+let’s walk through some simple examples.</p>
 <p>We should only have one image now.
 That is the one created while verifying the installation.
 Verify this by running <code>docker images</code>.</p>
-<h3 id="bash-example" tabindex="-1">Bash Example</h3>
-<p>Let's create a very simple image that just outputs &quot;Hello, World!&quot; using bash.
+<h3 id="bash-example">Bash Example</h3>
+<p>Let’s create a very simple image that just outputs “Hello, World!” using bash.
 Here is the <code>Dockerfile</code> that describes the image.</p>
 <pre><code class="language-docker">FROM bash
 CMD echo Hello, World!
 </code></pre>
 <p>To build this image enter: <code>docker build -t my-demo .</code><br>
-Because we don't already have the <code>bash</code> base image,
+Because we don’t already have the <code>bash</code> base image,
 that is downloaded and built.</p>
 <p>To see all the current images enter: <code>docker images</code><br>
 We should have three images now. They are named
@@ -124,23 +119,23 @@ Note that the <code>bash</code> image on which it depended was not deleted,
 but it can be deleted with <code>docker rmi bash</code>.
 It is common to create multiple images that use the same base image
 and retain these rather than delete them.</p>
-<h3 id="node-example" tabindex="-1">Node Example</h3>
-<p>Now let's create an image that outputs &quot;<code>Hello, World!</code>&quot; using Node.js.
-It uses the &quot;chalk&quot; npm package to output colored text.
+<h3 id="node-example">Node Example</h3>
+<p>Now let’s create an image that outputs “<code>Hello, World!</code>” using Node.js.
+It uses the “chalk” npm package to output colored text.
 We are doing this to illustrate using npm packages from a Docker image.</p>
 <p>Here is the <code>package.json</code> file that describes dependencies.
-It can also specify a &quot;script&quot; for running the application.</p>
+It can also specify a “script” for running the application.</p>
 <pre><code class="language-json">{
-  &quot;name&quot;: &quot;chalk-demo&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;a Hello World app that uses the chalk npm package&quot;,
-  &quot;main&quot;: &quot;index.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node index.js&quot;
+  "name": "chalk-demo",
+  "version": "1.0.0",
+  "description": "a Hello World app that uses the chalk npm package",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
   },
-  &quot;license&quot;: &quot;MIT&quot;,
-  &quot;dependencies&quot;: {
-    &quot;chalk&quot;: &quot;^1.1.3&quot;
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^1.1.3"
   }
 }
 </code></pre>
@@ -157,16 +152,16 @@ console.log('Hello, ' + chalk.red.bold(name) + '!');
 <p>To run this Node application outside of Docker
 with no excess output from npm,
 enter: <code>npm -s start</code>
-Note how &quot;World&quot; is output in red.</p>
+Note how “World” is output in red.</p>
 <p>Here is the Dockerfile that describes the image to be built.
 It specifies a specific version of Node, 7.4.
 An alternative it to request the latest long-term support (LTS) version
-by replacing the version number with the code name &quot;boron&quot;.</p>
+by replacing the version number with the code name “boron”.</p>
 <pre><code class="language-docker">FROM node:7.4-onbuild
-ENV name &quot;&quot;
-CMD [&quot;npm&quot;, &quot;--silent&quot;, &quot;start&quot;]
+ENV name ""
+CMD ["npm", "--silent", "start"]
 </code></pre>
-<p>Base images with an &quot;<code>onbuild&quot;</code> tag
+<p>Base images with an “<code>onbuild"</code> tag
 use <code>ONBUILD</code> instructions to specify
 instructions to be executed when the using image is executed.
 These instructions are executed as if were inserted
@@ -200,21 +195,21 @@ the container it creates after the image exits.
 Note that it is preceded by two dashes, not one.</p>
 <p>To override the value of the <code>name</code> environment variable
 specified in <code>Dockerfile</code> and <code>index.js</code>,
-add &quot;<code>-e name={value}</code>&quot; to the <code>docker run</code> command.
+add “<code>-e name={value}</code>” to the <code>docker run</code> command.
 For example, <code>docker run -t --rm -e name=Mark node-demo</code></p>
-<h3 id="volume-example" tabindex="-1">Volume Example</h3>
-<p>Now let's create an image that writes and reads files on the host.</p>
+<h3 id="volume-example">Volume Example</h3>
+<p>Now let’s create an image that writes and reads files on the host.</p>
 <p>Here is the <code>package.json</code> file.
 This example has no dependencies.</p>
 <pre><code class="language-json">{
-  &quot;name&quot;: &quot;volume-demo&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;demonstrates reading and writing text files&quot;,
-  &quot;main&quot;: &quot;index.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node index.js&quot;
+  "name": "volume-demo",
+  "version": "1.0.0",
+  "description": "demonstrates reading and writing text files",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
   },
-  &quot;license&quot;: &quot;MIT&quot;
+  "license": "MIT"
 }
 </code></pre>
 <p>Here is the JavaScript code from the file <code>index.js</code>.</p>
@@ -222,12 +217,12 @@ This example has no dependencies.</p>
 const filePath = '/data/test.txt';
 
 const data = 'Hello, World!';
-fs.writeFile(filePath, data, err =&gt; {
+fs.writeFile(filePath, data, err => {
   if (err) throw err;
 
   console.log('write was successful');
 
-  fs.readFile(filePath, (err, buf) =&gt; {
+  fs.readFile(filePath, (err, buf) => {
     if (err) throw err;
     console.log('read got:', buf.toString());
   });
@@ -235,7 +230,7 @@ fs.writeFile(filePath, data, err =&gt; {
 </code></pre>
 <p>Here is the Dockerfile that describes the image to be built.</p>
 <pre><code class="language-docker">FROM node:7.4-onbuild
-CMD [&quot;npm&quot;, &quot;start&quot;]
+CMD ["npm", "start"]
 </code></pre>
 <p>To build the Docker image enter: <code>docker build -t volume-demo .</code>
 To run this image,
@@ -244,22 +239,22 @@ The <code>-v</code> option tells Docker to map the container directory <code>/da
 to the host directory <code>data</code> under your home directory.</p>
 <p>After running this, a file named <code>test.txt</code> will exist
 in <code>$HOME/data</code> directory and it will contain
-&quot;<code>Hello, World!</code>&quot;.</p>
-<h3 id="express-example" tabindex="-1">Express Example</h3>
-<p>Now let's create an image that runs an Express HTTP server using Node.js.</p>
+“<code>Hello, World!</code>”.</p>
+<h3 id="express-example">Express Example</h3>
+<p>Now let’s create an image that runs an Express HTTP server using Node.js.</p>
 <p>Here is the <code>package.json</code> file that describes dependencies.
 It also specifies a <code>script</code> for running the application.</p>
 <pre><code class="language-json">{
-  &quot;name&quot;: &quot;express-demo&quot;,
-  &quot;version&quot;: &quot;1.0.0&quot;,
-  &quot;description&quot;: &quot;a Hello World Express app&quot;,
-  &quot;main&quot;: &quot;index.js&quot;,
-  &quot;scripts&quot;: {
-    &quot;start&quot;: &quot;node index.js&quot;
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "a Hello World Express app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
   },
-  &quot;license&quot;: &quot;MIT&quot;,
-  &quot;dependencies&quot;: {
-    &quot;express&quot;: &quot;^4.14.0&quot;
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0"
   }
 }
 </code></pre>
@@ -268,13 +263,13 @@ It also specifies a <code>script</code> for running the application.</p>
 
 const app = express();
 
-app.get('/hello', (req, res) =&gt; {
+app.get('/hello', (req, res) => {
   const name = req.query.name || 'World';
   res.send(`Hello, ${name}!`);
 });
 
 const port = 3000;
-app.listen(port, () =&gt; console.log('listening on port', port));
+app.listen(port, () => console.log('listening on port', port));
 </code></pre>
 <p>To run this Node application outside of Docker
 enter: <code>npm start</code><br>
@@ -292,7 +287,7 @@ This is specified with the <code>--publish</code> or <code>-p</code> option.
 For example, <code>-p 3001:3000</code> specifies that port 3000
 inside the container is mapped to the host port 3001.
 The same port number can be used for both if
-the container port isn't already in use on the host.</p>
+the container port isn’t already in use on the host.</p>
 <p>To run this image in a container enter:
 <code>docker run -d -p 3000:3000 express-demo</code><br>
 The <code>-d</code> option causes the container
@@ -308,83 +303,82 @@ To stop a running container enter:
 <p>The docker info command outputs an overview of the current Docker environment
 including the operating system (ex. Ubuntu), provider (ex. amazonec2),
 number of images, number of containers, and how many are running and stopped.</p>
-<h2 id="amazon-ec2" tabindex="-1">Amazon EC2</h2>
+<h2 id="amazon-ec2">Amazon EC2</h2>
 <p>From the Amazon EC2 website,
-&quot;Amazon Elastic Compute Cloud (Amazon EC2) is a web service
+“Amazon Elastic Compute Cloud (Amazon EC2) is a web service
 that provides resizable compute capacity in the cloud.
-It is designed to make web-scale cloud computing easier for developers.&quot;</p>
+It is designed to make web-scale cloud computing easier for developers.”</p>
 <p>In the next section we will walk through the steps to
 run a Docker image in a container within an EC2 instance.
 To prepare for that, this section provides the steps
 to create a free EC2 account.
 Skip the rest of this section if you already have an EC2 account.</p>
 <ul>
-<li>Browse <a href="https://amazon.com/ec2" target="_blank">https://amazon.com/ec2</a></li>
-<li>Click the &quot;Create an AWS Account&quot; button.</li>
+<li>Browse <a href="https://amazon.com/ec2" target="_blank"></a><a href="https://amazon.com/ec2" rel="noopener" target="_blank">https://amazon.com/ec2</a></li>
+<li>Click the “Create an AWS Account” button.</li>
 <li>Enter your email address.</li>
-<li>Select the &quot;I am a new user&quot; radio button.</li>
-<li>Press the &quot;Sign in using our secure server&quot; button.</li>
+<li>Select the “I am a new user” radio button.</li>
+<li>Press the “Sign in using our secure server” button.</li>
 <li>Enter the requested information.</li>
-<li>Press the &quot;Create account&quot; button.</li>
-<li>Enter contact information and check the &quot;AWS Customer Agreement&quot; checkbox.</li>
-<li>Press the &quot;Create Account and Continue&quot; button.</li>
+<li>Press the “Create account” button.</li>
+<li>Enter contact information and check the “AWS Customer Agreement” checkbox.</li>
+<li>Press the “Create Account and Continue” button.</li>
 <li>Enter credit card information. You will only be charged if
 your usage exceeds certain limits after the trial period ends.</li>
-<li>Press the &quot;Continue&quot; button.</li>
+<li>Press the “Continue” button.</li>
 <li>Enter your telephone number.</li>
-<li>Press the &quot;Call Me Now&quot; button.</li>
+<li>Press the “Call Me Now” button.</li>
 <li>You will receive a phone call. On your phone,
 enter the PIN number that is displayed in the browser.</li>
-<li>Press the &quot;Continue to select your Support Plan&quot; button.</li>
-<li>Select the &quot;Basic&quot; radio button.</li>
-<li>Press the &quot;Continue&quot; button.</li>
+<li>Press the “Continue to select your Support Plan” button.</li>
+<li>Select the “Basic” radio button.</li>
+<li>Press the “Continue” button.</li>
 </ul>
 <p>The next step is to get access and secret keys.</p>
 <ul>
-<li>From the &quot;My Account&quot; menu in the upper-right, select &quot;Security Credentials&quot;.</li>
+<li>From the “My Account” menu in the upper-right, select “Security Credentials”.</li>
 <li>Sign in using your new account.</li>
-<li>Press the &quot;Continue to Security Credentials&quot; button.</li>
-<li>Click &quot;Access Keys (Access Key ID and Secret Access Key)&quot;.</li>
-<li>Press the &quot;Create New Access Key&quot; button.</li>
-<li>Press the &quot;Download New Key&quot; button.</li>
-<li>This downloads a file named &quot;rootkey.csv&quot; in the Downloads directory.
+<li>Press the “Continue to Security Credentials” button.</li>
+<li>Click “Access Keys (Access Key ID and Secret Access Key)”.</li>
+<li>Press the “Create New Access Key” button.</li>
+<li>Press the “Download New Key” button.</li>
+<li>This downloads a file named “rootkey.csv” in the Downloads directory.
 It contains your access key and secret key. Move this file to a place
-you'll remember to look for it later, like in a directory named &quot;Amazon-AWS&quot;.</li>
+you’ll remember to look for it later, like in a directory named “Amazon-AWS”.</li>
 </ul>
-<h2 id="docker-machine" tabindex="-1">Docker Machine</h2>
+<h2 id="docker-machine">Docker Machine</h2>
 <p>Docker Machine makes it easy to use Docker in cloud provider instances.
-We'll walk through the steps to create an instance on Amazon EC2.
+We’ll walk through the steps to create an instance on Amazon EC2.
 This section assumes you already have an AWS account.</p>
 <ul>
 <li>
 <p>Install Docker Machine by following the instructions at
-<a href="https://docs.docker.com/machine/install-machine"
-target="_blank">https://docs.docker.com/machine/install-machine</a>.</p>
+<a href="https://docs.docker.com/machine/install-machine" target="_blank"></a><a href="https://docs.docker.com/machine/install-machine" rel="noopener" target="_blank">https://docs.docker.com/machine/install-machine</a>.</p>
 </li>
 <li>
 <p>Create a Docker-aware Amazon EC2 instance by entering the following commands.
-We will use the instance name &quot;aws-sandbox&quot;.
+We will use the instance name “aws-sandbox”.
 That should be substituted in place of
 all occurrences of {instance-name} below.</p>
-<pre><code class="language-bash">docker-machine create --driver amazonec2 \&lt;br&gt;
-  --amazonec2-access-key={access-key} \&lt;br&gt;
-  --amazonec2-secret-key={secret-key} \&lt;br&gt;
-  --amazonec2-region={region} \&lt;br&gt;
+<pre><code class="language-bash">docker-machine create --driver amazonec2 \&#x3C;br>
+  --amazonec2-access-key={access-key} \&#x3C;br>
+  --amazonec2-secret-key={secret-key} \&#x3C;br>
+  --amazonec2-region={region} \&#x3C;br>
   {instance-name}
 </code></pre>
 <p>The values for <code>access-key</code> and <code>secret-key</code>
 can be obtained from the <code>rootkey.csv</code> file
 that was downloaded in the previous section.
-The value for region will be similar to &quot;us-west-2&quot;.</li>
+The value for region will be similar to “us-west-2”.</p></li>
 This command populates the
 <code>~/.docker/machine/machines/{instance-name}</code> directory
 with several <code>.pem</code> files and more.
-It will take several minutes to complete.</p>
-</li>
+It will take several minutes to complete.<p></p>
+
 <li>
 <p>Enter: <code>eval $(docker-machine env {instance-name})</code><br>
 This sets four Docker-related environment variables that cause
-subsequent &quot;<code>docker</code>&quot; commands to run on the AWS instance
+subsequent “<code>docker</code>” commands to run on the AWS instance
 instead of locally.
 The environment variables are <code>DOCKER_CERT_PATH</code>,
 <code>DOCKER_HOST</code>, <code>DOCKER_MACHINE_NAME</code>,
@@ -405,16 +399,16 @@ cd to its directory and enter these commands:<br>
 <code>docker run -d -p 3000:3000 express-demo</code><br></p>
 <p>To test this app running in the AWS instance,
 browse <code>http://{instance-ip-address}:3000/hello</code>.
-TODO: Why doesn't the server respond?
+TODO: Why doesn’t the server respond?
 You should also be able to test this by running<br>
 <code>docker run -d -p 8000:80 --name webserver kitematic/hello-world-nginx</code><br>
-and browsing {ip-address}:8000, but that doesn't work either!</p>
+and browsing {ip-address}:8000, but that doesn’t work either!</p>
 <p>To stop a running instance, enter <code>docker-machine stop {instance-name}</code></p>
 <p>To restart a running instance, enter <code>docker-machine restart {instance-name}</code></p>
 <p>To remove a stopped instance, enter <code>docker-machine remove {instance-name}</code></p>
 <p>To ssh into an instance, enter <code>docker-machine ssh {instance-name}</code></p>
 <p>TODO: Is there a good reason to create an IAM user and install the aws CLI?</p>
-<h2 id="dockerfile-contents" tabindex="-1">Dockerfile Contents</h2>
+<h2 id="dockerfile-contents">Dockerfile Contents</h2>
 <p>Dockerfiles contain instructions that describe an image to be built.
 Each instruction is on a separate line.
 They start with an instruction name followed by its arguments.
@@ -424,16 +418,16 @@ To spread arguments over several lines,
 end all but the last line with a backslash like in Bash.
 Comments are lines that begin with <code>#</code>.
 Comments cannot appear at the ends of instructions.</p>
-<h2 id="dockerfile-instructions" tabindex="-1">Dockerfile Instructions</h2>
+<h2 id="dockerfile-instructions">Dockerfile Instructions</h2>
 <p>Each instruction runs independently in a new image created just for it,
-or ones from previous builds that are in the &quot;build cache&quot;.
+or ones from previous builds that are in the “build cache”.
 Previous commands do not affect subsequent ones.
-For example, &quot;RUN cd /usr/local&quot; will not change
+For example, “RUN cd /usr/local” will not change
 the working directory used by the next instruction.</p>
-<h3 id="from" tabindex="-1">FROM</h3>
+<h3 id="from">FROM</h3>
 <p>This specifies the base image.
 It is required and MUST be the first instruction.</p>
-<h3 id="env" tabindex="-1">ENV</h3>
+<h3 id="env">ENV</h3>
 <p>This instruction sets the value of an environment variable
 that is used inside the Dockerfile.
 It cannot be used to change the value
@@ -446,29 +440,29 @@ use <code>${ANIMAL}</code> or <code>$ANIMAL</code>.</p>
 <p>Instructions that support references to environment variables include:
 <code>ADD</code>, <code>COPY</code>, <code>ENV</code>, <code>EXPOSE</code>, <code>LABEL</code>, <code>ONBUILD</code>, <code>STOPSIGNAL</code>,
 <code>USER</code>, <code>VOLUME</code>, and <code>WORKDIR</code>.</p>
-<h3 id="maintainer" tabindex="-1">MAINTAINER</h3>
+<h3 id="maintainer">MAINTAINER</h3>
 <p>TODO: Add this detail.</p>
-<h3 id="workdir" tabindex="-1">WORKDIR</h3>
+<h3 id="workdir">WORKDIR</h3>
 <p>This sets the default working directory from which commands will execute.
-It defaults to &quot;/&quot;.</p>
-<h3 id="run" tabindex="-1">RUN</h3>
+It defaults to ”/”.</p>
+<h3 id="run">RUN</h3>
 <p>TODO: Add this detail.</p>
-<h3 id="cmd" tabindex="-1">CMD</h3>
+<h3 id="cmd">CMD</h3>
 <p>TODO: Add this detail.</p>
-<h3 id="path" tabindex="-1">PATH</h3>
+<h3 id="path">PATH</h3>
 <p>This specifies a local filesystem path that will be in the context of the image.
 This should expose only the files needed by the image.
 For example, do not use /.
 A .dockerignore file can be added to any directory
 to specify files that should not be exposed to the image.</p>
-<h3 id="url" tabindex="-1">URL</h3>
+<h3 id="url">URL</h3>
 <p>This specifies a Github repository
 whose files will be in the context of the image.</p>
-<h3 id="copy" tabindex="-1">COPY</h3>
+<h3 id="copy">COPY</h3>
 <p>TODO: Add this detail.</p>
-<h3 id="workpath" tabindex="-1">WORKPATH</h3>
-<h2 id="images" tabindex="-1">Images</h2>
-<h3 id="creating-images" tabindex="-1">Creating Images</h3>
+<h3 id="workpath">WORKPATH</h3>
+<h2 id="images">Images</h2>
+<h3 id="creating-images">Creating Images</h3>
 <p>To build an image from a Dockerfile:</p>
 <pre><code class="language-bash">docker build [-t {tag}] {Dockerfile-path}
 </code></pre>
@@ -478,7 +472,7 @@ the id that is automatically assigned.
 A tag consists of a name and
 an optional version separated from the name by a colon.
 For example, <code>my-project:1.2</code></p>
-<p>Typically the &quot;docker build&quot; command is run
+<p>Typically the “docker build” command is run
 from the directory that contains Dockerfile.
 When that is the case, the value for Dockerfile-path
 can be a period representing the current directory.</p>
@@ -493,11 +487,11 @@ Subsequent builds of your images that use these base images
 are much faster because locally installed base images are reused.</p>
 <p>Examples of commonly used base images include
 bash and node. ADD MORE!</p>
-<h3 id="listing-images" tabindex="-1">Listing Images</h3>
+<h3 id="listing-images">Listing Images</h3>
 <p>To get a list of all exising images:</p>
 <pre><code class="language-bash">docker images
 </code></pre>
-<h3 id="tagging-images" tabindex="-1">Tagging Images</h3>
+<h3 id="tagging-images">Tagging Images</h3>
 <p>Images have unique ids which are SHA values.
 These are long and difficult to type.
 Tags are human readable aliases for image ids.
@@ -505,11 +499,11 @@ Any number of tags can be added to the same image.
 To add a tag to an image:</p>
 <pre><code class="language-bash">docker tag {id-or-existing-name} {new-name}
 </code></pre>
-<h3 id="deleting-images" tabindex="-1">Deleting Images</h3>
+<h3 id="deleting-images">Deleting Images</h3>
 <p>To delete an image:</p>
 <pre><code class="language-bash">docker rmi [-f] {image-id-prefix-or-tag}
 </code></pre>
-<p>If an image has a tag other than &quot;latest&quot;,
+<p>If an image has a tag other than “latest”,
 deleting it requires specifying both the name and tag like this:</p>
 <p>MISSING CONTENT?</p>
 <p>If the image is used by an existing container,
@@ -524,23 +518,23 @@ deleting one by its id, requires using the -f option.</p>
 <p>Deleting a tag only deletes the corresponding image
 if it is the only tag for that image. ???</p>
 <p>To delete all images, enter <code>docker rmi -f $(docker images -q)</code></p>
-<h3 id="dangling-images" tabindex="-1">Dangling Images</h3>
+<h3 id="dangling-images">Dangling Images</h3>
 <p>During iterative development it is common
 to rebuild an image multiple times.
 When an image with the same name as an existing one is built,
 the previous version remains but is stripped of its name and tag.
-These are referred to as &quot;dangling images&quot;.
+These are referred to as “dangling images”.
 The following command deletes all of them:</p>
-<pre><code class="language-bash">docker rmi $(docker images -qa -f &quot;dangling=true&quot;)
+<pre><code class="language-bash">docker rmi $(docker images -qa -f "dangling=true")
 </code></pre>
 <p>This uses two docker commands.
-First, &quot;docker images&quot; is used to get a list of the ids
+First, “docker images” is used to get a list of the ids
 of all the dangling images.
-Second, &quot;docker rmi&quot; is used to delete those images.
-Why isn't there a build option to do this automatically?</p>
-<h2 id="containers" tabindex="-1">Containers</h2>
+Second, “docker rmi” is used to delete those images.
+Why isn’t there a build option to do this automatically?</p>
+<h2 id="containers">Containers</h2>
 <p>A container is a running instance of an image.</p>
-<h3 id="creating%2Frunning-containers" tabindex="-1">Creating/Running Containers</h3>
+<h3 id="creatingrunning-containers">Creating/Running Containers</h3>
 <p>To list the current running containers,
 enter: <code>docker ps</code></p>
 <p>To list all containers including those that are stopped,
@@ -553,23 +547,23 @@ enter <code>docker restart {container-id}</code></p>
 enter <code>docker start -a {container-id}</code>.
 This works even if the images used by the container have been deleted
 because the images have already been copied into the container.</p>
-<h3 id="deleting-containers" tabindex="-1">Deleting Containers</h3>
+<h3 id="deleting-containers">Deleting Containers</h3>
 <p>To delete specific containers, enter <code>docker rm {container-ids}</code>.
 A space-separated list of container id prefixes can be specified.
 Each id prefix must uniquely match a single container.</p>
 <p>To delete all containers, enter <code>docker rm $(docker ps -qa)</code>.</p>
-<h3 id="opening-a-shell-inside-a-running-container" tabindex="-1">Opening a shell inside a running container</h3>
+<h3 id="opening-a-shell-inside-a-running-container">Opening a shell inside a running container</h3>
 <p>To interact with a running container,
 open a shell inside it where commands can be entered.</p>
 <pre><code class="language-bash">docker exec -it {container-id} /bin/sh
 </code></pre>
 <p>To delete all containers including those that are running,
 enter <code>docker rm -f $(docker ps -qa)</code></p>
-<h2 id="volumes" tabindex="-1">Volumes</h2>
+<h2 id="volumes">Volumes</h2>
 <p>Containers can also provide read-write access to the read-only image filesystem
-a &quot;Union File System&quot;.
+a “Union File System”.
 Changes to files happens in the container, but are not saved in the image.
-&quot;Volumes&quot; allow these changes to be persisted to the local filesystem.</p>
+“Volumes” allow these changes to be persisted to the local filesystem.</p>
 <p>To specify a volume to be used by a container,
 use the -v option of the docker run command as follows:</p>
 <pre><code class="language-bash">docker run {image-name} -v $(pwd):{directory}
@@ -577,8 +571,8 @@ use the -v option of the docker run command as follows:</p>
 <p>It should be possible to edit files under a volume directory
 and have the image in the container utilize the changes
 without restarted it. TRY THIS!
-See <a href="https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&amp;utm_source=Spotlight&amp;utm_medium=email&amp;utm_campaign=cloud%202017-01-24">https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&amp;utm_source=Spotlight&amp;utm_medium=email&amp;utm_campaign=cloud 2017-01-24</a></p>
-<h3 id="sharing-an-image" tabindex="-1">Sharing an Image</h3>
+See <a href="https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&#x26;utm_source=Spotlight&#x26;utm_medium=email&#x26;utm_campaign=cloud%202017-01-24" rel="noopener" target="_blank">https://dzone.com/articles/docker-for-devs-creating-a-developer-image?edition=264895&#x26;utm_source=Spotlight&#x26;utm_medium=email&#x26;utm_campaign=cloud%202017-01-24</a></p>
+<h3 id="sharing-an-image">Sharing an Image</h3>
 <p>The easiest way to share a Docker image is to share its Dockerfile.
 The recipient can build this image from that.</p>
 <p>Another alternative is to register for a
@@ -586,7 +580,7 @@ The recipient can build this image from that.</p>
 account and upload your image there.
 From here you can browse for shared, downloadable images.
 For example, docker/whalesay.</p>
-<h2 id="unorganized-content" tabindex="-1">Unorganized Content</h2>
+<h2 id="unorganized-content">Unorganized Content</h2>
 <ul>
 <li>Docker Engine: supports sharing Docker images</li>
 <li>docker run docker/whalesay cowsay Hello from the whale!</li>
@@ -603,19 +597,19 @@ status bar at the top of the screen
 </li>
 <li>if there is a whale icon
 <ul>
-<li>click it a verify that the dropdown says &quot;Docker is running&quot;</li>
+<li>click it a verify that the dropdown says “Docker is running”</li>
 </ul>
 </li>
 </ul>
 <p>To set Docker preferences</p>
 <ul>
 <li>click the whale icon in the status bar</li>
-<li>select &quot;Preferences&quot;</li>
+<li>select “Preferences”</li>
 <li>General options include:
 <ul>
-<li>&quot;Automatically start Docker when you log in&quot; (on by default)</li>
-<li>&quot;Automatically check for updates&quot; (on by default)</li>
-<li>&quot;Exclude VM from Time Machine backups&quot; (off by default)</li>
+<li>“Automatically start Docker when you log in” (on by default)</li>
+<li>“Automatically check for updates” (on by default)</li>
+<li>“Exclude VM from Time Machine backups” (off by default)</li>
 <li>number of CPUs</li>
 <li>amount of memory allocated</li>
 </ul>
@@ -638,17 +632,17 @@ status bar at the top of the screen
 <li>to define
 <ul>
 <li>create a new directory and cd to it</li>
-<li>create a file name &quot;Dockerfile&quot;</li>
+<li>create a file name “Dockerfile”</li>
 <li>comments in this file begin with #</li>
-<li>first instruction must be &quot;FROM {image-name}[:tag]&quot;
-to specify the base image - tag defaults to &quot;latest&quot;,
-but can specify a different version - the smallest, simplest base image is &quot;scratch&quot;,
-but that doesn't seem to be able to do anything - another good option is &quot;bash&quot; - official Node base images are described at
-<a href="https://hub.docker.com/_/node/">https://hub.docker.com/_/node/</a>
+<li>first instruction must be “FROM {image-name}[:tag]”
+to specify the base image - tag defaults to “latest”,
+but can specify a different version - the smallest, simplest base image is “scratch”,
+but that doesn’t seem to be able to do anything - another good option is “bash” - official Node base images are described at
+<a href="https://hub.docker.com/_/node/" rel="noopener" target="_blank">https://hub.docker.com/_/node/</a>
 _ specify npm packages to be installed in package.json
 _ run a command to install PostgreSQL?
-IMPORTANT! * SEE <a href="https://hub.docker.com/r/spittet/node-postgresql/">https://hub.docker.com/r/spittet/node-postgresql/</a> - official PostgreSQL base images are described at
-<a href="https://hub.docker.com/_/postgres/">https://hub.docker.com/_/postgres/</a> - there doesn't seem to be an offical base image
+IMPORTANT! * SEE <a href="https://hub.docker.com/r/spittet/node-postgresql/" rel="noopener" target="_blank">https://hub.docker.com/r/spittet/node-postgresql/</a> - official PostgreSQL base images are described at
+<a href="https://hub.docker.com/_/postgres/" rel="noopener" target="_blank">https://hub.docker.com/_/postgres/</a> - there doesn’t seem to be an offical base image
 that includes Express</li>
 <li>RUN command
 <ul>
@@ -656,7 +650,7 @@ that includes Express</li>
 and creates a new image</li>
 <li>often used to install software packages</li>
 <li>to install software in the image, add lines like this:
-RUN apt-get -y update &amp;&amp; apt-get install -y {software-name}</li>
+RUN apt-get -y update &#x26;&#x26; apt-get install -y {software-name}</li>
 </ul>
 </li>
 <li>CMD command
@@ -666,7 +660,7 @@ RUN apt-get -y update &amp;&amp; apt-get install -y {software-name}</li>
 <li>only the last CMD command is used,
 so there is no point in having more than one</li>
 <li>typically used to start a server</li>
-<li>to run a command, add the line &quot;CMD {command}&quot;</li>
+<li>to run a command, add the line “CMD {command}”</li>
 </ul>
 </li>
 <li>ENTRYPOINT command
@@ -674,18 +668,18 @@ so there is no point in having more than one</li>
 <li>configures a container that will run as an executable</li>
 </ul>
 </li>
-<li>RUN, CMD, and ENTRYPOINT can be used in &quot;shell&quot; or &quot;exec&quot; form
+<li>RUN, CMD, and ENTRYPOINT can be used in “shell” or “exec” form
 <ul>
 <li>in shell form the command is
-executed with &quot;/bin/sh -c {command}&quot;
+executed with “/bin/sh -c {command}”
 <ul>
-<li>ex. CMD echo &quot;Hello, World!&quot;</li>
+<li>ex. CMD echo “Hello, World!”</li>
 </ul>
 </li>
 <li>in exec form an executable is
 executed directly with no shell processing
 <ul>
-<li>ex. CMD [&quot;/bin/echo&quot;, &quot;Hello, World!&quot;]</li>
+<li>ex. CMD [“/bin/echo”, “Hello, World!”]</li>
 <li>exec form is preferred for the CMD and ENTRYPOINT commands</li>
 </ul>
 </li>
@@ -710,7 +704,7 @@ the image will have no name (a.k.a. repository)
 or tag, just an id</li>
 <li>Dockerfile-path can be . for the current directory</li>
 <li>also downloads and builds image for the base image
-if it doesn't already exist
+if it doesn’t already exist
 <ul>
 <li>ex. bash and node</li>
 <li>can take a long time, but subsequent builds are
@@ -723,10 +717,10 @@ as an existing image, it will not be replaced,
 but it will lose its name so
 the name can be assigned to the new image
 <ul>
-<li>referred to as a &quot;dangling image&quot;</li>
+<li>referred to as a “dangling image”</li>
 <li>can delete it by its id or with this command:
-docker rmi $(docker images -qa -f &quot;dangling=true&quot;)</li>
-<li>why isn't there a build option to do this automatically?</li>
+docker rmi $(docker images -qa -f “dangling=true”)</li>
+<li>why isn’t there a build option to do this automatically?</li>
 </ul>
 </li>
 </ul>
@@ -770,12 +764,12 @@ docker rmi $(docker images -qa -f &quot;dangling=true&quot;)</li>
 <li>options
 -i : is for interactive (can read from stdin)
 -t : allocates a pseudo TTY
---rm : removes container after image exits
---name {container-name} : gives name to container</li>
+—rm : removes container after image exits
+—name {container-name} : gives name to container</li>
 </ul>
 </li>
-<li>if the image isn't found locally,
-this attempts to download it from &quot;Docker Hub&quot;
+<li>if the image isn’t found locally,
+this attempts to download it from “Docker Hub”
 <ul>
 <li>download images are saved locally for future use</li>
 <li>can remove when no longer needed</li>
@@ -783,7 +777,7 @@ this attempts to download it from &quot;Docker Hub&quot;
 </li>
 <li>every time this is run, a new container is created</li>
 <li>after this completes, the new container remains
-unless the --rm option is used
+unless the —rm option is used
 <ul>
 <li>I think you want this for non-server images</li>
 </ul>
@@ -858,7 +852,7 @@ that is unique</li>
 <ul>
 <li>docker inspect {name-or-id}
 <ul>
-<li>Monsanto container-name is &quot;capacity-api&quot;</li>
+<li>Monsanto container-name is “capacity-api”</li>
 </ul>
 </li>
 </ul>
@@ -885,5 +879,6 @@ that is unique</li>
 <li>docker-compose down</li>
 </ul>
 </li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

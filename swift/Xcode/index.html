@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Xcode</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Xcode</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#panels">Panels</a></li><li><a href="#navigator">Navigator</a></li><li><a href="#inspector">Inspector</a></li><li><a href="#files">Files</a></li><li><a href="#project-files">Project Files</a></li><li><a href="#editor">Editor</a></li><ul><li><a href="#sticky-headers">Sticky Headers</a></li><li><a href="#multiple-editor-panes">Multiple Editor Panes</a></li><li><a href="#matching-braces">Matching Braces</a></li><li><a href="#code-completion">Code Completion</a></li><li><a href="#spell-checking">Spell Checking</a></li><li><a href="#code-folding">Code Folding</a></li><li><a href="#multiple-cursors">Multiple Cursors</a></li><li><a href="#replacing-a-rectangular-selection">Replacing a Rectangular Selection</a></li><li><a href="#rename-all-in-scope">Rename All in Scope</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#sorting">Sorting</a></li></ul><li><a href="#console">Console</a></li><li><a href="#playgrounds">Playgrounds</a></li><li><a href="#projects">Projects</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#code-generation">Code Generation</a></li><li><a href="#documentation-generation">Documentation Generation</a></li><li><a href="#pragma-marks">Pragma Marks</a></li><li><a href="#building">Building</a></li><li><a href="#clean-builds">Clean Builds</a></li><li><a href="#running">Running</a></li><li><a href="#previews">Previews</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#app-icons">App Icons</a></li><li><a href="#sf-symbols">SF Symbols</a></li><li><a href="#source-control-(git)">Source Control (Git)</a></li><ul><li><a href="#project-navigator">Project Navigator</a></li><li><a href="#local-repositories">Local Repositories</a></li><li><a href="#.gitignore-file">.gitignore File</a></li><li><a href="#remote-repositories">Remote Repositories</a></li><li><a href="#branches">Branches</a></li><li><a href="#uncommitted-changes">Uncommitted Changes</a></li><li><a href="#commits">Commits</a></li><li><a href="#stashes">Stashes</a></li><li><a href="#pull-requests">Pull Requests</a></li><li><a href="#tags">Tags</a></li><li><a href="#reset">Reset</a></li></ul><li><a href="#themes">Themes</a></li><li><a href="#column-marker">Column Marker</a></li><li><a href="#code-folding-1">Code Folding</a></li><li><a href="#vim-support">Vim Support</a></li><li><a href="#duplicating-files">Duplicating Files</a></li><li><a href="#app-name">App Name</a></li><li><a href="#new-files">New Files</a></li><li><a href="#header-comments">Header Comments</a></li><li><a href="#mapping-files-to-targets">Mapping Files to Targets</a></li><li><a href="#schemes">Schemes</a></li><li><a href="#hot-reload">Hot Reload</a></li><li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li><ul><li><a href="#visibility-of-ui-parts">Visibility of UI Parts</a></li><li><a href="#build%2Frun">Build/Run</a></li><li><a href="#navigate">Navigate</a></li><li><a href="#find%2Freplace">Find/Replace</a></li><li><a href="#code-formatting-1">Code Formatting</a></li><li><a href="#code-folding-2">Code Folding</a></li><li><a href="#source-control">Source Control</a></li><li><a href="#miscellaneous">Miscellaneous</a></li></ul><li><a href="#snippets">Snippets</a></li><li><a href="#using-a-new-swift-version">Using a New Swift Version</a></li><li><a href="#xcode-issues">Xcode Issues</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Xcode</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Xcode</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#panels">Panels</a></li><li><a href="#navigator">Navigator</a></li><li><a href="#inspector">Inspector</a></li><li><a href="#files">Files</a></li><li><a href="#project-files">Project Files</a></li><li><a href="#editor">Editor</a></li><ul><li><a href="#sticky-headers">Sticky Headers</a></li><li><a href="#multiple-editor-panes">Multiple Editor Panes</a></li><li><a href="#matching-braces">Matching Braces</a></li><li><a href="#code-completion">Code Completion</a></li><li><a href="#spell-checking">Spell Checking</a></li><li><a href="#code-folding">Code Folding</a></li><li><a href="#multiple-cursors">Multiple Cursors</a></li><li><a href="#replacing-a-rectangular-selection">Replacing a Rectangular Selection</a></li><li><a href="#rename-all-in-scope">Rename All in Scope</a></li><li><a href="#refactoring">Refactoring</a></li><li><a href="#sorting">Sorting</a></li></ul><li><a href="#console">Console</a></li><li><a href="#playgrounds">Playgrounds</a></li><li><a href="#projects">Projects</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#code-generation">Code Generation</a></li><li><a href="#documentation-generation">Documentation Generation</a></li><li><a href="#pragma-marks">Pragma Marks</a></li><li><a href="#building">Building</a></li><li><a href="#clean-builds">Clean Builds</a></li><li><a href="#running">Running</a></li><li><a href="#previews">Previews</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#app-icons">App Icons</a></li><li><a href="#sf-symbols">SF Symbols</a></li><li><a href="#source-control-git">Source Control (Git)</a></li><ul><li><a href="#project-navigator">Project Navigator</a></li><li><a href="#local-repositories">Local Repositories</a></li><li><a href="#gitignore-file">.gitignore File</a></li><li><a href="#remote-repositories">Remote Repositories</a></li><li><a href="#branches">Branches</a></li><li><a href="#uncommitted-changes">Uncommitted Changes</a></li><li><a href="#commits">Commits</a></li><li><a href="#stashes">Stashes</a></li><li><a href="#pull-requests">Pull Requests</a></li><li><a href="#tags">Tags</a></li><li><a href="#reset">Reset</a></li></ul><li><a href="#themes">Themes</a></li><li><a href="#column-marker">Column Marker</a></li><li><a href="#code-folding-1">Code Folding</a></li><li><a href="#vim-support">Vim Support</a></li><li><a href="#duplicating-files">Duplicating Files</a></li><li><a href="#app-name">App Name</a></li><li><a href="#new-files">New Files</a></li><li><a href="#header-comments">Header Comments</a></li><li><a href="#mapping-files-to-targets">Mapping Files to Targets</a></li><li><a href="#schemes">Schemes</a></li><li><a href="#hot-reload">Hot Reload</a></li><li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li><ul><li><a href="#visibility-of-ui-parts">Visibility of UI Parts</a></li><li><a href="#buildrun">Build/Run</a></li><li><a href="#navigate">Navigate</a></li><li><a href="#findreplace">Find/Replace</a></li><li><a href="#code-formatting-1">Code Formatting</a></li><li><a href="#code-folding-2">Code Folding</a></li><li><a href="#source-control">Source Control</a></li><li><a href="#miscellaneous">Miscellaneous</a></li></ul><li><a href="#snippets">Snippets</a></li><li><a href="#using-a-new-swift-version">Using a New Swift Version</a></li><li><a href="#xcode-issues">Xcode Issues</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://developer.apple.com/xcode/?v=1.1.1" rel="noopener" target="_blank">Xcode</a>
 is an IDE from Apple for creating apps for
 iPhone, iPad, macOS, Apple Watch, and Apple TV.</p>
@@ -7,80 +9,79 @@ are no longer automatically downloaded when Xcode is installed.
 Only the iOS and macOS SDKs are downloaded, not watchOS or tvOS.
 This makes it faster to install Xcode.
 Additionally SDKs can be downloaded after Xcode is installed.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <p>Paul Hudson provided an excellent summary of the new features added in Xcode 14
-at <a href="https://www.youtube.com/watch?v=V2TDGeevDWo&amp;v=1.1.1" rel="noopener" target="_blank">What</a>.</p>
-<h2 id="panels" tabindex="-1">Panels</h2>
+at <a href="https://www.youtube.com/watch?v=V2TDGeevDWo&#x26;v=1.1.1" rel="noopener" target="_blank">What</a>.</p>
+<h2 id="panels">Panels</h2>
 <p>The Xcode user interface contains many panels that are described below:</p>
-<table>
-<thead>
-<tr>
-<th>Area</th>
-<th>Location</th>
-<th>Purpose</th>
-<th>Toggle With</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Navigator</td>
-<td>left</td>
-<td>display files, search results, and more</td>
-<td>View ... Navigators ... {Hide|Show Navigator} or cmd-zero</td>
-</tr>
-<tr>
-<td>Editor</td>
-<td>center left</td>
-<td>view and edit code and data in selected files</td>
-<td>none</td>
-</tr>
-<tr>
-<td>Canvas</td>
-<td>center right</td>
-<td>view and interact with Previews</td>
-<td>Editor ... Canvas or cmd-option-return</td>
-</tr>
-<tr>
-<td>Minimap</td>
-<td>right</td>
-<td>display zoomed out view of entire file</td>
-<td>Editor ... Minimap or cmd-ctrl-shift-m</td>
-</tr>
-<tr>
-<td>Inspector</td>
-<td>right</td>
-<td>view and editing details about selected item</td>
-<td>View ... Inspectors ... {Hide|Show Inspector} or cmd-option-zero</td>
-</tr>
-<tr>
-<td>Debug</td>
-<td>bottom</td>
-<td>display print output and more</td>
-<td>View ... Debug Area ... {Hide|Show Debug Area} or cmd-shift-y</td>
-</tr>
-</tbody>
-</table>
-<h2 id="navigator" tabindex="-1">Navigator</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Area</th><th>Location</th><th>Purpose</th><th>Toggle With</th></tr></thead><tbody><tr><td>Navigator</td><td>left</td><td>display files, search results, and more</td><td>View … Navigators … {Hide|Show Navigator} or cmd-zero</td></tr><tr><td>Editor</td><td>center left</td><td>view and edit code and data in selected files</td><td>none</td></tr><tr><td>Canvas</td><td>center right</td><td>view and interact with Previews</td><td>Editor … Canvas or cmd-option-return</td></tr><tr><td>Minimap</td><td>right</td><td>display zoomed out view of entire file</td><td>Editor … Minimap or cmd-ctrl-shift-m</td></tr><tr><td>Inspector</td><td>right</td><td>view and editing details about selected item</td><td>View … Inspectors … {Hide|Show Inspector} or cmd-option-zero</td></tr><tr><td>Debug</td><td>bottom</td><td>display print output and more</td><td>View … Debug Area … {Hide|Show Debug Area} or cmd-shift-y</td></tr></tbody></table>
+<h2 id="navigator">Navigator</h2>
 <p>The Navigator panel is used to navigate between specific kinds of resources.
 It appears on the left side of the Xcode window.
 This can be toggled between showing and hiding by pressing cmd-0
 or tapping the following button on the left side of the title bar:</p>
-<p><img alt="Xcode toggle Navigator panel" class="keep-size"
-  src="/blog/assets/Xcode-toggle-panel.png?v=1.1.1"></p>
+<p><img alt="Xcode toggle Navigator panel" class="keep-size" src="/blog/assets/Xcode-toggle-panel.png?v=1.1.1"></p>
 <p>The Navigator panel displays the following nine icon buttons at the top:</p>
 <ul>
 <li>
 <p>1st tab - Project Navigator (folder icon)</p>
-<p>This displays the &quot;Project Navigator&quot; which shows
+<p>This displays the “Project Navigator” which shows
 a tree view of files in the project.</p>
 <p>Files can be organized into groups.
 To create a new group, right-click on an
-existing group or file and select &quot;New Group&quot;.
+existing group or file and select “New Group”.
 This creates a group and a directory on the file system
-named &quot;New Group&quot; which can be renamed.
+named “New Group” which can be renamed.
 Existing files can then be dragged into the new group.
 Another option is to select all the files to be moved to a subdirectory,
-right-click one of them, and select &quot;New Group From Selection&quot;.</p>
+right-click one of them, and select “New Group From Selection”.</p>
 <p>To open a file, click its name.</p>
 <p>To open a file in a new editor split, option-click its name.</p>
 <p>To open a file in a specific existing editor split,
@@ -88,8 +89,8 @@ shift-option-click its name.
 This highlights an editor pane with a blue overlay.
 Moving the cursor to a different editor pane moves the overlay.
 Click when the desired editor pane is highlighted.</p>
-<p>To &quot;quickly open&quot; a file by typing part of its name,
-select File ... Open Quickly...&quot; or press cmd-shift-o.</p>
+<p>To “quickly open” a file by typing part of its name,
+select File … Open Quickly…” or press cmd-shift-o.</p>
 <p>All of the options above open a temporary view of the file,
 indicated by the file name in the tab being in italic.
 If there is already a temporary view tab and another file is opened, the
@@ -100,17 +101,16 @@ double-click its tab or edit its contents.</p>
 can be customized by dragging them up and down
 and their order is persisted as part of the project.
 To sort the files displayed in a group,
-right-click its name and select &quot;Sort by Name&quot; or &quot;Sort by Type&quot;.</p>
+right-click its name and select “Sort by Name” or “Sort by Type”.</p>
 <p>The following buttons appear at the bottom of the Project Navigator.o
 The clock button toggles showing only files
 that have been viewed recently.
-The &quot;+-&quot; button toggles showing only files
+The ”+-” button toggles showing only files
 whose source control status has changed (ex. modified files).</p>
-<p><img alt="Xcode Project Navigator buttons" class="keep-size"
-  src="/blog/assets/xcode-project-navigator-buttons.png?v=1.1.1"></p>
+<p><img alt="Xcode Project Navigator buttons" class="keep-size" src="/blog/assets/xcode-project-navigator-buttons.png?v=1.1.1"></p>
 </li>
 <li>
-<p>2nd tab - Source Control Navigator (&quot;x&quot; in square icon)</p>
+<p>2nd tab - Source Control Navigator (“x” in square icon)</p>
 <p>This displays a list of files that have been modified (M)
 or added (A).</p>
 <p>Click a file to see its contents.</p>
@@ -118,55 +118,49 @@ or added (A).</p>
 to see diffs.</p>
 <p>Click the button to the right of that one containing horizontal lines
 to display a menu of options including
-&quot;Inline Comparison&quot; and &quot;Side by Side Comparison&quot; (preferred).
-Oddly, in &quot;Side by Side&quot; mode the current version of the file
+“Inline Comparison” and “Side by Side Comparison” (preferred).
+Oddly, in “Side by Side” mode the current version of the file
 is shown on the left and the previous version is shown on the right.
-See the &quot;Source Control&quot; section below for the steps to fix this.</p>
+See the “Source Control” section below for the steps to fix this.</p>
 <p>To discard all changes to a file, right-click the file name
-in the Navigator and select &quot;Discard Changes in ...&quot;.</p>
+in the Navigator and select “Discard Changes in …”.</p>
 <p>Right-click a file to see a pop-up menu that includes the options
-&quot;Commit&quot; and &quot;Discard Changes&quot;.
+“Commit” and “Discard Changes”.
 Oddly it seems the only way to commit multiple files at once
-is to select &quot;Commit...&quot; from the &quot;Source Control&quot; menu.</p>
+is to select “Commit…” from the “Source Control” menu.</p>
 </li>
 <li>
 <p>3rd tab - Symbol Navigator (tree diagram icon)</p>
 <p>This displays an alphabetized list of files.
 Click a file to expand it to a list of the properties and methods it defines.
 These can be clicked to navigate to their definition.
-The &quot;Hierarchical&quot; and &quot;Flat&quot; options at the top of the list
+The “Hierarchical” and “Flat” options at the top of the list
 seem identical.</p>
 </li>
 <li>
 <p>4th tab - Find Navigator (magnifier glass icon)</p>
 <p>This is used to find and replace text in the project.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator.png?v=1.1.1"></p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator.png?v=1.1.1"></p>
 <p>Click the magnifier glass icon to see a dropdown
 containing past searches that can be clicked to recall them.</p>
-<p>Click &quot;Find&quot; to optionally switch to &quot;Replace&quot; mode.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator-dropdown1.png?v=1.1.1"></p>
-<p>Click &quot;Text&quot; to optionally switch to searching for &quot;References&quot;,
-&quot;Definitions&quot;, &quot;Regular Expression&quot;, or &quot;Call Hierarchy&quot;.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator-dropdown2.png?v=1.1.1"></p>
-<p>Click &quot;Containing&quot; to optionally switch to
-&quot;Matching Word&quot;, &quot;Starting With&quot;, or &quot;Ending With&quot;.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator-dropdown3.png?v=1.1.1"></p>
-<p>Click &quot;In Project&quot; to optionally limit the search
+<p>Click “Find” to optionally switch to “Replace” mode.</p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator-dropdown1.png?v=1.1.1"></p>
+<p>Click “Text” to optionally switch to searching for “References”,
+“Definitions”, “Regular Expression”, or “Call Hierarchy”.</p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator-dropdown2.png?v=1.1.1"></p>
+<p>Click “Containing” to optionally switch to
+“Matching Word”, “Starting With”, or “Ending With”.</p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator-dropdown3.png?v=1.1.1"></p>
+<p>Click “In Project” to optionally limit the search
 to a specific project directory
-and select &quot;New Scope...&quot; for advanced options.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator-dropdown4.png?v=1.1.1"></p>
-<p>Click &quot;Ignoring Case&quot; to optionally switch to &quot;Matching Case&quot;.</p>
-<p><img alt="Xcode Find" class="keep-size"
-  src="/blog/assets/xcode-find-navigator-dropdown5.png?v=1.1.1"></p>
+and select “New Scope…” for advanced options.</p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator-dropdown4.png?v=1.1.1"></p>
+<p>Click “Ignoring Case” to optionally switch to “Matching Case”.</p>
+<p><img alt="Xcode Find" class="keep-size" src="/blog/assets/xcode-find-navigator-dropdown5.png?v=1.1.1"></p>
 </li>
 <li>
 <p>5th tab - Test Navigator (warning icon - triangle containing !)</p>
-<p>This displays &quot;Buildtime&quot; and &quot;Runtime&quot; issues.</p>
+<p>This displays “Buildtime” and “Runtime” issues.</p>
 </li>
 <li>
 <p>6th tab - Test Navigator (diamond containing checkmark icon)</p>
@@ -177,7 +171,7 @@ TODO: Can they be run individually from here?</p>
 <p>7th tab - Debug Navigator (spray can icon)</p>
 <p>This displays information about CPU, Memory, Disk, and Network usage.
 Click each of these to see detailed information.
-For example, clicking &quot;CPU&quot; displays information about thread usage.</p>
+For example, clicking “CPU” displays information about thread usage.</p>
 </li>
 <li>
 <p>8th tab - Breakpoint Navigator (tag icon)</p>
@@ -191,28 +185,27 @@ including error messages.
 Click a build to see details.</p>
 </li>
 </ul>
-<h2 id="inspector" tabindex="-1">Inspector</h2>
+<h2 id="inspector">Inspector</h2>
 <p>The Inspector panel is used to modify properties of the selected item.
 It appears on the right side of the Xcode window.
 This can be toggled between showing and hiding by pressing cmd-option-0
 or tapping the following button on the right side of the title bar:</p>
-<p><img alt="Xcode toggle Inspector panel" class="keep-size"
-  src="/blog/assets/xcode-toggle-panel.png?v=1.1.1"></p>
-<h2 id="files" tabindex="-1">Files</h2>
+<p><img alt="Xcode toggle Inspector panel" class="keep-size" src="/blog/assets/xcode-toggle-panel.png?v=1.1.1"></p>
+<h2 id="files">Files</h2>
 <p>To open a file within a project in an editor pane,
-select File ... Open Quickly... (or press cmd-shift-o),
+select File … Open Quickly… (or press cmd-shift-o),
 enter part of the file name (at least three characters),
 and click the file within the list that appears.
 This also works with any kind of name including
 types, variables, functions, structs, classes, properties, and methods.
 It even works with framework types.</p>
-<h2 id="project-files" tabindex="-1">Project Files</h2>
+<h2 id="project-files">Project Files</h2>
 <p>Xcode projects are described by a file with the
-<code>.xcodeproj</code> file extension which is short for &quot;Xcode Project&quot;.
-These are actually &quot;packages&quot; (rather than files)
+<code>.xcodeproj</code> file extension which is short for “Xcode Project”.
+These are actually “packages” (rather than files)
 that contain directories and files.
 To see this, right-click on a <code>.xcodeproj</code> file in the Finder
-and select &quot;Show Package Contents&quot;.
+and select “Show Package Contents”.
 The typical contents include:</p>
 <ul>
 <li>
@@ -256,7 +249,7 @@ order in which they should appear in the Project Navigator</p>
 </ul>
 </li>
 </ul>
-<p>The file extension stands for &quot;Project Builder Xcode Project&quot;.</p>
+<p>The file extension stands for “Project Builder Xcode Project”.</p>
 <p>This file uses the syntax from Next plist files
 that looks a bit like JavaScript object literals
 rather than a standard format such as JSON or XML.</p>
@@ -277,14 +270,14 @@ rather than a standard format such as JSON or XML.</p>
 </ul>
 <p>When files are added to a project directory from outside of Xcode
 (such as in the Finder or a Terminal window)
-it is necessary to select File ... Add Files... in Xcode
+it is necessary to select File … Add Files… in Xcode
 in order to add entries in the <code>.xcodeproj</code> file
 so they are seen as belonging to the project.</p>
 <p>When deleting files under a project directory, it is best to
 do so from Xcode rather than the Finder or a Terminal window.
 This updates the <code>.xcodeproj</code> file so the files
 are no longer seen as belonging to the project.</p>
-<h2 id="editor" tabindex="-1">Editor</h2>
+<h2 id="editor">Editor</h2>
 <p>Xcode provides a specialized editor for some file types.
 Examples include project files (<code>.xcodeproj</code>) and Property List (PLIST) files
 (such as <code>Info.plist</code> and <code>Localizable.stringsdict</code>).</p>
@@ -294,17 +287,17 @@ and Objective-C files (<code>.m</code> and <code>.h</code>) a text editor is use
 Saving is not required.</p>
 <p>Lines with errors are indicated with red bars in the right gutter.
 By default these contains the number of errors on the line,
-an error icon (circle containing an &quot;X&quot;), and the first error message.
+an error icon (circle containing an “X”), and the first error message.
 Click anywhere in the red bar to fully display all the error messages.
-Sometimes errors contain a &quot;Fix&quot; button that can be clicked
+Sometimes errors contain a “Fix” button that can be clicked
 to automatically fix the error.</p>
 <p>To hide the first error message, only displaying
 the number of errors and the error icon,
-select Xcode ... Settings ... General ... Issues ... Show Minimized.
+select Xcode … Settings … General … Issues … Show Minimized.
 With this setting, click anywhere on a red bar,
 to see the text for all the errors on the line.</p>
 <p>To see basic documentation of a name in code, option-click it.
-For more detail, click the &quot;Open in Developer Documentation&quot;.
+For more detail, click the “Open in Developer Documentation”.
 Alternatively, click the circled question mark at the top of the Inspector.
 The Inspector will then display help for
 anything name under the cursor in the Code Editor.</p>
@@ -315,12 +308,12 @@ that can include the following options:</p>
 <li>Fold - collapses a code block to an ellipsis;
 double-click the ellipsis to re-open</li>
 <li>Show Quick Help - same as option-click to bypass context menu</li>
-<li>Callers...</li>
+<li>Callers…</li>
 <li>Edit All in Scope - with Vim keybindings must be in insert mode</li>
 <li>Rename</li>
 <li>Show SwiftUI Inspector - opens inspector in a dialog
 as an alternative to using Inspector on right side</li>
-<li>Extract Subview - creates a new view named &quot;ExtractedView&quot;
+<li>Extract Subview - creates a new view named “ExtractedView”
 that renders the selected view</li>
 <li>Embed in HStack</li>
 <li>Embed in VStack</li>
@@ -329,22 +322,22 @@ that renders the selected view</li>
 <li>Group - embeds in a <code>Group</code></li>
 <li>Make Conditional - surrounds in an <code>if</code>/<code>else</code></li>
 <li>Repeat - surrounds in a <code>ForEach</code> loop</li>
-<li>Embed... - embeds in a placeholder view named <code>Container</code>
+<li>Embed… - embeds in a placeholder view named <code>Container</code>
 that must be renamed to a real view</li>
 <li>Extract to a Variable</li>
 <li>Extract to a Method</li>
 <li>Extract All Occurrences</li>
 </ul>
-<p>Note that the &quot;Extract Subview&quot; option and the &quot;Embed in *&quot; options
+<p>Note that the “Extract Subview” option and the “Embed in *” options
 only appear a preview is displayed and a view name is command-clicked.</p>
-<p>In the past there was a &quot;Rename...&quot; option in this menu.
-It was moved to Editor ... Refactor ... Rename.</p>
-<h3 id="sticky-headers" tabindex="-1">Sticky Headers</h3>
+<p>In the past there was a “Rename…” option in this menu.
+It was moved to Editor … Refactor … Rename.</p>
+<h3 id="sticky-headers">Sticky Headers</h3>
 <p>When scrolling down through code, the first line of each
 type and function definition that encloses the code being viewed
 sticks at the top of the editor window to provide context.</p>
 <p>To scroll to a sticky header, click it.</p>
-<h3 id="multiple-editor-panes" tabindex="-1">Multiple Editor Panes</h3>
+<h3 id="multiple-editor-panes">Multiple Editor Panes</h3>
 <p>To open a file in a new split pane,
 hold down the option key and click the file in the Project Navigator.
 If the file is already open, to open another view of the file
@@ -356,20 +349,20 @@ Then release the keys, hover over where the file should be opened.
 Potential locations are highlighted as you hover.
 Click when the desired location is highlighted.</p>
 <p>Alternatively, click the button the upper-right
-that is a rectangle containing a vertical line and a &quot;+&quot; to open
+that is a rectangle containing a vertical line and a ”+” to open
 a split pane containing the same file in the the currently editor pane.</p>
 <p>To open a new split below the current one instead of to the right,
 open down the option key before clicking the button.</p>
 <p>The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.</p>
-<h3 id="matching-braces" tabindex="-1">Matching Braces</h3>
+<h3 id="matching-braces">Matching Braces</h3>
 <p>To find the matching brace for a given brace,
 hold down the command key and hover over a brace.
 Alternatively, click after either brace to highlight the matching brace.
 When Vim Mode is enabled, this only works in insert mode.</p>
 <p>To select all the code in matching braces, including the braces,
 double-click either one of them.</p>
-<h3 id="code-completion" tabindex="-1">Code Completion</h3>
+<h3 id="code-completion">Code Completion</h3>
 <p>Xcode provides great intellisense and code completion.</p>
 <p>When accepting a function completion, only non-dimmed arguments are included.
 To also include the dimmed arguments, hold down the option key
@@ -381,19 +374,19 @@ For example, <code>.frame(mina</code> gives <code>.frame(minWidth: , alignment: 
 to advance to the next argument.
 If the last argument is a closure, press return to
 automatically turn it into a trailing closure.</p>
-<h3 id="spell-checking" tabindex="-1">Spell Checking</h3>
+<h3 id="spell-checking">Spell Checking</h3>
 <p>To configure Xcode to check spelling while typing, select
-Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
+Edit … Format … Spelling and Grammar … Check Spelling While Typing.
 A faint red line will be displayed under all misspelled words.</p>
-<h3 id="code-folding" tabindex="-1">Code Folding</h3>
-<p>To enable code folding, select Xcode ... Settings ... Text Editing
-and check the checkbox for &quot;Code folding ribbon&quot;.</p>
-<p>To fold the code in any construct (function, argument list, struct, class, ...),
+<h3 id="code-folding">Code Folding</h3>
+<p>To enable code folding, select Xcode … Settings … Text Editing
+and check the checkbox for “Code folding ribbon”.</p>
+<p>To fold the code in any construct (function, argument list, struct, class, …),
 click the corresponding section in the code folding ribbon.</p>
-<p>To unfold code, click the &quot;&gt;&quot; in the code folding ribbon
-or double-click &quot;...&quot; in the code.</p>
+<p>To unfold code, click the ”>” in the code folding ribbon
+or double-click ”…” in the code.</p>
 <p>To enable code folding,</p>
-<h3 id="multiple-cursors" tabindex="-1">Multiple Cursors</h3>
+<h3 id="multiple-cursors">Multiple Cursors</h3>
 <p>To get multiple cursors so the same changes
 can be made in multiple locations simultaneously:</p>
 <ul>
@@ -402,40 +395,40 @@ can be made in multiple locations simultaneously:</p>
 <li>Hold down the ctrl and shift keys and click additional locations.</li>
 <li>Type the changes.</li>
 </ul>
-<h3 id="replacing-a-rectangular-selection" tabindex="-1">Replacing a Rectangular Selection</h3>
+<h3 id="replacing-a-rectangular-selection">Replacing a Rectangular Selection</h3>
 <ul>
 <li>If using Vim keybindings, enter insert mode.</li>
 <li>Hold down the option key and
 select a rectangular region using the mouse or trackpad.</li>
 <li>Type the text that will replace the selected portion of each line.</li>
 </ul>
-<h3 id="rename-all-in-scope" tabindex="-1">Rename All in Scope</h3>
+<h3 id="rename-all-in-scope">Rename All in Scope</h3>
 <p>One approach is to use refactoring as follows:</p>
 <ul>
 <li>Right-click one occurrence.</li>
-<li>Select Refactor ... Rename from the context menu.</li>
+<li>Select Refactor … Rename from the context menu.</li>
 <li>Make the change in the current instance and all instances will change.</li>
-<li>Click the &quot;Rename&quot; button in the upper-right.</li>
+<li>Click the “Rename” button in the upper-right.</li>
 </ul>
-<p>Another approach is to use &quot;Edit All in Scope&quot; as follows:</p>
+<p>Another approach is to use “Edit All in Scope” as follows:</p>
 <ul>
 <li>Place the cursor on one of the occurrences.</li>
 <li>Press cmd-ctrl-e.</li>
 <li>Make the change in the current instance and all instances will change.</li>
 <li>Press the return key or click outside the change.</li>
 </ul>
-<h3 id="refactoring" tabindex="-1">Refactoring</h3>
+<h3 id="refactoring">Refactoring</h3>
 <p>To <strong>rename</strong> all occurrences of a variable:</p>
 <ul>
 <li>Right-click one occurrence.</li>
-<li>Select Refactor ... Rename...</li>
+<li>Select Refactor … Rename…</li>
 <li>Enter the new name.</li>
 <li>Press the return key.</li>
 </ul>
 <p>To move an expression into a <strong>new variable</strong>:</p>
 <ul>
 <li>Select the expression to be extracted.</li>
-<li>Select Refactor ... Extract to Variable.</li>
+<li>Select Refactor … Extract to Variable.</li>
 <li>If using Vim Mode:
 <ul>
 <li>Press the escape key.</li>
@@ -457,11 +450,11 @@ but this can be changed to a <code>var</code> manually.</p>
 <p>To extract multiple lines of code to a <strong>new method</strong>:</p>
 <ul>
 <li>Select the lines to be extracted.</li>
-<li>Select Refactor ... Extract to Method.</li>
+<li>Select Refactor … Extract to Method.</li>
 <li>If using Vim Mode:
 <ul>
 <li>Press the escape key.</li>
-<li>Type &quot;ciw&quot; for &quot;change inner word&quot;.</li>
+<li>Type “ciw” for “change inner word”.</li>
 </ul>
 </li>
 <li>Enter a name for the new method.</li>
@@ -475,33 +468,33 @@ If the extracted code needs data present at the call site,
 the new method will have parameters for it
 and the supplied call will pass the required data.</p>
 <p>To generate a <strong>memberwise initializer</strong> for a <code>struct</code> or <code>class</code>,
-right-click the its name and select Refactor ... Generate Memberwise Initializer.
+right-click the its name and select Refactor … Generate Memberwise Initializer.
 The new initializer will be preceded by the <code>internal</code> keyword
 which can be removed manually if desired.</p>
 <p>To change a type to <strong>conform to the <code>Equatable</code> protocol</strong>,
-right-click the its name and select Refactor ... Add Equatable Conformance.
+right-click the its name and select Refactor … Add Equatable Conformance.
 This changes the type to inherit from <code>Equatable</code> and
 adds a static <code>==</code> method that returns <code>true</code> if all the properties are equal.</p>
 <p>There are more context-sensitive Refactor menu options
 that are less frequently used.</p>
 <p>For more on Xcode refactoring, see <a href="https://www.avanderlee.com/swift/xcode-refactoring/?v=1.1.1" rel="noopener" target="_blank">Xcode refactoring options explained with examples</a> from SwiftLee.</p>
-<h3 id="sorting" tabindex="-1">Sorting</h3>
+<h3 id="sorting">Sorting</h3>
 <p>By default Xcode does not have the ability to sort selected lines.</p>
 <p>WARNING! The following does not work in Xcode 14!</p>
 <p>The ability to sort selected lines can be added
-using the extension <a href="?v=1.1.1" rel="noopener" target="_blank">xcsort</a>.</p>
+using the extension <a href="?v=1.1.1">xcsort</a>.</p>
 <p>Once installed:</p>
 <ul>
 <li>Open the System Settings app.</li>
-<li>In the left nav, click &quot;Privacy &amp; Security&quot;.</li>
-<li>Scroll to the bottom and click &quot;Extensions&quot;.</li>
-<li>Click &quot;Xcode Source Editor&quot;.</li>
-<li>Check the checkbox for &quot;xcsort&quot;.</li>
-<li>Click the &quot;Done&quot; button.</li>
+<li>In the left nav, click “Privacy &#x26; Security”.</li>
+<li>Scroll to the bottom and click “Extensions”.</li>
+<li>Click “Xcode Source Editor”.</li>
+<li>Check the checkbox for “xcsort”.</li>
+<li>Click the “Done” button.</li>
 </ul>
 <p>Back in Xcode, select a range of lines to sort and select
-Editor ... xcsort ... Sort Lines.</p>
-<h2 id="console" tabindex="-1">Console</h2>
+Editor … xcsort … Sort Lines.</p>
+<h2 id="console">Console</h2>
 <p>The bottom section is not visible by default.
 Drag the status row at the bottom up to expose it.</p>
 <p>The bottom section has two subsections.
@@ -513,20 +506,20 @@ The output from <code>print</code> calls only appears when running in the debug 
 <p>Xcode used to support debug mode in Previews,
 but now it is only supported in the Simulator.</p>
 <p>To make the console area appear automatically when new text is written to it,
-select Xcode ... Settings ... Behaviors ... Generates output,
-click the &quot;Show&quot; checkbox, and select &quot;Variables &amp; Console View&quot;.</p>
-<h2 id="playgrounds" tabindex="-1">Playgrounds</h2>
+select Xcode … Settings … Behaviors … Generates output,
+click the “Show” checkbox, and select “Variables &#x26; Console View”.</p>
+<h2 id="playgrounds">Playgrounds</h2>
 <p>Playgrounds are great for experimenting with the Swift programming language.</p>
 <p>To create and use a Playground:</p>
 <ul>
-<li>Select File ... New ... Playground...</li>
-<li>Select a template such as &quot;Blank&quot; and press &quot;Next&quot;.</li>
+<li>Select File … New … Playground…</li>
+<li>Select a template such as “Blank” and press “Next”.</li>
 <li>Enter a name for the playground.</li>
 <li>Select the directory where it will be saved.</li>
 <li>Enter code in the provided text editor.</li>
 <li>To run all of the code,
 click the blue triangle in the gutter after the last line,
-press cmd-shift-return, or select Editor ... Run Playground.</li>
+press cmd-shift-return, or select Editor … Run Playground.</li>
 <li>To run only the code up to and including a specific line,
 hover over the line and click the play button that appears.</li>
 <li>Output from <code>print</code> calls appears in the console area at the bottom.
@@ -540,44 +533,44 @@ for it to identify syntax errors and run the code.</p>
 <p>Playgrounds treat files under “Sources” as separate, unnamed modules.
 To expose things defined in those files to the main playground code,
 declare them as <code>public</code>.
-They do not need to be &quot;imported&quot;.</p>
-<h2 id="projects" tabindex="-1">Projects</h2>
+They do not need to be “imported”.</p>
+<h2 id="projects">Projects</h2>
 <p>To develop an app:</p>
 <ul>
 <li>
-<p>Select File ... New ... Project... or press cmd-shift-n.</p>
+<p>Select File … New … Project… or press cmd-shift-n.</p>
 </li>
 <li>
-<p>Select a target platform such as &quot;iOS&quot;.</p>
+<p>Select a target platform such as “iOS”.</p>
 </li>
 <li>
-<p>Select a template and press &quot;Next&quot;.
+<p>Select a template and press “Next”.
 The templates are organized by types which include
-&quot;Multiplatform&quot; (for apps that run in multiple OSes),
-&quot;iOS&quot;, &quot;macOS&quot;, &quot;watchOS&quot;, &quot;tvOS&quot;, &quot;DriverKit&quot;, and &quot;Other&quot;.
+“Multiplatform” (for apps that run in multiple OSes),
+“iOS”, “macOS”, “watchOS”, “tvOS”, “DriverKit”, and “Other”.
 The templates are further divided into the categories
-&quot;Application&quot;, &quot;Framework &amp; Library&quot;, and &quot;Other&quot;.
-Usually &quot;App&quot; under the &quot;Application&quot; category is the desired template.</p>
+“Application”, “Framework &#x26; Library”, and “Other”.
+Usually “App” under the “Application” category is the desired template.</p>
 </li>
 <li>
 <p>Enter a product name, select a team,
-enter an &quot;Organization Identifier&quot; (can be your email address),
-and press &quot;Next&quot;.</p>
+enter an “Organization Identifier” (can be your email address),
+and press “Next”.</p>
 </li>
 <li>
-<p>Select the directory where the project should be saved and press &quot;Create&quot;.</p>
+<p>Select the directory where the project should be saved and press “Create”.</p>
 </li>
 </ul>
 <p>To open an existing app,
-select File ... Open Recent ... {project-path} or
-select File ... Open, navigate to the project directory, and click &quot;Open&quot;.
+select File … Open Recent … {project-path} or
+select File … Open, navigate to the project directory, and click “Open”.
 Another way to open an existing Xcode project
 is to double-click its <code>.xcodeproj</code> file.</p>
-<h2 id="code-formatting" tabindex="-1">Code Formatting</h2>
+<h2 id="code-formatting">Code Formatting</h2>
 <p>To fix Swift code indentation in Xcode,
 select the lines to be fixed (cmd-a for all)
 and press ctrl-i which is the keyboard shortcut
-for Editor ... Structure ... Re-Indent.
+for Editor … Structure … Re-Indent.
 The default code indentation is four spaces.
 Chained method calls that appear on separate lines are indented,
 but those chained onto trailing closures are not.</p>
@@ -602,21 +595,21 @@ enter <code>swiftformat *.swift</code>.</p>
 <li>restart Xcode</li>
 <li>add a keyboard shortcut
 <ul>
-<li>select Xcode ... Settings ... Key Bindings</li>
-<li>enter &quot;SwiftFormat&quot; in the Filter input</li>
-<li>double-click in the Key column for &quot;SwiftFormat - Format File&quot;</li>
+<li>select Xcode … Settings … Key Bindings</li>
+<li>enter “SwiftFormat” in the Filter input</li>
+<li>double-click in the Key column for “SwiftFormat - Format File”</li>
 <li>press a key combination to assign like option-f</li>
 </ul>
 </li>
 </ul>
 <p>To format all the lines in the current file,
 press the assigned keyboard shortcut or
-select Editor ... SwiftFormat ... Format File.</p>
+select Editor … SwiftFormat … Format File.</p>
 <p>There is currently no way within Xcode to format files on save.
 However, this can be configured using an Automator script
 and a System Preferences keyboard shortcut.
 The steps to configure this are described at <a href="https://luisramos.dev/xcode-format-and-save?v=1.1.1" rel="noopener" target="_blank">Xcode Format and Save</a>.</p>
-<h2 id="code-generation" tabindex="-1">Code Generation</h2>
+<h2 id="code-generation">Code Generation</h2>
 <p>Xcode offers code completion of function/method calls.
 Optional arguments appear dimmed.
 Navigate to a proposed completion with the up and down arrow keys
@@ -625,7 +618,7 @@ When a completion with optional arguments is selected,
 those will not be included by default.
 To include them, hold down the option before pressing return.</p>
 <p>Xcode will hide some code completions and indicate this
-with the text &quot;+n more&quot; at the end of a suggested completions.
+with the text “+n more” at the end of a suggested completions.
 To reveal them, press the right arrow key.</p>
 <p>To include them, hold down the option key before selecting the completion.
 Xcode can generate code for the memberwise initializer
@@ -633,7 +626,7 @@ of a <code>struct</code> or <code>class</code>.
 Just type <code>init</code> and accept the completion.
 Then customize the provided code as needed.</p>
 <p>Some code completions generate code that processes arrays.
-For example, type &quot;lplay&quot; and choose the <code>List(players) { player...</code> completion.
+For example, type “lplay” and choose the <code>List(players) { player...</code> completion.
 This generates the following code, perhaps choosing to
 use some existing <code>String</code> property such as <code>name</code>:</p>
 <pre><code class="language-swift">List(players) { player in
@@ -644,9 +637,9 @@ use some existing <code>String</code> property such as <code>name</code>:</p>
 For example, in a <code>struct</code> that conforms to the <code>Codable</code> protocol,
 type <code>encode</code> and accept the completion.
 Then customize the provided code as needed.</p>
-<h2 id="documentation-generation" tabindex="-1">Documentation Generation</h2>
+<h2 id="documentation-generation">Documentation Generation</h2>
 <p>To generate DocC documentation for the current project
-select Product ... Build Documentation.
+select Product … Build Documentation.
 This can take a couple of minutes to complete.
 When it does, a dialog will open that contains lists of all the
 classes, structs, functions, and enums defined by the project.
@@ -654,36 +647,36 @@ Click a name to see details about it.
 Use the filter input at the top to filter the documentation
 to values containing specific text.</p>
 <p>Supposedly the generated documentation can be exported to GitHub
-for viewing outside of Xcode, but it's not clear how to do that.</p>
-<h2 id="pragma-marks" tabindex="-1">Pragma Marks</h2>
+for viewing outside of Xcode, but it’s not clear how to do that.</p>
+<h2 id="pragma-marks">Pragma Marks</h2>
 <p>Each section of a source file can be preceded by a special comment
-called a &quot;pragma mark&quot;.
+called a “pragma mark”.
 The syntax is <code>// MARK: - SectionName</code> where SectionName is typically something
 like <code>Nested Types</code>, <code>Constants</code>, <code>Properties</code>, <code>Initializers</code>, or <code>Methods</code>.
 Xcode will display these section names in the Minimap and
 in the dropdown of source file elements at the top of the Editor pane.
 The <code>-</code> in the comment is optional and causes a
 horizontal line to be drawn above the section name.</p>
-<p>To toggle display of the Minimap, select Editor ... Minimap
+<p>To toggle display of the Minimap, select Editor … Minimap
 or press cmd-ctrl-M.</p>
-<h2 id="building" tabindex="-1">Building</h2>
-<p>To build a project, select Product ... Build or press cmd-b.</p>
+<h2 id="building">Building</h2>
+<p>To build a project, select Product … Build or press cmd-b.</p>
 <p>To hear sounds that indicate whether the build was successful or failed,
-select Xcode ... Settings ... Behaviors.
-Then select &quot;Succeeds, check &quot;Play sound&quot;, and select a sound.
-Repeat for &quot;Fails&quot; and select a different sound.</p>
+select Xcode … Settings … Behaviors.
+Then select “Succeeds, check “Play sound”, and select a sound.
+Repeat for “Fails” and select a different sound.</p>
 <p>To see how long it takes each build to complete
-after the text &quot;Build Succeeded&quot; in the title bar,
+after the text “Build Succeeded” in the title bar,
 enter the following command in a terminal window:</p>
 <pre><code class="language-bash">defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
 </code></pre>
 <p>To customize build settings, select the top item in the Project Navigator,
-select a target, click the &quot;Build Settings&quot; tab, and make changes.</p>
+select a target, click the “Build Settings” tab, and make changes.</p>
 <p>For details on the available build settings, see <a href="https://xcodebuildsettings.com?v=1.1.1" rel="noopener" target="_blank">Xcode Build Settings</a>.</p>
-<h2 id="clean-builds" tabindex="-1">Clean Builds</h2>
+<h2 id="clean-builds">Clean Builds</h2>
 <p>Occasionally it is useful to delete all generated files and start over.
-To do this, select Product ... Clean Build Folder or press cmd-shift-k.</p>
-<h2 id="running" tabindex="-1">Running</h2>
+To do this, select Product … Clean Build Folder or press cmd-shift-k.</p>
+<h2 id="running">Running</h2>
 <p>To run an app:</p>
 <ul>
 <li>
@@ -693,26 +686,26 @@ that have been used to run the app in the Simulator.
 This makes it easier to select frequently used device types.</p>
 </li>
 <li>
-<p>Select Product ... Run or press cmd-r.</p>
+<p>Select Product … Run or press cmd-r.</p>
 </li>
 </ul>
 <p>To run the current app on a real iOS device:</p>
 <ul>
 <li>Attach the device with a USB cable.</li>
 <li>Wait for the computer to recognize the device.
-It will appear in the left nav. of the Finder under &quot;Locations&quot;.</li>
+It will appear in the left nav. of the Finder under “Locations”.</li>
 <li>Select the device from the dropdown at the top
 that includes the names of available simulators.
-It will have a name like &quot;iPhone 14 Pro&quot;.</li>
+It will have a name like “iPhone 14 Pro”.</li>
 <li>Press the play button or cmd-r.</li>
 <li>Enter the computer password.</li>
 <li>Look for a new app icon to appear on the device.</li>
 <li>One-time setup on the device:
 <ul>
 <li>Open the Settings app.</li>
-<li>Select General ... VPN &amp; Device Management.</li>
+<li>Select General … VPN &#x26; Device Management.</li>
 <li>Tap the new app.</li>
-<li>Tap the &quot;Trust&quot; button.</li>
+<li>Tap the “Trust” button.</li>
 </ul>
 </li>
 </ul>
@@ -720,9 +713,9 @@ It will have a name like &quot;iPhone 14 Pro&quot;.</li>
 <ul>
 <li>The device must be on the same WiFi network as the computer.</li>
 <li>Attach the device to the computer with a cable.</li>
-<li>Select Window ... Devices and Simulators.</li>
+<li>Select Window … Devices and Simulators.</li>
 <li>In the dialog that appears, select the device in the left nav.</li>
-<li>Check the &quot;Connect vis network&quot; checkbox.</li>
+<li>Check the “Connect vis network” checkbox.</li>
 <li>In the Finder, eject the device.</li>
 <li>Disconnect the device from the computer.</li>
 </ul>
@@ -731,33 +724,33 @@ It will have a name like &quot;iPhone 14 Pro&quot;.</li>
 <li>Select the device from the device dropdown at the top.</li>
 <li>Press the play button or cmd-r.</li>
 </ul>
-<h2 id="previews" tabindex="-1">Previews</h2>
+<h2 id="previews">Previews</h2>
 <p>Previews allow testing a single view outside of the Simulator or a real device.</p>
 <p>Previews are always live meaning they
 update automatically when code changes are saved.
 However, previews still sometimes need to be resumed
-by either clicking the &quot;Resume&quot; button or pressing cmd-option-p.</p>
+by either clicking the “Resume” button or pressing cmd-option-p.</p>
 <p>To toggle between showing and hiding the preview area, press cmd-option-return.</p>
 <p>Calls to the <code>print</code> function are ignored when running a preview.
 To enable this, right-click on the play button in the canvas
-and select &quot;Debug Preview&quot;.
-TODO: This must have moved in Xcode 14 and I can't find it!</p>
-<p>A new &quot;variants&quot; button appears as the third button
+and select “Debug Preview”.
+TODO: This must have moved in Xcode 14 and I can’t find it!</p>
+<p>A new “variants” button appears as the third button
 at the bottom of the preview area.
 Clicking this offers the options to show one of
-&quot;Color Scheme Variants&quot; (Light and Dark),
-&quot;Orientation Variants&quot; (Portrait, Landscape left, and Landscape right),
-and &quot;Dynamic Text Variants&quot; (X Small through XXX Large and AX 1 through AX 5)</p>
+“Color Scheme Variants” (Light and Dark),
+“Orientation Variants” (Portrait, Landscape left, and Landscape right),
+and “Dynamic Text Variants” (X Small through XXX Large and AX 1 through AX 5)</p>
 <p>If a preview defines multiple views,
 they are presented in separate tabs in the preview area.
 TODO: How are the tab titles specified?</p>
-<h2 id="debugging" tabindex="-1">Debugging</h2>
+<h2 id="debugging">Debugging</h2>
 <p>To see an outline of the frame of each view,
 run the app in a Simulator or real device
-and select Debug ... View Debugging ... Show View Frames
+and select Debug … View Debugging … Show View Frames
 to toggle it on. Select it again to toggle it off.
 This is much easier than modifying code to <code>border</code> view modifiers.</p>
-<p>To open the debug area, select View ... Debug Area ... Show Debug Area,
+<p>To open the debug area, select View … Debug Area … Show Debug Area,
 press cmd-shift-y, or drag the bottom bar up.
 There are two sides to the debug area.
 The left size displays variable names and values.
@@ -765,17 +758,15 @@ Variable values can also be seen by
 hovering over their names in the editor area.
 The right side displays <code>print</code> function output.</p>
 <p>Set breakpoints by clicking on source file line numbers.</p>
-<p><img alt="Xcode breakpoint" class="keep-size"
-  src="/blog/assets/xcode-breakpoint.png?v=1.1.1"></p>
+<p><img alt="Xcode breakpoint" class="keep-size" src="/blog/assets/xcode-breakpoint.png?v=1.1.1"></p>
 <p>Run the app and click the debugger buttons shown below.
 The app runs in debug mode by default because
-the default scheme &quot;Run&quot; settings has &quot;Build Configuration&quot; set to &quot;Debug&quot;.</p>
-<p><img alt="Xcode debugger buttons" style="width: 50%"
-  src="/blog/assets/xcode-debugger-buttons.png?v=1.1.1"></p>
-<h2 id="app-icons" tabindex="-1">App Icons</h2>
+the default scheme “Run” settings has “Build Configuration” set to “Debug”.</p>
+<p><img alt="Xcode debugger buttons" style="width: 50%" src="/blog/assets/xcode-debugger-buttons.png?v=1.1.1"></p>
+<h2 id="app-icons">App Icons</h2>
 <p>To add app icons:</p>
 <ul>
-<li>browse <a href="https://appicon.co">https://appicon.co</a></li>
+<li>browse <a href="https://appicon.co" rel="noopener" target="_blank">https://appicon.co</a></li>
 <li>drag an image file into the drag area</li>
 <li>check the checkboxes for the target devices</li>
 <li>click the Generate button</li>
@@ -784,33 +775,33 @@ the default scheme &quot;Run&quot; settings has &quot;Build Configuration&quot; 
 <li>open the <code>AppIcons</code> folder</li>
 <li>open the <code>Assets.xcassets</code> folder to expose the <code>AppIcon.appiconset</code> folder</li>
 <li>open an Xcode project</li>
-<li>right-click <code>Assets.xcassets</code> in the Navigator and select &quot;Show in Finder&quot;</li>
+<li>right-click <code>Assets.xcassets</code> in the Navigator and select “Show in Finder”</li>
 <li>drag the <code>AppIcon.appiconset</code> folder from the Finder
 into the directory opened by the previous command
-and click the &quot;Replace&quot; button</li>
+and click the “Replace” button</li>
 </ul>
-<h2 id="sf-symbols" tabindex="-1">SF Symbols</h2>
+<h2 id="sf-symbols">SF Symbols</h2>
 <p>Access to SF Symbols is now built into Xcode.
 To access it, press cmd-shift-l or
-click the &quot;+&quot; in the upper-left and click the circled star.
+click the ”+” in the upper-left and click the circled star.
 Type part of a symbol name in the input at the top
 to filter the list of symbols.
 Click a symbol name to see the symbol
 and a list of OSes where it is supported.
 Double-click a symbol name to insert it at the cursor location
 or drag it to the desired location inside a container view.
-This will insert <code>Image(systemName: &quot;{symbol-name}&quot;)</code>.</p>
-<h2 id="source-control-(git)" tabindex="-1">Source Control (Git)</h2>
+This will insert <code>Image(systemName: "{symbol-name}")</code>.</p>
+<h2 id="source-control-git">Source Control (Git)</h2>
 <p>Xcode has excellent built-in support for
 source control (aka version control) using Git.
 There are two main places where Git operations are initiated,
-the &quot;Source Control&quot; menu and the &quot;Source Control Navigator&quot;.
-To access the &quot;Source Control Navigator&quot;,
+the “Source Control” menu and the “Source Control Navigator”.
+To access the “Source Control Navigator”,
 select the second navigator tab or press cmd-2.</p>
 <p>To <strong>allow Xcode to access your GitHub account</strong>:</p>
 <ul>
 <li>
-<p>Select Xcode ... Settings...</p>
+<p>Select Xcode … Settings…</p>
 </li>
 <li>
 <p>Select the Accounts tab.</p>
@@ -818,15 +809,15 @@ select the second navigator tab or press cmd-2.</p>
 <li>
 <p>If no account for GitHub is present:</p>
 <ul>
-<li>Click the &quot;+&quot; in the lower-right.</li>
-<li>In the dialog that appears, select &quot;GitHub&quot; and click the &quot;Continue&quot; button.</li>
+<li>Click the ”+” in the lower-right.</li>
+<li>In the dialog that appears, select “GitHub” and click the “Continue” button.</li>
 <li>Enter your account name and paste your personal access token (PAT).</li>
-<li>Click the &quot;Sign In&quot; button.</li>
+<li>Click the “Sign In” button.</li>
 <li>Close the Settings dialog.</li>
 </ul>
 </li>
 </ul>
-<h3 id="project-navigator" tabindex="-1">Project Navigator</h3>
+<h3 id="project-navigator">Project Navigator</h3>
 <p>When a project has a Git repository, the list of files in the Project Navigator
 indicates their source control status with the following letters
 on the trailing edge of the file names:</p>
@@ -836,27 +827,27 @@ on the trailing edge of the file names:</p>
 <li>M for modified files</li>
 <li>R for renamed files</li>
 </ul>
-<h3 id="local-repositories" tabindex="-1">Local Repositories</h3>
+<h3 id="local-repositories">Local Repositories</h3>
 <p>When a new Xcode project is created,
 there is an option to create a local Git repository for it.
 In the final dialog that is displayed when creating a new project
 (where the parent directory is selected),
-check the checkbox to &quot;Create Git repository on my Mac&quot;.</p>
+check the checkbox to “Create Git repository on my Mac”.</p>
 <p>If this is not done when the project is created,
 Xcode can <strong>create a local Git repository</strong> later.
 With the project open in Xcode,
-select Source Control ... New Git Repository...
-In the dialog that appears, click the &quot;Create&quot; button.
+select Source Control … New Git Repository…
+In the dialog that appears, click the “Create” button.
 This automatically creates the first commit containing all the existing files
-on a branch named &quot;main&quot;.</p>
+on a branch named “main”.</p>
 <p>To <strong>refresh the Git status</strong> shown for files in the Project Navigator,
 perhaps because their status has been changed outside of Xcode,
-select Source Control ... Refresh File Status.</p>
+select Source Control … Refresh File Status.</p>
 <p>To <strong>delete a local repository</strong>:</p>
 <ul>
 <li>TODO: Is this possible?</li>
 </ul>
-<h3 id=".gitignore-file" tabindex="-1">.gitignore File</h3>
+<h3 id="gitignore-file">.gitignore File</h3>
 <p>All Swift project Git repositories should have a <code>.gitignore</code> file
 in their root directory that specifies files
 that should be committed to the repository.
@@ -864,9 +855,9 @@ This file is not automatically created.
 This file can be obtained from <a href="https://gitignore.io?v=1.1.1" rel="noopener" target="_blank">gitignore.io</a>.</p>
 <ul>
 <li>Browse <a href="https://gitignore.io?v=1.1.1" rel="noopener" target="_blank">gitignore.io</a>.</li>
-<li>Enter &quot;Swift&quot; in the search input.</li>
-<li>Click the &quot;Create&quot; button.</li>
-<li>Select File ... Save As...</li>
+<li>Enter “Swift” in the search input.</li>
+<li>Click the “Create” button.</li>
+<li>Select File … Save As…</li>
 <li>Save the file in the root project directory and name it <code>.gitignore</code>.</li>
 <li>If this adds a file extension of <code>.txt</code>, rename the file to remove that.</li>
 <li>This file will not be visible inside Xcode, but can be
@@ -876,30 +867,30 @@ such as lines that apply to older versions of Xcode and
 lines that apply to tools you are not using
 such as Carthage, CocoaPods, and Accio.</li>
 </ul>
-<h3 id="remote-repositories" tabindex="-1">Remote Repositories</h3>
+<h3 id="remote-repositories">Remote Repositories</h3>
 <p>To <strong>clone a remote GitHub repository</strong>:</p>
 <p>Approach #1:</p>
 <ul>
-<li>Select Source Control ... Clone...</li>
+<li>Select Source Control … Clone…</li>
 <li>In the dialog that appears, paste a GitHub URL or
 select a remote repository from the provided list
 of your remote GitHub repositories.</li>
-<li>Click the &quot;Clone&quot; button.</li>
+<li>Click the “Clone” button.</li>
 <li>In the dialog that appears, select the directory where the clone should be saved.</li>
-<li>Click the &quot;Clone&quot; button.</li>
+<li>Click the “Clone” button.</li>
 <li>The cloned repository will be opened in Xcode.</li>
 </ul>
 <p>Approach #2:</p>
 <ul>
 <li>Browse the repository in GitHub.</li>
 <li>Verify that there is a <code>.xcodeproj</code> file in the root directory.</li>
-<li>Click the green &quot;Code&quot; button.</li>
-<li>In the popup that appears, click &quot;Open with Xcode&quot;.</li>
-<li>In the dialog that appears, click &quot;Allow&quot;.</li>
+<li>Click the green “Code” button.</li>
+<li>In the popup that appears, click “Open with Xcode”.</li>
+<li>In the dialog that appears, click “Allow”.</li>
 <li>In the Xcode dialog that appears,
 select the directory where the cloned repository should be saved
-and click the &quot;Clone&quot; button.</li>
-<li>In the dialog that appears, click the &quot;Trust and Open&quot; button.</li>
+and click the “Clone” button.</li>
+<li>In the dialog that appears, click the “Trust and Open” button.</li>
 <li>The cloned repository will be opened in Xcode.</li>
 </ul>
 <p>To <strong>create a remote GitHub repository</strong> from a local Git repository:</p>
@@ -907,51 +898,51 @@ and click the &quot;Clone&quot; button.</li>
 <li>Ensure that GitHub access is configure in Xcode Settings as described above.</li>
 <li>Open the Source Control Navigator.</li>
 <li>Select the Repositories tab.</li>
-<li>Right-click &quot;Remotes&quot;.</li>
-<li>Select &quot;New {project-name} Remote...&quot;.</li>
+<li>Right-click “Remotes”.</li>
+<li>Select “New {project-name} Remote…”.</li>
 <li>In the dialog that appears:
 <ul>
 <li>Verify the values for Account, Owner, Repository,
-and Remote Name (defaults to &quot;origin&quot;).
+and Remote Name (defaults to “origin”).
 Typically no changes are required.</li>
 <li>Enter a Description.</li>
 <li>Choose whether the repository should be Public or Private.</li>
-<li>Click the &quot;Create&quot; button.</li>
+<li>Click the “Create” button.</li>
 </ul>
 </li>
 <li>This creates the remote repository and
 pushes the local repository with only the current branch.
 to push other branches, switch to them one at a time and
-select Source Control ... Push...</li>
+select Source Control … Push…</li>
 </ul>
 <p>To <strong>fetch new branches</strong> from the remote repository,
-select Source Control ... Fetch Changes.</p>
+select Source Control … Fetch Changes.</p>
 <p>To <strong>pull changes</strong> in a remote repository into the local repository:</p>
 <ul>
-<li>Select Source Control ... Pull... or press cmd-option-x.</li>
+<li>Select Source Control … Pull… or press cmd-option-x.</li>
 <li>In the dialog that appears,
 select a remote repository from which to pull
-(defaults to &quot;origin/main&quot; which is usually the desired value).</li>
-<li>There is also a &quot;Rebase local changes onto upstream changes&quot; checkbox
+(defaults to “origin/main” which is usually the desired value).</li>
+<li>There is also a “Rebase local changes onto upstream changes” checkbox
 for the brave.</li>
-<li>Click the &quot;Pull&quot; button.</li>
+<li>Click the “Pull” button.</li>
 </ul>
 <p>To <strong>push changes</strong> committed in the local repository to the remote repository:</p>
 <ul>
-<li>Select Source Control ... Push....</li>
+<li>Select Source Control … Push…</li>
 <li>In the dialog that appears,
 select the remote repository to which to push
-(defaults to &quot;origin/main&quot; which is usually the desired value).</li>
-<li>There is also an &quot;Include Tags&quot; checkbox that should be checked
+(defaults to “origin/main” which is usually the desired value).</li>
+<li>There is also an “Include Tags” checkbox that should be checked
 when new tags have been applied.</li>
-<li>Click the &quot;Push&quot; button.</li>
+<li>Click the “Push” button.</li>
 </ul>
 <p>To <strong>view a remote Git repository</strong> that is known to Xcode:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
 <li>Select the Repositories tab.</li>
-<li>Right-click a remote name such as &quot;origin&quot;.</li>
-<li>Select &quot;View on GitHub...&quot;.
+<li>Right-click a remote name such as “origin”.</li>
+<li>Select “View on GitHub…”.
 This will open a browser tab in the default web browser
 and display the remote repository.</li>
 </ul>
@@ -959,45 +950,45 @@ and display the remote repository.</li>
 <ul>
 <li>Open the Source Control Navigator.</li>
 <li>Select the Repositories tab.</li>
-<li>Right-click a remote name such as &quot;origin&quot;.</li>
-<li>Select &quot;Delete...&quot;.</li>
-<li>In the confirmation dialog that appears, click the &quot;Delete&quot; button.
+<li>Right-click a remote name such as “origin”.</li>
+<li>Select “Delete…”.</li>
+<li>In the confirmation dialog that appears, click the “Delete” button.
 This removes the reference to the remote repository from the Xcode project,
 but it does not delete the remote repository!
 To actually delete it, go the GitHub web page of the repository,
-click &quot;Settings&quot; in the upper-right,
+click “Settings” in the upper-right,
 scroll to the bottom of the page,
-click the &quot;Delete this repository&quot; button,
+click the “Delete this repository” button,
 enter the repository name in the dialog that appears,
-press the &quot;I understand ...&quot; button.
+press the “I understand …” button.
 Sometimes a confirmation dialog appears.
-If it does, click the &quot;Send SMS&quot; button,
+If it does, click the “Send SMS” button,
 enter the code received on your phone,
-and click the &quot;?&quot; button.</li>
+and click the ”?” button.</li>
 </ul>
-<h3 id="branches" tabindex="-1">Branches</h3>
+<h3 id="branches">Branches</h3>
 <p>The current branch is displayed in the Xcode title bar
 on the left side below the project name.</p>
 <p>To <strong>see a list of all existing branches</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
 <li>Select the Repositories tab.</li>
-<li>Expand the &quot;Branches&quot; section.</li>
+<li>Expand the “Branches” section.</li>
 </ul>
 <p>To <strong>create a new branch</strong>:</p>
 <ul>
 <li>Right-click the name of an existing branch.</li>
-<li>Select &quot;New branch from {branch-name}...&quot;.</li>
+<li>Select “New branch from {branch-name}…”.</li>
 <li>In the dialog that appears,
-enter the new branch name in the &quot;To&quot; input
-and click the &quot;Create&quot; button.</li>
+enter the new branch name in the “To” input
+and click the “Create” button.</li>
 <li>The new branch automatically becomes the current branch.</li>
 </ul>
 <p>To <strong>switch to a different branch</strong>:</p>
 <ul>
 <li>Right-click the name of an existing branch.</li>
-<li>Select &quot;Switch...&quot;.</li>
-<li>In the dialog that appears, click the &quot;Switch&quot; button.</li>
+<li>Select “Switch…”.</li>
+<li>In the dialog that appears, click the “Switch” button.</li>
 </ul>
 <p>To <strong>merge one branch to another</strong>:</p>
 <ul>
@@ -1008,10 +999,10 @@ and click the &quot;Create&quot; button.</li>
 <p>Right-click the source branch name.</p>
 </li>
 <li>
-<p>Select &quot;Merge {source-branch} into {target-branch}...&quot;.</p>
+<p>Select “Merge {source-branch} into {target-branch}…”.</p>
 </li>
 <li>
-<p>In the dialog that appears, click the &quot;Merge&quot; button.</p>
+<p>In the dialog that appears, click the “Merge” button.</p>
 </li>
 <li>
 <p>If there are any conflicts:</p>
@@ -1028,17 +1019,17 @@ with red conflict buttons in the center gutter.</p>
 <p>Clicking a conflict button displays a popup
 with four options for resolving the conflict:</p>
 <ul>
-<li>&quot;Choose Left&quot;</li>
-<li>&quot;Choose Right&quot;</li>
-<li>&quot;Choose Left Then Right&quot;</li>
-<li>&quot;Choose Right Then Left&quot;</li>
+<li>“Choose Left”</li>
+<li>“Choose Right”</li>
+<li>“Choose Left Then Right”</li>
+<li>“Choose Right Then Left”</li>
 </ul>
 <p>The last two options attempt combine both changes,
 which can result in an undesirable change.</p>
 </li>
 <li>
 <p>After resolving all the conflicts,
-click the &quot;Merge&quot; button in the lower-left.</p>
+click the “Merge” button in the lower-left.</p>
 </li>
 </ul>
 </li>
@@ -1046,21 +1037,21 @@ click the &quot;Merge&quot; button in the lower-left.</p>
 <p>To <strong>delete a branch</strong>:</p>
 <ul>
 <li>Right-click the branch name.</li>
-<li>Select &quot;Delete...&quot;.</li>
-<li>In the confirmation dialog that appears, click the &quot;Delete&quot; button.</li>
+<li>Select “Delete…”.</li>
+<li>In the confirmation dialog that appears, click the “Delete” button.</li>
 </ul>
-<h3 id="uncommitted-changes" tabindex="-1">Uncommitted Changes</h3>
+<h3 id="uncommitted-changes">Uncommitted Changes</h3>
 <p>To <strong>see the Git status of all files in the project</strong>:</p>
 <ul>
 <li>Open the Project Navigator.</li>
 <li>Look for the following letters after the file names:
-&quot;A&quot; (added), &quot;C&quot; (conflict), and &quot;M&quot; (modified)</li>
+“A” (added), “C” (conflict), and “M” (modified)</li>
 </ul>
 <p>There are two ways to see uncommitted changes
 for the file in the current text editor pane:</p>
 <p>Approach #1:</p>
 <ul>
-<li>Select Editor ... Side By Side Comparison or
+<li>Select Editor … Side By Side Comparison or
 click the button in the upper-right containing right and left arrows.
 The double arrow button toggles the diff display and
 its background changes between transparent and blue.</li>
@@ -1071,47 +1062,47 @@ its background changes between transparent and blue.</li>
 <li>Click a blue vertical bar to get a popup menu
 with the following possible options:
 <ul>
-<li>&quot;Show Change&quot; displays the original line above the modified line.</li>
-<li>&quot;Hide Change&quot; removes the display of the original line.</li>
-<li>&quot;Discard Changes&quot; undoes the changes.</li>
+<li>“Show Change” displays the original line above the modified line.</li>
+<li>“Hide Change” removes the display of the original line.</li>
+<li>“Discard Changes” undoes the changes.</li>
 </ul>
 </li>
 </ul>
 <p>To <strong>discard uncommitted changes in the current source file</strong>:</p>
 <ul>
-<li>Select Source Control ... Discard Changes in {file-name}...</li>
+<li>Select Source Control … Discard Changes in {file-name}…</li>
 <li>In the confirmation dialog that is displayed,
-click the &quot;Discard Changes&quot; button.</li>
+click the “Discard Changes” button.</li>
 </ul>
 <p>To <strong>discard all uncommitted changes</strong>:</p>
 <ul>
 <li>In the Project Navigator, select the top entry.</li>
-<li>Select Source Control ... Discard All Changes...</li>
-<li>In the confirmation dialog that is displayed, click the &quot;Discard&quot; button.</li>
+<li>Select Source Control … Discard All Changes…</li>
+<li>In the confirmation dialog that is displayed, click the “Discard” button.</li>
 </ul>
-<h3 id="commits" tabindex="-1">Commits</h3>
+<h3 id="commits">Commits</h3>
 <p>To <strong>commit changes</strong>:</p>
 <ul>
-<li>Select Source Control ... Commit... or press cmd-option-c
+<li>Select Source Control … Commit… or press cmd-option-c
 to open a dialog that lists the files that can be committed.
 By default the checkbox for each file is checked.
 Uncheck any that should not be committed.</li>
 <li>A letter will appear after files that will be affected by the commit,
-&quot;A&quot; for added, &quot;C&quot; for merge conflict, &quot;D&quot; for deleted, &quot;M&quot; for modified,
-and &quot;?&quot; for files unknown to the local Git repository.</li>
+“A” for added, “C” for merge conflict, “D” for deleted, “M” for modified,
+and ”?” for files unknown to the local Git repository.</li>
 <li>In the left, make sure the checkboxes to the left
 of each filename to be committed are checked.</li>
 <li>One at a time click the name of each file to be committed
 to see a side-by-side diff where you can verify all the changes.
 By default the new version is displayed on the left.
-To switch this, select Xcode ... Settings ... Source Control ...
-Comparison View ... Local Revision on Right Side.</li>
+To switch this, select Xcode … Settings … Source Control …
+Comparison View … Local Revision on Right Side.</li>
 <li>Undesired changes can be discarded by clicking a numbered blue button
 in the gutter between the old and new versions of the file
-and selecting &quot;Discard Changes&quot; from the popup.</li>
+and selecting “Discard Changes” from the popup.</li>
 <li>Enter a comment for the commit in the text area at the bottom.</li>
-<li>Optionally check the &quot;Push to remote&quot; checkbox.</li>
-<li>Click the &quot;Commit&quot; button.</li>
+<li>Optionally check the “Push to remote” checkbox.</li>
+<li>Click the “Commit” button.</li>
 </ul>
 <p>To <strong>see the changes in a previous commit</strong>:</p>
 <ul>
@@ -1122,20 +1113,20 @@ and selecting &quot;Discard Changes&quot; from the popup.</li>
 <li>A list of all the commits on that branch will be displayed in the editor area.</li>
 <li>Double-click a commit to see the files that were added, modified, and deleted
 in that commit.</li>
-<li>Click the &quot;&lt;&quot; button in the upper-left of the editor area
+<li>Click the ”&#x3C;” button in the upper-left of the editor area
 to return to the list of commits.</li>
 </ul>
-<h3 id="stashes" tabindex="-1">Stashes</h3>
+<h3 id="stashes">Stashes</h3>
 <p>To <strong>stash uncommitted changes</strong>:</p>
 <ul>
-<li>Select Source Control ... Stash Changes...</li>
-<li>In the dialog that appears, enter a description and click the &quot;Stash&quot; button.</li>
+<li>Select Source Control … Stash Changes…</li>
+<li>In the dialog that appears, enter a description and click the “Stash” button.</li>
 </ul>
 <p>To <strong>see a list of existing stashes</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
 <li>Click the Repositories tab.</li>
-<li>Expand the &quot;Stashed Changes&quot; section.</li>
+<li>Expand the “Stashed Changes” section.</li>
 <li>Click a stash description to see the names of the files that were modified.</li>
 <li>Click a file name to see a side-by-side diff of the changes.</li>
 </ul>
@@ -1144,125 +1135,125 @@ to return to the list of commits.</li>
 <li>Open the Source Control Navigator.</li>
 <li>Click the Repositories tab.</li>
 <li>Ensure that the target branch is the current branch.</li>
-<li>Right-click a stash description and select &quot;Apply Stashed Changes...&quot;.</li>
-<li>Optionally uncheck the &quot;Keep stash after applying&quot; checkbox.</li>
-<li>Click the &quot;Apply Stash&quot; button.</li>
+<li>Right-click a stash description and select “Apply Stashed Changes…”.</li>
+<li>Optionally uncheck the “Keep stash after applying” checkbox.</li>
+<li>Click the “Apply Stash” button.</li>
 </ul>
 <p>To <strong>delete a stash</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
 <li>Click the Repositories tab.</li>
-<li>Expand the &quot;Stashed Changes&quot; section.</li>
-<li>Right-click a stash description and select &quot;Delete...&quot;.</li>
-<li>In the confirmation dialog that appears, click the &quot;Delete&quot; button.</li>
+<li>Expand the “Stashed Changes” section.</li>
+<li>Right-click a stash description and select “Delete…”.</li>
+<li>In the confirmation dialog that appears, click the “Delete” button.</li>
 </ul>
-<h3 id="pull-requests" tabindex="-1">Pull Requests</h3>
+<h3 id="pull-requests">Pull Requests</h3>
 <p>To <strong>create a pull request</strong>:</p>
 <ul>
-<li>Select Source Control ... Create Pull Request... or
+<li>Select Source Control … Create Pull Request… or
 click the current branch in the Xcode title bar
 on the left side below the project name
-and select &quot;Create Pull Request...&quot;.</li>
-<li>Replace &quot;Untitled Pull Request&quot; with a title.</li>
+and select “Create Pull Request…”.</li>
+<li>Replace “Untitled Pull Request” with a title.</li>
 <li>Enter a description.</li>
-<li>Click the &quot;Publish&quot; button.</li>
+<li>Click the “Publish” button.</li>
 <li>In the dialog that appears, confirm creating a new pull request
-by clicking the &quot;Publish&quot; button.</li>
+by clicking the “Publish” button.</li>
 </ul>
 <p>To <strong>view a pull request in the GitHub web UI</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
-<li>Click the &quot;Changes&quot; tab.</li>
-<li>In the &quot;Pull Request&quot; section, right-click the title of a pull request
-and select &quot;View Pull Request on GitHub&quot;.</li>
+<li>Click the “Changes” tab.</li>
+<li>In the “Pull Request” section, right-click the title of a pull request
+and select “View Pull Request on GitHub”.</li>
 </ul>
 <p>To <strong>merge a pull request</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
-<li>Click the &quot;Changes&quot; tab.</li>
-<li>In the &quot;Pull Request&quot; section, select the title of a pull request.</li>
-<li>Click the &quot;Merge...&quot; button in the upper-right corner of the
+<li>Click the “Changes” tab.</li>
+<li>In the “Pull Request” section, select the title of a pull request.</li>
+<li>Click the “Merge…” button in the upper-right corner of the
 editor panel that displays information about the pull request.</li>
 <li>Enter a commit message.</li>
-<li>Optionally check the &quot;Delete source branch after merging&quot; checkbox.</li>
-<li>Click the &quot;Merge&quot; button.</li>
+<li>Optionally check the “Delete source branch after merging” checkbox.</li>
+<li>Click the “Merge” button.</li>
 </ul>
 <p>To <strong>close a pull request without merging it</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
-<li>Click the &quot;Changes&quot; tab.</li>
-<li>In the &quot;Pull Request&quot; section, select the title of a pull request.</li>
-<li>Click the downward chevron on the right side of the &quot;Merge...&quot; button
-and select &quot;Close&quot;.</li>
+<li>Click the “Changes” tab.</li>
+<li>In the “Pull Request” section, select the title of a pull request.</li>
+<li>Click the downward chevron on the right side of the “Merge…” button
+and select “Close”.</li>
 </ul>
-<h3 id="tags" tabindex="-1">Tags</h3>
+<h3 id="tags">Tags</h3>
 <p>To <strong>tag a commit</strong>:</p>
 <ul>
 <li>Open the Source Control Navigator.</li>
-<li>Click the &quot;Repositories&quot; tab.</li>
+<li>Click the “Repositories” tab.</li>
 <li>To tag the latest commit on a branch,
-right-click the branch name and select &quot;Tag {branch-name}...&quot;.</li>
+right-click the branch name and select “Tag {branch-name}…”.</li>
 <li>To tag a specific commit, select a branch name to display a list of commits on the branch,
-right-click a commit, and select &quot;Tag {commit-prefix}...&quot;.</li>
+right-click a commit, and select “Tag {commit-prefix}…”.</li>
 <li>In the dialog that appears, enter at tag name and message.</li>
-<li>Click the &quot;Create&quot; button.</li>
+<li>Click the “Create” button.</li>
 </ul>
 <p>To <strong>push tags to a remote repository</strong>:</p>
 <ul>
-<li>Select Source Control ... Push...</li>
+<li>Select Source Control … Push…</li>
 <li>In the dialog that appears,
 select the remote repository to which to push
-(defaults to &quot;origin/main&quot; which is usually the desired value).</li>
-<li>Check the &quot;Include Tags&quot; checkbox.</li>
-<li>Click the &quot;Push&quot; button.</li>
+(defaults to “origin/main” which is usually the desired value).</li>
+<li>Check the “Include Tags” checkbox.</li>
+<li>Click the “Push” button.</li>
 </ul>
-<h3 id="reset" tabindex="-1">Reset</h3>
+<h3 id="reset">Reset</h3>
 <p>There is no option in Xcode to perform a <code>git reset</code>
 in order to remove some commits from the history.
 This must be done from the command-line or in another Git-aware tool.</p>
-<h2 id="themes" tabindex="-1">Themes</h2>
-<p>To choose a different theme, select Xcode ... Settings ... Themes.
+<h2 id="themes">Themes</h2>
+<p>To choose a different theme, select Xcode … Settings … Themes.
 From here you can add, delete, and select themes.
-I like the &quot;Classic (Dark)&quot; theme.
+I like the “Classic (Dark)” theme.
 This only affects editor windows. To change the entire Xcode UI
 to use a dark theme regardless of the system setting,
-select Xcode ... Settings ... General and select &quot;Dark&quot; from the Appearance dropdown.</p>
-<h2 id="column-marker" tabindex="-1">Column Marker</h2>
+select Xcode … Settings … General and select “Dark” from the Appearance dropdown.</p>
+<h2 id="column-marker">Column Marker</h2>
 <p>To add a vertical line at a given column width,
-select Xcode ... Settings ... Text Editing,
-check &quot;Page guide column at:&quot;, and choose a column number.
+select Xcode … Settings … Text Editing,
+check “Page guide column at:”, and choose a column number.
 The indentation amount and type (spaces vs. tabs)
 can also be specified here.</p>
-<h2 id="code-folding-1" tabindex="-1">Code Folding</h2>
-<p>To enable code folding, select Xcode ... Settings ...
-Text Editing ... Display ... Code Folding Ribbon.
+<h2 id="code-folding-1">Code Folding</h2>
+<p>To enable code folding, select Xcode … Settings …
+Text Editing … Display … Code Folding Ribbon.
 This adds a code folding ribbon on the left side of editor panes.
 Click in the ribbon to fold the code at the corresponding line.
 To unfold, click again or double-click the ellipsis in the code.</p>
-<h2 id="vim-support" tabindex="-1">Vim Support</h2>
-<p>To enable use of many Vim key bindings, select Editor ... Vim Mode.
+<h2 id="vim-support">Vim Support</h2>
+<p>To enable use of many Vim key bindings, select Editor … Vim Mode.
 Dot commands and keyboard macros are not yet supported.</p>
-<h2 id="duplicating-files" tabindex="-1">Duplicating Files</h2>
+<h2 id="duplicating-files">Duplicating Files</h2>
 <p>To duplicate a source file, select it in the Navigator
-and click File ... Duplicate.
+and click File … Duplicate.
 Oddly the context sensitive menu that is displayed when
 a file in the Navigator is right clicked does not include this option.
 Alternatively, hold down the option key and drag a file
 to a different group or within the same group.</p>
-<h2 id="app-name" tabindex="-1">App Name</h2>
+<h2 id="app-name">App Name</h2>
 <p>To give the app a different name from the project:</p>
 <ul>
 <li>In the Navigator, select the root project directory.</li>
-<li>In the editor that appears, select the first entry under &quot;Targets&quot;.</li>
-<li>Rename &quot;Development Assets&quot; under &quot;Development&quot;.</li>
-<li>In the General tab under Identity, modify the &quot;Display Name&quot;.</li>
+<li>In the editor that appears, select the first entry under “Targets”.</li>
+<li>Rename “Development Assets” under “Development”.</li>
+<li>In the General tab under Identity, modify the “Display Name”.</li>
 <li>In the Navigator, rename the root directory
 and the directory below that with the same name.</li>
-<li>TODO: I'm not confident all of these steps are correct or required.</li>
+<li>TODO: I’m not confident all of these steps are correct or required.</li>
 </ul>
-<h2 id="new-files" tabindex="-1">New Files</h2>
+<h2 id="new-files">New Files</h2>
 <p>To create a new file within a project,
-select File ... New ... File... or press cmd-n.
+select File … New … File… or press cmd-n.
 This will display a dialog that prompts for a file type
 followed by another that prompts for the file name
 and directory where it should be saved.</p>
@@ -1277,19 +1268,19 @@ like these where several placeholders are replaced:</p>
 //  ___COPYRIGHT___
 //
 </code></pre>
-<h2 id="header-comments" tabindex="-1">Header Comments</h2>
+<h2 id="header-comments">Header Comments</h2>
 <p>To prevent Xcode from adding the comment lines above to new files, edit the file
 <code>/Applications/Xcode.app/Contents/Developer/Library/Xcode/Templates/File Templates/Multiplatform/Source/Swift File.xctemplate/__FILEBASENAME__.swift</code>
 and delete the line <code>//___FILEHEADER__</code> and the blank line that follows.</p>
-<h2 id="mapping-files-to-targets" tabindex="-1">Mapping Files to Targets</h2>
+<h2 id="mapping-files-to-targets">Mapping Files to Targets</h2>
 <p>Targets in an Xcode project are things that can be executed
 such as an iOS app, a watchOS app, unit tests, and UI tests.</p>
 <p>By default files are only accessible from their associated target.
 If an app has multiple targets and a source file should be shared between them,
 select the file in the Navigator, open the Inspector on the right,
 and check the checkboxes for each target that should have access to the file.</p>
-<h2 id="schemes" tabindex="-1">Schemes</h2>
-<p>A &quot;scheme&quot; defines a target to build,
+<h2 id="schemes">Schemes</h2>
+<p>A “scheme” defines a target to build,
 the configuration settings to use when building it,
 and a set of tests to run after the target is built.</p>
 <p>Every project begins with a default scheme whose name matches the project name.</p>
@@ -1299,15 +1290,15 @@ This opens a dropdown menu that contains a menu item for each existing scheme
 and the following options:</p>
 <ul>
 <li>
-<p>&quot;Edit Scheme...&quot;</p>
+<p>“Edit Scheme…”</p>
 <p>This opens a dialog where the currently selected scheme can be edited.</p>
 </li>
 <li>
-<p>&quot;New Scheme...&quot;</p>
+<p>“New Scheme…”</p>
 <p>This opens a dialog where a new scheme for a selected target can be created.</p>
 </li>
 <li>
-<p>&quot;Manage Schemes...&quot;</p>
+<p>“Manage Schemes…”</p>
 <p>This opens a dialog that lists the existing schemes,
 allows them to be deleted, allows new schemes to be created,
 and allows importing schemes from other projects.</p>
@@ -1353,12 +1344,12 @@ which have the type <code>[String]</code>.</p>
 which has the type <code>[String:String]</code>.</p>
 </li>
 <li>
-<p>&quot;App Language&quot; which defaults to &quot;System Language&quot;
-but can be changed to a language like &quot;French&quot;</p>
+<p>“App Language” which defaults to “System Language”
+but can be changed to a language like “French”</p>
 </li>
 <li>
-<p>&quot;App Region&quot; which defaults to &quot;System Region&quot;
-but can be changed to a language like &quot;France&quot;</p>
+<p>“App Region” which defaults to “System Region”
+but can be changed to a language like “France”</p>
 </li>
 <li>
 <p>diagnostics to collect while the target executes</p>
@@ -1374,8 +1365,7 @@ but can be changed to a language like &quot;France&quot;</p>
 </ul>
 <p>The screenshot below shows changing the language and region
 which affects those values when the app is run in the Simulator or on a device.</p>
-<p><img alt="Xcode scheme language and region" style="width: 100%"
-  src="/blog/assets/xcode-scheme-language-region.png?v=1.1.1"></p>
+<p><img alt="Xcode scheme language and region" style="width: 100%" src="/blog/assets/xcode-scheme-language-region.png?v=1.1.1"></p>
 <p>The Test phase specifies:</p>
 <ul>
 <li>
@@ -1404,7 +1394,7 @@ to <code>app.launchEnvironment</code>.</p>
 <p>the user language (ex. Spanish)</p>
 </li>
 <li>
-<p>the user region (ex. Americas ... Mexico)</p>
+<p>the user region (ex. Americas … Mexico)</p>
 </li>
 <li>
 <p>whether screenshots should be collected</p>
@@ -1454,8 +1444,8 @@ Debug or Release build configuration should used.
 TODO: What does this phase do?</p>
 <p>The Archive phase specifies the archive name and
 whether a Debug or Release build configuration should used.
-An &quot;archive&quot; is a file that can be submitted to TestFlight and the App Store.</p>
-<h2 id="hot-reload" tabindex="-1">Hot Reload</h2>
+An “archive” is a file that can be submitted to TestFlight and the App Store.</p>
+<h2 id="hot-reload">Hot Reload</h2>
 <p>While Previews usually automatically update
 when changes to a project file are saved,
 this behavior is inconsistent.
@@ -1479,32 +1469,32 @@ The file <code>InjectionIII.app</code> will appear in the <code>Downloads</code>
 This is a menu bar app that adds an icon.
 This app MUST BE RUNNING for hot reloading to work!
 Clicking the icon opens a menu of options.
-Verify that &quot;File Watcher&quot; is selected.</li>
+Verify that “File Watcher” is selected.</li>
 </ol>
 <p>The per-project steps are:</p>
 <ol>
 <li>Open an iOS project in Xcode.</li>
-<li>Select File ... Add Packages...</li>
-<li>Enter &quot;Inject&quot; in the search input or
-paste the URL &quot;<a href="https://github.com/krzysztofzablocki/Inject">https://github.com/krzysztofzablocki/Inject</a>&quot;.</li>
-<li>Select &quot;Inject&quot; in the list of matching packages.</li>
-<li>Click the &quot;Add Package&quot; button.</li>
-<li>Click the next &quot;Add Package&quot; button.</li>
+<li>Select File … Add Packages…</li>
+<li>Enter “Inject” in the search input or
+paste the URL “<a href="https://github.com/krzysztofzablocki/Inject" rel="noopener" target="_blank">https://github.com/krzysztofzablocki/Inject</a>”.</li>
+<li>Select “Inject” in the list of matching packages.</li>
+<li>Click the “Add Package” button.</li>
+<li>Click the next “Add Package” button.</li>
 <li>Select the top item in the Navigator.</li>
 <li>Select the main target.</li>
-<li>Click the &quot;Build Settings&quot; tab.</li>
-<li>Enter &quot;Other Linker Flags&quot; in the filter input.</li>
-<li>Expand the &quot;Other Linking Flags&quot; row.</li>
-<li>For the value of the &quot;Debug&quot; row, paste <code>-Xlinker -interposable</code></li>
+<li>Click the “Build Settings” tab.</li>
+<li>Enter “Other Linker Flags” in the filter input.</li>
+<li>Expand the “Other Linking Flags” row.</li>
+<li>For the value of the “Debug” row, paste <code>-Xlinker -interposable</code></li>
 <li>Open the <code>ContentView.swift</code> file.</li>
 <li>Add <code>import Inject</code></li>
 <li>Add the property <code>@ObservedObject private var iO = Inject.observer</code></li>
 <li>Chain a call to <code>.enableInjection()</code> at the end of what <code>body</code> returns.</li>
-<li>Click the InjectionIII menu bar icon and select &quot;Open Project&quot;.
+<li>Click the InjectionIII menu bar icon and select “Open Project”.
 If the menu bar icon is not present,
 double-click the InjectionIII app to launch it.</li>
 <li>Select the directory that contains the <code>.xcodeproj</code> project file.</li>
-<li>Click the &quot;Select Project Directory&quot; button.</li>
+<li>Click the “Select Project Directory” button.</li>
 <li>Run the project in the Simulator.</li>
 </ol>
 <p>Note that the added code does not need to be removed before releasing
@@ -1512,9 +1502,9 @@ the app to production because it does nothing unless it is run in debug mode.</p
 <p>If the directory being watched is nested inside the
 <code>Desktop</code> or <code>Documents</code> directory, another dialog map appear
 requesting permission to access files in those directories.
-<a href="https://github.com/johnno1962/InjectionIII/releases?v=1.0.20">https://github.com/johnno1962/InjectionIII/releases?v=1.0.20</a></p>
+<a href="https://github.com/johnno1962/InjectionIII/releases?v=1.0.20" rel="noopener" target="_blank">https://github.com/johnno1962/InjectionIII/releases?v=1.0.20</a></p>
 <p>If you override the cmd-s keybinding to run something like
-&quot;SwiftFormat - Format File&quot; and also save changes,
+“SwiftFormat - Format File” and also save changes,
 pressing it will not trigger the Simulator to update.
 In this case the Simulator will update
 if you active any other app besides Xcode.
@@ -1524,374 +1514,374 @@ For example changes to property initial values do not take effect.
 See this <a href="https://github.com/johnno1962/InjectionIII/issues/425?v=1.1.1" rel="noopener" target="_blank">issue</a>.
 In the code below, hot reload will not pick up
 a change to the value of the <code>name</code> property.</p>
-<h2 id="keyboard-shortcuts" tabindex="-1">Keyboard Shortcuts</h2>
+<h2 id="keyboard-shortcuts">Keyboard Shortcuts</h2>
 <p>Xcode supports a large number of keyboard shortcuts,
 many of which were described in the previous sections.
 The following table summarize the most commonly used keyboard shortcuts.</p>
-<h3 id="visibility-of-ui-parts" tabindex="-1">Visibility of UI Parts</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>show quick actions</td>
-<td>cmd-shift-a</td>
-</tr>
-<tr>
-<td>show file navigator</td>
-<td>cmd-1</td>
-</tr>
-<tr>
-<td>show local changes navigator</td>
-<td>cmd-2</td>
-</tr>
-<tr>
-<td>show symbols navigator</td>
-<td>cmd-3</td>
-</tr>
-<tr>
-<td>show find navigator</td>
-<td>cmd-4</td>
-</tr>
-<tr>
-<td>show issues navigator</td>
-<td>cmd-5</td>
-</tr>
-<tr>
-<td>show tests navigator</td>
-<td>cmd-6</td>
-</tr>
-<tr>
-<td>show debug navigator</td>
-<td>cmd-7</td>
-</tr>
-<tr>
-<td>show breakpoints navigator</td>
-<td>cmd-8</td>
-</tr>
-<tr>
-<td>show reports navigator</td>
-<td>cmd-9</td>
-</tr>
-<tr>
-<td>toggle navigator panel</td>
-<td>cmd-0</td>
-</tr>
-<tr>
-<td>toggle inspector panel</td>
-<td>cmd-option-0</td>
-</tr>
-<tr>
-<td>toggle debug area</td>
-<td>cmd-shift-y</td>
-</tr>
-<tr>
-<td>activate console</td>
-<td>cmd-shift-c</td>
-</tr>
-<tr>
-<td>toggle toolbar</td>
-<td>cmd-option-t</td>
-</tr>
-<tr>
-<td>toggle full screen</td>
-<td>cmd-ctrl-f</td>
-</tr>
-<tr>
-<td>toggle preview display</td>
-<td>cmd-option-return</td>
-</tr>
-<tr>
-<td>toggle minimap</td>
-<td>cmd-ctrl-shift-m</td>
-</tr>
-<tr>
-<td>toggle authors (who last edited each line and when)</td>
-<td>cmd-ctrl-shift-a</td>
-</tr>
-<tr>
-<td>open developer documentation</td>
-<td>cmd-shift-0</td>
-</tr>
-<tr>
-<td>open library</td>
-<td>cmd-shift-l</td>
-</tr>
-<tr>
-<td>toggle editor focus</td>
-<td>cmd-ctrl-shift-return</td>
-</tr>
-</tbody>
-</table>
-<p>&quot;Show Quick Actions&quot; was added to the &quot;Tools&quot; menu in Xcode 15.
+<h3 id="visibility-of-ui-parts">Visibility of UI Parts</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>show quick actions</td><td>cmd-shift-a</td></tr><tr><td>show file navigator</td><td>cmd-1</td></tr><tr><td>show local changes navigator</td><td>cmd-2</td></tr><tr><td>show symbols navigator</td><td>cmd-3</td></tr><tr><td>show find navigator</td><td>cmd-4</td></tr><tr><td>show issues navigator</td><td>cmd-5</td></tr><tr><td>show tests navigator</td><td>cmd-6</td></tr><tr><td>show debug navigator</td><td>cmd-7</td></tr><tr><td>show breakpoints navigator</td><td>cmd-8</td></tr><tr><td>show reports navigator</td><td>cmd-9</td></tr><tr><td>toggle navigator panel</td><td>cmd-0</td></tr><tr><td>toggle inspector panel</td><td>cmd-option-0</td></tr><tr><td>toggle debug area</td><td>cmd-shift-y</td></tr><tr><td>activate console</td><td>cmd-shift-c</td></tr><tr><td>toggle toolbar</td><td>cmd-option-t</td></tr><tr><td>toggle full screen</td><td>cmd-ctrl-f</td></tr><tr><td>toggle preview display</td><td>cmd-option-return</td></tr><tr><td>toggle minimap</td><td>cmd-ctrl-shift-m</td></tr><tr><td>toggle authors (who last edited each line and when)</td><td>cmd-ctrl-shift-a</td></tr><tr><td>open developer documentation</td><td>cmd-shift-0</td></tr><tr><td>open library</td><td>cmd-shift-l</td></tr><tr><td>toggle editor focus</td><td>cmd-ctrl-shift-return</td></tr></tbody></table>
+<p>“Show Quick Actions” was added to the “Tools” menu in Xcode 15.
 It has perhaps the most important keyboard shortcut, cmd-shift-a.
 Pressing that opens a dialog that can run any menu command.
 Type part of the command to filter the list.
-For example, to run the &quot;Clean Build Folder&quot; command from the &quot;Tools&quot; menu,
-press cmd-shift-a, type &quot;cle&quot;, and press return.</p>
+For example, to run the “Clean Build Folder” command from the “Tools” menu,
+press cmd-shift-a, type “cle”, and press return.</p>
 <p>When the editor area is split, toggle focusing on just the split that has focus
-by selecting View ... Editor ... Focus and
-restore the splits by selecting View ... Editor ... Hide Focus.
+by selecting View … Editor … Focus and
+restore the splits by selecting View … Editor … Hide Focus.
 Alternatively press cmd-ctrl-shift-return to toggle focus
 or click the buttons in the upper-left of each editor split
 that contain an arrow pointing southwest and an arrow pointing northeast.
 When the button has a blue background it means editor splits are hidden.</p>
 <p>To add and customize keyboard shortcuts,
-select Xcode ... Settings ... Key Bindings.
+select Xcode … Settings … Key Bindings.
 Location a command whose keyboard shortcut is to be changed,
-double-click the &quot;Key&quot; column of that row,
+double-click the “Key” column of that row,
 and press the desired keyboard shortcut.
 If the new keyboard shortcut is already in use,
 a warning will be displayed.</p>
-<h3 id="build%2Frun" tabindex="-1">Build/Run</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>restart preview</td>
-<td>cmd-option-p</td>
-</tr>
-<tr>
-<td>build</td>
-<td>cmd-b</td>
-</tr>
-<tr>
-<td>build and run</td>
-<td>cmd-r</td>
-</tr>
-<tr>
-<td>clean</td>
-<td>cmd-shift-k</td>
-</tr>
-<tr>
-<td>clear console</td>
-<td>cmd-k</td>
-</tr>
-</tbody>
-</table>
-<h3 id="navigate" tabindex="-1">Navigate</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>go to previous location</td>
-<td>cmd-ctrl-left or tap &quot;&lt;&quot; button in upper-left</td>
-</tr>
-<tr>
-<td>go to next location</td>
-<td>cmd-ctrl-right or tap &quot;&gt;&quot; button in upper-left</td>
-</tr>
-<tr>
-<td>switch to next file tab</td>
-<td>cmd-}</td>
-</tr>
-<tr>
-<td>switch to previous file tab</td>
-<td>cmd-{</td>
-</tr>
-<tr>
-<td>go back to previously viewed file</td>
-<td>cmd-ctrl-left-arrow</td>
-</tr>
-<tr>
-<td>go forward to previously viewed file</td>
-<td>cmd-ctrl-right-arrow</td>
-</tr>
-<tr>
-<td>move focus to next pane</td>
-<td>cmd-option-`</td>
-</tr>
-<tr>
-<td>open jump menu</td>
-<td>ctrl-6</td>
-</tr>
-</tbody>
-</table>
+<h3 id="buildrun">Build/Run</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>restart preview</td><td>cmd-option-p</td></tr><tr><td>build</td><td>cmd-b</td></tr><tr><td>build and run</td><td>cmd-r</td></tr><tr><td>clean</td><td>cmd-shift-k</td></tr><tr><td>clear console</td><td>cmd-k</td></tr></tbody></table>
+<h3 id="navigate">Navigate</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>go to previous location</td><td>cmd-ctrl-left or tap ”&#x3C;” button in upper-left</td></tr><tr><td>go to next location</td><td>cmd-ctrl-right or tap ”>” button in upper-left</td></tr><tr><td>switch to next file tab</td><td>cmd-}</td></tr><tr><td>switch to previous file tab</td><td>cmd-{</td></tr><tr><td>go back to previously viewed file</td><td>cmd-ctrl-left-arrow</td></tr><tr><td>go forward to previously viewed file</td><td>cmd-ctrl-right-arrow</td></tr><tr><td>move focus to next pane</td><td>cmd-option-`</td></tr><tr><td>open jump menu</td><td>ctrl-6</td></tr></tbody></table>
 <p>The jump menu displays a list of all the types, properties, and methods
 defined in the current source file.
 If the file contains pragma mark comments (<code>// MARK: - {section-name}</code>)
 then the list will be divided into sections with those names.
 Clicking a name scrolls to that definition and highlights it.
 To make it easier to find a particular item in the list, type part of its name.</p>
-<h3 id="find%2Freplace" tabindex="-1">Find/Replace</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>find in file</td>
-<td>cmd-f</td>
-</tr>
-<tr>
-<td>find next in file</td>
-<td>cmd-g</td>
-</tr>
-<tr>
-<td>find previous in file</td>
-<td>cmd-shift-g</td>
-</tr>
-<tr>
-<td>find and replace in file</td>
-<td>cmd-option-f</td>
-</tr>
-<tr>
-<td>find and replace next in file</td>
-<td>cmd-option-g</td>
-</tr>
-<tr>
-<td>find in project</td>
-<td>cmd-shift-f</td>
-</tr>
-<tr>
-<td>find next in project</td>
-<td>cmd-shift-g</td>
-</tr>
-<tr>
-<td>find and replace in project</td>
-<td>cmd-option-shift-f</td>
-</tr>
-<tr>
-<td>rename refactor</td>
-<td>cmd-ctrl-e</td>
-</tr>
-</tbody>
-</table>
-<h3 id="code-formatting-1" tabindex="-1">Code Formatting</h3>
+<h3 id="findreplace">Find/Replace</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>find in file</td><td>cmd-f</td></tr><tr><td>find next in file</td><td>cmd-g</td></tr><tr><td>find previous in file</td><td>cmd-shift-g</td></tr><tr><td>find and replace in file</td><td>cmd-option-f</td></tr><tr><td>find and replace next in file</td><td>cmd-option-g</td></tr><tr><td>find in project</td><td>cmd-shift-f</td></tr><tr><td>find next in project</td><td>cmd-shift-g</td></tr><tr><td>find and replace in project</td><td>cmd-option-shift-f</td></tr><tr><td>rename refactor</td><td>cmd-ctrl-e</td></tr></tbody></table>
+<h3 id="code-formatting-1">Code Formatting</h3>
 <p>Code formatting can happen automatically when changes are saved
-by following the direction at <a href="/blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1" rel="noopener" target="_blank">SwiftFormat</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>re-indent current line or selected lines</td>
-<td>ctrl-i</td>
-</tr>
-<tr>
-<td>increase line indent</td>
-<td>cmd-]</td>
-</tr>
-<tr>
-<td>decrease line indent</td>
-<td>cmd-[</td>
-</tr>
-</tbody>
-</table>
-<h3 id="code-folding-2" tabindex="-1">Code Folding</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fold code</td>
-<td>cmd-option-left</td>
-</tr>
-<tr>
-<td>unfold code</td>
-<td>cmd-option-right</td>
-</tr>
-<tr>
-<td>fold all functions and methods</td>
-<td>cmd-option-shift-left</td>
-</tr>
-<tr>
-<td>unfold all functions and methods</td>
-<td>cmd-option-shift-right</td>
-</tr>
-</tbody>
-</table>
-<h3 id="source-control" tabindex="-1">Source Control</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>git commit</td>
-<td>cmd-option-c</td>
-</tr>
-<tr>
-<td>git pull</td>
-<td>cmd-option-x</td>
-</tr>
-</tbody>
-</table>
-<h3 id="miscellaneous" tabindex="-1">Miscellaneous</h3>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>context menu for options like &quot;Embed in VStack&quot;</td>
-<td>cmd-click</td>
-</tr>
-<tr>
-<td>increase font size</td>
-<td>cmd-plus</td>
-</tr>
-<tr>
-<td>decrease font size</td>
-<td>cmd-minus</td>
-</tr>
-<tr>
-<td>open file</td>
-<td>cmd-o</td>
-</tr>
-<tr>
-<td>open new split pane for file in focused editor</td>
-<td>cmd-ctrl-t</td>
-</tr>
-<tr>
-<td>fuzzy file finder (open quickly)</td>
-<td>cmd-shift-o</td>
-</tr>
-<tr>
-<td>toggle commenting current or selected lines</td>
-<td>cmd-/</td>
-</tr>
-</tbody>
-</table>
-<h2 id="snippets" tabindex="-1">Snippets</h2>
+by following the direction at <a href="/blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1">SwiftFormat</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>re-indent current line or selected lines</td><td>ctrl-i</td></tr><tr><td>increase line indent</td><td>cmd-]</td></tr><tr><td>decrease line indent</td><td>cmd-[</td></tr></tbody></table>
+<h3 id="code-folding-2">Code Folding</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>fold code</td><td>cmd-option-left</td></tr><tr><td>unfold code</td><td>cmd-option-right</td></tr><tr><td>fold all functions and methods</td><td>cmd-option-shift-left</td></tr><tr><td>unfold all functions and methods</td><td>cmd-option-shift-right</td></tr></tbody></table>
+<h3 id="source-control">Source Control</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>git commit</td><td>cmd-option-c</td></tr><tr><td>git pull</td><td>cmd-option-x</td></tr></tbody></table>
+<h3 id="miscellaneous">Miscellaneous</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Key</th></tr></thead><tbody><tr><td>context menu for options like “Embed in VStack”</td><td>cmd-click</td></tr><tr><td>increase font size</td><td>cmd-plus</td></tr><tr><td>decrease font size</td><td>cmd-minus</td></tr><tr><td>open file</td><td>cmd-o</td></tr><tr><td>open new split pane for file in focused editor</td><td>cmd-ctrl-t</td></tr><tr><td>fuzzy file finder (open quickly)</td><td>cmd-shift-o</td></tr><tr><td>toggle commenting current or selected lines</td><td>cmd-/</td></tr></tbody></table>
+<h2 id="snippets">Snippets</h2>
 <p>Snippets are commonly used lines of code that can be quickly inserted.
 To insert a snippet, entering part of its name,
 selecting from the matching options, and press the return key.</p>
 <p>There are many predefined snippets and custom snippets can be defined.</p>
-<p>To see the existing snippets, select View ... Show Library,
-click the &quot;+&quot; in the upper-right, or press cmd-shift-l.
-Then click the &quot;{}&quot; button at the top center.</p>
+<p>To see the existing snippets, select View … Show Library,
+click the ”+” in the upper-right, or press cmd-shift-l.
+Then click the ”{}” button at the top center.</p>
 <p>Many snippets contain placeholders for text to be inserted.
 After inserting a snippet,
 the cursor will be positioned at the first placeholder.
@@ -1901,8 +1891,8 @@ press the return key followed by the tab key to move to the next placeholder.</p
 <ul>
 <li>Enter text for the snippet in any file.</li>
 <li>Select the text.</li>
-<li>Right-click the selected text and select &quot;Create Code Snippet...&quot;
-or select Editor ... Create Code Snippet....</li>
+<li>Right-click the selected text and select “Create Code Snippet…”
+or select Editor … Create Code Snippet…</li>
 <li>In the dialog that appears:
 <ul>
 <li>enter a name for the snippet</li>
@@ -1910,53 +1900,53 @@ or select Editor ... Create Code Snippet....</li>
 <li>select the Language where the snippet can be used (ex. Swift)</li>
 <li>select the Platform where the snippet can be used (ex. iOS or All)</li>
 <li>enter the completion text used to trigger the snippet
-(doesn't use name by default)</li>
+(doesn’t use name by default)</li>
 <li>select the Availability of the snippet where options include
-&quot;Class Implementation&quot;, &quot;Code Expression&quot;, &quot;Function or Method&quot;,
-&quot;String or Comment&quot;, and &quot;Top Level&quot;</li>
+“Class Implementation”, “Code Expression”, “Function or Method”,
+“String or Comment”, and “Top Level”</li>
 </ul>
 </li>
 </ul>
 <p>To add placeholders in a snippet,
-add placeholder names surrounded by &quot;&lt;#&quot; and &quot;#&gt;&quot;.
+add placeholder names surrounded by ”&#x3C;#” and ”#>”.
 The placeholder text will be replaced by a
 highlighted version of the placeholder name.
 Unfortunately, using the same placeholder name multiple times within a snippet
 does not cause them to be replaced by the same text.</p>
 <p>The literal expressions <code>#file</code>, <code>#fileID</code>, <code>#function</code>, <code>#line</code>, and <code>#column</code>
 can be used to provide context in <code>print</code> output. For example:</p>
-<pre><code class="language-swift">print(&quot;\(#fileID) \(#function) &lt;#variable#&gt; =&quot;, &lt;#variable#&gt;)
+<pre><code class="language-swift">print("\(#fileID) \(#function) &#x3C;#variable#> =", &#x3C;#variable#>)
 </code></pre>
 <p>To edit an existing snippet, select it in the Library
-and click the &quot;Edit&quot; button in the lower-right.</p>
+and click the “Edit” button in the lower-right.</p>
 <p>To delete an existing snippet, select it in the Library
-and click the &quot;Delete&quot; button in the lower-left.</p>
+and click the “Delete” button in the lower-left.</p>
 <p>Snippets I have defined include:</p>
-<table>
-<thead>
-<tr>
-<th>Completion</th>
-<th>Expands To</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>loge</code></td>
-<td><code>print(&quot;\(#fileID) \(#function) entered</code></td>
-</tr>
-<tr>
-<td><code>logv</code></td>
-<td><code>print(&quot;\(#fileID) \(#function) &lt;#variable#&gt; =&quot;, &lt;#variable#&gt;)</code></td>
-</tr>
-<tr>
-<td><code>spv</code></td>
-<td><code>@State private var</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="using-a-new-swift-version" tabindex="-1">Using a New Swift Version</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Completion</th><th>Expands To</th></tr></thead><tbody><tr><td><code>loge</code></td><td><code>print("\(#fileID) \(#function) entered</code></td></tr><tr><td><code>logv</code></td><td><code>print("\(#fileID) \(#function) &#x3C;#variable#> =", &#x3C;#variable#>)</code></td></tr><tr><td><code>spv</code></td><td><code>@State private var</code></td></tr></tbody></table>
+<h2 id="using-a-new-swift-version">Using a New Swift Version</h2>
 <p>See <a href="https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/?v=1.1.1" rel="noopener" target="_blank">How to use a pre-release Swift version in Xcode</a>.</p>
-<h2 id="xcode-issues" tabindex="-1">Xcode Issues</h2>
+<h2 id="xcode-issues">Xcode Issues</h2>
 <p>While using Xcode is generally fine, it does have a few issues.</p>
 <ul>
 <li>
@@ -1967,16 +1957,17 @@ This may be caused by the Swift compiler being slow.</p>
 </li>
 <li>
 <p>Xcode only supports limited Vim keybindings.</p>
-<p>To enable this, select Editor ... Vim Mode.</p>
+<p>To enable this, select Editor … Vim Mode.</p>
 <p>The Vim support is very basic.
 No colon commands are supported.
-This means changes cannot be saved with &quot;:w&quot;
-and find/replace cannot be performed with &quot;:s/foo/bar&quot;.
-Pressing the &quot;/&quot; key invokes Xcode find,
+This means changes cannot be saved with “:w”
+and find/replace cannot be performed with “:s/foo/bar”.
+Pressing the ”/” key invokes Xcode find,
 but it does not support regular expressions.
 It does not support repeating commands with the period key,
 defining macros, and other more advanced Vim features.
-For a list of supported Vim commands, see this <a href="https://developer.apple.com/forums/thread/681968?login=true&amp;page=1#692795022&amp;v=1.1.1" rel="noopener" target="_blank">Apple Developer Forum post</a>.</p>
+For a list of supported Vim commands, see this <a href="https://developer.apple.com/forums/thread/681968?login=true&#x26;page=1#692795022&#x26;v=1.1.1" rel="noopener" target="_blank">Apple Developer Forum post</a>.</p>
 </li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

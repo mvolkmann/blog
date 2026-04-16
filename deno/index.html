@@ -1,17 +1,17 @@
-<!DOCTYPE html><html lang="en"> <head><title>Deno</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Deno</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#differences-from-node.js">Differences from Node.js</a></li><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#installing-deno">Installing deno</a></li><li><a href="#options">Options</a></li><li><a href="#conventions">Conventions</a></li><li><a href="#permission-flags">Permission Flags</a></li><li><a href="#example-script">Example Script</a></li><li><a href="#command-summary">Command Summary</a></li><li><a href="#repls">REPLs</a></li><li><a href="#running">Running</a></li><li><a href="#watching">Watching</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#getting-information">Getting Information</a></li><li><a href="#generating-documentation">Generating Documentation</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#testing">Testing</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#installing-programs">Installing Programs</a></li><li><a href="#shell-completions">Shell Completions</a></li><li><a href="#libraries">Libraries</a></li><li><a href="#built-ins">Built-ins</a></li><li><a href="#imports">Imports</a></li><li><a href="#import-maps">Import Maps</a></li><li><a href="#lock-files">Lock Files</a></li><li><a href="#standard-library">Standard Library</a></li><li><a href="#resource-ids">Resource Ids</a></li><li><a href="#third-party-modules">Third Party Modules</a></li><li><a href="#deno.land">deno.land</a></li><li><a href="#using-node-packages">Using Node Packages</a></li><li><a href="#deno-global-variable">Deno Global Variable</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#parsing-command-line-arguments">Parsing command line arguments</a></li><li><a href="#databases">Databases</a></li><li><a href="#mongodb">MongoDB</a></li><li><a href="#basic-http-server">Basic HTTP server</a></li><li><a href="#rest-server-with-oak">REST Server with oak</a></li><li><a href="#websockets">WebSockets</a></li><li><a href="#webassembly-(wasm)">WebAssembly (WASM)</a></li><li><a href="#tidbits">Tidbits</a></li></ul></aside> <article><!-- markdownlint-disable MD013 -->
-<p><img alt="Deno logo" style="width: 30%"
-  src="/blog/assets/deno-logo.svg?v=1.1.1"
-  title="Deno logo"></p>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Deno</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Deno</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#differences-from-nodejs">Differences from Node.js</a></li><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#installing-deno">Installing deno</a></li><li><a href="#options">Options</a></li><li><a href="#conventions">Conventions</a></li><li><a href="#permission-flags">Permission Flags</a></li><li><a href="#example-script">Example Script</a></li><li><a href="#command-summary">Command Summary</a></li><li><a href="#repls">REPLs</a></li><li><a href="#running">Running</a></li><li><a href="#watching">Watching</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#getting-information">Getting Information</a></li><li><a href="#generating-documentation">Generating Documentation</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#testing">Testing</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#installing-programs">Installing Programs</a></li><li><a href="#shell-completions">Shell Completions</a></li><li><a href="#libraries">Libraries</a></li><li><a href="#built-ins">Built-ins</a></li><li><a href="#imports">Imports</a></li><li><a href="#import-maps">Import Maps</a></li><li><a href="#lock-files">Lock Files</a></li><li><a href="#standard-library">Standard Library</a></li><li><a href="#resource-ids">Resource Ids</a></li><li><a href="#third-party-modules">Third Party Modules</a></li><li><a href="#denoland">deno.land</a></li><li><a href="#using-node-packages">Using Node Packages</a></li><li><a href="#deno-global-variable">Deno Global Variable</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#parsing-command-line-arguments">Parsing command line arguments</a></li><li><a href="#databases">Databases</a></li><li><a href="#mongodb">MongoDB</a></li><li><a href="#basic-http-server">Basic HTTP server</a></li><li><a href="#rest-server-with-oak">REST Server with oak</a></li><li><a href="#websockets">WebSockets</a></li><li><a href="#webassembly-wasm">WebAssembly (WASM)</a></li><li><a href="#tidbits">Tidbits</a></li></ul></aside> <article> <!-- markdownlint-disable MD013 -->
+<p><img alt="Deno logo" style="width: 30%" src="/blog/assets/deno-logo.svg?v=1.1.1" title="Deno logo"></p>
+<h2 id="overview">Overview</h2>
 <p><a href="https://deno.land/?v=1.1.1" rel="noopener" target="_blank">Deno</a> is a
-&quot;secure runtime for JavaScript and TypeScript&quot;.
-The name comes from moving the last two letters of &quot;Node&quot; to the front.
-Originally it was pronounced &quot;den O&quot;, but was later changed to &quot;D no&quot;
+“secure runtime for JavaScript and TypeScript”.
+The name comes from moving the last two letters of “Node” to the front.
+Originally it was pronounced “den O”, but was later changed to “D no”
 like the pet dinosaur in the Flintstones cartoon.</p>
 <p>Ryan Dahl created both
 <a href="https://nodejs.org/?v=1.1.1" rel="noopener" target="_blank">Node.js</a> and Deno.
 In June 2018, he gave a talk at JSConf EU 2018 titled
-&quot;<a href="https://www.youtube.com/watch?v=M3BM9TB-8yA&amp;vl=en&amp;v=1.1.1" rel="noopener" target="_blank">10 Things I Regret About Node.js</a>.
+“<a href="https://www.youtube.com/watch?v=M3BM9TB-8yA&#x26;vl=en&#x26;v=1.1.1" rel="noopener" target="_blank">10 Things I Regret About Node.js</a>.
 A prototype of Deno was presented during this talk.</p>
 <p>Version 1.0 of Deno was released on May 13, 2020.
 It is open source and uses the MIT license.</p>
@@ -31,10 +31,10 @@ All of those are insecure by default.</p>
 <p>I believe the Deno security model is its most significant feature!
 With Deno you never have to worry that some library you are using,
 or a library used by a library,
-might do something bad that you didn't want to allow.
+might do something bad that you didn’t want to allow.
 You can run an app with no permissions and see what errors are generated.
 For example, suppose you see the following error message:</p>
-<pre><code class="language-text">error: Uncaught PermissionDenied: read access to &quot;pets.db&quot;,
+<pre><code class="language-text">error: Uncaught PermissionDenied: read access to "pets.db",
 run again with the --allow-read flag
 </code></pre>
 <p>You can then decide whether you app should be reading that file
@@ -71,7 +71,7 @@ TODO: Try this with Python!</p>
 <a href="https://deno.land/manual?v=1.1.1" rel="noopener" target="_blank">Deno Manual</a>.
 The <a href="https://discord.gg/deno?v=1.1.1" rel="noopener" target="_blank">Deno Discord channel</a>
 is another great resource.</p>
-<h2 id="differences-from-node.js" tabindex="-1">Differences from Node.js</h2>
+<h2 id="differences-from-nodejs">Differences from Node.js</h2>
 <ol>
 <li>Deno uses ES modules by default.
 Node.js can use ES modules, but defaults to CommonJS.</li>
@@ -91,7 +91,7 @@ like the Fetch API and functions from the <code>window</code> object.</li>
 <li>Deno programs stop when an uncaught error is encountered,
 such as failing to catch a rejected promise.</li>
 </ol>
-<h2 id="pros" tabindex="-1">Pros</h2>
+<h2 id="pros">Pros</h2>
 <ul>
 <li>Deno has unique support for building secure applications
 that are limited in their ability to read/write files
@@ -108,18 +108,18 @@ and <a href="https://github.com/tc39/proposal-top-level-await?v=1.1.1" rel="noop
 linting, code formatting, running tests, and bundling code into a single file.
 This removes the need to select, install, and configure tools for these.</li>
 </ul>
-<h2 id="cons" tabindex="-1">Cons</h2>
+<h2 id="cons">Cons</h2>
 <ul>
 <li>The number of libraries that are compatible with Deno
 is far less that the number of Node.js libraries.
 Many Node.js libraries cannot be used directly by Deno
 because that use APIs that Deno cannot make secure.</li>
-<li>Knowledge of existing Node.js libraries often doesn't help
+<li>Knowledge of existing Node.js libraries often doesn’t help
 when implementing an application in Deno and
 time must be spent finding and learning how to use an alternate library.</li>
 <li>Deno is currently slower than Node.js for some tasks.</li>
 </ul>
-<h2 id="installing-deno" tabindex="-1">Installing <code>deno</code></h2>
+<h2 id="installing-deno">Installing <code>deno</code></h2>
 <p>Deno is installed as a single executable file.
 To install it:</p>
 <ul>
@@ -130,20 +130,20 @@ To install it:</p>
 <p>For more install options, see the
 <a href="https://deno.land/?v=1.1.1" rel="noopener" target="_blank">main Deno website</a>.</p>
 <p>To update to the latest version, enter <code>deno upgrade</code>.</p>
-<h2 id="options" tabindex="-1">Options</h2>
+<h2 id="options">Options</h2>
 <p>To get help on <code>deno</code> options, enter <code>deno help</code>, <code>deno --help</code>, or <code>deno -h</code>.
 This includes the Deno version, the Deno manual URL, third party module URLs,
 the issue tracker URL, basic command examples, basic options,
 a brief description of each subcommand, and
 a description of environment variables that affect Deno.</p>
-<p>To get help on a subcommand such as &quot;run&quot;, enter <code>deno run --help</code>.</p>
+<p>To get help on a subcommand such as “run”, enter <code>deno run --help</code>.</p>
 <p>To get the version of <code>deno</code> that is installed, enter <code>deno -V</code>.
 To also get the versions of V8 and TypeScript that <code>deno</code> uses,
 enter <code>deno --version</code>.</p>
-<h2 id="conventions" tabindex="-1">Conventions</h2>
+<h2 id="conventions">Conventions</h2>
 <p>The <code>.js</code> and <code>.ts</code> files in the standard library
 use underscores rather than dashes to separate multiple words in file names.</p>
-<h2 id="permission-flags" tabindex="-1">Permission Flags</h2>
+<h2 id="permission-flags">Permission Flags</h2>
 <p>Deno supports the following permission flags:</p>
 <ul>
 <li><code>-A</code> or <code>--allow-all</code><br>
@@ -156,7 +156,7 @@ which can be used in timing attacks and fingerprinting.
 Without this permission, functions that return times
 such as <code>performance.now</code> return values in milliseconds
 instead of a more precise value.</li>
-<li><code>--allow-net=&lt;allow-net&gt;</code><br>
+<li><code>--allow-net=&#x3C;allow-net></code><br>
 This allows network access.
 A comma-separated list of domains can optionally be specified
 to restrict network access to only those domains.
@@ -168,21 +168,21 @@ For an example, see <a href="https://denolib.gitbook.io/guide/codebase-basics/ex
 Keep in mind that plugins are not limited by
 the normal Deno security restrictions.
 Plugins are currently an unstable feature.</li>
-<li><code>--allow-read=&lt;allow-read&gt;</code><br>
+<li><code>--allow-read=&#x3C;allow-read></code><br>
 This allows read access to the file system.
 A comma-separated list of directories or files can optionally be specified
 to restrict reads to only those directories and files.</li>
 <li><code>--allow-run</code><br>
 This allow running subprocesses outside of the Deno sandbox,
 which means they do not have security restrictions.</li>
-<li><code>--allow-write=&lt;allow-write&gt;</code><br>
+<li><code>--allow-write=&#x3C;allow-write></code><br>
 This allows write access to the file system.
 A comma-separated list of directories or files can optionally be specified
 to restrict writes to only those directories and files.</li>
 </ul>
 <p>What other programming language / runtime can make
 the security guarantees that Deno makes?
-I don't know of any.</p>
+I don’t know of any.</p>
 <p>A Deno program can check for permission flags and take different actions
 based on whether specific flags and values are present.
 For example:</p>
@@ -202,20 +202,20 @@ if (status.state === 'granted') {
 so this must be run with the <code>--unstable</code> flag.</p>
 <p>If the program is not also run with <code>--allow-write=/tmp</code>,
 the user will be prompted with the following and
-the program will wait for the user to press the &quot;g&quot; or &quot;d&quot; key:</p>
-<pre><code class="language-text">⚠️ Deno requests write access to &quot;/tmp&quot;. Grant? [g/d (g = grant, d = deny)]
+the program will wait for the user to press the “g” or “d” key:</p>
+<pre><code class="language-text">⚠️ Deno requests write access to "/tmp". Grant? [g/d (g = grant, d = deny)]
 </code></pre>
 <p>The <code>Deno.permissions.revoke</code> function removes a permission.
 This is useful when actions that require the permission have completed
 and you wish to ensure that those actions cannot be performed again
 for the remainder of the program.</p>
-<h2 id="example-script" tabindex="-1">Example Script</h2>
-<p>Here's an example Deno script to whet your appetite.
+<h2 id="example-script">Example Script</h2>
+<p>Here’s an example Deno script to whet your appetite.
 It prompts for a U.S. ZIP code and uses the
 <a href="https://openweathermap.org/api?v=1.1.1" rel="noopener" target="_blank">OpenWeather API</a>
 to get the city name, current temperature, and current wind speed.
 It was inspired by a
-<a href="https://www.youtube.com/watch?v=3MapKMsioTo&amp;v=1.1.1" rel="noopener" target="_blank">talk</a>
+<a href="https://www.youtube.com/watch?v=3MapKMsioTo&#x26;v=1.1.1" rel="noopener" target="_blank">talk</a>
 given by Luca Casonato at an ING Tech Meetup on November 5, 2020.</p>
 <pre><code class="language-ts">import {bold, cyan} from 'https://deno.land/std@0.79.0/fmt/colors.ts';
 
@@ -224,7 +224,7 @@ function print(label: string, value: string): void {
 }
 
 try {
-  // Web browsers implement the &quot;prompt&quot; function
+  // Web browsers implement the "prompt" function
   // to prompt a user for input using a modal dialog.
   // Deno implements this to prompt in a terminal.
   const zipCode = prompt('U.S. ZIP code:');
@@ -238,7 +238,7 @@ try {
   const {API_KEY} = JSON.parse(secrets);
   const url =
     'https://api.openweathermap.org/data/2.5/weather' +
-    `?zip=${zipCode}&amp;units=imperial&amp;appid=${API_KEY}`;
+    `?zip=${zipCode}&#x26;units=imperial&#x26;appid=${API_KEY}`;
 
   const res = await fetch(url);
   const json = await res.json();
@@ -272,98 +272,98 @@ Wind speed: 11.41 mph
 </code></pre>
 <p>Repeatedly typing that long command to run this would be tedious.
 We could write a shell script to run it, but Deno can do that for us.
-Just recall the command, change the &quot;run&quot; subcommand to &quot;install&quot;,
+Just recall the command, change the “run” subcommand to “install”,
 and execute it.
 This writes a shell script to <code>$HOME/.deno/bin</code>
 with the same name as your source file.
 It will contain the <code>deno run</code> command with all its options.
 To give the script a different name,
 specify the name using the <code>--name</code> (or <code>-n</code>) flag.
-As long as that &quot;bin&quot; directory is in your <code>PATH</code>,
+As long as that “bin” directory is in your <code>PATH</code>,
 it can now be executed by just entering the script name.</p>
-<h2 id="command-summary" tabindex="-1">Command Summary</h2>
+<h2 id="command-summary">Command Summary</h2>
 <p>Deno commands start with <code>deno</code> followed by a command name and options.
-Here's a summary of the commands. Details will be provided later.</p>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>bundle</code></td>
-<td>bundles a module and its dependencies into a single file</td>
-</tr>
-<tr>
-<td><code>cache</code></td>
-<td>caches dependencies</td>
-</tr>
-<tr>
-<td><code>compile</code></td>
-<td>creates a standalone executable</td>
-</tr>
-<tr>
-<td><code>completions</code></td>
-<td>generates shell completions</td>
-</tr>
-<tr>
-<td><code>doc</code></td>
-<td>displays documentation for a given module</td>
-</tr>
-<tr>
-<td><code>eval</code></td>
-<td>evaluates a string of JS/TS code</td>
-</tr>
-<tr>
-<td><code>fmt</code></td>
-<td>formats source files</td>
-</tr>
-<tr>
-<td><code>help</code></td>
-<td>displays help on <code>deno</code> commands and environment variables</td>
-</tr>
-<tr>
-<td><code>info</code></td>
-<td>displays information about the cache or source files, including dependencies</td>
-</tr>
-<tr>
-<td><code>install</code></td>
-<td>installs a script as an executable</td>
-</tr>
-<tr>
-<td><code>lint</code></td>
-<td>identifies issues in source files</td>
-</tr>
-<tr>
-<td><code>repl</code></td>
-<td>starts a Read Eval Print Loop</td>
-</tr>
-<tr>
-<td><code>run</code></td>
-<td>runs a script from a file or URL</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>runs tests</td>
-</tr>
-<tr>
-<td><code>types</code></td>
-<td>displays information about built-in types; can use in your code</td>
-</tr>
-<tr>
-<td><code>upgrade</code></td>
-<td>upgrades <code>deno</code></td>
-</tr>
-</tbody>
-</table>
+Here’s a summary of the commands. Details will be provided later.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>bundle</code></td><td>bundles a module and its dependencies into a single file</td></tr><tr><td><code>cache</code></td><td>caches dependencies</td></tr><tr><td><code>compile</code></td><td>creates a standalone executable</td></tr><tr><td><code>completions</code></td><td>generates shell completions</td></tr><tr><td><code>doc</code></td><td>displays documentation for a given module</td></tr><tr><td><code>eval</code></td><td>evaluates a string of JS/TS code</td></tr><tr><td><code>fmt</code></td><td>formats source files</td></tr><tr><td><code>help</code></td><td>displays help on <code>deno</code> commands and environment variables</td></tr><tr><td><code>info</code></td><td>displays information about the cache or source files, including dependencies</td></tr><tr><td><code>install</code></td><td>installs a script as an executable</td></tr><tr><td><code>lint</code></td><td>identifies issues in source files</td></tr><tr><td><code>repl</code></td><td>starts a Read Eval Print Loop</td></tr><tr><td><code>run</code></td><td>runs a script from a file or URL</td></tr><tr><td><code>test</code></td><td>runs tests</td></tr><tr><td><code>types</code></td><td>displays information about built-in types; can use in your code</td></tr><tr><td><code>upgrade</code></td><td>upgrades <code>deno</code></td></tr></tbody></table>
 <p>Some commands and flags are considered experimental
 and may change in the future.
 It in order to use those, the <code>--unstable</code> flag
 must be included until they become stable.</p>
-<p>For an example of using the <code>install</code> command, see the &quot;Watching&quot; section.</p>
-<h2 id="repls" tabindex="-1">REPLs</h2>
+<p>For an example of using the <code>install</code> command, see the “Watching” section.</p>
+<h2 id="repls">REPLs</h2>
 <p>A Read Eval Print Loop (REPL) tool is great for
 learning about the features of a programming language or runtime.
 The command <code>deno repl</code> or just <code>deno</code> starts a terminal-based REPL.
@@ -373,8 +373,8 @@ One is <a href="https://deno-playground.now.sh/?v=1.1.1" rel="noopener" target="
 This supports code formatting and sharing code with others.
 Another less attractive option is
 <a href="https://deno.town/?v=1.1.1" rel="noopener" target="_blank">deno.town</a>,
-which doesn't support code formatting or sharing code.</p>
-<h2 id="running" tabindex="-1">Running</h2>
+which doesn’t support code formatting or sharing code.</p>
+<h2 id="running">Running</h2>
 <p>To run a Deno program, enter a command like the following,
 passing it a JavaScript or TypeScript file:</p>
 <pre><code class="language-bash">deno run src/main.ts
@@ -395,7 +395,7 @@ on port 1234.</p>
 enter the following:</p>
 <pre><code class="language-bash">deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts --help
 </code></pre>
-<h2 id="watching" tabindex="-1">Watching</h2>
+<h2 id="watching">Watching</h2>
 <p>To run in watch mode so the script is restarted
 when any source file (<code>.js</code>, <code>.json</code>, or <code>.ts</code>)
 in and below the current directory changes,
@@ -417,8 +417,8 @@ that is similar to <a href="https://nodemon.io/?v=1.1.1" rel="noopener" target="
 with the same options and arguments. For example:</p>
 <pre><code class="language-bash">denon run --allow-net my_server.ts
 </code></pre>
-<h2 id="vs-code" tabindex="-1">VS Code</h2>
-<p>The &quot;Deno&quot; VS Code extension provides:</p>
+<h2 id="vs-code">VS Code</h2>
+<p>The “Deno” VS Code extension provides:</p>
 <ul>
 <li>intellisense</li>
 <li>ES module imports</li>
@@ -435,18 +435,18 @@ Rather than configure this extension with global settings,
 create a <code>.vscode</code> directory at the top of each Deno project directory.
 Then create the file <code>settings.json</code> inside it with the following content:</p>
 <pre><code class="language-json">{
-  &quot;deno.enable&quot;: true,
-  &quot;deno.import_intellisense_origins&quot;: {
-    &quot;https://deno.land&quot;: true,
-    &quot;https://deno.land/x&quot;: true
+  "deno.enable": true,
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true,
+    "https://deno.land/x": true
   },
-  &quot;deno.lint&quot;: true,
-  &quot;deno.unstable&quot;: true,
-  &quot;[javascript]&quot;: {
-    &quot;editor.defaultFormatter&quot;: &quot;denoland.vscode-deno&quot;
+  "deno.lint": true,
+  "deno.unstable": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  &quot;[typescript]&quot;: {
-    &quot;editor.defaultFormatter&quot;: &quot;denoland.vscode-deno&quot;
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno"
   }
 }
 </code></pre>
@@ -454,7 +454,7 @@ Then create the file <code>settings.json</code> inside it with the following con
 <p>This should use <code>deno fmt</code> to format <code>.js</code> and <code>.ts</code> files in the project,
 but this is not working for me.
 See this <a href="https://github.com/denoland/vscode_deno/issues/267?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
-<h2 id="linting" tabindex="-1">Linting</h2>
+<h2 id="linting">Linting</h2>
 <p>To lint all <code>.js</code> and <code>.ts</code> files
 in and below the current directory, enter <code>deno lint --unstable</code>.</p>
 <p>To see a list of the rules checked by <code>deno lint</code>,
@@ -477,7 +477,7 @@ add the following comment at the top:</p>
 add the following comment before the line:</p>
 <pre><code class="language-js">// deno-lint-ignore rule1 rule2 rule3
 </code></pre>
-<h2 id="code-formatting" tabindex="-1">Code Formatting</h2>
+<h2 id="code-formatting">Code Formatting</h2>
 <p>To format all <code>.js</code>, <code>.json</code>, and <code>.ts</code> files
 in and below the current directory, enter <code>deno fmt</code>.
 This uses <a href="https://github.com/dprint/dprint?v=1.1.1" rel="noopener" target="_blank">dprint</a>
@@ -502,14 +502,14 @@ add the comment <code>// deno-fmt-ignore-file</code> at the top.</p>
 but it seems to not currently be configurable.</p>
 <p>If the formatting performed by <code>deno fmt</code> is not to your liking,
 Prettier can be used instead.</p>
-<h2 id="getting-information" tabindex="-1">Getting Information</h2>
+<h2 id="getting-information">Getting Information</h2>
 <p>To get the locations of cache directories used by Deno, enter <code>deno info</code>.
 This provides the cache directory,
 the subdirectory where remote modules are cached, and
 the subdirectory where the output of the TypeScript compiler is stored.</p>
 <p>To install a remote module and see a list of its dependencies,
 enter <code>deno info {module-url}</code>.</p>
-<h2 id="generating-documentation" tabindex="-1">Generating Documentation</h2>
+<h2 id="generating-documentation">Generating Documentation</h2>
 <p>The <code>deno doc</code> command writes documentation for built-in types
 and local source files to stdout.</p>
 <p>For example, to see documentation on the <code>Deno.read</code> function,
@@ -528,7 +528,7 @@ of the <code>/** comment */</code> that precedes it.
 It does not perform any special parsing or formatting of
 <a href="https://jsdoc.app/?v=1.1.1" rel="noopener" target="_blank">JSDoc</a> comments
 and it does not generate HTML files.</p>
-<h2 id="debugging" tabindex="-1">Debugging</h2>
+<h2 id="debugging">Debugging</h2>
 <p>Deno programs can be debugged using the Chrome DevTools Debugger.
 It supports source maps which enables stepping through TypeScript code
 while actually running JavaScript code produced by the compiler.
@@ -537,31 +537,27 @@ The steps to use the debugger are:</p>
 <li>Start the script by entering
 <code>deno run -A --inspect-brk some_name.ts</code></li>
 <li>Browse <code>chrome://inspect</code></li>
-<li>Click the &quot;inspect&quot; link at the bottom of the Chrome window
+<li>Click the “inspect” link at the bottom of the Chrome window
 to open another Chrome window.</li>
 <li>Typically the source file of a dependency
 rather than the main script will be displayed.
 Click the table for the main script to view its source code.
 If there is no tab for it, use the file explorer on the left
-to navigate to it under &quot;file://&quot;.</li>
+to navigate to it under “file://”.</li>
 <li>Click line numbers to toggle breakpoints.</li>
 <li>Click the buttons in the upper-right to
 resume execution (play triangle), step over (curved arrow over dot),
 step in (down arrow), step out (up arrow), step (right arrow),
 deactivate all breakpoints (slash through breakpoint symbol),
 and toggle pausing on exceptions (stop sign with equal sign).</li>
-<li>Examine local and global variables under the &quot;Scope&quot; section on the right.</li>
-<li>Create watches under the &quot;Watch&quot; section on the right.</li>
-<li>Examine the call stack under the &quot;Call Stack&quot; section on the right.</li>
-<li>To restart execution, click the &quot;reload&quot; link
+<li>Examine local and global variables under the “Scope” section on the right.</li>
+<li>Create watches under the “Watch” section on the right.</li>
+<li>Examine the call stack under the “Call Stack” section on the right.</li>
+<li>To restart execution, click the “reload” link
 back in the original Chrome window.</li>
 </ol>
-<p><img alt="Chrome debugger window #1" style="width: 40%"
-  src="/blog/assets/deno-chrome-debugger-1.png?v=1.1.1"
-  title="Chrome debugger window #1">
-<img alt="Chrome debugger window #2" style="width: 90%"
-  src="/blog/assets/deno-chrome-debugger-2.png?v=1.1.1"
-  title="Chrome debugger window #2"></p>
+<p><img alt="Chrome debugger window #1" style="width: 40%" src="/blog/assets/deno-chrome-debugger-1.png?v=1.1.1" title="Chrome debugger window #1">
+<img alt="Chrome debugger window #2" style="width: 90%" src="/blog/assets/deno-chrome-debugger-2.png?v=1.1.1" title="Chrome debugger window #2"></p>
 <p>VS Code also supports debugging Deno programs.
 The steps to do this are:</p>
 <ol>
@@ -571,17 +567,17 @@ The steps to do this are:</p>
 <li>
 <p>Create the file <code>.vscode/launch.json</code> with the following content:</p>
 <pre><code class="language-json">{
-  &quot;version&quot;: &quot;0.2.0&quot;,
-  &quot;configurations&quot;: [
+  "version": "0.2.0",
+  "configurations": [
     {
-      &quot;name&quot;: &quot;Deno&quot;,
-      &quot;type&quot;: &quot;pwa-node&quot;,
-      &quot;request&quot;: &quot;launch&quot;,
-      &quot;cwd&quot;: &quot;${workspaceFolder}&quot;,
-      &quot;runtimeExecutable&quot;: &quot;deno&quot;,
-      &quot;runtimeArgs&quot;: [&quot;run&quot;, &quot;-A&quot;, &quot;--inspect-brk&quot;, &quot;${file}&quot;],
-      &quot;attachSimplePort&quot;: 9229,
-      &quot;outputCapture&quot;: &quot;std&quot;
+      "name": "Deno",
+      "type": "pwa-node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "deno",
+      "runtimeArgs": ["run", "-A", "--inspect-brk", "${file}"],
+      "attachSimplePort": 9229,
+      "outputCapture": "std"
     }
   ]
 }
@@ -591,31 +587,29 @@ The steps to do this are:</p>
 <p>Open the main script file in VS Code.</p>
 </li>
 <li>
-<p>Select Run ... Start Debugging or press F5.</p>
+<p>Select Run … Start Debugging or press F5.</p>
 </li>
 <li>
-<p>If prompted to select an environment, select &quot;Deno&quot;.</p>
+<p>If prompted to select an environment, select “Deno”.</p>
 </li>
 <li>
 <p>Use the debugger control buttons at the top.</p>
 </li>
 <li>
 <p>Use the left-nav debugger content including the sections labelled
-&quot;VARIABLES&quot;, &quot;WATCH&quot;, &quot;CALL STACK&quot;, &quot;LOADED SCRIPTS&quot;, and &quot;BREAKPOINTS&quot;.</p>
+“VARIABLES”, “WATCH”, “CALL STACK”, “LOADED SCRIPTS”, and “BREAKPOINTS”.</p>
 </li>
 <li>
 <p>To exit from the debugger, click the red square in the debug controls,
-select Run ... Stop Debugging, or press shift-F5.</p>
+select Run … Stop Debugging, or press shift-F5.</p>
 </li>
 </ol>
-<p><img alt="VS Code debugger" style="width: 90%"
-  src="/blog/assets/deno-vs-code-debugger.png?v=1.1.1"
-  title="VS Code debugger"></p>
+<p><img alt="VS Code debugger" style="width: 90%" src="/blog/assets/deno-vs-code-debugger.png?v=1.1.1" title="VS Code debugger"></p>
 <p>Currently it reports the following error when importing modules from URLs:</p>
 <pre><code class="language-text">Could not load source '{file-system-path/some-name.ts}': Unable to retrieve source content.
 </code></pre>
 <p>See this <a href="https://github.com/denoland/vscode_deno/issues/233?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
-<h2 id="testing" tabindex="-1">Testing</h2>
+<h2 id="testing">Testing</h2>
 <p>Deno has built-in support for unit tests, documented
 <a href="https://deno.land/manual/testing?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
 <p>Here is a simple module defined in <code>statistics.ts</code>:</p>
@@ -626,21 +620,21 @@ select Run ... Stop Debugging, or press shift-F5.</p>
 }
 
 export function sum(...numbers: number[]): number {
-  return numbers.reduce((acc, n) =&gt; acc + n, 0);
+  return numbers.reduce((acc, n) => acc + n, 0);
 }
 </code></pre>
 <p>Here is a file that provides tests for the <code>average</code> function.</p>
 <pre><code class="language-ts">import {assertEquals} from 'https://deno.land/std@0.79.0/testing/asserts.ts';
 import {average, sum} from './statistics.ts';
 
-Deno.test('average', () =&gt; {
+Deno.test('average', () => {
   assertEquals(average(), 0);
   assertEquals(average(1), 1);
   assertEquals(average(1, 2), 1.5);
   assertEquals(average(1, 2, 3), 2);
 });
 
-Deno.test('sum', () =&gt; {
+Deno.test('sum', () => {
   assertEquals(sum(), 0);
   assertEquals(sum(1), 1);
   assertEquals(sum(1, 2), 3);
@@ -672,7 +666,7 @@ enter <code>deno test --coverage --unstable</code>.
 This outputs any uncovered source lines.
 It would be nice if this supported an option to
 only output uncovered line numbers instead of the actual code.</p>
-<h2 id="bundling" tabindex="-1">Bundling</h2>
+<h2 id="bundling">Bundling</h2>
 <p>The <code>deno bundle</code> command bundles all the dependencies of a program
 into a single file.
 It takes a <code>.js</code> or <code>.ts</code> file as input and produces a <code>.js</code> file.
@@ -683,7 +677,7 @@ See this <a href="https://github.com/denoland/deno/issues/8211?v=1.1.1" rel="noo
 <p>Some bundles can be run in web browsers.
 However, this command does not modify the use of top level <code>await</code>,
 so code that uses that feature will only run in browsers that support it.</p>
-<h2 id="installing-programs" tabindex="-1">Installing Programs</h2>
+<h2 id="installing-programs">Installing Programs</h2>
 <p>The <code>deno install</code> command creates an executable shell script
 that runs a given Deno program.
 Any required permission options must be included in this command.
@@ -708,13 +702,13 @@ In order for users to run the app they would need to:</p>
 that was specified in the <code>install</code> command</li>
 </ul>
 <p>A better solution using <code>deno compile</code> is coming soon.</p>
-<h2 id="shell-completions" tabindex="-1">Shell Completions</h2>
+<h2 id="shell-completions">Shell Completions</h2>
 <p>The <code>deno completions</code> command generates shell-specific commands
 that define completions for <code>deno</code> subcommands and their options.
 The supported shells are zsh, bash, fish, powershell, and elvish.</p>
 <p>For example, to generate completions for the bash shell
 enter the following command:</p>
-<pre><code class="language-bash">deno completions bash &gt; /usr/local/etc/bash_completion.d/deno.bash
+<pre><code class="language-bash">deno completions bash > /usr/local/etc/bash_completion.d/deno.bash
 </code></pre>
 <p>To cause these completions to be activated in every new bash shell session,
 add the following in <code>~/.bash_profile</code>:</p>
@@ -731,7 +725,7 @@ press tab twice to see all the possible flags including
 <code>--inspect-brk</code>, <code>--unstable</code>, and <code>--watch</code>.</p>
 <p>To generate completions for the fish shell
 and enable their use enter the following command:</p>
-<pre><code class="language-bash">deno completions fish &gt; $HOME/.config/fish/completions/deno.fish
+<pre><code class="language-bash">deno completions fish > $HOME/.config/fish/completions/deno.fish
 </code></pre>
 <p>No additional steps are needed in order for the
 completions to be activated in every new fish shell session.
@@ -740,14 +734,14 @@ and press the tab key once to see all the possible completions.
 Use the down and up arrow keys to select a completion and continue typing.
 To see the allowed flags for a command, type one <code>-</code> and press tab.
 Once again, use the down and up arrow keys to select one.</p>
-<h2 id="libraries" tabindex="-1">Libraries</h2>
+<h2 id="libraries">Libraries</h2>
 <p>Deno library code comes from three categories.
-The &quot;Runtime API&quot; defines built-in things that are available without importing.
-The &quot;Standard Library&quot; defines things that are maintained by the Deno team.
-&quot;Third Party Modules&quot; are maintained by other developers.
+The “Runtime API” defines built-in things that are available without importing.
+The “Standard Library” defines things that are maintained by the Deno team.
+“Third Party Modules” are maintained by other developers.
 The main Deno website at <a href="https://deno.land/?v=1.1.1" rel="noopener" target="_blank">deno.land</a>
 has links to documentation for all three categories at the top of the page.</p>
-<h2 id="built-ins" tabindex="-1">Built-ins</h2>
+<h2 id="built-ins">Built-ins</h2>
 <p>For documentation on the built-in functions, see the
 <a href="https://doc.deno.land/built-in/stable?v=1.1.1" rel="noopener" target="_blank">Runtime API</a>.</p>
 <p>These include the following from the Web API:</p>
@@ -803,7 +797,7 @@ Supply one CSS string for each occurrence of <code>%c</code> in the first string
 <p>These write to stdout and read from stdin.
 All of them pause execution and wait for the user to reply.
 <code>alert</code> and <code>prompt</code> wait for the enter/return key.
-<code>confirm</code> waits for the &quot;y&quot; or &quot;n&quot; key.</p>
+<code>confirm</code> waits for the “y” or “n” key.</p>
 </li>
 <li>
 <p><code>setTimeout</code> and <code>clearTimeout</code></p>
@@ -847,10 +841,10 @@ and end the section with <code>performance.measure('some-name');</code>.</p>
 <pre><code class="language-ts">// ProgressEvent extends EventTarget, not Event.
 // But the first parameter of an EventListener is supposed to be an Event.
 // @ts-ignore
-const listener = (event: ProgressEvent): void =&gt; {
+const listener = (event: ProgressEvent): void => {
   // Report on the progress.
   console.log('loaded =', event.loaded);
-  if (event.loaded &gt;= event.total) {
+  if (event.loaded >= event.total) {
     removeEventListener('myCustomEvent', listener);
     clearInterval(intervalId);
   }
@@ -858,7 +852,7 @@ const listener = (event: ProgressEvent): void =&gt; {
 addEventListener('myCustomEvent', listener);
 
 let loaded = 0;
-const intervalId = setInterval(() =&gt; {
+const intervalId = setInterval(() => {
   // Do some work.
   loaded += 10; // report that 10% of the work is done
   const event = new ProgressEvent('myCustomEvent', {
@@ -869,7 +863,7 @@ const intervalId = setInterval(() =&gt; {
   dispatchEvent(event);
 }, 200);
 </code></pre>
-<h2 id="imports" tabindex="-1">Imports</h2>
+<h2 id="imports">Imports</h2>
 <p>Deno source files import other files as ES modules
 using the <code>import</code> statement, not the <code>require</code> function like in Node.js.
 The file to import can be specified with
@@ -882,7 +876,7 @@ When a <code>.ts</code> file is imported, it is automatically compiled to JavaSc
 <ul>
 <li>run code without a connection to the internet</li>
 <li>run code if the owner of a remote module removes or breaks it</li>
-<li>be confident the code won't do something malicious</li>
+<li>be confident the code won’t do something malicious</li>
 </ul>
 <p>Deno addresses all of these concerns.
 The first two are covered by the fact that Deno caches remote modules
@@ -902,7 +896,7 @@ not checking for new versions, unless it is run with the <code>--reload</code> f
 <p>File URLs for libraries maintained in GitHub contain tag names,
 so creating tags that are version numbers is great way
 to make multiple versions compatible with Deno imports.
-To see the URL to use, select a file, select a tag, click the &quot;Raw&quot; button,
+To see the URL to use, select a file, select a tag, click the “Raw” button,
 and note the URL in the address bar.</p>
 <p>Deno does not use <code>npm</code> to install modules.
 Instead, <code>import</code> statements can specify module URLs
@@ -945,8 +939,8 @@ export {name4, name5} from 'https://domain2/pkg2@v2/filename2.ts';
 <p>Then import from this file with lines like the following:</p>
 <pre><code class="language-ts">import {name1, name3, name4} from './deps.ts';
 </code></pre>
-<p>TODO: Isn't it odd to then have every source file only import from this one file?</p>
-<h2 id="import-maps" tabindex="-1">Import Maps</h2>
+<p>TODO: Isn’t it odd to then have every source file only import from this one file?</p>
+<h2 id="import-maps">Import Maps</h2>
 <p>Imports maps are currently an experimental feature
 that only work if the <code>--unstable</code> flag is included.
 They define a mapping from keywords to URLs
@@ -955,8 +949,8 @@ The mapping is specified in a JSON file
 which is referenced by the <code>--importmap</code> option.</p>
 <p>For example, the file <code>import_map.json</code> could contain:</p>
 <pre><code class="language-json">{
-  &quot;imports&quot;: {
-    &quot;date-fns&quot;: &quot;https://cdn.deno.land/date_fns/versions/v2.15.0/raw/index.js&quot;
+  "imports": {
+    "date-fns": "https://cdn.deno.land/date_fns/versions/v2.15.0/raw/index.js"
   }
 }
 </code></pre>
@@ -964,7 +958,7 @@ which is referenced by the <code>--importmap</code> option.</p>
 <pre><code class="language-js">// Example function calls take directly from https://date-fns.org/.
 import {format, formatDistance, formatRelative, subDays} from 'date-fns';
 
-console.log(format(new Date(), &quot;'Today is a' iiii&quot;));
+console.log(format(new Date(), "'Today is a' iiii"));
 // example output: Today is a Monday
 
 console.log(formatDistance(subDays(new Date(), 3), new Date()));
@@ -976,7 +970,7 @@ console.log(formatRelative(subDays(new Date(), 3), new Date()));
 <p>To run this, enter the following:</p>
 <pre><code class="language-bash">deno run --import-map=import_map.json --unstable demo.js
 </code></pre>
-<h2 id="lock-files" tabindex="-1">Lock Files</h2>
+<h2 id="lock-files">Lock Files</h2>
 <p>It is useful to record the version of each dependency being used
 so the same versions can be downloaded by multiple developers
 and in CI/CD environments.
@@ -1006,7 +1000,7 @@ preventing any new downloads, enter a command like the following:</p>
 </code></pre>
 <p>This will fail if any source file imports a module with a URL
 that has not previously been cached.</p>
-<h2 id="standard-library" tabindex="-1">Standard Library</h2>
+<h2 id="standard-library">Standard Library</h2>
 <p>The Deno <a href="https://deno.land/std?v=1.1.1" rel="noopener" target="_blank">Standard Library</a>
 is modeled after that of the Go programming language.
 It is implemented in TypeScript.
@@ -1016,109 +1010,109 @@ These modules are not installed by default and are
 downloaded and cached the first time a script that uses them is run.</p>
 <p>Highlights from the Deno standard library
 are described in the following table:</p>
-<table>
-<thead>
-<tr>
-<th>Module</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>archive</td>
-<td>tars and untars files</td>
-</tr>
-<tr>
-<td>bytes</td>
-<td>operates on Uint8Array values</td>
-</tr>
-<tr>
-<td>datetime</td>
-<td>parses date strings, formats <code>Date</code> objects, and extracts data from them</td>
-</tr>
-<tr>
-<td>encoding</td>
-<td>deals with many data encodings such as base32, binary, csv, toml, and yaml</td>
-</tr>
-<tr>
-<td>flags</td>
-<td>command line argument parser</td>
-</tr>
-<tr>
-<td>fmt</td>
-<td>formatted output (<code>sprintf</code>) including colors and styles</td>
-</tr>
-<tr>
-<td>fs</td>
-<td>file system manipulation</td>
-</tr>
-<tr>
-<td>hash</td>
-<td>creates hashes (ex. md5) and applies them to data</td>
-</tr>
-<tr>
-<td>http</td>
-<td>for implementing HTTP servers</td>
-</tr>
-<tr>
-<td>io</td>
-<td>reading from and writing to streams, including reading by lines</td>
-</tr>
-<tr>
-<td>log</td>
-<td>logging with debug, info, warning, error, and critical levels</td>
-</tr>
-<tr>
-<td>mime</td>
-<td>reads and writes multipart form data</td>
-</tr>
-<tr>
-<td>node</td>
-<td>compatibility layer for the Node.js standard library (partially implemented)</td>
-</tr>
-<tr>
-<td>path</td>
-<td>manipulates file paths; currently on generates RegExps from glob expressions</td>
-</tr>
-<tr>
-<td>permissions</td>
-<td>gets permission flag strings and grants permissions (see <code>Deno.permissions</code> first)</td>
-</tr>
-<tr>
-<td>signal</td>
-<td>generates and listens for OS signals such as SIGINT (ctrl-c)</td>
-</tr>
-<tr>
-<td>testing</td>
-<td>assertions for implementing unit tests</td>
-</tr>
-<tr>
-<td>textproto</td>
-<td><code>TextProtoReader</code> class for reading from a <code>BufReader</code></td>
-</tr>
-<tr>
-<td>uuid</td>
-<td>generates and validates unique identifiers</td>
-</tr>
-<tr>
-<td>wasi</td>
-<td>implements the WebAssembly System Interface</td>
-</tr>
-<tr>
-<td>ws</td>
-<td>for implementing WebSocket servers</td>
-</tr>
-</tbody>
-</table>
-<p>TODO: Is <code>datetime</code> being renamed to <code>date</code>? See <a href="https://github.com/denoland/deno/issues/8594">https://github.com/denoland/deno/issues/8594</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Module</th><th>Description</th></tr></thead><tbody><tr><td>archive</td><td>tars and untars files</td></tr><tr><td>bytes</td><td>operates on Uint8Array values</td></tr><tr><td>datetime</td><td>parses date strings, formats <code>Date</code> objects, and extracts data from them</td></tr><tr><td>encoding</td><td>deals with many data encodings such as base32, binary, csv, toml, and yaml</td></tr><tr><td>flags</td><td>command line argument parser</td></tr><tr><td>fmt</td><td>formatted output (<code>sprintf</code>) including colors and styles</td></tr><tr><td>fs</td><td>file system manipulation</td></tr><tr><td>hash</td><td>creates hashes (ex. md5) and applies them to data</td></tr><tr><td>http</td><td>for implementing HTTP servers</td></tr><tr><td>io</td><td>reading from and writing to streams, including reading by lines</td></tr><tr><td>log</td><td>logging with debug, info, warning, error, and critical levels</td></tr><tr><td>mime</td><td>reads and writes multipart form data</td></tr><tr><td>node</td><td>compatibility layer for the Node.js standard library (partially implemented)</td></tr><tr><td>path</td><td>manipulates file paths; currently on generates RegExps from glob expressions</td></tr><tr><td>permissions</td><td>gets permission flag strings and grants permissions (see <code>Deno.permissions</code> first)</td></tr><tr><td>signal</td><td>generates and listens for OS signals such as SIGINT (ctrl-c)</td></tr><tr><td>testing</td><td>assertions for implementing unit tests</td></tr><tr><td>textproto</td><td><code>TextProtoReader</code> class for reading from a <code>BufReader</code></td></tr><tr><td>uuid</td><td>generates and validates unique identifiers</td></tr><tr><td>wasi</td><td>implements the WebAssembly System Interface</td></tr><tr><td>ws</td><td>for implementing WebSocket servers</td></tr></tbody></table>
+<p>TODO: Is <code>datetime</code> being renamed to <code>date</code>? See <a href="https://github.com/denoland/deno/issues/8594" rel="noopener" target="_blank">https://github.com/denoland/deno/issues/8594</a>.</p>
 <p>These libraries typically contain a <code>mod.ts</code> file
 that defines what is exported.</p>
 <p>To see documentation for a standard library source file,
 browse <a href="https://deno.land/?v=1.1.1" rel="noopener" target="_blank">deno.land</a>,
-click &quot;Standard Library&quot; at the top,
+click “Standard Library” at the top,
 click the name of the library (such as <code>fs</code>),
 click a <code>.ts</code> source file (such as <code>mod.ts</code>),
-and click &quot;View Documentation&quot;.</p>
+and click “View Documentation”.</p>
 <p>For example, the <code>fs</code> library provides the following functions:</p>
 <ul>
 <li><code>copy</code> copies a file or directory</li>
@@ -1139,7 +1133,7 @@ and click &quot;View Documentation&quot;.</p>
 <li><code>bright</code> versions of the color functions</li>
 <li><code>bgBright</code> versions of the color functions to set a bright background color</li>
 </ul>
-<p>To write to stdout with colors, similar to the npm package &quot;chalk&quot;:</p>
+<p>To write to stdout with colors, similar to the npm package “chalk”:</p>
 <pre><code class="language-js">import {
   bgYellow,
   blue,
@@ -1161,13 +1155,13 @@ import * as path from 'https://deno.land/std@0.79.0/path/mod.ts';
 
 const filename = path.join(Deno.cwd(), 'my-file.txt');
 const reader = await Deno.open(filename);
-// The readlines function returns an &quot;async iterable object&quot;.
-// The &quot;for await&quot; loop iterates over this.
+// The readlines function returns an "async iterable object".
+// The "for await" loop iterates over this.
 for await (const line of readLines(reader)) {
   console.log(line);
 }
 </code></pre>
-<h2 id="resource-ids" tabindex="-1">Resource Ids</h2>
+<h2 id="resource-ids">Resource Ids</h2>
 <p>Deno refers to input and output streams as resources
 that have resource ids.
 Resource ids are useful for streaming reads (see <code>Deno.read</code>),
@@ -1182,7 +1176,7 @@ console.log('file.rid =', file.rid); // 3
 
 // This returns an object where keys are resource ids (integers as strings)
 // and the values are resource names.
-// Resources include &quot;stdin&quot;, &quot;stdout&quot;, &quot;stderr&quot;, and any opened files.
+// Resources include "stdin", "stdout", "stderr", and any opened files.
 const resources = Deno.resources();
 console.table(resources);
 
@@ -1217,7 +1211,7 @@ file.close();
 it is easier to use the <code>prompt</code> function.
 While you could write to stdout and stderr using their resource ids,
 it is easier to use <code>console.log</code> and <code>console.error</code>.</p>
-<h2 id="third-party-modules" tabindex="-1">Third Party Modules</h2>
+<h2 id="third-party-modules">Third Party Modules</h2>
 <p>Many third party modules are registered at
 <a href="https://deno.land/x?v=1.1.1" rel="noopener" target="_blank">deno.land/x</a>.
 The code for these modules originates from a public GitHub repository.
@@ -1225,15 +1219,15 @@ When a module is added to <code>deno.land/x</code>,
 an immutable copy is made in an S3 bucket and it is served from there.
 As of 12/3/2020 there were 1342 modules here.</p>
 <p>To add your own modules to <code>deno.land/x</code>,
-browse the site and click the &quot;Add a module&quot; button
-under &quot;How do I add a module&quot;.
+browse the site and click the “Add a module” button
+under “How do I add a module”.
 Apply a git tag to each version.
 These tags are used as version numbers in import URLs.</p>
 <p>One example is the <code>case</code> module which provides many functions
 that convert multi-word strings where words are separated by spaces
 into another string.
 Follow the instructions to add a
-&quot;Branch or tag creation&quot; webhook to your repository.</p>
+“Branch or tag creation” webhook to your repository.</p>
 <pre><code class="language-js">import * as c from 'https://deno.land/x/case@v2.1.0/mod.ts';
 
 const s = 'one FINE day';
@@ -1260,13 +1254,13 @@ This is a free repository of Deno modules that uses
 <a href="https://www.arweave.org/?v=1.1.1" rel="noopener" target="_blank">Arweave</a>
 to permanently store them using Blockchain.
 As of 11/30/2020 there were 196 registered modules here.</p>
-<h2 id="deno.land" tabindex="-1">deno.land</h2>
+<h2 id="denoland">deno.land</h2>
 <p>The site <code>https://deno.land/x</code> hosts a curated collection of
 third-party modules that work with Deno.
 As of 11/23/2020 it contained 1,302 modules.
 Examples include lodash, date_fns, ramda, xstate, ky (HTTP client), and
 i18next (internationalization framework).</p>
-<h2 id="using-node-packages" tabindex="-1">Using Node Packages</h2>
+<h2 id="using-node-packages">Using Node Packages</h2>
 <p>Node packages that only use Node.js APIs that have been polyfilled by Deno
 have a possibility of being usable in Deno programs. For example,
 <a href="https://www.npmjs.com/package/lodash?v=1.1.1" rel="noopener" target="_blank">lodash</a> can be used.
@@ -1295,7 +1289,7 @@ For example, to load the <code>path</code> polyfill:</p>
 const require = createRequire(import.meta.url);
 const path = require('path');
 </code></pre>
-<h2 id="deno-global-variable" tabindex="-1">Deno Global Variable</h2>
+<h2 id="deno-global-variable">Deno Global Variable</h2>
 <p>When a script is run with <code>deno run</code>,
 the <code>Deno</code> global variable is made available.
 It has a large number of properties, most of which are functions.
@@ -1399,32 +1393,32 @@ try {
   // handle errors
 }
 </code></pre>
-<h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
+<h2 id="environment-variables">Environment Variables</h2>
 <p>The <code>Deno.env</code> variable provides methods to
 get, set, and delete environment variables.
 Using these requires the <code>--allow-env</code> flag.</p>
-<table>
-<thead>
-<tr>
-<th>Operation</th>
-<th>Function</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>get</td>
-<td><code>Deno.env.get(&quot;name&quot;)</code></td>
-</tr>
-<tr>
-<td>set</td>
-<td><code>Deno.env.set(&quot;name&quot;, &quot;value&quot;)</code></td>
-</tr>
-<tr>
-<td>delete</td>
-<td><code>Deno.env.delete(&quot;name&quot;)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Operation</th><th>Function</th></tr></thead><tbody><tr><td>get</td><td><code>Deno.env.get("name")</code></td></tr><tr><td>set</td><td><code>Deno.env.set("name", "value")</code></td></tr><tr><td>delete</td><td><code>Deno.env.delete("name")</code></td></tr></tbody></table>
 <p>The shell in which the Deno program runs is no affected
 by the <code>set</code> or <code>delete</code> methods.</p>
 <p>For example:</p>
@@ -1435,7 +1429,7 @@ Deno.env.delete('COLOR');
 color = Deno.env.get('COLOR');
 console.log(color); // undefined
 </code></pre>
-<h2 id="parsing-command-line-arguments" tabindex="-1">Parsing command line arguments</h2>
+<h2 id="parsing-command-line-arguments">Parsing command line arguments</h2>
 <p>There are several Deno modules for parsing command line arguments.
 The standard library provides the
 <a href="https://deno.land/std/flags?v=1.1.1" rel="noopener" target="_blank">flags</a> module.
@@ -1445,15 +1439,15 @@ Third party options include
 <p>The <code>flags</code> module provides a <code>parse</code> function that gathers
 command line flags into an object and returns it.
 Default values can be specified for each flag.
-Additional values after <code>--</code> are gathered into an array stored in the key &quot;_&quot;.</p>
+Additional values after <code>--</code> are gathered into an array stored in the key ”_”.</p>
 <p>An options method to be called with unsupported flags,
 named <code>unknown</code>, can be supplied.
 These flags will still be added to the returned object
 unless this method returns <code>false</code>.</p>
 <p>Here is an example of using the <code>flags</code> module in the file <code>flags_demo.js</code>.
-It recognizes the flags &quot;alpha&quot;, &quot;beta&quot;, and &quot;gamma&quot;.
-The value of the &quot;alpha&quot; flag is coerced to a boolean.
-The values of the &quot;beta&quot; and &quot;gamma&quot; flags are treated as strings.
+It recognizes the flags “alpha”, “beta”, and “gamma”.
+The value of the “alpha” flag is coerced to a boolean.
+The values of the “beta” and “gamma” flags are treated as strings.
 There is no support for treating flag values as numbers,
 but they can be converted to numbers after being parsed.</p>
 <pre><code class="language-js">import {parse} from 'https://deno.land/std@0.79.0/flags/mod.ts';
@@ -1481,14 +1475,14 @@ it outputs the following:</p>
 ┌───────┬───────┬───────┬─────────┐
 │ (idx) │   0   │   1   │ Values  │
 ├───────┼───────┼───────┼─────────┤
-│   _   │ &quot;foo&quot; │ &quot;bar&quot; │         │
+│   _   │ "foo" │ "bar" │         │
 │ alpha │       │       │  true   │
-│ beta  │       │       │  &quot;19&quot;   │
-│ gamma │       │       │ &quot;Greek&quot; │
+│ beta  │       │       │  "19"   │
+│ gamma │       │       │ "Greek" │
 └───────┴───────┴───────┴─────────┘
 </code></pre>
 <p>Here is the same example of using the <code>yargs</code> module in the file <code>yargs_demo.ts</code>.
-It also supports &quot;aliases&quot; which enable shorthand options
+It also supports “aliases” which enable shorthand options
 (ex. <code>--alpha</code> or <code>-a</code>).</p>
 <pre><code class="language-ts">import yargs from 'https://deno.land/x/yargs@v16.2.0-deno/deno.ts';
 import {Arguments} from 'https://deno.land/x/yargs@v16.2.0-deno/deno-types.ts';
@@ -1521,14 +1515,14 @@ it outputs the following:</p>
 <pre><code class="language-text">┌───────┬───────┬───────┬────────────┐
 │ (idx) │   0   │   1   │   Values   │
 ├───────┼───────┼───────┼────────────┤
-│   _   │ &quot;foo&quot; │ &quot;bar&quot; │            │
+│   _   │ "foo" │ "bar" │            │
 │ alpha │       │       │   false    │
 │   a   │       │       │   false    │
 │ beta  │       │       │     19     │
 │   b   │       │       │     19     │
-│ gamma │       │       │  &quot;delta&quot;   │
-│   g   │       │       │  &quot;delta&quot;   │
-│  $0   │       │       │ &quot;deno run&quot; │
+│ gamma │       │       │  "delta"   │
+│   g   │       │       │  "delta"   │
+│  $0   │       │       │ "deno run" │
 └───────┴───────┴───────┴────────────┘
 </code></pre>
 <p>The yargs module supports using the <code>--help</code> flag
@@ -1539,9 +1533,9 @@ For example, <code>deno run yargs_demo.ts --help</code> outputs the following:</
       --version  Show version number                                   [boolean]
   -a, --alpha    first greek                          [boolean] [default: false]
   -b, --beta     second greek                              [number] [default: 1]
-  -g, --gamma    third greek                         [string] [default: &quot;Greek&quot;]
+  -g, --gamma    third greek                         [string] [default: "Greek"]
 </code></pre>
-<h2 id="databases" tabindex="-1">Databases</h2>
+<h2 id="databases">Databases</h2>
 <p>The most popular Deno library for working with relational databases is
 <a href="https://deno.land/x/cotton?v=1.1.1" rel="noopener" target="_blank">Cotton</a>.
 It supports MySQL, PostgreSQL, and SQLite.</p>
@@ -1552,18 +1546,18 @@ as an alternative to manually creating SQL statement strings.</p>
 <p>Cotton also supports <a href="https://deno.land/x/cotton@v0.7.4/docs/guide/model.md?v=1.1.1" rel="noopener" target="_blank">object-relational mapping</a> that maps a JavaScript class to a database table.</p>
 <p>Finally, Cotton supports <a href="https://deno.land/x/cotton@v0.7.4/docs/guide/migrations.md?v=1.1.1" rel="noopener" target="_blank">database migrations</a> for making a series of changes to a database schema
 in a repeatable way.</p>
-<p>Here's an example using
+<p>Here’s an example using
 <a href="https://www.sqlite.org/index.html?v=1.1.1" rel="noopener" target="_blank">SQLite</a>.</p>
 <ol>
 <li>Install SQLite by downloading a version from the
 <a href="https://www.sqlite.org/download.html?v=1.1.1" rel="noopener" target="_blank">SQLite Download Page</a>.</li>
 <li>Create a pets database by entering <code>sqlite3 pets.db</code>
-This starts an interactive session, indicated by the <code>sqlite&gt;</code> prompt.</li>
-<li>Create a &quot;dogs&quot; table by entering
+This starts an interactive session, indicated by the <code>sqlite></code> prompt.</li>
+<li>Create a “dogs” table by entering
 <code>create table dogs(id integer primary key autoincrement, name string, breed string);</code></li>
-<li>Add a row to the &quot;dogs&quot; table by entering
+<li>Add a row to the “dogs” table by entering
 <code>insert into dogs values('Comet', 'Whippet');</code></li>
-<li>Query the &quot;dogs&quot; table by entering <code>select \* from dogs;</code></li>
+<li>Query the “dogs” table by entering <code>select \* from dogs;</code></li>
 </ol>
 <p>Here is a Deno program in a file named <code>cotton_demo.js</code>
 that interacts with the pets database.</p>
@@ -1572,8 +1566,8 @@ that interacts with the pets database.</p>
 const db = await connect({type: 'sqlite', database: 'pets.db'});
 
 // Delete all rows from the dogs table.
-//await db.table(&quot;dogs&quot;).delete().execute();
-//await db.table(&quot;dogs&quot;).delete().where('name', '*').execute();
+//await db.table("dogs").delete().execute();
+//await db.table("dogs").delete().where('name', '*').execute();
 await db.query('delete from dogs');
 
 // Add new rows to the dogs table.
@@ -1602,7 +1596,7 @@ console.log('dogs =', dogs);
 dogs = await db.table('dogs').order('name').execute();
 console.log('dogs =', dogs);
 
-// Using &quot;where&quot;
+// Using "where"
 const [comet] = await db.table('dogs').where('name', 'Comet').execute();
 console.log('comet =', comet);
 
@@ -1638,7 +1632,7 @@ const db = await connect({type: 'sqlite', database: 'pets.db'});
 const manager = db.getManager();
 
 // If no table name is passed to @Model, it will default to
-// the lowercase version of the class name, &quot;dog&quot; in this case.
+// the lowercase version of the class name, "dog" in this case.
 @Model('dogs')
 class Dog {
   // This class cannot have a constructor because Cotton
@@ -1647,12 +1641,12 @@ class Dog {
   @Primary()
   id!: number;
 
-  // The docs say &quot;Cotton is smart enough to determine the data type
+  // The docs say "Cotton is smart enough to determine the data type
   // of that particular column using TypeScript types.
   // However, you can still customize your column types
-  // by passing the type option.&quot;
+  // by passing the type option."
   // But omitting this gives the error
-  // &quot;Column '${propertyKey}' must have a type!&quot;
+  // "Column '${propertyKey}' must have a type!"
   @Column({type: DataType.String})
   name!: string;
 
@@ -1692,23 +1686,23 @@ await db.disconnect();
 <p>Because this code uses decorators, the following options
 must be present in a <code>tsconfig.json</code> file:</p>
 <pre><code class="language-json">{
-  &quot;compilerOptions&quot;: {
-    &quot;experimentalDecorators&quot;: true,
-    &quot;emitDecoratorMetadata&quot;: true
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }
 </code></pre>
 <p>It seems that Cotton does not currently support
 creating or executing for prepared statements?
 See this <a href="https://github.com/rahmanfadhil/cotton/issues/32?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
-<h2 id="mongodb" tabindex="-1">MongoDB</h2>
+<h2 id="mongodb">MongoDB</h2>
 <p>One option for working with MongoDB databases in Deno
 is <a href="https://deno.land/x/mongo@v0.20.0?v=1.1.1" rel="noopener" target="_blank">deno_mongo</a>.
 Another option is
 <a href="https://eveningkid.github.io/denodb-docs/?v=1.1.1" rel="noopener" target="_blank">denodb</a>
 which aims to works with many databases.
 It uses deno_mongo under the hood for MongoDB databases,
-but I wasn't able to get it to work.
+but I wasn’t able to get it to work.
 See this <a href="https://github.com/eveningkid/denodb/issues/152?v=1.1.1" rel="noopener" target="_blank">issue</a> and this <a href="https://github.com/eveningkid/denodb/commit/abed3063dd92436ceb4f124227daee5ee6604b2d#commitcomment-44634400?v=1.1.1" rel="noopener" target="_blank">temporary fix</a>.</p>
 <p>Here is an example of using deno_mongo:</p>
 <pre><code class="language-ts">import {MongoClient} from 'https://deno.land/x/mongo@v0.20.0/mod.ts';
@@ -1723,7 +1717,7 @@ interface Dog {
 }
 
 const db = client.database('animals');
-const dogsColl = db.collection&lt;Dog&gt;('dogs');
+const dogsColl = db.collection&#x3C;Dog>('dogs');
 
 // Delete all the documents in the dogs collection.
 let count = await dogsColl.deleteMany({_id: {$ne: null}});
@@ -1759,7 +1753,7 @@ console.log('dogs =', await dogs.toArray());
 count = await dogsColl.count();
 console.log('count =', count);
 </code></pre>
-<h2 id="basic-http-server" tabindex="-1">Basic HTTP server</h2>
+<h2 id="basic-http-server">Basic HTTP server</h2>
 <p>The standard library contains <code>file_server.ts</code>
 which implements a basic HTTP file server.
 To install this and server files in the current directory:</p>
@@ -1781,7 +1775,7 @@ for await (const req of server) {
     const content = await serveFile(req, path);
     req.respond(content);
   } catch (e) {
-    const status = e &amp;&amp; e instanceof Deno.errors.NotFound ? 404 : 500;
+    const status = e &#x26;&#x26; e instanceof Deno.errors.NotFound ? 404 : 500;
     req.respond({body: e.message, status});
   }
 }
@@ -1792,10 +1786,10 @@ Typically one would use a framework such as
 <a href="https://github.com/asos-craigmorten/opine?v=1.1.1" rel="noopener" target="_blank">opine</a>
 (port of Express) for this,
 but it demonstrates what is possible using only the standard library.
-It supports two operations, &quot;add&quot; and &quot;multiply&quot;,
+It supports two operations, “add” and “multiply”,
 that are invoked with requests like these:</p>
-<pre><code class="language-text">GET http://localhost:1234/add?n1=2&amp;n2=3 returns 5
-GET http://localhost:1234/multiply?n1=3&amp;n2=4 returns 12
+<pre><code class="language-text">GET http://localhost:1234/add?n1=2&#x26;n2=3 returns 5
+GET http://localhost:1234/multiply?n1=3&#x26;n2=4 returns 12
 </code></pre>
 <pre><code class="language-ts">import {
   Response,
@@ -1811,7 +1805,7 @@ const port = 1234;
 const server: Server = serve({port});
 console.log('listening on port', port);
 
-async function getBodyJson(req: ServerRequest): Promise&lt;string&gt; {
+async function getBodyJson(req: ServerRequest): Promise&#x3C;string> {
   const text = await getBodyText(req);
   const contentType = req.headers.get('Content-Type');
   if (contentType !== 'application/json') {
@@ -1820,7 +1814,7 @@ async function getBodyJson(req: ServerRequest): Promise&lt;string&gt; {
   return JSON.parse(text);
 }
 
-async function getBodyText(req: ServerRequest): Promise&lt;string&gt; {
+async function getBodyText(req: ServerRequest): Promise&#x3C;string> {
   // Deno makes heavy use of the Uint8Array type.
   const buf: Uint8Array = await Deno.readAll(req.body);
   return decode(buf);
@@ -1852,7 +1846,7 @@ function add(req: ServerRequest): number {
 }
 
 // This just demonstrates getting a JSON body.
-async function echoJson(req: ServerRequest): Promise&lt;string&gt; {
+async function echoJson(req: ServerRequest): Promise&#x3C;string> {
   const obj = await getBodyJson(req);
   return JSON.stringify(obj);
 }
@@ -1862,14 +1856,14 @@ function multiply(req: ServerRequest): number {
   return Number(n1) * Number(n2);
 }
 
-async function shout(req: ServerRequest): Promise&lt;string&gt; {
+async function shout(req: ServerRequest): Promise&#x3C;string> {
   const body = await getBodyText(req);
   return body.toUpperCase();
 }
 
-type Handler = (req: ServerRequest) =&gt; void;
+type Handler = (req: ServerRequest) => void;
 
-const routeHandlers: Record&lt;string, Handler&gt; = {add, echoJson, multiply, shout};
+const routeHandlers: Record&#x3C;string, Handler> = {add, echoJson, multiply, shout};
 
 function getFirstPathPart(url: string): string {
   const [path] = url.split('?');
@@ -1897,7 +1891,7 @@ for await (const req: ServerRequest of server) {
   }
 }
 </code></pre>
-<h2 id="rest-server-with-oak" tabindex="-1">REST Server with oak</h2>
+<h2 id="rest-server-with-oak">REST Server with oak</h2>
 <p>There are many HTTP server libraries for Deno.
 Currently the most popular is
 <a href="https://oakserver.github.io/oak/?v=1.1.1" rel="noopener" target="_blank">oak</a>.
@@ -1984,14 +1978,14 @@ router
 const app = new Application();
 
 // Request logging
-app.use(async (ctx, next) =&gt; {
+app.use(async (ctx, next) => {
   await next();
   console.log(`${ctx.request.method} ${ctx.request.url}`);
 });
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-app.addEventListener('listen', () =&gt; {
+app.addEventListener('listen', () => {
   console.log('listening on port', PORT);
 });
 await app.listen({port: PORT});
@@ -2024,7 +2018,7 @@ async function getDogById(id) {
 }
 
 function getDogByName(dogs, name) {
-  return Object.values(dogs).find(dog =&gt; dog.name === name);
+  return Object.values(dogs).find(dog => dog.name === name);
 }
 
 function updateDog(dog) {
@@ -2059,18 +2053,16 @@ console.log('client.js x: oscar =', await getDogById(oscar.id));
 <p>Deno server libraries do not yet seem to support
 generating OpenAPI (Swagger) documentation.
 One module that claims to support this is <a href="https://deno.land/x/deno_swagger_doc@releasev1.0.0?v=1.1.1" rel="noopener" target="_blank">deno_swagger_doc</a>,
-but I wasn't able to get it to work.
+but I wasn’t able to get it to work.
 See this <a href="https://github.com/singhcool/deno-swagger-doc/issues/8?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
-<h2 id="websockets" tabindex="-1">WebSockets</h2>
+<h2 id="websockets">WebSockets</h2>
 <p>Deno has built-in support for WebSockets.
-To demonstrate this, we'll build a simple app
+To demonstrate this, we’ll build a simple app
 where multiple browser clients can connect to a WebSocket server.
 Each client renders an empty <code>svg</code> element.
 Clicking on the <code>svg</code> adds a circle in that location on every connected client.
 This could be the start of a game.</p>
-<p><img alt="Deno WebSocket demo" style="width: 30%"
-  src="/blog/assets/deno-websocket-demo.png?v=1.1.1"
-  title="Deno WebSocket demo"></p>
+<p><img alt="Deno WebSocket demo" style="width: 30%" src="/blog/assets/deno-websocket-demo.png?v=1.1.1" title="Deno WebSocket demo"></p>
 <p>Here is the server code:</p>
 <pre><code class="language-ts">import {serve} from 'https://deno.land/std@0.79.0/http/server.ts';
 import {
@@ -2086,7 +2078,7 @@ async function addClient(sock: WebSocket) {
   // For every new event coming from this client ...
   for await (const event of sock) {
     // Send the event to all connected clients.
-    clients.forEach(client =&gt; client.send(event as string));
+    clients.forEach(client => client.send(event as string));
   }
 }
 
@@ -2104,12 +2096,12 @@ for await (const req of serve(':' + PORT)) {
 }
 </code></pre>
 <p>Here is the client code that can be opened in a web browser:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
-    &lt;style&gt;
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;meta charset="utf-8" />
+    &#x3C;meta name="viewport" content="width=device-width, initial-scale=1" />
+    &#x3C;style>
       body {
         margin: 0;
       }
@@ -2125,8 +2117,8 @@ for await (const req of serve(':' + PORT)) {
         height: 400px;
         width: 600px;
       }
-    &lt;/style&gt;
-    &lt;script&gt;
+    &#x3C;/style>
+    &#x3C;script>
       function addCircle(x, y, radius) {
         const svg = document.querySelector('svg');
         const circle = document.createElementNS(
@@ -2141,11 +2133,11 @@ for await (const req of serve(':' + PORT)) {
 
       const ws = new WebSocket('ws://localhost:1234');
 
-      ws.onopen = () =&gt; {
+      ws.onopen = () => {
         console.log('opened WebSocket');
       };
 
-      ws.onmessage = event =&gt; {
+      ws.onmessage = event => {
         const message = event.data;
         const [shape, x, y, size] = message.split(' ');
         if (shape === 'circle') {
@@ -2160,14 +2152,14 @@ for await (const req of serve(':' + PORT)) {
         const msg = `circle ${event.clientX} ${event.clientY} ${RADIUS}`;
         ws.send(msg);
       }
-    &lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; onclick=&quot;handleClick(event)&quot; /&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;svg xmlns="http://www.w3.org/2000/svg" onclick="handleClick(event)" />
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="webassembly-(wasm)" tabindex="-1">WebAssembly (WASM)</h2>
+<h2 id="webassembly-wasm">WebAssembly (WASM)</h2>
 <p>WebAssembly is a binary format for a stack-based virtual machine.
 It is a compilation target of many programming languages
 including C, C++, C#, F#, Go, JavaScript, Kotlin, Rust, and Swift.
@@ -2181,13 +2173,14 @@ Some benchmarks show it to be an order of magnitude faster.
 Deno can execute WebAssembly code.
 It does this by utilizing the WebAssembly virtual machine provided by V8.</p>
 <p>TODO
-To compile Python to WebAssembly ...</p>
+To compile Python to WebAssembly …</p>
 <p>To compile Rust to WebAssembly and use it in a Deno program,
 see <a href="/blog/Rust#webassembly">Rust WebAssembly</a>.</p>
 <p>TODO: Create an example that demonstrates the performance difference
 TODO: between JavaScript and WebAssembly. Perhaps compute the total
 TODO: and average sales by category of a large number of transactions.</p>
-<h2 id="tidbits" tabindex="-1">Tidbits</h2>
+<h2 id="tidbits">Tidbits</h2>
 <p>To determine if the current file was executed as the main script,
-check the value of the boolean <code>import.meta.main</code>.</p>
-</article> </body></html>
+check the value of the boolean <code>import.meta.main</code>.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

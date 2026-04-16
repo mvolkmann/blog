@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Terminal Tips</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Terminal Tips</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#custom-shell-prompts">Custom Shell Prompts</a></li><li><a href="#managing-multiple-sessions">Managing Multiple Sessions</a></li><li><a href="#terminal-font">Terminal Font</a></li><li><a href="#change-directory">Change Directory</a></li><li><a href="#command-line-git">Command-line Git</a></li><li><a href="#avoid-accidents">Avoid Accidents</a></li><li><a href="#search-for-files">Search For Files</a></li><li><a href="#command-line-editing">Command-line Editing</a></li><li><a href="#using-json">Using JSON</a></li><li><a href="#command-output">Command Output</a></li><li><a href="#terminal-based-file-editing">Terminal-based File Editing</a></li><li><a href="#kill-processes">Kill Processes</a></li><li><a href="#having-fun">Having Fun</a></li><li><a href="#wrap-up">Wrap Up</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Terminal Tips</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Terminal Tips</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#custom-shell-prompts">Custom Shell Prompts</a></li><li><a href="#managing-multiple-sessions">Managing Multiple Sessions</a></li><li><a href="#terminal-font">Terminal Font</a></li><li><a href="#change-directory">Change Directory</a></li><li><a href="#command-line-git">Command-line Git</a></li><li><a href="#avoid-accidents">Avoid Accidents</a></li><li><a href="#search-for-files">Search For Files</a></li><li><a href="#command-line-editing">Command-line Editing</a></li><li><a href="#using-json">Using JSON</a></li><li><a href="#command-output">Command Output</a></li><li><a href="#terminal-based-file-editing">Terminal-based File Editing</a></li><li><a href="#kill-processes">Kill Processes</a></li><li><a href="#having-fun">Having Fun</a></li><li><a href="#wrap-up">Wrap Up</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>Most software developers spend some amount of time in terminal windows
 entering commands in their favorite shell, be it
 <a href="https://www.gnu.org/software/bash/?v=1.1.1" rel="noopener" target="_blank">bash</a>,
@@ -9,7 +11,7 @@ or something else.</p>
 <p>If this describes you, perhaps there are
 things you can do to improve the experience.
 Read on for some suggestions.</p>
-<h2 id="custom-shell-prompts" tabindex="-1">Custom Shell Prompts</h2>
+<h2 id="custom-shell-prompts">Custom Shell Prompts</h2>
 <p>Shell prompts can provide lots of contextual information
 about the environment in which the next command will be run.
 This might include answers to questions like:</p>
@@ -26,74 +28,72 @@ Bash, Fish, Nushell, Powershell, and Zsh.
 This removes the need to customize the prompt in multiple, shell-specific ways.</p>
 <p>Starship is configured in one place for all shells,
 which is great for developers that utilize multiple shells.</p>
-<p>To install Starship, see the instructions at <a href="https://starship.rs/guide/#🚀-installation?v=1.1.1" rel="noopener" target="_blank">Starship Installation</a>.
+<p>To install Starship, see the instructions at <a href="https://starship.rs/guide/#%F0%9F%9A%80-installation?v=1.1.1" rel="noopener" target="_blank">Starship Installation</a>.
 In macOS it can be installed using the Homebrew command <code>brew install starship</code>.</p>
 <p>To use Starship with zsh, add the following line in <code>~/.zshrc</code>:</p>
-<pre><code class="language-bash">eval &quot;$(starship init zsh)&quot;
+<pre><code class="language-bash">eval "$(starship init zsh)"
 </code></pre>
 <p>Configure Starship by creating the file <code>~/.config/starship.toml</code>.
 My configuration is shown below.
 Note the use of unicode characters and
 detailed information about the state of git repositories.</p>
-<pre><code class="language-toml">format = &quot;$shell$custom$git_branch$git_status$directory$character &quot;
+<pre><code class="language-toml">format = "$shell$custom$git_branch$git_status$directory$character "
 
 # Displays text, typically a single character,
 # based on the status of the previous command.
 [character]
-success_symbol = &quot;[▶](green)&quot; # normal prompt
-error_symbol = &quot;[✗](bold red)&quot; # used if previous command failed
+success_symbol = "[▶](green)" # normal prompt
+error_symbol = "[✗](bold red)" # used if previous command failed
 
 # Displays current directory.
 [directory]
-format = &quot;[$path]($style)&quot;
-style = &quot;yellow&quot;
+format = "[$path]($style)"
+style = "yellow"
 truncate_to_repo = false
 truncation_length = 3 # parent directories to show; default is 3
-truncation_symbol = &quot;…/&quot;
+truncation_symbol = "…/"
 
 # Displays current Git branch when in a directory of a Git repository.
 [git_branch]
-format = &quot;[$symbol ](green)[$branch ]($style)&quot;
-style = &quot;italic green&quot;
-symbol = &quot;&quot;
+format = "[$symbol ](green)[$branch ]($style)"
+style = "italic green"
+symbol = ""
 
 # Displays status of Git repository when in a directory of a Git repository.
 [git_status]
-format = &quot;[$all_status$ahead_behind]($style)&quot;
-ahead = &quot;⇡ $count &quot;
-behind = &quot;⇣ $count &quot;
-deleted = &quot;🗑 $count &quot;
-diverged = &quot; $count &quot;
-stashed = &quot;📦 $count &quot;
-modified = &quot;פֿ $count &quot;
+format = "[$all_status$ahead_behind]($style)"
+ahead = "⇡ $count "
+behind = "⇣ $count "
+deleted = "🗑 $count "
+diverged = " $count "
+stashed = "📦 $count "
+modified = "פֿ $count "
 staged = '[ $count ](green)'
-renamed = &quot; $count &quot;
-untracked = &quot;🤷 ‍$count &quot;
-style = &quot;bold red&quot;
+renamed = " $count "
+untracked = "🤷 ‍$count "
+style = "bold red"
 
 [shell]
 disabled = false
-bash_indicator = &quot;🚀&quot;
-fish_indicator = &quot;🐠&quot;
-nu_indicator = &quot;🦀&quot;
-zsh_indicator = &quot;🧙&quot;
+bash_indicator = "🚀"
+fish_indicator = "🐠"
+nu_indicator = "🦀"
+zsh_indicator = "🧙"
 </code></pre>
 <p>Here is a example of the Starship prompt configured above.</p>
-<p><img alt="Starship prompt example" style="width: 70%"
-  src="/blog/assets/Starship-prompt-example.png?v=1.1.1"
-  title="Starship prompt example"></p>
+<p><img alt="Starship prompt example" style="width: 70%" src="/blog/assets/Starship-prompt-example.png?v=1.1.1" title="Starship prompt example"></p>
 <p>This shows the following in order:</p>
 <ul>
 <li>The current shell is zsh (based in the emoji shown).</li>
 <li>The directory is inside a Git repository (based on the git emoji).</li>
-<li>We are on the &quot;main&quot; branch.</li>
+<li>We are on the “main” branch.</li>
 <li>One file was deleted (trash can emoji).</li>
 <li>One file was modified (pencil emoji).</li>
 <li>One file is untracked (shrugging person emoji).</li>
-<li>We are in the directory .../SwiftUI/WeatherKitDemo/WeatherKitDemo.</li>
+<li>We are in the directory …/SwiftUI/WeatherKitDemo/WeatherKitDemo.</li>
 </ul>
 <p>For more detail, see my <a href="/blog/starship">Starship blog page</a>.</p>
-<h2 id="managing-multiple-sessions" tabindex="-1">Managing Multiple Sessions</h2>
+<h2 id="managing-multiple-sessions">Managing Multiple Sessions</h2>
 <p>For each operating system there are several applications to choose from
 that support interaction with shell sessions.
 Many support simultaneous shell sessions
@@ -107,7 +107,7 @@ This allows you to focus on a task at hand
 by switching to a specific window or tab.</p>
 <p>For example, perhaps you are editing your blog and working on two projects.
 Create a separate tab for each of these
-whose names are &quot;blog&quot; and the project names.
+whose names are “blog” and the project names.
 Inside each tab create multiple panes by splitting the initial pane
 horizontally, vertically, or both.
 In the panes of a project tab you can run
@@ -119,12 +119,10 @@ include <a href="https://app.warp.dev/referral/24D6GX?v=1.1.1" rel="noopener" ta
 <a href="https://github.com/tmux/tmux/wiki?v=1.1.1" rel="noopener" target="_blank">tmux</a>
 (typically run inside iTerm2), and Terminal (built-in macOS app).</p>
 <p>The screenshot below shows a window with three tabs.
-The currently selected tab is &quot;Project #1&quot;.
+The currently selected tab is “Project #1”.
 This tab contains four panes that each have a specific purpose.</p>
-<p><img alt="Warp panes" style="width: 100%"
-  src="/blog/assets/warp-panes.png?v=1.1.1"
-  title="Warp panes"></p>
-<h2 id="terminal-font" tabindex="-1">Terminal Font</h2>
+<p><img alt="Warp panes" style="width: 100%" src="/blog/assets/warp-panes.png?v=1.1.1" title="Warp panes"></p>
+<h2 id="terminal-font">Terminal Font</h2>
 <p>Everything looks better in a terminal that is configured to use a nice font.</p>
 <p>Personal preference enters in here.
 I prefer a monospace font, meaning all characters have the same width.
@@ -137,19 +135,17 @@ that makes for a more harmonious reading experience.</p>
 <p>For example, an exclamation point followed by an equal sign
 (meaning not equal) is replaced by an equal sign with a slash through it.</p>
 <p>Here is some code in the Swift programming language that can
-take advantage of ligatures for the character sequences <code>-&gt;</code> and <code>&gt;=</code>.</p>
-<pre><code class="language-swift">func max(n1: Double, n2: Double) -&gt; Bool {
-    n1 &gt;= n2 ? n1 : n2
+take advantage of ligatures for the character sequences <code>-></code> and <code>>=</code>.</p>
+<pre><code class="language-swift">func max(n1: Double, n2: Double) -> Bool {
+    n1 >= n2 ? n1 : n2
 }
 </code></pre>
 <p>And here is the same code displayed with ligatures:</p>
-<p><img alt="font ligatures" style="width: 60%"
-  src="/blog/assets/font-ligatures.png?v=1.1.1"
-  title="font ligatures"></p>
+<p><img alt="font ligatures" style="width: 60%" src="/blog/assets/font-ligatures.png?v=1.1.1" title="font ligatures"></p>
 <p>My current favorite monospace font that supports ligatures is <a href="https://www.nerdfonts.com/font-downloads?v=1.1.1" rel="noopener" target="_blank">FiraCode Nerd Font</a>.</p>
 <p>Your chosen terminal app should have a settings screen
 that enables specifying the font that it should use.</p>
-<h2 id="change-directory" tabindex="-1">Change Directory</h2>
+<h2 id="change-directory">Change Directory</h2>
 <p>If your work involves switching between projects during a typical day
 then you likely use the <code>cd</code> command quite a bit.
 A great time saver is to define aliases in your shell configuration file
@@ -175,46 +171,46 @@ export LANG_DIR=$DEV_DIR/lang
 # This directory contains Swift documentation and code examples.
 export SWIFT_DIR=$LANG_DIR/swift
 
-alias cdblog=&quot;cd $BLOG_DIR&quot;
-alias cddev=&quot;cd $DEV_DIR&quot;
-alias cdjs=&quot;cd $JS_DIR&quot;
-alias cdprojects=&quot;cd $PROJECTS_DIR&quot;
-alias cdswift=&quot;cd $SWIFT_DIR&quot;
+alias cdblog="cd $BLOG_DIR"
+alias cddev="cd $DEV_DIR"
+alias cdjs="cd $JS_DIR"
+alias cdprojects="cd $PROJECTS_DIR"
+alias cdswift="cd $SWIFT_DIR"
 </code></pre>
-<h2 id="command-line-git" tabindex="-1">Command-line Git</h2>
+<h2 id="command-line-git">Command-line Git</h2>
 <p>If you sometimes work with Git from the command-line,
 defining the following aliases and shell functions can make this easier.
 Use these when you are in or below the root directory of a git repository.</p>
 <p>For the zsh shell the following can be added in your <code>~/.zshrc</code> file.</p>
 <pre><code class="language-bash"># This lists all the local branches in the current git repository.
-alias br=&quot;git branch&quot;
+alias br="git branch"
 
 # This prompts for a commit message to be entered using Vim.
 # Diffs for all the modified files are displayed inside Vim
 # so they can be verified and serve as the basis for a good commit message.
 # After a message is entered and saved (:wq),
 # this commits all the modified files.
-alias ci=&quot;git commit -av&quot;
+alias ci="git commit -av"
 
 # This creates a new branch off of the current branch
 # with the name specified after `cob`.
 # For example, `cob feature-compute-score`.
-alias cob=&quot;git checkout -b&quot;
+alias cob="git checkout -b"
 
 # This checks out the branch specified after `co`.
 # For example, `co feature-compute-score`.
-alias co=&quot;git checkout&quot;
+alias co="git checkout"
 
 # This lists all the commits on the current branch from newest to oldest.
 # For each commit the SHA, author, date, and commit message are output.
-alias log=&quot;git log&quot;
+alias log="git log"
 
 # This deletes the local AND remote branches with a given name.
 # For example, `rmb feature-compute-score`.
-alias rmb=&quot;$HOME/bin/rmb&quot; # a shell script defined below
+alias rmb="$HOME/bin/rmb" # a shell script defined below
 
 # This outputs lists of all modified, deleted, and untracked files.
-alias status=&quot;git status&quot;
+alias status="git status"
 
 # This cd's up to the root directory of current git repository.
 function cdgitroot() {
@@ -247,10 +243,10 @@ fi
 git branch -d $1
 git branch -rd origin/$1
 </code></pre>
-<h2 id="avoid-accidents" tabindex="-1">Avoid Accidents</h2>
+<h2 id="avoid-accidents">Avoid Accidents</h2>
 <p>A deadline is looming and you are working as fast as possible to meet it.
 Your fingers are a blur as you crank out shell commands in a terminal.
-But you're human and mistakes can creep in.
+But you’re human and mistakes can creep in.
 Did you mean to copy over or delete that existing file?
 And has your backup process run since the last time
 that file that just disappeared was modified?</p>
@@ -262,11 +258,11 @@ that prompt for permission before overwriting or deleting a file.
 This gives you a chance to consider whether you
 really want to carry out a non-reversible action.</p>
 <pre><code class="language-bash"># Ask for confirmation before overwriting or deleting files.
-alias cp=&quot;cp -i&quot;
-alias mv=&quot;mv -i&quot;
-alias rm=&quot;rm -i&quot;
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
 </code></pre>
-<h2 id="search-for-files" tabindex="-1">Search For Files</h2>
+<h2 id="search-for-files">Search For Files</h2>
 <p>There are multiple ways to search for files in and below the current directory
 that have a specific file extension and contain given text.
 One way is to use the <code>find</code> command as follows:</p>
@@ -275,21 +271,19 @@ One way is to use the <code>find</code> command as follows:</p>
 find . -type f -name '*.js' -exec grep 'some text' {} \;
 </code></pre>
 <p>When using <a href="https://app.warp.dev/referral/24D6GX?v=1.1.1" rel="noopener" target="_blank">Warp</a>,
-its &quot;A.I. Command Search&quot; feature can be used to build the command.
+its “A.I. Command Search” feature can be used to build the command.
 Press the # key and enter a phrase like
-&quot;find all js files containing some text&quot;.
+“find all js files containing some text”.
 This suggests the command
-<code>find . -name &quot;*.js&quot; -exec grep -l &quot;some text&quot; {} \;</code>.
+<code>find . -name "*.js" -exec grep -l "some text" {} \;</code>.
 To accept the suggestion, press cmd-return to copy the command
 into the input area and press return again to execute it.</p>
-<p><img alt="Warp AI Command" style="width: 100%"
-  src="/blog/assets/warp-ai-command.gif?v=1.1.1"
-  title="Warp AI Command"></p>
+<p><img alt="Warp AI Command" style="width: 100%" src="/blog/assets/warp-ai-command.gif?v=1.1.1" title="Warp AI Command"></p>
 <p>The <code>find</code> command has several issues:</p>
 <ul>
 <li>The syntax is hard to remember.</li>
 <li>It is somewhat slow.</li>
-<li>The output doesn't indicate the line numbers where matches were found.</li>
+<li>The output doesn’t indicate the line numbers where matches were found.</li>
 <li>The output is not color-coded.</li>
 </ul>
 <p>A better alternative is to use <a href="https://github.com/BurntSushi/ripgrep?v=1.1.1" rel="noopener" target="_blank">ripgrep</a>.
@@ -302,101 +296,99 @@ Matching line numbers are displayed in green.
 Text on the matching lines is displayed in white,
 except the matching text which is displayed in red.
 This is much better!</p>
-<h2 id="command-line-editing" tabindex="-1">Command-line Editing</h2>
-<p>We can't all be perfect when entering shell commands.
+<h2 id="command-line-editing">Command-line Editing</h2>
+<p>We can’t all be perfect when entering shell commands.
 Sometimes we need to edit what we have typed before executing a command.
-So it's helpful to learn how to be productive in
+So it’s helpful to learn how to be productive in
 performing basic editing in your selected shell.</p>
 <p>In many terminal programs, the following keyboard shortcuts can be used
 to move the cursor within a command being entered:</p>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Shortcut Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>move to beginning of line</td>
-<td>ctrl-a</td>
-</tr>
-<tr>
-<td>move to end of line</td>
-<td>ctrl-e</td>
-</tr>
-<tr>
-<td>move back one word</td>
-<td>meta-b</td>
-</tr>
-<tr>
-<td>move forward one word</td>
-<td>meta-f</td>
-</tr>
-<tr>
-<td>move back one character</td>
-<td>ctrl-b or left arrow</td>
-</tr>
-<tr>
-<td>move forward one character</td>
-<td>ctrl-f or right arrow</td>
-</tr>
-<tr>
-<td>clear what has been entered</td>
-<td>ctrl-u</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Shortcut Key</th></tr></thead><tbody><tr><td>move to beginning of line</td><td>ctrl-a</td></tr><tr><td>move to end of line</td><td>ctrl-e</td></tr><tr><td>move back one word</td><td>meta-b</td></tr><tr><td>move forward one word</td><td>meta-f</td></tr><tr><td>move back one character</td><td>ctrl-b or left arrow</td></tr><tr><td>move forward one character</td><td>ctrl-f or right arrow</td></tr><tr><td>clear what has been entered</td><td>ctrl-u</td></tr></tbody></table>
 <p>Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
 However, the <a href="https://app.warp.dev/referral/24D6GX?v=1.1.1" rel="noopener" target="_blank">Warp</a> terminal behaves much more like a standard text editor.
 It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.</p>
-<p><img alt="Warp command-line editing" style="width: 100%"
-  src="/blog/assets/warp-command-editing.gif?v=1.1.1"
-  title="Warp command-line editing"></p>
+<p><img alt="Warp command-line editing" style="width: 100%" src="/blog/assets/warp-command-editing.gif?v=1.1.1" title="Warp command-line editing"></p>
 <p>By default, Warp uses the following, easier to remember,
 keyboard shortcuts for moving the cursor.</p>
-<table>
-<thead>
-<tr>
-<th>Action</th>
-<th>Warp Shortcut Key</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>move to beginning of line</td>
-<td>cmd-left-arrow</td>
-</tr>
-<tr>
-<td>move to end of line</td>
-<td>cmd-right-arrow</td>
-</tr>
-<tr>
-<td>move back one word</td>
-<td>option-left-arrow</td>
-</tr>
-<tr>
-<td>move forward one word</td>
-<td>option-right-arrow</td>
-</tr>
-<tr>
-<td>move back one character</td>
-<td>left arrow</td>
-</tr>
-<tr>
-<td>move forward one character</td>
-<td>right arrow</td>
-</tr>
-<tr>
-<td>clear what has been entered</td>
-<td>ctrl-c or ctrl-u</td>
-</tr>
-</tbody>
-</table>
-<h2 id="using-json" tabindex="-1">Using JSON</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Action</th><th>Warp Shortcut Key</th></tr></thead><tbody><tr><td>move to beginning of line</td><td>cmd-left-arrow</td></tr><tr><td>move to end of line</td><td>cmd-right-arrow</td></tr><tr><td>move back one word</td><td>option-left-arrow</td></tr><tr><td>move forward one word</td><td>option-right-arrow</td></tr><tr><td>move back one character</td><td>left arrow</td></tr><tr><td>move forward one character</td><td>right arrow</td></tr><tr><td>clear what has been entered</td><td>ctrl-c or ctrl-u</td></tr></tbody></table>
+<h2 id="using-json">Using JSON</h2>
 <p>JavaScript Object Notation (JSON) is a data format that is frequently used
 for data returned by API services and data in input files.
 Often all the data is on a single line with no added spaces
@@ -408,16 +400,14 @@ It is a command-line JSON processor that is implemented in C.</p>
 <p>The basic functionality of jq is to pretty-print JSON data.
 But can also filter, sort, and transform JSON data.</p>
 <p>In this example we get JSON data from an API endpoint
-and filter it to display all the varieties of the &quot;hound&quot; dog breed.</p>
-<p><img alt="jq-dogs" style="width: 100%"
-  src="/blog/assets/jq-dogs.png?v=1.1.1"
-  title="jq dogs"></p>
+and filter it to display all the varieties of the “hound” dog breed.</p>
+<p><img alt="jq-dogs" style="width: 100%" src="/blog/assets/jq-dogs.png?v=1.1.1" title="jq dogs"></p>
 <p>jq is practically a programming language.
 It has a long list of features including
 types, conditionals, regular expressions, math functions,
 custom function definitions, variables, streaming, and more.</p>
 <p>For more information, see my <a href="/blog/jq">jq blog page</a>.</p>
-<h2 id="command-output" tabindex="-1">Command Output</h2>
+<h2 id="command-output">Command Output</h2>
 <p>In most terminal apps commands that produce large amounts of output cause
 the command to scroll off the top of the pane where the command was entered.
 It is then no longer obvious what command produced the output
@@ -429,13 +419,11 @@ that were entered since the last time the terminal was cleared.</p>
 The last command entered sticks to the top of the pane
 while its output scrolls below it.
 Clicking the command causes the output to scroll back to its first line.
-Both the command and its output are part of a &quot;block&quot;.
+Both the command and its output are part of a “block”.
 There are many commands that can be executed on a block
-including &quot;Find Within Block&quot; and &quot;Copy Output&quot;.</p>
-<p><img alt="Warp command output" style="width: 100%"
-  src="/blog/assets/warp-command-output.gif?v=1.1.1"
-  title="Warp command output"></p>
-<h2 id="terminal-based-file-editing" tabindex="-1">Terminal-based File Editing</h2>
+including “Find Within Block” and “Copy Output”.</p>
+<p><img alt="Warp command output" style="width: 100%" src="/blog/assets/warp-command-output.gif?v=1.1.1" title="Warp command output"></p>
+<h2 id="terminal-based-file-editing">Terminal-based File Editing</h2>
 <p>The ability to edit files within a terminal session is handy and efficient.
 An important use case for this is editing files that
 reside on another server that is accessed using SSH.</p>
@@ -443,13 +431,13 @@ reside on another server that is accessed using SSH.</p>
 text editor that is available by default in terminal sessions.</p>
 <p>Many software developers know a little bit about Vim and
 grudgingly use it when nothing else is available.
-You don't need to be an expert in Vim or customize it
+You don’t need to be an expert in Vim or customize it
 in order to derive a lot of its benefits.</p>
 <p>Even though some version of Vim is already installed
 in macOS and Linux environments, I recommend installing
 <a href="https://neovim.io?v=1.1.1" rel="noopener" target="_blank">neovim</a>
 which is a modern replacement for Vim.
-Click the &quot;Install Now&quot; button at the link above
+Click the “Install Now” button at the link above
 for installation instructions.</p>
 <p>In macOS neovim can be installed using
 the Homebrew command <code>brew install neovim</code>.
@@ -462,10 +450,10 @@ for managing multiple files in a single Vim session.</p>
 <p>Perhaps you are a fan of <a href="https://code.visualstudio.com/?v=1.1.1" rel="noopener" target="_blank">VS Code</a> and prefer to avoid using any flavor of Vim.
 Enter <code>vscode .</code> in a terminal to launch VS Code use it to
 edit any files in and below the current directory.</p>
-<h2 id="kill-processes" tabindex="-1">Kill Processes</h2>
-<p>Here's a common scenario.
+<h2 id="kill-processes">Kill Processes</h2>
+<p>Here’s a common scenario.
 You attempt to start a server that listens on port 8000,
-but you get the error message &quot;Something is already running on port 8000&quot;.
+but you get the error message “Something is already running on port 8000”.
 You currently have ten terminal sessions open in various windows and panes.
 If you could find the one what is running a server using port 8000
 you could navigate to it and press ctrl-c to kill it.
@@ -474,7 +462,7 @@ But finding it takes too long.</p>
 that would kill the process that is listening on a given port.
 You can with <code>klp 8000</code>!</p>
 <p>Define the following alias in your shell configuration file.</p>
-<pre><code class="language-bash">alias klp=&quot;kill-listening-process&quot;
+<pre><code class="language-bash">alias klp="kill-listening-process"
 </code></pre>
 <p>Ths script <code>kill-listening-process</code> will differ somewhat
 based on the operating system.
@@ -500,18 +488,14 @@ fi
 <p>In the screenshot below we have started a server in the left pane
 and attempted to start another server in the right pane
 listening on the same port.
-Note the OSError message &quot;Address already in use&quot; at the bottom.</p>
-<p><img alt="server before klp" style="width: 100%"
-  src="/blog/assets/kill-listening-process-1.png?v=1.1.1"
-  title="server before klp"></p>
+Note the OSError message “Address already in use” at the bottom.</p>
+<p><img alt="server before klp" style="width: 100%" src="/blog/assets/kill-listening-process-1.png?v=1.1.1" title="server before klp"></p>
 <p>In the screenshot below we have used the <code>klp</code> alias
 to kill the process that was listening on port 8000.
-Note that the left pane reports that the server was &quot;terminated&quot;
+Note that the left pane reports that the server was “terminated”
 and the right pane reports the id of the process that it killed.</p>
-<p><img alt="server after klp" style="width: 100%"
-  src="/blog/assets/kill-listening-process-2.png?v=1.1.1"
-  title="server after klp"></p>
-<h2 id="having-fun" tabindex="-1">Having Fun</h2>
+<p><img alt="server after klp" style="width: 100%" src="/blog/assets/kill-listening-process-2.png?v=1.1.1" title="server after klp"></p>
+<h2 id="having-fun">Having Fun</h2>
 <p>The terminal is not just for work, it can also be fun.
 If you are a macOS user and you have <a href="https://brew.sh/?v=1.1.1" rel="noopener" target="_blank">Homebrew</a> installed, try these.</p>
 <ul>
@@ -521,50 +505,41 @@ If you are a macOS user and you have <a href="https://brew.sh/?v=1.1.1" rel="noo
 to fill your terminal with an animated aquarium
 made entirely of ASCII characters.
 Press ctrl-c to exit.</p>
-<p><img alt="asciiquarium" style="width: 100%"
-  src="/blog/assets/asciiquarium.png?v=1.1.1"
-  title="asciiqarium"></p>
+<p><img alt="asciiquarium" style="width: 100%" src="/blog/assets/asciiquarium.png?v=1.1.1" title="asciiqarium"></p>
 </li>
 <li>
 <p>cmatrix</p>
 <p>Enter <code>brew install cmatrix</code> followed by <code>cmatrix</code>
-to fill your terminal with an animation from the movie &quot;The Matrix&quot;.
+to fill your terminal with an animation from the movie “The Matrix”.
 Press ctrl-c to exit.</p>
-<p><img alt="cmatrix" style="width: 100%"
-  src="/blog/assets/cmatrix.png?v=1.1.1"
-  title="cmatrix"></p>
+<p><img alt="cmatrix" style="width: 100%" src="/blog/assets/cmatrix.png?v=1.1.1" title="cmatrix"></p>
 </li>
 <li>
 <p>myman</p>
 <p>Enter <code>brew install myman</code> followed by <code>myman</code>
 to play a version of the game Pacman in the terminal.
 Press ctrl-c to exit.</p>
-<p><img alt="myman" style="width: 100%"
-  src="/blog/assets/myman.png?v=1.1.1"
-  title="myman"></p>
+<p><img alt="myman" style="width: 100%" src="/blog/assets/myman.png?v=1.1.1" title="myman"></p>
 </li>
 <li>
 <p>ninvaders</p>
 <p>Enter <code>brew install ninvaders</code> followed by <code>ninvaders</code>
 to play a version of the game Space Invaders in the terminal.
 Press ctrl-c to exit.</p>
-<p><img alt="ninvaders" style="width: 100%"
-  src="/blog/assets/ninvaders.png?v=1.1.1"
-  title="ninvaders"></p>
+<p><img alt="ninvaders" style="width: 100%" src="/blog/assets/ninvaders.png?v=1.1.1" title="ninvaders"></p>
 </li>
 <li>
 <p>tetris</p>
 <p>Enter <code>brew install samtay/tui/tetris</code> followed by <code>tetris</code>
 to play the game Tetris in the terminal.
 Press q to quit.</p>
-<p><img alt="tetris" style="width: 100%"
-  src="/blog/assets/tetris.png?v=1.1.1"
-  title="tetris"></p>
+<p><img alt="tetris" style="width: 100%" src="/blog/assets/tetris.png?v=1.1.1" title="tetris"></p>
 </li>
 </ul>
-<h2 id="wrap-up" tabindex="-1">Wrap Up</h2>
-<p>That's all the terminal tips that come to mind for me now.
+<h2 id="wrap-up">Wrap Up</h2>
+<p>That’s all the terminal tips that come to mind for me now.
 What did I miss?
 Email <a href="mailto:mark@objectcomputing.com?subject=terminal tips">me</a>
-your suggestions!</p>
-</article> </body></html>
+your suggestions!</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Meteor</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Meteor</h2> <aside><ul><ul><li><a href="#overview">Overview</a></li><li><a href="#key-benefits">Key Benefits</a></li><li><a href="#installing">Installing</a></li><li><a href="#creating-a-project">Creating a Project</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#meteor-packages">Meteor Packages</a></li><li><a href="#mongodb">MongoDB</a></li><li><a href="#collections">Collections</a></li><li><a href="#local-collections">Local Collections</a></li><li><a href="#collection-schemas">Collection Schemas</a></li><li><a href="#meteor-methods">Meteor Methods</a></li><li><a href="#method-retries">Method Retries</a></li><li><a href="#optimistic-ui">Optimistic UI</a></li><li><a href="#viewing-websocket-messages">Viewing WebSocket Messages</a></li><li><a href="#meteor-websocket-messages">Meteor WebSocket Messages</a></li><li><a href="#tracker">Tracker</a></li><li><a href="#reactivevar">ReactiveVar</a></li><li><a href="#reactivedict">ReactiveDict</a></li><li><a href="#session">Session</a></li><li><a href="#email">Email</a></li><li><a href="#eslint">ESLint</a></li><li><a href="#prettier">Prettier</a></li><li><a href="#devtools">DevTools</a></li><li><a href="#tutorials">Tutorials</a></li><li><a href="#todo-app">Todo App</a></li><li><a href="#routing">Routing</a></li><li><a href="#meteor-shell">Meteor Shell</a></li><li><a href="#building-and-deploying">Building and Deploying</a></li><ul><li><a href="#mongodb-hosting">MongoDB Hosting</a></li><li><a href="#configuring-a-cloud-server">Configuring a Cloud Server</a></li><li><a href="#enabling-https">Enabling HTTPS</a></li><li><a href="#manual-deploy">Manual Deploy</a></li><li><a href="#meteor-up-(mup)">Meteor Up (mup)</a></li><li><a href="#galaxy">Galaxy</a></li></ul><li><a href="#creating-meteor-packages">Creating Meteor Packages</a></li><li><a href="#building-a-mobile-app">Building a Mobile App</a></li><li><a href="#resources">Resources</a></li></ul></ul></aside> <article><h3 id="overview" tabindex="-1">Overview</h3>
+<!DOCTYPE html><html lang="en"> <head><title>Meteor</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Meteor</h2> <aside><ul><ul><li><a href="#overview">Overview</a></li><li><a href="#key-benefits">Key Benefits</a></li><li><a href="#installing">Installing</a></li><li><a href="#creating-a-project">Creating a Project</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#meteor-packages">Meteor Packages</a></li><li><a href="#mongodb">MongoDB</a></li><li><a href="#collections">Collections</a></li><li><a href="#local-collections">Local Collections</a></li><li><a href="#collection-schemas">Collection Schemas</a></li><li><a href="#meteor-methods">Meteor Methods</a></li><li><a href="#method-retries">Method Retries</a></li><li><a href="#optimistic-ui">Optimistic UI</a></li><li><a href="#viewing-websocket-messages">Viewing WebSocket Messages</a></li><li><a href="#meteor-websocket-messages">Meteor WebSocket Messages</a></li><li><a href="#tracker">Tracker</a></li><li><a href="#reactivevar">ReactiveVar</a></li><li><a href="#reactivedict">ReactiveDict</a></li><li><a href="#session">Session</a></li><li><a href="#email">Email</a></li><li><a href="#eslint">ESLint</a></li><li><a href="#prettier">Prettier</a></li><li><a href="#devtools">DevTools</a></li><li><a href="#tutorials">Tutorials</a></li><li><a href="#todo-app">Todo App</a></li><li><a href="#routing">Routing</a></li><li><a href="#meteor-shell">Meteor Shell</a></li><li><a href="#building-and-deploying">Building and Deploying</a></li><ul><li><a href="#mongodb-hosting">MongoDB Hosting</a></li><li><a href="#configuring-a-cloud-server">Configuring a Cloud Server</a></li><li><a href="#enabling-https">Enabling HTTPS</a></li><li><a href="#manual-deploy">Manual Deploy</a></li><li><a href="#meteor-up-mup">Meteor Up (mup)</a></li><li><a href="#galaxy">Galaxy</a></li></ul><li><a href="#creating-meteor-packages">Creating Meteor Packages</a></li><li><a href="#building-a-mobile-app">Building a Mobile App</a></li><li><a href="#resources">Resources</a></li></ul></ul></aside> <article> <h3 id="overview">Overview</h3>
 <p>Meteor (<a href="https://meteor.com/?v=1.1.1" rel="noopener" target="_blank">meteor.com</a>)
 is an open-source, full-stack, JavaScript
 platform for building web and mobile (Android and iOS) applications.
@@ -37,7 +39,7 @@ guaranteed support response times and service-level agreements (SLAs).</p>
 <p>Meteor provides many command-line tools summarized
 <a href="https://docs.meteor.com/commandline.html?v=1.1.1" rel="noopener" target="_blank">here</a>.
 After installing Meteor, enter <code>meteor help</code> for help on using these.</p>
-<h3 id="key-benefits" tabindex="-1">Key Benefits</h3>
+<h3 id="key-benefits">Key Benefits</h3>
 <p>The key benefits of using Meteor are:</p>
 <ul>
 <li>One install provides client, server (Node.js), and database (MongoDB) setup.</li>
@@ -60,7 +62,7 @@ including OAuth logins.</li>
 </ul>
 <p>All of this enables implementing significant functionality
 in a small amount of code.</p>
-<h3 id="installing" tabindex="-1">Installing</h3>
+<h3 id="installing">Installing</h3>
 <p>For platform-specific instructions on installing Meteor,
 see <a href="https://www.meteor.com/install?v=1.1.1" rel="noopener" target="_blank">here</a>.
 On Linux or macOS, enter <code>curl https://install.meteor.com | sh</code>.
@@ -70,7 +72,7 @@ including MongoDB and TypeScript.
 <a href="https://nodejs.org/?v=1.1.1" rel="noopener" target="_blank">Node.js</a>
 must be installed separately and that includes the npm tool.</p>
 <p>Repeating the install command will update the existing installation.</p>
-<h3 id="creating-a-project" tabindex="-1">Creating a Project</h3>
+<h3 id="creating-a-project">Creating a Project</h3>
 <p>To create the initial directory structure for a new Meteor project
 and run it, enter the following commands:</p>
 <ul>
@@ -78,19 +80,19 @@ and run it, enter the following commands:</p>
 <li><code>cd {app-name}</code></li>
 <li><code>meteor</code></li>
 </ul>
-<p>This is covered in more detail later in the &quot;Todo App&quot; section.</p>
+<p>This is covered in more detail later in the “Todo App” section.</p>
 <p>It is recommended to use the command <code>meteor npm</code> instead of <code>npm</code>
 when installing npm packages in a Meteor app.
 When packages have binary dependencies,
 this ensures that they are built using the same C libraries.</p>
-<p>Meteor provides &quot;hot code pushes&quot;
-so the browser doesn't need to be manually refreshed
-and the server doesn't need to be manually restarted.
-After making changes to client code, the message &quot;Client modified -- refreshing&quot;
+<p>Meteor provides “hot code pushes”
+so the browser doesn’t need to be manually refreshed
+and the server doesn’t need to be manually restarted.
+After making changes to client code, the message “Client modified — refreshing”
 will appear in the terminal window where the server is running.
-After making changes to server code, the message &quot;Meteor server restarted&quot;
+After making changes to server code, the message “Meteor server restarted”
 will appear in the same place.</p>
-<h3 id="directory-structure" tabindex="-1">Directory Structure</h3>
+<h3 id="directory-structure">Directory Structure</h3>
 <p>The recommended directory structure for Meteor applications
 and the initial set of files inside them is:</p>
 <ul>
@@ -143,11 +145,11 @@ and all code is lazily loaded.
 So there is no longer a requirement to have an <code>imports</code> directory.
 However, it is still a useful location for
 files that are shared between client and server code.</p>
-<h3 id="meteor-packages" tabindex="-1">Meteor Packages</h3>
+<h3 id="meteor-packages">Meteor Packages</h3>
 <p>Meteor projects can use packages from npm and
-from its own package repository called &quot;Atmosphere&quot;.
+from its own package repository called “Atmosphere”.
 Atmosphere contains packages that are specific to Meteor.
-These are referred to as &quot;Isopacks&quot; because they are typically
+These are referred to as “Isopacks” because they are typically
 isomorphic, meaning that the code can run on the client or server.</p>
 <p>To see the available packages in Atmosphere,
 browse <a href="https://atmospherejs.com/?v=1.1.1" rel="noopener" target="_blank">atmosphere.com</a>.
@@ -162,7 +164,7 @@ to <code>.meteor/packages</code> in order to track dependencies,
 similar to how npm uses the <code>package-lock.json</code> file.
 It also installs packages on which this one depends.
 If the app is running, Meteor performs a
-&quot;hot code push&quot; of the CSS and JS files in the package
+“hot code push” of the CSS and JS files in the package
 so the effect is seen immediately,
 unlike installing npm packages.</p>
 <p>After adding packages to a project, to update to
@@ -198,48 +200,48 @@ The meteor-platform package has many dependencies that are also installed
 including blaze, check, ddp, jquery, mongo, session, tracker, and underscore.</p>
 <p>Popular Atmosphere packages include:</p>
 <ul>
-<li>accounts-password - &quot;login service that enables secure password-based login&quot;</li>
-<li>accounts-ui - &quot;turn-key user interface for Meteor Accounts&quot; using Blaze</li>
-<li>meteor-base - &quot;default set of packages that almost every app will have&quot;</li>
-<li>mongo - &quot;adaptor for using MongoDB and Minimongo over DDP&quot;</li>
-<li>rdb:svelte-meteor-data - &quot;reactively track Meteor data inside Svelte components&quot;</li>
-<li>react-meteor-data - &quot;React hook for reactively tracking Meteor data&quot;</li>
-<li>static-html - &quot;define static page content in <code>.html</code> files&quot;; alternative to Blaze</li>
+<li>accounts-password - “login service that enables secure password-based login”</li>
+<li>accounts-ui - “turn-key user interface for Meteor Accounts” using Blaze</li>
+<li>meteor-base - “default set of packages that almost every app will have”</li>
+<li>mongo - “adaptor for using MongoDB and Minimongo over DDP”</li>
+<li>rdb:svelte-meteor-data - “reactively track Meteor data inside Svelte components”</li>
+<li>react-meteor-data - “React hook for reactively tracking Meteor data”</li>
+<li>static-html - “define static page content in <code>.html</code> files”; alternative to Blaze</li>
 <li>svelte:compiler - compiles <code>.svelte</code> files to JavaScript</li>
-<li>svelte:blaze-integration - &quot;render Blaze templates
-inside your Svelte components and vice versa&quot;;
+<li>svelte:blaze-integration - “render Blaze templates
+inside your Svelte components and vice versa”;
 useful when using the account-ui package in a Svelte app</li>
-<li>tracker - &quot;dependency tracker to allow reactive callbacks&quot;</li>
-<li>typescript - &quot;compiler plugin that compiles TypeScript and ECMAScript
-in <code>.ts</code> and <code>.tsx</code> files&quot;</li>
+<li>tracker - “dependency tracker to allow reactive callbacks”</li>
+<li>typescript - “compiler plugin that compiles TypeScript and ECMAScript
+in <code>.ts</code> and <code>.tsx</code> files”</li>
 </ul>
-<h3 id="mongodb" tabindex="-1">MongoDB</h3>
+<h3 id="mongodb">MongoDB</h3>
 <p>MongoDB is a popular NoSQL database.
 There are many commands and options to master,
 but the following presents some of the basics
 for using the MongoDB console in conjunction with Meteor.</p>
 <p>To start the MongoDB console, enter <code>meteor mongo</code>.</p>
 <p>To see a list of all the databases, enter <code>show dbs</code>.</p>
-<p>Meteor uses the database named &quot;meteor&quot;.
+<p>Meteor uses the database named “meteor”.
 To interact with this database, enter <code>use meteor</code>.</p>
 <p>To see a list of collections in the current database, enter <code>show collections</code>.</p>
 <p>To see the first 20 documents in a given collection,
 enter <code>db.{coll-name}.find()</code>.</p>
 <p>To delete all the documents in a collection, enter <code>db.{coll-name}.drop()</code>.</p>
-<p>To reset the &quot;meteor&quot; MongoDB database,
+<p>To reset the “meteor” MongoDB database,
 deleting all documents in all collections,
 stop the Meteor server and enter <code>meteor reset</code>.
 This can be useful to start an app in a pristine state.</p>
 <p>Multiple Meteor apps can use the same MongoDB database to share data.
-Search for &quot;Multiple apps use the same database&quot; in the
+Search for “Multiple apps use the same database” in the
 <a href="http://meteor-up.com/docs.html?v=1.1.1" rel="noopener" target="_blank">Meteor Up</a> docs.</p>
-<h3 id="collections" tabindex="-1">Collections</h3>
+<h3 id="collections">Collections</h3>
 <p>The client-side of Meteor applications can obtain data in many ways
 including REST calls and GraphQL queries
 that connect to any kind of database.
 The data can be stored in clients in many ways including
 JavaScript variables, session storage, and local storage.</p>
-<p>The most common way for a Meteor application to store data is in &quot;collections&quot;.
+<p>The most common way for a Meteor application to store data is in “collections”.
 These are typically associated with a MongoDB collection.
 They can be accessed from both client and server code.
 When data is added to a collection, updated, or deleted,
@@ -247,7 +249,7 @@ client code that uses it typically updates automatically.
 This provides a significant benefit over using REST services
 that require the use of polling to get data updates.</p>
 <p>The following code demonstrates
-creating a MongoDB collection named &quot;tasks&quot;,
+creating a MongoDB collection named “tasks”,
 inserting a document into the collection, and finding it.
 By convention, variable names that refer to collections
 have CamelCase names that start uppercase.
@@ -258,19 +260,19 @@ const id = Tasks.insert({text: 'buy milk'}); // returns assigned id
 const task = Tasks.findOne({_id: id});
 </code></pre>
 <p>The same code can be used in client or server code
-when the Meteor &quot;insecure&quot; package is installed.
+when the Meteor “insecure” package is installed.
 The starter app includes this.
 Later we will look at securing Meteor applications by removing this package.</p>
 <p>If the code above is run in the server,
-it creates a MongoDB collection (if it doesn't already exist) and populates it.
+it creates a MongoDB collection (if it doesn’t already exist) and populates it.
 If the code above is run in the client, it creates a client-side cache
-using the &quot;Minimonogo&quot; library which provides an
+using the “Minimonogo” library which provides an
 in-memory JavaScript implementation of the MongoDB API.</p>
 <p>Minimongo in the client is automatically kept in sync with
-MongoDB in the server when the &quot;autopublish&quot; package is installed.
+MongoDB in the server when the “autopublish” package is installed.
 The starter app includes this.
 Later we will look at removing this.</p>
-<p>When &quot;autopublish&quot; is not installed,
+<p>When “autopublish” is not installed,
 the server must publish documents from collections
 and the client must subscribe documents of interest.
 This keeps the client-side cache (implemented by Minimongo)
@@ -278,8 +280,8 @@ in sync with a subset of the data in MongoDB on the server.
 The underlying mechanism that supports this
 is the Meteor Distributed Data Protocol (DDP)
 which sends WebSocket messages in both directions.</p>
-<h3 id="local-collections" tabindex="-1">Local Collections</h3>
-<p>It is also possible to create a &quot;local collection&quot;
+<h3 id="local-collections">Local Collections</h3>
+<p>It is also possible to create a “local collection”
 that only exists on the client or on the server.
 These are Minimongo collections that are
 not synchronized with a MongoDB collection.
@@ -296,7 +298,7 @@ or the <code>Session</code> object, all of which are described later.</p>
 <p>To support associations between documents in different collections,
 see the Meteor package
 <a href="https://atmospherejs.com/cultofcoders/grapher?v=1.1.1" rel="noopener" target="_blank">cultofcoders:grapher</a>.</p>
-<h3 id="collection-schemas" tabindex="-1">Collection Schemas</h3>
+<h3 id="collection-schemas">Collection Schemas</h3>
 <p>A schema can be associated with a collection
 in order to provide validation when documents are added or updated.
 Schemas can be described using the npm package
@@ -368,13 +370,13 @@ is only able to describe top-level properties and their values.
 For example, if a document contains a property whose value is a large array
 and a single element is modified, DDP will send the entire array to clients.
 This works fine, but is inefficient.</p>
-<h3 id="meteor-methods" tabindex="-1">Meteor Methods</h3>
+<h3 id="meteor-methods">Meteor Methods</h3>
 <p>Meteor Methods are functions that can reside only on the server
 or on both the client and server.
 They are meant to be called from client code.
 The server instance is invoked using a
 Remote Procedure Call (RPC) that utilizes WebSockets.
-By convention, &quot;Method&quot; is written with a capital &quot;M&quot;
+By convention, “Method” is written with a capital “M”
 to distinguish it from normal JavaScript methods.</p>
 <p>Meteor Methods are an alternative to REST calls implemented using HTTP.
 An issue with using Meteor Methods instead of REST
@@ -397,7 +399,7 @@ and for them to return data needed by the client.</p>
 import <code>Meteor</code> from the <code>meteor/meteor</code> package
 and pass an object literal to <code>Meteor.methods</code>.
 The properties of the object are Method definitions.
-This registers the Methods with Meteor's DDP system.
+This registers the Methods with Meteor’s DDP system.
 The <code>Meteor.methods</code> function can be called any number of times
 to register additional Methods.</p>
 <p>Methods can accept any number of parameters with any JavaScript types.</p>
@@ -429,13 +431,13 @@ This typically updates Minimongo and corresponding UI updates
 are made in response to these changes.</li>
 <li>A JSON-based DDP message is constructed and sent to the server
 using a WebSocket connection.
-This includes a message name (<code>msg</code> property set to &quot;method&quot;),
+This includes a message name (<code>msg</code> property set to “method”),
 Method name (in the <code>method</code> property),
 arguments (in the <code>params</code> property),
 and a generated Method id (in the <code>id</code> property).</li>
 <li>The Method executes on the server, possibly updating MongoDB.</li>
 <li>A return value is sent to the client in a message that includes
-a message name (<code>msg</code> property set to &quot;result&quot;),
+a message name (<code>msg</code> property set to “result”),
 the previously generated Method id (in the <code>id</code> property),
 and the result (in the <code>result</code> property).</li>
 <li>DDP messages that describe changes made in MongoDB in the server
@@ -450,7 +452,7 @@ Now the UI is updated using data from Minimongo.</li>
 and the result is set to whatever value the Method returns.
 If the call fails, the error description is set to an object
 that contains the properties
-<code>error</code> (an HTTP status code even though HTTP isn't used),
+<code>error</code> (an HTTP status code even though HTTP isn’t used),
 <code>reason</code> (concise message), <code>message</code> (long message), and more.
 It does not throw a JavaScript <code>Error</code>, so try/catch cannot be used.</p>
 <p>If a Method inserts new documents in a collection,
@@ -467,7 +469,7 @@ Call <code>this.unblock()</code> in a Method implementation
 to allow another Method to begin executing before that one finishes.</p>
 <p>While it is not commonly needed,
 Meteor supports Method implementations that call other Methods.</p>
-<p>Let's implement a simple Method that just adds two numbers.
+<p>Let’s implement a simple Method that just adds two numbers.
 It is not a typical Method because it does not update a collection.
 We will see several examples of Methods that update a collection later.
 To verify that the Method is called on both the client and server side,
@@ -495,7 +497,7 @@ to invoke the code above in the client and server:</p>
 <p>Add the following in <code>client/main.js</code> to call the <code>sum</code> Method:</p>
 <pre><code class="language-js">const number1 = 2;
 const number2 = 3;
-Meteor.call('sum', number1, number2, (err, result) =&gt; {
+Meteor.call('sum', number1, number2, (err, result) => {
   if (err) {
     alert(err);
   } else {
@@ -505,13 +507,13 @@ Meteor.call('sum', number1, number2, (err, result) =&gt; {
 </code></pre>
 <p>In this case there is no benefit to
 invoking the method on both the client and server
-because it doesn't rely on any server resources.
-Later in the &quot;Optimistic UI&quot; section we will learn why this can be useful.</p>
+because it doesn’t rely on any server resources.
+Later in the “Optimistic UI” section we will learn why this can be useful.</p>
 <p>If you prefer to use promises instead of callback functions,
 implement a utility function that wraps calls in a <code>Promise</code> as follows:</p>
 <pre><code class="language-js">export function call(name, ...args) {
-  return new Promise((resolve, reject) =&gt; {
-    Meteor.call(name, ...args, (err, result) =&gt; {
+  return new Promise((resolve, reject) => {
+    Meteor.call(name, ...args, (err, result) => {
       if (err) {
         reject(err);
       } else {
@@ -551,8 +553,8 @@ const connection = DDP.connect(serverUrl);
 connection.call(methodName, arguments, callback);
 </code></pre>
 <p>For more details, see
-<a href="https://docs.meteor.com/api/connections.html#DDP-connect">https://docs.meteor.com/api/connections.html#DDP-connect</a>.</p>
-<h3 id="method-retries" tabindex="-1">Method Retries</h3>
+<a href="https://docs.meteor.com/api/connections.html#DDP-connect" rel="noopener" target="_blank">https://docs.meteor.com/api/connections.html#DDP-connect</a>.</p>
+<h3 id="method-retries">Method Retries</h3>
 <p>If a client calls a Method and their internet connection is lost
 before a result is returned, Meteor will remember this
 and will make the call again when connectivity is restored.
@@ -563,7 +565,7 @@ no additional changes are made in the database.</p>
 <ul>
 <li>
 <p>Creating a new document in a collection using the same data multiple times
-is typically problematic and it's up to you to guard against this.
+is typically problematic and it’s up to you to guard against this.
 For example, in a Todo app we could reject attempts
 to add multiple tasks with the same text.</p>
 </li>
@@ -572,7 +574,7 @@ to add multiple tasks with the same text.</p>
 </li>
 <li>
 <p>Updating a document multiple times is not a problem as long as
-the document hasn't been modified using different data in the interim.
+the document hasn’t been modified using different data in the interim.
 This can be addressed by adding the last update timestamp to each document
 and verifying that it matches what is in the data for an update.
 When the timestamp does not match, we can assume the document
@@ -583,7 +585,7 @@ has been updated since we last retrieved it and reject the update.</p>
 an attempt to delete a non-existent document is not treated as an error.</p>
 </li>
 </ul>
-<h3 id="optimistic-ui" tabindex="-1">Optimistic UI</h3>
+<h3 id="optimistic-ui">Optimistic UI</h3>
 <p>Optimistic UI is a feature of Meteor Methods, and also of Apollo GraphQL,
 that enables a UI to respond to user interactions
 without waiting for server responses.
@@ -632,7 +634,7 @@ it is not called on the server.</p>
 return a different result when run on the client versus the server.
 This is not typical, but it is useful to demonstrate optimistic UI.</p>
 <p>Here is a simplified example from the upcoming Todo app.
-It inserts a document in the &quot;tasks&quot; collection.
+It inserts a document in the “tasks” collection.
 When run on the client it updates Minimongo
 using the text passed as an argument.
 When run on the server it uses a timeout to wait three seconds
@@ -646,11 +648,11 @@ The UI then updates to show the uppercase text.</p>
 <pre><code class="language-js">Meteor.methods({
   addTask(text) {
     check(text, String);
-    return new Promise(resolve =&gt; {
+    return new Promise(resolve => {
       if (Meteor.isServer) {
         // Meteor requires using this version of setTimeout.
         // See https://docs.meteor.com/api/timers.html.
-        Meteor.setTimeout(() =&gt; {
+        Meteor.setTimeout(() => {
           // Tasks is a collection.
           const id = Tasks.insert({text: text.toUpperCase()});
           resolve(id);
@@ -682,7 +684,7 @@ It deletes a task with a given id.</p>
   });
 }
 </code></pre>
-<h3 id="viewing-websocket-messages" tabindex="-1">Viewing WebSocket Messages</h3>
+<h3 id="viewing-websocket-messages">Viewing WebSocket Messages</h3>
 <p>Chrome DevTools can be used to view the WebSocket messages
 that are sent by Meteor.
 Like HTTP messages, they appear on the Network tab.
@@ -693,11 +695,11 @@ Selecting a connection displays all the messages sent over that connection.</p>
 <p>To view WebSocket messages:</p>
 <ol>
 <li>Open the Chrome DevTools.</li>
-<li>Select the &quot;Network&quot; tab.</li>
-<li>Click &quot;WS&quot; to filter on WebSockets.</li>
+<li>Select the “Network” tab.</li>
+<li>Click “WS” to filter on WebSockets.</li>
 <li>Refresh the browser to get a new WebSocket connection.</li>
 <li>Click the WebSocket connection that is displayed.</li>
-<li>Click the &quot;Messages&quot; tab to see all the WebSocket messages.
+<li>Click the “Messages” tab to see all the WebSocket messages.
 This list is updated as new messages are received.</li>
 <li>Click a message to see its details.</li>
 </ol>
@@ -706,71 +708,71 @@ Outgoing messages have a green arrow pointing up
 and are sent from the client to the server.
 Incoming messages have a red arrow pointing down
 and are sent from the server to the client.</p>
-<h3 id="meteor-websocket-messages" tabindex="-1">Meteor WebSocket Messages</h3>
+<h3 id="meteor-websocket-messages">Meteor WebSocket Messages</h3>
 <p>Each Meteor WebSocket message contains an array of JSON objects that have
 a <code>msg</code> property and other properties such as
 <code>collection</code>, <code>fields</code>, <code>id</code>, <code>method</code>, <code>methods</code>, <code>msg</code>, and <code>params</code>.
 Typically each message array contains a single object.</p>
 <p>When a client initially connects to the server,
 a series of messages are sent from the server to the client.
-While I can't describe the purpose of each of these messages,
+While I can’t describe the purpose of each of these messages,
 I can describe the pattern observed.
 These messages include:</p>
 <ul>
 <li>
 <p>one matching</p>
 <pre><code class="language-json">{
-  &quot;msg&quot;: &quot;connect&quot;,
-  &quot;version&quot;: &quot;{some-version}&quot;,
-  &quot;support&quot;: [?]
+  "msg": "connect",
+  "version": "{some-version}",
+  "support": [?]
 }
 </code></pre>
 </li>
 <li>
 <p>several matching</p>
 <pre><code class="language-json">{
-  &quot;msg&quot;: &quot;sub&quot;,
-  &quot;id&quot;: &quot;{some-id}&quot;,
-  &quot;name&quot;: &quot;{some-name}&quot;,
-  &quot;params&quot;: [?]
+  "msg": "sub",
+  "id": "{some-id}",
+  "name": "{some-name}",
+  "params": [?]
 }
 </code></pre>
 </li>
 <li>
-<p>one matching <code>{&quot;server_id&quot;: &quot;{some-id}&quot;}</code></p>
+<p>one matching <code>{"server_id": "{some-id}"}</code></p>
 </li>
 <li>
-<p>one matching <code>{&quot;msg&quot;: &quot;connected&quot;, &quot;session&quot;: &quot;{session-id}&quot;}</code></p>
+<p>one matching <code>{"msg": "connected", "session": "{session-id}"}</code></p>
 </li>
 <li>
-<p>several matching <code>{&quot;msg&quot;: &quot;ready&quot;, &quot;subs&quot;: [?]}</code></p>
+<p>several matching <code>{"msg": "ready", "subs": [?]}</code></p>
 </li>
 <li>
 <p>several matching</p>
 <pre><code class="language-json">{
-  &quot;msg&quot;: &quot;added&quot;,
-  &quot;collection&quot;: &quot;meteor_autoupdate_clientversions&quot;,
-  &quot;id&quot;: &quot;version&quot;,
-  &quot;fields&quot;: {&quot;version&quot;: &quot;outdated}
+  "msg": "added",
+  "collection": "meteor_autoupdate_clientversions",
+  "id": "version",
+  "fields": {"version": "outdated}
 }
 </code></pre>
 </li>
 </ul>
 <p>Periodically, about every 45 seconds, each side sends
-a &quot;ping&quot; message to verify that the other side is still reachable.
-The other side replies with a &quot;pong&quot; message.</p>
+a “ping” message to verify that the other side is still reachable.
+The other side replies with a “pong” message.</p>
 <p>If the Meteor accounts packages are used
 to support account creation and sign in,
 a sign in request triggers a message from the client to the server
 containing the following JSON:</p>
 <pre><code class="language-json">{
-  &quot;msg&quot;: &quot;method&quot;,
-  &quot;method&quot;: &quot;login&quot;,
-  &quot;params&quot;: [
+  "msg": "method",
+  "method": "login",
+  "params": [
     {
-      &quot;user&quot;: &quot;{username}&quot;,
-      &quot;password&quot;: &quot;{hashed-password}&quot;,
-      &quot;algorithm&quot;: &quot;sha-256&quot;
+      "user": "{username}",
+      "password": "{hashed-password}",
+      "algorithm": "sha-256"
     }
   ]
 }
@@ -778,13 +780,13 @@ containing the following JSON:</p>
 <p>A successful sign in triggers a message from the server to the client
 containing the following JSON:</p>
 <pre><code class="language-json">{
-  &quot;msg&quot;: &quot;result&quot;,
-  &quot;id&quot;: &quot;{message-id}&quot;,
-  &quot;result&quot;: {
-    &quot;id&quot;: &quot;{result-id}&quot;,
-    &quot;token&quot;: &quot;{token}&quot;,
-    &quot;token-expires&quot;: {&quot;$date&quot;: &quot;{timestamp}&quot;},
-    &quot;type&quot;: &quot;password&quot;
+  "msg": "result",
+  "id": "{message-id}",
+  "result": {
+    "id": "{result-id}",
+    "token": "{token}",
+    "token-expires": {"$date": "{timestamp}"},
+    "type": "password"
   }
 }
 </code></pre>
@@ -794,26 +796,26 @@ This allows Minimongo in the client to stay in sync.
 Each message has a <code>msg</code> property that specifies the type of update,
 a <code>collection</code> property set to the name of the collection,
 and an <code>id</code> property set to the <code>_id</code> value of the affected document.</p>
-<p>When a document is added to a collection, <code>msg</code> is set to &quot;added&quot;
+<p>When a document is added to a collection, <code>msg</code> is set to “added”
 and <code>fields</code> is set to a JSON object containing
 all the properties of the document.</p>
-<p>When a document is updated, <code>msg</code> is set to &quot;changed&quot;
+<p>When a document is updated, <code>msg</code> is set to “changed”
 and <code>fields</code> is set to a JSON object containing
 only the properties of the document that were modified.</p>
-<p>When a document is deleted from a collection, <code>msg</code> is set to &quot;remove&quot;.</p>
-<p>When a client subscribes to a collection, &quot;added&quot; messages described above
+<p>When a document is deleted from a collection, <code>msg</code> is set to “remove”.</p>
+<p>When a client subscribes to a collection, “added” messages described above
 are sent from the server to initially populate Minimongo.</p>
-<h3 id="tracker" tabindex="-1">Tracker</h3>
+<h3 id="tracker">Tracker</h3>
 <p>Tracker is a dependency tracking system used by Meteor to
 update UIs when reactive variables and data sources change.
 From the Meteor
 <a href="https://docs.meteor.com/api/tracker.html?v=1.1.1" rel="noopener" target="_blank">Tracker docs</a>,
-&quot;When you call a function that supports reactive updates
+“When you call a function that supports reactive updates
 (such as a database query),
 it automatically saves the current <code>Computation</code> object, if any
 (representing, for example, the current template being rendered).
-Later, when the data changes, the function can &quot;invalidate&quot; the <code>Computation</code>,
-causing it to rerun (re-rendering the template).&quot;</p>
+Later, when the data changes, the function can “invalidate” the <code>Computation</code>,
+causing it to rerun (re-rendering the template).”</p>
 <p>There is a low-level API for using Tracker,
 but there are easier ways to use it in React and Svelte.</p>
 <p>For React there is hook called <code>useTracker</code> for responding to tracker changes.
@@ -824,7 +826,7 @@ This is provided by the Meteor package
 <a href="https://atmospherejs.com/rdb/svelte-meteor-data?v=1.1.1" rel="noopener" target="_blank">rdb/svelte-meteor-data</a>.</p>
 <p>For example, to always get the current user in a Svelte component
 when the accounts-password package is used:</p>
-<pre><code class="language-js">$: user = useTracker(() =&gt; Meteor.user());
+<pre><code class="language-js">$: user = useTracker(() => Meteor.user());
 </code></pre>
 <p>The rdb/svelte-meteor-data package
 also turns MongoDB cursor objects into Svelte stores
@@ -846,7 +848,7 @@ so references to them should have a <code>$</code> prefix.</p>
 <p>For more information on the relationship between
 <code>useTracker</code> and Svelte stores, see this
 <a href="https://github.com/rdb/svelte-meteor-data/issues/6?v=1.1.1" rel="noopener" target="_blank">issue</a>.</p>
-<h3 id="reactivevar" tabindex="-1">ReactiveVar</h3>
+<h3 id="reactivevar">ReactiveVar</h3>
 <p>A <code>ReactiveVar</code> is a client-side object holds a single value.
 They can be created and exported from <code>.js</code> files
 so they can be imported by multiple components.
@@ -861,25 +863,25 @@ const myVar = new ReactiveVar(initialValue);
 <p>To change the value, call <code>myVar.set(newValue)</code>.</p>
 <p>To get the value, call <code>myVar.get()</code>.</p>
 <p>Here is a Svelte component that demonstrates using a <code>ReactiveVar</code>:</p>
-<pre><code class="language-js">&lt;script&gt;
+<pre><code class="language-js">&#x3C;script>
   import {ReactiveVar} from 'meteor/reactive-var';
 
   const myRV = new ReactiveVar(0);
   let counter;
-  Tracker.autorun(() =&gt; {
+  Tracker.autorun(() => {
     counter = myRV.get();
   });
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;div&gt;
+&#x3C;div>
   counter = {counter}
-  &lt;button on:click={() =&gt; myRV.set(counter + 1)}&gt;Increment&lt;/button&gt;
-&lt;/div&gt;
+  &#x3C;button on:click={() => myRV.set(counter + 1)}>Increment&#x3C;/button>
+&#x3C;/div>
 </code></pre>
 <p>Since Svelte components already support reactive variables within components
 and stores to achieve reactivity across components,
 there is little reason to use <code>ReactiveVar</code> in Svelte components.</p>
-<h3 id="reactivedict" tabindex="-1">ReactiveDict</h3>
+<h3 id="reactivedict">ReactiveDict</h3>
 <p>A <code>ReactiveDict</code> is a client-side reactive data store
 that holds key/value pairs.
 They are used in the same ways a <code>ReactiveVar</code> objects,
@@ -909,7 +911,7 @@ Only the first call is processed. Subsequent calls are ignored.</p>
 <p>To remove all the key/value pairs, call <code>myDict.clear()</code>.</p>
 <p>For the same reasons explained in the previous section on <code>ReactiveVar</code>,
 there is little reason to use <code>ReactiveDict</code> in Svelte components.</p>
-<h3 id="session" tabindex="-1">Session</h3>
+<h3 id="session">Session</h3>
 <p>The <code>Session</code> is a client-side, global <code>ReactiveDict</code> object.
 It is typically used to share data between components.
 The <code>Session</code> object cannot be shared between users or between browser tabs.</p>
@@ -922,17 +924,17 @@ that of <code>ReactiveDict</code> objects since it is one.</p>
 <p>To make the <code>Session</code> reactive so code is executed whenever
 the value for a given key changes, use <code>Tracker.autorun</code> as follows:</p>
 <pre><code class="language-js">let someValue;
-Tracker.autorun(() =&gt; {
+Tracker.autorun(() => {
   someValue = Session.get(key);
 });
 </code></pre>
 <p>Here is a Svelte component that demonstrates using a <code>Session</code>:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   import {Session} from 'meteor/session';
   import {Tracker} from 'meteor/tracker';
 
   let counter;
-  Tracker.autorun(() =&gt; {
+  Tracker.autorun(() => {
     counter = Session.get('counter');
   });
   Session.setDefault('counter', 0);
@@ -940,21 +942,21 @@ Tracker.autorun(() =&gt; {
   function increment() {
     Session.set('counter', counter + 1);
   }
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;div class=&quot;container&quot;&gt;
+&#x3C;div class="container">
   {counter}
-  &lt;button on:click=&quot;{increment}&quot;&gt;Increment&lt;/button&gt;
-&lt;/div&gt;
+  &#x3C;button on:click="{increment}">Increment&#x3C;/button>
+&#x3C;/div>
 </code></pre>
 <p>The ESLint plugin eslint-plugin-meteor will complain about
 the use of <code>Session</code> based on the <a href="https://github.com/dferber90/eslint-plugin-meteor/blob/master/docs/rules/no-session.md?v=1.1.1" rel="noopener" target="_blank">meteor/no-session</a> rule.
 Disable this ESLint rule if you decide to use <code>Session</code>.</p>
 <p>For the same reasons explained in the previous section on <code>ReactiveVar</code>,
 there is little reason to use <code>Session</code> in Svelte components.</p>
-<h3 id="email" tabindex="-1">Email</h3>
+<h3 id="email">Email</h3>
 <p>TODO: Document the Meteor API for sending email.</p>
-<h3 id="eslint" tabindex="-1">ESLint</h3>
+<h3 id="eslint">ESLint</h3>
 <p>The steps to install and configure the ESLint linting tool
 for use in a Meteor project are listed below.
 They assume using Svelte as the web framework.
@@ -965,49 +967,49 @@ When this is not the case, the Svelte-specific parts can be omitted.</p>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;lint&quot;: &quot;eslint --fix --quiet '{client,imports,server}/**/*.{js,svelte}'&quot;,
+<pre><code class="language-json">"lint": "eslint --fix --quiet '{client,imports,server}/**/*.{js,svelte}'",
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>.eslintrc.json</code> containing the following:</p>
 <pre><code class="language-json">{
-  &quot;env&quot;: {
-    &quot;browser&quot;: true,
-    &quot;es6&quot;: true,
-    &quot;jest&quot;: true,
-    &quot;node&quot;: true
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true,
+    "node": true
   },
-  &quot;extends&quot;: [
-    &quot;eslint:recommended&quot;,
-    &quot;plugin:import/recommended&quot;,
-    &quot;plugin:meteor/recommended&quot;
+  "extends": [
+    "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:meteor/recommended"
   ],
-  &quot;overrides&quot;: [
+  "overrides": [
     {
-      &quot;files&quot;: [&quot;**/*.svelte&quot;],
-      &quot;processor&quot;: &quot;svelte3/svelte3&quot;
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
     }
   ],
-  &quot;parserOptions&quot;: {
-    &quot;ecmaVersion&quot;: 2019,
-    &quot;sourceType&quot;: &quot;module&quot;
+  "parserOptions": {
+    "ecmaVersion": 2019,
+    "sourceType": "module"
   },
-  &quot;plugins&quot;: [&quot;import&quot;, &quot;meteor&quot;, &quot;svelte3&quot;]
+  "plugins": ["import", "meteor", "svelte3"]
 }
 </code></pre>
 </li>
 </ul>
 <p>To run ESLint, enter <code>npm run lint</code>.</p>
-<p>ESLint will give &quot;Unable to resolve path to module&quot; errors
-on all imports that begin with &quot;meteor/&quot;.
+<p>ESLint will give “Unable to resolve path to module” errors
+on all imports that begin with “meteor/”.
 However, the Meteor build system is able to resolve these.
 To suppress these errors, add the following top level property
 in the <code>.eslintrc.json</code> file:</p>
-<pre><code class="language-json">&quot;rules&quot;: {
-  &quot;import/no-unresolved&quot;: [&quot;error&quot;, {&quot;ignore&quot;: [&quot;^meteor/&quot;]}]
+<pre><code class="language-json">"rules": {
+  "import/no-unresolved": ["error", {"ignore": ["^meteor/"]}]
 }
 </code></pre>
-<h3 id="prettier" tabindex="-1">Prettier</h3>
+<h3 id="prettier">Prettier</h3>
 <p>The steps to install and configure the Prettier code formatting tool
 for use in a Meteor project are listed below.
 They assume using Svelte as the web framework.
@@ -1018,34 +1020,34 @@ When this is not the case, the Svelte-specific parts can be omitted.</p>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;format&quot;: &quot;prettier --write '{client,imports,server}/**/*.{css,html,js,svelte}'&quot;,
+<pre><code class="language-json">"format": "prettier --write '{client,imports,server}/**/*.{css,html,js,svelte}'",
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>.prettierrc</code> containing
 personal preferences like the following:</p>
 <pre><code class="language-json">{
-  &quot;arrowParens&quot;: &quot;avoid&quot;,
-  &quot;bracketSpacing&quot;: false,
-  &quot;singleQuote&quot;: true,
-  &quot;svelteSortOrder&quot;: &quot;scripts-markup-styles&quot;,
-  &quot;trailingComma&quot;: &quot;none&quot;
+  "arrowParens": "avoid",
+  "bracketSpacing": false,
+  "singleQuote": true,
+  "svelteSortOrder": "scripts-markup-styles",
+  "trailingComma": "none"
 }
 </code></pre>
 </li>
 </ul>
 <p>To run Prettier, enter <code>npm run format</code>.</p>
-<h3 id="devtools" tabindex="-1">DevTools</h3>
-<p>The Chrome extension &quot;Meteor DevTools Evolved&quot; displays
+<h3 id="devtools">DevTools</h3>
+<p>The Chrome extension “Meteor DevTools Evolved” displays
 DDP messages, Minimongo contents, and subscriptions.</p>
 <p>To install it, browse
 <a href="https://chrome.google.com/webstore/search/meteor%20devtools%20evolved?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
-<h3 id="tutorials" tabindex="-1">Tutorials</h3>
+<h3 id="tutorials">Tutorials</h3>
 <p>The Meteor web site contains several tutorials
 <a href="https://www.meteor.com/tutorials?v=1.1.1" rel="noopener" target="_blank">here</a>
 that provide introductions to using Meteor.</p>
-<h3 id="todo-app" tabindex="-1">Todo App</h3>
-<p>Let's walk through the steps to build a Todo app using Meteor.
+<h3 id="todo-app">Todo App</h3>
+<p>Let’s walk through the steps to build a Todo app using Meteor.
 This is a modified version of the Todo app presented at the Meteor site
 that demonstrates additional features.
 Code for the final version of this app can be found in
@@ -1071,7 +1073,7 @@ and with each of the options see
 <p>Modify the <code>start</code> script in <code>package.json</code> as follows
 if you are not targeting older browsers or mobile devices
 in order to avoid generating unnecessary code:</p>
-<pre><code class="language-json">&quot;start&quot;: &quot;meteor run --exclude-archs 'web.browser.legacy, web.cordova'&quot;,
+<pre><code class="language-json">"start": "meteor run --exclude-archs 'web.browser.legacy, web.cordova'",
 </code></pre>
 </li>
 <li>
@@ -1082,12 +1084,12 @@ in order to avoid generating unnecessary code:</p>
 <p><img src="/blog/assets/meteor-default-page.png" alt="default Meteor app"></p>
 </li>
 <li>
-<p>Press the &quot;Click Me&quot; button multiple times.</p>
-<p>The text &quot;You've pressed the button n times.&quot;
+<p>Press the “Click Me” button multiple times.</p>
+<p>The text “You’ve pressed the button n times.”
 will update to display the number of times it was clicked.</p>
 </li>
 <li>
-<p>Exercise &quot;hot code push&quot;.</p>
+<p>Exercise “hot code push”.</p>
 <p>The UI is defined by the following files in the <code>client</code> directory:
 <code>main.html</code>, <code>main.css</code>, and <code>main.js</code>.
 Try editing the file <code>client/main.html</code>.
@@ -1119,13 +1121,13 @@ For more information about Svelte, see
 </li>
 <li>
 <p>Replace the content of <code>client/main.html</code> with the following:</p>
-<pre><code class="language-html">&lt;head&gt;
-  &lt;title&gt;Todo App&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;!-- Svelte will insert content in this div. --&gt;
-  &lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
-&lt;/body&gt;
+<pre><code class="language-html">&#x3C;head>
+  &#x3C;title>Todo App&#x3C;/title>
+&#x3C;/head>
+&#x3C;body>
+  &#x3C;!-- Svelte will insert content in this div. -->
+  &#x3C;div id="app">&#x3C;/div>
+&#x3C;/body>
 </code></pre>
 </li>
 <li>
@@ -1133,42 +1135,42 @@ For more information about Svelte, see
 <pre><code class="language-js">import {Meteor} from 'meteor/meteor';
 import App from './App.svelte';
 
-Meteor.startup(() =&gt; {
+Meteor.startup(() => {
   new App({target: document.getElementById('app')});
 });
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>client/Task.svelte</code> containing the following:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   export let task; // Parent components pass this value as a prop.
 
-  const formatDate = date =&gt;
+  const formatDate = date =>
     date.toLocaleDateString('en-us', {
       month: 'short',
       day: 'numeric',
       year: 'numeric'
     });
 
-  // These are Svelte &quot;reactive declarations&quot; which are
+  // These are Svelte "reactive declarations" which are
   // re-executed any time a variable they depend on changes.
   $: ({createdAt, text} = task);
   $: item = text + (createdAt ? ` - added ${formatDate(createdAt)}` : '');
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;li&gt;{item}&lt;/li&gt;
+&#x3C;li>{item}&#x3C;/li>
 
-&lt;style&gt;
+&#x3C;style>
   /* This styling is scoped to this component. */
   li {
     padding-left: 0;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>client/App.svelte</code> containing the following:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   import Task from './Task.svelte';
 
   // Later we will replace this with a way to get the tasks from MongoDB.
@@ -1180,19 +1182,19 @@ Meteor.startup(() =&gt; {
       {_id: 3, text: 'This is task 3', createdAt}
     ];
   }
-&lt;/script&gt;
-&lt;div class=&quot;container&quot;&gt;
-  &lt;header&gt;
-    &lt;h1&gt;Todo App&lt;/h1&gt;
-  &lt;/header&gt;
-  &lt;section&gt;
-    &lt;ul&gt;
+&#x3C;/script>
+&#x3C;div class="container">
+  &#x3C;header>
+    &#x3C;h1>Todo App&#x3C;/h1>
+  &#x3C;/header>
+  &#x3C;section>
+    &#x3C;ul>
       {#each getTasks() as task}
-      &lt;Task {task} /&gt;
+      &#x3C;Task {task} />
       {/each}
-    &lt;/ul&gt;
-  &lt;/section&gt;
-&lt;/div&gt;
+    &#x3C;/ul>
+  &#x3C;/section>
+&#x3C;/div>
 </code></pre>
 <p>At this point the app should display the following basic task list:</p>
 <p><img src="/blog/assets/meteor-todo-1.png" alt="Todo App after step 14"></p>
@@ -1208,7 +1210,7 @@ Now the task list is styled nicely.</p>
 </li>
 <li>
 <p>Create the file <code>imports/tasks.js</code> containing the following
-which will create a MongoDB collection named &quot;tasks&quot;:</p>
+which will create a MongoDB collection named “tasks”:</p>
 <pre><code class="language-js">import {Mongo} from 'meteor/mongo';
 
 export const Tasks = new Mongo.Collection('tasks');
@@ -1236,15 +1238,15 @@ $: tasks = Tasks.find(query, projection);
 <li>
 <p>Replace the call to <code>getTasks()</code> in <code>client/App.svelte</code> with <code>$tasks</code>.</p>
 <p>This is a reference to a Svelte store that is kept in sync
-with the MongoDB &quot;tasks&quot; collection.
+with the MongoDB “tasks” collection.
 The UI will no longer display any tasks because
 this collection does not yet contain any tasks.</p>
 </li>
 <li>
 <p>Insert some tasks using the MongoDB console by entering the following:</p>
 <pre><code class="language-bash">meteor mongo
-db.tasks.insert({ text: &quot;buy milk&quot; })
-db.tasks.insert({ text: &quot;take out trash&quot; })
+db.tasks.insert({ text: "buy milk" })
+db.tasks.insert({ text: "take out trash" })
 </code></pre>
 <p>Note that the UI updates automatically to show these new tasks.</p>
 <p><img src="/blog/assets/meteor-todo-3.png" alt="Todo App after step 22"></p>
@@ -1265,15 +1267,15 @@ function addTask() {
 <li>
 <p>Add the following in <code>client/App.svelte</code> as the first child of
 the <code>section</code> element to prepare for adding tasks in the UI:</p>
-<pre><code class="language-html">&lt;form on:submit|preventDefault=&quot;{addTask}&quot;&gt;
-  &lt;input placeholder=&quot;todo text&quot; bind:value=&quot;{text}&quot; /&gt;
-  &lt;button&gt;Add&lt;/button&gt;
-&lt;/form&gt;
+<pre><code class="language-html">&#x3C;form on:submit|preventDefault="{addTask}">
+  &#x3C;input placeholder="todo text" bind:value="{text}" />
+  &#x3C;button>Add&#x3C;/button>
+&#x3C;/form>
 </code></pre>
 </li>
 <li>
 <p>Add the following after the HTML in <code>client/App.svelte</code>:</p>
-<pre><code class="language-css">&lt;style&gt;
+<pre><code class="language-css">&#x3C;style>
   form {
     margin-top: 0;
     padding-bottom: 1rem;
@@ -1282,12 +1284,12 @@ the <code>section</code> element to prepare for adding tasks in the UI:</p>
   section {
     padding: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 </li>
 </ul>
 <p>Now new tasks can be added by entering text in the input and
-either pressing the &quot;Add&quot; button or pressing the return key.</p>
+either pressing the “Add” button or pressing the return key.</p>
 <p><img src="/blog/assets/meteor-todo-4.png" alt="Todo App after step 25"></p>
 </li>
 <li>
@@ -1300,7 +1302,7 @@ Add a task in either browser window and notice that it appears in both.</p>
 <li>
 <p>Add the ability to mark tasks as done and delete them
 by changing <code>client/Task.svelte</code> to match the following:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   import {Tasks} from '../imports/tasks.js';
 
   export let task;
@@ -1309,7 +1311,7 @@ by changing <code>client/Task.svelte</code> to match the following:</p>
     Tasks.remove(task._id);
   }
 
-  const formatDate = date =&gt;
+  const formatDate = date =>
     date.toLocaleDateString('en-us', {
       month: 'short',
       day: 'numeric',
@@ -1322,16 +1324,16 @@ by changing <code>client/Task.svelte</code> to match the following:</p>
 
   $: ({createdAt, text} = task);
   $: item = text + (createdAt ? ` - added ${formatDate(createdAt)}` : '');
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;li&gt;
-  &lt;input type=&quot;checkbox&quot; checked=&quot;{task.done}&quot; on:click=&quot;{toggleDone}&quot; /&gt;
-  &lt;span class:done=&quot;{task.done}&quot;&gt;{item}&lt;/span&gt;
-  &lt;!-- using Unicode trash can --&gt;
-  &lt;button on:click=&quot;{deleteTask}&quot;&gt;&amp;#x1f5d1;&lt;/button&gt;
-&lt;/li&gt;
+&#x3C;li>
+  &#x3C;input type="checkbox" checked="{task.done}" on:click="{toggleDone}" />
+  &#x3C;span class:done="{task.done}">{item}&#x3C;/span>
+  &#x3C;!-- using Unicode trash can -->
+  &#x3C;button on:click="{deleteTask}">&#x26;#x1f5d1;&#x3C;/button>
+&#x3C;/li>
 
-&lt;style&gt;
+&#x3C;style>
   button {
     background-color: transparent;
     border: none;
@@ -1345,7 +1347,7 @@ by changing <code>client/Task.svelte</code> to match the following:</p>
   li {
     padding-left: 0;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>Now tasks can be marked as done by clicking the checkbox in front of them
 and they can be deleted by clicking the trash can icon after them.</p>
@@ -1357,12 +1359,12 @@ by making the following changes in <code>client/App.svelte</code>:</p>
 <ul>
 <li>
 <p>Add the following in the <code>script</code> element:</p>
-<pre><code class="language-js">$: remaining = $tasks.filter(t =&gt; !t.done).length;
+<pre><code class="language-js">$: remaining = $tasks.filter(t => !t.done).length;
 </code></pre>
 </li>
 <li>
 <p>Add the following as the new first child of the <code>section</code> element:</p>
-<pre><code class="language-html">&lt;p class=&quot;stats&quot;&gt;{remaining} of {$tasks.length} remaining&lt;/p&gt;
+<pre><code class="language-html">&#x3C;p class="stats">{remaining} of {$tasks.length} remaining&#x3C;/p>
 </code></pre>
 </li>
 <li>
@@ -1387,22 +1389,22 @@ by making the following changes in <code>client/App.svelte</code>:</p>
 </code></pre>
 </li>
 <li>
-<p>Add the following inside the <code>form</code> element after the &quot;Add&quot; button:</p>
-<pre><code class="language-html">&lt;label className=&quot;hide-completed&quot;&gt;
-  &lt;input type=&quot;checkbox&quot; bind:checked=&quot;{hideCompleted}&quot; /&gt;
+<p>Add the following inside the <code>form</code> element after the “Add” button:</p>
+<pre><code class="language-html">&#x3C;label className="hide-completed">
+  &#x3C;input type="checkbox" bind:checked="{hideCompleted}" />
   Hide Completed Tasks
-&lt;/label&gt;
+&#x3C;/label>
 </code></pre>
 </li>
 <li>
 <p>Change the content of the <code>{#each}</code> block to the following:</p>
 <pre><code class="language-html">{#if !hideCompleted || !task.done}
-&lt;Task {task} /&gt;
+&#x3C;Task {task} />
 {/if}
 </code></pre>
 </li>
 </ul>
-<p>Now when the &quot;Hide Completed Tasks&quot; checkbox is checked,
+<p>Now when the “Hide Completed Tasks” checkbox is checked,
 only tasks that are not done are displayed.</p>
 <p><img src="/blog/assets/meteor-todo-7.png" alt="Todo App after step 28"></p>
 </li>
@@ -1428,12 +1430,12 @@ Accounts.ui.config({
 <pre><code class="language-js">import './accounts-config.js';
 </code></pre>
 <p>Alternatively, this can be imported from a <code>.svelte</code> file,
-perhaps the one that renders <code>&lt;BlazeTemplate template=&quot;loginButtons&quot; /&gt;</code>,
+perhaps the one that renders <code>&#x3C;BlazeTemplate template="loginButtons" /></code>,
 which is described next.</p>
 </li>
 <li>
 <p>Modify the <code>client/App.svelte</code> file to match the following:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   import {Meteor} from 'meteor/meteor';
   import {useTracker} from 'meteor/rdb:svelte-meteor-data';
   import {BlazeTemplate} from 'meteor/svelte:blaze-integration';
@@ -1445,14 +1447,14 @@ which is described next.</p>
   let user;
 
   // user is a store
-  $: user = useTracker(() =&gt; Meteor.user());
+  $: user = useTracker(() => Meteor.user());
 
   const query = {};
   const projection = {sort: {createdAt: -1}}; // newest first
   // This is a MongoDB cursor which is also a Svelte store.
   $: tasks = Tasks.find(query, projection);
 
-  $: remaining = $tasks.filter(t =&gt; !t.done).length;
+  $: remaining = $tasks.filter(t => !t.done).length;
 
   function addTask() {
     Tasks.insert({
@@ -1463,41 +1465,41 @@ which is described next.</p>
     });
     text = '';
   }
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;div class=&quot;container&quot;&gt;
-  &lt;!-- This provides the UI for user account management. --&gt;
-  &lt;BlazeTemplate template=&quot;loginButtons&quot; /&gt;
+&#x3C;div class="container">
+  &#x3C;!-- This provides the UI for user account management. -->
+  &#x3C;BlazeTemplate template="loginButtons" />
 
-  &lt;header&gt;
-    &lt;h1&gt;Todo App&lt;/h1&gt;
-  &lt;/header&gt;
+  &#x3C;header>
+    &#x3C;h1>Todo App&#x3C;/h1>
+  &#x3C;/header>
 
-  &lt;section&gt;
+  &#x3C;section>
     {#if $user}
-    &lt;p class=&quot;stats&quot;&gt;{remaining} of {$tasks.length} remaining&lt;/p&gt;
+    &#x3C;p class="stats">{remaining} of {$tasks.length} remaining&#x3C;/p>
 
-    &lt;form on:submit|preventDefault=&quot;{addTask}&quot;&gt;
-      &lt;input placeholder=&quot;todo text&quot; bind:value=&quot;{text}&quot; /&gt;
-      &lt;button&gt;Add&lt;/button&gt;
-      &lt;label className=&quot;hide-completed&quot;&gt;
-        &lt;input type=&quot;checkbox&quot; bind:checked=&quot;{hideCompleted}&quot; /&gt;
+    &#x3C;form on:submit|preventDefault="{addTask}">
+      &#x3C;input placeholder="todo text" bind:value="{text}" />
+      &#x3C;button>Add&#x3C;/button>
+      &#x3C;label className="hide-completed">
+        &#x3C;input type="checkbox" bind:checked="{hideCompleted}" />
         Hide Completed Tasks
-      &lt;/label&gt;
-    &lt;/form&gt;
+      &#x3C;/label>
+    &#x3C;/form>
 
-    &lt;ul&gt;
+    &#x3C;ul>
       {#each $tasks as task} {#if !hideCompleted || !task.done}
-      &lt;Task {task} /&gt;
+      &#x3C;Task {task} />
       {/if} {/each}
-    &lt;/ul&gt;
+    &#x3C;/ul>
     {:else}
-    &lt;p&gt;Please sign in.&lt;/p&gt;
+    &#x3C;p>Please sign in.&#x3C;/p>
     {/if}
-  &lt;/section&gt;
-&lt;/div&gt;
+  &#x3C;/section>
+&#x3C;/div>
 
-&lt;style&gt;
+&#x3C;style>
   form {
     margin-top: 0;
     padding-bottom: 1rem;
@@ -1527,20 +1529,20 @@ which is described next.</p>
     left: 50%;
     transform: translate(-50%, -50%);
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 </li>
 </ul>
 <p>Now users must create an account and sign in before they can
 view, add, and modify tasks.
 Information about user accounts is stored in the
-MongoDB database &quot;meteor&quot; inside the collection &quot;users&quot;.</p>
-<p>Before a user signs in, they see a &quot;Sign in&quot; link in the upper-right.</p>
+MongoDB database “meteor” inside the collection “users”.</p>
+<p>Before a user signs in, they see a “Sign in” link in the upper-right.</p>
 <p><img src="/blog/assets/meteor-todo-before-sign-in.png" alt="Todo App before sign in"></p>
-<p>Clicking &quot;Sign in&quot; displays a dialog that
+<p>Clicking “Sign in” displays a dialog that
 contains a link to create an account.</p>
 <p><img src="/blog/assets/meteor-todo-sign-in.png" alt="Todo App before sign in"></p>
-<p>Clicking &quot;Create account&quot; changes the dialog
+<p>Clicking “Create account” changes the dialog
 to prompt for account information.
 By default, passwords must contain at least six characters,
 but there are no restrictions on the characters.</p>
@@ -1548,12 +1550,12 @@ but there are no restrictions on the characters.</p>
 <p>After creating an account, or
 entering a username and password for an existing account,
 the user is signed in and
-the &quot;Sign in&quot; link in the upper-right is replaced by their username.</p>
+the “Sign in” link in the upper-right is replaced by their username.</p>
 <p><img src="/blog/assets/meteor-todo-after-sign-in.png" alt="Todo App before sign in"></p>
 <p>Clicking the username link in the upper-right
 presents a dialog for signing out or changing the password.</p>
 <p><img src="/blog/assets/meteor-todo-click-username.png" alt="Todo App before sign in"></p>
-<p>Clicking &quot;Change password&quot; changes the dialog to
+<p>Clicking “Change password” changes the dialog to
 prompt for the current and new passwords.</p>
 <p><img src="/blog/assets/meteor-todo-change-password.png" alt="Todo App before sign in"></p>
 <p>After successfully changing the password,
@@ -1568,9 +1570,9 @@ To give users role-based permissions and per-document permissions, see
 <a href="https://guide.meteor.com/accounts.html#roles-and-permissions?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
 </li>
 <li>
-<p>Add support for &quot;forgot password&quot; emails.</p>
-<p>This will allow users to click the &quot;Forgot password&quot; link
-in the &quot;Sign in&quot; dialog which changes the dialog content
+<p>Add support for “forgot password” emails.</p>
+<p>This will allow users to click the “Forgot password” link
+in the “Sign in” dialog which changes the dialog content
 to prompt for an email address.
 If a user account exists for the email address,
 an email is sent containing a link that the user can click
@@ -1585,12 +1587,12 @@ After doing so they are immediately signed in.</p>
 <p>Create the file <code>secrets.json</code> in the project root directory
 with content like the following:</p>
 <pre><code class="language-json">{
-  &quot;MAIL_NAME&quot;: &quot;Your Name&quot;,
-  &quot;MAIL_USER&quot;: &quot;some-user&quot;,
-  &quot;MAIL_PASSWORD&quot;: &quot;some-password&quot;,
-  &quot;MAIL_USER_DOMAIN&quot;: &quot;some-company.com&quot;,
-  &quot;MAIL_SERVER_DOMAIN&quot;: &quot;smtp.gmail.com&quot;,
-  &quot;MAIL_SERVER_PORT&quot;: 587
+  "MAIL_NAME": "Your Name",
+  "MAIL_USER": "some-user",
+  "MAIL_PASSWORD": "some-password",
+  "MAIL_USER_DOMAIN": "some-company.com",
+  "MAIL_SERVER_DOMAIN": "smtp.gmail.com",
+  "MAIL_SERVER_PORT": 587
 }
 </code></pre>
 <p>Note that the last two values above are specific to using
@@ -1612,7 +1614,7 @@ import secrets from '../secrets.json';
 const siteName = 'Todos by Mark';
 Accounts.emailTemplates.siteName = siteName;
 
-const from = `${secrets.MAIL_NAME}&lt;${secrets.MAIL_USER}@${secrets.MAIL_USER_DOMAIN}&gt;`;
+const from = `${secrets.MAIL_NAME}&#x3C;${secrets.MAIL_USER}@${secrets.MAIL_USER_DOMAIN}>`;
 Accounts.emailTemplates.from = from;
 </code></pre>
 </li>
@@ -1623,7 +1625,7 @@ import '../imports/tasks.js';
 import './accounts-setup.js';
 import secrets from '../secrets.json';
 
-Meteor.startup(() =&gt; {
+Meteor.startup(() => {
   // code to run on server at startup
   process.env.MAIL_URL =
     'smtp://' +
@@ -1640,10 +1642,10 @@ Meteor.startup(() =&gt; {
 </code></pre>
 </li>
 </ul>
-<p>Now when a user clicks the &quot;Forgot password&quot; link in the sign in dialog,
-they can enter their email address and press the &quot;Reset password&quot; button.</p>
+<p>Now when a user clicks the “Forgot password” link in the sign in dialog,
+they can enter their email address and press the “Reset password” button.</p>
 <p><img src="/blog/assets/meteor-todo-forgot-password.png" alt="Todo App forgot password"></p>
-<p>When the email is sent, the dialog changes to include the text &quot;Email sent&quot;.</p>
+<p>When the email is sent, the dialog changes to include the text “Email sent”.</p>
 <p><img src="/blog/assets/meteor-todo-forgot-password-email-sent.png" alt="Todo App forgot password email sent"></p>
 <p>The user will receive an email like the following:</p>
 <p><img src="/blog/assets/meteor-todo-password-reset-email.png" alt="Todo App password reset email"></p>
@@ -1766,7 +1768,7 @@ after the line that starts with <code>export const Tasks</code>.</p>
 <pre><code class="language-js">if (Meteor.isServer) {
   // This is only run on the server.
   // An arrow function cannot be used here
-  // because we need to use the &quot;this&quot; keyword.
+  // because we need to use the "this" keyword.
   // If no query is provided, the entire collection is published.
   // A second argument can be passed to the find method which is
   // an object where the keys are names of properties.
@@ -1787,7 +1789,7 @@ after the line that starts with <code>export const Tasks</code>.</p>
 <p>Add the following in the <code>script</code> element of <code>client/App.svelte</code>
 to subscribe to all tasks that are published:</p>
 <pre><code class="language-js">// The name passed to subscribe must match a name passed to publish.
-onMount(() =&gt; Meteor.subscribe('tasks'));
+onMount(() => Meteor.subscribe('tasks'));
 </code></pre>
 <p>Additional arguments can be passed to <code>Meteor.subscribe</code>.
 These are passed to the function that is passed to <code>Meteor.publish</code>
@@ -1813,7 +1815,7 @@ can view and operate on their tasks.</p>
 <ul>
 <li>
 <p>Add the following at the bottom of <code>server/accounts-setup.js</code>:</p>
-<pre><code class="language-js">Accounts.onLogin(({user}) =&gt; {
+<pre><code class="language-js">Accounts.onLogin(({user}) => {
   const [email] = user.emails;
   if (!email.verified) {
     Accounts.sendVerificationEmail(user._id, email.address);
@@ -1836,19 +1838,19 @@ Accounts.emailTemplates.verifyEmail = {
 <li>
 <p>Determine if the logged in user has a verified email address by
 adding the following in <code>client/App.svelte</code> after the <code>$: user =</code> line:</p>
-<pre><code class="language-js">$: emailVerified = $user &amp;&amp; $user.emails[0].verified;
+<pre><code class="language-js">$: emailVerified = $user &#x26;&#x26; $user.emails[0].verified;
 </code></pre>
 </li>
 <li>
-<p>Change <code>{#if $user}</code> to <code>{#if $user &amp;&amp; emailVerified}</code></p>
+<p>Change <code>{#if $user}</code> to <code>{#if $user &#x26;&#x26; emailVerified}</code></p>
 </li>
 <li>
 <p>Add the following before the <code>{:else}</code> line:</p>
-<pre><code class="language-js">{:else if $user &amp;&amp; !emailVerified}
-  &lt;p&gt;
+<pre><code class="language-js">{:else if $user &#x26;&#x26; !emailVerified}
+  &#x3C;p>
     You have been sent an email containing a link to verify your account.
     Please click that link in order to start adding tasks.
-  &lt;/p&gt;
+  &#x3C;/p>
 </code></pre>
 </li>
 </ul>
@@ -1863,11 +1865,11 @@ before they can start adding tasks.</p>
 <p>The user can dismiss the dialog and proceed with using the app.</p>
 </li>
 </ol>
-<p>That's it! We now have a functioning Todo app
+<p>That’s it! We now have a functioning Todo app
 that supports user accounts and tasks are persisted in a database.
-I can't imagine doing all of this in less code
+I can’t imagine doing all of this in less code
 using anything other than Meteor!</p>
-<h3 id="routing" tabindex="-1">Routing</h3>
+<h3 id="routing">Routing</h3>
 <p>For apps that need client-side page routing there are two popular libraries:</p>
 <ul>
 <li><a href="https://github.com/kadirahq/flow-router?v=1.1.1" rel="noopener" target="_blank">FlowRouter</a>
@@ -1877,20 +1879,20 @@ using anything other than Meteor!</p>
 <p>Typically these are used with the Blaze framework.
 When using a different web framework such a Svelte or React,
 routing approaches for those can be used instead.</p>
-<h3 id="meteor-shell" tabindex="-1">Meteor Shell</h3>
+<h3 id="meteor-shell">Meteor Shell</h3>
 <p>The <code>meteor shell</code> command launches a REPL that is used to
 examine and interact with the server side of a Meteor app.
 TODO: How is it used?</p>
-<h3 id="building-and-deploying" tabindex="-1">Building and Deploying</h3>
+<h3 id="building-and-deploying">Building and Deploying</h3>
 <p>Now that we have our app running locally,
 we are ready to deploy it to a server so real users can access it.</p>
-<h4 id="mongodb-hosting" tabindex="-1">MongoDB Hosting</h4>
+<h4 id="mongodb-hosting">MongoDB Hosting</h4>
 <p>If your Meteor app uses MongoDB, and most do,
 the first step is to select a hosting platform.
 One option is
 <a href="https://www.mongodb.com/cloud/atlas?v=1.1.1" rel="noopener" target="_blank">MongoDB Atlas</a>.
 Another option is <a href="https://mlab.com/?v=1.1.1" rel="noopener" target="_blank">mLab</a>.</p>
-<p>MongoDB Atlas has an endless free tier referred to as &quot;Shared Clusters&quot;
+<p>MongoDB Atlas has an endless free tier referred to as “Shared Clusters”
 that does not provide backup.</p>
 <p>To configure MongoDB Atlas:</p>
 <ul>
@@ -1898,64 +1900,64 @@ that does not provide backup.</p>
 <a href="https://www.mongodb.com/cloud/atlas?v=1.1.1" rel="noopener" target="_blank">here</a>.</li>
 <li>Choose between AWS, GCP, and Azure for the cloud provider.</li>
 <li>Create a cluster.</li>
-<li>In the left nav. under &quot;SECURITY&quot;, click &quot;Database Access&quot;
-and press &quot;Add New Database User&quot;.</li>
+<li>In the left nav. under “SECURITY”, click “Database Access”
+and press “Add New Database User”.</li>
 <li>Optionally change the default username and password.</li>
-<li>Select &quot;Database User Privileges&quot; from the drop-down.
-You will likely want &quot;Read and write to any database&quot;.</li>
-<li>Press &quot;Add User&quot;.</li>
-<li>In the left nav. under &quot;SECURITY&quot;, click &quot;Network Access&quot;
-and press &quot;ADD IP ADDRESS&quot;.</li>
+<li>Select “Database User Privileges” from the drop-down.
+You will likely want “Read and write to any database”.</li>
+<li>Press “Add User”.</li>
+<li>In the left nav. under “SECURITY”, click “Network Access”
+and press “ADD IP ADDRESS”.</li>
 <li>Enter IP addresses that should have access.
 You will likely want to add the IP address of your machine
 AND the IP address of your cloud or Galaxy server.</li>
 </ul>
 <p>To view databases and collections:</p>
 <ul>
-<li>In the left nav. under &quot;DATA STORAGE&quot;, click &quot;Clusters&quot;.</li>
-<li>Press &quot;COLLECTIONS&quot;.</li>
+<li>In the left nav. under “DATA STORAGE”, click “Clusters”.</li>
+<li>Press “COLLECTIONS”.</li>
 <li>Select a database names to see the collections in it.</li>
 <li>Select a collection name to see the documents in it.</li>
 <li>Hover over a document and click the pencil icon to modify the document.
-Press the &quot;UPDATE&quot; button when finished.
+Press the “UPDATE” button when finished.
 It can take about five seconds for Meteor apps that use the document
 to update.</li>
 <li>Hover over a document and click the trash can icon to delete the document.</li>
 </ul>
 <p>To connect from the mongo shell:</p>
 <ul>
-<li>In the left nav. under &quot;DATA STORAGE&quot;, click &quot;Clusters&quot;.</li>
-<li>Press &quot;CONNECT&quot;.</li>
-<li>Click &quot;Connect with the mongo shell&quot;.</li>
+<li>In the left nav. under “DATA STORAGE”, click “Clusters”.</li>
+<li>Press “CONNECT”.</li>
+<li>Click “Connect with the mongo shell”.</li>
 <li>If you do not already have the mongo shell installed,
-click &quot;I do not have the mongo shell installed&quot;
+click “I do not have the mongo shell installed”
 and follow the platform-specific instructions to install it.</li>
-<li>Otherwise, click &quot;I have the mongo shell installed&quot;.</li>
-<li>Press &quot;Copy&quot; after the supplied connection string.</li>
+<li>Otherwise, click “I have the mongo shell installed”.</li>
+<li>Press “Copy” after the supplied connection string.</li>
 <li>Open a terminal window.</li>
 <li>Paste the connection string.</li>
-<li>Replace &quot;<dbname>&quot; with the name of an existing database and press return.</li>
+<li>Replace "<dbname>" with the name of an existing database and press return.</dbname></li>
 <li>Enter the password.</li>
-<li>Enter &quot;show collections&quot; to list the collections within the database.</li>
+<li>Enter “show collections” to list the collections within the database.</li>
 </ul>
 <p>To connect from the MongoDB Compass app:</p>
 <ul>
-<li>In the left nav. under &quot;DATA STORAGE&quot;, click &quot;Clusters&quot;.</li>
-<li>Press &quot;CONNECT&quot;.</li>
-<li>Click &quot;Connect using MongoDB Compass&quot;.</li>
+<li>In the left nav. under “DATA STORAGE”, click “Clusters”.</li>
+<li>Press “CONNECT”.</li>
+<li>Click “Connect using MongoDB Compass”.</li>
 <li>If you do not already have MongoDB Compass installed,
-click &quot;I do not have MongoDB Compass&quot;
+click “I do not have MongoDB Compass”
 and follow the platform-specific instructions to install it.</li>
-<li>Otherwise, click &quot;I have MongoDB Compass&quot;.</li>
-<li>Press &quot;Copy&quot; after the supplied connection string.</li>
+<li>Otherwise, click “I have MongoDB Compass”.</li>
+<li>Press “Copy” after the supplied connection string.</li>
 <li>Open the MongoDB Compass app.</li>
 <li>Paste the connection string.</li>
-<li>Replace &quot;<password>&quot; with the password and press &quot;CONNECT&quot;.</li>
+<li>Replace "<password>" with the password and press “CONNECT”.</password></li>
 <li>Click a database name to see the collections inside it.</li>
 </ul>
 <p>For more detail on using MongoDB Atlas with Meteor, see
-<a href="https://medium.com/@cfnelson/mongodb-atlas-with-meteor-a-step-by-step-guide-da34093665f4">https://medium.com/@cfnelson/mongodb-atlas-with-meteor-a-step-by-step-guide-da34093665f4</a>.</p>
-<h4 id="configuring-a-cloud-server" tabindex="-1">Configuring a Cloud Server</h4>
+<a href="https://medium.com/@cfnelson/mongodb-atlas-with-meteor-a-step-by-step-guide-da34093665f4" rel="noopener" target="_blank">https://medium.com/@cfnelson/mongodb-atlas-with-meteor-a-step-by-step-guide-da34093665f4</a>.</p>
+<h4 id="configuring-a-cloud-server">Configuring a Cloud Server</h4>
 <p>There are many options to choose from including
 AWS, Google Cloud Platform (GCP), and Azure.</p>
 <p>An option that is fairly simple with a low cost is DigitalOcean.</p>
@@ -1968,23 +1970,23 @@ You can also get a free domain name from
 <a href="https://www.freenom.com/?v=1.1.1" rel="noopener" target="_blank">freenom.com</a>.</p>
 <p>To associate a domain name with a DigitalOcean project, browse
 <a href="https://cloud.digitalocean.com?v=1.1.1" rel="noopener" target="_blank">cloud.digitalocean.com</a>,
-sign in, click &quot;Networking&quot; in the left nav., enter a domain for a project,
-and press &quot;Add Domain&quot;.
-Then under &quot;Create new record&quot;, select &quot;A&quot;, enter &quot;@&quot; for &quot;HOSTNAME&quot;,
-enter your DigitalOcean server IP address for &quot;WILL DIRECT TO&quot;,
-and press &quot;Create Record&quot;.
-Repeat this using &quot;www&quot; instead of &quot;@&quot; for &quot;HOSTNAME&quot;.
+sign in, click “Networking” in the left nav., enter a domain for a project,
+and press “Add Domain”.
+Then under “Create new record”, select “A”, enter ”@” for “HOSTNAME”,
+enter your DigitalOcean server IP address for “WILL DIRECT TO”,
+and press “Create Record”.
+Repeat this using “www” instead of ”@” for “HOSTNAME”.
 You can also create A records from the domain registrar site such as Hover.</p>
-<p>After ssh'ing to your instance for the first time,
+<p>After ssh’ing to your instance for the first time,
 it is helping to edit your <code>.bashrc</code> file.
 Some things you may want to add include:</p>
 <pre><code class="language-bash"># Make it easier to clear the screen.
 alias cls='clear'
 
 # Ask for confirmation before overwriting or deleting files.
-alias cp=&quot;cp -i&quot;
-alias mv=&quot;mv -i&quot;
-alias rm=&quot;rm -i&quot;
+alias cp="cp -i"
+alias mv="mv -i"
+alias rm="rm -i"
 
 # Make the delete key work.
 export TERM=xterm-256color
@@ -1999,15 +2001,15 @@ and node listening on port 3000.
 A different port can be used for the Meteor server.</p>
 <p>To enable accessing you MongoDB Atlas server:</p>
 <ul>
-<li>Browse <a href="http://cloud.mongodb.com">cloud.mongodb.com</a> and log in.</li>
-<li>In the left nav. under &quot;SECURITY&quot;, click &quot;Network Access&quot;.</li>
-<li>Press &quot;ADD IP ADDRESS&quot;.</li>
+<li>Browse cloud.mongodb.com and log in.</li>
+<li>In the left nav. under “SECURITY”, click “Network Access”.</li>
+<li>Press “ADD IP ADDRESS”.</li>
 <li>Add the IP address of your cloud server.</li>
 </ul>
 <p>TODO: mup works now! Try to get it to use HTTPS!
 TODO: Get Galaxy to work.
 TODO: Get manual deploy to work.</p>
-<h4 id="enabling-https" tabindex="-1">Enabling HTTPS</h4>
+<h4 id="enabling-https">Enabling HTTPS</h4>
 <p>To determine the version of Ubuntu you are using, enter <code>lsb_release -a</code>.
 For me this is 20.04.</p>
 <p>DigitalOcean provides an nginx proxy that is started by default.</p>
@@ -2037,7 +2039,7 @@ For me this is 20.04.</p>
 <p>Enter <code>sudo systemctl restart nginx</code></p>
 </li>
 <li>
-<p>Now you should be able to browse <a href="https://%7Byour-domain%7D:%7Bnode-port%7D">https://{your-domain}:{node-port}</a></p>
+<p>Now you should be able to browse <a href="https://%7Byour-domain%7D:%7Bnode-port%7D" rel="noopener" target="_blank">https://{your-domain}:{node-port}</a></p>
 </li>
 <li>
 <p>TODO: THIS DID NOT WORK!
@@ -2045,7 +2047,7 @@ There is a probably a conflict with
 <code>/etc/nginx/sites-available/{your-domain}</code> below.</p>
 </li>
 </ul>
-<p>Setup nginx &quot;server blocks&quot; by following the steps
+<p>Setup nginx “server blocks” by following the steps
 <a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)?v=1.1.1" rel="noopener" target="_blank">here</a> which are summaries below:</p>
 <ol>
 <li>
@@ -2062,14 +2064,14 @@ There is a probably a conflict with
 </li>
 <li>
 <p>Add content like the following for testing your site:</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Welcome to {your-site}!&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Success, the {your-site} server block is working!&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Welcome to {your-site}!&#x3C;/title>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;h1>Success, the {your-site} server block is working!&#x3C;/h1>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 </li>
 <li>
@@ -2109,18 +2111,18 @@ no syntax errors in the edited files.</p>
 <p>Enter <code>sudo systemctl restart nginx</code> to restart nginx.</p>
 </li>
 <li>
-<p>Browse <a href="http://%7Byour-domain%7D">http://{your-domain}</a> to verify that nginx can server the earlier HTML.</p>
+<p>Browse <a href="http://%7Byour-domain%7D" rel="noopener" target="_blank">http://{your-domain}</a> to verify that nginx can server the earlier HTML.</p>
 </li>
 </ol>
 <p>Enable SSL by following the steps
 <a href="https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04?v=1.1.1" rel="noopener" target="_blank">here</a>.
 These instructions specific to Ubuntu version 20.04.
-It uses a &quot;certbot&quot; which will automatically renew the certificate
+It uses a “certbot” which will automatically renew the certificate
 before it expires.</p>
 <ol>
 <li>Enter <code>sudo apt install python3-certbot-nginx</code></li>
 <li>Enter <code>sudo ufw status</code> to see that network traffic is currently allowed.</li>
-<li>If &quot;Nginx FULL&quot; is not set to &quot;ALLOW&quot; ...
+<li>If “Nginx FULL” is not set to “ALLOW” …
 <ul>
 <li>Enter <code>sudo ufw allow 'Nginx Full'</code></li>
 <li>Enter <code>sudo ufw delete allow 'Nginx HTTP'</code>
@@ -2145,7 +2147,7 @@ by entering <code>certbot renew</code>.
 But certbot makes this unnecessary and will automatically renew your cert.
 Make a backup of the <code>/etc/letsencrypt</code> directory.</p>
 <p>You can now browse <code>https://{your-domain}</code>.</p>
-<h4 id="manual-deploy" tabindex="-1">Manual Deploy</h4>
+<h4 id="manual-deploy">Manual Deploy</h4>
 <p>To build a Meteor app for deployment:</p>
 <ul>
 <li>cd to the root project directory.</li>
@@ -2155,7 +2157,7 @@ before running the next command.</li>
 where <code>{a-name}</code> is replaced by the target architecture
 such as <code>os.linux.x86_64</code>.</li>
 </ul>
-<p>This creates the specified directory if it doesn't exist and creates
+<p>This creates the specified directory if it doesn’t exist and creates
 a TAR file named <code>{project-name}.tar.gz</code> inside it.
 The TAR file contains a single directory named <code>bundle</code> which contains
 all the files for the client-side and server-side of the application.</p>
@@ -2190,15 +2192,15 @@ TODO: Do you need to do something to tell it to use port 4000
 TODO: or does it get that from the ROOT_URL environment variable?</li>
 </ol>
 <p>This gives the error MongoNetworkError: failed to connect to server
-[<a href="http://cluster0-shard-00-00.tqq7g.mongodb.net:27017">cluster0-shard-00-00.tqq7g.mongodb.net:27017</a>] on first connect
+[cluster0-shard-00-00.tqq7g.mongodb.net:27017] on first connect
 [MongoNetworkError: connection 5 to
-<a href="http://cluster0-shard-00-00.tqq7g.mongodb.net:27017">cluster0-shard-00-00.tqq7g.mongodb.net:27017</a> closed</p>
+cluster0-shard-00-00.tqq7g.mongodb.net:27017 closed</p>
 <p>Other alternatives for deploying Meteor apps include
 Galaxy (<a href="https://www.meteor.com/hosting?v=1.1.1" rel="noopener" target="_blank">here</a>)
 and Meteor Up (<a href="http://meteor-up.com/?v=1.1.1" rel="noopener" target="_blank">here</a>).
 Meteor Up, a.k.a mup, can be used to deploy a Meteor app
 to any server to which you can <code>ssh</code>.</p>
-<h4 id="meteor-up-(mup)" tabindex="-1">Meteor Up (mup)</h4>
+<h4 id="meteor-up-mup">Meteor Up (mup)</h4>
 <p>Meteor Up uses Docker to deploy Meteor apps.</p>
 <p>The steps to deploy a Meteor app using Meteor Up are:</p>
 <ul>
@@ -2241,7 +2243,7 @@ Also kill the process for MongoDB listening on port 27017.</li>
 </li>
 <li>Enter <code>cd .deploy</code></li>
 <li>Enter <code>mup setup</code></li>
-<li>If you get the error &quot;endpoint mup-nginx-proxy not found&quot;,
+<li>If you get the error “endpoint mup-nginx-proxy not found”,
 this is not your first time running <code>mup</code> for this project,
 and you have made certain changes to your <code>mup.js</code> file,
 you may need to enter <code>mup stop</code> and <code>mup reconfig</code> instead of <code>mup setup</code>.</li>
@@ -2249,8 +2251,8 @@ you may need to enter <code>mup stop</code> and <code>mup reconfig</code> instea
 (This works in Node 12, but may not yet work in newer versions.)</li>
 </ul>
 <p>If the last step is successful, browse the URL in <code>app.env.ROOT_URL</code>.
-This defaults to use a MongoDB database named &quot;test&quot;, not &quot;meteor&quot;.</p>
-<h4 id="galaxy" tabindex="-1">Galaxy</h4>
+This defaults to use a MongoDB database named “test”, not “meteor”.</p>
+<h4 id="galaxy">Galaxy</h4>
 <p>Galaxy provides a free, one-month trial.</p>
 <p>Galaxy does not provided MongoDB hosting.</p>
 <p>To use Galaxy:</p>
@@ -2259,13 +2261,13 @@ This defaults to use a MongoDB database named &quot;test&quot;, not &quot;meteor
 <p>Browse <a href="https://galaxy.meteor.com?v=1.1.1" rel="noopener" target="_blank">galaxy.meteor.com</a></p>
 </li>
 <li>
-<p>Press &quot;SIGN IN WITH METEOR&quot; and authenticate.</p>
+<p>Press “SIGN IN WITH METEOR” and authenticate.</p>
 </li>
 <li>
 <p>Create a free trial account</p>
 </li>
 <li>
-<p>Choose a region (ex. &quot;US-East-1&quot;)</p>
+<p>Choose a region (ex. “US-East-1”)</p>
 </li>
 <li>
 <p>Open a terminal window and cd to the root project directory.</p>
@@ -2273,10 +2275,10 @@ This defaults to use a MongoDB database named &quot;test&quot;, not &quot;meteor
 <li>
 <p>Create the file <code>settings.json</code> containing the following:</p>
 <pre><code class="language-json">{
-  &quot;galaxy.meteor.com&quot;: {
-    &quot;env&quot;: {
-      &quot;MONGO_URL&quot;: &quot;mongodb+srv://{username}:{password}@{mongo-host}/meteor&quot;,
-      &quot;MAIL_URL&quot;: &quot;smtp://volkmannm@objectcomputing.com:$&amp;oBDvwWTTms9d6dxYDG@smtp.gmail.com:587&quot;
+  "galaxy.meteor.com": {
+    "env": {
+      "MONGO_URL": "mongodb+srv://{username}:{password}@{mongo-host}/meteor",
+      "MAIL_URL": "smtp://volkmannm@objectcomputing.com:$&#x26;oBDvwWTTms9d6dxYDG@smtp.gmail.com:587"
     }
   }
 }
@@ -2288,7 +2290,7 @@ This defaults to use a MongoDB database named &quot;test&quot;, not &quot;meteor
 <li>
 <p>Enter <code>DEPLOY_HOSTNAME=us-east-1.galaxy-deploy.meteor.com \</code>
 <code>meteor deploy {hostname} --settings settings.json</code>
-where <code>{hostname}</code> can be &quot;{username}.meteorapp.com&quot;.</p>
+where <code>{hostname}</code> can be “{username}.meteorapp.com”.</p>
 </li>
 </ul>
 <p>This will output the following:</p>
@@ -2305,8 +2307,8 @@ For this reason, the MongoDB server must accept requests from
 an IP address range, not specific IP addresses.
 The free tier of MongoDB Atlas does not support whitelisting IP address ranges,
 so upgrading to a paid tier is required to connect to it from a Galaxy server.</p>
-<h3 id="creating-meteor-packages" tabindex="-1">Creating Meteor Packages</h3>
-<p>Early in the &quot;Meteor Packages&quot; section we discussed Isopacks
+<h3 id="creating-meteor-packages">Creating Meteor Packages</h3>
+<p>Early in the “Meteor Packages” section we discussed Isopacks
 which are packages containing code that often can run on the client or server.
 You can create your own Isopacks.
 They can existing locally, only for use by your applications.
@@ -2330,8 +2332,8 @@ supports the following methods for making assertions:
 <code>equal</code>, <code>notEqual</code>, <code>instanceOf</code>, <code>isTrue</code>, <code>isFalse</code>,
 <code>isNull</code>, <code>isNotNull</code>, <code>isUndefined</code>, <code>isNan</code>, <code>matches</code>, and <code>length</code>.</li>
 <li>Run tests by entering <code>meteor test-packages ./</code>.<br>
-The names of tests run in the server are preceded by &quot;S:&quot;.
-Those run in the client are preceded by &quot;C:&quot;.</li>
+The names of tests run in the server are preceded by “S:”.
+Those run in the client are preceded by “C:”.</li>
 <li>Browse localhost:3000 to see test results.</li>
 <li>Modify code until tests pass.
 Tests rerun automatically when changes are detected and browser refreshes.</li>
@@ -2347,12 +2349,12 @@ push changes to the Git repository,
 and enter <code>meteor publish</code>.
 These changes will appear on atmosphere.js immediately.</li>
 </ol>
-<p>See the earlier &quot;Meteor Packages&quot; section for details on
+<p>See the earlier “Meteor Packages” section for details on
 adding the use of packages to a project and importing values from them.</p>
-<h3 id="building-a-mobile-app" tabindex="-1">Building a Mobile App</h3>
+<h3 id="building-a-mobile-app">Building a Mobile App</h3>
 <ul>
 <li>Create a new Meteor app following the steps described earlier.</li>
-<li>See <a href="http://guide.meteor.com/cordova.html#installing-prerequisites">http://guide.meteor.com/cordova.html#installing-prerequisites</a>.</li>
+<li>See <a href="http://guide.meteor.com/cordova.html#installing-prerequisites" rel="noopener" target="_blank">http://guide.meteor.com/cordova.html#installing-prerequisites</a>.</li>
 <li><code>meteor add-platform android</code></li>
 <li><code>meteor add-platform ios</code></li>
 <li><code>meteor run ios</code> to run in a simulator</li>
@@ -2360,7 +2362,7 @@ adding the use of packages to a project and importing values from them.</p>
 <li><code>meteor run ios-device</code> to run on an iOS device</li>
 <li><code>meteor run android-device</code> to run on an Android device</li>
 </ul>
-<h3 id="resources" tabindex="-1">Resources</h3>
+<h3 id="resources">Resources</h3>
 <ul>
 <li><a href="https://meteor.com/?v=1.1.1" rel="noopener" target="_blank">Meteor home page</a></li>
 <li><a href="https://guide.meteor.com/?v=1.1.1" rel="noopener" target="_blank">Meteor Guide</a></li>
@@ -2370,5 +2372,6 @@ curated list of packages and libraries</li>
 <li><a href="https://atmospherejs.com/?v=1.1.1" rel="noopener" target="_blank">Atmosphere Meteor package repository</a></li>
 <li><a href="https://forums.meteor.com/?v=1.1.1" rel="noopener" target="_blank">Meteor Forum</a></li>
 <li><a href="https://stackoverflow.com/questions/tagged/meteor?v=1.1.1" rel="noopener" target="_blank">Stack Overflow</a></li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

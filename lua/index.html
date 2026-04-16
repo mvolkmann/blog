@@ -1,14 +1,14 @@
-<!DOCTYPE html><html lang="en"> <head><title>Lua</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Lua</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#used-by">Used By</a></li><li><a href="#resources">Resources</a></li><li><a href="#cheat-sheets">Cheat Sheets</a></li><li><a href="#installing">Installing</a></li><li><a href="#compiling">Compiling</a></li><li><a href="#vs-code-support">VS Code Support</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#source-files">Source Files</a></li><li><a href="#running-code">Running Code</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#keywords">Keywords</a></li><li><a href="#comments">Comments</a></li><li><a href="#types">Types</a></li><li><a href="#input%2Foutput">Input/Output</a></li><li><a href="#names">Names</a></li><li><a href="#variables">Variables</a></li><li><a href="#booleans">Booleans</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#strings">Strings</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#operators">Operators</a></li><li><a href="#conditional-logic">Conditional Logic</a></li><li><a href="#iteration">Iteration</a></li><li><a href="#iterators">Iterators</a></li><li><a href="#functions">Functions</a></li><li><a href="#default-parameter-values">Default Parameter Values</a></li><li><a href="#tables">Tables</a></li><li><a href="#modules">Modules</a></li><li><a href="#metatables">Metatables</a></li><ul><li><a href="#table-delegation">Table Delegation</a></li><li><a href="#classes">Classes</a></li><li><a href="#method-syntax">Method Syntax</a></li><li><a href="#inheritance">Inheritance</a></li><li><a href="#multiple-inheritance">Multiple Inheritance</a></li><li><a href="#simplifying-classes">Simplifying Classes</a></li></ul><li><a href="#metamethods">Metamethods</a></li><li><a href="#evaluting-code-at-runtime">Evaluting Code at Runtime</a></li><li><a href="#lua-functional-(luafun)">Lua Functional (luafun)</a></li><li><a href="#standard-library">Standard Library</a></li><ul><li><a href="#basic-module">basic module</a></li><li><a href="#debug-module">debug module</a></li><li><a href="#io-module">io Module</a></li><li><a href="#math-module">math module</a></li><li><a href="#os-module">os Module</a></li><li><a href="#package-module">package Module</a></li><li><a href="#string-module">string Module</a></li><li><a href="#table-module">table module</a></li></ul><li><a href="#environments">Environments</a></li><li><a href="#coroutines">Coroutines</a></li><li><a href="#networking">Networking</a></li><li><a href="#utility-functions">Utility Functions</a></li><li><a href="#error-handling">Error Handling</a></li><li><a href="#c-integration">C Integration</a></li><li><a href="#games">Games</a></li><ul><li><a href="#l%C3%B6ve">LÖVE</a></li><li><a href="#l%C3%B6vr">LÖVR</a></li></ul><li><a href="#flavors-of-lua">Flavors of Lua</a></li><ul><li><a href="#luajit">LuaJIT</a></li><li><a href="#pallene">Pallene</a></li><li><a href="#teal">Teal</a></li></ul><li><a href="#languages-based-on-lua">Languages Based on Lua</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
-<p><img alt="Lua logo" style="width: 40%"
-    src="/blog/assets/lua-logo.svg?v=1.1.1"
-    title="Lua logo"></p>
+<!DOCTYPE html><html lang="en"> <head><title>Lua</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Lua</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#used-by">Used By</a></li><li><a href="#resources">Resources</a></li><li><a href="#cheat-sheets">Cheat Sheets</a></li><li><a href="#installing">Installing</a></li><li><a href="#compiling">Compiling</a></li><li><a href="#vs-code-support">VS Code Support</a></li><li><a href="#grammar">Grammar</a></li><li><a href="#source-files">Source Files</a></li><li><a href="#running-code">Running Code</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#keywords">Keywords</a></li><li><a href="#comments">Comments</a></li><li><a href="#types">Types</a></li><li><a href="#inputoutput">Input/Output</a></li><li><a href="#names">Names</a></li><li><a href="#variables">Variables</a></li><li><a href="#booleans">Booleans</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#strings">Strings</a></li><li><a href="#patterns">Patterns</a></li><li><a href="#operators">Operators</a></li><li><a href="#conditional-logic">Conditional Logic</a></li><li><a href="#iteration">Iteration</a></li><li><a href="#iterators">Iterators</a></li><li><a href="#functions">Functions</a></li><li><a href="#default-parameter-values">Default Parameter Values</a></li><li><a href="#tables">Tables</a></li><li><a href="#modules">Modules</a></li><li><a href="#metatables">Metatables</a></li><ul><li><a href="#table-delegation">Table Delegation</a></li><li><a href="#classes">Classes</a></li><li><a href="#method-syntax">Method Syntax</a></li><li><a href="#inheritance">Inheritance</a></li><li><a href="#multiple-inheritance">Multiple Inheritance</a></li><li><a href="#simplifying-classes">Simplifying Classes</a></li></ul><li><a href="#metamethods">Metamethods</a></li><li><a href="#evaluting-code-at-runtime">Evaluting Code at Runtime</a></li><li><a href="#lua-functional-luafun">Lua Functional (luafun)</a></li><li><a href="#standard-library">Standard Library</a></li><ul><li><a href="#basic-module">basic module</a></li><li><a href="#debug-module">debug module</a></li><li><a href="#io-module">io Module</a></li><li><a href="#math-module">math module</a></li><li><a href="#os-module">os Module</a></li><li><a href="#package-module">package Module</a></li><li><a href="#string-module">string Module</a></li><li><a href="#table-module">table module</a></li></ul><li><a href="#environments">Environments</a></li><li><a href="#coroutines">Coroutines</a></li><li><a href="#networking">Networking</a></li><li><a href="#utility-functions">Utility Functions</a></li><li><a href="#error-handling">Error Handling</a></li><li><a href="#c-integration">C Integration</a></li><li><a href="#games">Games</a></li><ul><li><a href="#löve">LÖVE</a></li><li><a href="#lövr">LÖVR</a></li></ul><li><a href="#flavors-of-lua">Flavors of Lua</a></li><ul><li><a href="#luajit">LuaJIT</a></li><li><a href="#pallene">Pallene</a></li><li><a href="#teal">Teal</a></li></ul><li><a href="#languages-based-on-lua">Languages Based on Lua</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
+<p><img alt="Lua logo" style="width: 40%" src="/blog/assets/lua-logo.svg?v=1.1.1" title="Lua logo"></p>
 <p><a href="https://www.lua.org/?v=1.1.1" rel="noopener" target="_blank">Lua</a> is a
 dynamically typed scripting language created in 1993
 by a team at <a href="http://www.puc-rio.br?v=1.1.1" rel="noopener" target="_blank">Pontifical Catholic University of Rio de Janeiro</a> in Brazil.
 The team members include <a href="https://en.wikipedia.org/wiki/Roberto_Ierusalimschy?v=1.1.1" rel="noopener" target="_blank">Roberto Ierusalimschy</a>,
 <a href="https://web.tecgraf.puc-rio.br/~celes/?v=1.1.1" rel="noopener" target="_blank">Walemar Celes</a>,
 and <a href="https://lhf.impa.br/?v=1.1.1" rel="noopener" target="_blank">Luiz Henrique de Figueiredo</a>.</p>
-<p>The Portuguese word &quot;Lua&quot; means &quot;Moon&quot;.
+<p>The Portuguese word “Lua” means “Moon”.
 The Lua logo depicts the Moon orbiting around the Earth
 and its shadow being cast onto the Earth.</p>
 <p>The goals of Lua are:</p>
@@ -58,7 +58,7 @@ although it can be simulated with metatables and functions</p>
 see <code>pcall</code>, <code>xpcall</code>, and <code>error</code> functions</p>
 </li>
 <li>
-<p>uses string &quot;patterns&quot; which are a simplified version of regular expressions</p>
+<p>uses string “patterns” which are a simplified version of regular expressions</p>
 </li>
 <li>
 <p>limited Unicode support</p>
@@ -72,7 +72,7 @@ but can be declared <code>local</code></p>
 </li>
 </ul>
 <p>For a more extensive list of pros and cons, see <a href="http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts?v=1.1.1" rel="noopener" target="_blank">Lua: Good, bad, and ugly parts</a>.</p>
-<h2 id="used-by" tabindex="-1">Used By</h2>
+<h2 id="used-by">Used By</h2>
 <p>Notable uses of Lua include:</p>
 <ul>
 <li><a href="https://www.angrybirds.com?v=1.1.1" rel="noopener" target="_blank">Angry Birds</a> game</li>
@@ -86,13 +86,13 @@ creates games and simulations on an iPad using Lua</li>
 <li><a href="https://worldofwarcraft.blizzard.com/?v=1.1.1" rel="noopener" target="_blank">World of Warcraft</a> game</li>
 <li>Texas Instruments <a href="https://education.ti.com/en/resources/lua-scripting?v=1.1.1" rel="noopener" target="_blank">TI-Nspire</a> graphing calculators</li>
 </ul>
-<p>Roblox uses a variant of Lua called Luau. From <a href="https://devforum.roblox.com/t/what-is-the-difference-between-lua-and-luau/2181620/2?v=1.1.1" rel="noopener" target="_blank">veilict</a>, &quot;Luau's main focus was for much needed optimizations
+<p>Roblox uses a variant of Lua called Luau. From <a href="https://devforum.roblox.com/t/what-is-the-difference-between-lua-and-luau/2181620/2?v=1.1.1" rel="noopener" target="_blank">veilict</a>, “Luau’s main focus was for much needed optimizations
 to the Lua VM and to add more complex type checking,
 which allows you to see more in-depth errors before runtime.
 You can specify the type of a given variable yourself,
-or you can have Luau infer the type for you.&quot;</p>
+or you can have Luau infer the type for you.”</p>
 <p>For a more extensive list of Lua use, see the <a href="https://en.wikipedia.org/wiki/List_of_applications_using_Lua?v=1.1.1" rel="noopener" target="_blank">List of applications using Lua</a> Wikipedia page.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li>
 <p><a href="https://www.lua.org/manual/?v=1.1.1" rel="noopener" target="_blank">Lua Reference Manual</a></p>
@@ -102,26 +102,26 @@ or you can have Luau infer the type for you.&quot;</p>
 </li>
 <li>
 <p><a href="https://www.lua.org/gems/?v=1.1.1" rel="noopener" target="_blank">Lua Programming Gems</a> -
-&quot;a collection of articles recording some of the wisdom and practice
-on how to program well in Lua&quot;</p>
+“a collection of articles recording some of the wisdom and practice
+on how to program well in Lua”</p>
 </li>
 <li>
-<p><a href="https://www.youtube.com/watch?v=XxcSvnEIUq4&amp;v=1.1.1" rel="noopener" target="_blank">Why (and why not) Lua</a> talk by Roberto Ierusalimschy (2019)</p>
+<p><a href="https://www.youtube.com/watch?v=XxcSvnEIUq4&#x26;v=1.1.1" rel="noopener" target="_blank">Why (and why not) Lua</a> talk by Roberto Ierusalimschy (2019)</p>
 </li>
 <li>
 <p><a href="https://github.com/pallene-lang/pallene?v=1.1.1" rel="noopener" target="_blank">Pallene</a>,
-&quot;a statically typed and ahead-of-time compiled sister language to Lua,
-with a focus on performance&quot;</p>
+“a statically typed and ahead-of-time compiled sister language to Lua,
+with a focus on performance”</p>
 </li>
 <li>
-<p><a href="https://www.youtube.com/watch?v=H3inzGGFefg&amp;v=1.1.1" rel="noopener" target="_blank">Lua and Pallene</a> talk by Roberto Ierusalimschy (2022)</p>
+<p><a href="https://www.youtube.com/watch?v=H3inzGGFefg&#x26;v=1.1.1" rel="noopener" target="_blank">Lua and Pallene</a> talk by Roberto Ierusalimschy (2022)</p>
 </li>
 <li>
 <p><a href="https://www.youtube.com/@teej_dv?v=1.1.1" rel="noopener" target="_blank">TJ DeVries</a>
 YouTube channel; TJ is a Neovim core maintainer and
 is the creator of several Neovim plugins including:</p>
 <ul>
-<li><a href="https://github.com/nvim-telescope/telescope.nvim?v=1.1.1" rel="noopener" target="_blank">telescope.nvim</a> &quot;highly extendable fuzzy finder&quot;</li>
+<li><a href="https://github.com/nvim-telescope/telescope.nvim?v=1.1.1" rel="noopener" target="_blank">telescope.nvim</a> “highly extendable fuzzy finder”</li>
 <li><a href="https://github.com/nvim-lua/plenary.nvim?v=1.1.1" rel="noopener" target="_blank">plenary.nvim</a> collection of Lua functions used to write Neovim plugins</li>
 <li><a href="https://github.com/tjdevries/tree-sitter-lua?v=1.1.1" rel="noopener" target="_blank">tree-sitter-lua</a> Tree-sitter grammar for Lua</li>
 <li><a href="https://github.com/tjdevries/colorbuddy.nvim?v=1.1.1" rel="noopener" target="_blank">colorbuddy.nvim</a> for creating Neovim color schemes</li>
@@ -131,16 +131,16 @@ is the creator of several Neovim plugins including:</p>
 <p><a href="https://github.com/nanotee/nvim-lua-guide?v=1.1.1" rel="noopener" target="_blank">Getting started using Lua in Neovim</a></p>
 </li>
 <li>
-<p><a href="https://github.com/LewisJEllis/awesome-lua?v=1.1.1" rel="noopener" target="_blank">Awesome Lua</a> - &quot;a curated list of quality Lua packages and resources.&quot;</p>
+<p><a href="https://github.com/LewisJEllis/awesome-lua?v=1.1.1" rel="noopener" target="_blank">Awesome Lua</a> - “a curated list of quality Lua packages and resources.”</p>
 </li>
 </ul>
-<h2 id="cheat-sheets" tabindex="-1">Cheat Sheets</h2>
+<h2 id="cheat-sheets">Cheat Sheets</h2>
 <ul>
 <li><a href="https://devhints.io/lua?v=1.1.1" rel="noopener" target="_blank">DevHints.io</a></li>
 <li><a href="https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/?v=1.1.1" rel="noopener" target="_blank">Cheatography</a></li>
 <li><a href="https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet?v=1.1.1" rel="noopener" target="_blank">codecademy</a></li>
 </ul>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>Lua can be installed in macOS using Homebrew.
 Enter <code>brew install lua</code> to install it.
 Enter <code>lua -v</code> to verify that it worked and see the version.</p>
@@ -148,7 +148,7 @@ Enter <code>lua -v</code> to verify that it worked and see the version.</p>
 <a href="http://www.lua.org/start.html?v=1.1.1" rel="noopener" target="_blank">Getting Started</a>.</p>
 <p>To experiment with Lua on the web without installing anything,
 see <a href="http://www.lua.org/demo.html?v=1.1.1" rel="noopener" target="_blank">Lua Demo</a>.</p>
-<h2 id="compiling" tabindex="-1">Compiling</h2>
+<h2 id="compiling">Compiling</h2>
 <p>Lua programs can be compiled to bytecode before runtime.
 This enables faster program startup because
 runtime bytecode generation is no longer needed.</p>
@@ -166,20 +166,20 @@ To change the file name, use the <code>-o</code> option.
 For example, <code>luac demo.lua -o demo.luac</code>.</p>
 <p>To execute a bytecode file, pass it to the Lua interpreter.
 For example, <code>lua demo.luac</code>.</p>
-<h2 id="vs-code-support" tabindex="-1">VS Code Support</h2>
+<h2 id="vs-code-support">VS Code Support</h2>
 <p>VS Code has great support for Lua.</p>
 <p>The <a href="https://github.com/LuaLS/lua-language-server?v=1.1.1" rel="noopener" target="_blank">Lua</a>
 extension from sumneko is a Lua language server.
 It provides code annotations, syntax checking, dynamic type checking,
 code formatting, spell checking, and more.</p>
 <p>To disable specific diagnostics,
-open Settings, filter on &quot;Lua&quot;, scroll down to &quot;Lua &gt; Diagnostics: Disable&quot;,
-click the &quot;Add Item&quot; button, select a diagnostic name from the drop-down,
-and click the &quot;OK&quot; button.</p>
+open Settings, filter on “Lua”, scroll down to “Lua > Diagnostics: Disable”,
+click the “Add Item” button, select a diagnostic name from the drop-down,
+and click the “OK” button.</p>
 <p>The <a href="https://github.com/Koihik/vscode-lua-format?v=1.1.1" rel="noopener" target="_blank">vscode-lua-format</a> extension from Koihik
 is a popular Lua code formatting extension.
-To configure this, open Settings, filter on &quot;Lua&quot;, and enter the path
-to a configuration file in &quot;Vscode-lua-format: Config Path&quot; such as
+To configure this, open Settings, filter on “Lua”, and enter the path
+to a configuration file in “Vscode-lua-format: Config Path” such as
 <code>/Users/{your-user}/Documents/dev/lang/lua/style.config</code>.
 Then create the file <code>style.config</code> in that location
 containing something like the following:</p>
@@ -194,69 +194,69 @@ keep_simple_function_one_line: true
 single_quote_to_double_quote: true
 use_tab: false
 </code></pre>
-<p>The <a href="https://marketplace.visualstudio.com/items?itemName=actboy168.lua-debug&amp;v=1.1.1" rel="noopener" target="_blank">Lua Debug</a> VS Code extension supports
+<p>The <a href="https://marketplace.visualstudio.com/items?itemName=actboy168.lua-debug&#x26;v=1.1.1" rel="noopener" target="_blank">Lua Debug</a> VS Code extension supports
 debugging Lua code with breakpoints and watches.</p>
-<h2 id="grammar" tabindex="-1">Grammar</h2>
+<h2 id="grammar">Grammar</h2>
 <p>Lua is a very simple language.
 The entire grammar, except comment syntax, is described below.</p>
 <ul>
-<li>&quot;binop&quot; is short for &quot;binary operator&quot;.</li>
-<li>&quot;exp&quot; is short for &quot;expression&quot;.</li>
-<li>&quot;fieldsep&quot; is short for &quot;field separator&quot;.</li>
-<li>&quot;stat&quot; is short for &quot;statement&quot;.</li>
-<li>&quot;unop&quot; is short for &quot;unary operator&quot;.</li>
-<li>&quot;var&quot; is short for &quot;variable&quot;.</li>
+<li>“binop” is short for “binary operator”.</li>
+<li>“exp” is short for “expression”.</li>
+<li>“fieldsep” is short for “field separator”.</li>
+<li>“stat” is short for “statement”.</li>
+<li>“unop” is short for “unary operator”.</li>
+<li>“var” is short for “variable”.</li>
 </ul>
 <code>
 chunk ::= {stat [';']} [laststat[';']]
 <p>block ::= chunk</p>
 <p>stat ::=<br>
-varlist1 '=' explist1 |<br>
-local namelist ['=' explist1] |<br>
+varlist1 ’=’ explist1 |<br>
+local namelist [’=’ explist1] |<br>
 if exp then block {elseif exp then block} [else block] end |<br>
 do block end |<br>
 while exp do block end |<br>
 repeat block until exp |<br>
-for Name '=' exp ',' exp [',' exp] do block end |<br>
+for Name ’=’ exp ’,’ exp [’,’ exp] do block end |<br>
 for namelist in explist1 do block end |<br>
 function funcname funcbody |<br>
 local function Name funcbody |<br>
 functioncall</p>
 <p>laststat ::= return [explist1] | break</p>
-<p>funcname ::= Name {'.' Name} [':' Name]</p>
-<p>varlist1 ::= var {',' var}</p>
-<p>var ::= Name | prefixexp '[' exp ']' | prefixexp '.' Name</p>
-<p>namelist ::= Name {',' Name}</p>
-<p>explist1 ::= {exp ','} exp</p>
+<p>funcname ::= Name {’.’ Name} [’:’ Name]</p>
+<p>varlist1 ::= var {’,’ var}</p>
+<p>var ::= Name | prefixexp ’[’ exp ’]’ | prefixexp ’.’ Name</p>
+<p>namelist ::= Name {’,’ Name}</p>
+<p>explist1 ::= {exp ’,’} exp</p>
 <p>exp ::=<br>
-nil | false | true | Number | String | '...' |<br>
+nil | false | true | Number | String | ’…’ |<br>
 function | prefixexp | tableconstructor | exp binop exp | unop exp</p>
-<p>prefixexp ::= var | functioncall | '(' exp ')'</p>
-<p>functioncall ::= prefixexp args | prefixexp ':' Name args</p>
-<p>args ::= '(' [explist1] ')' | tableconstructor | String</p>
+<p>prefixexp ::= var | functioncall | ’(’ exp ’)’</p>
+<p>functioncall ::= prefixexp args | prefixexp ’:’ Name args</p>
+<p>args ::= ’(’ [explist1] ’)’ | tableconstructor | String</p>
 <p>function ::= function funcbody</p>
-<p>funcbody ::= '(' [parlist1] ')' block end</p>
-<p>parlist1 ::= namelist [',' '...'] | '...'</p>
-<p>tableconstructor ::= '{' [fieldlist] '}'</p>
+<p>funcbody ::= ’(’ [parlist1] ’)’ block end</p>
+<p>parlist1 ::= namelist [’,’ ’…’] | ’…’</p>
+<p>tableconstructor ::= ’{’ [fieldlist] ’}’</p>
 <p>fieldlist ::= field {fieldsep field} [fieldsep]</p>
-<p>field ::= '[' exp ']' '=' exp | Name '=' exp | exp</p>
-<p>fieldsep ::= ',' | ';'</p>
+<p>field ::= ’[’ exp ’]’ ’=’ exp | Name ’=’ exp | exp</p>
+<p>fieldsep ::= ’,’ | ’;’</p>
 <p>binop ::=<br>
-'+' | '-' | '*' | '/' | '^' | '%' | '..' |<br>
-'&lt;' | '&lt;=' | '&gt;' | '&gt;=' | '==' | '~=' |<br>
+’+’ | ’-’ | ’*’ | ’/’ | ’^’ | ’%’ | ’..’ |<br>
+’&#x3C;’ | ’&#x3C;=’ | ’>’ | ’>=’ | ’==’ | ’~=’ |<br>
 and | or</p>
-<p>unop ::= '-' | not | '#'
+</code><p><code>unop ::= ’-’ | not | ’#’
 </code></p>
-<h2 id="source-files" tabindex="-1">Source Files</h2>
+<h2 id="source-files">Source Files</h2>
 <p>Lua source files have a <code>.lua</code> extension.</p>
 <p>A source file can use variables and functions defined in
 another source file by using the <code>require</code> function.
 The following statement loads the file <code>other.lua</code>:</p>
-<pre><code class="language-lua">require &quot;other&quot;
+<pre><code class="language-lua">require "other"
 </code></pre>
-<p>For more information on using <code>require</code>, see the &quot;Modules&quot; section.</p>
-<h2 id="running-code" tabindex="-1">Running Code</h2>
-<p>To use the Lua <a href="https://en.wikipedia.org/wiki/Read–eval–print_loop?v=1.1.1" rel="noopener" target="_blank">REPL</a>,
+<p>For more information on using <code>require</code>, see the “Modules” section.</p>
+<h2 id="running-code">Running Code</h2>
+<p>To use the Lua <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop?v=1.1.1" rel="noopener" target="_blank">REPL</a>,
 enter <code>lua</code> and then enter Lua statements.
 To exit the REPL, press ctrl-c or ctrl-d.</p>
 <p>To run a Lua program, enter <code>lua {filename}.lua</code>.
@@ -266,11 +266,11 @@ Alternatively, consider using <code>luajit</code>.</p>
 <p>There are several tools that claim to
 produce executable files from Lua programs.
 However, none of them seem to be popular or actively maintained.</p>
-<h2 id="debugging" tabindex="-1">Debugging</h2>
+<h2 id="debugging">Debugging</h2>
 <p>TODO: Add information about the <code>debug</code> standard library
 TODO: and debuggers built using its features.
-See <a href="https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling">https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling</a>.</p>
-<h2 id="keywords" tabindex="-1">Keywords</h2>
+See <a href="https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling" rel="noopener" target="_blank">https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling</a>.</p>
+<h2 id="keywords">Keywords</h2>
 <p>The Lua programming language only defines 22 keywords.
 Some of the keywords such as <code>then</code>, <code>and</code>, <code>or</code>, and <code>end</code>
 make the syntax similar to the Ruby programming language.</p>
@@ -317,7 +317,7 @@ make the syntax similar to the Ruby programming language.</p>
 <li><code>goto</code>: jumps to a label</li>
 <li><code>nil</code>: represents having no value</li>
 </ul>
-<h2 id="comments" tabindex="-1">Comments</h2>
+<h2 id="comments">Comments</h2>
 <p>A single-line comment begins with two dashes.
 For example, <code>-- This is a comment.</code></p>
 <p>A multi-line comment is a single-line comment followed by a multi-line string.
@@ -338,15 +338,15 @@ This is useful for commented out a section of code
 that contains a commented out section.
 For example:</p>
 <pre><code class="language-lua">--[=[
-  print(&quot;one&quot;)
+  print("one")
   --[[
-  print(&quot;two&quot;)
-  print(&quot;three&quot;)
+  print("two")
+  print("three")
   --]]
-  print(&quot;four&quot;)
+  print("four")
 --]=]
 </code></pre>
-<h2 id="types" tabindex="-1">Types</h2>
+<h2 id="types">Types</h2>
 <p>Lua uses dynamic types.
 The types of variables and function parameters
 are never specified and are always inferred.</p>
@@ -358,55 +358,55 @@ a boolean to a number, a number to a boolean, or a string to a boolean.</p>
 The number zero and empty strings are not treated as <code>false</code>.</p>
 <p>The following table shows how to convert each primitive type
 to the other primitive types.</p>
-<table>
-<thead>
-<tr>
-<th>From</th>
-<th>To Boolean</th>
-<th>To Number</th>
-<th>To String</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>boolean <code>b</code></td>
-<td>not needed</td>
-<td><code>b and 1 or 0</code></td>
-<td><code>tostring(b)</code></td>
-</tr>
-<tr>
-<td>number <code>n</code></td>
-<td><code>n == 0</code></td>
-<td>not needed</td>
-<td><code>tostring(n)</code></td>
-</tr>
-<tr>
-<td>string <code>s</code></td>
-<td><code>s == &quot;true&quot;</code></td>
-<td><code>tonumber(s)</code></td>
-<td>not needed</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>From</th><th>To Boolean</th><th>To Number</th><th>To String</th></tr></thead><tbody><tr><td>boolean <code>b</code></td><td>not needed</td><td><code>b and 1 or 0</code></td><td><code>tostring(b)</code></td></tr><tr><td>number <code>n</code></td><td><code>n == 0</code></td><td>not needed</td><td><code>tostring(n)</code></td></tr><tr><td>string <code>s</code></td><td><code>s == "true"</code></td><td><code>tonumber(s)</code></td><td>not needed</td></tr></tbody></table>
 <p>The conversion from a number to a boolean above
 assumes that all numbers except zero should be treated as <code>false</code>.</p>
 <p>The <code>tonumber</code> function returns <code>nil</code> if the conversion is not possible.</p>
 <p>While it is not commonly done, functions can validate the
 types of arguments passed to them using the <code>assert</code> function.
 This takes a condition and
-an optional message that defaults to &quot;assertion failed!&quot;.
+an optional message that defaults to “assertion failed!”.
 If the condition evaluates to <code>false</code>,
 it prints the message and terminates the program.
 For example:</p>
 <pre><code class="language-lua">function demo(s)
-  assert(type(s) == &quot;string&quot;, &quot;demo requires a string&quot;)
-  print(&quot;success&quot;)
+  assert(type(s) == "string", "demo requires a string")
+  print("success")
 end
 
-demo(&quot;yes&quot;) -- success
+demo("yes") -- success
 demo(7) -- demo requires a string
 </code></pre>
-<h2 id="input%2Foutput" tabindex="-1">Input/Output</h2>
+<h2 id="inputoutput">Input/Output</h2>
 <p>To write to stdout, use the <code>print</code> function or the<code>io.write</code> function.
 Both take any number of arguments.</p>
 <p>The <code>print</code> function adds a tab character between each value
@@ -421,16 +421,16 @@ To override it to do that, add the following function.</p>
   local len = #t
   for i, v in ipairs(t) do
     io.write(tostring(v))
-    if i &lt; len then io.write(' ') end
+    if i &#x3C; len then io.write(' ') end
   end
   io.write('\n')
 end
 </code></pre>
 <p>Alternatively, define a <code>log</code> function like the following.
-For example, this can be called with <code>log(&quot;score&quot;, score)</code>
+For example, this can be called with <code>log("score", score)</code>
 to log the value of a variable.</p>
 <pre><code class="language-lua">function log(name, value)
-  print(string.format(&quot;%s = %s&quot;, name, value)
+  print(string.format("%s = %s", name, value)
 end
 </code></pre>
 <p>The <code>io.write</code> function does not add any characters between values
@@ -444,19 +444,19 @@ io.write('Hello', tostring(true), 7) -- Hellotrue7
 <p>To read from stdin, use the <code>io.read</code> function.
 By default this returns a string, but it can also be asked to return a number.</p>
 <p>The following code prompts for two numbers and prints their sum.</p>
-<pre><code class="language-lua">io.write(&quot;First Number: &quot;)
+<pre><code class="language-lua">io.write("First Number: ")
 -- This form of `io.read` returns a number
 -- or nil if a non-number is entered.
-n1 = io.read(&quot;n&quot;)
+n1 = io.read("n")
 
-io.write(&quot;Second Number: &quot;)
-n2 = io.read(&quot;n&quot;)
+io.write("Second Number: ")
+n2 = io.read("n")
 
 if n1 and n2 then
   sum = n1 + n2
-  print(&quot;Sum: &quot; .. sum) -- `..` operator performs string concatenation
+  print("Sum: " .. sum) -- `..` operator performs string concatenation
 else
-  print(&quot;An invalid number was entered.&quot;)
+  print("An invalid number was entered.")
 end
 </code></pre>
 <p>To print to the terminal using colors, see:</p>
@@ -467,9 +467,9 @@ end
 <pre><code class="language-lua">local term = require 'term'
 local colors = term.colors
 
-print(colors(&quot;%{bright red}red&quot;))
-print(colors(&quot;%{bright yellow}yellow&quot;))
-print(colors(&quot;%{bright blue}blue&quot;))
+print(colors("%{bright red}red"))
+print(colors("%{bright yellow}yellow"))
+print(colors("%{bright blue}blue"))
 print('white')
 </code></pre>
 </li>
@@ -487,15 +487,15 @@ print(colors.reset 'white')
 </li>
 </ul>
 <p>For information on reading and writing files,
-see the &quot;Standard Library&quot; &quot;io Module&quot; section below.</p>
-<h2 id="names" tabindex="-1">Names</h2>
+see the “Standard Library” “io Module” section below.</p>
+<h2 id="names">Names</h2>
 <p>Variable and function names can contain letters, digits, and underscores,
 but no other symbols. They cannot start with a digit.</p>
 <p>In multi-word names, the words can be separated by underscores (preferred)
 or written in camel-case.
 For example, <code>one_long_name</code> or <code>oneLongName</code>.</p>
 <p>Variable names, function names, and table keys are case-sensitive.</p>
-<h2 id="variables" tabindex="-1">Variables</h2>
+<h2 id="variables">Variables</h2>
 <p>To assign a value to a variable, use the <code>=</code> operator.</p>
 <p>Variables with no assigned value have the value <code>nil</code>.</p>
 <p>New values of any type can be assigned to a variable at any time.</p>
@@ -504,7 +504,7 @@ the type name of the variable value.
 This can be <code>nil</code>, <code>boolean</code>, <code>number</code>, <code>string</code>,
 <code>table</code>, <code>function</code>, <code>thread</code>, or <code>userdata</code>.</p>
 <p>The <code>thread</code> type represents a coroutine
-which is described in the &quot;Coroutines&quot; section below.</p>
+which is described in the “Coroutines” section below.</p>
 <p>The <code>userdata</code> type represents raw data provided through the C API.</p>
 <p>Multi-variable assignment is supported.
 For example:</p>
@@ -526,11 +526,11 @@ for the names of constants to be all uppercase.</p>
 <p>All variables assigned without the <code>local</code> keyword
 are added to the global table <code>_G</code>.
 For example:</p>
-<pre><code>MyGlobal = &quot;demo&quot;
-_G.MyGlobal = &quot;demo&quot; -- same as previous line
+<pre><code>MyGlobal = "demo"
+_G.MyGlobal = "demo" -- same as previous line
 
 print(MyGlobal) -- demo
-print(_G[&quot;MyGlobal&quot;]) -- demo
+print(_G["MyGlobal"]) -- demo
 print(_G.MyGlobal) -- demo
 </code></pre>
 <p>The module <code>strict.lua</code> can be used to raise an error if
@@ -542,14 +542,14 @@ To use this:</p>
 which is a directory in <code>package.path</code>.</li>
 <li>Run code with <code>lua -l strict {file-name}.lua</code></li>
 </ol>
-<h2 id="booleans" tabindex="-1">Booleans</h2>
+<h2 id="booleans">Booleans</h2>
 <p>The boolean literal values are <code>true</code> and <code>false</code>.</p>
 <p>In conditions, the only values treated as false are <code>false</code> and <code>nil</code>.
 The number zero, an empty string, and an empty table are all treated as true.</p>
 <p>Variables can be set to a condition to obtain a boolean value.
-For example, <code>is_higher = my_score &gt; your_score</code>
+For example, <code>is_higher = my_score > your_score</code>
 sets <code>is_higher</code> to <code>true</code> or <code>false</code>.</p>
-<h2 id="numbers" tabindex="-1">Numbers</h2>
+<h2 id="numbers">Numbers</h2>
 <p>The <code>number</code> type typically represents numbers with
 64-bit integers or double precision floats.
 However, implementations are free to use other sizes.</p>
@@ -563,24 +563,24 @@ print(type(i), math.type(i)) -- number  integer
 local f = 3.14
 print(type(f), math.type(f)) -- number   float
 </code></pre>
-<h2 id="strings" tabindex="-1">Strings</h2>
+<h2 id="strings">Strings</h2>
 <p>The <code>string</code> type is used for single and multiple character text.
 There is no dedicated type for single characters.</p>
 <p>Strings can be delimited with either single or double quotes.
-For example, <code>'Hello World!'</code> or <code>&quot;Hello World!&quot;</code>.
-This syntax is referred to as a &quot;short literal string&quot;.</p>
+For example, <code>'Hello World!'</code> or <code>"Hello World!"</code>.
+This syntax is referred to as a “short literal string”.</p>
 <p>Escaping certain characters by preceding them with a backslash
 changes how they are interpreted.
 For example:</p>
 <ul>
 <li><code>\n</code> produces a newline character</li>
 <li><code>\t</code> produces a tab character</li>
-<li><code>\&quot;</code> produces a double quote inside a string delimited by double quotes</li>
+<li><code>\"</code> produces a double quote inside a string delimited by double quotes</li>
 <li><code>\'</code> produces a single quote inside a string delimited by single quotes</li>
 <li><code>\\</code> produces a backslash character</li>
 </ul>
 <p>Multi-line strings are delimited by <code>[[</code> and <code>]]</code>.
-This syntax is referred to as a &quot;long strings&quot;.
+This syntax is referred to as a “long strings”.
 A newline after <code>[[</code> is ignored and a newline before <code>]]</code> is not ignored.
 Otherwise newlines and indentation inside the square brackets are retained.
 For example:</p>
@@ -602,7 +602,7 @@ For example, <code>fullName = firstName .. ' ' .. lastName</code>.</p>
 Operations on them create new strings.</p>
 <p>String operations are supported by the <code>string</code> standard library
 which is described later.</p>
-<h2 id="patterns" tabindex="-1">Patterns</h2>
+<h2 id="patterns">Patterns</h2>
 <p>A pattern is a string containing magic characters and character classes.
 Patterns are similar to regular expressions,
 but are bit simpler and not quite as powerful.</p>
@@ -614,68 +614,68 @@ Opting out of regular expression support
 helps achieve the Lua goal of being small.</p>
 <p>Patterns are used in the <code>string</code> library functions
 <code>find</code>, <code>gmatch</code>, <code>gsub</code>, and <code>match</code>.</p>
-<p>Characters referred to as &quot;magic characters&quot; have special meaning in patterns.
+<p>Characters referred to as “magic characters” have special meaning in patterns.
 To include them as literal characters without their special meaning,
 precede them with a <code>%</code> character.
 The magic characters include:</p>
-<table>
-<thead>
-<tr>
-<th>Magic Character</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>^</code></td>
-<td>start anchor or negates a character class</td>
-</tr>
-<tr>
-<td><code>$</code></td>
-<td>end anchor</td>
-</tr>
-<tr>
-<td><code>.</code></td>
-<td>matches any single character</td>
-</tr>
-<tr>
-<td><code>?</code></td>
-<td>zero or one</td>
-</tr>
-<tr>
-<td><code>*</code></td>
-<td>zero or more</td>
-</tr>
-<tr>
-<td><code>+</code></td>
-<td>one or more</td>
-</tr>
-<tr>
-<td><code>[</code></td>
-<td>begins a character class</td>
-</tr>
-<tr>
-<td><code>]</code></td>
-<td>ends a character class</td>
-</tr>
-<tr>
-<td><code>-</code></td>
-<td>forms a range in a custom character class</td>
-</tr>
-<tr>
-<td><code>(</code></td>
-<td>begins a capture group</td>
-</tr>
-<tr>
-<td><code>)</code></td>
-<td>ends a capture group</td>
-</tr>
-<tr>
-<td><code>%</code></td>
-<td>escapes a magic character (ex. <code>%$</code> represents <code>$</code>)</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Magic Character</th><th>Meaning</th></tr></thead><tbody><tr><td><code>^</code></td><td>start anchor or negates a character class</td></tr><tr><td><code>$</code></td><td>end anchor</td></tr><tr><td><code>.</code></td><td>matches any single character</td></tr><tr><td><code>?</code></td><td>zero or one</td></tr><tr><td><code>*</code></td><td>zero or more</td></tr><tr><td><code>+</code></td><td>one or more</td></tr><tr><td><code>[</code></td><td>begins a character class</td></tr><tr><td><code>]</code></td><td>ends a character class</td></tr><tr><td><code>-</code></td><td>forms a range in a custom character class</td></tr><tr><td><code>(</code></td><td>begins a capture group</td></tr><tr><td><code>)</code></td><td>ends a capture group</td></tr><tr><td><code>%</code></td><td>escapes a magic character (ex. <code>%$</code> represents <code>$</code>)</td></tr></tbody></table>
 <p>Character classes are used to match sets of characters.
 The provided character classes begin with a <code>%</code> character
 rather than a backslash as they do in regular expression.
@@ -684,56 +684,56 @@ strings use backslash to escape characters (ex. <code>\n</code>).
 If character classes also began with a backslash,
 they would need to be escaped (ex. <code>\\d</code> instead of <code>%d</code>).</p>
 <p>The provided character classes include:</p>
-<table>
-<thead>
-<tr>
-<th>Character Class</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>%a</code></td>
-<td>letters</td>
-</tr>
-<tr>
-<td><code>%c</code></td>
-<td>control characters</td>
-</tr>
-<tr>
-<td><code>%d</code></td>
-<td>digits</td>
-</tr>
-<tr>
-<td><code>%g</code></td>
-<td>printable characters except spaces</td>
-</tr>
-<tr>
-<td><code>%l</code></td>
-<td>lowercase letters</td>
-</tr>
-<tr>
-<td><code>%p</code></td>
-<td>punctuation characters</td>
-</tr>
-<tr>
-<td><code>%s</code></td>
-<td>space characters</td>
-</tr>
-<tr>
-<td><code>%u</code></td>
-<td>uppercase letters</td>
-</tr>
-<tr>
-<td><code>%w</code></td>
-<td>alphanumeric characters</td>
-</tr>
-<tr>
-<td><code>%x</code></td>
-<td>hexadecimal digits</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Character Class</th><th>Meaning</th></tr></thead><tbody><tr><td><code>%a</code></td><td>letters</td></tr><tr><td><code>%c</code></td><td>control characters</td></tr><tr><td><code>%d</code></td><td>digits</td></tr><tr><td><code>%g</code></td><td>printable characters except spaces</td></tr><tr><td><code>%l</code></td><td>lowercase letters</td></tr><tr><td><code>%p</code></td><td>punctuation characters</td></tr><tr><td><code>%s</code></td><td>space characters</td></tr><tr><td><code>%u</code></td><td>uppercase letters</td></tr><tr><td><code>%w</code></td><td>alphanumeric characters</td></tr><tr><td><code>%x</code></td><td>hexadecimal digits</td></tr></tbody></table>
 <p>Custom character classes can be defined by listing individual characters
 and/or ranges of characters inside square brackets.
 For example:</p>
@@ -742,14 +742,14 @@ For example:</p>
 <li><code>[abcA-C]</code> allows the characters <code>a</code>, <code>b</code>, <code>c</code>, <code>A</code>, <code>B</code>, and <code>C</code></li>
 <li><code>[%da-fA-F]</code> is the equivalent of <code>%x</code> to describe a hexadecimal digit</li>
 </ul>
-<p>TODO: Add content from <a href="https://www.lua.org/pil/20.2.html">https://www.lua.org/pil/20.2.html</a>.</p>
+<p>TODO: Add content from <a href="https://www.lua.org/pil/20.2.html" rel="noopener" target="_blank">https://www.lua.org/pil/20.2.html</a>.</p>
 <p>TODO: See examples in dev/lua/patterns.lua.</p>
 <p>The <code>string.match</code> function takes a source string and a pattern.
 When the pattern contains capture groups, <code>string.match</code> returns
 the text matched by each capture group.
 For example:</p>
-<pre><code class="language-lua">local s = &quot;The score was 19 to 7.&quot;
-local pattern = &quot;(%d+).+(%d+)&quot;
+<pre><code class="language-lua">local s = "The score was 19 to 7."
+local pattern = "(%d+).+(%d+)"
 local score1, score2 = string.match(s, pattern)
 print(score1, score2) -- 19      7
 </code></pre>
@@ -760,13 +760,13 @@ and an option limit on the number of replacements that should be made.
 It returns a new version of the source string with the replacements made.
 For example:</p>
 <pre><code class="language-lua">local s =
-  &quot;The 2nd time was easier than the 1st, and the 4th was a piece of cake.&quot;
-local pattern = &quot;%d%l%l&quot;
+  "The 2nd time was easier than the 1st, and the 4th was a piece of cake."
+local pattern = "%d%l%l"
 
 local replTable = {
-  [&quot;1st&quot;] = &quot;first&quot;,
-  [&quot;2nd&quot;] = &quot;second&quot;,
-  [&quot;3rd&quot;] = &quot;third&quot;
+  ["1st"] = "first",
+  ["2nd"] = "second",
+  ["3rd"] = "third"
 }
 -- If a key for the match is not found in `replTable`, it keeps the match.
 local s2 = string.gsub(s, pattern, replTable)
@@ -775,9 +775,9 @@ print(s2)
 
 -- This function produces the same result as using `replTable`.
 local function replFn(match)
-  if match == &quot;1st&quot; then return &quot;first&quot; end
-  if match == &quot;2nd&quot; then return &quot;second&quot; end
-  if match == &quot;3rd&quot; then return &quot;third&quot; end
+  if match == "1st" then return "first" end
+  if match == "2nd" then return "second" end
+  if match == "3rd" then return "third" end
   return match
 end
 
@@ -785,7 +785,7 @@ local s3 = string.gsub(s, pattern, replFn)
 print(s3)
 -- The second time was easier than the first, and the 4th was a piece of cake.
 </code></pre>
-<h2 id="operators" tabindex="-1">Operators</h2>
+<h2 id="operators">Operators</h2>
 <p>Lua supports the following mathematical operators:</p>
 <ul>
 <li><code>+</code> addition (not string concatenation)</li>
@@ -802,10 +802,10 @@ are not supported.</p>
 <ul>
 <li><code>==</code> equal</li>
 <li><code>~=</code> not equal (differs from other languages that use <code>!=</code>)</li>
-<li><code>&lt;</code> less than</li>
-<li><code>&gt;</code> greater than</li>
-<li><code>&lt;=</code> less than or equal to</li>
-<li><code>&gt;=</code> greater than or equal to</li>
+<li><code>&#x3C;</code> less than</li>
+<li><code>></code> greater than</li>
+<li><code>&#x3C;=</code> less than or equal to</li>
+<li><code>>=</code> greater than or equal to</li>
 </ul>
 <p>Tables are compared by their memory addresses,
 not by their contents.</p>
@@ -817,11 +817,11 @@ not by their contents.</p>
 </ul>
 <p>Lua supports the following bitwise operators:</p>
 <ul>
-<li><code>&amp;</code> bitwise and</li>
+<li><code>&#x26;</code> bitwise and</li>
 <li><code>|</code> bitwise or</li>
 <li><code>~</code> bitwise exclusive or (binary) or bitwise not (unary)</li>
-<li><code>&lt;&lt;</code> bit shift left</li>
-<li><code>&gt;&gt;</code> bit shift right</li>
+<li><code>&#x3C;&#x3C;</code> bit shift left</li>
+<li><code>>></code> bit shift right</li>
 </ul>
 <p>The only supported assignment operator <code>=</code>.
 Shorthand assignment operators like <code>+=</code> that are supported
@@ -843,11 +843,11 @@ In a table with the keys <code>1</code>, <code>2</code>, <code>3</code>, and <co
 <li><code>*</code>, <code>/</code>, <code>//</code>, <code>%</code></li>
 <li><code>+</code> and binary <code>-</code></li>
 <li><code>..</code></li>
-<li><code>&lt;&lt;</code> and <code>&gt;&gt;</code></li>
-<li><code>&amp;</code></li>
+<li><code>&#x3C;&#x3C;</code> and <code>>></code></li>
+<li><code>&#x26;</code></li>
 <li>binary <code>~</code></li>
 <li><code>|</code></li>
-<li><code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, and <code>~=</code></li>
+<li><code>&#x3C;</code>, <code>></code>, <code>&#x3C;=</code>, <code>>=</code>, <code>==</code>, and <code>~=</code></li>
 <li><code>and</code></li>
 <li><code>or</code></li>
 </ul>
@@ -862,10 +862,10 @@ For example, <code>2 ^ 2 ^ 3</code> is the same as <code>2 ^ 8</code> and not <c
 For example:</p>
 <ul>
 <li><code>+</code> always performs addition, not string concatenation which uses <code>..</code></li>
-<li><code>{' and </code>}' always construct a table and do not delimit a code block</li>
-<li><code>:</code> always define or calls a function that can be used in the &quot;method&quot; style</li>
+<li><code>{' and </code>}’ always construct a table and do not delimit a code block</li>
+<li><code>:</code> always define or calls a function that can be used in the “method” style</li>
 </ul>
-<h2 id="conditional-logic" tabindex="-1">Conditional Logic</h2>
+<h2 id="conditional-logic">Conditional Logic</h2>
 <p>Lua supports an <code>if</code> statement, but not a <code>switch</code> statement.</p>
 <p>In an <code>if</code> statement, the <code>elseif</code> and <code>else</code> blocks shown below are optional.</p>
 <p>Parentheses are not required around conditions.</p>
@@ -884,7 +884,7 @@ same functionality can be achieved with the following:</p>
 </code></pre>
 <p>For the condition, recall that <code>false</code> and <code>nil</code> are treated as <code>false</code>
 and all other values are treated as <code>true</code>.</p>
-<h2 id="iteration" tabindex="-1">Iteration</h2>
+<h2 id="iteration">Iteration</h2>
 <p>Lua supports <code>for</code>, <code>while</code> (top tested), and <code>repeat</code> (bottom tested) loops.
 The <code>for</code> loop has two variations,
 one that iterates over a range of numbers and
@@ -931,10 +931,10 @@ For example:</p>
   ::continue::
 end
 </code></pre>
-<h2 id="iterators" tabindex="-1">Iterators</h2>
+<h2 id="iterators">Iterators</h2>
 <p>The <code>pairs</code> and <code>ipairs</code> functions that are used to iterate over tables
 return three values needed by a <code>for</code> loop.
-Understanding the purpose of these three values isn't necessary
+Understanding the purpose of these three values isn’t necessary
 unless there is a reason to implement custom iterators.</p>
 <p>The following code exposes the three values returned by the <code>pairs</code> function
 and provides insights on how a custom iterator might be implemented.
@@ -983,10 +983,10 @@ end
 <p>Other custom implementations could build and return
 a state based on the table passed in and
 could start with a control value other than <code>nil</code>.</p>
-<h2 id="functions" tabindex="-1">Functions</h2>
+<h2 id="functions">Functions</h2>
 <p>Functions are defined with the <code>function</code> keyword.
 This is longest keyword in Lua.
-It's too bad the designers didn't choose a shorter keyword
+It’s too bad the designers didn’t choose a shorter keyword
 like <code>func</code>, <code>fun</code>, or <code>fn</code>.</p>
 <p>Parameters are specified in parentheses after the function name
 and are separated by commas.
@@ -1013,8 +1013,8 @@ and can use them later when called.</p>
 the parentheses can be omitted.
 For example, the following are equivalent ways
 to pass a literal string to a function:</p>
-<pre><code class="language-lua">takeString(&quot;some text&quot;)
-takeString &quot;some text&quot;
+<pre><code class="language-lua">takeString("some text")
+takeString "some text"
 takeString [[some text]]
 </code></pre>
 <p>Likewise, the following are equivalent ways to pass a table to a function.</p>
@@ -1034,13 +1034,13 @@ For example:</p>
 <pre><code class="language-lua">function foo(b, n, s, t)
   b = true
   n = 2
-  s = &quot;yes&quot;
+  s = "yes"
   t.x = 2
 end
 
 b = false
 n = 1
-s = &quot;no&quot;
+s = "no"
 t = {x = 1}
 foo(b, n, s, t) -- only t.x is modified in this scope
 print(b, n, s, t.x) -- false 1 no 2
@@ -1061,18 +1061,18 @@ print(combine(2, 3, pow)) -- 8.0
 -- This function returns another function.
 function makeGreetFn(greeting)
   return function (name)
-    print(greeting .. &quot; &quot; .. name .. &quot;!&quot;)
+    print(greeting .. " " .. name .. "!")
   end
 end
 
-local greet = makeGreetFn(&quot;Hola&quot;);
+local greet = makeGreetFn("Hola");
 
-greet(&quot;Mark&quot;) -- Hola Mark!
+greet("Mark") -- Hola Mark!
 </code></pre>
 <p>Functions can return multiple values.
 For example:</p>
 <pre><code class="language-lua">function getStooges()
-  return &quot;Moe&quot;, &quot;Larry&quot;, &quot;Curly&quot;
+  return "Moe", "Larry", "Curly"
 end
 
 s1, s2, s3 = getStooges()
@@ -1089,7 +1089,7 @@ print(s3) -- Curly
 <p>When getting multiple return values from a function,
 underscores can be used as a placeholder for unneeded values.
 For example, when calling the <code>ipairs</code> function,
-if the index isn't needed then it can be used as follows:</p>
+if the index isn’t needed then it can be used as follows:</p>
 <pre><code class="language-lua">for _, v in ipairs(t) do
   ...
 end
@@ -1108,42 +1108,42 @@ end
 print(add(1, 2, 3)) -- 6
 
 function report(name, age, ...)
-  local count = select(&quot;#&quot;, ...)
-  local text = &quot;%s is %d years old and likes %d things.\nThey are&quot;
+  local count = select("#", ...)
+  local text = "%s is %d years old and likes %d things.\nThey are"
   local s = string.format(text, name, age, count)
   local things = {...}
   for index, thing in ipairs(things) do
-    local prefix = &quot; &quot;
+    local prefix = " "
     if index == 1 then
-      prefix = &quot; &quot;
-    elseif index &gt; 1 and index &lt; count then
-      prefix = &quot;, &quot;
+      prefix = " "
+    elseif index > 1 and index &#x3C; count then
+      prefix = ", "
     else
-      prefix = &quot;, and &quot;
+      prefix = ", and "
     end
     s = s .. prefix .. thing
   end
-  return s .. &quot;.&quot;
+  return s .. "."
 end
 
-print(report(&quot;Mark&quot;, 62, &quot;running&quot;, &quot;biking&quot;, &quot;programming&quot;))
+print(report("Mark", 62, "running", "biking", "programming"))
 -- Mark is 62 years old and likes 3 things.
 -- They are running, biking, and programming.
 </code></pre>
-<h2 id="default-parameter-values" tabindex="-1">Default Parameter Values</h2>
+<h2 id="default-parameter-values">Default Parameter Values</h2>
 <p>Lua does not provide an explicit way to define
 default values for function parameters.
 There are approaches two implement this.</p>
 <p>The first approach assigns default values using the <code>or</code> operator.
 For example:</p>
 <pre><code class="language-lua">function greet(greeting, name)
-  greeting = greeting or &quot;Hello&quot;
-  name = name or &quot;World&quot;
-  print(string.format(&quot;%s, %s!&quot;, greeting, name))
+  greeting = greeting or "Hello"
+  name = name or "World"
+  print(string.format("%s, %s!", greeting, name))
 end
 
 greet() -- Hello, World!
-greet(&quot;Hola&quot;, &quot;Mark&quot;) -- Hola, Mark!
+greet("Hola", "Mark") -- Hola, Mark!
 
 function volume(t)
   local w = t.width or 1
@@ -1174,8 +1174,8 @@ For example:</p>
   return t.width * t.height * t.depth
 end
 </code></pre>
-<h2 id="tables" tabindex="-1">Tables</h2>
-<p>Lua only provides one data structure called a &quot;table&quot;
+<h2 id="tables">Tables</h2>
+<p>Lua only provides one data structure called a “table”
 which is an associative array.
 It is used to represent arrays, dictionaries, trees, and graphs.</p>
 <p>A single table can be array-like, dictionary-like, or both.</p>
@@ -1183,11 +1183,11 @@ It is used to represent arrays, dictionaries, trees, and graphs.</p>
 not a copy of the table.</p>
 <p><em>Implementation Detail from <a href="https://www.lua.org/gems/?v=1.1.1" rel="noopener" target="_blank">Lua Programming Gems</a></em></p>
 <blockquote>
-<p>&quot;Every table in Lua has two parts: the array part and the hash part.
+<p>“Every table in Lua has two parts: the array part and the hash part.
 The array part stores entries with integer keys in the range 1 to n,
 for some particular n.
 All other entries (including integer keys outside that range)
-go to the hash part.&quot;</p>
+go to the hash part.”</p>
 </blockquote>
 <p>To create a table that is array-like,
 provide a comma-separated values inside curly braces.
@@ -1196,7 +1196,7 @@ They are not used to delimit blocks of code.</p>
 <p>For example:</p>
 <pre><code class="language-lua">local scores = {5, 2, 7}
 
-local names = {&quot;Mark&quot;, &quot;Tami&quot;}
+local names = {"Mark", "Tami"}
 </code></pre>
 <p>To create a table that is dictionary-like,
 provide keys and values inside curly braces.
@@ -1208,22 +1208,22 @@ Non-string keys and string keys in quotes must be enclosed in square brackets.</
 <p>Values can be of any type, including other tables.
 String values must be enclosed in quotes.</p>
 <p>For example:</p>
-<pre><code class="language-lua">local scores = {Mark=5, Tami=7, [&quot;Unknown Player&quot;]=3} -- uses string keys
+<pre><code class="language-lua">local scores = {Mark=5, Tami=7, ["Unknown Player"]=3} -- uses string keys
 
-local words = {[true]=&quot;yes&quot;, [false]=&quot;no&quot;} -- uses boolean keys
+local words = {[true]="yes", [false]="no"} -- uses boolean keys
 
-local months = {[1]=&quot;January&quot;, [2]=&quot;February&quot;} -- uses integer keys
+local months = {[1]="January", [2]="February"} -- uses integer keys
 
 -- This has the same result as the previous line,
 -- but values are specified without keys.
 -- Integer keys are provided starting from 1.
-local months = {&quot;January&quot;, &quot;February&quot;}
+local months = {"January", "February"}
 </code></pre>
 <p>To create a table that is both array-like and dictionary-like,
 provide some values with keys and some values without.
 Each value without a key is assigned a consecutive index key starting from 1.
 For example:</p>
-<pre><code class="language-lua">local mixed = { &quot;apple&quot;, month = &quot;April&quot;, &quot;banana&quot;, season = &quot;Spring&quot;, &quot;cherry&quot; }
+<pre><code class="language-lua">local mixed = { "apple", month = "April", "banana", season = "Spring", "cherry" }
 for k, v in pairs(mixed) do
   print(k, v)
 end
@@ -1239,25 +1239,25 @@ The square bracket syntax works with any key value.
 The dot syntax works with keys that are value variable names.
 For example:</p>
 <pre><code class="language-lua">local point = {x = 0, y = 0}
-point[&quot;x&quot;] = 1
+point["x"] = 1
 point.x = 1 -- same as previous line
 </code></pre>
 <p>An empty table can be created and filled later.
 For example:</p>
 <pre><code class="language-lua">local later = {} -- creates an empty table
-later[1] = &quot;Hello&quot;
-later[&quot;condition&quot;] = &quot;sunny&quot;
-later.condition = &quot;sunny&quot; -- same
+later[1] = "Hello"
+later["condition"] = "sunny"
+later.condition = "sunny" -- same
 </code></pre>
 <p>To get the corresponding value of a table key,
 use the square bracket or dot syntax.
 For example:</p>
 <pre><code class="language-lua">print(scores.Tami) -- 7
-print(scores[&quot;Tami&quot;]) -- 7
+print(scores["Tami"]) -- 7
 
 -- When a key is not found, the value returned is `nil`.
 -- The `or` operator can be used to provide a default value.
-print(scores[&quot;Mary&quot;] or &quot;unknown&quot;) -- unknown
+print(scores["Mary"] or "unknown") -- unknown
 
 print(months[2]) -- February
 </code></pre>
@@ -1295,71 +1295,71 @@ end
 The array-like entries past the insertion point move up by one.
 This can be expensive if a large number of entries need to be moved.
 For example:</p>
-<pre><code class="language-lua">local names = {&quot;Mark&quot;, &quot;Tami&quot;}
-table.insert(names, 2, &quot;Comet&quot;) -- Mark Comet Tami
-table.insert(names, &quot;Bob&quot;) -- pushes onto end; Mark Comet Tami Bob
+<pre><code class="language-lua">local names = {"Mark", "Tami"}
+table.insert(names, 2, "Comet") -- Mark Comet Tami
+table.insert(names, "Bob") -- pushes onto end; Mark Comet Tami Bob
 </code></pre>
 <p>The <code>table.remove</code> function removes an array-like entry.
 The array-like entries past the removal point move down by one.
 This can be expensive if a large number of entries need to be moved.
 For example:</p>
-<pre><code class="language-lua">local names = {&quot;Mark&quot;, &quot;Comet&quot;, &quot;Tami&quot;, &quot;Bob&quot;}
+<pre><code class="language-lua">local names = {"Mark", "Comet", "Tami", "Bob"}
 table.remove(names, 2) -- changes to Mark Tami Bob and returns Comet
 -- Omitting the index pops the last entry.
 table.remove(names) -- changes to Mark Tami and returns Bob
 </code></pre>
 <p>To remove a dictionary-like entry, set its value to <code>nil</code>.
 For example:</p>
-<pre><code class="language-lua">scores[&quot;Mark&quot;] = nil
+<pre><code class="language-lua">scores["Mark"] = nil
 </code></pre>
 <p>The <code>table.concat</code> function returns a string created by
 concatenating all of its array-like values using a given delimiter.
 This only includes values for consecutive integer keys starting from one.
 For example:</p>
-<pre><code class="language-lua">local t = {&quot;Mark&quot;, 7, &quot;Tami&quot;, 9}
-print(table.concat(t, &quot; and &quot;)) -- &quot;Mark and 7 and Tami and 9&quot;
+<pre><code class="language-lua">local t = {"Mark", 7, "Tami", 9}
+print(table.concat(t, " and ")) -- "Mark and 7 and Tami and 9"
 local t = {5, foo=2, 3, bar=4}
-print(table.concat(t, &quot; and &quot;)) -- 5 and 3; dictonary-like entries ignored
+print(table.concat(t, " and ")) -- 5 and 3; dictonary-like entries ignored
 </code></pre>
 <p>The <code>table.sort</code> function sorts an array-like table in place.
 For example:</p>
-<pre><code class="language-lua">local names = {&quot;Tami&quot;, &quot;Mark&quot;, &quot;Amanda&quot;, &quot;Jeremy&quot;}
+<pre><code class="language-lua">local names = {"Tami", "Mark", "Amanda", "Jeremy"}
 
 -- When no comparator function is specified,
--- the values are compared using the `&lt;` operator.
+-- the values are compared using the `&#x3C;` operator.
 table.sort(names)
-print(table.concat(names, &quot;, &quot;)) -- Amanda, Jeremy, Mark, Tami
+print(table.concat(names, ", ")) -- Amanda, Jeremy, Mark, Tami
 
 -- This specifies a comparator function.
--- Values with the same length are sorted using the `&lt;` operator.
+-- Values with the same length are sorted using the `&#x3C;` operator.
 -- When values lengths differ, shorter lengths come first.
 table.sort(names, function (a, b)
   if #a == #b then
-    return a &lt; b
+    return a &#x3C; b
   else
-    return #a &lt; #b
+    return #a &#x3C; #b
   end
 end)
-print(table.concat(names, &quot;, &quot;)) -- Mark, Tami, Amanda, Jeremy
+print(table.concat(names, ", ")) -- Mark, Tami, Amanda, Jeremy
 </code></pre>
 <p>To get the length of an array-like table, use <code>#my_table</code>.
 The returns the highest consecutive integer index starting from <code>1</code>.</p>
 <p>Dictionary-like tables do not store their number of entries.
 To get the count, it is necessary to iterate over the table and count them.
-The &quot;Lua Functional&quot; library described later defines a <code>length</code> function
+The “Lua Functional” library described later defines a <code>length</code> function
 for computing the size of a table, but it has O(n) complexity.</p>
 <p>The <code>table.pack</code> function provides another way to create an array-like table
 that adds the key <code>n</code> which holds the number of entries.
 The value of the <code>n</code> is not updated when entries are inserted or removed.
 For example:</p>
-<pre><code class="language-lua">local t = table.pack(&quot;Mark&quot;, 7, &quot;Tami&quot;, 9)
+<pre><code class="language-lua">local t = table.pack("Mark", 7, "Tami", 9)
 print(t.n) -- 4
 </code></pre>
 <p>The <code>table.unpack</code> function returns consecutive array-like entries
 with keys starting from <code>1</code>.
 It does not work with dictionary-like tables.
 For example:</p>
-<pre><code class="language-lua">local names = {&quot;Mark&quot;, &quot;Tami&quot;, &quot;Comet&quot;}
+<pre><code class="language-lua">local names = {"Mark", "Tami", "Comet"}
 local father, mother, dog = table.unpack(names)
 print(father, mother, dog) -- Mark    Tami    Comet
 print(table.unpack(names)) -- same
@@ -1369,7 +1369,7 @@ This supports creating the equivalent of multi-dimensional arrays.
 For example:</p>
 <pre><code class="language-lua">local my2d = {}
 my2d[i] = {}
-my2D[i][j] = &quot;some-value&quot;
+my2D[i][j] = "some-value"
 print(my2D[i][j]) -- some-value
 
 local points = {
@@ -1385,7 +1385,7 @@ Existing destination table entries at target indexes are replaced.</p>
 <p>For example:</p>
 <pre><code class="language-lua">local function dump(t)
   for _, v in ipairs(t) do
-    print(&quot;  &quot; .. v)
+    print("  " .. v)
   end
 end
 
@@ -1398,43 +1398,43 @@ table.move(t1, 1, 3, 3, t2)
 dump(t1) -- 1 2 3
 dump(t2) -- 4 5 1 2 3; existing value 6 was replaced with 1
 </code></pre>
-<h2 id="modules" tabindex="-1">Modules</h2>
+<h2 id="modules">Modules</h2>
 <p>A module is defined by a table whose entries are variables and functions.
 Typically each module is defined in its own source file
 and made available in other source files using the <code>require</code> function.</p>
 <p>To define a module named <code>my_module</code>, create a file
 named <code>my_module.lua</code> containing code like the following:</p>
-<pre><code class="language-lua">-- It is a convention to name this &quot;M&quot;.
+<pre><code class="language-lua">-- It is a convention to name this "M".
 local M = {} -- a table
 
-M.some_variable = &quot;some value&quot;
+M.some_variable = "some value"
 
 -- Function names containing a dot cannot be declared `local`.
 function M.some_function(p1, p2)
-  print(&quot;some_function was passed &quot; .. p1 .. &quot; and &quot; .. p2)
+  print("some_function was passed " .. p1 .. " and " .. p2)
 end
 
 return M
 </code></pre>
 <p>The following code shows an equivalent way to write the code above:</p>
 <pre><code class="language-lua">return {
-  some_variable = &quot;some value&quot;,
+  some_variable = "some value",
   some_function = function(p1, p2)
-    print(&quot;some_function was passed &quot; .. p1 .. &quot; and &quot; .. p2)
+    print("some_function was passed " .. p1 .. " and " .. p2)
   end
 }
 </code></pre>
 <p>The following code demonstrates using the module defined above.
 Note that the string passed to the <code>require</code> function
 does not include the <code>.lua</code> file extension.</p>
-<pre><code class="language-lua">local mm = require(&quot;my_module&quot;)
+<pre><code class="language-lua">local mm = require("my_module")
 print(mm.some_variable) -- some value
 mm.some_function(1, 2) -- some_function was passed 1 and 2
 </code></pre>
 <p>By convention, module members whose names begin with an underscore
 are considered private.</p>
-<p>A Lua &quot;package&quot; is a collection of modules.</p>
-<h2 id="metatables" tabindex="-1">Metatables</h2>
+<p>A Lua “package” is a collection of modules.</p>
+<h2 id="metatables">Metatables</h2>
 <p>A metatable is a table that defines metamethods.
 All metamethods have names that begin with two underscores.
 Examples include:</p>
@@ -1455,8 +1455,8 @@ The following code demonstrates this:</p>
 assert(getmetatable(true) == nil) -- boolean type
 assert(getmetatable(123) == nil) -- number type
 
-assert(getmetatable(&quot;test&quot;) ~= nil) -- string type
-assert(getmetatable(&quot;test&quot;).__index == string)
+assert(getmetatable("test") ~= nil) -- string type
+assert(getmetatable("test").__index == string)
 -- This shows that the alternate place to look
 -- for string functions is the `string` module.
 
@@ -1474,9 +1474,9 @@ to call a function that is defined as a table entry.
 For example, the metatable of all <code>string</code> instances
 contains all the string functions.
 There are two ways to get the uppercase version of a string.</p>
-<pre><code class="language-lua">local s = &quot;test&quot;
-print(string.upper(s)) -- uses the dot operator and returns &quot;TEST&quot;
-print(s:upper()) -- uses the colon operator and returns &quot;TEST&quot;
+<pre><code class="language-lua">local s = "test"
+print(string.upper(s)) -- uses the dot operator and returns "TEST"
+print(s:upper()) -- uses the colon operator and returns "TEST"
 </code></pre>
 <p>In the last call to <code>upper</code> above
 Lua attempts to find an <code>upper</code> function in the value of <code>s</code>.
@@ -1493,19 +1493,19 @@ It is possible to configure this for a specific table instance.
 But doing so only adds the ability to use the colon operator
 with that specific table instance.
 For example:</p>
-<pre><code class="language-lua">local t = {&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;}
-print(table.concat(t, &quot; and &quot;)) -- apple and banana and cherry
+<pre><code class="language-lua">local t = {"apple", "banana", "cherry"}
+print(table.concat(t, " and ")) -- apple and banana and cherry
 setmetatable(t, {__index = table})
-print(t:concat(&quot; and &quot;)) -- apple and banana and cherry
+print(t:concat(" and ")) -- apple and banana and cherry
 </code></pre>
 <p>Another issue with this approach is that assigning keys in the table <code>t</code>
 that have the same name as a table function
 makes those functions inaccessible using the colon operator.
 For example:</p>
-<pre><code class="language-lua">t.concat = &quot;broken&quot;
-print(t:concat(&quot; and &quot;)) -- attempt to call a string value (method 'concat')
+<pre><code class="language-lua">t.concat = "broken"
+print(t:concat(" and ")) -- attempt to call a string value (method 'concat')
 </code></pre>
-<h3 id="table-delegation" tabindex="-1">Table Delegation</h3>
+<h3 id="table-delegation">Table Delegation</h3>
 <p>Custom metatables can be added to tables, but not to any other Lua types.
 This is done with the <code>setmetatable(table, metatable)</code> function.</p>
 <p>The <code>setmetatable</code> function returns its first argument which is
@@ -1542,7 +1542,7 @@ setmetatable(t, t)
 <p>The value of <code>__index</code> can be a function instead of a table.
 For example:</p>
 <pre><code class="language-lua">t.__index = function (table, key)
-  if key == &quot;beta&quot; then return 2 end
+  if key == "beta" then return 2 end
   return nil
 end
 setmetatable(t, t)
@@ -1555,16 +1555,16 @@ so it is necessary to understand all of them.</p>
 adding a metatable to all instances of a given kind of table
 when they are created.
 This is the topic of the next section.</p>
-<h3 id="classes" tabindex="-1">Classes</h3>
+<h3 id="classes">Classes</h3>
 <p>Lua does not directly support defining classes and creating instances.
 However, these can be simulated using a combination of tables,
 metatables, and functions.</p>
 <p>A class can be represented by a table.
 A <code>new</code> function can be added to the table and used to
 create instances which are represented by new tables.
-There is nothing special about the name &quot;new&quot;,
+There is nothing special about the name “new”,
 but many other programming languages use that name for creating instances
-of a class, so it's a good idea to stick with that convention.</p>
+of a class, so it’s a good idea to stick with that convention.</p>
 <p>The <code>new</code> function should:</p>
 <ul>
 <li>Create a new table to represent the instance OR
@@ -1579,7 +1579,7 @@ functions that act as instance methods of the class.</li>
 <p>The metatable can be a separate table defined
 outside the <code>new</code> function in a variable.</p>
 <pre><code class="language-lua">-- Define a Shape class.
-Shape = {name = &quot;unknown&quot;, sides = 0}
+Shape = {name = "unknown", sides = 0}
 local metatable = {__index = Shape}
 
 -- Constructor
@@ -1592,10 +1592,10 @@ end
 
 -- Method - note the colon
 function Shape:report()
-  print(string.format(&quot;%s has %d sides&quot;, self.name, self.sides))
+  print(string.format("%s has %d sides", self.name, self.sides))
 end
 
-my_shape = Shape.new(&quot;triangle&quot;, 3)
+my_shape = Shape.new("triangle", 3)
 my_shape:report() -- triangle has 3 sides
 </code></pre>
 <p>Approach #2:</p>
@@ -1618,31 +1618,31 @@ Shape.__index = Shape
 -- Replace the line starting with `local instance` with this.
 local instance = setmetatable({}, Shape)
 </code></pre>
-<p>The following code demonstrates defining and using a <code>Person</code> &quot;class&quot;.</p>
+<p>The following code demonstrates defining and using a <code>Person</code> “class”.</p>
 <pre><code class="language-lua">local mt = {
   __index = {
-    -- Taking a &quot;self&quot; argument allows calling with the method syntax.
+    -- Taking a "self" argument allows calling with the method syntax.
     -- There is no way to define a method with a colon inside a table.
     haveBirthday = function (self)
       self.age = self.age + 1
     end,
 
-    -- Taking a &quot;self&quot; argument allows calling with the method syntax.
+    -- Taking a "self" argument allows calling with the method syntax.
     report = function (self)
-      print(string.format(&quot;%s is %d years old.&quot;, self.name, self.age))
+      print(string.format("%s is %d years old.", self.name, self.age))
     end
   }
 }
 
 local Person = {
   new = function (p)
-    p = p or {name = &quot;unknown&quot;, age = 0}
+    p = p or {name = "unknown", age = 0}
     setmetatable(p, mt)
     return p
   end
 }
 
-local me = Person.new({name = &quot;Mark&quot;, age = 61})
+local me = Person.new({name = "Mark", age = 61})
 me:haveBirthday()
 me:report() -- Mark is 62 years old.
 </code></pre>
@@ -1694,14 +1694,14 @@ print(pt.distance1(pt)) -- 5.0
 -- is defined (in the shared metatable) and calls to it are concise.
 print(pt:distance1()) -- 5.0
 </code></pre>
-<h3 id="method-syntax" tabindex="-1">Method Syntax</h3>
+<h3 id="method-syntax">Method Syntax</h3>
 <p>Tables can have entries where the key is a function name
 and the value is a function.
 While this can be done in any table, it makes the most sense to do this
 in tables that are the values the <code>__index</code> property in a metatable.
 The reason for this is that those functions can be shared
 by multiple other tables that use the metatable.</p>
-<p>These functions can be referred to as &quot;methods&quot; because
+<p>These functions can be referred to as “methods” because
 they are intended to be invoked on a specific table instance.</p>
 <p>Methods can be defined inside or outside of a table constructor.
 There is one syntax for defining them inside a table constructor
@@ -1735,7 +1735,7 @@ end
 return M
 </code></pre>
 <p>The following code demonstrates using the module defined above:</p>
-<pre><code class="language-lua">local Point = require(&quot;point&quot;)
+<pre><code class="language-lua">local Point = require("point")
 
 local p = Point.new({x = 3, y = 4})
 print(Point.distance1(p)) -- 5.0
@@ -1746,8 +1746,8 @@ print(Point.distance3(p)) -- 5.0
 print(p:distance3()) -- 5.0
 </code></pre>
 <ul>
-<li><code>MyTable.my_function(p1, p2)</code> referred to below as a &quot;dot function&quot;</li>
-<li><code>MyTable:my_function(p1, p2)</code> referred to below as a &quot;colon function&quot;</li>
+<li><code>MyTable.my_function(p1, p2)</code> referred to below as a “dot function”</li>
+<li><code>MyTable:my_function(p1, p2)</code> referred to below as a “colon function”</li>
 </ul>
 <p>Dot functions are somewhat like object-oriented class methods and
 colon functions are somewhat like object-oriented instance methods.
@@ -1760,7 +1760,7 @@ The only difference between these is that
 calling a table function using a colon
 automatically passes the value on which it is called as the first argument,
 moving all the explicit arguments to the right.</p>
-<p>Let's clear up the confusion with some examples.</p>
+<p>Let’s clear up the confusion with some examples.</p>
 <pre><code class="language-lua">local point = { x = 3, y = 4 }
 function Point.dot_distance(self)
   return math.sqrt(self.x^2 + self.y^2)
@@ -1788,7 +1788,7 @@ Point = class({
     return Point.new({x = p1.x + p2.x, y = p1.y + p2.y})
   end,
   __tostring = function (p)
-    return string.format(&quot;(%.2f, %.2f)&quot;, p.x, p.y)
+    return string.format("(%.2f, %.2f)", p.x, p.y)
   end
 })
 
@@ -1846,25 +1846,25 @@ MyTable:colonOuter(1, 2) -- MyTable address, 1, 2
 -- While this works, it is overly verbose.
 MyTable.colonOuter(MyTable, 1, 2) -- MyTable address, 1, 2
 </code></pre>
-<p>TODO: See my question about the colon syntax at <a href="https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/">https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/</a>
+<p>TODO: See my question about the colon syntax at <a href="https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/" rel="noopener" target="_blank">https://www.reddit.com/r/lua/comments/12tc33n/colon_syntax/</a>
 TODO: The answer is provided in the example code below!</p>
-<pre><code class="language-lua">s = &quot;test&quot;
+<pre><code class="language-lua">s = "test"
 print(s:upper()) -- TEST
 -- The previous line works because all string instances have a metatable
 -- with `__index` set to the table `string` that defines all the string functions.
 print(getmetatable(s).__index.upper)
 
 -- Tables do not do the same thing.
-t = {&quot;a&quot;, &quot;b&quot;, &quot;c&quot;}
-print(table.concat(t, &quot; &quot;)) -- a b c
--- print(t:concat(&quot; &quot;)) -- attempt to call a nil value (method 'concat')
+t = {"a", "b", "c"}
+print(table.concat(t, " ")) -- a b c
+-- print(t:concat(" ")) -- attempt to call a nil value (method 'concat')
 print(getmetatable(t)) -- nil
 
 -- We can fix this for individual tables, not for all of them at once.
 setmetatable(t, {__index = table})
-print(t:concat(&quot; &quot;)) -- a b c
+print(t:concat(" ")) -- a b c
 </code></pre>
-<h3 id="inheritance" tabindex="-1">Inheritance</h3>
+<h3 id="inheritance">Inheritance</h3>
 <p>We can simulate class inheritance by setting the metatable
 of a class to its superclass.
 The following code demonstrates this.</p>
@@ -1872,7 +1872,7 @@ The following code demonstrates this.</p>
 Animal.__index = Animal
 
 function Animal:displayName()
-  print(&quot;Animal: name = &quot; .. self.name)
+  print("Animal: name = " .. self.name)
 end
 
 Dog = {}
@@ -1880,7 +1880,7 @@ Dog.__index = Dog
 setmetatable(Dog, Animal)
 
 --[[ function Dog:displayName()
-  print(&quot;Dog: name = &quot; .. self.name)
+  print("Dog: name = " .. self.name)
 end ]]
 Whippet = {}
 Whippet.__index = Whippet
@@ -1893,9 +1893,9 @@ function Whippet.new(name)
 end
 
 --[[ function Whippet:displayName()
-  print(&quot;Whippet: name = &quot; .. self.name)
+  print("Whippet: name = " .. self.name)
 end ]]
-local w = Whippet.new(&quot;Comet&quot;)
+local w = Whippet.new("Comet")
 w:displayName() -- uses closest version found
 </code></pre>
 <p>Here is one more example of using inheritance.
@@ -1907,13 +1907,13 @@ The lack of a <code>new</code> function is what makes it abstract.</p>
 <p>The <code>Triangle</code> and <code>Rectangle</code> classes both inherit from the <code>Shape</code> class.
 The <code>Square</code> class inherits from the <code>Rectangle</code> class.</p>
 <pre><code class="language-lua">-- Define a Shape class.
-Shape = {name = &quot;unknown&quot;, sides = 0}
+Shape = {name = "unknown", sides = 0}
 Shape.__index = Shape
 
 -- Method
 function Shape:report()
   print(string.format(
-    &quot;%s has %d sides and area %.1f.&quot;,
+    "%s has %d sides and area %.1f.",
     self.name,
     self.sides,
     self:area()
@@ -1921,7 +1921,7 @@ function Shape:report()
 end
 
 -- Define a Triangle class.
-Triangle = {name = &quot;triangle&quot;, sides = 3}
+Triangle = {name = "triangle", sides = 3}
 Triangle.__index = Triangle
 setmetatable(Triangle, Shape) -- Triangle inherits from Shape
 
@@ -1942,7 +1942,7 @@ triangle = Triangle.new(4, 6)
 triangle:report() -- triangle has 3 sides and area 12.0
 
 -- Define a Rectangle class.
-Rectangle = {name = &quot;rectangle&quot;, sides = 4}
+Rectangle = {name = "rectangle", sides = 4}
 Rectangle.__index = Rectangle
 setmetatable(Rectangle, Shape) -- Rectangle inherits from Shape
 
@@ -1965,7 +1965,7 @@ rectangle:report() -- rectangle has 4 sides and area 24.0
 -- Define a Square class.
 -- Note that we didn't specify the number of sides.
 -- It will get that from its superclass Rectangle.
-Square = {name = &quot;square&quot;}
+Square = {name = "square"}
 Square.__index = Square
 setmetatable(Square, Rectangle) -- Square inherits from Rectangle
 
@@ -1987,12 +1987,12 @@ square:report() -- square has 4 sides and area 25.0
 </code></pre>
 <p>TODO: Can you simplify inheritance similar to how you simplified defining a class?
 TODO: Maybe you should show this example again using your <code>class</code> function.</p>
-<h3 id="multiple-inheritance" tabindex="-1">Multiple Inheritance</h3>
-<p>TODO: Add this based on <a href="https://www.youtube.com/watch?v=1BFoprD30dE&amp;t=97s">https://www.youtube.com/watch?v=1BFoprD30dE&amp;t=97s</a>.</p>
-<h3 id="simplifying-classes" tabindex="-1">Simplifying Classes</h3>
+<h3 id="multiple-inheritance">Multiple Inheritance</h3>
+<p>TODO: Add this based on <a href="https://www.youtube.com/watch?v=1BFoprD30dE&#x26;t=97s" rel="noopener" target="_blank">https://www.youtube.com/watch?v=1BFoprD30dE&#x26;t=97s</a>.</p>
+<h3 id="simplifying-classes">Simplifying Classes</h3>
 <p>There is a fair amount boilerplate code in all the examples above
 and plenty of opportunity to make mistakes.
-We can address this by creating an &quot;oo&quot; module that defines the
+We can address this by creating an “oo” module that defines the
 functions <code>class</code> and <code>subclass</code> that do all the work for us.</p>
 <p>The <code>oo</code> module can be defined as follows:</p>
 <pre><code class="language-lua">local M = {}
@@ -2006,7 +2006,7 @@ end
 
 local function move_metamethods(source, target)
   for k, v in pairs(source) do
-    if k:startsWith(&quot;__&quot;) then
+    if k:startsWith("__") then
       target[k] = v
       source[k] = nil
     end
@@ -2017,7 +2017,7 @@ end
 -- The `defaults` parameter is a table that holds default property values
 -- and optional metamethods like `__tostring`.
 function M.class(defaults)
-  assert(type(defaults) == &quot;table&quot;, &quot;defaults must be a table&quot;)
+  assert(type(defaults) == "table", "defaults must be a table")
 
   local metatable = { __index = defaults }
   move_metamethods(defaults, metatable)
@@ -2025,7 +2025,7 @@ function M.class(defaults)
   return {
     meta = metatable, -- used by subclass function
     new = function(initial)
-      assert(not defaults.abstract, &quot;cannot create instance of abstract class&quot;)
+      assert(not defaults.abstract, "cannot create instance of abstract class")
       local instance = initial or {}
       setmetatable(instance, metatable)
       return instance
@@ -2037,8 +2037,8 @@ end
 -- The `defaults` parameter is a table that holds default property values
 -- and optional metamethods like `__tostring`.
 function M.subclass(baseClass, defaults)
-  assert(type(baseClass) == &quot;table&quot;, &quot;base class must be a table&quot;)
-  assert(type(defaults) == &quot;table&quot;, &quot;defaults must be a table&quot;)
+  assert(type(baseClass) == "table", "base class must be a table")
+  assert(type(defaults) == "table", "defaults must be a table")
 
   local metatable = { __index = defaults }
   move_metamethods(defaults, metatable)
@@ -2057,8 +2057,8 @@ end
 return M
 </code></pre>
 <p>The following code demonstrates using the
-<code>class</code> and <code>subclass</code> functions defined in the &quot;oo&quot; module.</p>
-<pre><code class="language-lua">local oo = require &quot;oo&quot;
+<code>class</code> and <code>subclass</code> functions defined in the “oo” module.</p>
+<pre><code class="language-lua">local oo = require "oo"
 
 Point = oo.class({
   -- Properties
@@ -2075,7 +2075,7 @@ Point = oo.class({
     return Point.new({ x = p1.x + p2.x, y = p1.y + p2.y })
   end,
   __tostring = function(p)
-    return string.format(&quot;(%.2f, %.2f)&quot;, p.x, p.y)
+    return string.format("(%.2f, %.2f)", p.x, p.y)
   end
 })
 
@@ -2093,215 +2093,215 @@ print(p4) -- (0.00, 7.00)
 Shape = oo.class({
   abstract = true,
   report = function(self)
-    print(string.format(&quot;%s has %d sides and area %f&quot;, self.name, self.sides,
+    print(string.format("%s has %d sides and area %f", self.name, self.sides,
       self:area()))
   end
 })
 
 Triangle = oo.subclass(Shape, {
-  name = &quot;triangle&quot;,
+  name = "triangle",
   sides = 3,
   area = function(self) return 0.5 * self.base * self.height end
 })
 local triangle = Triangle.new({ base = 4, height = 6 })
-print(&quot;triangle area =&quot;, triangle:area()) -- 12.0
+print("triangle area =", triangle:area()) -- 12.0
 triangle:report() -- triangle has 3 sides and area 12.000000
 
 Rectangle = oo.subclass(Shape, {
-  name = &quot;rectangle&quot;,
+  name = "rectangle",
   sides = 4,
   area = function(self) return self.width * self.height end
 })
 local rectangle = Rectangle.new({ width = 4, height = 6 })
 rectangle:report() -- rectangle has 4 sides
-print(&quot;rectangle area = &quot; .. rectangle:area()) -- 24
+print("rectangle area = " .. rectangle:area()) -- 24
 
 Square = oo.subclass(Rectangle, {
-  name = &quot;square&quot;,
+  name = "square",
   area = function(self) return self.side ^ 2 end
 })
 local square = Square.new({ side = 5 })
 square:report() -- square has 4 sides
-print(&quot;square area = &quot; .. square:area()) -- 25.0
+print("square area = " .. square:area()) -- 25.0
 </code></pre>
-<h2 id="metamethods" tabindex="-1">Metamethods</h2>
+<h2 id="metamethods">Metamethods</h2>
 <p>Metamethods are special methods from a predefined list
 that can be defined in a metatable.
 Many of metamethods define the functionality of Lua operators
 on tables associated with the metatable.</p>
 <p>The following metamethods define the operation of mathematical operators.</p>
-<table>
-<thead>
-<tr>
-<th>Metamethod</th>
-<th>Operator</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__add</code></td>
-<td><code>+</code></td>
-</tr>
-<tr>
-<td><code>__sub</code></td>
-<td><code>-</code></td>
-</tr>
-<tr>
-<td><code>__mul</code></td>
-<td><code>*</code></td>
-</tr>
-<tr>
-<td><code>__div</code></td>
-<td><code>/</code></td>
-</tr>
-<tr>
-<td><code>__idiv</code></td>
-<td><code>//</code></td>
-</tr>
-<tr>
-<td><code>__mod</code></td>
-<td><code>%</code></td>
-</tr>
-<tr>
-<td><code>__pow</code></td>
-<td><code>^</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metamethod</th><th>Operator</th></tr></thead><tbody><tr><td><code>__add</code></td><td><code>+</code></td></tr><tr><td><code>__sub</code></td><td><code>-</code></td></tr><tr><td><code>__mul</code></td><td><code>*</code></td></tr><tr><td><code>__div</code></td><td><code>/</code></td></tr><tr><td><code>__idiv</code></td><td><code>//</code></td></tr><tr><td><code>__mod</code></td><td><code>%</code></td></tr><tr><td><code>__pow</code></td><td><code>^</code></td></tr></tbody></table>
 <p>The following metamethods define the operation of logical operators.</p>
-<table>
-<thead>
-<tr>
-<th>Metamethod</th>
-<th>Operator</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__eq</code></td>
-<td><code>==</code></td>
-</tr>
-<tr>
-<td><code>__lt</code></td>
-<td><code>&lt;</code></td>
-</tr>
-<tr>
-<td><code>__le</code></td>
-<td><code>&lt;=</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metamethod</th><th>Operator</th></tr></thead><tbody><tr><td><code>__eq</code></td><td><code>==</code></td></tr><tr><td><code>__lt</code></td><td><code>&#x3C;</code></td></tr><tr><td><code>__le</code></td><td><code>&#x3C;=</code></td></tr></tbody></table>
 <p>There are no metamethods that correspond to the logical operators
-<code>~=</code>, <code>&gt;</code>, and <code>&gt;=</code>.
+<code>~=</code>, <code>></code>, and <code>>=</code>.
 Those are derived from the negation of the other logical operators.</p>
 <p>There are no metamethods that correspond to the logical operators
 <code>and</code>, <code>or</code>, and <code>not</code>.</p>
 <p>The following metamethods define the operation of bitwise operators.</p>
-<table>
-<thead>
-<tr>
-<th>Metamethod</th>
-<th>Operator</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__band</code></td>
-<td><code>&amp;</code></td>
-</tr>
-<tr>
-<td><code>__bor</code></td>
-<td><code>|</code></td>
-</tr>
-<tr>
-<td><code>__bxor</code></td>
-<td><code>~</code></td>
-</tr>
-<tr>
-<td><code>__bnot</code></td>
-<td><code>!</code></td>
-</tr>
-<tr>
-<td><code>__shl</code></td>
-<td><code>&lt;&lt;</code></td>
-</tr>
-<tr>
-<td><code>__shr</code></td>
-<td><code>&gt;&gt;</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metamethod</th><th>Operator</th></tr></thead><tbody><tr><td><code>__band</code></td><td><code>&#x26;</code></td></tr><tr><td><code>__bor</code></td><td><code>|</code></td></tr><tr><td><code>__bxor</code></td><td><code>~</code></td></tr><tr><td><code>__bnot</code></td><td><code>!</code></td></tr><tr><td><code>__shl</code></td><td><code>&#x3C;&#x3C;</code></td></tr><tr><td><code>__shr</code></td><td><code>>></code></td></tr></tbody></table>
 <p>The following metamethods define the operation other operators.</p>
-<table>
-<thead>
-<tr>
-<th>Metamethod</th>
-<th>Operator</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__concat</code></td>
-<td><code>..</code></td>
-</tr>
-<tr>
-<td><code>__len</code></td>
-<td><code>#</code></td>
-</tr>
-<tr>
-<td><code>__unm</code></td>
-<td><code>-</code> (unary)</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metamethod</th><th>Operator</th></tr></thead><tbody><tr><td><code>__concat</code></td><td><code>..</code></td></tr><tr><td><code>__len</code></td><td><code>#</code></td></tr><tr><td><code>__unm</code></td><td><code>-</code> (unary)</td></tr></tbody></table>
 <p>Metamethods also support implementing functions
 that are called when specific things occur
 that are unrelated to operators.</p>
-<table>
-<thead>
-<tr>
-<th>Metamethod</th>
-<th>Operation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>__call</code></td>
-<td>called when the table is called like a function</td>
-</tr>
-<tr>
-<td><code>__gc</code></td>
-<td>called after garbage collection runs</td>
-</tr>
-<tr>
-<td><code>__index</code></td>
-<td>called if a key is not found in the table</td>
-</tr>
-<tr>
-<td><code>__metatable</code></td>
-<td>prevents changes to metatable; see below</td>
-</tr>
-<tr>
-<td><code>__mode</code></td>
-<td>returns a string; see below</td>
-</tr>
-<tr>
-<td><code>__newindex</code></td>
-<td>called when an entry is added to the table</td>
-</tr>
-<tr>
-<td><code>__pairs</code></td>
-<td><code>pairs</code> function</td>
-</tr>
-<tr>
-<td><code>__tostring</code></td>
-<td>returns a string representation</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Metamethod</th><th>Operation</th></tr></thead><tbody><tr><td><code>__call</code></td><td>called when the table is called like a function</td></tr><tr><td><code>__gc</code></td><td>called after garbage collection runs</td></tr><tr><td><code>__index</code></td><td>called if a key is not found in the table</td></tr><tr><td><code>__metatable</code></td><td>prevents changes to metatable; see below</td></tr><tr><td><code>__mode</code></td><td>returns a string; see below</td></tr><tr><td><code>__newindex</code></td><td>called when an entry is added to the table</td></tr><tr><td><code>__pairs</code></td><td><code>pairs</code> function</td></tr><tr><td><code>__tostring</code></td><td>returns a string representation</td></tr></tbody></table>
 <p>The <code>__index</code> metamethod is perhaps the most important one
 in terms of the breadth of functionality it unlocks.
-This was covered in previous sections on &quot;Metatables&quot; and &quot;Classes&quot;.</p>
+This was covered in previous sections on “Metatables” and “Classes”.</p>
 <p>When the <code>__metatable</code> function is defined,
 the metatable cannot be modified and this returns an error message.</p>
 <p>When the <code>__mode</code> function returns a string.
@@ -2310,7 +2310,7 @@ When it contains <code>v</code>, the values are weak.
 Both can be true.</p>
 <p>The <code>__pairs</code> method method enables iterating over metatable entries.</p>
 <p>TODO: See your metamethods.lua file.</p>
-<h2 id="evaluting-code-at-runtime" tabindex="-1">Evaluting Code at Runtime</h2>
+<h2 id="evaluting-code-at-runtime">Evaluting Code at Runtime</h2>
 <p>The <code>load</code> function takes a string or a function.
 It returns a function and message, either of which can be <code>nil</code>.</p>
 <p>When a string is passed it parses it as Lua code and
@@ -2321,8 +2321,8 @@ If there are errors in the code, it returns
 It is called repeatedly until it returns an empty string or <code>nil</code>.
 The returned strings are concatenated to form the entire code to be compiled.</p>
 <p>Here are two contrived examples.</p>
-<pre><code class="language-lua">local name = &quot;World&quot;
-local code = &quot;print('Hello, &quot; .. name .. &quot;!')&quot;
+<pre><code class="language-lua">local name = "World"
+local code = "print('Hello, " .. name .. "!')"
 local fn = load(code)
 if fn then print(fn()) end -- Hello, World!
 
@@ -2331,12 +2331,12 @@ local last = 4
 local function getCode()
   -- local code
   if n == 0 then
-    code = &quot;print(&quot;
-  elseif n &lt; last then
-    code = n .. &quot;,&quot;
+    code = "print("
+  elseif n &#x3C; last then
+    code = n .. ","
   elseif n == last then
-    code = n .. &quot;)&quot;
-  elseif n &gt; last then
+    code = n .. ")"
+  elseif n > last then
     code = nil
   end
 
@@ -2353,11 +2353,10 @@ If no file path is provided, it reads code from <code>stdin</code>.</p>
 <p>The <code>dofile</code> function reads code from a file or <code>stdin</code>,
 executes it, and returns all the values returned by the code
 rather than returning a function to be executed later.</p>
-<h2 id="lua-functional-(luafun)" tabindex="-1">Lua Functional (luafun)</h2>
-<p>The <a href="https://www.lua.org/manual/5.4/manual.html#6.6"
-target="_blank">table</a> library does not include
+<h2 id="lua-functional-luafun">Lua Functional (luafun)</h2>
+<p>The <a href="https://www.lua.org/manual/5.4/manual.html#6.6" target="_blank">table</a> library does not include
 functions such as <code>map</code>, <code>filter</code>, <code>reduce</code>, <code>some</code>, and <code>every</code>.
-It's not difficult to write these though.
+It’s not difficult to write these though.
 The following code implements and demonstrates using each of them.</p>
 <pre><code class="language-lua">function map(fn, t)
   local result = {}
@@ -2370,7 +2369,7 @@ end
 local numbers = { 1, 2, 3, 4, 5 }
 local function square(n) return n * n end
 local squares = map(square, numbers)
-print(table.concat(squares, &quot;, &quot;)) -- 1, 4, 9, 16, 25
+print(table.concat(squares, ", ")) -- 1, 4, 9, 16, 25
 
 function filter(fn, t)
   local result = {}
@@ -2384,7 +2383,7 @@ end
 
 local function isEven(n) return n % 2 == 0 end
 local evens = filter(isEven, numbers)
-print(table.concat(evens, &quot;, &quot;)) -- 2, 4
+print(table.concat(evens, ", ")) -- 2, 4
 
 function reduce(fn, t, initial)
   local acc = initial
@@ -2411,8 +2410,8 @@ function every(fn, t)
   return true
 end
 
-print(some(function(n) return n &gt; 3 end, numbers))  -- true
-print(every(function(n) return n &lt; 7 end, numbers)) -- true
+print(some(function(n) return n > 3 end, numbers))  -- true
+print(every(function(n) return n &#x3C; 7 end, numbers)) -- true
 </code></pre>
 <p>The functions <code>map</code>, <code>filter</code>, and <code>reduce</code> (and many more)
 can be found in the <a href="https://luafun.github.io/?v=1.1.1" rel="noopener" target="_blank">Lua Functional Library</a>.</p>
@@ -2420,7 +2419,7 @@ can be found in the <a href="https://luafun.github.io/?v=1.1.1" rel="noopener" t
 To download the file, enter
 <code>wget https://raw.github.com/luafun/luafun/master/fun.lua</code>.</p>
 <p>The following code demonstrates basic use of this library:</p>
-<pre><code class="language-lua">local fun = require(&quot;fun&quot;)
+<pre><code class="language-lua">local fun = require("fun")
 
 local scores = {7, 4, 13}
 
@@ -2430,27 +2429,27 @@ local scores = {7, 4, 13}
 -- Use `map` to double the numbers in a table.
 local function double(n) return n * 2 end
 doubled_iter = fun.map(double, scores)
-print(&quot;Doubled Scores&quot;)
+print("Doubled Scores")
 fun.each(print, doubled_iter) -- 14 8 26
 
 -- Use `filter` to get odd numbers from a table.
 local function odd(n) return n % 2 == 1 end
 odd_iter = fun.filter(odd, scores)
-print(&quot;Odd Scores&quot;)
+print("Odd Scores")
 fun.each(print, odd_iter) -- 7 3
 
 -- Use `reduce` to sum the numbers in a table.
 local function add(a, b) return a + b end
 total = fun.reduce(add, 0, scores)
-print(&quot;Total is &quot; .. total) -- 24
+print("Total is " .. total) -- 24
 
 -- Do the same with the `sum` function.
-print(&quot;Total is &quot; .. fun.sum(scores)) -- 24
+print("Total is " .. fun.sum(scores)) -- 24
 
 -- There are MANY more functions in the luafun library!
 </code></pre>
 <p>TODO: How can you use a for loop to iterate over values in an iterator?</p>
-<h2 id="standard-library" tabindex="-1">Standard Library</h2>
+<h2 id="standard-library">Standard Library</h2>
 <p>The Lua standard library defines the following modules:</p>
 <ul>
 <li><a href="https://www.lua.org/manual/5.4/manual.html#6.1" target="_blank">basic</a></li>
@@ -2465,121 +2464,121 @@ print(&quot;Total is &quot; .. fun.sum(scores)) -- 24
 <li><a href="https://www.lua.org/manual/5.4/manual.html#6.5" target="_blank">utf8</a></li>
 </ul>
 <p>Modules in the standard library do not need to be imported to use them.</p>
-<h3 id="basic-module" tabindex="-1">basic module</h3>
+<h3 id="basic-module">basic module</h3>
 <p>The <code>basic</code> module defines the following core Lua functions.</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>assert(v [,message])</code></td>
-<td>raises an error if <code>v</code> is <code>false</code> or <code>nil</code></td>
-</tr>
-<tr>
-<td><code>collectgarbage([opt [,arg]])</code></td>
-<td>controls the operation of the garbage collector</td>
-</tr>
-<tr>
-<td><code>dofile([filename])</code></td>
-<td>opens a file containing Lua code and executes it</td>
-</tr>
-<tr>
-<td><code>error(message [, level])</code></td>
-<td>raises an error that can be caught with <code>pcall</code> and <code>xpcall</code></td>
-</tr>
-<tr>
-<td><code>_G</code></td>
-<td>holds the global environment</td>
-</tr>
-<tr>
-<td><code>getmetatable(object)</code></td>
-<td>gets the metatable of a given object</td>
-</tr>
-<tr>
-<td><code>ipairs(t)</code></td>
-<td>returns three values needed to iterate over the indexes and values in an array-like table</td>
-</tr>
-<tr>
-<td><code>load(chunk, [, chunkname [, mode [, env]]])</code></td>
-<td>loads Lua code from a string or function and returns a function that will execute it</td>
-</tr>
-<tr>
-<td><code>loadfile([filename [, mode, [, env]]])</code></td>
-<td>loads Lua code from a file and returns a function that will execute it</td>
-</tr>
-<tr>
-<td><code>next(table [, index])</code></td>
-<td>gets the next index and value in array-like table</td>
-</tr>
-<tr>
-<td><code>pairs(t)</code></td>
-<td>returns three values needed to iterate over the keys and values in a dictionary-like table</td>
-</tr>
-<tr>
-<td><code>pcall(f, [, arg1, ...])</code></td>
-<td>takes a function and arguments to pass to it; performs a &quot;protected call&quot; that catches errors</td>
-</tr>
-<tr>
-<td><code>print(...)</code></td>
-<td>takes any number of arguments and sends their <code>tostring</code> values to <code>stdout</code></td>
-</tr>
-<tr>
-<td><code>rawequal(v1, v2)</code></td>
-<td>compares values without using their <code>__eq</code> metamethods</td>
-</tr>
-<tr>
-<td><code>rawget(table, index)</code></td>
-<td>gets the value at a given table index without using the <code>__index</code> metamethod</td>
-</tr>
-<tr>
-<td><code>rawlen(v)</code></td>
-<td>gets the length of a value without using its <code>__len</code> metamethod</td>
-</tr>
-<tr>
-<td><code>rawset(table, index, value)</code></td>
-<td>sets the value at a given table index without using the <code>__newindex</code> metamethod</td>
-</tr>
-<tr>
-<td><code>select(index, ...)</code></td>
-<td>returns a subset of its arguments starting at a given index or the number of arguments if the first is <code>#</code></td>
-</tr>
-<tr>
-<td><code>setmetatable(table, metatable)</code></td>
-<td>sets the metatable of a given table</td>
-</tr>
-<tr>
-<td><code>tonumber(e [, base])</code></td>
-<td>converts a string to a number in a given base (defaults to 10)</td>
-</tr>
-<tr>
-<td><code>tostring(v)</code></td>
-<td>converts a value to a string</td>
-</tr>
-<tr>
-<td><code>type(v)</code></td>
-<td>returns the type of a value as a string</td>
-</tr>
-<tr>
-<td><code>_VERSION</code></td>
-<td>a global variable that holds a string that describes the current Lua version (ex. &quot;Lua 5.4&quot;)</td>
-</tr>
-<tr>
-<td><code>warn(msg1, ...)</code></td>
-<td>writes a warning message to <code>stdout</code> that constructed by concatenating its string arguments</td>
-</tr>
-<tr>
-<td><code>xpcall(f, msgh, [, arg1, ...])</code></td>
-<td>similar to <code>pcall</code>, but takes a message handler that can be used to capture additional error information</td>
-</tr>
-</tbody>
-</table>
-<h3 id="debug-module" tabindex="-1">debug module</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody><tr><td><code>assert(v [,message])</code></td><td>raises an error if <code>v</code> is <code>false</code> or <code>nil</code></td></tr><tr><td><code>collectgarbage([opt [,arg]])</code></td><td>controls the operation of the garbage collector</td></tr><tr><td><code>dofile([filename])</code></td><td>opens a file containing Lua code and executes it</td></tr><tr><td><code>error(message [, level])</code></td><td>raises an error that can be caught with <code>pcall</code> and <code>xpcall</code></td></tr><tr><td><code>_G</code></td><td>holds the global environment</td></tr><tr><td><code>getmetatable(object)</code></td><td>gets the metatable of a given object</td></tr><tr><td><code>ipairs(t)</code></td><td>returns three values needed to iterate over the indexes and values in an array-like table</td></tr><tr><td><code>load(chunk, [, chunkname [, mode [, env]]])</code></td><td>loads Lua code from a string or function and returns a function that will execute it</td></tr><tr><td><code>loadfile([filename [, mode, [, env]]])</code></td><td>loads Lua code from a file and returns a function that will execute it</td></tr><tr><td><code>next(table [, index])</code></td><td>gets the next index and value in array-like table</td></tr><tr><td><code>pairs(t)</code></td><td>returns three values needed to iterate over the keys and values in a dictionary-like table</td></tr><tr><td><code>pcall(f, [, arg1, ...])</code></td><td>takes a function and arguments to pass to it; performs a “protected call” that catches errors</td></tr><tr><td><code>print(...)</code></td><td>takes any number of arguments and sends their <code>tostring</code> values to <code>stdout</code></td></tr><tr><td><code>rawequal(v1, v2)</code></td><td>compares values without using their <code>__eq</code> metamethods</td></tr><tr><td><code>rawget(table, index)</code></td><td>gets the value at a given table index without using the <code>__index</code> metamethod</td></tr><tr><td><code>rawlen(v)</code></td><td>gets the length of a value without using its <code>__len</code> metamethod</td></tr><tr><td><code>rawset(table, index, value)</code></td><td>sets the value at a given table index without using the <code>__newindex</code> metamethod</td></tr><tr><td><code>select(index, ...)</code></td><td>returns a subset of its arguments starting at a given index or the number of arguments if the first is <code>#</code></td></tr><tr><td><code>setmetatable(table, metatable)</code></td><td>sets the metatable of a given table</td></tr><tr><td><code>tonumber(e [, base])</code></td><td>converts a string to a number in a given base (defaults to 10)</td></tr><tr><td><code>tostring(v)</code></td><td>converts a value to a string</td></tr><tr><td><code>type(v)</code></td><td>returns the type of a value as a string</td></tr><tr><td><code>_VERSION</code></td><td>a global variable that holds a string that describes the current Lua version (ex. “Lua 5.4”)</td></tr><tr><td><code>warn(msg1, ...)</code></td><td>writes a warning message to <code>stdout</code> that constructed by concatenating its string arguments</td></tr><tr><td><code>xpcall(f, msgh, [, arg1, ...])</code></td><td>similar to <code>pcall</code>, but takes a message handler that can be used to capture additional error information</td></tr></tbody></table>
+<h3 id="debug-module">debug module</h3>
 <p>TODO: Add detail on this module.</p>
-<h3 id="io-module" tabindex="-1">io Module</h3>
+<h3 id="io-module">io Module</h3>
 <p>The following code shows the most basic way to write to a new file.
 If the file already exists, it is overwritten.</p>
 <pre><code class="language-lua">-- Open a file in text mode and make it the default output file.
@@ -2608,122 +2607,122 @@ io.input():close()
 </code></pre>
 <p>Files can be opened in one of the following modes
 where the columns indicate the capabilities of each mode:</p>
-<table>
-<thead>
-<tr>
-<th>Mode</th>
-<th style="text-align:center">New</th>
-<th style="text-align:center">Overwrite</th>
-<th style="text-align:center">Read</th>
-<th style="text-align:center">Write</th>
-<th style="text-align:center">Append</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>r</code></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><code>w</code></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><code>a</code></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-</tr>
-<tr>
-<td><code>r+</code></td>
-<td style="text-align:center"></td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><code>w+</code></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-</tr>
-<tr>
-<td><code>a+</code></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-<td style="text-align:center"></td>
-<td style="text-align:center">X</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Mode</th><th align="center">New</th><th align="center">Overwrite</th><th align="center">Read</th><th align="center">Write</th><th align="center">Append</th></tr></thead><tbody><tr><td><code>r</code></td><td align="center"></td><td align="center"></td><td align="center">X</td><td align="center"></td><td align="center"></td></tr><tr><td><code>w</code></td><td align="center">X</td><td align="center">X</td><td align="center"></td><td align="center">X</td><td align="center"></td></tr><tr><td><code>a</code></td><td align="center">X</td><td align="center"></td><td align="center"></td><td align="center"></td><td align="center">X</td></tr><tr><td><code>r+</code></td><td align="center"></td><td align="center"></td><td align="center">X</td><td align="center">X</td><td align="center"></td></tr><tr><td><code>w+</code></td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center">X</td><td align="center"></td></tr><tr><td><code>a+</code></td><td align="center">X</td><td align="center"></td><td align="center">X</td><td align="center"></td><td align="center">X</td></tr></tbody></table>
 <p>To open a file in a specific mode:</p>
-<pre><code class="language-lua">local stream = io.open(file_path, mode) -- mode defaults to &quot;r&quot;
+<pre><code class="language-lua">local stream = io.open(file_path, mode) -- mode defaults to "r"
 </code></pre>
 <p>To write to a file using the method syntax:</p>
 <pre><code class="language-lua">stream:write(data)
 </code></pre>
 <p>The following code demonstrates many ways to read from a stream.</p>
-<pre><code class="language-lua">contents = stream:read(&quot;a&quot;) -- reads entire contents
+<pre><code class="language-lua">contents = stream:read("a") -- reads entire contents
 
-line = stream:read(&quot;l&quot;) -- reads next line, discarding newline
-line = stream:read(&quot;L&quot;) -- reads next line, keeiping newline
+line = stream:read("l") -- reads next line, discarding newline
+line = stream:read("L") -- reads next line, keeiping newline
 
-number = stream:read(&quot;n&quot;) -- reads one number
+number = stream:read("n") -- reads one number
 
-n1, n2 = stream:read(&quot;n&quot;, &quot;n&quot;) -- reads two numbers
+n1, n2 = stream:read("n", "n") -- reads two numbers
 
-text = stream:read(n) -- reads a string of up to &quot;n&quot; bytes
+text = stream:read(n) -- reads a string of up to "n" bytes
 
-end_test = stream:read(0) -- returns nil if at end of file; otherwise &quot;&quot;
+end_test = stream:read(0) -- returns nil if at end of file; otherwise ""
 </code></pre>
 <p>To seek to a specific byte offset in a stream:</p>
-<pre><code class="language-lua">stream:seek(&quot;set&quot;, offset)
+<pre><code class="language-lua">stream:seek("set", offset)
 </code></pre>
 <p>To close a stream:</p>
 <pre><code class="language-lua">stream:close()
 </code></pre>
-<h3 id="math-module" tabindex="-1">math module</h3>
+<h3 id="math-module">math module</h3>
 <p>Constants defined by this module include:</p>
-<table>
-<thead>
-<tr>
-<th>Constant</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>math.huge</code></td>
-<td>floating point value greater than any other number</td>
-</tr>
-<tr>
-<td><code>math.maxinteger</code></td>
-<td>maximum integer value</td>
-</tr>
-<tr>
-<td><code>math.mininteger</code></td>
-<td>minimum integer value</td>
-</tr>
-<tr>
-<td><code>math.pi</code></td>
-<td>value of π</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Constant</th><th>Meaning</th></tr></thead><tbody><tr><td><code>math.huge</code></td><td>floating point value greater than any other number</td></tr><tr><td><code>math.maxinteger</code></td><td>maximum integer value</td></tr><tr><td><code>math.mininteger</code></td><td>minimum integer value</td></tr><tr><td><code>math.pi</code></td><td>value of π</td></tr></tbody></table>
 <p>A constant for <code>e</code> is not defined, but it can be obtained from <code>math.exp(1)</code>.</p>
 <p>Trigonometry functions defined by this module include
 <code>sin</code>, <code>cos</code>, <code>tan</code>, <code>asin</code>, <code>acos</code>, and <code>atan</code>.
@@ -2740,120 +2739,120 @@ For example:</p>
 <li><code>math.random(5, 10)</code> returns an integer in the range [5, 10]</li>
 </ul>
 <p>Other functions defined in this module include:</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Returns</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>math.abs(x)</code></td>
-<td>absolute value</td>
-</tr>
-<tr>
-<td><code>math.ceil(x)</code></td>
-<td>ceiling (rounds up)</td>
-</tr>
-<tr>
-<td><code>math.exp(x)</code></td>
-<td>e raised to the x power</td>
-</tr>
-<tr>
-<td><code>math.floor(x)</code></td>
-<td>floor (rounds up)</td>
-</tr>
-<tr>
-<td><code>math.fmod(x, y)</code></td>
-<td>floating point remainder of x / y</td>
-</tr>
-<tr>
-<td><code>math.log(x, [base])</code></td>
-<td>logarithm of x with specified base or e</td>
-</tr>
-<tr>
-<td><code>math.max(...)</code></td>
-<td>maximum of a set of numbers</td>
-</tr>
-<tr>
-<td><code>math.min(...)</code></td>
-<td>minimum of a set of numbers</td>
-</tr>
-<tr>
-<td><code>math.modf(x)</code></td>
-<td>integral and fractional parts of a floating point number</td>
-</tr>
-<tr>
-<td><code>math.sqrt(x)</code></td>
-<td>square root</td>
-</tr>
-<tr>
-<td><code>math.tointeger(x)</code></td>
-<td>integer value if x can be converted to an integer; otherwise <code>nil</code></td>
-</tr>
-<tr>
-<td><code>math.type(x)</code></td>
-<td><code>&quot;integer&quot;</code>, <code>&quot;float&quot;</code>, or <code>nil</code></td>
-</tr>
-<tr>
-<td><code>math.ult(m, n)</code></td>
-<td><code>true</code> if m &lt; n when compared as unsigned integers; otherwise <code>false</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Function</th><th>Returns</th></tr></thead><tbody><tr><td><code>math.abs(x)</code></td><td>absolute value</td></tr><tr><td><code>math.ceil(x)</code></td><td>ceiling (rounds up)</td></tr><tr><td><code>math.exp(x)</code></td><td>e raised to the x power</td></tr><tr><td><code>math.floor(x)</code></td><td>floor (rounds up)</td></tr><tr><td><code>math.fmod(x, y)</code></td><td>floating point remainder of x / y</td></tr><tr><td><code>math.log(x, [base])</code></td><td>logarithm of x with specified base or e</td></tr><tr><td><code>math.max(...)</code></td><td>maximum of a set of numbers</td></tr><tr><td><code>math.min(...)</code></td><td>minimum of a set of numbers</td></tr><tr><td><code>math.modf(x)</code></td><td>integral and fractional parts of a floating point number</td></tr><tr><td><code>math.sqrt(x)</code></td><td>square root</td></tr><tr><td><code>math.tointeger(x)</code></td><td>integer value if x can be converted to an integer; otherwise <code>nil</code></td></tr><tr><td><code>math.type(x)</code></td><td><code>"integer"</code>, <code>"float"</code>, or <code>nil</code></td></tr><tr><td><code>math.ult(m, n)</code></td><td><code>true</code> if m &#x3C; n when compared as unsigned integers; otherwise <code>false</code></td></tr></tbody></table>
 <p><code>math.modf(3.14)</code> returns <code>3</code> and <code>0.14</code></p>
 <p>The value passed to <code>math.tointeger</code> can be a number or string.
 For example:</p>
 <ul>
-<li><code>math.tointeger(3.0)</code> and <code>math.tointeger(&quot;3.0&quot;)</code> both return <code>3</code></li>
+<li><code>math.tointeger(3.0)</code> and <code>math.tointeger("3.0")</code> both return <code>3</code></li>
 <li><code>math.tointeger(3.1)</code> returns <code>nil</code>
 because it cannot be converted to an integer</li>
 </ul>
-<h3 id="os-module" tabindex="-1">os Module</h3>
+<h3 id="os-module">os Module</h3>
 <p>The <code>os</code> module defines the following functions:</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>os.time()</code></td>
-<td>returns seconds since 1970 or a given date/time</td>
-</tr>
-<tr>
-<td><code>os.difftime()</code></td>
-<td>returns difference in seconds between two times</td>
-</tr>
-<tr>
-<td><code>os.date()</code></td>
-<td>returns a string describing the current date and time</td>
-</tr>
-<tr>
-<td><code>os.exit(code)</code></td>
-<td>code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number</td>
-</tr>
-<tr>
-<td><code>os.getenv(&quot;environment-variable-name&quot;)</code></td>
-<td>returns the value of an environment variables</td>
-</tr>
-<tr>
-<td><code>os.rename(current_file_path, new_file_path)</code></td>
-<td>renames a file or directory</td>
-</tr>
-<tr>
-<td><code>os.remove(current_file_path)</code></td>
-<td>deletes a file or empty directory</td>
-</tr>
-<tr>
-<td><code>os.execute(shell_command)</code></td>
-<td>executes a shell command</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Function</th><th>Purpose</th></tr></thead><tbody><tr><td><code>os.time()</code></td><td>returns seconds since 1970 or a given date/time</td></tr><tr><td><code>os.difftime()</code></td><td>returns difference in seconds between two times</td></tr><tr><td><code>os.date()</code></td><td>returns a string describing the current date and time</td></tr><tr><td><code>os.exit(code)</code></td><td>code can be true (exits with EXIT_SUCCESS; default), false (exits with EXIT_FAILURE), or a number</td></tr><tr><td><code>os.getenv("environment-variable-name")</code></td><td>returns the value of an environment variables</td></tr><tr><td><code>os.rename(current_file_path, new_file_path)</code></td><td>renames a file or directory</td></tr><tr><td><code>os.remove(current_file_path)</code></td><td>deletes a file or empty directory</td></tr><tr><td><code>os.execute(shell_command)</code></td><td>executes a shell command</td></tr></tbody></table>
 <p>The <code>os.date</code> function takes a format string
 and an optional time that defaults to now.
 The format string uses the same characters as the C <a href="https://man7.org/linux/man-pages/man3/strftime.3.html?v=1.1.1" rel="noopener" target="_blank">strftime</a> function
@@ -2874,7 +2873,7 @@ time = os.time({
 print(time) -- -274891181; negative because it is before 1970
 print(type(time)) -- number
 
-format = &quot;%A, %B %e, %Y&quot;
+format = "%A, %B %e, %Y"
 print(os.date(format, time)) -- Sunday, April 16, 1961
 </code></pre>
 <p>To get the time required to run some code:</p>
@@ -2882,59 +2881,59 @@ print(os.date(format, time)) -- Sunday, April 16, 1961
 -— Add some code here.
 print(os.clock() - start)
 </code></pre>
-<h3 id="package-module" tabindex="-1">package Module</h3>
+<h3 id="package-module">package Module</h3>
 <p>TODO: Add details about the `package module.</p>
-<h3 id="string-module" tabindex="-1">string Module</h3>
+<h3 id="string-module">string Module</h3>
 <p>String operations supported by this module include the following,
 all using method syntax where <code>s</code> is a string:</p>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>s:len()</code> or <code>#s</code></td>
-<td>returns length in bytes</td>
-</tr>
-<tr>
-<td><code>s:sub(startIndex, endIndex)</code></td>
-<td>returns a substring</td>
-</tr>
-<tr>
-<td><code>s:gsub(source, oldValue, newValue)</code></td>
-<td>performs global substitution</td>
-</tr>
-<tr>
-<td><code>s:find(target)</code></td>
-<td>returns start and end index inclusive</td>
-</tr>
-<tr>
-<td><code>s:upper()</code></td>
-<td>returns uppercase version</td>
-</tr>
-<tr>
-<td><code>s:lower()</code></td>
-<td>returns lowercase version</td>
-</tr>
-<tr>
-<td><code>s:match('pattern', i=1)</code></td>
-<td>returns first match found in s starting at index i</td>
-</tr>
-<tr>
-<td><code>s:gmatch('pattern', i=1)</code></td>
-<td>returns iterator over all matches found in s start at index i</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Function</th><th>Description</th></tr></thead><tbody><tr><td><code>s:len()</code> or <code>#s</code></td><td>returns length in bytes</td></tr><tr><td><code>s:sub(startIndex, endIndex)</code></td><td>returns a substring</td></tr><tr><td><code>s:gsub(source, oldValue, newValue)</code></td><td>performs global substitution</td></tr><tr><td><code>s:find(target)</code></td><td>returns start and end index inclusive</td></tr><tr><td><code>s:upper()</code></td><td>returns uppercase version</td></tr><tr><td><code>s:lower()</code></td><td>returns lowercase version</td></tr><tr><td><code>s:match('pattern', i=1)</code></td><td>returns first match found in s starting at index i</td></tr><tr><td><code>s:gmatch('pattern', i=1)</code></td><td>returns iterator over all matches found in s start at index i</td></tr></tbody></table>
 <p>The <code>gsub</code> function returns a new string and
 the number of occurrences that were replaced.</p>
 <p>The following code demonstrates using the <code>gmatch</code> function
 to find all the integers in a string:</p>
-<pre><code class="language-lua">local s = &quot;apple 19 banana 7 cherry 21&quot;
-local matches = s:gmatch(&quot;%d+&quot;)
+<pre><code class="language-lua">local s = "apple 19 banana 7 cherry 21"
+local matches = s:gmatch("%d+")
 for match in matches do
   print(match) -- 19, 7, and 21
 end
@@ -2957,19 +2956,19 @@ function string.endsWith(source, target)
   return endIndex == #source
 end
 
-text = &quot;This is used to test of our new functions.&quot;
+text = "This is used to test of our new functions."
 </code></pre>
 <p>The <code>contains</code> function defined above can be called in two ways.</p>
-<pre><code class="language-lua">print(string.contains(text, &quot;test&quot;)) -- true
-print(text:contains(&quot;test&quot;)) -- true
+<pre><code class="language-lua">print(string.contains(text, "test")) -- true
+print(text:contains("test")) -- true
 </code></pre>
 <p>Here are more examples of calling the functions defined above
 using the method syntax.</p>
-<pre><code class="language-lua">print(text:contains(&quot;missing&quot;)) -- false
-print(text:startsWith(&quot;This&quot;)) -- true
-print(text:startsWith(&quot;Test&quot;)) -- false
-print(text:endsWith(&quot;functions.&quot;)) -- true
-print(text:endsWith(&quot;test.&quot;)) -- false
+<pre><code class="language-lua">print(text:contains("missing")) -- false
+print(text:startsWith("This")) -- true
+print(text:startsWith("Test")) -- false
+print(text:endsWith("functions.")) -- true
+print(text:endsWith("test.")) -- false
 </code></pre>
 <p>Lua does not support string interpolation.
 The closest Lua feature to this is the <code>string.format</code> function.
@@ -2985,25 +2984,25 @@ formatting directives that begin with a percent sign.</p>
 <li><code>%s</code> for strings</li>
 </ul>
 <p>For example:</p>
-<pre><code class="language-lua">name = &quot;Mark&quot;
-color = &quot;yellow&quot;
-sentence = string.format(&quot;%s's favorite color is %s.&quot;, name, color)
+<pre><code class="language-lua">name = "Mark"
+color = "yellow"
+sentence = string.format("%s's favorite color is %s.", name, color)
 </code></pre>
 <p>The <code>%f</code> directive can specify the number of decimal places to output.
 For example:</p>
 <pre><code class="language-lua">-- Print pi to four decimal places.
-print(string.format(&quot;pi is %.4f&quot;, math.pi)) -- pi is 3.1416
+print(string.format("pi is %.4f", math.pi)) -- pi is 3.1416
 </code></pre>
-<h3 id="table-module" tabindex="-1">table module</h3>
+<h3 id="table-module">table module</h3>
 <p>TODO: Add detail on this module.</p>
-<h2 id="environments" tabindex="-1">Environments</h2>
-<p>&quot;Free variables&quot; are variables that are not declared with the <code>local</code> keyword.
-They are stored in the current &quot;environment&quot;
+<h2 id="environments">Environments</h2>
+<p>“Free variables” are variables that are not declared with the <code>local</code> keyword.
+They are stored in the current “environment”
 which is a table referred to with the name <code>_ENV</code>.
 By default the value of <code>_ENV</code> is the same as <code>_G</code>.
 For example:</p>
-<pre><code class="language-lua">fruit = &quot;apple&quot;
-local fruit = &quot;banana&quot;
+<pre><code class="language-lua">fruit = "apple"
+local fruit = "banana"
 print(fruit) -- banana
 print(_ENV.fruit) -- apple
 print(_G.fruit) -- apple
@@ -3023,7 +3022,7 @@ end
 Doing so changes where free variables are stored.
 This can be useful to avoid changing variables in the outer scope.
 For example:</p>
-<pre><code class="language-lua">fruit = &quot;apple&quot;
+<pre><code class="language-lua">fruit = "apple"
 
 function demo1()
   -- Create a new environment that is only used by this function.
@@ -3038,7 +3037,7 @@ function demo1()
   local _ENV = env
 
   -- Assign a variable in the new environment.
-  fruit = &quot;banana&quot;
+  fruit = "banana"
 
   -- The print function is not in the new environment,
   -- so the version in the global environment will be used.
@@ -3057,7 +3056,7 @@ end
 demo1()
 print(fruit) -- apple
 </code></pre>
-<h2 id="coroutines" tabindex="-1">Coroutines</h2>
+<h2 id="coroutines">Coroutines</h2>
 <p>Lua is single-threaded like JavaScript.
 It supports collaborative multitasking with coroutines.
 At any point in time on only one coroutine is running.
@@ -3073,7 +3072,7 @@ It returns a boolean indicating if it was successful
 and any values passed to <code>coroutine.yield</code>.</p>
 <pre><code class="language-lua">local function nextNumber(delta, limit, previous)
   local next = (previous or 0) + delta
-  if next &lt;= limit then
+  if next &#x3C;= limit then
     coroutine.yield(next)
     nextNumber(delta, limit, next) -- recursive call
   end
@@ -3081,7 +3080,7 @@ end
 
 local thread = coroutine.create(nextNumber)
 print(type(thread)) -- thread
-print(coroutine.status(thread)) -- &quot;suspended&quot;
+print(coroutine.status(thread)) -- "suspended"
 
 -- We only need to pass arguments in the
 -- first call to `resume` for this coroutine.
@@ -3092,7 +3091,7 @@ while success and v do
   success, v = coroutine.resume(thread)
 end
 
-print(coroutine.status(thread)) -- &quot;dead&quot;
+print(coroutine.status(thread)) -- "dead"
 </code></pre>
 <p>The <code>coroutine.wrap</code> function provides an alternative to <code>coroutine.create</code>.
 Rather than returning a <code>thread</code>, <code>coroutine.wrap</code> returns a function
@@ -3114,28 +3113,28 @@ end
 </code></pre>
 <p>Lua does not directly support concurrently running threads,
 but they can be implemented using the approach described in
-chapter 26 of the &quot;Programming in Lua - Fourth edition&quot; book.
+chapter 26 of the “Programming in Lua - Fourth edition” book.
 There are many Lua libraries that support multithreading including
 <a href="http://lualanes.github.io/lanes/?v=1.1.1" rel="noopener" target="_blank">Lua Lanes</a>.</p>
 <p>Lua does not have the equivalent of the <code>async</code> and <code>await</code> keywords
 in other programming languages, but those can be simulated.
 See <a href="https://github.com/iamcco/async-await.lua?v=1.1.1" rel="noopener" target="_blank">async-await.lua</a>.</p>
-<p>For sending HTTP requests, see the &quot;Networking&quot; section below.</p>
-<h2 id="networking" tabindex="-1">Networking</h2>
+<p>For sending HTTP requests, see the “Networking” section below.</p>
+<h2 id="networking">Networking</h2>
 <p>There are several popular Lua networking libraries.</p>
 <ul>
 <li><a href="http://openresty.org/en/?v=1.1.1" rel="noopener" target="_blank">OpenResty</a> is
-&quot;a dynamic web platform based on NGINX and LuaJIT.&quot;</li>
+“a dynamic web platform based on NGINX and LuaJIT.”</li>
 <li><a href="https://github.com/daurnimator/lua-http?v=1.1.1" rel="noopener" target="_blank">lua-http</a> -
 supports implementing HTTP servers and clients</li>
 <li><a href="https://lunarmodules.github.io/luasocket/?v=1.1.1" rel="noopener" target="_blank">LuaSocket</a> -
-&quot;a C core that provides support for the TCP and UDP transport layers, and
+“a C core that provides support for the TCP and UDP transport layers, and
 a set of Lua modules that add support for functionality
-commonly needed by applications that deal with the Internet&quot;</li>
+commonly needed by applications that deal with the Internet”</li>
 <li><a href="https://luvit.io?v=1.1.1" rel="noopener" target="_blank">Luvit</a> -
-&quot;asynchronous I/O for Lua; implements the same APIs as Node.js&quot;</li>
+“asynchronous I/O for Lua; implements the same APIs as Node.js”</li>
 </ul>
-<h2 id="utility-functions" tabindex="-1">Utility Functions</h2>
+<h2 id="utility-functions">Utility Functions</h2>
 <p>The following functions are helpful for debugging.
 They can be defined in a file like <code>utility.lua</code>
 and required where needed.</p>
@@ -3144,46 +3143,46 @@ and required where needed.</p>
 -- Returns a string description of the keys and values in a table.
 -- Values can be nested tables.
 function M.dump(value)
-  if type(value) ~= &quot;table&quot; then
+  if type(value) ~= "table" then
     return tostring(value)
   end
 
-  local s = &quot;{ &quot;
+  local s = "{ "
   for k, v in pairs(value) do
-    if type(k) ~= &quot;number&quot; then
-      k = &quot;\&quot;&quot; .. k .. &quot;\&quot;&quot;
+    if type(k) ~= "number" then
+      k = "\"" .. k .. "\""
     end
-    s = s .. k .. &quot;=&quot; .. mod.dump(v) .. &quot;, &quot; -- recursive
+    s = s .. k .. "=" .. mod.dump(v) .. ", " -- recursive
   end
-  if #s &gt; 2 then s = s:sub(1, -3) end        -- removes last comma and space
-  return s .. &quot; }&quot;
+  if #s > 2 then s = s:sub(1, -3) end        -- removes last comma and space
+  return s .. " }"
 end
 
 -- Returns a string containing all the values in a table,
 -- each separated by a comma and a space.
 -- Values cannot be nested tables.
 function M.valuesString(obj)
-  if type(obj) ~= &quot;table&quot; then
-    return &quot;&quot;
+  if type(obj) ~= "table" then
+    return ""
   end
 
-  s = &quot;&quot;
+  s = ""
   for index, v in ipairs(obj) do
-    s = s .. v .. &quot;, &quot;
+    s = s .. v .. ", "
   end
   return s:sub(1, -3)
 end
 
 return M
 </code></pre>
-<h2 id="error-handling" tabindex="-1">Error Handling</h2>
+<h2 id="error-handling">Error Handling</h2>
 <p>Lua does not have a mechanism for throwing and catching exceptions.
 In many cases errors result in a function returning the value <code>nil</code>
 and it is left to developers to check for <code>nil</code> values.
 Failing to do so can result in programs crashing
 and outputting a stack trace.</p>
 <p>The only error handling mechanism Lua provides are the
-<code>pcall</code> and <code>xpcall</code> functions (short for &quot;protected call&quot;).
+<code>pcall</code> and <code>xpcall</code> functions (short for “protected call”).
 These can be compared to a try block in other programming languages.</p>
 <p>The <code>pcall</code> function is passed a function to execute and
 optionally arguments to be passed to it.
@@ -3201,8 +3200,8 @@ and displays their quotient.
 When invalid values are entered, error messages are output,
 but the program does not crash.</p>
 <pre><code class="language-lua">local function read_number(prompt)
-  io.write(prompt .. &quot;: &quot;)
-  local number = io.read(&quot;*number&quot;)
+  io.write(prompt .. ": ")
+  local number = io.read("*number")
   -- The previous line does not consume the newline character.
   -- Unless that is done, the next attempt to read a number will return `nil`.
   -- The following line consumes the newline character.
@@ -3211,36 +3210,36 @@ but the program does not crash.</p>
 end
 
 local function process()
-  local dividend = read_number(&quot;Enter a dividend&quot;)
+  local dividend = read_number("Enter a dividend")
   if not dividend then
     -- Error messages here are tables containing a message and a code.
-    error({message = &quot;dividend is invalid&quot;, code = 1})
+    error({message = "dividend is invalid", code = 1})
   end
 
-  local divisor = read_number(&quot;Enter a divisor&quot;)
+  local divisor = read_number("Enter a divisor")
   if not divisor then
-    error({message = &quot;divisor is invalid&quot;, code = 2})
+    error({message = "divisor is invalid", code = 2})
   end
   if divisor == 0 then
-    error({message = &quot;cannot divide by zero&quot;, code = 3})
+    error({message = "cannot divide by zero", code = 3})
   end
 
   local quotient = dividend / divisor
-  io.write(string.format(&quot;The quotient is %.3f\n\n&quot;, quotient))
+  io.write(string.format("The quotient is %.3f\n\n", quotient))
 end
 
 while true do
   local success, err = pcall(process)
   if not success then
     if err then
-      print(string.format(&quot;%s (code %d)&quot;, err.message, err.code))
+      print(string.format("%s (code %d)", err.message, err.code))
     end
     -- print(debug.traceback()) -- prints a stack trace
     print() -- extra newline
   end
 end
 </code></pre>
-<h2 id="c-integration" tabindex="-1">C Integration</h2>
+<h2 id="c-integration">C Integration</h2>
 <p>A common reason to integrate Lua with C is to
 use Lua as a configuration language.
 This has many advantages over other configuration options
@@ -3273,12 +3272,12 @@ by following these steps:</p>
 </ul>
 </li>
 <li>If compiling and linking with gcc (see below) results in
-the error &quot;ignoring file /usr/local/lib/liblua.dylib,
+the error “ignoring file /usr/local/lib/liblua.dylib,
 it may be necessary to remove the dynamic library by entering
 <code>rm /usr/local/lib/liblua.dylib</code>
 This will cause gcc to use <code>/usr/local/lib/liblua.a</code> instead
 building for macOS-arm64 but attempting to link with
-file built for macOS-x86_64&quot;.</li>
+file built for macOS-x86_64”.</li>
 </ul>
 <p>For an example of embedding the Lua interpreter in a C application, see
 the GitHub repository <a href="https://github.com/mvolkmann/lua-examples/tree/main/c-calls-lua?v=1.1.1" rel="noopener" target="_blank">c-calls-lua</a>.</p>
@@ -3287,14 +3286,14 @@ the GitHub repository <a href="https://github.com/mvolkmann/lua-examples/tree/ma
 </code></pre>
 <p>Run the executable by entering <code>./main</code></p>
 <p>For an example of embedding the Lua interpreter in a SwiftUI application, see
-<a href="/blog/topics/#/blog/swift/CallingC?v=1.1.1" rel="noopener" target="_blank">Swift Calling C</a> and
+<a href="/blog/topics/#/blog/swift/CallingC?v=1.1.1">Swift Calling C</a> and
 the GitHub respository <a href="https://github.com/mvolkmann/SwiftUICallsC?v=1.1.1" rel="noopener" target="_blank">SwiftUICallsC</a>.</p>
 <p>To restrict what loaded Lua code is able to do,
 only load a subset of the standard libraries.
 Copy the following code from the Lua source file <code>linit.c</code>
 and call <code>openlibs</code> in place of <code>luaL_openlibs</code>.</p>
 <pre><code class="language-c">static const luaL_Reg loadedlibs[] = {
-  // This loads the &quot;basic&quot; standard library into the global environment.
+  // This loads the "basic" standard library into the global environment.
   // It includes functions like pairs, ipairs, print,
   // tonumber, tostring, setmetatable, and getmetatable
   {LUA_GNAME, luaopen_base},
@@ -3315,8 +3314,8 @@ and call <code>openlibs</code> in place of <code>luaL_openlibs</code>.</p>
 
 LUALIB_API void openlibs(lua_State *L) {
   const luaL_Reg *lib;
-  for (lib = loadedlibs; lib-&gt;func; lib++) {
-    luaL_requiref(L, lib-&gt;name, lib-&gt;func, 1);
+  for (lib = loadedlibs; lib->func; lib++) {
+    luaL_requiref(L, lib->name, lib->func, 1);
     lua_pop(L, 1);  /* remove lib */
   }
 
@@ -3324,8 +3323,8 @@ LUALIB_API void openlibs(lua_State *L) {
   // remove the ability to change the default output file.
   // It will remain set to stdout, so `io.write` can be
   // used to write to stdout, but not to a file.
-  getGlobalTable(&quot;io&quot;);
-  setTableKeyValue(&quot;output&quot;, 0);
+  getGlobalTable("io");
+  setTableKeyValue("output", 0);
 }
 </code></pre>
 <p>It is probably possible to load a standard library and
@@ -3347,20 +3346,20 @@ remove the function and its arguments from the stack.</p>
 <p>TODO: How can you prevent Lua code executed from C from
 TODO: doing something dangerous like deleting files?</p>
 <p>For calling Lua from JavaScript,
-see <a href="https://daurnimator.github.io/lua.vm.js/lua.vm.js.html">https://daurnimator.github.io/lua.vm.js/lua.vm.js.html</a>
-and <a href="https://github.com/Doridian/LuaJS">https://github.com/Doridian/LuaJS</a>.</p>
+see <a href="https://daurnimator.github.io/lua.vm.js/lua.vm.js.html" rel="noopener" target="_blank">https://daurnimator.github.io/lua.vm.js/lua.vm.js.html</a>
+and <a href="https://github.com/Doridian/LuaJS" rel="noopener" target="_blank">https://github.com/Doridian/LuaJS</a>.</p>
 <p>For calling Lua from Swift, see
-<a href="https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/">https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/</a>.</p>
-<h2 id="games" tabindex="-1">Games</h2>
-<h3 id="l%C3%B6ve" tabindex="-1">LÖVE</h3>
+<a href="https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/" rel="noopener" target="_blank">https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/</a>.</p>
+<h2 id="games">Games</h2>
+<h3 id="löve">LÖVE</h3>
 <p><a href="https://love2d.org?v=1.1.1" rel="noopener" target="_blank">LÖVE</a>
 is a Lua framework for building 2D games.</p>
 <p>For details, see my <a href="/blog/love2d/">blog page</a>.</p>
-<h3 id="l%C3%B6vr" tabindex="-1">LÖVR</h3>
+<h3 id="lövr">LÖVR</h3>
 <p><a href="https://lovr.org?v=1.1.1" rel="noopener" target="_blank">LÖVR</a> is
-&quot;an open source framework for rapidly building immersive 3D experiences.&quot;</p>
-<h2 id="flavors-of-lua" tabindex="-1">Flavors of Lua</h2>
-<h3 id="luajit" tabindex="-1">LuaJIT</h3>
+“an open source framework for rapidly building immersive 3D experiences.”</p>
+<h2 id="flavors-of-lua">Flavors of Lua</h2>
+<h3 id="luajit">LuaJIT</h3>
 <p><a href="https://luajit.org/?v=1.1.1" rel="noopener" target="_blank">LuaJIT</a>
 is a just-in-time Lua compiler.
 It can be used as an alternative to <code>luac</code> to produces smaller bytecode files.
@@ -3371,11 +3370,11 @@ It is maintained by a separate team from the one that maintains Lua.</p>
 <p>LuaJIT is based on Lua 5.1, so it is missing features of Lua added since then.
 It has optional support for some Lua 5.2 and 5.3 features.
 From Paul Ducklin, Lua and LuaJIT are
-&quot;independent, incommensurate, and unlikely-ever-to-be-reunited projects
-that have been on very different journeys for more than 15 years now.&quot;</p>
-<p>LuaJIT does not support Lua's bitwise operators, but it includes
+“independent, incommensurate, and unlikely-ever-to-be-reunited projects
+that have been on very different journeys for more than 15 years now.”</p>
+<p>LuaJIT does not support Lua’s bitwise operators, but it includes
 the <code>bit</code> library that defines functions that can used instead.
-For example, instead of <code>n1 &amp; n2</code>, use <code>bit.band(n1, n2)</code>.</p>
+For example, instead of <code>n1 &#x26; n2</code>, use <code>bit.band(n1, n2)</code>.</p>
 <p>LuaJIT does not support the <code>goto</code> statement.</p>
 <p>LuaJIT uses a different syntax for vararg functions.</p>
 <p>TODO: Does LuaJIT only support 32-bit signed integers?</p>
@@ -3418,7 +3417,7 @@ These include the <code>bit</code>, <code>ffi</code>, and <code>jit</code> modul
 It also enhances some of the C API functions.</p>
 <p>From <a href="https://api7.ai/learning-center/openresty/luajit-vs-lua?v=1.1.1" rel="noopener" target="_blank">api7.ai</a>:</p>
 <blockquote>
-<p>The LuaJIT runtime environment ... has a JIT compiler
+<p>The LuaJIT runtime environment … has a JIT compiler
 that can generate machine code directly.
 The LuaJIT interpreter records some runtime statistics while executing the
 bytecode, such as the actual number of times each Lua function call entry
@@ -3427,8 +3426,8 @@ When these counts exceed a random threshold,
 the corresponding Lua function entry or Lua loop is considered hot enough
 to trigger the JIT compiler to start working.
 The JIT compiler tries to compile the corresponding Lua code path,
-starting from the hot function's entry or the hot loop's location.
-The compilation process converts the LuaJIT bytecode into LuaJIT's own
+starting from the hot function’s entry or the hot loop’s location.
+The compilation process converts the LuaJIT bytecode into LuaJIT’s own
 defined Intermediate Representation (IR) and
 then generates machine code for the target architecture.</p>
 </blockquote>
@@ -3444,7 +3443,7 @@ Using the Lua C API in LuaJIT is slower than using it in standard Lua.</p>
 <li>Enter <code>cd luajit</code></li>
 <li>In macOS, enter <code>export MACOSX_DEPLOYMENT_TARGET={version}</code>
 where <code>version</code> is a value like <code>13.2</code>.</li>
-<li>Enter <code>make &amp;&amp; sudo make install</code></li>
+<li>Enter <code>make &#x26;&#x26; sudo make install</code></li>
 <li>The previous command will ask you to create a symlink with a command like
 <code>ln -sf luajit-2.1.0-beta3 /usr/local/bin/luajit</code>.
 Enter that command.</li>
@@ -3454,8 +3453,8 @@ enter a command like <code>luajit -b demo.lua demo.out</code>
 To execute a bytecode file, enter a command like <code>luajit demo.out</code>.
 This will start faster than entering <code>luajit demo.lua</code>
 which performs just-in-time compilation at runtime.</p>
-<h3 id="pallene" tabindex="-1">Pallene</h3>
-<p>&quot;<a href="https://github.com/pallene-lang/pallene?v=1.1.1" rel="noopener" target="_blank">Pallene</a>
+<h3 id="pallene">Pallene</h3>
+<p>“<a href="https://github.com/pallene-lang/pallene?v=1.1.1" rel="noopener" target="_blank">Pallene</a>
 is a statically typed and ahead-of-time compiled sister language
 to Lua with a focus on performance. It is intended for
 writing performance sensitive code that interacts with Lua,
@@ -3464,14 +3463,14 @@ Compared to C, Pallene should offer better
 support for interacting with Lua data types,
 bypassing the unfriendly syntax and performance overhead of the Lua-C API.
 Compared to LuaJIT, Pallene aims to offer
-more predictable run-time performance.&quot;</p>
+more predictable run-time performance.”</p>
 <p>Pallene is the name of one of the moons of Saturn.
-The name of the moon is pronounced &quot;puh lee nee&quot;,
-but the language designer pronounces it &quot;pah lean&quot;.</p>
+The name of the moon is pronounced “puh lee nee”,
+but the language designer pronounces it “pah lean”.</p>
 <p>One use case is to write performance-critical modules in Pallene,
 compile them, and require them in Lua code.</p>
 <p>To install Pallene, see the detailed instructions at the Pallene link above.</p>
-<h3 id="teal" tabindex="-1">Teal</h3>
+<h3 id="teal">Teal</h3>
 <p><a href="https://github.com/teal-language/tl?v=1.1.1" rel="noopener" target="_blank">Teal</a> is a
 typed dialect of Lua.
 Currently it can target Lua 5.1 or 5.3.</p>
@@ -3488,7 +3487,7 @@ with type annotations removed, enter <code>tl gen {file-name}.tl</code>.</p>
 <code>~/.config/nvim/lua/user/plugins/vim-teal.lua</code> containing the following.
 This may require also using ALE to get syntax highlighting.</p>
 <pre><code class="language-lua">return {
-  &quot;teal-language/vim-teal&quot;
+  "teal-language/vim-teal"
 }
 </code></pre>
 <p>The following code demonstrates using Teal to implement <a href="https://en.wikipedia.org/wiki/Fizz_buzz?v=1.1.1" rel="noopener" target="_blank">Fizz buzz</a>.
@@ -3513,27 +3512,27 @@ local function fizzBuzz(limit: number, rules: {Rule})
 end
 
 fizzBuzz(30, {
-  {3, &quot;fizz&quot;},
-  {5, &quot;buzz&quot;}
+  {3, "fizz"},
+  {5, "buzz"}
 })
 </code></pre>
-<h2 id="languages-based-on-lua" tabindex="-1">Languages Based on Lua</h2>
+<h2 id="languages-based-on-lua">Languages Based on Lua</h2>
 <p><a href="http://ravilang.github.io/?v=1.1.1" rel="noopener" target="_blank">Ravi</a> is
-a &quot;dialect of Lua with limited optional static typing and JIT/AOT compilers&quot;.
-The name comes from Sanskrit word for &quot;Sun&quot;.</p>
+a “dialect of Lua with limited optional static typing and JIT/AOT compilers”.
+The name comes from Sanskrit word for “Sun”.</p>
 <p><a href="https://moonscript.org/?v=1.1.1" rel="noopener" target="_blank">MoonScript</a> is
-&quot;programmer friendly language that compiles into Lua&quot;.
-It &quot;gives you the power of the fastest scripting language
-combined with a rich set of features&quot;.</p>
+“programmer friendly language that compiles into Lua”.
+It “gives you the power of the fastest scripting language
+combined with a rich set of features”.</p>
 <p><a href="https://terralang.org/?v=1.1.1" rel="noopener" target="_blank">Terra</a> is a
-&quot;low-level system programming language that is designed to
-interoperate seamlessly with the Lua programming language&quot;.
-It &quot;shares Lua's syntax and control-flow constructs&quot;.</p>
+“low-level system programming language that is designed to
+interoperate seamlessly with the Lua programming language”.
+It “shares Lua’s syntax and control-flow constructs”.</p>
 <p><a href="http://squirrel-lang.org/?v=1.1.1" rel="noopener" target="_blank">Squirrel</a> is a
-&quot;high level imperative, object-oriented programming language,
-designed to be a light-weight scripting language&quot;.&quot;
-It was &quot;inspired by languages like Python,Javascript and especially Lua&quot;.</p>
-<h2 id="unorganized-content" tabindex="-1">Unorganized Content</h2>
+“high level imperative, object-oriented programming language,
+designed to be a light-weight scripting language”.”
+It was “inspired by languages like Python,Javascript and especially Lua”.</p>
+<h2 id="unorganized-content">Unorganized Content</h2>
 <p>summarize the constants and functions in all the standard libraries</p>
 <p>does the: syntax for calling a function only work when the variable has a type that maps to a Standard Library like String and number and table and function?</p>
 <p>How do you work with dates and times in Lua?
@@ -3564,10 +3563,10 @@ examples here that should be preceded by <code>local</code>.</p>
 Does each object get its own copy of every method?</p>
 <p>you can use the or operator to avoid setting instance values to know when they are missing in the passed table.
 but beware of cases where are the table passed in contains false values because those will not be used if you simply check with the or operator.</p>
-<p>this video suggest multiple ways to handle this: <a href="https://youtu.be/IQf82d3cr20">https://youtu.be/IQf82d3cr20</a></p>
+<p>this video suggest multiple ways to handle this: <a href="https://youtu.be/IQf82d3cr20" rel="noopener" target="_blank">https://youtu.be/IQf82d3cr20</a></p>
 <p>In the table section, describe copying tables like the following.
 Is there a way to make a deep copy? Maybe something recursive?</p>
-<pre><code class="language-lua">t = {&quot;alpha&quot;, {&quot;beta&quot;, &quot;gamma&quot;}}
+<pre><code class="language-lua">t = {"alpha", {"beta", "gamma"}}
 for k, v in pairs(t) do
   print(k, v)
 end
@@ -3588,5 +3587,6 @@ for k, v in pairs(copy2) do
 end
 </code></pre>
 <p>Reorder some of the sections above so no section relies on
-information found in a section that follows it (if possible).</p>
-</article> </body></html>
+information found in a section that follows it (if possible).</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

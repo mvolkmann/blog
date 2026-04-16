@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Swift Package Manager</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Swift Package Manager</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#terminology">Terminology</a></li><li><a href="#dependencies">Dependencies</a></li><li><a href="#creating-a-package">Creating a Package</a></li><li><a href="#command-line-executable-example">Command-line Executable Example</a></li><li><a href="#package-contents">Package Contents</a></li><li><a href="#manifest-file">Manifest File</a></li><li><a href="#building-a-package">Building a Package</a></li><li><a href="#documentation">Documentation</a></li><li><a href="#available-features">Available Features</a></li><li><a href="#using-github">Using GitHub</a></li><li><a href="#finding-packages">Finding Packages</a></li><li><a href="#using-packages">Using Packages</a></li><li><a href="#updating-packages">Updating Packages</a></li><li><a href="#adding-assets">Adding Assets</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#resources">Resources</a></li><li><a href="#excluding-resources">Excluding Resources</a></li><li><a href="#localized-resources">Localized Resources</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Swift Package Manager</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Swift Package Manager</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#benefits">Benefits</a></li><li><a href="#terminology">Terminology</a></li><li><a href="#dependencies">Dependencies</a></li><li><a href="#creating-a-package">Creating a Package</a></li><li><a href="#command-line-executable-example">Command-line Executable Example</a></li><li><a href="#package-contents">Package Contents</a></li><li><a href="#manifest-file">Manifest File</a></li><li><a href="#building-a-package">Building a Package</a></li><li><a href="#documentation">Documentation</a></li><li><a href="#available-features">Available Features</a></li><li><a href="#using-github">Using GitHub</a></li><li><a href="#finding-packages">Finding Packages</a></li><li><a href="#using-packages">Using Packages</a></li><li><a href="#updating-packages">Updating Packages</a></li><li><a href="#adding-assets">Adding Assets</a></li><li><a href="#unit-tests">Unit Tests</a></li><li><a href="#resources">Resources</a></li><li><a href="#excluding-resources">Excluding Resources</a></li><li><a href="#localized-resources">Localized Resources</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://www.swift.org/package-manager/?v=1.1.1" rel="noopener" target="_blank">Swift Package Manager</a> (SPM) provides a standard way to
 define and use software packages in Swift applications.
 SPM is preferred over other packaging options such as
@@ -19,7 +21,7 @@ For details on using private Git repositories see <a href="https://developer.app
 <p>For example packages, see
 <a href="https://github.com/mvolkmann/RMVGeometry?v=1.1.1" rel="noopener" target="_blank">RMVGeometry</a> and
 <a href="https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1" rel="noopener" target="_blank">RMVSwiftUIViews</a>.</p>
-<h2 id="benefits" tabindex="-1">Benefits</h2>
+<h2 id="benefits">Benefits</h2>
 <p>There are several benefits to factoring out code from a large application
 into packages that each reside in their own source control repository.</p>
 <ul>
@@ -32,17 +34,17 @@ has been moved to packages does not need to be compiled.</li>
 <li>It allows developers to focus on code with a specific purpose.</li>
 <li>It reduces the possibilities for source control merge conflicts.</li>
 </ul>
-<h2 id="terminology" tabindex="-1">Terminology</h2>
+<h2 id="terminology">Terminology</h2>
 <ul>
 <li>
 <p>Module</p>
-<p>The term &quot;module&quot; is somewhat of an umbrella term.
+<p>The term “module” is somewhat of an umbrella term.
 Libraries, frameworks, and Swift packages are all kinds of modules.
 A new project begins as a single module.</p>
 </li>
 <li>
 <p>Swift Package</p>
-<p>A &quot;Swift package&quot; is a collection of libraries.
+<p>A “Swift package” is a collection of libraries.
 Many packages define a single library.
 A package can be added as a dependency of an app or another package.
 A package can be local to the project that uses it or
@@ -51,7 +53,7 @@ which allows it to be used in multiple projects.</p>
 </li>
 <li>
 <p>Library</p>
-<p>A &quot;library&quot; is a collection of targets
+<p>A “library” is a collection of targets
 that define types that have a common goal.
 Some libraries contain a single target.
 Examples include network utilities, database access,
@@ -69,12 +71,12 @@ All libraries you create will be static.</p>
 </li>
 <li>
 <p>Target</p>
-<p>A &quot;target&quot; can be an executable or a set of closely related types.
+<p>A “target” can be an executable or a set of closely related types.
 Swift code imports non-executable targets by name.</p>
 </li>
 <li>
 <p>Framework</p>
-<p>A &quot;framework&quot; is folder that holds code, resources (such as images),
+<p>A “framework” is folder that holds code, resources (such as images),
 static libraries, and references to dynamic libraries.
 Examples of Apple-provided frameworks include AppKit (for macOS apps),
 CloudKit, Core Data, Core Location, Dispatch, Foundation, HealthKit,
@@ -90,7 +92,7 @@ to have a kebab-case name.</p>
 <p>The package names used by an app must be unique within that app.
 One way to avoid name conflicts it to add a two or three letter prefix
 to package names that identifiers the company or developer that created it.</p>
-<h2 id="dependencies" tabindex="-1">Dependencies</h2>
+<h2 id="dependencies">Dependencies</h2>
 <p>Every Swift app and package can have dependencies on other Swift packages.
 Swift Package Manager manages these dependencies.
 It can install directly specified dependencies
@@ -99,18 +101,18 @@ and the dependencies of those recursively.</p>
 in order to select the Git commit of a package that:</p>
 <ul>
 <li>is tagged with the highest semantic version that has a given major version
-(ex. <code>from: &quot;2.0.0&quot;</code>)</li>
+(ex. <code>from: "2.0.0"</code>)</li>
 <li>is tagged with the highest semantic version
 that has a given major and minor version
-(ex. <code>from: &quot;2.3.0&quot;</code>)</li>
-<li>is the latest on a given branch (ex. <code>.branch(&quot;branch-name&quot;)</code>)</li>
-<li>is tagged with a given semantic version (ex. <code>.exact(&quot;1.2.3&quot;)</code>; rarely used)</li>
+(ex. <code>from: "2.3.0"</code>)</li>
+<li>is the latest on a given branch (ex. <code>.branch("branch-name")</code>)</li>
+<li>is tagged with a given semantic version (ex. <code>.exact("1.2.3")</code>; rarely used)</li>
 <li>is tagged with the highest semantic version in a range of semantic versions
-(ex. <code>&quot;2.1.4&quot;...&quot;3.5.1&quot;</code>; rarely used)</li>
+(ex. <code>"2.1.4"..."3.5.1"</code>; rarely used)</li>
 <li>has a given commit identifier
-(ex. <code>.revision(&quot;9c0445321380e97fb8f3d3f000c22a495f13b4d6&quot;)</code>; rarely used)</li>
+(ex. <code>.revision("9c0445321380e97fb8f3d3f000c22a495f13b4d6")</code>; rarely used)</li>
 </ul>
-<h2 id="creating-a-package" tabindex="-1">Creating a Package</h2>
+<h2 id="creating-a-package">Creating a Package</h2>
 <p>To create a new package from the command line:</p>
 <ul>
 <li>cd to the directory that will hold the new package.</li>
@@ -121,7 +123,7 @@ that has a given major and minor version
 <a href="#package-contents">Package Contents</a> section.</p>
 <p>To create a new package in Xcode:</p>
 <ul>
-<li>Select File ... New ... Package...</li>
+<li>Select File … New … Package…</li>
 <li>In the dialog that appears, enter a name for the package.</li>
 <li>Select the directory where it will be stored.</li>
 <li>Click the Create button.</li>
@@ -130,19 +132,19 @@ that has a given major and minor version
 for ease of testing from it:</p>
 <ul>
 <li>Follow the steps above, but in the dialog select the project directory
-and select the project in the &quot;Add to&quot; dropdown.
+and select the project in the “Add to” dropdown.
 This creates a new scheme for the library inside the package
 that is used to build and test the library.</li>
 <li>Add the package as a dependency of the project.
 <ul>
 <li>Select the top entry in the Project Navigator.</li>
 <li>Select the main target.</li>
-<li>Select the &quot;General&quot; tab.</li>
-<li>Scroll down to the &quot;Frameworks, Libraries, and Embedded Content&quot; section.</li>
-<li>Click the &quot;+&quot; button.</li>
+<li>Select the “General” tab.</li>
+<li>Scroll down to the “Frameworks, Libraries, and Embedded Content” section.</li>
+<li>Click the ”+” button.</li>
 <li>Locate a package to be added and select one of its libraries.
 Often a package only contains a single library.</li>
-<li>Click the &quot;Add&quot; button.
+<li>Click the “Add” button.
 This provides access to all the targets defined in the library.</li>
 <li>Import targets from the library in each app source file that will use them.</li>
 </ul>
@@ -164,12 +166,12 @@ add <code>bundle: .module</code> to those <code>Image</code> initializer calls.<
 <p>Add DocC documentation to each type and method.
 To have Xcode supply as much of this as it can,
 select the first line of a type, method, or function
-and select Editor ... Structure ... Add Documentation
+and select Editor … Structure … Add Documentation
 or press cmd-option-/.
 After adding this documentation, rebuild the project
 and option-click on the name of a documented item
 to see the documentation in a popup.</p>
-<h2 id="command-line-executable-example" tabindex="-1">Command-line Executable Example</h2>
+<h2 id="command-line-executable-example">Command-line Executable Example</h2>
 <p>The following steps generate the files required to
 implement a Swift command-line executable,
 build a development version, run unit tests, run it locally,
@@ -180,7 +182,7 @@ build a production version, and copy it into the PATH:</p>
 <li><code>swift package init --type executable</code></li>
 <li><code>swift build</code></li>
 <li><code>swift test</code> to run unit tests</li>
-<li><code>swift run</code> to run as an executable (will print &quot;Hello, World!&quot;)</li>
+<li><code>swift run</code> to run as an executable (will print “Hello, World!”)</li>
 <li><code>swift build --configuration release</code></li>
 <li><code>cp -f .build/release/mydemo /usr/local/bin</code></li>
 <li><code>mydemo</code></li>
@@ -192,12 +194,12 @@ build a production version, and copy it into the PATH:</p>
 </li>
 <li>
 <p>Add the following in the <code>dependencies</code> array:</p>
-<pre><code class="language-swift">.package(url: &quot;https://github.com/apple/swift-argument-parser&quot;, from: &quot;1.2.0&quot;),
+<pre><code class="language-swift">.package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
 </code></pre>
 </li>
 <li>
 <p>In the <code>executableTarget</code> <code>dependencies</code> array, add the following:</p>
-<pre><code class="language-swift">.product(name: &quot;ArgumentParser&quot;, package: &quot;swift-argument-parser&quot;),
+<pre><code class="language-swift">.product(name: "ArgumentParser", package: "swift-argument-parser"),
 </code></pre>
 </li>
 <li>
@@ -208,19 +210,19 @@ GitHub repo:</p>
 
 @main
 struct Repeat: ParsableCommand {
-    @Flag(help: &quot;Include a counter with each repetition.&quot;)
+    @Flag(help: "Include a counter with each repetition.")
     var includeCounter = false
 
-    @Option(name: .shortAndLong, help: &quot;The number of times to repeat 'phrase'.&quot;)
+    @Option(name: .shortAndLong, help: "The number of times to repeat 'phrase'.")
     var count: Int? = nil
 
-    @Argument(help: &quot;The phrase to repeat.&quot;)
+    @Argument(help: "The phrase to repeat.")
     var phrase: String
 
     func run() throws {
         let repeatCount = count ?? 1
         for i in 1 ... repeatCount {
-            print((includeCounter ? &quot;\(i): &quot; : &quot;&quot;) + phrase)
+            print((includeCounter ? "\(i): " : "") + phrase)
         }
     }
 }
@@ -228,11 +230,11 @@ struct Repeat: ParsableCommand {
 </li>
 </ol>
 <p>For more details, see <a href="https://www.avanderlee.com/swift/command-line-tool-package-manager/?v=1.1.1" rel="noopener" target="_blank">Creating a command line tool using the Swift Package Manager</a>.</p>
-<h2 id="package-contents" tabindex="-1">Package Contents</h2>
+<h2 id="package-contents">Package Contents</h2>
 <p>The initial package contents are:</p>
 <ul>
 <li>
-<p><a href="http://README.md">README.md</a></p>
+<p>README.md</p>
 <p>This is a Markdown file that describes the package.
 It can include the goals of the package, license information,
 supported operating systems, supported Swift versions,
@@ -287,7 +289,7 @@ there will be a separate directory under <code>Tests</code> for each.</p>
 that should be accessible outside of the package must be marked as <code>public</code>.
 Default memberwise initializers in structs are not <code>public</code>,
 so it is necessary to add <code>public</code> initializers.</p>
-<h2 id="manifest-file" tabindex="-1">Manifest File</h2>
+<h2 id="manifest-file">Manifest File</h2>
 <p>The file <code>Package.swift</code> is the package manifest.
 It contains Swift code the creates a <code>Package</code> object.
 The <code>Package</code> initializer is passed the following arguments:</p>
@@ -302,7 +304,7 @@ The <code>Package</code> initializer is passed the following arguments:</p>
 <p><code>platforms</code> is an optional array of <a href="https://developer.apple.com/documentation/packagedescription/supportedplatform?v=1.1.1" rel="noopener" target="_blank">SupportedPlatform</a> instances that describe the
 operating systems and versions where the package can run.
 Versions can be specified using predefined constants or strings.
-For example, <code>[.iOS(.v14), .watchOS(&quot;7.0.0&quot;)]</code>.
+For example, <code>[.iOS(.v14), .watchOS("7.0.0")]</code>.
 Other platforms include <code>.macOS</code>, <code>.tvOS</code>, and <code>.linux</code>.</p>
 <p>Packages can be used on all platforms even if they are not listed here.
 When a platform is omitted from this array,
@@ -333,8 +335,8 @@ It is similar to a <code>package.json</code> file in a Node.js project.</p>
 // swift-tools-version: 5.7
 
 let package = Package(
-    name: &quot;RMVGeometry&quot;,
-    defaultLocalization: &quot;en&quot;,
+    name: "RMVGeometry",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v11), .iOS(.v14), .watchOS(.v7), .tvOS(.v14)
     ],
@@ -342,16 +344,16 @@ let package = Package(
         // Products define the executables and libraries a package produces,
         // and make them visible to other packages.
         .library(
-            name: &quot;RMVGeometry&quot;,
-            targets: [&quot;RMVCircle&quot;, &quot;RMVGeometry&quot;]
+            name: "RMVGeometry",
+            targets: ["RMVCircle", "RMVGeometry"]
         ),
     ],
     dependencies: [
         // Dependencies describe other packages on which this package depends.
         // For packages in a remote repository ...
-        // .package(url: some-url, from: &quot;some-version&quot;),
+        // .package(url: some-url, from: "some-version"),
         // For packages in the local file system ...
-        // .package(url: some-file-path, from: &quot;some-version&quot;),
+        // .package(url: some-file-path, from: "some-version"),
         // some-file-path can be absolute or relative.
         // Relative paths are preferred so they can
         // remain valid in a CI/CD environment.
@@ -360,30 +362,30 @@ let package = Package(
         // A target can define a module or a test suite.
         // Targets can depend on other targets in this package,
         // and on products in packages this package depends on.
-        .target(name: &quot;RMVCircle&quot;),
-        .testTarget(name: &quot;RMVCircleTests&quot;),
-        .target(name: &quot;RMVGeometry&quot;, dependencies: []),
-        .testTarget(name: &quot;RMVGeometryTests&quot;, dependencies: [&quot;RMVGeometry&quot;])
+        .target(name: "RMVCircle"),
+        .testTarget(name: "RMVCircleTests"),
+        .target(name: "RMVGeometry", dependencies: []),
+        .testTarget(name: "RMVGeometryTests", dependencies: ["RMVGeometry"])
     ]
 )
 </code></pre>
-<h2 id="building-a-package" tabindex="-1">Building a Package</h2>
+<h2 id="building-a-package">Building a Package</h2>
 <p>Building a package begins by downloading all of its remote dependencies
 recursively.</p>
 <p>To build a package from the command-line, enter <code>swift build</code>.</p>
 <p>To build a package inside Xcode,
-select Product ... Build or press cmd-b.</p>
-<h2 id="documentation" tabindex="-1">Documentation</h2>
+select Product … Build or press cmd-b.</p>
+<h2 id="documentation">Documentation</h2>
 <p>Package documentation is provided by the README .md file and by
-<a href="/blog/topics/#/blog/swift/DocC/?v=1.1.1" rel="noopener" target="_blank">DocC</a>
+<a href="/blog/topics/#/blog/swift/DocC/?v=1.1.1">DocC</a>
 comments in the code.</p>
-<h2 id="available-features" tabindex="-1">Available Features</h2>
+<h2 id="available-features">Available Features</h2>
 <p>To state that items in a library should only be available
 in applications that require at least a certain version of iOS,
 add an <code>@available(iOS {version}, *)</code> attribute before the item definition
 where <code>{version}</code> is an iOS version like <code>16.0</code>.
 This is alway needed when an item uses SwiftUI.</p>
-<h2 id="using-github" tabindex="-1">Using GitHub</h2>
+<h2 id="using-github">Using GitHub</h2>
 <p>Swift packages are frequently stored in a GitHub repository.
 Each package must be in its own repository.
 To create a GitHub repository for a new package inside Xcode:</p>
@@ -403,102 +405,102 @@ has a git repository, move the package directory to a new location.</p>
 that only shows the files in the package.</p>
 </li>
 <li>
-<p>Select the &quot;<a href="http://README.md">README.md</a>&quot; file and add details.</p>
+<p>Select the “README.md” file and add details.</p>
 </li>
 <li>
-<p>Select Source Control ... New Git Repository...</p>
+<p>Select Source Control … New Git Repository…</p>
 </li>
 <li>
-<p>Click the &quot;Create&quot; button.</p>
+<p>Click the “Create” button.</p>
 </li>
 <li>
 <p>If your GitHub account has not already been associated with Xcode:</p>
 <ul>
-<li>Select Xcode ... Settings...</li>
-<li>Select the &quot;Accounts&quot; tab.</li>
-<li>Click the &quot;+&quot; button in the lower-left.</li>
-<li>In the dialog that appears, select &quot;GitHub&quot;.</li>
-<li>Click the &quot;Continue&quot; button.</li>
+<li>Select Xcode … Settings…</li>
+<li>Select the “Accounts” tab.</li>
+<li>Click the ”+” button in the lower-left.</li>
+<li>In the dialog that appears, select “GitHub”.</li>
+<li>Click the “Continue” button.</li>
 <li>Enter a GitHub account name.</li>
 <li>Paste in a personal access token for the account.</li>
-<li>Click the &quot;Sign In&quot; button.</li>
+<li>Click the “Sign In” button.</li>
 </ul>
 </li>
 <li>
 <p>Open the Source Control Navigator which is the second Navigator tab.</p>
 </li>
 <li>
-<p>Click the &quot;Repositories&quot; tab.</p>
+<p>Click the “Repositories” tab.</p>
 </li>
 <li>
-<p>Right-click the top entry and select &quot;New {package-name} Remote...&quot;.</p>
+<p>Right-click the top entry and select “New {package-name} Remote…”.</p>
 </li>
 <li>
 <p>In the dialog that appears, verify the account, enter a description, and
-choose &quot;Public&quot; or &quot;Private&quot;.</p>
+choose “Public” or “Private”.</p>
 </li>
 <li>
-<p>Click the &quot;Create&quot; button.</p>
+<p>Click the “Create” button.</p>
 </li>
 <li>
 <p>Select the Source Control Navigator (2nd tab).</p>
 </li>
 <li>
-<p>Select the &quot;Repositories&quot; tab.</p>
+<p>Select the “Repositories” tab.</p>
 </li>
 </ul>
 <p>Package versions are specified with Git tags that are semantic version numbers.
 To add a tag to the current commit of a Swift package:</p>
 <ul>
 <li>Open the Source Control Navigator which is the second Navigator tab.</li>
-<li>Click the &quot;Repositories&quot; tab.</li>
-<li>Expand the &quot;Tags&quot; section to see the existing tags.</li>
-<li>Right-click the top entry and select &quot;Tag {branch-name}...&quot;
-where branch-name is typically &quot;main&quot;.</li>
+<li>Click the “Repositories” tab.</li>
+<li>Expand the “Tags” section to see the existing tags.</li>
+<li>Right-click the top entry and select “Tag {branch-name}…”
+where branch-name is typically “main”.</li>
 <li>In the dialog that appears, enter a semantic version number
 that is higher than the previous tag (ex. 1.2.3).</li>
 <li>Optionally enter a description in the Message input.</li>
 <li>Click the Create button.</li>
-<li>Select Source Control ... Push...</li>
+<li>Select Source Control … Push…</li>
 <li>In the dialog that appears,
-check the &quot;Include Tags&quot; checkbox and click the &quot;Push&quot; button.</li>
+check the “Include Tags” checkbox and click the “Push” button.</li>
 </ul>
 <p>For each new version of the package to be published,
 commit the changes, tag the commit, and push it as described above.</p>
 <p>To view the GitHub repository in your default web browser:</p>
 <ul>
 <li>Open the Source Control Navigator which is the second Navigator tab.</li>
-<li>Click the &quot;Repositories&quot; tab.</li>
-<li>Right-click the top entry and select &quot;View on GitHub...&quot;.</li>
+<li>Click the “Repositories” tab.</li>
+<li>Right-click the top entry and select “View on GitHub…”.</li>
 </ul>
-<h2 id="finding-packages" tabindex="-1">Finding Packages</h2>
+<h2 id="finding-packages">Finding Packages</h2>
 <p>There is no official package index similar to <a href="https://www.npmjs.com?v=1.1.1" rel="noopener" target="_blank">npmjs</a> for Node.js packages.
 <a href="https://swiftpackageindex.com?v=1.1.1" rel="noopener" target="_blank">Swift Package Index</a>
 is an unofficial index where you can search for open source packages.
 As of January 7, 2023 it provides information on 5,306 packages.</p>
-<h2 id="using-packages" tabindex="-1">Using Packages</h2>
+<h2 id="using-packages">Using Packages</h2>
 <p>To use a package in an application or other package:</p>
 <ul>
 <li>
 <p>Open the application or package that will use the package in Xcode.</p>
 </li>
 <li>
-<p>Select File ... Add Packages... .</p>
+<p>Select File … Add Packages… .</p>
 <p>Alternatively this longer set of steps can be used:</p>
 <ul>
 <li>Select the top entry in the Project Navigator.</li>
 <li>Select the project.</li>
-<li>Click the &quot;Package Dependencies&quot; tab.</li>
-<li>Click the &quot;+&quot; button at the bottom.</li>
+<li>Click the “Package Dependencies” tab.</li>
+<li>Click the ”+” button at the bottom.</li>
 </ul>
 </li>
 <li>
 <p>Paste the Git URL into the search input.
 This renders the Markdown found in the <code>README.md</code> file of the package.
-TODO: Why doesn't this work for many packages including <code>RMVGeometry</code> package?</p>
+TODO: Why doesn’t this work for many packages including <code>RMVGeometry</code> package?</p>
 </li>
 <li>
-<p>In the &quot;Dependency Rule&quot; dropdown, select one of the following options
+<p>In the “Dependency Rule” dropdown, select one of the following options
 where the repository tags are semantic version numbers:</p>
 <ul>
 <li>Version: Up to Next Major -
@@ -515,11 +517,11 @@ latest tag with a specified major.minor version</li>
 <p>Enter a semantic version number.</p>
 </li>
 <li>
-<p>Click the &quot;Add Package&quot; button.</p>
+<p>Click the “Add Package” button.</p>
 </li>
 <li>
 <p>In the confirmation dialog that appears,
-click a second &quot;Add Package&quot; button.</p>
+click a second “Add Package” button.</p>
 </li>
 <li>
 <p>In source files that will use the package,
@@ -531,18 +533,18 @@ defined in the imported package targets.</p>
 </li>
 </ul>
 <p>To update the version of all package dependencies,
-select File ... Packages ... Update to Latest Package Versions.</p>
+select File … Packages … Update to Latest Package Versions.</p>
 <p>To update the version of a specific package dependency:</p>
 <ul>
 <li>Open the Project Navigator.</li>
-<li>Under &quot;Package Dependencies&quot;, find the package and right-click it.</li>
-<li>Select &quot;Update Package&quot;.</li>
+<li>Under “Package Dependencies”, find the package and right-click it.</li>
+<li>Select “Update Package”.</li>
 </ul>
 <p>To see source code for a package dependency:</p>
 <ul>
 <li>Open the Project Navigator.</li>
-<li>Under &quot;Package Dependencies&quot;, find the package and expand it.</li>
-<li>Expand the &quot;Sources&quot; directory.</li>
+<li>Under “Package Dependencies”, find the package and expand it.</li>
+<li>Expand the “Sources” directory.</li>
 <li>Click a source file to view it.</li>
 </ul>
 <p>In source files that wish to use a package,
@@ -551,13 +553,13 @@ Often a package defines a single target
 whose name is the same as that of the package.
 But the names do not always match,
 especially when a package defines multiple targets.</p>
-<h2 id="updating-packages" tabindex="-1">Updating Packages</h2>
+<h2 id="updating-packages">Updating Packages</h2>
 <p>To update the version of a single package dependency to the latest version
 that is compatible with the dependency rule for specified for the package,
 right-click the dependency near the bottom of the Project Navigator
-and select &quot;Update Package&quot;.</p>
+and select “Update Package”.</p>
 <p>To update the version of all of the application dependencies,
-select File ... Packages ... Update to Latest Package Versions.</p>
+select File … Packages … Update to Latest Package Versions.</p>
 <p>Application projects contain the file
 <code>{project-name}.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved</code>.
 This file records the exact version of each package dependency being used.
@@ -566,7 +568,7 @@ It is similar to a <code>package-lock.json</code> file in a Node.js project.</p>
 all developers on a team to use the same versions of all the dependencies.
 This file is updated when a new package dependency is added
 and when an existing package dependency is updated.</p>
-<p>Other options in the File ... Packages menu include:</p>
+<p>Other options in the File … Packages menu include:</p>
 <ul>
 <li>
 <p>Reset Package Caches</p>
@@ -581,7 +583,7 @@ to be the version specified in the <code>Package.resolved</code> file.
 It is useful when another team member has updated that file.</p>
 </li>
 </ul>
-<h2 id="adding-assets" tabindex="-1">Adding Assets</h2>
+<h2 id="adding-assets">Adding Assets</h2>
 <p>To add assets such as color sets and image sets to a package:</p>
 <ul>
 <li>
@@ -589,7 +591,7 @@ It is useful when another team member has updated that file.</p>
 the target folder under the <code>Sources</code> folder.</p>
 </li>
 <li>
-<p>Select &quot;New Folder&quot;.</p>
+<p>Select “New Folder”.</p>
 </li>
 <li>
 <p>Name the new folder <code>Resources</code>.</p>
@@ -598,13 +600,13 @@ the target folder under the <code>Sources</code> folder.</p>
 <p>Right-click the new <code>Resources</code> folder.</p>
 </li>
 <li>
-<p>Select &quot;New File...&quot;.</p>
+<p>Select “New File…”.</p>
 </li>
 <li>
-<p>Select &quot;Asset Catalog&quot;.</p>
+<p>Select “Asset Catalog”.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
 <p>The file <code>Media.xcassets</code> will be added.</p>
@@ -619,7 +621,7 @@ adding them to <code>Assets.xcassets</code> in an application.</p>
 <li>
 <p>Add an argument like the following to the <code>.target</code> call for the target:</p>
 <pre><code class="language-swift">resources: [
-    .process(&quot;{TargetName}/Resources/Media.xcassets&quot;)
+    .process("{TargetName}/Resources/Media.xcassets")
 ]
 </code></pre>
 <p>The <code>process</code> method optimizes resources when possible.
@@ -642,16 +644,16 @@ it retains the file structure of that directory.</p>
 </li>
 </ul>
 <p>Here is an example of a package method that returns a SwiftUI <code>Image</code>:</p>
-<pre><code class="language-swift">    public func comet(size: Double) -&gt; some View {
+<pre><code class="language-swift">    public func comet(size: Double) -> some View {
         // This looks for the image inside the .xcassets file in this package
         // instead of looking in the .xcassets file of the using application.
-        Image(uiImage: UIImage(named: &quot;Comet&quot;, in: .module, with: nil)!)
+        Image(uiImage: UIImage(named: "Comet", in: .module, with: nil)!)
             .resizable()
             .scaledToFit()
             .frame(width: size, height: size)
     }
 </code></pre>
-<h2 id="unit-tests" tabindex="-1">Unit Tests</h2>
+<h2 id="unit-tests">Unit Tests</h2>
 <p>Unit tests enables verifying the functionality of a package
 before deploying the initial version or changes to it.</p>
 <p>Unit tests for a package reside in the <code>Tests/{package-name}Tests</code> directory.</p>
@@ -662,7 +664,7 @@ are treated as though they have an access level of <code>public</code>.
 This enables writing tests for them.</p>
 <p>Tests must be implemented as methods inside a <code>class</code> that inherits from
 <a href="https://developer.apple.com/documentation/xctest/xctestcase?v=1.1.1" rel="noopener" target="_blank">XCTestCase</a>.
-The methods must have names that begin with &quot;test&quot;.</p>
+The methods must have names that begin with “test”.</p>
 <p>For example, the file <code>IconTests.swift</code> below
 comes from the package GitHub repository <a href="https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1" rel="noopener" target="_blank">RMVSwiftUIViews</a>.</p>
 <pre><code class="language-swift">@testable import RMVSwiftUIViews
@@ -670,9 +672,9 @@ import XCTest
 
 final class IconTests: XCTestCase {
     func testEnumCases() throws {
-        XCTAssertEqual(Icon.baseball.rawValue, &quot;baseball&quot;)
-        XCTAssertEqual(Icon.bell.rawValue, &quot;sf-bell&quot;)
-        XCTAssertEqual(Icon.thumbsUp.rawValue, &quot;sf-hand.thumbsup&quot;)
+        XCTAssertEqual(Icon.baseball.rawValue, "baseball")
+        XCTAssertEqual(Icon.bell.rawValue, "sf-bell")
+        XCTAssertEqual(Icon.thumbsUp.rawValue, "sf-hand.thumbsup")
     }
 }
 </code></pre>
@@ -716,13 +718,13 @@ final class RMVSwiftUIViewsTests: XCTestCase {
 }
 </code></pre>
 <p>To run all of the tests in a package inside Xcode,
-select Product ... Test or press cmd-u.</p>
+select Product … Test or press cmd-u.</p>
 <p>To run a specific test function, click the diamond icon
 to the left of the first line in the function definition
 These can be found in the left gutter where line numbers typically appear.
 If no diamond icons appear, close the test source file and open it again.
 If the test passes, the diamond will turn green with a white checkmark inside.
-If the test fails, the diamond will turn red with a white &quot;X&quot; inside.</p>
+If the test fails, the diamond will turn red with a white “X” inside.</p>
 <p>To run all the tests in an <code>XCTestCase</code> subclass, click the diamond icon
 to the left of the first line in the class definition.</p>
 <p>Tests can also be run from the Test Navigator which is the sixth navigator tab.
@@ -754,7 +756,7 @@ an array of strings that are the names of the test methods to run.
 This array must be updated whenever new test methods are added.
 It is possible to automate this by running the command
 <code>swift test --generate-linuxmain</code>.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <p>A package can include resources that are files other that Swift source files.
 These include <code>.xcassets</code> files that hold images,
 <code>.strings</code> and <code>.stringsdict</code> files for localization,
@@ -762,32 +764,32 @@ Core Data model files, and more.</p>
 <p>The following <code>package.swift</code> manifest file from the <a href="https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1" rel="noopener" target="_blank">RMVSwiftUIViews</a> package
 demonstrates including the file <code>Assets.xcassets</code>
 which contains several Image Sets.
-Note the line that begins with &quot;resources:&quot;.</p>
+Note the line that begins with “resources:”.</p>
 <pre><code class="language-swift">// swift-tools-version: 5.7
 import PackageDescription
 
 let package = Package(
-    name: &quot;RMVSwiftUIViews&quot;,
+    name: "RMVSwiftUIViews",
     platforms: [.iOS(.v13)],
     products: [
         // This package defines a single library that defines a single target.
         .library(
-            name: &quot;RMVSwiftUIViews&quot;,
-            targets: [&quot;RMVSwiftUIViews&quot;]
+            name: "RMVSwiftUIViews",
+            targets: ["RMVSwiftUIViews"]
         ),
     ],
     dependencies: [], // This package doesn't depend on any others.
     targets: [
         // This target will be imported by apps.
         .target(
-            name: &quot;RMVSwiftUIViews&quot;,
+            name: "RMVSwiftUIViews",
             dependencies: [],
-            resources: [.process(&quot;Assets.xcassets&quot;)]
+            resources: [.process("Assets.xcassets")]
         ),
         // This target contains unit tests for the target above.
         .testTarget(
-            name: &quot;RMVSwiftUIViewsTests&quot;,
-            dependencies: [&quot;RMVSwiftUIViews&quot;]
+            name: "RMVSwiftUIViewsTests",
+            dependencies: ["RMVSwiftUIViews"]
         ),
     ]
 )
@@ -795,13 +797,13 @@ let package = Package(
 <p>The following method from the <code>Icon</code> <code>enum</code> defined in this package
 demonstrates getting images from both the package bundle
 and the bundle of an app that uses this package.</p>
-<pre><code class="language-swift">func image(fill: Bool) -&gt; Image {
-    let suffix = fill ? &quot;.fill&quot; : &quot;&quot;
-    if rawValue.prefix(3) == &quot;sf-&quot; {
+<pre><code class="language-swift">func image(fill: Bool) -> Image {
+    let suffix = fill ? ".fill" : ""
+    if rawValue.prefix(3) == "sf-" {
         let systemName = String(rawValue.dropFirst(3)) + suffix
         return Image(systemName: systemName) // gets from SF Symbols
     }
-    return rawValue == &quot;custom&quot; ?
+    return rawValue == "custom" ?
         Image(rawValue + suffix) : // gets from the app bundle
         Image(rawValue + suffix, bundle: .module) // gets from this bundle
 }
@@ -809,8 +811,8 @@ and the bundle of an app that uses this package.</p>
 <p>To add a text file to the package as a resource, modify the <code>resources</code> array
 passed to the first target in <code>package.swift</code> as follows:</p>
 <pre><code class="language-swift">            resources: [
-                .process(&quot;Assets.xcassets&quot;),
-                .copy(&quot;demo.csv&quot;) // a text file
+                .process("Assets.xcassets"),
+                .copy("demo.csv") // a text file
             ]
 </code></pre>
 <p>Alternatively, place all the resource files in a subdirectory of the package
@@ -819,8 +821,8 @@ With this change, additional resource files can be added
 in the <code>Resources</code> directory and it will not be necessary
 to add a reference to each one in <code>package.swift</code>.</p>
 <pre><code class="language-swift">            resources: [
-                .process(&quot;Assets.xcassets&quot;),
-                .process(&quot;Resources&quot;)
+                .process("Assets.xcassets"),
+                .process("Resources")
             ]
 
 </code></pre>
@@ -828,15 +830,15 @@ to add a reference to each one in <code>package.swift</code>.</p>
 <code>process</code> and <code>copy</code> methods in the <a href="#adding-assets">Adding Assets</a> section.</p>
 <p>To read the resource text file from code in the package:</p>
 <pre><code class="language-swift">let filePath = Bundle.module.path(
-    forResource: &quot;myFileName&quot;,
-    ofType: &quot;csv&quot;
+    forResource: "myFileName",
+    ofType: "csv"
 )
 if let filePath {
     let contents = try String(contentsOfFile: filePath)
     // Do something with contents.
 }
 </code></pre>
-<h2 id="excluding-resources" tabindex="-1">Excluding Resources</h2>
+<h2 id="excluding-resources">Excluding Resources</h2>
 <p>Some files that are part of the package project
 do not need to be included in the bundle that is produced.
 These include documentation files, code examples, and shell scripts,
@@ -847,11 +849,11 @@ whose value is an array of relative file path strings.
 For example:</p>
 <pre><code class="language-swift">        .target(
             ...
-            exclude: [&quot;notes.md&quot;],
+            exclude: ["notes.md"],
             ...
         ),
 </code></pre>
-<h2 id="localized-resources" tabindex="-1">Localized Resources</h2>
+<h2 id="localized-resources">Localized Resources</h2>
 <p>To include a resource that requires a
 different file for each supported language,
 add one directory inside the <code>Sources/{package-name}</code> directory
@@ -860,29 +862,27 @@ For example, <code>en.lproj</code> for English and <code>fr.lproj</code> for Fre
 Then add files in these directories where
 the corresponding files have the same name (ex. <code>message.txt</code>).</p>
 <figure style="width: 40%">
-  <img alt="SwiftUI Package Localized Resources"
-    src="/blog/assets/swiftui-package-localized-resources.png?v=1.1.1"
-    title="Swift Package Localized Resources">
+  <img alt="SwiftUI Package Localized Resources" src="/blog/assets/swiftui-package-localized-resources.png?v=1.1.1" title="Swift Package Localized Resources">
   <figcaption>Swift Package Localized Resources</figcaption>
 </figure>
 <p>Note that there is a <code>message.txt</code> file for each supported language.
-The file in the <code>en.lproj</code> directory contains &quot;Hello&quot;.
-The file in the <code>es.lproj</code> directory contains &quot;Hola&quot;.
-The file in the <code>fr.lproj</code> directory contains &quot;Bonjour&quot;.</p>
+The file in the <code>en.lproj</code> directory contains “Hello”.
+The file in the <code>es.lproj</code> directory contains “Hola”.
+The file in the <code>fr.lproj</code> directory contains “Bonjour”.</p>
 <p>The <code>.lproj</code> directories cannot contain subdirectories.</p>
 <p>The <code>package.swift</code> manifest file is required to
 specify <code>defaultLocalization</code> when there are localized resources.
-For example, <code>defaultLocalization: &quot;en&quot;,</code>.</p>
+For example, <code>defaultLocalization: "en",</code>.</p>
 <p>It seems there is no way to change the locale used by a test
 inside the test code.
 To change the locale that will be used when tests are run:</p>
 <ul>
 <li>Click the scheme dropdown to the left of the device dropdown
 at the top of the Xcode window.</li>
-<li>Select &quot;Edit Scheme...&quot;</li>
-<li>In the left nav, select &quot;Test&quot;.</li>
-<li>Select the &quot;Options&quot; tab.</li>
-<li>Select a language in the &quot;App Language&quot; dropdown.</li>
+<li>Select “Edit Scheme…”</li>
+<li>In the left nav, select “Test”.</li>
+<li>Select the “Options” tab.</li>
+<li>Select a language in the “App Language” dropdown.</li>
 </ul>
 <p>The following code defines a function to be tested.
 It reads and returns the contents of a localized resource file.</p>
@@ -893,9 +893,9 @@ extension String: LocalizedError {
     public var errorDescription: String? { self }
 }
 
-public func message() throws -&gt; String {
-    let filePath = Bundle.module.path(forResource: &quot;message&quot;, ofType: &quot;txt&quot;)
-    guard let filePath else { throw &quot;file not found&quot; }
+public func message() throws -> String {
+    let filePath = Bundle.module.path(forResource: "message", ofType: "txt")
+    guard let filePath else { throw "file not found" }
     let line = try String(contentsOfFile: filePath)
     return line.trimmingCharacters(in: .whitespacesAndNewlines)
 }
@@ -907,15 +907,16 @@ by following the steps above to select the language to use.</p>
 <pre><code class="language-swift">final class LocalizeTests: XCTestCase {
     func testMessage() throws {
         let lang = Locale.preferredLanguages.first
-        guard let lang else { throw &quot;language not set&quot; }
+        guard let lang else { throw "language not set" }
         let actual = try message()
         let expected =
-            lang == &quot;en&quot; ? &quot;Hello&quot; :
-            lang == &quot;es&quot; ? &quot;Hola&quot; :
-            lang == &quot;fr&quot; ? &quot;Bonjour&quot; :
-            &quot;unsupported language \(lang)&quot;
+            lang == "en" ? "Hello" :
+            lang == "es" ? "Hola" :
+            lang == "fr" ? "Bonjour" :
+            "unsupported language \(lang)"
         XCTAssertEqual(actual, expected)
     }
 }
-</code></pre>
-</article> </body></html>
+</code></pre> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

@@ -1,14 +1,14 @@
-<!DOCTYPE html><html lang="en"> <head><title>Why Swift?</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Why Swift?</h2> <aside><ul><li><a href="#functions">Functions</a></li><li><a href="#control-structures">Control Structures</a></li><ul><li><a href="#if-statement">if statement</a></li><li><a href="#switch-statement">switch statement</a></li><li><a href="#for-loop">for loop</a></li><li><a href="#while-loop">while loop</a></li><li><a href="#repeat-while-loop">repeat-while loop</a></li></ul><li><a href="#type-inference">Type Inference</a></li><li><a href="#collections">Collections</a></li><ul><li><a href="#arrays">Arrays</a></li><li><a href="#dictionaries">Dictionaries</a></li><li><a href="#sets">Sets</a></li><li><a href="#tuples">Tuples</a></li></ul><li><a href="#optionals">Optionals</a></li><li><a href="#properties">Properties</a></li><li><a href="#custom-types">Custom Types</a></li><ul><li><a href="#protocols">Protocols</a></li><li><a href="#structs">Structs</a></li><li><a href="#classes">Classes</a></li><li><a href="#enums">Enums</a></li></ul><li><a href="#access-control">Access Control</a></li><li><a href="#imports">Imports</a></li><li><a href="#closures">Closures</a></li><li><a href="#guards">Guards</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#property-observers">Property Observers</a></li><li><a href="#conclusion">Conclusion</a></li></ul></aside> <article><p><img alt="Swift logo" style="width: 30%"
-  src="/blog/assets/swift-logo.png?v=1.1.1"
-  title="Swift logo"></p>
-<h1 id="what-makes-swift-a-great-programming-language%3F" tabindex="-1">What makes Swift a great programming language?</h1>
+<!DOCTYPE html><html lang="en"> <head><title>Why Swift?</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link active expanded" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Why Swift?</h2> <aside><ul><li><a href="#functions">Functions</a></li><li><a href="#control-structures">Control Structures</a></li><ul><li><a href="#if-statement">if statement</a></li><li><a href="#switch-statement">switch statement</a></li><li><a href="#for-loop">for loop</a></li><li><a href="#while-loop">while loop</a></li><li><a href="#repeat-while-loop">repeat-while loop</a></li></ul><li><a href="#type-inference">Type Inference</a></li><li><a href="#collections">Collections</a></li><ul><li><a href="#arrays">Arrays</a></li><li><a href="#dictionaries">Dictionaries</a></li><li><a href="#sets">Sets</a></li><li><a href="#tuples">Tuples</a></li></ul><li><a href="#optionals">Optionals</a></li><li><a href="#properties">Properties</a></li><li><a href="#custom-types">Custom Types</a></li><ul><li><a href="#protocols">Protocols</a></li><li><a href="#structs">Structs</a></li><li><a href="#classes">Classes</a></li><li><a href="#enums">Enums</a></li></ul><li><a href="#access-control">Access Control</a></li><li><a href="#imports">Imports</a></li><li><a href="#closures">Closures</a></li><li><a href="#guards">Guards</a></li><li><a href="#extensions">Extensions</a></li><li><a href="#property-observers">Property Observers</a></li><li><a href="#conclusion">Conclusion</a></li></ul></aside> <article> <p><img alt="Swift logo" style="width: 30%" src="/blog/assets/swift-logo.png?v=1.1.1" title="Swift logo"></p>
+<h1 id="what-makes-swift-a-great-programming-language">What makes Swift a great programming language?</h1>
 <p>This article highlights many features of the <a href="https://developer.apple.com/swift/?v=1.1.1" rel="noopener" target="_blank">Swift</a> programming language
 that make it an attractive alternative to other programming languages.
 For a more complete introduction to Swift, see <a href="https://docs.swift.org/swift-book/documentation/the-swift-programming-language/guidedtour/?v=1.1.1" rel="noopener" target="_blank">A Swift Tour</a>.</p>
 <p>My goal is to provide clear, concise descriptions of a large number
 of fundamental Swift concepts along with short, illustrative code snippets.
 If you are familiar with at least one programming language
-that supports object-oriented concepts, I'm confident this will be
+that supports object-oriented concepts, I’m confident this will be
 enough to get you started reading and writing Swift code.</p>
 <p>Swift is supported in macOS, Linux, and Windows.
 For details, see <a href="https://www.swift.org/platform-support/?v=1.1.1" rel="noopener" target="_blank">Platform Support</a>.</p>
@@ -24,7 +24,7 @@ with the Swift Compiler for Android Development Environment
 <a href="https://developer.apple.com/xcode/swiftui/?v=1.1.1" rel="noopener" target="_blank">SwiftUI</a>
 framework. For a basic example,
 see my Running Calculator app for watchOS in <a href="https://github.com/mvolkmann/swiftui-running-calculator/blob/main/RunningCalculator%20WatchKit%20Extension/RunningCalculatorApp.swift?v=1.1.1" rel="noopener" target="_blank">GitHub</a>.</p>
-<h2 id="functions" tabindex="-1">Functions</h2>
+<h2 id="functions">Functions</h2>
 <p>Functions are defined with the <code>func</code> keyword followed by
 a name, parameter list, optional return type, and body.</p>
 <p>In functions with a return type where the body contains a single expression,
@@ -44,44 +44,44 @@ Parameter names are used to access the values inside the function body.</p>
 <p>To demonstrate these options, here are four ways to define a
 simple function that returns the result of multiplying two numbers.</p>
 <pre><code class="language-swift">// No parameters have argument labels.
-func multiplyV1(first: Double, second: Double) -&gt; Double {
+func multiplyV1(first: Double, second: Double) -> Double {
     first * second
 }
 print(multiplyV1(first: 2, second: 3)) // 6
 
 // All parameters have argument labels.
-func multiplyV2(number first: Double, by second: Double) -&gt; Double {
+func multiplyV2(number first: Double, by second: Double) -> Double {
     first * second
 }
 print(multiplyV2(number: 2, by: 3)) // 6
 
 // The first parameter is positional and the second has an argument label.
 // Positional parameters can appear before and/or after named parameters.
-func multiplyV3(_ first: Double, by second: Double) -&gt; Double {
+func multiplyV3(_ first: Double, by second: Double) -> Double {
     first * second
 }
 print(multiplyV3(2, by: 3)) // 6
 
 // All parameters are positional.
-func multiplyV4(_ first: Double, _ second: Double) -&gt; Double {
+func multiplyV4(_ first: Double, _ second: Double) -> Double {
     first * second
 }
 print(multiplyV4(2, 3)) // 6
 </code></pre>
 <p>The purpose of argument labels is to
 make calls to functions read in a more English-like manner.
-Typically argument labels are prepositions such as &quot;at&quot;, &quot;between&quot;, &quot;by&quot;,
-&quot;for&quot;, &quot;from&quot;, &quot;in&quot;, &quot;inside&quot;, &quot;of&quot;, &quot;on&quot;, &quot;to&quot;, or &quot;with&quot;.</p>
+Typically argument labels are prepositions such as “at”, “between”, “by”,
+“for”, “from”, “in”, “inside”, “of”, “on”, “to”, or “with”.</p>
 <p>The arguments in a function call must appear
 in the same order in which they are defined
 in order to support being read by developers in the expected way.
 For example, later we will see the definition of a <code>Person</code> class
 that defines a <code>marry</code> method.
-Here's an example of a call to this method:</p>
+Here’s an example of a call to this method:</p>
 <pre><code class="language-swift">personA.marry(spouse: personB, on: date)
 </code></pre>
-<p>Reading &quot;marry spouse on&quot; feels correct,
-but reading &quot;marry on spouse&quot; would not.</p>
+<p>Reading “marry spouse on” feels correct,
+but reading “marry on spouse” would not.</p>
 <p>Positional parameters are used far less frequently
 than named parameters in typical Swift code.</p>
 <p>Parameters can be given default values.
@@ -89,15 +89,15 @@ This allows them to be omitted in calls.
 However, specifying a default value for a parameter
 does not remove the need to specify its type.</p>
 <p>For example:</p>
-<pre><code class="language-swift">func greet(salutation: String = &quot;Hello&quot;, name: String = &quot;World&quot;) {
+<pre><code class="language-swift">func greet(salutation: String = "Hello", name: String = "World") {
     print(salutation, name)
 }
 greet() // Hello World
-greet(name: &quot;Mark&quot;) // Hello Mark
-greet(salutation: &quot;Hola&quot;) // Hola World
-greet(salutation: &quot;Hola&quot;, name: &quot;Mark&quot;) // Hola Mark
+greet(name: "Mark") // Hello Mark
+greet(salutation: "Hola") // Hola World
+greet(salutation: "Hola", name: "Mark") // Hola Mark
 </code></pre>
-<h2 id="control-structures" tabindex="-1">Control Structures</h2>
+<h2 id="control-structures">Control Structures</h2>
 <p>Many programming languages have a syntax that is
 modeled after the C programming language where
 conditions are surrounded by parentheses and
@@ -110,49 +110,49 @@ for requiring braces around code blocks.</p>
 <li>The <code>let</code> keyword declares a constant (cannot change).</li>
 <li>The <code>var</code> keyword declares a variable (can change).</li>
 <li>Literal strings must be surrounded by double quotes.</li>
-<li>A range of numbers is defined using the <code>...</code> and <code>..&lt;</code> operators.
+<li>A range of numbers is defined using the <code>...</code> and <code>..&#x3C;</code> operators.
 If a number appears on both sides of the operator, it is a closed range.
 If a number appears on only one side, it is an open range.</li>
 </ul>
-<h3 id="if-statement" tabindex="-1">if statement</h3>
+<h3 id="if-statement">if statement</h3>
 <pre><code class="language-swift">let score = Int.random(in: 0...30)
 
 // Can write on a single line.
-if score == 0 { print(&quot;Start the game!&quot;) }
+if score == 0 { print("Start the game!") }
 
 // Can spread over multiple lines.
 if score == 21 {
-    print(&quot;You win!&quot;)
-} else if score &gt; 21 {
-    print(&quot;You lose.&quot;)
+    print("You win!")
+} else if score > 21 {
+    print("You lose.")
 } else {
-    print(&quot;Still playing ...&quot;)
+    print("Still playing ...")
 }
 </code></pre>
-<h3 id="switch-statement" tabindex="-1">switch statement</h3>
+<h3 id="switch-statement">switch statement</h3>
 <p>Switch statements must be exhaustive which means
 they must either include a <code>case</code> that matches every possible value
 or they must include a <code>default</code> case.</p>
 <pre><code class="language-swift">switch score {
 case 21: // matches a single value
-    print(&quot;You win!&quot;)
+    print("You win!")
     // Control does not flow into the next case,
     // so a break statement is not necessary.
 case 22...: // matches an open-ended range
-    print(&quot;You lose.&quot;)
-case let s where s &gt; 21: // alternative using a where clause
-    print(&quot;You lose.&quot;)
+    print("You lose.")
+case let s where s > 21: // alternative using a where clause
+    print("You lose.")
 default: // matches all other values
-    print(&quot;Still playing.&quot;)
+    print("Still playing.")
 }
 </code></pre>
-<h3 id="for-loop" tabindex="-1">for loop</h3>
+<h3 id="for-loop">for loop</h3>
 <pre><code class="language-swift">// Create a deck of playing cards.
 let ranks = [
-    &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;,
-    &quot;10&quot;, &quot;J&quot;, &quot;Q&quot;, &quot;K&quot;, &quot;A&quot;
+    "2", "3", "4", "5", "6", "7", "8", "9",
+    "10", "J", "Q", "K", "A"
 ]
-let suits = [&quot;♥️&quot;, &quot;♦️&quot;, &quot;♣️&quot;, &quot;♠️&quot;]
+let suits = ["♥️", "♦️", "♣️", "♠️"]
 var deck: [String] = [] // Array of String values
 for rank in ranks {
     for suit in suits {
@@ -160,7 +160,7 @@ for rank in ranks {
         // is used for String interpolation.
         // Many other languages use ${expression} for this.
         // It's unclear why Swift chose a different syntax.
-        deck.append(&quot;\(rank)\(suit)&quot;)
+        deck.append("\(rank)\(suit)")
     }
 }
 
@@ -170,30 +170,30 @@ var hand: [String] = []
 for _ in 1...5 {
     hand.append(deck.removeFirst())
 }
-print(hand) // ex. [&quot;3♦️&quot;, &quot;3♣️&quot;, &quot;7♥️&quot;, &quot;8♥️&quot;, &quot;K♦️&quot;]
+print(hand) // ex. ["3♦️", "3♣️", "7♥️", "8♥️", "K♦️"]
 </code></pre>
-<h3 id="while-loop" tabindex="-1">while loop</h3>
+<h3 id="while-loop">while loop</h3>
 <pre><code class="language-swift">var temperature = 0
 func forecast() {
-    print(&quot;temperature is&quot;, temperature)
+    print("temperature is", temperature)
     // The loop below stops when this generates a high temperature.
     temperature = Int.random(in: 0...100)
 }
 
 // top-tested loop
-while temperature &lt; 80 {
+while temperature &#x3C; 80 {
     forecast()
 }
 </code></pre>
-<h3 id="repeat-while-loop" tabindex="-1">repeat-while loop</h3>
+<h3 id="repeat-while-loop">repeat-while loop</h3>
 <pre><code class="language-swift">temperature = 0
 
 // bottom-tested loop
 repeat {
     forecast()
-} while temperature &lt; 80
+} while temperature &#x3C; 80
 </code></pre>
-<h2 id="type-inference" tabindex="-1">Type Inference</h2>
+<h2 id="type-inference">Type Inference</h2>
 <p>There are many cases when it is unnecessary to specify types
 because Swift infers them.</p>
 <pre><code class="language-swift">let score: Int = 19
@@ -202,16 +202,16 @@ let score = 19 // same
 let distance: Double = 1.23
 let distance = 1.23 // same
 
-let name: String = &quot;Mark&quot;
-let name = &quot;Mark&quot; // same
+let name: String = "Mark"
+let name = "Mark" // same
 
 // SwiftUI is a framework for creating user interfaces.
 // It defines a Text struct and a Color enum.
 // Structs and enums are described later.
 // foregroundColor is a method that takes a Color which is
 // a struct with static properties for many common colors.
-Text(&quot;Hello, World!&quot;).foregroundColor(Color.red)
-Text(&quot;Hello, World!&quot;).foregroundColor(.red) // same
+Text("Hello, World!").foregroundColor(Color.red)
+Text("Hello, World!").foregroundColor(.red) // same
 
 // multilineTextAlignment is a method that takes a TextAlignment
 // which is an enum with cases for each supported option.
@@ -221,21 +221,21 @@ Text(title).multilineTextAlignment(.center) // same
 <p>A closure is a kind of anonymous function that is described later.
 Parameter types typically are not needed in closures
 because they can be inferred based on the types the caller passes.</p>
-<h2 id="collections" tabindex="-1">Collections</h2>
+<h2 id="collections">Collections</h2>
 <p>The most commonly used built-in collection types are
 <code>Array</code>, <code>Dictionary</code>, <code>Set</code>, and tuples.
 Each of these specifies the types of the items it can contain,
 and each has a literal syntax.</p>
-<h3 id="arrays" tabindex="-1">Arrays</h3>
+<h3 id="arrays">Arrays</h3>
 <p>Arrays store an ordered collection of values
 that have the same type or a common supertype.</p>
 <p>Here is an example of defining and using an <code>Array</code>.</p>
 <pre><code class="language-swift">// The type of this array is inferred to be [String],
-// which can also be written as Array&lt;String&gt;.
-var dogNames = [&quot;Maisey&quot;, &quot;Ramsay&quot;, &quot;Oscar&quot;]
+// which can also be written as Array&#x3C;String>.
+var dogNames = ["Maisey", "Ramsay", "Oscar"]
 
-dogNames.append(&quot;Comet&quot;)
-dogNames[2] = &quot;Oscar Wilde&quot;
+dogNames.append("Comet")
+dogNames[2] = "Oscar Wilde"
 print(dogNames[3]) // Comet
 
 // A for loop can iterate over the items in an Array.
@@ -243,37 +243,37 @@ for name in dogNames {
     print(name)
 }
 </code></pre>
-<h3 id="dictionaries" tabindex="-1">Dictionaries</h3>
+<h3 id="dictionaries">Dictionaries</h3>
 <p>Dictionaries store an unordered collection of key/value pairs
 where the keys must be unique.</p>
 <p>Here is an example of defining and using a <code>Dictionary</code>.</p>
 <pre><code class="language-swift">// The type of this Dictionary is inferred to be [String:String]
-// which can also be written as Dictionary&lt;String, String&gt;.
+// which can also be written as Dictionary&#x3C;String, String>.
 // The first type is that of the keys and
 // the second type is that of the values.
 var languageCreators = [
-    &quot;Java&quot;: &quot;James Gosling&quot;,
-    &quot;JavaScript&quot;: &quot;Brendan Eich&quot;,
-    &quot;Python&quot;: &quot;Guido van Rossum&quot;,
-    &quot;Rust&quot;: &quot;Graydon Hoare&quot;
+    "Java": "James Gosling",
+    "JavaScript": "Brendan Eich",
+    "Python": "Guido van Rossum",
+    "Rust": "Graydon Hoare"
 ]
-languageCreators[&quot;Swift&quot;] = &quot;Chris Lattner&quot;
+languageCreators["Swift"] = "Chris Lattner"
 
-// Getting the value for a key in a Dictionary returns an &quot;optional&quot;
+// Getting the value for a key in a Dictionary returns an "optional"
 // because it is possible that the key does not exist.
 // Optionals are described in the next section.
 // The nil-coalescing operator (??) is used here to handle a missing key.
-print(&quot;Swift was created by \(languageCreators[&quot;Swift&quot;] ?? &quot;unknown&quot;).&quot;)
+print("Swift was created by \(languageCreators["Swift"] ?? "unknown").")
 
 // A for loop can iterate over tuples of key/value pairs in a Dictionary.
 for (language, creator) in languageCreators {
-    print(&quot;\(language) was created by \(creator).&quot;)
+    print("\(language) was created by \(creator).")
 }
 </code></pre>
-<h3 id="sets" tabindex="-1">Sets</h3>
+<h3 id="sets">Sets</h3>
 <p>Sets store an unordered collection of unique values.</p>
 <p>Here is an example of defining and using a <code>Set</code>.</p>
-<pre><code class="language-swift">var uniqueNumbers: Set&lt;Int&gt; = []
+<pre><code class="language-swift">var uniqueNumbers: Set&#x3C;Int> = []
 
 // Fill the set with up to 5 random integers from 1 to 10.
 for _ in 1...5 {
@@ -283,7 +283,7 @@ for _ in 1...5 {
 print(uniqueNumbers) // can contain fewer than 5 values
 print(uniqueNumbers.contains(7)) // true or false
 </code></pre>
-<h3 id="tuples" tabindex="-1">Tuples</h3>
+<h3 id="tuples">Tuples</h3>
 <p>A tuple is an ordered collection of a fixed size
 whose items can have differing types.</p>
 <p>Here is an example of defining a function that returns a tuple,
@@ -291,7 +291,7 @@ calling the function, and using the return value.</p>
 <pre><code class="language-swift">// Gets the minimum, maximum, and average of the numbers in an Array,
 // returned as a tuple of optional Double values
 // which will be nil if the Array is empty.
-func statistics(_ values: [Double]) -&gt; (Double?, Double?, Double?) {
+func statistics(_ values: [Double]) -> (Double?, Double?, Double?) {
     let sum = values.reduce(0) { $0 + $1 }
     // Dividing an Int by an Int truncates the result.
     // To get a Double result, at least one of the operands must be a Double.
@@ -302,27 +302,27 @@ func statistics(_ values: [Double]) -&gt; (Double?, Double?, Double?) {
 let numbers = [3.0, 7.0, 1.0, 4.0]
 let results = statistics(numbers)
 // Note the use of the tuple indices 0, 1, and 2 to get values within the tuple.
-if let minimum = results.0 { print(&quot;minimum is \(minimum)&quot;) } // 1.0
-if let maximum = results.1 { print(&quot;maximum is \(maximum)&quot;) } // 7.0
-if let average = results.2 { print(&quot;average is \(average)&quot;) } // 3.75
+if let minimum = results.0 { print("minimum is \(minimum)") } // 1.0
+if let maximum = results.1 { print("maximum is \(maximum)") } // 7.0
+if let average = results.2 { print("average is \(average)") } // 3.75
 
 // Type aliases give a name to type and
 // are useful to avoid repeating long type descriptions.
 typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
 
-// This function is similar to the previous one but returns a &quot;named tuple&quot;.
+// This function is similar to the previous one but returns a "named tuple".
 // An alternative to consider is using a struct.
-func statistics2(_ values: [Double]) -&gt; StatisticsTuple {
+func statistics2(_ values: [Double]) -> StatisticsTuple {
     let sum = values.reduce(0) { $0 + $1 }
     let average = values.isEmpty ? nil : sum / Double(values.count)
     return (min: values.min(), max: values.max(), avg: average)
 }
 let results2 = statistics2(numbers)
-if let minimum = results2.min { print(&quot;minimum is \(minimum)&quot;) } // 1.0
-if let maximum = results2.max { print(&quot;maximum is \(maximum)&quot;) } // 7.0
-if let average = results2.avg { print(&quot;average is \(average)&quot;) } // 3.75
+if let minimum = results2.min { print("minimum is \(minimum)") } // 1.0
+if let maximum = results2.max { print("maximum is \(maximum)") } // 7.0
+if let average = results2.avg { print("average is \(average)") } // 3.75
 </code></pre>
-<h2 id="optionals" tabindex="-1">Optionals</h2>
+<h2 id="optionals">Optionals</h2>
 <p>The value <code>nil</code> represents the absence of a value.
 By default, variables cannot be set to <code>nil</code>.
 They must always have a value of the declared type, even initially.
@@ -330,7 +330,7 @@ To allow a variable to be set to <code>nil</code>,
 its type must be followed by a question mark, which makes it optional.</p>
 <pre><code class="language-swift">var name: String? // initial value is nil
 ...
-name = &quot;Mark&quot;
+name = "Mark"
 </code></pre>
 <p>The Swift compiler generates an error if code attempts to
 access a variable of an optional type without checking for <code>nil</code>.
@@ -338,41 +338,41 @@ There are several ways, demonstrated below,
 to test whether a variable holds the value <code>nil</code>
 and access its value when it is not <code>nil</code>.</p>
 <pre><code class="language-swift">if name != nil {
-    // The ! operator performs a &quot;force unwrap&quot;
+    // The ! operator performs a "force unwrap"
     // to get the wrapped value of an optional.
-    print(&quot;name is \(name!)&quot;) // name is Mark
+    print("name is \(name!)") // name is Mark
 }
 
-// An &quot;if let&quot; statement assigns the wrapped value
+// An "if let" statement assigns the wrapped value
 // of an optional on the right side of the equal sign
 // to a local variable on the left side
 // ONLY IF its value is not nil.
 // Often the local variable has the same name as the
 // optional variable and shadows within the block.
-// In Swift 5.7+, this can be shorted to &quot;if let name {&quot;.
+// In Swift 5.7+, this can be shorted to "if let name {".
 if let name = name {
-    print(&quot;name is \(name)&quot;) // name is Mark
+    print("name is \(name)") // name is Mark
 }
 
 // The nil-coalescing operator ?? requires an optional on the left side
 // and a non-optional on the right side.
 // If the optional is not nil, the result is the wrapped value.
 // Otherwise the result is the right side value.
-print(&quot;name is \(name ?? &quot;unknown&quot;)&quot;) // name is Mark
+print("name is \(name ?? "unknown")") // name is Mark
 
 // The optional chaining operator ?. is applied to an optional.
 // It evaluates to nil if the value of the optional is nil.
 // Otherwise it evaluates a member of the wrapped value
 // which can be a property or a method.
-print(&quot;name length is \(name?.count ?? 0)&quot;) // 4
-print(&quot;upper name is \(name?.uppercased() ?? &quot;&quot;)&quot;) // upper name is MARK
+print("name length is \(name?.count ?? 0)") // 4
+print("upper name is \(name?.uppercased() ?? "")") // upper name is MARK
 </code></pre>
-<h2 id="properties" tabindex="-1">Properties</h2>
+<h2 id="properties">Properties</h2>
 <p>Swift provides three ways to define custom types: struct, class, and enum.
 Each of these is described in the next section.
 For now all you need to know is that
 each of these can define properties and methods.</p>
-<p>Properties are either &quot;stored&quot; or &quot;computed&quot;.
+<p>Properties are either “stored” or “computed”.
 Every instance of a type stores its own values
 of all stored properties defined by the type.
 Computed properties are computed based on the values of other properties
@@ -404,7 +404,7 @@ This is the case for most computed properties.</p>
     }
 }
 
-// Unlike in many languages, the &quot;new&quot; keyword
+// Unlike in many languages, the "new" keyword
 // is not needed to create an instance of a type.
 let race = Race(kilometers: 5)
 print(race.miles) // 3.105
@@ -421,7 +421,7 @@ struct Counter {
             n * 3
         }
         set {
-            // Swift provides the variable &quot;newValue&quot;.
+            // Swift provides the variable "newValue".
             n = newValue / 3 // truncates
         }
     }
@@ -434,7 +434,7 @@ counter.tripled = 9 // changes n to 3
 print(counter.doubled) // 3 * 2 = 6; doesn't change n
 print(counter.tripled) // 3 * 3 = 9; doesn't change n
 </code></pre>
-<h2 id="custom-types" tabindex="-1">Custom Types</h2>
+<h2 id="custom-types">Custom Types</h2>
 <p>As stated above, the <code>struct</code>, <code>class</code>, and <code>enum</code> keywords
 provide three ways to define custom types.
 These differ from each other in several ways, but they
@@ -442,9 +442,9 @@ all support defining a type that has properties and methods.
 Methods are defined in the same way as functions
 but appear inside a <code>struct</code>, <code>class</code>, or <code>enum</code>.</p>
 <p>Before describing structs, classes, and enums,
-it is useful to understand the concept of &quot;protocols&quot; which are
+it is useful to understand the concept of “protocols” which are
 a kind of contract to which a custom type can conform.</p>
-<h3 id="protocols" tabindex="-1">Protocols</h3>
+<h3 id="protocols">Protocols</h3>
 <p>Protocols are similar to interfaces in some other programming languages.
 They define a set of computed properties and methods
 that other types (structs, enums, and classes) must implement.</p>
@@ -458,7 +458,7 @@ Commonly used protocols defined by Swift include:</p>
 <li><code>CustomStringConvertible</code>: must define the computed property <code>description</code></li>
 <li><code>Identifiable</code>: must define the computed property <code>id</code></li>
 <li><code>Equatable</code>: must define the <code>==</code> operator for comparing instances</li>
-<li><code>Comparable</code>: must define the <code>==</code> and <code>&lt;</code> operators for comparing instances</li>
+<li><code>Comparable</code>: must define the <code>==</code> and <code>&#x3C;</code> operators for comparing instances</li>
 <li><code>Hashable</code>: must define the <code>hash</code> method</li>
 </ul>
 <p>The Swift compiler can synthesize the implementations of several protocols.
@@ -467,11 +467,11 @@ stating that a type conforms to the protocol is all that is required.</p>
 <p>Instances of types that conform to the <code>CustomStringConvertible</code> protocol
 can be automatically converted to a <code>String</code> representation
 when printed or used in a <code>String</code> interpolation.</p>
-<h3 id="structs" tabindex="-1">Structs</h3>
-<p>Structs and enums are &quot;value types&quot;.
+<h3 id="structs">Structs</h3>
+<p>Structs and enums are “value types”.
 When an instance is assigned to a variable or passed to a function,
 a shallow copy is created. Technically a copy is not made until
-there is an attempt to modify it using a &quot;copy on write&quot; strategy.</p>
+there is an attempt to modify it using a “copy on write” strategy.</p>
 <p>Structs are used far more frequently than classes in typical Swift code.
 Nearly all built-in types are structs, including <code>Bool</code>, <code>Int</code>, <code>Double</code>,
 <code>Character</code>, <code>String</code>, <code>Array</code>, <code>Set</code>, <code>Dictionary</code>, <code>Range</code>, and <code>Date</code>.</p>
@@ -483,21 +483,21 @@ Nearly all built-in types are structs, including <code>Bool</code>, <code>Int</c
     // This is a computed property required by
     // the CustomStringConvertible protocol.
     var description: String {
-        &quot;\(name) is a \(breed).&quot;
+        "\(name) is a \(breed)."
     }
 }
 
-// By default, structs are given a &quot;memberwise-initializer&quot;
+// By default, structs are given a "memberwise-initializer"
 // that takes one argument for each stored property
 // in the order in which they are defined.
 // Structs are not required to define additional initializers,
 // but they can in order to define additional ways to create instances.
-let dog = Dog(name: &quot;Comet&quot;, breed: &quot;Whippet&quot;)
+let dog = Dog(name: "Comet", breed: "Whippet")
 
 print(dog) // Comet is a Whippet.
 </code></pre>
-<h3 id="classes" tabindex="-1">Classes</h3>
-<p>Classes are &quot;reference types&quot;.
+<h3 id="classes">Classes</h3>
+<p>Classes are “reference types”.
 Multiple variables can refer to the same instance, and
 passing an instance to a function passes a reference rather than a copy.</p>
 <p>Here is an example of defining a class, creating an instance, and using it.</p>
@@ -512,7 +512,7 @@ class Person {
 
     // Initializers (can have more than one)
 
-    // Classes are not given a &quot;memberwise-initializer&quot;,
+    // Classes are not given a "memberwise-initializer",
     // so they are required to define at least one initializer.
     init(name: String) {
         self.name = name
@@ -520,35 +520,35 @@ class Person {
 
     // Methods
 
-    // &quot;spouse&quot; and &quot;on&quot; are argument labels, used by callers.
-    // &quot;person&quot; and &quot;date&quot; are parameter names used inside the function.
+    // "spouse" and "on" are argument labels, used by callers.
+    // "person" and "date" are parameter names used inside the function.
     func marry(spouse person: Person, on date: Date) {
         self.spouse = person
         self.weddingDate = date
     }
 
     func report() {
-        // This assigns the wrapped value of the optional property &quot;spouse&quot;
-        // to the shadowing local variable &quot;spouse&quot;
+        // This assigns the wrapped value of the optional property "spouse"
+        // to the shadowing local variable "spouse"
         // only if its value is not nil.
         if let spouse = spouse {
-            print(&quot;\(name) is married to \(spouse.name).&quot;)
+            print("\(name) is married to \(spouse.name).")
         } else {
-            print(&quot;\(name) is single.&quot;)
+            print("\(name) is single.")
         }
     }
 }
 
-var personA = Person(name: &quot;Mark&quot;)
-var personB = Person(name: &quot;Tami&quot;)
+var personA = Person(name: "Mark")
+var personB = Person(name: "Tami")
 let date = Date() // now
 personA.marry(spouse: personB, on: date)
 personA.report() // Mark is married to Tami.
 </code></pre>
-<h3 id="enums" tabindex="-1">Enums</h3>
+<h3 id="enums">Enums</h3>
 <p>As stated earlier, enums are value types.
 They define a fixed set of values that instances can have,
-referred to as &quot;cases&quot;.</p>
+referred to as “cases”.</p>
 <p>Many programming languages support enums, but Swift takes the concept farther.
 In Swift, each case can have different associated data.
 Also, computed properties and methods can be defined,
@@ -561,16 +561,16 @@ enum Language {
     case english, french, german, spanish
 
     // Method
-    func greet() -&gt; String {
+    func greet() -> String {
         switch self {
         case .english:
-            return &quot;Hello&quot;
+            return "Hello"
         case .french:
-            return &quot;Bonjour&quot;
+            return "Bonjour"
         case .german:
-            return &quot;Hallo&quot;
+            return "Hallo"
         case .spanish:
-            return &quot;Hola&quot;
+            return "Hola"
         }
     }
 }
@@ -604,7 +604,7 @@ print(shape.area) // 4.0
 shape = Shape.rectangle(width: 3, height: 4)
 print(shape.area) // 12.0
 </code></pre>
-<h2 id="access-control" tabindex="-1">Access Control</h2>
+<h2 id="access-control">Access Control</h2>
 <p>Swift supports many keywords for controlling access to values like
 functions, types, and the properties and methods of types.
 These keywords appear at the beginning of declarations.</p>
@@ -621,7 +621,7 @@ The second most commonly used is <code>internal</code>, which is the default.</p
 <p>Specifying <code>private(set)</code> on a property means that
 the property can be accessed as if it is <code>public</code>,
 but it can only be modified as if it is <code>private</code>.</p>
-<h2 id="imports" tabindex="-1">Imports</h2>
+<h2 id="imports">Imports</h2>
 <p>To use values such as structs that are
 defined by a framework (such as Foundation, SwiftUI, or UIKit),
 it is necessary to import the framework.
@@ -634,13 +634,13 @@ All files in a project have access to all non-private values
 defined in any file within the project.
 This is somewhat surprising for developers
 coming from other programming languages.</p>
-<h2 id="closures" tabindex="-1">Closures</h2>
+<h2 id="closures">Closures</h2>
 <p>The syntax for anonymous functions is
 an open brace, a comma-separated list of parameters,
-the keyword &quot;in&quot;, the function body, and a close brace.
+the keyword “in”, the function body, and a close brace.
 Swift anonymous functions capture variables in their environment,
 making them available inside their function body,
-which makes them &quot;closures&quot;.
+which makes them “closures”.
 Typically closures are passed as arguments to other functions.</p>
 <p>Here are examples of passing a closure to the <code>reduce</code> method
 of the built-in <code>Array</code> struct.</p>
@@ -649,10 +649,10 @@ of the built-in <code>Array</code> struct.</p>
 // The second argument is a closure that takes the
 // accumulated value (so far) and the next value from the array.
 let sum = numbers.reduce(0, { acc, n in acc + n })
-print(&quot;sum =&quot;, sum) // 10
+print("sum =", sum) // 10
 </code></pre>
 <p>When the last argument to a function is a closure,
-it can be written as a &quot;trailing closure&quot;.
+it can be written as a “trailing closure”.
 These have the same syntax as any closure
 but immediately follow the function call.</p>
 <pre><code class="language-swift">let sum = numbers.reduce(0) { acc, n in acc + n }
@@ -669,16 +669,16 @@ The positional names $0, $1, and so on can be used instead.</p>
 <pre><code class="language-swift">// Here $0 represents the accumulator and $1 represents the next array item.
 let sum = numbers.reduce(0) { $0 + $1 }
 </code></pre>
-<h2 id="guards" tabindex="-1">Guards</h2>
+<h2 id="guards">Guards</h2>
 <p>Guards provide a clear way to check for conditions that are necessary
 in order to continue execution of a function.
 They have an associated block of code
 that is required to exit the current scope.
 Guards are typically used at or near the beginning of functions.</p>
 <pre><code class="language-swift">// Returns the number of items in a array that contain a given String.
-func countOccurrences(in items: [String], of target: String?) -&gt; Int {
+func countOccurrences(in items: [String], of target: String?) -> Int {
     // If the items Array is empty, there can be no occurrences.
-    guard items.count &gt; 0 else { return 0 }
+    guard items.count > 0 else { return 0 }
 
     // If the target String is nil, there is nothing to find.
     guard let target = target else { return 0 }
@@ -689,12 +689,12 @@ func countOccurrences(in items: [String], of target: String?) -&gt; Int {
     }
 }
 
-var dogNames = [&quot;Maisey&quot;, &quot;Ramsay&quot;, &quot;Oscar&quot;, &quot;Comet&quot;]
-print(countOccurrences(in: [], of: &quot;a&quot;)) // 0
+var dogNames = ["Maisey", "Ramsay", "Oscar", "Comet"]
+print(countOccurrences(in: [], of: "a")) // 0
 print(countOccurrences(in: dogNames, of: nil)) // 0
-print(countOccurrences(in: dogNames, of: &quot;a&quot;)) // 3
+print(countOccurrences(in: dogNames, of: "a")) // 3
 </code></pre>
-<h2 id="extensions" tabindex="-1">Extensions</h2>
+<h2 id="extensions">Extensions</h2>
 <p>Extensions add methods and computed properties to existing types,
 even built-in types.</p>
 <p>Here is an example of an extension that adds computed properties
@@ -702,13 +702,13 @@ to the <code>Date</code> type and accesses them on a <code>Date</code> instance.
 <pre><code class="language-swift">extension Date {
     var dayOfWeek: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = &quot;EEEE&quot; // gets name of day
+        dateFormatter.dateFormat = "EEEE" // gets name of day
         return dateFormatter.string(from: self)
     }
 
     var ymd: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = &quot;yyyy-MM-dd&quot;
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: self)
     }
 }
@@ -717,7 +717,7 @@ let now = Date()
 print(now.dayOfWeek) // Friday
 print(now.ymd) // 2022-07-08
 </code></pre>
-<h2 id="property-observers" tabindex="-1">Property Observers</h2>
+<h2 id="property-observers">Property Observers</h2>
 <p>Property observers watch for changes to a
 specific stored property of a type instance
 and perform actions before and/or after changes occur.</p>
@@ -729,30 +729,30 @@ the <code>didSet</code> function can revert to the old value if the new value is
     let name: String
     var age: Int {
         willSet {
-            // Swift provides the variable &quot;newValue&quot; to
+            // Swift provides the variable "newValue" to
             // access the new value that is not yet assigned.
-            print(&quot;about to change from \(age) to \(newValue)&quot;)
+            print("about to change from \(age) to \(newValue)")
         }
         didSet {
-            // Swift provides the variable &quot;oldValue&quot; to
+            // Swift provides the variable "oldValue" to
             // access the previously assigned value.
-            if age &gt;= 0 {
-                print(&quot;changed from \(oldValue) to \(age)&quot;)
+            if age >= 0 {
+                print("changed from \(oldValue) to \(age)")
             } else {
                 age = oldValue // reverts to previous value
-                print(&quot;reverted to \(oldValue)&quot;)
+                print("reverted to \(oldValue)")
             }
         }
     }
 }
 
-var me = Person(name: &quot;Mark&quot;, age: 61)
+var me = Person(name: "Mark", age: 61)
 me.age = 19 // about to change from 61 to 19; changed from 61 to 19
-print(&quot;age is \(me.age)&quot;) // age is 19
+print("age is \(me.age)") // age is 19
 me.age = -5 // about to change from 19 to -5; reverted to 19
-print(&quot;age is \(me.age)&quot;) // age is 19
+print("age is \(me.age)") // age is 19
 </code></pre>
-<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>I hope this article has piqued your interest in the Swift programming language.
 Topics that deserve further study include:</p>
 <ul>
@@ -763,5 +763,6 @@ Topics that deserve further study include:</p>
 <li>structured concurrency</li>
 <li>SwiftUI</li>
 <li>Xcode IDE</li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

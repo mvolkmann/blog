@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Macintosh Emulators</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Macintosh Emulators</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#utm">UTM</a></li><li><a href="#basilisk-ii">Basilisk II</a></li><ul><li><a href="#downloads">Downloads</a></li><li><a href="#setup">Setup</a></li><li><a href="#file-sharing">File Sharing</a></li></ul><li><a href="#infinite-mac">Infinite Mac</a></li><li><a href="#mini-vmac">Mini vMac</a></li><li><a href="#sheepshaver">SheepShaver</a></li><li><a href="#full-screen-mode">Full Screen Mode</a></li><li><a href="#colors">Colors</a></li><li><a href="#zooming-in">Zooming In</a></li><li><a href="#hypercard">HyperCard</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Macintosh Emulators</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Macintosh Emulators</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#utm">UTM</a></li><li><a href="#basilisk-ii">Basilisk II</a></li><ul><li><a href="#downloads">Downloads</a></li><li><a href="#setup">Setup</a></li><li><a href="#file-sharing">File Sharing</a></li></ul><li><a href="#infinite-mac">Infinite Mac</a></li><li><a href="#mini-vmac">Mini vMac</a></li><li><a href="#sheepshaver">SheepShaver</a></li><li><a href="#full-screen-mode">Full Screen Mode</a></li><li><a href="#colors">Colors</a></li><li><a href="#zooming-in">Zooming In</a></li><li><a href="#hypercard">HyperCard</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>There are four primary ways to emulate older Macintosh computers.</p>
 <ul>
 <li><a href="https://basilisk.cebix.net?v=1.1.1" rel="noopener" target="_blank">Basilisk II</a> for MacOS 0.x to 8.1</li>
@@ -8,28 +10,28 @@
 <li><a href="https://sheepshaver.cebix.net?v=1.1.1" rel="noopener" target="_blank">SheepShaver</a> for MacOS 7.5.2 to 9.0.4</li>
 <li><a href="https://mac.getutm.app?v=1.1.1" rel="noopener" target="_blank">UTM</a></li>
 </ul>
-<h2 id="utm" tabindex="-1">UTM</h2>
+<h2 id="utm">UTM</h2>
 <ol>
 <li>Browse the <a href="https://mac.getutm.app?v=1.1.1" rel="noopener" target="_blank">UTM home page</a>.</li>
-<li>Click the &quot;Download&quot; button to download the file <code>UTM.dmg</code>.</li>
+<li>Click the “Download” button to download the file <code>UTM.dmg</code>.</li>
 <li>Double-click the file <code>UTM.dmg</code>.</li>
 <li>Drag the icon for <code>UTM.app</code> to the <code>Applications</code> folder.</li>
 <li>Close the window.</li>
-<li>In a Finder window under &quot;Locations&quot;, eject <code>UTM</code>.</li>
+<li>In a Finder window under “Locations”, eject <code>UTM</code>.</li>
 <li>In the Finder window, click <code>Applications</code> in the left nav.</li>
 <li>Double-click <code>UTM.app</code>.</li>
-<li>Click the &quot;Continue&quot; button.</li>
+<li>Click the “Continue” button.</li>
 <li>Download <code>Mac OS X 9.2.2.utm.zip</code> from <a href="https://www.macintoshrepository.org/85192-utm-powerpc-mac-os-archive-9-1-9-2-2-10-0-10-1-10-2-10-3-10-4-10-5-?v=1.1.1" rel="noopener" target="_blank">Macintosh Repository</a>.
-I gave up here. I can't find the file anywhere.</li>
+I gave up here. I can’t find the file anywhere.</li>
 </ol>
-<h2 id="basilisk-ii" tabindex="-1">Basilisk II</h2>
+<h2 id="basilisk-ii">Basilisk II</h2>
 <p><a href="https://basilisk.cebix.net?v=1.1.1" rel="noopener" target="_blank">Basilisk II</a>
 is an open source 68K Macintosh emulator.</p>
 <p>For instructions on installing this, see
-<a href="https://www.youtube.com/watch?v=QSWWZ4hkvVk&amp;v=1.1.1" rel="noopener" target="_blank">Emulate a Classic Macintosh Today! Basilisk II Tutorial!</a>.
+<a href="https://www.youtube.com/watch?v=QSWWZ4hkvVk&#x26;v=1.1.1" rel="noopener" target="_blank">Emulate a Classic Macintosh Today! Basilisk II Tutorial!</a>.
 The main parts of this for installing and using the emulator
 in a modern Mac are described below.</p>
-<h3 id="downloads" tabindex="-1">Downloads</h3>
+<h3 id="downloads">Downloads</h3>
 <p>The following files must be downloaded:</p>
 <ul>
 <li>
@@ -38,23 +40,23 @@ for installing system software</p>
 <ul>
 <li>
 <p>Mac OS 7.6.1 at
-<a href="https://macintoshgarden.org/apps/macintosh-mac-os-76/">https://macintoshgarden.org/apps/macintosh-mac-os-76/</a> (file #7).
-The unzipped file name was &quot;Mac OS 7.6.1.toast&quot;.</p>
+<a href="https://macintoshgarden.org/apps/macintosh-mac-os-76/" rel="noopener" target="_blank">https://macintoshgarden.org/apps/macintosh-mac-os-76/</a> (file #7).
+The unzipped file name was “Mac OS 7.6.1.toast”.</p>
 </li>
 <li>
 <p>Mac OS 8.1 at
-<a href="https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-">https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-</a></p>
+<a href="https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-" rel="noopener" target="_blank">https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-</a></p>
 </li>
 <li>
 <p>Mac OS 9.2.2 Universal toast file #1 at
-<a href="https://macintoshgarden.org/apps/mac-os-922-universal">https://macintoshgarden.org/apps/mac-os-922-universal</a>
-The downloaded file name was &quot;macos-922-uni.zip&quot;.
-This unzips to a directory named &quot;macos-922-uni&quot;
-that contains the file &quot;macos-922-uni.iso&quot;.</p>
+<a href="https://macintoshgarden.org/apps/mac-os-922-universal" rel="noopener" target="_blank">https://macintoshgarden.org/apps/mac-os-922-universal</a>
+The downloaded file name was “macos-922-uni.zip”.
+This unzips to a directory named “macos-922-uni”
+that contains the file “macos-922-uni.iso”.</p>
 </li>
 <li>
-<p>Mac OS 8.1 at <a href="https://winworldpc.com/product/mac-os-8/81">https://winworldpc.com/product/mac-os-8/81</a>
-Click the link &quot;Apple Mac OS 8.1 (ISO)&quot;.
+<p>Mac OS 8.1 at <a href="https://winworldpc.com/product/mac-os-8/81" rel="noopener" target="_blank">https://winworldpc.com/product/mac-os-8/81</a>
+Click the link “Apple Mac OS 8.1 (ISO)”.
 Click the server link closet to you.
 This takes several minutes to download the file <code>Apple Mac OS 8.1 (ISO).7z</code>.
 Double-click this file to get the directory <code>Apple Mac OS 8.1 (ISO)</code>
@@ -66,26 +68,26 @@ which contains the file <code>MacOS8_1.iso</code>.</p>
 <p>one of these ROM files for emulating a specific Macintosh computer</p>
 <ul>
 <li>
-<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/">http://hampa.ch/pub/software/ROM/Macintosh 68K/</a>.
-Click the link &quot;368CADFE - Macintosh IIci.7z&quot;.
+<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/" rel="noopener" target="_blank">http://hampa.ch/pub/software/ROM/Macintosh%2068K/</a>.
+Click the link “368CADFE - Macintosh IIci.7z”.
 Double-click this file to get unzipped file
-&quot;368CADFE - Macintosh IIci.rom&quot;.</p>
+“368CADFE - Macintosh IIci.rom”.</p>
 </li>
 <li>
-<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/">http://hampa.ch/pub/software/ROM/Macintosh 68K/</a>.
-Click the link &quot;F1ACAD13 - Macintosh Quadra 650.7z&quot;.
+<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/" rel="noopener" target="_blank">http://hampa.ch/pub/software/ROM/Macintosh%2068K/</a>.
+Click the link “F1ACAD13 - Macintosh Quadra 650.7z”.
 Double-click this file to get the unzipped file
-&quot;F1ACAD13 - Macintosh Quadra 650.rom&quot;.</p>
+“F1ACAD13 - Macintosh Quadra 650.rom”.</p>
 </li>
 <li>
-<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/420DBFF3%20-%20Macintosh%20Quadra%20700.7z">http://hampa.ch/pub/software/ROM/Macintosh 68K/420DBFF3 - Macintosh Quadra 700.7z</a>
-Click the link &quot;420DBFF3 - Macintosh Quadra 700.7z&quot;.
+<p><a href="http://hampa.ch/pub/software/ROM/Macintosh%2068K/420DBFF3%20-%20Macintosh%20Quadra%20700.7z" rel="noopener" target="_blank">http://hampa.ch/pub/software/ROM/Macintosh%2068K/420DBFF3%20-%20Macintosh%20Quadra%20700.7z</a>
+Click the link “420DBFF3 - Macintosh Quadra 700.7z”.
 Double-click this file to get the unzipped file
-&quot;420DBFF3 - Macintosh Quadra 700.rom&quot;.</p>
+“420DBFF3 - Macintosh Quadra 700.rom”.</p>
 </li>
 <li>
-<p><a href="https://www.redundantrobot.com/sheepshaver">https://www.redundantrobot.com/sheepshaver</a>
-Click the link &quot;Performa ROM&quot;.
+<p><a href="https://www.redundantrobot.com/sheepshaver" rel="noopener" target="_blank">https://www.redundantrobot.com/sheepshaver</a>
+Click the link “Performa ROM”.
 This downloads a directory named <code>1mbMacrom</code>
 that contains the file <code>PERFORMA.ROM</code>.</p>
 </li>
@@ -96,32 +98,32 @@ that contains the file <code>PERFORMA.ROM</code>.</p>
 <ul>
 <li>
 <p>System 7.5.5 drive image from
-<a href="https://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/755_2GB_drive.zip">https://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/755_2GB_drive.zip</a>
+<a href="https://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/755_2GB_drive.zip" rel="noopener" target="_blank">https://www.savagetaylor.com/wp-content/uploads/68k_Macintosh/Bootdisks/755_2GB_drive.zip</a>
 The unzipped file name was 755_2GB_drive.dsk.</p>
 </li>
 <li>
 <p>System 8.1 drive image from
-<a href="https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-">https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-</a>
+<a href="https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-" rel="noopener" target="_blank">https://www.macintoshrepository.org/15953-mac-os-8-1-691-1912-a-cd-</a>
 The unzipped file name was Mac OS 8.1.cdr.</p>
 </li>
 <li>
 <p>System 9.2.2 drive image from
-<a href="https://www.macintoshrepository.org/36322-random-mac-os-9-2-2-hard-drive-image-home-made-">https://www.macintoshrepository.org/36322-random-mac-os-9-2-2-hard-drive-image-home-made-</a>
+<a href="https://www.macintoshrepository.org/36322-random-mac-os-9-2-2-hard-drive-image-home-made-" rel="noopener" target="_blank">https://www.macintoshrepository.org/36322-random-mac-os-9-2-2-hard-drive-image-home-made-</a>
 The unzipped file name was Mac_OS_9.2.2_HD_Restore.dmg.</p>
 </li>
 </ul>
 </li>
 <li>
 <p>Basilisk II Emulator from
-<a href="https://www.emaculation.com/forum/viewtopic.php?t=7361&amp;sid=c947aa32749beb939edf3fe187bb3352">https://www.emaculation.com/forum/viewtopic.php?t=7361&amp;sid=c947aa32749beb939edf3fe187bb3352</a>.
-I clicked the Download link after &quot;SDL2 port, 28 February 2024, universal (x86_64 and arm64)&quot;.
+<a href="https://www.emaculation.com/forum/viewtopic.php?t=7361&#x26;sid=c947aa32749beb939edf3fe187bb3352" rel="noopener" target="_blank">https://www.emaculation.com/forum/viewtopic.php?t=7361&#x26;sid=c947aa32749beb939edf3fe187bb3352</a>.
+I clicked the Download link after “SDL2 port, 28 February 2024, universal (x86_64 and arm64)”.
 The unzipped file name was BasiliskII.app.</p>
 </li>
 <li>
 <p>Basilisk II GUI from
-<a href="https://www.emaculation.com/forum/viewtopic.php?f=6&amp;t=10454">https://www.emaculation.com/forum/viewtopic.php?f=6&amp;t=10454</a>.
-I clicked the link after &quot;Download version 0.22&quot;.
-The unzipped file name was &quot;Basilisk II GUI.app&quot;.</p>
+<a href="https://www.emaculation.com/forum/viewtopic.php?f=6&#x26;t=10454" rel="noopener" target="_blank">https://www.emaculation.com/forum/viewtopic.php?f=6&#x26;t=10454</a>.
+I clicked the link after “Download version 0.22”.
+The unzipped file name was “Basilisk II GUI.app”.</p>
 </li>
 </ul>
 <p>I moved the following files to the new directory
@@ -133,45 +135,45 @@ The unzipped file name was &quot;Basilisk II GUI.app&quot;.</p>
 <li>MacOS8_1.iso</li>
 <li>PERFORMA.ROM</li>
 </ul>
-<h3 id="setup" tabindex="-1">Setup</h3>
+<h3 id="setup">Setup</h3>
 <p>In the Finder, rename <code>Mac OS 8.1.cdr</code> to <code>Macintosh HD.dsk</code>.</p>
 <p>In the Finder, do the following for <code>MacOS8_1.iso</code> and <code>PERFORMA.ROM</code>:</p>
 <ul>
 <li>find the file in the Finder</li>
 <li>right-click it</li>
-<li>select &quot;Get Info&quot;</li>
+<li>select “Get Info”</li>
 <li>check the Locked checkbox</li>
 <li>close the dialog</li>
 </ul>
-<p>Double-click the file &quot;Basilisk II GUI.app&quot;.
+<p>Double-click the file “Basilisk II GUI.app”.
 A warning dialog will appear that asks
-&quot;Are you sure you want to open it?&quot;
-Click the &quot;Open&quot; button.</p>
+“Are you sure you want to open it?”
+Click the “Open” button.</p>
 <p>On the System tab:</p>
 <ul>
-<li>change &quot;RAM Size (MB)&quot; to 1024</li>
-<li>change &quot;Mac Model ID&quot; to &quot;Quadra 900 (MacOS 8.x)&quot;</li>
-<li>change &quot;CPU Type&quot; to 68040</li>
-<li>check &quot;Don't use CPU when idle&quot;</li>
-<li>after &quot;ROM File&quot;, click the &quot;Browse...&quot; button</li>
-<li>select the file &quot;PERFORMA.ROM&quot;</li>
+<li>change “RAM Size (MB)” to 1024</li>
+<li>change “Mac Model ID” to “Quadra 900 (MacOS 8.x)”</li>
+<li>change “CPU Type” to 68040</li>
+<li>check “Don’t use CPU when idle”</li>
+<li>after “ROM File”, click the “Browse…” button</li>
+<li>select the file “PERFORMA.ROM”</li>
 </ul>
 <p>On the Graphics/Sound tab:</p>
 <ul>
-<li>Change &quot;Window Refresh Rate&quot; to Dynamic.</li>
+<li>Change “Window Refresh Rate” to Dynamic.</li>
 <li>Optionally change the Width and Height values.
 640 x 480 may work best for some games.</li>
 </ul>
 <p>On the Volumes tab:</p>
 <ul>
-<li>Click the &quot;Add...&quot; button.</li>
+<li>Click the “Add…” button.</li>
 <li>Select a drive file such as <code>Mac OS 8.1.cdr</code></li>
-<li>Click the &quot;Add...&quot; button again.</li>
+<li>Click the “Add…” button again.</li>
 <li>Select an ISO file such as <code>MacOS8_1.iso</code></li>
 <li>Create a drive where new software can be installed and files can be saved.
 <ul>
-<li>Click the &quot;Create...&quot; button.</li>
-<li>Enter the name &quot;Macintosh HD.dsk&quot;.</li>
+<li>Click the “Create…” button.</li>
+<li>Enter the name “Macintosh HD.dsk”.</li>
 <li>Click the Create button.</li>
 </ul>
 </li>
@@ -179,38 +181,38 @@ Click the &quot;Open&quot; button.</p>
 <li>Click the Quit button.</li>
 </ul>
 <p>Start the emulator by double-clicking the file BasiliskII.app.</p>
-<h3 id="file-sharing" tabindex="-1">File Sharing</h3>
+<h3 id="file-sharing">File Sharing</h3>
 <p>To allow the emulator to share files with the host Mac:</p>
 <ul>
-<li>Quit &quot;BasiliskII.app&quot; if it is running.</li>
+<li>Quit “BasiliskII.app” if it is running.</li>
 <li>Create a directory in the host Mac that will be shared.
-I created a &quot;share&quot; directory in Applications/Macintosh Emulator.</li>
-<li>Double-click &quot;Basilisk II GUI.app&quot;.</li>
+I created a “share” directory in Applications/Macintosh Emulator.</li>
+<li>Double-click “Basilisk II GUI.app”.</li>
 <li>Click the Volumes tab.</li>
-<li>After &quot;Unix root&quot;, click the &quot;Browse...&quot; button.</li>
+<li>After “Unix root”, click the “Browse…” button.</li>
 <li>Select the directory to be shared.</li>
 <li>Click the Save button.</li>
 <li>Click the Quit button.</li>
-<li>Double-click &quot;BasiliskII.app&quot;.</li>
-<li>Double-click the &quot;Unix&quot; drive to see the shared files.</li>
+<li>Double-click “BasiliskII.app”.</li>
+<li>Double-click the “Unix” drive to see the shared files.</li>
 </ul>
-<p>For example, browse <a href="https://macintoshgarden.org">https://macintoshgarden.org</a>, click the GAMES link,
+<p>For example, browse <a href="https://macintoshgarden.org" rel="noopener" target="_blank">https://macintoshgarden.org</a>, click the GAMES link,
 download some sames, and move the files to the shared directory.</p>
-<p>Extract <code>.sit</code> files inside the emulator using &quot;Stuffit Expander&quot;,
+<p>Extract <code>.sit</code> files inside the emulator using “Stuffit Expander”,
 not in the host Mac.</p>
-<h2 id="infinite-mac" tabindex="-1">Infinite Mac</h2>
+<h2 id="infinite-mac">Infinite Mac</h2>
 <p>TODO: Add information about this.</p>
 <p>The Mac OS 6.0.5, 7.6, 8.5, and 9 emulators all include HyperCard 2.4.1.</p>
-<h2 id="mini-vmac" tabindex="-1">Mini vMac</h2>
+<h2 id="mini-vmac">Mini vMac</h2>
 <p>The Mini vMac emulator supports Mac System 1 to 7.5.</p>
 <p>The steps to install and configure this emulator are:</p>
 <p>TODO: These steps are not working! Maybe the downloaded files are incorrect.</p>
 <ol>
 <li>Download a ROM file for Mac OS 7.0.1 from the <a href="https://archive.org/details/AppleMacintoshSystem701?v=1.1.1" rel="noopener" target="_blank">Internet Archive</a>
-by clicking the &quot;ISO IMAGE&quot; link.</li>
+by clicking the “ISO IMAGE” link.</li>
 <li>Rename the downloaded file <code>System_7_0_1.img</code> to <code>vMac.ROM</code>.</li>
 <li>Download a bootable disk image for Mac OS 7.5.5 from <a href="https://winworldpc.com/product/mac-os-7/75?v=1.1.1" rel="noopener" target="_blank">WinWorld</a>.
-by clicking the &quot;Apple Mac OS 7.5.5 [PowerPC Specific] (CD)&quot; link
+by clicking the “Apple Mac OS 7.5.5 [PowerPC Specific] (CD)” link
 at the bottom of the list.</li>
 <li>Double-click the downloaded file <code>Apple Mac OS 7.5.5.7z</code>
 to get the directory <code>Apple Mac OS 7.5.5</code>
@@ -219,86 +221,86 @@ that contains the file <code>MacOS 7.5.5.iso</code>.</li>
 <li>Double-click the downloaded <code>.tar</code> file to get the file <code>Mini vMac.app</code>.</li>
 <li>Double-click the file <code>Mini vMac.app</code>.</li>
 <li>Drag the ROM file <code>System_7_0_1.img</code> onto the Mini vMac window.</li>
-<li>Drag the bootable disk image file `` onto the Mini vMac window.</li>
+<li>Drag the bootable disk image file “ onto the Mini vMac window.</li>
 </ol>
-<h2 id="sheepshaver" tabindex="-1">SheepShaver</h2>
+<h2 id="sheepshaver">SheepShaver</h2>
 <p>For instructions on installing this, see the YouTube videos
-<a href="https://www.youtube.com/watch?v=4kiACxmEe6Q&amp;t=607s&amp;v=1.1.1" rel="noopener" target="_blank">Mac OS 9 on SheepShaver</a> and
-<a href="https://www.youtube.com/watch?v=XQAf7GII9NY&amp;v=1.1.1" rel="noopener" target="_blank">How To Install Mac OS 9 In OS X Using SheepShaver</a>.</p>
+<a href="https://www.youtube.com/watch?v=4kiACxmEe6Q&#x26;t=607s&#x26;v=1.1.1" rel="noopener" target="_blank">Mac OS 9 on SheepShaver</a> and
+<a href="https://www.youtube.com/watch?v=XQAf7GII9NY&#x26;v=1.1.1" rel="noopener" target="_blank">How To Install Mac OS 9 In OS X Using SheepShaver</a>.</p>
 <p>The steps for installing this in macOS are summarized below.</p>
 <ol>
-<li>Browse <a href="https://www.emaculation.com">https://www.emaculation.com</a></li>
-<li>Click the &quot;E-Maculation wiki&quot; link.</li>
-<li>Under &quot;Welcome&quot;, click the SheepShaver link.</li>
-<li>Under &quot;Download the Latest Version&quot;,
-click the &quot;SheepShaver for OSX/macOS&quot; link.</li>
-<li>Under &quot;Version 2.5, 25 January 2025, universal (x86_64 and arm64)&quot;,
+<li>Browse <a href="https://www.emaculation.com" rel="noopener" target="_blank">https://www.emaculation.com</a></li>
+<li>Click the “E-Maculation wiki” link.</li>
+<li>Under “Welcome”, click the SheepShaver link.</li>
+<li>Under “Download the Latest Version”,
+click the “SheepShaver for OSX/macOS” link.</li>
+<li>Under “Version 2.5, 25 January 2025, universal (x86_64 and arm64)”,
 click the Download link.</li>
-<li>Double-click the downloaded file to get the file &quot;SheepShaver.app&quot;.</li>
-<li>Under &quot;For the above version 2.5 builds&quot;,
-click the link after &quot;SheepShaver folder&quot;.</li>
-<li>Double-click the downloaded file to get the folder &quot;SheepShaver scripts&quot;.</li>
-<li>Browse <a href="https://www.redundantrobot.com">https://www.redundantrobot.com</a></li>
-<li>Click the &quot;SHEEPSHAVER TUTORIAL&quot; link.</li>
-<li>Click the &quot;New World PPC ROM&quot; link.</li>
-<li>Browse <a href="https://winworldpc.com">https://winworldpc.com</a></li>
+<li>Double-click the downloaded file to get the file “SheepShaver.app”.</li>
+<li>Under “For the above version 2.5 builds”,
+click the link after “SheepShaver folder”.</li>
+<li>Double-click the downloaded file to get the folder “SheepShaver scripts”.</li>
+<li>Browse <a href="https://www.redundantrobot.com" rel="noopener" target="_blank">https://www.redundantrobot.com</a></li>
+<li>Click the “SHEEPSHAVER TUTORIAL” link.</li>
+<li>Click the “New World PPC ROM” link.</li>
+<li>Browse <a href="https://winworldpc.com" rel="noopener" target="_blank">https://winworldpc.com</a></li>
 <li>Click the Library link.</li>
-<li>Under &quot;Apple/Mac&quot;, click the &quot;Mac OS 9&quot; link.</li>
-<li>Under &quot;Available releases&quot;, click the 9.0 link.
+<li>Under “Apple/Mac”, click the “Mac OS 9” link.</li>
+<li>Under “Available releases”, click the 9.0 link.
 Supposedly SheepShaver does not support 9.1 or 9.2.</li>
-<li>Under Downloads, click the &quot;Apple Mac OS 9.0.4 (ISO)&quot; link.</li>
+<li>Under Downloads, click the “Apple Mac OS 9.0.4 (ISO)” link.</li>
 <li>Click one of the Server links.
-I chose &quot;Server 2&quot; because it is closest to me.</li>
+I chose “Server 2” because it is closest to me.</li>
 <li>Create a directory named SheepShaver
 and move all the downloaded files into it.
-These include SheepShaver.app, the &quot;SheepShaver scripts&quot; directory,
-newworld86.rom, and &quot;Apple Mac OS 9.0.4.7z&quot; (which may still be downloading).</li>
-<li>Right-click the newworld86.rom file and select &quot;Get Info&quot;.</li>
-<li>Under &quot;Name &amp; Extension&quot;, change the name to &quot;Mac OS ROM&quot;.</li>
+These include SheepShaver.app, the “SheepShaver scripts” directory,
+newworld86.rom, and “Apple Mac OS 9.0.4.7z” (which may still be downloading).</li>
+<li>Right-click the newworld86.rom file and select “Get Info”.</li>
+<li>Under “Name &#x26; Extension”, change the name to “Mac OS ROM”.</li>
 <li>Close the info dialog.</li>
-<li>Double-click the &quot;Apple Mac OS 9.0.4.7z&quot; file to unzip it.</li>
-<li>Delete the &quot;Apple Mac OS 9.0.4.7z&quot; file.</li>
-<li>Double-click the &quot;Apple Mac OS 9.0.4&quot; directory.</li>
-<li>Move the &quot;Apple MacOS 9.0.4.iso&quot; file up one directory.</li>
-<li>Delete the &quot;Apple Mac OS 9.0.4&quot; directory.</li>
-<li>Right-click the &quot;Apple MacOS 9.0.4.iso&quot; file and select &quot;Get Info&quot;.</li>
+<li>Double-click the “Apple Mac OS 9.0.4.7z” file to unzip it.</li>
+<li>Delete the “Apple Mac OS 9.0.4.7z” file.</li>
+<li>Double-click the “Apple Mac OS 9.0.4” directory.</li>
+<li>Move the “Apple MacOS 9.0.4.iso” file up one directory.</li>
+<li>Delete the “Apple Mac OS 9.0.4” directory.</li>
+<li>Right-click the “Apple MacOS 9.0.4.iso” file and select “Get Info”.</li>
 <li>Click the Locked checkbox.</li>
 <li>Close the info dialog.</li>
 <li>Double-click the SheepShaver.app file.</li>
-<li>Click the SheepShaver menu and select &quot;Settings...&quot;.</li>
-<li>After &quot;ROM File:&quot;, click the &quot;Browse...&quot; button.</li>
-<li>Select the &quot;Mac OS ROM&quot; file.</li>
+<li>Click the SheepShaver menu and select “Settings…”.</li>
+<li>After “ROM File:”, click the “Browse…” button.</li>
+<li>Select the “Mac OS ROM” file.</li>
 <li>Create a directory that will be used to share files with the emulator,
-perhaps named &quot;Mac OS Share&quot;.</li>
-<li>After &quot;Unix Root:&quot;, click the &quot;Browse...&quot; button.</li>
+perhaps named “Mac OS Share”.</li>
+<li>After “Unix Root:”, click the “Browse…” button.</li>
 <li>Select the directory that was just created.</li>
-<li>Change &quot;RAM Size (MB):&quot; to 512.</li>
-<li>Click the &quot;Create...&quot; button.</li>
-<li>Change &quot;Save As:&quot; to Mac_Disk.</li>
-<li>Change &quot;Volume Size (MB)&quot; to 10000.</li>
+<li>Change “RAM Size (MB):” to 512.</li>
+<li>Click the “Create…” button.</li>
+<li>Change “Save As:” to Mac_Disk.</li>
+<li>Change “Volume Size (MB)” to 10000.</li>
 <li>Click the Save button.</li>
-<li>Click the &quot;Add...&quot; button.</li>
-<li>Select the &quot;Apple MacOS 9.0.4.iso&quot; file.</li>
-<li>Click the &quot;Open&quot; button.</li>
-<li>Uncheck the CDROM checkbox for the &quot;Apple MacOS 9.0.4.iso&quot; file.</li>
-<li>Click the &quot;Audio / Video&quot; tab.</li>
-<li>Change &quot;Refresh Rate:&quot; to Dynamic.</li>
-<li>Change &quot;Width:&quot; to Maximum.</li>
-<li>Change &quot;Height:&quot; to Maximum.</li>
-<li>Click the &quot;Miscellaneous&quot; tab.</li>
-<li>Uncheck &quot;Ignore Illegal Instructions&quot;.</li>
-<li>Change &quot;Mouse Wheel Function:&quot; to &quot;Page Up/Down&quot;.</li>
-<li>Change &quot;Lines to Scroll:&quot; to 1.</li>
-<li>Click the &quot;Save and Quit&quot; button.</li>
-<li>Select &quot;Force Quit...&quot; from the Apple menu (or press cmd-option-esc)
+<li>Click the “Add…” button.</li>
+<li>Select the “Apple MacOS 9.0.4.iso” file.</li>
+<li>Click the “Open” button.</li>
+<li>Uncheck the CDROM checkbox for the “Apple MacOS 9.0.4.iso” file.</li>
+<li>Click the “Audio / Video” tab.</li>
+<li>Change “Refresh Rate:” to Dynamic.</li>
+<li>Change “Width:” to Maximum.</li>
+<li>Change “Height:” to Maximum.</li>
+<li>Click the “Miscellaneous” tab.</li>
+<li>Uncheck “Ignore Illegal Instructions”.</li>
+<li>Change “Mouse Wheel Function:” to “Page Up/Down”.</li>
+<li>Change “Lines to Scroll:” to 1.</li>
+<li>Click the “Save and Quit” button.</li>
+<li>Select “Force Quit…” from the Apple menu (or press cmd-option-esc)
 and force quit the SheepShaver app.</li>
 <li>Double-click the SheepShaver.app file again.</li>
-<li>Wait for a dialog to appear that says &quot;This disk is unreadable ...&quot;.</li>
-<li>Change &quot;Name:&quot; from untitled to &quot;MacOS_HD&quot;.</li>
-<li>Change &quot;Format:&quot; to &quot;Mac OS Extended 9.7 GB&quot;.</li>
+<li>Wait for a dialog to appear that says “This disk is unreadable …”.</li>
+<li>Change “Name:” from untitled to “MacOS_HD”.</li>
+<li>Change “Format:” to “Mac OS Extended 9.7 GB”.</li>
 <li>Click the Initialize button.</li>
 <li>Click the Continue button.</li>
-<li>In the Finder dialog that appears, double-click &quot;Mac OS 9 Install&quot;.</li>
+<li>In the Finder dialog that appears, double-click “Mac OS 9 Install”.</li>
 <li>Click the Continue button.</li>
 <li>Click the Select button.</li>
 <li>Click the Continue button.</li>
@@ -306,7 +308,7 @@ and force quit the SheepShaver app.</li>
 <li>Click the Agree button.</li>
 <li>Click the Start button. This will run for around five minutes.</li>
 <li>Click the Continue button.</li>
-<li>In the Finder window, double-click &quot;Mac OS 9.0.4 Update Install&quot;.</li>
+<li>In the Finder window, double-click “Mac OS 9.0.4 Update Install”.</li>
 <li>Click the Select button.</li>
 <li>Click the Continue button.</li>
 <li>Click the Agree button.</li>
@@ -314,68 +316,68 @@ and force quit the SheepShaver app.</li>
 <li>Click the Quit button.</li>
 <li>Click and hold on the Special menu.</li>
 <li>Select Restart.</li>
-<li>In the &quot;Mac OS Setup Assistant&quot; window,
+<li>In the “Mac OS Setup Assistant” window,
 click the right triangle in the lower-right to advance to page 2.</li>
 <li>Click the right triangle again to advance to page 3.</li>
-<li>Under &quot;What is your name?&quot;, enter your name.</li>
+<li>Under “What is your name?”, enter your name.</li>
 <li>Click the right triangle again to advance to page 4.</li>
 <li>If necessary, correct whether you are currently
 observing daylight savings time.</li>
 <li>If necessary, correct the time and date.</li>
 <li>Click the right triangle again to advance to page 5.</li>
-<li>Select the nearest city (&quot;Chicago, U.S.A.&quot; for me).</li>
+<li>Select the nearest city (“Chicago, U.S.A.” for me).</li>
 <li>Close the window.</li>
 <li>Click the Quit button.</li>
-<li>In the Finder window, double-click &quot;Adobe Software&quot; folder.</li>
-<li>Double-click the &quot;Install Adobe Acrobat Reader 4.0&quot; file.</li>
-<li>Double-click the &quot;Install Adobe Acrobat Reader 4.0&quot; folder.</li>
-<li>Double-click the &quot;Adobe Acrobat Installer&quot; file.</li>
+<li>In the Finder window, double-click “Adobe Software” folder.</li>
+<li>Double-click the “Install Adobe Acrobat Reader 4.0” file.</li>
+<li>Double-click the “Install Adobe Acrobat Reader 4.0” folder.</li>
+<li>Double-click the “Adobe Acrobat Installer” file.</li>
 <li>Click the Continue button.</li>
 <li>Click the Install button.</li>
 <li>Click the Quit button.</li>
 <li>Close all the Finder windows.</li>
-<li>Click the SheepShaver menu and select &quot;Settings...&quot;.</li>
-<li>Uncheck CDROM checkbox for the &quot;Apple MacOS 9.0.4.iso&quot; file.</li>
-<li>Click the Remove button to remove the file &quot;Apple MacOS 9.0.4.iso&quot;
+<li>Click the SheepShaver menu and select “Settings…”.</li>
+<li>Uncheck CDROM checkbox for the “Apple MacOS 9.0.4.iso” file.</li>
+<li>Click the Remove button to remove the file “Apple MacOS 9.0.4.iso”
 since we are finished using it to install the operating system.</li>
-<li>Click the &quot;Save and Quit&quot; button.</li>
-<li>Click the &quot;Shut Down&quot; button.</li>
+<li>Click the “Save and Quit” button.</li>
+<li>Click the “Shut Down” button.</li>
 <li>Double-click the SheepShaver.app file.</li>
-<li>Click the SheepShaver menu and select &quot;Settings...&quot;.</li>
+<li>Click the SheepShaver menu and select “Settings…”.</li>
 <li>Click the Miscellaneous tab.</li>
-<li>Click the &quot;Save and Quit&quot; button.</li>
-<li>Click the &quot;Shut Down&quot; button.</li>
+<li>Click the “Save and Quit” button.</li>
+<li>Click the “Shut Down” button.</li>
 <li>Double-click the SheepShaver.app file.</li>
-<li>There will now be a &quot;Unix&quot; drive that is empty.
-Files placed in the &quot;Mac OS Share&quot; directory of the host
-will appear in the &quot;Unix&quot; drive.</li>
-<li>To adjust the window size, select Apple menu ... Control Panels ... Monitors
+<li>There will now be a “Unix” drive that is empty.
+Files placed in the “Mac OS Share” directory of the host
+will appear in the “Unix” drive.</li>
+<li>To adjust the window size, select Apple menu … Control Panels … Monitors
 and select another resolution.</li>
-<li>To enable sound, select Apple menu ... Control Panels ... Sound,
-select &quot;Output&quot;, and select &quot;Built-in&quot;.</li>
+<li>To enable sound, select Apple menu … Control Panels … Sound,
+select “Output”, and select “Built-in”.</li>
 <li>In SheepShaver, click the Apple menu
-and select Control Panels ... Appearance.</li>
-<li>On the Themes tab, optionally change the theme or keep &quot;Mac OS Default&quot;.</li>
-<li>On the Sound tab, change &quot;Sound tracks:&quot; to &quot;Platinum Sounds&quot;.</li>
+and select Control Panels … Appearance.</li>
+<li>On the Themes tab, optionally change the theme or keep “Mac OS Default”.</li>
+<li>On the Sound tab, change “Sound tracks:” to “Platinum Sounds”.</li>
 <li>On the Desktop tab, optionally select a different pattern and
-click the &quot;Set Desktop&quot; button, or keep &quot;Mac OS Default&quot;.</li>
+click the “Set Desktop” button, or keep “Mac OS Default”.</li>
 <li>Close the Appearance window.</li>
 <li>Drag all the aliases on the desktop to the trash can.</li>
-<li>From the Special menu, select &quot;Empty Trash...&quot; and click the OK button.</li>
-<li>In SheepShaver, click the Apple menu and select Favorites ... <a href="http://www.apple.com">www.apple.com</a>.
+<li>From the Special menu, select “Empty Trash…” and click the OK button.</li>
+<li>In SheepShaver, click the Apple menu and select Favorites … <a href="http://www.apple.com" rel="noopener" target="_blank">www.apple.com</a>.
 This will launch Microsoft Internet Explorer 4.5 and open an error dialog
-that says &quot;Security failure. The server reply is invalid.&quot;
-&quot;Microsoft Internet Explorer&quot; can also be found in MacOS_HD ... Internet.</li>
-<li>In the address bar, enter &quot;<a href="http://macintoshgarden.org/">http://macintoshgarden.org/</a>&quot;
-or &quot;<a href="http://macintoshrepository.org">http://macintoshrepository.org</a>&quot; to download apps and games.</li>
+that says “Security failure. The server reply is invalid.”
+“Microsoft Internet Explorer” can also be found in MacOS_HD … Internet.</li>
+<li>In the address bar, enter “<a href="http://macintoshgarden.org/" rel="noopener" target="_blank">http://macintoshgarden.org/</a>”
+or “<a href="http://macintoshrepository.org" rel="noopener" target="_blank">http://macintoshrepository.org</a>” to download apps and games.</li>
 </ol>
 <p>The last version of HyperCard is 2.4.1.
 The last Mac OS version that supports this is 9.2.2.
 To install HyperCard:</p>
 <ol>
-<li>Browse <a href="https://macintoshgarden.org/apps/hypercard-241">https://macintoshgarden.org/apps/hypercard-241</a>.</li>
+<li>Browse <a href="https://macintoshgarden.org/apps/hypercard-241" rel="noopener" target="_blank">https://macintoshgarden.org/apps/hypercard-241</a>.</li>
 <li>Download the HyperCard-241.iso file using link #2.</li>
-<li>Move it to the &quot;Mac OS Share&quot; directory.</li>
+<li>Move it to the “Mac OS Share” directory.</li>
 <li>In SheepShaver, double-click the Unix drive.</li>
 <li>Double-click the HyperCard-241.iso file to create a HyperCard drive.</li>
 <li>Double-click the HyperCard drive.</li>
@@ -385,48 +387,48 @@ To install HyperCard:</p>
 <li>Click the Select button.</li>
 <li>Click the Start button. This will run for a few minutes.</li>
 <li>Click the Restart button.</li>
-<li>The folder &quot;HyperCard 2.4&quot; will be at the top of &quot;MacOS_HD&quot;.</li>
+<li>The folder “HyperCard 2.4” will be at the top of “MacOS_HD”.</li>
 <li>Drag it to the Applications folder.</li>
-<li>To launch HyperCard, open the &quot;HyperCard 2.4&quot; folder
+<li>To launch HyperCard, open the “HyperCard 2.4” folder
 and double-click HyperCard.</li>
 </ol>
-<h2 id="full-screen-mode" tabindex="-1">Full Screen Mode</h2>
+<h2 id="full-screen-mode">Full Screen Mode</h2>
 <p>To toggle full screen mode, press ctrl-return.
 This is highly recommended because it enables resizing windows
 (such as script editors) that have become taller than the SheepShaver window.
 However, when in full screen mode the mouse cursor cannot be
 moved outside of SheepShaver, which prevents accessing other applications.</p>
-<h2 id="colors" tabindex="-1">Colors</h2>
+<h2 id="colors">Colors</h2>
 <p>To enable colors in the emulator:</p>
 <ul>
 <li>Open the Apple menu.</li>
-<li>Select &quot;Control Panels&quot;.</li>
+<li>Select “Control Panels”.</li>
 <li>Double-click Monitors.</li>
 <li>Select the Colors radio button.</li>
 <li>Select 256.</li>
 <li>Close the Monitors window.</li>
-<li>Close the &quot;Control Panels&quot; window.</li>
+<li>Close the “Control Panels” window.</li>
 </ul>
-<h2 id="zooming-in" tabindex="-1">Zooming In</h2>
+<h2 id="zooming-in">Zooming In</h2>
 <p>One way to increase the size of an app (such as HyperCard)
 running in an emulator from a modern Mac host is to:</p>
 <ul>
-<li>open &quot;System Settings&quot;</li>
+<li>open “System Settings”</li>
 <li>select Accessibility</li>
 <li>select Zoom</li>
-<li>toggle the &quot;Use keyboard shortcuts to zoom&quot; option on</li>
+<li>toggle the “Use keyboard shortcuts to zoom” option on</li>
 <li>open the emulator</li>
 <li>launch the app</li>
 <li>press cmd-option-= (plus key) to zoom in</li>
 <li>press cmd-option-minus to zoom out</li>
 </ul>
-<h2 id="hypercard" tabindex="-1">HyperCard</h2>
-<p>HyperCard is located in Mac OS 7.6.1 ... CD Extras ... HyperCard Player.
-Double-click &quot;HyperCard Player&quot;.
+<h2 id="hypercard">HyperCard</h2>
+<p>HyperCard is located in Mac OS 7.6.1 … CD Extras … HyperCard Player.
+Double-click “HyperCard Player”.
 A dialog will appear that says the Geneva and Palatino fonts
 must be installed for text to display correctly in the stacks.
 Press cmd-q to quit HyperCard.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://www.emaculation.com/doku.php?v=1.1.1" rel="noopener" target="_blank">Emaculation.com</a></li>
 <li><a href="https://archive.org?v=1.1.1" rel="noopener" target="_blank">Internet Archive</a></li>
@@ -435,5 +437,6 @@ Press cmd-q to quit HyperCard.</p>
 <li><a href="https://www.macintoshrepository.org?v=1.1.1" rel="noopener" target="_blank">Macintosh Repository</a></li>
 <li><a href="https://rescuemyclassicmac.com?v=1.1.1" rel="noopener" target="_blank">RescueMyClassicMac</a></li>
 <li><a href="https://vintagemacmuseum.com/resources/mac-software/?v=1.1.1" rel="noopener" target="_blank">The Vintage Mac Museum</a></li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

@@ -1,10 +1,12 @@
-<!DOCTYPE html><html lang="en"> <head><title>Web Awesome</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Web Awesome</h2> <aside><ul><li><a href="#components">Components</a></li><li><a href="#importing-components">Importing Components</a></li><ul><li><a href="#cdn-with-autoloader">CDN with Autoloader</a></li><li><a href="#cdn-with-specific-components">CDN with Specific Components</a></li><li><a href="#project-install">Project Install</a></li></ul><li><a href="#styles%2C-themes%2C-and-design-tokens">Styles, Themes, and Design Tokens</a></li><li><a href="#layout">Layout</a></li><li><a href="#sample-project">Sample Project</a></li><ul><li><a href="#wa-radio-group-and-wa-radio">wa-radio-group and wa-radio</a></li><li><a href="#wa-input-and-wa-relative-time">wa-input and wa-relative-time</a></li><li><a href="#wa-button%2C-wa-badge%2C-wa-switch">wa-button, wa-badge, wa-switch</a></li><li><a href="#retrieving-messages">Retrieving Messages</a></li><li><a href="#wa-dialog">wa-dialog</a></li><li><a href="#wa-drawer">wa-drawer</a></li><li><a href="#wa-progress-bar-and-wa-progress-ring">wa-progress-bar and wa-progress-ring</a></li><li><a href="#wa-rating">wa-rating</a></li></ul><li><a href="#other-libraries">Other Libraries</a></li><li><a href="#summary">Summary</a></li></ul></aside> <article><p>Many commonly needed web components have already been implemented
+<!DOCTYPE html><html lang="en"> <head><title>Web Awesome</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Web Awesome</h2> <aside><ul><li><a href="#components">Components</a></li><li><a href="#importing-components">Importing Components</a></li><ul><li><a href="#cdn-with-autoloader">CDN with Autoloader</a></li><li><a href="#cdn-with-specific-components">CDN with Specific Components</a></li><li><a href="#project-install">Project Install</a></li></ul><li><a href="#styles-themes-and-design-tokens">Styles, Themes, and Design Tokens</a></li><li><a href="#layout">Layout</a></li><li><a href="#sample-project">Sample Project</a></li><ul><li><a href="#wa-radio-group-and-wa-radio">wa-radio-group and wa-radio</a></li><li><a href="#wa-input-and-wa-relative-time">wa-input and wa-relative-time</a></li><li><a href="#wa-button-wa-badge-wa-switch">wa-button, wa-badge, wa-switch</a></li><li><a href="#retrieving-messages">Retrieving Messages</a></li><li><a href="#wa-dialog">wa-dialog</a></li><li><a href="#wa-drawer">wa-drawer</a></li><li><a href="#wa-progress-bar-and-wa-progress-ring">wa-progress-bar and wa-progress-ring</a></li><li><a href="#wa-rating">wa-rating</a></li></ul><li><a href="#other-libraries">Other Libraries</a></li><li><a href="#summary">Summary</a></li></ul></aside> <article> <p>Many commonly needed web components have already been implemented
 and are freely available in open source libraries.</p>
 <p>Perhaps the best example of such a library is
-<a href="https://webawesome.com">Web Awesome</a>.
-Web Awesome is the new name for <a href="https://shoelace.style">Shoelace</a>
+<a href="https://webawesome.com" rel="noopener" target="_blank">Web Awesome</a>.
+Web Awesome is the new name for <a href="https://shoelace.style" rel="noopener" target="_blank">Shoelace</a>
 which was first released in 2020.
-It is maintained by <a href="https://fontawesome.com">Font Awesome</a>
+It is maintained by <a href="https://fontawesome.com" rel="noopener" target="_blank">Font Awesome</a>
 which provides a large library of over 60,000 free and paid icons.</p>
 <p>If you are already using Shoelace, migrating to Web Awesome is easy.
 Most of the components have the same names and APIs.
@@ -12,18 +14,18 @@ All that is required is to:</p>
 <ul>
 <li>change the <code>script</code> element that includes the Shoelace library
 to include the Web Awesome library instead</li>
-<li>change the custom element name prefixes from &quot;sl&quot; to &quot;wa&quot;</li>
+<li>change the custom element name prefixes from “sl” to “wa”</li>
 </ul>
-<p>Web Awesome components are implemented using <a href="https://lit.dev">Lit</a>.</p>
+<p>Web Awesome components are implemented using <a href="https://lit.dev" rel="noopener" target="_blank">Lit</a>.</p>
 <p>Most of the components provided by Web Awesome are free to use.
-But it also provides some &quot;Pro&quot; components
+But it also provides some “Pro” components
 whose usage requires a subscription fee.</p>
 <p>Compared to Shoelace components, Web Awesome components provide improvements in
 accessibility, performance, theming, and server-side rendering (SSR).</p>
 <p>At publication time, Web Awesome was still in beta, but the components are
-quite usable and have been battle tested for years under the name &quot;Shoelace&quot;.</p>
-<h2 id="components" tabindex="-1">Components</h2>
-<p>Let's run through brief descriptions of each of the components provided by
+quite usable and have been battle tested for years under the name “Shoelace”.</p>
+<h2 id="components">Components</h2>
+<p>Let’s run through brief descriptions of each of the components provided by
 Web Awesome, to get a feel for the breadth of the components.
 This list was compiled when the newest version was 3.0.0-beta-6.</p>
 <ul>
@@ -85,7 +87,7 @@ an alternative to <code>wa-progress-bar</code></li>
 <li><code>wa-rating</code>: displays a customizable set of icons that can be clicked
 to indicate a rating</li>
 <li><code>wa-relative-time</code>: displays a date or time duration description
-relative to the current date/time (e.g. &quot;yesterday&quot; or &quot;3 minutes ago&quot;)</li>
+relative to the current date/time (e.g. “yesterday” or “3 minutes ago”)</li>
 <li><code>wa-resize-observer</code>: declarative interface to the ResizeObserver API</li>
 <li><code>wa-scroller</code>: creates a scrollable container for content that
 may be larger that the allocated space</li>
@@ -95,7 +97,7 @@ placeholder, hint, clear button, and ability to select multiple values</li>
 <li><code>wa-skeleton</code>: displays a placeholder for content that will be rendered later
 (prevents layout shift)</li>
 <li><code>wa-slider</code>: displays a customizable alternative to an HTML <code>input</code> element
-whose <code>type</code> is set to &quot;range&quot; with many optional features including a label,
+whose <code>type</code> is set to “range” with many optional features including a label,
 hint, tooltip, increment markers, reference labels, vertical orientation,
 and ability to select a pair of values</li>
 <li><code>wa-spinner</code>: displays a spinning semi-circle that
@@ -121,8 +123,8 @@ that can be zoomed in and out</li>
 </ul>
 <p>Most of these components are demonstrated in
 a single HTML file in the GitHub repository project
-<a href="https://github.com/mvolkmann/web-awesome-demo/blob/main/index.html">web-awesome-demo</a>.</p>
-<h2 id="importing-components" tabindex="-1">Importing Components</h2>
+<a href="https://github.com/mvolkmann/web-awesome-demo/blob/main/index.html" rel="noopener" target="_blank">web-awesome-demo</a>.</p>
+<h2 id="importing-components">Importing Components</h2>
 <p>There are at least three options, described below,
 for using Web Awesome components.
 The first two options use a CDN.
@@ -145,11 +147,11 @@ geographically closer to your server than a CDN server</li>
 <li>lost opportunity to bundle packages, resulting in more HTTP requests</li>
 <li>revealing information about your users to the CDN</li>
 </ul>
-<p>In each of the examples below, replace &quot;CDN&quot; with its URL prefix
+<p>In each of the examples below, replace “CDN” with its URL prefix
 which currently is the following:</p>
 <pre><code class="language-text">https://early.webawesome.com/webawesome@3.0.0-beta.6/dist
 </code></pre>
-<h3 id="cdn-with-autoloader" tabindex="-1">CDN with Autoloader</h3>
+<h3 id="cdn-with-autoloader">CDN with Autoloader</h3>
 <p>The easiest option is to use the Web Awesome autoloader.
 This automatically loads the JavaScript needed for each component from a CDN
 the first time they appear in the DOM.
@@ -160,19 +162,19 @@ each time a component is used for the first time.</p>
 <p>To use them option, we need to make a few changes to the main HTML file
 of the site.</p>
 <p>First, add a <code>class</code> attribute to the <code>html</code> element as follows:
-This configures the use of the default theme and the brand color &quot;blue&quot;.</p>
-<pre><code class="language-html">&lt;html class=&quot;wa-theme-default wa-palette-default wa-brand-blue&quot; lang=&quot;en&quot;&gt;
+This configures the use of the default theme and the brand color “blue”.</p>
+<pre><code class="language-html">&#x3C;html class="wa-theme-default wa-palette-default wa-brand-blue" lang="en">
   ...
-&lt;/html&gt;
+&#x3C;/html>
 </code></pre>
 <p>Second, add the following <code>link</code> element as a child of the <code>head</code> element.
 This loads the Web Awesome default theme.</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;{CDN}/styles/webawesome.css&quot; /&gt;
+<pre><code class="language-html">&#x3C;link rel="stylesheet" href="{CDN}/styles/webawesome.css" />
 </code></pre>
 <p>Third, add the following <code>script</code> element as a child of the <code>head</code> element.
 This loads the Web Awesome autoloader which watches DOM modifications
 for unregistered Web Awesome custom elements and lazy loads them.</p>
-<pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;{CDN}/webawesome.loader.js&quot;&gt;&lt;/script&gt;
+<pre><code class="language-html">&#x3C;script type="module" src="{CDN}/webawesome.loader.js">&#x3C;/script>
 </code></pre>
 <p>To demonstrate this, we can add the following <code>script</code> element
 inside the <code>head</code> element.
@@ -183,34 +185,34 @@ The JavaScript for the <code>wa-button</code> custom element
 is loaded when the page is loaded.
 But the JavaScript for the <code>wa-icon</code> custom element
 is not loaded until the button is clicked.</p>
-<pre><code class="language-html">&lt;script&gt;
-  window.onload = () =&gt; {
+<pre><code class="language-html">&#x3C;script>
+  window.onload = () => {
     const button = document.getElementById('add-button');
     const target = document.getElementById('target');
-    button.addEventListener('click', () =&gt; {
-      target.innerHTML = '&lt;wa-icon slot=&quot;icon&quot; name=&quot;trash&quot;&gt;&lt;/wa-icon&gt;';
+    button.addEventListener('click', () => {
+      target.innerHTML = '&#x3C;wa-icon slot="icon" name="trash">&#x3C;/wa-icon>';
     });
   };
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
-<pre><code class="language-html">&lt;wa-button id=&quot;add-button&quot;&gt;Add Icon&lt;/wa-button&gt;
-&lt;div id=&quot;target&quot;&gt;&lt;/div&gt;
+<pre><code class="language-html">&#x3C;wa-button id="add-button">Add Icon&#x3C;/wa-button>
+&#x3C;div id="target">&#x3C;/div>
 </code></pre>
-<h3 id="cdn-with-specific-components" tabindex="-1">CDN with Specific Components</h3>
-<p>The benefit of this approach is that it doesn't use the autoloader.
+<h3 id="cdn-with-specific-components">CDN with Specific Components</h3>
+<p>The benefit of this approach is that it doesn’t use the autoloader.
 There is no delay each time a new component is used for the first time
 because all the required component JavaScript code is loaded up front.</p>
 <p>To use this option, use CDN URLs to include a theme CSS file
 and the JavaScript for each component to be used.
 For example:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;{CDN}/styles/webawesome.css&quot; /&gt;
+<pre><code class="language-html">&#x3C;link rel="stylesheet" href="{CDN}/styles/webawesome.css" />
 
-&lt;script type=&quot;module&quot;&gt;
+&#x3C;script type="module">
   import '{CDN}/components/avatar/avatar.js';
   import '{CDN}/components/icon/icon.js';
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
-<h3 id="project-install" tabindex="-1">Project Install</h3>
+<h3 id="project-install">Project Install</h3>
 <p>This approach has the same benefit describe above
 gained by not using the autoloader.
 In addition, it does not use a CDN and
@@ -230,7 +232,7 @@ therefore is not affected by CDN outages.</p>
 <p>Import the Web Awesome CSS rules and each component being used.</p>
 <p>For the sample project, add the following in <code>index.html</code>
 inside the <code>head</code> element:</p>
-<pre><code class="language-html">&lt;script type=&quot;module&quot;&gt;
+<pre><code class="language-html">&#x3C;script type="module">
   import '@awesome.me/webawesome/dist/styles/webawesome.css';
   import '@awesome.me/webawesome/dist/components/badge/badge.js';
   import '@awesome.me/webawesome/dist/components/button/button.js';
@@ -244,22 +246,22 @@ inside the <code>head</code> element:</p>
   import '@awesome.me/webawesome/dist/components/rating/rating.js';
   import '@awesome.me/webawesome/dist/components/relative-time/relative-time.js';
   import '@awesome.me/webawesome/dist/components/switch/switch.js';
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 </ol>
 <p>When not using a CDN, you will see several warning messages
 in the DevTools Console that can be safely ignored.
 These are described in the open
-<a href="https://github.com/shoelace-style/webawesome/issues/1269">issue #1269</a>.
+<a href="https://github.com/shoelace-style/webawesome/issues/1269" rel="noopener" target="_blank">issue #1269</a>.
 Hopefully this issue will be resolved soon.</p>
-<p>If the VS Code extension &quot;Web Components Language Server&quot; is installed
+<p>If the VS Code extension “Web Components Language Server” is installed
 and the <code>@awesome.me/webawesome</code> package is installed in a project,
 VS Code will provide element and attribute completions
 for Web Awesome custom elements.
 If Web Awesome is being obtained from a CDN, create the file <code>wc.config.js</code>
 containing the following in order to get completions:
-TODO: See <a href="https://github.com/wc-toolkit/wc-language-server/issues/27">issue #27</a>.</p>
+TODO: See <a href="https://github.com/wc-toolkit/wc-language-server/issues/27" rel="noopener" target="_blank">issue #27</a>.</p>
 <pre><code class="language-js">export default {
   libraries: {
     '@awesome.me/webawesome': {
@@ -268,7 +270,7 @@ TODO: See <a href="https://github.com/wc-toolkit/wc-language-server/issues/27">i
   }
 };
 </code></pre>
-<h2 id="styles%2C-themes%2C-and-design-tokens" tabindex="-1">Styles, Themes, and Design Tokens</h2>
+<h2 id="styles-themes-and-design-tokens">Styles, Themes, and Design Tokens</h2>
 <p>Web Awesome supports several ways to change the styling of its components.</p>
 <ol>
 <li>Customize individual instances of components.</li>
@@ -277,18 +279,18 @@ TODO: See <a href="https://github.com/wc-toolkit/wc-language-server/issues/27">i
 </ol>
 <p>As an example of customizing component instances,
 we can change the background color of all <code>wa-tag</code> elements that have
-their <code>variant</code> attribute set to &quot;danger&quot; with the following CSS rule:</p>
+their <code>variant</code> attribute set to “danger” with the following CSS rule:</p>
 <pre><code class="language-css">wa-tag[variant='danger'] {
   background-color: coral;
 }
 </code></pre>
 <p>Each theme is a collection of CSS custom properties
-which are also referred to as &quot;CSS variables&quot; or &quot;design tokens&quot;.
+which are also referred to as “CSS variables” or “design tokens”.
 Design tokens help to achieve styling consistency across a web site or web app.
 Their values can be modified in one place
 to adjust styling across an entire site/app.</p>
 <p>Web Awesome provides three free themes
-which are named &quot;Default&quot;, &quot;Awesome&quot;, and &quot;Shoelace&quot;.
+which are named “Default”, “Awesome”, and “Shoelace”.
 The Default theme is intended to serve as
 the starting point for most new projects.
 A significant difference in the Awesome theme
@@ -298,19 +300,19 @@ for users migrating from Shoelace.
 It features smaller border radius values than the Default theme,
 but is otherwise quite similar to the Default theme.
 The CSS for each of these themes can be found in a GitHub repository at
-<a href="https://github.com/shoelace-style/webawesome/tree/next/packages/webawesome/src/styles/themes">Web Awesome free themes</a>.</p>
+<a href="https://github.com/shoelace-style/webawesome/tree/next/packages/webawesome/src/styles/themes" rel="noopener" target="_blank">Web Awesome free themes</a>.</p>
 <p>Web Awesome also currently provides eight themes
-that require a paid subscription to &quot;Web Awesome Pro&quot;.
+that require a paid subscription to “Web Awesome Pro”.
 In addition, there are many third-party commercial themes.</p>
 <p>To use the free, Default theme, change the <code>html</code> element to the following:</p>
-<pre><code class="language-html">&lt;html
-  class=&quot;wa-theme-default wa-palette-default wa-brand-blue&quot;
-  lang=&quot;en&quot;
-&gt;&lt;/html&gt;
+<pre><code class="language-html">&#x3C;html
+  class="wa-theme-default wa-palette-default wa-brand-blue"
+  lang="en"
+>&#x3C;/html>
 </code></pre>
 <p>and add the following <code>link</code> element,
 updating the URL as new versions of Web Awesome are released:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;{CDN}/dist/styles/webawesome.css&quot; /&gt;
+<pre><code class="language-html">&#x3C;link rel="stylesheet" href="{CDN}/dist/styles/webawesome.css" />
 </code></pre>
 <p>The file <code>webawesome.css</code> imports the following:</p>
 <ul>
@@ -332,17 +334,17 @@ updating the URL as new versions of Web Awesome are released:</p>
 copy the <code>styles</code> directory from <code>packages/webawesome/src</code> into your project,
 and change the <code>href</code> value to <code>styles/webawesome.css</code>.</p>
 <p>To change the brand/primary color used by the theme,
-change &quot;blue&quot; in the CSS class name <code>wa-brand-blue</code> to &quot;red&quot;, &quot;orange&quot;,
-&quot;yellow&quot;, &quot;green&quot;, &quot;cyan&quot;, &quot;indigo&quot;, &quot;purple&quot;, &quot;pink&quot;, or &quot;gray&quot;.</p>
-<p>To use the free themes Awesome or Shoelace, change &quot;default&quot; in the class names
+change “blue” in the CSS class name <code>wa-brand-blue</code> to “red”, “orange”,
+“yellow”, “green”, “cyan”, “indigo”, “purple”, “pink”, or “gray”.</p>
+<p>To use the free themes Awesome or Shoelace, change “default” in the class names
 on the <code>html</code> element to the lowercase version of the desired theme name.
-Then add the following after the <code>link</code> element for &quot;webawesome.css&quot;:</p>
-<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;{CDN}/dist/styles/themes/{theme-name}.css&quot; /&gt;
+Then add the following after the <code>link</code> element for “webawesome.css”:</p>
+<pre><code class="language-html">&#x3C;link rel="stylesheet" href="{CDN}/dist/styles/themes/{theme-name}.css" />
 </code></pre>
 <p>Web Awesome provides a tool for creating custom themes
 that requires a paid account.
-To use this, browse the <a href="https://webawesome.com/docs/themes">Themes</a> page
-and click the &quot;Create a Theme&quot; button.</p>
+To use this, browse the <a href="https://webawesome.com/docs/themes" rel="noopener" target="_blank">Themes</a> page
+and click the “Create a Theme” button.</p>
 <p>Creating a custom theme without a paid account is doable, but tedious.
 Make a copy of the <code>styles/themes/default.css</code> file,
 modify its contents, and change the
@@ -351,17 +353,17 @@ modify its contents, and change the
 To automatically add that CSS class only when the user
 configures their system preferences to use dark mode,
 add the following <code>script</code> element:</p>
-<pre><code class="language-js">&lt;script&gt;
-  window.onload = async () =&gt; {
+<pre><code class="language-js">&#x3C;script>
+  window.onload = async () => {
     window
-      .matchMedia(&quot;(prefers-color-scheme: dark)&quot;)
-      .addEventListener(&quot;change&quot;, (event) =&gt; {
-        document.documentElement.classList.toggle(&quot;wa-dark&quot;, event.matches);
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (event) => {
+        document.documentElement.classList.toggle("wa-dark", event.matches);
       });
   };
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
-<h2 id="layout" tabindex="-1">Layout</h2>
+<h2 id="layout">Layout</h2>
 <p>Web Awesome provides a set of CSS classes that can make it easier to achieve
 specific component layouts than directly using flexbox and grid layouts.
 These CSS classes enable specifying styling directly in HTML elements,
@@ -373,7 +375,7 @@ a <code>link</code> element for <code>styles/webawesome.css</code> is present.</
 <p>Each of the following CSS classes use <code>display: flex</code> except <code>wa-grid</code>.</p>
 <ul>
 <li><code>wa-cluster</code>: places child elements in rows, wrapping when
-the next element doesn't fit on the current row</li>
+the next element doesn’t fit on the current row</li>
 <li><code>wa-flank</code>: places content on the left and right sides of another element</li>
 <li><code>wa-frame</code>: maintains a specific aspect ratio which is useful for images and videos</li>
 <li><code>wa-grid</code>: uses <code>display: grid</code></li>
@@ -383,38 +385,38 @@ the next element doesn't fit on the current row</li>
 <p>To specify the amount of space to leave between elements, use the
 CSS classes <code>wa-gap-{size}</code> where <code>size</code>, from smallest to largest,
 is 0, 3xs, 2xs, xs, s, m, l, xl, 2xl, or 3xl.
-Specifying a gap size automatically sets the <code>display</code> property to &quot;flex&quot;.</p>
-<p>To specify cross-axis alignment of items when <code>display</code> is &quot;flex&quot;,
+Specifying a gap size automatically sets the <code>display</code> property to “flex”.</p>
+<p>To specify cross-axis alignment of items when <code>display</code> is “flex”,
 use the CSS classes <code>wa-align-items-{option}</code> where <code>option</code>
 is start, center, end, baseline, or stretch.</p>
 <p>The following example lays out child elements
 using flexbox with a gap of <code>1rem</code>.</p>
 <img alt="Web Awesome flexbox" src="/blog/assets/web-awesome-flexbox.png?v=1.1.1">
-<pre><code class="language-html">&lt;div
-  class=&quot;wa-align-items-center wa-gap-m&quot;
-  style=&quot;border: 1px solid gray; height: 4rem;&quot;
-&gt;
-  &lt;wa-tag variant=&quot;success&quot; size=&quot;small&quot;&gt;Success&lt;/wa-tag&gt;
-  &lt;wa-tag variant=&quot;warning&quot; size=&quot;medium&quot;&gt;Warning&lt;/wa-tag&gt;
-  &lt;wa-tag variant=&quot;danger&quot; size=&quot;large&quot;&gt;Danger&lt;/wa-tag&gt;
-&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div
+  class="wa-align-items-center wa-gap-m"
+  style="border: 1px solid gray; height: 4rem;"
+>
+  &#x3C;wa-tag variant="success" size="small">Success&#x3C;/wa-tag>
+  &#x3C;wa-tag variant="warning" size="medium">Warning&#x3C;/wa-tag>
+  &#x3C;wa-tag variant="danger" size="large">Danger&#x3C;/wa-tag>
+&#x3C;/div>
 </code></pre>
 <p>The following example lays out child elements using <code>wa-grid</code>:</p>
 <img alt="Web Awesome wa-grid" src="/blog/assets/web-awesome-wa-grid.png?v=1.1.1">
-<pre><code class="language-html">&lt;div class=&quot;wa-grid wa-gap-m&quot; style=&quot;grid-template-columns: repeat(2, 1fr)&quot;&gt;
-  &lt;wa-tag&gt;One&lt;/wa-tag&gt;
-  &lt;wa-tag&gt;Two&lt;/wa-tag&gt;
-  &lt;wa-tag class=&quot;wa-span-grid&quot;&gt;Three&lt;/wa-tag&gt;
-  &lt;wa-tag&gt;Four&lt;/wa-tag&gt;
-  &lt;wa-tag&gt;Five&lt;/wa-tag&gt;
-  &lt;wa-tag&gt;Six&lt;/wa-tag&gt;
-&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div class="wa-grid wa-gap-m" style="grid-template-columns: repeat(2, 1fr)">
+  &#x3C;wa-tag>One&#x3C;/wa-tag>
+  &#x3C;wa-tag>Two&#x3C;/wa-tag>
+  &#x3C;wa-tag class="wa-span-grid">Three&#x3C;/wa-tag>
+  &#x3C;wa-tag>Four&#x3C;/wa-tag>
+  &#x3C;wa-tag>Five&#x3C;/wa-tag>
+  &#x3C;wa-tag>Six&#x3C;/wa-tag>
+&#x3C;/div>
 </code></pre>
 <p>If you are already familiar with using flexbox and grid layouts directly in CSS,
 you may find that to be easier than
 using the layout CSS classes provided by Web Awesome.</p>
-<h2 id="sample-project" tabindex="-1">Sample Project</h2>
-<p>Let's walk through using the following Web Awesome components:</p>
+<h2 id="sample-project">Sample Project</h2>
+<p>Let’s walk through using the following Web Awesome components:</p>
 <ul>
 <li><code>wa-button</code></li>
 <li><code>wa-dialog</code></li>
@@ -428,7 +430,7 @@ using the layout CSS classes provided by Web Awesome.</p>
 <li><code>wa-switch</code></li>
 </ul>
 <p>All the code for this project can be found in the GitHub repository at
-<a href="https://github.com/mvolkmann/web-awesome-sample-project">web-awesome-sample-project</a>.</p>
+<a href="https://github.com/mvolkmann/web-awesome-sample-project" rel="noopener" target="_blank">web-awesome-sample-project</a>.</p>
 <ol>
 <li>
 <p>Create a directory for the project.</p>
@@ -444,25 +446,25 @@ using the layout CSS classes provided by Web Awesome.</p>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;dev&quot;: &quot;vite&quot;
+<pre><code class="language-json">"dev": "vite"
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>index.html</code> containing the following,
 replacing <code>{CDN}</code> with the CDN URL for Web Awesome:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;title&gt;Web Awesome Demo&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;{CDN}/dist/styles/webawesome.css&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
-    &lt;script type=&quot;module&quot; src=&quot;{CDN}/dist/webawesome.loader.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;module&quot; src=&quot;script.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Web Awesome Demo&lt;/h1&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html lang="en">
+  &#x3C;head>
+    &#x3C;title>Web Awesome Demo&#x3C;/title>
+    &#x3C;link rel="stylesheet" href="{CDN}/dist/styles/webawesome.css" />
+    &#x3C;link rel="stylesheet" href="styles.css" />
+    &#x3C;script type="module" src="{CDN}/dist/webawesome.loader.js">&#x3C;/script>
+    &#x3C;script type="module" src="script.js">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;h1>Web Awesome Demo&#x3C;/h1>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 </li>
 <li>
@@ -479,7 +481,7 @@ replacing <code>{CDN}</code> with the CDN URL for Web Awesome:</p>
 </li>
 <li>
 <p>Create the file <code>script.js</code> containing the following:</p>
-<pre><code class="language-js">window.onload = () =&gt; {
+<pre><code class="language-js">window.onload = () => {
   // We will add code here later.
 };
 </code></pre>
@@ -488,53 +490,53 @@ replacing <code>{CDN}</code> with the CDN URL for Web Awesome:</p>
 <p>Start a local HTTP server by entering <code>npm run dev</code>.</p>
 </li>
 <li>
-<p>Browse <code>localhost:5173</code> and verify that &quot;Web Awesome Demo&quot; is rendered.</p>
+<p>Browse <code>localhost:5173</code> and verify that “Web Awesome Demo” is rendered.</p>
 </li>
 </ol>
-<h3 id="wa-radio-group-and-wa-radio" tabindex="-1">wa-radio-group and wa-radio</h3>
-<p>Let's add radio buttons that can be selected
+<h3 id="wa-radio-group-and-wa-radio">wa-radio-group and wa-radio</h3>
+<p>Let’s add radio buttons that can be selected
 to change the color of the page heading.</p>
 <img alt="Web Awesome radio group" src="/blog/assets/web-awesome-radio-group.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element:</p>
-<pre><code class="language-html">&lt;wa-radio-group
-  id=&quot;color-radio&quot;
-  label=&quot;Select a heading color.&quot;
-  orientation=&quot;horizontal&quot;
-  size=&quot;small&quot;
-&gt;
-  &lt;wa-radio value=&quot;red&quot;&gt;Red&lt;/wa-radio&gt;
-  &lt;wa-radio value=&quot;green&quot;&gt;Green&lt;/wa-radio&gt;
-  &lt;wa-radio value=&quot;blue&quot;&gt;Blue&lt;/wa-radio&gt;
-&lt;/wa-radio-group&gt;
+<pre><code class="language-html">&#x3C;wa-radio-group
+  id="color-radio"
+  label="Select a heading color."
+  orientation="horizontal"
+  size="small"
+>
+  &#x3C;wa-radio value="red">Red&#x3C;/wa-radio>
+  &#x3C;wa-radio value="green">Green&#x3C;/wa-radio>
+  &#x3C;wa-radio value="blue">Blue&#x3C;/wa-radio>
+&#x3C;/wa-radio-group>
 </code></pre>
 <p>Add the following in <code>script.js</code> inside the <code>window.onload</code> callback function:</p>
 <pre><code class="language-js">// Find all the DOM elements we need to access.
 const colorRadio = document.getElementById('color-radio');
 
 // Configure event handling.
-colorRadio.addEventListener('change', () =&gt; {
+colorRadio.addEventListener('change', () => {
   const h1 = document.querySelector('h1');
   h1.style.color = colorRadio.value;
 });
 </code></pre>
 <p>Click each of the radio buttons and verify that
 the color of the <code>h1</code> element changes to the selected color.</p>
-<h3 id="wa-input-and-wa-relative-time" tabindex="-1">wa-input and wa-relative-time</h3>
-<p>Let's add a date input for your next dentist appointment.
+<h3 id="wa-input-and-wa-relative-time">wa-input and wa-relative-time</h3>
+<p>Let’s add a date input for your next dentist appointment.
 After a date is entered/selected, the difference from now to that date
-will be displayed with text like &quot;tomorrow&quot; or &quot;in 2 weeks&quot;.</p>
+will be displayed with text like “tomorrow” or “in 2 weeks”.</p>
 <img alt="Web Awesome date input" src="/blog/assets/web-awesome-date-input.png?v=1.1.1">
 <img alt="Web Awesome relative time" src="/blog/assets/web-awesome-relative-time.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element:</p>
-<pre><code class="language-html">&lt;div class=&quot;wa-align-items-end wa-gap-m&quot;&gt;
-  &lt;wa-input
-    id=&quot;date-input&quot;
-    label=&quot;Dentist Appointment&quot;
-    placeholder=&quot;date&quot;
-    type=&quot;date&quot;
-  &gt;&lt;/wa-input&gt;
-  &lt;wa-relative-time id=&quot;relative-time&quot;&gt;&lt;/wa-relative-time&gt;
-&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div class="wa-align-items-end wa-gap-m">
+  &#x3C;wa-input
+    id="date-input"
+    label="Dentist Appointment"
+    placeholder="date"
+    type="date"
+  >&#x3C;/wa-input>
+  &#x3C;wa-relative-time id="relative-time">&#x3C;/wa-relative-time>
+&#x3C;/div>
 </code></pre>
 <p>Add the following rule in <code>styles.css</code> so the <code>wa-relative-time</code> component
 is not rendered until a date is entered:</p>
@@ -565,16 +567,16 @@ function showRelativeTime(dateString) {
 the <code>window.onload</code> callback function:</p>
 <pre><code class="language-js">const dateInput = document.getElementById('date-input');
 relativeTime = document.getElementById('relative-time');
-dateInput.addEventListener('change', event =&gt; {
+dateInput.addEventListener('change', event => {
   showRelativeTime(event.target.value);
 });
 </code></pre>
 <p>Click the calendar icon in the date input.
 Select the day after today.
-Verify that the text &quot;tomorrow&quot; appears after the date input.
+Verify that the text “tomorrow” appears after the date input.
 Select other dates and verify that the correct relative date appears.</p>
-<h3 id="wa-button%2C-wa-badge%2C-wa-switch" tabindex="-1">wa-button, wa-badge, wa-switch</h3>
-<p>Let's add a button users can click to see
+<h3 id="wa-button-wa-badge-wa-switch">wa-button, wa-badge, wa-switch</h3>
+<p>Let’s add a button users can click to see
 a list of messages that have been received.
 When unread messages are available,
 the button will have a badge on its upper-right corner
@@ -582,13 +584,13 @@ that shows the number of unread messages.
 There will also be a switch that toggles whether the badge is shown.</p>
 <img alt="Web Awesome button and switch" src="/blog/assets/web-awesome-button-and-switch.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element.</p>
-<pre><code class="language-html">&lt;div class=&quot;wa-align-items-center wa-gap-xl&quot;&gt;
-  &lt;wa-button id=&quot;view-button&quot; disabled size=&quot;small&quot;&gt;
+<pre><code class="language-html">&#x3C;div class="wa-align-items-center wa-gap-xl">
+  &#x3C;wa-button id="view-button" disabled size="small">
     View Messages
-    &lt;wa-badge attention=&quot;pulse&quot; variant=&quot;danger&quot; pill&gt;&lt;/wa-badge&gt;
-  &lt;/wa-button&gt;
-  &lt;wa-switch id=&quot;badge-switch&quot; checked&gt;Show Badge&lt;/wa-switch&gt;
-&lt;/div&gt;
+    &#x3C;wa-badge attention="pulse" variant="danger" pill>&#x3C;/wa-badge>
+  &#x3C;/wa-button>
+  &#x3C;wa-switch id="badge-switch" checked>Show Badge&#x3C;/wa-switch>
+&#x3C;/div>
 </code></pre>
 <p>Add the following in <code>styles.css</code> to improve the <code>wa-switch</code> styling:</p>
 <pre><code class="language-css">#badge-switch {
@@ -603,9 +605,9 @@ let viewButton;
 
 function updateBadge() {
   buttonBadge.textContent = messages.length;
-  const haveMessages = messages.length &gt; 0;
+  const haveMessages = messages.length > 0;
   const checked = badgeSwitch.hasAttribute('checked');
-  buttonBadge.style.display = checked &amp;&amp; haveMessages ? 'flex' : 'none';
+  buttonBadge.style.display = checked &#x26;&#x26; haveMessages ? 'flex' : 'none';
   viewButton.toggleAttribute('disabled', !haveMessages);
 }
 </code></pre>
@@ -615,19 +617,19 @@ the <code>window.onload</code> callback function:</p>
 buttonBadge = viewButton.querySelector('wa-badge');
 badgeSwitch = document.getElementById('badge-switch');
 
-badgeSwitch.addEventListener('change', () =&gt; {
-  // Keep &quot;checked&quot; attribute in sync with state.
+badgeSwitch.addEventListener('change', () => {
+  // Keep "checked" attribute in sync with state.
   badgeSwitch.toggleAttribute('checked');
   updateBadge();
 });
 
 updateBadge();
 </code></pre>
-<p>The &quot;View Messages&quot; button and the &quot;Show Badge&quot; switch appear now,
-but we haven't yet added code to retrieve messages.
+<p>The “View Messages” button and the “Show Badge” switch appear now,
+but we haven’t yet added code to retrieve messages.
 The badge over the button will not appear until messages are received.</p>
-<h3 id="retrieving-messages" tabindex="-1">Retrieving Messages</h3>
-<p>We'll use a free public API get a new, random message every two seconds.</p>
+<h3 id="retrieving-messages">Retrieving Messages</h3>
+<p>We’ll use a free public API get a new, random message every two seconds.</p>
 <p>Add the following in <code>script.js</code> before the call to <code>window.onload</code>:</p>
 <pre><code class="language-js">const MAX_MESSAGES = 20;
 
@@ -640,27 +642,27 @@ async function getMessage() {
 <p>Add the following in <code>script.js</code> at the end of
 the <code>window.onload</code> callback function:</p>
 <pre><code class="language-js">// Generate up to MAX_MESSAGES.
-setInterval(async () =&gt; {
-  if (messages.length &lt; MAX_MESSAGES) {
+setInterval(async () => {
+  if (messages.length &#x3C; MAX_MESSAGES) {
     messages.push((await getMessage()) + '.');
     updateBadge();
   }
 }, 2000);
 </code></pre>
-<p>Now we see the badge appear on the &quot;View Messages&quot; button.
+<p>Now we see the badge appear on the “View Messages” button.
 The number increments every time a new message is received.
-But clicking the button doesn't yet display the messages.</p>
-<h3 id="wa-dialog" tabindex="-1">wa-dialog</h3>
-<p>Let's add a dialog that displays the messages
-when the &quot;View Messages&quot; button is clicked.</p>
+But clicking the button doesn’t yet display the messages.</p>
+<h3 id="wa-dialog">wa-dialog</h3>
+<p>Let’s add a dialog that displays the messages
+when the “View Messages” button is clicked.</p>
 <img alt="Web Awesome dialog" src="/blog/assets/web-awesome-dialog.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element.</p>
-<pre><code class="language-html">&lt;wa-dialog id=&quot;message-dialog&quot; label=&quot;Messages&quot; light-dismiss&gt;
-  &lt;div&gt;&lt;/div&gt;
-  &lt;wa-button data-dialog=&quot;close&quot; slot=&quot;footer&quot; variant=&quot;brand&quot;&gt;
+<pre><code class="language-html">&#x3C;wa-dialog id="message-dialog" label="Messages" light-dismiss>
+  &#x3C;div>&#x3C;/div>
+  &#x3C;wa-button data-dialog="close" slot="footer" variant="brand">
     Close
-  &lt;/wa-button&gt;
-&lt;/wa-dialog&gt;
+  &#x3C;/wa-button>
+&#x3C;/wa-dialog>
 </code></pre>
 <p>Add the following in <code>styles.css</code> to so
 the dialog close button never touches the last message:</p>
@@ -672,9 +674,9 @@ the dialog close button never touches the last message:</p>
 <pre><code class="language-js">let messageDialog;
 
 function openContainer(container) {
-  const items = messages.map(message =&gt; `&lt;li&gt;${message}&lt;/li&gt;`);
+  const items = messages.map(message => `&#x3C;li>${message}&#x3C;/li>`);
   const div = container.querySelector('div');
-  div.innerHTML = `&lt;ol&gt;${items.join('')}&lt;/ol&gt;`;
+  div.innerHTML = `&#x3C;ol>${items.join('')}&#x3C;/ol>`;
   messages = [];
   updateBadge();
   container.open = true;
@@ -683,30 +685,30 @@ function openContainer(container) {
 <p>Add the following in <code>script.js</code> at the end of
 the <code>window.onload</code> callback function:</p>
 <pre><code class="language-js">messageDialog = document.getElementById('message-dialog');
-viewButton.addEventListener('click', () =&gt; openContainer(messageDialog));
+viewButton.addEventListener('click', () => openContainer(messageDialog));
 </code></pre>
 <p>Wait for the badge to increment a few times
-and then click the &quot;View Messages&quot; button.
+and then click the “View Messages” button.
 A dialog will open that displays the messages.
 The message array is cleared since those messages have now been read,
 and the badge count returns to zero.
 The badge disappears until the next message is received.</p>
 <p>When there are more messages than fit in the dialog,
 it automatically gains a scrollbar for viewing all the messages.</p>
-<h3 id="wa-drawer" tabindex="-1">wa-drawer</h3>
-<p>Let's also add support for displaying the messages in a drawer.</p>
+<h3 id="wa-drawer">wa-drawer</h3>
+<p>Let’s also add support for displaying the messages in a drawer.</p>
 <img alt="Web Awesome drawer" src="/blog/assets/web-awesome-drawer.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element.</p>
-<pre><code class="language-html">&lt;div&gt;
-  &lt;wa-button id=&quot;drawer-button&quot; disabled size=&quot;small&quot;&gt;Open Drawer&lt;/wa-button&gt;
-&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div>
+  &#x3C;wa-button id="drawer-button" disabled size="small">Open Drawer&#x3C;/wa-button>
+&#x3C;/div>
 
-&lt;wa-drawer id=&quot;message-drawer&quot; label=&quot;Messages&quot; placement=&quot;bottom&quot;&gt;
-  &lt;div&gt;&lt;/div&gt;
-  &lt;wa-button data-drawer=&quot;close&quot; slot=&quot;footer&quot; variant=&quot;brand&quot;&gt;
+&#x3C;wa-drawer id="message-drawer" label="Messages" placement="bottom">
+  &#x3C;div>&#x3C;/div>
+  &#x3C;wa-button data-drawer="close" slot="footer" variant="brand">
     Close
-  &lt;/wa-button&gt;
-&lt;/wa-drawer&gt;
+  &#x3C;/wa-button>
+&#x3C;/wa-drawer>
 </code></pre>
 <p>Add the following in <code>styles.css</code> to so
 the drawer close button never touches the last message:</p>
@@ -727,23 +729,23 @@ the <code>window.onload</code> callback function:</p>
 drawerButton = document.getElementById('drawer-button');
 
 messageDrawer = document.getElementById('message-drawer');
-drawerButton.addEventListener('click', () =&gt; openContainer(messageDrawer));
+drawerButton.addEventListener('click', () => openContainer(messageDrawer));
 </code></pre>
 <p>Wait for the badge to increment a few times
-and then click the &quot;Open Drawer&quot; button.
+and then click the “Open Drawer” button.
 A drawer will open from the bottom of the window that displays the messages.
 Like with the dialog, the message array is be cleared
 since those messages have now been read.</p>
 <p>When there are more messages than can be fit in the drawer,
 it automatically gains a scrollbar for viewing all the messages.</p>
-<h3 id="wa-progress-bar-and-wa-progress-ring" tabindex="-1">wa-progress-bar and wa-progress-ring</h3>
-<p>Let's add components that indicate the progress in receiving messages.
+<h3 id="wa-progress-bar-and-wa-progress-ring">wa-progress-bar and wa-progress-ring</h3>
+<p>Let’s add components that indicate the progress in receiving messages.
 We can use a progress bar or a progress ring.
 Both are included for demonstration purposes.</p>
 <img alt="Web Awesome progress bar and ring" src="/blog/assets/web-awesome-progress.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element.</p>
-<pre><code class="language-html">&lt;wa-progress-bar id=&quot;progress-bar&quot; label=&quot;Message Progress&quot;&gt;&lt;/wa-progress-bar&gt;
-&lt;wa-progress-ring id=&quot;progress-ring&quot;&gt;&lt;/wa-progress-ring&gt;
+<pre><code class="language-html">&#x3C;wa-progress-bar id="progress-bar" label="Message Progress">&#x3C;/wa-progress-bar>
+&#x3C;wa-progress-ring id="progress-ring">&#x3C;/wa-progress-ring>
 </code></pre>
 <p>Add the following in <code>styles.css</code> to customize the
 colors and thicknesses of the progress indicators:</p>
@@ -780,24 +782,24 @@ progressRing = document.getElementById('progress-ring');
 </code></pre>
 <p>Refresh the page and notice how both the progress bar and progress ring
 show the percent complete toward receiving <code>MAX_MESSAGES</code>.</p>
-<h3 id="wa-rating" tabindex="-1">wa-rating</h3>
-<p>Let's add rating hearts that users can click
+<h3 id="wa-rating">wa-rating</h3>
+<p>Let’s add rating hearts that users can click
 to express how much they like Web Awesome.</p>
 <img alt="Web Awesome rating" src="/blog/assets/web-awesome-rating.png?v=1.1.1">
 <p>Add the following in <code>index.html</code> at the bottom of the <code>body</code> element.</p>
-<pre><code class="language-html">&lt;div&gt;
-  &lt;div&gt;Click a star to indicate how much you like Web Awesome.&lt;/div&gt;
-  &lt;div class=&quot;row&quot;&gt;
-    &lt;wa-rating
-      id=&quot;rating&quot;
-      label=&quot;Rating&quot;
-      precision=&quot;0.5&quot;
-      max=&quot;10&quot;
-      size=&quot;large&quot;
-    &gt;&lt;/wa-rating&gt;
-    &lt;span&gt;0&lt;/span&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div>
+  &#x3C;div>Click a star to indicate how much you like Web Awesome.&#x3C;/div>
+  &#x3C;div class="row">
+    &#x3C;wa-rating
+      id="rating"
+      label="Rating"
+      precision="0.5"
+      max="10"
+      size="large"
+    >&#x3C;/wa-rating>
+    &#x3C;span>0&#x3C;/span>
+  &#x3C;/div>
+&#x3C;/div>
 </code></pre>
 <p>Add the following in <code>styles.css</code>:</p>
 <pre><code class="language-css">#rating {
@@ -816,8 +818,8 @@ to express how much they like Web Awesome.</p>
 <pre><code class="language-js">function configureRating() {
   // This causes the wa-rating component to use hearts instead of stars.
   const rating = document.getElementById('rating');
-  rating.getSymbol = () =&gt; '&lt;wa-icon name=&quot;heart&quot; variant=&quot;solid&quot;&gt;&lt;/wa-icon&gt;';
-  rating.addEventListener('change', () =&gt; {
+  rating.getSymbol = () => '&#x3C;wa-icon name="heart" variant="solid">&#x3C;/wa-icon>';
+  rating.addEventListener('change', () => {
     const span = rating.nextElementSibling;
     span.textContent = rating.value;
   });
@@ -828,17 +830,18 @@ the <code>window.onload</code> callback function:</p>
 <pre><code class="language-js">configureRating();
 </code></pre>
 <p>A row of ten pink hearts appears now,
-followed by &quot;0&quot; to indicate that none have been clicked.
+followed by “0” to indicate that none have been clicked.
 Try clicking some of the hearts.
 Clicking the left side of a heart selects a half value,
 whereas clicking the right side selects a whole value.</p>
-<h2 id="other-libraries" tabindex="-1">Other Libraries</h2>
-<p>&quot;Open Web Components&quot; maintains a site that lists web component libraries.
-See <a href="https://open-wc.org/guides/community/component-libraries/">Community: Component Libraries</a>.</p>
-<h2 id="summary" tabindex="-1">Summary</h2>
+<h2 id="other-libraries">Other Libraries</h2>
+<p>“Open Web Components” maintains a site that lists web component libraries.
+See <a href="https://open-wc.org/guides/community/component-libraries/" rel="noopener" target="_blank">Community: Component Libraries</a>.</p>
+<h2 id="summary">Summary</h2>
 <p>Web Awesome provides a large collection of
 well implemented, highly configurable web components,
 most of which are free to use.
 Using these components can greatly jump start projects,
-removing the need for teams to implement similar components.</p>
-</article> </body></html>
+removing the need for teams to implement similar components.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

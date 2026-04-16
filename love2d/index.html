@@ -1,28 +1,30 @@
-<!DOCTYPE html><html lang="en"> <head><title>LÖVE</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>LÖVE</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#documentation">Documentation</a></li><li><a href="#installing">Installing</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#running">Running</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#auto-restarts">Auto-Restarts</a></li><li><a href="#colors">Colors</a></li><li><a href="#fonts">Fonts</a></li><li><a href="#images">Images</a></li><li><a href="#sounds">Sounds</a></li><li><a href="#graphics">Graphics</a></li><li><a href="#frame-rate">Frame Rate</a></li><li><a href="#cursor">Cursor</a></li><li><a href="#keys">Keys</a></li><li><a href="#mouse-clicks">Mouse Clicks</a></li><li><a href="#mouse-cursor">Mouse Cursor</a></li><li><a href="#background-scrolling">Background Scrolling</a></li><li><a href="#calling-functions-later">Calling Functions Later</a></li><li><a href="#tweening">Tweening</a></li><li><a href="#physics">Physics</a></li><li><a href="#deploying">Deploying</a></li><ul><li><a href="#web">Web</a></li><li><a href="#ios">iOS</a></li></ul><li><a href="#optimizations">Optimizations</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>LÖVE</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>LÖVE</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#documentation">Documentation</a></li><li><a href="#installing">Installing</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#running">Running</a></li><li><a href="#bundling">Bundling</a></li><li><a href="#auto-restarts">Auto-Restarts</a></li><li><a href="#colors">Colors</a></li><li><a href="#fonts">Fonts</a></li><li><a href="#images">Images</a></li><li><a href="#sounds">Sounds</a></li><li><a href="#graphics">Graphics</a></li><li><a href="#frame-rate">Frame Rate</a></li><li><a href="#cursor">Cursor</a></li><li><a href="#keys">Keys</a></li><li><a href="#mouse-clicks">Mouse Clicks</a></li><li><a href="#mouse-cursor">Mouse Cursor</a></li><li><a href="#background-scrolling">Background Scrolling</a></li><li><a href="#calling-functions-later">Calling Functions Later</a></li><li><a href="#tweening">Tweening</a></li><li><a href="#physics">Physics</a></li><li><a href="#deploying">Deploying</a></li><ul><li><a href="#web">Web</a></li><li><a href="#ios">iOS</a></li></ul><li><a href="#optimizations">Optimizations</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://love2d.org/?v=1.1.1" rel="noopener" target="_blank">LÖVE</a> is
-&quot;an <em>awesome</em> framework you can use to make 2D games in Lua.
-It's free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS.&quot;</p>
+“an <em>awesome</em> framework you can use to make 2D games in Lua.
+It’s free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS.”</p>
 <p>LÖVE can be downloaded from the previous link.</p>
 <p>LÖVE use LuaJIT which mostly only supports Lua 5.1.
 It includes some Lua 5.2 and 5.3 features.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li>
-<p><a href="https://github.com/love2d-community/awesome-love2d?v=1.1.1" rel="noopener" target="_blank">Awesome Löve</a> - &quot;A categorized community-driven collection of
-high-quality, awesome LÖVE libraries, projects, and resources.&quot;</p>
+<p><a href="https://github.com/love2d-community/awesome-love2d?v=1.1.1" rel="noopener" target="_blank">Awesome Löve</a> - “A categorized community-driven collection of
+high-quality, awesome LÖVE libraries, projects, and resources.”</p>
 </li>
 <li>
 <p><a href="https://discord.gg/r5JjuFU8?v=1.1.1" rel="noopener" target="_blank">LÖVE Game Framework Discord Channel</a></p>
 </li>
 <li>
-<p><a href="https://www.youtube.com/watch?v=3k4CMAaNCuk&amp;t=3309s&amp;v=1.1.1" rel="noopener" target="_blank">Falling in LÖVE with Lua</a></p>
+<p><a href="https://www.youtube.com/watch?v=3k4CMAaNCuk&#x26;t=3309s&#x26;v=1.1.1" rel="noopener" target="_blank">Falling in LÖVE with Lua</a></p>
 <p>This is a great YouTube video on the LÖVE framework.
 Colton Ogden walks through the beginnings of writing a Super Mario game.
 The source code is available at <a href="https://github.com/coltonoscopy/cs502019games-track/tree/master/mario?v=1.1.1" rel="noopener" target="_blank">cs502019games-track</a>.</p>
 </li>
 <li>
 <p><a href="https://www.sheepolution.com/learn?v=1.1.1" rel="noopener" target="_blank">Sheepolution</a></p>
-<p>&quot;Learn how to make games with LÖVE.&quot;
+<p>“Learn how to make games with LÖVE.”
 This provides a series of articles and videos.</p>
 </li>
 <li>
@@ -37,29 +39,25 @@ For example, it provides code for generating gradients
 and testing whether a point is in a shape.</p>
 </li>
 </ul>
-<h2 id="documentation" tabindex="-1">Documentation</h2>
+<h2 id="documentation">Documentation</h2>
 <p>The LÖVE home page is shown below:</p>
-<p><img alt="LÖVE Home Page" style="width: 100%"
-  src="/blog/assets/love2d-home-page.png?v=1.1.1"
-  title="LÖVE Home Page"></p>
-<p>Clicking the &quot;Wiki&quot; button in the upper-right navigates to the following page:</p>
-<p><img alt="LÖVE Wiki" style="width: 100%"
-    src="/blog/assets/love2d-wiki.png?v=1.1.1"
-    title="LÖVE Wiki"></p>
+<p><img alt="LÖVE Home Page" style="width: 100%" src="/blog/assets/love2d-home-page.png?v=1.1.1" title="LÖVE Home Page"></p>
+<p>Clicking the “Wiki” button in the upper-right navigates to the following page:</p>
+<p><img alt="LÖVE Wiki" style="width: 100%" src="/blog/assets/love2d-wiki.png?v=1.1.1" title="LÖVE Wiki"></p>
 <p>Click a module name in the left nav to see documentation
 on all of its functions.</p>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>For macOS:</p>
 <ul>
-<li>Click the &quot;64-bit zipped&quot; link under &quot;macOS&quot; to download <code>love.app</code>.</li>
-<li>Drag this file into the &quot;Applications&quot; directory.</li>
+<li>Click the “64-bit zipped” link under “macOS” to download <code>love.app</code>.</li>
+<li>Drag this file into the “Applications” directory.</li>
 <li>Double-click <code>love.app</code> to launch the app.
 This will fail the first time with the message
-&quot;love.app cannot be opened because the developer cannot be verified&quot;.
-To fix this, open the Settings app, select &quot;Privacy &amp; Security&quot;,
-scroll down to &quot;love.app was blocked ...&quot; and click the &quot;Open Anyway&quot; button.</li>
+“love.app cannot be opened because the developer cannot be verified”.
+To fix this, open the Settings app, select “Privacy &#x26; Security”,
+scroll down to “love.app was blocked …” and click the “Open Anyway” button.</li>
 </ul>
-<h2 id="getting-started" tabindex="-1">Getting Started</h2>
+<h2 id="getting-started">Getting Started</h2>
 <p>To creating a new LÖVE app:</p>
 <ul>
 <li>
@@ -77,13 +75,13 @@ scroll down to &quot;love.app was blocked ...&quot; and click the &quot;Open Any
 <li>
 <p>Add content like the following to configure the app:</p>
 <pre><code class="language-lua">-- This is not required, but prevents warnings in code editors
--- about &quot;love&quot; being undefined.
-local love = require &quot;love&quot;
+-- about "love" being undefined.
+local love = require "love"
 
 function love.conf(t)
   t.modules.joystick = false -- when not supporting joystick use
-  t.title = &quot;Monkey Nim&quot;
-  t.version = &quot;11.4&quot;    -- version of Love2D
+  t.title = "Monkey Nim"
+  t.version = "11.4"    -- version of Love2D
   -- When t.window.width and t.window.height are not set,
   -- love.graphics.getDimensions() returns the screen width and height.
   -- t.window.width = 393 -- iPhone 14 Pro width
@@ -112,20 +110,18 @@ with the refresh rate of the monitor.
 It can be set in the <code>conf.lua</code> file with <code>t.window.vsync = 1</code>.
 Alternatively it can be passed as an argument
 to the <code>love.graphics.setMode</code> function.</p>
-<p>The parameter <code>dt</code> in the <code>love.update</code> function is short for &quot;delta time&quot;.
+<p>The parameter <code>dt</code> in the <code>love.update</code> function is short for “delta time”.
 This is used to make game updates frame rate independent.
 It is a floating point number that indicates
 the number of seconds requires to display each frame.
 This value can vary among devices.
 For example, when <code>dt</code> is <code>0.1</code>, the device displays 10 frames per second.</p>
-<h2 id="running" tabindex="-1">Running</h2>
+<h2 id="running">Running</h2>
 <p>The initial source file must be named <code>main.lua</code>.
 When the LÖVE app is run without this file,
 a window matching the screenshot below is displayed.</p>
-<p><img alt="LÖVE No Game" style="width: 80%"
-    src="/blog/assets/love2d-no-game.png?v=1.1.1"
-    title="LÖVE No Game"></p>
-<p>Note that the kite tail on the balloon says &quot;NO GAME&quot;.</p>
+<p><img alt="LÖVE No Game" style="width: 80%" src="/blog/assets/love2d-no-game.png?v=1.1.1" title="LÖVE No Game"></p>
+<p>Note that the kite tail on the balloon says “NO GAME”.</p>
 <p>There are many ways to run a LÖVE app:</p>
 <ul>
 <li>
@@ -133,7 +129,7 @@ a window matching the screenshot below is displayed.</p>
 <ol>
 <li>Add the following in <code>~/.zshrc</code>:</li>
 </ol>
-<pre><code class="language-bash">alias love=&quot;/Applications/love.app/Contents/MacOS/love&quot;
+<pre><code class="language-bash">alias love="/Applications/love.app/Contents/MacOS/love"
 </code></pre>
 <ol>
 <li>Open a new terminal session.</li>
@@ -153,16 +149,16 @@ In macOS, drag from the Finder.</p>
 <p>Use VS Code.</p>
 <ol>
 <li>Start VS Code and open the project directory.</li>
-<li>Install the extension &quot;Love2D Support&quot; from Pixelbyte Studios.</li>
-<li>Click the gear icon and select &quot;Extension Settings&quot;.</li>
-<li>Change &quot;Pixelbyte &gt; love2d: Path&quot; to
-&quot;/Applications/love.app/Contents/MacOS/love&quot;.</li>
+<li>Install the extension “Love2D Support” from Pixelbyte Studios.</li>
+<li>Click the gear icon and select “Extension Settings”.</li>
+<li>Change “Pixelbyte > love2d: Path” to
+“/Applications/love.app/Contents/MacOS/love”.</li>
 <li>Open the <code>main.lua</code> file in an editor tab.</li>
 <li>Press cmd-l to run the game.</li>
 </ol>
 </li>
 </ul>
-<h2 id="bundling" tabindex="-1">Bundling</h2>
+<h2 id="bundling">Bundling</h2>
 <p>The source code and asset files (fonts, sounds, and images) can be
 bundled into a single file that can be double-clicked to run the app.
 To do this, create a zip file containing all the required files
@@ -184,7 +180,7 @@ popd
 <p>Make the <code>bundle</code> script executable by entering <code>chmod a+x bundle</code>.</p>
 <p>Enter <code>./bundle</code> to bundle the app into a <code>.love</code> file.
 Double-click this file to run the app locally.</p>
-<h2 id="auto-restarts" tabindex="-1">Auto-Restarts</h2>
+<h2 id="auto-restarts">Auto-Restarts</h2>
 <p>It is convenient to configure the app to restart
 any time a file within the project is modified.
 The Lua module <a href="https://github.com/rxi/lurker?v=1.1.1" rel="noopener" target="_blank">lurker</a>
@@ -199,8 +195,8 @@ is perfect for this!</p>
 </li>
 <li>
 <p>Add the following lines near the top of <code>main.lua</code>:</p>
-<pre><code class="language-lua">local lurker = require &quot;lurker&quot;
-lurker.postswap = function() love.event.quit &quot;restart&quot; end
+<pre><code class="language-lua">local lurker = require "lurker"
+lurker.postswap = function() love.event.quit "restart" end
 </code></pre>
 </li>
 <li>
@@ -213,7 +209,7 @@ lurker.postswap = function() love.event.quit &quot;restart&quot; end
 and restart the app when a change is detected.
 One issue with this is that every time the game is restarted,
 focus will move from the code editor to the game.</p>
-<h2 id="colors" tabindex="-1">Colors</h2>
+<h2 id="colors">Colors</h2>
 <p>The current color can be set using
 <code>love.graphics.setColor(red, green, blue, alpha)</code>
 where all the arguments are floating point numbers from 0 to 1.
@@ -252,11 +248,11 @@ use <code>love.graphics.setColor(colors.yellow)</code>.</p>
 
   -- This makes sure the color isn't too dark.
   local total = r + g + b
-  return total &gt;= 1 and { r, g, b } or randomColor()
+  return total >= 1 and { r, g, b } or randomColor()
 end
 </code></pre>
-<h2 id="fonts" tabindex="-1">Fonts</h2>
-<p>LÖVE uses the font &quot;Bitstream Vera Sans&quot; by default.
+<h2 id="fonts">Fonts</h2>
+<p>LÖVE uses the font “Bitstream Vera Sans” by default.
 Any font types supported by <a href="https://freetype.org/?v=1.1.1" rel="noopener" target="_blank">loFreeType 2</a> can be also be used.
 This includes TrueType, WOFF, and many others.</p>
 <p>To create a font object, use
@@ -269,13 +265,13 @@ The latter differs in that it provides word wrapping and alignment.</p>
 <p>Consider creating all the <code>Font</code> objects that the app will need
 on startup and holding them in a table. For example:</p>
 <pre><code class="language-lua">local fonts = {
-  default = g.newFont(&quot;Pangolin-Regular.ttf&quot;, 18),
-  button = g.newFont(&quot;Pangolin-Regular.ttf&quot;, 30)
+  default = g.newFont("Pangolin-Regular.ttf", 18),
+  button = g.newFont("Pangolin-Regular.ttf", 30)
 }
 </code></pre>
 <p>To use one of these fonts later,
 use <code>love.graphics.setFont(fonts.button, x, y)</code>.</p>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>LÖVE supports the image formats jpg, png, bmp, and many others.
 It does not support gif files</p>
 <p>To create an <code>Image</code> object:</p>
@@ -294,14 +290,14 @@ on startup and holding them in a table. For example:</p>
 </code></pre>
 <p>To draw one of these images later,
 use <code>love.graphics.draw(images.monkey, x, y)</code>.</p>
-<h2 id="sounds" tabindex="-1">Sounds</h2>
+<h2 id="sounds">Sounds</h2>
 <p>LÖVE supports the sound formats mp3, ogg, wav, and many others.</p>
 <p>To create a sound, specify its file path and source type as follows:</p>
-<pre><code class="language-lua">local mySound = love.audio.newSource(&quot;sounds/my-sound.mp3&quot;, &quot;static&quot;)
+<pre><code class="language-lua">local mySound = love.audio.newSource("sounds/my-sound.mp3", "static")
 </code></pre>
 <p>The last argument is the source type.
-&quot;static&quot; is preferred for short sounds.
-&quot;stream&quot; is the default and is preferred for longer sounds
+“static” is preferred for short sounds.
+“stream” is the default and is preferred for longer sounds
 because it avoids holding the entire sound in memory.</p>
 <p>To play a sound, use <code>mySound:play()</code>.</p>
 <p>To cause a sound to loop continuously,
@@ -312,9 +308,9 @@ To resume it later, use <code>mySound:resume()</code>.</p>
 <p>Consider creating all the sound <code>Source</code> objects that the app will need
 on startup and holding them in a table. For example:</p>
 <pre><code class="language-lua">local sounds = {
-  success = love.audio.newSource(&quot;sounds/success.mp3&quot;, &quot;static&quot;),
-  failure = love.audio.newSource(&quot;sounds/failure.mp3&quot;, &quot;static&quot;),
-  song = love.audio.newSource(&quot;sounds/song.mp3&quot;)
+  success = love.audio.newSource("sounds/success.mp3", "static"),
+  failure = love.audio.newSource("sounds/failure.mp3", "static"),
+  song = love.audio.newSource("sounds/song.mp3")
 }
 </code></pre>
 <p>To play one of these sounds later, use <code>sounds.success:play()</code>.</p>
@@ -323,31 +319,31 @@ clone it and play the clone. For example:</p>
 <pre><code class="language-lua">local clone = sounds.failure:clone()
 clone:play()
 </code></pre>
-<h2 id="graphics" tabindex="-1">Graphics</h2>
+<h2 id="graphics">Graphics</h2>
 <p>The <code>love.graphics</code> module provides many functions for drawing.
 To simplify calling functions from the submodules of the <code>love</code> module,
 create and use variables like these to refer to the functions:</p>
 <pre><code class="language-lua">local g = love.graphics
 local p = love.physics
 </code></pre>
-<h2 id="frame-rate" tabindex="-1">Frame Rate</h2>
+<h2 id="frame-rate">Frame Rate</h2>
 <p>To display the frames per second being rendered
 add code like the following in the <code>love.draw</code> function:</p>
-<pre><code class="language-lua">love.graphics.print(&quot;FPS: &quot; .. love.timer.getFPS(), 10, 5)
+<pre><code class="language-lua">love.graphics.print("FPS: " .. love.timer.getFPS(), 10, 5)
 </code></pre>
-<h2 id="cursor" tabindex="-1">Cursor</h2>
+<h2 id="cursor">Cursor</h2>
 <p>The following code draws a circle at the cursor position
 when placed in the <code>love.draw</code> function:</p>
 <pre><code class="language-lua">love.graphics.setColor(colors.yellow)
-love.graphics.circle(&quot;fill&quot;, x, y, 10) ]]
+love.graphics.circle("fill", x, y, 10) ]]
 </code></pre>
-<h2 id="keys" tabindex="-1">Keys</h2>
+<h2 id="keys">Keys</h2>
 <p>There are multiple ways to process key presses.</p>
 <p>One way is to write the function <code>love.keypressed</code>.
 For example, the following code causes the app
 to be restarted when the escape key is pressed.</p>
 <pre><code class="language-lua">function love.keypressed(k)
-  if k == &quot;escape&quot; then love.event.quit(&quot;restart&quot;) end
+  if k == "escape" then love.event.quit("restart") end
 end
 </code></pre>
 <p>Another way is to use the <code>love.keyboard.isDown</code> function.
@@ -356,10 +352,10 @@ and returns a boolean indicating if any of them are down.
 A table that maps key names to functions that should be called
 when they are pressed can be defined as follows:</p>
 <pre><code class="language-lua">local keyMap = {
-  left = function() dec(monkeyPosition, &quot;x&quot;) end,
-  right = function() inc(monkeyPosition, &quot;x&quot;) end,
-  up = function() dec(monkeyPosition, &quot;y&quot;) end,
-  down = function() inc(monkeyPosition, &quot;y&quot;) end
+  left = function() dec(monkeyPosition, "x") end,
+  right = function() inc(monkeyPosition, "x") end,
+  up = function() dec(monkeyPosition, "y") end,
+  down = function() inc(monkeyPosition, "y") end
 }
 </code></pre>
 <p>Then add code like the following in the <code>love.update</code> function:</p>
@@ -368,7 +364,7 @@ when they are pressed can be defined as follows:</p>
     if love.keyboard.isDown(key) then fn() end
   end
 </code></pre>
-<h2 id="mouse-clicks" tabindex="-1">Mouse Clicks</h2>
+<h2 id="mouse-clicks">Mouse Clicks</h2>
 <p>There are several ways to process mouse clicks.</p>
 <p>One way is to write the function <code>love.mousepressed</code>.
 For example, the following code causes the app
@@ -386,7 +382,7 @@ end
 <p>Another may is to use the <code>love.mouse.isDown</code> function.
 This takes arguments that are the button numbers to check
 and returns a boolean indicating if any of them are down.</p>
-<h2 id="mouse-cursor" tabindex="-1">Mouse Cursor</h2>
+<h2 id="mouse-cursor">Mouse Cursor</h2>
 <p>The following code hides the default mouse cursor
 and display an image in its place.</p>
 <pre><code class="language-lua">love.mouse.setVisible(false)
@@ -396,7 +392,7 @@ local h = monkeyImage:getHeight()
 local w = monkeyImage:getWidth()
 g.draw(monkeyImage, x - w/2, y - h/2)
 </code></pre>
-<h2 id="background-scrolling" tabindex="-1">Background Scrolling</h2>
+<h2 id="background-scrolling">Background Scrolling</h2>
 <p>A single image can be scrolled across the background in any direction.
 It is best if the image being scrolled is pre-scaled
 so one of its dimensions matches the corresponding window dimension.
@@ -405,12 +401,12 @@ the image height should match the window height.
 It order to achieve seamless scrolling,
 the opposite edges should match.</p>
 <p>For example:</p>
-<pre><code class="language-lua">local love = require &quot;love&quot;
+<pre><code class="language-lua">local love = require "love"
 
 local backgroundPosition
 local backgroundSpeed = 100
 local g = love.graphics
-local image = love.graphics.newImage(&quot;background.jpg&quot;)
+local image = love.graphics.newImage("background.jpg")
 
 -- When t.window.width and t.window.height are not set,
 -- love.graphics.getDimensions() returns the screen width and height.
@@ -439,15 +435,15 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-    if key == &quot;escape&quot; then
+    if key == "escape" then
         love.event.quit()
     end
 end
 </code></pre>
-<h2 id="calling-functions-later" tabindex="-1">Calling Functions Later</h2>
+<h2 id="calling-functions-later">Calling Functions Later</h2>
 <p>The following code can be used to schedule functions
 to be called later.</p>
-<pre><code class="language-lua">local socket = require &quot;socket&quot;
+<pre><code class="language-lua">local socket = require "socket"
 
 local laters = {}
 
@@ -462,14 +458,14 @@ end
 -- Call this near the beginning of love.update.
 function processLaters()
   for fn, time in pairs(laters) do
-    if time &lt;= os.time() then
+    if time &#x3C;= os.time() then
       laters[fn] = nil
       fn()
     end
   end
 end
 </code></pre>
-<h2 id="tweening" tabindex="-1">Tweening</h2>
+<h2 id="tweening">Tweening</h2>
 <p>Tweening is the process of gradually changing a value over time.
 It is often used to implement animations.
 The values changed can include the coordinates of an item on the screen,
@@ -484,7 +480,7 @@ The text decreases in font size as it drops down the screen
 and bounces when it reaches the bottom.</p>
 <pre><code class="language-lua">-- Describe the subject which is the thing to be tweened.
 -- x and y define the starting location.
-local label = { text = &quot;TWEENING!&quot;, fontSize = 60, x = 100, y = 0, }
+local label = { text = "TWEENING!", fontSize = 60, x = 100, y = 0, }
 
 -- Define the tween.  The arguments are the duration in seconds,
 -- the subject, the target, and the easing function.
@@ -498,25 +494,25 @@ local labelTween = tween.new(
 )
 
 -- Draw the thing being tweened using its current properties
--- in the &quot;love.draw&quot; function.
-love.graphics.setFont(g.newFont(&quot;Pangolin-Regular.ttf&quot;, label.fontSize))
+-- in the "love.draw" function.
+love.graphics.setFont(g.newFont("Pangolin-Regular.ttf", label.fontSize))
 love.graphics.print(label.text, label.x, label.y)
 
 -- Update the properties of the thing being tweened
--- in the &quot;love.update&quot; function.
+-- in the "love.update" function.
 labelTween:update(dt)
 </code></pre>
-<h2 id="physics" tabindex="-1">Physics</h2>
+<h2 id="physics">Physics</h2>
 <p>The <code>love.physics</code> module provides many functions that wrap the functionality
 of <a href="https://box2d.org/?v=1.1.1" rel="noopener" target="_blank">Box2D</a> which is
 a C++-based 2D physics engine.
 Box2D was created by Erin Catto who works at Blizzard Games.
 Box2D is used by many games including Angry Birds.</p>
 <p>For an example project that uses <code>love.physics</code>, see <a href="https://github.com/mvolkmann/lua-examples/tree/main/love/monkey-nim?v=1.1.1" rel="noopener" target="_blank">Monkey Nim</a>.</p>
-<h2 id="deploying" tabindex="-1">Deploying</h2>
+<h2 id="deploying">Deploying</h2>
 <p>LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
 Details can be found at <a href="https://love2d.org/wiki/Game_Distribution?v=1.1.1" rel="noopener" target="_blank">Game Distribution</a>.</p>
-<h3 id="web" tabindex="-1">Web</h3>
+<h3 id="web">Web</h3>
 <p>One way to deploy a LÖVE app to the web is to use <a href="https://github.com/Davidobot/love.js?v=1.1.1" rel="noopener" target="_blank">love.js</a>.
 This uses <a href="https://emscripten.org/?v=1.1.1" rel="noopener" target="_blank">Emscripten</a>
 to compile the C code from Lua and LÖVE to WebAssembly
@@ -552,7 +548,7 @@ const app = express();
 
 app.use(
   express.static('../web', {
-    setHeaders: res =&gt; {
+    setHeaders: res => {
       res.set('Cross-Origin-Opener-Policy', 'same-origin');
       res.set('Cross-Origin-Embedder-Policy', 'require-corp');
     }
@@ -560,7 +556,7 @@ app.use(
 );
 
 const PORT = 1919;
-app.listen(PORT, () =&gt; console.log('browse localhost:' + PORT));
+app.listen(PORT, () => console.log('browse localhost:' + PORT));
 </code></pre>
 </li>
 </ul>
@@ -570,7 +566,7 @@ app.listen(PORT, () =&gt; console.log('browse localhost:' + PORT));
 <li>Browse localhost:1919</li>
 </ul>
 <p>If running the app results in the error
-&quot;Uncaught RangeError: offset is out of bounds&quot;,
+“Uncaught RangeError: offset is out of bounds”,
 try adding the <code>--memory</code> flag to the <code>npx love.js</code> command
 in order to allow it to use more memory.
 The default is 16,777,216 bytes.</p>
@@ -587,50 +583,48 @@ node server.js
 popd
 </code></pre>
 <p>To run this, enter <code>./websrv</code>.</p>
-<h3 id="ios" tabindex="-1">iOS</h3>
-<p>The YouTube video <a href="https://www.youtube.com/watch?v=MsYanwcU42E&amp;list=WL&amp;index=108&amp;t=6s&amp;v=1.1.1" rel="noopener" target="_blank">Build LOVE2D for iOS iPhone, iPad, iPod Touch</a>
+<h3 id="ios">iOS</h3>
+<p>The YouTube video <a href="https://www.youtube.com/watch?v=MsYanwcU42E&#x26;list=WL&#x26;index=108&#x26;t=6s&#x26;v=1.1.1" rel="noopener" target="_blank">Build LOVE2D for iOS iPhone, iPad, iPod Touch</a>
 walks through the steps to deploy a LÖVE app to iOS.
 This must be done in macOS.</p>
 <p>The following steps create a default iOS project and run it:</p>
 <ol>
 <li>If not already installed, install Xcode.</li>
-<li>Download iOS source by clicking the &quot;iOS source&quot; link
+<li>Download iOS source by clicking the “iOS source” link
 in the Download section of the
 <a href="https://love2d.org/?v=1.1.1" rel="noopener" target="_blank">LÖVE</a> home page.
-<img alt="LÖVE iOS Source" style="width: 100%"
- src="/blog/assets/love2d-ios-source.png?v=1.1.1"
- title="LÖVE iOS Source"></li>
+<img alt="LÖVE iOS Source" style="width: 100%" src="/blog/assets/love2d-ios-source.png?v=1.1.1" title="LÖVE iOS Source"></li>
 <li>Double-click the downloaded file to unzip it.</li>
 <li>Move this directory to its desired location and rename it.</li>
 <li>In the Finder, navigate to <code>platform/xcode</code>.</li>
 <li>Double-click the file <code>love.xcodeproj</code> to open it in Xcode.</li>
 <li>Select a simulator device.</li>
 <li>Build and run the app.</li>
-<li>In the simulator, tap &quot;No-game screen&quot;
-to see the default &quot;NO GAME&quot; screen.</li>
+<li>In the simulator, tap “No-game screen”
+to see the default “NO GAME” screen.</li>
 </ol>
 <p>The following steps customize the default project to run your game.</p>
 <ol>
 <li>Enter <code>./bundle</code> to bundle the LÖVE project into a <code>.love</code> file.
-(See the &quot;Bundling&quot; section above.)</li>
+(See the “Bundling” section above.)</li>
 <li>Back in Xcode, select the top-most project navigator item
 to edit the LÖVE project.</li>
-<li>Select the &quot;love.ios&quot; target.</li>
-<li>Select the &quot;General&quot; tab.</li>
-<li>In the &quot;Identity&quot; section, enter a &quot;Display Name&quot;.
-TODO: Why is the displayed app name &quot;love&quot; instead of this value?</li>
-<li>In the &quot;Deployment Info&quot; section under &quot;iPhone Orientation&quot;,
-consider only checking &quot;Portrait&quot;.</li>
-<li>Select the &quot;Signing &amp; Capabilities&quot; tab.</li>
-<li>In the &quot;Team&quot; dropdown, select your development team.</li>
+<li>Select the “love.ios” target.</li>
+<li>Select the “General” tab.</li>
+<li>In the “Identity” section, enter a “Display Name”.
+TODO: Why is the displayed app name “love” instead of this value?</li>
+<li>In the “Deployment Info” section under “iPhone Orientation”,
+consider only checking “Portrait”.</li>
+<li>Select the “Signing &#x26; Capabilities” tab.</li>
+<li>In the “Team” dropdown, select your development team.</li>
 <li>Change the bundle identifier to uniquely identify your project.</li>
-<li>Select the &quot;Build Phases&quot; tab.</li>
-<li>Expand the &quot;Copy Bundle Resources&quot; section.</li>
-<li>Click the &quot;+&quot; button, click the &quot;Add Other...&quot; button,
+<li>Select the “Build Phases” tab.</li>
+<li>Expand the “Copy Bundle Resources” section.</li>
+<li>Click the ”+” button, click the “Add Other…” button,
 and add your <code>.love</code> zip file.</li>
-<li>Check the &quot;Copy items if needed&quot; checkbox.</li>
-<li>Select the &quot;Create folder references&quot; radio button.</li>
-<li>Click the &quot;Finish&quot; button.</li>
+<li>Check the “Copy items if needed” checkbox.</li>
+<li>Select the “Create folder references” radio button.</li>
+<li>Click the “Finish” button.</li>
 </ol>
 <p>To run the app on a real device:</p>
 <ol>
@@ -651,9 +645,10 @@ in the file <code>Images.xcassets</code>.</p>
 <p>After making changes to the Lua code, enter <code>./bundle</code> again
 to create a new <code>.love</code> file and then re-run the iOS project.</p>
 <p>If no sounds play, it is likely because the phone mute switch is on.</p>
-<h2 id="optimizations" tabindex="-1">Optimizations</h2>
+<h2 id="optimizations">Optimizations</h2>
 <p>When comparing the distance between two points to some value,
 compare the square of the distance.
 This removes the need to use the <code>math.sqrt</code> function
-which can hurt game performance.</p>
-</article> </body></html>
+which can hurt game performance.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

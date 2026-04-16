@@ -1,14 +1,16 @@
-<!DOCTYPE html><html lang="en"> <head><title>LaTeX</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>LaTeX</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#pros-and-cons">Pros and Cons</a></li><li><a href="#installing">Installing</a></li><ul><li><a href="#installing-in-macos">Installing in macOS</a></li><li><a href="#installing-in-windows">Installing in Windows</a></li><li><a href="#installing-in-linux">Installing in Linux</a></li></ul><li><a href="#command-line-processing">Command-line Processing</a></li><ul><li><a href="#error-handling">Error Handling</a></li></ul><li><a href="#editors">Editors</a></li><ul><li><a href="#texmaker">TeXmaker</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#overleaf">Overleaf</a></li></ul><li><a href="#syntax">Syntax</a></li><ul><li><a href="#declarations">Declarations</a></li><li><a href="#environments">Environments</a></li><li><a href="#command-groups">Command Groups</a></li></ul><li><a href="#special-characters">Special Characters</a></li><li><a href="#document-classes">Document Classes</a></li><li><a href="#packages">Packages</a></li><ul><li><a href="#popular-packages">Popular Packages</a></li></ul><li><a href="#abstract">Abstract</a></li><li><a href="#sections">Sections</a></li><li><a href="#unicode-characters">Unicode Characters</a></li><li><a href="#portrait-vs.-landscape">Portrait vs. Landscape</a></li><li><a href="#page-styles">Page Styles</a></li><li><a href="#page-numbers">Page Numbers</a></li><li><a href="#page-headers-and-footers">Page Headers and Footers</a></li><li><a href="#comments">Comments</a></li><li><a href="#basic-formatting">Basic Formatting</a></li><li><a href="#macros">Macros</a></li><li><a href="#conditional-logic-and-iteration">Conditional Logic and Iteration</a></li><li><a href="#fonts">Fonts</a></li><ul><li><a href="#font-family">Font Family</a></li><li><a href="#font-style">Font Style</a></li><li><a href="#font-size">Font Size</a></li></ul><li><a href="#truetype-and-opentype-fonts">TrueType and OpenType Fonts</a></li><li><a href="#colors">Colors</a></li><li><a href="#lengths">Lengths</a></li><li><a href="#paragraphs">Paragraphs</a></li><li><a href="#margin-notes">Margin Notes</a></li><li><a href="#space">Space</a></li><ul><li><a href="#horizontal-space">Horizontal Space</a></li><li><a href="#vertical-space">Vertical Space</a></li></ul><li><a href="#justifying-and-aligning">Justifying and Aligning</a></li><li><a href="#quotes">Quotes</a></li><li><a href="#lists">Lists</a></li><li><a href="#code-listings">Code Listings</a></li><li><a href="#horizontal-rules">Horizontal Rules</a></li><li><a href="#links-and-urls">Links and URLs</a></li><li><a href="#verbatim-text">Verbatim Text</a></li><li><a href="#columns">Columns</a></li><li><a href="#splitting-documents">Splitting Documents</a></li><li><a href="#boxes">Boxes</a></li><li><a href="#figures">Figures</a></li><li><a href="#references">References</a></li><li><a href="#images">Images</a></li><li><a href="#math-mode">Math Mode</a></li><li><a href="#charts">Charts</a></li><li><a href="#dots">Dots</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#matrices">Matrices</a></li><li><a href="#tables">Tables</a></li><li><a href="#scaling%2C-resizing%2C-and-rotating">Scaling, Resizing, and Rotating</a></li><li><a href="#picture-environment">picture Environment</a></li><li><a href="#greek-letters">Greek Letters</a></li><li><a href="#symbols">Symbols</a></li><li><a href="#document-title%2C-author%2C-and-date">Document Title, Author, and Date</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#formatting-the-word-latex">Formatting the Word LaTeX</a></li><li><a href="#footnotes">Footnotes</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#bibliography">Bibliography</a></li><li><a href="#index">Index</a></li><li><a href="#slide-presentations-(beamer)">Slide Presentations (beamer)</a></li><li><a href="#converting-to-epub">Converting to EPUB</a></li><li><a href="#files-produced">Files Produced</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>LaTeX</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>LaTeX</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#pros-and-cons">Pros and Cons</a></li><li><a href="#installing">Installing</a></li><ul><li><a href="#installing-in-macos">Installing in macOS</a></li><li><a href="#installing-in-windows">Installing in Windows</a></li><li><a href="#installing-in-linux">Installing in Linux</a></li></ul><li><a href="#command-line-processing">Command-line Processing</a></li><ul><li><a href="#error-handling">Error Handling</a></li></ul><li><a href="#editors">Editors</a></li><ul><li><a href="#texmaker">TeXmaker</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#overleaf">Overleaf</a></li></ul><li><a href="#syntax">Syntax</a></li><ul><li><a href="#declarations">Declarations</a></li><li><a href="#environments">Environments</a></li><li><a href="#command-groups">Command Groups</a></li></ul><li><a href="#special-characters">Special Characters</a></li><li><a href="#document-classes">Document Classes</a></li><li><a href="#packages">Packages</a></li><ul><li><a href="#popular-packages">Popular Packages</a></li></ul><li><a href="#abstract">Abstract</a></li><li><a href="#sections">Sections</a></li><li><a href="#unicode-characters">Unicode Characters</a></li><li><a href="#portrait-vs-landscape">Portrait vs. Landscape</a></li><li><a href="#page-styles">Page Styles</a></li><li><a href="#page-numbers">Page Numbers</a></li><li><a href="#page-headers-and-footers">Page Headers and Footers</a></li><li><a href="#comments">Comments</a></li><li><a href="#basic-formatting">Basic Formatting</a></li><li><a href="#macros">Macros</a></li><li><a href="#conditional-logic-and-iteration">Conditional Logic and Iteration</a></li><li><a href="#fonts">Fonts</a></li><ul><li><a href="#font-family">Font Family</a></li><li><a href="#font-style">Font Style</a></li><li><a href="#font-size">Font Size</a></li></ul><li><a href="#truetype-and-opentype-fonts">TrueType and OpenType Fonts</a></li><li><a href="#colors">Colors</a></li><li><a href="#lengths">Lengths</a></li><li><a href="#paragraphs">Paragraphs</a></li><li><a href="#margin-notes">Margin Notes</a></li><li><a href="#space">Space</a></li><ul><li><a href="#horizontal-space">Horizontal Space</a></li><li><a href="#vertical-space">Vertical Space</a></li></ul><li><a href="#justifying-and-aligning">Justifying and Aligning</a></li><li><a href="#quotes">Quotes</a></li><li><a href="#lists">Lists</a></li><li><a href="#code-listings">Code Listings</a></li><li><a href="#horizontal-rules">Horizontal Rules</a></li><li><a href="#links-and-urls">Links and URLs</a></li><li><a href="#verbatim-text">Verbatim Text</a></li><li><a href="#columns">Columns</a></li><li><a href="#splitting-documents">Splitting Documents</a></li><li><a href="#boxes">Boxes</a></li><li><a href="#figures">Figures</a></li><li><a href="#references">References</a></li><li><a href="#images">Images</a></li><li><a href="#math-mode">Math Mode</a></li><li><a href="#charts">Charts</a></li><li><a href="#dots">Dots</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#matrices">Matrices</a></li><li><a href="#tables">Tables</a></li><li><a href="#scaling-resizing-and-rotating">Scaling, Resizing, and Rotating</a></li><li><a href="#picture-environment">picture Environment</a></li><li><a href="#greek-letters">Greek Letters</a></li><li><a href="#symbols">Symbols</a></li><li><a href="#document-title-author-and-date">Document Title, Author, and Date</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#formatting-the-word-latex">Formatting the Word LaTeX</a></li><li><a href="#footnotes">Footnotes</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#bibliography">Bibliography</a></li><li><a href="#index">Index</a></li><li><a href="#slide-presentations-beamer">Slide Presentations (beamer)</a></li><li><a href="#converting-to-epub">Converting to EPUB</a></li><li><a href="#files-produced">Files Produced</a></li><li><a href="#debugging">Debugging</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article> <style>
   img {
     border: 1px solid gray;
   }
 </style>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p>TeX is a low-level typesetting system created by Donald Knuth
 in 1978 at Stanford University.
 The name was original composed of the Greek letters
 tau, epsilon, and chi (which looks like the Latin letter X).
-That is why TeX is pronounced &quot;tech&quot; and not &quot;tex&quot;.</p>
+That is why TeX is pronounced “tech” and not “tex”.</p>
 <p><a href="https://www.latex-project.org?v=1.1.1" rel="noopener" target="_blank">LaTeX</a>
 is a high-level typesetting system built on TeX
 by defining a set of custom TeX commands.
@@ -21,13 +23,13 @@ but can also produce DVI (device independent), EPUB, HTML,
 Markdown, MathML, plain text, Postscript, SVG, and Word files.</p>
 <p>The additional programs <code>BibTeX</code> and <code>MakeIndex</code> are used to generate
 bibliography and index pages.</p>
-<p>LaTeX is pronounced &quot;Lah-tech&quot; or &quot;Lay-tech&quot;.
-It is not pronounced the same as &quot;latex&quot;, the substance
+<p>LaTeX is pronounced “Lah-tech” or “Lay-tech”.
+It is not pronounced the same as “latex”, the substance
 that comes from trees and plants which is used to produce rubber.</p>
 <p>Both TeX and LaTeX are markup languages that are
 used in text files with a <code>.tex</code> file extension.
 Other commonly used markup languages include HTML, Markdown, SVG, and XML.</p>
-<h2 id="pros-and-cons" tabindex="-1">Pros and Cons</h2>
+<h2 id="pros-and-cons">Pros and Cons</h2>
 <p>Some pros of using LaTeX include:</p>
 <ul>
 <li>provides high-quality typesetting for professional looking PDF documents,
@@ -35,7 +37,7 @@ especially those that contain mathematical equations</li>
 <li>allows authors to focus on content before formatting while
 maintaining consistent formatting and automatic numbering of
 pages, chapters, sections, figures, and tables
-(uses a separate &quot;counter&quot; for each kind of content)</li>
+(uses a separate “counter” for each kind of content)</li>
 <li>supports extensive customization through thousands of packages
 and templates for various document types</li>
 <li>supports generating a table of contents, list of figures (images),
@@ -58,87 +60,87 @@ what will be rendered in the target output (often a PDF)</li>
 compared to many word processing applications</li>
 <li>collaboration requires all contributors to have knowledge of LaTeX</li>
 </ul>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>Generating PDF documents from LaTeX documents
 requires a distribution and an editor.</p>
 <p>The distribution provides executables that must be found
 in a directory listed in your <code>PATH</code> environment variable.
 The <a href="https://www.tug.org/texlive/" target="_blank">TeX Live</a>
 distribution is recommended.</p>
-<h3 id="installing-in-macos" tabindex="-1">Installing in macOS</h3>
+<h3 id="installing-in-macos">Installing in macOS</h3>
 <p>The macOS version of TeX Live is named mactex.
 One way to install mactex is to install Homebrew
 and then enter <code>brew install mactex</code>.
 This installs the following shell commands:</p>
-<table>
-<thead>
-<tr>
-<th>Command</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>pdflatex</code></td>
-<td>compiles .tex files into PDF format</td>
-</tr>
-<tr>
-<td><code>xelatex</code></td>
-<td>like pdflatex, but supports TrueType font, OpenType fonts, and Unicode</td>
-</tr>
-<tr>
-<td><code>lualatex</code></td>
-<td>like xelatex, but supports Lua scripting</td>
-</tr>
-<tr>
-<td><code>latex</code></td>
-<td>compiles .tex files into DVI (older format)</td>
-</tr>
-<tr>
-<td><code>dvips</code></td>
-<td>converts DVI files to PostScript</td>
-</tr>
-<tr>
-<td><code>dvipdfmx</code></td>
-<td>converts DVI files to PDF</td>
-</tr>
-<tr>
-<td><code>bibtex</code></td>
-<td>processes .bib files for bibliography references</td>
-</tr>
-<tr>
-<td><code>biber</code></td>
-<td>more powerful bibliography processor (alternative to bibtex)</td>
-</tr>
-<tr>
-<td><code>makeindex</code></td>
-<td>generates an index for documents</td>
-</tr>
-<tr>
-<td><code>tlmgr</code></td>
-<td>TeX Live package manager (for installing/updating LaTeX packages)</td>
-</tr>
-<tr>
-<td><code>kpsewhich</code></td>
-<td>searches for installed TeX files</td>
-</tr>
-<tr>
-<td><code>texhash</code></td>
-<td>updates TeX's file database after installing packages</td>
-</tr>
-<tr>
-<td><code>latexmk</code></td>
-<td>automates LaTeX compilation (runs multiple passes as needed)</td>
-</tr>
-</tbody>
-</table>
-<h3 id="installing-in-windows" tabindex="-1">Installing in Windows</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Command</th><th>Description</th></tr></thead><tbody><tr><td><code>pdflatex</code></td><td>compiles .tex files into PDF format</td></tr><tr><td><code>xelatex</code></td><td>like pdflatex, but supports TrueType font, OpenType fonts, and Unicode</td></tr><tr><td><code>lualatex</code></td><td>like xelatex, but supports Lua scripting</td></tr><tr><td><code>latex</code></td><td>compiles .tex files into DVI (older format)</td></tr><tr><td><code>dvips</code></td><td>converts DVI files to PostScript</td></tr><tr><td><code>dvipdfmx</code></td><td>converts DVI files to PDF</td></tr><tr><td><code>bibtex</code></td><td>processes .bib files for bibliography references</td></tr><tr><td><code>biber</code></td><td>more powerful bibliography processor (alternative to bibtex)</td></tr><tr><td><code>makeindex</code></td><td>generates an index for documents</td></tr><tr><td><code>tlmgr</code></td><td>TeX Live package manager (for installing/updating LaTeX packages)</td></tr><tr><td><code>kpsewhich</code></td><td>searches for installed TeX files</td></tr><tr><td><code>texhash</code></td><td>updates TeX’s file database after installing packages</td></tr><tr><td><code>latexmk</code></td><td>automates LaTeX compilation (runs multiple passes as needed)</td></tr></tbody></table>
+<h3 id="installing-in-windows">Installing in Windows</h3>
 <p>There preferred LaTeX distribution for windows is
 <a href="https://miktex.org?v=1.1.1" rel="noopener" target="_blank">MiKTeX</a>.</p>
-<h3 id="installing-in-linux" tabindex="-1">Installing in Linux</h3>
+<h3 id="installing-in-linux">Installing in Linux</h3>
 <p>Many Linux distributions come with the commands needed
 to process LaTeX documents already installed.</p>
-<h2 id="command-line-processing" tabindex="-1">Command-line Processing</h2>
+<h2 id="command-line-processing">Command-line Processing</h2>
 <p>To generate a <code>.pdf</code> file from a <code>.tex</code> file in a terminal window,
 run one of the following commands:</p>
 <pre><code class="language-bash">pdflatex {name}.tex
@@ -155,13 +157,13 @@ but on the first run the output is be produced
 using the previous versions of these special files.</p>
 <p>Everything these commands write to the terminal
 is also written to the file <code>{name}.log</code>.
-However, when using the VS Code extension &quot;LaTeX Workshop&quot;,
+However, when using the VS Code extension “LaTeX Workshop”,
 it seems to delete the log file.</p>
 <p>Open the generated PDF document with the following command:</p>
 <pre><code class="language-bash">open {name}.pdf
 </code></pre>
 <p>TeX editors will handle both of these steps for you.</p>
-<h3 id="error-handling" tabindex="-1">Error Handling</h3>
+<h3 id="error-handling">Error Handling</h3>
 <p>Common errors encountered when processing <code>.tex</code> files include:</p>
 <ul>
 <li>misspelled command, environment, or declaration name</li>
@@ -172,7 +174,7 @@ it seems to delete the log file.</p>
 </ul>
 <p>If an error is encountered, an error message will appear in the terminal.
 The message will begin with <code>!</code> and be followed by
-&quot;LaTeX Error:&quot; if it was detected by LaTex rather than by TeX.
+“LaTeX Error:” if it was detected by LaTex rather than by TeX.
 The next line will include the line number where the error occurred.
 The final line will only contain <code>?</code>.</p>
 <p>To continue processing, press the return key.
@@ -181,33 +183,33 @@ This allows viewing multiple errors that can all be fixed before the next run.</
 <p>If the final line only contains <code>*</code>,
 it is likely that the <code>\end{document}</code> command was not found.
 Press ctrl-d to exit and add the missing command.</p>
-<h2 id="editors" tabindex="-1">Editors</h2>
+<h2 id="editors">Editors</h2>
 <p>Recommended LaTeX editors include TeXmaker, VS Code, and Overleaf.</p>
-<h3 id="texmaker" tabindex="-1">TeXmaker</h3>
+<h3 id="texmaker">TeXmaker</h3>
 <p><a href="https://www.xm1math.net/texmaker/" target="_blank">TeXmaker</a>
 is a free, cross-platform LaTeX editor.
 Download the installer, run it, and drag the app icon to the Applications directory.
 Double-click the app to run it.
 It will likely show an error dialog that says
-&quot;texmaker.app is damaged and can't be opened&quot;, but it is not damaged.
+“texmaker.app is damaged and can’t be opened”, but it is not damaged.
 To fix this, open a terminal window and enter the following command:</p>
 <pre><code class="language-bash">sudo xattr -dr com.apple.quarantine /Applications/texmaker.app
 </code></pre>
-<h3 id="vs-code" tabindex="-1">VS Code</h3>
+<h3 id="vs-code">VS Code</h3>
 <p>VS Code can be used to edit <code>.tex</code> files.</p>
-<p>Install the extension &quot;LaTeX Workshop&quot; from James Yu.
+<p>Install the extension “LaTeX Workshop” from James Yu.
 This automatically generates a PDF
 every time changes to a <code>.tex</code> file are saved
 and the PDF can be viewed inside VS Code.</p>
-<p>When changes to a <code>.tex</code> file are saved, the &quot;LaTeX Workshop&quot; extension
-&quot;Build LaTeX project&quot; command will automatically run.
+<p>When changes to a <code>.tex</code> file are saved, the “LaTeX Workshop” extension
+“Build LaTeX project” command will automatically run.
 There is also a right-pointing green triangle in the upper-right
 that can be clicked to run that same command.</p>
 <p>To view the PDF, click the preview button in the upper-right that
 looks like a two-page document with a small magnifier glass on top of it.</p>
 <p>To jump from a <code>\ref{label}</code> command in the <code>.tex</code> file to the
 corresponding location in the generated PDF displayed in the preview,
-hover over the label text and click &quot;View on pdf&quot;.</p>
+hover over the label text and click “View on pdf”.</p>
 <p>To jump from the content under the cursor in the <code>.tex</code> file to the
 corresponding location in the generated PDF displayed in the preview,
 press cmd-option-j.</p>
@@ -223,71 +225,69 @@ For example, <code>BIT</code> expands to the following:</p>
 The <code>BFI</code> snippet expands to the set commands typically used to create a figure.
 The <code>BTA</code> snippet expands to the set commands typically used to create a table.</p>
 <p>For more snippets, see
-<a href="https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets"
-target="_blank">Snippets and shortcuts</a>.</p>
+<a href="https://github.com/James-Yu/LaTeX-Workshop/wiki/Snippets" target="_blank">Snippets and shortcuts</a>.</p>
 <p>To see a preview of a mathematical expression rendered in a popup,
 hover over the opening <code>$</code>, the opening <code>$$</code>,
-or the word &quot;align&quot; in <code>\begin{align}</code>.</p>
+or the word “align” in <code>\begin{align}</code>.</p>
 <p>By default this extension uses the <code>pdflatex</code> command
 to generate PDF files. To change this to use <code>xelatex</code>,
 which is required for some functionality:</p>
 <ol>
 <li>
-<p>Select &quot;Preferences: Open User Settings (JSON)&quot; from the command palette.</p>
+<p>Select “Preferences: Open User Settings (JSON)” from the command palette.</p>
 </li>
 <li>
-<p>Search for &quot;pdflatex&quot;.</p>
+<p>Search for “pdflatex”.</p>
 </li>
 <li>
 <p>Copy the object containing that immediately after it.</p>
 </li>
 <li>
-<p>In the copied object, change the values of &quot;name&quot; and &quot;command&quot;
-from &quot;pdflatex&quot; to &quot;xelatex&quot;.</p>
+<p>In the copied object, change the values of “name” and “command”
+from “pdflatex” to “xelatex”.</p>
 </li>
 <li>
 <p>Add the following at the end of the <code>settings.json</code> file
 before the closing curly brace:</p>
-<pre><code class="language-json">&quot;latex-workshop.latex.recipes&quot;: [
+<pre><code class="language-json">"latex-workshop.latex.recipes": [
   {
-    &quot;name&quot;: &quot;xelatex&quot;,
-    &quot;tools&quot;: [&quot;xelatex&quot;]
+    "name": "xelatex",
+    "tools": ["xelatex"]
   }
 ],
-&quot;latex-workshop.latex.recipe.default&quot;: &quot;xelatex&quot;
+"latex-workshop.latex.recipe.default": "xelatex"
 </code></pre>
 </li>
 <li>
-<p>Open <code>settings.json</code> and modify &quot;latex-workshop.latex.tools&quot;.</p>
-<p>Add <code>&quot;-shell-escape&quot;,</code> to the &quot;args&quot; arrays for the following commands:
+<p>Open <code>settings.json</code> and modify “latex-workshop.latex.tools”.</p>
+<p>Add <code>"-shell-escape",</code> to the “args” arrays for the following commands:
 latexmk, lualatexmk, xelatexmk, pdflatex, and xelatex.</p>
 </li>
 </ol>
-<p>VS Code can format LaTeX documents, but it the &quot;LaTeX Workshop&quot; extension
+<p>VS Code can format LaTeX documents, but it the “LaTeX Workshop” extension
 does not include a formatter.
-<a href="https://github.com/cmhughes/latexindent.pl"
-target="_blank">latexindent.pl</a> is a Perl script
+<a href="https://github.com/cmhughes/latexindent.pl" target="_blank">latexindent.pl</a> is a Perl script
 that formats <code>.tex</code> files and can be used from VS Code.
-The &quot;getting started&quot; section of its GitHub README page
+The “getting started” section of its GitHub README page
 explains how to install it for various operating systems.
 In macOS, enter <code>brew install latexindent</code> from a terminal window.</p>
 <p>To configure they LaTeX Workshop extension to use <code>latexindent</code>,
-open Settings, select Extensions...LaTeX.
-For &quot;Latex-workshop › Formatting: Latex&quot;, select &quot;latexindent&quot;.
-For &quot;Latex-workshop › Formatting › Latexindent: Path&quot;,
+open Settings, select Extensions…LaTeX.
+For “Latex-workshop › Formatting: Latex”, select “latexindent”.
+For “Latex-workshop › Formatting › Latexindent: Path”,
 if the command <code>latexindent</code> is in your <code>PATH</code>,
 this can be set to only <code>latexindent</code>.</p>
 <p>To format the <code>.tex</code> file currently begin edited,
-right-click anywhere in the document and select &quot;Format Document&quot;,
-or open the Command Palette and select &quot;Format Document&quot;.</p>
+right-click anywhere in the document and select “Format Document”,
+or open the Command Palette and select “Format Document”.</p>
 <p>In order to get <code>latexindent</code> to work, I had to enter the following commands
 in a terminal to install additional Perl modules:</p>
 <pre><code class="language-bash">cpan YAML::Tiny
 cpan File::HomeDir
 </code></pre>
-<h3 id="overleaf" tabindex="-1">Overleaf</h3>
+<h3 id="overleaf">Overleaf</h3>
 <p><a href="https://www.overleaf.com" target="_blank">Overleaf</a>
-is a web-based editor that doesn't require installing any software.
+is a web-based editor that doesn’t require installing any software.
 It requires creating an account.
 There are free and paid accounts.</p>
 <p>Paid accounts have the following features that are not present in free accounts:</p>
@@ -307,7 +307,7 @@ There are free and paid accounts.</p>
 </ul>
 <p>Paid accounts are $199 (10 collaborators per project)
 or $399 (unlimited collaborators per project) per year.</p>
-<h2 id="syntax" tabindex="-1">Syntax</h2>
+<h2 id="syntax">Syntax</h2>
 <p>LaTeX documents consist of a sequence of commands and content.
 Most commands begin with a backslash.
 Some commands have a second form whose name ends with as asterisk
@@ -337,7 +337,7 @@ But sometimes all the optional arguments appear in a comma-separated list
 inside a single pair of square brackets.
 Usually the optional arguments appear before the required arguments,
 but sometimes they appear after them.</p>
-<p>Many commands support a &quot;star variant&quot; that affects its behavior.
+<p>Many commands support a “star variant” that affects its behavior.
 For example, <code>\chapter{some name}</code> starts a new, numbered chapter
 and <code>\chapter*{some name}</code> starts a new, unnumbered chapter.</p>
 <p>The commands before <code>\begin{document}</code> are referred to as the preamble
@@ -350,8 +350,8 @@ These commands:</p>
 </ul>
 <p>The entire content of a document must be surrounded by
 <code>\begin{document}</code> and <code>\end{document}</code>.</p>
-<h3 id="declarations" tabindex="-1">Declarations</h3>
-<p>A &quot;declaration&quot; changes the effect of subsequent commands
+<h3 id="declarations">Declarations</h3>
+<p>A “declaration” changes the effect of subsequent commands
 or the meaning of arguments to subsequent commands.
 The scope of the effect is from the declaration to
 the next closing curly brace (<code>}</code>) or end of an an environment (<code>\end{name}</code>).</p>
@@ -362,8 +362,8 @@ Examples include <code>\pagenumbering</code> and <code>\pagecolor</code>.</p>
 the text inside the curly braces to be huge:</p>
 <pre><code class="language-latex">{\Huge Shout it from the rooftops!}
 </code></pre>
-<h3 id="environments" tabindex="-1">Environments</h3>
-<p>An &quot;environment&quot; can provide content to be rendered at its
+<h3 id="environments">Environments</h3>
+<p>An “environment” can provide content to be rendered at its
 beginning and end, and can specify the default formatting of its content.</p>
 <p>The <code>\begin{name}</code> command starts a usage of the named environment.
 It must be paired with a corresponding <code>\end{name}</code> command.
@@ -374,7 +374,7 @@ that behave somewhat differently than their non-asterisk form.</p>
 <p>The following example uses the <code>center</code> environment
 which centers each line of text inside it.
 The <code>\\</code> command inserts a newline character.
-For more on inserting space, see the &quot;Space&quot; section below.</p>
+For more on inserting space, see the “Space” section below.</p>
 <pre><code class="language-latex">\begin{center}
   one \\
   two \\
@@ -430,7 +430,7 @@ and specifying green as the text color:</p>
   in a kingdom nestled beside a sparkling sea, ...
 \end{fairytale}
 </code></pre>
-<h3 id="command-groups" tabindex="-1">Command Groups</h3>
+<h3 id="command-groups">Command Groups</h3>
 <p>A command group is defined by a pair of curly braces
 and limits the scope of a command
 so it only affects the content inside the group.
@@ -440,10 +440,10 @@ to in a huge font.</p>
   ...
 }
 </code></pre>
-<h2 id="special-characters" tabindex="-1">Special Characters</h2>
+<h2 id="special-characters">Special Characters</h2>
 <p>There are ten special characters in LaTeX
 that require special handling to render as the literal character.
-The following characters must be escaped with a backslash: $ &amp; # % _ { }.</p>
+The following characters must be escaped with a backslash: $ &#x26; # % _ { }.</p>
 <p>To render a backslash, use the <code>\textbackslash</code> command.</p>
 <p>To render a caret, use the <code>\textasciicircum</code> command.</p>
 <p>To render a tilde, use the <code>\textasciitilde</code> command.</p>
@@ -461,7 +461,7 @@ For example, <code>`quoted text'</code>.</p>
 </ul>
 <p>To print accented characters and symbols that appear in non-English text,
 see <a href="https://en.wikibooks.org/wiki/LaTeX/Special_Characters?v=1.1.1" rel="noopener" target="_blank">LaTeX/Special Characters</a>.</p>
-<h2 id="document-classes" tabindex="-1">Document Classes</h2>
+<h2 id="document-classes">Document Classes</h2>
 <p>Document classes change the default formatting
 by redefining environments and commands.
 They can also define new environments and commands.</p>
@@ -505,7 +505,7 @@ These can help with diagnosing layout issues.</li>
 <p><code>legno</code> to place equation numbers on their left side rather than right side</p>
 </li>
 <li>
-<p><code>openbib</code> to use the &quot;open&quot; bibliography format</p>
+<p><code>openbib</code> to use the “open” bibliography format</p>
 </li>
 <li>
 <p><code>openany</code> (default) or <code>openright</code>
@@ -531,17 +531,17 @@ to use 2-column pages throughout the entire document</p>
 <li>
 <p>a paper size that can be one of the following:</p>
 <ul>
-<li><code>a4paper</code>: 210 x 297 mm; approx. 8.25&quot; x 11.75&quot;</li>
-<li><code>a5paper</code>: 148 x 210 mm; approx. 5.8&quot; x 8.3&quot;</li>
-<li><code>b5paper</code>: 176 x 250 mm; approx. 6.9&quot; x 9.8&quot;</li>
-<li><code>executivepaper</code>: 7.25&quot; x 10.5&quot;</li>
-<li><code>legalpaper</code>: 8.5&quot; x 14&quot;</li>
-<li><code>letterpaper</code>: 8.5&quot; x 11&quot;</li>
+<li><code>a4paper</code>: 210 x 297 mm; approx. 8.25” x 11.75”</li>
+<li><code>a5paper</code>: 148 x 210 mm; approx. 5.8” x 8.3”</li>
+<li><code>b5paper</code>: 176 x 250 mm; approx. 6.9” x 9.8”</li>
+<li><code>executivepaper</code>: 7.25” x 10.5”</li>
+<li><code>legalpaper</code>: 8.5” x 14”</li>
+<li><code>letterpaper</code>: 8.5” x 11”</li>
 </ul>
 </li>
 </ul>
-<p>See the video tutorial at <a href="https://www.youtube.com/watch?v=ydOTMQC7np0">https://www.youtube.com/watch?v=ydOTMQC7np0</a>!</p>
-<h2 id="packages" tabindex="-1">Packages</h2>
+<p>See the video tutorial at <a href="https://www.youtube.com/watch?v=ydOTMQC7np0" rel="noopener" target="_blank">https://www.youtube.com/watch?v=ydOTMQC7np0</a>!</p>
+<h2 id="packages">Packages</h2>
 <p>Packages can add support for additional commands.
 They can also modify default settings that affect how documents are rendered.</p>
 <p>Documentation on all LaTeX packages can be found at
@@ -558,88 +558,88 @@ For example:</p>
 \usepackage{float, graphicx}
 \usepackage{hyperref}
 </code></pre>
-<h3 id="popular-packages" tabindex="-1">Popular Packages</h3>
-<p>In packages whose names begin with &quot;ams&quot;, that stands for
+<h3 id="popular-packages">Popular Packages</h3>
+<p>In packages whose names begin with “ams”, that stands for
 <a href="https://www.ams.org/home/page" target="_blank">
 American Mathematical Society</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Package</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>amsfonts</td>
-<td>adds fonts for use in mathematics</td>
-</tr>
-<tr>
-<td>amsmath</td>
-<td>adds commands for rendering mathematical formulas</td>
-</tr>
-<tr>
-<td>amssymb</td>
-<td>adds commands for additional mathematical symbols</td>
-</tr>
-<tr>
-<td>blindtext</td>
-<td>generates random text for testing layouts</td>
-</tr>
-<tr>
-<td>comment</td>
-<td>adds support for multi-line comments</td>
-</tr>
-<tr>
-<td>fancyhdr</td>
-<td>adds commands to configure page headers and footers</td>
-</tr>
-<tr>
-<td>float</td>
-<td>improves ability to control placement of objects like figures and tables</td>
-</tr>
-<tr>
-<td>geometry</td>
-<td>adjusts page margins, page size, and layout</td>
-</tr>
-<tr>
-<td>graphicx</td>
-<td>builds on the graphic package to enhance support for graphics</td>
-</tr>
-<tr>
-<td>hyperref</td>
-<td>adds commands to create clickable hyperlinks</td>
-</tr>
-<tr>
-<td>inputenc</td>
-<td>adds support for various input encodings like utf8</td>
-</tr>
-<tr>
-<td>lipsum</td>
-<td>generates Lorem Ipsum text for testing layouts</td>
-</tr>
-<tr>
-<td>listings</td>
-<td>adds commands to typeset programming language source code</td>
-</tr>
-<tr>
-<td>minted</td>
-<td>formats and highlights programming language source code</td>
-</tr>
-<tr>
-<td>xcolor</td>
-<td>adds commands to change the color of text</td>
-</tr>
-</tbody>
-</table>
-<h2 id="abstract" tabindex="-1">Abstract</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Package</th><th>Description</th></tr></thead><tbody><tr><td>amsfonts</td><td>adds fonts for use in mathematics</td></tr><tr><td>amsmath</td><td>adds commands for rendering mathematical formulas</td></tr><tr><td>amssymb</td><td>adds commands for additional mathematical symbols</td></tr><tr><td>blindtext</td><td>generates random text for testing layouts</td></tr><tr><td>comment</td><td>adds support for multi-line comments</td></tr><tr><td>fancyhdr</td><td>adds commands to configure page headers and footers</td></tr><tr><td>float</td><td>improves ability to control placement of objects like figures and tables</td></tr><tr><td>geometry</td><td>adjusts page margins, page size, and layout</td></tr><tr><td>graphicx</td><td>builds on the graphic package to enhance support for graphics</td></tr><tr><td>hyperref</td><td>adds commands to create clickable hyperlinks</td></tr><tr><td>inputenc</td><td>adds support for various input encodings like utf8</td></tr><tr><td>lipsum</td><td>generates Lorem Ipsum text for testing layouts</td></tr><tr><td>listings</td><td>adds commands to typeset programming language source code</td></tr><tr><td>minted</td><td>formats and highlights programming language source code</td></tr><tr><td>xcolor</td><td>adds commands to change the color of text</td></tr></tbody></table>
+<h2 id="abstract">Abstract</h2>
 <p>To add an abstract section to an article:</p>
 <pre><code class="language-latex">\begin{abstract}
   This is the abstract.
   \newpage
 \end{abstract}
 </code></pre>
-<h2 id="sections" tabindex="-1">Sections</h2>
+<h2 id="sections">Sections</h2>
 <p>Documents can have up to seven levels of sections,
 but not all of them are supported for every document class.
 For example, the <code>\chapter</code> command can be used
@@ -683,15 +683,13 @@ unnumbered chapters and section not appear in the table of contents.</p>
 <p>The <code>fncychap</code> package makes chapter titles fancier.
 The options include Bjarne, Bjornstrup, Conny, Glenn, Lenny, Rejne, and Sonny.
 For example:</p>
-<p><img alt="LaTeX Bjornstrup" style="width: 80%"
-  src="/blog/assets/latex-fncychap-bjornstrup.png?v=1.1.1"></p>
+<p><img alt="LaTeX Bjornstrup" style="width: 80%" src="/blog/assets/latex-fncychap-bjornstrup.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage[Bjornstrup]{fncychap}
 </code></pre>
-<p><img alt="LaTeX fncychap Glenn" style="width: 80%"
-  src="/blog/assets/latex-fncychap-glenn.png?v=1.1.1"></p>
+<p><img alt="LaTeX fncychap Glenn" style="width: 80%" src="/blog/assets/latex-fncychap-glenn.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage[Glenn]{fncychap}
 </code></pre>
-<h2 id="unicode-characters" tabindex="-1">Unicode Characters</h2>
+<h2 id="unicode-characters">Unicode Characters</h2>
 <p>To enable the use of Unicode characters, add the following in the preamble:</p>
 <pre><code class="language-latex">\usepackage[utf8]{inputenc}
 </code></pre>
@@ -701,7 +699,7 @@ and not when using <code>xelatex</code> or <code>lualatex</code>.</p>
 contains all the Unicode characters you wish to use.
 For example, the default font likely does not
 contain the Unicode wastebasket character.</p>
-<h2 id="portrait-vs.-landscape" tabindex="-1">Portrait vs. Landscape</h2>
+<h2 id="portrait-vs-landscape">Portrait vs. Landscape</h2>
 <p>By default all pages will be in portrait mode.
 To cause all pages to use landscape mode, use the <code>geometry</code> package.
 For example:</p>
@@ -731,13 +729,12 @@ For example:</p>
 ...
 \end{document}
 </code></pre>
-<h2 id="page-styles" tabindex="-1">Page Styles</h2>
+<h2 id="page-styles">Page Styles</h2>
 <p>The following diagram shows the commands that can be used to change
 the layout of pages, including the margins, the sizes of the areas,
 and the space between the areas.</p>
-<p><img alt="LaTeX page styles" style="width: 90%"
-  src="/blog/assets/latex-page-styles.png?v=1.1.1"></p>
-<h2 id="page-numbers" tabindex="-1">Page Numbers</h2>
+<p><img alt="LaTeX page styles" style="width: 90%" src="/blog/assets/latex-page-styles.png?v=1.1.1"></p>
+<h2 id="page-numbers">Page Numbers</h2>
 <p>Many document classes such as <code>article</code>, <code>book</code>, and <code>report</code>
 include page numbers by default.
 To suppress the page numbers,
@@ -749,11 +746,11 @@ add one of the following commands in the preamble:</p>
 <p>The <code>\pagenumbering</code> command can also specify the following values
 to use a particular kind of page numbering:</p>
 <ul>
-<li><code>arabic</code>: 1, 2, 3, ...</li>
-<li><code>alph</code>: a, b, c, ...</li>
-<li><code>Alph</code>: A, B, C, ...</li>
-<li><code>roman</code>: i, ii, iii, ...</li>
-<li><code>Roman</code>: I, II, III, ...</li>
+<li><code>arabic</code>: 1, 2, 3, …</li>
+<li><code>alph</code>: a, b, c, …</li>
+<li><code>Alph</code>: A, B, C, …</li>
+<li><code>roman</code>: i, ii, iii, …</li>
+<li><code>Roman</code>: I, II, III, …</li>
 </ul>
 <p>Each chapter or section can change the page numbering style
 and restart page numbering from one.
@@ -812,8 +809,8 @@ Chapter content goes here.
 </code></pre>
 <p>Unfortunately, changing the page numbering style breaks
 the index generated by the <code>imakeidx</code> and <code>makeidx</code> packages.
-See the &quot;Index&quot; section.</p>
-<h2 id="page-headers-and-footers" tabindex="-1">Page Headers and Footers</h2>
+See the “Index” section.</p>
+<h2 id="page-headers-and-footers">Page Headers and Footers</h2>
 <p>The <code>fancyhdr</code> package enables customizing the content
 of the page headers and footers.
 The header and footer can render text in three areas,
@@ -849,12 +846,12 @@ All of this must appear in the preamble.</p>
 % and the right side of odd pages.
 \fancyfoot[LE,RO]{\thepage}
 </code></pre>
-<h2 id="comments" tabindex="-1">Comments</h2>
+<h2 id="comments">Comments</h2>
 <p>Single-line comments begin with <code>%</code> and extend to the end of the line.
 For example:</p>
 <pre><code class="language-latex">% This is a single-line comment.
 </code></pre>
-<p>The &quot;comment&quot; package adds support for multi-line comments.
+<p>The “comment” package adds support for multi-line comments.
 For example:</p>
 <pre><code class="language-latex">\usepackage{comment}
 ...
@@ -869,7 +866,7 @@ where the command to process the document is running.
 For example:</p>
 <pre><code class="language-latex">\typeout{Add more dogs in this table.}
 </code></pre>
-<h2 id="basic-formatting" tabindex="-1">Basic Formatting</h2>
+<h2 id="basic-formatting">Basic Formatting</h2>
 <p>The following commands change the formatting of text in their argument.</p>
 <pre><code class="language-latex">\textbf{This is bold.}
 \textmd{This is medium.} % typically the default
@@ -894,7 +891,7 @@ For example, the declaration <code>\em</code> corresponds to the <code>\emph</co
 <p>Every declaration has a corresponding environment with the same name.
 For example, <code>{\em ... }</code> can be replaced by <code>\begin{em} ... \end{em}</code>
 which feels more explicit.</p>
-<h2 id="macros" tabindex="-1">Macros</h2>
+<h2 id="macros">Macros</h2>
 <p>Macros make it unnecessary to repeat
 commonly used content and sequences of commands.
 They can significantly reduce the amount of markup required in documents.</p>
@@ -905,19 +902,19 @@ that can optionally have required parameters.</p>
 <p>The <code>\newcommand</code> command uses <code>\def</code>.
 Unlike <code>\def</code>, it checks whether the command being defined already exists.
 It also adds support for optional arguments.</p>
-<p>Here's an example of defining a macro using <code>\def</code>
+<p>Here’s an example of defining a macro using <code>\def</code>
 which just inserts some static text.</p>
 <pre><code class="language-latex">\def\email{someone@gmail.com}
 </code></pre>
 <p>To use this, add <code>\email</code> everywhere that content should be inserted.</p>
-<p>Here's an example of defining a macro using <code>\newcommand</code>.
+<p>Here’s an example of defining a macro using <code>\newcommand</code>.
 The command being defined is <code>\image</code> and it takes three arguments.
 The arguments are inserted where <code>#1</code>, <code>#2</code>, and <code>#3</code> appear.</p>
 <pre><code class="language-latex">\newcommand{\image}[3]{
-  \begin{figure}[H] % see &quot;here&quot; in Figures section
+  \begin{figure}[H] % see "here" in Figures section
     \centering
     \includegraphics[width=#2]{#1}
-    \caption{#3} % see &quot;\caption&quot; in Figures section
+    \caption{#3} % see "\caption" in Figures section
   \end{figure}
 }
 </code></pre>
@@ -934,16 +931,16 @@ wrap the command contents in the <code>\ensuremath</code> command.</p>
 <p>Defining a command that already exists with <code>\newcommand</code>
 results in an error.
 To redefine an existing command, use the <code>\renewcommand</code> instead.
-To define a command only if it doesn't already exist,
+To define a command only if it doesn’t already exist,
 use the <code>\providecommand</code> command instead.</p>
-<h2 id="conditional-logic-and-iteration" tabindex="-1">Conditional Logic and Iteration</h2>
+<h2 id="conditional-logic-and-iteration">Conditional Logic and Iteration</h2>
 <p>The <code>ifthen</code> package adds commands that support
 conditional logic (<code>\ifthenelse</code> command) and iteration (<code>\whiledo</code> command)
 for choosing the text to render.
 These can be used anywhere in a document, including in macros.</p>
-<p>See <a href="https://www.youtube.com/watch?v=6VMglkW9nFk&amp;v=1.1.1" rel="noopener" target="_blank">Master Loops &amp; Conditionals in LaTeX: Beginner</a>.</p>
-<h2 id="fonts" tabindex="-1">Fonts</h2>
-<h3 id="font-family" tabindex="-1">Font Family</h3>
+<p>See <a href="https://www.youtube.com/watch?v=6VMglkW9nFk&#x26;v=1.1.1" rel="noopener" target="_blank">Master Loops &#x26; Conditionals in LaTeX: Beginner</a>.</p>
+<h2 id="fonts">Fonts</h2>
+<h3 id="font-family">Font Family</h3>
 <p>To change the font family for a section of the content,
 surround it with:</p>
 <ul>
@@ -951,13 +948,12 @@ surround it with:</p>
 <li><code>textsf{ ... }</code> for a sans serif font</li>
 <li><code>texttt{ ... }</code> for a typewriter (monospace) font</li>
 </ul>
-<h3 id="font-style" tabindex="-1">Font Style</h3>
+<h3 id="font-style">Font Style</h3>
 <p>To change the font style for a section of content,
 surround with commands shown in the following table.
-The style &quot;upright&quot; seems to be same as &quot;medium&quot;.</p>
-<p><img alt="LaTeX font styles" style="width: 30%"
-  src="/blog/assets/latex-font-styles.png?v=1.1.1"></p>
-<h3 id="font-size" tabindex="-1">Font Size</h3>
+The style “upright” seems to be same as “medium”.</p>
+<p><img alt="LaTeX font styles" style="width: 30%" src="/blog/assets/latex-font-styles.png?v=1.1.1"></p>
+<h3 id="font-size">Font Size</h3>
 <p>To change the default font size for the entire document,
 modify the <code>\documentclass</code> command as follows:</p>
 <pre><code class="language-latex">\documentclass[12pt]{book}
@@ -990,13 +986,13 @@ And up through the ground came a bubblin crude.
 Oil that is, black gold, Texas tea.
 
 Well the first thing you know ol Jed's a millionaire,
-Kinfolk said &quot;Jed move away from there&quot;
-Said &quot;Californy is the place you ought to be&quot;
+Kinfolk said "Jed move away from there"
+Said "Californy is the place you ought to be"
 So they loaded up the truck and moved to Beverly.
 
 }
 </code></pre>
-<h2 id="truetype-and-opentype-fonts" tabindex="-1">TrueType and OpenType Fonts</h2>
+<h2 id="truetype-and-opentype-fonts">TrueType and OpenType Fonts</h2>
 <p>The shell command <code>pdflatex</code> only supports using Type1 and bitmap fonts,
 not TrueType or OpenType fonts.
 The shell cvommands <code>xelatex</code> and <code>lualatex</code>
@@ -1021,7 +1017,7 @@ or the name of an installed font.</p>
 </code></pre>
 </li>
 </ol>
-<h2 id="colors" tabindex="-1">Colors</h2>
+<h2 id="colors">Colors</h2>
 <p>The <code>color</code> package provides basic support the changing text color.</p>
 <pre><code class="language-latex">\usepackage{color}
 ...
@@ -1091,7 +1087,7 @@ For example:</p>
 </code></pre>
 <p>For more colors, see
 <a href="https://latexcolor.com" target="_blank">LaTeX Color</a>.</p>
-<h2 id="lengths" tabindex="-1">Lengths</h2>
+<h2 id="lengths">Lengths</h2>
 <p>Many commands take a length argument that must include a unit.
 The supported units are:</p>
 <ul>
@@ -1107,8 +1103,8 @@ to the bottom of another in the same paragraph)</li>
 <li><code>\textheight</code> - height of page text area</li>
 <li><code>\textwidth</code> - width of page text area</li>
 </ul>
-<h2 id="paragraphs" tabindex="-1">Paragraphs</h2>
-<p>Paragraphs are separated by blank lines which introduce &quot;hard returns&quot;.
+<h2 id="paragraphs">Paragraphs</h2>
+<p>Paragraphs are separated by blank lines which introduce “hard returns”.
 A period is treated as the end of a sentence
 unless it is preceded by an uppercase letter.
 If a period that does not end a sentence appears in one
@@ -1135,7 +1131,7 @@ add the following in the preamble.</p>
 % The `random` option causes random text to be generated.
 % The `math` option is like the `random` option,
 % but also includes random math in the generated text.
-% These options only works when the &quot;english&quot; option is specified above.
+% These options only works when the "english" option is specified above.
 \usepackage[math]{blindtext}
 </code></pre>
 <p>In the document content, add <code>\blindtext</code>
@@ -1150,7 +1146,7 @@ We wish to hold the whole sky,\\
 but we never will.
 %\end{verse}
 </code></pre>
-<h2 id="margin-notes" tabindex="-1">Margin Notes</h2>
+<h2 id="margin-notes">Margin Notes</h2>
 <p>To place a note in the right margin,
 use the <code>\marginpar</code> command immediately after the content
 for the line where it should begin.
@@ -1161,16 +1157,16 @@ For example:</p>
   This is a margin note.
 }
 </code></pre>
-<h2 id="space" tabindex="-1">Space</h2>
+<h2 id="space">Space</h2>
 <p>The LaTeX compiler typically removes extra spaces as it sees fit.
 A sequence of space characters such as a spaces, tabs, and linefeeds
 are treated the same as a single space character.</p>
-<h3 id="horizontal-space" tabindex="-1">Horizontal Space</h3>
+<h3 id="horizontal-space">Horizontal Space</h3>
 <p>There are many ways to insert different amounts of horizontal space.
 The following options are ordered from least to most space
 and are depicted in the image that follows.
 Note the differences in the amount of space
-between the words &quot;space&quot; and &quot;with&quot;.</p>
+between the words “space” and “with”.</p>
 <ul>
 <li><code>\,</code> inserts a thin space</li>
 <li><code>\:</code> inserts a medium space</li>
@@ -1183,8 +1179,7 @@ on a different line than the previous word (ex. <code>Mr.~Mark~Volkmann</code>)<
 (seemining with a thin space on both sides)</li>
 <li><code>\qquad</code> inserts double the space inserted by <code>\quad</code></li>
 </ul>
-<p><img alt="LaTeX adding space" style="width: 30%"
-  src="/blog/assets/latex-space.png?v=1.1.1"></p>
+<p><img alt="LaTeX adding space" style="width: 30%" src="/blog/assets/latex-space.png?v=1.1.1"></p>
 <p>The image above was created with the following markup:</p>
 <pre><code class="language-latex">\noindent
 space\,with comma\\
@@ -1207,7 +1202,7 @@ with a single space on each side that
 separates it from the previous and next words.</p>
 <p>If the <code>\hspace</code> command ends up at the beginning or ending of a line,
 it is removed. Use <code>\*hspace</code> instead to avoid this.</p>
-<h3 id="vertical-space" tabindex="-1">Vertical Space</h3>
+<h3 id="vertical-space">Vertical Space</h3>
 <p>There are many ways to insert different amounts of vertical space.</p>
 <p>By default there is no vertical space betweeen paragraphs
 and the first line of each paragraph in each section,
@@ -1219,7 +1214,7 @@ except the first.</p>
 <pre><code class="language-latex">\usepackage[skip=14pt, indent=20pt]{parskip}
 </code></pre>
 <p>To add a single newline after a line, add <code>\\</code> at its end,
-which introduces a &quot;soft return&quot;.
+which introduces a “soft return”.
 To add a newline AND prevent a page break at that point, use <code>\\*</code>.
 To specify vertical space to be added after a newline,
 enclose a length in square brackets after the <code>\\</code> or <code>\\*</code> command.
@@ -1246,7 +1241,7 @@ middle
 \vfill
 bottom
 </code></pre>
-<h2 id="justifying-and-aligning" tabindex="-1">Justifying and Aligning</h2>
+<h2 id="justifying-and-aligning">Justifying and Aligning</h2>
 <p>In many document classes such as <code>article</code>, <code>report</code>, and <code>book</code>,
 paragraphs are justified by default so
 each full line of text has the same length.
@@ -1284,12 +1279,11 @@ that spans multiple lines.\\
 Each line is centered.
 \end{flushright}
 </code></pre>
-<h2 id="quotes" tabindex="-1">Quotes</h2>
+<h2 id="quotes">Quotes</h2>
 <p>The <code>quote</code> environment is used for short quotes.
 The <code>quotation</code> environment is used for multi-paragraph quotes.
 For example:</p>
-<p><img alt="LaTeX quotes" style="width: 70%"
-  src="/blog/assets/latex-quotes.png?v=1.1.1"></p>
+<p><img alt="LaTeX quotes" style="width: 70%" src="/blog/assets/latex-quotes.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{quote}
   I hope that I may always desire more than I can accomplish. \emph{Michelangelo}
 
@@ -1309,11 +1303,10 @@ For example:</p>
   \emph{Theodore Roosevelt}
 \end{quotation}
 </code></pre>
-<h2 id="lists" tabindex="-1">Lists</h2>
+<h2 id="lists">Lists</h2>
 <p>Bulleted lists are created with <code>\item</code> commands
-inside the &quot;itemize&quot; environment. For example:</p>
-<p><img alt="LaTeX itemize list" style="width: 10%"
-  src="/blog/assets/latex-itemize-list.png?v=1.1.1"></p>
+inside the “itemize” environment. For example:</p>
+<p><img alt="LaTeX itemize list" style="width: 10%" src="/blog/assets/latex-itemize-list.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{itemize}
   \item red
   \item green
@@ -1321,9 +1314,8 @@ inside the &quot;itemize&quot; environment. For example:</p>
 \end{itemize}
 </code></pre>
 <p>Numbered lists are created with <code>\item</code> commands
-inside the &quot;enumerate&quot; environment. For example:</p>
-<p><img alt="LaTeX enumerate list" style="width: 10%"
-  src="/blog/assets/latex-enumerate-list.png?v=1.1.1"></p>
+inside the “enumerate” environment. For example:</p>
+<p><img alt="LaTeX enumerate list" style="width: 10%" src="/blog/assets/latex-enumerate-list.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{enumerate}
   \item red
   \item green
@@ -1331,9 +1323,8 @@ inside the &quot;enumerate&quot; environment. For example:</p>
 \end{enumerate}
 </code></pre>
 <p>Description lists are created with <code>\item</code> commands
-inside the &quot;description&quot; environment. For example:</p>
-<p><img alt="LaTeX description list" style="width: 25%"
-  src="/blog/assets/latex-description-list.png?v=1.1.1"></p>
+inside the “description” environment. For example:</p>
+<p><img alt="LaTeX description list" style="width: 25%" src="/blog/assets/latex-description-list.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{description}
   \item[apple] a red fruit
   \item[kiwi] a green fruit
@@ -1342,8 +1333,7 @@ inside the &quot;description&quot; environment. For example:</p>
 </code></pre>
 <p>Lists can be nested up to four levels deep.
 For example:</p>
-<p><img alt="LaTeX nested lists" style="width: 25%"
-  src="/blog/assets/latex-nested-lists.png?v=1.1.1"></p>
+<p><img alt="LaTeX nested lists" style="width: 25%" src="/blog/assets/latex-nested-lists.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{itemize}
   \item red
     \begin{enumerate}
@@ -1362,7 +1352,7 @@ For example:</p>
     \end{enumerate}
 \end{itemize}
 </code></pre>
-<h2 id="code-listings" tabindex="-1">Code Listings</h2>
+<h2 id="code-listings">Code Listings</h2>
 <p>The <code>listings</code> package renders programming code source code.
 It can render code in many programming languages including
 Bash, C, C++, Go, Haskell, Java, JavaScript, Lisp, Lua, Matlab,
@@ -1371,15 +1361,14 @@ It can also render many markup languages including
 CSS, HTML, JSON, LaTeXTeX, XML, and YAML.</p>
 <p>See the <code>\lstdefinelanguage</code> command that adds support for more languages.</p>
 <p>For example:</p>
-<p><img alt="LaTeX listings" style="width: 80%"
-  src="/blog/assets/latex-listings.png?v=1.1.1"></p>
+<p><img alt="LaTeX listings" style="width: 80%" src="/blog/assets/latex-listings.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage{listings}
 \usepackage[dvipsnames]{xcolor} % dvipsnames gives 68 more predefined colors.
 ...
 \lstset{backgroundcolor=\color{Apricot}, numbers=left}
 \begin{lstlisting}[caption={Hello World code}, frame=single, frameround=tttt, language=Python]
   def hello():
-      print(&quot;Hello, World!&quot;)
+      print("Hello, World!")
 
   hello()
 \end{lstlisting}
@@ -1392,19 +1381,17 @@ that is used to render the list of listings pages.
 The <code>\lstlistoflisting</code> command typically appears after the table of contents.</p>
 <p>To include this page in the table of contents,
 add the following after the <code>\lstlistoflisting</code> command
-where &quot;Code Listings&quot; can be any page title:</p>
+where “Code Listings” can be any page title:</p>
 <pre><code class="language-latex">\addcontentsline{toc}{chapter}{Code Listings}
 </code></pre>
 <p>A better option is to use the <code>minted</code> package.
 This uses the Python library Pygments to format source code.
-The supported languages are listed at <a href="https://pygments.org/languages/"
-target="_blank">Pygment Languages</a>.</p>
+The supported languages are listed at <a href="https://pygments.org/languages/" target="_blank">Pygment Languages</a>.</p>
 <p>The <code>minted</code> package requires access to the <code>pygentize</code> command.
 To install that in macOS, enter <code>brew install pygments</code>.</p>
 <p>The following is an example of rendering Smalltalk code:</p>
-<p><img alt="LaTeX minted Smalltalk code" style="width: 85%"
-  src="/blog/assets/latex-minted-smalltalk.png?v=1.1.1"></p>
-<pre><code class="language-latex">\begin{listing}[H] % see &quot;here&quot; in Figures section
+<p><img alt="LaTeX minted Smalltalk code" style="width: 85%" src="/blog/assets/latex-minted-smalltalk.png?v=1.1.1"></p>
+<pre><code class="language-latex">\begin{listing}[H] % see "here" in Figures section
   \begin{minted}[bgcolor=Beige, frame=lines, framesep=3mm, linenos, numbersep=3pt]{smalltalk}
 newName: nameString breed: breedString
     | dog |
@@ -1413,15 +1400,15 @@ newName: nameString breed: breedString
     dog breed: breedString.
     ^ dog.
   \end{minted}
-  \caption{My Smalltalk code} % see &quot;\caption&quot; in Figures section
+  \caption{My Smalltalk code} % see "\caption" in Figures section
 \end{listing}
 </code></pre>
 <p>Listings with a caption are automatically numbered.
 The sequence of listing numbers is independent from
 the numbering of figures and tables.</p>
-<h2 id="horizontal-rules" tabindex="-1">Horizontal Rules</h2>
+<h2 id="horizontal-rules">Horizontal Rules</h2>
 <p>To draw a horizontal line across the page, use <code>\hrule</code>.</p>
-<h2 id="links-and-urls" tabindex="-1">Links and URLs</h2>
+<h2 id="links-and-urls">Links and URLs</h2>
 <p>To render a URL in a monospace font, use the <code>\texttt</code> command.
 For example, <code>\texttt{https://mvolkmann.github.io/blog/}</code>.
 The URL will not be clickable.</p>
@@ -1447,7 +1434,7 @@ For example:</p>
 
 \href{https://mvolkmann.github.io/blog/}{My Blog}
 </code></pre>
-<h2 id="verbatim-text" tabindex="-1">Verbatim Text</h2>
+<h2 id="verbatim-text">Verbatim Text</h2>
 <p>Text can be rendered verbatim in order to:</p>
 <ul>
 <li>begin on a new line</li>
@@ -1458,7 +1445,7 @@ For example:</p>
 </ul>
 <p>For short text, use the <code>\verb</code> command
 with the text delimited by vertical bars (pipes).
-Why aren't curly braces used instead?
+Why aren’t curly braces used instead?
 For example:</p>
 <pre><code class="language-latex">\verb|This text will be rendered verbatim|
 </code></pre>
@@ -1472,7 +1459,7 @@ We wish to hold the whole sky,
 but we never will.
 \end{verbatim}
 </code></pre>
-<h2 id="columns" tabindex="-1">Columns</h2>
+<h2 id="columns">Columns</h2>
 <p>Rendering content in multiple columns
 is not supported by the <code>pdflatex</code> command.
 The <code>xelatex</code> or <code>lualatex</code> command must be used instead.</p>
@@ -1506,7 +1493,7 @@ using the <code>\setlength</code> and <code>\columnseprule</code> commands.
 For example:</p>
 <pre><code class="language-latex">\setlength{\columnseprule}{2pt}
 </code></pre>
-<h2 id="splitting-documents" tabindex="-1">Splitting Documents</h2>
+<h2 id="splitting-documents">Splitting Documents</h2>
 <p>A <code>.tex</code> file can include the contents of other <code>.tex</code> files.
 This enables breaking a large document into smaller documents
 that can be edited independently, such as each chapter of a book.
@@ -1541,7 +1528,7 @@ This command can be nested, so included files can use the <code>\input</code> co
 <p>To temporarily avoid rendering the content of files included with <code>\input</code>,
 comment out those lines.
 This will change the numbering of the chapters and sections that follow.</p>
-<h2 id="boxes" tabindex="-1">Boxes</h2>
+<h2 id="boxes">Boxes</h2>
 <p>The <code>tcolorbox</code> package renders a colored box with
 a title bar at the bottom and content below.
 The <code>coloframe</code> option specifies the border color
@@ -1554,8 +1541,7 @@ To specify a second color that should mixed with the first,
 add another <code>!</code> after the percentage value followed by another color.
 For example, <code>red!30!yellow</code> means 30% red and 70% yellow.</p>
 <p>For example:</p>
-<p><img alt="LaTeX tcolorbox" style="width: 80%"
-  src="/blog/assets/latex-tcolorbox.png?v=1.1.1"></p>
+<p><img alt="LaTeX tcolorbox" style="width: 80%" src="/blog/assets/latex-tcolorbox.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage{tcolorbox}
 ...
 \begin{tcolorbox}[
@@ -1566,7 +1552,7 @@ For example, <code>red!30!yellow</code> means 30% red and 70% yellow.</p>
   My box content.
 \end{tcolorbox}
 </code></pre>
-<h2 id="figures" tabindex="-1">Figures</h2>
+<h2 id="figures">Figures</h2>
 <p>The <code>figure</code> environment creates floating content,
 meaning the compiler can choose its location.
 The content is typically a graphical element like an image or diagram,
@@ -1586,16 +1572,15 @@ or on a new page containing only figures and tables.
 The <code>float</code> package adds support for overriding the compiler
 with the following options:</p>
 <ul>
-<li>The &quot;h&quot; option tells the compiler to place the item &quot;here&quot; if possible.</li>
-<li>The &quot;H&quot; option tells the compiler to absolutely place the item &quot;here&quot;.
-The option &quot;!h&quot; is somewhat equivalent.</li>
-<li>The &quot;t&quot; option moves the item to the top of the page.</li>
-<li>The &quot;b&quot; option moves the item to the bottom of the page.</li>
+<li>The “h” option tells the compiler to place the item “here” if possible.</li>
+<li>The “H” option tells the compiler to absolutely place the item “here”.
+The option “!h” is somewhat equivalent.</li>
+<li>The “t” option moves the item to the top of the page.</li>
+<li>The “b” option moves the item to the bottom of the page.</li>
 </ul>
 <p>The same options can be used to control the placement of tables.</p>
 <p>The following example renders an image that is scaled to be 3 inches wide.</p>
-<p><img alt="LaTeX figure image" style="width: 50%"
-  src="/blog/assets/latex-figure-image.png?v=1.1.1"></p>
+<p><img alt="LaTeX figure image" style="width: 50%" src="/blog/assets/latex-figure-image.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{figure}[H]
   \centering
   \includegraphics[width=3in]{smalltalk-balloon}
@@ -1605,8 +1590,7 @@ The option &quot;!h&quot; is somewhat equivalent.</li>
 </code></pre>
 <p>Any number of references to this figure can occur elsewhere in the document.
 For example:</p>
-<p><img alt="LaTeX figure reference" style="width: 50%"
-  src="/blog/assets/latex-figure-reference.png?v=1.1.1"></p>
+<p><img alt="LaTeX figure reference" style="width: 50%" src="/blog/assets/latex-figure-reference.png?v=1.1.1"></p>
 <pre><code class="language-latex">My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
 </code></pre>
 <p>To include a page containing a list of figures
@@ -1616,34 +1600,34 @@ This causes LaTeX to create a <code>.lof</code> file
 that is used to render the list of figures pages.</p>
 <p>To include this page in the table of contents,
 add the following after the <code>\listoffigures</code> command
-where &quot;Images&quot; can be any page title:</p>
+where “Images” can be any page title:</p>
 <pre><code class="language-latex">\addcontentsline{toc}{chapter}{Images}
 </code></pre>
-<h2 id="references" tabindex="-1">References</h2>
+<h2 id="references">References</h2>
 <p>To reference a figure, listing, or table
 that is labeled with <code>\label{some-label}</code>,
 use the <code>\ref{some-label}</code> command.
 If the hyperref package is included with <code>\usepackage{hyperref}</code>,
 this will output a hyperlink to the item using its assigned number.
 Only the number will be output, so consider adding
-the word &quot;figure&quot;, &quot;listing&quot;, or &quot;table&quot; before this.
-For example, &quot;See table \ref{dog-table}.&quot;</p>
+the word “figure”, “listing”, or “table” before this.
+For example, “See table \ref{dog-table}.”</p>
 <p>To instead output a page number reference to a figure, listing, or table
 that is labeled with <code>\label{some-label}</code>,
 use the <code>\pageref{some-label}</code> command.
 If the hyperref package is included with <code>\usepackage{hyperref}</code>,
 this will output a hyperlink to the item using its page number.
 Only the number will be output, so consider adding
-the word &quot;page&quot; before this.
-For example, &quot;See page \pageref{dog-table}.&quot;</p>
-<h2 id="images" tabindex="-1">Images</h2>
+the word “page” before this.
+For example, “See page \pageref{dog-table}.”</p>
+<h2 id="images">Images</h2>
 <p>To include images, use the <code>graphicx</code> package.
 Use the <code>\includegraphics</code> command, specifying a file name.
 It is not necessary to include the file extension.
 The image file must reside in the same directory as the <code>.tex</code> file.
 The supported image formats include JPEG (.jpg or .jpeg),
 PNG (.png), and PDF (.pdf).</p>
-<p>Surrounding the image with a &quot;figure&quot; enables adding a caption
+<p>Surrounding the image with a “figure” enables adding a caption
 which will be automatically numbered along with other figures
 and can be placed above or below the image.</p>
 <p>For example:</p>
@@ -1671,7 +1655,7 @@ For example, <code>[width=0.7\textwidth]</code>.</p>
 use <code>\linewidth</code> for the <code>width</code> value.</p>
 <p>Instead of specifying a <code>width</code>, a <code>height</code> (a measure like <code>width</code>)
 or <code>scale</code> (a number treated as a percentage) can be specified.</p>
-<h2 id="math-mode" tabindex="-1">Math Mode</h2>
+<h2 id="math-mode">Math Mode</h2>
 <p>Mathematical equations are specially formatted when in math mode.
 This includes making variables names italicized and
 properly formatting fractions, subscripts, supercripts, and more.</p>
@@ -1681,8 +1665,7 @@ Display math mode renders mathematical text on its own line,
 separated from surrounding content and horizontally centered by default.</p>
 <p>To use inline math mode, surround content by single dollar signs,
 <code>\(</code> and <code>\)</code>, or <code>\begin{math}</code> and <code>\end{math}</code>. For example:</p>
-<p><img alt="LaTeX inline math mode" style="width: 70%"
-  src="/blog/assets/latex-inline-math-mode.png?v=1.1.1"></p>
+<p><img alt="LaTeX inline math mode" style="width: 70%" src="/blog/assets/latex-inline-math-mode.png?v=1.1.1"></p>
 <pre><code class="language-latex">The Pythagorean theorem states that
 for a triangle with sides of length $a$ and $b$
 and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
@@ -1693,8 +1676,7 @@ so <code>\dfrac</code> is only needed in inline math mode.
 For both commands, the numerator and denominator
 are specified in their own pair of curly braces.</p>
 <p>For example:</p>
-<p><img alt="LaTeX inline fractions" style="width: 60%"
-  src="/blog/assets/latex-inline-fractions.png?v=1.1.1"></p>
+<p><img alt="LaTeX inline fractions" style="width: 60%" src="/blog/assets/latex-inline-fractions.png?v=1.1.1"></p>
 <pre><code class="language-latex">Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
 </code></pre>
 <p>To use display math mode, surround content by double dollar signs,
@@ -1703,8 +1685,7 @@ Each formula should appear on its own line
 and all but the last should end in <code>\\</code>.
 LaTeX will not break a long formula over multiple lines,
 so each formula must fit on one line.</p>
-<p><img alt="LaTeX display math mode" style="width: 70%"
-  src="/blog/assets/latex-display-math-mode.png?v=1.1.1"></p>
+<p><img alt="LaTeX display math mode" style="width: 70%" src="/blog/assets/latex-display-math-mode.png?v=1.1.1"></p>
 <pre><code class="language-latex">The Pythagorean theorem states that
 for a triangle with sides of length $a$ and $b$
 and hypotenuse of length $c$, $a^2 + b^2 = c^2$.
@@ -1717,18 +1698,16 @@ $$ v = \frac{1}{2} g t^2 $$
 </code></pre>
 <p>A vertically centered dot represents multiplication and can add clarity.
 In the expression $ 2xy^2 $ it is clear that
-\(2\), \(x\), and \(y^2\) are to be multiplied.
-In this case adding dots between the terms doesn't add clarity.
-On the other hand, \(23\) represents a single number, not multiplying \(2\) and \(3\).
+$2$, $x$, and $y^2$ are to be multiplied.
+In this case adding dots between the terms doesn’t add clarity.
+On the other hand, $23$ represents a single number, not multiplying $2$ and $3$.
 In this case it is appropriate to write \verb|$2 \cdot 3|
 which is rendered as follows:</p>
-<p><img alt="LaTeX cdot command" style="width: 6%"
-  src="/blog/assets/latex-cdot-command.png?v=1.1.1"></p>
+<p><img alt="LaTeX cdot command" style="width: 6%" src="/blog/assets/latex-cdot-command.png?v=1.1.1"></p>
 <p>The <code>equation</code> environment is like the <code>displaymath</code> environment,
 but it adds numbers in parentheses to the right of equations
 to identify them. For example:</p>
-<p><img alt="LaTeX equations" style="width: 55%"
-  src="/blog/assets/latex-equations.png?v=1.1.1"></p>
+<p><img alt="LaTeX equations" style="width: 55%" src="/blog/assets/latex-equations.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{equation}
     area = width \cdot height
 \end{equation}
@@ -1738,15 +1717,13 @@ to identify them. For example:</p>
 </code></pre>
 <p>All roots, square and otherwise, are rendered with the <code>\sqrt</code> command.
 For example:</p>
-<p><img alt="LaTeX math roots" style="width: 25%"
-  src="/blog/assets/latex-math-roots.png?v=1.1.1"></p>
+<p><img alt="LaTeX math roots" style="width: 25%" src="/blog/assets/latex-math-roots.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$ \sqrt{25} = 5 $$
 $$ \sqrt[3]{8} = 2 $$
 $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 </code></pre>
 <p>The following are additional examples of using math mode:</p>
-<p><img alt="LaTeX more math mode" style="width: 18%"
-  src="/blog/assets/latex-more-math-mode.png?v=1.1.1"></p>
+<p><img alt="LaTeX more math mode" style="width: 18%" src="/blog/assets/latex-more-math-mode.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
 $$ 3x^2 $$ % single-character superscript
 $$ 3x^{12} $$ % multi-character superscript (requires curly braces)
@@ -1763,29 +1740,27 @@ like parentheses, square brackets, curly braces, and vertical bars
 have a height that matches their content.
 The following example demonstrates what is rendered
 without and with those commands.</p>
-<p><img alt="LaTeX \left and \right commands" style="width: 15%"
-  src="/blog/assets/latex-left-right-commands.png?v=1.1.1"></p>
+<p><img alt="LaTeX \left and \right commands" style="width: 15%" src="/blog/assets/latex-left-right-commands.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$ a (\frac{b + 1}{c + 2}) $$
 $$ a \left(\frac{b + 1}{c + 2}\right) $$
 </code></pre>
 <p>To align equal signs when showing the solution to an equation,
 use the <code>amsmath</code> package, wrap the steps in an <code>align</code> environment,
-preceded each <code>=</code> with <code>&amp;</code>, and end each line with <code>\\</code>.
+preceded each <code>=</code> with <code>&#x26;</code>, and end each line with <code>\\</code>.
 It is not necessary to have any text before the equal sign.</p>
 <p>For example:</p>
-<p><img alt="LaTeX equation equals align" style="width: 50%"
-  src="/blog/assets/latex-equation-equals-align.png?v=1.1.1"></p>
+<p><img alt="LaTeX equation equals align" style="width: 50%" src="/blog/assets/latex-equation-equals-align.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{align}
-f(x) &amp;= x^2 - 20x + 6 + 7x + x^2 \\
-     &amp;= 2x^2 - 13x + 6 \\
-     &amp;= (2x - 1)(x - 6)
+f(x) &#x26;= x^2 - 20x + 6 + 7x + x^2 \\
+     &#x26;= 2x^2 - 13x + 6 \\
+     &#x26;= (2x - 1)(x - 6)
 \end{align}
 </code></pre>
 <pre><code class="language-latex">\begin{align}
-2x^2 &amp;= 13x - 6 \\
-2x^2 - 13x + 6 &amp;= 0 \\
-(2x - 1)(x - 6) &amp;= 0 \\
-x &amp;= 1/2 \,or\, 6
+2x^2 &#x26;= 13x - 6 \\
+2x^2 - 13x + 6 &#x26;= 0 \\
+(2x - 1)(x - 6) &#x26;= 0 \\
+x &#x26;= 1/2 \,or\, 6
 \end{align}
 </code></pre>
 <p>The steps will be numbered by default.
@@ -1807,8 +1782,7 @@ to draw a horizontal line below its argument.</p>
 <p>To add text above an <code>\overbrace</code>, use a superscript.
 To add text below an <code>\underbrace</code>, use a subscript.
 For example:</p>
-<p><img alt="LaTeX \overbrace and \underbrace" style="width: 20%"
-  src="/blog/assets/latex-overbrace-underbrace.png?v=1.1.1"></p>
+<p><img alt="LaTeX \overbrace and \underbrace" style="width: 20%" src="/blog/assets/latex-overbrace-underbrace.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$
   a + \overbrace{b + c}^{\textup{middle}} + d
 $$
@@ -1817,8 +1791,7 @@ $$
 $$
 </code></pre>
 <p>The following examples demonstrate rendering limits, sums, and integrals:</p>
-<p><img alt="LaTeX limits, sums, and integrals" style="width: 25%"
-  src="/blog/assets/latex-lim-sum-int.png?v=1.1.1"></p>
+<p><img alt="LaTeX limits, sums, and integrals" style="width: 25%" src="/blog/assets/latex-lim-sum-int.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$ \lim_{x \to \infty} \frac{1}{x^r} = 0, r \in \mathbb{Z^+} $$
 $$ \sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6} $$
 $$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
@@ -1827,7 +1800,7 @@ $$ \int_0^\infty e^{-x^2} dx = \sqrt{\pi} $$
 that can only be used in math mode.
 They prevent function names from being rendered in italics like variable names.
 Examples include <code>\sin</code>, <code>\cos</code>, <code>\tan</code>, <code>\ln</code>, <code>\log</code>, and <code>\gcd</code>.</p>
-<h2 id="charts" tabindex="-1">Charts</h2>
+<h2 id="charts">Charts</h2>
 <p>LaTeX can render many kinds of charts.
 The following document demonstrates several of these.</p>
 <pre><code class="language-latex">\documentclass{article}
@@ -1839,8 +1812,7 @@ The following document demonstrates several of these.</p>
 
 \begin{document}
 </code></pre>
-<p><img alt="LaTeX bar chart" style="width: 50%"
-  src="/blog/assets/latex-bar-chart.png?v=1.1.1"></p>
+<p><img alt="LaTeX bar chart" style="width: 50%" src="/blog/assets/latex-bar-chart.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{figure}
   \centering
   \begin{tikzpicture}
@@ -1856,8 +1828,7 @@ The following document demonstrates several of these.</p>
   \caption{Simple Bar Chart}
 \end{figure}
 </code></pre>
-<p><img alt="LaTeX pie chart" style="width: 50%"
-  src="/blog/assets/latex-pie-chart.png?v=1.1.1"></p>
+<p><img alt="LaTeX pie chart" style="width: 50%" src="/blog/assets/latex-pie-chart.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{figure}
   \centering
   \begin{tikzpicture}
@@ -1875,8 +1846,7 @@ The following document demonstrates several of these.</p>
   \caption{Simple Pie Chart}
 \end{figure}
 </code></pre>
-<p><img alt="LaTeX line plot" style="width: 50%"
-  src="/blog/assets/latex-line-plot.png?v=1.1.1"></p>
+<p><img alt="LaTeX line plot" style="width: 50%" src="/blog/assets/latex-line-plot.png?v=1.1.1"></p>
 <pre><code class="language-latex">% TODO: How can this be modified to fill the area below the line?
 \begin{figure}
   \centering
@@ -1897,8 +1867,7 @@ The following document demonstrates several of these.</p>
   \caption{Simple Line Graph}
 \end{figure}
 </code></pre>
-<p><img alt="LaTeX curves plot" style="width: 50%"
-  src="/blog/assets/latex-curves-plot.png?v=1.1.1"></p>
+<p><img alt="LaTeX curves plot" style="width: 50%" src="/blog/assets/latex-curves-plot.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{figure}
   \centering
   \begin{tikzpicture}
@@ -1923,8 +1892,7 @@ The following document demonstrates several of these.</p>
   \end{tikzpicture}
 \end{figure}
 </code></pre>
-<p><img alt="LaTeX 3D plot" style="width: 50%"
-  src="/blog/assets/latex-3d-plot.png?v=1.1.1"></p>
+<p><img alt="LaTeX 3D plot" style="width: 50%" src="/blog/assets/latex-3d-plot.png?v=1.1.1"></p>
 <pre><code class="language-latex">% This takes as long time to render (around 15 seconds)!
 \begin{figure}
   \centering
@@ -1948,22 +1916,21 @@ The following document demonstrates several of these.</p>
 
 \end{document}
 </code></pre>
-<h2 id="dots" tabindex="-1">Dots</h2>
+<h2 id="dots">Dots</h2>
 <p>Dot commands render an ellipsis in different orientations.
 Simply typing three periods does not
 result in the correct spacing for an ellipsis.</p>
 <p>The following examples demonstrate the dot commands:</p>
-<p><img alt="LaTeX dots" style="width: 15%"
-  src="/blog/assets/latex-dots.png?v=1.1.1"></p>
+<p><img alt="LaTeX dots" style="width: 15%" src="/blog/assets/latex-dots.png?v=1.1.1"></p>
 <pre><code class="language-latex">$ 1, 2, \dots, 10 $ \\ % horizontal dots
 $ 2, 3, \ldots, 10 $ \\ % lower horizontal dots
 $ 3 \cdots 10 $ \\ % vertically centered horizontal dots
-$ 4~ \vdots ~10 $ \\ % vertical dots; ~ (&quot;tie&quot;) and is like &amp;nbsp; in HTML
+$ 4~ \vdots ~10 $ \\ % vertical dots; ~ ("tie") and is like &#x26;nbsp; in HTML
 $ 5 \ddots 10 $ \\ % diagonal dots
 </code></pre>
 <p>The commands <code>\dots</code>, <code>\ldots</code>, and <code>\vdots</code> can be used in any mode.
 The commands <code>\cdots</code> and <code>\vdots</code> can only be used in math mode.</p>
-<h2 id="arrays" tabindex="-1">Arrays</h2>
+<h2 id="arrays">Arrays</h2>
 <p>Arrays render values in rows and columns of math formulas
 and can only be used in math mode.
 For rows and columns of text items, use the <code>tabular</code> environment.</p>
@@ -1978,9 +1945,9 @@ The <code>\textup</code> command is used here to prevent words from being
 treated as variables and therefore being printed in italics.</p>
 <pre><code class="language-latex">$$
   \begin{array}{ll}
-    \textup{diameter}      &amp; 2r      \\
-    \textup{circumference} &amp; 2 \pi r \\
-    \textup{area}          &amp; \pi r^2 \\
+    \textup{diameter}      &#x26; 2r      \\
+    \textup{circumference} &#x26; 2 \pi r \\
+    \textup{area}          &#x26; \pi r^2 \\
   \end{array}
 $$
 </code></pre>
@@ -1999,14 +1966,13 @@ To place a delimiter only on one side,
 specify a period for the other side to make it invisible.
 For example, <code>\left. ... \right\}</code> renders
 no delimeter on the left side and a curly brace on the right side.</p>
-<p><img alt="LaTeX array delimiters" style="width: 25%"
-  src="/blog/assets/latex-array-delimiters.png?v=1.1.1"></p>
+<p><img alt="LaTeX array delimiters" style="width: 25%" src="/blog/assets/latex-array-delimiters.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$
   \left.
   \begin{array}{ll}
-    \textup{diameter}      &amp; 2r      \\
-    \textup{circumference} &amp; 2 \pi r \\
-    \textup{area}          &amp; \pi r^2 \\
+    \textup{diameter}      &#x26; 2r      \\
+    \textup{circumference} &#x26; 2 \pi r \\
+    \textup{area}          &#x26; \pi r^2 \\
   \end{array}
   \right\}
 $$
@@ -2018,13 +1984,12 @@ and the center column describes the relationships
 between the left and right sides (usually <code>=</code>).
 The equation described in each row is numbered.</p>
 <p>For example:</p>
-<p><img alt="LaTeX eqnarray" style="width: 60%"
-  src="/blog/assets/latex-eqnarray.png?v=1.1.1"></p>
+<p><img alt="LaTeX eqnarray" style="width: 60%" src="/blog/assets/latex-eqnarray.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{eqnarray}
-  2x^2 &amp; = &amp; 13x - 6 \\
-  2x^2 - 13x + 6 &amp; = &amp; 0 \\
-  (2x - 1)(x - 6) &amp; = &amp; 0 \\
-  x &amp; = &amp; 1/2 \textup{ or } 6
+  2x^2 &#x26; = &#x26; 13x - 6 \\
+  2x^2 - 13x + 6 &#x26; = &#x26; 0 \\
+  (2x - 1)(x - 6) &#x26; = &#x26; 0 \\
+  x &#x26; = &#x26; 1/2 \textup{ or } 6
 \end{eqnarray}
 </code></pre>
 <p>This environment automatically uses math mode for its contents
@@ -2036,7 +2001,7 @@ Display math should end with $$
 <p>To avoid rendering equation numbers, use <code>eqnarray*</code>.</p>
 <p>If an equation is too long to fit on a single line,
 use the <code>\lefteqn</code> command to allow using multiple lines.</p>
-<h2 id="matrices" tabindex="-1">Matrices</h2>
+<h2 id="matrices">Matrices</h2>
 <p>Matrices are rendered with matrix environment.
 These include the following:</p>
 <ul>
@@ -2051,25 +2016,24 @@ These include the following:</p>
 about the origin in the x/y plane.
 In math mode a single quote renders a prime symbol,
 two single quotes render a double prime, and so on.</p>
-<p><img alt="LaTeX matrices" style="width: 50%"
-  src="/blog/assets/latex-matrices.png?v=1.1.1"></p>
+<p><img alt="LaTeX matrices" style="width: 50%" src="/blog/assets/latex-matrices.png?v=1.1.1"></p>
 <pre><code class="language-latex">$$
 [x' \, y' \, z' \, 1]
 =
 [x \, y \, z \, 1] \cdot
 \begin{bmatrix}
-    \cos\theta &amp; -\sin\theta &amp; 0 &amp; 0 \\
-    \sin\theta &amp; \cos\theta &amp; 0 &amp; 0 \\
-    0 &amp; 0 &amp; 1 &amp; 0 \\
-    0 &amp; 0 &amp; 0 &amp; 1 \\
+    \cos\theta &#x26; -\sin\theta &#x26; 0 &#x26; 0 \\
+    \sin\theta &#x26; \cos\theta &#x26; 0 &#x26; 0 \\
+    0 &#x26; 0 &#x26; 1 &#x26; 0 \\
+    0 &#x26; 0 &#x26; 0 &#x26; 1 \\
 \end{bmatrix}
 $$
 </code></pre>
-<h2 id="tables" tabindex="-1">Tables</h2>
+<h2 id="tables">Tables</h2>
 <p>To create a table, use the <code>\begin{tabular}{columns}</code> command.
 This can be used in any mode, unlike the <code>array</code> environment
 which can only be used in math mode.
-&quot;columns&quot; is replaced by text that specifies:</p>
+“columns” is replaced by text that specifies:</p>
 <ul>
 <li>the number of columns</li>
 <li>whether they should be left-aligned (<code>l</code>), centered (<code>c</code>), or right-aligned (<code>r</code>)</li>
@@ -2082,26 +2046,25 @@ There will be vertical lines before the first and second columns,
 and after the last column, that extent the entire height of the table.</p>
 <p>The table rows are specified with content that follows
 up to the <code>\end{tabular}</code> command.</p>
-<p>The cells of each row are separated by the <code>&amp;</code> character.
+<p>The cells of each row are separated by the <code>&#x26;</code> character.
 The end of each row is marked by <code>\\</code>.</p>
 <p>To add horizontal lines before and/or after a row, add the <code>\hline</code> command.
 To add double lines, such as below the heading row,
 add two <code>\hline</code> commands.</p>
 <p>The following example creates a table describing dogs.
 It uses the <code>\textbf</code> command is used to make the column headings bold.</p>
-<p><img alt="LaTeX table" style="width: 50%"
-  src="/blog/assets/latex-table.png?v=1.1.1"></p>
+<p><img alt="LaTeX table" style="width: 50%" src="/blog/assets/latex-table.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{tabular}{|l|l|c|}
   \hline
-  \textbf{Name} &amp; \textbf{Breed} &amp; \textbf{Age} \\
+  \textbf{Name} &#x26; \textbf{Breed} &#x26; \textbf{Age} \\
   \hline\hline
-  Comet &amp; Whippet &amp; 4 \\
+  Comet &#x26; Whippet &#x26; 4 \\
   \hline
-  Greta &amp; German Shorthaired Pointer &amp; 1 \\
+  Greta &#x26; German Shorthaired Pointer &#x26; 1 \\
   \hline
-  Oscar &amp; Lab mix &amp; 7 \\
+  Oscar &#x26; Lab mix &#x26; 7 \\
   \hline
-  Ramsay &amp; Native American Indian Dog &amp; 8 \\
+  Ramsay &#x26; Native American Indian Dog &#x26; 8 \\
   \hline
 \end{tabular}
 </code></pre>
@@ -2125,7 +2088,7 @@ add <code>\rowcolor{color}</code> before its data.</p>
 add <code>\cellcolor{color}</code> before its data.</p>
 <p>For example, the following makes the background color of a row pale yellow,
 and makes the second cell be pink:</p>
-<pre><code class="language-latex">\rowcolor{yellow!50}Comet &amp; \cellcolor{red!20}Whippet &amp; 4 \\\
+<pre><code class="language-latex">\rowcolor{yellow!50}Comet &#x26; \cellcolor{red!20}Whippet &#x26; 4 \\\
 </code></pre>
 <p>To alternate the background colors of all rows except the first,
 which typically contains column headings,
@@ -2135,8 +2098,8 @@ including the cell in the header row:</p>
 <ol>
 <li>
 <p>Define a new column type in the preamble.</p>
-<pre><code class="language-latex">% Column type &quot;i&quot; (for important) is red and centered.
-\newcolumntype{i}{&gt;{\columncolor{red!20}}c}
+<pre><code class="language-latex">% Column type "i" (for important) is red and centered.
+\newcolumntype{i}{>{\columncolor{red!20}}c}
 </code></pre>
 </li>
 <li>
@@ -2155,8 +2118,7 @@ This is done by adding a <code>\label{some-label}</code> command
 in a <code>table</code> environment.
 To reference the table, use the <code>\ref{some-label}</code> command.</p>
 <p>For example:</p>
-<p><img alt="LaTeX tabular in table" style="width: 50%"
-  src="/blog/assets/latex-tabular-in-table.png?v=1.1.1"></p>
+<p><img alt="LaTeX tabular in table" style="width: 50%" src="/blog/assets/latex-tabular-in-table.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage{float}
 ...
 \begin{table}[H] % absolutely positions table here
@@ -2164,15 +2126,15 @@ To reference the table, use the <code>\ref{some-label}</code> command.</p>
   \def\arraystretch{2} % adds padding inside cells
   \begin{tabular}{|l|l|c|}
     \hline
-    Name &amp; Breed &amp; Age \\
+    Name &#x26; Breed &#x26; Age \\
     \hline\hline
-    Comet &amp; Whippet &amp; 4 \\
+    Comet &#x26; Whippet &#x26; 4 \\
     \hline
-    Greta &amp; German Shorthaired Pointer &amp; 1 \\
+    Greta &#x26; German Shorthaired Pointer &#x26; 1 \\
     \hline
-    Oscar &amp; Lab mix &amp; 7 \\
+    Oscar &#x26; Lab mix &#x26; 7 \\
     \hline
-    Ramsay &amp; Native American Indian Dog &amp; 8 \\
+    Ramsay &#x26; Native American Indian Dog &#x26; 8 \\
     \hline
   \end{tabular}
   \caption{Dogs in my family}
@@ -2191,24 +2153,23 @@ This causes LaTeX to create a <code>.lot</code> file
 that is used to render the list of tables pages.</p>
 <p>To include this page in the table of contents,
 add the following after the <code>\listoffiguures</code> command
-where &quot;Tables&quot; can be any page title:</p>
+where “Tables” can be any page title:</p>
 <pre><code class="language-latex">\addcontentsline{toc}{chapter}{Tables}
 </code></pre>
 <p>The <code>[H]</code> option can be specified on a <code>table</code> environment,
 but not on a <code>tabular</code> environment.</p>
 <p>Text in a table cell can contain paragraphs of text that wrap to multiple lines.
 For example:</p>
-<p><img alt="LaTeX table with paragraphs" style="width: 70%"
-  src="/blog/assets/latex-table-paragraphs.png?v=1.1.1"></p>
+<p><img alt="LaTeX table with paragraphs" style="width: 70%" src="/blog/assets/latex-table-paragraphs.png?v=1.1.1"></p>
 <pre><code class="language-latex">\begin{table}[H]
   \def\arraystretch{1.5} % adds padding inside cells
   \begin{tabular}{|l|p{3in}|} % note use of p with a specified width
     \hline
-    Sport &amp; Definition \\
+    Sport &#x26; Definition \\
     \hline\hline
-    ice hockey &amp; a game played on ice between two teams of six skaters each, the object being to score goals by shooting a puck into the opponents' cage using a stick with a wooden blade set at an obtuse angle to the shaft. \\
+    ice hockey &#x26; a game played on ice between two teams of six skaters each, the object being to score goals by shooting a puck into the opponents' cage using a stick with a wooden blade set at an obtuse angle to the shaft. \\
     \hline
-    basketball &amp; a game played by two teams of usually five players each on a rectangular court having a raised basket or goal at each end, points being scored by tossing the ball through the opponent's basket. \\
+    basketball &#x26; a game played by two teams of usually five players each on a rectangular court having a raised basket or goal at each end, points being scored by tossing the ball through the opponent's basket. \\
     \hline
   \end{tabular}
 \end{table}
@@ -2230,46 +2191,45 @@ borders to be drawn on the left and/or right side of the content.</p>
 and requires the <code>xcolor</code> package.
 When the <code>\cellcolor</code> command is applied to a cell that spans more than one row,
 only the first row is affected. Is this a bug?</p>
-<p><img alt="LaTeX table with spans" style="width: 30%"
-  src="/blog/assets/latex-table-with-spans.png?v=1.1.1"></p>
+<p><img alt="LaTeX table with spans" style="width: 30%" src="/blog/assets/latex-table-with-spans.png?v=1.1.1"></p>
 <pre><code class="language-latex">\usepackage{colortbl, multirow, xcolor}
 ...
 \def\arraystretch{1.5} % adds padding inside cells
 \begin{tabular}{|c|c|c|c|}
   \hline
-  &amp; A &amp; B &amp; C \\
+  &#x26; A &#x26; B &#x26; C \\
   \hline\hline
-  1 &amp; \cellcolor{yellow} A1 &amp; B1 &amp; C1 \\
+  1 &#x26; \cellcolor{yellow} A1 &#x26; B1 &#x26; C1 \\
   \hline
 
-  2 &amp; A2 &amp; \multicolumn{2}{c|}{B2 \&amp; C2} \\
+  2 &#x26; A2 &#x26; \multicolumn{2}{c|}{B2 \&#x26; C2} \\
   \hline
 
-  3 &amp; \multirow{2}{*}{\cellcolor{yellow} A3 \&amp; A4} &amp; B3 &amp; C3 \\
+  3 &#x26; \multirow{2}{*}{\cellcolor{yellow} A3 \&#x26; A4} &#x26; B3 &#x26; C3 \\
   \cline{1-1} \cline{3-4} % Draw cell lines below cells 1, 3, and 4.
 
-  4 &amp; &amp; B4 &amp; C4 \\
+  4 &#x26; &#x26; B4 &#x26; C4 \\
   \hline
 
-  5 &amp; A5 &amp; \multicolumn{2}{c|}{
+  5 &#x26; A5 &#x26; \multicolumn{2}{c|}{
     \multirow{2}{1.5cm}{
-      \cellcolor{yellow} B5, C5, B6, \&amp; C6
+      \cellcolor{yellow} B5, C5, B6, \&#x26; C6
     }
   } \\
   \cline{1-2} % Draw cell lines below cells 1 and 2.
 
-  6 &amp; A6 &amp; \multicolumn{2}{c|}{} \\
+  6 &#x26; A6 &#x26; \multicolumn{2}{c|}{} \\
   \hline
 \end{tabular}
 </code></pre>
 <p>TODO: When I use <code>\cellcolor</code> in a <code>\multirow</code>, it only colors the first row.
 TODO: Am I doing something wrong in this simple example?
-TODO: I posted this question here: <a href="https://www.youtube.com/watch?v=xyZtxfMsD38">https://www.youtube.com/watch?v=xyZtxfMsD38</a></p>
+TODO: I posted this question here: <a href="https://www.youtube.com/watch?v=xyZtxfMsD38" rel="noopener" target="_blank">https://www.youtube.com/watch?v=xyZtxfMsD38</a></p>
 <pre><code class="language-latex">\begin{tabular}{|c|c|c|}
   \hline
-  1 &amp; \multirow{2}{*}{\cellcolor{yellow} 2 and 6} &amp; 3 \\
+  1 &#x26; \multirow{2}{*}{\cellcolor{yellow} 2 and 6} &#x26; 3 \\
   \cline{1-1} \cline{3-3}
-  5 &amp; &amp; 7 \\
+  5 &#x26; &#x26; 7 \\
   \hline
 \end{tabular}
 </code></pre>
@@ -2282,12 +2242,12 @@ For example:</p>
 ...
 \begin{longtable}{|l|c|l|}
   \hline
-  Description &amp; Symbol &amp; Command \\
+  Description &#x26; Symbol &#x26; Command \\
   \hline\hline
   \endhead % marks the end of the heading rows
-  checkmark &amp; $\checkmark$ &amp; \verb|\checkmark| \\
-  circle &amp; $\circ$ &amp; \verb|\circ| \\
-  club suit &amp; $\clubsuit$ &amp; \verb|\clubsuit| \\
+  checkmark &#x26; $\checkmark$ &#x26; \verb|\checkmark| \\
+  circle &#x26; $\circ$ &#x26; \verb|\circ| \\
+  club suit &#x26; $\clubsuit$ &#x26; \verb|\clubsuit| \\
   ...
   \hline
 \end{longtable}
@@ -2295,7 +2255,7 @@ For example:</p>
 <p>Also see the commands <code>\endfirsthead</code>, <code>\endlastfoot</code>, and <code>\endfoot</code>.</p>
 <p>Other packages that support rendering tables include
 <code>tabu</code>, <code>tabularx</code>, and <code>tabulary</code>.</p>
-<h2 id="scaling%2C-resizing%2C-and-rotating" tabindex="-1">Scaling, Resizing, and Rotating</h2>
+<h2 id="scaling-resizing-and-rotating">Scaling, Resizing, and Rotating</h2>
 <p>The graphicsx package defines the following commands (and more):</p>
 <ul>
 <li><code>\scalebox</code> - argument is a constant scale factor</li>
@@ -2303,15 +2263,14 @@ For example:</p>
 <li><code>\rotatebox</code> - argument is angle in degrees</li>
 </ul>
 <p>For example:</p>
-<p><img alt="LaTeX scalebox, resizebox, and rotatebox" style="width: 30%"
-  src="/blog/assets/latex-scalebox-resizebox-rotatebox.png?v=1.1.1"></p>
+<p><img alt="LaTeX scalebox, resizebox, and rotatebox" style="width: 30%" src="/blog/assets/latex-scalebox-resizebox-rotatebox.png?v=1.1.1"></p>
 <pre><code class="language-latex">\scalebox{3}{TEST}
 
 \resizebox{1in}{1.5in}{TEST}
 
 \rotatebox{45}{TEST}
 </code></pre>
-<h2 id="picture-environment" tabindex="-1">picture Environment</h2>
+<h2 id="picture-environment">picture Environment</h2>
 <p>The <code>picture</code> environment supports drawing basic diagrams containing
 lines, arrows, rectangles, circles, and curves.
 Rectangles can be solid or dashed, and they can have square or rounded corners.</p>
@@ -2335,8 +2294,7 @@ for the drawing command that follows.
 For lines and arrows, the reference point is its starting point.
 For shapes like rectangles, ovals, and circles,
 the reference point is its center.</p>
-<p><img alt="LaTeX picture environment" style="width: 50%"
-  src="/blog/assets/latex-picture-environment.png?v=1.1.1"></p>
+<p><img alt="LaTeX picture environment" style="width: 50%" src="/blog/assets/latex-picture-environment.png?v=1.1.1"></p>
 <pre><code class="language-latex">\def\myWidth{200}
 \def\myHeight{150}
 \newcommand{\myHalfWidth}{\dimexpr\myWidth pt/2\relax}
@@ -2390,162 +2348,157 @@ begins at x = 0, y = 0, has a width of 200 and a height of 150.</p>
 ...
 \graphpaper[15](0,0)(200,150)
 </code></pre>
-<h2 id="greek-letters" tabindex="-1">Greek Letters</h2>
+<h2 id="greek-letters">Greek Letters</h2>
 <p>Greek letters are produced using the following commands.
 There are no commands for Greek letters that are
 identical to the corresponding Latin letter,
 Latin letters are used for those.</p>
-<p><img alt="LaTeX Greek letters" style="width: 30%"
-  src="/blog/assets/latex-greek-letters.png?v=1.1.1"></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Lowercase</th>
-<th>Uppercase</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>alpha</td>
-<td><code>$\alpha$</code></td>
-<td><code>A</code></td>
-</tr>
-<tr>
-<td>beta</td>
-<td><code>$\beta$</code></td>
-<td><code>B</code></td>
-</tr>
-<tr>
-<td>gamma</td>
-<td><code>$\gamma$</code></td>
-<td><code>$\Gamma$</code></td>
-</tr>
-<tr>
-<td>delta</td>
-<td><code>$\delta$</code></td>
-<td><code>$\Delta$</code></td>
-</tr>
-<tr>
-<td>epsilon</td>
-<td><code>$\epsilon$</code></td>
-<td><code>E</code></td>
-</tr>
-<tr>
-<td>zeta</td>
-<td><code>$\zeta$</code></td>
-<td><code>Z</code></td>
-</tr>
-<tr>
-<td>eta</td>
-<td><code>$\eta$</code></td>
-<td><code>H</code></td>
-</tr>
-<tr>
-<td>theta</td>
-<td><code>$\theta$</code></td>
-<td><code>$\Theta$</code></td>
-</tr>
-<tr>
-<td>iota</td>
-<td><code>$\iota$</code></td>
-<td><code>I</code></td>
-</tr>
-<tr>
-<td>kappa</td>
-<td><code>$\kappa$</code></td>
-<td><code>K</code></td>
-</tr>
-<tr>
-<td>lambda</td>
-<td><code>$\lambda$</code></td>
-<td><code>$\Lambda$</code></td>
-</tr>
-<tr>
-<td>mu</td>
-<td><code>$\mu$</code></td>
-<td><code>M</code></td>
-</tr>
-<tr>
-<td>nu</td>
-<td><code>$\nu$</code></td>
-<td><code>N</code></td>
-</tr>
-<tr>
-<td>xi</td>
-<td><code>$\xi$</code></td>
-<td><code>$\Xi$</code></td>
-</tr>
-<tr>
-<td>omicron</td>
-<td><code>o</code></td>
-<td><code>O</code></td>
-</tr>
-<tr>
-<td>pi</td>
-<td><code>$\pi$</code></td>
-<td><code>$\Pi$</code></td>
-</tr>
-<tr>
-<td>rho</td>
-<td><code>$\rho$</code></td>
-<td><code>P</code></td>
-</tr>
-<tr>
-<td>sigma</td>
-<td><code>$\sigma$</code></td>
-<td><code>$\Sigma$</code></td>
-</tr>
-<tr>
-<td>tau</td>
-<td><code>$\tau$</code></td>
-<td><code>T</code></td>
-</tr>
-<tr>
-<td>upsilon</td>
-<td><code>$\upsilon$</code></td>
-<td><code>$\Upsilon</code></td>
-</tr>
-<tr>
-<td>phi</td>
-<td><code>$\phi$</code></td>
-<td><code>$\Phi$</code></td>
-</tr>
-<tr>
-<td>chi</td>
-<td><code>$\chi$</code></td>
-<td><code>X</code></td>
-</tr>
-<tr>
-<td>psi</td>
-<td><code>$\psi$</code></td>
-<td><code>$\Psi$</code></td>
-</tr>
-<tr>
-<td>omega</td>
-<td><code>$\omega$</code></td>
-<td><code>$\Omega$</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="symbols" tabindex="-1">Symbols</h2>
+<p><img alt="LaTeX Greek letters" style="width: 30%" src="/blog/assets/latex-greek-letters.png?v=1.1.1"></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Lowercase</th><th>Uppercase</th></tr></thead><tbody><tr><td>alpha</td><td><code>$\alpha$</code></td><td><code>A</code></td></tr><tr><td>beta</td><td><code>$\beta$</code></td><td><code>B</code></td></tr><tr><td>gamma</td><td><code>$\gamma$</code></td><td><code>$\Gamma$</code></td></tr><tr><td>delta</td><td><code>$\delta$</code></td><td><code>$\Delta$</code></td></tr><tr><td>epsilon</td><td><code>$\epsilon$</code></td><td><code>E</code></td></tr><tr><td>zeta</td><td><code>$\zeta$</code></td><td><code>Z</code></td></tr><tr><td>eta</td><td><code>$\eta$</code></td><td><code>H</code></td></tr><tr><td>theta</td><td><code>$\theta$</code></td><td><code>$\Theta$</code></td></tr><tr><td>iota</td><td><code>$\iota$</code></td><td><code>I</code></td></tr><tr><td>kappa</td><td><code>$\kappa$</code></td><td><code>K</code></td></tr><tr><td>lambda</td><td><code>$\lambda$</code></td><td><code>$\Lambda$</code></td></tr><tr><td>mu</td><td><code>$\mu$</code></td><td><code>M</code></td></tr><tr><td>nu</td><td><code>$\nu$</code></td><td><code>N</code></td></tr><tr><td>xi</td><td><code>$\xi$</code></td><td><code>$\Xi$</code></td></tr><tr><td>omicron</td><td><code>o</code></td><td><code>O</code></td></tr><tr><td>pi</td><td><code>$\pi$</code></td><td><code>$\Pi$</code></td></tr><tr><td>rho</td><td><code>$\rho$</code></td><td><code>P</code></td></tr><tr><td>sigma</td><td><code>$\sigma$</code></td><td><code>$\Sigma$</code></td></tr><tr><td>tau</td><td><code>$\tau$</code></td><td><code>T</code></td></tr><tr><td>upsilon</td><td><code>$\upsilon$</code></td><td><code>$\Upsilon</code></td></tr><tr><td>phi</td><td><code>$\phi$</code></td><td><code>$\Phi$</code></td></tr><tr><td>chi</td><td><code>$\chi$</code></td><td><code>X</code></td></tr><tr><td>psi</td><td><code>$\psi$</code></td><td><code>$\Psi$</code></td></tr><tr><td>omega</td><td><code>$\omega$</code></td><td><code>$\Omega$</code></td></tr></tbody></table>
+<h2 id="symbols">Symbols</h2>
 <p>Some of the supported symbols are shown in the table below.
 The <code>\ddots</code>, <code>\iddots</code>, and <code>\vdots</code> commands
 are defined in the <code>mathdots</code> package.
 The <code>\frownie</code> and <code>\smiley</code> commands
 are defined in the <code>wasysym</code> package.</p>
-<p><img alt="LaTeX symbols part 1" style="width: 57%"
-  src="/blog/assets/latex-symbols1.png?v=1.1.1">
-<img alt="LaTeX symbols part 2" style="width: 57%"
-  src="/blog/assets/latex-symbols2.png?v=1.1.1"></p>
+<p><img alt="LaTeX symbols part 1" style="width: 57%" src="/blog/assets/latex-symbols1.png?v=1.1.1">
+<img alt="LaTeX symbols part 2" style="width: 57%" src="/blog/assets/latex-symbols2.png?v=1.1.1"></p>
 <p>Symbols that represent classes of numbers
 are rendered with the <code>\mathbb</code> command.</p>
-<p><img alt="LaTeX symbols part 3" style="width: 50%"
-  src="/blog/assets/latex-symbols3.png?v=1.1.1"></p>
+<p><img alt="LaTeX symbols part 3" style="width: 50%" src="/blog/assets/latex-symbols3.png?v=1.1.1"></p>
 <p>For more, see
-<a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
-target="_blank">LaTeX:Symbols</a>.</p>
-<h2 id="document-title%2C-author%2C-and-date" tabindex="-1">Document Title, Author, and Date</h2>
+<a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols" target="_blank">LaTeX:Symbols</a>.</p>
+<h2 id="document-title-author-and-date">Document Title, Author, and Date</h2>
 <p>The preamble can include the <code>\title</code>, <code>\author</code>, and <code>\date</code> commands to
 specify information that will be used in a nicely formatted document title.
 For example:</p>
@@ -2570,9 +2523,8 @@ For example:</p>
 \end{document}
 </code></pre>
 <p>This renders the following title information:</p>
-<p><img alt="LaTeX maketitle output" style="width: 50%"
-  src="/blog/assets/latex-maketitle.png?v=1.1.1"></p>
-<h2 id="table-of-contents" tabindex="-1">Table of Contents</h2>
+<p><img alt="LaTeX maketitle output" style="width: 50%" src="/blog/assets/latex-maketitle.png?v=1.1.1"></p>
+<h2 id="table-of-contents">Table of Contents</h2>
 <p>A table of contents can be generated for documents that use the
 <code>\chapter</code>, <code>\section</code>, <code>\subsection</code>, and <code>\subsubsection</code> commands.
 If the package <code>hyperref</code> is included,
@@ -2615,30 +2567,26 @@ that is used to render the table of contents pages.</p>
 \end{document}
 </code></pre>
 <p>This generates the following table of contents:</p>
-<p><img alt="LaTeX table of contents" style="width: 80%"
-  src="/blog/assets/latex-table-of-contents.png?v=1.1.1"></p>
-<h2 id="formatting-the-word-latex" tabindex="-1">Formatting the Word LaTeX</h2>
+<p><img alt="LaTeX table of contents" style="width: 80%" src="/blog/assets/latex-table-of-contents.png?v=1.1.1"></p>
+<h2 id="formatting-the-word-latex">Formatting the Word LaTeX</h2>
 <p>The word LaTeX is specially formatted with the command <code>\LaTeX</code>
 which reneders the following:</p>
-<p><img alt="LaTeX rendered" style="width: 10%"
-  src="/blog/assets/latex-rendered.png?v=1.1.1"></p>
+<p><img alt="LaTeX rendered" style="width: 10%" src="/blog/assets/latex-rendered.png?v=1.1.1"></p>
 <p>Similarly, the word TeX is spacially formatted with <code>\TeX</code>.</p>
 <p>Both are typically followed by a backslash and a space
 to get proper horizontal spacing between it and what follows.</p>
-<h2 id="footnotes" tabindex="-1">Footnotes</h2>
+<h2 id="footnotes">Footnotes</h2>
 <p>To add numbered footnotes, use the <code>\footnote</code> command.
 For example:</p>
 <pre><code class="language-latex">Oil that is, black gold, Texas tea.
 \footnote{Texas tea is another name for oil.}
 </code></pre>
 <p>This adds a section at the bottom for page like the following:</p>
-<p><img alt="LaTeX footnote" style="width: 40%"
-src="/blog/assets/latex-footnote.png?v=1.1.1"></p>
+<p><img alt="LaTeX footnote" style="width: 40%" src="/blog/assets/latex-footnote.png?v=1.1.1"></p>
 <p>It also adds a number in square brackets like the following
 that acts a clickable link to the corresponding footnote.</p>
-<p><img alt="LaTeX footnote number" style="width: 35%"
-src="/blog/assets/latex-footnote-number.png?v=1.1.1"></p>
-<h2 id="appendices" tabindex="-1">Appendices</h2>
+<p><img alt="LaTeX footnote number" style="width: 35%" src="/blog/assets/latex-footnote-number.png?v=1.1.1"></p>
+<h2 id="appendices">Appendices</h2>
 <p>The <code>\appendix</code> command marks the beginning of appendix content.
 The following example document demonstrates a book with two appendices
 that are included in the table of contents.</p>
@@ -2665,7 +2613,7 @@ This is the second appendix.
 
 \end{document}
 </code></pre>
-<h2 id="bibliography" tabindex="-1">Bibliography</h2>
+<h2 id="bibliography">Bibliography</h2>
 <p>To add a bibliography pages to a document:</p>
 <ol>
 <li>
@@ -2675,14 +2623,14 @@ the <code>.tex</code> file that will use it.</p>
 <li>
 <p>Add directives to the <code>.bib</code> file. For example:</p>
 <pre><code class="language-text">@book{htmx-volkmann,
-  author = &quot;Volkmann, R. Mark&quot;,
-  isbn = &quot;9798888650769&quot;,
-  journal = &quot;Pragmatic Bookshelf&quot;,
-  pages = &quot;184&quot;,
-  publisher = &quot;Pragmatic Bookshelf&quot;,
-  title = &quot;Server-Driven Web Apps with Htmx&quot;,
-  url = &quot;https://pragprog.com/titles/mvhtmx/server-driven-web-apps-with-htmx/&quot;,
-  year = &quot;2024&quot;
+  author = "Volkmann, R. Mark",
+  isbn = "9798888650769",
+  journal = "Pragmatic Bookshelf",
+  pages = "184",
+  publisher = "Pragmatic Bookshelf",
+  title = "Server-Driven Web Apps with Htmx",
+  url = "https://pragprog.com/titles/mvhtmx/server-driven-web-apps-with-htmx/",
+  year = "2024"
 }
 </code></pre>
 <p>Also see the directives @article, @inproceedings, and @misc.
@@ -2694,8 +2642,7 @@ Each of these have a different set of required attributes.</p>
 \bibliography{some-name} % refers to the file some-name.bib
 </code></pre>
 <p>This causes bibliography pages similar to the following to be generated.</p>
-<p><img alt="LaTeX bibliography" style="width: 60%"
-  src="/blog/assets/latex-bibliography.png?v=1.1.1"></p>
+<p><img alt="LaTeX bibliography" style="width: 60%" src="/blog/assets/latex-bibliography.png?v=1.1.1"></p>
 </li>
 <li>
 <p>Add citations within the document that link to bibliography entries.
@@ -2706,7 +2653,7 @@ For example:</p>
 clickable link to the corresponding bibliography entry.</p>
 </li>
 </ol>
-<h2 id="index" tabindex="-1">Index</h2>
+<h2 id="index">Index</h2>
 <p>The <code>imakeidx</code> package generates an index including an alphabetical list
 of important words and phrases and the page numbers where they appear.
 Each item in the list is a link that can be clicked to scroll to the occurrence.</p>
@@ -2716,7 +2663,7 @@ Each item in the list is a link that can be clicked to scroll to the occurrence.
 <p>Include the following in the preamble:</p>
 <pre><code class="language-latex">% This needed to include lists of listings, figures, and tables
 % in the Table of Contents.
-% The nottoc option tells it to not include the &quot;Contents&quot; page
+% The nottoc option tells it to not include the "Contents" page
 % in the Table of Contents.
 \usepackage[nottoc]{tocbibind}
 
@@ -2755,7 +2702,7 @@ This reads the <code>.ind</code> file that is generated by the <code>\makeindex<
 It may be necessary to run this twice.</p>
 </li>
 </ol>
-<p>See the sample content in the &quot;Page Numbering&quot; section.</p>
+<p>See the sample content in the “Page Numbering” section.</p>
 <p>To add a page range to the index,
 mark the beginning of the range with <code>\index{some-term|(}</code>
 and mark the end of the range with <code>\index{some-term|)}</code>.
@@ -2765,24 +2712,20 @@ mark the word or phrase with <code>\index{this-key|see{other-key}}</code>.</p>
 <p>Using the <code>\pagenumbering</code> command to switch between
 <code>roman</code> and <code>arabic</code> page numbers confuses the <code>\makeindex</code> command,
 so unfortunate it seems that cannot be done.</p>
-<h2 id="slide-presentations-(beamer)" tabindex="-1">Slide Presentations (beamer)</h2>
+<h2 id="slide-presentations-beamer">Slide Presentations (beamer)</h2>
 <p>LaTeX can create PDF-based slide presentations
-using the &quot;beamer&quot; document class.
+using the “beamer” document class.
 See the following YouTube videos:</p>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=rx7wwtmFlD8"
-target="_blank">How I Make Presentations Using LaTeX &amp; Beamer</a></li>
-<li><a href="https://www.youtube.com/watch?v=0fsWGg81RwU"
-target="_blank">LaTeX Tutorial 11: Beamer Slide Presentation</a></li>
-<li><a href="https://www.overleaf.com/learn/latex/Beamer"
-target="_blank">Overleaf Beamer Guide</a></li>
+<li><a href="https://www.youtube.com/watch?v=rx7wwtmFlD8" target="_blank">How I Make Presentations Using LaTeX &#x26; Beamer</a></li>
+<li><a href="https://www.youtube.com/watch?v=0fsWGg81RwU" target="_blank">LaTeX Tutorial 11: Beamer Slide Presentation</a></li>
+<li><a href="https://www.overleaf.com/learn/latex/Beamer" target="_blank">Overleaf Beamer Guide</a></li>
 </ul>
 <p>The example below demonstrates many <code>beamer</code> features.
 It is based on the the first link above
 which is to a YouTube video from Dr. Trefor Bazett.</p>
 <p>The following screenshot shows the handout pages it generates.</p>
-<p><img alt="LaTeX beamer example" style="width: 100%"
-src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
+<p><img alt="LaTeX beamer example" style="width: 100%" src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
 <pre><code class="language-latex">% Specifying 14pt makes the text larger than the default.
 % Specifying an aspect ratio of 169 makes it 16 by 9 instead of 4 by 3.
 \documentclass[14pt, aspectratio=169, handout]{beamer}
@@ -2838,29 +2781,29 @@ src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
     % The items are progressively revealed on separate slides.
     % If the dash after each slide number is removed,
     % only one item will appear on each slide of the frame.
-    \item&lt;1-&gt; Item 1
-    \item&lt;2-&gt; Item 2
-    \item&lt;3-&gt; Item 3
+    \item&#x3C;1-> Item 1
+    \item&#x3C;2-> Item 2
+    \item&#x3C;3-> Item 3
   \end{itemize}
 
   \vfill
   % These maintain their positions as if all are present,
   % but only one is visible at a time.
-  %\onslide&lt;1&gt;{Spring}
-  %\onslide&lt;2&gt;{Summer}
-  %\onslide&lt;3&gt;{Fall}
+  %\onslide&#x3C;1>{Spring}
+  %\onslide&#x3C;2>{Summer}
+  %\onslide&#x3C;3>{Fall}
 
   % Only one of these is visible at a time
   % and they render in the same position.
-  \only&lt;1&gt;{Spring}
-  \only&lt;2&gt;{Summer}
-  \only&lt;3&gt;{Fall}
+  \only&#x3C;1>{Spring}
+  \only&#x3C;2>{Summer}
+  \only&#x3C;3>{Fall}
 
   \vfill
-  \alert&lt;2&gt;{On all slides in the frame, but red only on the second.}
+  \alert&#x3C;2>{On all slides in the frame, but red only on the second.}
 
   \vfill
-  \textbf&lt;3&gt;{On all slides in the frame, but bold only on the second.}
+  \textbf&#x3C;3>{On all slides in the frame, but bold only on the second.}
 \end{frame}
 
 \begin{frame}
@@ -2906,9 +2849,9 @@ src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
     $a^2 + b^2 = c^2$
   \end{theorem}
 
-  % The &lt;2&gt; below makes this hidden on the first slide of the frame
+  % The &#x3C;2> below makes this hidden on the first slide of the frame
   % and shown on the second.
-  \begin{proof}&lt;2&gt;
+  \begin{proof}&#x3C;2>
     This is a proof. \\
     A QED square is included on the last line.
   \end{proof}
@@ -2916,7 +2859,7 @@ src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
 
 \end{document}
 </code></pre>
-<h2 id="converting-to-epub" tabindex="-1">Converting to EPUB</h2>
+<h2 id="converting-to-epub">Converting to EPUB</h2>
 <p>To convert a LaTeX document to the EPUB format:</p>
 <ol>
 <li>
@@ -2936,7 +2879,7 @@ src="/blog/assets/latex-beamer.png?v=1.1.1"></p>
 <li><code>--mathml</code> to render math mode content</li>
 <li><code>--toc</code></li>
 </ul>
-<h2 id="files-produced" tabindex="-1">Files Produced</h2>
+<h2 id="files-produced">Files Produced</h2>
 <p>When LaTeX processes a <code>.tex</code> file, it can produce many temporary files
 in addition to generate a <code>.pdf</code> file.
 Each file has the same name as the input <code>.tex</code> file,
@@ -2967,16 +2910,16 @@ and read by that command</li>
 if the <code>\tableofcontents</code> command is present,
 and read by that command</li>
 </ul>
-<h2 id="debugging" tabindex="-1">Debugging</h2>
+<h2 id="debugging">Debugging</h2>
 <p>When LaTeX reports errors, it is often useful to temporarily comment out
 or delete sections of the document until the offending line is identified.
 When LaTeX begins processing each file,
-it outputs &quot;(&quot; followed by the file name.
+it outputs ”(” followed by the file name.
 Then it outputs each page number being processed inside square brackets.
-When it finishes processing a file, it outputs &quot;)&quot;.</p>
+When it finishes processing a file, it outputs ”)”.</p>
 <p>If an error occurs, the output above stops and a new line
 describing the error is output.
-This line begins with &quot;!&quot;, followed by an error message.</p>
+This line begins with ”!”, followed by an error message.</p>
 <p>For example, suppose we have the following in the file <code>book.tex</code>:</p>
 <pre><code class="language-latex">\documentclass{book}
 \usepackage{hyperref}
@@ -3018,7 +2961,7 @@ Chapter 1.
 Chapter 2.
 )
 </code></pre>
-<p>Now let's add the invalid command <code>\badcommand</code> in the file <code>chapter2.tex</code>
+<p>Now let’s add the invalid command <code>\badcommand</code> in the file <code>chapter2.tex</code>
 and run the command <code>pdflatex book</code> again.
 This time the output is the following (many lines omitted):</p>
 <pre><code class="language-text">(./book.tex
@@ -3041,14 +2984,14 @@ l.3 \badcommand
 <ul>
 <li>Pages 1 through 8 were successfully processed.</li>
 <li>The file <code>chapter1.tex</code> was successfully processed
-because we see the closing &quot;)&quot; for that file.</li>
+because we see the closing ”)” for that file.</li>
 <li>The file <code>chapter2.tex</code> was not successfully processed
-because the closing &quot;)&quot; for that chapter was never output.</li>
-<li>The output &quot;l.3&quot; means that the error is on line 3 of
+because the closing ”)” for that chapter was never output.</li>
+<li>The output “l.3” means that the error is on line 3 of
 the file being processed and is caused by <code>\badcommand</code>.</li>
 </ul>
 <p>Everything written to the terminal is also written to the file <code>book.log</code>.</p>
-<p>There are four categories for &quot;errors&quot;:</p>
+<p>There are four categories for “errors”:</p>
 <ul>
 <li>LaTeX errors</li>
 <li>TeX errors</li>
@@ -3057,7 +3000,7 @@ the file being processed and is caused by <code>\badcommand</code>.</li>
 </ul>
 <p>Some errors indicate that they occurred
 while processing a specific generated file.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://latexref.xyz?v=1.1.1" rel="noopener" target="_blank">LaTeX2e: An unoffical reference manual</a></li>
 <li><a href="https://ctan.org/?v=1.1.1" rel="noopener" target="_blank">CTAN</a>
@@ -3067,14 +3010,12 @@ Comprehensive TeX Archive Network</li>
 <a href="https://www.youtube.com/watch?v=ydOTMQC7np0" target="_blank">
 LaTeX – Full Tutorial for Beginners</a> from Michelle Krummel
 </li>
-<li><a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73"
-target="_blank">Dr. Trefor Bazett</a> series of 13 YouTube videos</li>
-<li><a href="https://www.youtube.com/watch?v=VhmkLrOjLsw"
-target="_blank">LaTeX Tutorial</a> from Derek Banas</li>
+<li><a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&#x26;list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73" target="_blank">Dr. Trefor Bazett</a> series of 13 YouTube videos</li>
+<li><a href="https://www.youtube.com/watch?v=VhmkLrOjLsw" target="_blank">LaTeX Tutorial</a> from Derek Banas</li>
 <li><a href="https://latexcolor.com" target="_blank">LaTeX Color</a>
-Click the &quot;Reference Guide&quot; link to see
+Click the “Reference Guide” link to see
 a collection of slide themes and color themes.</li>
-<li><a href="https://www.newthinktank.com/2019/01/latex-tutorial/"
-target="_blank">LaTeK cheat sheet</a></li>
-</ul>
-</article> </body></html>
+<li><a href="https://www.newthinktank.com/2019/01/latex-tutorial/" target="_blank">LaTeK cheat sheet</a></li>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

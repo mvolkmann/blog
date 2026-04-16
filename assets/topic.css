@@ -9,45 +9,43 @@
   --table-cell-bg-color: #fff9f2;
 }
 
-a > code {
+.topic-page a > code {
   font-size: 1.4rem;
 }
 
-article aside {
+.topic-page aside {
   border: 1px solid gray;
   font-size: 0.9rem;
   padding: 0.5rem;
 }
 
-body {
-  background-color: var(--bg-color);
-  color: var(--fg-color);
+.topic-page {
   font-family: sans-serif;
   margin: 0 auto;
-  padding: 1rem;
+  max-width: var(--topic-max-width);
 }
 
-figure {
+.topic-page figure {
   display: inline-block;
   margin: 0 0 1rem;
 }
 
-h2 {
+.topic-page h2 {
   color: var(--heading-color);
   font-size: 1.4rem;
   text-align: center;
 }
 
-article > h2 {
+.topic-page article > h2 {
   text-align: start;
 }
 
-article > h2:not(:first-of-type) {
+.topic-page article > h2:not(:first-of-type) {
   border-top: 1px solid var(--rule-color);
   padding-top: 1rem;
 }
 
-h3 {
+.topic-page h3 {
   border-top: 1px dashed var(--rule-color);
   color: var(--accent-color);
   font-size: 1.2rem;
@@ -59,50 +57,52 @@ html {
   scroll-behavior: smooth;
 }
 
-img {
+.topic-page img {
   width: 95%;
 }
 
-img.default-size {
+.topic-page img.default-size {
   width: unset;
 }
 
-img.half-size {
+.topic-page img.half-size {
   width: 50%;
 }
 
-img.keep-size {
+.topic-page img.keep-size {
   width: auto;
 }
 
-.MathJax {
+.topic-page .MathJax {
   font-size: 200%;
 }
 
-li > code,
-p > code {
+.topic-page li > code,
+.topic-page p > code {
   font-size: 1rem;
 }
 
-pre {
+.topic-page pre {
   background-color: var(--table-cell-bg-color) !important;
 }
 
-table {
+.topic-page table {
   border-collapse: collapse;
   color: var(--fg-color);
 }
 
-td {
+.topic-page td {
   background-color: var(--table-cell-bg-color);
+  color: var(--fg-color);
 }
 
-th {
+.topic-page th {
   background-color: var(--table-header-bg-color);
+  color: var(--fg-color);
 }
 
-td,
-th {
+.topic-page td,
+.topic-page th {
   border: solid var(--table-border-color) 1px;
   padding: 0.5rem;
 }

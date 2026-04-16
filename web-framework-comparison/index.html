@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Web Framework Comparison</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Web Framework Comparison</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#sample-app">Sample App</a></li><li><a href="#next.js-version">Next.js Version</a></li><li><a href="#htmx-version">htmx Version</a></li><li><a href="#sveltekit-version">SvelteKit Version</a></li><li><a href="#comparing-the-versions">Comparing the Versions</a></li><li><a href="#lighthouse-scores">Lighthouse Scores</a></li><li><a href="#conclusion">Conclusion</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Web Framework Comparison</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Web Framework Comparison</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#sample-app">Sample App</a></li><li><a href="#nextjs-version">Next.js Version</a></li><li><a href="#htmx-version">htmx Version</a></li><li><a href="#sveltekit-version">SvelteKit Version</a></li><li><a href="#comparing-the-versions">Comparing the Versions</a></li><li><a href="#lighthouse-scores">Lighthouse Scores</a></li><li><a href="#conclusion">Conclusion</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>React is currently the most popular framework for building web applications.
 Alternatives like Svelte, Vue, Angular differ from React in some ways,
 but the fundamental approach used is similar.
@@ -28,30 +30,25 @@ the HTTP verb to use for the request and the URL path where it will be sent.</li
 </ul>
 <p>The following diagram describes commonly used values
 for the <code>hx-swap</code> attribute.</p>
-<p><img alt="hx-swap" style="width: 70%"
-  src="/blog/assets/htmx-hx-swap.png?v=1.1.1"></p>
+<p><img alt="hx-swap" style="width: 70%" src="/blog/assets/htmx-hx-swap.png?v=1.1.1"></p>
 <p>For more detail on htmx, see my
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/htmx/"
-target="_blank">htmx blog page</a>.</p>
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/htmx/" target="_blank">htmx blog page</a>.</p>
 <p>There are many frameworks that leverage React.
 Next.js is one of the most popular.
 For details on Next.js, see my
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/next-js/"
-target="_blank">Next.js blog page</a>.</p>
-<h2 id="sample-app" tabindex="-1">Sample App</h2>
-<p>Let's implement a web app using Next.js and then implement
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/next-js/" target="_blank">Next.js blog page</a>.</p>
+<h2 id="sample-app">Sample App</h2>
+<p>Let’s implement a web app using Next.js and then implement
 the same app using SvelteKit and htmx to see how they differ.</p>
 <p>The app manages a collection of dogs.
 Users can add new dogs.
 They can also hover over of the table row of an existing dog
 to reveal buttons for deleting or editing it.</p>
-<p><img alt="Dog CRUD app" style="width: 50%"
-  src="/blog/assets/htmx-dog-crud.png?v=1.1.1"></p>
-<h2 id="next.js-version" tabindex="-1">Next.js Version</h2>
+<p><img alt="Dog CRUD app" style="width: 50%" src="/blog/assets/htmx-dog-crud.png?v=1.1.1"></p>
+<h2 id="nextjs-version">Next.js Version</h2>
 <p>All the code for the Next.js version of this app
 can be found in the GitHub repository at
-<a href="https://github.com/mvolkmann/nextjs-dogs-crud"
-target="_blank">nextjs-dogs-crud</a>.</p>
+<a href="https://github.com/mvolkmann/nextjs-dogs-crud" target="_blank">nextjs-dogs-crud</a>.</p>
 <p>Follow these steps to create the app from scratch.</p>
 <ol>
 <li>
@@ -59,7 +56,7 @@ target="_blank">nextjs-dogs-crud</a>.</p>
 </li>
 <li>
 <p><code>npx create-next-app@latest</code></p>
-<p>I chose the name &quot;dogs-crud&quot; and
+<p>I chose the name “dogs-crud” and
 accepted all the defaults except using Tailwind.</p>
 </li>
 <li>
@@ -91,7 +88,7 @@ button {
   margin-bottom: 1rem;
   padding: 0.5rem;
 
-  &amp;:disabled {
+  &#x26;:disabled {
     background-color: gray;
   }
 }
@@ -148,7 +145,7 @@ th {
 td {
   background-color: white;
 
-  &amp; button {
+  &#x26; button {
     background-color: transparent;
     color: white;
   }
@@ -170,7 +167,7 @@ export type Dog = {
   breed: string;
 };
 
-const dogMap = new Map&lt;string, Dog&gt;();
+const dogMap = new Map&#x3C;string, Dog>();
 
 addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
@@ -188,7 +185,7 @@ export function deleteDog(id: string): boolean {
 
 export function getDogs(): Dog[] {
   const dogs = Array.from(dogMap.values());
-  return dogs.sort((a: Dog, b: Dog) =&gt; a.name.localeCompare(b.name));
+  return dogs.sort((a: Dog, b: Dog) => a.name.localeCompare(b.name));
 }
 
 export function updateDog(
@@ -263,8 +260,8 @@ export async function PUT(req: Request, {params: {id}}: Props) {
 <p>This file provides the HTML boilerplate that
 wraps what is rendered by <code>src/app/page.tsx</code> below.</p>
 <ul>
-<li>Delete the two lines that refer to the &quot;Inter&quot; font.</li>
-<li>Change the title from &quot;Create Next App&quot; to &quot;Dogs CRUD&quot;.</li>
+<li>Delete the two lines that refer to the “Inter” font.</li>
+<li>Change the title from “Create Next App” to “Dogs CRUD”.</li>
 <li>Remove the <code>className</code> attribute from the <code>body</code> element.</li>
 </ul>
 </li>
@@ -275,11 +272,11 @@ import {useEffect, useState} from 'react';
 
 type Dog = {id: string; name: string; breed: string};
 
-const Home = () =&gt; {
-  const [dogMap, setDogMap] = useState&lt;Map&lt;string, Dog&gt;&gt;(new Map());
-  const [selectedDog, setSelectedDog] = useState&lt;Dog | undefined&gt;();
+const Home = () => {
+  const [dogMap, setDogMap] = useState&#x3C;Map&#x3C;string, Dog>>(new Map());
+  const [selectedDog, setSelectedDog] = useState&#x3C;Dog | undefined>();
 
-  useEffect(() =&gt; {
+  useEffect(() => {
     loadDogs();
   }, []);
 
@@ -299,7 +296,7 @@ const Home = () =&gt; {
     setDogMap(newDogMap);
   }
 
-  async function handleDelete(event: React.MouseEvent&lt;HTMLButtonElement&gt;) {
+  async function handleDelete(event: React.MouseEvent&#x3C;HTMLButtonElement>) {
     if (!confirm('Are you sure?')) return;
 
     const tr = event.currentTarget.closest('tr');
@@ -317,7 +314,7 @@ const Home = () =&gt; {
     }
   }
 
-  function handleEdit(event: React.MouseEvent&lt;HTMLButtonElement&gt;) {
+  function handleEdit(event: React.MouseEvent&#x3C;HTMLButtonElement>) {
     const tr = event.currentTarget.closest('tr');
     // It should never fail to find a `tr` that wraps the clicked button.
     if (!tr) throw new Error('tr not found');
@@ -327,7 +324,7 @@ const Home = () =&gt; {
     setSelectedDog(dogMap.get(tr.id));
   }
 
-  async function handleSubmit(event: React.FormEvent&lt;HTMLFormElement&gt;) {
+  async function handleSubmit(event: React.FormEvent&#x3C;HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
 
@@ -351,7 +348,7 @@ const Home = () =&gt; {
   async function loadDogs() {
     const res = await fetch('/api/dogs');
     const dogArray = await res.json();
-    const dogMap = new Map&lt;string, Dog&gt;();
+    const dogMap = new Map&#x3C;string, Dog>();
     for (const dog of dogArray) {
       dogMap.set(dog.id, dog);
     }
@@ -359,73 +356,73 @@ const Home = () =&gt; {
   }
 
   return (
-    &lt;main&gt;
-      &lt;h1&gt;Dogs&lt;/h1&gt;
-      &lt;form onSubmit={handleSubmit}&gt;
-        &lt;div&gt;
-          &lt;label htmlFor=&quot;name&quot;&gt;Name&lt;/label&gt;
-          &lt;input
-            id=&quot;name&quot;
-            name=&quot;name&quot;
+    &#x3C;main>
+      &#x3C;h1>Dogs&#x3C;/h1>
+      &#x3C;form onSubmit={handleSubmit}>
+        &#x3C;div>
+          &#x3C;label htmlFor="name">Name&#x3C;/label>
+          &#x3C;input
+            id="name"
+            name="name"
             required
             size={30}
-            type=&quot;text&quot;
+            type="text"
             defaultValue={selectedDog ? selectedDog.name : ''}
-          /&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          &lt;label htmlFor=&quot;breed&quot;&gt;Breed&lt;/label&gt;
-          &lt;input
-            id=&quot;breed&quot;
-            name=&quot;breed&quot;
+          />
+        &#x3C;/div>
+        &#x3C;div>
+          &#x3C;label htmlFor="breed">Breed&#x3C;/label>
+          &#x3C;input
+            id="breed"
+            name="breed"
             required
             size={30}
-            type=&quot;text&quot;
+            type="text"
             defaultValue={selectedDog ? selectedDog.breed : ''}
-          /&gt;
-        &lt;/div&gt;
-        &lt;div className=&quot;buttons&quot;&gt;
-          &lt;button id=&quot;submit-btn&quot;&gt;{selectedDog ? 'Update' : 'Add'}&lt;/button&gt;
-          {selectedDog &amp;&amp; (
-            &lt;button type=&quot;button&quot; onClick={() =&gt; setSelectedDog(undefined)}&gt;
+          />
+        &#x3C;/div>
+        &#x3C;div className="buttons">
+          &#x3C;button id="submit-btn">{selectedDog ? 'Update' : 'Add'}&#x3C;/button>
+          {selectedDog &#x26;&#x26; (
+            &#x3C;button type="button" onClick={() => setSelectedDog(undefined)}>
               Cancel
-            &lt;/button&gt;
+            &#x3C;/button>
           )}
-        &lt;/div&gt;
-      &lt;/form&gt;
-      &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Breed&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          {Array.from(dogMap.values()).map(dog =&gt; (
-            &lt;tr className=&quot;on-hover&quot; id={dog.id} key={dog.id}&gt;
-              &lt;td&gt;{dog.name}&lt;/td&gt;
-              &lt;td&gt;{dog.breed}&lt;/td&gt;
-              &lt;td className=&quot;buttons&quot;&gt;
-                &lt;button
-                  className=&quot;show-on-hover&quot;
+        &#x3C;/div>
+      &#x3C;/form>
+      &#x3C;table>
+        &#x3C;thead>
+          &#x3C;tr>
+            &#x3C;th>Name&#x3C;/th>
+            &#x3C;th>Breed&#x3C;/th>
+          &#x3C;/tr>
+        &#x3C;/thead>
+        &#x3C;tbody>
+          {Array.from(dogMap.values()).map(dog => (
+            &#x3C;tr className="on-hover" id={dog.id} key={dog.id}>
+              &#x3C;td>{dog.name}&#x3C;/td>
+              &#x3C;td>{dog.breed}&#x3C;/td>
+              &#x3C;td className="buttons">
+                &#x3C;button
+                  className="show-on-hover"
                   onClick={handleDelete}
-                  type=&quot;button&quot;
-                &gt;
+                  type="button"
+                >
                   ✕
-                &lt;/button&gt;
-                &lt;button
-                  className=&quot;show-on-hover&quot;
+                &#x3C;/button>
+                &#x3C;button
+                  className="show-on-hover"
                   onClick={handleEdit}
-                  type=&quot;button&quot;
-                &gt;
+                  type="button"
+                >
                   ✎
-                &lt;/button&gt;
-              &lt;/td&gt;
-            &lt;/tr&gt;
+                &#x3C;/button>
+              &#x3C;/td>
+            &#x3C;/tr>
           ))}
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/main&gt;
+        &#x3C;/tbody>
+      &#x3C;/table>
+    &#x3C;/main>
   );
 };
 
@@ -441,51 +438,48 @@ export default Home;
 <li>
 <p>Add a dog.</p>
 <p>Enter a name and breed in the form at the top.
-Click the &quot;Add&quot; button to add a new dog.</p>
+Click the “Add” button to add a new dog.</p>
 </li>
 <li>
 <p>Edit a dog.</p>
 <p>Hover over one of the dog rows and click the pencil icon that appears.
 Modify the name and/or breed in the form at the top.
-Click the &quot;Update&quot; button to submit the changes.</p>
+Click the “Update” button to submit the changes.</p>
 </li>
 <li>
 <p>Delete a dog.</p>
-<p>Hover over one of the dog rows and click the &quot;X&quot; icon that appears.
-Click the &quot;OK&quot; button in the confirmation dialog to approve the delete.</p>
+<p>Hover over one of the dog rows and click the “X” icon that appears.
+Click the “OK” button in the confirmation dialog to approve the delete.</p>
 </li>
 </ol>
-<h2 id="htmx-version" tabindex="-1">htmx Version</h2>
+<h2 id="htmx-version">htmx Version</h2>
 <p>Unlike Next.js, the htmx library does not
 provide a framework for implementing API endpoints.
 This is both good and bad.
 The good side is that we can choose any
 programming language and server framework.
-For example, we could use Go and the &quot;Go Fiber&quot; library.
+For example, we could use Go and the “Go Fiber” library.
 Or we could use Python and the Fast API, Flask, or Django libraries.</p>
 <p>Most web developers are already familiar with JavaScript,
 so we will use that for our example app.
 Specifically, we will use the Bun JavaScript engine
 and the Hono server library.</p>
-<p>&quot;<a href="https://bun.sh?v=1.1.1" rel="noopener" target="_blank">Bun</a>
-is a fast JavaScript all-in-one toolkit.&quot;
+<p>“<a href="https://bun.sh?v=1.1.1" rel="noopener" target="_blank">Bun</a>
+is a fast JavaScript all-in-one toolkit.”
 It includes a JavaScript runtime, package manager, bundler, and test runner.</p>
 <p>Bun can be used as a drop-in replacement for npm and Node.js.
 The Bun runtime supports nearly all Node.js built-in modules.
 It also supports JSX which we will utilize
 in our API endpoints to generate HTML.</p>
 <p>For more detail on Bun, see my
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/bun/"
-target="_blank">bun blog page</a>.</p>
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/bun/" target="_blank">bun blog page</a>.</p>
 <p><a href="https://hono.dev/?v=1.1.1" rel="noopener" target="_blank">Hono</a>
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
 For more detail on Hono, see my
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/hono/"
-target="_blank">Hono blog page</a>.</p>
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/hono/" target="_blank">Hono blog page</a>.</p>
 <p>All the code for the htmx version of this app
 can be found in the GitHub repository at
-<a href="https://github.com/mvolkmann/htmx-examples/tree/main/htmx-dogs-crud"
-target="_blank">htmx-dogs-crud</a>.</p>
+<a href="https://github.com/mvolkmann/htmx-examples/tree/main/htmx-dogs-crud" target="_blank">htmx-dogs-crud</a>.</p>
 <p>Follow these steps to create the app from scratch.</p>
 <ol>
 <li>
@@ -506,14 +500,14 @@ but there will be a new version that supports windows very soon.</p>
 <p><code>npm install hono</code></p>
 </li>
 <li>
-<p>Add the following line in <code>tsconfig.json</code> inside the &quot;compilerOptions&quot;:</p>
-<pre><code class="language-json">&quot;jsxImportSource&quot;: &quot;hono/jsx&quot;,
+<p>Add the following line in <code>tsconfig.json</code> inside the “compilerOptions”:</p>
+<pre><code class="language-json">"jsxImportSource": "hono/jsx",
 </code></pre>
 </li>
 <li>
 <p>Add the following in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;scripts&quot;: {
-  &quot;dev&quot;: &quot;bun run --watch server.tsx&quot;
+<pre><code class="language-json">"scripts": {
+  "dev": "bun run --watch server.tsx"
 },
 </code></pre>
 </li>
@@ -529,7 +523,7 @@ type Dog = {id: string; name: string; breed: string};
 
 let selectedId = '';
 
-const dogMap = new Map&lt;string, Dog&gt;();
+const dogMap = new Map&#x3C;string, Dog>();
 
 addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
@@ -548,15 +542,15 @@ function dogRow(dog: Dog, updating = false) {
   // Using an out-of-band swap achieves this.
   if (updating) attrs['hx-swap-oob'] = 'true';
 
-  // The &quot;on-hover&quot; CSS class causes the delete and edit buttons
+  // The "on-hover" CSS class causes the delete and edit buttons
   // for this row to appear when the user hovers over the row.
   return (
-    &lt;tr class=&quot;on-hover&quot; id={`row-${dog.id}`} {...attrs}&gt;
-      &lt;td&gt;{dog.name}&lt;/td&gt;
-      &lt;td&gt;{dog.breed}&lt;/td&gt;
-      &lt;td class=&quot;buttons&quot;&gt;
+    &#x3C;tr class="on-hover" id={`row-${dog.id}`} {...attrs}>
+      &#x3C;td>{dog.name}&#x3C;/td>
+      &#x3C;td>{dog.breed}&#x3C;/td>
+      &#x3C;td class="buttons">
         {/* The `hx-confirm` attribute causes a confirmation dialog to appear
-            before a DELETE request is sent to the &quot;/dog/{id}&quot; endpoint.
+            before a DELETE request is sent to the "/dog/{id}" endpoint.
             The `hx-delete` attribute specifies the URL
             where a DELETE request will be sent.
             The `hx-target` attribute specifies that the target of the
@@ -564,32 +558,32 @@ function dogRow(dog: Dog, updating = false) {
             which represents the row that contains this button.
             The `hx-swap` attribute specifies that the target element
             should be deleted, which removes the table row. */}
-        &lt;button
-          class=&quot;show-on-hover&quot;
-          hx-confirm=&quot;Are you sure?&quot;
+        &#x3C;button
+          class="show-on-hover"
+          hx-confirm="Are you sure?"
           hx-delete={`/dog/${dog.id}`}
-          hx-target=&quot;closest tr&quot;
-          hx-swap=&quot;delete&quot;
-          type=&quot;button&quot;
-        &gt;
+          hx-target="closest tr"
+          hx-swap="delete"
+          type="button"
+        >
           ✕
-        &lt;/button&gt;
+        &#x3C;/button>
         {/* This selects the dog which triggers a selection-change event,
             which causes the form to update.
             The `hx-get` attribute specifies the URL
             where a GET request will be sent.
             The `hx-swap` attribute specifies that
             nothing on the page will be modified. */}
-        &lt;button
-          class=&quot;show-on-hover&quot;
+        &#x3C;button
+          class="show-on-hover"
           hx-get={'/select/' + dog.id}
-          hx-swap=&quot;none&quot;
-          type=&quot;button&quot;
-        &gt;
+          hx-swap="none"
+          type="button"
+        >
           ✎
-        &lt;/button&gt;
-      &lt;/td&gt;
-    &lt;/tr&gt;
+        &#x3C;/button>
+      &#x3C;/td>
+    &#x3C;/tr>
   );
 }
 
@@ -599,7 +593,7 @@ const app = new Hono();
 app.use('/*', serveStatic({root: './public'}));
 
 // Deletes the dog with a given id.
-app.delete('/dog/:id', (c: Context) =&gt; {
+app.delete('/dog/:id', (c: Context) => {
   const id = c.req.param('id');
   const existed = dogMap.delete(id);
   if (!existed) c.status(404);
@@ -607,9 +601,9 @@ app.delete('/dog/:id', (c: Context) =&gt; {
 });
 
 // Deselects the currently selected dog.
-app.get('/deselect', (c: Context) =&gt; {
+app.get('/deselect', (c: Context) => {
   selectedId = '';
-  // Setting the &quot;HX-Trigger&quot; response header causes
+  // Setting the "HX-Trigger" response header causes
   // the specified event to be triggered in the browser.
   // We listen for this event in `index.html` below
   // and send a GET request to the `/form` endpoint
@@ -619,7 +613,7 @@ app.get('/deselect', (c: Context) =&gt; {
 });
 
 // Gets the proper form for either adding or updating a dog.
-app.get('/form', (c: Context) =&gt; {
+app.get('/form', (c: Context) => {
   const selectedDog = dogMap.get(selectedId);
 
   // This attribute causes the `form` to be reset (cleared)
@@ -645,59 +639,59 @@ app.get('/form', (c: Context) =&gt; {
     // The `hx-disabled-elt` element lists the elements that
     // should be disabled while a request is being processed.
     // Submitting the form triggers a request.
-    &lt;form hx-disabled-elt=&quot;#submit-btn&quot; {...attrs}&gt;
-      &lt;div&gt;
-        &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;
-        &lt;input
-          id=&quot;name&quot;
-          name=&quot;name&quot;
+    &#x3C;form hx-disabled-elt="#submit-btn" {...attrs}>
+      &#x3C;div>
+        &#x3C;label for="name">Name&#x3C;/label>
+        &#x3C;input
+          id="name"
+          name="name"
           required
           size={30}
-          type=&quot;text&quot;
+          type="text"
           value={selectedDog?.name ?? ''}
-        /&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-        &lt;label for=&quot;breed&quot;&gt;Breed&lt;/label&gt;
-        &lt;input
-          id=&quot;breed&quot;
-          name=&quot;breed&quot;
+        />
+      &#x3C;/div>
+      &#x3C;div>
+        &#x3C;label for="breed">Breed&#x3C;/label>
+        &#x3C;input
+          id="breed"
+          name="breed"
           required
           size={30}
-          type=&quot;text&quot;
+          type="text"
           value={selectedDog?.breed ?? ''}
-        /&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;buttons&quot;&gt;
-        &lt;button id=&quot;submit-btn&quot;&gt;{selectedId ? 'Update' : 'Add'}&lt;/button&gt;
-        {selectedId &amp;&amp; (
-          &lt;button hx-get=&quot;/deselect&quot; hx-swap=&quot;none&quot; type=&quot;button&quot;&gt;
+        />
+      &#x3C;/div>
+      &#x3C;div class="buttons">
+        &#x3C;button id="submit-btn">{selectedId ? 'Update' : 'Add'}&#x3C;/button>
+        {selectedId &#x26;&#x26; (
+          &#x3C;button hx-get="/deselect" hx-swap="none" type="button">
             Cancel
-          &lt;/button&gt;
+          &#x3C;/button>
         )}
-      &lt;/div&gt;
-    &lt;/form&gt;
+      &#x3C;/div>
+    &#x3C;/form>
   );
 });
 
 // Selects a dog.
-app.get('/select/:id', (c: Context) =&gt; {
+app.get('/select/:id', (c: Context) => {
   selectedId = c.req.param('id');
-  // As described above, setting the &quot;HX-Trigger&quot; response header
+  // As described above, setting the "HX-Trigger" response header
   // causes the specified event to be triggered in the browser.
   c.header('HX-Trigger', 'selection-change');
   return c.body(null);
 });
 
 // Gets table rows for all the dogs.
-app.get('/table-rows', (c: Context) =&gt; {
+app.get('/table-rows', (c: Context) => {
   const dogs = Array.from(dogMap.values());
-  dogs.sort((a: Dog, b: Dog) =&gt; a.name.localeCompare(b.name));
-  return c.html(&lt;&gt;{dogs.map(dog =&gt; dogRow(dog))}&lt;/&gt;);
+  dogs.sort((a: Dog, b: Dog) => a.name.localeCompare(b.name));
+  return c.html(&#x3C;>{dogs.map(dog => dogRow(dog))}&#x3C;/>);
 });
 
 // Creates a dog and returns a table row describing it.
-app.post('/dog', async (c: Context) =&gt; {
+app.post('/dog', async (c: Context) => {
   const formData = await c.req.formData();
   const name = (formData.get('name') as string) || '';
   const breed = (formData.get('breed') as string) || '';
@@ -707,7 +701,7 @@ app.post('/dog', async (c: Context) =&gt; {
 
 // Updates a dog and returns a new table row describing it.
 // The new row will replace the existing row for this dog.
-app.put('/dog/:id', async (c: Context) =&gt; {
+app.put('/dog/:id', async (c: Context) => {
   const id = c.req.param('id');
   const formData = await c.req.formData();
   const name = (formData.get('name') as string) || '';
@@ -729,37 +723,37 @@ we saw in the Next.js <code>src/app/global.css</code> file.</p>
 </li>
 <li>
 <p>Create the file <code>public/index.html</code> containing the following:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;htmx CRUD&lt;/title&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;Dogs CRUD&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;styles.css&quot; /&gt;
-    &lt;script src=&quot;https://unpkg.com/htmx.org@1.9.10&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;h1&gt;Dogs&lt;/h1&gt;
-    &lt;!-- This causes an HTML form to be inserted in this div
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>htmx CRUD&#x3C;/title>
+    &#x3C;meta name="description" content="Dogs CRUD" />
+    &#x3C;meta name="viewport" content="width=device-width" />
+    &#x3C;link rel="stylesheet" href="styles.css" />
+    &#x3C;script src="https://unpkg.com/htmx.org@1.9.10">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;h1>Dogs&#x3C;/h1>
+    &#x3C;!-- This causes an HTML form to be inserted in this div
          when the page is initially loaded, and again
-         every time a &quot;selection-change&quot; event is dispatched
-         and bubbles up to the body element.  --&gt;
-    &lt;div hx-trigger=&quot;load, selection-change from:body&quot; hx-get=&quot;/form&quot;&gt;&lt;/div&gt;
-    &lt;!-- This causes table rows (tr elements) to be inserted in
+         every time a "selection-change" event is dispatched
+         and bubbles up to the body element.  -->
+    &#x3C;div hx-trigger="load, selection-change from:body" hx-get="/form">&#x3C;/div>
+    &#x3C;!-- This causes table rows (tr elements) to be inserted in
          the tbody element when the page is initially loaded.
          Subsequent changes to the table rows are
-         handled by elements returned by the the server. --&gt;
-    &lt;table hx-trigger=&quot;load&quot; hx-get=&quot;/table-rows&quot; hx-target=&quot;tbody&quot;&gt;
-      &lt;thead&gt;
-        &lt;tr&gt;
-          &lt;th&gt;Name&lt;/th&gt;
-          &lt;th&gt;Breed&lt;/th&gt;
-        &lt;/tr&gt;
-      &lt;/thead&gt;
-      &lt;tbody&gt;&lt;/tbody&gt;
-    &lt;/table&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+         handled by elements returned by the the server. -->
+    &#x3C;table hx-trigger="load" hx-get="/table-rows" hx-target="tbody">
+      &#x3C;thead>
+        &#x3C;tr>
+          &#x3C;th>Name&#x3C;/th>
+          &#x3C;th>Breed&#x3C;/th>
+        &#x3C;/tr>
+      &#x3C;/thead>
+      &#x3C;tbody>&#x3C;/tbody>
+    &#x3C;/table>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 </li>
 <li>
@@ -772,14 +766,13 @@ we saw in the Next.js <code>src/app/global.css</code> file.</p>
 <p>Just like in the Next.js app, add a dog, edit a dog, and delete a dog.</p>
 </li>
 </ol>
-<h2 id="sveltekit-version" tabindex="-1">SvelteKit Version</h2>
+<h2 id="sveltekit-version">SvelteKit Version</h2>
 <p>I also implemented the same app using SvelteKit.</p>
 <p>All the code for the SvelteKit version of this app
 can be found in the GitHub repository at
-<a href="https://github.com/mvolkmann/htmx-examples/tree/main/svelte-dogs-crud"
-target="_blank">svelte-dogs-crud</a>.</p>
+<a href="https://github.com/mvolkmann/htmx-examples/tree/main/svelte-dogs-crud" target="_blank">svelte-dogs-crud</a>.</p>
 <p>I was only able to get the SvelteKit app to run with Node 18.19.1.</p>
-<h2 id="comparing-the-versions" tabindex="-1">Comparing the Versions</h2>
+<h2 id="comparing-the-versions">Comparing the Versions</h2>
 <p>What conclusions can be drawn from comparing these versions of the app?</p>
 <ul>
 <li>
@@ -876,20 +869,18 @@ This requires making a copy of a <code>Map</code> for each change that
 must trigger a page update, which is inefficient.</p>
 <p>Reactivity is SvelteKit does not require making copies of the <code>Map</code>.</p>
 <p>In the htmx approach, the server returns new snippets of HTML
-that are inserted into the page, so it doesn't need reactivity.
+that are inserted into the page, so it doesn’t need reactivity.
 For apps where there is state that never needs to be shared with the server,
 libraries like
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/alpine/"
-target="_blank">Alpine</a> and
-<a href="https://mvolkmann.github.io/blog/topics/#/blog/hyperscript/"
-target="_blank">_hyperscript</a> can be used.
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/alpine/" target="_blank">Alpine</a> and
+<a href="https://mvolkmann.github.io/blog/topics/#/blog/hyperscript/" target="_blank">_hyperscript</a> can be used.
 Both are small, client-side JavaScript libraries
 that make it easy to add reactivity to web pages.</p>
 </li>
 <li>
 <p>Learning curve</p>
 <p>The learning curve for htmx is smaller than for Next.js/React and SvelteKit.</p>
-<p>It's difficult to compare the required learning curves
+<p>It’s difficult to compare the required learning curves
 if you are already familiar with React or Svelte.
 But try to imagine what the difference would be
 if you did not already have that background.</p>
@@ -920,108 +911,108 @@ so this would not be a differentiator.</p>
 <p>Server-side flexibility</p>
 <p>Next.js and SvelteKit apps typically implement their API endpoints
 using the framework and write the code in TypeScript.
-It's also possible to implement the API endpoints using
+It’s also possible to implement the API endpoints using
 any programming language and server library just like with htmx.
-However, that doesn't remove the need for writing a lot of
+However, that doesn’t remove the need for writing a lot of
 client-side JavaScript code and incurring larger JavaScript downloads.</p>
 </li>
 </ul>
-<h2 id="lighthouse-scores" tabindex="-1">Lighthouse Scores</h2>
+<h2 id="lighthouse-scores">Lighthouse Scores</h2>
 <p>The following table shows Chrome Lighthouse scores
 for all three versions of the app running locally.
 For Next.js and SvelteKit, separate scores are shown
 for running in development mode versus production.</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th style="text-align:right">Next.js dev</th>
-<th style="text-align:right">Next.js prod</th>
-<th style="text-align:right">SvelteKit dev</th>
-<th style="text-align:right">SvelteKit prod</th>
-<th style="text-align:right">htmx</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Performance</strong></td>
-<td style="text-align:right">56</td>
-<td style="text-align:right">99</td>
-<td style="text-align:right">75</td>
-<td style="text-align:right">98</td>
-<td style="text-align:right">99</td>
-</tr>
-<tr>
-<td><strong>Accessibility</strong></td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-</tr>
-<tr>
-<td><strong>Best Practices</strong></td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-</tr>
-<tr>
-<td><strong>SEO</strong></td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-<td style="text-align:right">100</td>
-</tr>
-<tr>
-<td><strong>First Contentful Paint</strong></td>
-<td style="text-align:right">0.9 s</td>
-<td style="text-align:right">1.0 s</td>
-<td style="text-align:right">1.1 s</td>
-<td style="text-align:right">1.8 s</td>
-<td style="text-align:right">1.6 s</td>
-</tr>
-<tr>
-<td><strong>Largest Contentful Paint</strong></td>
-<td style="text-align:right">9.8 s</td>
-<td style="text-align:right">2.1 s</td>
-<td style="text-align:right">9.9 s</td>
-<td style="text-align:right">2.1 s</td>
-<td style="text-align:right">1.7 s</td>
-</tr>
-<tr>
-<td><strong>Total Blocking Time</strong></td>
-<td style="text-align:right">780 ms</td>
-<td style="text-align:right">0 ms</td>
-<td style="text-align:right">0 ms</td>
-<td style="text-align:right">0 ms</td>
-<td style="text-align:right">0 ms</td>
-</tr>
-<tr>
-<td><strong>Cummulative Layout Shift</strong></td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.002</td>
-</tr>
-<tr>
-<td><strong>Speed Index</strong></td>
-<td style="text-align:right">0.9s</td>
-<td style="text-align:right">1.1s</td>
-<td style="text-align:right">1.1s</td>
-<td style="text-align:right">1.8s</td>
-<td style="text-align:right">1.6s</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th></th><th align="right">Next.js dev</th><th align="right">Next.js prod</th><th align="right">SvelteKit dev</th><th align="right">SvelteKit prod</th><th align="right">htmx</th></tr></thead><tbody><tr><td><strong>Performance</strong></td><td align="right">56</td><td align="right">99</td><td align="right">75</td><td align="right">98</td><td align="right">99</td></tr><tr><td><strong>Accessibility</strong></td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td></tr><tr><td><strong>Best Practices</strong></td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td></tr><tr><td><strong>SEO</strong></td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td><td align="right">100</td></tr><tr><td><strong>First Contentful Paint</strong></td><td align="right">0.9 s</td><td align="right">1.0 s</td><td align="right">1.1 s</td><td align="right">1.8 s</td><td align="right">1.6 s</td></tr><tr><td><strong>Largest Contentful Paint</strong></td><td align="right">9.8 s</td><td align="right">2.1 s</td><td align="right">9.9 s</td><td align="right">2.1 s</td><td align="right">1.7 s</td></tr><tr><td><strong>Total Blocking Time</strong></td><td align="right">780 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td><td align="right">0 ms</td></tr><tr><td><strong>Cummulative Layout Shift</strong></td><td align="right">0.002</td><td align="right">0.002</td><td align="right">0.002</td><td align="right">0.002</td><td align="right">0.002</td></tr><tr><td><strong>Speed Index</strong></td><td align="right">0.9s</td><td align="right">1.1s</td><td align="right">1.1s</td><td align="right">1.8s</td><td align="right">1.6s</td></tr></tbody></table>
 <p>These scores show that both Next.js and SvelteKit have dubious scores
-for &quot;Largest Contentful Paint&quot; when running in development mode.
-Perhaps that doesn't really matter.</p>
+for “Largest Contentful Paint” when running in development mode.
+Perhaps that doesn’t really matter.</p>
 <p>When running in production mode, all of them have reasonably good scores.</p>
-<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>Htmx has a number of benefits over single page app (SPA) frameworks
 like React, Svelte, Vue, and Angular.
 In my opinion, the largest benefits are simplicity and
@@ -1029,5 +1020,6 @@ a return to focusing on the web fundamentals of HTML and CSS.
 I feel more productive when using htmx.</p>
 <p>I encourage you to give htmx a try in the next web app you create
 and judge for yourself whether it simplifies web development
-and makes you more productive.</p>
-</article> </body></html>
+and makes you more productive.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

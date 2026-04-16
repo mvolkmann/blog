@@ -1,6 +1,8 @@
-<!DOCTYPE html><html lang="en"> <head><title>UNIX Notes</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>UNIX Notes</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#ascii-characters">ASCII characters</a></li><li><a href="#awk">Awk</a></li><li><a href="#bc-line-oriented-calculator">bc line-oriented calculator</a></li><li><a href="#creating-directories">Creating Directories</a></li><li><a href="#curl">Curl</a></li><li><a href="#default-shell">Default Shell</a></li><li><a href="#diff">Diff</a></li><li><a href="#disk-space">Disk Space</a></li><li><a href="#display">Display</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#finding%2Fsearching-files">Finding/Searching Files</a></li><ul><li><a href="#find">find</a></li><li><a href="#grep">grep</a></li><li><a href="#ripgrep">ripgrep</a></li></ul><li><a href="#ftp">FTP</a></li><li><a href="#functions">Functions</a></li><li><a href="#graphics-files">Graphics files</a></li><li><a href="#hex">Hex</a></li><li><a href="#home-directory-mount">Home Directory Mount</a></li><li><a href="#host">Host</a></li><li><a href="#ip-address">IP address</a></li><li><a href="#ld_library_path">LD_LIBRARY_PATH</a></li><li><a href="#line-endings">Line Endings</a></li><li><a href="#list-directory-contents">List Directory Contents</a></li><li><a href="#list-library-contents">List Library Contents</a></li><li><a href="#locate">Locate</a></li><li><a href="#make">Make</a></li><li><a href="#man-pages">Man Pages</a></li><li><a href="#messages">Messages</a></li><li><a href="#mount">Mount</a></li><li><a href="#netstat">Netstat</a></li><li><a href="#password">Password</a></li><li><a href="#patch">Patch</a></li><li><a href="#path">PATH</a></li><li><a href="#ports">Ports</a></li><li><a href="#printing">Printing</a></li><li><a href="#processes">Processes</a></li><li><a href="#rsync">rsync</a></li><li><a href="#script-command-echoing">Script Command Echoing</a></li><li><a href="#secure-copy">Secure Copy</a></li><li><a href="#shell-prompt">Shell Prompt</a></li><li><a href="#shell-scripts">Shell Scripts</a></li><li><a href="#ssh">SSH</a></li><li><a href="#stdout-and-stderr">stdout and stderr</a></li><li><a href="#switch-user-(su-and-sudo)">Switch User (su and sudo)</a></li><li><a href="#symbolic-links">Symbolic Links</a></li><li><a href="#tar">Tar</a></li><li><a href="#term">TERM</a></li><li><a href="#threads">Threads</a></li><li><a href="#time">Time</a></li><li><a href="#version">Version</a></li><li><a href="#windows">Windows</a></li><li><a href="#zip">Zip</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>UNIX Notes</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>UNIX Notes</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#ascii-characters">ASCII characters</a></li><li><a href="#awk">Awk</a></li><li><a href="#bc-line-oriented-calculator">bc line-oriented calculator</a></li><li><a href="#creating-directories">Creating Directories</a></li><li><a href="#curl">Curl</a></li><li><a href="#default-shell">Default Shell</a></li><li><a href="#diff">Diff</a></li><li><a href="#disk-space">Disk Space</a></li><li><a href="#display">Display</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#findingsearching-files">Finding/Searching Files</a></li><ul><li><a href="#find">find</a></li><li><a href="#grep">grep</a></li><li><a href="#ripgrep">ripgrep</a></li></ul><li><a href="#ftp">FTP</a></li><li><a href="#functions">Functions</a></li><li><a href="#graphics-files">Graphics files</a></li><li><a href="#hex">Hex</a></li><li><a href="#home-directory-mount">Home Directory Mount</a></li><li><a href="#host">Host</a></li><li><a href="#ip-address">IP address</a></li><li><a href="#ld_library_path">LD_LIBRARY_PATH</a></li><li><a href="#line-endings">Line Endings</a></li><li><a href="#list-directory-contents">List Directory Contents</a></li><li><a href="#list-library-contents">List Library Contents</a></li><li><a href="#locate">Locate</a></li><li><a href="#make">Make</a></li><li><a href="#man-pages">Man Pages</a></li><li><a href="#messages">Messages</a></li><li><a href="#mount">Mount</a></li><li><a href="#netstat">Netstat</a></li><li><a href="#password">Password</a></li><li><a href="#patch">Patch</a></li><li><a href="#path">PATH</a></li><li><a href="#ports">Ports</a></li><li><a href="#printing">Printing</a></li><li><a href="#processes">Processes</a></li><li><a href="#rsync">rsync</a></li><li><a href="#script-command-echoing">Script Command Echoing</a></li><li><a href="#secure-copy">Secure Copy</a></li><li><a href="#shell-prompt">Shell Prompt</a></li><li><a href="#shell-scripts">Shell Scripts</a></li><li><a href="#ssh">SSH</a></li><li><a href="#stdout-and-stderr">stdout and stderr</a></li><li><a href="#switch-user-su-and-sudo">Switch User (su and sudo)</a></li><li><a href="#symbolic-links">Symbolic Links</a></li><li><a href="#tar">Tar</a></li><li><a href="#term">TERM</a></li><li><a href="#threads">Threads</a></li><li><a href="#time">Time</a></li><li><a href="#version">Version</a></li><li><a href="#windows">Windows</a></li><li><a href="#zip">Zip</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>This is a collection of tips on using UNIX and Linux systems.</p>
-<h2 id="ascii-characters" tabindex="-1">ASCII characters</h2>
+<h2 id="ascii-characters">ASCII characters</h2>
 <p>To see a list of all the ASCII characters and their codes,
 enter <code>man ascii</code>.</p>
 <p>To dump the ASCII characters in a text file, enter
@@ -8,17 +10,17 @@ enter <code>man ascii</code>.</p>
 <p>The <code>-c</code> option causes it to print ASCII characters
 using backslash escapes for control characters.
 The <code>-x</code> option causes it to output inverted pairs of hex ASCII codes.</p>
-<h2 id="awk" tabindex="-1">Awk</h2>
+<h2 id="awk">Awk</h2>
 <p>This command can replace given text in a set of files with new text.
-For example, the following replaces&quot;foo&quot; with &quot;bar&quot;
+For example, the following replaces”foo” with “bar”
 in all the <code>.java</code> files in the current directory.</p>
 <pre><code class="language-bash">for file in \*.java; do
   mv $file $file.orig
-  awk -e '{ if ($0 == &quot;foo&quot;) print &quot;bar&quot;; else print $0 }' $file.orig &gt; $file
+  awk -e '{ if ($0 == "foo") print "bar"; else print $0 }' $file.orig > $file
 done
 </code></pre>
 <p>Also see <code>MyUnixEnv/notes/AwkNotes.txt</code>.</p>
-<h2 id="bc-line-oriented-calculator" tabindex="-1">bc line-oriented calculator</h2>
+<h2 id="bc-line-oriented-calculator">bc line-oriented calculator</h2>
 <ul>
 <li>To convert decimal numbers to hex
 obase=16
@@ -26,26 +28,26 @@ enter any decimal number and it will be output as hex</li>
 <li>To convert hex numbers to decimal
 ibase=16
 enter any hex number and it will be output as decimal</li>
-<li>To exit, enter &quot;quit&quot;.</li>
+<li>To exit, enter “quit”.</li>
 </ul>
-<h2 id="creating-directories" tabindex="-1">Creating Directories</h2>
-<p>To create directories whose parent directories don't exist yet,
+<h2 id="creating-directories">Creating Directories</h2>
+<p>To create directories whose parent directories don’t exist yet,
 enter a command like <code>mkdir -p dir1/dir2/dir3</code>.</p>
-<h2 id="curl" tabindex="-1">Curl</h2>
+<h2 id="curl">Curl</h2>
 <p>Ampersands separating query parameters must be preceded by backslashes.</p>
 <p>Surround url in single or double quotes if it contains special characters
 like double quotes.</p>
 <p>To specify a request body for a POST or PUT, use <code>-d '{body-payload}'</code></p>
 <p>To use a verb other than GET which is the default, add <code>-X{verb}</code>.
 For example, <code>curl -XPUT http://localhost:3000 -d '{body-payload}'</code></p>
-<p>To specify the body content type, add <code>-H &quot;Content-Type: {type}&quot;</code>.
+<p>To specify the body content type, add <code>-H "Content-Type: {type}"</code>.
 An example type is <code>application/json</code>.</p>
 <p>To put data from a text file:</p>
-<pre><code class="language-bash">curl -XPUT http://localhost:3000 -H&quot;Content-Type: application/json&quot; --data @security.json
+<pre><code class="language-bash">curl -XPUT http://localhost:3000 -H"Content-Type: application/json" --data @security.json
 curl http://localhost:3000/security/admin/rights/%2F # verifies
 </code></pre>
 <p>To put data from a binary file</p>
-<pre><code class="language-bash">curl -XPUT http://localhost:3000 -H&quot;Content-Type: image/png&quot; --data-binary @{file-path}
+<pre><code class="language-bash">curl -XPUT http://localhost:3000 -H"Content-Type: image/png" --data-binary @{file-path}
 </code></pre>
 <p>To specify output to be added after successful output, add <code>-o</code>.
 For example, to add a newline:</p>
@@ -53,9 +55,9 @@ For example, to add a newline:</p>
 </code></pre>
 <p>To see headers, <code>curl -i {url}</code>.</p>
 <p>To send a HEAD request, add <code>--head</code> or <code>-I</code>, not <code>-XHEAD</code>.</p>
-<h2 id="default-shell" tabindex="-1">Default Shell</h2>
+<h2 id="default-shell">Default Shell</h2>
 <p>To change the default shell, enter <code>ypchsh</code>.</p>
-<h2 id="diff" tabindex="-1">Diff</h2>
+<h2 id="diff">Diff</h2>
 <ul>
 <li>To get lines missing in first file and present in second file
 <ul>
@@ -63,8 +65,8 @@ For example, to add a newline:</p>
 <li>comm -13 file1.txt file2.txt</li>
 <li>if the lines are not sorted
 <ul>
-<li>diff --new-line-format=&quot;gronk:%L&quot; | grep &quot;^gronk&quot; | sed 's/gronk://'
-where &quot;gronk&quot; is just some unique string
+<li>diff —new-line-format=“gronk:%L” | grep “^gronk” | sed ‘s/gronk://’
+where “gronk” is just some unique string
 that is used to filter out only the relevant lines
 and sed is used to remove that unique prefix</li>
 </ul>
@@ -72,13 +74,13 @@ and sed is used to remove that unique prefix</li>
 </ul>
 </li>
 </ul>
-<h2 id="disk-space" tabindex="-1">Disk Space</h2>
+<h2 id="disk-space">Disk Space</h2>
 <ul>
 <li>
 <p>To determine top offenders in disk space usage,
 du -sk * | sort -rn | head
 -s = summarize
--k = --blocksize=1K
+-k = —blocksize=1K
 -r = reverse
 -n = sort as numeric
 head defaults to showing only first 10
@@ -91,19 +93,19 @@ ls -lS</p>
 <li>
 <p>To find the largest files in and below the current directory,
 find . -type f -size +1M -exec ls -lk {} ; | sort -nr -k 5 | head
-The &quot;-size +1M&quot; limits processing to files that are at least one megabyte.
-The &quot;-nr&quot; options for sort are numeric-sort and reverse.
+The “-size +1M” limits processing to files that are at least one megabyte.
+The “-nr” options for sort are numeric-sort and reverse.
 This dramatically improves performance.</p>
 </li>
 </ul>
-<h2 id="display" tabindex="-1">Display</h2>
+<h2 id="display">Display</h2>
 <ul>
 <li>To allow other Linux boxes to display to yours
 <ul>
-<li>on yours execute &quot;xhost +&quot;</li>
-<li>on theirs execute &quot;export DISPLAY={host}:0.0&quot;
+<li>on yours execute “xhost +”</li>
+<li>on theirs execute “export DISPLAY={host}:0.0”
 then run application that generates the display
-(at Boeing your host is <a href="http://b878360.stl.mo.boeing.com">b878360.stl.mo.boeing.com</a>)</li>
+(at Boeing your host is b878360.stl.mo.boeing.com)</li>
 </ul>
 </li>
 <li>Auto-scroll
@@ -115,27 +117,27 @@ To fix this, change the resolution and then change it back.</li>
 </ul>
 </li>
 </ul>
-<h2 id="directory-structure" tabindex="-1">Directory Structure</h2>
+<h2 id="directory-structure">Directory Structure</h2>
 <ul>
 <li>To see the content of the current directory
-including subdirectories as a tree, enter &quot;tree&quot;.</li>
-<li>install on Mac with &quot;brew install tree&quot;</li>
+including subdirectories as a tree, enter “tree”.</li>
+<li>install on Mac with “brew install tree”</li>
 </ul>
-<h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
+<h2 id="environment-variables">Environment Variables</h2>
 <ul>
 <li>To set in bash,
 export name=value</li>
 <li>To unset in bash,
 unset name</li>
 </ul>
-<h2 id="finding%2Fsearching-files" tabindex="-1">Finding/Searching Files</h2>
+<h2 id="findingsearching-files">Finding/Searching Files</h2>
 <p>There are multiple commands that search files,
 including <code>find</code>, <code>grep</code>, and <code>rg</code> (ripgrep).</p>
-<h3 id="find" tabindex="-1">find</h3>
+<h3 id="find">find</h3>
 <p>To find all files of a given type in and below the current directory
 that contain a given string,
-<code>find -name '_.{type}' | xargs grep &quot;{string}&quot;</code>.
-An alternative is <code>find -name '_.{type}' -exec grep &quot;{string}&quot; {} \;</code>
+<code>find -name '_.{type}' | xargs grep "{string}"</code>.
+An alternative is <code>find -name '_.{type}' -exec grep "{string}" {} \;</code>
 Consider using ripgrep instead because it is much faster.</p>
 <p>If the first argument starts with <code>-</code>
 then the search begins in the current directory.
@@ -146,14 +148,14 @@ If <code>-name</code> is omitted, it defaults to <code>-name '\*'</code>.</p>
 <code>find . -name 'name-pattern' -delete</code>.
 <code>-delete</code> is much shorter than the alternative <code>-exec rm {} \;</code>.</p>
 <p>To output only file names containing a match and not the matching lines:</p>
-<pre><code class="language-bash">find -name '\*.{type}' | xargs grep -l &quot;{string}&quot;
+<pre><code class="language-bash">find -name '\*.{type}' | xargs grep -l "{string}"
 </code></pre>
-<p>To find all .h and .cpp files that contain &quot;foo&quot;:</p>
-<pre><code class="language-bash">find -regex &quot;.\*[.h|.cpp]&quot; | xargs grep foo
+<p>To find all .h and .cpp files that contain “foo”:</p>
+<pre><code class="language-bash">find -regex ".\*[.h|.cpp]" | xargs grep foo
 </code></pre>
-<p>To avoid &quot;Permission denied&quot; messages
+<p>To avoid “Permission denied” messages
 when find tries to search certain directories:</p>
-<pre><code class="language-bash">find -name 'whatever' 2&gt; /dev/null
+<pre><code class="language-bash">find -name 'whatever' 2> /dev/null
 </code></pre>
 <p>To find all directories that contain files
 that have been modified today:</p>
@@ -164,7 +166,7 @@ whose contents have been modified in the last n days:</p>
 <pre><code class="language-bash">find . -type f -mtime -n
 </code></pre>
 <p>To edit all the files that contain a given string:</p>
-<pre><code class="language-bash">vim $(find -name '\*.filetype' | xargs grep -l &quot;string&quot;)
+<pre><code class="language-bash">vim $(find -name '\*.filetype' | xargs grep -l "string")
 </code></pre>
 <p>To find all files that contain text that matches a regular expression,
 for example, .h files that define a class that inherits from another (:):</p>
@@ -177,7 +179,7 @@ and make them not executable:</p>
 <p>The <code>001</code> is a mask that specifies the x bit.</p>
 <p>To limit the depth of the search (# of directories deep),
 add <code>-maxdepth n</code>.</p>
-<h3 id="grep" tabindex="-1">grep</h3>
+<h3 id="grep">grep</h3>
 <p><code>grep</code> stands for Global Regular Expression Print.
 It came from the <code>ed</code> editor command <code>g/RE/p</code>
 where <code>RE</code> is replaced by a regular expression.
@@ -185,13 +187,13 @@ It globally operates on every line in the file
 and prints all lines that match the regular expression.</p>
 <p>To find all files with a given extension in the current directory
 that contain a given string, enter <code>grep '{string}' *.{extension}</code>.</p>
-<h3 id="ripgrep" tabindex="-1">ripgrep</h3>
+<h3 id="ripgrep">ripgrep</h3>
 <p><a href="https://github.com/BurntSushi/ripgrep?v=1.1.1" rel="noopener" target="_blank">ripgrep</a>
 implements the <code>rg</code> command in Rust
 and is a much faster alternative to the <code>find</code> command.</p>
 <p>To find all occurrences of a string within
 any file that is in or below the current directory,
-enter `rg '{string}'.
+enter `rg ‘{string}’.
 Quotes around the string are only needed if
 it contains spaces, other special characters, or a regular expression.</p>
 <p>By default <code>rg</code> does not search the following files:</p>
@@ -222,10 +224,10 @@ For example, <code>-tc</code> is the same as <code>-g '*.{c.h}'</code>.
 To see all the supported file types, enter <code>rg --type-list</code>.
 To see the glob pattern used by a given file type,
 enter <code>rg --type-list | rg '^{type}:'</code>.</p>
-<h2 id="ftp" tabindex="-1">FTP</h2>
+<h2 id="ftp">FTP</h2>
 <ul>
 <li>See notes on ncftp in CygwinNotes.txt</li>
-<li>Don't forget to enter &quot;binary&quot; before attempting to put binary files.</li>
+<li>Don’t forget to enter “binary” before attempting to put binary files.</li>
 <li>~/.netrc can be used to reduce typing required.
 <ul>
 <li>To register username/password for specific machines,
@@ -234,21 +236,21 @@ machine {name-or-IP-address} login {username} password {password}</li>
 <li>To create macros of FTP commands
 such as updating a file and quitting,
 macdef uploadExe
-lcd &lt;YOUR_EXECUTABLE_DIR&gt;
+lcd &#x3C;YOUR_EXECUTABLE_DIR>
 binary
-put &lt;EXECUTABLE_NAME&gt;
+put &#x3C;EXECUTABLE_NAME>
 quit
 There must be a blank line after the last macdef!
 It may be necessary to place macdefs immediately after
 the machine definitions where they will be used.
 This will require duplicating macros that need to be
 used on multiple machines.</li>
-<li>To use the .netrc file, enter &quot;ftp {name-or-IP-address}&quot;</li>
+<li>To use the .netrc file, enter “ftp {name-or-IP-address}”</li>
 <li>To execute an FTP command and capture its output in a file
-echo &quot;{command}&quot; | ftp {name-or-IP-address} &gt; ftp.txt</li>
-<li>To run a macro from an FTP prompt, &quot;${macro-name}&quot;.</li>
+echo “{command}” | ftp {name-or-IP-address} > ftp.txt</li>
+<li>To run a macro from an FTP prompt, ”${macro-name}”.</li>
 <li>To run a macro from the command line,
-&quot;echo &quot;${macro-name}&quot; | ftp {name-or-IP-address}</li>
+“echo ”${macro-name}” | ftp {name-or-IP-address}</li>
 <li>To see all the commands that a macro executes
 <ul>
 <li>if running macro from ftp prompt, start ftp with -d</li>
@@ -258,36 +260,36 @@ echo &quot;{command}&quot; | ftp {name-or-IP-address} &gt; ftp.txt</li>
 </ul>
 </li>
 </ul>
-<h2 id="functions" tabindex="-1">Functions</h2>
+<h2 id="functions">Functions</h2>
 <ul>
 <li>to see the definition of a function defined in some script
-that has been run (perhaps .bashrc), enter &quot;type {function-name}&quot;</li>
+that has been run (perhaps .bashrc), enter “type {function-name}“</li>
 </ul>
-<h2 id="graphics-files" tabindex="-1">Graphics files</h2>
+<h2 id="graphics-files">Graphics files</h2>
 <ul>
 <li>to display a graphics file such as a .png file,
-use the &quot;Eye of Gnome&quot; application by entering &quot;eog {file-path}&quot;</li>
+use the “Eye of Gnome” application by entering “eog {file-path}“</li>
 </ul>
-<h2 id="hex" tabindex="-1">Hex</h2>
+<h2 id="hex">Hex</h2>
 <ul>
 <li>To see the hex characters in the output of a command
 {command} | od -cx</li>
 </ul>
-<h2 id="home-directory-mount" tabindex="-1">Home Directory Mount</h2>
+<h2 id="home-directory-mount">Home Directory Mount</h2>
 <ul>
-<li>To force someone else's home directory to be mounted on your Linux box,
+<li>To force someone else’s home directory to be mounted on your Linux box,
 sudo su - {their-id}
 Use your root password.</li>
 </ul>
-<h2 id="host" tabindex="-1">Host</h2>
+<h2 id="host">Host</h2>
 <ul>
-<li>To determine name of current host, enter &quot;hostname&quot;.</li>
+<li>To determine name of current host, enter “hostname”.</li>
 </ul>
-<h2 id="ip-address" tabindex="-1">IP address</h2>
+<h2 id="ip-address">IP address</h2>
 <ul>
 <li>To determine the IP address of the current host (four ways)
 <ul>
-<li>google &quot;what is my ip&quot;</li>
+<li>google “what is my ip”</li>
 <li>run /sbin/ifconfig and look for en0 (wired) or en1 (wireless) inet addr
 <ul>
 <li>on some machines, ifconfig is in /sbin</li>
@@ -298,10 +300,10 @@ Use your root password.</li>
 </ul>
 </li>
 </ul>
-<h2 id="ld_library_path" tabindex="-1">LD_LIBRARY_PATH</h2>
+<h2 id="ld_library_path">LD_LIBRARY_PATH</h2>
 <p>This environment variable lists directories to be searched
 for library files (such as .so files).</p>
-<h2 id="line-endings" tabindex="-1">Line Endings</h2>
+<h2 id="line-endings">Line Endings</h2>
 <ul>
 <li>to convert line endings in files from DOS (CRLF) to UNIX (LF)
 <ul>
@@ -309,11 +311,11 @@ for library files (such as .so files).</p>
 <li>open a bash shell</li>
 <li>cd to a directory containing the files to convert</li>
 <li>for each file extension to be processed (ex. .js)
-find . -type f -name '*.js' -exec dos2unix {} ;</li>
+find . -type f -name ‘*.js’ -exec dos2unix {} ;</li>
 </ul>
 </li>
 </ul>
-<h2 id="list-directory-contents" tabindex="-1">List Directory Contents</h2>
+<h2 id="list-directory-contents">List Directory Contents</h2>
 <ul>
 <li>To show hidden files, ls -a</li>
 <li>To show details, ls -l
@@ -321,7 +323,7 @@ find . -type f -name '*.js' -exec dos2unix {} ;</li>
 <li>extended attribuets
 <ul>
 <li>the last position in the permissions string
-contains @ if the file has &quot;extended attributes&quot;</li>
+contains @ if the file has “extended attributes”</li>
 <li>to list them, xattr {file-path}</li>
 <li>to delete one, xattr -d {extended-attr-name} {file-path}</li>
 </ul>
@@ -329,15 +331,15 @@ contains @ if the file has &quot;extended attributes&quot;</li>
 </ul>
 </li>
 <li>To sort on creation time with newest files first, ls -lt</li>
-<li>To use color, alias ls='ls --color=tty'
+<li>To use color, alias ls=‘ls —color=tty’
 (directories are blue, executables are green)</li>
 </ul>
-<h2 id="list-library-contents" tabindex="-1">List Library Contents</h2>
+<h2 id="list-library-contents">List Library Contents</h2>
 <ul>
 <li>Use nm command which outputs lines containing symbol value, type and name.</li>
 <li>To unmangle symbol names for C++ methods, pipe nm output to c++filt.</li>
 <li>The symbol type is output before each symbol in the library:
-A - absolute, won't change by further linking
+A - absolute, won’t change by further linking
 B - uninitialized
 C - common
 D - initialized
@@ -353,66 +355,66 @@ W - weach symbol
 <ul>
 <li>
 <ul>
-<li>a &quot;stabs&quot; symbol
+<li>a “stabs” symbol
 ? - unknown</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="locate" tabindex="-1">Locate</h2>
+<h2 id="locate">Locate</h2>
 <ul>
 <li>This command searches a database for a filename
 and outputs all the locations where it resides.</li>
 <li>The database is typically updated every night for all files on the drive.</li>
 <li>Usage: locate {filename}</li>
 </ul>
-<h2 id="make" tabindex="-1">Make</h2>
+<h2 id="make">Make</h2>
 <ul>
 <li>To see commands that make would execute without executing them,
 make -n</li>
 <li>Use MPC to generate makefiles for various platforms</li>
 </ul>
-<h2 id="man-pages" tabindex="-1">Man Pages</h2>
+<h2 id="man-pages">Man Pages</h2>
 <ul>
 <li>to save a man page in a text file that can be printed
 <ul>
-<li>man {command} | col -b &gt; {command}.txt</li>
+<li>man {command} | col -b > {command}.txt</li>
 </ul>
 </li>
 <li>to save it in a much more appealing Postscript format
 <ul>
-<li>man -t {command} &gt; {command}.ps</li>
+<li>man -t {command} > {command}.ps</li>
 </ul>
 </li>
 </ul>
-<h2 id="messages" tabindex="-1">Messages</h2>
+<h2 id="messages">Messages</h2>
 <ul>
 <li>To send a message to a particular user that they will see
-at their command prompt, &quot;write {user-name}&quot;.
+at their command prompt, “write {user-name}”.
 After that, each line you type is sent to them when you press the enter key.
 They can do the same to you in order to have a conversation.</li>
-<li>To send a message to all users on your current host, &quot;wall {message}&quot;.</li>
+<li>To send a message to all users on your current host, “wall {message}”.</li>
 </ul>
-<h2 id="mount" tabindex="-1">Mount</h2>
+<h2 id="mount">Mount</h2>
 <ul>
 <li>If your home directory is actually mounted from somewhere else
 (such as an NIS server), to see where, cd to your home directory
-and enter &quot;df .&quot;.
+and enter “df .”.
 <ul>
 <li>this is the case at Boeing</li>
 </ul>
 </li>
 <li>To see all directories that are mounted from somewhere else,
-enter &quot;df | grep :&quot; or &quot;mount | grep :&quot;.</li>
+enter “df | grep :” or “mount | grep :”.</li>
 <li>To mount USB drives that are detected by automount,
 <ul>
-<li>run &quot;dmesg&quot; to see what device name was assigned (ex. sda1 or sdb2)</li>
-<li>run &quot;ls /media&quot; to see what device names it assigned (ex. WD_Combo or ipod)</li>
+<li>run “dmesg” to see what device name was assigned (ex. sda1 or sdb2)</li>
+<li>run “ls /media” to see what device names it assigned (ex. WD_Combo or ipod)</li>
 <li>mount -t vfat /dev/sda1 /media/WD_Combo</li>
 <li>mount -t vfat /dev/sdb2 /media/ipod</li>
 <li>there should be a way to make these mounts happen automatically on reboot
-but I haven't figured that out</li>
+but I haven’t figured that out</li>
 </ul>
 </li>
 <li>/etc/fstab (stands for File System TABle)
@@ -424,30 +426,30 @@ but I haven't figured that out</li>
 <li>automount
 <ul>
 <li>responsible for dynamically mounting USB devices</li>
-<li>to stop it, run &quot;/etc/init.d/autofs stop&quot;</li>
-<li>to start it, run &quot;/etc/init.d/autofs start&quot;</li>
+<li>to stop it, run “/etc/init.d/autofs stop”</li>
+<li>to start it, run “/etc/init.d/autofs start”</li>
 </ul>
 </li>
 </ul>
-<h2 id="netstat" tabindex="-1">Netstat</h2>
+<h2 id="netstat">Netstat</h2>
 <ul>
 <li>To see which ports are currently being listened on by some server
 netstat -an | grep LISTEN</li>
 </ul>
-<h2 id="password" tabindex="-1">Password</h2>
+<h2 id="password">Password</h2>
 <ul>
 <li>To change password
 passwd [username]
 To change to a dictionary word, su root and ignore warnings.</li>
 </ul>
-<h2 id="patch" tabindex="-1">Patch</h2>
+<h2 id="patch">Patch</h2>
 <ul>
 <li>To create a patch file,
-diff {file1} {file2} &gt; {name}.patch</li>
+diff {file1} {file2} > {name}.patch</li>
 <li>To apply a patch file to a file,
 patch ???</li>
 </ul>
-<h2 id="path" tabindex="-1">PATH</h2>
+<h2 id="path">PATH</h2>
 <ul>
 <li>This environment variable contains a list of directories
 Identify areas of concern when using Java threads alone and together with C++ threads.
@@ -457,41 +459,41 @@ Present all the information gathered in a teleconference.
 Assist NSIT in running the testing framework to gather results on the target platform.
 Modify the testing framework based on feedback from NSIT.
 to be searched for executables.</li>
-<li>After an executable is run once, it's location can be remembered.</li>
-<li>If PATH is changed later, you may have to run &quot;hash -r&quot;
+<li>After an executable is run once, it’s location can be remembered.</li>
+<li>If PATH is changed later, you may have to run “hash -r”
 to get the OS to forget all executable locations it was remembering.</li>
 </ul>
-<h2 id="ports" tabindex="-1">Ports</h2>
+<h2 id="ports">Ports</h2>
 <ul>
-<li>to find the process listening on a given port, use &quot;list open files&quot;
+<li>to find the process listening on a given port, use “list open files”
 lsof -i:{port-number}</li>
 </ul>
-<h2 id="printing" tabindex="-1">Printing</h2>
+<h2 id="printing">Printing</h2>
 <ul>
 <li>To get name of default printer,
 lpstat -d</li>
 <li>To print source files using enscript
-alias ens=&quot;enscript --borders --columns=2 --fancy-header <br>
---landscape --line-numbers=1 --mark-wrapped-lines=arrow <br>
---pretty-print=cpp --printer=bstl0860&quot;
+alias ens=“enscript —borders —columns=2 —fancy-header <br>
+—landscape —line-numbers=1 —mark-wrapped-lines=arrow <br>
+—pretty-print=cpp —printer=bstl0860”
 ens {filename}.cpp</li>
-<li>Your &quot;ens&quot; alias is configured to print in two columns
-and &quot;ens1&quot; prints in one column.</li>
+<li>Your “ens” alias is configured to print in two columns
+and “ens1” prints in one column.</li>
 <li>To print selected lines from a file,
-sed -n '{start-line},{end-line}p' {file-path} | ens
+sed -n ‘{start-line},{end-line}p’ {file-path} | ens
 <ul>
-<li>&quot;p&quot; is for print</li>
+<li>“p” is for print</li>
 </ul>
 </li>
 </ul>
-<h2 id="processes" tabindex="-1">Processes</h2>
+<h2 id="processes">Processes</h2>
 <ul>
-<li>$! holds the process id (PID) of the last process that was spawned using &amp;
+<li>$! holds the process id (PID) of the last process that was spawned using &#x26;
 <ul>
 <li>for example,
-some-executable&amp;
+some-executable&#x26;
 pid=$!
-<h1 id="do-some-work" tabindex="-1">do some work</h1>
+<h1 id="do-some-work">do some work</h1>
 kill -9 $pid</li>
 </ul>
 </li>
@@ -520,10 +522,10 @@ Well-written *nix applications catch this signal and terminate gracefully.</li>
 <li>kill - SIGKILL(9): kill -9 {pid} (uncatchable)</li>
 </ul>
 </li>
-<li>If a process won't die and you're curious about why, attach a gdb session.
-After poking around, do a &quot;quit&quot; without detaching
+<li>If a process won’t die and you’re curious about why, attach a gdb session.
+After poking around, do a “quit” without detaching
 which should kill the process.</li>
-<li>Sun's JVM uses SIQQUIT(3) as a signal to dump all the running threads.</li>
+<li>Sun’s JVM uses SIQQUIT(3) as a signal to dump all the running threads.</li>
 </ul>
 </li>
 <li>Defunct processes used to be called zombie processes.
@@ -531,19 +533,19 @@ They are neither dead nor alive.
 They are processes that have become corrupted in such a way
 that they no long can communicate with their parent or child process.
 Killing the parent or child process will usually make them go away.
-If the parent or child process is missing, you're out of luck.
+If the parent or child process is missing, you’re out of luck.
 Possibly there is a stuck automount.
 Of course rebooting the machine will get rid of them.</li>
 </ul>
-<h2 id="rsync" tabindex="-1">rsync</h2>
+<h2 id="rsync">rsync</h2>
 <ul>
 <li>Copies new and modified files to a remote server</li>
 <li>example
 <ul>
 <li>cd ~/Documents/VolkmannWebSite</li>
-<li>rsync -a --delete --progress --stats <a href="mailto:volkmanm@ftp.ociweb.com">volkmanm@ftp.ociweb.com</a>:/
+<li>rsync -a —delete —progress —stats <a href="mailto:volkmanm@ftp.ociweb.com">volkmanm@ftp.ociweb.com</a>:/
 <ul>
-<li>this doesn't work! need to figure out how to supply password</li>
+<li>this doesn’t work! need to figure out how to supply password</li>
 <li>-a archive mode which implies these options: rlptgoD
 <ul>
 <li>r is recursive</li>
@@ -552,25 +554,25 @@ Of course rebooting the machine will get rid of them.</li>
 <li>t preserves create and modify times</li>
 <li>g preserves groups</li>
 <li>o preserves owners</li>
-<li>D implies --devices and --specials</li>
-<li>--devices preserves devices?</li>
-<li>--specials preserves special files?</li>
+<li>D implies —devices and —specials</li>
+<li>—devices preserves devices?</li>
+<li>—specials preserves special files?</li>
 </ul>
 </li>
-<li>--delete deletes files from remote server that are not present locally</li>
-<li>--progress shows progress during transfer</li>
-<li>--states shows file transfer statistics</li>
-</ul>
-</li>
+<li>—delete deletes files from remote server that are not present locally</li>
+<li>—progress shows progress during transfer</li>
+<li>—states shows file transfer statistics</li>
 </ul>
 </li>
 </ul>
-<h2 id="script-command-echoing" tabindex="-1">Script Command Echoing</h2>
+</li>
+</ul>
+<h2 id="script-command-echoing">Script Command Echoing</h2>
 <ul>
 <li>To see each command that is executed in a script named foo,
 sh -x foo</li>
 </ul>
-<h2 id="secure-copy" tabindex="-1">Secure Copy</h2>
+<h2 id="secure-copy">Secure Copy</h2>
 <ul>
 <li>To avoid being prompted for a password, see notes on ssh-keygen below.</li>
 <li>To copy a file to another host,
@@ -582,17 +584,17 @@ scp -r {user-name}@{host}:{dir-path} .</li>
 <li>To copy a file to your home directory on another host,
 scp {file-path} {user-name}@{host}:</li>
 </ul>
-<h2 id="shell-prompt" tabindex="-1">Shell Prompt</h2>
+<h2 id="shell-prompt">Shell Prompt</h2>
 <ul>
 <li>To customize shell prompt in bash,
-export PS1=&quot;prompt&quot;
+export PS1=“prompt”
 Escape sequences that can be used in prompt include
 \H - host name
 \u - user name
 \w - current working directory
-Recommended prompt is &quot;\w$ &quot;.</li>
+Recommended prompt is “\w$ ”.</li>
 </ul>
-<h2 id="shell-scripts" tabindex="-1">Shell Scripts</h2>
+<h2 id="shell-scripts">Shell Scripts</h2>
 <ul>
 <li>To specify the type of script, in this example using bash,
 make the following the first line.
@@ -600,11 +602,11 @@ make the following the first line.
 <li>To cause every command in a script that is executed to be echoed,
 add the following near the top of the script.
 set -x
-(also see &quot;set -v&quot;)</li>
+(also see “set -v”)</li>
 </ul>
-<h2 id="ssh" tabindex="-1">SSH</h2>
+<h2 id="ssh">SSH</h2>
 <ul>
-<li>download PuTTY from <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">http://www.chiark.greenend.org.uk/~sgtatham/putty/</a>
+<li>download PuTTY from <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/" rel="noopener" target="_blank">http://www.chiark.greenend.org.uk/~sgtatham/putty/</a>
 <ul>
 <li>need putty.exe, pageant.exe and plink.exe</li>
 <li>see C:\Program Files\PuTTY on your laptop</li>
@@ -616,28 +618,28 @@ set -x
 </ul>
 </li>
 <li>double-click the Pageant icon on your laptop desktop (needed?)</li>
-<li>add the environment variable SVN_SSH=&quot;ssh -l volkmanm -P 12345&quot;</li>
+<li>add the environment variable SVN_SSH=“ssh -l volkmanm -P 12345”</li>
 <li>to generate a new SSH key
 <ul>
 <li>run C:\Program Files\PuTTY\puttygen.exe on laptop</li>
-<li>select &quot;SSH2 DSA&quot; radio button near bottom of dialog</li>
-<li>click the &quot;Generate&quot; button</li>
-<li>move the mouse over the &quot;Key&quot; area
+<li>select “SSH2 DSA” radio button near bottom of dialog</li>
+<li>click the “Generate” button</li>
+<li>move the mouse over the “Key” area
 until the progress bar goes all the way to the right</li>
 <li>copy the public key by selecting it with the mouse and pressing Ctrl-C
-(using the &quot;Save public key&quot; button saves it in a form
-that the OCI SSH server can't use)</li>
-<li>save the private key by pressing the &quot;Save private key&quot; button</li>
+(using the “Save public key” button saves it in a form
+that the OCI SSH server can’t use)</li>
+<li>save the private key by pressing the “Save private key” button</li>
 <li>add the public key to ~/.ssh/authorized_keys on the OCI hickory server</li>
 </ul>
 </li>
 <li>to test that the SSH key is working properly, from a command prompt,
-enter &quot;putty -i {path-to-private-key-file} <a href="mailto:volkmanm@ssh.ociweb.com">volkmanm@ssh.ociweb.com</a>&quot;</li>
+enter “putty -i {path-to-private-key-file} <a href="mailto:volkmanm@ssh.ociweb.com">volkmanm@ssh.ociweb.com</a>”</li>
 <li>to avoid being prompted for a password
 <ul>
 <li>on source machine
 <ul>
-<li>enter ssh-keygen (accept all the defaults; don't enter a passphrase)</li>
+<li>enter ssh-keygen (accept all the defaults; don’t enter a passphrase)</li>
 <li>use ftp or scp to copy ~/.ssh/id_rsa.pub to the destination machine</li>
 </ul>
 </li>
@@ -651,39 +653,39 @@ enter &quot;putty -i {path-to-private-key-file} <a href="mailto:volkmanm@ssh.oci
 </ul>
 </li>
 </ul>
-<h2 id="stdout-and-stderr" tabindex="-1">stdout and stderr</h2>
+<h2 id="stdout-and-stderr">stdout and stderr</h2>
 <ul>
 <li>to redirect both to the same place
-command &gt; file 2&gt;&amp;1
+command > file 2>&#x26;1
 or (bash only)
-command &amp;&gt; file</li>
+command &#x26;> file</li>
 </ul>
-<h2 id="switch-user-(su-and-sudo)" tabindex="-1">Switch User (su and sudo)</h2>
+<h2 id="switch-user-su-and-sudo">Switch User (su and sudo)</h2>
 <ul>
 <li>To switch to the root user,
-enter &quot;su root&quot; or just &quot;su&quot;.</li>
+enter “su root” or just “su”.</li>
 <li>To switch to the root user AND get its enviroment (ex. PATH),
-enter &quot;su - root&quot; or just &quot;su -&quot;.</li>
-<li>sudo does a &quot;switch user&quot; and then executes some command</li>
-<li>At Boeing you can use &quot;sudo su&quot; to switch to the root id.
-To verify that it worked, enter &quot;id&quot; which should show that uid is root.</li>
+enter “su - root” or just “su -”.</li>
+<li>sudo does a “switch user” and then executes some command</li>
+<li>At Boeing you can use “sudo su” to switch to the root id.
+To verify that it worked, enter “id” which should show that uid is root.</li>
 </ul>
-<h2 id="symbolic-links" tabindex="-1">Symbolic Links</h2>
+<h2 id="symbolic-links">Symbolic Links</h2>
 <ul>
 <li>To create a symbolic link,
-enter &quot;ln -s {target-file} {link-name}&quot;</li>
+enter “ln -s {target-file} {link-name}”</li>
 <li>Suggested use
 <ul>
 <li>directories for installed libraries and applications under /opt
 should include version numbers</li>
-<li>create a symbolic link for each whose name doesn't include the version</li>
+<li>create a symbolic link for each whose name doesn’t include the version</li>
 <li>refer to these symbolic links in applications that use them</li>
 <li>when new versions are installed, only the symbolic links
 need to be changed, not the applications that use them</li>
 </ul>
 </li>
 </ul>
-<h2 id="tar" tabindex="-1">Tar</h2>
+<h2 id="tar">Tar</h2>
 <ul>
 <li>To tar the contents of a directory named d
 cd to the parent directory
@@ -712,18 +714,18 @@ tar xf myfiles.tar <code>find ...</code></li>
 <li>See your pkg and unpkg scripts that make it easier to
 tar/zip and unzip/untar directories.</li>
 </ul>
-<h2 id="term" tabindex="-1">TERM</h2>
+<h2 id="term">TERM</h2>
 <ul>
-<li>If delete/backspace key doesn't work, you may need to enter
+<li>If delete/backspace key doesn’t work, you may need to enter
 export TERM=xterm-256color
 <ul>
 <li>can add this in .bashrc</li>
 </ul>
 </li>
 </ul>
-<h2 id="threads" tabindex="-1">Threads</h2>
+<h2 id="threads">Threads</h2>
 <ul>
-<li>Some versions of UNIX/Linux don't support thread priorities.</li>
+<li>Some versions of UNIX/Linux don’t support thread priorities.</li>
 <li>NPTL stands for New POSIX Thread Library</li>
 <li>RedHat Enterprise 3 uses the 2.4.21 kernel which uses NPTL.</li>
 <li>Fedora probably uses NPTL.</li>
@@ -731,37 +733,38 @@ export TERM=xterm-256color
 export LD_ASSUME_KERNEL=2.4.1</li>
 <li>Have to run as root to assign thread priorities.</li>
 </ul>
-<h2 id="time" tabindex="-1">Time</h2>
+<h2 id="time">Time</h2>
 <ul>
 <li>To find out how long it takes to execute a given command,
 time {command}</li>
 </ul>
-<h2 id="version" tabindex="-1">Version</h2>
+<h2 id="version">Version</h2>
 <ul>
 <li>To get UNIX version,
 uname -a
 Under Linux, the 3rd piece of data is the Linux kernel version.
-At Boeing it's Linux 2.4.21-15.EL and VxWorks 6.1.</li>
+At Boeing it’s Linux 2.4.21-15.EL and VxWorks 6.1.</li>
 <li>To get RedHat version,
 cat /etc/redhat-release
-At Boeing it's Red Hat Enterprise Linux WS release 3 (Taroon Update 2).</li>
+At Boeing it’s Red Hat Enterprise Linux WS release 3 (Taroon Update 2).</li>
 <li>To get the thread library version,
 getconf GNU_LIBPTHREAD_VERSION
-At Boeing it's NPTL 0.60.
+At Boeing it’s NPTL 0.60.
 NPTL stands for New POSIX Thread Library.</li>
 </ul>
-<h2 id="windows" tabindex="-1">Windows</h2>
+<h2 id="windows">Windows</h2>
 <ul>
 <li>To minimize all windows, ctrl-alt-d.</li>
 <li>To cycle between windows, ctrl-alt-tab.</li>
 </ul>
-<h2 id="zip" tabindex="-1">Zip</h2>
+<h2 id="zip">Zip</h2>
 <ul>
 <li>To create a zip file named foo.zip containing
 all the files in and below the directory bar
 zip -r foo bar</li>
-<li>To unzip .bz2 files, use &quot;bunzip2 {name}.bz2&quot;.</li>
+<li>To unzip .bz2 files, use “bunzip2 {name}.bz2”.</li>
 <li>To list the files inside a zip file,
 zipinfo foo.zip</li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

@@ -1,27 +1,27 @@
-<!DOCTYPE html><html lang="en"> <head><title>Morphic</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Morphic</h2> <aside><ul><li><a href="#morphs">Morphs</a></li><li><a href="#pluggable">Pluggable</a></li><li><a href="#creating-and-modifying-morphs">Creating and Modifying Morphs</a></li><li><a href="#halo">Halo</a></li><li><a href="#desktop-color">Desktop Color</a></li><ul><li><a href="#submorphs">Submorphs</a></li></ul><li><a href="#embedding">Embedding</a></li><li><a href="#layoutmorph">LayoutMorph</a></li><ul><li><a href="#layoutspec">LayoutSpec</a></li><li><a href="#more-ways-to-add-submorphs">More Ways to Add Submorphs</a></li></ul><li><a href="#editing-characteristics">Editing Characteristics</a></li><li><a href="#coordinate-systems">Coordinate Systems</a></li><li><a href="#imagemorph">ImageMorph</a></li><li><a href="#creating-a-custom-morph">Creating a Custom Morph</a></li><ul><li><a href="#adding-borders">Adding Borders</a></li><li><a href="#drawing-lines-and-shapes">Drawing Lines and Shapes</a></li><li><a href="#drawing-images">Drawing Images</a></li></ul><li><a href="#text-entry">Text Entry</a></li><li><a href="#mouse-events">Mouse Events</a></li><li><a href="#keyboard-events">Keyboard Events</a></li><li><a href="#morphiccanvas">MorphicCanvas</a></li><li><a href="#drawing-details">Drawing Details</a></li><li><a href="#borderedboxmorph">BorderedBoxMorph</a></li><li><a href="#systemwindow">SystemWindow</a></li><li><a href="#world-menu-items">World Menu Items</a></li><li><a href="#fonts">Fonts</a></li><li><a href="#button-labels">Button Labels</a></li><li><a href="#button-issue">Button Issue</a></li><li><a href="#button-demo-in-cuis">Button Demo in Cuis</a></li><li><a href="#svg">SVG</a></li><li><a href="#full-screen-buttons">Full Screen Buttons</a></li><li><a href="#morph-methods">Morph Methods</a></li><li><a href="#popups">Popups</a></li><ul><li><a href="#popupmenu">PopUpMenu</a></li><li><a href="#selectionmenu">SelectionMenu</a></li><li><a href="#stringrequestmorph">StringRequestMorph</a></li></ul><li><a href="#pluggablelistmorph">PluggableListMorph</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#animation">Animation</a></li><li><a href="#blocking-ui-updates">Blocking UI Updates</a></li><li><a href="#redrawing">Redrawing</a></li><li><a href="#creating-jpeg-images">Creating JPEG Images</a></li><li><a href="#more-morphs">More Morphs</a></li><li><a href="#annoyances">Annoyances</a></li><li><a href="#todo-app">Todo App</a></li></ul></aside> <article><p>Morphic is a GUI framework that is included in popular Smalltalk images
+<!DOCTYPE html><html lang="en"> <head><title>Morphic</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link active expanded" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Morphic</h2> <aside><ul><li><a href="#morphs">Morphs</a></li><li><a href="#pluggable">Pluggable</a></li><li><a href="#creating-and-modifying-morphs">Creating and Modifying Morphs</a></li><li><a href="#halo">Halo</a></li><li><a href="#desktop-color">Desktop Color</a></li><ul><li><a href="#submorphs">Submorphs</a></li></ul><li><a href="#embedding">Embedding</a></li><li><a href="#layoutmorph">LayoutMorph</a></li><ul><li><a href="#layoutspec">LayoutSpec</a></li><li><a href="#more-ways-to-add-submorphs">More Ways to Add Submorphs</a></li></ul><li><a href="#editing-characteristics">Editing Characteristics</a></li><li><a href="#coordinate-systems">Coordinate Systems</a></li><li><a href="#imagemorph">ImageMorph</a></li><li><a href="#creating-a-custom-morph">Creating a Custom Morph</a></li><ul><li><a href="#adding-borders">Adding Borders</a></li><li><a href="#drawing-lines-and-shapes">Drawing Lines and Shapes</a></li><li><a href="#drawing-images">Drawing Images</a></li></ul><li><a href="#text-entry">Text Entry</a></li><li><a href="#mouse-events">Mouse Events</a></li><li><a href="#keyboard-events">Keyboard Events</a></li><li><a href="#morphiccanvas">MorphicCanvas</a></li><li><a href="#drawing-details">Drawing Details</a></li><li><a href="#borderedboxmorph">BorderedBoxMorph</a></li><li><a href="#systemwindow">SystemWindow</a></li><li><a href="#world-menu-items">World Menu Items</a></li><li><a href="#fonts">Fonts</a></li><li><a href="#button-labels">Button Labels</a></li><li><a href="#button-issue">Button Issue</a></li><li><a href="#button-demo-in-cuis">Button Demo in Cuis</a></li><li><a href="#svg">SVG</a></li><li><a href="#full-screen-buttons">Full Screen Buttons</a></li><li><a href="#morph-methods">Morph Methods</a></li><li><a href="#popups">Popups</a></li><ul><li><a href="#popupmenu">PopUpMenu</a></li><li><a href="#selectionmenu">SelectionMenu</a></li><li><a href="#stringrequestmorph">StringRequestMorph</a></li></ul><li><a href="#pluggablelistmorph">PluggableListMorph</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#animation">Animation</a></li><li><a href="#blocking-ui-updates">Blocking UI Updates</a></li><li><a href="#redrawing">Redrawing</a></li><li><a href="#creating-jpeg-images">Creating JPEG Images</a></li><li><a href="#more-morphs">More Morphs</a></li><li><a href="#annoyances">Annoyances</a></li><li><a href="#todo-app">Todo App</a></li></ul></aside> <article> <p>Morphic is a GUI framework that is included in popular Smalltalk images
 such as Squeak, Pharo, and Cuis.
-It defines user interfaces with &quot;morphs&quot; which are objects that
+It defines user interfaces with “morphs” which are objects that
 know how to render themselves in the Smalltalk environment.
 They are what other graphical systems refer to as widgets or components.</p>
 <p>For a great introduction to Morphic, see
-<a href="https://www.youtube.com/watch?v=62baNn3c56Y"
-target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.</p>
-<p><a href="http://www.jvuletich.org/Morphic3/Morphic3-201006.html"
-target="_blank">Morphic 3</a> was developed by Juan Vuletich
+<a href="https://www.youtube.com/watch?v=62baNn3c56Y" target="_blank">Holistic computing with Smalltalk and Morphic. Part 1</a>.</p>
+<p><a href="http://www.jvuletich.org/Morphic3/Morphic3-201006.html" target="_blank">Morphic 3</a> was developed by Juan Vuletich
 and is used in Cuis Smalltalk.
 It adds display resolution independence, float coordinates,
 modeling of coordinate systems as objects,
 alias free rendering based on signal processing theory,
 use of textures and photos,
 zoomable user interfaces (not tied to pixel density), and vector graphics.</p>
-<h2 id="morphs" tabindex="-1">Morphs</h2>
+<h2 id="morphs">Morphs</h2>
 <p>Any <code>Morph</code> be embedded in another.
-These are referred to as &quot;submorphs&quot;.
+These are referred to as “submorphs”.
 However, not all morphs draw their submorphs.
 Examples that do include <code>WorldMorph</code> and <code>LayoutMorph</code>.</p>
 <p>TODO: How are the submorphs of a LayoutMorph drawn?
 TODO: I thought it would have a drawOn: method that sends #drawOn:
-TODO: to each submorph using the same canvas, but it doesn't.</p>
+TODO: to each submorph using the same canvas, but it doesn’t.</p>
 <p>Each <code>Morph</code> holds a reference to its parent <code>Morph</code>
 in its instance variable <code>owner</code>.
 Those references can be followed all the way up to an instance of <code>WorldMorph</code>
@@ -29,7 +29,7 @@ whose <code>owner</code> is <code>nil</code>.</p>
 <p>Each <code>Morph</code> stores its children (embedded) morphs
 in its <code>Array</code> instance variable <code>submorphs</code>.
 If there are no children, the value is an empty <code>Array</code> rather than <code>nil</code>.</p>
-<p>Morphic uses the term &quot;extent&quot; to describe the width and height of a <code>Morph</code>.
+<p>Morphic uses the term “extent” to describe the width and height of a <code>Morph</code>.
 It is represented by a <code>Point</code> object with
 an <code>x</code> instance variable that holds the width and
 a <code>y</code> instance variable that holds the height.</p>
@@ -41,8 +41,8 @@ Instance of <code>AffineTransformation</code> hold matrix entries that specify
 translation, scaling, and rotation in indexed properties.</p>
 <p>Each <code>Morph</code> can store additional properties in its <code>properties</code> instance variable
 which holds a reference to a <code>Dictionary</code> of key/value pairs.</p>
-<h2 id="pluggable" tabindex="-1">Pluggable</h2>
-<p>Several of the <code>Morph</code> subclasses are &quot;pluggable&quot;. This means
+<h2 id="pluggable">Pluggable</h2>
+<p>Several of the <code>Morph</code> subclasses are “pluggable”. This means
 they can be configured through composition rather than inheritance.
 Configuration is achieved by specifying a model object and a selector
 for messages to be sent to the model object when an interaction occurs.</p>
@@ -51,20 +51,20 @@ can be created with the <code>model:action:label:</code> class method.
 The <code>model:</code> keyword specifies a model object,
 the <code>action:</code> keyword specifies a selector on the model object, and
 the <code>label:</code> keyword specifies the text that will appear in the button.</p>
-<h2 id="creating-and-modifying-morphs" tabindex="-1">Creating and Modifying Morphs</h2>
+<h2 id="creating-and-modifying-morphs">Creating and Modifying Morphs</h2>
 <p>Only a small set of morphs are provided by default.
 The package UI-MetaProperties is a good source of additional morphs.
 To install it:</p>
 <ul>
 <li>
-<p>Clone the <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI">https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI</a> repository
+<p>Clone the <a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI" rel="noopener" target="_blank">https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-UI</a> repository
 into the same directory as the Cuis-Smalltalk-Dev repository.</p>
 </li>
 <li>
 <p>Open a Workspace.</p>
 </li>
 <li>
-<p>Enter <code>Feature require: 'UI-MetaProperties'</code> and &quot;Do it&quot;.</p>
+<p>Enter <code>Feature require: 'UI-MetaProperties'</code> and “Do it”.</p>
 <p>This installs the following other packages
 that can also be installed individually:</p>
 <ul>
@@ -89,13 +89,13 @@ installs the following other packages:</p>
 </ul>
 </li>
 </ul>
-<p>The set of &quot;Basic&quot; morphs will now include <code>BorderedBoxMorph</code>,
+<p>The set of “Basic” morphs will now include <code>BorderedBoxMorph</code>,
 <code>ColoredBoxMorph</code>, <code>EllipseMorph</code>, <code>FrameMorph</code>, <code>ImageMorph</code>,
 <code>LabelMorph</code>, <code>LineMorph</code>, and <code>PointerLineMorph</code>.</p>
 <p>To create a <code>Morph</code>:</p>
 <ul>
 <li>Open the World menu.</li>
-<li>Select &quot;New morph...&quot;.</li>
+<li>Select “New morph…”.</li>
 <li>In the dialog that appears, select a category of morphs
 and then a specific kind (ex. <code>BorderedBoxMorph</code>).</li>
 <li>The <code>Morph</code> will appear attached to the cursor
@@ -107,34 +107,34 @@ and click to drop it.</li>
 <ul>
 <li>cmd-click a <code>Morph</code> to open its halo.</li>
 <li>Click the orange Explore handle to open an Explorer OR
-Click the orange Debug handle and select &quot;inspect morph&quot; to open an Inspector.</li>
+Click the orange Debug handle and select “inspect morph” to open an Inspector.</li>
 <li>Send a message to <code>self</code> in the bottom pane of the Explorer or the Inspector
 to change a property of the <code>Morph</code>. For example, <code>self color: Color red</code>.</li>
 </ul>
 <p>Alternatively, to modify a <code>Morph</code> from a Workspace:</p>
 <ul>
 <li>cmd-click a <code>Morph</code> to open its halo.</li>
-<li>Click the blue Menu handle on the top and select &quot;copy to clipboard&quot;.</li>
+<li>Click the blue Menu handle on the top and select “copy to clipboard”.</li>
 <li>Open a Workspace window.</li>
 <li>Press cmd-v to paste the <code>Morph</code> reference from the clipboard.</li>
 <li>Send messages to the <code>Morph</code> reference to modify it.</li>
 </ul>
 <p>To change the colors used by a <code>Morph</code> from its halo:</p>
 <ul>
-<li>Ensure that the &quot;UI-Color-Panel&quot; package is installed
-(a dependency of the &quot;UI-MetaProperties&quot; package).</li>
+<li>Ensure that the “UI-Color-Panel” package is installed
+(a dependency of the “UI-MetaProperties” package).</li>
 <li>cmd-click a <code>Morph</code> to open its halo.</li>
-<li>Click the blue menu button on the top and select &quot;change color...&quot;.</li>
-<li>A window titled &quot;Click-Select a Color&quot; will appear attached to the cursor.</li>
+<li>Click the blue menu button on the top and select “change color…”.</li>
+<li>A window titled “Click-Select a Color” will appear attached to the cursor.</li>
 <li>Position the window by moving the cursor and click to drop it.</li>
 <li>Click a color swatch.</li>
-<li>A menu will appear with the options &quot;Cancel&quot;,
-&quot;adoptWidgetsColor:&quot;, &quot;color:&quot;, and &quot;borderColor:&quot;.
+<li>A menu will appear with the options “Cancel”,
+“adoptWidgetsColor:”, “color:”, and “borderColor:”.
 Select an option to change that color property of the <code>Morph</code>.
-Some morphs don't support all the options.
-For example, &quot;color&quot; of a <code>LabelMorph</code> can be changed,
+Some morphs don’t support all the options.
+For example, “color” of a <code>LabelMorph</code> can be changed,
 but it does not have a border.
-TODO: What does &quot;adoptWidgetsColor:&quot; do?</li>
+TODO: What does “adoptWidgetsColor:” do?</li>
 </ul>
 <p>To get the size of an instance of <code>BoxMorph</code> or one of its subclasses,
 send it the <code>#extentInWorld</code> message.</p>
@@ -147,10 +147,10 @@ For example, <code>morph morphExtent: 200 @ 100</code>.</li>
 </ul>
 <p>See my Morphic demos in package <code>Volkmann</code>
 in the classes <code>VButtonDemo</code> and <code>VGreet</code>.
-In a Workspace, enter <code>VButtonDemo new</code> or <code>VGreet new</code> and &quot;Do it&quot;.</p>
-<h2 id="halo" tabindex="-1">Halo</h2>
+In a Workspace, enter <code>VButtonDemo new</code> or <code>VGreet new</code> and “Do it”.</p>
+<h2 id="halo">Halo</h2>
 <p>A <code>Morph</code> halo is a set of circle buttons,
-referred to as &quot;handles&quot;, that surround a <code>Morph</code>.
+referred to as “handles”, that surround a <code>Morph</code>.
 Each handle changes the <code>Morph</code> in some way or reveals information about it.
 Hover over a handle to see a tooltip that describes its purpose.</p>
 <p>To open the halo for a <code>Morph</code>,
@@ -158,93 +158,92 @@ cmd-click it in Cuis or option-click it in Squeak.
 If the item is embedded in other morphs, repeat this multiple times
 until a halo appears around the desired <code>Morph</code>.</p>
 <p>The class of the <code>Morph</code> will be displayed at the bottom of the <code>Morph</code>.</p>
-<p><img alt="Smalltalk halo" style="width: 50%"
-  src="/blog/assets/smalltalk-halo.png?v=1.1.1"></p>
+<p><img alt="Smalltalk halo" style="width: 50%" src="/blog/assets/smalltalk-halo.png?v=1.1.1"></p>
 <p>The following buttons are provided:</p>
-<table>
-<thead>
-<tr>
-<th>Button</th>
-<th>Location</th>
-<th>Tooltip</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>red circle with white &quot;x&quot;</td>
-<td>upper-left</td>
-<td>Remove</td>
-<td>removes the item</td>
-</tr>
-<tr>
-<td>blue circle with white document</td>
-<td>top</td>
-<td>Menu</td>
-<td>opens menu &quot;A&quot; (1)</td>
-</tr>
-<tr>
-<td>black circle with house</td>
-<td>top</td>
-<td>Pick up</td>
-<td>drag to move the item within its parent (2)</td>
-</tr>
-<tr>
-<td>brown circle with resize icon</td>
-<td>top</td>
-<td>Move</td>
-<td>drag to move the item out of its parent</td>
-</tr>
-<tr>
-<td>green circle with copy icon</td>
-<td>upper-right</td>
-<td>Duplicate</td>
-<td>drag to position a duplicate of the item</td>
-</tr>
-<tr>
-<td>orange circle with wrench</td>
-<td>right side</td>
-<td>Debug</td>
-<td>opens a menu of debugging options</td>
-</tr>
-<tr>
-<td>blue circle with magnifier glass</td>
-<td>right side</td>
-<td>Change Scale</td>
-<td>drag to change scale of item</td>
-</tr>
-<tr>
-<td>yellow circle with resize icon</td>
-<td>lower-right</td>
-<td>Change Size</td>
-<td>drag to resize the item</td>
-</tr>
-<tr>
-<td>light blue circle with question mark</td>
-<td>bottom</td>
-<td>Help</td>
-<td>click and hold to display a related tooltip (3)</td>
-</tr>
-<tr>
-<td>blue circle with rotate icon</td>
-<td>lower-left</td>
-<td>Rotate</td>
-<td>drag to rotate item (4)</td>
-</tr>
-<tr>
-<td>dull yellow circle with odd shape</td>
-<td>left side</td>
-<td>Collapse</td>
-<td>click to collapse (hide) the item (5)</td>
-</tr>
-<tr>
-<td>orange circle with wrench</td>
-<td>left side</td>
-<td>Explore</td>
-<td>opens an &quot;Explore&quot; window (6)</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Button</th><th>Location</th><th>Tooltip</th><th>Purpose</th></tr></thead><tbody><tr><td>red circle with white “x”</td><td>upper-left</td><td>Remove</td><td>removes the item</td></tr><tr><td>blue circle with white document</td><td>top</td><td>Menu</td><td>opens menu “A” (1)</td></tr><tr><td>black circle with house</td><td>top</td><td>Pick up</td><td>drag to move the item within its parent (2)</td></tr><tr><td>brown circle with resize icon</td><td>top</td><td>Move</td><td>drag to move the item out of its parent</td></tr><tr><td>green circle with copy icon</td><td>upper-right</td><td>Duplicate</td><td>drag to position a duplicate of the item</td></tr><tr><td>orange circle with wrench</td><td>right side</td><td>Debug</td><td>opens a menu of debugging options</td></tr><tr><td>blue circle with magnifier glass</td><td>right side</td><td>Change Scale</td><td>drag to change scale of item</td></tr><tr><td>yellow circle with resize icon</td><td>lower-right</td><td>Change Size</td><td>drag to resize the item</td></tr><tr><td>light blue circle with question mark</td><td>bottom</td><td>Help</td><td>click and hold to display a related tooltip (3)</td></tr><tr><td>blue circle with rotate icon</td><td>lower-left</td><td>Rotate</td><td>drag to rotate item (4)</td></tr><tr><td>dull yellow circle with odd shape</td><td>left side</td><td>Collapse</td><td>click to collapse (hide) the item (5)</td></tr><tr><td>orange circle with wrench</td><td>left side</td><td>Explore</td><td>opens an “Explore” window (6)</td></tr></tbody></table>
 <p>A <code>Morph</code> can also be dragged directly without
 opening its halo and using the drag buttons.
 This only works if the area that is dragged
@@ -255,125 +254,122 @@ by dragging the button.</p>
 <ul>
 <li>send to back</li>
 <li>bring to front</li>
-<li>embed into &gt;</li>
-<li>change color...</li>
-<li>halo actions...</li>
-<li>checkbox for &quot;resist being picked up&quot;</li>
-<li>checkbox for &quot;be locked&quot;</li>
+<li>embed into ></li>
+<li>change color…</li>
+<li>halo actions…</li>
+<li>checkbox for “resist being picked up”</li>
+<li>checkbox for “be locked”</li>
 <li>copy to clipboard</li>
-<li>export...</li>
-<li>debug...</li>
+<li>export…</li>
+<li>debug…</li>
 </ul>
 <p>It is often useful to click the red pin in the upper-right of the menu
 so it remains open if you click outside it.
 This enables dragging values onto it (such as color swatches)
 to change the values of instance variables.
 If you forget the <code>Morph</code> to which a pinned menu belongs,
-click &quot;show target halo&quot; to open the halo of the <code>Morph</code>.</p>
+click “show target halo” to open the halo of the <code>Morph</code>.</p>
 <p>To change the value of an instance variable in the menu, such as
 <code>borderColor</code>, click it and use the provided editor to change its value.
 When changing a color, select a color palette and
 drag a color swatch onto the instance variable.</p>
-<p><img alt="Crayon Colors palette"
-  src="/blog/assets/cuis-crayon-colors-palette.png?v=1.1.1"
-  style="width: 100%"></p>
+<p><img alt="Crayon Colors palette" src="/blog/assets/cuis-crayon-colors-palette.png?v=1.1.1" style="width: 100%"></p>
 <p>Color swatches can be dragged from one menu to another to copy colors.
 Fonts can also be dragged from one menu to another to copy fonts.</p>
 <p>(2) If the <code>Morph</code> is embedded in another <code>Morph</code>,
 this changes the owner to world, which un-embeds it.</p>
-<p>(3) It seems most of the help tooltips default to &quot;Help not yet supplied&quot;.
+<p>(3) It seems most of the help tooltips default to “Help not yet supplied”.
 To edit the help text, click the orange circle on the right,
-select &quot;edit balloon help&quot;, and modify the help text.</p>
-<p>(4) To change the center of rotation of a <code>Morph</code>, click the &quot;Explore&quot; handle,
-enter the following in the bottom pane, and &quot;Do it&quot;:</p>
+select “edit balloon help”, and modify the help text.</p>
+<p>(4) To change the center of rotation of a <code>Morph</code>, click the “Explore” handle,
+enter the following in the bottom pane, and “Do it”:</p>
 <pre><code class="language-smalltalk">self setProperty: #rotationCenter toValue: newX @ newY.
 </code></pre>
-<p>(5) To restore a collapsed item, click it's thumbnail in the bottom bar.</p>
-<p>(6) &quot;Explore&quot; windows enable viewing data associated with an item
+<p>(5) To restore a collapsed item, click it’s thumbnail in the bottom bar.</p>
+<p>(6) “Explore” windows enable viewing data associated with an item
 such as its location, extent (width and height), and color.
 Send messages to <code>self</code> in the bottom pane to modify the <code>Morph</code>.
 To add a method to the mo</p>
 <p>For more detail, see
-<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html"
-target="_blank">A brief introduction to Inspectors</a>.</p>
-<h2 id="desktop-color" tabindex="-1">Desktop Color</h2>
+<a href="https://cuis-smalltalk.github.io/TheCuisBook/A-brief-introduction-to-Inspectors.html" target="_blank">A brief introduction to Inspectors</a>.</p>
+<h2 id="desktop-color">Desktop Color</h2>
 <p>One way to change the desktop color is to:</p>
 <ul>
 <li>Right-click the desktop to open its halo.</li>
 <li>Click the blue menu button.</li>
-<li>Select &quot;debug...inspect morph&quot; to open an Inspect window.</li>
+<li>Select “debug…inspect morph” to open an Inspect window.</li>
 <li>Click in the bottom pane of the Inspect window.</li>
 <li>Enter <code>self color: Color red</code> or use some other color name.</li>
-<li>&quot;Do it&quot;.</li>
+<li>“Do it”.</li>
 </ul>
 <p>This works with all colors except <code>transparent</code> and alpha values are ignored.</p>
-<h3 id="submorphs" tabindex="-1">Submorphs</h3>
+<h3 id="submorphs">Submorphs</h3>
 <p>All <code>Morph</code> instances have the instance variable <code>submorphs</code>
 whose value is an array of child morphs.
 The order of the morphs in the array indicates their stacking order
 with the lower indexes rendered on top of higher indexes.</p>
 <p>The following methods can be used to add a submorph to any morph:</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>addMorph:</code></td>
-<td>delegates to <code>addMorphFront:</code></td>
-</tr>
-<tr>
-<td><code>addMorph:behind:</code></td>
-<td>adds immediately after a given child morph</td>
-</tr>
-<tr>
-<td><code>addMorph:inFrontOf:</code></td>
-<td>adds immediately before a given child morph</td>
-</tr>
-<tr>
-<td><code>addMorph:position:</code></td>
-<td>same as <code>addMorphFront:position:</code></td>
-</tr>
-<tr>
-<td><code>addMorphBack:</code></td>
-<td>adds to end</td>
-</tr>
-<tr>
-<td><code>addMorphBack:position:</code></td>
-<td>adds at end AND sets x,y position</td>
-</tr>
-<tr>
-<td><code>addMorphFront:</code></td>
-<td>adds to beginning</td>
-</tr>
-<tr>
-<td><code>addMorphFront:position:</code></td>
-<td>adds at beginning AND sets x,y position</td>
-</tr>
-<tr>
-<td><code>addMorphFrontFromWorldPosition:</code></td>
-<td>adds to beginning AND performs owner location transformations to compute the location of the morph being added</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>addMorph:</code></td><td>delegates to <code>addMorphFront:</code></td></tr><tr><td><code>addMorph:behind:</code></td><td>adds immediately after a given child morph</td></tr><tr><td><code>addMorph:inFrontOf:</code></td><td>adds immediately before a given child morph</td></tr><tr><td><code>addMorph:position:</code></td><td>same as <code>addMorphFront:position:</code></td></tr><tr><td><code>addMorphBack:</code></td><td>adds to end</td></tr><tr><td><code>addMorphBack:position:</code></td><td>adds at end AND sets x,y position</td></tr><tr><td><code>addMorphFront:</code></td><td>adds to beginning</td></tr><tr><td><code>addMorphFront:position:</code></td><td>adds at beginning AND sets x,y position</td></tr><tr><td><code>addMorphFrontFromWorldPosition:</code></td><td>adds to beginning AND performs owner location transformations to compute the location of the morph being added</td></tr></tbody></table>
 <p>NOTE: The <code>addMorph:position:</code> method should just delegate
-to <code>addMorphFront:position:</code>, but doesn't current do that.</p>
-<h2 id="embedding" tabindex="-1">Embedding</h2>
+to <code>addMorphFront:position:</code>, but doesn’t current do that.</p>
+<h2 id="embedding">Embedding</h2>
 <p>To embed a <code>Morph</code> into another (such as a LayoutMorph) so
 they are treated as a single unit and can be positioned together:</p>
 <ul>
 <li>Drag a <code>Morph</code> on top of its intended parent <code>Morph</code>.</li>
 <li>Open the halo of the <code>Morph</code>.</li>
 <li>Click the blue Menu handle.</li>
-<li>Hover over &quot;embed into&quot; to display a popup containing
+<li>Hover over “embed into” to display a popup containing
 the names of every <code>Morph</code> under the one being embedded.
 Hover over each option to highlight the corresponding <code>Morph</code>,
 which helps to verify the correct selection.</li>
 <li>Click the name of the <code>Morph</code> that will become the parent.
-Often the intended parent <code>Morph</code> is a &quot;LayoutMorph&quot;.</li>
+Often the intended parent <code>Morph</code> is a “LayoutMorph”.</li>
 </ul>
 <p>To embed a <code>Morph</code> in another using code send the message <code>#addMorph:</code>.
 For example:</p>
@@ -383,9 +379,9 @@ b2 := EllipseMorph new.
 lm addMorph: b1.
 lm addMorph: b2.
 lm openInWorld.
-lm morphPosition: 200 @ 200. &quot;relative to upper-left corner of World&quot;
+lm morphPosition: 200 @ 200. "relative to upper-left corner of World"
 </code></pre>
-<h2 id="layoutmorph" tabindex="-1">LayoutMorph</h2>
+<h2 id="layoutmorph">LayoutMorph</h2>
 <p>A <code>LayoutMorph</code> instance can only have submorphs that are
 instances of <code>PlacedMorph</code> or its subclasses.
 The order of the morphs within the <code>submorphs</code> collection of a <code>LayoutMorph</code>
@@ -428,7 +424,7 @@ its x value for rows and its y value for columns.</p>
 </ul>
 <p>This specifies the alignment of the submorphs
 in the same direction as the <code>LayoutMorph</code>,
-referred to as the &quot;major axis&quot;.</p>
+referred to as the “major axis”.</p>
 <p>By default, all the submorphs will be
 pushed to the left of a row or top of a column.
 To change this, send the <code>#axisEdgeWeight:</code> message with a number from 0 to 1.
@@ -445,8 +441,7 @@ For example, <code>myLayout := Layout newRow</code>.</p>
 <p>To add a submorph to an instance of <code>LayoutMorph</code>,
 send it the <code>#addMorph:</code> message.
 For example:</p>
-<p><img alt="LayoutMorph" style="width: 30%"
-  src="/blog/assets/cuis-smalltalk-layoutmorph.png?v=1.1.1"></p>
+<p><img alt="LayoutMorph" style="width: 30%" src="/blog/assets/cuis-smalltalk-layoutmorph.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">box1 := ColoredBoxMorph new color: Color red; morphExtent: 50 @ 50.
 box2 := ColoredBoxMorph new color: Color green; morphExtent: 75 @ 75.
 box3 := ColoredBoxMorph new color: Color blue; morphExtent: 100 @ 100.
@@ -469,16 +464,15 @@ can be configured interactively.</p>
 <ul>
 <li>Open the halo for a <code>LayoutMorph</code>.</li>
 <li>Click the blue menu button.</li>
-<li>Select &quot;edit me (a LayoutMorph)&quot;. The dialog below will appear.</li>
+<li>Select “edit me (a LayoutMorph)”. The dialog below will appear.</li>
 <li>Click the red push pin to enable trying multiple changes.</li>
-<li>After each set of changes, click the &quot;Update&quot; button.</li>
+<li>After each set of changes, click the “Update” button.</li>
 <li>When satisfied with the changes, close the dialog.</li>
 </ul>
-<p><img alt="Cuis Morphic Layout dialog" style="width: 75%"
-  src="/blog/assets/cuis-morphic-layout-dialog.png?v=1.1.1"></p>
+<p><img alt="Cuis Morphic Layout dialog" style="width: 75%" src="/blog/assets/cuis-morphic-layout-dialog.png?v=1.1.1"></p>
 <p>To change the background color of a <code>LayoutMorph</code> instance,
 send it <code>#color:</code> with an argument that is the new color.</p>
-<h3 id="layoutspec" tabindex="-1">LayoutSpec</h3>
+<h3 id="layoutspec">LayoutSpec</h3>
 <p><code>LayoutMorph</code> instances also have a <code>layoutSpec</code> instance variable
 that is inherited from the superclass <code>PlacedMorph</code>.
 It defaults to <code>nil</code> and can be set to an instance of <code>LayoutSpec</code>.
@@ -487,70 +481,70 @@ This is ignored if the owner is not a <code>LayoutMorph</code>.</p>
 <p>Instances of <code>LayoutSpec</code> have the following instance variables:
 <code>morph</code>, <code>fixedWidth</code>, <code>fixedHeight</code>, <code>offAxisEdgeWeight</code>,
 <code>proportionalWidth</code>, and <code>proportionalHeight</code>.</p>
-<h3 id="more-ways-to-add-submorphs" tabindex="-1">More Ways to Add Submorphs</h3>
+<h3 id="more-ways-to-add-submorphs">More Ways to Add Submorphs</h3>
 <p>The <code>LayoutMorph</code> class defines the following additional instance methods,
 beyond those defined in the <code>Morph</code> class,
 that can be used to add submorph to an instance.
 Each of these set the <code>layoutSpec</code> instance variable
 to a new instance of <code>LayoutSpec</code>.</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>addMorph:fixedHeight:</code></td>
-<td>The height remains at the specified size and the width adjusts to fill the available space.</td>
-</tr>
-<tr>
-<td><code>addMorph:fixedWidth:</code></td>
-<td>The width remains at the specified size and the height edjusts to fill the available space.</td>
-</tr>
-<tr>
-<td><code>addMorph:layoutSpec:</code></td>
-<td></td>
-</tr>
-<tr>
-<td><code>addMorph:proportionalHeight:</code></td>
-<td>The height adjusts to be the specified percentage (number between 0 and 1) of the available height and the width adjusts to fill the available space.</td>
-</tr>
-<tr>
-<td><code>addMorph:proportionalWidth:</code></td>
-<td>The width adjusts to be the specified percentage (number between 0 and 1) of the available width and the height adjusts to fill the available space.</td>
-</tr>
-<tr>
-<td><code>addMorphBack:</code></td>
-<td>Adds at the left of row or top of column (seems opposite of expected).</td>
-</tr>
-<tr>
-<td><code>addMorphFront:</code></td>
-<td>Adds at the right or row or top of column (seems opposite of expected).</td>
-</tr>
-<tr>
-<td><code>addMorphFrontFromWorldPosition:</code></td>
-<td>Same as <code>addMorphFront:</code>, but adds <code>self layoutSubmorphs</code> at end (unclear when this would be used).</td>
-</tr>
-<tr>
-<td><code>addMorphKeepWorldHeight:</code></td>
-<td>Unclear when this would be used.</td>
-</tr>
-<tr>
-<td><code>addMorphUseAll:</code></td>
-<td>Unclear when this would be used.</td>
-</tr>
-<tr>
-<td><code>addMorphs:</code></td>
-<td>Adds a collection of morphs making each take the same percentage of the <code>LayoutMorph</code> width.</td>
-</tr>
-<tr>
-<td><code>addMorphsWidthProportionalTo:</code></td>
-<td>Adds a collection of moprhs making each take a given proportion of the <code>LayoutMorph</code> width (percentage of total)</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>addMorph:fixedHeight:</code></td><td>The height remains at the specified size and the width adjusts to fill the available space.</td></tr><tr><td><code>addMorph:fixedWidth:</code></td><td>The width remains at the specified size and the height edjusts to fill the available space.</td></tr><tr><td><code>addMorph:layoutSpec:</code></td><td></td></tr><tr><td><code>addMorph:proportionalHeight:</code></td><td>The height adjusts to be the specified percentage (number between 0 and 1) of the available height and the width adjusts to fill the available space.</td></tr><tr><td><code>addMorph:proportionalWidth:</code></td><td>The width adjusts to be the specified percentage (number between 0 and 1) of the available width and the height adjusts to fill the available space.</td></tr><tr><td><code>addMorphBack:</code></td><td>Adds at the left of row or top of column (seems opposite of expected).</td></tr><tr><td><code>addMorphFront:</code></td><td>Adds at the right or row or top of column (seems opposite of expected).</td></tr><tr><td><code>addMorphFrontFromWorldPosition:</code></td><td>Same as <code>addMorphFront:</code>, but adds <code>self layoutSubmorphs</code> at end (unclear when this would be used).</td></tr><tr><td><code>addMorphKeepWorldHeight:</code></td><td>Unclear when this would be used.</td></tr><tr><td><code>addMorphUseAll:</code></td><td>Unclear when this would be used.</td></tr><tr><td><code>addMorphs:</code></td><td>Adds a collection of morphs making each take the same percentage of the <code>LayoutMorph</code> width.</td></tr><tr><td><code>addMorphsWidthProportionalTo:</code></td><td>Adds a collection of moprhs making each take a given proportion of the <code>LayoutMorph</code> width (percentage of total)</td></tr></tbody></table>
 <p>The <code>addMorphs:</code> method takes a collection of <code>Morphs</code> and adds each
 using the <code>addMorph:proportionalWidth:</code> method with a value of <code>1</code>.
 This causes all the newly added submorphs have the same width
@@ -564,7 +558,7 @@ The <code>LayoutSpec</code> instance method <code>initialize</code> method sets
 both the <code>proportionalHeight</code> and <code>proportionalWidth</code> properties to <code>1.0</code>
 which may not be the desired values.
 So if the goal is to add a morph to a <code>LayoutMorph</code>,
-set one of the &quot;proportional&quot; properties to a given value,
+set one of the “proportional” properties to a given value,
 and not change the other, consider adding the morph with the <code>addMorph:</code> method
 and then set the desired <code>LayoutSpec</code> property with an expression like
 <code>someMorph layoutSpec proportionalWidth: 1.0</code>.</p>
@@ -575,7 +569,7 @@ it will default to smallest size that contains its submorphs.</p>
 <code>layoutSpec</code> and <code>layoutSpec:</code> that get and set a <code>LayoutSpec</code> object
 specific to the <code>PlacedMorph</code>.</p>
 <p>The submorphs added to a <code>LayoutMorph</code> can each specify their alignment in
-the opposite direction of the <code>LayoutMorph</code>, referred to as the &quot;minor axis&quot;.
+the opposite direction of the <code>LayoutMorph</code>, referred to as the “minor axis”.
 It defaults to centering.
 To change this, send the <code>#axisEdgeWeight:</code> message with a number from 0 to 1.
 A value zero pushes to the top/left,
@@ -591,21 +585,20 @@ To achieve that, use code like the following:</p>
 </code></pre>
 <p>Consider adding the following instance method to <code>LayoutMorph</code>:</p>
 <pre><code class="language-smalltalk">offAxisEdgeWeight: aNumber
-    &quot;Sets offAxisEdgeWeight of all submorphs.&quot;
+    "Sets offAxisEdgeWeight of all submorphs."
 
     self submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].
 </code></pre>
 <p>The following code demonstrates layout of submorphs.</p>
-<p><img alt="Cuis Morphic layout" style="width: 40%"
-  src="/blog/assets/cuis-morphic-layout1.png?v=1.1.1"></p>
+<p><img alt="Cuis Morphic layout" style="width: 40%" src="/blog/assets/cuis-morphic-layout1.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">row := LayoutMorph newRow.
 row morphExtent: 250@100.
 row borderColor: Color yellow; borderWidth: 5.
 row color: Color tan.
 row gap: 10.
-&quot;left-aligned by default&quot;
-&quot;row axisEdgeWeight: 1.&quot; &quot;right-aligned&quot;
-row axisEdgeWeight: 0.5. &quot;centered horizontally&quot;
+"left-aligned by default"
+"row axisEdgeWeight: 1." "right-aligned"
+row axisEdgeWeight: 0.5. "centered horizontally"
 
 box := ColoredBoxMorph new.
 box color: Color red.
@@ -614,7 +607,7 @@ row addMorph: box.
 
 box := ColoredBoxMorph new.
 box color: Color green.
-&quot;Keeping default extent of 50@40.&quot;
+"Keeping default extent of 50@40."
 row addMorph: box.
 
 box := ColoredBoxMorph new.
@@ -622,54 +615,52 @@ box color: Color blue.
 box morphExtent: 30@20.
 row addMorph: box.
 
-&quot;row submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ].&quot;
+"row submorphs do: [ :submorph | submorph layoutSpec offAxisEdgeWeight: 0 ]."
 row offAxisEdgeWeight: 1.
 
 row openInWorld.
 </code></pre>
 <p>Here is one more example.</p>
-<p><img alt="Cuis Morphic layout" style="width: 40%"
-  src="/blog/assets/cuis-morphic-layout2.png?v=1.1.1"></p>
+<p><img alt="Cuis Morphic layout" style="width: 40%" src="/blog/assets/cuis-morphic-layout2.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">column := LayoutMorph newColumn.
 column layoutSpec fixedWidth: 300; fixedHeight: 200.
-&quot;Add a border to the LayoutMorph.&quot;
+"Add a border to the LayoutMorph."
 column borderColor: Color green; borderWidth: 5.
 
 row := LayoutMorph newRow.
 row borderColor: Color yellow; borderWidth: 5.
 row addMorph: (BorderedBoxMorph new color: Color pink).
 row addMorph: (BorderedBoxMorph new color: Color lightBlue).
-&quot;By default, the submorphs will be pushed to the left and centered vertically.&quot;
-&quot;Center the submorphs horizontally.&quot;
+"By default, the submorphs will be pushed to the left and centered vertically."
+"Center the submorphs horizontally."
 row axisEdgeWeight: 0.5.
-&quot;Move all the submorphs to the top of the row.&quot;
+"Move all the submorphs to the top of the row."
 row submorphsDo: [:submorph | submorph layoutSpec offAxisEdgeWeight: 0].
 column addMorph: row.
 
 row := LayoutMorph newRow.
 row borderColor: Color red; borderWidth: 5.
 item := BorderedBoxMorph new color: Color lightGreen.
-item layoutSpec proportionalWidth: 1. &quot;grows width to maximum available&quot;
+item layoutSpec proportionalWidth: 1. "grows width to maximum available"
 row addMorph: item.
 row addMorph: (BorderedBoxMorph new color: Color lightOrange).
 column addMorph: row.
 
-&quot;Each of the column submorphs will have the same height be default.
-Since the column has a fixed height of 200, each row will have a height of 100.&quot;
+"Each of the column submorphs will have the same height be default.
+Since the column has a fixed height of 200, each row will have a height of 100."
 
-&quot;The column LayoutSpec won't be honored unless it is inside a LayoutMorph.&quot;
+"The column LayoutSpec won't be honored unless it is inside a LayoutMorph."
 container := LayoutMorph newRow.
 container addMorph: column.
 container openInHand.
 </code></pre>
-<h2 id="editing-characteristics" tabindex="-1">Editing Characteristics</h2>
+<h2 id="editing-characteristics">Editing Characteristics</h2>
 <p>Many characteristics of a <code>Morph</code> can be edited by
 opening its halo and clicking its blue menu button.
 To get a halo for a submorph, cmd-click repeatedly
 until the halo appears around the target <code>Morph</code>.
 The following menu will appear:</p>
-<p><img alt="Cuis halo blue menu" style="width: 60%"
-  src="/blog/assets/cuis-halo-blue-menu.png?v=1.1.1"></p>
+<p><img alt="Cuis halo blue menu" style="width: 60%" src="/blog/assets/cuis-halo-blue-menu.png?v=1.1.1"></p>
 <p>Click the push pin at the upper-right of the menu
 to keep the menu open, which simplifies making multiple changes.</p>
 <p>To change the border width, size (<code>morphExtent</code>), or position (<code>morphPosition</code>)
@@ -677,7 +668,7 @@ of a <code>Morph</code>:</p>
 <ul>
 <li>Click <code>borderWidth</code>, <code>morphExtent</code>, or <code>morphPosition</code>.</li>
 <li>Modify the numbers in the dialog that appears.</li>
-<li>Click the &quot;Accept&quot; to save the changes or the &quot;Cancel&quot; button to discard them.</li>
+<li>Click the “Accept” to save the changes or the “Cancel” button to discard them.</li>
 </ul>
 <p>Why do a small subset of <code>Morph</code> instance methods begin with <code>morph</code>?
 These include <code>morphExtent</code>, <code>morphExtentInOwner</code>, <code>morphId</code>,
@@ -691,14 +682,14 @@ other classes, and as they are about the morph they are dealing with,
 it just seemed right to me.</p>
 <p>Others including <code>morphExtentInOwner</code>, <code>#morphPositionInWorld</code>, and
 <code>morphPositionInWorld:</code> were created when I converted the Morphic framework
-from Squeak's style global coordinates to Morph local coordinates.
+from Squeak’s style global coordinates to Morph local coordinates.
 It was a way to separate the two semantics while they were both there,
 during that redesign. So they are no longer needed. I pushed updates to rename
 them and to deprecate the old implementations. They will be removed later.</p>
 <p>Finally, we have others like <code>#morphPosition</code>, <code>#morphExtent</code>, and such.
 The problem with them is that <code>#position</code> and <code>#position:</code> are part of
 the <code>Stream</code> protocol. <code>#extent</code> and <code>#extent:</code> are part of the
-<code>Form</code> and <code>Rectangle</code> protocol. This looks like polymorphism, but it isn't.
+<code>Form</code> and <code>Rectangle</code> protocol. This looks like polymorphism, but it isn’t.
 In no way can a <code>Morph</code> and a <code>Stream</code> be used in the same code.
 The same is true for a <code>Morph</code> and a <code>Form</code>, or a <code>Morph</code> and a <code>Rectangle</code>.
 In this cases, when using Senders and Implementors in such messages,
@@ -707,12 +698,12 @@ of senders and implementors that will never intersect.
 The lists of senders and implementors become twice as large for no reason,
 and working in that code is much harder than needed.</p>
 <p>Yes, I really dislike false polymorphism. So <code>#morphPosition</code>, <code>#morphExtent</code>,
-and a few others have the &quot;morph&quot; prefix only so they are never
+and a few others have the “morph” prefix only so they are never
 confused with Stream, Form and Rectangle protocol.</p>
 </blockquote>
 <p>To change the border color or color of a <code>Morph</code>:</p>
 <ul>
-<li>Click &quot;borderColor&quot; or &quot;color&quot;.</li>
+<li>Click “borderColor” or “color”.</li>
 <li>Select one of the following color sets
 to open a dialog containing color swatches:
 CSS3 (Web) Colors, Crayon Colors, NBSISCC Colors, XKCD Colors,
@@ -720,10 +711,9 @@ or ColorMix Editor (opens a Color Editor dialog).
 A Color Editor dialog enables selecting a color
 with RGB, HSL, and transparency.
 For more detail on these color dictionaries, see
-<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/NamedColors/README.md"
-target="_blank">Cuis-NamedColors</a>.</li>
+<a href="https://github.com/Cuis-Smalltalk/Cuis-Smalltalk-Dev/blob/master/Packages/Features/NamedColors/README.md" target="_blank">Cuis-NamedColors</a>.</li>
 <li>Drag a color swatch from the dialog
-onto the swatch for &quot;borderColor&quot; or &quot;color&quot;.</li>
+onto the swatch for “borderColor” or “color”.</li>
 <li>Close the color swatch dialog.</li>
 <li>Close the <code>Morph</code> menu.</li>
 </ul>
@@ -731,17 +721,15 @@ onto the swatch for &quot;borderColor&quot; or &quot;color&quot;.</li>
 <ul>
 <li>Open the halo for a submorph.</li>
 <li>Click the blue menu button.</li>
-<li>Select &quot;edit my LayoutSpec&quot;. The dialog below will appear.</li>
+<li>Select “edit my LayoutSpec”. The dialog below will appear.</li>
 <li>Click the red push pin to enable trying multiple changes.</li>
-<li>After each set of changes, click the &quot;Update&quot; button.</li>
+<li>After each set of changes, click the “Update” button.</li>
 <li>When satisfied with the changes, close the dialog.</li>
 </ul>
-<p><img alt="Cuis edit my LayoutSpec" style="width: 80%"
-  src="/blog/assets/cuis-edit-my-layoutspec.png?v=1.1.1"></p>
+<p><img alt="Cuis edit my LayoutSpec" style="width: 80%" src="/blog/assets/cuis-edit-my-layoutspec.png?v=1.1.1"></p>
 <p>For more detail on layouts, see
-<a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
-target="_blank">Exploring morph layouts in Cuis</a>.</p>
-<h2 id="coordinate-systems" tabindex="-1">Coordinate Systems</h2>
+<a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md" target="_blank">Exploring morph layouts in Cuis</a>.</p>
+<h2 id="coordinate-systems">Coordinate Systems</h2>
 <p>The world coordinate system places (0, 0) in
 the upper-left corner of the main window.
 X values increase going right and Y values increase going down.</p>
@@ -751,16 +739,14 @@ This coordinate system is used for drawing the <code>Morph</code>.</p>
 <p>Changing the translation, rotation, or scale of a <code>Morph</code>
 changes its local coordinate system.</p>
 <p>Positive rotations are clockwise and negative rotations are counter-clockwise.</p>
-<h2 id="imagemorph" tabindex="-1">ImageMorph</h2>
+<h2 id="imagemorph">ImageMorph</h2>
 <p>An <code>ImageMorph</code> can render an image from a file.
 For example, the following image is from
-<a href="https://visualparadox.com/wallpapers/altitude1600.htm"
-target="_blank">VisualParadox</a>.</p>
-<p><img alt="Altitude"
-    src="/blog/assets/altitude1600.jpg?v=1.1.1"></p>
-<pre><code class="language-smalltalk">&quot;Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory.&quot;
+<a href="https://visualparadox.com/wallpapers/altitude1600.htm" target="_blank">VisualParadox</a>.</p>
+<p><img alt="Altitude" src="/blog/assets/altitude1600.jpg?v=1.1.1"></p>
+<pre><code class="language-smalltalk">"Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory."
 filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.
-form := Form fromFileNamed: filePath :: magnifyBy: 0.25. &quot;scale to 1/4 size&quot;
+form := Form fromFileNamed: filePath :: magnifyBy: 0.25. "scale to 1/4 size"
 morph := ImageMorph newWith: form.
 morph openInWorld.
 </code></pre>
@@ -768,7 +754,7 @@ morph openInWorld.
 <p>PNG and TIFF files are not supported by default.
 To add support for those,
 evaluate <code>Feature require: 'Graphics-Files-Additional'</code>.</p>
-<h2 id="creating-a-custom-morph" tabindex="-1">Creating a Custom Morph</h2>
+<h2 id="creating-a-custom-morph">Creating a Custom Morph</h2>
 <p>A custom morph is implemented as a subclass of <code>Morph</code> or one of its subclasses.
 The <code>drawOn:</code> method must be implemented to describe what to render.
 This is passed an object from a subclass of <code>MorphicCanvas</code> object.
@@ -776,7 +762,7 @@ Typically this is <code>VectorCanvas</code> or <code>HybridCanvas</code>.
 This defines the supported drawing methods.</p>
 <p>Subclasses of <code>Morph</code>:</p>
 <ul>
-<li>do not have a specified &quot;extent&quot; (size)</li>
+<li>do not have a specified “extent” (size)</li>
 <li>use the coordinate system of their owner, which can be a <code>WorldMorph</code>
 (for example, if the owner is scaled by a factor of 2
 then this will be also)</li>
@@ -787,7 +773,7 @@ that is centered at origin, has a width of 150, and a height of 140</li>
 </ul>
 <p>Subclasses of <code>PlacedMorph</code></p>
 <ul>
-<li>do not have a specified &quot;extent&quot; (size)</li>
+<li>do not have a specified “extent” (size)</li>
 <li>use their own local coordinate system</li>
 <li>can be dragged to a new location</li>
 <li>use a <code>VectorCanvas</code></li>
@@ -795,7 +781,7 @@ that is centered at origin, has a width of 150, and a height of 140</li>
 </ul>
 <p>Subclasses of <code>BoxMorph</code>:</p>
 <ul>
-<li>have an &quot;extent&quot; (size) specified by their <code>defaultExtent</code> method
+<li>have an “extent” (size) specified by their <code>defaultExtent</code> method
 which defaults to <code>50@40</code></li>
 <li>use a <code>HybridCanvas</code> by default, but will use a <code>VectorCanvas</code>
 if their <code>requiresVectorCanvas</code> method returns <code>true</code></li>
@@ -821,7 +807,7 @@ For an example, see the class <code>Sample07Clipping</code>.
 NOTE: It seems that only drawing of shapes is clipped, not images.</p>
 <p>Custom morphs that are subclasses of <code>PlacedMorph</code> (or one of its subclasses)
 can be directly dragged to new locations.
-Otherwise dragging requires opening the <code>Morph</code> halo and using the &quot;Move&quot; handle.</p>
+Otherwise dragging requires opening the <code>Morph</code> halo and using the “Move” handle.</p>
 <p>The following example includes the instance variable <code>extent</code>
 to allow the width and height to be used to determine what to draw.</p>
 <pre><code class="language-smalltalk">PlacedMorph subclass: #CanvasDemo
@@ -862,8 +848,8 @@ Otherwise it will be placed at a random location.</p>
 <p>Also see the custom method <code>openAtCursor</code> that I added to the <code>Morph</code> class.
 It is defined as follows:</p>
 <pre><code class="language-smalltalk">openAtCursor
-    &quot;Opens Morph, attempting to center it at hand location,
-    but keeping it in the world bounds.&quot;
+    "Opens Morph, attempting to center it at hand location,
+    but keeping it in the world bounds."
     | world |
     world := self runningWorld.
     world
@@ -872,13 +858,13 @@ It is defined as follows:</p>
             w addMorph: self centeredNear: w activeHand morphPosition.
         ]
 </code></pre>
-<h3 id="adding-borders" tabindex="-1">Adding Borders</h3>
+<h3 id="adding-borders">Adding Borders</h3>
 <p>To add a border around a morph with a given color and width,
 send it the message <code>#borderColor:borderWidth</code>.
 For example:</p>
 <pre><code class="language-smalltalk">myMorph borderColor: Color red; borderWidth: 3.
 </code></pre>
-<h3 id="drawing-lines-and-shapes" tabindex="-1">Drawing Lines and Shapes</h3>
+<h3 id="drawing-lines-and-shapes">Drawing Lines and Shapes</h3>
 <p>Many of the drawing methods are defined in the superclasses
 <code>AbstractVectorCanvas</code> and <code>MorphicCanvas</code>.
 Examples include:</p>
@@ -894,12 +880,12 @@ Examples include:</p>
 </ul>
 </li>
 <li><code>fillRectangle:color:</code></li>
-<li><code>image:at:</code> (see example below under &quot;Drawing Images&quot;)</li>
+<li><code>image:at:</code> (see example below under “Drawing Images”)</li>
 <li><code>line:to:width:color:</code></li>
 <li>TODO: Add more!</li>
 </ul>
 <p>For examples of using these methods,
-see the classes in the category &quot;Morphic ... Examples&quot;.</p>
+see the classes in the category “Morphic … Examples”.</p>
 <p>The following code draws a green rectangle with a red border
 and a red line from its upper-left to lower-right.
 It has a default width of 100, height of 100, and
@@ -932,15 +918,15 @@ extent: aPoint
 
 initialize
     super initialize.
-    extent := 100@100 &quot;default size&quot;
-    &quot;Place in upper-left corner by default.&quot;
+    extent := 100@100 "default size"
+    "Place in upper-left corner by default."
     self location: (MorphicTranslation withTranslation: 0@0).
 </code></pre>
 <p>To try this:</p>
 <ul>
 <li>Open a Workspace.</li>
 <li>Enter <code>(CanvasDemo new extent: 300@400) openInHand.</code></li>
-<li>Press cmd-d to &quot;Do it&quot;.</li>
+<li>Press cmd-d to “Do it”.</li>
 <li>Move the cursor to where the <code>Morph</code> should be dropped.</li>
 <li>Click to drop it.</li>
 </ul>
@@ -954,7 +940,7 @@ add the following in the <code>drawOn:</code> method:</p>
 aCanvas
     drawString: 'Hello'
     atCenterXBaselineY: x1 + x2 / 2 @ (y1 + y2 / 2)
-    font: font &quot;pass nil to use default font&quot;
+    font: font "pass nil to use default font"
     color: Color yellow.
 </code></pre>
 <p>Lines have rounded endpoints by default.
@@ -964,7 +950,7 @@ for drawing on a canvas:</p>
 <pre><code class="language-smalltalk">drawOn: aCanvas
     | center filePath font form halfHeight halfWidth height padding rect text textStart width |
 
-    &quot;filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'.&quot;
+    "filePath := '/Users/volkmannm/Pictures/images/altitude1600.jpg'."
     filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
     form := Form fromFileNamed: filePath.
     form := form magnifyBy: 0.25.
@@ -990,15 +976,15 @@ for drawing on a canvas:</p>
     ].
 
     aCanvas strokeWidth: 5 color: Color blue do: [
-        &quot;radius is a Point with x as major axis radius and y as minor axis radius.
-        rotationAngle is clockwise rotation in radians.&quot;
+        "radius is a Point with x as major axis radius and y as minor axis radius.
+        rotationAngle is clockwise rotation in radians."
         aCanvas ellipseCenter: 50@50 radius: 40@20 rotationAngle: Float pi / 4.
     ].
 
     aCanvas strokeWidth: 10 color: Color red do: [
         aCanvas line: center to: width @ height width: 5 color: Color red.
-        &quot;moveTo: 100 @ 100;
-        lineTo: 200 @ 200.&quot;
+        "moveTo: 100 @ 100;
+        lineTo: 200 @ 200."
     ].
 
     aCanvas strokeWidth: 5 color: Color green do: [
@@ -1008,14 +994,13 @@ for drawing on a canvas:</p>
             arcTo: width * 3/4 @ (height * 3/4) radius: 30 angleOfXAxis: Float pi largeFlag: false sweepFlag: false
     ].
 
-    &quot;A frameRectangle doesn't seem useful.&quot;
-    &quot;aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10.&quot;
+    "A frameRectangle doesn't seem useful."
+    "aCanvas frameRectangle: rect topLeftColor: Color red bottomRightColor: Color blue borderWidth: 10."
 </code></pre>
 <p>The following code demonstrates using the
 <code>arcTo:radius:angleOfXAxis:largeFlag:sweepFlag:</code> method
 to draw an oval at a 45 degree angle.</p>
-<p><img alt="Cuis arcTo:" style="width: 30%"
-  src="/blog/assets/cuis-morphic-oval.png?v=1.1.1"></p>
+<p><img alt="Cuis arcTo:" style="width: 30%" src="/blog/assets/cuis-morphic-oval.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">drawOn: aCanvas
 	| height linen radius rect width |
 
@@ -1037,8 +1022,8 @@ to draw an oval at a 45 degree angle.</p>
 	].
 </code></pre>
 <p>Custom methods related to drawing like <code>drawOn:</code>
-should be placed in the &quot;drawing&quot; method category.</p>
-<h3 id="drawing-images" tabindex="-1">Drawing Images</h3>
+should be placed in the “drawing” method category.</p>
+<h3 id="drawing-images">Drawing Images</h3>
 <p>The following code can be used in a <code>drawOn:</code> method
 to draw an image on a canvas:</p>
 <pre><code class="language-smalltalk">filePath := '/Users/volkmannm/Pictures/logos/Smalltalk-balloon.png'.
@@ -1046,7 +1031,7 @@ form := Form fromFileNamed: filePath.
 form := form magnifyBy: 0.25.
 aCanvas image: form at: 0@0
 </code></pre>
-<h2 id="text-entry" tabindex="-1">Text Entry</h2>
+<h2 id="text-entry">Text Entry</h2>
 <p>The <code>TextModelMorph</code> class defined in the base image Morphic package
 can be used for single or multiple line text entry.</p>
 <p>The following code creates an instance of <code>TextModelMorph</code>,
@@ -1091,7 +1076,7 @@ until the user begins typing a value,
 send it <code>#emptyTextDisplayMessage:</code> with a string message.</p>
 <p>The default background color of a <code>TextModelMorph</code> is white.
 A <code>TextModelMorph</code> only displays a border when it has focus.
-One way to make its bounds apparent when it doesn't have focus
+One way to make its bounds apparent when it doesn’t have focus
 is to set the background color of the parent component.</p>
 <pre><code class="language-smalltalk">tmm owner color: (Color blue alpha: 0.1)
 </code></pre>
@@ -1110,8 +1095,8 @@ then a horizontal scroll bar will appear.</p>
 <p>To prevent scroll bars from appearing,
 send one of the following messages to an instance:</p>
 <ul>
-<li><code>#hHideScrollBar</code> for horizontal (doesn't seem to work!)</li>
-<li><code>#vHideScrollBar</code> for vertical (doesn't seem to work!)</li>
+<li><code>#hHideScrollBar</code> for horizontal (doesn’t seem to work!)</li>
+<li><code>#vHideScrollBar</code> for vertical (doesn’t seem to work!)</li>
 <li><code>#hideScrollBarsIndefinitely</code> for both</li>
 </ul>
 <p>The default size of a <code>TextModelMorph</code> is 200 by 100.
@@ -1138,29 +1123,29 @@ To manually request the update:</p>
 </code></pre>
 <p>There are multiple ways to configure user actions that trigger an update.
 The easiest are:</p>
-<pre><code class="language-smalltalk">tmm acceptOnAny: true. &quot;updates after every keystroke&quot;
+<pre><code class="language-smalltalk">tmm acceptOnAny: true. "updates after every keystroke"
 
-tmm acceptOnCR: true. &quot;updates after return key is pressed&quot;
+tmm acceptOnCR: true. "updates after return key is pressed"
 </code></pre>
 <p>To listen for changes to the value of a <code>TextModelMorph</code>:</p>
 <pre><code class="language-smalltalk">tmm keystrokeAction: [:event |
     | value |
     value := tmm text.
-    &quot;Do something with the value.&quot;
+    "Do something with the value."
 ].
 </code></pre>
 <p>By default, if the user attempts to close a <code>SystemWindow</code>
 and it contains <code>TextModelMorph</code> instances that have unsaved changes,
 the user will be asked to confirm this with the message
-&quot;Changes have not been saved. Is it OK to cancel those changes?&quot;.
-They must select &quot;Yes&quot; to close the window.
+“Changes have not been saved. Is it OK to cancel those changes?”.
+They must select “Yes” to close the window.
 To disable this check for a particular instance of <code>TextModelMorph</code>,
 send it <code>askBeforeDiscardingEdits: false</code>.</p>
 <p>The following code creates a single-line text input
 with a given width that never shows scroll bars:</p>
 <pre><code class="language-smalltalk">tmm := TextModelMorph withText: '' ::
     hideScrollBarsIndefinitely;
-    morphExtent: 200 @ 0; &quot;calculates required height for one line&quot;
+    morphExtent: 200 @ 0; "calculates required height for one line"
     wrapFlag: false.
 </code></pre>
 <p>If the text exceeds the width,
@@ -1184,11 +1169,10 @@ It prints their ASCII codes to the Transcript.</p>
 to use the <code>TextEntryMorph</code> class defined in the UI-Entry package.
 Also, consider using the <code>TextInputMorf</code> class
 defined in my Cuis-Smalltalk-Morf package.</p>
-<p>Let's combine what we have learned above to create a small application.
+<p>Let’s combine what we have learned above to create a small application.
 The user can enter their first and last name.
-Clicking the &quot;Greet&quot; button displays a greeting message below the button.</p>
-<p><img alt="Cuis user interaction demo" style="width: 40%"
-  src="/blog/assets/cuis-user-interaction-demo.png?v=1.1.1"></p>
+Clicking the “Greet” button displays a greeting message below the button.</p>
+<p><img alt="Cuis user interaction demo" style="width: 40%" src="/blog/assets/cuis-user-interaction-demo.png?v=1.1.1"></p>
 <p>Create the class <code>UserInteractionDemo</code> as follows:</p>
 <pre><code class="language-smalltalk">Object subclass: #UserInteractionDemo
     instanceVariableNames: 'firstName greetLabel lastName'
@@ -1211,8 +1195,8 @@ lastName: aString
 </code></pre>
 <p>Define the instance method <code>textEntryOn:</code> as follows:</p>
 <pre><code class="language-smalltalk">textEntryOn: aSymbol
-    &quot;Answer a TextModelMorph where aSymbol provides
-     the name for the getter and setter.&quot;
+    "Answer a TextModelMorph where aSymbol provides
+     the name for the getter and setter."
     | entry |
 
     entry := TextModelMorph
@@ -1222,8 +1206,8 @@ lastName: aString
         acceptOnAny: true;
         askBeforeDiscardingEdits: false;
         hideScrollBarsIndefinitely;
-        &quot;Width is made proportional below.
-        Setting height to zero causes it to use minimum height for one line.&quot;
+        "Width is made proportional below.
+        Setting height to zero causes it to use minimum height for one line."
         morphExtent: 0 @@ 0;
         tabToFocus: true;
         wrapFlag: false.
@@ -1232,7 +1216,7 @@ lastName: aString
 </code></pre>
 <p>Define the instance method <code>rowLabeled:</code> as follows:</p>
 <pre><code class="language-smalltalk">rowLabeled: aString for: aMorph
-    &quot;Answer a row LayoutMorph containing a LabelMorph and a given morph.&quot;
+    "Answer a row LayoutMorph containing a LabelMorph and a given morph."
     | row |
 
     row := LayoutMorph newRow
@@ -1258,7 +1242,7 @@ lastName: aString
     firstName := ''.
     lastName := ''.
 
-    &quot;Relative file paths start from the Cuis-Smalltalk-Dev-UserFiles directory.&quot;
+    "Relative file paths start from the Cuis-Smalltalk-Dev-UserFiles directory."
     form := Form fromFileNamed: './hot-air-balloon.png' :: magnifyBy: 0.5.
     image := ImageMorph newWith: form.
 
@@ -1278,17 +1262,17 @@ lastName: aString
         addMorph: button;
         addMorph: greetLabel.
 
-    &quot;Set window size to the smallest height that contains its submorphs.&quot;
+    "Set window size to the smallest height that contains its submorphs."
     extent := window layoutMorph minimumExtent.
     window
         morphExtent: 400 @@ extent y;
         openInWorld.
 
-    &quot;Set a background color so it's clear where the TextModelMorphs
-    are placed when they do not have focus.&quot;
+    "Set a background color so it's clear where the TextModelMorphs
+    are placed when they do not have focus."
     window layoutMorph color: (Color blue alpha: 0.1).
 </code></pre>
-<h2 id="mouse-events" tabindex="-1">Mouse Events</h2>
+<h2 id="mouse-events">Mouse Events</h2>
 <p>To handle mouse clicks on a custom morph,
 add instance methods like the following to a <code>Morph</code> subclass.
 On each click, this changes the <code>fillColor</code> instance variable
@@ -1323,9 +1307,9 @@ To do this, implement the <code>handlesMouseDown</code> method as follows:</p>
     | localPoint |
 
     localPoint := self internalizeFromWorld: aMouseEvent eventPosition.
-    ^ localPoint y &gt; self labelHeight.
+    ^ localPoint y > self labelHeight.
 </code></pre>
-<h2 id="keyboard-events" tabindex="-1">Keyboard Events</h2>
+<h2 id="keyboard-events">Keyboard Events</h2>
 <p>To handle keyboard events on a custom morph,
 add instance methods like the following to a <code>Morph</code> subclass.</p>
 <pre><code class="language-smalltalk">handlesKeyboard
@@ -1345,19 +1329,19 @@ keyboardFocusChange: aBoolean
 keyStroke: aKeyboardEvent
     | char |
     char := Character codePoint: aKeyboardEvent keyValue.
-    char logAs: 'character'. &quot;defined in Getting Started&quot;
+    char logAs: 'character'. "defined in Getting Started"
     aKeyboardEvent isArrowUp ifTrue: ['got up arrow' print].
 </code></pre>
 <p>Also see the <code>isArrowRight</code>, <code>isArrowDown</code>, and <code>isArrowLeft</code> methods.</p>
-<h2 id="morphiccanvas" tabindex="-1">MorphicCanvas</h2>
+<h2 id="morphiccanvas">MorphicCanvas</h2>
 <p>The <code>MorphicCanvas</code> class has many subclasses including
 <code>BitBltBoundsFinderCanvas</code>, <code>BitBltCanvas</code>, <code>BoundsFinderCanvas</code>,
 <code>HybridCanvas</code>, and <code>VectorCanvas</code>.</p>
-<p><code>BitBltCanvas</code> is a legacy class that doesn't support
+<p><code>BitBltCanvas</code> is a legacy class that doesn’t support
 vector graphics operations, anti-aliasing, or zooming.
 But it provides great performance due to its simplicity.</p>
 <p>TODO: Is it worthwhile to learn about any of these besides <code>VectorCanvas</code>?</p>
-<h2 id="drawing-details" tabindex="-1">Drawing Details</h2>
+<h2 id="drawing-details">Drawing Details</h2>
 <p>How does the message <code>#drawOn:</code> get sent to each currently visible morph?</p>
 <p>The abstract class <code>MorphicCanvas</code> defines the method <code>drawCurrentAndSubmorphs</code>
 as <code>subclassResponsibility</code>.
@@ -1381,7 +1365,7 @@ sends the message <code>#fullDraw</code> to each submorph.</p>
 <li><code>MorphicCanvas drawRoots:rootsDamage:backgroundDamage:</code></li>
 <li><code>MorphicCanvas fullDraw:</code></li>
 </ul>
-<h2 id="borderedboxmorph" tabindex="-1">BorderedBoxMorph</h2>
+<h2 id="borderedboxmorph">BorderedBoxMorph</h2>
 <p>The <code>BorderedBoxMorph</code> class is a subclass of <code>ColoredBoxMorph</code>,
 which is a subclass of <code>BoxMorph</code>, which is a subclass of <code>PlacedMorph</code>.
 The <code>BorderedBoxMorph</code> class adds the instance variables
@@ -1389,7 +1373,7 @@ The <code>BorderedBoxMorph</code> class adds the instance variables
 The <code>ColoredBoxMorph</code> class adds the instance variable <code>color</code>.
 The <code>BoxMorph</code> class adds the instance variable <code>extent</code> (width and height)
 and is intended for morphs that are rectangular.</p>
-<p>TODO: The class comment for <code>BoxMorph</code> says &quot;DON'T subclass from here.&quot; Why?</p>
+<p>TODO: The class comment for <code>BoxMorph</code> says “DON’T subclass from here.” Why?</p>
 <p>All the developer tool windows are subclasses of <code>BorderedBoxMorph</code>.
 For example, System Browsers are implemented by the <code>BrowserWindow</code> class
 which has the following inheritance hierarchy.</p>
@@ -1432,7 +1416,7 @@ which has the following inheritance hierarchy.</p>
 </ul>
 </li>
 </ul>
-<h2 id="systemwindow" tabindex="-1">SystemWindow</h2>
+<h2 id="systemwindow">SystemWindow</h2>
 <p>To implement a custom window, create an instance of the class <code>SystemWindow</code>
 or a custom subclass of it.
 This supplies the standard buttons in the upper-left to
@@ -1441,16 +1425,16 @@ toggle to and from full screen (green; not really the full screen),
 and open a menu of other window-related commands (blue).</p>
 <p>The menu includes:</p>
 <ul>
-<li>change title...</li>
-<li>window color... (broken?)</li>
-<li>close others...</li>
+<li>change title…</li>
+<li>window color… (broken?)</li>
+<li>close others…</li>
 <li>send to back</li>
 <li>make next-to-topmost (moves behind one other window)</li>
 <li>make undraggable/draggable (toggles)</li>
 <li>close (same as red button)</li>
 <li>collapse (same as orange button)</li>
 <li>expand/contract (same as green button)</li>
-<li>resize... (graphically select both location and size)</li>
+<li>resize… (graphically select both location and size)</li>
 </ul>
 <p>The simplest way to create a <code>SystemWindow</code> that displays a single morph
 is to send <code>#embeddedInMorphicWindowLabeled:</code> to the morph
@@ -1460,7 +1444,7 @@ that is the returned by the <code>initialExtent</code> method
 which returns <code>RealEstate standardWindowExtent</code>
 which is <code>1079@830</code>.
 Override the <code>initialExtent</code> method to use a different size.</p>
-<p>The window title defaults to &quot;Untitled Window&quot;.
+<p>The window title defaults to “Untitled Window”.
 To change this, send <code>#setLabel:</code> with an argument
 that is the desired title string to an instance.</p>
 <p>Instances of this class have the instance property <code>layoutMorph</code>
@@ -1477,48 +1461,46 @@ perhaps by sending it <code>#openInWorld</code>:</p>
 <pre><code class="language-smalltalk">extent := window layoutMorph minimumExtent.
 window morphExtent: extent.
 </code></pre>
-<p>Here's a basic example that demonstrates adding a World menu item
+<p>Here’s a basic example that demonstrates adding a World menu item
 that opens a custom subclass of <code>SystemWindow</code>.
 The window prompts for your name.
-When a name is entered, it displays &quot;Hello {name}!&quot; below in the text input.</p>
-<p><img alt="window before entering name" style="width: 40%"
-  src="/blog/assets/cuis-smalltalk-greeter1.png?v=1.1.1"></p>
-<p><img alt="window after entering name" style="width: 40%"
-  src="/blog/assets/cuis-smalltalk-greeter2.png?v=1.1.1"></p>
+When a name is entered, it displays “Hello {name}!” below in the text input.</p>
+<p><img alt="window before entering name" style="width: 40%" src="/blog/assets/cuis-smalltalk-greeter1.png?v=1.1.1"></p>
+<p><img alt="window after entering name" style="width: 40%" src="/blog/assets/cuis-smalltalk-greeter2.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">SystemWindow subclass: #Greeter
     instanceVariableNames: ''
     classVariableNames: ''
     poolDictionaries: ''
     category: 'Greeter'
 
-&quot;class method&quot;
+"class method"
 worldMenuOptions
     ^`{
         {
-            #submenuOf -&gt; TheWorldMenu openLabel.
-            #itemGroup -&gt; 10.
-            #itemOrder -&gt; 42.
-            #label -&gt; 'Greeter'.
-            #object -&gt; Greeter.
-            #selector -&gt; #open.
-            #icon -&gt; #chatIcon.
-            #balloonText -&gt; 'Opens a window where you can greet yourself'.
+            #submenuOf -> TheWorldMenu openLabel.
+            #itemGroup -> 10.
+            #itemOrder -> 42.
+            #label -> 'Greeter'.
+            #object -> Greeter.
+            #selector -> #open.
+            #icon -> #chatIcon.
+            #balloonText -> 'Opens a window where you can greet yourself'.
         } asDictionary
     }`
 
-&quot;class method&quot;
+"class method"
 open
     | extent window |
 
     window := self new.
 
-    &quot;Set window size to the smallest height that contains its submorphs.&quot;
+    "Set window size to the smallest height that contains its submorphs."
     extent := window layoutMorph minimumExtent.
     window
         morphExtent: 300 @ extent y;
         openInWorld.
 
-&quot;instance method&quot;
+"instance method"
 initialize
     | column greetingLabel nameInput row |
 
@@ -1529,12 +1511,12 @@ initialize
     nameInput := TextModelMorph withModel: (TextModel withText: '').
     nameInput emptyTextDisplayMessage: 'Enter your name'.
 
-    &quot;Don't warn the user that changes have not been saved when the window is closed.&quot;
+    "Don't warn the user that changes have not been saved when the window is closed."
     nameInput askBeforeDiscardingEdits: false.
 
     greetingLabel := LabelMorph contents: ''.
 
-    &quot;Update greetingLabel on any keystroke in nameInput.&quot;
+    "Update greetingLabel on any keystroke in nameInput."
     nameInput keystrokeAction: [ :event |
         | name |
         name := nameInput text.
@@ -1545,23 +1527,23 @@ initialize
     ].
 
     row := LayoutMorph newRow.
-    row separation: 10. &quot;between child morphs; defaults to 0&quot;
-    row padding: 0. &quot;must set after separation&quot;
+    row separation: 10. "between child morphs; defaults to 0"
+    row padding: 0. "must set after separation"
     row
         addMorph: (LabelMorph contents: 'Name:');
-        addMorph: nameInput proportionalWidth: 1. &quot;fills row&quot;
+        addMorph: nameInput proportionalWidth: 1. "fills row"
 
     column := self layoutMorph.
-    column separation: 10. &quot;between child morphs; defaults to 0&quot;
-    column padding: 10. &quot;around window edges; must set after separation&quot;
+    column separation: 10. "between child morphs; defaults to 0"
+    column padding: 10. "around window edges; must set after separation"
     column
-        addMorph: row fixedHeight: 0; &quot;to use minimum height that fits row children&quot;
+        addMorph: row fixedHeight: 0; "to use minimum height that fits row children"
         addMorph: greetingLabel.
 
-    &quot;To left align all child morphs of column ...
-    column submorphs do: [ :morph | morph layoutSpec offAxisEdgeWeight: #leftOrTop ].&quot;
+    "To left align all child morphs of column ...
+    column submorphs do: [ :morph | morph layoutSpec offAxisEdgeWeight: #leftOrTop ]."
 </code></pre>
-<h2 id="world-menu-items" tabindex="-1">World Menu Items</h2>
+<h2 id="world-menu-items">World Menu Items</h2>
 <p>To add menu items in the World menu,
 add the class method <code>worldMenuOptions</code> to any class.
 This method must returns an array of <code>Dictionary</code> objects,
@@ -1572,21 +1554,21 @@ immediately updates the World menu.</p>
 <pre><code class="language-smalltalk">worldMenuOptions
     ^`{
         {
-            \#submenuOf -&gt; TheWorldMenu openLabel.
-            \#itemGroup -&gt; 10.
-            \#itemOrder -&gt; 41.
-            \#label -&gt; 'Method Finder'.
-            \#object -&gt; MethodFinderWindow.
-            \#selector -&gt; \#open.
-            \#icon -&gt; \#inspectIcon.
-            \#balloonText -&gt; 'A tool for finding methods that return a given answer.'.
+            \#submenuOf -> TheWorldMenu openLabel.
+            \#itemGroup -> 10.
+            \#itemOrder -> 41.
+            \#label -> 'Method Finder'.
+            \#object -> MethodFinderWindow.
+            \#selector -> \#open.
+            \#icon -> \#inspectIcon.
+            \#balloonText -> 'A tool for finding methods that return a given answer.'.
         } asDictionary
     }`
 </code></pre>
 <p>The <code>#submenuOf</code> key is optional and specifies
 the submenu within the World menu where a menu item will be added.
 If this is omitted, the menu item will appear directly in the World menu.
-For example, the &quot;Open&quot; submenu is identified by <code>TheWorldMenu openLabel</code>.
+For example, the “Open” submenu is identified by <code>TheWorldMenu openLabel</code>.
 All the current submenus of the World menu are defined in the
 class method <code>worldMenuOptions</code> in the class <code>TheWorldMenu</code>.
 These include:</p>
@@ -1600,10 +1582,10 @@ These include:</p>
 </ul>
 <p>The <code>#itemGroup</code> key specifies the group within the target menu
 where a menu item will be added.
-The &quot;Open&quot; menu has four groups numbered 10, 20, 30, and $0.</p>
+The “Open” menu has four groups numbered 10, 20, 30, and $0.</p>
 <p>The <code>#itemOrder</code> key specifies the order in which
 a menu item will appear in its menu.
-Within the &quot;Open&quot; menu, the existing menu items use the following values:</p>
+Within the “Open” menu, the existing menu items use the following values:</p>
 <ul>
 <li>Text Editor: 10</li>
 <li>Workspace: 20</li>
@@ -1612,7 +1594,7 @@ Within the &quot;Open&quot; menu, the existing menu items use the following valu
 <li>MessageNames: 40</li>
 <li>Transcript: 50.</li>
 </ul>
-<p>So the example above places the menu item &quot;Method Finder&quot; after &quot;Message Names&quot;.</p>
+<p>So the example above places the menu item “Method Finder” after “Message Names”.</p>
 <p>The <code>#label</code> key specifies the text that will appear in the menu item.</p>
 <p>The <code>#object</code> key specifies the class that implements the menu item.
 An instance of this class will be created when the menu item is selected.
@@ -1624,26 +1606,26 @@ of a <code>SystemWindow</code> subclass and opens it.</p>
 <p>The <code>#icon</code> key is optional and specifies
 the icon that will appear before the menu item label.
 The value is a selector for a <code>Theme</code> class instance method
-in the &quot;icons&quot; method category.</p>
+in the “icons” method category.</p>
 <p>The <code>#balloonText</code> key is optional and specifies
 tooltip text that will appear when hovering over the menu item.</p>
 <p>To learn more about the existing menu items in the World menu,
 search for implementors of the <code>worldMenuOptions</code> method.</p>
-<p>Here's a simple example where selecting a custom menu item
+<p>Here’s a simple example where selecting a custom menu item
 writes to the Transcript.
 Create the class <code>Greeter</code> as a subclass of <code>Object</code>
 and add the following class methods:</p>
 <pre><code class="language-smalltalk">worldMenuOptions
     ^`{
         {
-            #submenuOf -&gt; TheWorldMenu openLabel.
-            #itemGroup -&gt; 10.
-            #itemOrder -&gt; 42.
-            #label -&gt; 'Greet'.
-            #object -&gt; MyMenuItem.
-            #selector -&gt; #greet.
-            #icon -&gt; #chatIcon.
-            #balloonText -&gt; 'Writes a greeting to the Transcript'.
+            #submenuOf -> TheWorldMenu openLabel.
+            #itemGroup -> 10.
+            #itemOrder -> 42.
+            #label -> 'Greet'.
+            #object -> MyMenuItem.
+            #selector -> #greet.
+            #icon -> #chatIcon.
+            #balloonText -> 'Writes a greeting to the Transcript'.
         } asDictionary
     }`
 
@@ -1651,11 +1633,11 @@ greet
 
     'Hello World!' print
 </code></pre>
-<h2 id="fonts" tabindex="-1">Fonts</h2>
+<h2 id="fonts">Fonts</h2>
 <p>To see a popup list of the installed fonts and fonts available to install,
-enter <code>FontFamily promptUser</code> in a Workspace and &quot;Do it&quot;.
+enter <code>FontFamily promptUser</code> in a Workspace and “Do it”.
 The installed font names are displayed using their font.
-To install a font, click its checkbox under &quot;Available to install&quot;.
+To install a font, click its checkbox under “Available to install”.
 The list may include the following:</p>
 <ul>
 <li>Alex Brush</li>
@@ -1699,14 +1681,14 @@ TODO: Report this!</p>
 add a line like the following to its <code>initialize</code> method:</p>
 <pre><code class="language-smalltalk">defaultFont := FontFamily familyName: 'JetBrains Mono NL' pointSize: 14.
 </code></pre>
-<h2 id="button-labels" tabindex="-1">Button Labels</h2>
+<h2 id="button-labels">Button Labels</h2>
 <p>Button labels are automatically shortened to fit within the button width
 using the <code>String</code> instance method <code>squeezeTo:</code>.
 It begins by removing spaces from right to left.
 It then removes vowels from right to left.
 Finally, it removes consonants from right to left
 and adds an ellipsis at the end.</p>
-<h2 id="button-issue" tabindex="-1">Button Issue</h2>
+<h2 id="button-issue">Button Issue</h2>
 <p>The class <code>PluggableButtonMorph</code> uses the value of <code>Theme current buttonLabel</code>
 as the color for the label on all instances.
 But sending <code>#color:</code> to an instance changes its background color.
@@ -1741,7 +1723,7 @@ and the one that sets <code>embossed</code>.</p>
 <pre><code class="language-smalltalk">drawEmbossedLabelOn: aCanvas
     | availableW center colorForLabel f l labelMargin targetSize w x y |
     label ifNotNil: [
-        &quot;The next line was modified.&quot;
+        "The next line was modified."
         colorForLabel := self enableLabelColorWith: self labelColor.
         self isPressed
             ifFalse: [
@@ -1762,13 +1744,13 @@ and the one that sets <code>embossed</code>.</p>
         labelMargin := 3.
         w := f widthOfString: label.
         availableW := extent x - labelMargin - labelMargin.
-        availableW &gt;= w
+        availableW >= w
             ifTrue: [l := label]
             ifFalse: [
                 x := labelMargin.
                 targetSize := label size * availableW // w.
                 l := label squeezedTo: targetSize.
-                (f widthOfString: l) &gt; availableW ifTrue: [
+                (f widthOfString: l) > availableW ifTrue: [
                     targetSize := targetSize - 1.
                     l := label squeezedTo: targetSize ]
             ].
@@ -1781,14 +1763,14 @@ and the one that sets <code>embossed</code>.</p>
             at: x@y
             font: f
             color: colorForLabel
-            &quot;The next line was modified.&quot;
+            "The next line was modified."
             embossed: false
     ]
 </code></pre>
 </li>
 </ol>
-<h2 id="button-demo-in-cuis" tabindex="-1">Button Demo in Cuis</h2>
-<p>Add this code in a Workspace, select it all, and &quot;Do it&quot;.
+<h2 id="button-demo-in-cuis">Button Demo in Cuis</h2>
+<p>Add this code in a Workspace, select it all, and “Do it”.
 It uses the class <code>VButtonMorph</code> defined above.</p>
 <pre><code class="language-smalltalk">label := LabelMorph new
   contents: '0';
@@ -1809,21 +1791,21 @@ layout := LayoutMorph new
   addMorph: decBtn;
   addMorph: label;
   addMorph: incBtn;
-  &quot;color: Color transparent ;&quot;
+  "color: Color transparent ;"
   separation: 10;
   location: (MorphicTranslation withTranslation: 70@70);
    rotateBy: 15 degreesToRadians;
   scale: 1.5;
   openInWorld.
 
-&quot;Add horizontal padding in buttons.&quot;
+"Add horizontal padding in buttons."
 decBtn morphWidth: (incBtn morphWidth + 20).
 incBtn morphWidth: (incBtn morphWidth + 20).
 </code></pre>
 <p>To delete this from the World,
-enter layoutDelete in the Workspaces and &quot;Do it&quot;, or
+enter layoutDelete in the Workspaces and “Do it”, or
 open the halo for the <code>LayoutMorph</code> and click the red button in the upper-left.</p>
-<h2 id="svg" tabindex="-1">SVG</h2>
+<h2 id="svg">SVG</h2>
 <p>To work with SVG images:</p>
 <ul>
 <li>
@@ -1835,15 +1817,15 @@ open the halo for the <code>LayoutMorph</code> and click the red button in the u
 </li>
 <li>
 <p>Open a Workspace and install the package <code>SVG</code>.</p>
-<p>enter <code>Feature require: #SVG</code> and &quot;Do it&quot;.</p>
+<p>enter <code>Feature require: #SVG</code> and “Do it”.</p>
 </li>
 <li>
-<p>Enter <code>SVGMainMorph exampleTiger openInWorld</code> and &quot;Do it&quot;.</p>
+<p>Enter <code>SVGMainMorph exampleTiger openInWorld</code> and “Do it”.</p>
 </li>
 </ul>
 <p>There are many more example class methods in the <code>SVGMainMorph</code> class.
 To open all the SVG examples,
-enter <code>SVGMainMorph openAllExamples SVGMainMorph</code> and &quot;Do it&quot;.
+enter <code>SVGMainMorph openAllExamples SVGMainMorph</code> and “Do it”.
 To delete all those morphs, enter
 <code>SVGMainMorph allInstancesDo: [:obj | obj delete]</code>.</p>
 <p>Another way to open all the SVG examples is to use reflection as follows:</p>
@@ -1854,12 +1836,11 @@ selectors do: [:selector |
     ]
 ].
 </code></pre>
-<h2 id="full-screen-buttons" tabindex="-1">Full Screen Buttons</h2>
+<h2 id="full-screen-buttons">Full Screen Buttons</h2>
 <p>You can add buttons to the World that simplify toggling full screen mode.
 The following class defines a class method <code>buttons</code> that displays buttons
 that activate and deactivate full screen mode.</p>
-<p><img alt="Cuis full screen buttons" class="logo" style="width: 20%"
-  src="/blog/assets/cuis-full-screen-buttons.png?v=1.1.1"></p>
+<p><img alt="Cuis full screen buttons" class="logo" style="width: 20%" src="/blog/assets/cuis-full-screen-buttons.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">Object subclass: #VFullScreenButtons
     instanceVariableNames: ''
     classVariableNames: ''
@@ -1877,7 +1858,7 @@ fullScreenOn
     self fullScreen: true
 
 initialize
-    &quot;renders buttons for setting full screen on or off&quot;
+    "renders buttons for setting full screen on or off"
 
     super initialize.
     LayoutMorph newColumn
@@ -1894,74 +1875,66 @@ initialize
         location: (MorphicTranslation withTranslation: 10@10);
         openInWorld
 </code></pre>
-<h2 id="morph-methods" tabindex="-1">Morph Methods</h2>
+<h2 id="morph-methods">Morph Methods</h2>
 <p>The <code>Morph</code> class provides a large number of instance methods.
 Highlights are provided in the following table:</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>collides</code></td>
-<td>answers <code>Boolean</code> indicating if receiver contour overlaps argument contour</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>collides</code></td><td>answers <code>Boolean</code> indicating if receiver contour overlaps argument contour</td></tr></tbody></table>
 <p>TODO: Add more methods to this table.</p>
-<h2 id="popups" tabindex="-1">Popups</h2>
+<h2 id="popups">Popups</h2>
 <p>The classes <code>PopUpMenu</code>, <code>SelectionMenu</code>, and <code>StringRequestMorph</code> all display
 a dialog that shares information with users or prompts them for input.</p>
-<h3 id="popupmenu" tabindex="-1">PopUpMenu</h3>
+<h3 id="popupmenu">PopUpMenu</h3>
 <p>The class <code>PopUpMenu</code> provides an easy way to render a dialog that
 displays information, asks the user for confirmation,
 or ask the user to select an option.
 It is similar to the JavaScript DOM functions <code>alert</code> and <code>confirm</code>.</p>
 <p>For example:</p>
-<p><img alt="Cuis PopupMenu inform" style="width: 50%"
-  src="/blog/assets/cuis-popupmenu-inform.png?v=1.1.1"></p>
+<p><img alt="Cuis PopupMenu inform" style="width: 50%" src="/blog/assets/cuis-popupmenu-inform.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">PopUpMenu inform: 'Something interesting just happened.'.
 </code></pre>
-<p><img alt="Cuis PopupMenu confirm" style="width: 32%"
-  src="/blog/assets/cuis-popupmenu-confirm.png?v=1.1.1"></p>
+<p><img alt="Cuis PopupMenu confirm" style="width: 32%" src="/blog/assets/cuis-popupmenu-confirm.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">likesIceCream := PopUpMenu confirm: 'Do you like ice cream?'.
-likesIceCream print. &quot;prints true or false&quot;
+likesIceCream print. "prints true or false"
 </code></pre>
-<p><img alt="Cuis PopupMenu confirm:trueChoice:falseChoice:" style="width: 32%"
-  src="/blog/assets/cuis-popupmenu-confirm-truechoice-falsechoice.png?v=1.1.1"></p>
+<p><img alt="Cuis PopupMenu confirm:trueChoice:falseChoice:" style="width: 32%" src="/blog/assets/cuis-popupmenu-confirm-truechoice-falsechoice.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">likesIceCream := PopUpMenu
     confirm: 'Do you like ice cream?'
     trueChoice: 'Love it!'
     falseChoice: 'Not for me'.
-likesIceCream print. &quot;prints true or false&quot;
+likesIceCream print. "prints true or false"
 </code></pre>
-<p><img alt="Cuis PopupMenu withCaption:chooseFrom" style="width: 24%"
-  src="/blog/assets/cuis-popupmenu-withcaption-choosefrom.png?v=1.1.1"></p>
+<p><img alt="Cuis PopupMenu withCaption:chooseFrom" style="width: 24%" src="/blog/assets/cuis-popupmenu-withcaption-choosefrom.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">color := PopUpMenu withCaption: 'Choose a color.' chooseFrom: #('red' 'green' 'blue').
-color print. &quot;prints choice index 1, 2, or 3&quot;
+color print. "prints choice index 1, 2, or 3"
 </code></pre>
-<h3 id="selectionmenu" tabindex="-1">SelectionMenu</h3>
+<h3 id="selectionmenu">SelectionMenu</h3>
 <p>The <code>SelectionMenu</code> class is a subclass of <code>PopupMenu</code>.
 For example:</p>
-<p><img alt="Cuis SelectionMenu" style="width: 18%"
-  src="/blog/assets/cuis-selectionmenu.png?v=1.1.1"></p>
+<p><img alt="Cuis SelectionMenu" style="width: 18%" src="/blog/assets/cuis-selectionmenu.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">labels := #(burrito enchilada taco chips quacamole salsa water soda tea).
-lines := #(3 6). &quot;draw lines after these indexes&quot;
+lines := #(3 6). "draw lines after these indexes"
 menu := SelectionMenu labels: labels lines: lines.
 selection := menu startUpMenu.
-selection print. &quot;prints selected label index&quot;
+selection print. "prints selected label index"
 </code></pre>
 <p>The following code demonstrates opening a <code>SelectionMenu</code>
 when a button is clicked.</p>
-<p><img alt="Cuis SelectionMenu closed" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu1.png?v=1.1.1"></p>
-<p><img alt="Cuis SelectionMenu open" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu2.png?v=1.1.1"></p>
-<p><img alt="Cuis SelectionMenu selected" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu3.png?v=1.1.1"></p>
+<p><img alt="Cuis SelectionMenu closed" style="width: 40%" src="/blog/assets/cuis-selectionmenu1.png?v=1.1.1"></p>
+<p><img alt="Cuis SelectionMenu open" style="width: 40%" src="/blog/assets/cuis-selectionmenu2.png?v=1.1.1"></p>
+<p><img alt="Cuis SelectionMenu selected" style="width: 40%" src="/blog/assets/cuis-selectionmenu3.png?v=1.1.1"></p>
 <p>Define the following class:</p>
 <pre><code class="language-smalltalk">Object subclass: #MenuDemo
     instanceVariableNames: 'colorButton colorMenu statusLabel colors window'
@@ -1989,7 +1962,7 @@ when a button is clicked.</p>
         addMorph: colorButton;
         addMorph: statusLabel.
 
-    &quot;Set window size to the smallest height that contains its submorphs.&quot;
+    "Set window size to the smallest height that contains its submorphs."
     layout := window layoutMorph.
     layout separation: 10.
     window
@@ -2016,14 +1989,13 @@ openMenu
     ]
 </code></pre>
 <p>To run this, evaluate <code>MenuDemo new</code> in a Workspace.</p>
-<h3 id="stringrequestmorph" tabindex="-1">StringRequestMorph</h3>
+<h3 id="stringrequestmorph">StringRequestMorph</h3>
 <p>The class <code>StringRequestMorph</code> prompts the user to enter a text response.
 It can verify the response using a provided block that returns
 a Boolean value indicating whether the response is valid.
 It can also evaluate a block if the user clicks the cancel button.</p>
 <p>For example:</p>
-<p><img alt="Cuis StringRequestMorph" style="width: 40%"
-  src="/blog/assets/cuis-stringrequestmorph.png?v=1.1.1"></p>
+<p><img alt="Cuis StringRequestMorph" style="width: 40%" src="/blog/assets/cuis-stringrequestmorph.png?v=1.1.1"></p>
 <pre><code class="language-smalltalk">StringRequestMorph
     request: 'Comment'
     initialAnswer: 'no comment'
@@ -2031,7 +2003,7 @@ It can also evaluate a block if the user clicks the cancel button.</p>
     do: [ :answer | answer print ]
     orCancel: [ 'canceled' print ].
 </code></pre>
-<h2 id="pluggablelistmorph" tabindex="-1">PluggableListMorph</h2>
+<h2 id="pluggablelistmorph">PluggableListMorph</h2>
 <p>The <code>PluggableListMorph</code> displays a scrollable list of items.
 Users can select an item by clicking it or by typing its first few letters.</p>
 <p>The follow code implements a small application that allows users to
@@ -2039,8 +2011,7 @@ select a color from a list to change the background color of the window.
 Users can also add new colors and delete existing colors.</p>
 <p>In addition to demonstrating the use of <code>PluggableListMorph</code>,
 this also disables buttons when their use is not appropriate.</p>
-<p><img alt="Cuis PluggableListMorph" style="width: 30%"
-  src="/blog/assets/cuis-pluggablelistmorph.png?v=1.1.1"></p>
+<p><img alt="Cuis PluggableListMorph" style="width: 30%" src="/blog/assets/cuis-pluggablelistmorph.png?v=1.1.1"></p>
 <p>Create the following class:</p>
 <pre><code class="language-smalltalk">Object subclass: #ListDemo
     instanceVariableNames: 'colorList colors deleteButton newColorEntry selectedColorIndex selectedLabel window'
@@ -2086,22 +2057,22 @@ this also disables buttons when their use is not appropriate.</p>
         addMorph: deleteButton;
         addMorph: selectedLabel.
 
-    &quot;Set window size to the smallest height that contains its submorphs.&quot;
+    "Set window size to the smallest height that contains its submorphs."
     layout := window layoutMorph.
     layout separation: 10.
     window
         morphExtent: 250 @ layout minimumExtent y;
         openInWorld.
 
-    self selectedColorIndex: 0. &quot;sets initial background color&quot;
+    self selectedColorIndex: 0. "sets initial background color"
 
 colors
     ^ colors
 
 newColor
-    &quot;In this app there is no need to retrieve this value
+    "In this app there is no need to retrieve this value
     or even hold it in an instance variable, but
-    TextModelMorph requires that this method exists.&quot;
+    TextModelMorph requires that this method exists."
 
     ^ ''
 
@@ -2156,7 +2127,7 @@ deleteColor
     ]
 
 textEntryOn: aSymbol
-    &quot;Answer a TextModelMorph where aSymbol provides the name for the getter and setter.&quot;
+    "Answer a TextModelMorph where aSymbol provides the name for the getter and setter."
     | entry |
 
     entry := TextModelMorph
@@ -2166,16 +2137,16 @@ textEntryOn: aSymbol
         acceptOnCR: true;
         askBeforeDiscardingEdits: false;
         hideScrollBarsIndefinitely;
-        &quot;Width is made proportional below.
-        Setting height to zero causes it to use minimum height for one line.&quot;
+        "Width is made proportional below.
+        Setting height to zero causes it to use minimum height for one line."
         morphExtent: 0 @ 0.
     entry layoutSpec proportionalWidth: 1.
     ^ entry.
 </code></pre>
 <p>To run this, evaluate <code>ListDemo new</code> in a Workspace.</p>
-<h2 id="event-handling" tabindex="-1">Event Handling</h2>
+<h2 id="event-handling">Event Handling</h2>
 <p>The <code>Morph</code> class provides many methods for event handling
-in the &quot;events&quot; method category. Examples include:</p>
+in the “events” method category. Examples include:</p>
 <ul>
 <li><code>keyDown:</code></li>
 <li><code>keyStroke:</code></li>
@@ -2213,7 +2184,7 @@ the message <code>#releaseKeyboardFocus:</code> with the morph as the argument.
 The <code>HandMorph</code> can be obtained by
 sending <code>runningWorld activeHand</code> to any morph.</p>
 <p>The <code>Morph</code> class provides several methods for focus handling
-in the &quot;focus handling&quot; method category. These include:</p>
+in the “focus handling” method category. These include:</p>
 <ul>
 <li><code>hasKeyboardFocus</code> - answers a <code>Boolean</code></li>
 <li><code>hasMouseFocus</code> - answers a <code>Boolean</code></li>
@@ -2276,13 +2247,13 @@ ellipseMorph2611483
 is spelled correctly!</p>
 </li>
 <li>
-<p>Select those lines of code and &quot;Do it&quot;.</p>
+<p>Select those lines of code and “Do it”.</p>
 </li>
 <li>
 <p>Click the <code>Morph</code>.</p>
 </li>
 <li>
-<p>Verify that a PopUpMenu appears containing &quot;got click&quot;.</p>
+<p>Verify that a PopUpMenu appears containing “got click”.</p>
 </li>
 </ul>
 <p>To create and configure an <code>EllipseMorph</code> in code:</p>
@@ -2336,10 +2307,10 @@ in another morph to delete it.</p>
     self addMorph: layout.
 
 drawOn: aCanvas
-    &quot;This overrides the method in Morph to do nothing
-    so a blue rectangle is not drawn.&quot;
+    "This overrides the method in Morph to do nothing
+    so a blue rectangle is not drawn."
 </code></pre>
-<h2 id="animation" tabindex="-1">Animation</h2>
+<h2 id="animation">Animation</h2>
 <p>Animation in Morphic is achieved through stepping.
 Subclasses of <code>Morph</code> add animation by defining two instance methods.
 The <code>step</code> method defines what to do at each step of the animation and
@@ -2355,13 +2326,13 @@ to start and stop the animation.</p>
     poolDictionaries: ''
     category: 'Demo'
 
-&quot;class methods&quot;
+"class methods"
 
 open
 
     self new openInWorld startStepping
 
-&quot;instance methods&quot;
+"instance methods"
 
 initialize
 
@@ -2387,7 +2358,7 @@ stepTime
 <p>The following class implements a morph that renders a red circle
 and animates to a random location in the World every time it is clicked.
 After defining this class in a System Browser,
-enter <code>AnimatedMorph new openInWorld</code> in a Workspace and &quot;Do it&quot;.
+enter <code>AnimatedMorph new openInWorld</code> in a Workspace and “Do it”.
 This only animates position changes, but other properties such as
 rotation, scale, and color can also be animated.</p>
 <pre><code class="language-smalltalk">EllipseMorph subclass: #AnimatedMorph
@@ -2396,7 +2367,7 @@ rotation, scale, and color can also be animated.</p>
     poolDictionaries: ''
     category: 'Volkmann'
 
-&quot;instance methods&quot;
+"instance methods"
 
 initialize
     | size |
@@ -2417,7 +2388,7 @@ mouseButton1Up: aMouseEvent localPosition: aPosition
 
     oldX := self morphPosition x.
     oldY := self morphPosition y.
-    &quot;UISupervisor ui answers the WorldMorph instance.&quot;
+    "UISupervisor ui answers the WorldMorph instance."
     worldExtent := UISupervisor ui morphExtent.
     size := self size.
     newX := (worldExtent x rounded - size) atRandom.
@@ -2425,7 +2396,7 @@ mouseButton1Up: aMouseEvent localPosition: aPosition
     dx := newX - oldX / self stepCount.
     dy := newY - oldY / self stepCount.
     stepNumber := 0.
-    self startStepping. &quot;must send after morph is opened, not in initialize&quot;
+    self startStepping. "must send after morph is opened, not in initialize"
 
 step
 
@@ -2438,24 +2409,24 @@ stepCount
     ^ 50
 
 stepTime
-    ^ 5 &quot;default is 1000 for once per second&quot;
+    ^ 5 "default is 1000 for once per second"
 </code></pre>
-<h2 id="blocking-ui-updates" tabindex="-1">Blocking UI Updates</h2>
+<h2 id="blocking-ui-updates">Blocking UI Updates</h2>
 <p>UI updates do not become visible until the method that made them completes.
 This can be an issue when methods are long-running.
 This affects all morphs, including those provided by
 the development environment, such as the Transcript window.
 To address this, run such methods in a new process.
-See the section &quot;Running in Another Process&quot; in the &quot;Blocks&quot; chapter.</p>
-<h2 id="redrawing" tabindex="-1">Redrawing</h2>
+See the section “Running in Another Process” in the “Blocks” chapter.</p>
+<h2 id="redrawing">Redrawing</h2>
 <p>After making code changes, if the UI does not update properly,
 there are two things that can be done to update the display.</p>
 <ol>
-<li>Open the World menu and select &quot;Restore Display&quot;.</li>
-<li>Open the World menu and select &quot;Debug ... Start drawing all again&quot;.</li>
+<li>Open the World menu and select “Restore Display”.</li>
+<li>Open the World menu and select “Debug … Start drawing all again”.</li>
 </ol>
 <p>TODO: What is the difference between these?</p>
-<h2 id="creating-jpeg-images" tabindex="-1">Creating JPEG Images</h2>
+<h2 id="creating-jpeg-images">Creating JPEG Images</h2>
 <p>To create a JPEG image from any morph:</p>
 <pre><code class="language-smalltalk">myMorph imageForm: 32 :: writeJPEGfileNamed: 'myMorph.jpg'
 </code></pre>
@@ -2464,9 +2435,9 @@ there are two things that can be done to update the display.</p>
 
    self imageForm: 32 :: writeJPEGfileNamed: aFilePath
 </code></pre>
-<p>The base image doesn't contain methods for
+<p>The base image doesn’t contain methods for
 writing other image formats such as PNG.</p>
-<h2 id="more-morphs" tabindex="-1">More Morphs</h2>
+<h2 id="more-morphs">More Morphs</h2>
 <p>TODO: Study the following morphs defined in Cuis-Smalltalk-UI.</p>
 <p>Clone the <code>Cuis-Smalltalk-UI</code> repository and
 install the morphs by evaluating <code>Feature require: 'UI-Click-Select'</code>.</p>
@@ -2481,12 +2452,13 @@ install the morphs by evaluating <code>Feature require: 'UI-Click-Select'</code>
 <li><code>PluggableDropDownListMorph</code></li>
 <li><code>PluggableListOfMorph</code></li>
 </ul>
-<h2 id="annoyances" tabindex="-1">Annoyances</h2>
+<h2 id="annoyances">Annoyances</h2>
 <p>Some of the methods in Morphic classes are inconsistently named.
 For example, the class <code>TextModelMorph</code> defines the methods
 <code>alwaysHideVerticalScrollbar</code> and <code>hideScrollBarsIndefinitely</code>.
-Note how the &quot;b&quot; is sometimes lowercase and sometimes uppercase.</p>
-<h2 id="todo-app" tabindex="-1">Todo App</h2>
-<p>See <a href="https://github.com/mvolkmann/Cuis-Smalltalk-TodoApp">https://github.com/mvolkmann/Cuis-Smalltalk-TodoApp</a>.
-TODO: Learn how to deploy this app.</p>
-</article> </body></html>
+Note how the “b” is sometimes lowercase and sometimes uppercase.</p>
+<h2 id="todo-app">Todo App</h2>
+<p>See <a href="https://github.com/mvolkmann/Cuis-Smalltalk-TodoApp" rel="noopener" target="_blank">https://github.com/mvolkmann/Cuis-Smalltalk-TodoApp</a>.
+TODO: Learn how to deploy this app.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

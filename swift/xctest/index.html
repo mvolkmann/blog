@@ -1,7 +1,9 @@
-<!DOCTYPE html><html lang="en"> <head><title>XCTest</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>XCTest</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#unit-test-configuration">Unit Test Configuration</a></li><li><a href="#ui-test-configuration">UI Test Configuration</a></li><li><a href="#target-membership">Target Membership</a></li><li><a href="#implementing-tests">Implementing Tests</a></li><li><a href="#example-unit-test">Example Unit Test</a></li><li><a href="#ui-tests">UI Tests</a></li><li><a href="#recording-ui-test-steps">Recording UI Test Steps</a></li><li><a href="#ui-test-utility-methods">UI Test Utility Methods</a></li><li><a href="#example-ui-test">Example UI Test</a></li><li><a href="#unwrapping-optionals">Unwrapping Optionals</a></li><li><a href="#dismissing-sheets">Dismissing Sheets</a></li><li><a href="#screen-navigation">Screen Navigation</a></li><li><a href="#running-tests-in-xcode">Running Tests in Xcode</a></li><li><a href="#viewing-test-results">Viewing Test Results</a></li><li><a href="#code-coverage">Code Coverage</a></li><li><a href="#run-from-command-line">Run from Command Line</a></li><li><a href="#mocking">Mocking</a></li><li><a href="#github-actions">GitHub Actions</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>XCTest</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>XCTest</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#unit-test-configuration">Unit Test Configuration</a></li><li><a href="#ui-test-configuration">UI Test Configuration</a></li><li><a href="#target-membership">Target Membership</a></li><li><a href="#implementing-tests">Implementing Tests</a></li><li><a href="#example-unit-test">Example Unit Test</a></li><li><a href="#ui-tests">UI Tests</a></li><li><a href="#recording-ui-test-steps">Recording UI Test Steps</a></li><li><a href="#ui-test-utility-methods">UI Test Utility Methods</a></li><li><a href="#example-ui-test">Example UI Test</a></li><li><a href="#unwrapping-optionals">Unwrapping Optionals</a></li><li><a href="#dismissing-sheets">Dismissing Sheets</a></li><li><a href="#screen-navigation">Screen Navigation</a></li><li><a href="#running-tests-in-xcode">Running Tests in Xcode</a></li><li><a href="#viewing-test-results">Viewing Test Results</a></li><li><a href="#code-coverage">Code Coverage</a></li><li><a href="#run-from-command-line">Run from Command Line</a></li><li><a href="#mocking">Mocking</a></li><li><a href="#github-actions">GitHub Actions</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://developer.apple.com/documentation/xctest?v=1.1.1" rel="noopener" target="_blank">XCTest</a>
 is a unit testing and UI testing framework for Swift and SwiftUI.
-&quot;XC&quot; is an abbreviation for &quot;Xcode&quot;.</p>
+“XC” is an abbreviation for “Xcode”.</p>
 <p>Unit tests are for testing non-UI logic such as data services and view models.
 They can also serve as a kind of API documentation.</p>
 <p>UI Tests are for testing user interface interactions like
@@ -11,27 +13,27 @@ add a test that fails due to the bug
 and passes when the bug is fixed.</p>
 <p>Each type of test requires creating a new target in the app.
 The steps for doing this are described in the following sections.</p>
-<h2 id="unit-test-configuration" tabindex="-1">Unit Test Configuration</h2>
+<h2 id="unit-test-configuration">Unit Test Configuration</h2>
 <ol>
 <li>
 <p>Select the topmost entry in the Project Navigator.</p>
 </li>
 <li>
-<p>Click the &quot;+&quot; button at the bottom of the left nav to create a new target.</p>
+<p>Click the ”+” button at the bottom of the left nav to create a new target.</p>
 </li>
 <li>
-<p>Enter &quot;test&quot; to filter the set of templates displayed.</p>
+<p>Enter “test” to filter the set of templates displayed.</p>
 </li>
 <li>
-<p>Select &quot;Unit Testing Bundle&quot;.</p>
+<p>Select “Unit Testing Bundle”.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
-<p>Click the &quot;Finish&quot; button.</p>
+<p>Click the “Finish” button.</p>
 <p>This creates a new folder that appears in the Project Navigator
-whose name is the project name followed by &quot;Tests&quot;.
+whose name is the project name followed by “Tests”.
 The new folder contains a <code>.swift</code> file with the same name
 containing starter test code.</p>
 </li>
@@ -39,27 +41,27 @@ containing starter test code.</p>
 <p>Edit the provided <code>.swift</code> files in the new target.</p>
 </li>
 </ol>
-<h2 id="ui-test-configuration" tabindex="-1">UI Test Configuration</h2>
+<h2 id="ui-test-configuration">UI Test Configuration</h2>
 <ol>
 <li>
 <p>Select the topmost entry in the Project Navigator.</p>
 </li>
 <li>
-<p>Click the &quot;+&quot; button at the bottom of the left nav to create another target.</p>
+<p>Click the ”+” button at the bottom of the left nav to create another target.</p>
 </li>
 <li>
-<p>Enter &quot;test&quot; to filter the set of templates displayed.</p>
+<p>Enter “test” to filter the set of templates displayed.</p>
 </li>
 <li>
-<p>Select &quot;UI Testing Bundle&quot;.</p>
+<p>Select “UI Testing Bundle”.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
-<p>Click the &quot;Finish&quot; button.</p>
+<p>Click the “Finish” button.</p>
 <p>This creates a new folder that appears in the Project Navigator
-whose name is the project name followed by &quot;UITests&quot;.
+whose name is the project name followed by “UITests”.
 The new folder contains a <code>.swift</code> file with the same name
 containing starter test code.</p>
 </li>
@@ -67,20 +69,20 @@ containing starter test code.</p>
 <p>Edit the provided <code>.swift</code> files in the new target.</p>
 </li>
 </ol>
-<h2 id="target-membership" tabindex="-1">Target Membership</h2>
+<h2 id="target-membership">Target Membership</h2>
 <p>By default the test targets do not have access
 to source files defined in the main target.
 To make a source file available to a test target:</p>
 <ul>
 <li>Select the source file in the Project Navigator.</li>
 <li>Open the Inspector panel on the right.</li>
-<li>Select the &quot;File Inspector&quot; tab (first one).</li>
-<li>Under &quot;Target Membership&quot;, check the checkbox for each
+<li>Select the “File Inspector” tab (first one).</li>
+<li>Under “Target Membership”, check the checkbox for each
 test target that needs to access the source file.</li>
 </ul>
 <p>Repeat this for all source files used by the one being tested,
 including source files that define extensions.</p>
-<h2 id="implementing-tests" tabindex="-1">Implementing Tests</h2>
+<h2 id="implementing-tests">Implementing Tests</h2>
 <p>For each set of related test methods:</p>
 <ol>
 <li>
@@ -91,23 +93,23 @@ including source files that define extensions.</p>
 with a name that ends in <code>Tests.swift</code>.</p>
 <ol>
 <li>
-<p>Select File ... New ... File... or press cmd-n.</p>
+<p>Select File … New … File… or press cmd-n.</p>
 </li>
 <li>
-<p>For non-UI tests, select &quot;Unit Test Case Class&quot;
-or for UI tests, select &quot;UI Test Case Class&quot;.</p>
+<p>For non-UI tests, select “Unit Test Case Class”
+or for UI tests, select “UI Test Case Class”.</p>
 </li>
 <li>
-<p>Enter a name that ends in &quot;Tests&quot;.</p>
+<p>Enter a name that ends in “Tests”.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
 <p>Select the appropriate test directory.</p>
 </li>
 <li>
-<p>Click the &quot;Create&quot; button.</p>
+<p>Click the “Create” button.</p>
 <p>The generated class will inherit from <a href="https://developer.apple.com/documentation/xctest/xctestcase?v=1.1.1" rel="noopener" target="_blank">XCTestCase</a>.</p>
 </li>
 <li>
@@ -129,16 +131,16 @@ For setup that can throw, override the <code>setUpWithError</code> method.</p>
 For tear down that can throw, override the <code>tearDownWithError</code> method.</p>
 </li>
 <li>
-<p>Add test methods whose names begin with &quot;test&quot;.</p>
+<p>Add test methods whose names begin with “test”.</p>
 <p>A new instance of the <code>XCTestCase</code> subtype is created
 before running each of these methods,
 so it is not possible for them to share state.
 This is good because it prevents a test method from being effected
 by previous runs of other test methods.</p>
-<p>A good pattern to follow in test methods is &quot;given, when, then&quot;.
-The &quot;given&quot; part establish the conditions to be tested.
-The &quot;when&quot; part takes some action to be tested.
-The &quot;then&quot; part makes assertions that should not be true.</p>
+<p>A good pattern to follow in test methods is “given, when, then”.
+The “given” part establish the conditions to be tested.
+The “when” part takes some action to be tested.
+The “then” part makes assertions that should not be true.</p>
 <p>Test methods can use the <code>print</code> function and
 output will appear in the Debug Area Console.</p>
 <p>If the method tests any <code>async</code> functions, mark the test method as <code>async</code>.</p>
@@ -156,7 +158,7 @@ Each of these has a version that takes and does not take an error message.</p>
 throws a specific error:</p>
 <pre><code class="language-swift">XCTAssertThrowsError(
    try getData(date: Date()),
-   &quot;failed to get data&quot;
+   "failed to get data"
 ) { error in
    let myError = error as? MyErrorType
    XCTAssertEqual(myError, MyErrorType.invalidDate)
@@ -168,12 +170,12 @@ as follows:</p>
 <pre><code class="language-swift">do {
     try someFunction(someArguments)
 } catch {
-    XCTFail(&quot;some message&quot;)
+    XCTFail("some message")
 }
 </code></pre>
 </li>
 </ol>
-<h2 id="example-unit-test" tabindex="-1">Example Unit Test</h2>
+<h2 id="example-unit-test">Example Unit Test</h2>
 <p>The following code defines a <code>struct</code> with a simple <code>static</code> function:</p>
 <pre><code class="language-swift">import Foundation
 
@@ -183,12 +185,12 @@ extension String: LocalizedError {
 }
 
 struct Math {
-    static func add(n1: Double, n2: Double) -&gt; Double {
+    static func add(n1: Double, n2: Double) -> Double {
         n1 + n2
     }
 
-    static func divide(n1: Double, n2: Double) throws -&gt; Double {
-        if n2 == 0 { throw &quot;divide by zero&quot; }
+    static func divide(n1: Double, n2: Double) throws -> Double {
+        if n2 == 0 { throw "divide by zero" }
         return n1 / n2 // returns Double.infinity if n2 is zero
     }
 }
@@ -225,12 +227,12 @@ final class MathTests: XCTestCase {
     func testDivideByZero() throws {
         XCTAssertThrowsError(try Math.divide(n1: 10, n2: 0)) { error in
             let string = error as? String
-            XCTAssertEqual(string, &quot;divide by zero&quot;)
+            XCTAssertEqual(string, "divide by zero")
         }
     }
 }
 </code></pre>
-<h2 id="ui-tests" tabindex="-1">UI Tests</h2>
+<h2 id="ui-tests">UI Tests</h2>
 <p>UI test cases create an instance of <a href="https://developer.apple.com/documentation/xctest/xcuiapplication?v=1.1.1" rel="noopener" target="_blank">XCUIApplication</a> and typically store it in a variable named <code>app</code>.</p>
 <p>A call to <code>app.launch()</code> is required to launch the app.</p>
 <p><code>XCUIApplication</code> inherits from <a href="https://developer.apple.com/documentation/xctest/xcuielement?v=1.1.1" rel="noopener" target="_blank">XCUIElement</a>.
@@ -240,334 +242,334 @@ Some of these are only available when running on a specific platform.
 For example, window elements are available in macOS, but not in iOS.</p>
 <p>Some of these properties are defined by the following protocols
 to which <code>XCUIElement</code> conforms: <a href="https://developer.apple.com/documentation/xctest/xcuielementattributes?v=1.1.1" rel="noopener" target="_blank">XCUIElementAttributes</a> and <a href="https://developer.apple.com/documentation/xctest/xcuielementtypequeryprovider?v=1.1.1" rel="noopener" target="_blank">XCUIElementTypeQueryProvider</a>.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>alerts: XCUIElementQuery</code></td>
-<td>query that matches alert elements</td>
-</tr>
-<tr>
-<td><code>buttons: XCUIElementQuery</code></td>
-<td>query that matches button elements</td>
-</tr>
-<tr>
-<td><code>checkBoxes: XCUIElementQuery</code></td>
-<td>query that matches checkbox elements</td>
-</tr>
-<tr>
-<td><code>comboBoxes: XCUIElementQuery</code></td>
-<td>query that matches combo box elements</td>
-</tr>
-<tr>
-<td><code>datePickers: XCUIElementQuery</code></td>
-<td>query that matches date picker elements</td>
-</tr>
-<tr>
-<td><code>debugDescription: String</code></td>
-<td>debugging information</td>
-</tr>
-<tr>
-<td><code>dialogs: XCUIElementQuery</code></td>
-<td>query that matches dialog elements</td>
-</tr>
-<tr>
-<td><code>elementType: XCUIElement.ElementType</code></td>
-<td>enum value from <a href="https://developer.apple.com/documentation/xctest/xcuielement/elementtype?v=1.1.1" rel="noopener" target="_blank">XCUIElement.ElementType</a></td>
-</tr>
-<tr>
-<td><code>exists: Bool</code></td>
-<td>indicates if the element exists on the screen</td>
-</tr>
-<tr>
-<td><code>firstMatch: XCUIElement</code></td>
-<td>first element that matches</td>
-</tr>
-<tr>
-<td><code>hasFocus: Bool</code></td>
-<td>indicates whether the element has focus</td>
-</tr>
-<tr>
-<td><code>identifier: String</code></td>
-<td>associated with the element using the <code>.accessibilityIdentifier(&quot;id&quot;)</code> view modifier</td>
-</tr>
-<tr>
-<td><code>images: XCUIElementQuery</code></td>
-<td>query that matches image elements</td>
-</tr>
-<tr>
-<td><code>isEnabled: Bool</code></td>
-<td>indicates whether the element is enabled</td>
-</tr>
-<tr>
-<td><code>isHittable: Bool</code></td>
-<td>indicates if a hit point can be determined (visible?)</td>
-</tr>
-<tr>
-<td><code>isSelected: Bool</code></td>
-<td>indicates whether the element is selected</td>
-</tr>
-<tr>
-<td><code>label: String</code></td>
-<td>label value of the element</td>
-</tr>
-<tr>
-<td><code>links: XCUIElementQuery</code></td>
-<td>query that matches link elements</td>
-</tr>
-<tr>
-<td><code>maps: XCUIElementQuery</code></td>
-<td>query that matches map elements</td>
-</tr>
-<tr>
-<td><code>menuBarItems: XCUIElementQuery</code></td>
-<td>query that matches menu bar item elements</td>
-</tr>
-<tr>
-<td><code>menuBars: XCUIElementQuery</code></td>
-<td>query that matches menu bar elements</td>
-</tr>
-<tr>
-<td><code>menuItems: XCUIElementQuery</code></td>
-<td>query that matches menu item elements</td>
-</tr>
-<tr>
-<td><code>menus: XCUIElementQuery</code></td>
-<td>query that matches menu elements</td>
-</tr>
-<tr>
-<td><code>navigationBars: XCUIElementQuery</code></td>
-<td>query that matches navigation bar elements</td>
-</tr>
-<tr>
-<td><code>pickers: XCUIElementQuery</code></td>
-<td>query that matches picker elements</td>
-</tr>
-<tr>
-<td><code>placeholderValue: String?</code></td>
-<td>placeholder value of the element (ex. in a <code>TextField</code>)</td>
-</tr>
-<tr>
-<td><code>progressIndicators: XCUIElementQuery</code></td>
-<td>query that matches progress indicator elements</td>
-</tr>
-<tr>
-<td><code>radioButtons: XCUIElementQuery</code></td>
-<td>query that matches radio button elements</td>
-</tr>
-<tr>
-<td><code>radioGroups: XCUIElementQuery</code></td>
-<td>query that matches radio group elements</td>
-</tr>
-<tr>
-<td><code>scrollBars: XCUIElementQuery</code></td>
-<td>query that matches scroll bar elements</td>
-</tr>
-<tr>
-<td><code>scrollViews: XCUIElementQuery</code></td>
-<td>query that matches scroll view elements</td>
-</tr>
-<tr>
-<td><code>secureTextFields: XCUIElementQuery</code></td>
-<td>query that matches secure text field elements</td>
-</tr>
-<tr>
-<td><code>sheets: XCUIElementQuery</code></td>
-<td>query that matches sheet elements</td>
-</tr>
-<tr>
-<td><code>sliders: XCUIElementQuery</code></td>
-<td>query that matches slider elements</td>
-</tr>
-<tr>
-<td><code>staticTexts: XCUIElementQuery</code></td>
-<td>query that matches label elements</td>
-</tr>
-<tr>
-<td><code>switches: XCUIElementQuery</code></td>
-<td>query that matches switch elements</td>
-</tr>
-<tr>
-<td><code>textFields: XCUIElementQuery</code></td>
-<td>query that matches text field elements</td>
-</tr>
-<tr>
-<td><code>textViews: XCUIElementQuery</code></td>
-<td>query that matches text elements</td>
-</tr>
-<tr>
-<td><code>title: String</code></td>
-<td>title value of the element</td>
-</tr>
-<tr>
-<td><code>toggles: XCUIElementQuery</code></td>
-<td>query that matches toggle elements</td>
-</tr>
-<tr>
-<td><code>toolbarButtons: XCUIElementQuery</code></td>
-<td>query that matches toolbar button elements</td>
-</tr>
-<tr>
-<td><code>toolbars: XCUIElementQuery</code></td>
-<td>query that matches toolbar elements</td>
-</tr>
-<tr>
-<td><code>value: Any?</code></td>
-<td>raw value of the element</td>
-</tr>
-<tr>
-<td><code>webViews: XCUIElementQuery</code></td>
-<td>query that matches web view elements</td>
-</tr>
-<tr>
-<td><code>windows: XCUIElementQuery</code></td>
-<td>query that matches window elements</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Description</th></tr></thead><tbody><tr><td><code>alerts: XCUIElementQuery</code></td><td>query that matches alert elements</td></tr><tr><td><code>buttons: XCUIElementQuery</code></td><td>query that matches button elements</td></tr><tr><td><code>checkBoxes: XCUIElementQuery</code></td><td>query that matches checkbox elements</td></tr><tr><td><code>comboBoxes: XCUIElementQuery</code></td><td>query that matches combo box elements</td></tr><tr><td><code>datePickers: XCUIElementQuery</code></td><td>query that matches date picker elements</td></tr><tr><td><code>debugDescription: String</code></td><td>debugging information</td></tr><tr><td><code>dialogs: XCUIElementQuery</code></td><td>query that matches dialog elements</td></tr><tr><td><code>elementType: XCUIElement.ElementType</code></td><td>enum value from <a href="https://developer.apple.com/documentation/xctest/xcuielement/elementtype?v=1.1.1" rel="noopener" target="_blank">XCUIElement.ElementType</a></td></tr><tr><td><code>exists: Bool</code></td><td>indicates if the element exists on the screen</td></tr><tr><td><code>firstMatch: XCUIElement</code></td><td>first element that matches</td></tr><tr><td><code>hasFocus: Bool</code></td><td>indicates whether the element has focus</td></tr><tr><td><code>identifier: String</code></td><td>associated with the element using the <code>.accessibilityIdentifier("id")</code> view modifier</td></tr><tr><td><code>images: XCUIElementQuery</code></td><td>query that matches image elements</td></tr><tr><td><code>isEnabled: Bool</code></td><td>indicates whether the element is enabled</td></tr><tr><td><code>isHittable: Bool</code></td><td>indicates if a hit point can be determined (visible?)</td></tr><tr><td><code>isSelected: Bool</code></td><td>indicates whether the element is selected</td></tr><tr><td><code>label: String</code></td><td>label value of the element</td></tr><tr><td><code>links: XCUIElementQuery</code></td><td>query that matches link elements</td></tr><tr><td><code>maps: XCUIElementQuery</code></td><td>query that matches map elements</td></tr><tr><td><code>menuBarItems: XCUIElementQuery</code></td><td>query that matches menu bar item elements</td></tr><tr><td><code>menuBars: XCUIElementQuery</code></td><td>query that matches menu bar elements</td></tr><tr><td><code>menuItems: XCUIElementQuery</code></td><td>query that matches menu item elements</td></tr><tr><td><code>menus: XCUIElementQuery</code></td><td>query that matches menu elements</td></tr><tr><td><code>navigationBars: XCUIElementQuery</code></td><td>query that matches navigation bar elements</td></tr><tr><td><code>pickers: XCUIElementQuery</code></td><td>query that matches picker elements</td></tr><tr><td><code>placeholderValue: String?</code></td><td>placeholder value of the element (ex. in a <code>TextField</code>)</td></tr><tr><td><code>progressIndicators: XCUIElementQuery</code></td><td>query that matches progress indicator elements</td></tr><tr><td><code>radioButtons: XCUIElementQuery</code></td><td>query that matches radio button elements</td></tr><tr><td><code>radioGroups: XCUIElementQuery</code></td><td>query that matches radio group elements</td></tr><tr><td><code>scrollBars: XCUIElementQuery</code></td><td>query that matches scroll bar elements</td></tr><tr><td><code>scrollViews: XCUIElementQuery</code></td><td>query that matches scroll view elements</td></tr><tr><td><code>secureTextFields: XCUIElementQuery</code></td><td>query that matches secure text field elements</td></tr><tr><td><code>sheets: XCUIElementQuery</code></td><td>query that matches sheet elements</td></tr><tr><td><code>sliders: XCUIElementQuery</code></td><td>query that matches slider elements</td></tr><tr><td><code>staticTexts: XCUIElementQuery</code></td><td>query that matches label elements</td></tr><tr><td><code>switches: XCUIElementQuery</code></td><td>query that matches switch elements</td></tr><tr><td><code>textFields: XCUIElementQuery</code></td><td>query that matches text field elements</td></tr><tr><td><code>textViews: XCUIElementQuery</code></td><td>query that matches text elements</td></tr><tr><td><code>title: String</code></td><td>title value of the element</td></tr><tr><td><code>toggles: XCUIElementQuery</code></td><td>query that matches toggle elements</td></tr><tr><td><code>toolbarButtons: XCUIElementQuery</code></td><td>query that matches toolbar button elements</td></tr><tr><td><code>toolbars: XCUIElementQuery</code></td><td>query that matches toolbar elements</td></tr><tr><td><code>value: Any?</code></td><td>raw value of the element</td></tr><tr><td><code>webViews: XCUIElementQuery</code></td><td>query that matches web view elements</td></tr><tr><td><code>windows: XCUIElementQuery</code></td><td>query that matches window elements</td></tr></tbody></table>
 <p>The following table highlights methods in the <code>XCUIElement</code> class.</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>children(matching) -&gt; XCUIElementQuery</code></td>
-<td>gets all the child elements of a given type</td>
-</tr>
-<tr>
-<td><code>click()</code></td>
-<td>clicks the element in a macOS app</td>
-</tr>
-<tr>
-<td><code>descendants(matching) -&gt; XCUIElementQuery</code></td>
-<td>gets all the descendant elements of a given type</td>
-</tr>
-<tr>
-<td><code>doubleClick()</code></td>
-<td>double-clicks the element in a macOS app</td>
-</tr>
-<tr>
-<td><code>doubleTap()</code></td>
-<td>double-taps the element in an iOS app</td>
-</tr>
-<tr>
-<td><code>hover()</code></td>
-<td>moves the pointer over the element in an iPad or macOS app</td>
-</tr>
-<tr>
-<td><code>pinch(withScale, velocity)</code></td>
-<td>pinches with two touches</td>
-</tr>
-<tr>
-<td><code>press(forDuration)</code></td>
-<td>long-presses an element in an iOS app</td>
-</tr>
-<tr>
-<td><code>rightClick()</code></td>
-<td>right-clicks the element in a macOS app</td>
-</tr>
-<tr>
-<td><code>rotate(angle, withVelocity)</code></td>
-<td>rotates with two touches</td>
-</tr>
-<tr>
-<td><code>scroll(byDeltaX, deltaY)</code></td>
-<td>scrolls the view in an iPad or macOS app</td>
-</tr>
-<tr>
-<td><code>swipeDown()</code></td>
-<td>swipes down (useful for dismissing sheets)</td>
-</tr>
-<tr>
-<td><code>swipeLeft()</code></td>
-<td>swipes left</td>
-</tr>
-<tr>
-<td><code>swipeRight()</code></td>
-<td>swipes right</td>
-</tr>
-<tr>
-<td><code>swipeUp()</code></td>
-<td>swipes up</td>
-</tr>
-<tr>
-<td><code>tap()</code></td>
-<td>tap the element in an iOS app</td>
-</tr>
-<tr>
-<td><code>typeText(String)</code></td>
-<td>types text into an element that accepts input like a <code>TextField</code>, <code>SecureField</code>, or <code>TextEditor</code></td>
-</tr>
-<tr>
-<td><code>waitForExistence(timeout) -&gt; Bool</code></td>
-<td>waits as long as the timeout and returns a <code>Bool</code> indicating if the element exists</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>children(matching) -> XCUIElementQuery</code></td><td>gets all the child elements of a given type</td></tr><tr><td><code>click()</code></td><td>clicks the element in a macOS app</td></tr><tr><td><code>descendants(matching) -> XCUIElementQuery</code></td><td>gets all the descendant elements of a given type</td></tr><tr><td><code>doubleClick()</code></td><td>double-clicks the element in a macOS app</td></tr><tr><td><code>doubleTap()</code></td><td>double-taps the element in an iOS app</td></tr><tr><td><code>hover()</code></td><td>moves the pointer over the element in an iPad or macOS app</td></tr><tr><td><code>pinch(withScale, velocity)</code></td><td>pinches with two touches</td></tr><tr><td><code>press(forDuration)</code></td><td>long-presses an element in an iOS app</td></tr><tr><td><code>rightClick()</code></td><td>right-clicks the element in a macOS app</td></tr><tr><td><code>rotate(angle, withVelocity)</code></td><td>rotates with two touches</td></tr><tr><td><code>scroll(byDeltaX, deltaY)</code></td><td>scrolls the view in an iPad or macOS app</td></tr><tr><td><code>swipeDown()</code></td><td>swipes down (useful for dismissing sheets)</td></tr><tr><td><code>swipeLeft()</code></td><td>swipes left</td></tr><tr><td><code>swipeRight()</code></td><td>swipes right</td></tr><tr><td><code>swipeUp()</code></td><td>swipes up</td></tr><tr><td><code>tap()</code></td><td>tap the element in an iOS app</td></tr><tr><td><code>typeText(String)</code></td><td>types text into an element that accepts input like a <code>TextField</code>, <code>SecureField</code>, or <code>TextEditor</code></td></tr><tr><td><code>waitForExistence(timeout) -> Bool</code></td><td>waits as long as the timeout and returns a <code>Bool</code> indicating if the element exists</td></tr></tbody></table>
 <p>In a test method, to wait for a specific view to be created:</p>
 <pre><code class="language-swift">let viewExists = someView.waitForExistence(timeout: seconds)
 XCTAssertTrue(viewExists)
 </code></pre>
 <p>The following table highlights properties in the <a href="https://developer.apple.com/documentation/xctest/xcuielementquery?v=1.1.1" rel="noopener" target="_blank">XCUIElementQuery</a> class.</p>
-<table>
-<thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>allElementsBoundByIndex: [XCUIElement]</code></td>
-<td>array of matching elements</td>
-</tr>
-<tr>
-<td><code>count: Int</code></td>
-<td>number of matching elements</td>
-</tr>
-<tr>
-<td><code>element: XCUIElement</code></td>
-<td>the single matching element; test fails if not exactly one</td>
-</tr>
-<tr>
-<td><code>firstMatch: XCUIElement</code></td>
-<td>first matching element</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Description</th></tr></thead><tbody><tr><td><code>allElementsBoundByIndex: [XCUIElement]</code></td><td>array of matching elements</td></tr><tr><td><code>count: Int</code></td><td>number of matching elements</td></tr><tr><td><code>element: XCUIElement</code></td><td>the single matching element; test fails if not exactly one</td></tr><tr><td><code>firstMatch: XCUIElement</code></td><td>first matching element</td></tr></tbody></table>
 <p>The following table highlights methods in the <a href="https://developer.apple.com/documentation/xctest/xcuielementquery?v=1.1.1" rel="noopener" target="_blank">XCUIElementQuery</a> class.</p>
-<table>
-<thead>
-<tr>
-<th>Method</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>element(boundBy: Int) -&gt; XCUIElement</code></td>
-<td>matching element at a given index</td>
-</tr>
-<tr>
-<td><code>subscript(String) -&gt; XCUIElement</code></td>
-<td>returns the descendant element with a given accessibility identifier using <code>[id]</code> syntax</td>
-</tr>
-</tbody>
-</table>
-<h2 id="recording-ui-test-steps" tabindex="-1">Recording UI Test Steps</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>element(boundBy: Int) -> XCUIElement</code></td><td>matching element at a given index</td></tr><tr><td><code>subscript(String) -> XCUIElement</code></td><td>returns the descendant element with a given accessibility identifier using <code>[id]</code> syntax</td></tr></tbody></table>
+<h2 id="recording-ui-test-steps">Recording UI Test Steps</h2>
 <p>To generate test code by recording user interactions:</p>
 <ol>
 <li>Click inside a test function where code should be inserted.</li>
-<li>Click the red &quot;record&quot; circle at the bottom of the editor pane
+<li>Click the red “record” circle at the bottom of the editor pane
 of the test source file.</li>
 <li>Wait for the app to begin running in the Simulator.</li>
 <li>Interact with the UI to navigation to the point within the app
@@ -577,7 +579,7 @@ and selecting items from pickers.</li>
 <li>Optionally manually improve the generated test code.</li>
 <li>Add assertions about what should be in the UI.</li>
 </ol>
-<h2 id="ui-test-utility-methods" tabindex="-1">UI Test Utility Methods</h2>
+<h2 id="ui-test-utility-methods">UI Test Utility Methods</h2>
 <p>The following utility methods defined in an extension of the <code>XCTestCase</code> class
 simplify writing tests.</p>
 <pre><code class="language-swift">import XCTest
@@ -644,7 +646,7 @@ extension XCTestCase {
     }
 }
 </code></pre>
-<h2 id="example-ui-test" tabindex="-1">Example UI Test</h2>
+<h2 id="example-ui-test">Example UI Test</h2>
 <p>The following code defines a custom <code>View</code>:</p>
 <pre><code class="language-swift">import SwiftUI
 
@@ -653,7 +655,7 @@ struct Counter: View {
 
     var body: some View {
         HStack {
-            Button(&quot;-&quot;) { count -= 1 }
+            Button("-") { count -= 1 }
 
             // Applying the `accessibilityIdentifier` view modifier
             // to a view makes it easy to find it in a UI test.
@@ -661,10 +663,10 @@ struct Counter: View {
             // via an accessibility identifier.
             // Using these is much better than searching for English text,
             // especially in apps that use localization strings.
-            Text(&quot;\(count)&quot;)
-                .accessibilityIdentifier(&quot;count&quot;)
+            Text("\(count)")
+                .accessibilityIdentifier("count")
 
-            Button(&quot;+&quot;) { count += 1 }
+            Button("+") { count += 1 }
         }
     }
 }
@@ -696,41 +698,41 @@ final class CounterTests: XCTestCase {
     }
 
     func testIncrement() throws {
-        tapButton(label: &quot;+&quot;)
-        tapButton(label: &quot;+&quot;)
+        tapButton(label: "+")
+        tapButton(label: "+")
 
         // To look for text anywhere on the page ...
-        // try textExists(&quot;2&quot;)
+        // try textExists("2")
 
         // To look for text inside a specific view
         // using a method in XCTestCaseExtension.swift ...
-        // &quot;count&quot; is the accessibility identifier that
+        // "count" is the accessibility identifier that
         // was associated with the `Text` view that
         // holds the count in the `Counter` view above.
         // This approach is less brittle than relying on other properties
         // of a view that might change such as the label of a `Button`.
-        try textExists(identifier: &quot;count&quot;, text: &quot;2&quot;)
+        try textExists(identifier: "count", text: "2")
     }
 }
 </code></pre>
 <p>In the <code>setUpWithError</code> method of test files, add the following:</p>
 <pre><code class="language-swift">XCTestCase.app.launch()
 </code></pre>
-<h2 id="unwrapping-optionals" tabindex="-1">Unwrapping Optionals</h2>
+<h2 id="unwrapping-optionals">Unwrapping Optionals</h2>
 <p>If a test performs a force unwrap on an optional whose value is <code>nil</code>,
 the tests will stop running.
 To avoid this, use <a href="https://developer.apple.com/documentation/xctest/3380195-xctunwrap?v=1.1.1" rel="noopener" target="_blank">XCTUnwrap</a> which fails the test if the value is <code>nil</code>.
 For example:</p>
 <pre><code class="language-swift">let firstScore = try XCTUnwrap(scores.first)
-XCTAssert(firstScore &gt; 0)
+XCTAssert(firstScore > 0)
 </code></pre>
-<h2 id="dismissing-sheets" tabindex="-1">Dismissing Sheets</h2>
+<h2 id="dismissing-sheets">Dismissing Sheets</h2>
 <p>To dismiss the currently displayed sheet in a test,
 find any element on the sheet and call <code>.swipeDown()</code> on it.
 For example:</p>
-<pre><code class="language-swift">app.staticTexts[&quot;info-title&quot;].swipeDown()
+<pre><code class="language-swift">app.staticTexts["info-title"].swipeDown()
 </code></pre>
-<h2 id="screen-navigation" tabindex="-1">Screen Navigation</h2>
+<h2 id="screen-navigation">Screen Navigation</h2>
 <p>When implementing test methods that need to navigate to a common set of screens,
 consider implementing a separate function that navigates to each screen
 and call those from tests that require the navigation.
@@ -744,62 +746,62 @@ the following functions can be written:</p>
 <li><code>goToC</code>: navigates from A to C by first calling <code>goToB</code></li>
 <li><code>goToD</code>: navigates from A to D by first calling <code>goToC</code></li>
 </ul>
-<h2 id="running-tests-in-xcode" tabindex="-1">Running Tests in Xcode</h2>
+<h2 id="running-tests-in-xcode">Running Tests in Xcode</h2>
 <ol>
 <li>To run a single test method, click the diamond where the
 line number of the first line of the method would normally appear.
-WARNING: If the diamonds don't appear, click a different source file
+WARNING: If the diamonds don’t appear, click a different source file
 and they click back on the test file. This is frequently needed!</li>
 <li>To run all the test methods in the file, click the diamond where the
 line number of the first line of the class would normally appear.</li>
 <li>To run all the tests in Project Navigator folder,
 click the diamond to the right of the folder name.</li>
-<li>To run all the tests, select Product ... Test or press cmd-u.</li>
+<li>To run all the tests, select Product … Test or press cmd-u.</li>
 </ol>
-<p>I don't see diamonds before UI tests, only before unit tests.
+<p>I don’t see diamonds before UI tests, only before unit tests.
 UI tests can be launched from the Test Inspector
 by clicking diamonds there.</p>
 <p>UI tests launch the app on the selected device
 which can be in the Simulator or on a real device.</p>
-<p>In UI tests, the on-screen keyboard doesn't always appear.
-If it doesn't, tests that require typing in text fields will fail.
-To fix this, go the Simulator app, select I/O ... Keyboard,
-and unselect &quot;Connect Hardware Keyboard&quot;.</p>
-<h2 id="viewing-test-results" tabindex="-1">Viewing Test Results</h2>
+<p>In UI tests, the on-screen keyboard doesn’t always appear.
+If it doesn’t, tests that require typing in text fields will fail.
+To fix this, go the Simulator app, select I/O … Keyboard,
+and unselect “Connect Hardware Keyboard”.</p>
+<h2 id="viewing-test-results">Viewing Test Results</h2>
 <p>To see a report on test results:</p>
 <ol>
-<li>Click the &quot;Show Report Navigator&quot; button,
+<li>Click the “Show Report Navigator” button,
 which is the last button at the top of the Project Navigator,
 and then click a test run with a specific time.</li>
 <li>In the editor panel where test results are displayed,
 click a category of test results to view
-which include &quot;All&quot;, &quot;Passed&quot;, &quot;Failed&quot;, &quot;Skipped&quot;,
-&quot;Expected Failures&quot;, and &quot;Mixed&quot;.</li>
+which include “All”, “Passed”, “Failed”, “Skipped”,
+“Expected Failures”, and “Mixed”.</li>
 </ol>
-<h2 id="code-coverage" tabindex="-1">Code Coverage</h2>
+<h2 id="code-coverage">Code Coverage</h2>
 <p>To enable collecting code coverage data:</p>
 <ol>
 <li>Click the target dropdown at the top of Xcode.</li>
-<li>Select &quot;Edit Scheme...&quot;.</li>
-<li>Select &quot;Test&quot; in the left nav.</li>
-<li>Click the &quot;Options&quot; tab.</li>
-<li>Check the &quot;Gather coverage for&quot; checkbox.</li>
-<li>Select &quot;some targets&quot; in the dropdown to the right of this checkbox.</li>
-<li>Click the &quot;+&quot; button to select a target.</li>
+<li>Select “Edit Scheme…”.</li>
+<li>Select “Test” in the left nav.</li>
+<li>Click the “Options” tab.</li>
+<li>Check the “Gather coverage for” checkbox.</li>
+<li>Select “some targets” in the dropdown to the right of this checkbox.</li>
+<li>Click the ”+” button to select a target.</li>
 <li>Select the target of the main app.</li>
-<li>Click the &quot;Close&quot; button.</li>
+<li>Click the “Close” button.</li>
 <li>Run all the tests again.</li>
 <li>View the test results as described above.</li>
-<li>Click &quot;Coverage&quot; under the new test run.</li>
+<li>Click “Coverage” under the new test run.</li>
 <li>Expand the test folder displayed to see the coverage percentage
 of each source file.</li>
 </ol>
-<h2 id="run-from-command-line" tabindex="-1">Run from Command Line</h2>
+<h2 id="run-from-command-line">Run from Command Line</h2>
 <p>See <a href="https://www.appsdeveloperblog.com/run-xcode-unit-tests-from-the-command-line/?v=1.1.1" rel="noopener" target="_blank">Run Xcode Unit Tests From The Command Line</a>.</p>
 <p>To enable this, enter
 <code>sudo xcode-select -s /Applications/Xcode.app/Contents/Developer</code></p>
 <p>Start the Simulator app. Will the tests fail without this?
-To toggle between light and dark mode, select Features ... Toggle Appearance.</p>
+To toggle between light and dark mode, select Features … Toggle Appearance.</p>
 <p><code>cd</code> to a directory containing a <code>.xcodeproj</code> file.</p>
 <p>To get lists of targets, build configurations, and schemes
 defined in an Xcode project, enter <code>xcodebuild -list</code></p>
@@ -814,9 +816,10 @@ enter an <code>xcodebuild</code> command similar to the the following:</p>
   clean test
 </code></pre>
 <p>Add <code>-quiet</code> to reduce the output and only show errors.</p>
-<h2 id="mocking" tabindex="-1">Mocking</h2>
+<h2 id="mocking">Mocking</h2>
 <p>One library to consider for adding mocking to XCTest tests is
 <a href="https://github.com/Brightify/Cuckoo?v=1.1.1" rel="noopener" target="_blank">Cuckoo</a>.</p>
-<h2 id="github-actions" tabindex="-1">GitHub Actions</h2>
-<p>See <a href="https://vmois.dev/xcode-github-actions/?v=1.1.1" rel="noopener" target="_blank">How to use GitHub Actions for testing Xcode project</a>.</p>
-</article> </body></html>
+<h2 id="github-actions">GitHub Actions</h2>
+<p>See <a href="https://vmois.dev/xcode-github-actions/?v=1.1.1" rel="noopener" target="_blank">How to use GitHub Actions for testing Xcode project</a>.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

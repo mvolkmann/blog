@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>TestFlight</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>TestFlight</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#steps">Steps</a></li><ul><li><a href="#part-1---creating-an-app-identifier">Part 1 - Creating an App Identifier</a></li><li><a href="#part-2---creating-an-app">Part 2 - Creating an App</a></li><li><a href="#part-3---creating-a-build">Part 3 - Creating a Build</a></li><ul><li><a href="#encryption">Encryption</a></li></ul><li><a href="#part-4---distributing-an-app">Part 4 - Distributing an App</a></li><li><a href="#part-5---app-configuration">Part 5 - App Configuration</a></li><li><a href="#part-6---adding-external-testing-users">Part 6 - Adding External Testing Users</a></li><li><a href="#part-7---submit-for-review">Part 7 - Submit for Review</a></li><li><a href="#part-8---resolve-app-review-issues">Part 8 - Resolve App Review Issues</a></li><li><a href="#part-9---instructions-for-test-users">Part 9 - Instructions for Test Users</a></li><li><a href="#part-10---sales">Part 10 - Sales</a></li></ul><li><a href="#feedback">Feedback</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>TestFlight</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>TestFlight</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#steps">Steps</a></li><ul><li><a href="#part-1---creating-an-app-identifier">Part 1 - Creating an App Identifier</a></li><li><a href="#part-2---creating-an-app">Part 2 - Creating an App</a></li><li><a href="#part-3---creating-a-build">Part 3 - Creating a Build</a></li><ul><li><a href="#encryption">Encryption</a></li></ul><li><a href="#part-4---distributing-an-app">Part 4 - Distributing an App</a></li><li><a href="#part-5---app-configuration">Part 5 - App Configuration</a></li><li><a href="#part-6---adding-external-testing-users">Part 6 - Adding External Testing Users</a></li><li><a href="#part-7---submit-for-review">Part 7 - Submit for Review</a></li><li><a href="#part-8---resolve-app-review-issues">Part 8 - Resolve App Review Issues</a></li><li><a href="#part-9---instructions-for-test-users">Part 9 - Instructions for Test Users</a></li><li><a href="#part-10---sales">Part 10 - Sales</a></li></ul><li><a href="#feedback">Feedback</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://developer.apple.com/testflight/?v=1.1.1" rel="noopener" target="_blank">TestFlight</a>
 enables deploying test versions of an iOS app
 that does not require a full app review.
@@ -12,134 +14,134 @@ TODO: Add documentation on the steps to submit to the App Store.</p>
 See <a href="https://developer.apple.com/app-store/getting-featured/?v=1.1.1" rel="noopener" target="_blank">Getting Featured on the App Store</a>.
 In order to be featured you must tell Apple about your app
 by completing the form at <a href="https://developer.apple.com/contact/app-store/promote/?v=1.1.1" rel="noopener" target="_blank">Tell us about your app or game</a>.</p>
-<h2 id="steps" tabindex="-1">Steps</h2>
-<h3 id="part-1---creating-an-app-identifier" tabindex="-1">Part 1 - Creating an App Identifier</h3>
+<h2 id="steps">Steps</h2>
+<h3 id="part-1---creating-an-app-identifier">Part 1 - Creating an App Identifier</h3>
 <ol>
 <li>Browse <a href="https://developer.apple.com?v=1.1.1" rel="noopener" target="_blank">developer.apple.com</a> and sign in.</li>
-<li>In the top nav bar, click &quot;Account&quot; and sign in.</li>
-<li>In the &quot;Certificates, Identifiers &amp; Profiles&quot; section, click &quot;Identifiers&quot;.</li>
-<li>To create a new identifier, click the &quot;+&quot; after &quot;Identifiers&quot;.</li>
-<li>Select &quot;App IDs&quot; radio button.</li>
-<li>Click the &quot;Continue&quot; button.</li>
-<li>Click the &quot;App&quot; button.</li>
-<li>Click the &quot;Continue&quot; button.</li>
-<li>Enter an app name in the &quot;Description&quot; input.</li>
+<li>In the top nav bar, click “Account” and sign in.</li>
+<li>In the “Certificates, Identifiers &#x26; Profiles” section, click “Identifiers”.</li>
+<li>To create a new identifier, click the ”+” after “Identifiers”.</li>
+<li>Select “App IDs” radio button.</li>
+<li>Click the “Continue” button.</li>
+<li>Click the “App” button.</li>
+<li>Click the “Continue” button.</li>
+<li>Enter an app name in the “Description” input.</li>
 <li>Open the app in Xcode.</li>
 <li>Select the top entry in the Navigator.</li>
 <li>Select the first entry under TARGETS.</li>
 <li>Click the General tab.</li>
 <li>Copy the app bundle identifier from Xcode
-and paste it in the &quot;Bundle ID&quot; field.</li>
-<li>Check the desired &quot;Capabilities&quot; such as &quot;HealthKit&quot;.</li>
-<li>Click the &quot;Continue&quot; button.</li>
-<li>Click the &quot;Register&quot; button.</li>
+and paste it in the “Bundle ID” field.</li>
+<li>Check the desired “Capabilities” such as “HealthKit”.</li>
+<li>Click the “Continue” button.</li>
+<li>Click the “Register” button.</li>
 </ol>
-<h3 id="part-2---creating-an-app" tabindex="-1">Part 2 - Creating an App</h3>
+<h3 id="part-2---creating-an-app">Part 2 - Creating an App</h3>
 <ol>
 <li>Browse <a href="https://appstoreconnect.apple.com?v=1.1.1" rel="noopener" target="_blank">appstoreconnect.apple.com</a>.</li>
-<li>Click the large &quot;My Apps&quot; button.</li>
-<li>Click the &quot;+&quot; button after &quot;Apps&quot;.</li>
-<li>Select &quot;New App&quot; from the dropdown.</li>
+<li>Click the large “My Apps” button.</li>
+<li>Click the ”+” button after “Apps”.</li>
+<li>Select “New App” from the dropdown.</li>
 <li>In the dialog that appears:
 <ol>
 <li>Select the supported platforms (ex. iOS).</li>
 <li>Enter the app name which must be unique across all apps in the App Store.</li>
-<li>Select the primary language such as &quot;English (U.S.)&quot;.</li>
+<li>Select the primary language such as “English (U.S.)”.</li>
 <li>Select the bundle ID for the app that was created in part 1.</li>
 <li>Enter a SKU with no spaces that is unique among your apps.</li>
 <li>Choose between limited (restricted set of test users)
 and full access (any user can access; preferred).</li>
-<li>Click the &quot;Create&quot; button.</li>
+<li>Click the “Create” button.</li>
 </ol>
 </li>
 <li>If a spinner is displayed for a long time, refresh the browser.</li>
-<li>The &quot;App Store&quot; tab is selected by default and all the fields
+<li>The “App Store” tab is selected by default and all the fields
 on this page must be completed to deploy to the app store.
-But to just deploy to TestFlight, click the &quot;TestFlight&quot; tab.</li>
+But to just deploy to TestFlight, click the “TestFlight” tab.</li>
 </ol>
-<h3 id="part-3---creating-a-build" tabindex="-1">Part 3 - Creating a Build</h3>
+<h3 id="part-3---creating-a-build">Part 3 - Creating a Build</h3>
 <ol>
 <li>Open the app in Xcode.</li>
 <li>Select the top entry in the Project Navigator.</li>
 <li>Select the first entry under TARGETS.</li>
 <li>Click the General tab.</li>
-<li>Set &quot;Version&quot; to &quot;0.1.0&quot; for the initial build
+<li>Set “Version” to “0.1.0” for the initial build
 which is a semantic version number.
 Typically this is modified each time new features or bug fixes
 are being deployed but changing this is not required.
 An advantage of only incrementing the build number
 is that a new review of the app will not be triggered.
-(It seems I had to set all the &quot;MARKETING_VERSION&quot; values to &quot;1&quot;
+(It seems I had to set all the “MARKETING_VERSION” values to “1”
 it order to successfully upload a build.)</li>
-<li>Set &quot;Build&quot; to &quot;1&quot;. Increment this for each subsequent build.
-It does not need to match the value of &quot;Version&quot;.</li>
-<li>After &quot;App Icon&quot;, enter &quot;AppIcon&quot; which
+<li>Set “Build” to “1”. Increment this for each subsequent build.
+It does not need to match the value of “Version”.</li>
+<li>After “App Icon”, enter “AppIcon” which
 should be the asset name of the application icon.</li>
-<li>After &quot;App Icon Source&quot;, check the &quot;Include all app icon assets&quot; checkbox.</li>
+<li>After “App Icon Source”, check the “Include all app icon assets” checkbox.</li>
 <li>Repeat the previous two steps for each target using matching values.</li>
-<li>Verify that the file &quot;Assets.xcassets&quot; defines the image set &quot;AppIcon&quot;
+<li>Verify that the file “Assets.xcassets” defines the image set “AppIcon”
 that contains icons for both iPhone and iPad (if building for both).</li>
 <li>If a paired watchOS app is included, the watch app will have its own
-&quot;Assets.xcassets&quot; file that must contain &quot;AppIcon&quot; for the watch.</li>
-<li>In the device list at the top, choose &quot;Any iOS Device&quot;.</li>
-<li>Select Product ... Archive.
+“Assets.xcassets” file that must contain “AppIcon” for the watch.</li>
+<li>In the device list at the top, choose “Any iOS Device”.</li>
+<li>Select Product … Archive.
 This can take a few minutes to complete on a fast machine.</li>
-<li>In the dialog that appears, click the &quot;Distribute App&quot; button.
+<li>In the dialog that appears, click the “Distribute App” button.
 This dialog may be on a different screen and behind other windows.</li>
-<li>Select the &quot;App Store Connect&quot; radio button.</li>
-<li>Click the &quot;Next&quot; button.</li>
-<li>Select the &quot;Upload&quot; radio button.</li>
-<li>Click the &quot;Next&quot; button.</li>
-<li>In the dialog that appears, the &quot;Manage Version and Build Number&quot; checkbox
+<li>Select the “App Store Connect” radio button.</li>
+<li>Click the “Next” button.</li>
+<li>Select the “Upload” radio button.</li>
+<li>Click the “Next” button.</li>
+<li>In the dialog that appears, the “Manage Version and Build Number” checkbox
 can be unchecked.
 When this is checked and you have not changed the build number
 since the last archive, it automatically increments the build number.
-But is does not also increment the version number, so it isn't useful.
+But is does not also increment the version number, so it isn’t useful.
 If you already modified the version number and build number,
 leaving this checked has no effect.
-(If you get the error &quot;Metadata/Info.plist Mismatch&quot; when
+(If you get the error “Metadata/Info.plist Mismatch” when
 uploading the archive, try again with this checkbox checked.)</li>
-<li>Click the &quot;Next&quot; button.</li>
-<li>Select the &quot;Automatically manage signing&quot; radio button.</li>
-<li>Click the &quot;Next&quot; button.</li>
-<li>If an &quot;Apple Distribution certificate&quot; has not yet been created:
+<li>Click the “Next” button.</li>
+<li>Select the “Automatically manage signing” radio button.</li>
+<li>Click the “Next” button.</li>
+<li>If an “Apple Distribution certificate” has not yet been created:
 <ul>
-<li>Check &quot;Generate an Apple Distribution certificate&quot;.</li>
-<li>Press the &quot;Next&quot; button.</li>
-<li>Press the &quot;Export Signing Certificate...&quot; button
+<li>Check “Generate an Apple Distribution certificate”.</li>
+<li>Press the “Next” button.</li>
+<li>Press the “Export Signing Certificate…” button
 and save it somewhere on your hard drive.</li>
-<li>Click the &quot;Next&quot; button.</li>
+<li>Click the “Next” button.</li>
 </ul>
 </li>
-<li>Click the &quot;Upload&quot; button.
+<li>Click the “Upload” button.
 This can take a few minutes to complete on a fast machine.</li>
 <li>You will be asked if the app uses encryption,
 such as sending HTTP requests using HTTPS.
 For apps that do not use encryption, the question can be suppressed
-by adding the Boolean key &quot;App Uses Non-Exempt Encryption&quot;
-in the target Info tab with a value of &quot;NO&quot;.
+by adding the Boolean key “App Uses Non-Exempt Encryption”
+in the target Info tab with a value of “NO”.
 For apps that do use encryption,
 you will have to submit a form to the U.S. government
 which is explained in the encryption questions.
 After answering the questions displayed in a dialog,
-click the &quot;Start Internal Testing&quot; button.
-The status should change to &quot;Ready to Submit&quot;</li>
+click the “Start Internal Testing” button.
+The status should change to “Ready to Submit”</li>
 </ol>
-<h4 id="encryption" tabindex="-1">Encryption</h4>
+<h4 id="encryption">Encryption</h4>
 <p>By default every time an app is submitted
 there will be a prompt related to use of encryption.
-A dialog will appear with the title &quot;Export Compliance Information&quot;
-and the question &quot;Does your app use encryption?&quot;.
+A dialog will appear with the title “Export Compliance Information”
+and the question “Does your app use encryption?”.
 To avoid the need to answer this question
 every time a new version of the app is released:</p>
 <ul>
 <li>Select the top entry in the Navigator.</li>
 <li>Select the main target.</li>
-<li>Click the &quot;Info&quot; tab.</li>
-<li>Click the &quot;+&quot; button in any row.</li>
-<li>Add the key &quot;App Uses Non-Exempt Encryption&quot; with the value &quot;YES&quot; or &quot;NO&quot;.</li>
+<li>Click the “Info” tab.</li>
+<li>Click the ”+” button in any row.</li>
+<li>Add the key “App Uses Non-Exempt Encryption” with the value “YES” or “NO”.</li>
 </ul>
-<h3 id="part-4---distributing-an-app" tabindex="-1">Part 4 - Distributing an App</h3>
+<h3 id="part-4---distributing-an-app">Part 4 - Distributing an App</h3>
 <ol>
 <li>
 <p>Return to the <a href="https://appstoreconnect.apple.com/?v=1.1.1" rel="noopener" target="_blank">App Store Connect</a> web page.</p>
@@ -148,61 +150,61 @@ every time a new version of the app is released:</p>
 <p>Login with your Apple ID.</p>
 </li>
 <li>
-<p>Click the large &quot;My Apps&quot; button.</p>
+<p>Click the large “My Apps” button.</p>
 </li>
 <li>
 <p>Click the app to be distributed.</p>
 </li>
 <li>
-<p>Click the &quot;TestFlight&quot; tab.</p>
+<p>Click the “TestFlight” tab.</p>
 </li>
 <li>
-<p>If the build to be distributed has a STATUS of &quot;Processing&quot;,
+<p>If the build to be distributed has a STATUS of “Processing”,
 refresh the page periodically until that changes.</p>
 </li>
 <li>
-<p>If the build to be distributed has a STATUS of &quot;Missing Compliance&quot;,
-click the &quot;Manage&quot; link and answer the questions asked.
-The status should change to &quot;Ready to Submit&quot;.
+<p>If the build to be distributed has a STATUS of “Missing Compliance”,
+click the “Manage” link and answer the questions asked.
+The status should change to “Ready to Submit”.
 To avoid being prompted about this in the future,
-add the Info key &quot;App Uses Non-Exempt Encryption&quot; with a value of &quot;NO&quot;.</p>
+add the Info key “App Uses Non-Exempt Encryption” with a value of “NO”.</p>
 </li>
 <li>
 <p>Click the build number to be distributed (ex. 4).</p>
 </li>
 <li>
-<p>If this is the first time distributing this app ...</p>
+<p>If this is the first time distributing this app …</p>
 <ol>
 <li>
-<p>In the &quot;App Previews and Screenshots&quot; section,
+<p>In the “App Previews and Screenshots” section,
 add at least three screenshots for each supported device size.</p>
 <p>These must have specific pixel dimensions.
-A simulator that provides screenshots for a 6.5&quot; iPhone is &quot;iPhone 11 Pro Max&quot;.
-A simulator that provides screenshots for a 5.5&quot; iPhone is &quot;iPhone 8 Plus&quot;.
-A simulator that provides screenshots for a 12.9&quot; iPad is &quot;iPad Pro 6th generation&quot;.</p>
+A simulator that provides screenshots for a 6.5” iPhone is “iPhone 11 Pro Max”.
+A simulator that provides screenshots for a 5.5” iPhone is “iPhone 8 Plus”.
+A simulator that provides screenshots for a 12.9” iPad is “iPad Pro 6th generation”.</p>
 <p>To capture screenshots, run the app in the Simulator
 once for a device that has the desired size.
 Click the camera button in the upper-right or press cmd-s.
 This displays a screenshot thumbnail in the lower-right.
-Right-click the thumbnail and select &quot;Save to Desktop&quot;.</p>
+Right-click the thumbnail and select “Save to Desktop”.</p>
 <p>On the App Store Connect page,
-click &quot;Prepare for Submission&quot; in the left nav.
-Drag the screenshot files into the area under &quot;Version Information&quot;.</p>
+click “Prepare for Submission” in the left nav.
+Drag the screenshot files into the area under “Version Information”.</p>
 </li>
 <li>
-<p>Click the &quot;Create Group&quot; link in the light blue rectangle to add testers.</p>
+<p>Click the “Create Group” link in the light blue rectangle to add testers.</p>
 </li>
 <li>
 <p>Enter a group name.</p>
 </li>
 <li>
-<p>Check the &quot;Enable automatic distribution&quot; checkbox.</p>
+<p>Check the “Enable automatic distribution” checkbox.</p>
 </li>
 <li>
-<p>Click the &quot;Create&quot; button.</p>
+<p>Click the “Create” button.</p>
 </li>
 <li>
-<p>Click &quot;Test Information&quot; under &quot;General Information&quot; in the left nav.</p>
+<p>Click “Test Information” under “General Information” in the left nav.</p>
 </li>
 <li>
 <p>Complete the ENTIRE form.</p>
@@ -212,85 +214,85 @@ Drag the screenshot files into the area under &quot;Version Information&quot;.</
 Otherwise the form will not be considered complete.</p>
 </li>
 <li>
-<p>Click the &quot;Save&quot; button in the upper-right.</p>
+<p>Click the “Save” button in the upper-right.</p>
 </li>
 </ol>
 </li>
 <li>
-<p>Click the circled &quot;+&quot; after &quot;Group&quot;.</p>
+<p>Click the circled ”+” after “Group”.</p>
 </li>
 <li>
 <p>In the dialog that appears, check at least one group name.</p>
 </li>
 <li>
-<p>Click the &quot;Next&quot; button.</p>
+<p>Click the “Next” button.</p>
 </li>
 <li>
 <p>Enter a description of what testers should test.</p>
 </li>
 <li>
-<p>Click the &quot;Submit for Review&quot; button.</p>
+<p>Click the “Submit for Review” button.</p>
 </li>
 <li>
-<p>Click the back link near the top of the page that says &quot;iOS Builds&quot;.</p>
+<p>Click the back link near the top of the page that says “iOS Builds”.</p>
 </li>
 <li>
-<p>Verify that the status changed to &quot;Waiting for Review&quot;.
+<p>Verify that the status changed to “Waiting for Review”.
 Testers will receive an email about the new version in a day or two.
-The status of this build will change to &quot;Testing&quot;.</p>
+The status of this build will change to “Testing”.</p>
 </li>
 </ol>
-<h3 id="part-5---app-configuration" tabindex="-1">Part 5 - App Configuration</h3>
+<h3 id="part-5---app-configuration">Part 5 - App Configuration</h3>
 <ol>
-<li>Return to the App Store Connect web page and the &quot;App Store&quot; tab.</li>
+<li>Return to the App Store Connect web page and the “App Store” tab.</li>
 <li>If the page for the app is not already displayed,
 click the large button containing the app name.</li>
 <li>Visit each section linked in the left nav and supply any missing information.
-There are many things that must be specified, especially under &quot;App Privacy&quot;!
-For each section, click the &quot;Save&quot; button
+There are many things that must be specified, especially under “App Privacy”!
+For each section, click the “Save” button
 after entering all the required data.</li>
-<li>Click &quot;Prepare for Submission&quot; in the left nav.</li>
-<li>Click the &quot;Add for Review&quot; button in the upper-right.</li>
-<li>If you see &quot;Unable to Add for Review&quot;,
+<li>Click “Prepare for Submission” in the left nav.</li>
+<li>Click the “Add for Review” button in the upper-right.</li>
+<li>If you see “Unable to Add for Review”,
 supply all the missing information that is listed.</li>
 </ol>
-<h3 id="part-6---adding-external-testing-users" tabindex="-1">Part 6 - Adding External Testing Users</h3>
+<h3 id="part-6---adding-external-testing-users">Part 6 - Adding External Testing Users</h3>
 <ol>
 <li>
-<p>If &quot;External Testing&quot; does not appear in the left nav,
-click the &quot;+&quot; after &quot;Internal Testing&quot;, enter any name,
-and click the &quot;Create&quot; button.
-This will trigger &quot;External Testing&quot; to appear in the left nav.</p>
+<p>If “External Testing” does not appear in the left nav,
+click the ”+” after “Internal Testing”, enter any name,
+and click the “Create” button.
+This will trigger “External Testing” to appear in the left nav.</p>
 </li>
 <li>
-<p>Click the &quot;+&quot; after &quot;External Testing&quot; in the left nav.</p>
+<p>Click the ”+” after “External Testing” in the left nav.</p>
 </li>
 <li>
 <p>Enter a group name.</p>
 </li>
 <li>
-<p>Click the &quot;Create&quot; button.</p>
+<p>Click the “Create” button.</p>
 </li>
 <li>
-<p>Under &quot;External Testing&quot; in the left nav, click the new group name.</p>
+<p>Under “External Testing” in the left nav, click the new group name.</p>
 </li>
 <li>
 <p>For each external testing user:</p>
 <ul>
-<li>Click the &quot;+&quot; after &quot;Tester&quot;.</li>
-<li>Select &quot;Add New Testers&quot;.</li>
+<li>Click the ”+” after “Tester”.</li>
+<li>Select “Add New Testers”.</li>
 <li>Enter their email, first name, and last name.</li>
-<li>Click the &quot;Add&quot; button.</li>
+<li>Click the “Add” button.</li>
 </ul>
 </li>
 <li>
-<p>Click the &quot;+&quot; after &quot;Build&quot; and select a build to be tested.</p>
+<p>Click the ”+” after “Build” and select a build to be tested.</p>
 </li>
 <li>
 <p>Does something else need to be clicked to save all of this?</p>
 </li>
 <li>
-<p>The status of the selected build should change to &quot;Waiting for Review&quot;.</p>
+<p>The status of the selected build should change to “Waiting for Review”.</p>
 </li>
 <li>
 <p>Wait for an approval email from Apple,
@@ -298,77 +300,78 @@ after which the testers should receive an email containing
 a link that will allow them to download the app from TestFlight.</p>
 </li>
 <li>
-<p>If a build of the app is rejected, it will display a status of &quot;Rejected&quot;
-on the &quot;App Store Connect&quot; web page.
+<p>If a build of the app is rejected, it will display a status of “Rejected”
+on the “App Store Connect” web page.
 To see the reasons for the rejection:</p>
 <ul>
-<li>Click the &quot;App Store&quot; link in the top nav.</li>
-<li>Click &quot;App Review&quot; in the left nav.</li>
-<li>Click the &quot;Resolve&quot; link on the far right.</li>
+<li>Click the “App Store” link in the top nav.</li>
+<li>Click “App Review” in the left nav.</li>
+<li>Click the “Resolve” link on the far right.</li>
 </ul>
 </li>
 </ol>
 <p>Test users must install the TestFlight app on their devices
 in order to download test builds of the app and provide feedback.</p>
-<h3 id="part-7---submit-for-review" tabindex="-1">Part 7 - Submit for Review</h3>
+<h3 id="part-7---submit-for-review">Part 7 - Submit for Review</h3>
 <ol>
-<li>Return to the App Store Connect web page and the &quot;TestFlight&quot; tab.</li>
+<li>Return to the App Store Connect web page and the “TestFlight” tab.</li>
 <li>In the table, click the build number link
 for the version that was just uploaded.</li>
-<li>Address issues, if any, identified in the &quot;STATUS&quot; column.</li>
-<li>Wait for the status to change to &quot;Ready to Submit&quot;.</li>
-<li>Click the &quot;+&quot; to the right of &quot;Groups&quot;.</li>
+<li>Address issues, if any, identified in the “STATUS” column.</li>
+<li>Wait for the status to change to “Ready to Submit”.</li>
+<li>Click the ”+” to the right of “Groups”.</li>
 <li>If there are no tester groups, add at least one.</li>
 <li>Select at least one group to test the new app build.</li>
-<li>Click the &quot;Save&quot; button in the upper-right? VERIFY THIS AGAIN!</li>
-<li>Click the &quot;Submit for Review&quot; button? VERIFY THIS AGAIN!</li>
+<li>Click the “Save” button in the upper-right? VERIFY THIS AGAIN!</li>
+<li>Click the “Submit for Review” button? VERIFY THIS AGAIN!</li>
 <li>Return to the previous page that lists versions of the app and note
-that the submitted version now has a status of &quot;Waiting for Review&quot;.</li>
+that the submitted version now has a status of “Waiting for Review”.</li>
 <li>It can take a couple of days for Apple to review the new build.</li>
 </ol>
-<h3 id="part-8---resolve-app-review-issues" tabindex="-1">Part 8 - Resolve App Review Issues</h3>
+<h3 id="part-8---resolve-app-review-issues">Part 8 - Resolve App Review Issues</h3>
 <ol>
-<li>Return to the App Store Connect web page and the &quot;App Store&quot; tab.</li>
+<li>Return to the App Store Connect web page and the “App Store” tab.</li>
 <li>Click the large button for the app.
 It seems that having the app in TestFlight
 is not enough to cause its icon to be displayed here.
 The app may need to be submitted to the App Store
 in order to display its icon on this web page.</li>
-<li>In the left nav, click &quot;App Review&quot;.</li>
-<li>If the &quot;REVIEW STATUS&quot; column shows &quot;Rejected&quot;,
-click the &quot;Resolve&quot; link at the end of the row.</li>
+<li>In the left nav, click “App Review”.</li>
+<li>If the “REVIEW STATUS” column shows “Rejected”,
+click the “Resolve” link at the end of the row.</li>
 <li>Read the messages explaining why the app was rejected.</li>
 <li>Address all of the issues and verify that they are no longer present
 when running the app locally.</li>
-<li>In the left nav, select the first entry under &quot;iOS App&quot;.</li>
-<li>In the main area, scroll down to the &quot;Build&quot; section.</li>
-<li>Click the &quot;-&quot; button to disassociate the previous build.</li>
-<li>Click the &quot;+&quot; button after the &quot;Build&quot; section heading.</li>
+<li>In the left nav, select the first entry under “iOS App”.</li>
+<li>In the main area, scroll down to the “Build” section.</li>
+<li>Click the ”-” button to disassociate the previous build.</li>
+<li>Click the ”+” button after the “Build” section heading.</li>
 <li>Select a new build.</li>
-<li>Click the &quot;Save&quot; button in the upper-right.</li>
-<li>Click the &quot;Add for Review&quot; button in the upper-right.</li>
-<li>A &quot;Confirm Submission&quot; page will be displayed.</li>
-<li>Click the &quot;Submit to App Review&quot; button in the upper-right.</li>
-<li>The app status will change to &quot;Waiting for Review&quot;.</li>
+<li>Click the “Save” button in the upper-right.</li>
+<li>Click the “Add for Review” button in the upper-right.</li>
+<li>A “Confirm Submission” page will be displayed.</li>
+<li>Click the “Submit to App Review” button in the upper-right.</li>
+<li>The app status will change to “Waiting for Review”.</li>
 <li>Wait for feedback from Apple. This could take a couple of days.</li>
 </ol>
-<h3 id="part-9---instructions-for-test-users" tabindex="-1">Part 9 - Instructions for Test Users</h3>
+<h3 id="part-9---instructions-for-test-users">Part 9 - Instructions for Test Users</h3>
 <ol>
 <li>You receive an email with the subject
-&quot;You've been invited to the App Store Connect&quot;.</li>
+“You’ve been invited to the App Store Connect”.</li>
 <li>View this email on your mobile device4.</li>
-<li>Click the &quot;Accept Invitation&quot; link in the email.</li>
+<li>Click the “Accept Invitation” link in the email.</li>
 <li>A new page opens in mobile Safari.</li>
 <li>Enter your Apple ID and password to login.</li>
 </ol>
-<h3 id="part-10---sales" tabindex="-1">Part 10 - Sales</h3>
+<h3 id="part-10---sales">Part 10 - Sales</h3>
 <p>To see statistics on app sales, browse
 <a href="https://appstoreconnect.apple.com?v=1.1.1" rel="noopener" target="_blank">App Store Connect</a>
-and click &quot;Sales and Trends&quot;.</p>
-<h2 id="feedback" tabindex="-1">Feedback</h2>
+and click “Sales and Trends”.</p>
+<h2 id="feedback">Feedback</h2>
 <p>To see feedback from TestFlight users inside Xcode:</p>
 <ul>
-<li>Select Window ... Organizer.</li>
-<li>Click &quot;Feedback&quot;.</li>
-</ul>
-</article> </body></html>
+<li>Select Window … Organizer.</li>
+<li>Click “Feedback”.</li>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

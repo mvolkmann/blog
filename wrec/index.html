@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>wrec</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>wrec</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#reactivity">Reactivity</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#properties">Properties</a></li><li><a href="#event-listeners">Event Listeners</a></li><li><a href="#javascript-expressions">JavaScript Expressions</a></li><li><a href="#unchanging-expressions">Unchanging Expressions</a></li><li><a href="#conditional-and-iterative-html-generation">Conditional and Iterative HTML Generation</a></li><li><a href="#element-references">Element References</a></li><li><a href="#form-elements">Form Elements</a></li><li><a href="#disabling-components">Disabling Components</a></li><li><a href="#computed-properties">Computed Properties</a></li><li><a href="#reactive-css">Reactive CSS</a></li><li><a href="#nested-web-components">Nested Web Components</a></li><li><a href="#kicking-it-up-a-notch">Kicking it up a Notch</a></li><li><a href="#non-primitive-properties">Non-primitive Properties</a></li><li><a href="#changing-multiple-properties">Changing Multiple Properties</a></li><li><a href="#property-change-events">Property Change Events</a></li><li><a href="#form-submissions">Form Submissions</a></li><li><a href="#state">State</a></li><li><a href="#error-checking">Error Checking</a></li><li><a href="#security">Security</a></li><li><a href="#server-side-rendering">Server-Side Rendering</a></li><li><a href="#more-examples">More Examples</a></li><li><a href="#tests">Tests</a></li></ul></aside> <article><script src="/blog/js/basic-wrec.js" type="module"></script>
+<!DOCTYPE html><html lang="en"> <head><title>wrec</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>wrec</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#reactivity">Reactivity</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#properties">Properties</a></li><li><a href="#event-listeners">Event Listeners</a></li><li><a href="#javascript-expressions">JavaScript Expressions</a></li><li><a href="#unchanging-expressions">Unchanging Expressions</a></li><li><a href="#conditional-and-iterative-html-generation">Conditional and Iterative HTML Generation</a></li><li><a href="#element-references">Element References</a></li><li><a href="#form-elements">Form Elements</a></li><li><a href="#disabling-components">Disabling Components</a></li><li><a href="#computed-properties">Computed Properties</a></li><li><a href="#reactive-css">Reactive CSS</a></li><li><a href="#nested-web-components">Nested Web Components</a></li><li><a href="#kicking-it-up-a-notch">Kicking it up a Notch</a></li><li><a href="#non-primitive-properties">Non-primitive Properties</a></li><li><a href="#changing-multiple-properties">Changing Multiple Properties</a></li><li><a href="#property-change-events">Property Change Events</a></li><li><a href="#form-submissions">Form Submissions</a></li><li><a href="#state">State</a></li><li><a href="#error-checking">Error Checking</a></li><li><a href="#security">Security</a></li><li><a href="#server-side-rendering">Server-Side Rendering</a></li><li><a href="#more-examples">More Examples</a></li><li><a href="#tests">Tests</a></li></ul></aside> <article> <script src="/blog/js/basic-wrec.js" type="module"></script>
 <script src="/blog/js/color-demo.js" type="module"></script>
 <script src="/blog/js/color-picker.js" type="module"></script>
 <script src="/blog/js/counter-wrec.js" type="module"></script>
@@ -32,46 +34,43 @@
   }
 </style>
 <figure style="width: 30%">
-  <img alt="wrec logo" style="border: 0"
-    src="/blog/assets/wrec-logo.png?v=1.1.1">
+  <img alt="wrec logo" style="border: 0" src="/blog/assets/wrec-logo.png?v=1.1.1">
 </figure>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="https://www.npmjs.com/package/wrec?v=1.1.1" rel="noopener" target="_blank">wrec</a> is a small,
 zero dependency library that greatly simplifies building web components.
 Its main features are that it automates
 wiring event listeners and implementing reactivity.</p>
-<p>If you're new to web components, see my slides
+<p>If you’re new to web components, see my slides
 from a one-hour talk on web components at <a href="https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf?v=1.1.1" rel="noopener" target="_blank">Web Components</a>.
 A video of the talk is at
-<a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
-target="_blank">OCI Tech Lunch - July 2025</a>.
+<a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view" target="_blank">OCI Tech Lunch - July 2025</a>.
 Also see my series of
-<a href="https://www.youtube.com/playlist?list=PLGhglgQb4jVk3-_wc8srORlGalSRFMEpR"
-target="_blank">YouTube videos</a> on web components and the wrec library.</p>
+<a href="https://www.youtube.com/playlist?list=PLGhglgQb4jVk3-_wc8srORlGalSRFMEpR" target="_blank">YouTube videos</a> on web components and the wrec library.</p>
 <p>Wrec was inspired by <a href="https://lit.dev?v=1.1.1" rel="noopener" target="_blank">Lit</a>.
 It has the following advantages over Lit:</p>
 <ul>
-<li>Wrec is simpler ... just a single class to extend (Wrec).</li>
-<li>Wrec has a cleaner syntax ... no need to
+<li>Wrec is simpler … just a single class to extend (Wrec).</li>
+<li>Wrec has a cleaner syntax … no need to
 surround JS expressions with <code>${...}</code>.</li>
-<li>Wrec provides automatic 2-way data binding ...
+<li>Wrec provides automatic 2-way data binding …
 no need to dispatch custom events and listen for them.</li>
-<li>Wrec doesn't require a special syntax for Boolean attributes.</li>
+<li>Wrec doesn’t require a special syntax for Boolean attributes.</li>
 <li>Wrec enables specifying the content of a <code>textarea</code> element
 with a JavaScript expression in its text content.</li>
 </ul>
 <p>Wrec components have many of the features provided by Alpine.js.</p>
 <p>To install wrec in one of your projects, enter <code>npm install wrec</code>.</p>
-<h2 id="reactivity" tabindex="-1">Reactivity</h2>
-<p>When we use the word &quot;reactivity&quot;, we mean the ability to automatically
+<h2 id="reactivity">Reactivity</h2>
+<p>When we use the word “reactivity”, we mean the ability to automatically
 update the DOM when the value of a component property changes.</p>
 <p>There are many approaches that can be used to implement reactivity.
 One approach is to use a virtual DOM.
 When a component property changes,
 a new version of the component DOM is created.
 That DOM is compared to the existing DOM for the component,
-referred to as &quot;diffing&quot;.
-Then the existing DOM is updated, but only the parts where a &quot;diff&quot; was found.
+referred to as “diffing”.
+Then the existing DOM is updated, but only the parts where a “diff” was found.
 Web frameworks that use this approach include React and Vue.js.</p>
 <p>Wrec takes a more surgical approach to reactivity.</p>
 <ul>
@@ -93,7 +92,7 @@ it gets a list of all references to the expression in the instance
 and updates them with the new value.</li>
 </ul>
 <p>This approach is highly efficient.</p>
-<h2 id="getting-started" tabindex="-1">Getting Started</h2>
+<h2 id="getting-started">Getting Started</h2>
 <p>To define a web component using wrec:</p>
 <ol>
 <li>Install wrec by entering <code>npm install wrec</code>.</li>
@@ -115,7 +114,7 @@ class BasicWrec extends Wrec {
       font-size: 2rem;
     }
   `;
-  static html = html`&lt;span&gt;Hello, World!&lt;/span&gt;`;
+  static html = html`&#x3C;span>Hello, World!&#x3C;/span>`;
 }
 
 BasicWrec.define('basic-wrec');
@@ -124,7 +123,7 @@ BasicWrec.define('basic-wrec');
 This allows the text to span multiple lines.
 The tags <code>css</code> and <code>html</code> are optional.
 They trigger the VS Code extension Prettier to format the code
-and the &quot;Inline HTML&quot; extension to add syntax highlighting.</p>
+and the “Inline HTML” extension to add syntax highlighting.</p>
 <p>The <code>define</code> method registers a custom HTML element with
 a kebab-case name which is typically based on the class name.
 For <code>BasicWrec</code>, the element name is <code>basic-wrec</code>.
@@ -133,12 +132,12 @@ An alternative is to use the <code>define</code> method as follows:</p>
 <pre><code class="language-js">customElements.define('element-name', SomeClass);
 </code></pre>
 <p>To use this in a web page or Markdown file, include the following:</p>
-<pre><code class="language-html">&lt;script src=&quot;some-path/basic-wrec.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;
-&lt;basic-wrec&gt;&lt;/basic-wrec&gt;
+<pre><code class="language-html">&#x3C;script src="some-path/basic-wrec.js" type="module">&#x3C;/script>
+&#x3C;basic-wrec>&#x3C;/basic-wrec>
 </code></pre>
 <p>Here it is in action.</p>
 <p><basic-wrec></basic-wrec></p>
-<h2 id="tooling" tabindex="-1">Tooling</h2>
+<h2 id="tooling">Tooling</h2>
 <p>Wrec provides three tools.</p>
 <p>To check for issues in wrec component implementations,
 enter <code>npx wrec-lint [file-path]</code>.
@@ -146,15 +145,15 @@ When no file path is specified, it runs on every <code>.js</code> and <code>.ts<
 that defines a class that extends <code>Wrec</code>.</p>
 <p>To automatically run the wrec linter in VS Code
 when component source files are saved,
-install the &quot;wrec&quot; extension.</p>
+install the “wrec” extension.</p>
 <p>To automatically add <code>usedBy</code> properties to
 the configuration objects of properties that need them,
 enter <code>npx wrec-usedby {file-path}</code>.
 See examples of the <code>usedBy</code> property later in this document.</p>
-<h2 id="properties" tabindex="-1">Properties</h2>
+<h2 id="properties">Properties</h2>
 <p>Web components defined with wrec can define and use properties.
 Properties are automatically mapped to attributes in the custom element.
-Here's a simple example that enables specifying a name.</p>
+Here’s a simple example that enables specifying a name.</p>
 <pre><code class="language-js">import {html, Wrec} from './wrec.min.js';
 
 class HelloWorld extends Wrec {
@@ -162,15 +161,15 @@ class HelloWorld extends Wrec {
     name: {type: String, value: 'World'}
   };
 
-  static html = html`&lt;div&gt;Hello, &lt;span&gt;this.name&lt;/span&gt;!&lt;/div&gt;`;
+  static html = html`&#x3C;div>Hello, &#x3C;span>this.name&#x3C;/span>!&#x3C;/div>`;
 }
 
 HelloWorld.define('hello-world');
 </code></pre>
 <p>We can use this custom element as follows:</p>
-<pre><code class="language-html">&lt;hello-world&gt;&lt;/hello-world&gt;
+<pre><code class="language-html">&#x3C;hello-world>&#x3C;/hello-world>
 
-&lt;hello-world name=&quot;wrec&quot;&gt;&lt;/hello-world&gt;
+&#x3C;hello-world name="wrec">&#x3C;/hello-world>
 </code></pre>
 <p>This will render the following:</p>
 <p><hello-world></hello-world>
@@ -188,48 +187,48 @@ the values are objects that describe the property.
 Those objects support the following keys:</p>
 <ul>
 <li><code>doc</code>: a documentation string used when generating a Custom Elements Manifest file</li>
-<li><code>type</code>: a class name such as <code>Boolean</code>, <code>Number</code>, <code>String</code>, or <code>Array&lt;Object&gt;</code></li>
+<li><code>type</code>: a class name such as <code>Boolean</code>, <code>Number</code>, <code>String</code>, or <code>Array&#x3C;Object></code></li>
 <li><code>value</code>: the default value</li>
 <li><code>required</code>: set to <code>true</code> to throw an error when the corresponding argument is not supplied</li>
 <li><code>computed</code>: a JavaScript expression from which the value is computed</li>
 <li><code>uses</code>: a comma-separated list of other property names used to compute the value</li>
-<li><code>dispatch</code>: set to <code>true</code> to cause a &quot;change&quot; event to be dispatched
+<li><code>dispatch</code>: set to <code>true</code> to cause a “change” event to be dispatched
 every time the value of the property changes</li>
 </ul>
 <p>The <code>value</code> and <code>computed</code> properties should not both be specified.</p>
 <p>The <code>uses</code> property should only be specified
 if the <code>computed</code> property is also specified.
 It is needed when the <code>computed</code> expression
-doesn't directly reference the listed properties.
+doesn’t directly reference the listed properties.
 This situation arises when the expression is a method call
 where the properties are not explicitly passed.
 Supplying <code>uses</code> causes the <code>computed</code> expression to be re-evaluated
 every time the value of any of the listed properties changes.</p>
-<p>The <code>detail</code> property of the dispatched &quot;change&quot; events is set to an object
+<p>The <code>detail</code> property of the dispatched “change” events is set to an object
 with the properties <code>tagName</code>, <code>property</code>, <code>oldValue</code>, and <code>value</code>.</p>
-<h2 id="event-listeners" tabindex="-1">Event Listeners</h2>
+<h2 id="event-listeners">Event Listeners</h2>
 <p>To wire event listeners,
-Wrec looks for attributes whose name begins with &quot;on&quot;.
+Wrec looks for attributes whose name begins with “on”.
 It assumes the remainder of the attribute name is an event name.
 It also assumes that the value of the attribute is either
 a method name that should be called or code that should be executed
 when that event is dispatched.
-For example, with the attribute <code>onclick=&quot;increment&quot;</code>,
+For example, with the attribute <code>onclick="increment"</code>,
 if <code>increment</code> is a method in the component, wrec will
 add an event listener to the element containing the attribute
-for &quot;click&quot; events and call <code>this.increment(event)</code>.
-Alternatively, the attribute <code>onclick=&quot;this.count++&quot;</code>
+for “click” events and call <code>this.increment(event)</code>.
+Alternatively, the attribute <code>onclick="this.count++"</code>
 adds an event listener that increments <code>this.count</code>
 when the element is clicked.</p>
 <p>The case of the event name within the attribute name
 does not matter because Wrec lowercases the name.
 So the attributes in the previous examples
-can be replaced by <code>onClick=&quot;increment&quot;</code>.</p>
-<h2 id="javascript-expressions" tabindex="-1">JavaScript Expressions</h2>
+can be replaced by <code>onClick="increment"</code>.</p>
+<h2 id="javascript-expressions">JavaScript Expressions</h2>
 <p>In the HTML to be rendered, CSS property values,
 element attributes, and element text content
 can contain raw JavaScript expressions.
-By &quot;raw&quot; we mean that the expressions
+By “raw” we mean that the expressions
 are not surrounded by noisy syntax like <code>${...}</code>.</p>
 <p>If the expressions contain references to properties in the form
 <code>this.propertyName</code>, wrec automatically watches them for changes.
@@ -237,7 +236,7 @@ In this context, <code>this</code> always refers to the parent web component.
 When changes are detected, wrec automatically reevaluates the expressions
 and replaces the attribute values or text contents with new values.
 Wrec does not rerender the entire web component.</p>
-<p>Here's an example of a counter component that takes advantage of this feature:</p>
+<p>Here’s an example of a counter component that takes advantage of this feature:</p>
 <pre><code class="language-js">import {css, html, Wrec} from './wrec.min.js';
 
 class CounterWrec extends Wrec {
@@ -259,12 +258,12 @@ class CounterWrec extends Wrec {
   `;
 
   static html = html`
-    &lt;label&gt;this.label&lt;/label&gt;
-    &lt;button onClick=&quot;this.count--&quot; type=&quot;button&quot; disabled=&quot;this.count === 0&quot;&gt;
+    &#x3C;label>this.label&#x3C;/label>
+    &#x3C;button onClick="this.count--" type="button" disabled="this.count === 0">
       -
-    &lt;/button&gt;
-    &lt;span&gt;this.count&lt;/span&gt;
-    &lt;button onClick=&quot;this.count++&quot; type=&quot;button&quot;&gt;+&lt;/button&gt;
+    &#x3C;/button>
+    &#x3C;span>this.count&#x3C;/span>
+    &#x3C;button onClick="this.count++" type="button">+&#x3C;/button>
   `;
 }
 
@@ -275,17 +274,17 @@ wrec adds the attribute to the element with no value
 or removes the attribute from the element.
 This is commonly used for attributes like <code>disabled</code>.</p>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;counter-wrec label=&quot;Score&quot; count=&quot;0&quot;&gt;&lt;/counter-wrec&gt;
+<pre><code class="language-html">&#x3C;counter-wrec label="Score" count="0">&#x3C;/counter-wrec>
 </code></pre>
 <p><counter-wrec label="Score" count="0"></counter-wrec></p>
-<p>Click the &quot;+&quot; and &quot;-&quot; buttons to try it.</p>
+<p>Click the ”+” and ”-” buttons to try it.</p>
 <p>It is highly unlikely that an attribute value or element text content
-will ever need to render the word &quot;this&quot;, followed by a period,
+will ever need to render the word “this”, followed by a period,
 followed by a valid JavaScript identifier.
 But if that need arises, just escape the period by using two.
 Wrec will render only a single period.</p>
-<p>To follow the word &quot;this&quot; with an ellipsis,
-include a space before it as in &quot;this ... and that&quot;.</p>
+<p>To follow the word “this” with an ellipsis,
+include a space before it as in “this … and that”.</p>
 <p>By default the JavaScript expressions in HTML only have access to
 the properties/methods of the component class and global functions.
 To enable access to other functions and variables,
@@ -296,16 +295,16 @@ To allow using them in expressions,
 add the following line in the component class:</p>
 <pre><code class="language-js">static context = { average, COUNT };
 </code></pre>
-<h2 id="unchanging-expressions" tabindex="-1">Unchanging Expressions</h2>
+<h2 id="unchanging-expressions">Unchanging Expressions</h2>
 <p>In insert the value of an expression
 that does not use properties of the web component,
 into an HTML template string,
 surround the expression with the syntax <code>${...}</code>.
 For example, assuming <code>DAYS</code> is a variable
 whose value is an array of month names:</p>
-<pre><code class="language-html">&lt;p&gt;The month is ${DAYS[new Date().getDay()]}.&lt;/p&gt;
+<pre><code class="language-html">&#x3C;p>The month is ${DAYS[new Date().getDay()]}.&#x3C;/p>
 </code></pre>
-<h2 id="conditional-and-iterative-html-generation" tabindex="-1">Conditional and Iterative HTML Generation</h2>
+<h2 id="conditional-and-iterative-html-generation">Conditional and Iterative HTML Generation</h2>
 <p>Wrec supports conditional and iterative generation of HTML.</p>
 <p>The following web component demonstrates conditional generation
 using the ternary operator.</p>
@@ -317,25 +316,25 @@ class TemperatureEval extends Wrec {
   };
 
   static html = html`
-    &lt;p&gt;this.temperature &lt; 32 ? &quot;freezing&quot; : &quot;not freezing&quot;&lt;/p&gt;
+    &#x3C;p>this.temperature &#x3C; 32 ? "freezing" : "not freezing"&#x3C;/p>
   `;
 }
 
 TemperatureEval.define('temperature-eval');
 </code></pre>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;temperature-eval temperature=&quot;100&quot;&gt;&lt;/temperature-eval&gt;
+<pre><code class="language-html">&#x3C;temperature-eval temperature="100">&#x3C;/temperature-eval>
 </code></pre>
 <p><temperature-eval temperature="100"></temperature-eval></p>
 <p>Use your browser DevTools to inspect the
 instance of the <code>temperature-eval</code> custom element.
-Double-click the value of the <code>temperature</code> attribute and change it &quot;20&quot;.
-Note how the rendered output changes from &quot;not freezing&quot; to &quot;freezing&quot;.</p>
+Double-click the value of the <code>temperature</code> attribute and change it “20”.
+Note how the rendered output changes from “not freezing” to “freezing”.</p>
 <p>For an example of a web component that iterates over values
 in a comma-delimited attribute value to determine what to render,
 see the <code>RadioGroup</code> and <code>SelectList</code> classes
-in the &quot;Kicking it up a Notch&quot; section below.</p>
-<h2 id="element-references" tabindex="-1">Element References</h2>
+in the “Kicking it up a Notch” section below.</p>
+<h2 id="element-references">Element References</h2>
 <p>HTML elements rendered by wrec can have a <code>ref</code> attribute
 whose value is the name of property of type <code>HTMLElement</code>.
 That property will be set to a reference to the element.</p>
@@ -346,11 +345,11 @@ to call a method (<code>next</code>) on that element.</p>
 <pre><code class="language-typescript">import {html, Wrec} from 'wrec';
 import './traffic-light'; // register custom element
 
-const sleep = (ms: number) =&gt; new Promise(resolve =&gt; setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 class LightController extends Wrec {
   static properties = {tl: {type: HTMLElement}};
-  static html = html`&lt;traffic-light ref=&quot;tl&quot;&gt;&lt;/traffic-light&gt;`;
+  static html = html`&#x3C;traffic-light ref="tl">&#x3C;/traffic-light>`;
 
   async ready() {
     const {tl} = this;
@@ -371,16 +370,16 @@ LightController.define('light-controller');
     ...
   }
 </code></pre>
-<h2 id="form-elements" tabindex="-1">Form Elements</h2>
+<h2 id="form-elements">Form Elements</h2>
 <p>Wrec supports two-way data binding for HTML form elements.</p>
 <ul>
 <li><code>input</code> and <code>select</code> elements can have a <code>value</code> attribute
-whose value is &quot;this.somePropertyName&quot;.
-An event listener for &quot;change&quot; events will be added.
-To instead listen for &quot;input&quot; events, use the attribute <code>value:input</code>.</li>
+whose value is “this.somePropertyName”.
+An event listener for “change” events will be added.
+To instead listen for “input” events, use the attribute <code>value:input</code>.</li>
 <li><code>textarea</code> elements can have text content
-that is &quot;this.somePropertyName&quot;.
-An event listener for &quot;change&quot; events will be added.</li>
+that is “this.somePropertyName”.
+An event listener for “change” events will be added.</li>
 </ul>
 <p>When the user changes the value of these form elements,
 the associated property is automatically updated.
@@ -417,21 +416,21 @@ class NumberSlider extends Wrec {
   `;
 
   static html = html`
-    &lt;label&gt;this.label&lt;/label&gt;
-    &lt;input
-      type=&quot;range&quot;
-      min=&quot;this.min&quot;
-      max=&quot;this.max&quot;
-      value:input=&quot;this.value&quot;
-    /&gt;
-    &lt;span&gt;this.value&lt;/span&gt;
+    &#x3C;label>this.label&#x3C;/label>
+    &#x3C;input
+      type="range"
+      min="this.min"
+      max="this.max"
+      value:input="this.value"
+    />
+    &#x3C;span>this.value&#x3C;/span>
   `;
 }
 
 NumberSlider.define('number-slider');
 </code></pre>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;number-slider label=&quot;Rating&quot; max=&quot;10&quot;&gt;&lt;/number-slider&gt;
+<pre><code class="language-html">&#x3C;number-slider label="Rating" max="10">&#x3C;/number-slider>
 </code></pre>
 <p><number-slider label="Rating" max="10"></number-slider></p>
 <p>Drag the slider thumb to change the value.</p>
@@ -441,15 +440,15 @@ a child Lit component and have the child can update the property.
 The child must dispatch custom events that
 the parent listens for so it can update its own state.
 For an example of this, see
-<a href="https://github.com/mvolkmann/lit-examples/blob/main/wrec-compare/binding-demo.ts">wrec-compare</a>.</p>
-<h2 id="disabling-components" tabindex="-1">Disabling Components</h2>
+<a href="https://github.com/mvolkmann/lit-examples/blob/main/wrec-compare/binding-demo.ts" rel="noopener" target="_blank">wrec-compare</a>.</p>
+<h2 id="disabling-components">Disabling Components</h2>
 <p>Adding the <code>disabled</code> attribute to a wrec component instance or removing it,
 automatically does the same to all applicable descendant elements,
 even those in nested shadow DOMs.
 Applicable elements include
 <code>button</code>, <code>fieldset</code>, <code>input</code>, <code>select</code>, and <code>textarea</code> elements,
 and also nested wrec component instances.</p>
-<h2 id="computed-properties" tabindex="-1">Computed Properties</h2>
+<h2 id="computed-properties">Computed Properties</h2>
 <p>The value of a property can be computed using the values of other properties.
 To do this, add the <code>computed</code> attribute to the description of the property.</p>
 <p>The example component below has a computed property
@@ -464,7 +463,7 @@ class RectangleArea extends Wrec {
     /*
     area: {
       type: Number,
-      computed: &quot;this.width * this.height&quot;,
+      computed: "this.width * this.height",
     },
     */
     area: {
@@ -480,9 +479,9 @@ class RectangleArea extends Wrec {
   `;
 
   static html = html`
-    &lt;number-slider label=&quot;Width&quot; value=&quot;this.width&quot;&gt;&lt;/number-slider&gt;
-    &lt;number-slider label=&quot;Height&quot; value=&quot;this.height&quot;&gt;&lt;/number-slider&gt;
-    &lt;div class=&quot;area&quot;&gt;Area: &lt;span&gt;this.area&lt;/span&gt;&lt;/div&gt;
+    &#x3C;number-slider label="Width" value="this.width">&#x3C;/number-slider>
+    &#x3C;number-slider label="Height" value="this.height">&#x3C;/number-slider>
+    &#x3C;div class="area">Area: &#x3C;span>this.area&#x3C;/span>&#x3C;/div>
   `;
 
   rectangleArea() {
@@ -493,7 +492,7 @@ class RectangleArea extends Wrec {
 RectangleArea.define('rectangle-area');
 </code></pre>
 <p>Since the <code>rectangleArea</code> method uses properties
-that don't appear in the expression,
+that don’t appear in the expression,
 we need to let wrec know when the expression should be reevaluated.
 The configuration object for each component property can include
 the <code>usedBy</code> property to indicate which methods use the property.
@@ -503,15 +502,15 @@ all expressions that call those methods are reevaluated.
 In this case, the <code>width</code> and <code>height</code> properties
 are both used by the <code>rectangleArea</code> method.</p>
 <p>Here it is in action:</p>
-<pre><code class="language-html">&lt;rectangle-area&gt;&lt;/rectangle-area&gt;
+<pre><code class="language-html">&#x3C;rectangle-area>&#x3C;/rectangle-area>
 </code></pre>
-<p>Drag the &quot;Width&quot; and &quot;Height&quot; sliders and
-note how the &quot;Area&quot; is automatically updated.</p>
+<p>Drag the “Width” and “Height” sliders and
+note how the “Area” is automatically updated.</p>
 <p>It is possible for computed property expressions to form a cycle.
 For example, given properties <code>a</code>, <code>b</code>, and <code>c</code>, they can be defined
 such that <code>a</code> depends on <code>b</code>, <code>b</code> depends on <code>c</code>, and <code>c</code> depends on <code>a</code>.
 Wrec detects these cycles and throws an error.</p>
-<h2 id="reactive-css" tabindex="-1">Reactive CSS</h2>
+<h2 id="reactive-css">Reactive CSS</h2>
 <p>Wrec supports JavaScript expressions in CSS property values.</p>
 <p>The following color picker component demonstrates this.
 It also defines a computed property whose value
@@ -550,23 +549,23 @@ class ColorPicker extends Wrec {
   `;
 
   static html = html`
-    &lt;div id=&quot;swatch&quot;&gt;&lt;/div&gt;
-    &lt;div id=&quot;sliders&quot;&gt;
-      &lt;!-- prettier-ignore --&gt;
+    &#x3C;div id="swatch">&#x3C;/div>
+    &#x3C;div id="sliders">
+      &#x3C;!-- prettier-ignore -->
       ${this.makeSlider('Red')}
       ${this.makeSlider('Green')}
       ${this.makeSlider('Blue')}
-    &lt;/div&gt;
+    &#x3C;/div>
   `;
 
   static makeSlider(label) {
     return html`
-      &lt;number-slider
+      &#x3C;number-slider
         label=${label}
-        label-width=&quot;this.labelWidth&quot;
-        max=&quot;255&quot;
-        value=&quot;this.${label.toLowerCase()}&quot;
-      &gt;&lt;/number-slider&gt;
+        label-width="this.labelWidth"
+        max="255"
+        value="this.${label.toLowerCase()}"
+      >&#x3C;/number-slider>
     `;
   }
 }
@@ -574,12 +573,12 @@ class ColorPicker extends Wrec {
 ColorPicker.define('color-picker');
 </code></pre>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;color-picker&gt;&lt;/color-picker&gt;
+<pre><code class="language-html">&#x3C;color-picker>&#x3C;/color-picker>
 </code></pre>
 <p><color-picker></color-picker></p>
 <p>Drag the sliders to change the color of the swatch on the left.</p>
-<h2 id="nested-web-components" tabindex="-1">Nested Web Components</h2>
-<p>Let's define a web component that uses <code>color-picker</code>
+<h2 id="nested-web-components">Nested Web Components</h2>
+<p>Let’s define a web component that uses <code>color-picker</code>
 to change the color of some text.
 It also uses a <code>number-slider</code> to change the size of the text.</p>
 <pre><code class="language-js">import {css, html, Wrec} from './wrec.min.js';
@@ -604,21 +603,21 @@ class ColorDemo extends Wrec {
   `;
 
   static html = html`
-    &lt;color-picker color=&quot;this.color&quot;&gt;&lt;/color-picker&gt;
-    &lt;number-slider
-      label=&quot;Size&quot;
-      max=&quot;48&quot;
-      min=&quot;12&quot;
-      value=&quot;this.size&quot;
-    &gt;&lt;/number-slider&gt;
-    &lt;p&gt;This is a test.&lt;/p&gt;
+    &#x3C;color-picker color="this.color">&#x3C;/color-picker>
+    &#x3C;number-slider
+      label="Size"
+      max="48"
+      min="12"
+      value="this.size"
+    >&#x3C;/number-slider>
+    &#x3C;p>This is a test.&#x3C;/p>
   `;
 }
 
 ColorDemo.define('color-demo');
 </code></pre>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;color-demo&gt;&lt;/color-demo&gt;
+<pre><code class="language-html">&#x3C;color-demo>&#x3C;/color-demo>
 </code></pre>
 <p><color-demo></color-demo></p>
 <p>CSS variable values can be any valid JavaScript expression.
@@ -627,10 +626,10 @@ the CSS variable <code>--size</code> and modifying the rule for <code>font-size<
 <pre><code class="language-css">--size: this.size * 2;
 font-size: calc(var(--size) * 1px);
 </code></pre>
-<h2 id="kicking-it-up-a-notch" tabindex="-1">Kicking it up a Notch</h2>
+<h2 id="kicking-it-up-a-notch">Kicking it up a Notch</h2>
 <p>For this demo we need to define three more custom elements which are:</p>
 <ul>
-<li><code>radio-group</code>: renders a set of radio buttons which are <code>input</code> elements with <code>type=&quot;radio&quot;</code></li>
+<li><code>radio-group</code>: renders a set of radio buttons which are <code>input</code> elements with <code>type="radio"</code></li>
 <li><code>select-list</code>: renders a <code>select</code> element with <code>option</code> children</li>
 <li><code>data-binding</code>: renders elements that tie everything together</li>
 </ul>
@@ -650,11 +649,11 @@ class RadioGroup extends Wrec {
   };
 
   static css = css`
-    :host &gt; div {
+    :host > div {
       display: flex;
       gap: 0.5rem;
 
-      &gt; div {
+      > div {
         display: flex;
         align-items: center;
       }
@@ -662,13 +661,13 @@ class RadioGroup extends Wrec {
   `;
 
   static html = html`
-    &lt;div&gt;
-      &lt;!-- prettier-ignore --&gt;
+    &#x3C;div>
+      &#x3C;!-- prettier-ignore -->
       this.values
-        .split(&quot;,&quot;)
+        .split(",")
         .map(this.makeRadio)
-        .join(&quot;&quot;)
-    &lt;/div&gt;
+        .join("")
+    &#x3C;/div>
   `;
 
   #labelArray = [];
@@ -696,7 +695,7 @@ class RadioGroup extends Wrec {
   // This handles the case when the specified value
   // is not in the list of values.
   #fixValue() {
-    requestAnimationFrame(() =&gt; {
+    requestAnimationFrame(() => {
       const values = this.values.split(',');
       if (this.value) {
         if (!values.includes(this.value)) this.value = values[0];
@@ -717,16 +716,16 @@ class RadioGroup extends Wrec {
   makeRadio(value, index) {
     value = value.trim();
     return html`
-      &lt;div&gt;
-        &lt;input
-          type=&quot;radio&quot;
-          id=&quot;${value}&quot;
-          onchange=&quot;handleChange&quot;
-          value=&quot;${value}&quot;
+      &#x3C;div>
+        &#x3C;input
+          type="radio"
+          id="${value}"
+          onchange="handleChange"
+          value="${value}"
           ${value === this.value ? 'checked' : ''}
-        /&gt;
-        &lt;label for=&quot;${value}&quot;&gt;${this.#labelArray[index]}&lt;/label&gt;
-      &lt;/div&gt;
+        />
+        &#x3C;label for="${value}">${this.#labelArray[index]}&#x3C;/label>
+      &#x3C;/div>
     `;
   }
 }
@@ -746,13 +745,13 @@ class SelectList extends Wrec {
   };
 
   static html = html`
-    &lt;select value=&quot;this.value&quot;&gt;
-      &lt;!-- prettier-ignore --&gt;
+    &#x3C;select value="this.value">
+      &#x3C;!-- prettier-ignore -->
       this.values
-        .split(&quot;,&quot;)
+        .split(",")
         .map(this.makeOption)
-        .join(&quot;&quot;)
-    &lt;/select&gt;
+        .join("")
+    &#x3C;/select>
   `;
 
   #labelArray = [];
@@ -772,7 +771,7 @@ class SelectList extends Wrec {
   // This handles the case when the specified value
   // is not in the list of values.
   #fixValue() {
-    requestAnimationFrame(() =&gt; {
+    requestAnimationFrame(() => {
       const values = this.values.split(',');
       if (this.value) {
         if (!values.includes(this.value)) this.value = values[0];
@@ -786,7 +785,7 @@ class SelectList extends Wrec {
   // called from the expression in the html method.
   makeOption(value, index) {
     return html`
-      &lt;option value=&quot;${value.trim()}&quot;&gt;${this.#labelArray[index]}&lt;/option&gt;
+      &#x3C;option value="${value.trim()}">${this.#labelArray[index]}&#x3C;/option>
     `;
   }
 }
@@ -798,7 +797,7 @@ SelectList.define('select-list');
 calls a method in the class to obtain its value.</p>
 <pre><code class="language-js">import {css, html, Wrec} from './wrec.min.js';
 
-const capitalize = str =&gt;
+const capitalize = str =>
   str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
 
 class DataBinding extends Wrec {
@@ -827,30 +826,30 @@ class DataBinding extends Wrec {
   `;
 
   static html = html`
-    &lt;div&gt;
-      &lt;label&gt;Color Options (comma-separated):&lt;/label&gt;
-      &lt;input value=&quot;this.colors&quot; /&gt;
-    &lt;/div&gt;
-    &lt;radio-group
-      labels=&quot;this.labels&quot;
-      name=&quot;color1&quot;
-      value=&quot;this.color&quot;
-      values=&quot;this.colors&quot;
-    &gt;&lt;/radio-group&gt;
-    &lt;select-list
-      labels=&quot;this.labels&quot;
-      name=&quot;color2&quot;
-      value=&quot;this.color&quot;
-      values=&quot;this.colors&quot;
-    &gt;&lt;/select-list&gt;
-    &lt;number-slider
-      label=&quot;Size&quot;
-      max=&quot;48&quot;
-      min=&quot;12&quot;
-      name=&quot;size&quot;
-      value=&quot;this.size&quot;
-    &gt;&lt;/number-slider&gt;
-    &lt;p&gt;You selected the color &lt;span id=&quot;selected-color&quot;&gt;this.color&lt;/span&gt;.&lt;/p&gt;
+    &#x3C;div>
+      &#x3C;label>Color Options (comma-separated):&#x3C;/label>
+      &#x3C;input value="this.colors" />
+    &#x3C;/div>
+    &#x3C;radio-group
+      labels="this.labels"
+      name="color1"
+      value="this.color"
+      values="this.colors"
+    >&#x3C;/radio-group>
+    &#x3C;select-list
+      labels="this.labels"
+      name="color2"
+      value="this.color"
+      values="this.colors"
+    >&#x3C;/select-list>
+    &#x3C;number-slider
+      label="Size"
+      max="48"
+      min="12"
+      name="size"
+      value="this.size"
+    >&#x3C;/number-slider>
+    &#x3C;p>You selected the color &#x3C;span id="selected-color">this.color&#x3C;/span>.&#x3C;/p>
   `;
 
   getLabels() {
@@ -861,7 +860,7 @@ class DataBinding extends Wrec {
 DataBinding.define('data-binding');
 </code></pre>
 <p>Finally, here it is in action.</p>
-<pre><code class="language-html">&lt;data-binding color=&quot;blue&quot; colors=&quot;red,green,blue&quot;&gt;&lt;/data-binding&gt;
+<pre><code class="language-html">&#x3C;data-binding color="blue" colors="red,green,blue">&#x3C;/data-binding>
 </code></pre>
 <p><data-binding color="blue" colors="red,green,blue"></data-binding></p>
 <p>Select one of the radio buttons and
@@ -870,7 +869,7 @@ Also, the corresponding <code>option</code> is selected in the <code>select</cod
 <p>Select a different color in the <code>select-list</code> and
 note how the color of the text at the bottom updates.
 Also, the corresponding radio button is selected.</p>
-<p>Drag the &quot;Size&quot; slider to change the size of the text at the bottom.</p>
+<p>Drag the “Size” slider to change the size of the text at the bottom.</p>
 <p>For the most amazing part,
 change the comma-separated list of colors in the input at the top
 and press the return key to commit the change.
@@ -881,7 +880,7 @@ Selecting other colors via the radio buttons or the <code>select</code> works as
 Consider how much code would be required to reproduce this
 using another library or framework and
 how much more complicated that code would be!</p>
-<h2 id="non-primitive-properties" tabindex="-1">Non-primitive Properties</h2>
+<h2 id="non-primitive-properties">Non-primitive Properties</h2>
 <p>Wrec automatically keeps
 primitive web component properties (Boolean, Number, or String)
 in sync with corresponding attributes.
@@ -903,13 +902,13 @@ Wrec components can override the <code>propertyChangedCallback</code> method
 to be notified of changes to any of their properties,
 including computed properties.</p>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;table-wired&gt;&lt;/table-wired&gt;
+<pre><code class="language-html">&#x3C;table-wired>&#x3C;/table-wired>
 </code></pre>
 <p>The properties of the <code>table-wired</code> component are set with the following code:</p>
-<pre><code class="language-js">window.onload = () =&gt; {
+<pre><code class="language-js">window.onload = () => {
   const tableWired = document.querySelector('table-wired');
-  // The property &quot;properties&quot; must be set before the property &quot;headings&quot;
-  // because changing &quot;headings&quot; triggers the &quot;buildTh&quot; method
+  // The property "properties" must be set before the property "headings"
+  // because changing "headings" triggers the "buildTh" method
   // which uses properties to determine the data to sort.
   tableWired.properties = ['name', 'age', 'occupation'];
   tableWired.headings = ['Name', 'Age', 'Occupation'];
@@ -924,21 +923,21 @@ including computed properties.</p>
 <p>Try these steps to experiment with the reactivity of the table.</p>
 <ol>
 <li>Click the table headings to sort the rows.</li>
-<li>Right-click the table and select &quot;Inspect&quot;.</li>
-<li>In the DevTools Elements tab, click the <code>&lt;table-wired&gt;</code> element.</li>
-<li>Click the &quot;Console&quot; tab.</li>
+<li>Right-click the table and select “Inspect”.</li>
+<li>In the DevTools Elements tab, click the <code>&#x3C;table-wired></code> element.</li>
+<li>Click the “Console” tab.</li>
 <li>To see the current data objects that are being rendered,
 enter <code>$0.data</code></li>
 <li>To see the current properties from the <code>data</code> objects
 whose values are rendered, enter <code>$0.properties</code></li>
 <li>Change the properties that are rendered by
 entering <code>$0.properties = ['occupation', 'name']</code>
-The headings are incorrect now, but we'll fix that in the next step.</li>
+The headings are incorrect now, but we’ll fix that in the next step.</li>
 <li>Change the table headings by entering <code>$0.headings = ['Job', 'Call Me']</code></li>
 <li>Change the data objects that are being rendered by entering
 <code>$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]</code></li>
 </ol>
-<h2 id="changing-multiple-properties" tabindex="-1">Changing Multiple Properties</h2>
+<h2 id="changing-multiple-properties">Changing Multiple Properties</h2>
 <p>Suppose a component has the properties <code>color</code> and <code>size</code>,
 and the variable <code>component</code> is set to a reference to an instance.
 To change both properties, you could use the following:</p>
@@ -951,17 +950,17 @@ But there is a way to only trigger a single round of UI updates.
 Use the following instead:</p>
 <pre><code class="language-js">component.batchSet({color: 'yellow'; size: 'large'});
 </code></pre>
-<h2 id="property-change-events" tabindex="-1">Property Change Events</h2>
-<p>Wrec components will dispatch &quot;change&quot; events whenever
+<h2 id="property-change-events">Property Change Events</h2>
+<p>Wrec components will dispatch “change” events whenever
 a property configured with <code>dispatch: true</code> changes.
 For an example of this,
 see the <code>checked</code> property in <code>src/examples/toggle-switch.js</code>.
 The component defined in <code>src/examples/binding-demo.js</code>
 listens for that event, as does the <code>script</code> in <code>src/examples/index.html</code>.</p>
 <p>The following web component implements a toggle switch.
-The code was generated by ChatGPT using the &quot;o3 pro&quot; model,
+The code was generated by ChatGPT using the “o3 pro” model,
 and then modified.</p>
-<p>A &quot;change&quot; event is dispatched each time
+<p>A “change” event is dispatched each time
 the value of the <code>checked</code> property changes.
 The event <code>detail</code> property is set to an object
 with the properties <code>tagName</code>, <code>property</code>, <code>oldValue</code>, and <code>value</code>.</p>
@@ -1021,17 +1020,17 @@ class ToggleSwitch extends Wrec {
 
   // The tabindex attribute is required to make the div focusable.
   static html = html`
-    &lt;div
-      aria-checked=&quot;this.checked&quot;
-      class=&quot;this.checked ? 'checked' : ''&quot;
-      onClick=&quot;toggle&quot;
-      onKeyDown=&quot;handleKey&quot;
-      role=&quot;switch&quot;
-      tabindex=&quot;0&quot;
-    &gt;
-      &lt;span class=&quot;track&quot;&gt;&lt;/span&gt;
-      &lt;span class=&quot;thumb&quot;&gt;&lt;/span&gt;
-    &lt;/div&gt;
+    &#x3C;div
+      aria-checked="this.checked"
+      class="this.checked ? 'checked' : ''"
+      onClick="toggle"
+      onKeyDown="handleKey"
+      role="switch"
+      tabindex="0"
+    >
+      &#x3C;span class="track">&#x3C;/span>
+      &#x3C;span class="thumb">&#x3C;/span>
+    &#x3C;/div>
   `;
 
   handleKey(e) {
@@ -1049,10 +1048,10 @@ class ToggleSwitch extends Wrec {
 ToggleSwitch.define('toggle-switch');
 </code></pre>
 <p>Here it is in action.</p>
-<pre><code class="language-html">&lt;toggle-switch checked&gt;&lt;/toggle-switch&gt;
+<pre><code class="language-html">&#x3C;toggle-switch checked>&#x3C;/toggle-switch>
 </code></pre>
 <p><toggle-switch checked></toggle-switch></p>
-<h2 id="form-submissions" tabindex="-1">Form Submissions</h2>
+<h2 id="form-submissions">Form Submissions</h2>
 <p>Wrec components can use the same approach as vanilla web components
 to implement form submissions.
 But wrec also provides an easier approach.</p>
@@ -1070,18 +1069,18 @@ and the corresponding form keys to be used using the <code>form-assoc</code> att
 The value of this attribute is a comma-separated list of pairs.
 Each pair is a property name and form key separated by a colon.</p>
 <p>For example, suppose we have a <code>color-picker</code> component
-with the properties &quot;red&quot;, &quot;green&quot;, and &quot;blue&quot;.
+with the properties “red”, “green”, and “blue”.
 An instance inside a <code>form</code> could look like the following
-in order to submit those values with the keys &quot;r&quot;, &quot;g&quot;, and &quot;b&quot;:</p>
-<pre><code class="language-html">&lt;color-picker form-assoc=&quot;red: r, green: g, blue: b&quot;&gt;&lt;/color-picker&gt;
+in order to submit those values with the keys “r”, “g”, and “b”:</p>
+<pre><code class="language-html">&#x3C;color-picker form-assoc="red: r, green: g, blue: b">&#x3C;/color-picker>
 </code></pre>
 <p>Wrec automatically updates the form values to be submitted
 when the values of the specified properties change.</p>
 <p>The components must be included in a <code>form</code> element
 that provides a way for the user to submit the <code>form</code>.
-If the <code>method</code> attribute value is &quot;POST&quot;,
+If the <code>method</code> attribute value is “POST”,
 each of the component properties is added to the form data.
-If the <code>method</code> attribute value is &quot;GET&quot;,
+If the <code>method</code> attribute value is “GET”,
 each of the component properties is added as a query parameter.</p>
 <p>If multiple web components use the same property names,
 there will be duplicate form property names
@@ -1092,10 +1091,10 @@ and the values for each will be included.</p>
 <p>Wrec automatically handles form resets.
 The initial value of each component property is saved
 when each instance is created.
-When a <code>button</code> with <code>type=&quot;reset&quot;</code> inside a <code>form</code> element is clicked,
+When a <code>button</code> with <code>type="reset"</code> inside a <code>form</code> element is clicked,
 the provided <code>formResetCallback</code> method sets the values of
 each component property back to their initial values.</p>
-<h2 id="state" tabindex="-1">State</h2>
+<h2 id="state">State</h2>
 <p>Wrec supports holding state outside of web components and
 creating two-way bindings between state properties and web component properties.
 This can be used as an alternative to holding state in a parent component
@@ -1103,7 +1102,7 @@ of multiple components that use the state.
 For examples of using the <code>WrecState</code> class, see the files
 <code>src/examples/hello-world-with-state.html</code>
 and <code>src/examples/data-binding2.ts</code>.</p>
-<p>Let's walk through the <code>hello-world-with-state</code> example.
+<p>Let’s walk through the <code>hello-world-with-state</code> example.
 First, we define the custom element <code>labeled-input</code>
 in the file <code>labeled-input.js</code>.</p>
 <pre><code class="language-js">import {css, html, Wrec} from '../wrec';
@@ -1125,10 +1124,10 @@ class LabeledInput extends Wrec {
   `;
 
   static html = html`
-    &lt;div&gt;
-      &lt;label for=&quot;this.id&quot;&gt;this.label&lt;/label&gt;
-      &lt;input id=&quot;this.id&quot; name=&quot;this.name&quot; type=&quot;text&quot; value=&quot;this.value&quot; /&gt;
-    &lt;/div&gt;
+    &#x3C;div>
+      &#x3C;label for="this.id">this.label&#x3C;/label>
+      &#x3C;input id="this.id" name="this.name" type="text" value="this.value" />
+    &#x3C;/div>
   `;
 }
 
@@ -1149,7 +1148,7 @@ class HelloWorld extends Wrec {
     }
   `;
 
-  static html = html` &lt;p&gt;Hello, &lt;span&gt;this.name&lt;/span&gt;!&lt;/p&gt; `;
+  static html = html` &#x3C;p>Hello, &#x3C;span>this.name&#x3C;/span>!&#x3C;/p> `;
 }
 
 HelloWorld.define('hello-world');
@@ -1158,19 +1157,19 @@ HelloWorld.define('hello-world');
 Note below how we:</p>
 <ul>
 <li>
-<p>Create a <code>WrecState</code> object with a name (ex. &quot;vault&quot;).
+<p>Create a <code>WrecState</code> object with a name (ex. “vault”).
 The second argument specifies whether the data
 should be persisted to <code>sessionStorage</code>.</p>
 <pre><code class="language-js">const state = new WrecState('vault', true, {name: 'World'});
 </code></pre>
 </li>
 <li>
-<p>associate the <code>WrecState</code> property &quot;name&quot; with the <code>labeled-input</code> property &quot;value&quot;</p>
+<p>associate the <code>WrecState</code> property “name” with the <code>labeled-input</code> property “value”</p>
 <pre><code class="language-js">li.useState(state, {name: 'value'});
 </code></pre>
 </li>
 <li>
-<p>associate the <code>WrecState</code> property &quot;name&quot; with the <code>hello-world</code> property &quot;name&quot;</p>
+<p>associate the <code>WrecState</code> property “name” with the <code>hello-world</code> property “name”</p>
 <p>It is not necessary to specify the mapping from state properties
 to component properties when they are the same.</p>
 <pre><code class="language-js">hw.useState(state);
@@ -1179,18 +1178,18 @@ to component properties when they are the same.</p>
 </ul>
 <p>Changing the value of the input updates the <code>WrecState</code>
 which updates the <code>hello-world</code> element.</p>
-<p>Clicking the &quot;Reset&quot; button updates the <code>WrecState</code>,
+<p>Clicking the “Reset” button updates the <code>WrecState</code>,
 which updates both the <code>labeled-input</code> and <code>hello-world</code> elements.</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;style&gt;
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;style>
       body {
         font-family: sans-serif;
       }
-    &lt;/style&gt;
-    &lt;script src=&quot;hello-world.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;labeled-input.js&quot; type=&quot;module&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;module&quot;&gt;
+    &#x3C;/style>
+    &#x3C;script src="hello-world.js" type="module">&#x3C;/script>
+    &#x3C;script src="labeled-input.js" type="module">&#x3C;/script>
+    &#x3C;script type="module">
       import {WrecState} from '../wrec-state.js';
       const state = new WrecState('vault', true, {name: 'World'});
 
@@ -1200,7 +1199,7 @@ which updates both the <code>labeled-input</code> and <code>hello-world</code> e
       hw.useState(state);
 
       const button = document.querySelector('button');
-      button.addEventListener('click', () =&gt; {
+      button.addEventListener('click', () => {
         state.name = 'World';
       });
 
@@ -1210,18 +1209,18 @@ which updates both the <code>labeled-input</code> and <code>hello-world</code> e
       // A second, optional argument can be supplied which is
       // an array of strings that are the state paths of interest.
       // When omitted, the callback function is called for all state changes.
-      state.addChangeCallback((statePath, newValue, oldValue) =&gt; {
+      state.addChangeCallback((statePath, newValue, oldValue) => {
         const msg = `${statePath} changed from ${oldValue} to ${newValue}`;
         console.log('state-demo.html:', msg);
       });
-    &lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;labeled-input id=&quot;name&quot; label=&quot;Name&quot;&gt;&lt;/labeled-input&gt;
-    &lt;hello-world&gt;&lt;/hello-world&gt;
-    &lt;button&gt;Reset&lt;/button&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;labeled-input id="name" label="Name">&#x3C;/labeled-input>
+    &#x3C;hello-world>&#x3C;/hello-world>
+    &#x3C;button>Reset&#x3C;/button>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p>This example creates a single <code>WrecState</code> object,
 but any number can be created as a way of logically grouping
@@ -1247,7 +1246,7 @@ For example:</p>
 // and the values are component property names.
 c1.useState(state, {color: 'color', 'team.leader.name': 'name'});
 </code></pre>
-<p>When running in development mode (<code>NODE_ENV</code> set to &quot;development&quot;),
+<p>When running in development mode (<code>NODE_ENV</code> set to “development”),
 <code>WrecState</code> objects can be accessed from the DevTools console.
 For example:</p>
 <pre><code class="language-js">state = WrecState.get('vault'); // gets a WrecState object by name
@@ -1257,20 +1256,20 @@ state.team.leader.name = 'Mark'; // reactively changes a state property
 </code></pre>
 <p>The data in each <code>WrecState</code> object can be persisted to <code>sessionStorage</code>
 so the data is not lost if the user refreshes the page.
-The keys are &quot;wrec-state-&quot; followed by the <code>WrecState</code> name.
+The keys are “wrec-state-” followed by the <code>WrecState</code> name.
 The data is automatically restored as long as each <code>WrecState</code> object
 is created in a <code>Window</code> <code>onload</code> handler, as shown above.
 This also enables sharing state between pages of a multi-page web app.</p>
 <p>The <code>WrecState</code> <code>subscribe</code> method enables arbitrary code
 to listen for state changes at specified paths.
 To listen for changes at all paths, omit the second parameter.
-For example, if <code>myState</code> is a <code>WrecState</code> object that holds a &quot;color&quot; property,
+For example, if <code>myState</code> is a <code>WrecState</code> object that holds a “color” property,
 the following code listens for changes to it.
 When finished listening, call the <code>unsubscribe</code> function that is returned.</p>
 <p>Data in <code>WrecState</code> objects is subject to potential XSS attacks
 and exposure to malicious browser extensions.
 For this reason, sensitive data should not be stored in <code>WrecState</code> objects.</p>
-<h2 id="error-checking" tabindex="-1">Error Checking</h2>
+<h2 id="error-checking">Error Checking</h2>
 <p>Wrec checks for many kinds of errors and throws an <code>Error</code> when they are found.
 Look for messages in the DevTools console.
 The kinds of errors that are detected include:</p>
@@ -1283,9 +1282,9 @@ that reference undeclared web component properties</li>
 <li>expressions in element text content
 that do not evaluate to a string or number</li>
 <li>event handling function names that
-don't match any method name in the web component</li>
+don’t match any method name in the web component</li>
 </ul>
-<h2 id="security" tabindex="-1">Security</h2>
+<h2 id="security">Security</h2>
 <p>Wrec uses the JavaScript <code>eval</code> function to evaluate JavaScript expressions
 that are placed in attribute values and the text content of elements.
 This has security implications if those expressions
@@ -1300,19 +1299,19 @@ Content Security Policy (CSP) to your web app.
 Simply adding the following element as a child of the
 <code>head</code> element in each page blocks sending HTTP requests
 to any domain except that of your web app:</p>
-<pre><code class="language-html">&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;connect-src 'self'&quot; /&gt;
+<pre><code class="language-html">&#x3C;meta http-equiv="Content-Security-Policy" content="connect-src 'self'" />
 </code></pre>
-<h2 id="server-side-rendering" tabindex="-1">Server-Side Rendering</h2>
+<h2 id="server-side-rendering">Server-Side Rendering</h2>
 <p>A wrec component can use server-side rendering (SSR) if it
-imports the <code>Wrec</code> class from 'wrec/ssr' instead of 'wrec'.
+imports the <code>Wrec</code> class from ‘wrec/ssr’ instead of ‘wrec’.
 For an example, see
-<a href="https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo">https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo</a>.
-The file <code>hello-world.ts</code> imports the <code>Wrec</code> class from 'wrec/ssr'.
+<a href="https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo" rel="noopener" target="_blank">https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo</a>.
+The file <code>hello-world.ts</code> imports the <code>Wrec</code> class from ‘wrec/ssr’.
 The file <code>server.ts</code> calls the <code>ssr</code> method on the <code>HelloWorld</code> class
 to generate HTML required for SSR.</p>
-<h2 id="more-examples" tabindex="-1">More Examples</h2>
+<h2 id="more-examples">More Examples</h2>
 <p>Check out the <code>src/examples</code> directory in the
-<a href="https://github.com/mvolkmann/wrec">wrec GitHub repository</a>.
+<a href="https://github.com/mvolkmann/wrec" rel="noopener" target="_blank">wrec GitHub repository</a>.
 This contains many example web components that are defined using wrec.</p>
 <p>Compare the files <code>counter-vanilla.js</code> and <code>counter-wrec.js</code>
 to get a feel for how much using wrec
@@ -1326,7 +1325,7 @@ simplifies the code required to define a web component.</p>
 <li>Browse localhost:5173/examples/index.html.</li>
 </ol>
 <p>Also try browsing other <code>.html</code> files besides <code>index.html</code>.</p>
-<h2 id="tests" tabindex="-1">Tests</h2>
+<h2 id="tests">Tests</h2>
 <p>wrec has an extensive set of Playwright tests.
 To run them:</p>
 <ol>
@@ -1336,12 +1335,13 @@ To run them:</p>
 <li>Enter <code>npm run testui</code>.</li>
 <li>Click the right pointing triangle.</li>
 </ol>
-<p>If there is no &quot;Action&quot; tab which displays a browser view of the running tests,
+<p>If there is no “Action” tab which displays a browser view of the running tests,
 reset the Playwright UI settings by entering one of these commands:</p>
 <pre><code class="language-bash"># macOS
 rm -rf ~/Library/Caches/ms-playwright/.settings
 
 # Windows
 del %LOCALAPPDATA%\ms-playwright\.settings /s /q
-</code></pre>
-</article> </body></html>
+</code></pre> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

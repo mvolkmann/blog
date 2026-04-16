@@ -1,38 +1,40 @@
-<!DOCTYPE html><html lang="en"> <head><title>Actions</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><link rel="stylesheet" href="/blog/assets/github-actions.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Actions</h2> <aside><ul><ul><li><a href="#overview">Overview</a></li><li><a href="#configuring-workflows">Configuring Workflows</a></li><li><a href="#linting">Linting</a></li><li><a href="#workflow-jobs">Workflow Jobs</a></li><li><a href="#workflow-steps">Workflow Steps</a></li><li><a href="#supported-webhook-events">Supported Webhook Events</a></li><li><a href="#scheduled-workflows">Scheduled Workflows</a></li><li><a href="#manually-triggered-workflows">Manually Triggered Workflows</a></li><li><a href="#operating-system">Operating System</a></li><li><a href="#viewing-action-results">Viewing Action Results</a></li><li><a href="#workflow-templates">Workflow Templates</a></li><li><a href="#popular-predefined-actions">Popular Predefined Actions</a></li><li><a href="#multi-line-steps">Multi-line Steps</a></li><li><a href="#workflow-errors">Workflow Errors</a></li><li><a href="#using-secrets">Using Secrets</a></li><li><a href="#building-and-publishing-an-eleventy-site">Building and Publishing an Eleventy Site</a></li><li><a href="#manually-triggering-a-workflow">Manually Triggering a Workflow</a></li><li><a href="#output-with-echo">Output with echo</a></li><li><a href="#shell-scripts">Shell Scripts</a></li><li><a href="#contexts">Contexts</a></li><li><a href="#sending-email">Sending Email</a></li><li><a href="#conditional-steps">Conditional Steps</a></li><li><a href="#setting-output">Setting Output</a></li><li><a href="#multiple-workflows">Multiple Workflows</a></li><li><a href="#defining-actions">Defining Actions</a></li></ul></ul></aside> <article><!-- markdownlint-disable MD013 -->
-<h3 id="overview" tabindex="-1">Overview</h3>
-<p>GitHub Actions enable registering &quot;jobs&quot; to run on a cloud server
+<!DOCTYPE html><html lang="en"> <head><title>Actions</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><link rel="stylesheet" href="/blog/assets/github-actions.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link active expanded" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Actions</h2> <aside><ul><ul><li><a href="#overview">Overview</a></li><li><a href="#configuring-workflows">Configuring Workflows</a></li><li><a href="#linting">Linting</a></li><li><a href="#workflow-jobs">Workflow Jobs</a></li><li><a href="#workflow-steps">Workflow Steps</a></li><li><a href="#supported-webhook-events">Supported Webhook Events</a></li><li><a href="#scheduled-workflows">Scheduled Workflows</a></li><li><a href="#manually-triggered-workflows">Manually Triggered Workflows</a></li><li><a href="#operating-system">Operating System</a></li><li><a href="#viewing-action-results">Viewing Action Results</a></li><li><a href="#workflow-templates">Workflow Templates</a></li><li><a href="#popular-predefined-actions">Popular Predefined Actions</a></li><li><a href="#multi-line-steps">Multi-line Steps</a></li><li><a href="#workflow-errors">Workflow Errors</a></li><li><a href="#using-secrets">Using Secrets</a></li><li><a href="#building-and-publishing-an-eleventy-site">Building and Publishing an Eleventy Site</a></li><li><a href="#manually-triggering-a-workflow">Manually Triggering a Workflow</a></li><li><a href="#output-with-echo">Output with echo</a></li><li><a href="#shell-scripts">Shell Scripts</a></li><li><a href="#contexts">Contexts</a></li><li><a href="#sending-email">Sending Email</a></li><li><a href="#conditional-steps">Conditional Steps</a></li><li><a href="#setting-output">Setting Output</a></li><li><a href="#multiple-workflows">Multiple Workflows</a></li><li><a href="#defining-actions">Defining Actions</a></li></ul></ul></aside> <article> <!-- markdownlint-disable MD013 -->
+<h3 id="overview">Overview</h3>
+<p>GitHub Actions enable registering “jobs” to run on a cloud server
 in response to GitHub events.
 The cloud server must have the GitHub Actions runner application is installed.
 GitHub provides these servers for free,
 but it is also possible to run jobs on your own servers.</p>
 <ul>
-<li>A &quot;<strong>workflow</strong>&quot; defines a set of jobs using a YAML file.</li>
-<li>A &quot;<strong>job</strong>&quot; defines a set up steps to run
+<li>A “<strong>workflow</strong>” defines a set of jobs using a YAML file.</li>
+<li>A “<strong>job</strong>” defines a set up steps to run
 in given environments (ex. <code>ubuntu-latest</code>).</li>
-<li>A &quot;<strong>step</strong>&quot; is a single task that runs a predefined action or a shell command.</li>
+<li>A “<strong>step</strong>” is a single task that runs a predefined action or a shell command.</li>
 </ul>
 <p>For example, a workflow can build an application
 after every push to given branches.
 This can include running linters, code formatters, and tests.
 Executed workflows and their output appear in the
-&quot;Actions&quot; tab of each GitHub repository.</p>
+“Actions” tab of each GitHub repository.</p>
 <p>A shell command can run a shell script or
 a CLI command such as those provided by <code>npm</code>.
 Examples include <code>npm install</code>, <code>npm run lint</code>, and <code>npm test</code>.</p>
 <p>There are over 3,000 predefined actions to choose from,
-cataloged at <a href="https://github.com/actions">https://github.com/actions</a>
-and <a href="https://github.com/marketplace?type=actions">https://github.com/marketplace?type=actions</a>.
+cataloged at <a href="https://github.com/actions" rel="noopener" target="_blank">https://github.com/actions</a>
+and <a href="https://github.com/marketplace?type=actions" rel="noopener" target="_blank">https://github.com/marketplace?type=actions</a>.
 Many of these are commercial,
 but there are over 200 that have a free tier.</p>
-<h3 id="configuring-workflows" tabindex="-1">Configuring Workflows</h3>
+<h3 id="configuring-workflows">Configuring Workflows</h3>
 <p>Workflows for a repository are configured by YAML files
 in the <code>.github/workflows</code> directory.
 Any number of workflows can be triggered by a single GitHub event.
 For details on the syntax of these files, see
-<a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions">https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions</a>.</p>
+<a href="https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions" rel="noopener" target="_blank">https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions</a>.</p>
 <p>Here is a simple example defined in a file named <code>demo.yml</code>.
 It uses an action defined at
-<a href="https://github.com/actions/hello-world-javascript-action">https://github.com/actions/hello-world-javascript-action</a>.
+<a href="https://github.com/actions/hello-world-javascript-action" rel="noopener" target="_blank">https://github.com/actions/hello-world-javascript-action</a>.
 The code that implements actions is automatically retrieved
 from their GitHub repositories.</p>
 <pre><code class="language-yaml">name: My Demo # workflow name
@@ -54,61 +56,61 @@ jobs:
 <p>The <code>on</code> property can be set to one webhook event name or an array of them.
 There are many webhook events that can trigger a workflow to run.
 These are documented at
-<a href="https://help.github.com/en/actions/reference/events-that-trigger-workflows">https://help.github.com/en/actions/reference/events-that-trigger-workflows</a>.
+<a href="https://help.github.com/en/actions/reference/events-that-trigger-workflows" rel="noopener" target="_blank">https://help.github.com/en/actions/reference/events-that-trigger-workflows</a>.
 Some events are triggered by more than one kind of activity.
 When this is the case, a particular activity type can be specified.</p>
-<h3 id="linting" tabindex="-1">Linting</h3>
+<h3 id="linting">Linting</h3>
 <p>To check a YAML file describing GitHub Actions for issues:</p>
 <ul>
 <li>enter <code>brew install actionlint</code></li>
 <li><code>cd</code> to the project root directory</li>
 <li>enter <code>actionlint</code></li>
 </ul>
-<h3 id="workflow-jobs" tabindex="-1">Workflow Jobs</h3>
+<h3 id="workflow-jobs">Workflow Jobs</h3>
 <p>In the workflow defined above, <code>build</code> is a job id.
 This workflow defines a single job.
 Defining multiple jobs is useful to allow some steps
 to run on a server that uses a different operating system.</p>
-<h3 id="workflow-steps" tabindex="-1">Workflow Steps</h3>
+<h3 id="workflow-steps">Workflow Steps</h3>
 <p>Each step (a.k.a. action) within a job is defined by a number of properties.</p>
-<table>
-<thead>
-<tr>
-<th>Property Name</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>name</code></td>
-<td>optional step name that appears in the web UI that shows workflow results</td>
-</tr>
-<tr>
-<td><code>run</code></td>
-<td>a shell command to run</td>
-</tr>
-<tr>
-<td><code>uses</code></td>
-<td>a predefined action to use</td>
-</tr>
-<tr>
-<td><code>with</code></td>
-<td>arguments to pass to the action</td>
-</tr>
-<tr>
-<td><code>id</code></td>
-<td>name that will be used to refer to action result properties</td>
-</tr>
-<tr>
-<td><code>needs</code></td>
-<td>step name (or array of them) that must completed before this step begins</td>
-</tr>
-<tr>
-<td><code>if</code></td>
-<td>for conditional execution</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property Name</th><th>Meaning</th></tr></thead><tbody><tr><td><code>name</code></td><td>optional step name that appears in the web UI that shows workflow results</td></tr><tr><td><code>run</code></td><td>a shell command to run</td></tr><tr><td><code>uses</code></td><td>a predefined action to use</td></tr><tr><td><code>with</code></td><td>arguments to pass to the action</td></tr><tr><td><code>id</code></td><td>name that will be used to refer to action result properties</td></tr><tr><td><code>needs</code></td><td>step name (or array of them) that must completed before this step begins</td></tr><tr><td><code>if</code></td><td>for conditional execution</td></tr></tbody></table>
 <p>Specify <code>run</code> or <code>uses</code>, but not both.</p>
 <p>If a step does not have a <code>name</code> property,
 a name is created from the value of <code>run</code> or <code>uses</code>.</p>
@@ -120,9 +122,9 @@ In the example above, the action creates an output named <code>time</code>
 which can be accessed with <code>steps.hello.outputs.time</code>
 because the value of <code>id</code> is <code>hello</code>.
 The action sets this to the time at which it was executed.</p>
-<h3 id="supported-webhook-events" tabindex="-1">Supported Webhook Events</h3>
+<h3 id="supported-webhook-events">Supported Webhook Events</h3>
 <table>
-  <tr>
+  <tbody><tr>
     <th>Webhook Event</th>
     <th>Triggered By</th>
   </tr>
@@ -249,10 +251,10 @@ The action sets this to the time at which it was executed.</p>
     <td class="bold">watch</td>
     <td>a user watches or stars the repository</td>
   </tr>
-</table>
-<h3 id="scheduled-workflows" tabindex="-1">Scheduled Workflows</h3>
+</tbody></table>
+<h3 id="scheduled-workflows">Scheduled Workflows</h3>
 <p>A workflow can be scheduled to run at a certain time interval
-by defining a &quot;scheduled event&quot;.
+by defining a “scheduled event”.
 For example, adding the following in a workflow YAML file
 causes the jobs that follow it to run every five minutes:</p>
 <pre><code class="language-yaml">on:
@@ -265,7 +267,7 @@ month (1-12), and day of week (0-6).
 An asterisk is treated as a wildcard character, allowing any value.
 Specifying a minute value with <code>*/n</code> means to run at every nth interval,
 so <code>*/5</code> runs every five minutes.</p>
-<h3 id="manually-triggered-workflows" tabindex="-1">Manually Triggered Workflows</h3>
+<h3 id="manually-triggered-workflows">Manually Triggered Workflows</h3>
 <p>A workflow can be triggered to run by dispatching a <code>repository_dispatch</code> event.
 This is done by sending an HTTP POST request to a GitHub API endpoint.</p>
 <p>Define the events that should trigger a workflow
@@ -276,12 +278,12 @@ in a workflow YAML file as follows:</p>
 </code></pre>
 <p>For details on sending a POST request for the specified event type
 in order to trigger the workflow, see
-<a href="https://developer.github.com/v3/repos/#create-a-repository-dispatch-event">https://developer.github.com/v3/repos/#create-a-repository-dispatch-event</a> and
-<a href="https://dev.to/teamhive/triggering-github-actions-using-repository-dispatches-39d1">https://dev.to/teamhive/triggering-github-actions-using-repository-dispatches-39d1</a>.
+<a href="https://developer.github.com/v3/repos/#create-a-repository-dispatch-event" rel="noopener" target="_blank">https://developer.github.com/v3/repos/#create-a-repository-dispatch-event</a> and
+<a href="https://dev.to/teamhive/triggering-github-actions-using-repository-dispatches-39d1" rel="noopener" target="_blank">https://dev.to/teamhive/triggering-github-actions-using-repository-dispatches-39d1</a>.
 These describe the required request headers
 (including an <code>Authorization</code> header containing a personal access token)
 and body.</p>
-<h3 id="operating-system" tabindex="-1">Operating System</h3>
+<h3 id="operating-system">Operating System</h3>
 <p>For workflows that will run on a GitHub-hosted server (a.k.a. runner),
 the operating system of the server can be specified.
 This can be the latest version of a particular OS or a specific version.
@@ -299,44 +301,44 @@ Current options include:</p>
 An example of specifying this is:</p>
 <pre><code class="language-yaml">runs-on: [self-hosted, linux]
 </code></pre>
-<h3 id="viewing-action-results" tabindex="-1">Viewing Action Results</h3>
-<p>After a workflow is triggered, click the &quot;Actions&quot; tab of the
+<h3 id="viewing-action-results">Viewing Action Results</h3>
+<p>After a workflow is triggered, click the “Actions” tab of the
 GitHub repository to refresh the list of triggered workflows.
 This can be done repeatedly until the workflow appears.</p>
 <p><img src="/blog/assets/github-actions-web-ui-1.png" alt="GitHub Actions web UI #1"></p>
 <p>The workflows that have been executed can be filtered on
-the event that triggered them (ex. &quot;push&quot;),
-their status (ex. &quot;success&quot; or &quot;failure&quot;),
+the event that triggered them (ex. “push”),
+their status (ex. “success” or “failure”),
 the targeted branch,
 and the GitHub user name that triggered it.</p>
 <p>Clicking a workflow row displays details about its execution.</p>
 <p><img src="/blog/assets/github-actions-web-ui-2.png" alt="GitHub Actions web UI #1"></p>
-<p>Click a job name (ex. &quot;DemoJob&quot;) in the left nav to see details.
+<p>Click a job name (ex. “DemoJob”) in the left nav to see details.
 This displays information about the steps
-&quot;Set up job&quot;, &quot;Complete job&quot;, and
-each named step in the workflow, &quot;Hello&quot; and &quot;Time&quot; in this example.
+“Set up job”, “Complete job”, and
+each named step in the workflow, “Hello” and “Time” in this example.
 Click the disclosure triangle in front of a step name
 to see its detail.</p>
-<p>The &quot;Set up job&quot; step sets up
+<p>The “Set up job” step sets up
 the cloud environment where the workflow will execute and
 downloads all predefined actions that will executed.</p>
-<p>The &quot;Complete job&quot; step tears down the cloud environment,
+<p>The “Complete job” step tears down the cloud environment,
 stopping any processes that were started.</p>
-<p>Here we see the &quot;Set up job&quot; and &quot;Hello&quot; steps expanded.</p>
+<p>Here we see the “Set up job” and “Hello” steps expanded.</p>
 <p><img src="/blog/assets/github-actions-web-ui-3.png" alt="GitHub Actions web UI #1"></p>
-<p>The &quot;Set up job&quot; step shows the operating system that was used
-and actions that were downloaded (ex. &quot;hello-world-javascript-action&quot;).</p>
-<p>Next, we see the &quot;Time&quot; and &quot;Complete Job&quot; steps expanded.
-In this example the &quot;Time&quot; step shows the
-time at which the &quot;Hello&quot; step was executed.</p>
+<p>The “Set up job” step shows the operating system that was used
+and actions that were downloaded (ex. “hello-world-javascript-action”).</p>
+<p>Next, we see the “Time” and “Complete Job” steps expanded.
+In this example the “Time” step shows the
+time at which the “Hello” step was executed.</p>
 <p><img src="/blog/assets/github-actions-web-ui-4.png" alt="GitHub Actions web UI #2"></p>
-<h3 id="workflow-templates" tabindex="-1">Workflow Templates</h3>
+<h3 id="workflow-templates">Workflow Templates</h3>
 <p>A workflow can be created from the GitHub web UI.
-Click the &quot;Actions&quot; tab and press the &quot;New workflow&quot; button.
+Click the “Actions” tab and press the “New workflow” button.
 This presents a series of boxes that describe workflow templates.
-Click the &quot;Set up this workflow&quot; button inside one of the boxes
+Click the “Set up this workflow” button inside one of the boxes
 to create a workflow based on that template.</p>
-<p>Here is an example workflow file created from the &quot;Node.js&quot; template:</p>
+<p>Here is an example workflow file created from the “Node.js” template:</p>
 <pre><code class="language-yaml">name: Node.js CI
 
 on:
@@ -368,12 +370,12 @@ jobs:
 <p>After clicking the button, it offers to save this workflow file
 in <code>.github/workflows/nodejs.yml</code> within your repository.
 You can customize the file name and the workflow definition if desired.</p>
-<p>When ready to save it, press the &quot;Start Commit&quot; button in the upper-right.
+<p>When ready to save it, press the “Start Commit” button in the upper-right.
 A dialog will appear.
-Optionally enter a commit comment and press the &quot;Commit new file&quot; button.
-Do a &quot;git pull&quot; to get the new workflow file in your local repository.
+Optionally enter a commit comment and press the “Commit new file” button.
+Do a “git pull” to get the new workflow file in your local repository.
 The new workflow will be scheduled to run immediately.
-Click the &quot;Actions&quot; tab to see the results.</p>
+Click the “Actions” tab to see the results.</p>
 <p>Two events trigger this workflow to execute.
 The first is a push to the master branch.
 The second is creating a pull request on the master branch.</p>
@@ -386,7 +388,7 @@ to <code>12.x</code> instead of <code>${{ matrix.node-version }}</code>.</p>
 <p>This workflow runs the following commands:</p>
 <ul>
 <li><code>actions/checkout@v2</code> is a predefined action that checks out
-the most recent commit to a given branch which defaults to &quot;master&quot;.
+the most recent commit to a given branch which defaults to “master”.
 See <a href="https://github.com/actions/checkout?v=1.1.1" rel="noopener" target="_blank">checkout</a>
 for options.</li>
 <li><code>actions/setup-node@v1</code> is a predefined action that sets the Node environment.
@@ -413,7 +415,7 @@ This sets the <code>CI</code> environment variable to <code>true</code>
 which means that warnings from tests will be treated as errors
 and cause the build to fail.</li>
 </ul>
-<h3 id="popular-predefined-actions" tabindex="-1">Popular Predefined Actions</h3>
+<h3 id="popular-predefined-actions">Popular Predefined Actions</h3>
 <p>The following action checks out the repository in the cloud environment.</p>
 <ul>
 <li><code>actions/checkout@v2</code><br>
@@ -424,36 +426,36 @@ to use a particular programming language.</p>
 <ul>
 <li>
 <p><code>actions/setup-go@v1</code><br>
-This is used by the &quot;Go&quot; workflow.</p>
+This is used by the “Go” workflow.</p>
 </li>
 <li>
 <p><code>actions/setup-java@v1</code><br>
-This is used by the &quot;Java with Gradle&quot; and &quot;Java with Maven&quot; workflows.</p>
+This is used by the “Java with Gradle” and “Java with Maven” workflows.</p>
 </li>
 <li>
 <p><code>actions/setup-node@v1</code><br>
-This is used by the &quot;Node.js&quot; and &quot;Publish Node.js package&quot; workflows.</p>
+This is used by the “Node.js” and “Publish Node.js package” workflows.</p>
 </li>
 <li>
 <p><code>actions/setup-python@v1</code><br>
-This is used by the &quot;Python application&quot;, &quot;Python package&quot;,
-and &quot;Publish Python package&quot; workflows.</p>
+This is used by the “Python application”, “Python package”,
+and “Publish Python package” workflows.</p>
 </li>
 </ul>
-<p>The following actions are used by the &quot;Deploy to Amazon ECS&quot; workflow for AWS.</p>
+<p>The following actions are used by the “Deploy to Amazon ECS” workflow for AWS.</p>
 <ul>
 <li><code>aws-actions/configure-aws-credentials@v1</code></li>
 <li><code>aws-actions/amazon-ecr-login@v1</code></li>
 <li><code>aws-actions/amazon-ecs-render-task-definition@v1</code></li>
 <li><code>aws-actions/amazon-ecs-deploy-task-definition@v1</code></li>
 </ul>
-<p>The following action is used by the &quot;Build and Deploy to GKE&quot; workflow for GCP.
-GKE stands for &quot;Google Kubernetes Engine&quot;.
-GCP stands for &quot;Google Cloud Platform&quot;.</p>
+<p>The following action is used by the “Build and Deploy to GKE” workflow for GCP.
+GKE stands for “Google Kubernetes Engine”.
+GCP stands for “Google Cloud Platform”.</p>
 <ul>
 <li><code>GoogleCloudPlatform/github-actions/setup-gcloud@master</code></li>
 </ul>
-<h3 id="multi-line-steps" tabindex="-1">Multi-line Steps</h3>
+<h3 id="multi-line-steps">Multi-line Steps</h3>
 <p>In this example, there are multiple, consecutive steps
 that each run one command.</p>
 <pre><code class="language-yaml">- run: npm ci
@@ -469,35 +471,35 @@ as follows:</p>
     npm run format
     npm run build
 </code></pre>
-<h3 id="workflow-errors" tabindex="-1">Workflow Errors</h3>
+<h3 id="workflow-errors">Workflow Errors</h3>
 <p>If a workflow step results in an error,
 subsequent steps will not be executed.
 For example, this could happen if there is
 a code linting error, a compiler error, or a test failure.</p>
 <p>If there are any errors, the repository owner
 will receive an email with the subject
-&quot;[{username}/{repo-name}] Run failed: {workflow-name} - {branch-name}&quot;.
+”[{username}/{repo-name}] Run failed: {workflow-name} - {branch-name}”.
 The email will include two links that can be clicked to see the results.
 The link containing the failed job name is more informative
-than the link containing &quot;View results&quot;.</p>
-<h3 id="using-secrets" tabindex="-1">Using Secrets</h3>
+than the link containing “View results”.</p>
+<h3 id="using-secrets">Using Secrets</h3>
 <p>To use secret information like passwords and tokens in a workflow,
 create GitHub secrets.</p>
 <p>To add a secret to a GitHub repo:</p>
 <ul>
 <li>Browse the GitHub repo.</li>
-<li>Click the &quot;Settings&quot; tab.</li>
-<li>Click &quot;Secrets&quot; in the left nav.</li>
-<li>Click &quot;Add a new secret&quot;.</li>
+<li>Click the “Settings” tab.</li>
+<li>Click “Secrets” in the left nav.</li>
+<li>Click “Add a new secret”.</li>
 <li>Enter a name (ex. GH_TOKEN).</li>
 <li>Enter a value (ex. paste your GitHub personal access token).</li>
-<li>Click &quot;Add secret&quot;.</li>
+<li>Click “Add secret”.</li>
 </ul>
 <p>Secrets can then be referenced by name in a workflow
 with the syntax <code>${{ secrets.name }}</code>
 where <code>name</code> is the secret name.
 This is used in the workflow in the next section.</p>
-<h3 id="building-and-publishing-an-eleventy-site" tabindex="-1">Building and Publishing an Eleventy Site</h3>
+<h3 id="building-and-publishing-an-eleventy-site">Building and Publishing an Eleventy Site</h3>
 <p>Here is a workflow file that builds and deploys an Eleventy site
 on every push.</p>
 <pre><code class="language-yaml">name: Eleventy build and deploy
@@ -522,9 +524,9 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./_site
 </code></pre>
-<p>For more details on the &quot;site deploy&quot; step,
-see <a href="https://github.com/peaceiris/actions-gh-pages">https://github.com/peaceiris/actions-gh-pages</a>.</p>
-<h3 id="manually-triggering-a-workflow" tabindex="-1">Manually Triggering a Workflow</h3>
+<p>For more details on the “site deploy” step,
+see <a href="https://github.com/peaceiris/actions-gh-pages" rel="noopener" target="_blank">https://github.com/peaceiris/actions-gh-pages</a>.</p>
+<h3 id="manually-triggering-a-workflow">Manually Triggering a Workflow</h3>
 <p>Currently there is no way to manually
 trigger a workflow from the GitHub web UI.
 It is a frequently requested feature, as indicated at
@@ -539,27 +541,27 @@ at the top of a workflow file to the following:</p>
     branches: [master]
   watch: # newly added event
     types: [started] # triggered by starring the repo
-    # Why is the event name &quot;started&quot;?  Looks like a typo.
+    # Why is the event name "started"?  Looks like a typo.
 </code></pre>
-<h3 id="output-with-echo" tabindex="-1">Output with echo</h3>
+<h3 id="output-with-echo">Output with echo</h3>
 <p>When running in a Linux environment,
 a step can use the <code>echo</code> command to produce output.
 For example:</p>
 <pre><code class="language-yaml">- name: hello world
-  run: echo &quot;Hello, World!&quot;
+  run: echo "Hello, World!"
 </code></pre>
 <p>To see the output, browse the GitHub repository,
-click the &quot;Actions&quot; tab, select the workflow,
+click the “Actions” tab, select the workflow,
 select the job, and click the disclosure triangle for the step.
 If the step has no disclosure triangle,
-click the ellipsis in the upper-right and select &quot;View raw logs&quot;.</p>
-<h3 id="shell-scripts" tabindex="-1">Shell Scripts</h3>
+click the ellipsis in the upper-right and select “View raw logs”.</p>
+<h3 id="shell-scripts">Shell Scripts</h3>
 <p>A step can execute a shell script that exists in the repository.
 For example:</p>
 <pre><code class="language-yaml">- name: run shell script
   run: . ./bin/example.sh
 </code></pre>
-<h3 id="contexts" tabindex="-1">Contexts</h3>
+<h3 id="contexts">Contexts</h3>
 <p>A large amount of context information is available in workflows.
 It is stored in the following context objects:
 <code>env</code>, <code>github</code>, <code>job</code>, <code>matrix</code>, <code>needs</code>,
@@ -574,9 +576,9 @@ For example:</p>
 <pre><code class="language-yaml">- name: Dump GitHub context
   env:
     GITHUB_CONTEXT: ${{ toJson(github) }}
-  run: echo &quot;$GITHUB_CONTEXT&quot;
+  run: echo "$GITHUB_CONTEXT"
 </code></pre>
-<h3 id="sending-email" tabindex="-1">Sending Email</h3>
+<h3 id="sending-email">Sending Email</h3>
 <p>A step can send an email.
 For example, this workflow sends an email
 when a project board in the repository changes.</p>
@@ -589,7 +591,7 @@ jobs:
       - name: dump GitHub context to discover available data
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo &quot;$GITHUB_CONTEXT&quot;
+        run: echo "$GITHUB_CONTEXT"
       - name: email summary
         id: projectChange
         uses: dawidd6/action-send-mail@v2
@@ -599,20 +601,20 @@ jobs:
           username: ${{secrets.MAIL_USERNAME}}
           password: ${{secrets.MAIL_PASSWORD}}
           subject: blog project change
-          body: &gt;
+          body: >
             A change was detected in the
-            &lt;a href=&quot;https://github.com/mvolkmann/blog/projects/3&quot;&gt;project board&lt;/a&gt;
+            &#x3C;a href="https://github.com/mvolkmann/blog/projects/3">project board&#x3C;/a>
             of the GitHub repository ${{github.repository}}.
-            &lt;br&gt;
+            &#x3C;br>
             updated by ${{ github.actor }}
             at ${{ github.event.project_card.updated_at }}
-            &lt;br&gt;
+            &#x3C;br>
             event name = ${{ github.event_name }}
-            &lt;br&gt;
+            &#x3C;br>
             event action = ${{ github.event.action}}
-            &lt;br&gt;
+            &#x3C;br>
             event changes = ${{ toJson(github.event.changes) }}
-            &lt;br&gt;
+            &#x3C;br>
             card note = ${{ github.event.project_card.note }}
           to: r.mark.volkmann@gmail.com
           from: Mark Volkmann
@@ -621,31 +623,31 @@ jobs:
 <p>This requires adding secrets with the names <code>MAIL_USERNAME</code> and <code>MAIL_PASSWORD</code>.
 These steps assume that Gmail is being used.</p>
 <ol>
-<li>Browse <a href="https://myaccount.google.com/">https://myaccount.google.com/</a>.</li>
-<li>Click &quot;Security&quot; in the left nav.</li>
-<li>In the &quot;Signing in to Google&quot; panel, click &quot;App passwords&quot;.</li>
-<li>In the &quot;Select app&quot; drop-down at the bottom, select &quot;Mail&quot;.</li>
-<li>In the &quot;Select device&quot; drop-down, select your current device type.</li>
-<li>Press the &quot;GENERATE&quot; button.</li>
+<li>Browse <a href="https://myaccount.google.com/" rel="noopener" target="_blank">https://myaccount.google.com/</a>.</li>
+<li>Click “Security” in the left nav.</li>
+<li>In the “Signing in to Google” panel, click “App passwords”.</li>
+<li>In the “Select app” drop-down at the bottom, select “Mail”.</li>
+<li>In the “Select device” drop-down, select your current device type.</li>
+<li>Press the “GENERATE” button.</li>
 <li>Copy the displayed password.</li>
 <li>Browse the GitHub repository for the workflow being created.</li>
-<li>Click the &quot;Settings&quot; tab.</li>
-<li>Click &quot;Secrets&quot; in the left nav.</li>
-<li>Click &quot;Add a new secret&quot;.</li>
-<li>Enter &quot;MAIL_USERNAME&quot; for the name.</li>
+<li>Click the “Settings” tab.</li>
+<li>Click “Secrets” in the left nav.</li>
+<li>Click “Add a new secret”.</li>
+<li>Enter “MAIL_USERNAME” for the name.</li>
 <li>Enter your Google username.</li>
-<li>Press the &quot;Add secret&quot; button.</li>
-<li>Click &quot;Add a new secret&quot;.</li>
-<li>Enter &quot;MAIL_PASSWORD&quot; for the name.</li>
+<li>Press the “Add secret” button.</li>
+<li>Click “Add a new secret”.</li>
+<li>Enter “MAIL_PASSWORD” for the name.</li>
 <li>Paste the generated password for the value.</li>
-<li>Press the &quot;Add secret&quot; button.</li>
+<li>Press the “Add secret” button.</li>
 </ol>
 <p>For more detail in the <code>action-send-mail</code> action,
-see <a href="https://github.com/dawidd6/action-send-mail">https://github.com/dawidd6/action-send-mail</a>.</p>
-<h3 id="conditional-steps" tabindex="-1">Conditional Steps</h3>
+see <a href="https://github.com/dawidd6/action-send-mail" rel="noopener" target="_blank">https://github.com/dawidd6/action-send-mail</a>.</p>
+<h3 id="conditional-steps">Conditional Steps</h3>
 <p>A step can include an <code>if</code> property to make its execution conditional.
 For a list of available variables that can be used in the condition,
-see <a href="https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts">https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts</a>.</p>
+see <a href="https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts" rel="noopener" target="_blank">https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts</a>.</p>
 <p>One variable that can be used holds
 the name of the event that triggered the workflow.
 The following step outputs this:</p>
@@ -666,34 +668,34 @@ jobs:
     steps:
       - name: manual trigger
         if: github.event_name == 'watch'
-        run: echo &quot;I was manually triggered.&quot;
+        run: echo "I was manually triggered."
 </code></pre>
 <p>To trigger this workflow, star the repo.
 To trigger it again, unstar and star the repo again.</p>
 <p>The reported action name will be the workflow name rather than
 a commit message since it was not triggered by a commit.</p>
-<h3 id="setting-output" tabindex="-1">Setting Output</h3>
+<h3 id="setting-output">Setting Output</h3>
 <p>A step can set output that can be used in subsequent steps.
 It uses some crazy syntax to do this.
 For example:</p>
 <pre><code class="language-yaml">- name: set some output
-  run: echo &quot;::set-output name=foo::bar&quot;
+  run: echo "::set-output name=foo::bar"
   id: my_id
 - name: use some output
   run: echo ${{steps.my_id.outputs.foo}}
 </code></pre>
-<p>This outputs &quot;bar&quot;.</p>
-<h3 id="multiple-workflows" tabindex="-1">Multiple Workflows</h3>
+<p>This outputs “bar”.</p>
+<h3 id="multiple-workflows">Multiple Workflows</h3>
 <p>A repository can define any number of workflows
 by creating multiple YAML files in the <code>.github/workflows</code> directory.</p>
 <p>An event can trigger any number of workflows.
-Each triggered workflow appears in the &quot;Actions&quot; tab
+Each triggered workflow appears in the “Actions” tab
 of the GitHub web UI for the repository as a separate entry.
 When triggered by a push, they will all have
 the same title which is a commit comment.
 Below each title is the workflow name which is what distinguishes them.
 Click them one at a time to see their results.</p>
-<h3 id="defining-actions" tabindex="-1">Defining Actions</h3>
+<h3 id="defining-actions">Defining Actions</h3>
 <p>An action is defined by a YAML file
 that describes an object with the following properties:</p>
 <ul>
@@ -718,7 +720,7 @@ Actions that are intended to be shared across projects
 should be defined in their own GitHub repository.</p>
 <p>When a workflow uses an action, it can specify the version to use with
 semantic versioning (major.minor.patch) or just a major version number.</p>
-<p>Let's define a JavaScript action that outputs the day of the week
+<p>Let’s define a JavaScript action that outputs the day of the week
 for the current date or a provided date.</p>
 <p>Create the directory <code>src/actions/day-week</code>.
 In this directory, create the file <code>action.yml</code>
@@ -728,7 +730,7 @@ description: 'outputs the day of the week for today or a given date'
 author: 'mvolkmann'
 inputs:
   date:
-    description: 'a date in the format &quot;yyyy-mm-dd&quot; or the string &quot;today&quot;'
+    description: 'a date in the format "yyyy-mm-dd" or the string "today"'
     default: 'today'
 outputs:
   dayOfWeek:
@@ -772,5 +774,6 @@ try {
     date: '1961-4-16'
 </code></pre>
 <p>For more details on defining JavaScript actions, see
-<a href="https://help.github.com/en/actions/building-actions/creating-a-javascript-action">https://help.github.com/en/actions/building-actions/creating-a-javascript-action</a>.</p>
-</article> </body></html>
+<a href="https://help.github.com/en/actions/building-actions/creating-a-javascript-action" rel="noopener" target="_blank">https://help.github.com/en/actions/building-actions/creating-a-javascript-action</a>.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

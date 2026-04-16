@@ -1,17 +1,19 @@
-<!DOCTYPE html><html lang="en"> <head><title>Swift Charts</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Swift Charts</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#example-app">Example App</a></li><li><a href="#chart">Chart</a></li><li><a href="#marks">Marks</a></li><ul><li><a href="#barmark">BarMark</a></li><li><a href="#linemark">LineMark</a></li><li><a href="#pointmark">PointMark</a></li><li><a href="#areamark">AreaMark</a></li><li><a href="#rectanglemark">RectangleMark</a></li><li><a href="#rulemark">RuleMark</a></li><li><a href="#sectormark">SectorMark</a></li></ul><li><a href="#selection">Selection</a></li><li><a href="#scrolling">Scrolling</a></li><li><a href="#example-charts">Example Charts</a></li><li><a href="#series-colors">Series Colors</a></li><li><a href="#axis-marks">Axis Marks</a></li><li><a href="#legends">Legends</a></li><li><a href="#scale">Scale</a></li><li><a href="#scrolling-1">Scrolling</a></li><li><a href="#background-and-overlay">Background and Overlay</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#animation">Animation</a></li><li><a href="#accessibility">Accessibility</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Swift Charts</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Swift Charts</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#example-app">Example App</a></li><li><a href="#chart">Chart</a></li><li><a href="#marks">Marks</a></li><ul><li><a href="#barmark">BarMark</a></li><li><a href="#linemark">LineMark</a></li><li><a href="#pointmark">PointMark</a></li><li><a href="#areamark">AreaMark</a></li><li><a href="#rectanglemark">RectangleMark</a></li><li><a href="#rulemark">RuleMark</a></li><li><a href="#sectormark">SectorMark</a></li></ul><li><a href="#selection">Selection</a></li><li><a href="#scrolling">Scrolling</a></li><li><a href="#example-charts">Example Charts</a></li><li><a href="#series-colors">Series Colors</a></li><li><a href="#axis-marks">Axis Marks</a></li><li><a href="#legends">Legends</a></li><li><a href="#scale">Scale</a></li><li><a href="#scrolling-1">Scrolling</a></li><li><a href="#background-and-overlay">Background and Overlay</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#animation">Animation</a></li><li><a href="#accessibility">Accessibility</a></li></ul></aside> <article> <style>
     img {
         border: 1px solid gray;
     }
 </style>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p>Apple introduced the <a href="https://developer.apple.com/documentation/charts?v=1.1.1" rel="noopener" target="_blank">Swift Charts</a>
 framework in iOS 16.</p>
-<p>&quot;Swift Charts is a powerful and concise SwiftUI framework
+<p>“Swift Charts is a powerful and concise SwiftUI framework
 for transforming your data into informative visualizations.
 With Swift Charts, you can build effective and customizable charts
 with minimal code. This framework provides
 marks, scales, axes, and legends as building blocks that you can
-combine to develop a broad range of data-driven charts.&quot;</p>
+combine to develop a broad range of data-driven charts.”</p>
 <p>Swift Charts supports creating bar charts, line charts,
 area charts, scatter plots, and heat maps.</p>
 <p>Support for pie and donut charts was added in iOS 17.</p>
@@ -26,21 +28,21 @@ If the x values are quantitative then the chart will be horizontal.
 and the y values will be used for y-axis labels.</p>
 <p>By default charts occupy all the space made available to them
 by their parent view.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://developer.apple.com/videos/play/wwdc2022/10136/?v=1.1.1" rel="noopener" target="_blank">Hello Swift Charts</a> from Apple WWDC 2022</li>
 <li><a href="https://developer.apple.com/videos/play/wwdc2022/10137?v=1.1.1" rel="noopener" target="_blank">Swift Charts: Raise the bar</a> from Apple WWDC 2022</li>
-<li><a href="https://www.youtube.com/watch?v=dIvE-E8nlsA&amp;v=1.1.1" rel="noopener" target="_blank">Charts Framework 1 - BarCharts Introduction</a> from Stewart Lynch</li>
-<li><a href="https://www.youtube.com/watch?v=lB3poCA8ZN4&amp;v=1.1.1" rel="noopener" target="_blank">Charts Framework 2 - Visualizing Large Data Sets with Bar Charts</a>
+<li><a href="https://www.youtube.com/watch?v=dIvE-E8nlsA&#x26;v=1.1.1" rel="noopener" target="_blank">Charts Framework 1 - BarCharts Introduction</a> from Stewart Lynch</li>
+<li><a href="https://www.youtube.com/watch?v=lB3poCA8ZN4&#x26;v=1.1.1" rel="noopener" target="_blank">Charts Framework 2 - Visualizing Large Data Sets with Bar Charts</a>
 from Stewart Lynch</li>
 <li><a href="https://developer.apple.com/videos/play/wwdc2023/10037/?v=1.1.1" rel="noopener" target="_blank">Explore pie charts and interactivity in Swift Charts</a>
 from Apple WWDC 2023</li>
 </ul>
-<h2 id="example-app" tabindex="-1">Example App</h2>
+<h2 id="example-app">Example App</h2>
 <p>See <a href="https://github.com/mvolkmann/ChartsDemo?v=1.1.1" rel="noopener" target="_blank">ChartsDemo</a>
 which is a SwiftUI app that demonstrates nearly everything
 shared in the Steward Lynch videos linked above.</p>
-<h2 id="chart" tabindex="-1">Chart</h2>
+<h2 id="chart">Chart</h2>
 <p>The <a href="https://developer.apple.com/documentation/charts/chart?v=1.1.1" rel="noopener" target="_blank">Chart</a> view contains marks that define the chart to be displayed.</p>
 <p>Charts are composed of three kinds of areas,
 axes (x and y), plot area, and legend.
@@ -61,13 +63,13 @@ For example:</p>
 </code></pre>
 <p>To customize the x-axis, apply the <a href="https://developer.apple.com/documentation/charts/chart/chartxaxis(content:)?v=1.1.1" rel="noopener" target="_blank">chartXAxis</a> view modifier.
 To customize the y-axis, apply the <a href="https://developer.apple.com/documentation/charts/chart/chartyaxis(content:)?v=1.1.1" rel="noopener" target="_blank">chartYAxis</a> view modifier.
-For more on these, see the &quot;Axis Labels&quot; section below.</p>
+For more on these, see the “Axis Labels” section below.</p>
 <p>To detect tap and drag gestures on the chart, apply the <a href="https://developer.apple.com/documentation/charts/chart/chartoverlay(alignment:content:)?v=1.1.1" rel="noopener" target="_blank">chartOverlay</a> view modifier or the <a href="https://developer.apple.com/documentation/charts/chart/chartbackground(alignment:content:)?v=1.1.1" rel="noopener" target="_blank">chartBackground</a> view modifier.
-For more on these, see the &quot;Event Handling&quot; section below.</p>
+For more on these, see the “Event Handling” section below.</p>
 <p>For a list of all view modifiers that can be applied to a <code>Chart</code>,
 see <a href="https://developer.apple.com/documentation/swiftui/view-chart-view?v=1.1.1" rel="noopener" target="_blank">Chart view modifiers</a>.</p>
-<h2 id="marks" tabindex="-1">Marks</h2>
-<p>Swift Charts supports six kinds of &quot;marks&quot; for creating various kinds of charts.
+<h2 id="marks">Marks</h2>
+<p>Swift Charts supports six kinds of “marks” for creating various kinds of charts.
 Each of these serve as direct children of the <a href="https://developer.apple.com/documentation/charts/chart?v=1.1.1" rel="noopener" target="_blank">Chart</a> view.
 They include:</p>
 <ul>
@@ -94,7 +96,7 @@ to specify a key path that uniquely identifiers each object.</p>
 the collection can be passed to the <code>Chart</code> initializer
 and the <code>ForEach</code> can be removed.
 The <code>Chart</code> initializer also supports the <code>id</code> argument.</p>
-<h3 id="barmark" tabindex="-1">BarMark</h3>
+<h3 id="barmark">BarMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/barmark?v=1.1.1" rel="noopener" target="_blank">BarMark</a>
 struct describe individual bars in a bar charts.</p>
 <p>Negative quantitative values cause the bar to be rendered
@@ -106,10 +108,10 @@ To allow Swift Charts to automatically
 choose a different color for the marks in each data series,
 pass the <code>by</code> argument that identifies the data series.
 For example:</p>
-<pre><code class="language-swift">BarMark(x: ageCategory, y: .value(&quot;Male&quot;, statistic.male))
-    .foregroundStyle(by: .value(&quot;Gender&quot;, &quot;Male&quot;))
-BarMark(x: ageCategory, y: .value(&quot;Female&quot;, statistic.female))
-    .foregroundStyle(by: .value(&quot;Gender&quot;, &quot;Female&quot;))
+<pre><code class="language-swift">BarMark(x: ageCategory, y: .value("Male", statistic.male))
+    .foregroundStyle(by: .value("Gender", "Male"))
+BarMark(x: ageCategory, y: .value("Female", statistic.female))
+    .foregroundStyle(by: .value("Gender", "Female"))
 </code></pre>
 <p>Bars are automatically stacked when there are multiple instances
 with the same nominal or temporal value.
@@ -117,12 +119,12 @@ To display the corresponding bars side-by-side instead of stacking them,
 apply the <code>position</code> view modifier,
 passing the <code>by</code> argument that identifies the data series.
 For example:</p>
-<pre><code class="language-swift">BarMark(x: ageCategory, y: .value(&quot;Male&quot;, statistic.male))
-    .foregroundStyle(by: .value(&quot;Gender&quot;, &quot;Male&quot;))
-    .position(by: .value(&quot;Gender&quot;, &quot;Male&quot;))
-BarMark(x: ageCategory, y: .value(&quot;Female&quot;, statistic.female))
-    .foregroundStyle(by: .value(&quot;Gender&quot;, &quot;Female&quot;))
-    .position(by: .value(&quot;Gender&quot;, &quot;Female&quot;))
+<pre><code class="language-swift">BarMark(x: ageCategory, y: .value("Male", statistic.male))
+    .foregroundStyle(by: .value("Gender", "Male"))
+    .position(by: .value("Gender", "Male"))
+BarMark(x: ageCategory, y: .value("Female", statistic.female))
+    .foregroundStyle(by: .value("Gender", "Female"))
+    .position(by: .value("Gender", "Female"))
 </code></pre>
 <p>In bar charts that use temporal data, the unit defaults to <code>.hour</code>.
 With this unit the axis that represents the temporal values
@@ -136,13 +138,13 @@ pass the <code>position</code> argument with a value of <code>.overlay</code>.
 For example:</p>
 <pre><code class="language-swift">BarMark(x: value1, y: value2)
     .annotation(position: .overlay) {
-        Text(&quot;\(data.quantity)&quot;)
+        Text("\(data.quantity)")
             .bold()
             .foregroundColor(.white)
     }
 }
 </code></pre>
-<h3 id="linemark" tabindex="-1">LineMark</h3>
+<h3 id="linemark">LineMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/linemark?v=1.1.1" rel="noopener" target="_blank">LineMark</a>
 struct are used to display line charts.</p>
 <p>To assign a different color to each corresponding <code>LineMark</code>,
@@ -157,7 +159,7 @@ See the examples in the <code>PointMark</code> section below.</p>
 <p>To change the line style, apply the <code>lineStyle</code> view modifier
 to each <code>LineMark</code>. For example, the following uses a dashed line:</p>
 <pre><code class="language-swift">LineMark(x: ageCategory, y: male)
-    .foregroundStyle(by: .value(&quot;Male&quot;, &quot;Male&quot;))
+    .foregroundStyle(by: .value("Male", "Male"))
     .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
 </code></pre>
 <p>To smooth the lines, apply the <code>interpolationMethod</code> view modifier
@@ -165,10 +167,10 @@ to each <code>LineMark</code> with the value <code>.monotone</code>, <code>.card
 <code>.catmullRom</code> (formulated by Edwin Catmull and Raphael Rom).
 For example:</p>
 <pre><code class="language-swift">LineMark(x: ageCategory, y: male)
-    .foregroundStyle(by: .value(&quot;Male&quot;, &quot;Male&quot;))
+    .foregroundStyle(by: .value("Male", "Male"))
     .interpolationMethod(.catmullRom)
 </code></pre>
-<h3 id="pointmark" tabindex="-1">PointMark</h3>
+<h3 id="pointmark">PointMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/pointmark?v=1.1.1" rel="noopener" target="_blank">PointMark</a>
 struct are used to display scatter plots or to add points to line charts.</p>
 <p>To assign a different color to each corresponding <code>PointMark</code>,
@@ -180,15 +182,15 @@ passing it a <code>by</code> argument whose value identifies a data series.
 For example:</p>
 <pre><code class="language-swift">PointMark(x: ageCategory, y: male)
     .foregroundStyle(.blue)
-    .symbol(by: .value(&quot;Gender&quot;, &quot;Male&quot;))
+    .symbol(by: .value("Gender", "Male"))
 PointMark(x: category, y: female)
     .foregroundStyle(.red)
-    .symbol(by: .value(&quot;Gender&quot;, &quot;Female&quot;))
+    .symbol(by: .value("Gender", "Female"))
 </code></pre>
-<p>The values <code>&quot;Male&quot;</code> and <code>&quot;Female&quot;</code> identify the data series
+<p>The values <code>"Male"</code> and <code>"Female"</code> identify the data series
 to which each point belongs.
 These values could come of the data objects rather than being literal values.</p>
-<h3 id="areamark" tabindex="-1">AreaMark</h3>
+<h3 id="areamark">AreaMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/areamark?v=1.1.1" rel="noopener" target="_blank">AreaMark</a>
 struct are used to display area charts which
 shade the area below single values in a data series
@@ -202,18 +204,16 @@ a chart that shows a series of minimum, average, and maximum values.
 the area between the minimum and maximum values.</p>
 <p>Areas can be stacked, but cannot overlap.</p>
 <p>The example app draws one line for male data and one line for female data.
-Toggling the &quot;Show Area&quot; option causes it to only shade below the male line
+Toggling the “Show Area” option causes it to only shade below the male line
 due to this restriction.</p>
-<h3 id="rectanglemark" tabindex="-1">RectangleMark</h3>
+<h3 id="rectanglemark">RectangleMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/rectanglemark?v=1.1.1" rel="noopener" target="_blank">RectangleMark</a>
 struct are used to display heat maps.</p>
 <p>The following code demonstrates using this to display a heat map
 that represents hourly temperature forecasts over the 5-day period.
 For a full implementation that uses <a href="/blog/swift/weatherkit">WeatherKit</a>
 to get real temperature forecasts, see <a href="https://github.com/mvolkmann/WeatherKitDemo?v=1.1.1" rel="noopener" target="_blank">WeatherKitDemo</a>.</p>
-<p><img alt="Swift Charts heat map" style="width: 45%"
-  src="/blog/assets/swift-charts-heat-map.png?v=1.1.1"
-  title="Swift Charts heat map"></p>
+<p><img alt="Swift Charts heat map" style="width: 45%" src="/blog/assets/swift-charts-heat-map.png?v=1.1.1" title="Swift Charts heat map"></p>
 <pre><code class="language-swift">import Charts
 import SwiftUI
 
@@ -221,7 +221,7 @@ extension Date {
     // Returns an abbreviated day of the week (ex. Sun).
     var dayOfWeek: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = &quot;EEE&quot;
+        dateFormatter.dateFormat = "EEE"
         return dateFormatter.string(from: self)
     }
 
@@ -240,12 +240,12 @@ extension Date {
 // in the WeatherKit `HourWeather` struct.
 struct HourWeather {
     let date: Date
-    let temperature: Measurement&lt;UnitTemperature&gt;
+    let temperature: Measurement&#x3C;UnitTemperature>
 }
 
 struct ContentView: View {
     private static let daysOfWeek =
-        [&quot;Sun&quot;, &quot;Mon&quot;, &quot;Tue&quot;, &quot;Wed&quot;, &quot;Thu&quot;, &quot;Fri&quot;, &quot;Sat&quot;]
+        ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
     private static let days = 5
 
@@ -259,7 +259,7 @@ struct ContentView: View {
         VStack(spacing: 21) {
             let startIndex = Date().dayOfWeekNumber - 1
             let range =
-                startIndex ..&lt; startIndex + Self.days
+                startIndex ..&#x3C; startIndex + Self.days
             ForEach(range, id: \.self) { index in
                 dayLabel(Self.daysOfWeek[index % 7])
             }
@@ -281,7 +281,7 @@ struct ContentView: View {
 
     // This displays an abbreviated day of the week (ex. Sun)
     // rotated to read from the right.
-    private func dayLabel(_ day: String) -&gt; some View {
+    private func dayLabel(_ day: String) -> some View {
         Text(day)
             .font(.subheadline)
             .rotationEffect(Angle.degrees(-90))
@@ -320,7 +320,7 @@ struct ContentView: View {
         hourlyForecast = data
     }
 
-    private func heatMap() -&gt; some View {
+    private func heatMap() -> some View {
         Chart {
             ForEach(hourlyForecast.indices, id: \.self) { index in
                 let forecast = hourlyForecast[index]
@@ -342,7 +342,7 @@ struct ContentView: View {
                     let index = axisValue.index
                     let mod = index % 12
                     let hour = mod == 0 ? 12 : mod
-                    Text(&quot;\(hour)\n\(index &lt; 12 ? &quot;AM&quot; : &quot;PM&quot;)&quot;)
+                    Text("\(hour)\n\(index &#x3C; 12 ? "AM" : "PM")")
                         .multilineTextAlignment(.center)
                 }
             }
@@ -357,23 +357,23 @@ struct ContentView: View {
     }
 
     // This creates an individual cell in the heat map.
-    private func mark(forecast: HourWeather) -&gt; some ChartContent {
+    private func mark(forecast: HourWeather) -> some ChartContent {
         let date = forecast.date
         let fahrenheit = forecast.temperature.converted(to: .fahrenheit).value
 
         return Plot {
             RectangleMark(
                 // Why do String values work, but Int values do not?
-                x: .value(&quot;Time&quot;, &quot;\(date.hour)&quot;),
-                y: .value(&quot;Day&quot;, date.dayOfWeek),
+                x: .value("Time", "\(date.hour)"),
+                y: .value("Day", date.dayOfWeek),
                 width: .ratio(1),
                 height: .ratio(1)
             )
             // Choose a cell color based on the temperature.
-            .foregroundStyle(by: .value(&quot;Temperature&quot;, fahrenheit))
+            .foregroundStyle(by: .value("Temperature", fahrenheit))
             // Display the temperature on top of the cell.
             .annotation(position: .overlay) {
-                Text(&quot;\(String(format: &quot;%.0f&quot;, fahrenheit))℉&quot;)
+                Text("\(String(format: "%.0f", fahrenheit))℉")
                     .rotationEffect(.degrees(-90))
                     .font(.body)
                     .frame(width: 55)
@@ -382,7 +382,7 @@ struct ContentView: View {
     }
 }
 </code></pre>
-<h3 id="rulemark" tabindex="-1">RuleMark</h3>
+<h3 id="rulemark">RuleMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/rulemark?v=1.1.1" rel="noopener" target="_blank">RuleMark</a>
 struct are used to add a vertical line (when only the <code>x</code> value is set)
 or a horizontal line (when only the <code>y</code> value is set).</p>
@@ -390,21 +390,21 @@ or a horizontal line (when only the <code>y</code> value is set).</p>
 apply the <code>annotation</code> view modifier.</p>
 <p>The following example adds a red, dashed, horizontal line at the y value
 that is the average of the quantitative values being plotted.
-The text &quot;Average&quot; appears below this line beginning at its leading end.</p>
-<pre><code class="language-swift">RuleMark(y: .value(&quot;Average&quot;, average))
+The text “Average” appears below this line beginning at its leading end.</p>
+<pre><code class="language-swift">RuleMark(y: .value("Average", average))
     .foregroundStyle(.red)
     .lineStyle(StrokeStyle(lineWidth: 1, dash: [10]))
     .annotation(position: .bottom, alignment: .leading) {
-         Text(&quot;Average&quot;).font(.caption)
+         Text("Average").font(.caption)
     }
 </code></pre>
-<p>The example in the &quot;Event Handling&quot; section below
+<p>The example in the “Event Handling” section below
 listens for drag events on the chart and
 adds a red, dashed, vertical line
 through the mark being dragged over.
 Information about the data point is displayed
 at the top of the line, above the chart.</p>
-<h3 id="sectormark" tabindex="-1">SectorMark</h3>
+<h3 id="sectormark">SectorMark</h3>
 <p>Instances of the <a href="https://developer.apple.com/documentation/charts/sectormark?v=1.1.1" rel="noopener" target="_blank">SectorMark</a>
 struct are used to add slices to pie and donut charts.
 This was added in iOS 17.</p>
@@ -431,43 +431,33 @@ Each <code>SectorMark</code> can have different values
 for <code>innerRadius</code> and/or <code>outerRadius</code>, but this is also not typical.</p>
 <p>TODO: Is there a way to place text in each <code>SectorMark</code>?</p>
 <p>For an example, see the app in the GitHub repository <a href="https://github.com/mvolkmann/SwiftChartsPieDonut?v=1.1.1" rel="noopener" target="_blank">SwiftChartsPieDonut</a>.</p>
-<p><img alt="Swift Charts donut" style="width: 45%"
-  src="/blog/assets/swift-charts-donut.png?v=1.1.1"
-  title="Swift Charts donut">
-<img alt="Swift Charts donut selected" style="width: 45%"
-  src="/blog/assets/swift-charts-donut-selected.png?v=1.1.1"
-  title="Swift Charts donut selected"></p>
-<h2 id="selection" tabindex="-1">Selection</h2>
+<p><img alt="Swift Charts donut" style="width: 45%" src="/blog/assets/swift-charts-donut.png?v=1.1.1" title="Swift Charts donut">
+<img alt="Swift Charts donut selected" style="width: 45%" src="/blog/assets/swift-charts-donut-selected.png?v=1.1.1" title="Swift Charts donut selected"></p>
+<h2 id="selection">Selection</h2>
 <p>iOS 17 added the <a href="https://developer.apple.com/documentation/swiftui/view/chartxselection(value:)?v=1.1.1" rel="noopener" target="_blank">chartXSelection</a>, <a href="https://developer.apple.com/documentation/swiftui/view/chartyselection(value:)?v=1.1.1" rel="noopener" target="_blank">chartYSelection</a>, and <a href="https://developer.apple.com/documentation/swiftui/view/chartangleselection(_:)?v=1.1.1" rel="noopener" target="_blank">chartAngleSelection</a> methods to the <code>Chart</code> struct.
 These are useful for allowing users to swipe over a chart
 trigger changes to the way a chart is rendered
 such as triggering the display of annotations.</p>
 <p>For an example, see the app in the GitHub repository <a href="https://github.com/mvolkmann/SwiftChartsSelection?v=1.1.1" rel="noopener" target="_blank">SwiftChartsSelection</a>.</p>
-<p><img alt="Swift Charts selection" style="width: 45%"
-  src="/blog/assets/swift-charts-selection.png?v=1.1.1"
-  title="Swift Charts selection"></p>
-<h2 id="scrolling" tabindex="-1">Scrolling</h2>
+<p><img alt="Swift Charts selection" style="width: 45%" src="/blog/assets/swift-charts-selection.png?v=1.1.1" title="Swift Charts selection"></p>
+<h2 id="scrolling">Scrolling</h2>
 <p>For charts with a large number of data points,
 it is convenient to all the chart to be wider than the screen
 and scroll when the user drags past its ends.
 This is enabled by calling <code>.chartScrollableAxes(.horizontal)</code> on the<code>Chart</code>.</p>
 <p>For an example, see the app in the GitHub repository <a href="https://github.com/mvolkmann/SwiftChartsScrollable?v=1.1.1" rel="noopener" target="_blank">SwiftChartsScrollable</a>.</p>
 <p>It seems that when scrolling is enabled, selection is disabled.
-I haven't found a way to enable both.
+I haven’t found a way to enable both.
 See the issue <a href="https://feedbackassistant.apple.com/feedback/12348843?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
-<h2 id="example-charts" tabindex="-1">Example Charts</h2>
+<h2 id="example-charts">Example Charts</h2>
 <p>This example plots hourly temperature forecasts from hard-coded data.
 It could of course come from WeatherKit.</p>
 <p>The code can be found at <a href="https://github.com/mvolkmann/SwiftChartsBasic?v=1.1.1" rel="noopener" target="_blank">SwiftChartsBasic</a>.</p>
 <p>There is a segmented <code>Picker</code> at the top that enables switching between
 two chart representations. The first is the bar chart and the second
 is a combination of a line chart, area chart, and point chart.</p>
-<p><img alt="Swift Charts bar chart" style="width: 45%"
-  src="/blog/assets/swift-charts-bar.png?v=1.1.1"
-  title="Swift Charts bar chart">
-<img alt="Swift Charts line/area/point chart" style="width: 45%"
-  src="/blog/assets/swift-charts-line-area-point.png?v=1.1.1"
-  title="Swift Charts line/area/point chart"></p>
+<p><img alt="Swift Charts bar chart" style="width: 45%" src="/blog/assets/swift-charts-bar.png?v=1.1.1" title="Swift Charts bar chart">
+<img alt="Swift Charts line/area/point chart" style="width: 45%" src="/blog/assets/swift-charts-line-area-point.png?v=1.1.1" title="Swift Charts line/area/point chart"></p>
 <p>The bars and points are assigned a color that selected from
 a gradient based on the temperature value they represent.
 This is done using the following <code>Array</code> extension:</p>
@@ -478,9 +468,9 @@ extension Array where Element: UIColor {
     /// - Parameters:
     ///   - percentage: Double between 0.0 and 1.0
     /// - Returns: Color object
-    func colorAt(percentage: Double) -&gt; Color {
-        guard percentage &gt; 0 else { return Color(first ?? .clear) }
-        guard percentage &lt; 1 else { return Color(last ?? .clear) }
+    func colorAt(percentage: Double) -> Color {
+        guard percentage > 0 else { return Color(first ?? .clear) }
+        guard percentage &#x3C; 1 else { return Color(last ?? .clear) }
 
         let floatIndex = percentage * Double(count - 1)
         let leftIndex = Int(floatIndex.rounded(.down))
@@ -493,12 +483,12 @@ extension Array where Element: UIColor {
 
         var (r1, g1, b1, a1): (CGFloat, CGFloat, CGFloat, CGFloat) =
             (0, 0, 0, 0)
-        guard leftColor.getRed(&amp;r1, green: &amp;g1, blue: &amp;b1, alpha: &amp;a1)
+        guard leftColor.getRed(&#x26;r1, green: &#x26;g1, blue: &#x26;b1, alpha: &#x26;a1)
         else { return Color(fallbackColor) }
 
         var (r2, g2, b2, a2): (CGFloat, CGFloat, CGFloat, CGFloat) =
             (0, 0, 0, 0)
-        guard rightColor.getRed(&amp;r2, green: &amp;g2, blue: &amp;b2, alpha: &amp;a2)
+        guard rightColor.getRed(&#x26;r2, green: &#x26;g2, blue: &#x26;b2, alpha: &#x26;a2)
         else { return Color(fallbackColor) }
 
         let subPercentage = floatIndex - Double(leftIndex)
@@ -518,7 +508,7 @@ import SwiftUI
 
 extension Date {
     // Creates a Date object for a given hour in the current day.
-    static func hour(_ hour: Int) -&gt; Date {
+    static func hour(_ hour: Int) -> Date {
         var components = Calendar.current.dateComponents(
             [.year, .month, .day],
             from: Date()
@@ -556,7 +546,7 @@ private let forecast: [Weather] = [
 ]
 
 struct ContentView: View {
-    @State private var chartType: String = &quot;bar&quot;
+    @State private var chartType: String = "bar"
 
     let areaColor = LinearGradient(
         gradient: Gradient(colors: [.yellow, .blue]),
@@ -570,17 +560,17 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Picker(&quot;Chart Type&quot;, selection: $chartType) {
-                Text(&quot;Bar&quot;).tag(&quot;bar&quot;)
-                Text(&quot;Line&quot;).tag(&quot;line&quot;)
+            Picker("Chart Type", selection: $chartType) {
+                Text("Bar").tag("bar")
+                Text("Line").tag("line")
             }
             .pickerStyle(.segmented)
 
             Chart(forecast) { data in
-                let time = PlottableValue.value(&quot;Time&quot;, data.dateTime)
-                let temp = PlottableValue.value(&quot;Temperature&quot;, data.temperature)
+                let time = PlottableValue.value("Time", data.dateTime)
+                let temp = PlottableValue.value("Temperature", data.temperature)
                 let color = color(for: data.temperature)
-                if chartType == &quot;bar&quot; {
+                if chartType == "bar" {
                     // Each BarMark can be a different color.
                     BarMark(x: time, y: temp)
                         .foregroundStyle(color)
@@ -602,17 +592,17 @@ struct ContentView: View {
     }
 
     // This returns a color to use for a given temperature.
-    func color(for temperature: Double) -&gt; Color {
+    func color(for temperature: Double) -> Color {
         let low = 30.0
         let high = 100.0
-        let percentage = temperature &lt;= low ? 0.0 :
-            temperature &gt;= high ? 1.0 :
+        let percentage = temperature &#x3C;= low ? 0.0 :
+            temperature >= high ? 1.0 :
             (temperature - low) / (high - low)
         return colors.colorAt(percentage: percentage)
     }
 }
 </code></pre>
-<h2 id="series-colors" tabindex="-1">Series Colors</h2>
+<h2 id="series-colors">Series Colors</h2>
 <p>To set the color to be used for each data series by its name,
 apply the <code>chartForegroundStyleScale</code> view modifier to the <code>Chart</code>.
 For example:</p>
@@ -620,11 +610,11 @@ For example:</p>
     // chart content goes here
 }
 .chartForegroundStyleScale([
-    &quot;Male&quot;: .blue,
-    &quot;Female&quot;: .red,
+    "Male": .blue,
+    "Female": .red,
 ])
 </code></pre>
-<h2 id="axis-marks" tabindex="-1">Axis Marks</h2>
+<h2 id="axis-marks">Axis Marks</h2>
 <p>Axis marks can be added to the x-axis and y-axis.
 Each is composed of three optional parts,
 a grid line, a tick, and a label.</p>
@@ -681,12 +671,12 @@ the view that should be used to render the label.</p>
         // Alternative that formats labels to be
         // a number of millions followed by the letter M.
         // AxisValueLabel {
-        //     Text(value == 0 ? &quot;&quot; : &quot;\(value / delta)M&quot;)
+        //     Text(value == 0 ? "" : "\(value / delta)M")
         // }
     }
 }
 </code></pre>
-<h2 id="legends" tabindex="-1">Legends</h2>
+<h2 id="legends">Legends</h2>
 <p>By default, a legend is displayed below each chart.</p>
 <p>To hide the legend, apply the <a href="https://developer.apple.com/documentation/charts/chart/chartlegend(_:)?v=1.1.1" rel="noopener" target="_blank">chartLegend</a> view modifier to the <code>Chart</code>, passing a value of <code>.hidden</code>.
 For example:</p>
@@ -700,7 +690,7 @@ passing the <code>position</code> argument with a value like <code>.top</code>, 
 For example:</p>
 <pre><code class="language-swift">Chart { ... }.chartLegend(position: .top)
 </code></pre>
-<h2 id="scale" tabindex="-1">Scale</h2>
+<h2 id="scale">Scale</h2>
 <p>Swift Charts automatically determines the minimum and maximum
 quantitative values to be plotted and
 selects appropriate x-axis and y-axis scales.
@@ -711,7 +701,7 @@ For example:</p>
 }
 .chartYScale(domain: 19 ... 157)
 </code></pre>
-<h2 id="scrolling-1" tabindex="-1">Scrolling</h2>
+<h2 id="scrolling-1">Scrolling</h2>
 <p>To create a chart that is larger that its allocation screen space
 and can be scrolled horizontally to view all the content:</p>
 <ol>
@@ -744,8 +734,8 @@ make the x-axis sticky in vertically scrolling charts.</p>
 <p>To scroll vertically instead of horizontally,
 embed the <code>Chart</code> in a <code>ScrollView</code> without passing <code>.horizontal</code>
 and set the <code>ScrollView</code> height instead of the width.</p>
-<h2 id="background-and-overlay" tabindex="-1">Background and Overlay</h2>
-<p>The <a href="https://developer.apple.com/documentation/swiftui/view/chartbackground(alignment:content:)?changes=latest_minor&amp;v=1.1.1" rel="noopener" target="_blank">chartBackground</a> view modifier can be applied to a <code>Chart</code>
+<h2 id="background-and-overlay">Background and Overlay</h2>
+<p>The <a href="https://developer.apple.com/documentation/swiftui/view/chartbackground(alignment:content:)?changes=latest_minor&#x26;v=1.1.1" rel="noopener" target="_blank">chartBackground</a> view modifier can be applied to a <code>Chart</code>
 to specify any view that should be rendered behind the chart marks.</p>
 <p>The <code>chartOverlay</code> view modifier can be applied to a <code>Chart</code>
 to specify any view that should be rendered on top of the chart marks.</p>
@@ -754,13 +744,13 @@ to specify any view that should be rendered on top of the chart marks.</p>
     // chart content goes here
 }
 .chartBackground { _ in
-    Image(systemName: &quot;flag.checkered&quot;)
+    Image(systemName: "flag.checkered")
         .resizable()
         .frame(width: 300, height: 300)
 }
 </code></pre>
-<h2 id="event-handling" tabindex="-1">Event Handling</h2>
-<p>To listen for tap and drag gestures on a chart, apply the <a href="https://developer.apple.com/documentation/swiftui/view/chartoverlay(alignment:content:)?changes=latest_minor&amp;v=1.1.1" rel="noopener" target="_blank">chartOverlay</a> view modifier to the <code>Chart</code>.
+<h2 id="event-handling">Event Handling</h2>
+<p>To listen for tap and drag gestures on a chart, apply the <a href="https://developer.apple.com/documentation/swiftui/view/chartoverlay(alignment:content:)?changes=latest_minor&#x26;v=1.1.1" rel="noopener" target="_blank">chartOverlay</a> view modifier to the <code>Chart</code>.
 Note that drag gestures will not be captured
 if the <code>Chart</code> is inside a <code>ScrollView</code>.</p>
 <p>For example, the following somewhat complex code displays
@@ -773,7 +763,7 @@ an annotation above a bar chart when dragging across the bars:</p>
         VStack {
             if let selectedData {
                 Text(selectedData.key)
-                Text(&quot;\(selectedData.quantity)&quot;)
+                Text("\(selectedData.quantity)")
             }
         }
         .padding(5)
@@ -794,9 +784,9 @@ an annotation above a bar chart when dragging across the bars:</p>
         Chart {
             ForEach(objects.indices, id: \.self) { index in
                 let object = objects[index]
-                let key = PlottableValue.value(&quot;Key Title&quot;, object.key)
+                let key = PlottableValue.value("Key Title", object.key)
 
-                BarMark(x: key, y: .value(&quot;Quantity&quot;, object.quantity))
+                BarMark(x: key, y: .value("Quantity", object.quantity))
 
                 if object.key == selectedData?.key {
                     RuleMark(x: key)
@@ -819,15 +809,15 @@ an annotation above a bar chart when dragging across the bars:</p>
 
     // This chooses a position based on whether
     // the data point is near one of the chart edges.
-    private func annotationPosition(_ index: Int) -&gt; AnnotationPosition {
+    private func annotationPosition(_ index: Int) -> AnnotationPosition {
         let percent = Double(index) / Double(vm.statistics.count)
-        return percent &lt; 0.1 ? .topTrailing :
-            percent &gt; 0.95 ? .topLeading :
+        return percent &#x3C; 0.1 ? .topTrailing :
+            percent > 0.95 ? .topLeading :
             .top
     }
 
     // ChartProxy is useful for supporting user interactions like tap and drag.
-    private func chartOverlay(proxy: ChartProxy) -&gt; some View {
+    private func chartOverlay(proxy: ChartProxy) -> some View {
         GeometryReader { geometry in // of the overlay view
             let origin = geometry[proxy.plotAreaFrame].origin
             Rectangle()
@@ -838,13 +828,13 @@ an annotation above a bar chart when dragging across the bars:</p>
                 .onTapGesture { value in
                     let x = value.x - origin.x
 
-                    // The ChartProxy &quot;position&quot; method translates a
+                    // The ChartProxy "position" method translates a
                     // data value to a coordinate value within the chart.
-                    // The ChartProxy &quot;value&quot; method translates a
+                    // The ChartProxy "value" method translates a
                     // coordinate value within the chart to a data value.
                     if let category: String = proxy.value(atX: x) {
                         let data = categoryToDataMap[category]
-                        print(&quot;got tap on&quot;, data)
+                        print("got tap on", data)
                     }
                 }
 
@@ -863,7 +853,7 @@ an annotation above a bar chart when dragging across the bars:</p>
     }
 }
 </code></pre>
-<h2 id="animation" tabindex="-1">Animation</h2>
+<h2 id="animation">Animation</h2>
 <p>Charts can be animated using <code>withAnimation</code> and
 changing the values to be plotted from zero to their actual value.
 This can be done at a different point in time for each data point
@@ -880,7 +870,7 @@ that indicate the data points that should shown now.</p>
 <p>In the loop inside the <code>Chart</code> where marks are created,
 determine if the current data point should be shown now,
 base its value on that, and use that value in the mark.</p>
-<pre><code class="language-swift">let shouldShow = index &lt; show.count &amp;&amp; show[index] == true
+<pre><code class="language-swift">let shouldShow = index &#x3C; show.count &#x26;&#x26; show[index] == true
 let value = shouldShow ? data[index].quantity : 0
 </code></pre>
 </li>
@@ -916,9 +906,10 @@ let value = shouldShow ? data[index].quantity : 0
 </code></pre>
 </li>
 </ol>
-<h2 id="accessibility" tabindex="-1">Accessibility</h2>
+<h2 id="accessibility">Accessibility</h2>
 <p>To make charts accessible, apply the <code>accessibilityLabel</code>
 and <code>accessibilityValue</code> view modifiers to each mark.
 For visually impaired users, the text passed to these
-will be spoken when VoiceOver is activated.</p>
-</article> </body></html>
+will be spoken when VoiceOver is activated.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

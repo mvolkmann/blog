@@ -1,5 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>PHP</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>PHP</h2> <aside><ul><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#installing-a-command-line-interpreter">Installing a command-line interpreter</a></li><li><a href="#running-a-command-line-script">Running a command-line script</a></li><li><a href="#installing-a-server">Installing a server</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax">Syntax</a></li><li><a href="#comments">Comments</a></li><li><a href="#variables">Variables</a></li><li><a href="#builtin-data-types">Builtin Data Types</a></li><li><a href="#strings">Strings</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#associative-arrays">Associative Arrays</a></li><li><a href="#multidimensional-arrays">Multidimensional Arrays</a></li><li><a href="#classes">Classes</a></li><li><a href="#magic-methods">Magic Methods</a></li><li><a href="#objects">Objects</a></li><li><a href="#conditional-logic">Conditional Logic</a></li><li><a href="#iteration">Iteration</a></li><li><a href="#functions">Functions</a></li><li><a href="#including-other-php-files">Including Other PHP Files</a></li><li><a href="#superglobals">Superglobals</a></li><li><a href="#query-parameters">Query Parameters</a></li><li><a href="#calculator-example">Calculator Example</a></li><li><a href="#mysql">MySQL</a></li><li><a href="#phpmyadmin">phpMyAdmin</a></li><li><a href="#database-with-crud">Database with CRUD</a></li></ul></aside> <article><p><img alt="PHP mascot" class="keep-size"
-  src="/blog/assets/php-mascot.png?v=1.1.1"></p>
+<!DOCTYPE html><html lang="en"> <head><title>PHP</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>PHP</h2> <aside><ul><li><a href="#pros">Pros</a></li><li><a href="#cons">Cons</a></li><li><a href="#installing-a-command-line-interpreter">Installing a command-line interpreter</a></li><li><a href="#running-a-command-line-script">Running a command-line script</a></li><li><a href="#installing-a-server">Installing a server</a></li><li><a href="#linting">Linting</a></li><li><a href="#code-formatting">Code Formatting</a></li><li><a href="#syntax">Syntax</a></li><li><a href="#comments">Comments</a></li><li><a href="#variables">Variables</a></li><li><a href="#builtin-data-types">Builtin Data Types</a></li><li><a href="#strings">Strings</a></li><li><a href="#arrays">Arrays</a></li><li><a href="#associative-arrays">Associative Arrays</a></li><li><a href="#multidimensional-arrays">Multidimensional Arrays</a></li><li><a href="#classes">Classes</a></li><li><a href="#magic-methods">Magic Methods</a></li><li><a href="#objects">Objects</a></li><li><a href="#conditional-logic">Conditional Logic</a></li><li><a href="#iteration">Iteration</a></li><li><a href="#functions">Functions</a></li><li><a href="#including-other-php-files">Including Other PHP Files</a></li><li><a href="#superglobals">Superglobals</a></li><li><a href="#query-parameters">Query Parameters</a></li><li><a href="#calculator-example">Calculator Example</a></li><li><a href="#mysql">MySQL</a></li><li><a href="#phpmyadmin">phpMyAdmin</a></li><li><a href="#database-with-crud">Database with CRUD</a></li></ul></aside> <article> <p><img alt="PHP mascot" class="keep-size" src="/blog/assets/php-mascot.png?v=1.1.1"></p>
 <p>PHP is an interpreted scripting language.
 It is typically used to implement web applications,
 but can also be used to implement command line scripts.</p>
@@ -8,43 +9,43 @@ Version 8 was released in November, 2020.
 A large number of PHP sites continue to use PHP version 5 or older.
 The most popular implementation is the Zend Engine,
 which is the default PHP interpreter in the Apache server.</p>
-<p>The name PHP was an acronym for &quot;Personal Home Page&quot;,
-but now is an acronym for &quot;PHP Hypertext Preprocessor&quot;.</p>
+<p>The name PHP was an acronym for “Personal Home Page”,
+but now is an acronym for “PHP Hypertext Preprocessor”.</p>
 <p>PHP source files typically contain HTML and CSS with embedded PHP code.
 This files are typically processed in an HTTP server and
 produce HTML that is returned to a web browser for rendering.
 Unlike JavaScript, PHP code does not execute in web browsers.</p>
 <p>Typically data is passed from browsers to the server
 using HTTP requests that contain data in HTML forms.
-HTML forms can contain <code>input</code> elements with <code>type=&quot;hidden&quot;</code>
+HTML forms can contain <code>input</code> elements with <code>type="hidden"</code>
 to send data that is not rendered.</p>
 <p>A great source of PHP documentation is the
 <a href="https://www.php.net/manual/en/?v=1.1.1" rel="noopener" target="_blank">PHP Manual</a>.</p>
-<h2 id="pros" tabindex="-1">Pros</h2>
+<h2 id="pros">Pros</h2>
 <ul>
 <li>What does Laravel add?</li>
 </ul>
-<h2 id="cons" tabindex="-1">Cons</h2>
+<h2 id="cons">Cons</h2>
 <ul>
 <li>Code only runs on page loads, so many page refreshes are required.</li>
 <li>No types?</li>
 </ul>
-<h2 id="installing-a-command-line-interpreter" tabindex="-1">Installing a command-line interpreter</h2>
-<p>TODO: To install PHP in Windows, ...</p>
+<h2 id="installing-a-command-line-interpreter">Installing a command-line interpreter</h2>
+<p>TODO: To install PHP in Windows, …</p>
 <p>macOS comes with PHP preinstalled.
 Do not use Homebrew to install it!
 This failed and made the preinstalled version unusable.</p>
-<p>TODO: To install PHP in Linux, ...</p>
-<h2 id="running-a-command-line-script" tabindex="-1">Running a command-line script</h2>
+<p>TODO: To install PHP in Linux, …</p>
+<h2 id="running-a-command-line-script">Running a command-line script</h2>
 <p>To run a PHP script from the command-line,
 enter <code>php {filename}.php</code>.</p>
 <p>For example, create the file <code>hello.php</code> containing the following:</p>
-<pre><code class="language-php">&lt;?php
-echo &quot;Hello, World!\n&quot;;
-?&gt;
+<pre><code class="language-php">&#x3C;?php
+echo "Hello, World!\n";
+?>
 </code></pre>
 <p>To run this, enter <code>php hello.php</code>.</p>
-<h2 id="installing-a-server" tabindex="-1">Installing a server</h2>
+<h2 id="installing-a-server">Installing a server</h2>
 <p>A recommended way to obtain a local HTTP server
 is to use XAMPP. I tried this, but failed to get it to work in macOS.</p>
 <p>Another option in macOS is to use the built-in support for Apache and PHP.
@@ -88,7 +89,7 @@ to verify that it is running.</p>
 </li>
 <li>
 <p>Create the file <code>/Library/WebServer/Documents/phpinfo.php</code>
-containing <code>&lt;?php phpinfo();</code></p>
+containing <code>&#x3C;?php phpinfo();</code></p>
 </li>
 <li>
 <p>Browse <a href="http://localhost/phpinfo.php?v=1.1.1" rel="noopener" target="_blank">http://localhost/phpinfo.php</a>.</p>
@@ -102,19 +103,19 @@ in the <code>/Library/WebServer/Documents</code> directory.</p>
 </li>
 <li>
 <p>Add the following content:</p>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;PHP Hello World&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-  &lt;h1&gt;Verifying PHP&lt;/h1&gt;
-    &lt;?php
-      echo &quot;Hello, World!&quot;;
-    ?&gt;
-    &lt;p&gt;Did you see it?&lt;/p&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<pre><code class="language-php">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>PHP Hello World&#x3C;/title>
+  &#x3C;/head>
+  &#x3C;body>
+  &#x3C;h1>Verifying PHP&#x3C;/h1>
+    &#x3C;?php
+      echo "Hello, World!";
+    ?>
+    &#x3C;p>Did you see it?&#x3C;/p>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 </li>
 <li>
@@ -123,13 +124,13 @@ in the <code>/Library/WebServer/Documents</code> directory.</p>
 </ul>
 </li>
 <li>
-<p>See the &quot;Installing&quot; link above for steps to install MySQL.</p>
+<p>See the “Installing” link above for steps to install MySQL.</p>
 </li>
 </ol>
-<h2 id="linting" tabindex="-1">Linting</h2>
+<h2 id="linting">Linting</h2>
 <p>PHP has a built-in code linter.
 To run it, enter <code>php -l {filename}.php</code> or <code>php -l *.php</code>.</p>
-<h2 id="code-formatting" tabindex="-1">Code Formatting</h2>
+<h2 id="code-formatting">Code Formatting</h2>
 <p>To format PHP files using Prettier:</p>
 <ul>
 <li><code>npm install -g prettier @prettier/plugin-php</code></li>
@@ -140,35 +141,35 @@ To run it, enter <code>php -l {filename}.php</code> or <code>php -l *.php</code>
 <p>To configure Prettier for PHP,
 create a <code>.prettierrc</code> file similar to the following:</p>
 <pre><code class="language-json">{
-  &quot;braceStyle&quot;: &quot;1tbs&quot;,
-  &quot;phpVersion&quot;: &quot;7.3&quot;,
-  &quot;singleQuote&quot;: true,
-  &quot;tabWidth&quot;: 2,
-  &quot;trailingCommaPHP&quot;: false
+  "braceStyle": "1tbs",
+  "phpVersion": "7.3",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingCommaPHP": false
 }
 </code></pre>
 <p>Setting <code>phpVersion</code> allows the Prettier plugin for PHP to use
 modern language features that were added in the specified version and earlier.</p>
-<h2 id="syntax" tabindex="-1">Syntax</h2>
+<h2 id="syntax">Syntax</h2>
 <p>To embed PHP code in HTML and CSS, use the following syntax:</p>
-<pre><code class="language-php">&lt;?php
+<pre><code class="language-php">&#x3C;?php
   // code
-?&gt;
+?>
 </code></pre>
 <p>This code can add to the response using the <code>echo</code> command.
-For example, <code>echo &quot;&lt;h1&gt;&quot; . $title . &quot;&lt;/h1&gt;&quot;;</code>.
+For example, <code>echo "&#x3C;h1>" . $title . "&#x3C;/h1>";</code>.
 Note that HTML tags can be output.</p>
 <p>To embed the value of a PHP variable, use the following syntax:</p>
-<pre><code class="language-php">&lt;?= $variableName ?&gt;
+<pre><code class="language-php">&#x3C;?= $variableName ?>
 </code></pre>
 <p>PHP statements are separated from each other by semicolons,
 which can also appear as statement terminators
 with the last statement having an optional terminator.</p>
 <p>Much of the syntax of PHP matches that of JavaScript.</p>
-<h2 id="comments" tabindex="-1">Comments</h2>
+<h2 id="comments">Comments</h2>
 <p>Single-line comments begin with <code>//</code> or <code>#</code>.
 Multi-line comments are delimited by <code>/*</code> and <code>*/</code>.</p>
-<h2 id="variables" tabindex="-1">Variables</h2>
+<h2 id="variables">Variables</h2>
 <p>PHP variable names must begin with <code>$</code>
 and typical follow that with a lowercase letter.
 When the name consists of multiple works, camel-case is preferred.
@@ -177,7 +178,7 @@ Variable names are case-sensitive, but class and function names are not.</p>
 <p>The built-in function <code>isset</code> function returns a boolean
 that indicates whether a variable has be set.
 For example, <code>isset($someName)</code>.</p>
-<h2 id="builtin-data-types" tabindex="-1">Builtin Data Types</h2>
+<h2 id="builtin-data-types">Builtin Data Types</h2>
 <p>The PHP built-in data types are
 Boolean, Integer, Float, String,
 Array, Object, <code>NULL</code>, and Resource.</p>
@@ -187,48 +188,48 @@ It is the default value of variables that have not be assigned a value.</p>
 and are commonly written in all lowercase.</p>
 <p>The Resource type is used to store references to
 functions and other resources that are defined outside of PHP.</p>
-<h2 id="strings" tabindex="-1">Strings</h2>
+<h2 id="strings">Strings</h2>
 <p>Strings can be delimited with single or double quotes.
-PHP also supports &quot;heredocs&quot;. TODO: Show this syntax!</p>
+PHP also supports “heredocs”. TODO: Show this syntax!</p>
 <p>Strings can be concatenated using the <code>.</code> (period) operator.</p>
 <p>Double-quoted strings support interpolation of PHP variables.
 For example, these lines are equivalent:</p>
-<pre><code class="language-php">echo &quot;color = &quot; . $color . &quot;&lt;br&gt;&quot;;
-echo &quot;color = $color&lt;br&gt;&quot;;
+<pre><code class="language-php">echo "color = " . $color . "&#x3C;br>";
+echo "color = $color&#x3C;br>";
 </code></pre>
 <p>Variable names in strings can optionally be surrounded by curly braces
 to prevent ambiguity.
 However, only variable names can be interpreted.
 Expressions, including function calls, in curly braces are not interpolated.</p>
-<p>Another way to create a string is a &quot;heredoc&quot;
+<p>Another way to create a string is a “heredoc”
 which can create a multi-line string that
 supports interpolation like double quoted strings.
 For example:</p>
-<pre><code class="language-php">$address = &lt;&lt;&lt;EOT
+<pre><code class="language-php">$address = &#x3C;&#x3C;&#x3C;EOT
 123 Some Street
 Somewhere, MO
 12345
 EOT;
 </code></pre>
-<p>Any delimiter word can follow <code>&lt;&lt;&lt;</code> as long as the same word is used at the end.</p>
-<p>The final way to create a string is a &quot;nowdoc&quot;.
+<p>Any delimiter word can follow <code>&#x3C;&#x3C;&#x3C;</code> as long as the same word is used at the end.</p>
+<p>The final way to create a string is a “nowdoc”.
 This is similar to a heredoc,
 but like single-quoted strings does not support interpolation.
 For example:</p>
-<pre><code class="language-php">$address = &lt;&lt;&lt;'EOT'
+<pre><code class="language-php">$address = &#x3C;&#x3C;&#x3C;'EOT'
 123 Some Street
 Somewhere, MO
 12345
 EOT;
 </code></pre>
 <p>Note that the first occurrence of the delimiter word is in single quotes.</p>
-<h2 id="arrays" tabindex="-1">Arrays</h2>
+<h2 id="arrays">Arrays</h2>
 <p>PHP supports three types of arrays: indexed, associative, and multidimensional.</p>
 <p>The <code>array</code> function is used to created an array.
 For example:</p>
-<pre><code class="language-php">$colors = array(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;);
+<pre><code class="language-php">$colors = array("red", "green", "blue");
 </code></pre>
-<p>This is called an &quot;indexed array&quot;.
+<p>This is called an “indexed array”.
 To access an array element, specify an index in square brackets.
 For example, <code>$colors[1]</code> gives <code>green</code>.</p>
 <p>The <code>count</code> function takes an array and returns its length.</p>
@@ -250,7 +251,7 @@ When multiple arrays are passed, the resulting array contains
 an element corresponding to each element in each of the arrays.
 The callback can be the string name of a function or function definition.
 For example:</p>
-<pre><code class="language-php">$upper_colors = array_map(&quot;strtoupper&quot;, $colors);
+<pre><code class="language-php">$upper_colors = array_map("strtoupper", $colors);
 </code></pre>
 <p>The <code>array_reduce</code> function creates a single value from an array.
 It takes an array and a callback.
@@ -261,21 +262,21 @@ $sum = array_reduce($numbers, function ($carry, $number) {
   return $carry + $number;
 });
 </code></pre>
-<h2 id="associative-arrays" tabindex="-1">Associative Arrays</h2>
+<h2 id="associative-arrays">Associative Arrays</h2>
 <p>Associative arrays hold key/value pairs.
 For example, to create an association between months and their numbers:</p>
-<pre><code class="language-php">$monthToNumber = array('January'=&gt;1, 'February'=&gt;2, ..., 'December'=&gt;12);
+<pre><code class="language-php">$monthToNumber = array('January'=>1, 'February'=>2, ..., 'December'=>12);
 </code></pre>
 <p>To get the value for a given key, use the syntax <code>$assocArray[key]</code>.
 JavaScript-like syntax of <code>$assocArray.property</code> is not supported.</p>
 <p>To add a key/value pair or modify the value of an existing key,
 use the syntax <code>$assocArray[key] = value;</code>.</p>
 <p>To iterate over the keys and values in an associative array:</p>
-<pre><code class="language-php">foreach ($assocArray as $key=&gt;$value) {
+<pre><code class="language-php">foreach ($assocArray as $key=>$value) {
   // Use $key and $value.
 }
 </code></pre>
-<h2 id="multidimensional-arrays" tabindex="-1">Multidimensional Arrays</h2>
+<h2 id="multidimensional-arrays">Multidimensional Arrays</h2>
 <p>PHP arrays can contain arrays.
 This enables creating multidimensional arrays.
 For example:</p>
@@ -290,7 +291,7 @@ For example:</p>
 <pre><code class="language-php">$point2 = points[2]; // array(2, 3)
 $value2 = points[2][1]; // 3
 </code></pre>
-<h2 id="classes" tabindex="-1">Classes</h2>
+<h2 id="classes">Classes</h2>
 <p>A PHP class can define properties and methods.
 For example:</p>
 <pre><code class="language-php">class Car {
@@ -300,22 +301,22 @@ For example:</p>
   public $year;
 
   public function __construct($year, $make, $model, $color) {
-    $this-&gt;color = $color;
-    $this-&gt;make = $make;
-    $this-&gt;model = $model;
-    $this-&gt;year = $year;
+    $this->color = $color;
+    $this->make = $make;
+    $this->model = $model;
+    $this->year = $year;
   }
 
   public function toString() {
-    return &quot;$this-&gt;year $this-&gt;make $this-&gt;model in $this-&gt;color&quot;;
+    return "$this->year $this->make $this->model in $this->color";
   }
 }
 </code></pre>
 <p>TODO: What access specifiers besides <code>public</code> are supported?</p>
 <p>Method parameter names must begin with <code>$</code> just like variable names.</p>
 <p>Methods refer to the current object using <code>$this</code>
-and refer to properties of that object using <code>-&gt;</code>.</p>
-<h2 id="magic-methods" tabindex="-1">Magic Methods</h2>
+and refer to properties of that object using <code>-></code>.</p>
+<h2 id="magic-methods">Magic Methods</h2>
 <p>See <a href="https://www.php.net/manual/en/language.oop5.magic.php?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
 <p>They include:</p>
 <ul>
@@ -337,22 +338,22 @@ and refer to properties of that object using <code>-&gt;</code>.</p>
 <li><code>__clone()</code></li>
 <li><code>__debugInfo()</code></li>
 </ul>
-<h2 id="objects" tabindex="-1">Objects</h2>
+<h2 id="objects">Objects</h2>
 <p>The <code>new</code> keyword is used to create an instance of a class.
 For example:</p>
-<pre><code class="language-php">$myCar = new Car(2015, &quot;MINI&quot;, &quot;Cooper&quot;, &quot;orange&quot;);
+<pre><code class="language-php">$myCar = new Car(2015, "MINI", "Cooper", "orange");
 </code></pre>
-<p>To access a public property of an object, use the <code>-&gt;</code> operator.
+<p>To access a public property of an object, use the <code>-></code> operator.
 For example:</p>
-<pre><code class="language-php">echo 'color is ' . $myCar-&gt;color . '&lt;br&gt;';
+<pre><code class="language-php">echo 'color is ' . $myCar->color . '&#x3C;br>';
 </code></pre>
-<p>To call a public method of an object, use the <code>-&gt;</code> operator.
+<p>To call a public method of an object, use the <code>-></code> operator.
 For example:</p>
-<pre><code class="language-php">echo $myCar-&gt;toString();
+<pre><code class="language-php">echo $myCar->toString();
 </code></pre>
-<h2 id="conditional-logic" tabindex="-1">Conditional Logic</h2>
+<h2 id="conditional-logic">Conditional Logic</h2>
 <p>PHP supports the same syntax for <code>if</code> and <code>switch</code> statements as JavaScript.</p>
-<h2 id="iteration" tabindex="-1">Iteration</h2>
+<h2 id="iteration">Iteration</h2>
 <p>PHP supports the same syntax for
 <code>for</code>, <code>while</code>, and <code>do while</code> loops as JavaScript.</p>
 <pre><code class="language-php">for (initializations; condition; updates) {
@@ -369,25 +370,25 @@ do {
 </code></pre>
 <p>The <code>foreach</code> loop iterates over the elements of an array.
 For example:</p>
-<pre><code class="language-php">$colors = array(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;);
+<pre><code class="language-php">$colors = array("red", "green", "blue");
 foreach ($colors as $color) {
   // use $color
 }
 </code></pre>
 <p>To also get the index in each iteration:</p>
-<pre><code class="language-php">foreach ($colors as $index=&gt;$color) {
+<pre><code class="language-php">foreach ($colors as $index=>$color) {
   $number = $index + 1;
-  echo &quot;$number) $color&lt;br&gt;&quot;;
+  echo "$number) $color&#x3C;br>";
 }
 </code></pre>
 <p>If elements will be modified inside the body of <code>foreach</code>,
-precede the variable with <code>&amp;</code> to get a reference.
+precede the variable with <code>&#x26;</code> to get a reference.
 For example:</p>
-<pre><code class="language-php">foreach ($colors as &amp;$color) {
+<pre><code class="language-php">foreach ($colors as &#x26;$color) {
   $color = strtoupper($color);
 }
 </code></pre>
-<h2 id="functions" tabindex="-1">Functions</h2>
+<h2 id="functions">Functions</h2>
 <p>To define a named function:</p>
 <pre><code class="language-php">function name(parameters) {
   ...
@@ -407,19 +408,19 @@ $b = 2;
 function demo($c) {
   global $a, $b; // cannot access $w and $x without this
   $d = 4;
-  echo &quot;a=$a, b=$b, c=$c, d=$d&lt;br&gt;&quot;; // a=1, b=2, c=3, d=4
+  echo "a=$a, b=$b, c=$c, d=$d&#x3C;br>"; // a=1, b=2, c=3, d=4
 }
 
 demo(3);
 </code></pre>
-<h2 id="including-other-php-files" tabindex="-1">Including Other PHP Files</h2>
+<h2 id="including-other-php-files">Including Other PHP Files</h2>
 <p>A PHP source file can include others.
 This is typically done at the top of the file.
 For example:</p>
-<pre><code class="language-php">&lt;?php
+<pre><code class="language-php">&#x3C;?php
   include 'file-name.php';
   include 'subdirectory/file-name.php';
-?&gt;
+?>
 
 It is an error to define a function or class multiple times.
 If a file being included defines functions or classes,
@@ -429,28 +430,28 @@ to avoid this error.
 For example, here is the file `math.php` that defines math functions:
 
 ```php
-&lt;?php
+&#x3C;?php
 function sum($n1, $n2) {
   return $n1 + $n2;
 }
 // Could define more math functions here.
-?&gt;
+?>
 </code></pre>
-<p>Note that the above file doesn't indicate what it exports.
+<p>Note that the above file doesn’t indicate what it exports.
 All the functions and classes it defines are automatically exported.</p>
 <p>Here is a PHP file that uses this:</p>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;body&gt;
-    &lt;?php
+<pre><code class="language-php">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;body>
+    &#x3C;?php
     include 'math.php';
 
-    echo 'sum = ' . sum(2, 3) . '&lt;br&gt;'; // 5
-    ?&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    echo 'sum = ' . sum(2, 3) . '&#x3C;br>'; // 5
+    ?>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="superglobals" tabindex="-1">Superglobals</h2>
+<h2 id="superglobals">Superglobals</h2>
 <p>Superglobals are predefined PHP variables.
 PHP currently defines these:</p>
 <ul>
@@ -495,7 +496,7 @@ the contents of <code>$_GET</code>, <code>$_POST</code>, and <code>$_COOKIE</cod
 <li>
 <p><code>$_ENV</code> is an associative array that holds environment variables
 that are passed in using the <code>environment</code> method.
-TODO: It's unclear what does this.</p>
+TODO: It’s unclear what does this.</p>
 </li>
 </ul>
 <p>To get the value of a query parameter, use <code>$_GET['name']</code>.
@@ -511,28 +512,27 @@ To delete a cookie, set it with a negative expiration value.</p>
 <p>Session values are only saved if a session has been started.
 To start a session, add the following on every page that accesses it,
 or in a file that all such pages include:</p>
-<pre><code class="language-php">&lt;?php session_start(); ?&gt;
+<pre><code class="language-php">&#x3C;?php session_start(); ?>
 </code></pre>
 <p>To set a session variable, use the syntax <code>$_SESSION['name'] = value;</code></p>
-<h2 id="query-parameters" tabindex="-1">Query Parameters</h2>
+<h2 id="query-parameters">Query Parameters</h2>
 <p>Query parameters appear at the end of URLs after the <code>?</code> character.
-They are name/value pairs where each pair is separated by a <code>&amp;</code> character
+They are name/value pairs where each pair is separated by a <code>&#x26;</code> character
 and each name and value are separated by an <code>=</code> character.
-For example, <code>?make=MINI&amp;model=Cooper&amp;year=2015</code>.</p>
+For example, <code>?make=MINI&#x26;model=Cooper&#x26;year=2015</code>.</p>
 <p>To get the value of a query parameter, use <code>$_GET['someName']</code>.
 The built-in function <code>isset</code> can be used to
 determine if a query parameter is set.
 For example, <code>isset($_GET['someName'])</code>.</p>
-<h2 id="calculator-example" tabindex="-1">Calculator Example</h2>
+<h2 id="calculator-example">Calculator Example</h2>
 <p>This is a ridiculous use of PHP because every button push triggers
 a page refresh. But it does work and it illustrates many PHP concepts.</p>
-<p><img alt="PHP Calculator" class="keep-size"
-  src="/blog/assets/php-calculator.png?v=1.1.1"></p>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;PHP Hello World&lt;/title&gt;
-    &lt;style&gt;
+<p><img alt="PHP Calculator" class="keep-size" src="/blog/assets/php-calculator.png?v=1.1.1"></p>
+<pre><code class="language-php">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>PHP Hello World&#x3C;/title>
+    &#x3C;style>
       button {
         border: 1px solid #575B5A;
         color: white;
@@ -583,10 +583,10 @@ a page refresh. But it does work and it illustrates many PHP concepts.</p>
         display: flex;
         align-items: center;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;?php
+    &#x3C;/style>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;?php
     $digit = $_GET['digit'];
     $lastOperator = $_GET['lastOperator'];
     $operator = $_GET['operator'];
@@ -652,48 +652,48 @@ a page refresh. But it does work and it illustrates many PHP concepts.</p>
       }
       $lastOperator = $operator;
     }
-    ?&gt;
-    &lt;form&gt;
-      &lt;div class=&quot;result&quot;&gt;
-        &lt;?= $display ?&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;button name=&quot;special&quot; value=&quot;clear&quot;&gt;AC&lt;/button&gt;
-        &lt;button name=&quot;special&quot; value=&quot;sign&quot;&gt;+/-&lt;/button&gt;
-        &lt;button name=&quot;special&quot; value=&quot;%&quot;&gt;％&lt;/button&gt;
-        &lt;button name=&quot;operator&quot; value=&quot;/&quot;&gt;÷&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;7&quot;&gt;7&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;8&quot;&gt;8&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;9&quot;&gt;9&lt;/button&gt;
-        &lt;button name=&quot;operator&quot; value=&quot;*&quot;&gt;x&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;4&quot;&gt;4&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;5&quot;&gt;5&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;6&quot;&gt;6&lt;/button&gt;
-        &lt;button name=&quot;operator&quot; value=&quot;-&quot;&gt;-&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;1&quot;&gt;1&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;2&quot;&gt;2&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;3&quot;&gt;3&lt;/button&gt;
-        &lt;button name=&quot;operator&quot; value=&quot;+&quot;&gt;+&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;button class=&quot;double&quot; name=&quot;digit&quot; value=&quot;0&quot;&gt;0&lt;/button&gt;
-        &lt;button name=&quot;digit&quot; value=&quot;.&quot;&gt;.&lt;/button&gt;
-        &lt;button name=&quot;operator&quot; value=&quot;=&quot;&gt;＝&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;input type=&quot;hidden&quot; name=&quot;n1&quot; value=&quot;&lt;?= $n1 ?&gt;&quot;&gt;
-      &lt;input type=&quot;hidden&quot; name=&quot;n2&quot; value=&quot;&lt;?= $n2 ?&gt;&quot;&gt;
-      &lt;input type=&quot;hidden&quot; name=&quot;lastOperator&quot; value=&quot;&lt;?= $lastOperator ?&gt;&quot;&gt;
-    &lt;form&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    ?>
+    &#x3C;form>
+      &#x3C;div class="result">
+        &#x3C;?= $display ?>
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;button name="special" value="clear">AC&#x3C;/button>
+        &#x3C;button name="special" value="sign">+/-&#x3C;/button>
+        &#x3C;button name="special" value="%">％&#x3C;/button>
+        &#x3C;button name="operator" value="/">÷&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;button name="digit" value="7">7&#x3C;/button>
+        &#x3C;button name="digit" value="8">8&#x3C;/button>
+        &#x3C;button name="digit" value="9">9&#x3C;/button>
+        &#x3C;button name="operator" value="*">x&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;button name="digit" value="4">4&#x3C;/button>
+        &#x3C;button name="digit" value="5">5&#x3C;/button>
+        &#x3C;button name="digit" value="6">6&#x3C;/button>
+        &#x3C;button name="operator" value="-">-&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;button name="digit" value="1">1&#x3C;/button>
+        &#x3C;button name="digit" value="2">2&#x3C;/button>
+        &#x3C;button name="digit" value="3">3&#x3C;/button>
+        &#x3C;button name="operator" value="+">+&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;button class="double" name="digit" value="0">0&#x3C;/button>
+        &#x3C;button name="digit" value=".">.&#x3C;/button>
+        &#x3C;button name="operator" value="=">＝&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;input type="hidden" name="n1" value="&#x3C;?= $n1 ?>">
+      &#x3C;input type="hidden" name="n2" value="&#x3C;?= $n2 ?>">
+      &#x3C;input type="hidden" name="lastOperator" value="&#x3C;?= $lastOperator ?>">
+    &#x3C;form>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="mysql" tabindex="-1">MySQL</h2>
+<h2 id="mysql">MySQL</h2>
 <p>MySQL is the most commonly used relational database in PHP applications.</p>
 <p>To install MySQL on macOS,
 install <a href="https://brew.sh/?v=1.1.1" rel="noopener" target="_blank">Homebrew</a>
@@ -704,14 +704,14 @@ and add the following at the end:</p>
 </code></pre>
 <p>To start the MySQL server, enter <code>mysql.server start</code>.
 To stop it, enter <code>mysql.server stop</code>.</p>
-<p>Initially the only user is &quot;root&quot; and it has no password.
-To set a password for the &quot;root&quot; user:</p>
+<p>Initially the only user is “root” and it has no password.
+To set a password for the “root” user:</p>
 <ul>
 <li>enter <code>mysql -uroot</code></li>
 <li>enter <code>alter user 'root'@'localhost' identified by mysql_native_password 'new-password';</code></li>
 <li>enter <code>exit</code></li>
 </ul>
-<h2 id="phpmyadmin" tabindex="-1">phpMyAdmin</h2>
+<h2 id="phpmyadmin">phpMyAdmin</h2>
 <p><a href="https://www.phpmyadmin.net/?v=1.1.1" rel="noopener" target="_blank">phpMyAdmin</a>
 is a free tool implemented in PHP
 that provides a web UI for managing MySQL databases.</p>
@@ -734,45 +734,37 @@ start it by entering <code>sudo apachectl start</code>.</p>
 <p>If the MySQL server is not running,
 start it by entering <code>mysql.server start</code>.</p>
 <p>To run phpMyAdmin, browse <code>localhost/phpMyAdmin</code>.
-Enter a username and password such as for the &quot;root&quot; user.</p>
-<p><img alt="phpMyAdmin login" style="width: 20%"
-  src="/blog/assets/phpMyAdmin-1-login.png?v=1.1.1"></p>
+Enter a username and password such as for the “root” user.</p>
+<p><img alt="phpMyAdmin login" style="width: 20%" src="/blog/assets/phpMyAdmin-1-login.png?v=1.1.1"></p>
 <p>After logging in, the settings page is displayed.</p>
-<p><img alt="phpMyAdmin settings" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-2-settings.png?v=1.1.1"></p>
-<p>Click the &quot;Databases&quot; tab to see a list of existing databases
+<p><img alt="phpMyAdmin settings" style="width: 70%" src="/blog/assets/phpMyAdmin-2-settings.png?v=1.1.1"></p>
+<p>Click the “Databases” tab to see a list of existing databases
 and create new ones.</p>
-<p><img alt="phpMyAdmin databases" style="width: 50%"
-  src="/blog/assets/phpMyAdmin-3-databases.png?v=1.1.1"></p>
+<p><img alt="phpMyAdmin databases" style="width: 50%" src="/blog/assets/phpMyAdmin-3-databases.png?v=1.1.1"></p>
 <p>Click the link for an existing database to see its tables.</p>
-<p><img alt="phpMyAdmin structure" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-4-structure.png?v=1.1.1"></p>
+<p><img alt="phpMyAdmin structure" style="width: 70%" src="/blog/assets/phpMyAdmin-4-structure.png?v=1.1.1"></p>
 <p>Click the link for an existing table to see its rows.</p>
-<p><img alt="phpMyAdmin tables" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-5-table-browse.png?v=1.1.1"></p>
-<p>Click the &quot;SQL&quot; tab to enter SQL for any kind of operation
+<p><img alt="phpMyAdmin tables" style="width: 70%" src="/blog/assets/phpMyAdmin-5-table-browse.png?v=1.1.1"></p>
+<p>Click the “SQL” tab to enter SQL for any kind of operation
 including creating tables, querying, inserting, updating, and deleting.
 The UI also provides ways of doing all of these things
 without writing SQL.</p>
-<p><img alt="phpMyAdmin SQL" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-6-sql.png?v=1.1.1"></p>
+<p><img alt="phpMyAdmin SQL" style="width: 70%" src="/blog/assets/phpMyAdmin-6-sql.png?v=1.1.1"></p>
 <p>To create a new table without writing SQL,
 click a database in the left nav,
-enter a table name and number of columns under &quot;Create table&quot;,
-and press the &quot;Go&quot; button.
+enter a table name and number of columns under “Create table”,
+and press the “Go” button.
 Enter the column details in the UI below.
-Note that the &quot;A_I&quot; checkboxes are for auto-increment
+Note that the “A_I” checkboxes are for auto-increment
 which is often used with primary keys.</p>
-<p><img alt="phpMyAdmin columns" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-7-columns.png?v=1.1.1"></p>
-<h2 id="database-with-crud" tabindex="-1">Database with CRUD</h2>
+<p><img alt="phpMyAdmin columns" style="width: 70%" src="/blog/assets/phpMyAdmin-7-columns.png?v=1.1.1"></p>
+<h2 id="database-with-crud">Database with CRUD</h2>
 <p>Here is an example web app that performs
 Create/Retrieve/Update/Delete operations on a database table.</p>
-<p><img alt="PHP dogs app" style="width: 30%"
-  src="/blog/assets/php-dogs-app.png?v=1.1.1"></p>
-<p>Let's start with the file <code>includes/db.php</code>
+<p><img alt="PHP dogs app" style="width: 30%" src="/blog/assets/php-dogs-app.png?v=1.1.1"></p>
+<p>Let’s start with the file <code>includes/db.php</code>
 which creates a connection to the database.</p>
-<pre><code class="language-php">&lt;?php
+<pre><code class="language-php">&#x3C;?php
 $dbServername = '127.0.0.1'; // 'localhost' doesn't work
 $dbUsername = 'root';
 $dbPassword = 'root';
@@ -780,8 +772,8 @@ $dbName = 'demo';
 $dbConn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);
 </code></pre>
 <p>Next is the file <code>includes/dog-crud.php</code> that
-inserts, updates, and deletes records in the &quot;dogs&quot; database table.</p>
-<pre><code class="language-php">&lt;?php
+inserts, updates, and deletes records in the “dogs” database table.</p>
+<pre><code class="language-php">&#x3C;?php
 include_once 'db.php';
 
 $fullAction = $_POST['action'];
@@ -796,35 +788,35 @@ $sql = '';
 
 switch ($action) {
   case 'delete':
-    $sql = &quot;delete from dogs where id = $id;&quot;;
+    $sql = "delete from dogs where id = $id;";
     mysqli_query($dbConn, $sql);
     break;
   case 'insert':
-    $sql = &quot;insert into dogs (name, breed) values ('$name', '$breed');&quot;;
+    $sql = "insert into dogs (name, breed) values ('$name', '$breed');";
     mysqli_query($dbConn, $sql);
     break;
   case 'edit':
     // Do nothing.
     break;
   case 'update':
-    $sql = &quot;update dogs set name='$name', breed='$breed' where id = $id;&quot;;
+    $sql = "update dogs set name='$name', breed='$breed' where id = $id;";
     mysqli_query($dbConn, $sql);
     break;
   default:
-    $action = &quot;error-${action}&quot;;
+    $action = "error-${action}";
 }
 
 // If any output is produced before this,
 // such as by echo statements, you'll get
-// &quot;Warning: Cannot modify header information - headers already sent by&quot;.
-header(&quot;Location: ../dogs.php?action=$action&amp;id=$id&quot;);
+// "Warning: Cannot modify header information - headers already sent by".
+header("Location: ../dogs.php?action=$action&#x26;id=$id");
 </code></pre>
 <p>Finally, the file <code>dogs.php</code> generates the HTML for the app.</p>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;PHP Dogs&lt;/title&gt;
-    &lt;style&gt;
+<pre><code class="language-php">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>PHP Dogs&#x3C;/title>
+    &#x3C;style>
       .actions {
         text-align: center;
       }
@@ -865,10 +857,10 @@ header(&quot;Location: ../dogs.php?action=$action&amp;id=$id&quot;);
         border: 1px solid lightgray;
         padding: 0.5rem;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;?php
+    &#x3C;/style>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;?php
     include_once 'includes/db.php';
 
     function startsWith($text, $prefix) {
@@ -879,7 +871,7 @@ header(&quot;Location: ../dogs.php?action=$action&amp;id=$id&quot;);
     $action = $_GET['action'];
     $id = $_GET['id'];
 
-    $btnAction = $action === 'edit' ? &quot;update-$id&quot; : 'insert';
+    $btnAction = $action === 'edit' ? "update-$id" : 'insert';
     $btnText = $action === 'edit' ? 'Update' : 'Add';
 
 
@@ -893,64 +885,65 @@ header(&quot;Location: ../dogs.php?action=$action&amp;id=$id&quot;);
     // Fetch each result set row as an associative array.
     $dogs = [];
     while ($dog = mysqli_fetch_assoc($results)) {
-      if ($action === 'edit' &amp;&amp; $id === $dog['id']) {
+      if ($action === 'edit' &#x26;&#x26; $id === $dog['id']) {
         $name = $dog['name'];
         $breed = $dog['breed'];
       }
       array_push($dogs, $dog);
     }
-    ?&gt;
+    ?>
 
-    &lt;form method=&quot;POST&quot; action=&quot;includes/dog-crud.php&quot;&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;label for=&quot;name&quot;&gt;Name&lt;/label&gt;
-        &lt;input id=&quot;name&quot; name=&quot;name&quot; value=&quot;&lt;?= $name ?&gt;&quot;&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;row&quot;&gt;
-        &lt;label for=&quot;breed&quot;&gt;Breed&lt;/label&gt;
-        &lt;input id=&quot;breed&quot; name=&quot;breed&quot; value=&quot;&lt;?= $breed ?&gt;&quot;&gt;
-      &lt;/div&gt;
-      &lt;button name=&quot;action&quot; value=&quot;&lt;?= $btnAction ?&gt;&quot;&gt;
-        &lt;?= $btnText ?&gt;
-      &lt;/button&gt;
+    &#x3C;form method="POST" action="includes/dog-crud.php">
+      &#x3C;div class="row">
+        &#x3C;label for="name">Name&#x3C;/label>
+        &#x3C;input id="name" name="name" value="&#x3C;?= $name ?>">
+      &#x3C;/div>
+      &#x3C;div class="row">
+        &#x3C;label for="breed">Breed&#x3C;/label>
+        &#x3C;input id="breed" name="breed" value="&#x3C;?= $breed ?>">
+      &#x3C;/div>
+      &#x3C;button name="action" value="&#x3C;?= $btnAction ?>">
+        &#x3C;?= $btnText ?>
+      &#x3C;/button>
 
-      &lt;table&gt;
-        &lt;caption&gt;Dogs&lt;/caption&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Breed&lt;/th&gt;
-            &lt;th&gt;Actions&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          &lt;?php
+      &#x3C;table>
+        &#x3C;caption>Dogs&#x3C;/caption>
+        &#x3C;thead>
+          &#x3C;tr>
+            &#x3C;th>Name&#x3C;/th>
+            &#x3C;th>Breed&#x3C;/th>
+            &#x3C;th>Actions&#x3C;/th>
+          &#x3C;/tr>
+        &#x3C;/thead>
+        &#x3C;tbody>
+          &#x3C;?php
             foreach ($dogs as $dog) {
               $id = $dog['id'];
-              echo '&lt;tr&gt;';
-              echo &quot;&lt;td&gt;{$dog['name']}&lt;/td&gt;&quot;;
-              echo &quot;&lt;td&gt;{$dog['breed']}&lt;/td&gt;&quot;;
-              echo '&lt;td class=&quot;actions&quot;&gt;';
+              echo '&#x3C;tr>';
+              echo "&#x3C;td>{$dog['name']}&#x3C;/td>";
+              echo "&#x3C;td>{$dog['breed']}&#x3C;/td>";
+              echo '&#x3C;td class="actions">';
               //TODO: How can you ask the user to confirm the delete without JS?
-              echo &quot;&lt;button name='action' value='delete-$id'&gt;🗑&lt;/button&gt;&quot;;
-              echo &quot;&lt;button name='action' value='edit-$id'&gt;✎&lt;/button&gt;&quot;;
-              echo '&lt;/td&gt;';
-              echo '&lt;/tr&gt;';
+              echo "&#x3C;button name='action' value='delete-$id'>🗑&#x3C;/button>";
+              echo "&#x3C;button name='action' value='edit-$id'>✎&#x3C;/button>";
+              echo '&#x3C;/td>';
+              echo '&#x3C;/tr>';
             }
-          ?&gt;
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/form&gt;
+          ?>
+        &#x3C;/tbody>
+      &#x3C;/table>
+    &#x3C;/form>
 
-    &lt;?php
+    &#x3C;?php
       if (startsWith($action, 'error')) {
         $pieces = explode('-', $action);
-        echo '&lt;div class=&quot;error&quot;&gt;';
-        echo &quot;An invalid action \&quot;$pieces[1]\&quot; was submitted.&quot;;
-        echo '&lt;/div&gt;';
+        echo '&#x3C;div class="error">';
+        echo "An invalid action \"$pieces[1]\" was submitted.";
+        echo '&#x3C;/div>';
       }
-    ?&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
-</article> </body></html>
+    ?>
+  &#x3C;/body>
+&#x3C;/html>
+</code></pre> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

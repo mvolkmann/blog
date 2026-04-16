@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="en"> <head><title>Progressive Web Apps (PWAs)</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Progressive Web Apps (PWAs)</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#advantages-over-native-apps">Advantages Over Native Apps</a></li><li><a href="#service-workers">Service Workers</a></li><li><a href="#registering-a-service-worker">Registering a Service Worker</a></li><li><a href="#manifest-file">Manifest File</a></li><li><a href="#generating-icons">Generating Icons</a></li><ul><li><a href="#storage-limits">Storage Limits</a></li></ul><li><a href="#evaluating-readiness">Evaluating Readiness</a></li><ul><li><a href="#message-passing">Message Passing</a></li></ul><li><a href="#caching-strategies">Caching Strategies</a></li><li><a href="#offline-support">Offline Support</a></li><li><a href="#service-worker-events">Service Worker Events</a></li><ul><li><a href="#install-event">install Event</a></li><li><a href="#activate-event">activate Event</a></li><li><a href="#message-event">message Event</a></li><li><a href="#fetch-event">fetch Event</a></li><li><a href="#sync-event">sync Event</a></li><li><a href="#push-event">push Event</a></li></ul><li><a href="#running-and-installing-a-pwa">Running and Installing a PWA</a></li><li><a href="#security">Security</a></li><li><a href="#managing-service-workers">Managing Service Workers</a></li><ul><li><a href="#updating-a-service-worker">Updating a Service Worker</a></li><li><a href="#viewing-source-code">Viewing Source Code</a></li><li><a href="#cached-files">Cached Files</a></li><li><a href="#clearing-everything">Clearing Everything</a></li><li><a href="#simulating-offline">Simulating Offline</a></li><li><a href="#bypassing-service-workers">Bypassing Service Workers</a></li><li><a href="#service-workers-in-macos-safari">Service Workers in macOS Safari</a></li><li><a href="#service-workers-in-ios-safari">Service Workers in iOS Safari</a></li></ul><li><a href="#push-notifications">Push Notifications</a></li><li><a href="#workbox">Workbox</a></li><li><a href="#resources">Resources</a></li><li><a href="#outstanding-questions">Outstanding Questions</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Progressive Web Apps (PWAs)</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Progressive Web Apps (PWAs)</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#advantages-over-native-apps">Advantages Over Native Apps</a></li><li><a href="#service-workers">Service Workers</a></li><li><a href="#registering-a-service-worker">Registering a Service Worker</a></li><li><a href="#manifest-file">Manifest File</a></li><li><a href="#generating-icons">Generating Icons</a></li><ul><li><a href="#storage-limits">Storage Limits</a></li></ul><li><a href="#evaluating-readiness">Evaluating Readiness</a></li><ul><li><a href="#message-passing">Message Passing</a></li></ul><li><a href="#caching-strategies">Caching Strategies</a></li><li><a href="#offline-support">Offline Support</a></li><li><a href="#service-worker-events">Service Worker Events</a></li><ul><li><a href="#install-event">install Event</a></li><li><a href="#activate-event">activate Event</a></li><li><a href="#message-event">message Event</a></li><li><a href="#fetch-event">fetch Event</a></li><li><a href="#sync-event">sync Event</a></li><li><a href="#push-event">push Event</a></li></ul><li><a href="#running-and-installing-a-pwa">Running and Installing a PWA</a></li><li><a href="#security">Security</a></li><li><a href="#managing-service-workers">Managing Service Workers</a></li><ul><li><a href="#updating-a-service-worker">Updating a Service Worker</a></li><li><a href="#viewing-source-code">Viewing Source Code</a></li><li><a href="#cached-files">Cached Files</a></li><li><a href="#clearing-everything">Clearing Everything</a></li><li><a href="#simulating-offline">Simulating Offline</a></li><li><a href="#bypassing-service-workers">Bypassing Service Workers</a></li><li><a href="#service-workers-in-macos-safari">Service Workers in macOS Safari</a></li><li><a href="#service-workers-in-ios-safari">Service Workers in iOS Safari</a></li></ul><li><a href="#push-notifications">Push Notifications</a></li><li><a href="#workbox">Workbox</a></li><li><a href="#resources">Resources</a></li><li><a href="#outstanding-questions">Outstanding Questions</a></li></ul></aside> <article> <style>
   img {
     border: 1px solid gray;
   }
 </style>
-<p><img alt="PWA logo" style="border: none; width: 30%"
-  src="/blog/assets/pwa-logo.svg?v=1.1.1"
-  title="PWA logo"></p>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<p><img alt="PWA logo" style="border: none; width: 30%" src="/blog/assets/pwa-logo.svg?v=1.1.1" title="PWA logo"></p>
+<h2 id="overview">Overview</h2>
 <p>Progressive Web Apps (PWAs) enable using web technologies
 to implement mobile applications.</p>
 <p>PWAs can provide many of the features
@@ -24,26 +24,26 @@ of files from the internet</li>
 they have left the application, to reengage them
 (using the Push API and the Notifications API)</li>
 <li>look like native apps by running
-without browser &quot;chrome&quot; or in full-screen mode</li>
+without browser “chrome” or in full-screen mode</li>
 <li>support multiple operating systems with a single code base,
 reducing development costs</li>
 </ul>
 <p>Supported features include background sync, bluetooth, camera access,
 contact access, device motion, file access, geolocation, offline mode,
 push notifications, and touch gestures.</p>
-<h2 id="advantages-over-native-apps" tabindex="-1">Advantages Over Native Apps</h2>
+<h2 id="advantages-over-native-apps">Advantages Over Native Apps</h2>
 <p>The advantages that PWAs have over native mobile apps include the ability to:</p>
 <ul>
 <li>implement using widely known web technologies</li>
 <li>bypass app store review</li>
 <li>allow users to access apps by URL
 rather than downloading them from an app store</li>
-<li>avoid app store cut of purchase prices (such as Apple's 30% cut)</li>
+<li>avoid app store cut of purchase prices (such as Apple’s 30% cut)</li>
 <li>run on the web, Android, and iOS with a single code base</li>
 <li>provide automatic app updates</li>
 </ul>
 <p>TODO: Fix the order of the remaining sections.</p>
-<h2 id="service-workers" tabindex="-1">Service Workers</h2>
+<h2 id="service-workers">Service Workers</h2>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API?v=1.1.1" rel="noopener" target="_blank">Service Workers</a> are the key to many PWA features.</p>
 <p>A service worker is a kind of <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API?v=1.1.1" rel="noopener" target="_blank">Web Worker</a>.
 This means that its functionality is defined in a JavaScript source file
@@ -53,7 +53,7 @@ share access to the service workers of the app.
 Even if the window and tabs are closed,
 the service workers of the app can continue executing.
 Viewing a service worker in Chrome DevTools
-will list each of these windows and tabs as &quot;Clients&quot; below the &quot;Status&quot;.</p>
+will list each of these windows and tabs as “Clients” below the “Status”.</p>
 <p>Service workers have many use cases:</p>
 <ul>
 <li>enable offline functionality</li>
@@ -72,7 +72,7 @@ to continue functioning after network connectivity is lost.</p>
 <li>intercepting network requests and deciding how to respond,
 including responding with cached values</li>
 </ul>
-<h2 id="registering-a-service-worker" tabindex="-1">Registering a Service Worker</h2>
+<h2 id="registering-a-service-worker">Registering a Service Worker</h2>
 <p>Each page of a web app that wished to utilize a service worker
 must register the service worker.
 The following code does this for a service worker
@@ -100,12 +100,12 @@ Refresh the page again and the output will not appear.
 Modify the service worker JavaScript file
 to change what the <code>console.log</code> call outputs.
 Refresh the page again and this time the output will appear.</p>
-<h2 id="manifest-file" tabindex="-1">Manifest File</h2>
+<h2 id="manifest-file">Manifest File</h2>
 <p>Service workers require a <code>manifest.json</code> file.
 These are typically located at the top of the <code>public</code> directory
 along with <code>index.html</code>.</p>
 <p>There are many properties that can be set in the manifest file.
-TODO: See the O'Reilly book &quot;Building Progressive Web Apps&quot;, pages 176-181 for details.</p>
+TODO: See the O’Reilly book “Building Progressive Web Apps”, pages 176-181 for details.</p>
 <p>The following properties are required:</p>
 <ul>
 <li><code>name</code> and/or <code>short_name</code></li>
@@ -127,8 +127,8 @@ TODO: See the O'Reilly book &quot;Building Progressive Web Apps&quot;, pages 176
 </ul>
 <p>Once a service worker has been registered,
 its manifest can be examined in Chrome devtools
-by clicking the &quot;Application&quot; tab and clicking &quot;Manifest&quot; in the left nav.</p>
-<h2 id="generating-icons" tabindex="-1">Generating Icons</h2>
+by clicking the “Application” tab and clicking “Manifest” in the left nav.</p>
+<h2 id="generating-icons">Generating Icons</h2>
 <p>The Node package <a href="https://github.com/elegantapp/pwa-asset-generator?v=1.1.1" rel="noopener" target="_blank">pwa-asset-generator</a>
 generates all the icons required by a PWA from a single image file.
 To use this:</p>
@@ -138,9 +138,9 @@ To use this:</p>
 <li>This will generate many images files in the <code>public/icons</code> directory.</li>
 <li>Copy the JSON array this outputs and paste it into <code>manifest.json</code>
 as the value of the <code>icons</code> property.</li>
-<li>Remove &quot;public/&quot; from the beginning of each icon <code>src</code> value.</li>
+<li>Remove “public/” from the beginning of each icon <code>src</code> value.</li>
 </ul>
-<h3 id="storage-limits" tabindex="-1">Storage Limits</h3>
+<h3 id="storage-limits">Storage Limits</h3>
 <p>There is a limit to the amount of data each application domain can cache
 and a limit to the amount of data that can be cached across all domains.
 The limits differ across web browsers,
@@ -148,32 +148,32 @@ but are mostly consistent for Chrome, Edge, and Firefox.
 The limit for a single domain is 20% of the overall limit.
 Typically the limits are based on the available space
 as shown in the following table.</p>
-<table>
-<thead>
-<tr>
-<th>Available Space</th>
-<th>Total Cache Limit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>up to 8 GB</td>
-<td>50 MB</td>
-</tr>
-<tr>
-<td>8 to 32 GB</td>
-<td>500 MB</td>
-</tr>
-<tr>
-<td>32 to 128 GB</td>
-<td>4% of volume size</td>
-</tr>
-<tr>
-<td>over 128 GB</td>
-<td>smaller of 20 GB or 4% of volume size</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Available Space</th><th>Total Cache Limit</th></tr></thead><tbody><tr><td>up to 8 GB</td><td>50 MB</td></tr><tr><td>8 to 32 GB</td><td>500 MB</td></tr><tr><td>32 to 128 GB</td><td>4% of volume size</td></tr><tr><td>over 128 GB</td><td>smaller of 20 GB or 4% of volume size</td></tr></tbody></table>
 <p>Safari is an outlier.
 It limits each application to 50 MB of cache storage
 regardless of the available space, and
@@ -182,16 +182,16 @@ An alternative is to use IndexedDB, which has a
 limit of 500 MB per application domain in Safari.</p>
 <p>When the total limit is reached, some browsers (Chrome and Firefox)
 remove the least recently used caches to make room for new caches.</p>
-<h2 id="evaluating-readiness" tabindex="-1">Evaluating Readiness</h2>
+<h2 id="evaluating-readiness">Evaluating Readiness</h2>
 <p>To determine if a web app can be used as a PWA:</p>
 <ul>
 <li>Use a desktop computer or laptop to open the app in the Chrome web browser.</li>
 <li>Open the DevTools.</li>
-<li>Click on the &quot;Lighthouse&quot; tab.</li>
-<li>Click the &quot;Analyze page load&quot; button.</li>
-<li>Click the &quot;Progressive Web App&quot; circle and address any issues identified.</li>
+<li>Click on the “Lighthouse” tab.</li>
+<li>Click the “Analyze page load” button.</li>
+<li>Click the “Progressive Web App” circle and address any issues identified.</li>
 </ul>
-<h3 id="message-passing" tabindex="-1">Message Passing</h3>
+<h3 id="message-passing">Message Passing</h3>
 <p>Service Workers do not have access to the DOM of their associated web app,
 so they cannot directly change what is rendered in the browser.
 However, they can communicate with the web app via message passing.
@@ -208,7 +208,7 @@ to send it some of the fetched data</li>
 </ul>
 <p>TODO: Implement message passing between a page and a service worker
 and in the other direction. Then document the required code here.</p>
-<h2 id="caching-strategies" tabindex="-1">Caching Strategies</h2>
+<h2 id="caching-strategies">Caching Strategies</h2>
 <p>Services workers can implement many caching strategies,
 perhaps based on the kinds of resources that will be requested.
 Resources can be files with content such as
@@ -216,9 +216,7 @@ HTML, CSS, JavaScript, JSON, and image data.
 Resources can also be the results of API calls.</p>
 <p>The diagram below is helpful in describing the various caching strategies.
 The descriptions below refer to the letters in this diagram.</p>
-<p><img alt="Service Workers" style="border: 0; width: 60%"
-  src="/blog/assets/service-workers.png?v=1.1.1"
-  title="Service Workers"></p>
+<p><img alt="Service Workers" style="border: 0; width: 60%" src="/blog/assets/service-workers.png?v=1.1.1" title="Service Workers"></p>
 <p>Possible caching strategies include:</p>
 <ul>
 <li>
@@ -263,10 +261,10 @@ where steps D and E are optional.</p>
 
 // No fetch events are generated in the initial load of the web app.
 // A second visit (or refresh) is required to cache all the resources.
-self.addEventListener('fetch', event =&gt; {
+self.addEventListener('fetch', event => {
   const {request} = event;
 
-  const getResource = async () =&gt; {
+  const getResource = async () => {
     const {url} = request;
     let resource;
 
@@ -311,11 +309,11 @@ In the diagram above, this is represented by the path A-D-E-F-B-C-D.</p>
 <p>The following service worker code implements this strategy.</p>
 <pre><code class="language-js">const cacheName = 'pwa-demo-v1';
 
-self.addEventListener('activate', event =&gt; {
-  const deleteOldCaches = async () =&gt; {
+self.addEventListener('activate', event => {
+  const deleteOldCaches = async () => {
     const keyList = await caches.keys();
     return Promise.all(
-      keyList.map(key =&gt; (key !== cacheName ? caches.delete(key) : null))
+      keyList.map(key => (key !== cacheName ? caches.delete(key) : null))
     );
   };
   event.waitUntil(deleteOldCaches());
@@ -323,10 +321,10 @@ self.addEventListener('activate', event =&gt; {
 
 // No fetch events are generated in the initial load of the web app.
 // A second visit is required to cache all the resources.
-self.addEventListener('fetch', event =&gt; {
+self.addEventListener('fetch', event => {
   const {request} = event;
 
-  const getResource = async () =&gt; {
+  const getResource = async () => {
     const {url} = request;
     let resource;
 
@@ -359,7 +357,7 @@ self.addEventListener('fetch', event =&gt; {
 </li>
 <li>
 <p>Cache, Update, and Refresh</p>
-<p>This strategy starts the same way as the &quot;cache and update&quot; strategy,
+<p>This strategy starts the same way as the “cache and update” strategy,
 but after new data is received from the network,
 the UI is triggered to refresh using the new data.</p>
 <p>For example, a theatre website might use this approach
@@ -377,7 +375,7 @@ when the requested photos are unavailable.
 This, of course, assumes that the stock images have already been cached.</p>
 <p>This strategy can be employed as a
 supplement to the previously described strategies
-to provide an alternative to returning a &quot;Not Found&quot; (404) status.</p>
+to provide an alternative to returning a “Not Found” (404) status.</p>
 <p>The following service worker code implements this strategy.</p>
 <pre><code class="language-js">const cacheName = 'pwa-demo-v1';
 
@@ -389,18 +387,18 @@ const filesToCache = [
   '/images/birthday-192.jpg'
 ];
 
-self.addEventListener('activate', event =&gt; {
-  const deleteOldCaches = async () =&gt; {
+self.addEventListener('activate', event => {
+  const deleteOldCaches = async () => {
     const keyList = await caches.keys();
     return Promise.all(
-      keyList.map(key =&gt; (key !== cacheName ? caches.delete(key) : null))
+      keyList.map(key => (key !== cacheName ? caches.delete(key) : null))
     );
   };
   event.waitUntil(deleteOldCaches());
 });
 
-self.addEventListener('install', event =&gt; {
-  const cacheAll = async () =&gt; {
+self.addEventListener('install', event => {
+  const cacheAll = async () => {
     const cache = await caches.open(cacheName);
     await cache.addAll(filesToCache);
   };
@@ -409,10 +407,10 @@ self.addEventListener('install', event =&gt; {
 
 // No fetch events are generated in the initial load of the web app.
 // A second visit is required to cache all the resources.
-self.addEventListener('fetch', event =&gt; {
+self.addEventListener('fetch', event => {
   const {request} = event;
 
-  const getResource = async () =&gt; {
+  const getResource = async () => {
     const {url} = request;
     const isAvatar = url.includes('githubusercontent.com');
     let resource;
@@ -452,10 +450,10 @@ self.addEventListener('fetch', event =&gt; {
 </code></pre>
 </li>
 </ul>
-<h2 id="offline-support" tabindex="-1">Offline Support</h2>
+<h2 id="offline-support">Offline Support</h2>
 <p>Web applications can determine whether they currently have network connectivity
 by checking the value of <code>navigator.onLine</code>.
-It's odd that the &quot;L&quot; is uppercase since &quot;online&quot; is a word!</p>
+It’s odd that the “L” is uppercase since “online” is a word!</p>
 <p>For some web applications it is possible to define
 a subset of functionality that can be supported
 for offline use and then only cache resources related to that.
@@ -480,9 +478,9 @@ after network connectivity was lost for the user that entered the hours?
 Perhaps the new hours should just be ignored, or
 perhaps the project should be recreated and the hours should be applied to it.
 There can be many such cases to consider.</p>
-<h2 id="service-worker-events" tabindex="-1">Service Worker Events</h2>
+<h2 id="service-worker-events">Service Worker Events</h2>
 <p>Service workers listen for events and act on them.</p>
-<h3 id="install-event" tabindex="-1">install Event</h3>
+<h3 id="install-event">install Event</h3>
 <p>The first event received is <code>install</code>.
 This is a one-time event.
 One way to handle this event is to do the following:</p>
@@ -494,20 +492,20 @@ If this cache does not exist, it is created.</li>
 They will be available without a network connection
 after the app is initially loaded from the network.</li>
 </ul>
-<h3 id="activate-event" tabindex="-1">activate Event</h3>
+<h3 id="activate-event">activate Event</h3>
 <p>The second event received is <code>activate</code>.
 This is also a one-time event.
 One way to handle this event is to delete any old caches for this app
 that were created when previous builds of the app were run.
 This can be determined by checking whether their names
 contain the current value of the <code>timestamp</code> variable.</p>
-<h3 id="message-event" tabindex="-1">message Event</h3>
+<h3 id="message-event">message Event</h3>
 <p>A <code>message</code> event occurs when a controlled page
 calls <code>ServiceWorker.postMessage(message)</code>
 to send a message to a specific service worker.
 The service worker can optionally send a response back
 by calling <code>Client.postMessage(message)</code>.</p>
-<h3 id="fetch-event" tabindex="-1">fetch Event</h3>
+<h3 id="fetch-event">fetch Event</h3>
 <p>The third event type received is <code>fetch</code>.
 This can be received many times.
 The caching strategy is implemented here.
@@ -516,13 +514,13 @@ using the following steps in this sequence:</p>
 <ul>
 <li>Only process <code>GET</code> requests.</li>
 <li>Don’t process requests asking for just part of a document,
-using an HTTP &quot;Range&quot; header (not commonly used).</li>
-<li>Only process URLs with a protocol beginning with &quot;http&quot;.
-For example, URLs with the &quot;data&quot; protocol are ignored.</li>
+using an HTTP “Range” header (not commonly used).</li>
+<li>Only process URLs with a protocol beginning with “http”.
+For example, URLs with the “data” protocol are ignored.</li>
 <li>Serve all static files from the cache.</li>
 <li>If the file is not found in the cache and
 the request has a <code>cache</code> property of <code>only-if-cached</code>,
-don't attempt to find the file using the network.</li>
+don’t attempt to find the file using the network.</li>
 <li>Otherwise, attempt to satisfy the request using the network.</li>
 <li>If found, add the file to the cache and return its contents.</li>
 <li>If not found and a match for the URL is in the cache, return that content.</li>
@@ -530,22 +528,22 @@ don't attempt to find the file using the network.</li>
 <p>This caching strategy means that the results of API service calls are cached.
 Later, if the same request is made again and the service is offline,
 the cached value will be returned.</p>
-<h3 id="sync-event" tabindex="-1">sync Event</h3>
+<h3 id="sync-event">sync Event</h3>
 <p>This event is used to determine when data can be synchronized
 between a web page and service worker.
 It relies on a <code>SyncManager</code> which is experimental.
 It is supported by Chrome and Edge, but not by Safari or Firefox.</p>
-<h3 id="push-event" tabindex="-1">push Event</h3>
+<h3 id="push-event">push Event</h3>
 <p>A <code>push</code> event occurs when a push notification is received.
 TODO: Try implementing push notifications.</p>
-<h2 id="running-and-installing-a-pwa" tabindex="-1">Running and Installing a PWA</h2>
+<h2 id="running-and-installing-a-pwa">Running and Installing a PWA</h2>
 <p>To run a PWA, browse its URL.
 This can be done by clicking a link received in an email or chat message.
 It can also be done by searching for the app in web browser
 or manually entering the URL in the browser location bar.</p>
 <p>Installing a PWA is optional.
 The steps to do so vary based on operating system.
-In iOS, tap the share button and select &quot;Add to Home Screen&quot;.</p>
+In iOS, tap the share button and select “Add to Home Screen”.</p>
 <p>Installing a PWA downloads all the required files.
 It also adds an app icon to the home screen so in the future
 the app can be launched by tapping its icon.
@@ -555,10 +553,10 @@ so it appears more like a native app.</p>
 <p>In development, PWA can be run from URLs that being with <code>http://localhost</code>.
 But in production, PWAs must be run from URLS that use HTTPS
 in order to utilize service workers.</p>
-<h2 id="security" tabindex="-1">Security</h2>
+<h2 id="security">Security</h2>
 <p>When a PWA attempts to access device features, such as contacts or the camera,
 the user will be prompted to grant permission.</p>
-<h2 id="managing-service-workers" tabindex="-1">Managing Service Workers</h2>
+<h2 id="managing-service-workers">Managing Service Workers</h2>
 <p>The Chrome DevTools provide ways to interact with service workers
 and the caches they create.</p>
 <p>To view service workers for the current site,
@@ -566,36 +564,32 @@ click the DevTools Application tab.
 Then click Service Workers in the left nav.
 The main area will display information about each of the
 service workers for the site.</p>
-<p><img alt="Service Workers in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-workers.png?v=1.1.1"
-  title="Service Workers in Chrome DevTools"></p>
+<p><img alt="Service Workers in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-service-workers.png?v=1.1.1" title="Service Workers in Chrome DevTools"></p>
 <p>The status of a service worker is displayed after the Status label.
 For example, it may say “activated and is running.”
 To stop the service worker, click the Stop link after the status.
 The Stop link will change to Start, and this can be clicked to restart it.</p>
-<h3 id="updating-a-service-worker" tabindex="-1">Updating a Service Worker</h3>
+<h3 id="updating-a-service-worker">Updating a Service Worker</h3>
 <p>By default, changes to service worker code
 are not loaded by refreshing the browser.</p>
 <p>Unregistering a service worker allows it to
 run through its lifecycle again when the page is refreshed.
 This includes processing the <code>install</code> and <code>activate</code> events again.
 This is useful for debugging the code that handles those events.</p>
-<p>To unregister a service worker in Chrome, click the &quot;Unregister&quot; link
+<p>To unregister a service worker in Chrome, click the “Unregister” link
 to the right of a service worker description
 and refresh the page (twice?).</p>
 <p>In Chrome, to enable page refreshes
 to reload service workers during development,
-check the &quot;Update on reload&quot; checkbox and refresh the page.</p>
-<p><img alt="Service Workers Update on reload" style="width: 100%"
-  src="/blog/assets/service-workers-update-on-reload.png?v=1.1.1"
-  title="Service Workers Update on reload"></p>
+check the “Update on reload” checkbox and refresh the page.</p>
+<p><img alt="Service Workers Update on reload" style="width: 100%" src="/blog/assets/service-workers-update-on-reload.png?v=1.1.1" title="Service Workers Update on reload"></p>
 <p>By default, changes to deployed service workers will not take effect for users
 until they close all browser tabs that are using the previous service workers
 and open new tabs.</p>
 <p>To force existing tabs that are browsing a site
 to activate service worker updates,
 add the following code in the service worker.</p>
-<pre><code class="language-js">self.addEventListener('install', event =&gt; {
+<pre><code class="language-js">self.addEventListener('install', event => {
   // This causes a newly installed service worker to
   // progress to the activating state, regardless of
   // whether there is already an active service worker.
@@ -605,54 +599,44 @@ add the following code in the service worker.</p>
 <p>In order for this change to take effect,
 users must close existing tabs for the site and open a new one.
 TODO: After this is done, do users have to refresh the page to load service worker updates?</p>
-<h3 id="viewing-source-code" tabindex="-1">Viewing Source Code</h3>
+<h3 id="viewing-source-code">Viewing Source Code</h3>
 <p>To view the source code for a service worker,
 click the link after the Source label.
 This switches to the Sources tab and displays the code.
 Typically the code will have been minified.</p>
-<p><img alt="Minimized service worker code in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-worker-code-minimized.png?v=1.1.1"
-  title="Minimized service worker code in Chrome DevTools"></p>
+<p><img alt="Minimized service worker code in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-service-worker-code-minimized.png?v=1.1.1" title="Minimized service worker code in Chrome DevTools"></p>
 <p>To see a pretty-printed version of this,
 click the “{}” at the bottom.</p>
-<p><img alt="Pretty-printed service worker code in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-worker-code-pretty-printed.png?v=1.1.1"
-  title="Pretty-printed service worker code in Chrome DevTools"></p>
-<h3 id="cached-files" tabindex="-1">Cached Files</h3>
+<p><img alt="Pretty-printed service worker code in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-service-worker-code-pretty-printed.png?v=1.1.1" title="Pretty-printed service worker code in Chrome DevTools"></p>
+<h3 id="cached-files">Cached Files</h3>
 <p>The list of requested files in the Network tab has a very small gear icon
 before each file that was loaded from a cache.
 This is useful for determining whether specific files
 were served from the network or from a cache.</p>
-<p><img alt="Files loaded from cache in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-network-files-from-cache.png?v=1.1.1"
-  title="Files loaded from cache in Chrome DevTools"></p>
+<p><img alt="Files loaded from cache in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-network-files-from-cache.png?v=1.1.1" title="Files loaded from cache in Chrome DevTools"></p>
 <p>To see the space being used by the current application domain,
-click the Application tab and click &quot;Storage&quot; in the left nav.
+click the Application tab and click “Storage” in the left nav.
 This displays the amount of space currently occupied by
 cache storage, service workers, and IndexedDB.
 It also displays a series of check boxes for categories of things
-hat can be cleared including &quot;Unregistered service workers&quot;,
-&quot;Local and session storage&quot;, &quot;IndexedDB&quot;, &quot;Web SQL&quot; (deprecated),
-&quot;Cookies&quot;, and &quot;Cache storage&quot;.</p>
+hat can be cleared including “Unregistered service workers”,
+“Local and session storage”, “IndexedDB”, “Web SQL” (deprecated),
+“Cookies”, and “Cache storage”.</p>
 <p>By default, all the check boxes are checked.
-Click the &quot;Clear Site Data&quot; button above the checkboxes
+Click the “Clear Site Data” button above the checkboxes
 to clear the data associated with every checked category.</p>
-<p><img alt="Clearing storage in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-clear-storage.png?v=1.1.1"
-  title="Clearing storage in Chrome DevTools"></p>
+<p><img alt="Clearing storage in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-clear-storage.png?v=1.1.1" title="Clearing storage in Chrome DevTools"></p>
 <p>A great video covering most of the topics in this section,
 created by the Chrome team, can be found at <a href="http://mng.bz/oPwp?v=1.1.1" rel="noopener" target="_blank">Debugging Service Workers in Chrome</a>.</p>
 <p>A similar video for Firefox from the same team can be found at <a href="http://mng.bz/nPw2?v=1.1.1" rel="noopener" target="_blank">Debugging Service Workers in Firefox</a>.</p>
 <p>To see the files that have been cached,
-click the DevTools &quot;Application&quot; tab.
-Then click the disclosure triangle before &quot;Cache storage&quot; in the left nav.
+click the DevTools “Application” tab.
+Then click the disclosure triangle before “Cache storage” in the left nav.
 This will show a list of all the current caches for the site in the left nav.
 Click one of the cache names to see a list
 of the files that it has cached in the main area.
 Click a file to see its contents at the bottom of the main area.</p>
-<p><img alt="Cached files in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-cache.png?v=1.1.1"
-  title="Cached files in Chrome DevTools"></p>
+<p><img alt="Cached files in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-cache.png?v=1.1.1" title="Cached files in Chrome DevTools"></p>
 <p>There are several ways to remove an individual file from a cache.</p>
 <ol>
 <li>Right-click a file name and select delete.</li>
@@ -660,49 +644,45 @@ Click a file to see its contents at the bottom of the main area.</p>
 <li>Click a file name to select it and click the “X” at the top.</li>
 </ol>
 <p>To delete an entire cache, right-click a cache name and select Delete.</p>
-<h3 id="clearing-everything" tabindex="-1">Clearing Everything</h3>
+<h3 id="clearing-everything">Clearing Everything</h3>
 <p>The Chrome Devtools provide a way to clear many things
 associated with the current application domain with a single click.
 This includes service worker registrations, local and session storage,
 IndexedDB databases, cookies, and cached files.
-To do this, open the DevTools, click the &quot;Application Tab&quot;,
-click &quot;Storage&quot; near the top of the left nav,
+To do this, open the DevTools, click the “Application Tab”,
+click “Storage” near the top of the left nav,
 verify that all the checkboxes at the bottom are checked,
-and click the &quot;Clear site data&quot; button.</p>
-<p><img alt="Chrome Clear site data button" style="width: 100%"
-  src="/blog/assets/chrome-clear-site-data.png?v=1.1.1"
-  title="Cached files in Chrome DevTools"></p>
-<h3 id="simulating-offline" tabindex="-1">Simulating Offline</h3>
+and click the “Clear site data” button.</p>
+<p><img alt="Chrome Clear site data button" style="width: 100%" src="/blog/assets/chrome-clear-site-data.png?v=1.1.1" title="Cached files in Chrome DevTools"></p>
+<h3 id="simulating-offline">Simulating Offline</h3>
 <p>In order to test the ability of service workers to use cached files,
 it is useful to simulate being offline.
-To do this, open Chrome Devtools, click the &quot;Application&quot; tab,
+To do this, open Chrome Devtools, click the “Application” tab,
 click Service Workers in the left nav, and
-check the &quot;Offline&quot; check box at the top of the main area.
+check the “Offline” check box at the top of the main area.
 This is an alternative to going to the Network tab
-and changing the &quot;No throttling&quot; drop-down to &quot;Offline&quot;.
+and changing the “No throttling” drop-down to “Offline”.
 A warning icon will appear in the Network tab
 to remind you that you are offline.</p>
-<p><img alt="Simulating being offline in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-offline.png?v=1.1.1"
-  title="Simulating being offline in Chrome DevTools"></p>
-<h3 id="bypassing-service-workers" tabindex="-1">Bypassing Service Workers</h3>
+<p><img alt="Simulating being offline in Chrome DevTools" style="width: 100%" src="/blog/assets/devtools-offline.png?v=1.1.1" title="Simulating being offline in Chrome DevTools"></p>
+<h3 id="bypassing-service-workers">Bypassing Service Workers</h3>
 <p>To bypass the use of service workers,
 causing all requests to go to the network,
 check the Bypass for Network check box at the top of the main area.
 This, of course, requires being online.</p>
-<h3 id="service-workers-in-macos-safari" tabindex="-1">Service Workers in macOS Safari</h3>
-<p>To see service workers in Safari, click the &quot;Develop&quot; menu,
-hover over &quot;Service Workers&quot; to reveal a menu that lists them,
+<h3 id="service-workers-in-macos-safari">Service Workers in macOS Safari</h3>
+<p>To see service workers in Safari, click the “Develop” menu,
+hover over “Service Workers” to reveal a menu that lists them,
 and click one of the service workers.
-This opens a window with three tabs at the top ...
-&quot;Console&quot;, &quot;Sources&quot;, and &quot;Network&quot;.</p>
+This opens a window with three tabs at the top …
+“Console”, “Sources”, and “Network”.</p>
 <p>Output from <code>console</code> methods like <code>console.log</code>
 do not appear in the Web Inspector Console.
 Instead they appear in the Console tab of the service worker window.</p>
 <p>Safari does not provide an easy way to unregister service workers.
 To unregister all of them for a given site, browse the site,
-open the &quot;Web Inspector&quot;, click the &quot;Console&quot; tab, and enter the following code.</p>
-<pre><code class="language-js">navigator.serviceWorker.getRegistrations().then(registrations =&gt; {
+open the “Web Inspector”, click the “Console” tab, and enter the following code.</p>
+<pre><code class="language-js">navigator.serviceWorker.getRegistrations().then(registrations => {
   for (const registration of registrations) {
     registration.unregister();
   }
@@ -711,36 +691,36 @@ open the &quot;Web Inspector&quot;, click the &quot;Console&quot; tab, and enter
 <p>To also delete a specific IndexedDB database, enter the following.</p>
 <pre><code class="language-js">indexedDB.deleteDatabase('db-name');
 </code></pre>
-<h3 id="service-workers-in-ios-safari" tabindex="-1">Service Workers in iOS Safari</h3>
+<h3 id="service-workers-in-ios-safari">Service Workers in iOS Safari</h3>
 <p>The following steps enable debugging PWAs running in iOS Safari.</p>
 <ol>
 <li>Attach the device (iPhone or iPad) to a Mac using a USB cable.</li>
-<li>A &quot;Trust This Computer?&quot; dialog will appear on the device.</li>
-<li>Tap &quot;Trust&quot;.</li>
+<li>A “Trust This Computer?” dialog will appear on the device.</li>
+<li>Tap “Trust”.</li>
 <li>Enter the device passcode.</li>
 <li>Launch Safari on the device.</li>
 <li>Browse the URL of a PWA.</li>
 <li>Launch Safari on the Mac.</li>
-<li>Click the &quot;Develop&quot; menu.</li>
+<li>Click the “Develop” menu.</li>
 <li>Hover over the device name that appears.</li>
-<li>Click &quot;Use for Development...&quot;</li>
-<li>A &quot;Trust This Computer?&quot; dialog will appear again on the device.</li>
-<li>Tap &quot;Trust&quot; again.</li>
+<li>Click “Use for Development…”</li>
+<li>A “Trust This Computer?” dialog will appear again on the device.</li>
+<li>Tap “Trust” again.</li>
 <li>Enter the device passcode again.</li>
-<li>Click the &quot;Develop&quot; menu again.</li>
+<li>Click the “Develop” menu again.</li>
 <li>Hover over the device name that appears again.</li>
-<li>If it says &quot;Pairing Denied, Reconnect Device to Continue&quot;,
+<li>If it says “Pairing Denied, Reconnect Device to Continue”,
 disconnect the USB cable and connect it again.</li>
-<li>Click the &quot;Develop&quot; menu again.</li>
+<li>Click the “Develop” menu again.</li>
 <li>Hover over the device name that appears again.</li>
-<li>Select the URL of the PWA to open a &quot;Web Inspector&quot; window
+<li>Select the URL of the PWA to open a “Web Inspector” window
 that can be used to interact with the device
 and see its output in the Console tab.</li>
-<li>Select ? to open a &quot;Service Worker&quot; window
+<li>Select ? to open a “Service Worker” window
 that can be used to interact with the Service Worker running on the device
 and see its output in this separate Console tab.</li>
 </ol>
-<h2 id="push-notifications" tabindex="-1">Push Notifications</h2>
+<h2 id="push-notifications">Push Notifications</h2>
 <p>Push notifications allow servers to send messages to clients
 that appear in popups outside their web browser.
 They can only be sent if users grant permission.</p>
@@ -749,32 +729,28 @@ asks the user for permission to send push notifications
 if they have not already granted or denied this.
 The choice is remembered by the browser.
 The value of <code>Notification.permission</code> will be
-&quot;granted&quot;, &quot;denied&quot;, or &quot;default&quot; (no choice made).</p>
+“granted”, “denied”, or “default” (no choice made).</p>
 <p>It is recommended to wait to ask for notification permission until the user
 has entered the site is made aware of why they would receive notifications.
-Consider providing an &quot;Enable Notifications&quot; button
+Consider providing an “Enable Notifications” button
 that calls the following function when it is clicked.</p>
 <p>Each web browser provides a different way
 for users to reset push notification permissions.</p>
-<p>To reset back to &quot;default&quot; in Chrome:</p>
+<p>To reset back to “default” in Chrome:</p>
 <ul>
-<li>Click the circled &quot;i&quot; on the left end of the address bar.</li>
-<li>Click the &quot;Reset Permissions&quot; button.</li>
+<li>Click the circled “i” on the left end of the address bar.</li>
+<li>Click the “Reset Permissions” button.</li>
 </ul>
-<p><img alt="Chrome Notification Permissions" style="; width: 40%"
-  src="/blog/assets/chrome-notification-permissions.png?v=1.1.1"
-  title="Chrome Notification Permissions"></p>
-<p>To reset back to &quot;default&quot; in Safari:</p>
+<p><img alt="Chrome Notification Permissions" style="; width: 40%" src="/blog/assets/chrome-notification-permissions.png?v=1.1.1" title="Chrome Notification Permissions"></p>
+<p>To reset back to “default” in Safari:</p>
 <ul>
-<li>Click &quot;Safari&quot; in the menu bar.</li>
-<li>Click &quot;Settings...&quot; in the menu.</li>
-<li>Click &quot;Notifications&quot; in the left nav of the dialog that appears.</li>
+<li>Click “Safari” in the menu bar.</li>
+<li>Click “Settings…” in the menu.</li>
+<li>Click “Notifications” in the left nav of the dialog that appears.</li>
 <li>Scroll to the website domain in the main area of the dialog.</li>
-<li>Select it and click the &quot;Remove&quot; button.</li>
+<li>Select it and click the “Remove” button.</li>
 </ul>
-<p><img alt="Safari Notification Permissions" style="; width: 100%"
-  src="/blog/assets/safari-notification-permissions.png?v=1.1.1"
-  title="Safari Notification Permissions"></p>
+<p><img alt="Safari Notification Permissions" style="; width: 100%" src="/blog/assets/safari-notification-permissions.png?v=1.1.1" title="Safari Notification Permissions"></p>
 <p>Web app client-side code can create subscriptions to push notifications
 and send them to a server via an HTTP request.
 The server can save these subscriptions in a database so
@@ -788,7 +764,7 @@ Safari uses a non-standard push notifications API,
 so supporting both browsers is difficult.</p>
 <p>The app at <a href="https://github.com/mvolkmann/pwa-cloudflare-demo?v=1.1.1" rel="noopener" target="_blank">pwa-cloudflare-demo</a> demonstrates all the steps required
 to handle push notifications in Chrome.
-While the name includes &quot;cloudflare&quot;, it does not currently support
+While the name includes “cloudflare”, it does not currently support
 running in a Cloudflare Worker. The reason is that the app uses the
 <a href="https://github.com/web-push-libs/web-push?v=1.1.1" rel="noopener" target="_blank">web-push</a>
 library which does not work in Cloudflare Workers.</p>
@@ -800,7 +776,7 @@ Each step indicates where the corresponding code is found in the demo app.</p>
 <p>These are required to send push notifications.
 One way to obtain them by entering <code>npx web-push generate-vapid-keys</code>
 or <code>bunx web-push generate-vapid-keys</code>.
-&quot;vapid&quot; stands for &quot;Voluntary APplication server IDentification&quot;.
+“vapid” stands for “Voluntary APplication server IDentification”.
 and is used for Web Push.</p>
 </li>
 <li>
@@ -811,7 +787,7 @@ WEB_PUSH_PUBLIC_KEY = 'BMx8QagkN_EidkH7D8jdZaz5BM2Hh-d3RQ5W1iWOfh32KRdbxu7fATv5o
 </code></pre>
 </li>
 <li>
-<p>Install the &quot;web-push&quot; package.</p>
+<p>Install the “web-push” package.</p>
 <p>Enter <code>npm install web-push</code> or <code>bun add web-push</code>.</p>
 </li>
 <li>
@@ -824,14 +800,14 @@ For details, see
 <li>
 <p>Create a SQLite database for storing subscriptions.</p>
 <pre><code class="language-sh">sqlite3 pwa.db
-sqlite&gt; create table subscriptions(id integer primary key autoincrement, json string);
-sqlite&gt; .exit
+sqlite> create table subscriptions(id integer primary key autoincrement, json string);
+sqlite> .exit
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>src/server.tsx</code> containing the following.
 This file uses TypeScript types.
-The file extension &quot;tsx&quot; enables using JSX to generate HTML,
+The file extension “tsx” enables using JSX to generate HTML,
 but that is not utilized in the code shown here.</p>
 <pre><code class="language-ts">import {Database} from 'bun:sqlite';
 import {Context, Hono} from 'hono';
@@ -854,7 +830,7 @@ const insertSubscription = db.query(
 
 // Restore previous subscriptions from database.
 const dbSubscriptions = getAllSubscriptions.all() as DBSubscription[];
-let subscriptions = dbSubscriptions.map(dbSub =&gt; {
+let subscriptions = dbSubscriptions.map(dbSub => {
   const subscription = JSON.parse(dbSub.json);
   subscription.id = dbSub.id;
   return subscription;
@@ -872,7 +848,7 @@ webPush.setVapidDetails(
 // This demonstrates triggering push notifications from a server.
 // It sends a new push notification every 5 seconds.
 let count = 0;
-setInterval(() =&gt; {
+setInterval(() => {
   if (subscriptions.length) {
     count++;
     const payload = JSON.stringify({
@@ -910,7 +886,7 @@ function pushNotification(payload: string | object) {
     // Remove the subscription from the database.
     deleteTodoPS.run(subscription.id);
 
-    subscriptions = subscriptions.filter(s =&gt; s.id !== subscription.id);
+    subscriptions = subscriptions.filter(s => s.id !== subscription.id);
   }
 }
 
@@ -924,7 +900,7 @@ app.use('/*', serveStatic({root: './public'}));
 /**
  * This endpoint saves a push notification subscription.
  */
-app.post('/save-subscription', async (c: Context) =&gt; {
+app.post('/save-subscription', async (c: Context) => {
   const subscription = await c.req.json();
   subscriptions.push(subscription);
 
@@ -989,9 +965,9 @@ function sendNotification(title, body, icon) {
 }
 
 // Register to receive messages from the service worker.
-// These are sent with &quot;client.postMessage&quot; in the service worker.
+// These are sent with "client.postMessage" in the service worker.
 // They are not push notifications.
-navigator.serviceWorker.onmessage = event =&gt; {
+navigator.serviceWorker.onmessage = event => {
   const message = event.data;
   if (message === 'ready') {
     // Determine if a service worker is already controlling this page.
@@ -1001,7 +977,7 @@ navigator.serviceWorker.onmessage = event =&gt; {
       // Give the new service worker time to really be ready.
       // In some apps it is useful to reload the page so
       // data only available from the service worker can be loaded.
-      setTimeout(() =&gt; {
+      setTimeout(() => {
         location.reload();
       }, 100);
     }
@@ -1012,12 +988,12 @@ navigator.serviceWorker.onmessage = event =&gt; {
 <li>
 <p>Include <code>setup.js</code> in the main HTML file, likely named <code>index.html</code>,
 as follows.</p>
-<pre><code class="language-html">&lt;script defer src=&quot;setup.js&quot;&gt;&lt;/script&gt;
+<pre><code class="language-html">&#x3C;script defer src="setup.js">&#x3C;/script>
 </code></pre>
 </li>
 <li>
 <p>Create the file <code>public/service-worker.js</code> containing the following:</p>
-<pre><code class="language-js">/// &lt;reference lib=&quot;webworker&quot; /&gt;
+<pre><code class="language-js">/// &#x3C;reference lib="webworker" />
 
 const cacheName = 'pwa-demo-v1';
 
@@ -1038,10 +1014,10 @@ function base64StringToUint8Array(base64String) {
   // Add equal signs to the end so the length is a multiple of 4.
   // See https://base64.guru/learn/base64-characters.
   //
-  // The following site says &quot;The base64 Decode converter does not support
-  // dash(&quot;-&quot;) and underscore(&quot;_&quot;) characters, therefore it is necessary to
+  // The following site says "The base64 Decode converter does not support
+  // dash("-") and underscore("_") characters, therefore it is necessary to
   // replace those characters before doing the Base64 decoding.
-  // Use &quot;+&quot; instead of &quot;-&quot; and &quot;/&quot; instead of &quot;_&quot;.&quot;
+  // Use "+" instead of "-" and "/" instead of "_"."
   // https://docshield.kofax.com/RPA/en_US/10.6.0_p2wddr4n2j/help/kap_help/reference/c_basedecode.html
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
   const base64 = (base64String + padding)
@@ -1050,7 +1026,7 @@ function base64StringToUint8Array(base64String) {
 
   const binary = atob(base64);
   const outputArray = new Uint8Array(binary.length);
-  for (let i = 0; i &lt; binary.length; ++i) {
+  for (let i = 0; i &#x3C; binary.length; ++i) {
     outputArray[i] = binary.charCodeAt(i);
   }
   return outputArray;
@@ -1060,13 +1036,13 @@ function base64StringToUint8Array(base64String) {
  * This deletes all the keys from a given cache.
  * It is not currently used.
  * @param {string} cacheName
- * @returns {Promise&lt;void&gt;}
+ * @returns {Promise&#x3C;void>}
  */
 async function deleteCache(cacheName) {
   // @type {string[]}
   const keys = await caches.keys();
   await Promise.all(
-    keys.map(key =&gt; (key === cacheName ? null : caches.delete(key)))
+    keys.map(key => (key === cacheName ? null : caches.delete(key)))
   );
 }
 
@@ -1075,7 +1051,7 @@ async function deleteCache(cacheName) {
  * If it is not found in the cache, it is retrieved from the network.
  * If it is a kind of resource we want to cache, it is added to the cache.
  * @param {Request} request
- * @returns {Promise&lt;Response | undefined&gt;} that contains the resource
+ * @returns {Promise&#x3C;Response | undefined>} that contains the resource
  */
 async function getResource(request) {
   const log = false; // set to true for debugging
@@ -1136,7 +1112,7 @@ function shouldCache(pathname) {
 }
 
 /**
- * This is called when a &quot;subscribe&quot; message is received from setup.js.
+ * This is called when a "subscribe" message is received from setup.js.
  */
 async function subscribeToPushNotifications() {
   if (inSafari()) {
@@ -1150,7 +1126,7 @@ async function subscribeToPushNotifications() {
     // This fails if the user has not already granted
     // permission to receive push notifications, so only
     // call this function after they grant permission.
-    // WARNING: If the &quot;Update on reload&quot; checkbox in the Chrome DevTools
+    // WARNING: If the "Update on reload" checkbox in the Chrome DevTools
     // Application tab is checked, the following line will not work.
     const subscription = await registration.pushManager.subscribe({
       applicationServerKey: base64StringToUint8Array(publicKey),
@@ -1172,9 +1148,9 @@ async function subscribeToPushNotifications() {
 //-----------------------------------------------------------------------------
 
 /**
- * This registers a listener for the &quot;install&quot; event of this service worker.
+ * This registers a listener for the "install" event of this service worker.
  */
-addEventListener('install', event =&gt; {
+addEventListener('install', event => {
   console.log('service-worker.js: installing');
   // This allows existing browser tabs to use an
   // updated version of this service worker.
@@ -1182,9 +1158,9 @@ addEventListener('install', event =&gt; {
 });
 
 /**
- * This registers a listener for the &quot;activate&quot; event of this service worker.
+ * This registers a listener for the "activate" event of this service worker.
  */
-addEventListener('activate', async event =&gt; {
+addEventListener('activate', async event => {
   console.log('service-worker.js: activating');
 
   // We could choose to delete the current cache every time
@@ -1193,7 +1169,7 @@ addEventListener('activate', async event =&gt; {
 
   // This gets an estimate for the amount of storage available
   // to this service worker.
-  // Safari says &quot;The operation is not supported.&quot; for the &quot;estimate&quot; method.
+  // Safari says "The operation is not supported." for the "estimate" method.
   // const estimate = await navigator.storage.estimate();
   // console.log('service-worker.js: storage estimate =', estimate);
 
@@ -1210,10 +1186,10 @@ addEventListener('activate', async event =&gt; {
 });
 
 /**
- * This registers a listener for the &quot;fetch&quot; event of this service worker.
+ * This registers a listener for the "fetch" event of this service worker.
  * It responds with a resource for accessing data at a requested URL.
  */
-addEventListener('fetch', async event =&gt; {
+addEventListener('fetch', async event => {
   const {request} = event;
   const url = new URL(request.url);
   const {pathname} = url;
@@ -1226,11 +1202,11 @@ addEventListener('fetch', async event =&gt; {
 });
 
 /**
- * This registers a listener for the &quot;message&quot; event of this service worker.
+ * This registers a listener for the "message" event of this service worker.
  */
-addEventListener('message', event =&gt; {
+addEventListener('message', event => {
   const message = event.data;
-  // This message is sent by the &quot;postMessage&quot; call in setup.js.
+  // This message is sent by the "postMessage" call in setup.js.
   if (message === 'subscribe') {
     subscribeToPushNotifications();
   } else {
@@ -1239,14 +1215,14 @@ addEventListener('message', event =&gt; {
 });
 
 /**
- * This registers a listener for the &quot;push&quot; event of this service worker.
+ * This registers a listener for the "push" event of this service worker.
  * One way to test this is to trigger a push from Chrome DevTools.
- * Click the &quot;Application&quot; tab, click &quot;Service workers&quot; in the left nav,
- * enter a message in the Push input, and click the &quot;Push&quot; button.
+ * Click the "Application" tab, click "Service workers" in the left nav,
+ * enter a message in the Push input, and click the "Push" button.
  * A push notification should appear.
  * Push notifications automatically disappear after about five seconds.
  */
-addEventListener('push', async event =&gt; {
+addEventListener('push', async event => {
   if (Notification.permission === 'granted') {
     let title, body, icon;
     try {
@@ -1268,7 +1244,7 @@ addEventListener('push', async event =&gt; {
 </code></pre>
 </li>
 </ol>
-<h2 id="workbox" tabindex="-1">Workbox</h2>
+<h2 id="workbox">Workbox</h2>
 <p><a href="https://web.dev/learn/pwa/workbox?v=1.1.1" rel="noopener" target="_blank">Workbox</a> is a set of
 open-source libraries that help with implementing PWA caching strategies
 in service workers.</p>
@@ -1300,19 +1276,20 @@ const pageStrategy = new CacheFirst({
 });
 
 // Cache page navigations (HTML) with a Cache First strategy
-registerRoute(({request}) =&gt; request.mode === 'navigate', pageStrategy);
+registerRoute(({request}) => request.mode === 'navigate', pageStrategy);
 </code></pre>
 <p>TODO: Describe how to load this service worker from a script!</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://web.dev/explore/progressive-web-apps?v=1.1.1" rel="noopener" target="_blank">web.dev</a> on PWAs</li>
 </ul>
-<p>TODO: For more content, see <a href="https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md">https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md</a>.</p>
-<p>See demo app at <a href="https://github.com/mvolkmann/pwa-cloudflare-demo">https://github.com/mvolkmann/pwa-cloudflare-demo</a>.</p>
-<h2 id="outstanding-questions" tabindex="-1">Outstanding Questions</h2>
+<p>TODO: For more content, see <a href="https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md" rel="noopener" target="_blank">https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md</a>.</p>
+<p>See demo app at <a href="https://github.com/mvolkmann/pwa-cloudflare-demo" rel="noopener" target="_blank">https://github.com/mvolkmann/pwa-cloudflare-demo</a>.</p>
+<h2 id="outstanding-questions">Outstanding Questions</h2>
 <p>Demonstrate sending messages between the app and a service worker.</p>
 <p>How can mobile clients get app updates without restarting the app?</p>
 <p>Do push notifications work in iOS now?</p>
 <p>Should you use the workbox and workbox-cli libraries
-to simplify service worker code?</p>
-</article> </body></html>
+to simplify service worker code?</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

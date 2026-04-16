@@ -1,6 +1,7 @@
-<!DOCTYPE html><html lang="en"> <head><title>Lambda Calculus</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Lambda Calculus</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#history">History</a></li><li><a href="#concepts">Concepts</a></li><li><a href="#variables">Variables</a></li><li><a href="#function-syntax">Function Syntax</a></li><li><a href="#evaluation-rules">Evaluation Rules</a></li><li><a href="#testing">Testing</a></li><li><a href="#boolean-logic">Boolean Logic</a></li><ul><li><a href="#true-and-false">True and False</a></li><li><a href="#not-function">Not Function</a></li><li><a href="#and-function">And Function</a></li><li><a href="#or-function">Or Function</a></li><li><a href="#if-expressions">If Expressions</a></li></ul><li><a href="#arithmetic">Arithmetic</a></li><ul><li><a href="#church-numerals">Church Numerals</a></li><li><a href="#successor">Successor</a></li><li><a href="#predecessor">Predecessor</a></li><li><a href="#is-zero">Is Zero</a></li><li><a href="#addition">Addition</a></li><li><a href="#subtraction">Subtraction</a></li><li><a href="#multiplication">Multiplication</a></li><li><a href="#division">Division</a></li><li><a href="#exponentiation">Exponentiation</a></li></ul><li><a href="#equality">Equality</a></li><li><a href="#function-composition">Function Composition</a></li><li><a href="#recursion">Recursion</a></li><ul><li><a href="#omega-combinator">Omega Combinator</a></li><li><a href="#y-combinator">Y Combinator</a></li><li><a href="#z-combinator">Z Combinator</a></li></ul><li><a href="#linked-lists">Linked Lists</a></li><li><a href="#bird-combinators">Bird Combinators</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
-<p><a href="https://en.wikipedia.org/wiki/Lambda_calculus"
-target="_blank">Lambda calculus</a> (sometimes written as λ-calculus)
+<!DOCTYPE html><html lang="en"> <head><title>Lambda Calculus</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Lambda Calculus</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#history">History</a></li><li><a href="#concepts">Concepts</a></li><li><a href="#variables">Variables</a></li><li><a href="#function-syntax">Function Syntax</a></li><li><a href="#evaluation-rules">Evaluation Rules</a></li><li><a href="#testing">Testing</a></li><li><a href="#boolean-logic">Boolean Logic</a></li><ul><li><a href="#true-and-false">True and False</a></li><li><a href="#not-function">Not Function</a></li><li><a href="#and-function">And Function</a></li><li><a href="#or-function">Or Function</a></li><li><a href="#if-expressions">If Expressions</a></li></ul><li><a href="#arithmetic">Arithmetic</a></li><ul><li><a href="#church-numerals">Church Numerals</a></li><li><a href="#successor">Successor</a></li><li><a href="#predecessor">Predecessor</a></li><li><a href="#is-zero">Is Zero</a></li><li><a href="#addition">Addition</a></li><li><a href="#subtraction">Subtraction</a></li><li><a href="#multiplication">Multiplication</a></li><li><a href="#division">Division</a></li><li><a href="#exponentiation">Exponentiation</a></li></ul><li><a href="#equality">Equality</a></li><li><a href="#function-composition">Function Composition</a></li><li><a href="#recursion">Recursion</a></li><ul><li><a href="#omega-combinator">Omega Combinator</a></li><li><a href="#y-combinator">Y Combinator</a></li><li><a href="#z-combinator">Z Combinator</a></li></ul><li><a href="#linked-lists">Linked Lists</a></li><li><a href="#bird-combinators">Bird Combinators</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
+<p><a href="https://en.wikipedia.org/wiki/Lambda_calculus" target="_blank">Lambda calculus</a> (sometimes written as λ-calculus)
 describes concepts that are fundamental to functional programming
 such as first-class functions and currying.
 A first-class function can take other functions as arguments
@@ -12,14 +13,14 @@ how functions can interact with each other,
 not to calculate results in a useful way.</p>
 <p>Learning λ-calculus can be compared to learning about slide rules.
 Calculators are an excellent replacement for slide rules,
-and it's not necessary to understand how to use a slide rule
+and it’s not necessary to understand how to use a slide rule
 in order to use a calculator.
-But it's fascinating to learn how slide rules work (logarithms).
-Likewise, it's not necessary to understand λ-calculus
+But it’s fascinating to learn how slide rules work (logarithms).
+Likewise, it’s not necessary to understand λ-calculus
 in order to be productive in modern programming languages.
-But it's fascinating to learn how much can be accomplished
+But it’s fascinating to learn how much can be accomplished
 within the constraints of λ-calculus.</p>
-<p>The word &quot;calculus&quot; has four meanings, the last of which applies here.</p>
+<p>The word “calculus” has four meanings, the last of which applies here.</p>
 <ol>
 <li>In mathematics it is a method of calculation
 known as differential or integral calculus.</li>
@@ -36,39 +37,30 @@ in a complicated situation.</li>
 λ-calculus and the closest equivalent in JavaScript.
 JavaScript implementations of all the functions described here
 can be found in this
-<a href="https://github.com/mvolkmann/lambda-calculus/blob/main/lambda-calculus.test.ts"
-target="_blank">GitHub repository</a>.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<a href="https://github.com/mvolkmann/lambda-calculus/blob/main/lambda-calculus.test.ts" target="_blank">GitHub repository</a>.</p>
+<h2 id="resources">Resources</h2>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Lambda_calculus"
-  target="_blank">Lambda calculus</a> page on Wikipedia</li>
-<li><a href="https://learnxinyminutes.com/docs/lambda-calculus/"
-target="_blank">Learn X in Y minutes Where X=Lambda Calculus</a></li>
-<li><a href="https://www.lesswrong.com/posts/D4PYwNtYNwsgoixGa/intro-to-hacking-with-the-lambda-calculus"
-target="_blank">Intro to hacking with the lambda calculus</a>
+<li><a href="https://en.wikipedia.org/wiki/Lambda_calculus" target="_blank">Lambda calculus</a> page on Wikipedia</li>
+<li><a href="https://learnxinyminutes.com/docs/lambda-calculus/" target="_blank">Learn X in Y minutes Where X=Lambda Calculus</a></li>
+<li><a href="https://www.lesswrong.com/posts/D4PYwNtYNwsgoixGa/intro-to-hacking-with-the-lambda-calculus" target="_blank">Intro to hacking with the lambda calculus</a>
 blog post by L Rudolf L</li>
-<li><a href="https://www.youtube.com/watch?v=3VQ382QG-y4"
-target="_blank">Fundamentals of Lambda Calculus &amp; Functional Programming in JavaScript</a>
+<li><a href="https://www.youtube.com/watch?v=3VQ382QG-y4" target="_blank">Fundamentals of Lambda Calculus &#x26; Functional Programming in JavaScript</a>
 YouTube talk by Gabriel Lebec</li>
 </ul>
-<h2 id="history" tabindex="-1">History</h2>
-<p><a href="https://en.wikipedia.org/wiki/Gottlob_Frege"
-target="_blank">Gottlob Frege</a> (1848-1925)
+<h2 id="history">History</h2>
+<p><a href="https://en.wikipedia.org/wiki/Gottlob_Frege" target="_blank">Gottlob Frege</a> (1848-1925)
 studied the use of functions in logic in 1893.</p>
-<p><a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel"
-target="_blank">Moses Schönfinkel</a> (1888-1942)
+<p><a href="https://en.wikipedia.org/wiki/Moses_Schönfinkel" target="_blank">Moses Schönfinkel</a> (1888-1942)
 studied how combinators can be applied to formal logic in the 1920s.
-The term &quot;combinator&quot; has two meanings, both of which describe a kind of function.
+The term “combinator” has two meanings, both of which describe a kind of function.
 The first describes functions that have no free variables.
 It combines only its arguments to produce a result.
 The second describes functions that take other functions
 and combine them to create a new function.</p>
-<p><a href="https://en.wikipedia.org/wiki/Alonzo_Church"
-target="_blank">Alonzo Church</a> (1903-1985)
+<p><a href="https://en.wikipedia.org/wiki/Alonzo_Church" target="_blank">Alonzo Church</a> (1903-1985)
 invented Lambda Calculus in the 1930s.
-He was the PhD advisor of <a href="https://en.wikipedia.org/wiki/Alan_Turing"
-target="_blank">Alan Turing</a> (1912-1954).</p>
-<h2 id="concepts" tabindex="-1">Concepts</h2>
+He was the PhD advisor of <a href="https://en.wikipedia.org/wiki/Alan_Turing" target="_blank">Alan Turing</a> (1912-1954).</p>
+<h2 id="concepts">Concepts</h2>
 <p>λ-calculus only defines three concepts, referred to as lambda terms:</p>
 <ul>
 <li>
@@ -77,21 +69,21 @@ target="_blank">Alan Turing</a> (1912-1954).</p>
 </li>
 <li>
 <p>lambda abstraction: defines an anonymous function that has exactly one parameter</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λ&lt;parameter&gt;.&lt;body&gt;</code></td>
-<td><code>&lt;parameter&gt; =&gt; &lt;body&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>&lt;parameter&gt;</code> is a single variable that is
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λ&#x3C;parameter>.&#x3C;body></code></td><td><code>&#x3C;parameter> => &#x3C;body></code></td></tr></tbody></table>
+<p><code>&#x3C;parameter></code> is a single variable that is
 also referred to as a meta-variable.</p>
 <p>The body of a function extends as far right as possible.<br>
 So <code>λx.a b c x</code> is evaluated as <code>λx.(((a b) c) x)</code><br>
@@ -103,25 +95,25 @@ written in the shorthand form <code>λxyz.a b c</code> despite the fact that
 </li>
 <li>
 <p>application: calls a function with arguments</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(λ&lt;parameter&gt;.&lt;body&gt;) &lt;arguments&gt;</code></td>
-<td><code>(&lt;parameter&gt; =&gt; &lt;body&gt;)(&lt;arguments&gt;)</code></td>
-</tr>
-<tr>
-<td><code>(λxyz.&lt;body&gt;) a b c</code></td>
-<td><code>(x =&gt; y =&gt; z =&gt; &lt;body&gt;)(a)(b)(c)</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>&lt;arguments&gt;</code> is a whitespace-separated list of expressions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>(λ&#x3C;parameter>.&#x3C;body>) &#x3C;arguments></code></td><td><code>(&#x3C;parameter> => &#x3C;body>)(&#x3C;arguments>)</code></td></tr><tr><td><code>(λxyz.&#x3C;body>) a b c</code></td><td><code>(x => y => z => &#x3C;body>)(a)(b)(c)</code></td></tr></tbody></table>
+<p><code>&#x3C;arguments></code> is a whitespace-separated list of expressions.
 Function application is left associative.
 So <code>a b c d</code> is evaluated as <code>((a b) c) d</code>.</p>
 </li>
@@ -130,67 +122,67 @@ So <code>a b c d</code> is evaluated as <code>((a b) c) d</code>.</p>
 such as booleans, numbers, and strings.
 It also does not define operators on these types or any built-in functions.
 However, these can be defined using only the concepts listed above.</p>
-<h2 id="variables" tabindex="-1">Variables</h2>
+<h2 id="variables">Variables</h2>
 <p>There are two kinds of variables, bound and free.
 Bound variables are bound by a specific abstraction (function).
 They appear as function parameters and represent an input value.
 Free variables appear in function definitions, are not parameters,
 and can represent any value.
 The following tables contains examples.</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-<th>Bound Variables</th>
-<th>Free Variables</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx.(+ x 1)</code></td>
-<td><code>x =&gt; x + 1</code></td>
-<td><code>x</code></td>
-<td>none</td>
-</tr>
-<tr>
-<td><code>λx.(+ y 1)</code></td>
-<td><code>x =&gt; y + 1</code></td>
-<td>none</td>
-<td><code>y</code></td>
-</tr>
-<tr>
-<td><code>λx.x λx.(+ x 1)</code></td>
-<td><code>x =&gt; x((x =&gt; x + 1))</code></td>
-<td>rename 2nd <code>x</code> as shown below</td>
-<td></td>
-</tr>
-<tr>
-<td><code>λx.x λy.(+ y 1)</code></td>
-<td><code>x =&gt; x((y =&gt; y + 1))</code></td>
-<td><code>x</code> and <code>y</code></td>
-<td>none</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th><th>Bound Variables</th><th>Free Variables</th></tr></thead><tbody><tr><td><code>λx.(+ x 1)</code></td><td><code>x => x + 1</code></td><td><code>x</code></td><td>none</td></tr><tr><td><code>λx.(+ y 1)</code></td><td><code>x => y + 1</code></td><td>none</td><td><code>y</code></td></tr><tr><td><code>λx.x λx.(+ x 1)</code></td><td><code>x => x((x => x + 1))</code></td><td>rename 2nd <code>x</code> as shown below</td><td></td></tr><tr><td><code>λx.x λy.(+ y 1)</code></td><td><code>x => x((y => y + 1))</code></td><td><code>x</code> and <code>y</code></td><td>none</td></tr></tbody></table>
 <p>The last two examples above assume that <code>x</code> is a function
 that does not necessarily correspond to a number.</p>
-<h2 id="function-syntax" tabindex="-1">Function Syntax</h2>
+<h2 id="function-syntax">Function Syntax</h2>
 <p>An identity function that just returns the value passed in can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx.x</code></td>
-<td><code>x =&gt; x</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx.x</code></td><td><code>x => x</code></td></tr></tbody></table>
 <p>Function definitions begin with the λ character,
 followed by a single parameter name, a period, and
 the lambda term to which the function evaluates.</p>
@@ -199,20 +191,20 @@ which results in the value <code>y</code>.
 Parentheses are used to surround function definitions
 and enable them to be applied.
 They are also used to define the order of operations.</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>(λx.x) y</code></td>
-<td><code>(x =&gt; x)(y)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>(λx.x) y</code></td><td><code>(x => x)(y)</code></td></tr></tbody></table>
 <p>Functions in λ-calculus can only have a single parameter.
 To support the concept of multi-parameter functions,
 a function can be passed to another function.
@@ -222,37 +214,36 @@ Recall that λ-calculus does not define numbers or operators.
 But for demonstration purposes, we can pretend that it does define
 numbers, basic math operators such as <code>+</code>,
 and the Boolean values <code>true</code> and <code>false</code>.</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx. λy.x + y</code></td>
-<td><code>(x, y) =&gt; x + y</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx. λy.x + y</code></td><td><code>(x, y) => x + y</code></td></tr></tbody></table>
 <p>A shorthand way of writing the λ-calculus function above is <code>λxy.x + y</code>.
 This is also sometimes written with a prefix operator as <code>λxy.(+ x y)</code>.</p>
 <p>Chaining functions that each take a single argument
-is referred to as &quot;currying&quot;.
+is referred to as “currying”.
 This is a nod to the mathematician
-<a href="https://en.wikipedia.org/wiki/Haskell_Curry"
-target="_blank">Haskell Curry</a> (1900-1982)
+<a href="https://en.wikipedia.org/wiki/Haskell_Curry" target="_blank">Haskell Curry</a> (1900-1982)
 who used the concept extensively in his research.
 However, the concept was initially defined by Gottlob Frege in 1893
 before Haskell Curry was born.</p>
 <p>The λ-calculus function above can be defined in JavaScript to support currying.
 This uses a function that returns another function.</p>
 <pre><code class="language-js">function add(x) {
-  return y =&gt; x + y;
+  return y => x + y;
 }
 // OR more compactly as:
-const add = x =&gt; y =&gt; x + y;
+const add = x => y => x + y;
 // It can be called as follows:
 const sum = add(2)(3); /* 5 */
 </code></pre>
@@ -260,7 +251,7 @@ const sum = add(2)(3); /* 5 */
 all functions automatically support currying.
 Passing fewer arguments to a function than it has parameters
 results in a new function that expects the remaining parameters.</p>
-<h2 id="evaluation-rules" tabindex="-1">Evaluation Rules</h2>
+<h2 id="evaluation-rules">Evaluation Rules</h2>
 <ul>
 <li>
 <p>𝛼-conversion (alpha)</p>
@@ -298,92 +289,92 @@ because <code>+</code> is a a function that takes two arguments,
 but only one is supplied.</p>
 </li>
 </ul>
-<h2 id="testing" tabindex="-1">Testing</h2>
+<h2 id="testing">Testing</h2>
 <p>When implementing λ-calculus functions in programming languages,
 it is useful to be able to convert λ-calculus representations
 to actual boolean values and numbers.</p>
 <p>In JavaScript this can be accomplished with the following functions
 where <code>b</code> is a λ-calculus function that represents true or false
 and <code>n</code> is a λ-calculus function that represents a natural number:</p>
-<pre><code class="language-js">const jsbool = b =&gt; b(true)(false);
-const jsnum = n =&gt; n(x =&gt; x + 1)(0);
+<pre><code class="language-js">const jsbool = b => b(true)(false);
+const jsnum = n => n(x => x + 1)(0);
 </code></pre>
-<h2 id="boolean-logic" tabindex="-1">Boolean Logic</h2>
-<h3 id="true-and-false" tabindex="-1">True and False</h3>
+<h2 id="boolean-logic">Boolean Logic</h2>
+<h3 id="true-and-false">True and False</h3>
 <p>The Boolean value true is represented by:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λt. λf. t</code></td>
-<td><code>t =&gt; f =&gt; t</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λt. λf. t</code></td><td><code>t => f => t</code></td></tr></tbody></table>
 <p>This takes two arguments and returns the first.</p>
 <p>In the examples that follow, the JavaScript function above is represented
 by <code>true_</code> to avoid conflicting with the JavaScript keyword <code>true</code>.</p>
 <p>The Boolean value false is represented by:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λt. λf. f</code></td>
-<td><code>t =&gt; f =&gt; f</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λt. λf. f</code></td><td><code>t => f => f</code></td></tr></tbody></table>
 <p>This takes two arguments and returns the second.
 It is the same as the function that represents the number zero (below).</p>
 <p>In the examples that follow, the JavaScript function above is represented
 by <code>false_</code> to avoid conflicting with the JavaScript keyword <code>false</code>.</p>
-<h3 id="not-function" tabindex="-1">Not Function</h3>
-<p>A function to return &quot;not&quot; of a Boolean value,
+<h3 id="not-function">Not Function</h3>
+<p>A function to return “not” of a Boolean value,
 where <code>b</code> is either the true or false function,
 can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λb.b false true</code></td>
-<td><code>b =&gt; b(false_)(true_)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λb.b false true</code></td><td><code>b => b(false_)(true_)</code></td></tr></tbody></table>
 <p>For example,
 <code>(λb.b false true) (λt. λf. t)</code> evaluates to false.
 <code>(λb.b false true) (λt. λf. f)</code> evaluates to true.</p>
-<h3 id="and-function" tabindex="-1">And Function</h3>
-<p>A function to return the result of and'ing two Boolean values can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx. λy. x y false</code></td>
-<td><code>x =&gt; y =&gt; x(y)(false_)</code></td>
-</tr>
-</tbody>
-</table>
+<h3 id="and-function">And Function</h3>
+<p>A function to return the result of and’ing two Boolean values can be defined as:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx. λy. x y false</code></td><td><code>x => y => x(y)(false_)</code></td></tr></tbody></table>
 <p>If the first argument is <code>false</code>, that is the result.
 Otherwise the second argument is the result.
 Replacing <code>false</code> with <code>x</code> results in an equivalent definition
@@ -412,22 +403,22 @@ false false false
 (λt. λf. f) false false
 false
 </code></pre>
-<h3 id="or-function" tabindex="-1">Or Function</h3>
-<p>A function to return the result of or'ing two Boolean values can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx. λy. x true y</code></td>
-<td><code>x =&gt; y =&gt; x(true_)(y)</code></td>
-</tr>
-</tbody>
-</table>
+<h3 id="or-function">Or Function</h3>
+<p>A function to return the result of or’ing two Boolean values can be defined as:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx. λy. x true y</code></td><td><code>x => y => x(true_)(y)</code></td></tr></tbody></table>
 <p>If the first argument is <code>true</code>, that is the result.
 Otherwise the second argument is the result.
 Replacing <code>true</code> with <code>x</code> results in an equivalent definition
@@ -456,25 +447,25 @@ false true false
 (λt. λf. f) true false
 false
 </code></pre>
-<h3 id="if-expressions" tabindex="-1">If Expressions</h3>
-<p>A function that models an &quot;if expression&quot; can be defined as follows where
+<h3 id="if-expressions">If Expressions</h3>
+<p>A function that models an “if expression” can be defined as follows where
 <code>c</code> is the condition to be tested,
 <code>x</code> is the result if <code>c</code> evaluates to true, and
 <code>y</code> is the result if <code>c</code> evaluates to false:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx. λy. x true y</code></td>
-<td><code>x =&gt; y =&gt; x(true_)(y)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx. λy. x true y</code></td><td><code>x => y => x(true_)(y)</code></td></tr></tbody></table>
 <p>This works because
 the function that represents <code>true</code> returns its first argument and
 the function that represents <code>false</code> returns its second argument.</p>
@@ -486,10 +477,10 @@ To solve this, the <code>if</code> function can be implemented as follows where
 <code>b</code> is a Boolean value,
 <code>t</code> is a function that can be called to get the true value, and
 <code>f</code> is a function that can be called to get the false value.</p>
-<pre><code class="language-js">const if_ = b =&gt; t =&gt; f =&gt; b(t)(f)(); // λbtf.(b t f)(_)
+<pre><code class="language-js">const if_ = b => t => f => b(t)(f)(); // λbtf.(b t f)(_)
 </code></pre>
-<h2 id="arithmetic" tabindex="-1">Arithmetic</h2>
-<h3 id="church-numerals" tabindex="-1">Church Numerals</h3>
+<h2 id="arithmetic">Arithmetic</h2>
+<h3 id="church-numerals">Church Numerals</h3>
 <p>While λ-calculus does not define numbers, we can select
 λ terms to represent each natural number (non-negative integers).
 We can define functions that take another function <code>f</code> and a number <code>x</code>
@@ -498,37 +489,37 @@ It is not the result of these functions that represent numbers,
 but rather the functions themselves.</p>
 <p>In the table below, note the number of times the function <code>f</code> is applied
 on the right side of the period.</p>
-<table>
-<thead>
-<tr>
-<th>Number</th>
-<th>λ term</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td><code>λfx.x</code></td>
-<td><code>f =&gt; x =&gt; x</code></td>
-</tr>
-<tr>
-<td>1</td>
-<td><code>λfx.f x</code></td>
-<td><code>f =&gt; x =&gt; f(x)</code></td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>λfx.f (f x)</code></td>
-<td><code>f =&gt; x =&gt; f(f(x))</code></td>
-</tr>
-<tr>
-<td>3</td>
-<td><code>λfx.f (f (f x))</code></td>
-<td><code>f =&gt; x =&gt; f(f(f(x)))</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Number</th><th>λ term</th><th>JavaScript</th></tr></thead><tbody><tr><td>0</td><td><code>λfx.x</code></td><td><code>f => x => x</code></td></tr><tr><td>1</td><td><code>λfx.f x</code></td><td><code>f => x => f(x)</code></td></tr><tr><td>2</td><td><code>λfx.f (f x)</code></td><td><code>f => x => f(f(x))</code></td></tr><tr><td>3</td><td><code>λfx.f (f (f x))</code></td><td><code>f => x => f(f(f(x)))</code></td></tr></tbody></table>
 <p>The function that represents zero is the same
 as the function that represents false (above).</p>
 <p>These functions that represent numbers take another function and a value.
@@ -537,30 +528,30 @@ initially passing it the value and
 subsequently passing it what the function returns.
 For example, the following JavaScript outputs
 the five numbers 3, 6, 12, 24, and 48.</p>
-<pre><code class="language-js">const demo = x =&gt; {
+<pre><code class="language-js">const demo = x => {
   console.log(x);
   return x + x;
 };
 five(demo)(3);
 </code></pre>
-<h3 id="successor" tabindex="-1">Successor</h3>
+<h3 id="successor">Successor</h3>
 <p>The successor function (succ)
 returns the number that follows a given number.
 It can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λn (λf. λx. f (n f x))</code></td>
-<td><code>n =&gt; f =&gt; x =&gt; f(n(f)(x))</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λn (λf. λx. f (n f x))</code></td><td><code>n => f => x => f(n(f)(x))</code></td></tr></tbody></table>
 <p>For example, the successor of 1 is 2.</p>
 <pre><code class="language-text">(λn (λf. λx. f (n f x))) 1
 (λn (λf. λx. f (n f x))) (λfx.f x)
@@ -569,7 +560,7 @@ It can be defined as:</p>
 λfx.f (f x)
 2
 </code></pre>
-<h3 id="predecessor" tabindex="-1">Predecessor</h3>
+<h3 id="predecessor">Predecessor</h3>
 <p>The predecessor function (pred)
 returns the number that precedes a given number.
 It is one of the most complicated functions in λ-calculus.</p>
@@ -584,117 +575,117 @@ composed of the second number and the successor of the second number.
 This yields (0, 1), (1, 2), and (2, 3).
 Take the first number of the final pair.</p>
 <p>A function to represent a pair can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λx.λy.λf.f x y</code></td>
-<td><code>x =&gt; y =&gt; f =&gt; f(x)(y)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λx.λy.λf.f x y</code></td><td><code>x => y => f => f(x)(y)</code></td></tr></tbody></table>
 <p>A function to get the first element of a pair <code>p</code> can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λp.p TRUE</code></td>
-<td><code>p =&gt; p(true_)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λp.p TRUE</code></td><td><code>p => p(true_)</code></td></tr></tbody></table>
 <p>A function to get the second element of a pair <code>p</code> can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λp.p FALSE</code></td>
-<td><code>p =&gt; p(false_)</code></td>
-</tr>
-</tbody>
-</table>
-<p>Let's use the name &quot;phi&quot; to refer to a function that
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λp.p FALSE</code></td><td><code>p => p(false_)</code></td></tr></tbody></table>
+<p>Let’s use the name “phi” to refer to a function that
 takes a pair and returns a new pair composed of
 the second element and the successor of the second element.
 This can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λp.pair (snd p) (succ (snd p))</code></td>
-<td><code>p =&gt; pair(snd(p))(succ(snd(p)))</code></td>
-</tr>
-</tbody>
-</table>
-<p>The term &quot;<code>n phi</code>&quot; represents n applications of the phi function.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λp.pair (snd p) (succ (snd p))</code></td><td><code>p => pair(snd(p))(succ(snd(p)))</code></td></tr></tbody></table>
+<p>The term “<code>n phi</code>” represents n applications of the phi function.</p>
 <p>We can now define the predecessor function as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λn.fst (n phi (pair zero zero))</code></td>
-<td><code>n =&gt; fst(n(phi)(pair(zero)(zero)))</code></td>
-</tr>
-</tbody>
-</table>
-<p>The Wikipedia page for &quot;Lambda Calculus&quot; defines the predecessor function as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))</code></td>
-<td><code>n =&gt; f =&gt; x =&gt; n(g =&gt; h =&gt; h(g(f)))(u =&gt; x)(u =&gt; u)</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="is-zero" tabindex="-1">Is Zero</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λn.fst (n phi (pair zero zero))</code></td><td><code>n => fst(n(phi)(pair(zero)(zero)))</code></td></tr></tbody></table>
+<p>The Wikipedia page for “Lambda Calculus” defines the predecessor function as:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λn (λf. λx. n (λg.λh. h (g f)) (λu.x) (λu.u))</code></td><td><code>n => f => x => n(g => h => h(g(f)))(u => x)(u => u)</code></td></tr></tbody></table>
+<h3 id="is-zero">Is Zero</h3>
 <p>A function to determine whether its argument is the zero function
 can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λn.n (λx.FALSE) TRUE</code></td>
-<td><code>n =&gt; n(x =&gt; false_)(true_)</code></td>
-</tr>
-</tbody>
-</table>
-<p>Let's verify that this works for 0 and 1.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λn.n (λx.FALSE) TRUE</code></td><td><code>n => n(x => false_)(true_)</code></td></tr></tbody></table>
+<p>Let’s verify that this works for 0 and 1.</p>
 <pre><code class="language-text">(λn.n (λx.FALSE) TRUE) λfx.x
 λfx.x (λx.FALSE) TRUE -- f is not used in the body
 (λx.x) TRUE
@@ -705,23 +696,23 @@ TRUE
 (λx.FALSE) TRUE
 FALSE
 </code></pre>
-<h3 id="addition" tabindex="-1">Addition</h3>
+<h3 id="addition">Addition</h3>
 <p>Addition can be seen as iterated successions.
 An add function can be defined as;</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn. (m succ) n</code></td>
-<td><code>m =&gt; n =&gt; m(succ)(n)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn. (m succ) n</code></td><td><code>m => n => m(succ)(n)</code></td></tr></tbody></table>
 <p>For example, here are the steps to use this function to add 2 and 3.
 See the representations for 2 and 3 in the table above.</p>
 <pre><code class="language-text">(λmn. (m succ) n) 2 3
@@ -734,46 +725,46 @@ succ (λfx.f (f (f (f x))))
 λfx.f (f (f (f (f x))))
 5
 </code></pre>
-<h3 id="subtraction" tabindex="-1">Subtraction</h3>
+<h3 id="subtraction">Subtraction</h3>
 <p>Subtraction can be seen as iterated predecessors.
 A subtraction function can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn. (n pred) m</code></td>
-<td><code>m =&gt; n =&gt; n(pred)(m)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn. (n pred) m</code></td><td><code>m => n => n(pred)(m)</code></td></tr></tbody></table>
 <p>This returns <code>zero</code> if <code>m</code> is less than <code>n</code>
-because we don't have a way to represent negative numbers.</p>
-<h3 id="multiplication" tabindex="-1">Multiplication</h3>
+because we don’t have a way to represent negative numbers.</p>
+<h3 id="multiplication">Multiplication</h3>
 <p>Multiplication can be seen as iterated addition.
 A multiply function (mul) can be written as the following
 where <code>m</code> and <code>n</code> are the two numbers to be multiplied:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn. m (add n) 0</code></td>
-<td><code>m =&gt; n =&gt; m(add(n))(zero)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn. m (add n) 0</code></td><td><code>m => n => m(add(n))(zero)</code></td></tr></tbody></table>
 <p>The functions above are correct, but multiplication
 is also the same as the composition of two numbers.
-See the &quot;Function Composition&quot; section below.</p>
+See the “Function Composition” section below.</p>
 <p>For example, here are the steps to use this function to multiply 2 and 3.
 See the representations for 2 and 3 in the table above.</p>
 <pre><code class="language-text">(λmn. m (add n) 0) 2 3
@@ -790,30 +781,30 @@ succ (succ 4)
 succ 5
 6 which is represented by λfx.f (f (f (f (f (f x)))))
 </code></pre>
-<h3 id="division" tabindex="-1">Division</h3>
+<h3 id="division">Division</h3>
 <p>Division of integer numbers usually results in a floating point result
-and there isn't an easy way to represent floating point numbers in λ-calculus.
+and there isn’t an easy way to represent floating point numbers in λ-calculus.
 We could define division as iterated subtraction
 and make the result be the number of times that one integers goes into another.</p>
 <p>TODO: Add this.</p>
-<h3 id="exponentiation" tabindex="-1">Exponentiation</h3>
+<h3 id="exponentiation">Exponentiation</h3>
 <p>Exponentiation can be seen as iterated multiplication.
 An exponentiation function (exp) can be defined as the following
 where <code>m</code> is the base and <code>n</code> is the exponent:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn. n (mul m) 1</code></td>
-<td><code>m =&gt; n =&gt; n(mul(m))(one)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn. n (mul m) 1</code></td><td><code>m => n => n(mul(m))(one)</code></td></tr></tbody></table>
 <p>For example, here are the steps to raise 2 to the 3rd power.
 See the representations for 2 and 3 in the table above.</p>
 <pre><code class="language-text">(λmn. n (mul m) 1) 2 3
@@ -827,88 +818,88 @@ See the representations for 2 and 3 in the table above.</p>
 </code></pre>
 <p>An exponentiation function can be defined even more simply
 as reverse function composition.</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn. n m</code></td>
-<td><code>m =&gt; n =&gt; n(m)</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn. n m</code></td><td><code>m => n => n(m)</code></td></tr></tbody></table>
 <pre><code class="language-text">(λmn. n m) 2 3
 3 2
 (λfx.f (f (f x))) 2
 λx.2 (2 (2 x))
 which is 2 times 2 times 2 which is 8.
 </code></pre>
-<h2 id="equality" tabindex="-1">Equality</h2>
+<h2 id="equality">Equality</h2>
 <p>A function to determine if two Boolean values are equal can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λab. (or (and a b) (and (not a) (not b)))</code></td>
-<td><code>a =&gt; b =&gt; or(and(a)(b))(and(not(a))(not(b)))</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λab. (or (and a b) (and (not a) (not b)))</code></td><td><code>a => b => or(and(a)(b))(and(not(a))(not(b)))</code></td></tr></tbody></table>
 <p>A function to determine if two numbers are equal can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λmn.and (iszero (sub m n)) (iszero (sub n m))</code></td>
-<td><code>m =&gt; n =&gt; and(iszero(sub(m)(n)))(iszero(sub(n)(m)))</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λmn.and (iszero (sub m n)) (iszero (sub n m))</code></td><td><code>m => n => and(iszero(sub(m)(n)))(iszero(sub(n)(m)))</code></td></tr></tbody></table>
 <p>We have to test both argument orders because our <code>sub</code> function returns zero
 when the first number is less than the last number.</p>
-<h2 id="function-composition" tabindex="-1">Function Composition</h2>
+<h2 id="function-composition">Function Composition</h2>
 <p>A function to compose two functions can be defined as:</p>
-<table>
-<thead>
-<tr>
-<th>λ-calculus</th>
-<th>JavaScript</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>λfgx.f (g x)</code></td>
-<td><code>f =&gt; g =&gt; x =&gt; f(g(x))</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="recursion" tabindex="-1">Recursion</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>λ-calculus</th><th>JavaScript</th></tr></thead><tbody><tr><td><code>λfgx.f (g x)</code></td><td><code>f => g => x => f(g(x))</code></td></tr></tbody></table>
+<h2 id="recursion">Recursion</h2>
 <p>Functions in λ-calculus do not have names.
 This leaves no way for a function to refer to itself
 which makes implementing recursion difficult.</p>
-<h3 id="omega-combinator" tabindex="-1">Omega Combinator</h3>
-<p>A value <code>v</code> is a &quot;fixed point&quot; of a function <code>f</code> if <code>f(v)</code> is equal to <code>v</code>.</p>
-<p>The function <code>λx.x x</code> has a &quot;fixed point&quot; of <code>λx.x x</code>
+<h3 id="omega-combinator">Omega Combinator</h3>
+<p>A value <code>v</code> is a “fixed point” of a function <code>f</code> if <code>f(v)</code> is equal to <code>v</code>.</p>
+<p>The function <code>λx.x x</code> has a “fixed point” of <code>λx.x x</code>
 which happens to be the same as the definition of the function.
 The expression <code>(λx.x x) (λx.x x)</code> is called the omega (Ω) combinator.
 Substituting this fixed point value for each <code>x</code> in the function
 yields the exact same expression.
 Evaluating this repeats forever, creating an infinite loop.</p>
-<h3 id="y-combinator" tabindex="-1">Y Combinator</h3>
+<h3 id="y-combinator">Y Combinator</h3>
 <p>The Y combinator, invented by Haskell Curry, is a function that
 implements recursion and provides a way of implementing loops.
 It adds use of the function parameter <code>f</code> to the previous definition,
@@ -928,19 +919,19 @@ but they do not.</p>
 Note how this differs slightly from the definition above
 in order to work in a strictly evaluated language.
 TODO: Is the modified version equivalent to the Z combinator?</p>
-<pre><code class="language-js">const Y = f =&gt; (x =&gt; x(x))(x =&gt; f(y =&gt; x(x)(y))); // λf.(λx.x x) (λx.f (x x))
+<pre><code class="language-js">const Y = f => (x => x(x))(x => f(y => x(x)(y))); // λf.(λx.x x) (λx.f (x x))
 </code></pre>
 <p>Next, we need a function to compute a single result in a factorial sequence.
 This function is not recursive because
-λ-calculus doesn't support named functions.
+λ-calculus doesn’t support named functions.
 The function <code>f</code> is a parameter of this function
 and is used to simulate recursion.</p>
-<pre><code class="language-js">const facgen = f =&gt; n =&gt; iszero(n)(() =&gt; one)(() =&gt; mul(n)(f(pred(n))))();
+<pre><code class="language-js">const facgen = f => n => iszero(n)(() => one)(() => mul(n)(f(pred(n))))();
 </code></pre>
 <p>Breaking this down, <code>iszero(n)</code> selects one of the following functions:</p>
 <ul>
-<li>If true then <code>(() =&gt; one)</code> is selected.</li>
-<li>if false then <code>(() =&gt; mul(n)(f(pred(n))))</code> is selected.</li>
+<li>If true then <code>(() => one)</code> is selected.</li>
+<li>if false then <code>(() => mul(n)(f(pred(n))))</code> is selected.</li>
 </ul>
 <p>The selected function is then invoked with <code>()</code>.</p>
 <p>Finally, we can define a function that combines
@@ -952,7 +943,7 @@ the Y combinator and the <code>facgen</code> function.</p>
 <code>factorial(two)</code> returns the function for <code>two</code>.<br>
 <code>factorial(three)</code> returns the function for <code>six</code>.<br>
 and so on.</p>
-<h3 id="z-combinator" tabindex="-1">Z Combinator</h3>
+<h3 id="z-combinator">Z Combinator</h3>
 <p>The Z combinator is similar to the Y combinator,
 but it provides lazy evaluation,
 deferring function applications until their results are needed.
@@ -965,20 +956,20 @@ where <code>M</code> is the Mockingbird function:</p>
 </code></pre>
 <p>A JavaScript implementation can be defined as:</p>
 <pre><code class="language-js">// Note that the two terms at the end are identical.
-const Z = f =&gt; (x =&gt; f(y =&gt; x(x)(y)))(x =&gt; f(y =&gt; x(x)(y)));
+const Z = f => (x => f(y => x(x)(y)))(x => f(y => x(x)(y)));
 </code></pre>
 <p>This can be used in place of the <code>Y</code> function above
 to define a factorial function.</p>
-<h2 id="linked-lists" tabindex="-1">Linked Lists</h2>
-<p>We can simulate linked lists with &quot;cons cells&quot;.
-The function <code>cons</code>, short of &quot;construct&quot;,
+<h2 id="linked-lists">Linked Lists</h2>
+<p>We can simulate linked lists with “cons cells”.
+The function <code>cons</code>, short of “construct”,
 creates a cons cell which holds a pair of values.
 The function <code>car</code> takes a cons cell and returns its first element.
 The function <code>cdr</code> takes a cons cell and returns its last element.</p>
-<pre><code class="language-js">const cons = a =&gt; b =&gt; f =&gt; f(a)(b);
-const car = p =&gt; p(true_);
-const cdr = p =&gt; p(false_);
-const nil = f =&gt; x =&gt; null; // used to mark the end of a linked list
+<pre><code class="language-js">const cons = a => b => f => f(a)(b);
+const car = p => p(true_);
+const cdr = p => p(false_);
+const nil = f => x => null; // used to mark the end of a linked list
 </code></pre>
 <p>The following code demonstrates using these functions:</p>
 <pre><code class="language-js">const pair = cons(one)(two);
@@ -991,11 +982,10 @@ expect(car(cdr(list))).toBe(two);
 expect(car(cdr(cdr(list)))).toBe(three);
 expect(cdr(cdr(cdr(list)))).toBe(nil);
 </code></pre>
-<h2 id="bird-combinators" tabindex="-1">Bird Combinators</h2>
-<p><a href="https://en.wikipedia.org/wiki/Raymond_Smullyan"
-target="_blank">Raymond Smullyan</a> (1919-2017)
+<h2 id="bird-combinators">Bird Combinators</h2>
+<p><a href="https://en.wikipedia.org/wiki/Raymond_Smullyan" target="_blank">Raymond Smullyan</a> (1919-2017)
 assigned bird names to many of the combinators used in λ-calculus
-in his book &quot;To Mock a Mockingbird&quot; which contains many logic puzzles.</p>
+in his book “To Mock a Mockingbird” which contains many logic puzzles.</p>
 <p>TODO: Add detail on these.</p>
 <ul>
 <li>Idiot (I)</li>
@@ -1007,5 +997,6 @@ in his book &quot;To Mock a Mockingbird&quot; which contains many logic puzzles.
 <li>Thrush (Th)</li>
 <li>Vireo (V)</li>
 <li>Blackbird (B1)</li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

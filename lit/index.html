@@ -1,15 +1,16 @@
-<!DOCTYPE html><html lang="en"> <head><title>Lit</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Lit</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#used-by">Used By</a></li><li><a href="#installing">Installing</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#basic-example">Basic Example</a></li><li><a href="#counter">Counter</a></li><li><a href="#properties">Properties</a></li><li><a href="#state">State</a></li><li><a href="#decorators">Decorators</a></li><li><a href="#refs">Refs</a></li><li><a href="#tagged-template-literals">Tagged Template Literals</a></li><li><a href="#slots">Slots</a></li><li><a href="#lifecycle">Lifecycle</a></li><ul><li><a href="#shouldupdate">shouldUpdate</a></li><li><a href="#willupdate">willUpdate</a></li><li><a href="#update">update</a></li><li><a href="#render">render</a></li><li><a href="#firstupdated">firstUpdated</a></li><li><a href="#updated">updated</a></li><li><a href="#adoptedcallback">adoptedCallback</a></li><li><a href="#haschanged">hasChanged</a></li><li><a href="#updatecomplete">updateComplete</a></li><li><a href="#performupdate">performUpdate</a></li><li><a href="#requestupdate">requestUpdate</a></li></ul><li><a href="#directives">Directives</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#context">Context</a></li><li><a href="#async-tasks">Async Tasks</a></li><li><a href="#localization">Localization</a></li><li><a href="#chess-board-example">Chess Board Example</a></li><li><a href="#markdown">Markdown</a></li><li><a href="#type-inference">Type Inference</a></li><li><a href="#errors-detected">Errors Detected</a></li><li><a href="#lit-labs">Lit Labs</a></li><li><a href="#publishing-components">Publishing Components</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Lit</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Lit</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#used-by">Used By</a></li><li><a href="#installing">Installing</a></li><li><a href="#tooling">Tooling</a></li><li><a href="#basic-example">Basic Example</a></li><li><a href="#counter">Counter</a></li><li><a href="#properties">Properties</a></li><li><a href="#state">State</a></li><li><a href="#decorators">Decorators</a></li><li><a href="#refs">Refs</a></li><li><a href="#tagged-template-literals">Tagged Template Literals</a></li><li><a href="#slots">Slots</a></li><li><a href="#lifecycle">Lifecycle</a></li><ul><li><a href="#shouldupdate">shouldUpdate</a></li><li><a href="#willupdate">willUpdate</a></li><li><a href="#update">update</a></li><li><a href="#render">render</a></li><li><a href="#firstupdated">firstUpdated</a></li><li><a href="#updated">updated</a></li><li><a href="#adoptedcallback">adoptedCallback</a></li><li><a href="#haschanged">hasChanged</a></li><li><a href="#updatecomplete">updateComplete</a></li><li><a href="#performupdate">performUpdate</a></li><li><a href="#requestupdate">requestUpdate</a></li></ul><li><a href="#directives">Directives</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#context">Context</a></li><li><a href="#async-tasks">Async Tasks</a></li><li><a href="#localization">Localization</a></li><li><a href="#chess-board-example">Chess Board Example</a></li><li><a href="#markdown">Markdown</a></li><li><a href="#type-inference">Type Inference</a></li><li><a href="#errors-detected">Errors Detected</a></li><li><a href="#lit-labs">Lit Labs</a></li><li><a href="#publishing-components">Publishing Components</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article> <style>
   img {
     border: 1px solid gray;
   }
 </style>
 <figure style="width: 50%">
-  <img alt="Lit logo" style="border: 0"
-    src="/blog/assets/lit-logo.png?v=1.1.1">
+  <img alt="Lit logo" style="border: 0" src="/blog/assets/lit-logo.png?v=1.1.1">
 </figure>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="https://lit.dev?v=1.1.1" rel="noopener" target="_blank">Lit</a>
-is library that simplifies developing <a href="/blog/topics/#/blog/web-components/?v=1.1.1" rel="noopener" target="_blank">web components</a>
+is library that simplifies developing <a href="/blog/topics/#/blog/web-components/?v=1.1.1">web components</a>
 compared to using only standard browser APIs.</p>
 <p>Other popular options include:</p>
 <ul>
@@ -24,7 +25,7 @@ compared to using only standard browser APIs.</p>
 </li>
 <li>
 <p><a href="https://hybrids.js.org/?v=1.1.1" rel="noopener" target="_blank">hybrids</a></p>
-<p>&quot;It's based on plain objects and pure functions.&quot;</p>
+<p>“It’s based on plain objects and pure functions.”</p>
 </li>
 </ul>
 <p>Lit components are native web components,
@@ -40,27 +41,27 @@ just implementing web components for their reusability across web frameworks.
 Lit can be used as a replacement for SPA frameworks
 like React, Svelte, Vue, and Angular.
 Whether using Lit in this way is a good idea is debatable.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li>
 <p><a href="https://lit.dev?v=1.1.1" rel="noopener" target="_blank">Lit home page</a></p>
 </li>
 <li>
 <p><a href="https://www.youtube.com/@buildWithLit?v=1.1.1" rel="noopener" target="_blank">Build With Lit</a> YouTube channel</p>
-<p>See the playlists &quot;Build it with Lit&quot;, &quot;Lit University&quot;, and &quot;Talks&quot;</p>
+<p>See the playlists “Build it with Lit”, “Lit University”, and “Talks”</p>
 </li>
 <li>
 <p><a href="https://htmlwithsuperpowers.netlify.app?v=1.1.1" rel="noopener" target="_blank">HTML with Superpowers</a> introduction to web components from Dave Rupert</p>
-<p>See examples on the &quot;Using&quot; page that include &quot;details-utils&quot; and &quot;two-up&quot;.</p>
+<p>See examples on the “Using” page that include “details-utils” and “two-up”.</p>
 </li>
 </ul>
-<h2 id="used-by" tabindex="-1">Used By</h2>
+<h2 id="used-by">Used By</h2>
 <p>Companies reportedly using Lit include
 Adobe, Cisco, Ford, GitHub, IBM, IKEA, Lego, Microsoft,
 Netflix, Red Hat, Reddit, SAP, VMware, and many more.</p>
 <p>Abobe uses Lit in Photoshop for the Web.</p>
 <p>Google uses Lit for Chrome DevTools.</p>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>The easiest way to get started using Lit is to
 get the library from this <a href="https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js?v=1.1.1" rel="noopener" target="_blank">CDN</a>.
 This single file can be saved locally to avoid depending on the CDN.
@@ -78,16 +79,16 @@ This has many advantages including:</p>
 <p>Enter <code>npm create vite@latest</code>.</p>
 </li>
 <li>
-<p>If prompted with &quot;OK to proceed?&quot;, press the return key.</p>
+<p>If prompted with “OK to proceed?”, press the return key.</p>
 </li>
 <li>
-<p>After the &quot;Project name&quot; prompt, enter a project name.</p>
+<p>After the “Project name” prompt, enter a project name.</p>
 </li>
 <li>
-<p>For the &quot;Select a framework&quot; prompt, select &quot;Lit&quot;.</p>
+<p>For the “Select a framework” prompt, select “Lit”.</p>
 </li>
 <li>
-<p>For the &quot;Select a variant&quot; prompt, select &quot;TypeScript&quot;.</p>
+<p>For the “Select a variant” prompt, select “TypeScript”.</p>
 </li>
 <li>
 <p>cd to the new project directory.</p>
@@ -98,18 +99,18 @@ This has many advantages including:</p>
 <li>
 <p>Run the project by entering <code>npm run dev</code> or <code>bun dev</code>.</p>
 <p>Currently running <code>bun dev</code> in macOS gives the error
-&quot;Cannot find module @rollup/rollup-darwin-x64&quot;.
+“Cannot find module @rollup/rollup-darwin-x64”.
 It should be looking for the ARM version, not the x64 version.
 A workaround is to use <code>npm run dev</code> for now.</p>
 </li>
 <li>
-<p>Type &quot;h&quot; and press the return key for help.</p>
+<p>Type “h” and press the return key for help.</p>
 </li>
 <li>
-<p>Type &quot;o&quot; and press the return key to open a browser tab for localhost:5173.</p>
+<p>Type “o” and press the return key to open a browser tab for localhost:5173.</p>
 </li>
 </ol>
-<h2 id="tooling" tabindex="-1">Tooling</h2>
+<h2 id="tooling">Tooling</h2>
 <p>ESLint has a plugin for Lit at <a href="https://github.com/43081j/eslint-plugin-lit#readme?v=1.1.1" rel="noopener" target="_blank">eslint-plugin-lit</a>.
 To use this, enter <code>npm install -D *</code> where * each of the following:</p>
 <ul>
@@ -120,33 +121,33 @@ To use this, enter <code>npm install -D *</code> where * each of the following:<
 </ul>
 <p>Create the file <code>.eslintrc.json</code> containing the following:</p>
 <pre><code class="language-json">{
-  &quot;extends&quot;: [
-    &quot;plugin:@typescript-eslint/recommended&quot;,
-    &quot;plugin:lit/recommended&quot;
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:lit/recommended"
   ],
-  &quot;parser&quot;: &quot;@typescript-eslint/parser&quot;,
-  &quot;parserOptions&quot;: {
-    &quot;ecmaVersion&quot;: 2020,
-    &quot;sourceType&quot;: &quot;module&quot;
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
   },
-  &quot;rules&quot;: {}
+  "rules": {}
 }
 </code></pre>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;lint&quot;: &quot;eslint --cache --ext=.js,.ts --fix src&quot;,
+<pre><code class="language-json">"lint": "eslint --cache --ext=.js,.ts --fix src",
 </code></pre>
 <p>Add the line <code>.eslintcache</code> in <code>.gitignore</code>.</p>
 <p>VS Code has an extension for Lit that provides syntax highlighting,
 type checking, code completion, and checks for improperly closed tags.
-See <a href="https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin&amp;v=1.1.1" rel="noopener" target="_blank">lit-plugin</a>.</p>
+See <a href="https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin&#x26;v=1.1.1" rel="noopener" target="_blank">lit-plugin</a>.</p>
 <p>To use Emmet expansions in Lit <code>html</code> tagged template literals inside VS Code,
 add the following in <code>settings.json</code>.</p>
-<pre><code class="language-json">  &quot;emmet.includeLanguages&quot;: {
-    &quot;javascript&quot;: &quot;html&quot;,
-    &quot;typescript&quot;: &quot;html&quot;
+<pre><code class="language-json">  "emmet.includeLanguages": {
+    "javascript": "html",
+    "typescript": "html"
   }
 </code></pre>
-<h2 id="basic-example" tabindex="-1">Basic Example</h2>
+<h2 id="basic-example">Basic Example</h2>
 <p>The following code from the file <code>src/greet-message.ts</code>
 implements a basic custom element using Lit and TypeScript.
 Using TypeScript provides type checking in code editors like VS Code.</p>
@@ -170,12 +171,12 @@ export class GreetMessage extends LitElement {
   override render() {
     // Checking for required attributes is optional.
     if (!this.name) throw new Error('name is a required attribute');
-    return html`&lt;div&gt;Hello, ${this.name}!&lt;/div&gt;`;
+    return html`&#x3C;div>Hello, ${this.name}!&#x3C;/div>`;
   }
 
   // The `styles` property can be defined anywhere in
   // the class definition, not just at the bottom.
-  // Making it &quot;static&quot; shares the value across all instances.
+  // Making it "static" shares the value across all instances.
   // :host refers to outermost element rendered by this custom element.
   static styles = css`
     :host {
@@ -200,7 +201,7 @@ export class GreetMessage extends LitElement {
 
   override render() {
     if (!this.name) throw new Error('name is a required attribute');
-    return html`&lt;div&gt;Hello, ${this.name}!&lt;/div&gt;`;
+    return html`&#x3C;div>Hello, ${this.name}!&#x3C;/div>`;
   }
 
   static styles = css`
@@ -227,9 +228,9 @@ the <code>createElement</code> and <code>appendChild</code> methods.</p>
     div.textContent = `Hello, ${name}!`;
     div.style.color = 'purple';
 
-    // The &quot;mode&quot; option is required and the recommended value is &quot;open&quot;.
-    // When set to &quot;open&quot;, `this.shadowRoot` is set.
-    // When set to &quot;closed&quot;, it is not.
+    // The "mode" option is required and the recommended value is "open".
+    // When set to "open", `this.shadowRoot` is set.
+    // When set to "closed", it is not.
     this.attachShadow({mode: 'open'});
     this.shadowRoot.appendChild(div);
     // Using shadow DOM is not required.  We can replace
@@ -240,7 +241,7 @@ the <code>createElement</code> and <code>appendChild</code> methods.</p>
     /*
     this.attachShadow({mode: 'open'});
     this.shadowRoot.innerHTML = `
-      &lt;div style=&quot;color: purple;&quot;&gt;Hello, ${name}!&lt;/div&gt;
+      &#x3C;div style="color: purple;">Hello, ${name}!&#x3C;/div>
     `;
     */
   }
@@ -251,25 +252,23 @@ customElements.define('greet-message', GreetMessage);
 This can be accessed in other lifecycle methods such as <code>connectedCallback</code>.
 One use is to register listeners for <code>slotchange</code> events.</p>
 <p>The following HTML renders the custom element defined above.</p>
-<p><img alt="Lit greet-message" style="width: 20%"
-  src="/blog/assets/lit-greet-message.png?v=1.1.1"></p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Lit Demo&lt;/title&gt;
-    &lt;!-- Change src value to use a different web component version. --&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/greet-message.ts&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;greet-message name=&quot;World&quot;&gt;&lt;/greet-message&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<p><img alt="Lit greet-message" style="width: 20%" src="/blog/assets/lit-greet-message.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Lit Demo&#x3C;/title>
+    &#x3C;!-- Change src value to use a different web component version. -->
+    &#x3C;script type="module" src="/src/greet-message.ts">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;greet-message name="World">&#x3C;/greet-message>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="counter" tabindex="-1">Counter</h2>
+<h2 id="counter">Counter</h2>
 <p>A common web component example is to implement a counter component.
 The following code shows one way to implement this using Lit.</p>
-<p><img alt="Lit counter" style="width: 30%"
-  src="/blog/assets/lit-counter.png?v=1.1.1"></p>
+<p><img alt="Lit counter" style="width: 30%" src="/blog/assets/lit-counter.png?v=1.1.1"></p>
 <pre><code class="language-ts">import {css, html, LitElement} from 'lit';
 import {customElement, state} from 'lit/decorators.js';
 
@@ -279,11 +278,11 @@ export class Counter extends LitElement {
 
   override render() {
     return html`
-      &lt;button ?disabled=${this.count === 0} @click=${() =&gt; this.count--}&gt;
+      &#x3C;button ?disabled=${this.count === 0} @click=${() => this.count--}>
         -
-      &lt;/button&gt;
-      &lt;div&gt;${this.count}&lt;/div&gt;
-      &lt;button @click=${() =&gt; this.count++}&gt;+&lt;/button&gt;
+      &#x3C;/button>
+      &#x3C;div>${this.count}&#x3C;/div>
+      &#x3C;button @click=${() => this.count++}>+&#x3C;/button>
     `;
   }
 
@@ -310,7 +309,7 @@ export class Counter extends LitElement {
   `;
 }
 </code></pre>
-<h2 id="properties" tabindex="-1">Properties</h2>
+<h2 id="properties">Properties</h2>
 <p>Lit uses the <code>@property</code> decorator to declare the attributes
 that can be specified in instances of custom elements.</p>
 <p>These values are reactive, meaning that changing the value
@@ -333,8 +332,8 @@ All <code>@property</code> declarations must be initialized,
 but they can be initialized to an empty string.
 The render method or any lifecycle method can check for
 required attributes and throw an error if not found.
-See the example in the &quot;Basic Example&quot; section above.</p>
-<h2 id="state" tabindex="-1">State</h2>
+See the example in the “Basic Example” section above.</p>
+<h2 id="state">State</h2>
 <p>Lit uses the <code>@state</code> decorator to declare instance properties
 that are set via attributes.</p>
 <p>These values are reactive, meaning that changing the value
@@ -343,8 +342,7 @@ causes the <code>render</code> method to be called.</p>
 <code>@property</code> or <code>@state</code> decorator are not reactive.</p>
 <p>The following custom Lit element demonstrates the reactivity
 of <code>@property</code> and <code>@state</code> variables.</p>
-<p><img alt="Lit reactivity" style="width: 30%"
-  src="/blog/assets/lit-reactivity.png?v=1.1.1"></p>
+<p><img alt="Lit reactivity" style="width: 30%" src="/blog/assets/lit-reactivity.png?v=1.1.1"></p>
 <pre><code class="language-ts">import {html, LitElement} from 'lit';
 import {customElement, property, state} from 'lit/decorators.js';
 
@@ -371,26 +369,26 @@ export class StateChanges extends LitElement {
 
   override render() {
     return html`
-      &lt;div&gt;
+      &#x3C;div>
         p: ${this.p}
-        &lt;button @click=${this.changeP}&gt;Change&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
+        &#x3C;button @click=${this.changeP}>Change&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div>
         s: ${this.s}
-        &lt;button @click=${this.changeS}&gt;Change&lt;/button&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
+        &#x3C;button @click=${this.changeS}>Change&#x3C;/button>
+      &#x3C;/div>
+      &#x3C;div>
         v: ${this.v}
-        &lt;button @click=${this.changeV}&gt;Change&lt;/button&gt;
-      &lt;/div&gt;
+        &#x3C;button @click=${this.changeV}>Change&#x3C;/button>
+      &#x3C;/div>
     `;
   }
 }
 </code></pre>
 <p>An instance of this custom element can be created as follows.</p>
-<pre><code class="language-html">&lt;state-changes p=&quot;initial&quot;&gt;&lt;/state-changes&gt;
+<pre><code class="language-html">&#x3C;state-changes p="initial">&#x3C;/state-changes>
 </code></pre>
-<h2 id="decorators" tabindex="-1">Decorators</h2>
+<h2 id="decorators">Decorators</h2>
 <p>Lit supports many decorators.
 We have already seen <code>@customElement</code>, <code>@property</code>, and <code>@state</code>.</p>
 <p>Other supported decorators include:</p>
@@ -413,7 +411,7 @@ It is a applied to a property declaration
 and the property is set to a reference to the matching element.</p>
 <p>For example:</p>
 <pre><code class="language-ts">// This sets `pBtn` to a reference to the `button`
-// inside the element with id &quot;p&quot;.
+// inside the element with id "p".
 @query('#p button') pBtn!: HTMLDivElement;
 
 // This is an event handling method that is
@@ -426,14 +424,14 @@ changeP() {
 
 override render() {
   return html`
-    &lt;div id=&quot;p&quot;&gt;
+    &#x3C;div id="p">
       p: ${this.p}
-      &lt;button @click=${this.changeP}&gt;Change&lt;/button&gt;
-    &lt;/div&gt;
+      &#x3C;button @click=${this.changeP}>Change&#x3C;/button>
+    &#x3C;/div>
   `;
 }
 </code></pre>
-<p>See the &quot;Refs&quot; section for an alternative.</p>
+<p>See the “Refs” section for an alternative.</p>
 </li>
 <li>
 <p><code>@queryAll</code></p>
@@ -463,8 +461,8 @@ changeP() {
 <p>This is similar to to <code>@query</code>, but sets a property to a <code>Promise</code>.</p>
 <p>For example:</p>
 <pre><code class="language-ts">// This sets `pBtn` to a `Promise` that will resolve to
-// a reference to the `button` inside the element with id &quot;p&quot;.
-@queryAsync('#p button') pBtn!: Promise&lt;HTMLButtonElement&gt;;
+// a reference to the `button` inside the element with id "p".
+@queryAsync('#p button') pBtn!: Promise&#x3C;HTMLButtonElement>;
 
 // This is an event handling method that is
 // called when a specific button is clicked.
@@ -491,7 +489,7 @@ breakfastElements!: HTMLElement[];
 </code></pre>
 <p>To get the elements assigned to the default slot,
 omit the argument to <code>@queryAssignedElements</code>.</p>
-<p>See examples in the &quot;Slots&quot; section below.</p>
+<p>See examples in the “Slots” section below.</p>
 </li>
 <li>
 <p><code>@queryAssignedNodes</code></p>
@@ -509,7 +507,7 @@ lunchNodes!: Node[];
 omit the argument to <code>@queryAssignedNodes</code>.</p>
 </li>
 </ul>
-<h2 id="refs" tabindex="-1">Refs</h2>
+<h2 id="refs">Refs</h2>
 <p>Refs provide an alternative to the <code>@query</code> decorator
 for getting a reference to a DOM element.</p>
 <p>For example:</p>
@@ -519,18 +517,18 @@ import {createRef, ref, type Ref} from 'lit/directives/ref.js';
 
 @customElement('greet-message')
 export class GreetMessage extends LitElement {
-  inputRef: Ref&lt;HTMLInputElement&gt; = createRef();
+  inputRef: Ref&#x3C;HTMLInputElement> = createRef();
 
   override render() {
     ...
     return html`
       ...
-        &lt;input
-          type=&quot;text&quot;
-          size=&quot;20&quot;
+        &#x3C;input
+          type="text"
+          size="20"
           ${ref(this.inputRef)}
-          @input=${() =&gt; (this.newName = this.inputRef.value.value)}
-        /&gt;
+          @input=${() => (this.newName = this.inputRef.value.value)}
+        />
       ...
     `;
   }
@@ -539,25 +537,25 @@ export class GreetMessage extends LitElement {
 <p>The expression <code>this.inputRef.value</code> gives the DOM <code>input</code> element.
 Adding <code>.value</code> to this gets the value of the <code>input</code>.</p>
 <p>Using the <code>@query</code> decorator, as shown earlier, is a bit easier.</p>
-<h2 id="tagged-template-literals" tabindex="-1">Tagged Template Literals</h2>
+<h2 id="tagged-template-literals">Tagged Template Literals</h2>
 <p>Lit implements the <code>html</code> and <code>css</code> tagged template literals.</p>
-<p>These using the browser's built-in parsers to parse the text
+<p>These using the browser’s built-in parsers to parse the text
 before any <code>${...}</code> interpolations are processed.
 The text must be well-formed HTML before the interpolations are inserted.</p>
 <p>From the Lit documentation,
-&quot;Because the browser's built-in parser is very lenient,
+“Because the browser’s built-in parser is very lenient,
 most cases of malformed templates are not detectable at runtime,
-so you won't see warnings — just templates that don't behave as you expect.
+so you won’t see warnings — just templates that don’t behave as you expect.
 We recommend using linting tools and IDE plugins
-to find issues in your templates during development.&quot;</p>
+to find issues in your templates during development.”</p>
 <p>TODO: Describe what these provide beyond string concatenation.
-TODO: See <a href="https://lit.dev/docs/templates/overview/">https://lit.dev/docs/templates/overview/</a>.</p>
-<h2 id="slots" tabindex="-1">Slots</h2>
+TODO: See <a href="https://lit.dev/docs/templates/overview/" rel="noopener" target="_blank">https://lit.dev/docs/templates/overview/</a>.</p>
+<h2 id="slots">Slots</h2>
 <p>Web components can have one default slot and any number of named slots.
 These are defined using the HTML <code>slot</code> element.
 Instances of the component can specify content to be placed in the slots.</p>
 <p>The <code>slot</code> element can be self closing and can have a <code>name</code> attribute.
-For example, <code>&lt;slot name=&quot;footer&quot; /&gt;</code>.</p>
+For example, <code>&#x3C;slot name="footer" /></code>.</p>
 <p>The following example demonstrates using slots.</p>
 <pre><code class="language-ts">import {html, LitElement, type PropertyValues} from 'lit';
 import {customElement, queryAssignedElements} from 'lit/decorators.js';
@@ -591,61 +589,60 @@ export class SlotsDemo extends LitElement {
 
   override render() {
     return html`
-      &lt;div&gt;
-        &lt;h2&gt;&lt;slot /&gt;&lt;/h2&gt;
-        &lt;h3&gt;Breakfast&lt;/h3&gt;
-        &lt;slot name=&quot;breakfast&quot;&gt;No breakfast options&lt;/slot&gt;
-        &lt;h3&gt;Lunch&lt;/h3&gt;
-        &lt;slot name=&quot;lunch&quot;&gt;No lunch options&lt;/slot&gt;
-        &lt;h3&gt;Dinner&lt;/h3&gt;
-        &lt;slot name=&quot;dinner&quot;&gt;No dinner options&lt;/slot&gt;
-      &lt;/div&gt;
+      &#x3C;div>
+        &#x3C;h2>&#x3C;slot />&#x3C;/h2>
+        &#x3C;h3>Breakfast&#x3C;/h3>
+        &#x3C;slot name="breakfast">No breakfast options&#x3C;/slot>
+        &#x3C;h3>Lunch&#x3C;/h3>
+        &#x3C;slot name="lunch">No lunch options&#x3C;/slot>
+        &#x3C;h3>Dinner&#x3C;/h3>
+        &#x3C;slot name="dinner">No dinner options&#x3C;/slot>
+      &#x3C;/div>
     `;
   }
 }
 </code></pre>
 <p>The following HTML renders the custom element defined above.</p>
-<p><img alt="Lit slots demo" style="width: 25%"
-  src="/blog/assets/lit-slots-demo.png?v=1.1.1"></p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Slots Demo&lt;/title&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/slots-demo.ts&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;slots-demo&gt;
-      &lt;p&gt;Menu&lt;/p&gt;
-      &lt;ul slot=&quot;breakfast&quot;&gt;
-        &lt;li&gt;Eggs&lt;/li&gt;
-        &lt;li&gt;Bacon&lt;/li&gt;
-      &lt;/ul&gt;
-      &lt;ul slot=&quot;dinner&quot;&gt;
-        &lt;li&gt;spaghetti&lt;/li&gt;
-        &lt;li&gt;tacos&lt;/li&gt;
-        &lt;li&gt;fried rice&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/slots-demo&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<p><img alt="Lit slots demo" style="width: 25%" src="/blog/assets/lit-slots-demo.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Slots Demo&#x3C;/title>
+    &#x3C;script type="module" src="/src/slots-demo.ts">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;slots-demo>
+      &#x3C;p>Menu&#x3C;/p>
+      &#x3C;ul slot="breakfast">
+        &#x3C;li>Eggs&#x3C;/li>
+        &#x3C;li>Bacon&#x3C;/li>
+      &#x3C;/ul>
+      &#x3C;ul slot="dinner">
+        &#x3C;li>spaghetti&#x3C;/li>
+        &#x3C;li>tacos&#x3C;/li>
+        &#x3C;li>fried rice&#x3C;/li>
+      &#x3C;/ul>
+    &#x3C;/slots-demo>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="lifecycle" tabindex="-1">Lifecycle</h2>
-<p>Lit supports all the standard web component <a href="/blog/topics/#/blog/web-components/#lifecycle-methods?v=1.1.1" rel="noopener" target="_blank">lifecycle methods</a>.</p>
+<h2 id="lifecycle">Lifecycle</h2>
+<p>Lit supports all the standard web component <a href="/blog/topics/#/blog/web-components/#lifecycle-methods?v=1.1.1">lifecycle methods</a>.</p>
 <p>Lit also supports additional methods and properties
-that are part of its &quot;reactive update cycle&quot;.
+that are part of its “reactive update cycle”.
 These include the following.</p>
-<h3 id="shouldupdate" tabindex="-1">shouldUpdate</h3>
+<h3 id="shouldupdate">shouldUpdate</h3>
 <p>This method is called automatically before an update is performed.
 It should return <code>true</code> to allow the update and <code>false</code> to reject it.</p>
 <p>Property changes made in this method WILL NOT trigger another update.</p>
-<h3 id="willupdate" tabindex="-1">willUpdate</h3>
+<h3 id="willupdate">willUpdate</h3>
 <p>This method is called automatically after <code>shouldUpdate</code>.</p>
 <p>Property changes made in this method WILL NOT trigger another update.</p>
-<h3 id="update" tabindex="-1">update</h3>
+<h3 id="update">update</h3>
 <p>This method is called automatically after <code>willUpdate</code>.</p>
 <p>Property changes made in this method WILL NOT trigger another update.</p>
 <p>Overriding this method is rare.</p>
-<h3 id="render" tabindex="-1">render</h3>
+<h3 id="render">render</h3>
 <p>This method is called automatically by
 the <code>update</code> method defined in <code>LitElement</code>.
 It is unique to Lit and not part of the web components standard.</p>
@@ -666,30 +663,30 @@ that is composed of multiple HTML strings.</p>
 <li>have any side effects</li>
 </ul>
 <p>It should return the same result for the same set of component property values.</p>
-<h3 id="firstupdated" tabindex="-1">firstUpdated</h3>
+<h3 id="firstupdated">firstUpdated</h3>
 <p>This method is called automatically the first call to <code>update</code>.</p>
 <p>Property changes made in this method WILL trigger another update.</p>
-<h3 id="updated" tabindex="-1">updated</h3>
+<h3 id="updated">updated</h3>
 <p>This method is called automatically after every call to <code>update</code>.</p>
-<h3 id="adoptedcallback" tabindex="-1">adoptedCallback</h3>
+<h3 id="adoptedcallback">adoptedCallback</h3>
 <p>This method is called automatically when a custom element instance
 is moved to a new document.</p>
 <p>Overriding this method is rare.</p>
-<h3 id="haschanged" tabindex="-1">hasChanged</h3>
+<h3 id="haschanged">hasChanged</h3>
 <p>This method is defined in the options object
 passed to the <code>@property</code> or <code>@state</code> decorator.
 It is called automatically every time the associated property value changes.
 It should return <code>true</code> to allow the change and <code>false</code> to reject it.</p>
-<h3 id="updatecomplete" tabindex="-1">updateComplete</h3>
+<h3 id="updatecomplete">updateComplete</h3>
 <p>This is a property whose value is a <code>Promise</code>
 that resolves when the latest update completes.
 It can be useful to <code>await</code> this before dispatching a custom event.</p>
-<h3 id="performupdate" tabindex="-1">performUpdate</h3>
+<h3 id="performupdate">performUpdate</h3>
 <p>This method can be called to perform a synchronous update,
 resulting in a call to the <code>render</code> method.
 Calling this can be useful when a non-reactive property
 that affects what is rendered is modified.</p>
-<h3 id="requestupdate" tabindex="-1">requestUpdate</h3>
+<h3 id="requestupdate">requestUpdate</h3>
 <p>This method can be called to request an asynchronous update,
 resulting in a call to the <code>render</code> method.
 Calling this can be useful when a non-reactive property
@@ -709,16 +706,16 @@ export class GreetMessage extends LitElement {
     hasChanged(newVal: string, oldVal: string) {
       console.log('hasChanged for name: changing from', oldVal, 'to', newVal);
       // Only allow the change if the length is more than 1.
-      const valid = newVal.length &gt; 1;
+      const valid = newVal.length > 1;
       return valid;
     }
   })
   name = '';
 
-  // This is set based on the presence of the &quot;shout&quot; attribute.
+  // This is set based on the presence of the "shout" attribute.
   @property({type: Boolean}) shout = false;
 
-  // This gets a reference to the DOM element with id &quot;nameInput&quot;.
+  // This gets a reference to the DOM element with id "nameInput".
   @query('#nameInput') nameInput!: HTMLInputElement;
 
   override attributeChangedCallback(
@@ -758,24 +755,24 @@ export class GreetMessage extends LitElement {
     // A `.` is used to create a one-way property binding
     // for attributes with string or number values.
     return html`
-      &lt;div&gt;${message}&lt;/div&gt;
-      &lt;form
-        @submit=${(e: SubmitEvent) =&gt; {
+      &#x3C;div>${message}&#x3C;/div>
+      &#x3C;form
+        @submit=${(e: SubmitEvent) => {
           e.preventDefault();
           this.name = this.newName;
           this.newName = ''; // clears the input
         }}
-      &gt;
-        &lt;input
-          id=&quot;nameInput&quot;
-          type=&quot;text&quot;
-          size=&quot;20&quot;
+      >
+        &#x3C;input
+          id="nameInput"
+          type="text"
+          size="20"
           required
           .value=${this.newName}
-          @input=${() =&gt; (this.newName = this.nameInput.value)}
-        /&gt;
-        &lt;button ?disabled=${this.newName.length &lt;= 1}&gt;Update&lt;/button&gt;
-      &lt;/form&gt;
+          @input=${() => (this.newName = this.nameInput.value)}
+        />
+        &#x3C;button ?disabled=${this.newName.length &#x3C;= 1}>Update&#x3C;/button>
+      &#x3C;/form>
     `;
   }
 
@@ -821,10 +818,10 @@ export class GreetMessage extends LitElement {
 </code></pre>
 <p>To conditionally hide an element, use a boolean attribute binding
 for the standard DOM <code>hidden</code> attribute. For example:</p>
-<pre><code class="language-js">&lt;div ?hidden=${some-condition}&gt;some content&lt;/div&gt;
+<pre><code class="language-js">&#x3C;div ?hidden=${some-condition}>some content&#x3C;/div>
 </code></pre>
-<h2 id="directives" tabindex="-1">Directives</h2>
-<p>Lit provides a number of &quot;directive&quot; functions
+<h2 id="directives">Directives</h2>
+<p>Lit provides a number of “directive” functions
 that can be useful in <code>html</code> tagged template literals.
 Most of their functionality can be implementing in
 plain JavaScript code instead, so their value is debatable.</p>
@@ -832,13 +829,13 @@ plain JavaScript code instead, so their value is debatable.</p>
 if a given value is defined.
 If it is defined, the value is used as a part of the attribute value.</p>
 <p>The <code>join</code> directive takes an iterable (typically an <code>Array</code>)
-of content strings and a &quot;joiner&quot;.
+of content strings and a “joiner”.
 The joiner can be a static string of content or
 a function that is passed an index and returns a string of content.
 The directive renders each content string in the iterable
 with the joiner between each pair.</p>
 <p>The <code>range</code> directive creates an iterable over a range of integers
-starting from zero and stopping one short of a given &quot;end&quot; value.
+starting from zero and stopping one short of a given “end” value.
 It can also be passed arguments for the start, end, and step values.</p>
 <p>The <code>when</code> directive is useful when content must be computed
 based on a condition. It takes a condition and two functions,
@@ -851,7 +848,7 @@ Each case computes the content to use with a function.</p>
 and renders content returned by a function for each element.</p>
 <p>The <code>repeat</code> directive is similar to the <code>map</code> function,
 but it takes an iterable (typically an Array),
-a function to compute a &quot;key&quot; value,
+a function to compute a “key” value,
 and a function to compute content.
 The key value is used to optimize DOM updates.
 It is not passed to the content function.
@@ -909,67 +906,67 @@ export class DirectivesDemo extends LitElement {
     };
 
     return html`
-      &lt;section&gt;
-        &lt;div class=${classMap(classes)} style=${styleMap(styles)}&gt;
+      &#x3C;section>
+        &#x3C;div class=${classMap(classes)} style=${styleMap(styles)}>
           My favorite fruit color is
           ${choose(
             this.fruit,
             [
               // These functions can return an `html` tagged template literal.
-              ['apple', () =&gt; 'red'],
-              ['banana', () =&gt; 'yellow'],
-              ['blueberry', () =&gt; 'blue'],
-              ['orange', () =&gt; 'orange']
+              ['apple', () => 'red'],
+              ['banana', () => 'yellow'],
+              ['blueberry', () => 'blue'],
+              ['orange', () => 'orange']
             ],
-            () =&gt; `invalid fruit ${this.fruit}`
+            () => `invalid fruit ${this.fruit}`
           )}.
-        &lt;/div&gt;
+        &#x3C;/div>
 
-        &lt;ul&gt;
+        &#x3C;ul>
           ${map(
             DirectivesDemo.fruits,
-            (fruit, index) =&gt; html`
-              &lt;li style=&quot;color: ${fruit.color}&quot;&gt;${index + 1}: ${fruit.name}&lt;/li&gt;
+            (fruit, index) => html`
+              &#x3C;li style="color: ${fruit.color}">${index + 1}: ${fruit.name}&#x3C;/li>
             `
           )}
-        &lt;/ul&gt;
+        &#x3C;/ul>
 
-        &lt;ul&gt;
+        &#x3C;ul>
           ${repeat(
             DirectivesDemo.fruits,
-            fruit =&gt; fruit.id,
-            (fruit, index) =&gt; html`
-              &lt;li style=&quot;color: ${fruit.color}&quot;&gt;${index + 1}: ${fruit.name}&lt;/li&gt;
+            fruit => fruit.id,
+            (fruit, index) => html`
+              &#x3C;li style="color: ${fruit.color}">${index + 1}: ${fruit.name}&#x3C;/li>
             `
           )}
-        &lt;/ul&gt;
+        &#x3C;/ul>
 
-        &lt;!-- This renders 10, 20, 30. --&gt;
-        ${repeat(range(3), number =&gt; html`&lt;div&gt;${(number + 1) * 10}&lt;/div&gt;`)}
+        &#x3C;!-- This renders 10, 20, 30. -->
+        ${repeat(range(3), number => html`&#x3C;div>${(number + 1) * 10}&#x3C;/div>`)}
 
-        &lt;!-- The style attribute is only set if
-             a value for this.color was supplied. --&gt;
-        &lt;div style=&quot;color: ${ifDefined(this.color)}&quot;&gt;
+        &#x3C;!-- The style attribute is only set if
+             a value for this.color was supplied. -->
+        &#x3C;div style="color: ${ifDefined(this.color)}">
           ${when(this.timeOnly, this.getTime, this.getDate)}
-        &lt;/div&gt;
+        &#x3C;/div>
 
-        &lt;div
-          style=&quot;border: 1px solid gray; display: inline-block; padding: 1rem&quot;
-        &gt;
+        &#x3C;div
+          style="border: 1px solid gray; display: inline-block; padding: 1rem"
+        >
           ${join(
             map(
               DirectivesDemo.fruits,
-              fruit =&gt; html`&lt;div&gt;${fruit.name}&lt;/span&gt;`
+              fruit => html`&#x3C;div>${fruit.name}&#x3C;/span>`
             ),
-            html`&lt;hr /&gt;`
+            html`&#x3C;hr />`
           )}
-        &lt;/div&gt;
-      &lt;/section&gt;
+        &#x3C;/div>
+      &#x3C;/section>
     `;
   }
 }
 </code></pre>
-<h2 id="event-handling" tabindex="-1">Event Handling</h2>
+<h2 id="event-handling">Event Handling</h2>
 <p>Lit supports registering event handling functions with event bindings.
 An event binding is an attribute whose name is <code>@</code> followed by an event name.
 The value must be a function object,
@@ -992,8 +989,8 @@ export class AlertOnClick extends LitElement {
 
   override render() {
     return html`
-      &lt;button @click=${this.handleClick}&gt;Click Me&lt;/button&gt;
-      &lt;button @click=${handleClick}&gt;Click Me&lt;/button&gt;
+      &#x3C;button @click=${this.handleClick}>Click Me&#x3C;/button>
+      &#x3C;button @click=${handleClick}>Click Me&#x3C;/button>
     `;
   }
 
@@ -1016,10 +1013,10 @@ export class AlertOnClick extends LitElement {
   `;
 }
 </code></pre>
-<p>&quot;Composed events&quot; that are set to bubble
+<p>“Composed events” that are set to bubble
 can bubble out of the shadow DOM of web components.
 Most standard UI events fit this criteria.</p>
-<p>When this happens, the event is &quot;retargeted&quot;. This means the event
+<p>When this happens, the event is “retargeted”. This means the event
 appear to come from the host element of the web component rather than
 from the actual element that triggered the event (such as an <code>input</code>).
 The event also loses the values of some of its properties.</p>
@@ -1040,48 +1037,48 @@ is <code>toggle-switch</code> could contain the following:</p>
 
 render() {
   return html`
-    &lt;input
-      type=&quot;checkbox&quot;
+    &#x3C;input
+      type="checkbox"
       ?checked=${this.checked}
       @change=${this.handleChange}
-    /&gt;
+    />
   `;
 }
 </code></pre>
 <p>A page that uses <code>toggle-switch</code> could contain the following
 to handle the custom <code>toggle</code> event.
 This example uses Alpine syntax to register an event listener.</p>
-<pre><code class="language-js">&lt;head&gt;
+<pre><code class="language-js">&#x3C;head>
   ...
-  &lt;script&gt;
+  &#x3C;script>
     function handleToggle(event) {
       const {checked} = event.detail;
       console.log('handleToggle: checked =', checked);
     }
-  &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;toggle-switch
-    label=&quot;Bluetooth&quot;
-    @toggle=&quot;handleToggle($event)&quot;
-  &gt;&lt;/toggle-switch&gt;
-&lt;/body&gt;
+  &#x3C;/script>
+&#x3C;/head>
+&#x3C;body>
+  &#x3C;toggle-switch
+    label="Bluetooth"
+    @toggle="handleToggle($event)"
+  >&#x3C;/toggle-switch>
+&#x3C;/body>
 </code></pre>
 </li>
 <li>
-<p>Don't handle in the web component and used <code>composedPath</code> in the page.</p>
+<p>Don’t handle in the web component and used <code>composedPath</code> in the page.</p>
 <p>For example, a web component whose custom element name
 is <code>toggle-switch</code> could contain the following:</p>
 <pre><code class="language-js">render() {
-  return html`&lt;input type=&quot;checkbox&quot; ?checked=&quot;${this.checked}&quot; /&gt;`;
+  return html`&#x3C;input type="checkbox" ?checked="${this.checked}" />`;
 }
 </code></pre>
 <p>A page that uses <code>toggle-switch</code> could contain the following
 to handle the standard DOM <code>input</code> event.
 This example uses Alpine syntax to register an event listener.</p>
-<pre><code class="language-js">&lt;head&gt;
+<pre><code class="language-js">&#x3C;head>
   ...
-  &lt;script&gt;
+  &#x3C;script>
     function handleInput(event) {
       // event.composedPath() returns an array of all the
       // nodes the event will pass through, starting from the
@@ -1091,21 +1088,21 @@ This example uses Alpine syntax to register an event listener.</p>
       const {checked} = input;
       console.log('handleInput: checked =', checked);
     }
-  &lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-  &lt;toggle-switch
-    label=&quot;Bluetooth&quot;
-    @input=&quot;handleInput($event)&quot;
-  &gt;&lt;/toggle-switch&gt;
-&lt;/body&gt;
+  &#x3C;/script>
+&#x3C;/head>
+&#x3C;body>
+  &#x3C;toggle-switch
+    label="Bluetooth"
+    @input="handleInput($event)"
+  >&#x3C;/toggle-switch>
+&#x3C;/body>
 </code></pre>
 </li>
 </ol>
-<h2 id="context" tabindex="-1">Context</h2>
+<h2 id="context">Context</h2>
 <p>The <a href="https://lit.dev/docs/data/context/?v=1.1.1" rel="noopener" target="_blank">@lit/context</a>
 package provides a way to make data available throughout a component subtree.
-It avoids &quot;prop drilling&quot; where data is passed
+It avoids “prop drilling” where data is passed
 through every layer of a component hierarchy.</p>
 <p>To install this package, enter <code>npm install @lit/context</code>.</p>
 <p>The following code in the file <code>src/dog-context.ts</code> defines
@@ -1117,9 +1114,9 @@ export type Dog = {
   breed: string;
 };
 
-// &lt;Dog&gt; specifies the kind of data that can be provided to the context.
+// &#x3C;Dog> specifies the kind of data that can be provided to the context.
 // 'dog' is a key associated with the context.
-export const dogContext = createContext&lt;Dog&gt;('dog');
+export const dogContext = createContext&#x3C;Dog>('dog');
 </code></pre>
 <p>The following code in the file <code>src/context-demo.ts</code>
 defines three custom elements.
@@ -1146,11 +1143,11 @@ export class MyTop extends LitElement {
 
   override render() {
     return html`
-      &lt;div&gt;
-        &lt;h1&gt;Top&lt;/h1&gt;
-        &lt;button @click=${this.changeDog}&gt;Change Dog&lt;/button&gt;
-        &lt;my-middle&gt;&lt;/my-middle&gt;
-      &lt;/div&gt;
+      &#x3C;div>
+        &#x3C;h1>Top&#x3C;/h1>
+        &#x3C;button @click=${this.changeDog}>Change Dog&#x3C;/button>
+        &#x3C;my-middle>&#x3C;/my-middle>
+      &#x3C;/div>
     `;
   }
 }
@@ -1159,10 +1156,10 @@ export class MyTop extends LitElement {
 export class MyMiddle extends LitElement {
   override render() {
     return html`
-      &lt;div&gt;
-        &lt;h2&gt;Middle&lt;/h2&gt;
-        &lt;my-bottom&gt;&lt;/my-bottom&gt;
-      &lt;/div&gt;
+      &#x3C;div>
+        &#x3C;h2>Middle&#x3C;/h2>
+        &#x3C;my-bottom>&#x3C;/my-bottom>
+      &#x3C;/div>
     `;
   }
 }
@@ -1179,28 +1176,27 @@ export class MyBottom extends LitElement {
       ? `${this.dog.name} is a ${this.dog.breed}.`
       : 'No dog found';
     return html`
-      &lt;div&gt;
-        &lt;h3&gt;Bottom&lt;/h3&gt;
-        &lt;div&gt;${text}&lt;/div&gt;
-      &lt;/div&gt;
+      &#x3C;div>
+        &#x3C;h3>Bottom&#x3C;/h3>
+        &#x3C;div>${text}&#x3C;/div>
+      &#x3C;/div>
     `;
   }
 }
 </code></pre>
 <p>The following HTML renders an instance of the <code>my-top</code> custom element.</p>
-<p><img alt="Lit context demo" style="width: 25%"
-  src="/blog/assets/lit-context-demo.png?v=1.1.1"></p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Context Demo&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./src/index.css&quot; /&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/context-demo.ts&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;my-top&gt;&lt;/my-top&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<p><img alt="Lit context demo" style="width: 25%" src="/blog/assets/lit-context-demo.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Context Demo&#x3C;/title>
+    &#x3C;link rel="stylesheet" href="./src/index.css" />
+    &#x3C;script type="module" src="/src/context-demo.ts">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;my-top>&#x3C;/my-top>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p>Web components that consume context data cannot modify it.
 But they can dispatch custom events that
@@ -1209,15 +1205,14 @@ Event handlers in the provider can modify the context data
 and consumers will be notified.</p>
 <p>The following example demonstrates this.
 Clicking any of the buttons increments the <code>count</code> value.</p>
-<p><img alt="Lit context events" style="border: 0; width: 30%"
-  src="/blog/assets/lit-context-events.png?v=1.1.1"></p>
+<p><img alt="Lit context events" style="border: 0; width: 30%" src="/blog/assets/lit-context-events.png?v=1.1.1"></p>
 <pre><code class="language-ts">import {html, LitElement} from 'lit';
 import {consume, createContext, provide} from '@lit/context';
 import {customElement} from 'lit/decorators.js';
 
 // A context can hold an object or a primitive value like a number.
 type Data = {count: number};
-export const dataContext = createContext&lt;Data&gt;('data');
+export const dataContext = createContext&#x3C;Data>('data');
 
 @customElement('my-parent')
 export class MyParent extends LitElement {
@@ -1230,11 +1225,11 @@ export class MyParent extends LitElement {
 
   override render() {
     return html`
-      &lt;div @increment=${this.increment}&gt;
-        &lt;button @click=${this.increment}&gt;Parent Increment&lt;/button&gt;
-        &lt;my-child&gt;&lt;/my-child&gt;
-        &lt;my-child&gt;&lt;/my-child&gt;
-      &lt;/div&gt;
+      &#x3C;div @increment=${this.increment}>
+        &#x3C;button @click=${this.increment}>Parent Increment&#x3C;/button>
+        &#x3C;my-child>&#x3C;/my-child>
+        &#x3C;my-child>&#x3C;/my-child>
+      &#x3C;/div>
     `;
   }
 }
@@ -1250,15 +1245,15 @@ export class MyChild extends LitElement {
 
   override render() {
     return html`
-      &lt;div&gt;
-        &lt;div&gt;count = ${this.data.count}&lt;/div&gt;
-        &lt;button @click=${this.increment}&gt;Child Increment&lt;/button&gt;
-      &lt;/div&gt;
+      &#x3C;div>
+        &#x3C;div>count = ${this.data.count}&#x3C;/div>
+        &#x3C;button @click=${this.increment}>Child Increment&#x3C;/button>
+      &#x3C;/div>
     `;
   }
 }
 </code></pre>
-<h2 id="async-tasks" tabindex="-1">Async Tasks</h2>
+<h2 id="async-tasks">Async Tasks</h2>
 <p>The <a href="https://lit.dev/docs/data/task/?v=1.1.1" rel="noopener" target="_blank">@lit/task</a> package
 simplifies obtaining data to render asynchronously.
 This includes fetching data from network endpoints.</p>
@@ -1277,10 +1272,10 @@ type Todo = {
 
 const URL_PREFIX = 'https://jsonplaceholder.typicode.com/todos/';
 
-async function getTodo(id: number): Promise&lt;Todo&gt; {
+async function getTodo(id: number): Promise&#x3C;Todo> {
   // Simulate a long-running query.
-  return new Promise((resolve, reject) =&gt; {
-    setTimeout(async () =&gt; {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
       try {
         const res = await fetch(URL_PREFIX + id);
         if (res.ok) {
@@ -1303,7 +1298,7 @@ export class TaskDemo extends LitElement {
   // and again any time one of its arguments changes.
   task = new Task(this, {
     task: getTodo,
-    args: () =&gt; [this.todoId]
+    args: () => [this.todoId]
   });
 
   changeTodoId(e: Event) {
@@ -1315,23 +1310,23 @@ export class TaskDemo extends LitElement {
     // What this renders is based on the whether the task
     // is pending, complete, or has experienced an error.
     const taskDisplay = this.task.render({
-      pending: () =&gt; html`&lt;img alt=&quot;spinner&quot; src=&quot;/spinner.gif&quot; /&gt;`,
-      complete: todo =&gt; html`
-        &lt;h2&gt;${todo.title}&lt;/h2&gt;
-        &lt;div&gt;status: ${todo.completed ? 'complete' : 'pending'}&lt;/div&gt;
+      pending: () => html`&#x3C;img alt="spinner" src="/spinner.gif" />`,
+      complete: todo => html`
+        &#x3C;h2>${todo.title}&#x3C;/h2>
+        &#x3C;div>status: ${todo.completed ? 'complete' : 'pending'}&#x3C;/div>
       `,
-      error: error =&gt; html`&lt;div class=&quot;error&quot;&gt;${error}&lt;/div&gt;`
+      error: error => html`&#x3C;div class="error">${error}&#x3C;/div>`
     });
 
     return html`
-      &lt;label&gt;
+      &#x3C;label>
         Todo ID
-        &lt;input
-          type=&quot;number&quot;
+        &#x3C;input
+          type="number"
           @input=${this.changeTodoId}
           .value=${this.todoId}
-        /&gt;
-      &lt;/label&gt;
+        />
+      &#x3C;/label>
       ${taskDisplay}
     `;
   }
@@ -1364,21 +1359,20 @@ export class TaskDemo extends LitElement {
 </code></pre>
 <p>The following HTML renders an instance of the <code>task-demo</code> custom element.
 Changing the todo ID in the input triggers running the task again.</p>
-<p><img alt="Lit context demo" style="border: 0; width: 60%"
-  src="/blog/assets/lit-task-demo.png?v=1.1.1"></p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Task Demo&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./src/index.css&quot; /&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/task-demo.ts&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;task-demo&gt;&lt;/task-demo&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<p><img alt="Lit context demo" style="border: 0; width: 60%" src="/blog/assets/lit-task-demo.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Task Demo&#x3C;/title>
+    &#x3C;link rel="stylesheet" href="./src/index.css" />
+    &#x3C;script type="module" src="/src/task-demo.ts">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;task-demo>&#x3C;/task-demo>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="localization" tabindex="-1">Localization</h2>
+<h2 id="localization">Localization</h2>
 <p>The <a href="https://lit.dev/docs/localization/overview/?v=1.1.1" rel="noopener" target="_blank">@lit/localize</a> package supports language translations.</p>
 <p>To install this package, enter <code>npm install @lit/localize</code>
 and <code>npm install @lit/localize-tools</code>.</p>
@@ -1389,7 +1383,7 @@ with a call to the <code>msg</code> function.</p>
 <p>The argument to <code>msg</code> must be literal text, not a variable.
 The reason is that the <code>lit-localize extract</code> command
 only extracts text found in <code>msg</code> calls.
-It doesn't execute the code, so it wouldn't be able to
+It doesn’t execute the code, so it wouldn’t be able to
 determine all the possible values of a variable.</p>
 <p>The following examples show all the supported scenarios.
 Note that the <code>str</code> must also be used when
@@ -1397,9 +1391,9 @@ the text does not contain HTML AND includes an interpolation.</p>
 <ul>
 <li>plain strings: <code>msg('Hello World')</code></li>
 <li>string with expressions: <code>msg(str`Hello ${name}`)</code></li>
-<li>HTML templates: <code>msg(html`Hello &lt;b&gt;World&lt;/b&gt;`)</code></li>
-<li>HTML templates with expressions: <code>msg(html`Hello &lt;b&gt;${name}&lt;/b&gt;`)</code></li>
-<li>nested inside HTML templates: <code>html`&lt;button&gt;${msg('Hello World')}&lt;/button&gt;`</code></li>
+<li>HTML templates: <code>msg(html`Hello &#x3C;b>World&#x3C;/b>`)</code></li>
+<li>HTML templates with expressions: <code>msg(html`Hello &#x3C;b>${name}&#x3C;/b>`)</code></li>
+<li>nested inside HTML templates: <code>html`&#x3C;button>${msg('Hello World')}&#x3C;/button>`</code></li>
 </ul>
 <p>For example:</p>
 <pre><code class="language-ts">import {LitElement, msg} from '@lit/localize';
@@ -1416,10 +1410,10 @@ import {configureLocalization, localized, msg} from '@lit/localize';
     const color = colors[this.color] ?? this.color;
 
     return html`
-      &lt;select @change=${this.changeLocale}&gt;
+      &#x3C;select @change=${this.changeLocale}>
         ${this.options}
-      &lt;/select&gt;
-      &lt;div&gt;${text} ${color}.&lt;/div&gt;
+      &#x3C;/select>
+      &#x3C;div>${text} ${color}.&#x3C;/div>
     `;
   }
 </code></pre>
@@ -1433,24 +1427,24 @@ containing the following.
 The <code>targetLocales</code> property specifies the languages and regions
 for which translations are desired.</p>
 <pre><code class="language-json">{
-  &quot;$schema&quot;: &quot;https://raw.githubusercontent.com/lit/lit/main/packages/localize-tools/config.schema.json&quot;,
-  &quot;sourceLocale&quot;: &quot;en&quot;,
-  &quot;targetLocales&quot;: [&quot;es-419&quot;, &quot;zh-Hans&quot;],
-  &quot;tsConfig&quot;: &quot;./tsconfig.json&quot;,
-  &quot;output&quot;: {
-    &quot;mode&quot;: &quot;runtime&quot;,
-    &quot;outputDir&quot;: &quot;./src/generated/locales&quot;,
-    &quot;localeCodesModule&quot;: &quot;./src/generated/locale-codes.ts&quot;
+  "$schema": "https://raw.githubusercontent.com/lit/lit/main/packages/localize-tools/config.schema.json",
+  "sourceLocale": "en",
+  "targetLocales": ["es-419", "zh-Hans"],
+  "tsConfig": "./tsconfig.json",
+  "output": {
+    "mode": "runtime",
+    "outputDir": "./src/generated/locales",
+    "localeCodesModule": "./src/generated/locale-codes.ts"
   },
-  &quot;interchange&quot;: {
-    &quot;format&quot;: &quot;xliff&quot;,
-    &quot;xliffDir&quot;: &quot;./xliff/&quot;
+  "interchange": {
+    "format": "xliff",
+    "xliffDir": "./xliff/"
   }
 }
 </code></pre>
 <p>Add the following npm scripts in <code>package.json</code>.</p>
-<pre><code class="language-json">&quot;localize:extract&quot;: &quot;lit-localize extract&quot;,
-&quot;localize:build&quot;: &quot;lit-localize build&quot;,
+<pre><code class="language-json">"localize:extract": "lit-localize extract",
+"localize:build": "lit-localize build",
 </code></pre>
 <p>Enter <code>npm localize:extract</code>.
 This creates an <code>xliff</code> directory containing
@@ -1479,7 +1473,7 @@ import {sourceLocale, targetLocales} from './generated/locale-codes.js';
 export const {getLocale, setLocale} = configureLocalization({
   sourceLocale,
   targetLocales,
-  loadLocale: locale =&gt; import(`./generated/locales/${locale}.ts`)
+  loadLocale: locale => import(`./generated/locales/${locale}.ts`)
 });
 
 @customElement('localize-demo')
@@ -1494,9 +1488,9 @@ export class LocalizeDemo extends LitElement {
     // The following line can be used in place of `@localized()` above.
     //updateWhenLocaleChanges(this);
 
-    this.options.push(html`&lt;option&gt;en&lt;/option&gt;`);
+    this.options.push(html`&#x3C;option>en&#x3C;/option>`);
     for (const locale of targetLocales) {
-      this.options.push(html`&lt;option&gt;${locale}&lt;/option&gt;`);
+      this.options.push(html`&#x3C;option>${locale}&#x3C;/option>`);
     }
   }
 
@@ -1516,60 +1510,58 @@ export class LocalizeDemo extends LitElement {
     const color = colors[this.color] ?? this.color;
 
     return html`
-      &lt;select @change=${this.changeLocale}&gt;
+      &#x3C;select @change=${this.changeLocale}>
         ${this.options}
-      &lt;/select&gt;
-      &lt;div&gt;${text} ${color}.&lt;/div&gt;
+      &#x3C;/select>
+      &#x3C;div>${text} ${color}.&#x3C;/div>
     `;
   }
 }
 </code></pre>
 <p>The following HTML renders an instance of the <code>localize-demo</code> custom element.
 Selected a different locale from the <code>select</code> updates the message.</p>
-<p><img alt="Lit localize demo" style="border: 0; width: 60%"
-  src="/blog/assets/lit-task-demo.png?v=1.1.1"></p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Localize Demo&lt;/title&gt;
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./src/index.css&quot; /&gt;
-    &lt;script type=&quot;module&quot; src=&quot;/src/localize-demo.ts&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;localize-demo&gt;&lt;/localize-demo&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+<p><img alt="Lit localize demo" style="border: 0; width: 60%" src="/blog/assets/lit-task-demo.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Localize Demo&#x3C;/title>
+    &#x3C;link rel="stylesheet" href="./src/index.css" />
+    &#x3C;script type="module" src="/src/localize-demo.ts">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;localize-demo>&#x3C;/localize-demo>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p>The <code>.xliff</code> files created by the <code>lit-localize extract</code> command
 use the XLIFF 1.2 format from 2008.
-It's unclear when it doesn't use the XLIFF 2.0 format from 2014.</p>
-<h2 id="chess-board-example" tabindex="-1">Chess Board Example</h2>
+It’s unclear when it doesn’t use the XLIFF 2.0 format from 2014.</p>
+<h2 id="chess-board-example">Chess Board Example</h2>
 <p><a href="https://mganjoo.github.io/gchessboard/?v=1.1.1" rel="noopener" target="_blank">gchessboard</a>
 is a web component (not using Lit) that renders a chess board.
 The pieces can be dragged to any squares, not just valid ones.
 This enables quickly setting up a position to study.</p>
-<p><img alt="web component chess board" style="width: 50%"
-  src="/blog/assets/web-component-chess-board.png?v=1.1.1"></p>
+<p><img alt="web component chess board" style="width: 50%" src="/blog/assets/web-component-chess-board.png?v=1.1.1"></p>
 <p>To try this, add the following to a new file, perhaps named <code>chess.html</code>.
 Then open the HTML file in any modern web browser.</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;Chess Board&lt;/title&gt;
-    &lt;style&gt;
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>Chess Board&#x3C;/title>
+    &#x3C;style>
       g-chess-board {
         margin: auto;
         width: 50%;
       }
-    &lt;/style&gt;
-    &lt;script type=&quot;module&quot; src=&quot;https://unpkg.com/gchessboard&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;g-chess-board fen=&quot;start&quot; interactive&gt;&lt;/g-chess-board&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/style>
+    &#x3C;script type="module" src="https://unpkg.com/gchessboard">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;g-chess-board fen="start" interactive>&#x3C;/g-chess-board>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h2 id="markdown" tabindex="-1">Markdown</h2>
+<h2 id="markdown">Markdown</h2>
 <p>Web components can be used in Markdown files.</p>
 <p>When using Vite with the Lit template:</p>
 <ol>
@@ -1590,12 +1582,12 @@ For my Astro-based blog, this is the <code>src/assets</code> directory.</p>
 <p>Add a script tag in the Markdown file.</p>
 <p>This should point to the renamed <code>.js</code> file.
 For example:</p>
-<pre><code class="language-html">&lt;script type=&quot;module&quot; src=&quot;/blog/assets/lit-components.js&quot;&gt;&lt;/script&gt;
+<pre><code class="language-html">&#x3C;script type="module" src="/blog/assets/lit-components.js">&#x3C;/script>
 </code></pre>
 </li>
 <li>
 <p>Use the custom element. For example:</p>
-<pre><code class="language-html">&lt;greet-message name=&quot;World&quot;&gt;&lt;/greet-message&gt;
+<pre><code class="language-html">&#x3C;greet-message name="World">&#x3C;/greet-message>
 </code></pre>
 </li>
 </ol>
@@ -1605,7 +1597,7 @@ Try inspecting the page and changing the value of the <code>name</code> attribut
 The update will be seen on the page.</p>
 <script type="module" src="/blog/assets/lit-components.js"></script>
 <p><greet-message name="Markdown"></greet-message></p>
-<h2 id="type-inference" tabindex="-1">Type Inference</h2>
+<h2 id="type-inference">Type Inference</h2>
 <p>When an instance of a custom element is created
 using the DOM <code>createElement</code> method, TypeScript cannot infer
 the specific type and assumes it is <code>HTMLElement</code>.</p>
@@ -1624,7 +1616,7 @@ by adding an entry to the <code>HTMLElementTagNameMap</code> as follows.</p>
 }
 </code></pre>
 <p>With this in place, the type of <code>el</code> will be inferred to be <code>AlertOnClick</code>.</p>
-<h2 id="errors-detected" tabindex="-1">Errors Detected</h2>
+<h2 id="errors-detected">Errors Detected</h2>
 <p>Lit error detection includes the following:</p>
 <ul>
 <li>defining multiple custom elements with the same name</li>
@@ -1636,7 +1628,7 @@ by adding an entry to the <code>HTMLElementTagNameMap</code> as follows.</p>
 <p>The element will be treated as if it were a <code>div</code> element.</p>
 </li>
 </ul>
-<h2 id="lit-labs" tabindex="-1">Lit Labs</h2>
+<h2 id="lit-labs">Lit Labs</h2>
 <p>Lit Labs is a collection of experimental packages
 that add functionality to Lit.
 The Lit team provides these in order to gather feedback.
@@ -1682,9 +1674,9 @@ A common example is rendering a scrolling list of items.</p>
 <p>These packages are near graduation as of February 2024.</p>
 <ul>
 <li><a href="https://www.npmjs.com/package/@lit-labs/scoped-registry-mixin?v=1.1.1" rel="noopener" target="_blank">scoped-registry-mixin</a> provides a way to
-&quot;scope custom element definitions to shadow roots,
+“scope custom element definitions to shadow roots,
 such that the mapping of tag names to custom element class
-doesn't rely on a single global registry&quot;.</li>
+doesn’t rely on a single global registry”.</li>
 </ul>
 <p>These packages have graduated.</p>
 <ul>
@@ -1705,7 +1697,7 @@ to create React wrappers for web components</p>
 for asynchronous tasks like fetching data</p>
 </li>
 </ul>
-<h2 id="publishing-components" tabindex="-1">Publishing Components</h2>
+<h2 id="publishing-components">Publishing Components</h2>
 <p>When publishing a library of Lit components, you can choose to
 include the Lit library in the bundle or omit it.
 In either case, the shared file should be an ES module.
@@ -1713,14 +1705,15 @@ If the Lit library is not included in the bundle,
 users of your components will need <code>script</code> tags
 to include both your component library and the Lit library.</p>
 <p>Consider releasing two versions of each Lit component library,
-one that includes the Lit library and one that doesn't.
+one that includes the Lit library and one that doesn’t.
 The former will be easier to use. But the latter is better in cases
 where multiple Lit component libraries are being used.</p>
 <p>If more than one copy of the Lit library is included in a page,
 more JavaScript code that necessary will be downloaded
 and there can be conflicts between different versions of the library.</p>
 <p>For more detail, see <a href="https://lit.dev/docs/tools/publishing/#publishing-best-practices?v=1.1.1" rel="noopener" target="_blank">Publishing</a>.</p>
-<h2 id="unorganized-content" tabindex="-1">Unorganized Content</h2>
+<h2 id="unorganized-content">Unorganized Content</h2>
 <p>To force a custom element instance to update, call its <code>requestUpdate</code> method.</p>
-<p>Consider using your small js2html library to generate HTML in web components.</p>
-</article> </body></html>
+<p>Consider using your small js2html library to generate HTML in web components.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

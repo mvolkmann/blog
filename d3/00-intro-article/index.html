@@ -1,6 +1,8 @@
-<!DOCTYPE html><html lang="en"> <head><title>D3 Article</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><link rel="stylesheet" href="/blog/assets/github-extensions.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>D3 Article</h2> <aside><ul><li><a href="#introduction">Introduction</a></li><ul><li><a href="#svg-basics">SVG Basics</a></li><li><a href="#svg-demo.html">svg-demo.html</a></li><li><a href="#svg-demo.css">svg-demo.css</a></li><li><a href="#svg-demo.js">svg-demo.js</a></li></ul><li><a href="#d3-selection-objects">D3 Selection Objects</a></li><li><a href="#the-data-method">The data method</a></li><li><a href="#the-join-method">The join method</a></li><li><a href="#drawing-bars">Drawing Bars</a></li><ul><li><a href="#index.html">index.html</a></li><li><a href="#bar-chart.css">bar-chart.css</a></li><li><a href="#bar-chart.js">bar-chart.js</a></li></ul><li><a href="#adding-a-y-axis">Adding a Y Axis</a></li><li><a href="#adding-an-x-axis">Adding an X Axis</a></li><li><a href="#adding-text-on-bars">Adding Text on Bars</a></li><li><a href="#adding-transitions">Adding Transitions</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#references">References</a></li><li><a href="#bonus-material">Bonus Material</a></li></ul></aside> <article><p>The Object Computing (OCI) version of this article can be found <a href="https://objectcomputing.com/resources/publications/sett/august-2020-mastering-d3-basics?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
-<h2 id="introduction" tabindex="-1">Introduction</h2>
-<p>D3 (<a href="https://d3js.org">https://d3js.org</a>) stands for Data-Driven Documents.
+<!DOCTYPE html><html lang="en"> <head><title>D3 Article</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><link rel="stylesheet" href="/blog/assets/github-extensions.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link active expanded" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>D3 Article</h2> <aside><ul><li><a href="#introduction">Introduction</a></li><ul><li><a href="#svg-basics">SVG Basics</a></li><li><a href="#svg-demohtml">svg-demo.html</a></li><li><a href="#svg-democss">svg-demo.css</a></li><li><a href="#svg-demojs">svg-demo.js</a></li></ul><li><a href="#d3-selection-objects">D3 Selection Objects</a></li><li><a href="#the-data-method">The data method</a></li><li><a href="#the-join-method">The join method</a></li><li><a href="#drawing-bars">Drawing Bars</a></li><ul><li><a href="#indexhtml">index.html</a></li><li><a href="#bar-chartcss">bar-chart.css</a></li><li><a href="#bar-chartjs">bar-chart.js</a></li></ul><li><a href="#adding-a-y-axis">Adding a Y Axis</a></li><li><a href="#adding-an-x-axis">Adding an X Axis</a></li><li><a href="#adding-text-on-bars">Adding Text on Bars</a></li><li><a href="#adding-transitions">Adding Transitions</a></li><li><a href="#conclusion">Conclusion</a></li><li><a href="#references">References</a></li><li><a href="#bonus-material">Bonus Material</a></li></ul></aside> <article> <p>The Object Computing (OCI) version of this article can be found <a href="https://objectcomputing.com/resources/publications/sett/august-2020-mastering-d3-basics?v=1.1.1" rel="noopener" target="_blank">here</a>.</p>
+<h2 id="introduction">Introduction</h2>
+<p>D3 (<a href="https://d3js.org" rel="noopener" target="_blank">https://d3js.org</a>) stands for Data-Driven Documents.
 It renders, and re-renders, HTML elements (including <code>svg</code>) in a web browser
 based on data and changes to the data.
 D3 is primarily used for data visualizations such as
@@ -29,7 +31,7 @@ It is open source and uses a BSD license.</p>
 so knowledge of those topics is helpful.</p>
 <p>There are three levels of D3 usage, using higher-level libraries,
 copying and modifying D3 examples, and coding from scratch.</p>
-<p>An example of a library that uses D3 is C3 (<a href="https://c3js.org/">https://c3js.org/</a>).
+<p>An example of a library that uses D3 is C3 (<a href="https://c3js.org/" rel="noopener" target="_blank">https://c3js.org/</a>).
 It uses D3 under the hood to render many kinds of charts.
 These charts are customizable but not
 to the extent that can be achieved when coding from scratch.
@@ -88,57 +90,57 @@ minimize the amount of code that must be downloaded to browsers.</p>
 <li>Voronoi Diagrams</li>
 <li>Zooming</li>
 </ul>
-<p>Let's learn D3 by example.
+<p>Let’s learn D3 by example.
 Many D3 tutorials start with a bar chart and so will this one.
 But ours will include more features than typically shown in tutorials
 in order to introduce more D3 concepts.</p>
 <p>You are encouraged to copy the code in the article and try it in a web browser!</p>
-<h3 id="svg-basics" tabindex="-1">SVG Basics</h3>
+<h3 id="svg-basics">SVG Basics</h3>
 <p>SVG stands for Scalable Vector Graphics.
 It is an XML-based syntax for specifying vector graphics.
 SVG is supported by all modern web browsers, even back to IE9.</p>
 <p>SVG elements include <code>svg</code>, <code>line</code>, <code>polygon</code>, <code>rect</code>, <code>circle</code>, <code>path</code>,
 <code>text</code>, <code>image</code>, <code>g</code> (for group), and many more.
 For our bar chart will will only need <code>svg</code>, <code>g</code>, <code>rect</code>, and <code>text</code>.</p>
-<p>Let's start by drawing a rectangle and placing text on it as shown below.</p>
+<p>Let’s start by drawing a rectangle and placing text on it as shown below.</p>
 <p><img src="/blog/assets/d3-svg-demo.png" alt="D3 SVG demo"></p>
 <p>We will implement this with separate HTML, CSS, and JavaScript files,
-but all of this could be combined into one HTML file if that's your style.</p>
-<h3 id="svg-demo.html" tabindex="-1"><code>svg-demo.html</code></h3>
+but all of this could be combined into one HTML file if that’s your style.</p>
+<h3 id="svg-demohtml"><code>svg-demo.html</code></h3>
 <p>This HTML includes all the bells and whistles to give a good Lighthouse score,
 including a <code>DOCTYPE</code>, language specification, and meta tags.
 To learn about Lighthouse,
-see <a href="https://developers.google.com/web/tools/lighthouse">https://developers.google.com/web/tools/lighthouse</a>.</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;title&gt;D3 SVG Demo&lt;/title&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;D3 SVG Demo&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+see <a href="https://developers.google.com/web/tools/lighthouse" rel="noopener" target="_blank">https://developers.google.com/web/tools/lighthouse</a>.</p>
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html lang="en">
+  &#x3C;head>
+    &#x3C;title>D3 SVG Demo&#x3C;/title>
+    &#x3C;meta charset="utf-8" />
+    &#x3C;meta name="description" content="D3 SVG Demo" />
+    &#x3C;meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./svg-demo.css&quot; /&gt;
+    &#x3C;link rel="stylesheet" href="./svg-demo.css" />
 
-    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;./svg-demo.js&quot; defer&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;svg id=&quot;chart&quot;&gt;&lt;/svg&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;script src="https://d3js.org/d3.v5.min.js">&#x3C;/script>
+    &#x3C;script src="./svg-demo.js" defer>&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;svg id="chart">&#x3C;/svg>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h3 id="svg-demo.css" tabindex="-1"><code>svg-demo.css</code></h3>
+<h3 id="svg-democss"><code>svg-demo.css</code></h3>
 <pre><code class="language-css">body {
   background-color: linen;
   font-family: sans-serif;
 }
 
-.bar &gt; rect {
+.bar > rect {
   stroke: black;
   stroke-width: 1;
 }
 
-.bar &gt; text {
+.bar > text {
   fill: white;
   text-anchor: middle; /* horizontally centers */
 }
@@ -147,22 +149,22 @@ see <a href="https://developers.google.com/web/tools/lighthouse">https://develop
   background-color: white;
 }
 </code></pre>
-<h3 id="svg-demo.js" tabindex="-1"><code>svg-demo.js</code></h3>
+<h3 id="svg-demojs"><code>svg-demo.js</code></h3>
 <pre><code class="language-js">const HEIGHT = 300;
 const WIDTH = 400;
 const score = 7; // out of 10
 const barHeight = HEIGHT * (score / 10);
 const barWidth = 50;
 
-// Find the DOM element with an id of &quot;chart&quot; and set its width and height.
+// Find the DOM element with an id of "chart" and set its width and height.
 // This happens to be an svg element.
 const svg = d3.select('#chart').attr('width', WIDTH).attr('height', HEIGHT);
 
-// Append a group element to the svg and add a CSS class of &quot;bar&quot;.
+// Append a group element to the svg and add a CSS class of "bar".
 const group = svg.append('g').attr('class', 'bar');
 
 // Append a rect element to the group and set its properties.
-// The background color of an SVG element is set using the &quot;fill&quot; property.
+// The background color of an SVG element is set using the "fill" property.
 group
   .append('rect')
   .attr('height', barHeight)
@@ -178,56 +180,56 @@ group
   .attr('x', barWidth / 2) // center horizontally in bar
   .attr('y', HEIGHT - barHeight + 20); // just below top
 </code></pre>
-<p>That's the very basics of working with SVG.
-But it's all you need to know to draw additional bars in a bar chart later.</p>
-<h2 id="d3-selection-objects" tabindex="-1">D3 Selection Objects</h2>
+<p>That’s the very basics of working with SVG.
+But it’s all you need to know to draw additional bars in a bar chart later.</p>
+<h2 id="d3-selection-objects">D3 Selection Objects</h2>
 <p>A D3 selection object encapsulates a set of DOM elements,
 similar to a jQuery object.
 To create one, use the d3 methods <code>select</code> and <code>selectAll</code>.
 For example, <code>d3.select('.bar')</code> returns a selection object that
-encapsulates the first element in the DOM with a CSS class of &quot;bar&quot;.
+encapsulates the first element in the DOM with a CSS class of “bar”.
 <code>d3.selectAll('.bar')</code> is similar, but the returned selection object
 encapsulates all matching DOM elements.</p>
 <p>The <code>select</code> and <code>selectAll</code> methods can also be called on a selection
 to find elements that are descendants of the elements in the selection
 within the DOM tree.</p>
 <p>Here is an example that demonstrates using the <code>select</code> and <code>selectAll</code> methods.</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;D3 Selections&lt;/title&gt;
-    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div class=&quot;chart&quot; id=&quot;chart1&quot;&gt;
-      &lt;div class=&quot;bar&quot;&gt;Bar #1&lt;/div&gt;
-      &lt;div class=&quot;bar&quot;&gt;Bar #2&lt;/div&gt;
-      &lt;div class=&quot;bar&quot;&gt;Bar #3&lt;/div&gt;
-    &lt;/div&gt;
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>D3 Selections&#x3C;/title>
+    &#x3C;script src="https://d3js.org/d3.v5.min.js">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;div class="chart" id="chart1">
+      &#x3C;div class="bar">Bar #1&#x3C;/div>
+      &#x3C;div class="bar">Bar #2&#x3C;/div>
+      &#x3C;div class="bar">Bar #3&#x3C;/div>
+    &#x3C;/div>
 
-    &lt;div class=&quot;chart&quot; id=&quot;chart2&quot;&gt;
-      &lt;div class=&quot;bar&quot;&gt;Bar #4&lt;/div&gt;
-      &lt;div class=&quot;bar&quot;&gt;Bar #5&lt;/div&gt;
-    &lt;/div&gt;
+    &#x3C;div class="chart" id="chart2">
+      &#x3C;div class="bar">Bar #4&#x3C;/div>
+      &#x3C;div class="bar">Bar #5&#x3C;/div>
+    &#x3C;/div>
 
-    &lt;script&gt;
-      // Select all elements with a CSS class of &quot;bar&quot;.
+    &#x3C;script>
+      // Select all elements with a CSS class of "bar".
       const bars1 = d3.selectAll('.bar');
       console.log('bars1 =', bars1);
 
-      // Select all elements with a CSS class of &quot;bar&quot; that are
-      // descendants of the element with an id of &quot;chart1&quot;.
+      // Select all elements with a CSS class of "bar" that are
+      // descendants of the element with an id of "chart1".
       const chart1 = d3.select('#chart1');
       const bars2 = chart1.selectAll('.bar');
       console.log('bars2 =', bars2);
 
-      // Select all elements with a CSS class of &quot;bar&quot; that are
-      // descendants of any element with a CSS class of &quot;chart&quot;.
+      // Select all elements with a CSS class of "bar" that are
+      // descendants of any element with a CSS class of "chart".
       const charts = d3.selectAll('.chart');
       const bars3 = charts.selectAll('.bar');
       console.log('bars3 =', bars3);
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p>Here is the output from the <code>console.log</code> calls
 found in the browser DevTools console.</p>
@@ -251,39 +253,39 @@ These <code>NodeList</code> objects contain the matching DOM elements.</p>
 <p>In the <code>bars1</code> selection, <code>_parents</code> contains only the <code>html</code> element,
 indicating that the entire document was searched.
 <code>_groups</code> holds a single <code>NodeList</code> that
-contains every DOM element with a CSS class of &quot;bar&quot;.</p>
+contains every DOM element with a CSS class of “bar”.</p>
 <p>In the <code>bars2</code> selection, <code>_parents</code>
-contains only the element with an id of &quot;chart1&quot;.
+contains only the element with an id of “chart1”.
 This happens because the search was performed on
 a selection that only contains that element.
 <code>_groups</code> holds a single <code>NodeList</code> that
-only contains the DOM elements with a CSS class of &quot;bar&quot;
-that are descendants of the element with an id of &quot;chart1&quot;.</p>
+only contains the DOM elements with a CSS class of “bar”
+that are descendants of the element with an id of “chart1”.</p>
 <p>In the <code>bars3</code> selection, <code>_parents</code>
-contains the two elements with a CSS class of &quot;chart&quot;
+contains the two elements with a CSS class of “chart”
 because the search was performed on a selection
 that only contains these elements.
 <code>_groups</code> holds two <code>NodeList</code> objects, one for each parent element.
-Each of these contains the DOM elements with a CSS class of &quot;bar&quot;
+Each of these contains the DOM elements with a CSS class of “bar”
 that are descendants of their respective parent element.</p>
-<h2 id="the-data-method" tabindex="-1">The <code>data</code> method</h2>
+<h2 id="the-data-method">The <code>data</code> method</h2>
 <p>Selection objects have a <code>data</code> method that associates data in an array
 with the DOM elements in the selection.
 It does this by adding a <code>__data__</code> property to them.</p>
 <p>Here is an example that demonstrates calling the <code>data</code> method on a selection.</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;D3 data method&lt;/title&gt;
-    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;script&gt;
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>D3 data method&#x3C;/title>
+    &#x3C;script src="https://d3js.org/d3.v5.min.js">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;script>
       const values = [7, 13, 2];
       const bars = d3.selectAll('.bar').data(values);
       console.log('bars =', bars);
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p>Here is the output from the <code>console.log</code> call
 found in the browser DevTools console.</p>
@@ -296,10 +298,10 @@ For example, suppose you have an array in a variable named <code>paintings</code
 that contains objects that describe paintings and
 they have the properties <code>paintingName</code>, <code>width</code>, and <code>height</code>.
 You can use the area of each painting as the values as follows:</p>
-<pre><code class="language-js">someSelection.data(paintings, p =&gt; p.width * p.height);
+<pre><code class="language-js">someSelection.data(paintings, p => p.width * p.height);
 </code></pre>
 <p>The <code>data</code> method returns a new selection that contains three sub-selections
-referred to as &quot;update&quot;, &quot;enter&quot;, and &quot;exit&quot;.</p>
+referred to as “update”, “enter”, and “exit”.</p>
 <p>The update sub-selection is held in the <code>_groups</code> property
 and contains all the DOM elements in the selection
 that can be <em>updated</em> with a data value.</p>
@@ -321,17 +323,17 @@ but fewer than the number of data values.</li>
 but more than the number of data values.</li>
 </ol>
 <p>You have already seen the first scenario in the previous code example
-where there were three data values and no elements with a CSS class of &quot;bar&quot;.</p>
+where there were three data values and no elements with a CSS class of “bar”.</p>
 <p>To see the second scenario, add the following to that HTML.</p>
-<pre><code class="language-html">&lt;div class=&quot;bar&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;bar&quot;&gt;&lt;/div&gt;
+<pre><code class="language-html">&#x3C;div class="bar">&#x3C;/div>
+&#x3C;div class="bar">&#x3C;/div>
 </code></pre>
 <p>Reloading the page in the browser, you will see that
 the update sub-selection holds these two elements with the values 7 and 13.
 The enter sub-selection now contains a single placeholder with the value 2.
 The exit sub-selection is empty.</p>
 <p>To see the third scenario, add three more <code>div</code> elements
-with a class of &quot;bar&quot; so there are a total of five.
+with a class of “bar” so there are a total of five.
 Reloading the page in the browser, you will see that
 the update sub-selection holds three elements with the values 7, 13, and 2.
 The enter sub-selection is empty.
@@ -350,9 +352,9 @@ and then call methods on that selection.</p>
 <p>The following example demonstrates each of these.
 It generates an array containing a random number of random integers.
 These are used to display values in <code>div</code> elements
-that have a CSS class of &quot;bar&quot;.
+that have a CSS class of “bar”.
 Their text indicate whether the element was updated or just entered the DOM.
-Each time the &quot;Update&quot; button is pressed, the process repeats
+Each time the “Update” button is pressed, the process repeats
 and previously created <code>div</code> elements are reused.</p>
 <p>Selection objects support many methods,
 some which act on all the DOM elements they encapsulate.
@@ -368,7 +370,7 @@ Inside these functions, the current element
 can be accessed using the <code>this</code> keyword.
 In order to use <code>this</code>, the function must not be an arrow function.</p>
 <p>Just like in jQuery, it is not an error to call such a method on a
-selection that is empty, meaning it doesn't encapsulate any DOM elements.</p>
+selection that is empty, meaning it doesn’t encapsulate any DOM elements.</p>
 <p>Selection objects are immutable, meaning
 the set of DOM elements they encapsulate cannot be changed.
 However, there are many methods on selection objects that return
@@ -378,25 +380,25 @@ It simply renders <code>div</code> elements that indicate
 whether they were just added to the DOM or
 they already existed and merely had their text updated.
 Note that SVG is not used in this example.</p>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;D3 data method&lt;/title&gt;
-    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;button onclick=&quot;update()&quot;&gt;Update&lt;/button&gt;
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>D3 data method&#x3C;/title>
+    &#x3C;script src="https://d3js.org/d3.v5.min.js">&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;button onclick="update()">Update&#x3C;/button>
 
-    &lt;div id=&quot;chart&quot;&gt;&lt;/div&gt;
+    &#x3C;div id="chart">&#x3C;/div>
 
-    &lt;script&gt;
+    &#x3C;script>
       // Gets a random integer between 1 and max inclusive.
-      const randomInt = max =&gt; Math.floor(Math.random() * max) + 1;
+      const randomInt = max => Math.floor(Math.random() * max) + 1;
 
       // Generates an array containing a random number of random integers.
       function getValues() {
         const count = randomInt(7);
         const values = [];
-        for (let i = 0; i &lt; count; i++) {
+        for (let i = 0; i &#x3C; count; i++) {
           values.push(randomInt(10));
         }
         return values;
@@ -407,12 +409,12 @@ Note that SVG is not used in this example.</p>
         console.log('values =', values);
 
         // Create a D3 selection representing the bars
-        // which are div elements with a CSS class of &quot;bar&quot;,
+        // which are div elements with a CSS class of "bar",
         // and associate data values with them.
         const bars = d3.select('#chart').selectAll('.bar').data(values);
 
         // Update the text of bar elements that are already in the DOM.
-        bars.text(d =&gt; 'update ' + d);
+        bars.text(d => 'update ' + d);
 
         // Create new bar elements that need to enter the DOM
         // and set their text.
@@ -420,18 +422,18 @@ Note that SVG is not used in this example.</p>
           .enter()
           .append('div')
           .attr('class', 'bar')
-          .text(d =&gt; 'enter ' + d);
+          .text(d => 'enter ' + d);
 
         // Remove bar elements that need to exit the DOM.
         bars.exit().remove();
       }
 
       update(); // initial call
-    &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/script>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<p>This is a common D3 pattern referred to as the &quot;general update pattern&quot;.
+<p>This is a common D3 pattern referred to as the “general update pattern”.
 It can be simplified in a couple of ways.</p>
 <p>The first simplification is to use the <code>merge</code> method.
 This is called after appending elements to the enter sub-selection.
@@ -440,17 +442,17 @@ selection on which it is called (the enter sub-selection in this case)
 with the selection passed to it (the update sub-selection in this case).
 The call that follows this operates on the new selection.
 This approach allows us to replace the
-&quot;Update&quot; and &quot;Create&quot; sections above with the following:</p>
+“Update” and “Create” sections above with the following:</p>
 <pre><code class="language-js">bars
   .enter() // returns the enter sub-selection
   .append('div') // returns the enter sub-selection
   .attr('class', 'bar') // returns the enter sub-selection
   .merge(bars) // returns a new selection
-  .text(d =&gt; 'value ' + d);
+  .text(d => 'value ' + d);
 </code></pre>
 <p>We have lost the ability to specify different text for
 updated and entered elements, but that is not typically needed.</p>
-<h2 id="the-join-method" tabindex="-1">The <code>join</code> method</h2>
+<h2 id="the-join-method">The <code>join</code> method</h2>
 <p>A second simplification that can be made to the code above
 is to use the <code>join</code> method.
 This takes up to three functions, one to handle each sub-selection.
@@ -458,15 +460,15 @@ They must be in the order enter, update, and exit.
 Using this approach, the code above, including the code for
 handling the exit sub-selection, can be replaced by the following.</p>
 <pre><code class="language-js">bars.join(
-  enter =&gt;
+  enter =>
     enter
       .append('div')
       .attr('class', 'bar')
-      .text(d =&gt; 'enter ' + d),
-  update =&gt; update.text(d =&gt; 'update ' + d),
+      .text(d => 'enter ' + d),
+  update => update.text(d => 'update ' + d),
   // This is the default behavior for the exit sub-selection
   // and can be omitted.
-  exit =&gt; exit.remove()
+  exit => exit.remove()
 );
 </code></pre>
 <p>This regains the ability to have different text
@@ -474,7 +476,7 @@ for updated and entered elements.
 But if that is not needed, you can shorten the code even more by
 passing the name of the element to be created to the <code>join</code> method as follows.
 This handles the enter sub-selection by
-creating new <code>div</code> elements with a class of &quot;bar&quot;.
+creating new <code>div</code> elements with a class of “bar”.
 It handles both the enter and update sub-selections
 by setting the text of those elements.
 Finally, it handles the exit sub-selection
@@ -482,55 +484,55 @@ by removing those elements from the DOM.</p>
 <pre><code class="language-js">bars
   .join('div')
   .attr('class', 'bar')
-  .text(d =&gt; 'value ' + d);
+  .text(d => 'value ' + d);
 </code></pre>
-<p>If you're feeling somewhat comfortable now with the notion of selection objects,
+<p>If you’re feeling somewhat comfortable now with the notion of selection objects,
 their three sub-selections, and the general update pattern,
 you are ready to put that knowledge to use for creating your first chart.</p>
-<h2 id="drawing-bars" tabindex="-1">Drawing Bars</h2>
+<h2 id="drawing-bars">Drawing Bars</h2>
 <p>Earlier you learned how to draw a single bar.
-Let's combine that with what you have learned about selections
+Let’s combine that with what you have learned about selections
 to draw one bar for each piece of data in an array.
 We will create a bar chart like the following:</p>
 <p><img src="/blog/assets/bar-chart.png" alt="D3 Bar Chart"></p>
-<p>The &quot;Update&quot; button generates new, random data and updates the bars.
+<p>The “Update” button generates new, random data and updates the bars.
 This is implemented by the files
 <code>index.html</code>, <code>bar-chart.css</code>, and <code>bar-chart.js</code>
 which are shown below.</p>
 <p>This code gives us a good base for adding features.
 There are many D3 concepts to cover here.
 See the comments in the code for details.</p>
-<h3 id="index.html" tabindex="-1"><code>index.html</code></h3>
-<pre><code class="language-html">&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;D3 Bar Chart&lt;/title&gt;
-    &lt;meta charset=&quot;utf-8&quot; /&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;D3 Bar Chart&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+<h3 id="indexhtml"><code>index.html</code></h3>
+<pre><code class="language-html">&#x3C;html>
+  &#x3C;head>
+    &#x3C;title>D3 Bar Chart&#x3C;/title>
+    &#x3C;meta charset="utf-8" />
+    &#x3C;meta name="description" content="D3 Bar Chart" />
+    &#x3C;meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    &lt;link rel=&quot;stylesheet&quot; href=&quot;./bar-chart.css&quot; /&gt;
+    &#x3C;link rel="stylesheet" href="./bar-chart.css" />
 
-    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;./bar-chart.js&quot; defer&gt;&lt;/script&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;!-- The bars will be added in this svg element. --&gt;
-    &lt;svg id=&quot;chart&quot;&gt;&lt;/svg&gt;
+    &#x3C;script src="https://d3js.org/d3.v5.min.js">&#x3C;/script>
+    &#x3C;script src="./bar-chart.js" defer>&#x3C;/script>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;!-- The bars will be added in this svg element. -->
+    &#x3C;svg id="chart">&#x3C;/svg>
 
-    &lt;div&gt;
-      &lt;!-- Render a new version of the chart when this is pressed. --&gt;
-      &lt;button onclick=&quot;updateData()&quot;&gt;Update&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;div>
+      &#x3C;!-- Render a new version of the chart when this is pressed. -->
+      &#x3C;button onclick="updateData()">Update&#x3C;/button>
+    &#x3C;/div>
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
-<h3 id="bar-chart.css" tabindex="-1"><code>bar-chart.css</code></h3>
+<h3 id="bar-chartcss"><code>bar-chart.css</code></h3>
 <pre><code class="language-css">body {
   background-color: linen;
   font-family: sans-serif;
 }
 
-.bar &gt; rect {
+.bar > rect {
   stroke: black;
   stroke-width: 1;
 }
@@ -543,7 +545,7 @@ button {
   background-color: white;
 }
 </code></pre>
-<h3 id="bar-chart.js" tabindex="-1"><code>bar-chart.js</code></h3>
+<h3 id="bar-chartjs"><code>bar-chart.js</code></h3>
 <pre><code class="language-js">// Later these will be adjusted to make room
 // for a vertical and horizontal axis.
 const BOTTOM_PADDING = 10;
@@ -580,16 +582,16 @@ let barPadding, barWidth, xScale, yScale;
 const colorScale = d3.scaleOrdinal(d3.schemePaired); // 12 colors
 
 // This returns a random integer from 1 to max inclusive.
-const random = max =&gt; Math.floor(Math.random() * max + 1);
+const random = max => Math.floor(Math.random() * max + 1);
 
 // This returns an array of objects taken from allData.
-// A &quot;score&quot; property with a random value from 1 to 10
+// A "score" property with a random value from 1 to 10
 // is added to each object.
 function getRandomData() {
   const count = random(allData.length);
-  const shuffled = allData.sort(() =&gt; 0.5 - Math.random());
+  const shuffled = allData.sort(() => 0.5 - Math.random());
   const data = shuffled.slice(0, count);
-  data.sort((f1, f2) =&gt; f1.name.localeCompare(f2.name));
+  data.sort((f1, f2) => f1.name.localeCompare(f2.name));
   for (const item of data) {
     item.score = random(10);
   }
@@ -601,11 +603,11 @@ function getRandomData() {
 function updateRect(rect) {
   rect
     // Each fruit will keep the same color as its score changes.
-    .attr('fill', d =&gt; colorScale(d.colorIndex))
+    .attr('fill', d => colorScale(d.colorIndex))
     .attr('width', barWidth - barPadding * 2)
-    .attr('height', d =&gt; usableHeight - yScale(d.score))
+    .attr('height', d => usableHeight - yScale(d.score))
     .attr('x', barPadding)
-    .attr('y', d =&gt; TOP_PADDING + yScale(d.score));
+    .attr('y', d => TOP_PADDING + yScale(d.score));
 }
 
 // This updates the bar chart with random data.
@@ -619,8 +621,8 @@ function updateData() {
   barWidth = usableWidth / data.length;
 
   // Create a scale to map data index values to x coordinates.
-  // This is a function that takes a value in the &quot;domain&quot;
-  // and returns a value in the &quot;range&quot;.
+  // This is a function that takes a value in the "domain"
+  // and returns a value in the "range".
   xScale = d3
     .scaleLinear()
     .domain([0, data.length])
@@ -629,11 +631,11 @@ function updateData() {
   // Create a scale to map data score values to y coordinates.
   // The range is flipped to account for
   // the SVG origin being in the upper left corner.
-  // Like xScale, this is a function that takes a value in the &quot;domain&quot;
-  // and returns a value in the &quot;range&quot;.
+  // Like xScale, this is a function that takes a value in the "domain"
+  // and returns a value in the "range".
   // The d3.max function computes the largest data value in a given array
   // where values are computed by the 2nd argument function.
-  const max = d3.max(data, d =&gt; d.score);
+  const max = d3.max(data, d => d.score);
   yScale = d3.scaleLinear().domain([0, max]).range([usableHeight, 0]);
 
   // Create a D3 selection object that represents the svg element
@@ -645,8 +647,8 @@ function updateData() {
   // in the previous section.
   const groups = svg
     .selectAll('.bar')
-    .data(data, d =&gt; d.name)
-    .join(enter =&gt; {
+    .data(data, d => d.name)
+    .join(enter => {
       // Create a new SVG group element for each placeholder
       // to represent a new bar.
       // For now the only thing in each group will be a rect element,
@@ -669,7 +671,7 @@ function updateData() {
 
   // Translate the groups for each bar to their
   // appropriate x coordinate based on its index.
-  groups.attr('transform', (_, i) =&gt; `translate(${xScale(i)}, 0)`);
+  groups.attr('transform', (_, i) => `translate(${xScale(i)}, 0)`);
 
   // Update all the rect elements using their newly associated data.
   updateRect(groups.select('rect'));
@@ -680,8 +682,8 @@ updateData();
 </code></pre>
 <p>To see this in action, click
 <a href="https://bar-chart.vercel.app/?v=1.1.1" rel="noopener" target="_blank">Basic Bar Chart</a>.</p>
-<h2 id="adding-a-y-axis" tabindex="-1">Adding a Y Axis</h2>
-<p>Now let's add a y axis to the chart that indicates the bar values.
+<h2 id="adding-a-y-axis">Adding a Y Axis</h2>
+<p>Now let’s add a y axis to the chart that indicates the bar values.
 We want this to be dynamic so that the highest value
 matches the highest value of any of the bars that are present.</p>
 <p>Here are the steps to add a y axis:</p>
@@ -716,7 +718,7 @@ as follows:</p>
   const yAxis = d3
     .axisLeft(yScale)
     .tickValues(tickValues)
-    .tickFormat(n =&gt; n.toFixed(0));
+    .tickFormat(n => n.toFixed(0));
 
   // Pass the selection for the group to the
   // axis generator function to render it.
@@ -735,8 +737,8 @@ as follows:</p>
 <p><img src="/blog/assets/d3-bar-chart-with-y-axis.png" alt="D3 bar chart with y axis"></p>
 <p>To see this in action, click
 <a href="https://bar-chart-with-y-axis.vercel.app/?v=1.1.1" rel="noopener" target="_blank">Bar Chart with y axis</a>.</p>
-<h2 id="adding-an-x-axis" tabindex="-1">Adding an X Axis</h2>
-<p>Now let's add an x axis to the chart whose values are
+<h2 id="adding-an-x-axis">Adding an X Axis</h2>
+<p>Now let’s add an x axis to the chart whose values are
 labels that are the fruit names associated with each bar.
 In our example the values represent scores in a poll
 where respondents name their favorite fruit.
@@ -746,7 +748,7 @@ Of course all our data is randomly generated.</p>
 <li>Add the following to <code>bar-chart.css</code> to position and rotate
 the x-axis labels:</li>
 </ol>
-<pre><code class="language-css">.x-axis &gt; .tick &gt; text {
+<pre><code class="language-css">.x-axis > .tick > text {
   /* Translate and rotate labels so they fit below bars better. */
   transform: translate(-8px, 15px) rotate(-45deg);
 }
@@ -777,7 +779,7 @@ as follows:</p>
   // Create a scale that maps fruit names to positions on the x axis.
   const xAxisScale = d3
     .scaleBand()
-    .domain(data.map(item =&gt; item.name)) // fruit names
+    .domain(data.map(item => item.name)) // fruit names
     .range([LEFT_PADDING, LEFT_PADDING + usableWidth]);
 
   // Create and call an axis generator function that renders the xAxis.
@@ -796,8 +798,8 @@ as follows:</p>
 <p><img src="/blog/assets/d3-bar-chart-with-x-axis.png" alt="D3 bar chart with x axis"></p>
 <p>To see this in action, click
 <a href="https://bar-chart-with-x-axis.vercel.app/?v=1.1.1" rel="noopener" target="_blank">Bar Chart with x axis</a>.</p>
-<h2 id="adding-text-on-bars" tabindex="-1">Adding Text on Bars</h2>
-<p>Now let's add text to each bar that shows the value of the bar.
+<h2 id="adding-text-on-bars">Adding Text on Bars</h2>
+<p>Now let’s add text to each bar that shows the value of the bar.
 The text should be positioned near the top of each bar
 and centered horizontally on the bar.</p>
 <p>The bars have a variety of fill colors.
@@ -806,14 +808,14 @@ but using black text is better for others.
 We can choose between white and black text by calculating
 the relative luminance of the bar fill color.
 A formula for this can be found in Wikipedia at
-<a href="https://en.wikipedia.org/wiki/Relative_luminance">https://en.wikipedia.org/wiki/Relative_luminance</a>.
+<a href="https://en.wikipedia.org/wiki/Relative_luminance" rel="noopener" target="_blank">https://en.wikipedia.org/wiki/Relative_luminance</a>.
 This is used in the <code>getTextColor</code> function below.</p>
 <p>Here are the steps to add text to the bars:</p>
 <ol>
 <li>
 <p>Add the following CSS rule in <code>bar-chart.css</code>
 to center the text for a bar horizontally within the bar.</p>
-<pre><code class="language-css">.bar &gt; text {
+<pre><code class="language-css">.bar > text {
   text-anchor: middle;
 }
 </code></pre>
@@ -828,11 +830,11 @@ function getTextColor(bgColor) {
   const green = parseInt(bgColor.substring(3, 5), 16);
   const blue = parseInt(bgColor.substring(5, 7), 16);
 
-  // Compute the &quot;relative luminance&quot;.
+  // Compute the "relative luminance".
   const luminance = (0.2126 * red + 0.7152 * green + 0.0722 * blue) / 255;
 
   // Use dark text on light backgrounds and vice versa.
-  return luminance &gt; 0.5 ? 'black' : 'white';
+  return luminance > 0.5 ? 'black' : 'white';
 }
 </code></pre>
 </li>
@@ -842,13 +844,13 @@ function getTextColor(bgColor) {
 // that displays the score for a bar.
 function updateText(text) {
   text
-    .attr('fill', d =&gt; {
+    .attr('fill', d => {
       const barColor = colorScale(d.colorIndex);
       return getTextColor(barColor);
     })
-    .text(d =&gt; d.score)
+    .text(d => d.score)
     .attr('x', barWidth / 2) // center horizontally in bar
-    .attr('y', d =&gt; TOP_PADDING + yScale(d.score) + 20); // just below top
+    .attr('y', d => TOP_PADDING + yScale(d.score) + 20); // just below top
 }
 </code></pre>
 </li>
@@ -871,9 +873,9 @@ updateText(groups.select('text'));
 <p>Note how some bars have white text, while others have black text.</p>
 <p>To see this in action, click
 <a href="https://bar-chart-with-text.vercel.app/?v=1.1.1" rel="noopener" target="_blank">Bar Chart with text</a>.</p>
-<h2 id="adding-transitions" tabindex="-1">Adding Transitions</h2>
+<h2 id="adding-transitions">Adding Transitions</h2>
 <p>D3 transitions animate changes to DOM and SVG properties.</p>
-<p>Let's add code to animate the following:</p>
+<p>Let’s add code to animate the following:</p>
 <ul>
 <li>changes to the position, width, and height of bars</li>
 <li>changes to the position of text on bars</li>
@@ -890,7 +892,7 @@ before the transition begins (defaults to zero) and an easing function.</p>
 at various times throughout its duration.
 The easing function defaults to <code>d3.easeCubic</code> when not specified.
 For descriptions of the provided easing functions and
-graphs that show their effect, see <a href="https://github.com/d3/d3-ease">https://github.com/d3/d3-ease</a>.</p>
+graphs that show their effect, see <a href="https://github.com/d3/d3-ease" rel="noopener" target="_blank">https://github.com/d3/d3-ease</a>.</p>
 <p>Here are the steps to add transitions to the bar chart:</p>
 <ol>
 <li>
@@ -903,7 +905,7 @@ graphs that show their effect, see <a href="https://github.com/d3/d3-ease">https
 <pre><code class="language-js">// You cannot invoke this with the call method on selections
 // because that will return the selection
 // instead of the result of the last call made here.
-const myTransition = selection =&gt; selection.transition().duration(DURATION);
+const myTransition = selection => selection.transition().duration(DURATION);
 </code></pre>
 </li>
 <li>
@@ -935,8 +937,8 @@ The last argument is a function that processes the exit sub-selection
 by animating bars leaving the DOM.</p>
 <pre><code class="language-js">// This is only needed so we can specify
 // an exit function as the third argument.
-update =&gt; update,
-  exit =&gt; {
+update => update,
+  exit => {
     // Remove the score text from the
     // exiting rect elements immediately.
     exit.selectAll('text').remove();
@@ -947,48 +949,46 @@ update =&gt; update,
       .select('rect')
       .attr('height', 0)
       .attr('y', TOP_PADDING + usableHeight)
-      .on('end', () =&gt; exit.remove());
+      .on('end', () => exit.remove());
   };
 </code></pre>
 </li>
 </ol>
 <p>The result looks the same as before,
-but now when the &quot;Update&quot; button is pressed,
+but now when the “Update” button is pressed,
 changes to the data cause everything in the bar chart
 to transition from its previous state to its new state.</p>
 <p>To see this in action, click
 <a href="https://bar-chart-with-transitions.vercel.app/?v=1.1.1" rel="noopener" target="_blank">Bar Chart with transitions</a>.</p>
 <p>The final code can be found in GitHub at
 <a href="https://github.com/mvolkmann/d3-bar-chart-with-transitions?v=1.1.1" rel="noopener" target="_blank">d3-bar-chart-with-transitions</a>.</p>
-<h2 id="conclusion" tabindex="-1">Conclusion</h2>
+<h2 id="conclusion">Conclusion</h2>
 <p>There is much more to learn about D3,
 including creating additional kinds charts such as
 pie charts, line charts, scatter plots, geographic maps, and more.
 What you have learned here about D3 selections and
 the general update pattern will serve you well as you dig in further.</p>
 <p>Feel free to email comments and questions about this article to
-<a
-  href="mailto:mark@objectcomputing.com?subject=Your D3 article"
-  target="_blank"
-  rel="noopener noreferrer">
+<a href="mailto:mark@objectcomputing.com?subject=Your D3 article" target="_blank" rel="noopener noreferrer">
 me
 </a>.</p>
-<h2 id="references" tabindex="-1">References</h2>
-<p>Official introduction to D3: <a href="https://d3js.org/">https://d3js.org/</a></p>
-<p>Examples of D3 creations: <a href="https://observablehq.com/@d3/gallery">https://observablehq.com/@d3/gallery</a></p>
-<p>D3 API documentation: <a href="https://github.com/d3/d3/blob/master/API.md">https://github.com/d3/d3/blob/master/API.md</a></p>
-<p>For a good book on D3, check out the O'Reilly book
-&quot;Interactive Data Visualization for the Web, 2nd Edition&quot; by Scott Murray at
-<a href="https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/">https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/</a>.</p>
-<h2 id="bonus-material" tabindex="-1">Bonus Material</h2>
+<h2 id="references">References</h2>
+<p>Official introduction to D3: <a href="https://d3js.org/" rel="noopener" target="_blank">https://d3js.org/</a></p>
+<p>Examples of D3 creations: <a href="https://observablehq.com/@d3/gallery" rel="noopener" target="_blank">https://observablehq.com/@d3/gallery</a></p>
+<p>D3 API documentation: <a href="https://github.com/d3/d3/blob/master/API.md" rel="noopener" target="_blank">https://github.com/d3/d3/blob/master/API.md</a></p>
+<p>For a good book on D3, check out the O’Reilly book
+“Interactive Data Visualization for the Web, 2nd Edition” by Scott Murray at
+<a href="https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/" rel="noopener" target="_blank">https://www.oreilly.com/library/view/interactive-data-visualization/9781491921296/</a>.</p>
+<h2 id="bonus-material">Bonus Material</h2>
 <p>The same bar chart has been implemented using the C3 library.
 To see how this differs from using D3 directly,
-see <a href="https://github.com/mvolkmann/c3-bar-chart">https://github.com/mvolkmann/c3-bar-chart</a>.
+see <a href="https://github.com/mvolkmann/c3-bar-chart" rel="noopener" target="_blank">https://github.com/mvolkmann/c3-bar-chart</a>.
 The text for the values of each bar are always black in this version.
 It seems very difficult to make this dynamic in C3.</p>
 <p>Also, the same bar chart has been implemented using the Svelte web framework.
-This can be found at <a href="https://github.com/mvolkmann/svelte-bar-chart">https://github.com/mvolkmann/svelte-bar-chart</a>.
+This can be found at <a href="https://github.com/mvolkmann/svelte-bar-chart" rel="noopener" target="_blank">https://github.com/mvolkmann/svelte-bar-chart</a>.
 This required manually implementing the x and y axes
 which was much more work than letting C3 provide those
-or even asking D3 to render them.</p>
-</article> </body></html>
+or even asking D3 to render them.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

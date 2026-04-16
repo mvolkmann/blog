@@ -1,6 +1,8 @@
-<!DOCTYPE html><html lang="en"> <head><title>tkinter library</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>tkinter library</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#alternatives">Alternatives</a></li><li><a href="#simple-example">Simple Example</a></li><li><a href="#widgets">Widgets</a></li><ul><li><a href="#container-widgets">Container Widgets</a></li><li><a href="#non-container-widgets">Non-container Widgets</a></li></ul><li><a href="#styling-limitations">Styling Limitations</a></li><ul><li><a href="#command-option">command Option</a></li><li><a href="#state-option">state Option</a></li><li><a href="#variable-wrappers">Variable Wrappers</a></li></ul><li><a href="#canvas">Canvas</a></li><li><a href="#layout-methods">Layout Methods</a></li><ul><li><a href="#pack">pack</a></li><li><a href="#grid">grid</a></li><li><a href="#place">place</a></li></ul><li><a href="#images">Images</a></li><li><a href="#custom-widgets">Custom Widgets</a></li></ul></aside> <article><!-- markdownlint-disable MD013 -->
-<h2 id="overview" tabindex="-1">Overview</h2>
-<p>The name &quot;tkinter&quot; is short for &quot;Tk interface&quot;.
+<!DOCTYPE html><html lang="en"> <head><title>tkinter library</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link active expanded" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>tkinter library</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#alternatives">Alternatives</a></li><li><a href="#simple-example">Simple Example</a></li><li><a href="#widgets">Widgets</a></li><ul><li><a href="#container-widgets">Container Widgets</a></li><li><a href="#non-container-widgets">Non-container Widgets</a></li></ul><li><a href="#styling-limitations">Styling Limitations</a></li><ul><li><a href="#command-option">command Option</a></li><li><a href="#state-option">state Option</a></li><li><a href="#variable-wrappers">Variable Wrappers</a></li></ul><li><a href="#canvas">Canvas</a></li><li><a href="#layout-methods">Layout Methods</a></li><ul><li><a href="#pack">pack</a></li><li><a href="#grid">grid</a></li><li><a href="#place">place</a></li></ul><li><a href="#images">Images</a></li><li><a href="#custom-widgets">Custom Widgets</a></li></ul></aside> <article> <!-- markdownlint-disable MD013 -->
+<h2 id="overview">Overview</h2>
+<p>The name “tkinter” is short for “Tk interface”.
 It is a Python interface to
 <a href="https://tkdocs.com/?v=1.1.1" rel="noopener" target="_blank">Tk</a> which is a GUI toolkit
 originally created for the
@@ -13,7 +15,7 @@ Many of the links on this page are to pages of the tutorialspoint site.</p>
 <p>Tk 8.5 added themed widgets.
 These are not yet covered here.
 See <a href="https://docs.python.org/3/library/tkinter.ttk.html?v=1.1.1" rel="noopener" target="_blank">Tk themed widgets</a>.</p>
-<h2 id="alternatives" tabindex="-1">Alternatives</h2>
+<h2 id="alternatives">Alternatives</h2>
 <p>Alternative GUI libraries for Python include:</p>
 <ul>
 <li>
@@ -44,8 +46,8 @@ The wxWidgets license allows free commercial usage.</p>
 </ul>
 <p>Characteristics of tkinter that distinguish it from these alternatives
 are that it is easier to use and it comes pre-installed with Python.</p>
-<h2 id="simple-example" tabindex="-1">Simple Example</h2>
-<p>Let's create a GUI app that just renders a label.
+<h2 id="simple-example">Simple Example</h2>
+<p>Let’s create a GUI app that just renders a label.
 Running the following code opens a window that displays text.</p>
 <pre><code class="language-python">import sys
 from tkinter import *
@@ -104,141 +106,141 @@ Closing the window causes the event loop to terminate
 and allows code that follows to execute.
 Assuming no additional blocking calls are made,
 the end of the program is reached and it exits.</p>
-<h2 id="widgets" tabindex="-1">Widgets</h2>
+<h2 id="widgets">Widgets</h2>
 <p>Widgets can be categorized into two groups,
 those that act as containers for other widgets
 and those that do not.</p>
-<h3 id="container-widgets" tabindex="-1">Container Widgets</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Nearest DOM/HTML Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_frame.htm?v=1.1.1" rel="noopener" target="_blank"><code>Frame</code></a></td>
-<td>container</td>
-<td><code>&lt;div&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_labelframe?v=1.1.1" rel="noopener" target="_blank"><code>LabelFrame</code></a></td>
-<td>labeled container</td>
-<td><code>&lt;fieldset&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_panedwindow?v=1.1.1" rel="noopener" target="_blank"><code>PanedWindow</code></a></td>
-<td>horizontal or vertical set of children<br>that is resizable</td>
-<td><code>&lt;div&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1" rel="noopener" target="_blank"><code>Tk</code></a></td>
-<td>root window</td>
-<td>DOM <code>Window</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1" rel="noopener" target="_blank"><code>Toplevel</code></a></td>
-<td>additional window</td>
-<td>DOM <code>Window</code></td>
-</tr>
-</tbody>
-</table>
-<h3 id="non-container-widgets" tabindex="-1">Non-container Widgets</h3>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Nearest DOM/HTML Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_button?v=1.1.1" rel="noopener" target="_blank"><code>Button</code></a></td>
-<td>button that can be pressed;<br><code>command</code> option specifies function to call when clicked.</td>
-<td><code>&lt;button&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_canvas?v=1.1.1" rel="noopener" target="_blank"><code>Canvas</code></a></td>
-<td>for drawing lines and shapes</td>
-<td><code>&lt;canvas&gt;</code> or <code>&lt;svg&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_checkbutton?v=1.1.1" rel="noopener" target="_blank"><code>Checkbutton</code></a></td>
-<td>checkbox</td>
-<td><code>&lt;input type=&quot;checkbox&quot;&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_entry?v=1.1.1" rel="noopener" target="_blank"><code>Entry</code></a></td>
-<td>single-line text input<br><code>command</code> option specifies function to call<br>when user changes value</td>
-<td><code>&lt;input type=&quot;text&quot;&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_label?v=1.1.1" rel="noopener" target="_blank"><code>Label</code></a></td>
-<td>label</td>
-<td><code>&lt;label&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_listbox?v=1.1.1" rel="noopener" target="_blank"><code>Listbox</code></a></td>
-<td>select list (not a drop-down)</td>
-<td><code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> children</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_menu?v=1.1.1" rel="noopener" target="_blank"><code>Menu</code></a></td>
-<td>menu bar or menu;<br>call <code>add_*</code> methods to add menu items<br>with a <code>label</code> and a <code>command</code></td>
-<td>none</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_menubutton?v=1.1.1" rel="noopener" target="_blank"><code>Menubutton</code></a></td>
-<td>menu name that can be clicked to open a menu</td>
-<td>none</td>
-</tr>
-<tr>
-<td><a href="https://effbot.org/tkinterbook/optionmenu.htm?v=1.1.1" rel="noopener" target="_blank"><code>OptionMenu</code></a></td>
-<td>drop-down list</td>
-<td><code>&lt;select&gt;</code> with <code>&lt;option&gt;</code> children</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_radiobutton?v=1.1.1" rel="noopener" target="_blank"><code>Radiobutton</code></a></td>
-<td>radio button</td>
-<td><code>&lt;input type=&quot;radio&quot;&gt;</code><br>See example at link to left.</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_scale?v=1.1.1" rel="noopener" target="_blank"><code>Scale</code></a></td>
-<td>slider</td>
-<td><code>&lt;input type=&quot;range&quot;&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_scrollbar?v=1.1.1" rel="noopener" target="_blank"><code>Scrollbar</code></a></td>
-<td>scrollbar</td>
-<td><code>&lt;div&gt;</code> with CSS <code>overflow</code> set to <code>scroll</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_text?v=1.1.1" rel="noopener" target="_blank"><code>Text</code></a></td>
-<td>multi-line text input</td>
-<td><code>&lt;textarea&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_spinbox?v=1.1.1" rel="noopener" target="_blank"><code>Spinbox</code></a></td>
-<td>number input</td>
-<td><code>&lt;input type=&quot;number&quot;&gt;</code></td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_messagebox?v=1.1.1" rel="noopener" target="_blank"><code>tkMessageBox</code></a></td>
-<td>dialog box;<br>see <code>ask*</code> and <code>show*</code> methods</td>
-<td><code>alert</code>, <code>confirm</code>, <code>prompt</code>, and <code>&lt;dialog&gt;</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="styling-limitations" tabindex="-1">Styling Limitations</h2>
+<h3 id="container-widgets">Container Widgets</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Description</th><th>Nearest DOM/HTML Equivalent</th></tr></thead><tbody><tr><td><a href="https://www.tutorialspoint.com/python3/tk_frame.htm?v=1.1.1" rel="noopener" target="_blank"><code>Frame</code></a></td><td>container</td><td><code>&#x3C;div></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_labelframe?v=1.1.1" rel="noopener" target="_blank"><code>LabelFrame</code></a></td><td>labeled container</td><td><code>&#x3C;fieldset></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_panedwindow?v=1.1.1" rel="noopener" target="_blank"><code>PanedWindow</code></a></td><td>horizontal or vertical set of children<br>that is resizable</td><td><code>&#x3C;div></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1" rel="noopener" target="_blank"><code>Tk</code></a></td><td>root window</td><td>DOM <code>Window</code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1" rel="noopener" target="_blank"><code>Toplevel</code></a></td><td>additional window</td><td>DOM <code>Window</code></td></tr></tbody></table>
+<h3 id="non-container-widgets">Non-container Widgets</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Name</th><th>Description</th><th>Nearest DOM/HTML Equivalent</th></tr></thead><tbody><tr><td><a href="https://www.tutorialspoint.com/python3/tk_button?v=1.1.1" rel="noopener" target="_blank"><code>Button</code></a></td><td>button that can be pressed;<br><code>command</code> option specifies function to call when clicked.</td><td><code>&#x3C;button></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_canvas?v=1.1.1" rel="noopener" target="_blank"><code>Canvas</code></a></td><td>for drawing lines and shapes</td><td><code>&#x3C;canvas></code> or <code>&#x3C;svg></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_checkbutton?v=1.1.1" rel="noopener" target="_blank"><code>Checkbutton</code></a></td><td>checkbox</td><td><code>&#x3C;input type="checkbox"></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_entry?v=1.1.1" rel="noopener" target="_blank"><code>Entry</code></a></td><td>single-line text input<br><code>command</code> option specifies function to call<br>when user changes value</td><td><code>&#x3C;input type="text"></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_label?v=1.1.1" rel="noopener" target="_blank"><code>Label</code></a></td><td>label</td><td><code>&#x3C;label></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_listbox?v=1.1.1" rel="noopener" target="_blank"><code>Listbox</code></a></td><td>select list (not a drop-down)</td><td><code>&#x3C;select></code> with <code>&#x3C;option></code> children</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_menu?v=1.1.1" rel="noopener" target="_blank"><code>Menu</code></a></td><td>menu bar or menu;<br>call <code>add_*</code> methods to add menu items<br>with a <code>label</code> and a <code>command</code></td><td>none</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_menubutton?v=1.1.1" rel="noopener" target="_blank"><code>Menubutton</code></a></td><td>menu name that can be clicked to open a menu</td><td>none</td></tr><tr><td><a href="https://effbot.org/tkinterbook/optionmenu.htm?v=1.1.1" rel="noopener" target="_blank"><code>OptionMenu</code></a></td><td>drop-down list</td><td><code>&#x3C;select></code> with <code>&#x3C;option></code> children</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_radiobutton?v=1.1.1" rel="noopener" target="_blank"><code>Radiobutton</code></a></td><td>radio button</td><td><code>&#x3C;input type="radio"></code><br>See example at link to left.</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_scale?v=1.1.1" rel="noopener" target="_blank"><code>Scale</code></a></td><td>slider</td><td><code>&#x3C;input type="range"></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_scrollbar?v=1.1.1" rel="noopener" target="_blank"><code>Scrollbar</code></a></td><td>scrollbar</td><td><code>&#x3C;div></code> with CSS <code>overflow</code> set to <code>scroll</code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_text?v=1.1.1" rel="noopener" target="_blank"><code>Text</code></a></td><td>multi-line text input</td><td><code>&#x3C;textarea></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_spinbox?v=1.1.1" rel="noopener" target="_blank"><code>Spinbox</code></a></td><td>number input</td><td><code>&#x3C;input type="number"></code></td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_messagebox?v=1.1.1" rel="noopener" target="_blank"><code>tkMessageBox</code></a></td><td>dialog box;<br>see <code>ask*</code> and <code>show*</code> methods</td><td><code>alert</code>, <code>confirm</code>, <code>prompt</code>, and <code>&#x3C;dialog></code></td></tr></tbody></table>
+<h2 id="styling-limitations">Styling Limitations</h2>
 <p>Tk has some platform-specific styling limitations. For example,
 in macOS the background color and relief of a button cannot be changed.
 This makes it difficult to implement hover effects.
 One option for macOS is to use <a href="https://github.com/Saadmairaj/tkmacosx?v=1.1.1" rel="noopener" target="_blank">tkmacos</a>.
 Another may be to use <a href="https://docs.python.org/3/library/tkinter.ttk.html?v=1.1.1" rel="noopener" target="_blank">Tk themed widgets</a>.</p>
-<h3 id="command-option" tabindex="-1"><code>command</code> Option</h3>
+<h3 id="command-option"><code>command</code> Option</h3>
 <p>The following components accept a <code>command</code> option that specifies a function
 to be called when the user clicks them or changes their value:
 <code>Button</code>, <code>Checkbutton</code>, <code>Radiobutton</code>, <code>Scale</code>, <code>Scrollbar</code>, and <code>Spinbox</code>.</p>
@@ -253,7 +255,7 @@ listen for a virtual event as follows:</p>
     selected_indexes = myListbox.curselection() # a tuple
     print('selected_indexes =', selected_indexes)
 
-myListbox.bind('&lt;&lt;ListboxSelect&gt;&gt;', print_selected_indexes)
+myListbox.bind('&#x3C;&#x3C;ListboxSelect>>', print_selected_indexes)
 </code></pre>
 <p>The <code>Text</code> widget also does not support the <code>command</code> option.
 To trigger a call to a function when the selected lines change,
@@ -263,21 +265,21 @@ listen for a virtual even as follows:</p>
     value = text.get('1.0', 'end-1c') + event.char
     print('value =', value)
 
-myText.bind('&lt;Key&gt;', print_text)
+myText.bind('&#x3C;Key>', print_text)
 </code></pre>
-<h3 id="state-option" tabindex="-1"><code>state</code> Option</h3>
+<h3 id="state-option"><code>state</code> Option</h3>
 <p>The following components accept a <code>state</code> option that defaults to <code>NORMAL</code>,
 but has the value <code>ACTIVE</code> when the mouse is over it
 and can be set to <code>DISABLED</code> to disable it:
 <code>Button</code>, <code>Checkbutton</code>, <code>Entry</code>, <code>Menubutton</code>, <code>Radiobutton</code>,
 <code>Scale</code>, <code>Text</code>, and <code>Spinbox</code>.
-Widgets whose <code>state</code> is <code>DISABLED</code> are &quot;grayed out&quot;.</p>
+Widgets whose <code>state</code> is <code>DISABLED</code> are “grayed out”.</p>
 <p>The <code>Listbox</code> widget does not support the <code>state</code> option.
 However, the <code>configure</code> method can be called on any widget to set its options.
 This can be used to set the <code>state</code> of a <code>Listbox</code> as follows:</p>
 <pre><code class="language-python">myListbox.configure(state=DISABLED)
 </code></pre>
-<h3 id="variable-wrappers" tabindex="-1">Variable Wrappers</h3>
+<h3 id="variable-wrappers">Variable Wrappers</h3>
 <p><a href="https://effbot.org/tkinterbook/variable.htm?v=1.1.1" rel="noopener" target="_blank">Variable wrappers</a> are classes provided by tkinter
 that track changes to Python variables that hold primitive values.
 The classes are <code>BooleanVar</code>, <code>DoubleVar</code>, <code>IntVar</code>, and <code>StringVar</code>.
@@ -299,14 +301,14 @@ mainloop()
 </code></pre>
 <p>A similar approach is used to get the value of a <code>Radiobutton</code>
 using its <code>variable</code> or <code>textvariable</code> option.</p>
-<h2 id="canvas" tabindex="-1">Canvas</h2>
+<h2 id="canvas">Canvas</h2>
 <p>The <code>Canvas</code> widget provides many methods for drawing on the canvas including
 <code>create_arc</code>, <code>create_bitmap</code>, <code>create_image</code>, <code>create_line</code>, <code>create_oval</code>,
 <code>create_polygon</code>, <code>create_rectangle</code>, <code>create_text</code>, and <code>create_window</code>.
 The <code>create_window</code> method paces another widget on the canvas.</p>
 <p>The <code>Canvas</code> widget can be used to implement custom widgets
 by using the <code>bind</code> method to listen to events such as clicks.</p>
-<p>Here's a simple example of using a <code>Canvas</code> widget:</p>
+<p>Here’s a simple example of using a <code>Canvas</code> widget:</p>
 <pre><code class="language-python">from tkinter import *
 from tkinter import font
 
@@ -339,36 +341,36 @@ canvas.pack()
 def canvas_click(event):
     print('canvas_click: x, y =', event.x, event.y)
 
-canvas.bind(&quot;&lt;Button-1&gt;&quot;, canvas_click)
+canvas.bind("&#x3C;Button-1>", canvas_click)
 
 Button(text='Quit', command=root.quit, padx=10, pady=10).pack()
 
 mainloop()
 </code></pre>
 <p><img src="/blog/assets/python-tkinter-canvas.png" alt="tkinter Canvas"></p>
-<h2 id="layout-methods" tabindex="-1">Layout Methods</h2>
-<table>
-<thead>
-<tr>
-<th>Layout Method</th>
-<th>Details</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_pack.htm?v=1.1.1" rel="noopener" target="_blank"><code>pack</code></a></td>
-<td>arranges widgets on the four sides of container</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_place.htm?v=1.1.1" rel="noopener" target="_blank"><code>place</code></a></td>
-<td>places widgets and specific positions in container</td>
-</tr>
-<tr>
-<td><a href="https://www.tutorialspoint.com/python3/tk_grid.htm?v=1.1.1" rel="noopener" target="_blank"><code>grid</code></a></td>
-<td>places widgets at row/column positions in container</td>
-</tr>
-</tbody>
-</table>
+<h2 id="layout-methods">Layout Methods</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Layout Method</th><th>Details</th></tr></thead><tbody><tr><td><a href="https://www.tutorialspoint.com/python3/tk_pack.htm?v=1.1.1" rel="noopener" target="_blank"><code>pack</code></a></td><td>arranges widgets on the four sides of container</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_place.htm?v=1.1.1" rel="noopener" target="_blank"><code>place</code></a></td><td>places widgets and specific positions in container</td></tr><tr><td><a href="https://www.tutorialspoint.com/python3/tk_grid.htm?v=1.1.1" rel="noopener" target="_blank"><code>grid</code></a></td><td>places widgets at row/column positions in container</td></tr></tbody></table>
 <p>The layout method is specified on a widget, not on a container.
 This means it is possible for a container to contain widgets
 that use different layout methods.
@@ -382,30 +384,30 @@ but typically this should be avoided.</p>
 Typically their values are the lowercase string version of the name.</li>
 <li>Percentages are float values between zero and one.</li>
 </ul>
-<h3 id="pack" tabindex="-1"><code>pack</code></h3>
+<h3 id="pack"><code>pack</code></h3>
 <p>The <a href="https://www.tutorialspoint.com/python3/tk_pack.htm?v=1.1.1" rel="noopener" target="_blank"><code>pack</code></a> method accepts the following options:</p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>expand</code></td>
-<td>fill unused space horizontally and vertically;<br><code>False</code> (default) or <code>True</code></td>
-</tr>
-<tr>
-<td><code>fill</code></td>
-<td>similar to <code>expand</code>, but can retain minimal dimensions;<br><code>NONE</code> (default), <code>X</code>, <code>Y</code>, or <code>BOTH</code></td>
-</tr>
-<tr>
-<td><code>side</code></td>
-<td><code>TOP</code> (default), <code>BOTTOM</code>, <code>LEFT</code>, or <code>RIGHT</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Values</th></tr></thead><tbody><tr><td><code>expand</code></td><td>fill unused space horizontally and vertically;<br><code>False</code> (default) or <code>True</code></td></tr><tr><td><code>fill</code></td><td>similar to <code>expand</code>, but can retain minimal dimensions;<br><code>NONE</code> (default), <code>X</code>, <code>Y</code>, or <code>BOTH</code></td></tr><tr><td><code>side</code></td><td><code>TOP</code> (default), <code>BOTTOM</code>, <code>LEFT</code>, or <code>RIGHT</code></td></tr></tbody></table>
 <p>Here is a simple example of using <code>pack</code>.
 It demonstrates that if multiple widgets are packed to the same side,
 they line up in the order they were packed.</p>
@@ -432,114 +434,114 @@ mainloop()
 </code></pre>
 <p>TODO: Why is centering off here?</p>
 <p><img src="/blog/assets/tkinter-pack.png" alt="pack example"></p>
-<h3 id="grid" tabindex="-1"><code>grid</code></h3>
+<h3 id="grid"><code>grid</code></h3>
 <p>The <a href="https://www.tutorialspoint.com/python3/tk_grid.htm?v=1.1.1" rel="noopener" target="_blank"><code>grid</code></a> method accepts the following options:</p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>column</code></td>
-<td>column index; default is 0</td>
-</tr>
-<tr>
-<td><code>columnspan</code></td>
-<td># of columns to occupy; default is 1</td>
-</tr>
-<tr>
-<td><code>ipadx</code></td>
-<td>internal x padding in pixels; default is 0</td>
-</tr>
-<tr>
-<td><code>ipady</code></td>
-<td>internal y padding in pixels; default is 0</td>
-</tr>
-<tr>
-<td><code>padx</code></td>
-<td>external x padding in pixels (margin); default is 0</td>
-</tr>
-<tr>
-<td><code>pady</code></td>
-<td>external y padding in pixels (margin); default is 0</td>
-</tr>
-<tr>
-<td><code>row</code></td>
-<td>row index; default is 0</td>
-</tr>
-<tr>
-<td><code>rowspan</code></td>
-<td># of rows to occupy; default is 1</td>
-</tr>
-<tr>
-<td><code>sticky</code></td>
-<td>position if cell is larger; centered by default;<br>compass direction <code>N</code>, <code>S</code>, <code>E</code>, <code>W</code>, <code>NE</code>, <code>NW</code>, <code>SE</code>, or <code>SW</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Values</th></tr></thead><tbody><tr><td><code>column</code></td><td>column index; default is 0</td></tr><tr><td><code>columnspan</code></td><td># of columns to occupy; default is 1</td></tr><tr><td><code>ipadx</code></td><td>internal x padding in pixels; default is 0</td></tr><tr><td><code>ipady</code></td><td>internal y padding in pixels; default is 0</td></tr><tr><td><code>padx</code></td><td>external x padding in pixels (margin); default is 0</td></tr><tr><td><code>pady</code></td><td>external y padding in pixels (margin); default is 0</td></tr><tr><td><code>row</code></td><td>row index; default is 0</td></tr><tr><td><code>rowspan</code></td><td># of rows to occupy; default is 1</td></tr><tr><td><code>sticky</code></td><td>position if cell is larger; centered by default;<br>compass direction <code>N</code>, <code>S</code>, <code>E</code>, <code>W</code>, <code>NE</code>, <code>NW</code>, <code>SE</code>, or <code>SW</code></td></tr></tbody></table>
 <p>Skipped rows and columns do not occupy any space.</p>
-<h3 id="place" tabindex="-1"><code>place</code></h3>
+<h3 id="place"><code>place</code></h3>
 <p>The <a href="https://www.tutorialspoint.com/python3/tk_place.htm?v=1.1.1" rel="noopener" target="_blank"><code>place</code></a> method accepts the following options.</p>
-<table>
-<thead>
-<tr>
-<th>Option</th>
-<th>Values</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>anchor</code></td>
-<td>compass direction<br><code>N</code>, <code>S</code>, <code>E</code>, <code>W</code>, <code>NE</code>, <code>NW</code> (default), <code>SE</code>, or <code>SW</code></td>
-</tr>
-<tr>
-<td><code>bordermode</code></td>
-<td><code>INSIDE</code> or <code>OUTSIDE</code>; indicates whether<br>border is included in <code>height</code> and <code>width</code></td>
-</tr>
-<tr>
-<td><code>height</code></td>
-<td>in pixels</td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td>in pixels</td>
-</tr>
-<tr>
-<td><code>relheight</code></td>
-<td>percentage of parent height</td>
-</tr>
-<tr>
-<td><code>relwidth</code></td>
-<td>percentage of parent width</td>
-</tr>
-<tr>
-<td><code>relx</code></td>
-<td>location as percentage of parent width</td>
-</tr>
-<tr>
-<td><code>rely</code></td>
-<td>location as percentage of parent height</td>
-</tr>
-<tr>
-<td><code>x</code></td>
-<td>location in pixels</td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>location in pixels</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Option</th><th>Values</th></tr></thead><tbody><tr><td><code>anchor</code></td><td>compass direction<br><code>N</code>, <code>S</code>, <code>E</code>, <code>W</code>, <code>NE</code>, <code>NW</code> (default), <code>SE</code>, or <code>SW</code></td></tr><tr><td><code>bordermode</code></td><td><code>INSIDE</code> or <code>OUTSIDE</code>; indicates whether<br>border is included in <code>height</code> and <code>width</code></td></tr><tr><td><code>height</code></td><td>in pixels</td></tr><tr><td><code>width</code></td><td>in pixels</td></tr><tr><td><code>relheight</code></td><td>percentage of parent height</td></tr><tr><td><code>relwidth</code></td><td>percentage of parent width</td></tr><tr><td><code>relx</code></td><td>location as percentage of parent width</td></tr><tr><td><code>rely</code></td><td>location as percentage of parent height</td></tr><tr><td><code>x</code></td><td>location in pixels</td></tr><tr><td><code>y</code></td><td>location in pixels</td></tr></tbody></table>
 <p>Options that accept percentage values support creating responsive layouts
 that respond to resizing the window.</p>
 <p>To center a widget horizontally, set options so that
 <code>relwidth + 2 * relx == 1</code>.</p>
 <p>To center a widget vertically, set options so that
 <code>relheight + 2 * rely == 1</code>.</p>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>To render images in a tkinter app, use the pillow library
 which can be installed by entering <code>pip install pillow</code>.
 An image can be added as the background of nearly any widget.
@@ -556,7 +558,7 @@ label.pack()
 
 mainloop()
 </code></pre>
-<h2 id="custom-widgets" tabindex="-1">Custom Widgets</h2>
+<h2 id="custom-widgets">Custom Widgets</h2>
 <p>One way to implement custom widgets is to define a new class
 that inherits from the class of an existing widget.
 For example, we can defined a widget named <code>EntryPlus</code>
@@ -566,11 +568,11 @@ that inherits from <code>Entry</code> and adds support for a <code>placeholder</
 from typing import Any, Dict
 
 class EntryPlus(Entry):
-    &quot;&quot;&quot;
+    """
     This is a Tk widget that inherits from the `Entry` widget
     and adds support for placeholder text.
     It requires specifying the textvariable option.
-    &quot;&quot;&quot;
+    """
 
     def __init__(self, **options: Dict[str, Any]):
         # Require the `textvariable` option.
@@ -593,24 +595,24 @@ class EntryPlus(Entry):
         Entry.__init__(self, **options)
 
         # Listen for `FocusIn` and `FocusOut` events.
-        self.bind('&lt;FocusIn&gt;', self.focused)
-        self.bind('&lt;FocusOut&gt;', self.blurred)
+        self.bind('&#x3C;FocusIn>', self.focused)
+        self.bind('&#x3C;FocusOut>', self.blurred)
 
     # When focus moves out, if the value
     # is empty, set it to the placeholder.
-    def blurred(self, _) -&gt; None:
+    def blurred(self, _) -> None:
         if self.var.get() == '':
             self.var.set(self.placeholder)
 
     # When retrieving the value, if it matches
     # the placeholder then return an empty string.
-    def get(self) -&gt; str:
+    def get(self) -> str:
         value = self.var.get()
         return '' if value == self.placeholder else value
 
     # When focus moves in, if the value
     # matches the placeholder then remove it.
-    def focused(self, _) -&gt; None:
+    def focused(self, _) -> None:
         if self.var.get() == self.placeholder:
             self.var.set('')
 </code></pre>
@@ -659,5 +661,6 @@ btn.grid(row=row, column=0, columnspan=2)
 
 mainloop()
 </code></pre>
-<p><img src="/blog/assets/python-tkinter-entry-demo.png" alt="Entry with placeholder"></p>
-</article> </body></html>
+<p><img src="/blog/assets/python-tkinter-entry-demo.png" alt="Entry with placeholder"></p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

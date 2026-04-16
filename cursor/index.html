@@ -1,17 +1,19 @@
-<!DOCTYPE html><html lang="en"> <head><title>Cursor</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Cursor</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#installing">Installing</a></li><li><a href="#starting">Starting</a></li><li><a href="#security">Security</a></li><li><a href="#functionality">Functionality</a></li><li><a href="#paid-vs.-free-versions">Paid vs. Free Versions</a></li><li><a href="#advice">Advice</a></li><li><a href="#chat-attempt-%231%3A-svelte---fail!">Chat Attempt #1: Svelte - FAIL!</a></li><li><a href="#chat-attempt-%232%3A-svelte---fail!">Chat Attempt #2: Svelte - FAIL!</a></li><li><a href="#chat-attempt-%233%3A-react---mostly-successful">Chat Attempt #3: React - Mostly successful</a></li><li><a href="#nim-game">Nim Game</a></li><li><a href="#summary">Summary</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Cursor</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Cursor</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#installing">Installing</a></li><li><a href="#starting">Starting</a></li><li><a href="#security">Security</a></li><li><a href="#functionality">Functionality</a></li><li><a href="#paid-vs-free-versions">Paid vs. Free Versions</a></li><li><a href="#advice">Advice</a></li><li><a href="#chat-attempt-1-svelte---fail">Chat Attempt #1: Svelte - FAIL!</a></li><li><a href="#chat-attempt-2-svelte---fail">Chat Attempt #2: Svelte - FAIL!</a></li><li><a href="#chat-attempt-3-react---mostly-successful">Chat Attempt #3: React - Mostly successful</a></li><li><a href="#nim-game">Nim Game</a></li><li><a href="#summary">Summary</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article> <style>
     img {
         border: 1px solid gray;
     }
 </style>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="https://www.cursor.com.?v=1.1.1" rel="noopener" target="_blank">Cursor</a> is an
-&quot;AI Code Editor&quot; that aims to make developers &quot;extraordinarily productive&quot;.
+“AI Code Editor” that aims to make developers “extraordinarily productive”.
 It is a fork of Microsoft VS Code.</p>
 <p>While Cursor offers a free tier, I frequently saw the following message
 when asking it to explain code, modify code, or generate new code:
-&quot;High Load - We're experiencing high demand for Claude 3.5 Sonnet right now.
-Please upgrade to Pro, switch to the 'default' model, Claude 3.7 sonnet,
-another model, or try again in a few moments.&quot;
+“High Load - We’re experiencing high demand for Claude 3.5 Sonnet right now.
+Please upgrade to Pro, switch to the ‘default’ model, Claude 3.7 sonnet,
+another model, or try again in a few moments.”
 This makes the free tier somewhat unusable.</p>
 <p>The paid tiers start at $20 per month.</p>
 <p>Cursor works best when given a somewhat detailed plan of what it should build.
@@ -25,11 +27,11 @@ that the desired result is achieved.
 Developers need to resist the urge to skip reviewing the code.</p>
 <p>Every piece of text in the Cursor chat pane is a clickable link
 that leads to the original or modified code, or related documentation.</p>
-<h2 id="installing" tabindex="-1">Installing</h2>
+<h2 id="installing">Installing</h2>
 <p>Click a download button on the
 <a href="https://www.cursor.com.?v=1.1.1" rel="noopener" target="_blank">Cursor home page</a>.
 Double-click the downloaded installer and follow the directions.</p>
-<h2 id="starting" tabindex="-1">Starting</h2>
+<h2 id="starting">Starting</h2>
 <p>Double-click the app to start it.
 On first launch it will prompt for:</p>
 <ul>
@@ -51,31 +53,31 @@ On first launch it will prompt for:</p>
 </li>
 <li>
 <p>VS Code Extensions</p>
-<p>Click &quot;Use Extensions&quot; to install all the extensions currently being used in VS Code,
-or click &quot;Start from Scratch&quot; to begin with no extensions installed.</p>
+<p>Click “Use Extensions” to install all the extensions currently being used in VS Code,
+or click “Start from Scratch” to begin with no extensions installed.</p>
 </li>
 <li>
-<p>&quot;Cursor.app&quot; would like to access files in your Documents folder.</p>
-<p>Click &quot;Don't Allow&quot; or &quot;Allow&quot; (preferred).</p>
+<p>“Cursor.app” would like to access files in your Documents folder.</p>
+<p>Click “Don’t Allow” or “Allow” (preferred).</p>
 </li>
 <li>
 <p>Data Preferences</p>
-<p>Select &quot;Help Improve Cursor&quot; (to share usage data)
-or &quot;Privacy Mode&quot; (to not share usage data).</p>
+<p>Select “Help Improve Cursor” (to share usage data)
+or “Privacy Mode” (to not share usage data).</p>
 </li>
 <li>
-<p>Click &quot;Log In&quot; (if you already have an account) or &quot;Sign Up&quot;.</p>
+<p>Click “Log In” (if you already have an account) or “Sign Up”.</p>
 </li>
 </ul>
-<h2 id="security" tabindex="-1">Security</h2>
+<h2 id="security">Security</h2>
 <p>See <a href="https://www.cursor.com/security?v=1.1.1" rel="noopener" target="_blank">Security</a>
 for details on how Cursor keeps your
 source code and development environment secure.</p>
-<p>Enabling &quot;Privacy Mode&quot; makes it so none of your code will be stored by Cursor.
+<p>Enabling “Privacy Mode” makes it so none of your code will be stored by Cursor.
 This setting can be found at
-Cursor ... Settings ... Cursor Settings ... General ... Privacy mode.
+Cursor … Settings … Cursor Settings … General … Privacy mode.
 It seems this is enabled by default, but double-check it.</p>
-<p>Cursor depends on several &quot;subprocessors&quot; where code is sent
+<p>Cursor depends on several “subprocessors” where code is sent
 in order to respond to queries.
 So Cursor is only as secure as those subprocessors which include:</p>
 <ul>
@@ -105,10 +107,10 @@ in the United States</li>
 </ul>
 <p>TODO: Finish documenting what each subprocessor above is used for.</p>
 <p>TODO: Explain what enabling privacy mode does.</p>
-<p>TODO: Add more detail from <a href="https://www.cursor.com/security">https://www.cursor.com/security</a>.</p>
+<p>TODO: Add more detail from <a href="https://www.cursor.com/security" rel="noopener" target="_blank">https://www.cursor.com/security</a>.</p>
 <p>TODO: Can Cursor be configured to never upload any of our source code?</p>
 <p>TODO: Can Cursor be configured to not use our source code to train its models?</p>
-<h2 id="functionality" tabindex="-1">Functionality</h2>
+<h2 id="functionality">Functionality</h2>
 <p>Cursor provides the following functionality:</p>
 <ul>
 <li>Predicts your next edit which can be accepted by pressing the tab key.</li>
@@ -117,34 +119,34 @@ in the United States</li>
 instead of writing programming language syntax.</li>
 </ul>
 <p>To test some of the functionality, I opened a source file containing
-<code>const cuisines = [ &quot;American&quot;, &quot;Chinese&quot;, ... ]</code>.
-After that code I inserted &quot;for (&quot; and it suggested
-&quot;for (const cuisine of cuisines) {&quot;.</p>
+<code>const cuisines = [ "American", "Chinese", ... ]</code>.
+After that code I inserted “for (” and it suggested
+“for (const cuisine of cuisines) {”.</p>
 <p>I selected the code that creates the <code>cuisines</code> array.
-Then I clicked &quot;Add to Chat&quot; and entered &quot;Add more cuisines.&quot;
+Then I clicked “Add to Chat” and entered “Add more cuisines.”
 It successfully added many more.</p>
-<p>Then I selected code again, clicked &quot;Edit&quot;, and
-entered &quot;sort from shortest to longest&quot;.
-It responded with &quot;High Load - We're experiencing high demand for
+<p>Then I selected code again, clicked “Edit”, and
+entered “sort from shortest to longest”.
+It responded with “High Load - We’re experiencing high demand for
 Claude 3.5 Sonnet right now. Please upgrade to Pro, switch to the
-'default' model, Claude 3.7 sonnet, another model,
+‘default’ model, Claude 3.7 sonnet, another model,
 or try again in a few moments.</p>
 <p>I selected a function definition that was inside a <code>useEffect</code>,
-clicked &quot;Add to Chat&quot;, and entered &quot;Move this code
-to its own function defined outside the useEffect.&quot;
+clicked “Add to Chat”, and entered “Move this code
+to its own function defined outside the useEffect.”
 It did this correctly, but did not wrap the new function in <code>useCallback</code>.</p>
-<p>I selected the function name, clicked &quot;Edit&quot;, and
-entered &quot;Wrap this function in a useCallback.&quot;
+<p>I selected the function name, clicked “Edit”, and
+entered “Wrap this function in a useCallback.”
 I had to press the tab key several times to get it to make all
 the necessary changes, but it successfully made correct changes.</p>
-<p>I selected the function name, clicked &quot;Edit&quot;, and
-entered &quot;rename this to {new-name}&quot;.
+<p>I selected the function name, clicked “Edit”, and
+entered “rename this to {new-name}”.
 After accepting the change I had to press tab once for
 each call to update the name of the function being called.</p>
-<p>After the array of cuisine names, I entered &quot;const longestCuisine =&quot;
+<p>After the array of cuisine names, I entered “const longestCuisine =”
 and it suggested following code which is perfect:</p>
-<pre><code class="language-js">const longestCuisine = cuisines.reduce((longest, current) =&gt; {
-  return current.length &gt; longest.length ? current : longest;
+<pre><code class="language-js">const longestCuisine = cuisines.reduce((longest, current) => {
+  return current.length > longest.length ? current : longest;
 }, cuisines[0]);
 </code></pre>
 <p>I selected the following CSS code:</p>
@@ -154,7 +156,7 @@ and it suggested following code which is perfect:</p>
   }
 }
 </code></pre>
-<p>Then I clicked &quot;Add to Chat&quot; and entered &quot;What does this code do?&quot;.
+<p>Then I clicked “Add to Chat” and entered “What does this code do?”.
 I received the following detailed response:</p>
 <pre><code class="language-text">This code is a CSS media query that controls animation behavior based on
 user preferences. Specifically: @media (prefers-reduced-motion: no-preference)
@@ -165,7 +167,7 @@ It runs infinitely (keeps repeating)
 Takes 20s (20 seconds) to complete one cycle
 Uses linear timing function (constant speed throughout the animation)
 This is an accessibility feature that respects user preferences for
-motion sensitivity.  Users who have enabled &quot;reduced motion&quot; in their
+motion sensitivity.  Users who have enabled "reduced motion" in their
 system settings (like those who might get motion sickness from animations)
 won't see the spinning animation,
 while other users will see the full animated effect.
@@ -176,33 +178,33 @@ or prefer minimal animations.
 <p>Supposedly Cursor can implement a UI based on a provided mockup.
 I tried this, but the cursor servers were
 too busy to do this using the free tier.</p>
-<h2 id="paid-vs.-free-versions" tabindex="-1">Paid vs. Free Versions</h2>
+<h2 id="paid-vs-free-versions">Paid vs. Free Versions</h2>
 <p>TODO: What features does the paid version add?</p>
-<h2 id="advice" tabindex="-1">Advice</h2>
+<h2 id="advice">Advice</h2>
 <p>For best results, make detailed requests rather than general ones.
-For example, requesting &quot;Write a todo app&quot; is too general.
+For example, requesting “Write a todo app” is too general.
 Have a clear vision of what you want to build.</p>
-<h2 id="chat-attempt-%231%3A-svelte---fail!" tabindex="-1">Chat Attempt #1: Svelte - FAIL!</h2>
+<h2 id="chat-attempt-1-svelte---fail">Chat Attempt #1: Svelte - FAIL!</h2>
 <p>Press cmd-i (macOS) or ctrl-i (others) to open Chat mode.
 Requests entered here can create and/or edit multiple source files.
-For example, &quot;Create a web application that allows users to
+For example, “Create a web application that allows users to
 select a kind of food such as Chinese or Mexican from a drop-down menu.
 Then display on a Google Map all the matching restaurants
 within 10 miles of the current location of the user.
-Use the latest version of Svelte.&quot;</p>
+Use the latest version of Svelte.”</p>
 <p>This will prompt for permission to run specific commands.
 If this runs for a long time, it may be prompting for more information
 or there may be an error.
-To see this, click &quot;Pop out terminal&quot;.</p>
-<p>In my case it told me &quot;create-svelte has been deprecated&quot;
-and that &quot;npm create svelte&quot; has been replaced with &quot;npx sv create&quot;.
+To see this, click “Pop out terminal”.</p>
+<p>In my case it told me “create-svelte has been deprecated”
+and that “npm create svelte” has been replaced with “npx sv create”.
 So I entered the following in the chat:
-&quot;You tried to use &quot;npm create svelte@latest&quot;, but create-svelte
-has been deprecated. You need to use &quot;npx sv create&quot; instead.&quot;</p>
-<p>I once again had to click &quot;Pop out terminal&quot; where I was asked
+“You tried to use “npm create svelte@latest”, but create-svelte
+has been deprecated. You need to use “npx sv create” instead.”</p>
+<p>I once again had to click “Pop out terminal” where I was asked
 several questions related to creating a new Svelte project.
 After answering them, the project was created
-in my home directory in a new directory named &quot;restaurant-finder&quot;.</p>
+in my home directory in a new directory named “restaurant-finder”.</p>
 <p>Instructions for running the project were output.
 These included optional commands to create a local git repository.
 It did not suggest running <code>npm install</code>, but that is required.</p>
@@ -210,30 +212,30 @@ It did not suggest running <code>npm install</code>, but that is required.</p>
 I had to delete the <code>package-lock.json</code> file and the <code>node_modules</code> directory,
 and then run <code>npm install</code> again which worked.</p>
 <p>The project code can be enhanced with followup requests.
-For example, &quot;Instead of displaying default map markers for each restaurant,
-display their Yelp rating.&quot;</p>
-<p>Back in Cursor I clicked the &quot;Open Project&quot; button
+For example, “Instead of displaying default map markers for each restaurant,
+display their Yelp rating.”</p>
+<p>Back in Cursor I clicked the “Open Project” button
 and selected the new project directory.
 This contained a fresh Svelte project with none of the code I requested.</p>
-<p>I requested the following in the chat: &quot;Modify the web application to
+<p>I requested the following in the chat: “Modify the web application to
 allow users to select a kind of food such as Chinese or Mexican
 from a drop-down menu. Then display on a Google Map all the matching
-restaurants within 10 miles of the current location of the user.&quot;
+restaurants within 10 miles of the current location of the user.”
 This ran for a couple of minutes.
 Then I pressed cmd-return to accept all the changes.</p>
 <p>This output the following:
-&quot;Also, please make sure to provide your Google Maps API key by
+“Also, please make sure to provide your Google Maps API key by
 replacing the empty string in the Map.svelte component.
-The application won't work without a valid API key.&quot;</p>
-<p>I asked it &quot;How can I put the Google Maps API key in a .env file
-that is not committed to Git so I can keep it secret?&quot;
+The application won’t work without a valid API key.”</p>
+<p>I asked it “How can I put the Google Maps API key in a .env file
+that is not committed to Git so I can keep it secret?”
 It created a <code>.env</code> file for me and modified <code>Map.svelte</code> to use it.
 I modified the <code>.env</code> file to use a Google Maps API key from a previous project.</p>
 <p>I ran <code>npm install</code> again to install new dependencies that were added.</p>
 <p>I ran <code>npm run dev</code> to start a local web server
 and browsed localhost:3000.
-The app wasn't even close to working.</p>
-<h2 id="chat-attempt-%232%3A-svelte---fail!" tabindex="-1">Chat Attempt #2: Svelte - FAIL!</h2>
+The app wasn’t even close to working.</p>
+<h2 id="chat-attempt-2-svelte---fail">Chat Attempt #2: Svelte - FAIL!</h2>
 <p>Creating a new SvelteKit project is somewhat complicated at the moment,
 so I did that manually and then opened that project in Cursor.</p>
 <p>I entered the following in the chat:</p>
@@ -258,11 +260,11 @@ within 10 miles of the current location of the user.</p>
 <p>Change the code to use Google Maps instead of Mapbox.</p>
 <p>This output the following:</p>
 <blockquote>
-<p>To get this working, you'll need to:</p>
+<p>To get this working, you’ll need to:</p>
 <ol>
 <li>Get a Google Maps API key:
 <ul>
-<li>Go to the Google Cloud Console (<a href="https://console.cloud.google.com/">https://console.cloud.google.com/</a>)</li>
+<li>Go to the Google Cloud Console (<a href="https://console.cloud.google.com/" rel="noopener" target="_blank">https://console.cloud.google.com/</a>)</li>
 <li>Create a new project or select an existing one</li>
 <li>Enable the Maps JavaScript API</li>
 <li>Create credentials (API key)</li>
@@ -278,30 +280,30 @@ within 10 miles of the current location of the user.</p>
 I edited that file and set PUBLIC_GOOGLE_MAPS_API_KEY to my API key.</p>
 </li>
 <li>
-<p>I ran the app again and selected &quot;Mexican&quot; from the cuisine drop-down.
-It opened a dialog that said &quot;<a href="http://localhost:5173">http://localhost:5173</a> wants to know your location.&quot;
-I clicked the &quot;Allow while visiting this site&quot; button.
-It rendered a map with the caption &quot;Showing Mexican restaurants near you&quot;
-and a dialog that said &quot;This page can't load Google Maps correctly.
-Do you own this website?&quot;
-I clicked the &quot;OK&quot; button.
+<p>I ran the app again and selected “Mexican” from the cuisine drop-down.
+It opened a dialog that said “<a href="http://localhost:5173" rel="noopener" target="_blank">http://localhost:5173</a> wants to know your location.”
+I clicked the “Allow while visiting this site” button.
+It rendered a map with the caption “Showing Mexican restaurants near you”
+and a dialog that said “This page can’t load Google Maps correctly.
+Do you own this website?”
+I clicked the “OK” button.
 In the DevTools console I saw the following messages:</p>
 <ul>
-<li>&quot;Google Maps JavaScript API has been loaded directly without loading=async.
-This can result in suboptimal performance.&quot;</li>
-<li>&quot;Google Maps JavaScript API warning: InvalidKey&quot;</li>
-<li>&quot;As of February 21st, 2024, google.maps.Marker is deprecated.
+<li>“Google Maps JavaScript API has been loaded directly without loading=async.
+This can result in suboptimal performance.”</li>
+<li>“Google Maps JavaScript API warning: InvalidKey”</li>
+<li>“As of February 21st, 2024, google.maps.Marker is deprecated.
 Please use google.maps.marker.AdvancedMarkerElement instead.
 At this time, google.maps.Marker is not scheduled to be discontinued,
 but google.maps.marker.AdvancedMarkerElement
-is recommended over google.maps.Marker.&quot;</li>
+is recommended over google.maps.Marker.”</li>
 </ul>
 </li>
 <li>
 <p>I entered the following the chat:
-I see a message in the DevTools console that says &quot;Google Maps
+I see a message in the DevTools console that says “Google Maps
 JavaScript API has been loaded directly without loading=async.
-This can result in suboptimal performance.&quot; Please fix that.</p>
+This can result in suboptimal performance.” Please fix that.</p>
 <p>Cursor attempted to fix this, but the changes it made
 did not make the warning go away.</p>
 </li>
@@ -312,16 +314,16 @@ Please use google.maps.marker.AdvancedMarkerElement instead.</p>
 <p>The changes removed the warning about google.maps.Marker being deprecated,
 but introduced these new issues:</p>
 <ul>
-<li>Please use addEventListener('gmp-click', ...)
-instead of addEventListener('click', ...).</li>
+<li>Please use addEventListener(‘gmp-click’, …)
+instead of addEventListener(‘click’, …).</li>
 <li>The map is initialized without a valid Map ID,
 which will prevent use of Advanced Markers.</li>
 </ul>
 </li>
 <li>
 <p>I entered the following the chat:
-Please use addEventListener('gmp-click', ...)
-instead of addEventListener('click', ...).</p>
+Please use addEventListener(‘gmp-click’, …)
+instead of addEventListener(‘click’, …).</p>
 <p>The changes removed the warning about addEventListener.</p>
 </li>
 <li>
@@ -330,12 +332,12 @@ The map is initialized without a valid Map ID,
 which will prevent use of Advanced Markers.
 Please initialize the map with a valid map id.</p>
 <p>This made changes and output the following:</p>
-<p>To get this working, you'll need to:</p>
+<p>To get this working, you’ll need to:</p>
 <ol>
 <li>Create a Map ID in the Google Cloud Console:
 <ul>
-<li>Go to <a href="https://console.cloud.google.com/google/maps-apis/maps">https://console.cloud.google.com/google/maps-apis/maps</a></li>
-<li>Click &quot;Create Map ID&quot;</li>
+<li>Go to <a href="https://console.cloud.google.com/google/maps-apis/maps" rel="noopener" target="_blank">https://console.cloud.google.com/google/maps-apis/maps</a></li>
+<li>Click “Create Map ID”</li>
 <li>Give your map a name</li>
 <li>Copy the generated Map ID</li>
 </ul>
@@ -344,27 +346,27 @@ Please initialize the map with a valid map id.</p>
 PUBLIC_GOOGLE_MAPS_ID=your_map_id_here</li>
 </ol>
 <p>The URL given to create a map id is incorrect. The correct URL is
-<a href="https://console.cloud.google.com/google/maps-apis/studio/maps">https://console.cloud.google.com/google/maps-apis/studio/maps</a>.
+<a href="https://console.cloud.google.com/google/maps-apis/studio/maps" rel="noopener" target="_blank">https://console.cloud.google.com/google/maps-apis/studio/maps</a>.
 I browsed that URL and did the following:</p>
 <ul>
-<li>click &quot;Create map ID&quot; button</li>
+<li>click “Create map ID” button</li>
 <li>enter a name and description</li>
-<li>selected &quot;JavaScript&quot; for the Map type</li>
+<li>selected “JavaScript” for the Map type</li>
 <li>accepted the default of Raster rather than Vector</li>
-<li>clicked the &quot;Save&quot; button</li>
-<li>copied the &quot;Map ID&quot; that was displayed</li>
+<li>clicked the “Save” button</li>
+<li>copied the “Map ID” that was displayed</li>
 <li>modified <code>PUBLIC_GOOGLE_MAPS_ID</code> in the <code>.env</code> file to have that value</li>
 </ul>
 </li>
 <li>
 <p>I entered the following the chat:
 When I restart the Svelte server, I get the error
-&quot;No loader is configured for '.node' files:
-node_modules/fsevents/fsevents.node&quot;. Please fix this.</p>
+“No loader is configured for ‘.node’ files:
+node_modules/fsevents/fsevents.node”. Please fix this.</p>
 </li>
 <li>
 <p>I entered the following the chat:
-Now I get SyntaxError: Identifier '<strong>vite</strong>injectQuery'
+Now I get SyntaxError: Identifier ‘<strong>vite</strong>injectQuery’
 has already been declared in app.js. Please fix this.</p>
 </li>
 <li>
@@ -373,21 +375,21 @@ The changes you made did not fix the problem. Please try again.</p>
 </li>
 <li>
 <p>I entered the following the chat:
-That didn't fix the problem either. Do you have another idea?</p>
+That didn’t fix the problem either. Do you have another idea?</p>
 </li>
 <li>
 <p>I entered the following the chat:
-Check my SvelteKit version and ensure it's compatible with your Vite version.</p>
+Check my SvelteKit version and ensure it’s compatible with your Vite version.</p>
 <p>This output the following:</p>
-<p>I see the issue now. You're using some very recent versions that might
-have compatibility issues. The problem is that you're using Svelte 5
+<p>I see the issue now. You’re using some very recent versions that might
+have compatibility issues. The problem is that you’re using Svelte 5
 (which is still in beta) along with Vite 6 (which is also very new).
-Let's downgrade to more stable versions. I'll update your package.json.</p>
+Let’s downgrade to more stable versions. I’ll update your package.json.</p>
 </li>
 <li>
 <p>I entered the following the chat:
-Now I get the error &quot;Top-level await is not available in the
-configured target environment&quot; Can you fix this?</p>
+Now I get the error “Top-level await is not available in the
+configured target environment” Can you fix this?</p>
 </li>
 <li>
 <p>I entered the following the chat:
@@ -396,8 +398,8 @@ uses a top-level await.</p>
 </li>
 <li>
 <p>I entered the following the chat:
-It's back to giving me
-&quot;SyntaxError: Identifier '<strong>vite</strong>injectQuery' has already been declared&quot;.
+It’s back to giving me
+“SyntaxError: Identifier ‘<strong>vite</strong>injectQuery’ has already been declared”.
 Can you fix that?</p>
 </li>
 <li>
@@ -414,7 +416,7 @@ It seems that your fixes are going in circles. Is it time to give up?</p>
 when directed to use a more popular web framework like React.</p>
 </li>
 </ul>
-<h2 id="chat-attempt-%233%3A-react---mostly-successful" tabindex="-1">Chat Attempt #3: React - Mostly successful</h2>
+<h2 id="chat-attempt-3-react---mostly-successful">Chat Attempt #3: React - Mostly successful</h2>
 <p>I entered the following in the chat:</p>
 <ul>
 <li>
@@ -440,43 +442,43 @@ and restarted the server with <code>yarn start</code>.</p>
 </li>
 <li>
 <p>In the DevTools Console I see
-&quot;As of February 21st, 2024, google.maps.Marker is deprecated.
-Please use google.maps.marker.AdvancedMarkerElement instead.&quot; Fix this.</p>
+“As of February 21st, 2024, google.maps.Marker is deprecated.
+Please use google.maps.marker.AdvancedMarkerElement instead.” Fix this.</p>
 </li>
 <li>
-<p>Now I get &quot;Performance warning! LoadScript has been reloaded unintentionally!
+<p>Now I get “Performance warning! LoadScript has been reloaded unintentionally!
 You should not pass <code>libraries</code> prop as new array. Please keep an array of
 libraries as static class property for Components and PureComponents,
 or just a const variable outside of component,
-or somewhere in config files or ENV variables&quot; Fix this.</p>
+or somewhere in config files or ENV variables” Fix this.</p>
 </li>
 <li>
-<p>Now I get &quot;The map is initialized without a valid Map ID,
-which will prevent use of Advanced Markers.&quot; Fix this.</p>
+<p>Now I get “The map is initialized without a valid Map ID,
+which will prevent use of Advanced Markers.” Fix this.</p>
 <p>After this I modified the <code>.env</code> file contain my Google Maps map ID
 and restarted the server with <code>yarn start</code>.</p>
 </li>
 <li>
 <p>Now I get an error on line 199 of RestaurantMap.tsx that says
-&quot;Property 'mapId' does not exist on type 'IntrinsicAttributes &amp;
-IntrinsicClassAttributes<GoogleMap> &amp; Readonly<GoogleMapProps>'.&quot; Fix this.</p>
+“Property ‘mapId’ does not exist on type ‘IntrinsicAttributes &#x26;
+IntrinsicClassAttributes<googlemap> &#x26; Readonly<googlemapprops>’.” Fix this.</googlemapprops></googlemap></p>
 </li>
 <li>
-<p>Now I get the error &quot;This API key is not authorized to use this
-service or API. Places API error: ApiTargetBlockedMapError&quot;.
+<p>Now I get the error “This API key is not authorized to use this
+service or API. Places API error: ApiTargetBlockedMapError”.
 How can I fix this?</p>
 <p>After this I followed the instructions it output.
 I also updated my Google Cloud payment method to use a new credit card.
 Then I restarted the server with <code>yarn start</code> and tried again.
-It still says &quot;This API key is not authorized to use this service or API.&quot;</p>
-<p>It turns out that I needed to enable &quot;Places API&quot; under &quot;Credentials&quot;
-for the GCP project I'm using.</p>
+It still says “This API key is not authorized to use this service or API.”</p>
+<p>It turns out that I needed to enable “Places API” under “Credentials”
+for the GCP project I’m using.</p>
 </li>
 <li>
-<p>Now I get the error &quot;<gmp-advanced-marker>:
-Please use addEventListener('gmp-click', ...)
-instead of addEventListener('click', ...).
-Error Component Stack&quot;. Fix this.</p>
+<p>Now I get the error ”<gmp-advanced-marker>:
+Please use addEventListener(‘gmp-click’, …)
+instead of addEventListener(‘click’, …).
+Error Component Stack”. Fix this.</gmp-advanced-marker></p>
 </li>
 <li>
 <p>Add .env to the .gitignore file.</p>
@@ -492,39 +494,39 @@ and remove any previously displayed route.</p>
 </li>
 <li>
 <p>Your solution is not working. When I click a marker,
-I don't see any route lines on the map.</p>
+I don’t see any route lines on the map.</p>
 <p>Cursor said I might need to enable the Directions API in GCP. When I
 searched for that I discovered that it was replaced with the Routes API.
 I enabled that, but it did not fix the problem.
-I'm giving up on this feature for now.</p>
+I’m giving up on this feature for now.</p>
 </li>
 <li>
 <p>Change the cursor to a wait cursor
 while the map is being generated or updated.</p>
 <p>This claimed to add changes for the cursor AND
-add a semi-transparent white overlay that says &quot;Loading restaurants...&quot;.
-The cursor does not change and the overlay doesn't display any text.</p>
+add a semi-transparent white overlay that says “Loading restaurants…”.
+The cursor does not change and the overlay doesn’t display any text.</p>
 </li>
 <li>
-<p>I don't see any text in the semi-transparent white overlay.</p>
+<p>I don’t see any text in the semi-transparent white overlay.</p>
 </li>
 <li>
 <p>Clicking a restaurant marker does nothing.
-I don't see a popup containing the restaurant name and address,
+I don’t see a popup containing the restaurant name and address,
 and no route lines are drawn on the map. Fix these issues.</p>
-<p>Cursor modified the code and said &quot;If you're still not seeing the popup
+<p>Cursor modified the code and said “If you’re still not seeing the popup
 or route lines, please check that you have the correct Google Maps API key
 with the following APIs enabled:
 Maps JavaScript API, Places API, and Directions API.</p>
 </li>
 <li>
 <p>Where are you getting the restaurant ratings?</p>
-<p>The answer was &quot;The restaurant ratings are coming from the Google Places API.
-Specifically, in the getDetails request, we're requesting
-the &quot;rating&quot; field from the Places API.&quot; along with much more detail.</p>
+<p>The answer was “The restaurant ratings are coming from the Google Places API.
+Specifically, in the getDetails request, we’re requesting
+the “rating” field from the Places API.” along with much more detail.</p>
 </li>
 <li>
-<p>I'm seeing two ESLint errors in RestaurantMaps.tsx about no-unused vars.
+<p>I’m seeing two ESLint errors in RestaurantMaps.tsx about no-unused vars.
 Fix those.</p>
 <p>It fixed them by commenting out code, not deleting it.</p>
 </li>
@@ -533,7 +535,7 @@ Fix those.</p>
 <p>This took a couple of minutes to complete.</p>
 </li>
 <li>
-<p>I'm seeing an ESLint warning react-hooks/exhaustive-deps in RestaurantMap.tsx.
+<p>I’m seeing an ESLint warning react-hooks/exhaustive-deps in RestaurantMap.tsx.
 Fix it.</p>
 <p>It did not fix the error.</p>
 </li>
@@ -542,16 +544,16 @@ Fix it.</p>
 to the useEffect in RestaurantMap.tsx where it is needed.</p>
 </li>
 <li>
-<p>ESLint says &quot;The createMarkerContent function makes the dependencies
+<p>ESLint says “The createMarkerContent function makes the dependencies
 of useEffect Hook (at line 247) change on every render.
-Move it inside the useEffect callback.&quot; Fix this.</p>
-<p>Finally I'm getting a clean startup of the app!</p>
+Move it inside the useEffect callback.” Fix this.</p>
+<p>Finally I’m getting a clean startup of the app!</p>
 </li>
 <li>
-<p>The app is broken now. I'm seeing this in the DevTools Console:
+<p>The app is broken now. I’m seeing this in the DevTools Console:
 Maximum update depth exceeded. This can happen when a component
 calls setState inside useEffect, but useEffect either
-doesn't have a dependency array, or
+doesn’t have a dependency array, or
 one of the dependencies changes on every render.</p>
 </li>
 <li>
@@ -575,9 +577,9 @@ Change this to show the shortest possible driving distance.</p>
 <p>Now I see this in the DevTools Console:
 Distance Matrix Service: This API project is not authorized to use this API.
 For more information on authentication and Google Maps JavaScript API services
-please see: <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">https://developers.google.com/maps/documentation/javascript/get-api-key</a></p>
-<p>Documentation in the GCP console says &quot;Routes API is the next generation
-version (v2) of the Directions and Distance Matrix APIs.&quot;
+please see: <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" rel="noopener" target="_blank">https://developers.google.com/maps/documentation/javascript/get-api-key</a></p>
+<p>Documentation in the GCP console says “Routes API is the next generation
+version (v2) of the Directions and Distance Matrix APIs.”
 I already have the Routes API enabled.</p>
 </li>
 <li>
@@ -587,11 +589,11 @@ I already have the Routes API enabled.</p>
 <p>You did not fix the ESLint errors. There are two react-hooks/exhaustive-deps
 errors in RestaurantMap.tsx. Can you fix them or do I need to do it?</p>
 <p>This failed again. It turns out that the <code>markers</code> and <code>setMarkers</code>
-variables set from a <code>useState</code> weren't even needed.
+variables set from a <code>useState</code> weren’t even needed.
 I manually deleted all references to those and the ESLint errors went away.</p>
-<p>I'm still etting the error &quot;Distance Matrix Service: This API project is not
-authorized to use this API.&quot; The Distance Matrix Service has been replaced
-by &quot;Routes API&quot; which I do have enabled.</p>
+<p>I’m still etting the error “Distance Matrix Service: This API project is not
+authorized to use this API.” The Distance Matrix Service has been replaced
+by “Routes API” which I do have enabled.</p>
 </li>
 <li>
 <p>Change the code to use the Google Maps Routes API
@@ -602,19 +604,19 @@ instead of the Distance Matrix Service.</p>
 </li>
 <li>
 <p>Your changes did not fix the issue.
-I still don't see a popup when I click a map marker.</p>
+I still don’t see a popup when I click a map marker.</p>
 <p>It fixed the issue this time AND
 I now see route lines when a marker is clicked!
 But the ESLint errors related to <code>markers</code> are back.
 I manually deleted that unused code.</p>
 </li>
 </ul>
-<p>In the DevTools Console I see the warning &quot;<gmp-advanced-marker>:
-Please use addEventListener('gmp-click', ...)
-instead of addEventListener('click', ...)&quot;.
+<p>In the DevTools Console I see the warning ”<gmp-advanced-marker>:
+Please use addEventListener(‘gmp-click’, …)
+instead of addEventListener(‘click’, …)”.
 But when I make that change, I no longer see a popup
-when I click a map marker. So I'm ignoring this warning.</p>
-<p>I'm calling the app good now!</p>
+when I click a map marker. So I’m ignoring this warning.</gmp-advanced-marker></p>
+<p>I’m calling the app good now!</p>
 <ul>
 <li>
 <p>Generate unit tests.</p>
@@ -623,19 +625,19 @@ but <code>loadavg</code> is not used so I deleted the line:</p>
 <pre><code class="language-js">import {loadavg} from 'os';
 </code></pre>
 <p>I ran <code>npm test</code> to verify that the new tests pass. They do not.
-The first issue is that <code>src/App.test.tsx</code> isn't useful or correct.
+The first issue is that <code>src/App.test.tsx</code> isn’t useful or correct.
 I deleted that file.
 The second issue is that <code>src/components/__tests__/RestaurantMap.test.tsx</code>
-gives a &quot;Geolocation error&quot;.</p>
+gives a “Geolocation error”.</p>
 </li>
 <li>
 <p>When I run the tests I get a Geolocation error in RestaurantMap.test.tsx. Fix this.</p>
 <p>There are SO MANY errors in the tests now.
-Honestly I'm tired of fighting with Cursor.
+Honestly I’m tired of fighting with Cursor.
 The app works fine, but the tests do not.</p>
 </li>
 </ul>
-<h2 id="nim-game" tabindex="-1">Nim Game</h2>
+<h2 id="nim-game">Nim Game</h2>
 <ul>
 <li>
 <p>Create a web app using Svelte that implements a Nim game with
@@ -654,16 +656,16 @@ And the computer does use good logic in its moves.</p>
 </li>
 </ul>
 <p>Overall Cursor did a decent job at generating this app.</p>
-<h2 id="summary" tabindex="-1">Summary</h2>
+<h2 id="summary">Summary</h2>
 <p>Cursor is a very useful tool and I recommend allowing all developers
 to have access to it. However:</p>
 <ul>
 <li>Developers must still be able to distinguish between good and bad code.
 Junior developers are unlikely to achieve good results.</li>
 <li>The tool works best when it is sent detailed requests.
-For example, instead of asking &quot;Write a todo application&quot;, ask
-&quot;Write a todo web application using the React framework
-and use Tailwind for styling.&quot;</li>
+For example, instead of asking “Write a todo application”, ask
+“Write a todo web application using the React framework
+and use Tailwind for styling.”</li>
 <li>There is a strong temptation to just accept all the generated code
 and not review it. This temptation must be resisted.</li>
 <li>Often when asking the tool to add a feature or fix a problem,
@@ -672,8 +674,9 @@ it introduces new problems.</li>
 is generally not possible in a single request.
 Instead, a dialog with the tool that is composed of many requests is needed.</li>
 </ul>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
-<li><a href="https://www.youtube.com/watch?v=ocMOZpuAMw4&amp;v=1.1.1" rel="noopener" target="_blank">Cursor Tutorial for Beginners</a></li>
-</ul>
-</article> </body></html>
+<li><a href="https://www.youtube.com/watch?v=ocMOZpuAMw4&#x26;v=1.1.1" rel="noopener" target="_blank">Cursor Tutorial for Beginners</a></li>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

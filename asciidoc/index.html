@@ -1,16 +1,16 @@
-<!DOCTYPE html><html lang="en"> <head><title>AsciiDoc</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>AsciiDoc</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#comparison-to-markdown">Comparison to Markdown</a></li><li><a href="#comparison-to-latex">Comparison to LaTeX</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#syntax-details">Syntax Details</a></li><li><a href="#basic-formatting">Basic Formatting</a></li><li><a href="#admonitions-(callouts)">Admonitions (Callouts)</a></li><li><a href="#aligning-text">Aligning Text</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#asciidoctor">Asciidoctor</a></li><li><a href="#asciidoctor.js-live-preview">Asciidoctor.js Live Preview</a></li><li><a href="#attributes">Attributes</a></li><ul><li><a href="#system-defined-attributes">System-defined Attributes</a></li><li><a href="#user-defined-attributes">User-defined Attributes</a></li></ul><li><a href="#audio">Audio</a></li><li><a href="#author">Author</a></li><li><a href="#bibliographies">Bibliographies</a></li><li><a href="#block-quotes">Block Quotes</a></li><li><a href="#blocks">Blocks</a></li><li><a href="#chapters">Chapters</a></li><li><a href="#comments">Comments</a></li><li><a href="#conditional-content">Conditional Content</a></li><li><a href="#cover-images">Cover Images</a></li><li><a href="#diagrams">Diagrams</a></li><li><a href="#docbook-output">DocBook Output</a></li><li><a href="#em-dash">Em Dash</a></li><li><a href="#epub-output">EPUB Output</a></li><li><a href="#front-matter">Front Matter</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#horizontal-rules">Horizontal Rules</a></li><li><a href="#html-output">HTML Output</a></li><li><a href="#icons">Icons</a></li><li><a href="#images">Images</a></li><li><a href="#including-files">Including Files</a></li><li><a href="#index">Index</a></li><li><a href="#line-breaks">Line Breaks</a></li><li><a href="#links">Links</a></li><li><a href="#listing-blocks">Listing Blocks</a></li><li><a href="#lists">Lists</a></li><li><a href="#markdown-to-asciidoc">Markdown to AsciiDoc</a></li><li><a href="#math-equations">Math Equations</a></li><li><a href="#page-breaks">Page Breaks</a></li><li><a href="#parts">Parts</a></li><li><a href="#pdf-output">PDF Output</a></li><li><a href="#references-%2F-links">References / Links</a></li><li><a href="#sections">Sections</a></li><li><a href="#slide-output">Slide Output</a></li><li><a href="#source-blocks">Source Blocks</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#tables">Tables</a></li><li><a href="#themes">Themes</a></li><li><a href="#video">Video</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article><div class="row">
+<!DOCTYPE html><html lang="en"> <head><title>AsciiDoc</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>AsciiDoc</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#comparison-to-markdown">Comparison to Markdown</a></li><li><a href="#comparison-to-latex">Comparison to LaTeX</a></li><li><a href="#vs-code">VS Code</a></li><li><a href="#syntax-details">Syntax Details</a></li><li><a href="#basic-formatting">Basic Formatting</a></li><li><a href="#admonitions-callouts">Admonitions (Callouts)</a></li><li><a href="#aligning-text">Aligning Text</a></li><li><a href="#appendices">Appendices</a></li><li><a href="#asciidoctor">Asciidoctor</a></li><li><a href="#asciidoctorjs-live-preview">Asciidoctor.js Live Preview</a></li><li><a href="#attributes">Attributes</a></li><ul><li><a href="#system-defined-attributes">System-defined Attributes</a></li><li><a href="#user-defined-attributes">User-defined Attributes</a></li></ul><li><a href="#audio">Audio</a></li><li><a href="#author">Author</a></li><li><a href="#bibliographies">Bibliographies</a></li><li><a href="#block-quotes">Block Quotes</a></li><li><a href="#blocks">Blocks</a></li><li><a href="#chapters">Chapters</a></li><li><a href="#comments">Comments</a></li><li><a href="#conditional-content">Conditional Content</a></li><li><a href="#cover-images">Cover Images</a></li><li><a href="#diagrams">Diagrams</a></li><li><a href="#docbook-output">DocBook Output</a></li><li><a href="#em-dash">Em Dash</a></li><li><a href="#epub-output">EPUB Output</a></li><li><a href="#front-matter">Front Matter</a></li><li><a href="#glossary">Glossary</a></li><li><a href="#horizontal-rules">Horizontal Rules</a></li><li><a href="#html-output">HTML Output</a></li><li><a href="#icons">Icons</a></li><li><a href="#images">Images</a></li><li><a href="#including-files">Including Files</a></li><li><a href="#index">Index</a></li><li><a href="#line-breaks">Line Breaks</a></li><li><a href="#links">Links</a></li><li><a href="#listing-blocks">Listing Blocks</a></li><li><a href="#lists">Lists</a></li><li><a href="#markdown-to-asciidoc">Markdown to AsciiDoc</a></li><li><a href="#math-equations">Math Equations</a></li><li><a href="#page-breaks">Page Breaks</a></li><li><a href="#parts">Parts</a></li><li><a href="#pdf-output">PDF Output</a></li><li><a href="#references--links">References / Links</a></li><li><a href="#sections">Sections</a></li><li><a href="#slide-output">Slide Output</a></li><li><a href="#source-blocks">Source Blocks</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#tables">Tables</a></li><li><a href="#themes">Themes</a></li><li><a href="#video">Video</a></li><li><a href="#resources">Resources</a></li></ul></aside> <article> <div class="row">
   <figure style="width: 25%">
-    <img alt="AsciiDoc logo" style="border: 0"
-      src="/blog/assets/asciidoc-logo.png?v=1.1.1">
+    <img alt="AsciiDoc logo" style="border: 0" src="/blog/assets/asciidoc-logo.png?v=1.1.1">
     <figcaption>AsciiDoc logo</figcaption>
   </figure>
   <figure style="width: 25%">
-    <img alt="Asciidoctor logo" style="border: 0"
-      src="/blog/assets/asciidoctor-logo.svg?v=1.1.1">
+    <img alt="Asciidoctor logo" style="border: 0" src="/blog/assets/asciidoctor-logo.svg?v=1.1.1">
     <figcaption>Asciidoctor logo</figcaption>
   </figure>
 </div>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="http://asciidoc.org/?v=1.1.1" rel="noopener" target="_blank">AsciiDoc</a>
 is a document creation language.
 It positions nicely between Markdown and LaTeX
@@ -29,10 +29,10 @@ including HTML, PDF, and EPUB (supported by e-readers)</li>
 Both AsciiDoc and LaTeX can be used for that purpose.</p>
 <p>AsciiDoc files are text files that can be edited in any text editor.
 The recommended file extension for AsciiDoc files is <code>.adoc</code>.</p>
-<p>AsciiDoc documentation uses the term &quot;backend&quot; to refer to software that
+<p>AsciiDoc documentation uses the term “backend” to refer to software that
 converts AsciiDoc files to a specific format such as HTML, PDF, or EPUB.
 Some AsciiDoc features are only supported by specific backends.</p>
-<p><a href="https://asciidoctor.org">Asciidoctor</a> is software that reads AsciiDoc files
+<p><a href="https://asciidoctor.org" rel="noopener" target="_blank">Asciidoctor</a> is software that reads AsciiDoc files
 and converts them into output formats such as HTML, PDF, EPUB, and DocBook.
 It is implemented in Ruby and was created by
 Dan Allen, Sarah White, and Ryan Waldron.</p>
@@ -40,7 +40,7 @@ Dan Allen, Sarah White, and Ryan Waldron.</p>
 over using a WYSIWYG application like Word, Pages, or Google Docs
 is that the change history of documents can be maintained
 using version control software like Git.</p>
-<h2 id="comparison-to-markdown" tabindex="-1">Comparison to Markdown</h2>
+<h2 id="comparison-to-markdown">Comparison to Markdown</h2>
 <p><a href="https://mvolkmann.github.io/blog/markdown/?v=1.1.1" rel="noopener" target="_blank">Markdown</a>
 was created in 2004 by John Gruber and Aaron Swartz.
 Markdown:</p>
@@ -50,7 +50,97 @@ Markdown:</p>
 <li>targets simpler documents than AsciiDoc and LaTex</li>
 <li>is more popular than AsciiDoc</li>
 </ul>
-<h2 id="comparison-to-latex" tabindex="-1">Comparison to LaTeX</h2>
+<p>The following table compares common Markdown features
+with their equivalent AsciiDoc syntax.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Markdown Feature</th><th>Markdown Syntax</th><th>AsciiDoc Syntax</th></tr></thead><tbody><tr><td>Heading 1</td><td><code># Heading 1</code></td><td><code>= Heading 1</code></td></tr><tr><td>Heading 2 (up to 6)</td><td><code>## Heading 2</code></td><td><code>== Heading 2</code></td></tr><tr><td>Bold</td><td><code>**bold**</code></td><td><code>*bold*</code></td></tr><tr><td>Italic</td><td><code>*italic*</code></td><td><code>_italic_</code></td></tr><tr><td>Bold + Italic</td><td><code>***bold italic***</code></td><td><code>*_bold italic_*</code></td></tr><tr><td>Strikethrough</td><td><code>~~text~~</code></td><td><code>[line-through]#text#</code></td></tr><tr><td>Inline Code</td><td><code>`code`</code></td><td><code>`code`</code></td></tr><tr><td>Link</td><td><code>[text](https://example.com)</code></td><td><code>https://example.com[text]</code></td></tr><tr><td>Image</td><td><code>![alt](image.png)</code></td><td><code>image::image.png[alt]</code></td></tr><tr><td>Unordered List</td><td><code>- Item</code></td><td><code>* Item</code></td></tr><tr><td>Ordered List</td><td><code>1. Item</code></td><td><code>. Item</code></td></tr><tr><td>Blockquote</td><td><code>> Quote</code></td><td><code>[quote]</code> plus a delimited block</td></tr><tr><td>Code Block</td><td>Fenced code block using triple backticks</td><td><code>[source,lang]</code> plus a delimited block</td></tr><tr><td>Horizontal Rule</td><td><code>---</code></td><td><code>'''</code></td></tr><tr><td>Task List</td><td><code>- [x] Done</code></td><td><code>* [x] Done</code></td></tr></tbody></table>
+<p>TODO: Describe the difference in table syntax.
+GRONK</p>
+<h2 id="comparison-to-latex">Comparison to LaTeX</h2>
 <p><a href="https://mvolkmann.github.io/blog/latex/?v=1.1.1" rel="noopener" target="_blank">LaTeX</a>
 is a typesetting system created by Leslie Lamport in 1984.
 LaTeX:</p>
@@ -60,9 +150,9 @@ LaTeX:</p>
 <li>like AsciiDoc, can be easily converted to several output formats</li>
 <li>is popular in academia and scientific communities</li>
 </ul>
-<h2 id="vs-code" tabindex="-1">VS Code</h2>
+<h2 id="vs-code">VS Code</h2>
 <p>If VS Code is used to edit <code>.adoc</code> files,
-install the AsciiDoc extension from <a href="http://asciidoctor.org">asciidoctor.org</a>.
+install the AsciiDoc extension from asciidoctor.org.
 It provides syntax highlighting, snippets, live preview, and
 the several command palette commands including:</p>
 <ul>
@@ -73,32 +163,32 @@ the several command palette commands including:</p>
 <li>AsciiDoc: Open Preview to the Side</li>
 </ul>
 <p>To preview an opened <code>.adoc</code> file in VS Code,
-click the &quot;Open Preview&quot; button in the upper-left.
+click the “Open Preview” button in the upper-left.
 The icon looks like a book with a magnifier glass on top.
 Alternatively, press cmd-k v.</p>
 <p>By default, previews use the same styling as other VS Code tabs
 which is typically white text on a black background.
 To instead display black text on a white background,
 modify the AsciiDoc extension settings so that
-&quot;Asciidoc &gt; Preview: Style&quot; has no value and
-&quot;Asciidoc &gt; Preview: Use Editor Style&quot; is unchecked.</p>
-<p>VS Code previews and the &quot;AsciiDoc: Save HTML Document&quot; command
+“Asciidoc > Preview: Style” has no value and
+“Asciidoc > Preview: Use Editor Style” is unchecked.</p>
+<p>VS Code previews and the “AsciiDoc: Save HTML Document” command
 use the JavaScript-based Asciidoctor.js library
 rather than the Ruby-based asciidoctor command.
 There are many AsciiDoc features that are not supported by Asciidoctor.js.
-If something doesn't seem to be working as expected in a VS Code preview
-or when running the &quot;AsciiDoc: Save HTML Document&quot; command,
+If something doesn’t seem to be working as expected in a VS Code preview
+or when running the “AsciiDoc: Save HTML Document” command,
 generate HTML using the <code>asciidoctor</code> command from a terminal
 or generate a PDF from VS Code.
 Then verify that the expected result is produced.</p>
-<p>Also consider installing the &quot;Code Spell Checker&quot; extension
-from <a href="http://streetsidesoftware.com">streetsidesoftware.com</a>.</p>
+<p>Also consider installing the “Code Spell Checker” extension
+from streetsidesoftware.com.</p>
 <p>To generate HTML output, open the command palette
-and select &quot;AsciiDoc: Save HTML Document&quot;.
+and select “AsciiDoc: Save HTML Document”.
 To view the rendered HTML, locate the <code>.html</code> file in the Explorer pane,
-right-click it, and select &quot;Open with Live Server&quot;.</p>
+right-click it, and select “Open with Live Server”.</p>
 <p>To generate PDF output, open the command palette
-and select &quot;AsciiDoc: Export Document as PDF&quot;.
+and select “AsciiDoc: Export Document as PDF”.
 A file dialog will open where you can enter the file name to use
 and select the destination directory.
 If a previous version of the PDF is open in VS Code,
@@ -107,16 +197,16 @@ If a previous version of the PDF is open in the macOS Preview app,
 it will update automatically when that app becomes active.</p>
 <p>To paste an image in the system clipboard into an AsciiDoc document
 using the <code>image:</code> directive, open the command palette
-and select &quot;AsciiDoc: Paste Image&quot;.
+and select “AsciiDoc: Paste Image”.
 An image file whose name is the current timestamp is
 created in the same directory as the document,
 and the <code>image:</code> directive will refer to that file.</p>
 <p>To generate DocBook output, open the command palette
-and select &quot;AsciiDoc: Save to DocBook&quot;.</p>
-<h2 id="syntax-details" tabindex="-1">Syntax Details</h2>
+and select “AsciiDoc: Save to DocBook”.</p>
+<h2 id="syntax-details">Syntax Details</h2>
 <p>AsciiDoc documents have two parts, a header section and a body section,
 that are separated by a blank line.</p>
-<p>The term &quot;directive&quot; encompasses attributes, macros,
+<p>The term “directive” encompasses attributes, macros,
 block delimiters, and replacement/flow syntax.</p>
 <p>The header section contains directives that control document settings.
 Examples include <code>= Document Title</code>,
@@ -139,47 +229,47 @@ and <code>include::common-attributes.adoc[]</code>.
 Some macros, such as <code>endif::[]</code>, do not require specifying a target.</p>
 <p>Replacement/flow syntax includes:</p>
 <ul>
-<li>page breaks with <code>&lt;&lt;&lt;</code></li>
+<li>page breaks with <code>&#x3C;&#x3C;&#x3C;</code></li>
 <li>horizontal rules with <code>'''</code></li>
 <li>paragraph continuation with <code>+</code> preceded by a space</li>
 <li>conditional rendering with <code>ifdef</code> and <code>ifndef</code></li>
 </ul>
-<h2 id="basic-formatting" tabindex="-1">Basic Formatting</h2>
+<h2 id="basic-formatting">Basic Formatting</h2>
 <p>To format text, add specific characters before and after the text.</p>
-<table>
-<thead>
-<tr>
-<th>Formatting</th>
-<th>Character</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bold</td>
-<td><code>*</code></td>
-</tr>
-<tr>
-<td>highlight</td>
-<td><code>#</code></td>
-</tr>
-<tr>
-<td>italic</td>
-<td><code>_</code> (underscore)</td>
-</tr>
-<tr>
-<td>monospace</td>
-<td>` (backtick)</td>
-</tr>
-<tr>
-<td>superscript</td>
-<td><code>^</code></td>
-</tr>
-<tr>
-<td>subscript</td>
-<td><code>~</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Formatting</th><th>Character</th></tr></thead><tbody><tr><td>bold</td><td><code>*</code></td></tr><tr><td>highlight</td><td><code>#</code></td></tr><tr><td>italic</td><td><code>_</code> (underscore)</td></tr><tr><td>monospace</td><td>` (backtick)</td></tr><tr><td>superscript</td><td><code>^</code></td></tr><tr><td>subscript</td><td><code>~</code></td></tr></tbody></table>
 <p>These special characters can be nested to apply multiple effects,
 but they must be nested in a specific order.
 For example, the following applies all four formatting effects:</p>
@@ -189,45 +279,45 @@ For example, the following applies all four formatting effects:</p>
 with either single of double <code>#</code> characters
 and preceding it with square brackets that contain
 references to CSS classes (only for HTML output).
-The CSS classes are referred to as &quot;roles&quot;. For example:</p>
-<table>
-<thead>
-<tr>
-<th>Styling</th>
-<th>Syntax</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>background color</td>
-<td><code>[.{color}-background]#some text#</code></td>
-</tr>
-<tr>
-<td>text color</td>
-<td><code>[.{color}]#some text#</code></td>
-</tr>
-<tr>
-<td>slightly bigger</td>
-<td><code>[.big]#some text#</code></td>
-</tr>
-<tr>
-<td>slightly smaller</td>
-<td><code>[.small]#some text#</code></td>
-</tr>
-<tr>
-<td>strikethrough</td>
-<td><code>[.line-through]#some text#</code></td>
-</tr>
-<tr>
-<td>overline</td>
-<td><code>[.overline]#some text#</code></td>
-</tr>
-<tr>
-<td>underline</td>
-<td><code>[.underline]#some text#</code></td>
-</tr>
-</tbody>
-</table>
+The CSS classes are referred to as “roles”. For example:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Styling</th><th>Syntax</th></tr></thead><tbody><tr><td>background color</td><td><code>[.{color}-background]#some text#</code></td></tr><tr><td>text color</td><td><code>[.{color}]#some text#</code></td></tr><tr><td>slightly bigger</td><td><code>[.big]#some text#</code></td></tr><tr><td>slightly smaller</td><td><code>[.small]#some text#</code></td></tr><tr><td>strikethrough</td><td><code>[.line-through]#some text#</code></td></tr><tr><td>overline</td><td><code>[.overline]#some text#</code></td></tr><tr><td>underline</td><td><code>[.underline]#some text#</code></td></tr></tbody></table>
 <p>Surrounding the text to be styled with double <code>#</code> characters
 is needed when that text contains single <code>#</code> characters.
 For example:</p>
@@ -283,12 +373,12 @@ role:
 </code></pre>
 <p>This will work when running the <code>asciidoctor-pdf</code> from a terminal,
 but it will not work when running the
-VS Code command &quot;AsciiDoc: Export Document as PDF&quot;.</p>
-<h2 id="admonitions-(callouts)" tabindex="-1">Admonitions (Callouts)</h2>
+VS Code command “AsciiDoc: Export Document as PDF”.</p>
+<h2 id="admonitions-callouts">Admonitions (Callouts)</h2>
 <p>There are four supported kinds of admonitions:
 CAUTION, IMPORTANT, NOTE, TIP, and WARNING.
 By default, each is preceded by its type.
-To render icon instead, add the &quot;:icons: font&quot; document attribute
+To render icon instead, add the “:icons: font” document attribute
 near the beginning of the document.</p>
 <p>The following are examples of single paragraph admonitions:</p>
 <pre><code class="language-text">CAUTION: This is a caution admonition.
@@ -318,29 +408,29 @@ For example:</p>
 <pre><code class="language-text">.Don't do this!
 WARNING: Rock climbing without ropes is dangerous.
 </code></pre>
-<h2 id="aligning-text" tabindex="-1">Aligning Text</h2>
+<h2 id="aligning-text">Aligning Text</h2>
 <p>By default, text is left-aligned.
 To change this, add one of the following before the text:</p>
 <pre><code class="language-adoc">[.text-left]
 [.text-center]
 [.text-right]
 </code></pre>
-<h2 id="appendices" tabindex="-1">Appendices</h2>
+<h2 id="appendices">Appendices</h2>
 <p>To add appendices to a document, use the following markup:</p>
-<pre><code class="language-adoc">&lt;&lt;&lt;
+<pre><code class="language-adoc">&#x3C;&#x3C;&#x3C;
 [appendix]
 == First Appendix
 
 Add first appendix content here.
 
-&lt;&lt;&lt;
+&#x3C;&#x3C;&#x3C;
 [appendix]
 == Second Appendix
 
 Add second appendix content here.
 </code></pre>
 <p>The appendices are assigned the letters A, B, C, and so on.</p>
-<h2 id="asciidoctor" tabindex="-1">Asciidoctor</h2>
+<h2 id="asciidoctor">Asciidoctor</h2>
 <p>To install the <code>asciidoctor</code> command in macOS:</p>
 <ol>
 <li>
@@ -354,16 +444,16 @@ Add second appendix content here.
 <p>Configure the shell to use this new version of Ruby
 instead of the version that ships with macOS.</p>
 <p>Edit <code>.zshrc</code> and add the following:</p>
-<pre><code class="language-bash">export PATH=&quot;/opt/homebrew/opt/ruby/bin:$PATH&quot;
-export PATH=&quot;$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH&quot;
+<pre><code class="language-bash">export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$(ruby -r rubygems -e 'puts Gem.bindir'):$PATH"
 </code></pre>
 </li>
 <li>
 <p>Enter <code>gem install asciidoctor</code>.</p>
 </li>
 </ol>
-<h2 id="asciidoctor.js-live-preview" tabindex="-1">Asciidoctor.js Live Preview</h2>
-<p>The browser extension &quot;Asciidoctor.js Live Preview&quot;
+<h2 id="asciidoctorjs-live-preview">Asciidoctor.js Live Preview</h2>
+<p>The browser extension “Asciidoctor.js Live Preview”
 is supported in the Chrome and Firefox browsers.
 It provides a live preview of AsciiDoc files.
 Changes saved in any text editor are reflected in the browser
@@ -372,19 +462,19 @@ after a couple of seconds.</p>
 <ul>
 <li>Click the vertical ellipsis button in the upper-right.</li>
 <li>Select Extensions … Visit Chrome Web Store.</li>
-<li>Search for &quot;asciidoc&quot;.</li>
-<li>Click &quot;Asciidoctor.js Live Preview&quot;.</li>
-<li>Click the &quot;Add to Chrome&quot; button.</li>
-<li>Click the &quot;Add extension&quot; button.</li>
+<li>Search for “asciidoc”.</li>
+<li>Click “Asciidoctor.js Live Preview”.</li>
+<li>Click the “Add to Chrome” button.</li>
+<li>Click the “Add extension” button.</li>
 <li>Click the extensions button (looks like a puzzle piece) in the upper-right.</li>
-<li>Click the vertical ellipsis after &quot;Asciidoctor.js Live Preview&quot;.</li>
-<li>Select &quot;Manage Extension&quot;.</li>
-<li>Enable &quot;Allow access to file URLs&quot;.</li>
+<li>Click the vertical ellipsis after “Asciidoctor.js Live Preview”.</li>
+<li>Select “Manage Extension”.</li>
+<li>Enable “Allow access to file URLs”.</li>
 </ul>
 <p>To use this, select File … Open File… and open any <code>.adoc</code> file.</p>
-<h2 id="attributes" tabindex="-1">Attributes</h2>
+<h2 id="attributes">Attributes</h2>
 <p>AsciiDoc supports system-defined (built-in) and user-defined attributes.</p>
-<h3 id="system-defined-attributes" tabindex="-1">System-defined Attributes</h3>
+<h3 id="system-defined-attributes">System-defined Attributes</h3>
 <p>There are two categories of system-defined attributes,
 document and character replacement.</p>
 <p><a href="https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/?v=1.1.1" rel="noopener" target="_blank">Document attributes</a> globally affect how the document is rendered.
@@ -442,7 +532,7 @@ in source code blocks.</p>
 </li>
 <li>
 <p><code>:toc-title: Some Title</code> sets the title of the generated table of contents
-which defaults to &quot;Table of Contents&quot;</p>
+which defaults to “Table of Contents”</p>
 </li>
 <li>
 <p><code>:toclevels:</code> specifies the number of levels to include in the table of contents.
@@ -452,51 +542,51 @@ The default is 3.</p>
 <p>References to <a href="https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/?v=1.1.1" rel="noopener" target="_blank">character replacement attributes</a> are replaced by a specific character.
 For example, <code>{deg}</code> is replaced by the degree symbol.</p>
 <p>Commonly used character replacement attributes include:</p>
-<table>
-<thead>
-<tr>
-<th>Attribute</th>
-<th>Replacement</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>deg</code></td>
-<td>degree symbol</td>
-</tr>
-<tr>
-<td><code>lsquo</code></td>
-<td>smart left single quote</td>
-</tr>
-<tr>
-<td><code>rsquo</code></td>
-<td>smart right single quote</td>
-</tr>
-<tr>
-<td><code>ldquo</code></td>
-<td>smart left double quote</td>
-</tr>
-<tr>
-<td><code>rdquo</code></td>
-<td>smart right double quote</td>
-</tr>
-<tr>
-<td><code>nbsp</code></td>
-<td>non-breaking space</td>
-</tr>
-</tbody>
-</table>
-<h3 id="user-defined-attributes" tabindex="-1">User-defined Attributes</h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Attribute</th><th>Replacement</th></tr></thead><tbody><tr><td><code>deg</code></td><td>degree symbol</td></tr><tr><td><code>lsquo</code></td><td>smart left single quote</td></tr><tr><td><code>rsquo</code></td><td>smart right single quote</td></tr><tr><td><code>ldquo</code></td><td>smart left double quote</td></tr><tr><td><code>rdquo</code></td><td>smart right double quote</td></tr><tr><td><code>nbsp</code></td><td>non-breaking space</td></tr></tbody></table>
+<h3 id="user-defined-attributes">User-defined Attributes</h3>
 <p>User-defined attributes are used for text replacement and conditional rendering.
 They are defined with the syntax <code>:name: [value]</code>.
 The value can be any text, including AsciiDoc markup such as <code>image</code> macros.</p>
 <p>The following attribute is Boolean in nature,
 meaning it is either set or not set.
-Directives described under &quot;Conditional Rendering&quot; can test whether it is set.</p>
+Directives described under “Conditional Rendering” can test whether it is set.</p>
 <pre><code class="language-text">:black-friday:
 </code></pre>
 <p>The following attribute has an assigned value.
-Directives described under &quot;Conditional Rendering&quot; can test its value.</p>
+Directives described under “Conditional Rendering” can test its value.</p>
 <pre><code class="language-text">:year: 2025
 </code></pre>
 <p>It can be substituted into text that follows with the syntax <code>{name}</code>.
@@ -519,7 +609,7 @@ For example, the file <code>attributes.adoc</code> can contain the following:</p
 <p>Files that use these attributes can include them with the following:</p>
 <pre><code class="language-adoc">include::attributes.adoc[]
 </code></pre>
-<h2 id="audio" tabindex="-1">Audio</h2>
+<h2 id="audio">Audio</h2>
 <p>The <code>audio</code> macro renders an HTML-based audio player
 for playing a given audio file.
 Supported formats include MP3 (<code>.mp3</code>), Wave (<code>.wav</code>), and Ogg Vorbis (<code>.ogg</code>).
@@ -535,11 +625,11 @@ For example:</p>
 <pre><code class="language-adoc">.Dog Barking
 audio::dog-bark.mp3[start=2, end=4]
 </code></pre>
-<h2 id="author" tabindex="-1">Author</h2>
+<h2 id="author">Author</h2>
 <p>Specify the author name and email address
 as the first line after the level 1 header.
 For example:</p>
-<pre><code class="language-text">R. Mark Volkmann &lt;r.mark.volkmann@gmail.com&gt;
+<pre><code class="language-text">R. Mark Volkmann &#x3C;r.mark.volkmann@gmail.com>
 </code></pre>
 <p>To insert the author name in the document, use <code>{author}</code>.
 To insert the author email in the document, use <code>{email}</code>.
@@ -549,10 +639,10 @@ Contact the author at {email}.
 </code></pre>
 <p>To hide the author line at the top of the document,
 add the document attribute <code>:!author:</code>.</p>
-<h2 id="bibliographies" tabindex="-1">Bibliographies</h2>
+<h2 id="bibliographies">Bibliographies</h2>
 <p>AsciiDoc supports generate bibliography pages
 using the extension <a href="https://github.com/asciidoctor-contrib/asciidoctor-bibtex?v=1.1.1" rel="noopener" target="_blank">asciidoctor-bibtex</a>.</p>
-<h2 id="block-quotes" tabindex="-1">Block Quotes</h2>
+<h2 id="block-quotes">Block Quotes</h2>
 <p>To create a block of quoted text with a single paragraph:</p>
 <pre><code class="language-adoc">[quote, Microsoft Haiku, late 1990's]
 Out of memory.
@@ -569,7 +659,7 @@ This is the first paragraph.
 This is the second paragraph.
 ____
 </code></pre>
-<h2 id="blocks" tabindex="-1">Blocks</h2>
+<h2 id="blocks">Blocks</h2>
 <p>A block is a range of lines that have a specific purpose.
 There are two ways to assign a block type to a range of lines.
 The first option is to preceded a contiguous set of lines (no blank lines)
@@ -579,52 +669,52 @@ it is unlikely that blank lines will be added to the block in the future.
 The second option is to add a line containing only a block delimiter
 before and after a range of lines.
 A block delimiter consists of four of the same character.</p>
-<table>
-<thead>
-<tr>
-<th>Block Type</th>
-<th>Delimiter Line</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>comment</td>
-<td><code>////</code></td>
-<td>comment out a range of lines</td>
-</tr>
-<tr>
-<td>example</td>
-<td><code>====</code></td>
-<td>show results of an operation</td>
-</tr>
-<tr>
-<td>listing</td>
-<td><code>----</code></td>
-<td>show source code without syntax highlighting</td>
-</tr>
-<tr>
-<td>literal</td>
-<td><code>....</code></td>
-<td>display text exactly as written in a monospace font</td>
-</tr>
-<tr>
-<td>passthrough</td>
-<td><code>++++</code></td>
-<td>avoid processing Asciidoc substitutions</td>
-</tr>
-<tr>
-<td>sidebar</td>
-<td><code>****</code></td>
-<td>separate auxiliary text from main text</td>
-</tr>
-<tr>
-<td>source</td>
-<td><code>----</code></td>
-<td>show source code with syntax highlighting</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Block Type</th><th>Delimiter Line</th><th>Purpose</th></tr></thead><tbody><tr><td>comment</td><td><code>////</code></td><td>comment out a range of lines</td></tr><tr><td>example</td><td><code>====</code></td><td>show results of an operation</td></tr><tr><td>listing</td><td><code>----</code></td><td>show source code without syntax highlighting</td></tr><tr><td>literal</td><td><code>....</code></td><td>display text exactly as written in a monospace font</td></tr><tr><td>passthrough</td><td><code>++++</code></td><td>avoid processing Asciidoc substitutions</td></tr><tr><td>sidebar</td><td><code>****</code></td><td>separate auxiliary text from main text</td></tr><tr><td>source</td><td><code>----</code></td><td>show source code with syntax highlighting</td></tr></tbody></table>
 <p>The following are examples of listing and source blocks:</p>
 <pre><code class="language-adoc">// This block ends at the first blank line.
 // It does not render with syntax highlighting
@@ -634,7 +724,7 @@ function add(a, b) {
   return a + b;
 }
 
-// This block is referred to as a &quot;delimited block&quot;.
+// This block is referred to as a "delimited block".
 // It ends after the matching block delimiter.
 // It does render with syntax highlighting.
 [source, javascript]
@@ -646,26 +736,26 @@ function add(a, b) {
 console.log(add(2, 3)); // outputs 5
 ----
 </code></pre>
-<p>For more detail on source blocks, see the &quot;Source Blocks&quot; section.</p>
+<p>For more detail on source blocks, see the “Source Blocks” section.</p>
 <p>Any kind of block can be given a title by preceding it with
 a line that begins with a period, followed by a caption.</p>
-<h2 id="chapters" tabindex="-1">Chapters</h2>
+<h2 id="chapters">Chapters</h2>
 <p>When the <code>:doctype:</code> attribute has the value <code>book</code>
 and the <code>:sectnums:</code> attribute is present,
 level 1 headings are treated as chapter titles
-and are preceded by &quot;Chapter&quot;, the chapter number, and a period.
-For example, <code>== Introduction</code> is rendered as &quot;Chapter 1. Introduction&quot;.
-The word &quot;Chapter&quot; is the default value
+and are preceded by “Chapter”, the chapter number, and a period.
+For example, <code>== Introduction</code> is rendered as “Chapter 1. Introduction”.
+The word “Chapter” is the default value
 of the <code>:chapter-signifier:</code> attribute.
 This can be set to a different value, including no value.</p>
-<p>There doesn't seem to be a way to prevent numbering of chapters
+<p>There doesn’t seem to be a way to prevent numbering of chapters
 and only number sections within chapters.</p>
-<h2 id="comments" tabindex="-1">Comments</h2>
+<h2 id="comments">Comments</h2>
 <p>Single-line comments begin with <code>//</code>.</p>
 <p>Multi-line comments begin with the line <code>////</code>
 and end with the same.</p>
-<h2 id="conditional-content" tabindex="-1">Conditional Content</h2>
-<p>The <code>ifdef</code> (short for &quot;if defined&quot;) and <code>ifndef</code> (short for &quot;if not defined&quot;)
+<h2 id="conditional-content">Conditional Content</h2>
+<p>The <code>ifdef</code> (short for “if defined”) and <code>ifndef</code> (short for “if not defined”)
 directives test whether an attribute is set or unset
 and conditionally include content up to the next <code>endif</code> directive.
 This enables generating multiple versions of output
@@ -681,8 +771,8 @@ ifndef::happy[]
 Cheer up.  Things will get better soon.
 endif::[]
 </code></pre>
-<p>This will render &quot;Have a great day!&quot; because the <code>happy</code> attribute is set.
-To instead render &quot;Cheer up.&quot;,
+<p>This will render “Have a great day!” because the <code>happy</code> attribute is set.
+To instead render “Cheer up.”,
 delete the line that sets the <code>happy</code> attribute or comment it out.</p>
 <p>To have an attribute that is set for part of the document and unset later,
 unset it by adding an exclamation mark after the name.
@@ -708,7 +798,7 @@ ifdef::attr1+attr2[] // tests whether both are set
 </code></pre>
 <p>To test a condition other that an attribute being set,
 use the <code>ifeval</code> directive.
-It can use the relational operators <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, and <code>&gt;</code>
+It can use the relational operators <code>==</code>, <code>!=</code>, <code>&#x3C;</code>, <code>&#x3C;=</code>, <code>>=</code>, and <code>></code>
 to test both numeric and string values.
 It cannot use arithmetic operators like <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code>.
 For example:</p>
@@ -726,45 +816,45 @@ Keep warm!
 endif::[]
 
 // Quotes are needed when the value is a multiple words.
-ifeval::[&quot;{city}&quot; == &quot;St. Louis&quot;]
+ifeval::["{city}" == "St. Louis"]
 Welcome to St. Louis!
 endif::[]
 
-ifeval::[{my-score} &gt; {opponent-score}]
+ifeval::[{my-score} > {opponent-score}]
 You are winning!
 endif::[]
 </code></pre>
 <p>The <code>ifeval</code> macro cannot test multiple conditions
 and it cannot test the values of counter variables
 such as <code>counter:section</code>.</p>
-<h2 id="cover-images" tabindex="-1">Cover Images</h2>
+<h2 id="cover-images">Cover Images</h2>
 <p>When writing a book, specify the document attributes like the following
 in the header to add front and back cover images:</p>
 <pre><code class="language-adoc">:front-cover-image: images/front-cover.png
 :back-cover-image: images/back-cover.png
 </code></pre>
 <p>Many image formats can be used including JPEG, PDF, and PNG.</p>
-<h2 id="diagrams" tabindex="-1">Diagrams</h2>
+<h2 id="diagrams">Diagrams</h2>
 <p>GraphViz diagrams can be described in AsciiDoc files and rendered.
 For example, the following can be added in a <code>.adoc</code> file:</p>
 <pre><code class="language-adoc">[graphviz, flow-diagram, svg]
 ----
 digraph G {
     // Set some styling attributes
-    rankdir=&quot;LR&quot;; // left to right layout
+    rankdir="LR"; // left to right layout
     node [shape=box, style=rounded];
 
     // Define the nodes
-    A [label=&quot;Start Process&quot;];
-    B [label=&quot;Data Input&quot;];
-    C [label=&quot;Data Validation&quot;];
-    D [label=&quot;Finish&quot;];
+    A [label="Start Process"];
+    B [label="Data Input"];
+    C [label="Data Validation"];
+    D [label="Finish"];
 
     // Define the edges (connections)
-    A -&gt; B;
-    B -&gt; C [label=&quot;Success&quot;];
-    B -&gt; D [label=&quot;Failure&quot;]; // Flow bypasses validation on failure
-    C -&gt; D;
+    A -> B;
+    B -> C [label="Success"];
+    B -> D [label="Failure"]; // Flow bypasses validation on failure
+    C -> D;
 }
 </code></pre>
 <p>The installs required to support this are:</p>
@@ -794,11 +884,11 @@ gem 'asciidoctor-diagram'
 </ol>
 <p>This creates the file <code>flow-diagram.svg</code> in the same directory as <code>{name}.adoc</code>.</p>
 <p>The generated HTML will contain the following <code>img</code> element:</p>
-<pre><code class="language-html">&lt;img src=&quot;flow-diagram.svg&quot; alt=&quot;flow diagram&quot; width=&quot;631&quot; height=&quot;113&quot; /&gt;
+<pre><code class="language-html">&#x3C;img src="flow-diagram.svg" alt="flow diagram" width="631" height="113" />
 </code></pre>
 <p>The rendered diagram will be the following:</p>
 <img alt="generated diagram" src="/blog/assets/graphviz-in-asciidoc.svg?v=1.1.1">
-<h2 id="docbook-output" tabindex="-1">DocBook Output</h2>
+<h2 id="docbook-output">DocBook Output</h2>
 <p>DocBook is a standardized XML format for technical documentation.
 These files can be easily converted to EPUB, HTML, man pages, and PDF.
 AsciiDoc files can be directly converted to these formats
@@ -807,9 +897,9 @@ without generating an intermediate DocBook file.</p>
 <pre><code class="language-bash">asciidoctor -b docbook5 {name}.adoc
 </code></pre>
 <p>This creates the file <code>{name}.xml</code>.</p>
-<h2 id="em-dash" tabindex="-1">Em Dash</h2>
+<h2 id="em-dash">Em Dash</h2>
 <p>To render an em dash, use two dashes (<code>--</code>) surrounded by spaces.</p>
-<h2 id="epub-output" tabindex="-1">EPUB Output</h2>
+<h2 id="epub-output">EPUB Output</h2>
 <p><a href="https://www.w3.org/TR/epub-33/?v=1.1.1" rel="noopener" target="_blank">EPUB</a>
 is a W3C standard data format typically used for e-books.
 It is supported by many e-readers, smartphones, and tablets.</p>
@@ -827,20 +917,20 @@ This will open the file in the Books app.</p>
 <li>
 <p>Compress the <code>.epub</code> file to a <code>.zip</code> file.
 In macOS, locate the <code>.epub</code> file in the Finder,
-right-click it, and select &quot;Compress&quot;.</p>
+right-click it, and select “Compress”.</p>
 </li>
 <li>
 <p>Determine your Kindle email address.</p>
-<p>Browse <a href="http://amazon.com">amazon.com</a>, sign in,
-hover over &quot;Accounts &amp; Lists&quot; in the upper-right,
-click &quot;Devices&quot; under &quot;Your Account&quot;, click the large &quot;Kindle&quot; button,
-click your Kindle device, and see the email address after &quot;Email&quot;.</p>
+<p>Browse amazon.com, sign in,
+hover over “Accounts &#x26; Lists” in the upper-right,
+click “Devices” under “Your Account”, click the large “Kindle” button,
+click your Kindle device, and see the email address after “Email”.</p>
 </li>
 <li>
 <p>Email the <code>.zip</code> file to your Kindle email address.</p>
 </li>
 <li>
-<p>Wait a few minutes for the file to appear as a new &quot;book&quot; on the Kindle.</p>
+<p>Wait a few minutes for the file to appear as a new “book” on the Kindle.</p>
 </li>
 <li>
 <p>Tap the new book to open it.</p>
@@ -892,7 +982,7 @@ If PDF output, footnotes appear at the end of each chapter in which they appear.
 <p>Footnote numbers are links.
 Clicking a footnote number in the text jumps to the footnote.
 Clicking a footnote number before a footnote jumps to where it is referenced.</p>
-<h2 id="front-matter" tabindex="-1">Front Matter</h2>
+<h2 id="front-matter">Front Matter</h2>
 <p>There are many kinds of content that sometimes
 appears before the first chapter of a book.
 This includes preface, acknowledgements, and dedication sections.</p>
@@ -901,20 +991,20 @@ This includes preface, acknowledgements, and dedication sections.</p>
 == Preface
 </code></pre>
 <p>To add an acknowledgements section, begin with the following:</p>
-<pre><code class="language-adoc">&lt;&lt;&lt;
+<pre><code class="language-adoc">&#x3C;&#x3C;&#x3C;
 [acknowledgements]
 == Acknowledgements
 </code></pre>
 <p>To add a dedication section, begin with the following:</p>
-<pre><code class="language-adoc">&lt;&lt;&lt;
+<pre><code class="language-adoc">&#x3C;&#x3C;&#x3C;
 [dedication%notitle]
 == Dedication
 </code></pre>
 <p>None of these sections will be assigned a chapter number,
 which is the desired result.</p>
-<h2 id="glossary" tabindex="-1">Glossary</h2>
+<h2 id="glossary">Glossary</h2>
 <p>To add a glossary section, add markup like the following:</p>
-<pre><code class="language-adoc">&lt;&lt;&lt;
+<pre><code class="language-adoc">&#x3C;&#x3C;&#x3C;
 [glossary]
 == Glossary of Key Terms
 
@@ -933,12 +1023,12 @@ A lightweight markup language that uses plain text formatting syntax
 to enable conversion to HTML and other formats,
 focusing on simplicity and readability.
 </code></pre>
-<h2 id="horizontal-rules" tabindex="-1">Horizontal Rules</h2>
+<h2 id="horizontal-rules">Horizontal Rules</h2>
 <p>To add a horizontal rule, add a line containing three single quotes.</p>
-<h2 id="html-output" tabindex="-1">HTML Output</h2>
+<h2 id="html-output">HTML Output</h2>
 <p>To generate HTML from an AsciiDoc file, enter <code>asciidoctor {name}.adoc</code>.
 This generates the file <code>{name}.html</code> in the same directory as the <code>.adoc</code> file.</p>
-<h2 id="icons" tabindex="-1">Icons</h2>
+<h2 id="icons">Icons</h2>
 <p>To enable access to the large set Font Awesome icons (over 2000),
 include the following in the header:</p>
 <pre><code class="language-adoc">:icons: font
@@ -977,36 +1067,34 @@ icon:paw[fw] Ramsay
 icon:thermometer[fw] Temperature
 </code></pre>
 <p>This renders the following:</p>
-<p><img alt="icon bullets"
-  src="/blog/assets/asciidoc-icon-bullets.png?v=1.1.1"
-  style="width: 25%"></p>
+<p><img alt="icon bullets" src="/blog/assets/asciidoc-icon-bullets.png?v=1.1.1" style="width: 25%"></p>
 <p>The following additional icon libraries can be used for PDF output.</p>
-<table>
-<thead>
-<tr>
-<th>Library Name</th>
-<th>Library Abbreviation</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Font Awesome Solid</td>
-<td>fas</td>
-</tr>
-<tr>
-<td>Font Awesome Brands</td>
-<td>fab</td>
-</tr>
-<tr>
-<td>Font Awesome Regular</td>
-<td>far</td>
-</tr>
-<tr>
-<td>Foundation Icons</td>
-<td>fi</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Library Name</th><th>Library Abbreviation</th></tr></thead><tbody><tr><td>Font Awesome Solid</td><td>fas</td></tr><tr><td>Font Awesome Brands</td><td>fab</td></tr><tr><td>Font Awesome Regular</td><td>far</td></tr><tr><td>Foundation Icons</td><td>fi</td></tr></tbody></table>
 <p>To specify the default library,
 add <code>:icon-set: {library-abbreviation}</code> in the header.
 For example:</p>
@@ -1021,15 +1109,13 @@ icon:google[]
 icon:html5[]
 icon:youtube[]
 </code></pre>
-<p><img alt="fab icons"
-  src="/blog/assets/asciidoc-fab-icons.png?v=1.1.1"
-  style="width: 30%"></p>
+<p><img alt="fab icons" src="/blog/assets/asciidoc-fab-icons.png?v=1.1.1" style="width: 30%"></p>
 <p>Icons from a library not specified with the <code>:icon-set</code> attribute,
 can used by including the library abbreviation and a dash before icon names.
 For example: <code>icon:fas-lightbulb[]</code>.
 However, it seems all the icon libraries are available
 without specifying their prefix. For example, <code>icon:lightbulb[]</code>.</p>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>To render an image, use the <code>image</code> macro.
 This takes a relative file path to an image file.
 Its attribute list can specify alt text,
@@ -1038,7 +1124,7 @@ If both a width and height are specified,
 the aspect ratio can differ from that of the image.
 Therefore, it is best to only specify one of those values.</p>
 <p>When followed by two colons, it renders an image on its own line.
-In the following examples, &quot;htmx&quot; is the alt text.</p>
+In the following examples, “htmx” is the alt text.</p>
 <pre><code class="language-text">// Use default size.
 image::assets/htmx-logo.png[htmx]
 // Only specify a width.
@@ -1064,7 +1150,7 @@ image::assets/htmx-logo.png[htmx, 200]
 add the <code>link</code> and <code>window</code> attributes.
 All the following must be on a single line.
 For example:</p>
-<pre><code class="language-adoc">image::dog.png[dog, width=75, link=&quot;https://somesite.com&quot;, window=&quot;_blank&quot;]
+<pre><code class="language-adoc">image::dog.png[dog, width=75, link="https://somesite.com", window="_blank"]
 </code></pre>
 <p>To add a light gray border around an image,
 precede it with the line <code>[.thumb]</code>.
@@ -1074,7 +1160,7 @@ This works for HTML output, but not for PDF output or in VS Code previews.</p>
 </code></pre>
 <p>There will be no indication that this is a link.
 To add a blue outline around images that are links,
-add the CSS rule <code>a &gt; img { border: 1px solid blue; }</code>.</p>
+add the CSS rule <code>a > img { border: 1px solid blue; }</code>.</p>
 <p>To cause the link to open in a new browser tab,
 add the attribute <code>window=_blank</code> inside the square brackets.</p>
 <p>In HTML output, to float an image left or right so text wraps around it,
@@ -1084,8 +1170,8 @@ For example:</p>
 image::comet.jpg[my whippet, width=125, role=right]
 The Whippet is a British breed of dog of sighthound type. It closely resembles
 the Greyhound and the smaller Italian Greyhound, and is intermediate between
-them in size. In the nineteenth century it was sometimes called &quot;the poor man's
-racehorse&quot;. It is commonly kept as a companion dog, for competitive showing or
+them in size. In the nineteenth century it was sometimes called "the poor man's
+racehorse". It is commonly kept as a companion dog, for competitive showing or
 for amateur racing, and may participate in various dog sports, including lure
 coursing, agility, and flyball. It has the fastest running speed within its
 weight and size range, and is believed to have the fastest idle-to-running
@@ -1096,7 +1182,7 @@ acceleration of any dog.
 <p>Note how the image is left-aligned with its caption.
 To center the image over the caption, add <code>align=center</code>.
 To right-align the image over the caption, add <code>align=right</code>.</p>
-<p>To add a light gray border around the image, add &quot;thumb&quot; to the role.
+<p>To add a light gray border around the image, add “thumb” to the role.
 For example, <code>role=thumb right</code>.</p>
 <p>In PDF output, to float an image left or right so text wraps around it,
 specify the <code>float</code> attribute instead of the <code>role</code> attribute.
@@ -1105,7 +1191,7 @@ For example:</p>
 image::comet.jpg[my whippet, width=125, float=right]
 </code></pre>
 <p>PDF output does not support the <code>align</code> attribute or the <code>thumb</code> value.</p>
-<h2 id="including-files" tabindex="-1">Including Files</h2>
+<h2 id="including-files">Including Files</h2>
 <p>The <code>include</code> directive includes the contents of a text file
 into the current file, even other AsciiDoc files.
 It can be used to partition a large file into smaller ones.
@@ -1147,7 +1233,7 @@ For example:</p>
 include::pdf-content.adoc[]
 endif::[]
 </code></pre>
-<h2 id="index" tabindex="-1">Index</h2>
+<h2 id="index">Index</h2>
 <p>AsciiDoc can automatically generate index pages in PDF output.</p>
 <p>If the <code>:media:</code> attribute is not specified or if its value is <code>screen</code>,
 the page numbers that appear in the index are links to the indexed text.
@@ -1173,12 +1259,12 @@ For example, <code>An (((Apple))) apple is red.</code></p>
 <p>triple parens for primary, secondary, and tertiary terms</p>
 <p>The phrases inside the parentheses appears in the index, but not in the text.
 For example, <code>An (((Fruit, Apple))) apple is red.</code>
-The index will contain &quot;Fruit&quot; with a sub-entry of &quot;Apple&quot;.</p>
+The index will contain “Fruit” with a sub-entry of “Apple”.</p>
 <p>Alternatively, the following longer syntax can be used:
 <code>indexterm:[Fruit, Apple] apple is red.</code></p>
 <p>For example, <code>An (((Food, Fruit, Apple))) apple is red.</code>
-The index will contain &quot;Food&quot; with a sub-entry of &quot;Fruit&quot;
-with a sub-sub-entry of &quot;Apple&quot;.</p>
+The index will contain “Food” with a sub-entry of “Fruit”
+with a sub-sub-entry of “Apple”.</p>
 <p>Alternatively, the following longer syntax can be used:
 <code>An indexterm:[Food, Fruit, Apple] apple is red.</code></p>
 </li>
@@ -1187,19 +1273,19 @@ with a sub-sub-entry of &quot;Apple&quot;.</p>
 immediately after a section heading to cause that to appear in the index.</p>
 <p>To generate an index on its own page,
 add the following to the end of the document:</p>
-<pre><code class="language-adoc">&lt;&lt;&lt;
+<pre><code class="language-adoc">&#x3C;&#x3C;&#x3C;
 [index]
 == Index
 </code></pre>
 <p>To add pages after the index, add markup like the following:</p>
 <pre><code class="language-adoc">// It's not clear why the next line is needed.
 == {nbsp}
-&lt;&lt;&lt;
+&#x3C;&#x3C;&#x3C;
 == Final Section
 
 More content goes here.
 </code></pre>
-<h2 id="line-breaks" tabindex="-1">Line Breaks</h2>
+<h2 id="line-breaks">Line Breaks</h2>
 <p>To force a line break, add a space and <code>+</code> at the end of a line.
 For example:</p>
 <pre><code class="language-adoc">first line +
@@ -1207,7 +1293,7 @@ second line
 </code></pre>
 <p>To include an empty line, add a line containing only a space followed by <code>+</code>.
 Alternatively, include the line <code>{empty} +</code>.</p>
-<h2 id="links" tabindex="-1">Links</h2>
+<h2 id="links">Links</h2>
 <p>To add a link to a URL, enter the URL
 followed by the link text inside square brackets.
 For example: <code>https://chatgpt.com[ChatGPT]</code>.
@@ -1232,15 +1318,15 @@ For example:</p>
 {chatgpt-link}
 </code></pre>
 <p>To add a link to a location in the current document,
-mark the location with <code>[[{id}]]</code> and link to it with <code>&lt;&lt;{id}, {link-text}&gt;&gt;</code>.
+mark the location with <code>[[{id}]]</code> and link to it with <code>&#x3C;&#x3C;{id}, {link-text}>></code>.
 For example:</p>
-<pre><code class="language-adoc">&lt;&lt;details, Important Details&gt;&gt;
+<pre><code class="language-adoc">&#x3C;&#x3C;details, Important Details>>
 ...
 [[details]]Details you need to know:
 </code></pre>
 <p>To create a mailto link, add <code>mailto:{email-address}[{link-text}]</code>.
 For example, <code>Send email to mailto:r.mark.volkmann@gmail.com[Mark].</code>.</p>
-<h2 id="listing-blocks" tabindex="-1">Listing Blocks</h2>
+<h2 id="listing-blocks">Listing Blocks</h2>
 <p>To display text lines in a monospace font, add lines containing
 four consecutive dashes before and after the lines.</p>
 <pre><code class="language-text">----
@@ -1249,7 +1335,7 @@ lines go here
 </code></pre>
 <p>Optional preceded the first line of four dashes
 with a line containing <code>[listing]</code>.</p>
-<h2 id="lists" tabindex="-1">Lists</h2>
+<h2 id="lists">Lists</h2>
 <p>For a bulleted lists, precede each item with * or -.
 Alternate for each nested level.</p>
 <pre><code class="language-text">* Fruit
@@ -1301,7 +1387,7 @@ Indenting the lines to indicate their nesting level is optional.</p>
 . Item 3
 .. Item 3.1
 </code></pre>
-<p>To explicitly specify each item &quot;number&quot;,
+<p>To explicitly specify each item “number”,
 enter them as they should be rendered.
 The VS Code AsciiDoc extension provides warnings
 if any are skipped or they are out of order.</p>
@@ -1314,13 +1400,13 @@ C. Item 3
 </code></pre>
 <p>For definition lists, separate terms and definitions with ::.
 By default, definitions will be indented on their own line
-even if they aren't written that way.</p>
+even if they aren’t written that way.</p>
 <pre><code class="language-text">Term 1:: Definition 1
 Term 2::
   Definition 2
 </code></pre>
 <p>For non-indented definition lists,
-precede them with the &quot;horizontal&quot; attribute?</p>
+precede them with the “horizontal” attribute?</p>
 <pre><code class="language-text">[horizontal]
 Term 1:: Definition 1
 Term 2::
@@ -1334,13 +1420,13 @@ For example:</p>
 * [*] buy peanut butter
 * [ ] eat lunch
 </code></pre>
-<h2 id="markdown-to-asciidoc" tabindex="-1">Markdown to AsciiDoc</h2>
-<p><a href="http://pandoc.org/">Pandoc</a> converts between various markup formats.
+<h2 id="markdown-to-asciidoc">Markdown to AsciiDoc</h2>
+<p><a href="http://pandoc.org/" rel="noopener" target="_blank">Pandoc</a> converts between various markup formats.
 To install Pandoc in macOS, enter <code>brew install pandoc</code>.</p>
 <p>To convert a Markdown file to AsciiDoc:</p>
 <pre><code class="language-bash">pandoc -f markdown -t asciidoc {name}.md -o {name}.adoc
 </code></pre>
-<h2 id="math-equations" tabindex="-1">Math Equations</h2>
+<h2 id="math-equations">Math Equations</h2>
 <p>To render math equations, enable it with the document attribute
 <code>:stem: latexmath</code>. Then use the <code>stem</code> directive.</p>
 <p>The examples below render the quadratic equation.</p>
@@ -1356,16 +1442,16 @@ x = {-b \pm \sqrt{b^2-4ac} \over 2a}
 <p>This works for HTML output.
 Producing PDF output requires installing the Ruby gem <code>asciidoctor-mathematical</code>.
 Unfortunately, running <code>gem install asciidoctor-mathematical</code> fails in macOS!
-See <a href="https://github.com/asciidoctor-contrib/asciidoctor-mathematical/issues/133">issue #133</a>.
+See <a href="https://github.com/asciidoctor-contrib/asciidoctor-mathematical/issues/133" rel="noopener" target="_blank">issue #133</a>.
 A workaround is to enter a LaTex math equation
-at an online web site like <a href="https://editor.codecogs.com">https://editor.codecogs.com</a>[Equation Editor],
+at an online web site like <a href="https://editor.codecogs.com%5BEquation" rel="noopener" target="_blank">https://editor.codecogs.com[Equation</a> Editor],
 take a screenshot of the result,
 and include that image in an AsciiDoc document.</p>
-<h2 id="page-breaks" tabindex="-1">Page Breaks</h2>
+<h2 id="page-breaks">Page Breaks</h2>
 <p>To add a page break in PDF output,
-insert a blank line followed by a line containing only <code>&lt;&lt;&lt;</code>.
-It's unclear when the blank line is needed.</p>
-<h2 id="parts" tabindex="-1">Parts</h2>
+insert a blank line followed by a line containing only <code>&#x3C;&#x3C;&#x3C;</code>.
+It’s unclear when the blank line is needed.</p>
+<h2 id="parts">Parts</h2>
 <p>Chapters of a book can be grouped into parts.
 To create each part, use the following markup:</p>
 <pre><code class="language-adoc">= Part Name
@@ -1374,12 +1460,12 @@ To create each part, use the following markup:</p>
 where each chapter begins with a level 2 heading (<code>===</code>).</p>
 <p>To automatically number the parts,
 add the attribute <code>:partnums:</code> in the header.</p>
-<p>To add a word at the beginning of each part title, such as &quot;Part&quot;,
+<p>To add a word at the beginning of each part title, such as “Part”,
 add the attribute <code>:part-signifier: Part</code> in the header.</p>
 <p>The following example shows markup for a book that
 contains two parts where each part contains two chapters.</p>
 <pre><code class="language-adoc">= My Book Title
-R. Mark Volkmann &lt;r.mark.volkmann@gmail.com&gt;
+R. Mark Volkmann &#x3C;r.mark.volkmann@gmail.com>
 :doctype: book
 :media: prepress
 :sectnums:
@@ -1423,7 +1509,7 @@ This is the third chapter content.
 
 This is the third chapter content.
 </code></pre>
-<h2 id="pdf-output" tabindex="-1">PDF Output</h2>
+<h2 id="pdf-output">PDF Output</h2>
 <p>To generate a PDF from an AsciiDoc file:</p>
 <ol>
 <li>
@@ -1441,7 +1527,7 @@ automatically run <code>asciidoctor-pdf</code> on it every time it is modified.
 Assuming that Node.js is installed,
 globally install <code>nodemon</code> by entering <code>npm install -g nodemon</code>.
 Then run the following command, substituting for <code>{name}</code>:</p>
-<pre><code class="language-bash">nodemon --watch {name}.adoc --exec &quot;asciidoctor-pdf {name}.adoc&quot;
+<pre><code class="language-bash">nodemon --watch {name}.adoc --exec "asciidoctor-pdf {name}.adoc"
 </code></pre>
 <p>The <code>--watch</code> flag can be followed by a comma-separated list of files to watch.
 This is useful when generating PDF from
@@ -1456,45 +1542,45 @@ if [ $# -ne 1 ]; then
 fi
 
 # Add .adoc extension if not present.
-file=&quot;$1&quot;
-if [[ &quot;$file&quot; != *.adoc ]]; then
-  file=&quot;$file.adoc&quot;
+file="$1"
+if [[ "$file" != *.adoc ]]; then
+  file="$file.adoc"
 fi
 
-nodemon --watch $file --exec &quot;asciidoctor-pdf $file&quot;
+nodemon --watch $file --exec "asciidoctor-pdf $file"
 </code></pre>
 <p>If this script is placed in an executable file named <code>adpw</code>
-(short for &quot;AsciiDoc PDF Watch&quot;)
+(short for “AsciiDoc PDF Watch”)
 within a directory that is in a <code>PATH</code> directory,
 it can be invoked with <code>adpw {file-name}</code>.</p>
-<h2 id="references-%2F-links" tabindex="-1">References / Links</h2>
+<h2 id="references--links">References / Links</h2>
 <p>Text can include references to items in the document including
 images, sections, tables, and any kind of block.
 Give each item to be referenced an id
 by preceding it with the line <code>[#some-id]</code> or <code>[[some-id]]</code>.
-Add links to items with ids by adding references with <code>&lt;&lt;some-id&gt;&gt;</code>.</p>
+Add links to items with ids by adding references with <code>&#x3C;&#x3C;some-id>></code>.</p>
 <p>The text shown for each reference is
 controlled by the <code>:xrefstyle:</code> document attribute.
 There are three supported values.
 Suppose the document contains
-an image with the caption &quot;My Image&quot;,
-a source block with the caption &quot;My Code&quot;,
-a section with the caption &quot;My Section&quot;, and
-a table with the caption &quot;My Table&quot;.
+an image with the caption “My Image”,
+a source block with the caption “My Code”,
+a section with the caption “My Section”, and
+a table with the caption “My Table”.
 Also, suppose the document attribute <code>:sectnums:</code> is in the header
 so sections are numbered.</p>
 <ul>
 <li><code>:xrefstyle: basic</code>, the default, results in the link text
-&quot;Figure 3&quot;, &quot;Listing 3&quot;, &quot;Section 3&quot;, and &quot;Table 3&quot;.</li>
+“Figure 3”, “Listing 3”, “Section 3”, and “Table 3”.</li>
 <li><code>:xrefstyle: short</code> results in the link text
-&quot;My Image&quot;, &quot;My Code&quot;, &quot;My Section&quot;, and &quot;My Table&quot;.</li>
+“My Image”, “My Code”, “My Section”, and “My Table”.</li>
 <li><code>:xrefstyle: short</code> results in the link text
-'Figure 3, &quot;My Image&quot;',
-'Listing 3, &quot;My Code&quot;',
-'Section 3, &quot;My Section&quot;', and
-'Table 3, &quot;My Table&quot;'.</li>
+‘Figure 3, “My Image”’,
+‘Listing 3, “My Code”’,
+‘Section 3, “My Section”’, and
+‘Table 3, “My Table”’.</li>
 </ul>
-<h2 id="sections" tabindex="-1">Sections</h2>
+<h2 id="sections">Sections</h2>
 <p>The beginning of each section in a document is marked by a line that
 starts with a number of <code>=</code> characters, followed by a title.
 For example, <code>== Introduction</code>.</p>
@@ -1504,17 +1590,17 @@ Level 1 sections begin with <code>==</code>, level 2 with <code>===</code> and s
 add <code>:sectnums:</code> in the header.</p>
 <p>By default, only section header levels 1, 2, and 3 are numbered.
 To change this, add <code>:sectnumlevels: {n}</code> in the header.</p>
-<h2 id="slide-output" tabindex="-1">Slide Output</h2>
+<h2 id="slide-output">Slide Output</h2>
 <p>To generate slidy slides, enter <code>asciidoctor -b slidy {input-file}</code>.
-This generates <code>{name}.html</code>, but it's in slidy format.</p>
-<p>Level 1 &amp; 2 headers start new slides.</p>
+This generates <code>{name}.html</code>, but it’s in slidy format.</p>
+<p>Level 1 &#x26; 2 headers start new slides.</p>
 <p>Slidy supports the following keyboard shortcuts:</p>
 <ul>
 <li>left arrow goes to previous slide</li>
 <li>right arrow or spacebar goes to next slide
 (can also mouse click anywhere on slide)</li>
-<li>s or &lt; makes font smaller</li>
-<li>b or &gt; makes font bigger</li>
+<li>s or &#x3C; makes font smaller</li>
+<li>b or > makes font bigger</li>
 <li>c shows table of contents</li>
 <li>f toggles display of status line</li>
 <li>home goes to first slide</li>
@@ -1522,7 +1608,7 @@ This generates <code>{name}.html</code>, but it's in slidy format.</p>
 <li>a toggles between showing all slides on one page
 and one slide at a time</li>
 </ul>
-<h2 id="source-blocks" tabindex="-1">Source Blocks</h2>
+<h2 id="source-blocks">Source Blocks</h2>
 <p>To mark a set of lines as source code, use the following syntax.</p>
 <pre><code class="language-text">[source, {language}]
 ----
@@ -1534,21 +1620,21 @@ To add syntax highlighting, specify a syntax highlighter
 using the <code>:source-highlighter:</code> document attribute.
 Its value is one of the following supported syntax highlighter libraries:</p>
 <ul>
-<li><a href="http://coderay.rubychan.de">coderay</a> is an older option
+<li><a href="http://coderay.rubychan.de" rel="noopener" target="_blank">coderay</a> is an older option
 implemented in Ruby that is replaced by <code>rouge</code>.
 To install this, enter <code>gem install coderay</code>.</li>
-<li><a href="https://highlightjs.org">highlight.js</a> requires client-side JavaScript
+<li><a href="https://highlightjs.org" rel="noopener" target="_blank">highlight.js</a> requires client-side JavaScript
 in HTML.</li>
-<li><a href="https://pygments.org">pygments</a> is implemented in Python.
+<li><a href="https://pygments.org" rel="noopener" target="_blank">pygments</a> is implemented in Python.
 To install this, enter <code>gem install pygments.rb</code>.</li>
-<li><a href="https://rouge.jneen.net">rouge</a> is a newer option implemented in Ruby
+<li><a href="https://rouge.jneen.net" rel="noopener" target="_blank">rouge</a> is a newer option implemented in Ruby
 that does not require client-side JavaScript in HTML.
 It is the only option that works with <code>asciidoctor-pdf</code>.
 To install this, run <code>gem install rouge</code>.</li>
 </ul>
 <p>For example, <code>:source-highlighter: highlight.js</code>.</p>
 <p>When using VS Code, if the command palette command
-&quot;AsciiDoc: Save HTML Document&quot; is used to generate HTML,
+“AsciiDoc: Save HTML Document” is used to generate HTML,
 highlight.js is the only syntax highlighter that works.
 The reason is that VS Code uses asciidoctor.js instead of asciidoctor,
 so it cannot use Ruby-based syntax highlighters.
@@ -1567,7 +1653,7 @@ function greet(name) {
 <p>The supported programming languages and the words used to specify them
 vary based on the selected syntax highlighting library.
 For highlight.js, see
-<a href="https://highlightjs.readthedocs.io/en/latest/supported-languages.html">Supported Languages</a>.</p>
+<a href="https://highlightjs.readthedocs.io/en/latest/supported-languages.html" rel="noopener" target="_blank">Supported Languages</a>.</p>
 <p>To cause the source code lines to be numbered, add the <code>linenums</code> attribute.
 This is not supported by highlight.js.
 For example:</p>
@@ -1584,7 +1670,7 @@ For example:</p>
 code goes here
 ----
 </code></pre>
-<h2 id="table-of-contents" tabindex="-1">Table of Contents</h2>
+<h2 id="table-of-contents">Table of Contents</h2>
 <p>To enable automatically generating a table of contents,
 add <code>:toc:</code> in the header.</p>
 <p>By default, only section header levels 1, 2, and 3 are included.
@@ -1594,7 +1680,7 @@ To place it elsewhere,
 perhaps to include a preface before the table of contents,
 change <code>:toc:</code> in the header to <code>:toc: macro</code>.
 Then add the line <code>toc::[]</code> where the table of contents should appear.</p>
-<h2 id="tables" tabindex="-1">Tables</h2>
+<h2 id="tables">Tables</h2>
 <p>The markup for a table begins and ends with a line
 that contains a vertical bar followed by three equal signs.
 Each cell is preceded by a vertical bar.</p>
@@ -1605,14 +1691,14 @@ Each cell is preceded by a vertical bar.</p>
 | row 2 col 1 | row 2 col 2 | row 2 col 3
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table" />
+<img src="/blog/assets/asciidoc-table-basic.png" alt="AsciiDoc basic table">
 <p>To include vertical bar characters in a cell, use the substitution <code>{vbar}</code>.</p>
 <p>Heading cells have a light gray background and their text is bold.
 There are three ways to indicate that the first row contains column headings.</p>
 <ol>
 <li>Specify all the headings on a single line and add a blank line after it.
 This is shown below.</li>
-<li>Add <code>[options=&quot;header&quot;]</code> before the table.</li>
+<li>Add <code>[options="header"]</code> before the table.</li>
 <li>Add <code>[%header]</code> before the table.</li>
 </ol>
 <p>The last two options enable placing each heading on a separate line
@@ -1625,7 +1711,7 @@ that begins with a vertical bar.</p>
 | row 2 col 1 | row 2 col 2 | row 2 col 3
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-with-header.png" alt="AsciiDoc table with header" />
+<img src="/blog/assets/asciidoc-table-with-header.png" alt="AsciiDoc table with header">
 <p>By default, tables span the width of the page
 and each column is allocated the same width.</p>
 <p>To change the table width, add a line before the table that specifies
@@ -1641,15 +1727,15 @@ add the <code>cols</code> attribute inside the square brackets.
 Its value can specify an alignment operator for each column,
 and thereby the number of columns.
 For example, the following specifies that
-the first column is left-aligned (<code>&lt;</code>),
+the first column is left-aligned (<code>&#x3C;</code>),
 the second column is centered (<code>^</code>), and
-the third column is right-aligned (<code>&gt;</code>).</p>
-<pre><code class="language-adoc">[cols=&quot;&lt;,^,&gt;&quot;]
+the third column is right-aligned (<code>></code>).</p>
+<pre><code class="language-adoc">[cols="&#x3C;,^,>"]
 </code></pre>
 <p>The data for each column within a data row can be
 on its own line starting with a vertical bar.
 For example, the previous table markup can be changed as follows:</p>
-<pre><code class="language-adoc">[cols=&quot;&lt;,^,&gt;&quot;, options=&quot;header&quot;]
+<pre><code class="language-adoc">[cols="&#x3C;,^,>", options="header"]
 |===
 | Heading 1
 | Heading 2
@@ -1662,7 +1748,7 @@ For example, the previous table markup can be changed as follows:</p>
 | row 2 col 3
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-horizontal-alignment.png" alt="AsciiDoc table horizontal alignment" />
+<img src="/blog/assets/asciidoc-table-horizontal-alignment.png" alt="AsciiDoc table horizontal alignment">
 <p>If the <code>cols</code> attribute is not specified, the number of columns
 in the table is determined by the number of cells in the first row.
 If a row contains fewer cells than the number of columns,
@@ -1673,14 +1759,14 @@ For example:</p>
 <pre><code class="language-adoc">|===
 | apple 3*| banana | cherry
 </code></pre>
-<img src="/blog/assets/asciidoc-table-cell-duplication.png" alt="AsciiDoc table cell duplication" />
+<img src="/blog/assets/asciidoc-table-cell-duplication.png" alt="AsciiDoc table cell duplication">
 <p>To cause the last row to be treated as a footer
 with a light gray background and normal (not bold) text,
-add <code>options=&quot;footer&quot;</code> or <code>%footer</code> inside the square brackets above the table.
+add <code>options="footer"</code> or <code>%footer</code> inside the square brackets above the table.
 Adding a blank line before the footer row
 does not cause it to be treated as a footer.
 For example:</p>
-<pre><code class="language-adoc">[options=&quot;header, footer&quot;]
+<pre><code class="language-adoc">[options="header, footer"]
 |===
 | Heading 1 | Heading 2 | Heading 3
 | row 1 col 1 | row 1 col 2 | row 1 col 3
@@ -1688,16 +1774,16 @@ For example:</p>
 | Footer 1 | Footer 2 | Footer 3
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-footer.png" alt="AsciiDoc table footer" />
+<img src="/blog/assets/asciidoc-table-footer.png" alt="AsciiDoc table footer">
 <p>To specify the relative width of each column
 so they do not all have the same width, add the <code>cols</code> attribute
 with a value that is a comma-separated list of relative widths.
-For example, <code>[cols=&quot;2,1,3&quot;]</code> specifies three columns
+For example, <code>[cols="2,1,3"]</code> specifies three columns
 where the first is twice as wide as the second
 and the third is three times as wide as the second.</p>
 <p>An alignment operator for each column can be
 specified before its relative width.
-For example, <code>[cols=&quot;&lt;2,^1,&gt;3&quot;]</code>.</p>
+For example, <code>[cols="&#x3C;2,^1,>3"]</code>.</p>
 <p>The alignment of any cell, including headings
 can differ from the alignment of its column.
 To override the alignment for a cell,
@@ -1707,15 +1793,15 @@ and also the ability for a data cell to
 span multiple columns and/or multiple rows.
 All the columns are left-aligned,
 but all the headings are centered.</p>
-<pre><code class="language-adoc">[cols=&quot;&lt;,&lt;,&lt;&quot;]
+<pre><code class="language-adoc">[cols="&#x3C;,&#x3C;,&#x3C;"]
 |===
 // Heading row
 ^|Column 1 ^|Column 2 ^|Column 3
 
-// First data row - &quot;foo&quot; spans two columns
+// First data row - "foo" spans two columns
 |Hello 2+|I span two columns.
 
-// Second data row - &quot;apple pie&quot; spans two rows
+// Second data row - "apple pie" spans two rows
 .2+|I span two rows. |apple |banana
 
 // Third data row - nothing in the first column
@@ -1731,35 +1817,35 @@ but all the headings are centered.</p>
 |raspberry |strawberry |watermelon
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-spanning.png" alt="AsciiDoc table with spanning" />
+<img src="/blog/assets/asciidoc-table-spanning.png" alt="AsciiDoc table with spanning">
 <p>Cells that contain fewer lines of data than others in the same row
 can specify the vertical alignment of their data.
-For top alignment, which is the default, add <code>.&lt;</code> before the vertical bar of the cell.
+For top alignment, which is the default, add <code>.&#x3C;</code> before the vertical bar of the cell.
 For center alignment add <code>.^</code> before the vertical bar of the cell.
-For bottom alignment add <code>.&gt;</code> before the vertical bar of the cell.</p>
+For bottom alignment add <code>.></code> before the vertical bar of the cell.</p>
 <p>The following table contains a single row.
 It specifies that the:</p>
 <ul>
-<li>second cell is left-aligned (<code>&lt;</code>) and top-aligned (<code>.&lt;</code>, the default),</li>
+<li>second cell is left-aligned (<code>&#x3C;</code>) and top-aligned (<code>.&#x3C;</code>, the default),</li>
 <li>third cell is horizontally center-aligned (<code>^</code>) and vertically center-aligned (<code>.^</code>)</li>
-<li>fourth cell is right-aligned (<code>&gt;</code>) and bottom-aligned (<code>.&gt;</code>).</li>
+<li>fourth cell is right-aligned (<code>></code>) and bottom-aligned (<code>.></code>).</li>
 </ul>
-<pre><code class="language-adoc">[cols=&quot;1,1,1,1&quot;]
+<pre><code class="language-adoc">[cols="1,1,1,1"]
 |===
 | line1 +
 line 2 +
 line 3 +
 line 4
-&lt;.&lt;| apple
+&#x3C;.&#x3C;| apple
 ^.^| banana
-&gt;.&gt;| cherry
+>.>| cherry
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-vertical-alignment.png" alt="AsciiDoc table vertical alignment" />
+<img src="/blog/assets/asciidoc-table-vertical-alignment.png" alt="AsciiDoc table vertical alignment">
 <p>To specify both the horizontal and vertical alignment of a cell,
 add a horizontal alignment operator, a period, and
 a vertical alignment operator before its vertical bar.
-For example, <code>&gt;.^|data</code> specifies a cell that is
+For example, <code>>.^|data</code> specifies a cell that is
 horizontally right aligned and vertically bottom aligned.</p>
 <p>To style a column, add a style operator
 in its position of the <code>cols</code> attribute.
@@ -1778,7 +1864,7 @@ add a style operator before its vertical bar.</p>
 <p>The following example specifies the styling of each column.
 The first row utilizes those styles.
 The second row overrides them with different styles.</p>
-<pre><code class="language-adoc">[cols=&quot;a,d,e,h,l,m,s&quot;]
+<pre><code class="language-adoc">[cols="a,d,e,h,l,m,s"]
 |===
 | image::asciidoc-logo.png[] | default | emphasis | header | literal | monospace | strong
 s| strong
@@ -1790,7 +1876,7 @@ d| default
 a| image::asciidoc-logo.png[]
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-styles.png" alt="AsciiDoc table styles" />
+<img src="/blog/assets/asciidoc-table-styles.png" alt="AsciiDoc table styles">
 <p>The <code>frame</code> option controls the borders on the outside of the table.
 By default, a border is drawn on all four sides.
 Specify <code>frame=ends</code> to draws borders only at the top and bottom.
@@ -1804,7 +1890,7 @@ Specify <code>grid=none</code> to omit all borders between rows or columns.
 It is generally not desirable to change the grid setting
 in tables where any cells span multiple rows or columns.</p>
 <p>For example:</p>
-<pre><code class="language-adoc">[frame=ends, grid=rows, options=&quot;header, footer&quot;]
+<pre><code class="language-adoc">[frame=ends, grid=rows, options="header, footer"]
 |===
 | Heading 1 | Heading 2 | Heading 3
 | row 1 col 1 | row 1 col 2 | row 1 col 3
@@ -1812,7 +1898,7 @@ in tables where any cells span multiple rows or columns.</p>
 | Footer 1 | Footer 2 | Footer 3
 |===
 </code></pre>
-<img src="/blog/assets/asciidoc-table-frame-grid.png" alt="AsciiDoc table frame and grid" />
+<img src="/blog/assets/asciidoc-table-frame-grid.png" alt="AsciiDoc table frame and grid">
 <p>Table rows can be shaded in various patterns with a background color.
 This is specified with the <code>stripes</code> attribute that accepts the following values:</p>
 <ul>
@@ -1829,7 +1915,7 @@ Numbering of the rows begins with 1 on the first data row, not the header row.</
 <p>To include comma-separated values (CSV) or tab-separated values (TSV)
 in a table, add the <code>format</code> attribute with the value <code>csv</code> or <code>tsv</code>.
 For example:</p>
-<pre><code class="language-adoc">[%autowidth, format=csv, options=&quot;header&quot;]
+<pre><code class="language-adoc">[%autowidth, format=csv, options="header"]
 |===
 Fruit,Color
 apple,red
@@ -1837,11 +1923,10 @@ banana,yellow
 cherry,red
 |===
 </code></pre>
-<p><img src="/blog/assets/asciidoc-table-csv.png"
-  alt="AsciiDoc table CSV" style="width: 20%"></p>
+<p><img src="/blog/assets/asciidoc-table-csv.png" alt="AsciiDoc table CSV" style="width: 20%"></p>
 <p>The table data can be included from an external CSV or TSV file.
 For example:</p>
-<pre><code class="language-adoc">[%autowidth, format=csv, options=&quot;header&quot;]
+<pre><code class="language-adoc">[%autowidth, format=csv, options="header"]
 |===
 include::fruit.csv[]
 |===
@@ -1881,7 +1966,7 @@ Their order must be:</p>
 <li>vertical bar</li>
 <li>cell content</li>
 </ul>
-<h2 id="themes" tabindex="-1">Themes</h2>
+<h2 id="themes">Themes</h2>
 <p>Themes define many characteristics of PDF output including
 page size, margins, headers, footers, and heading colors.</p>
 <p>There is a default theme defined in the file <code>default-theme.yml</code>.
@@ -1904,13 +1989,13 @@ to understand which settings you may wish to override in a custom theme.</p>
 This file typically begins with the following line:</p>
 <pre><code class="language-yaml">extends: default
 </code></pre>
-<p>Let's create a custom theme that overrides
+<p>Let’s create a custom theme that overrides
 the header and footer sections of each page.
 This is documented at <a href="https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/?v=1.1.1" rel="noopener" target="_blank">Add Running Content</a>.
 We will also specify heading colors.</p>
-<p>The term &quot;verso&quot; refers to even numbered pages
+<p>The term “verso” refers to even numbered pages
 that appear on the left side of an opened book.
-The term &quot;recto&quot; refers to odd numbered pages
+The term “recto” refers to odd numbered pages
 that appear on the right side of an opened book.</p>
 <p>When the <code>:media:</code> attribute is set to <code>prepress</code> or <code>print</code>,
 the <code>asciidoctor-pdf</code> command automatically uses margin mirroring.
@@ -2004,7 +2089,7 @@ in the current directory.
 Note that the entire custom theme file name is specified.</p>
 <pre><code class="language-bash">asciidoctor-pdf --theme custom-theme.yml book.adoc
 </code></pre>
-<h2 id="video" tabindex="-1">Video</h2>
+<h2 id="video">Video</h2>
 <p>The <code>video</code> macro renders an HTML-based video player
 for playing a given video file.
 The video file is assumed to be in the same directory as the <code>.adoc</code> file
@@ -2026,13 +2111,13 @@ video::rabbit-waking.mp4[width=240, height=135]
 <p>To play a YouTube video, specify its id and the <code>youtube</code> attribute.
 The id can be obtained by opening the video in a web browser and
 noting the value of the <code>v</code> query parameter in the address bar.
-For example, let's enable playing the video at <a href="https://www.youtube.com/watch?v=gBhOg0Vriik&amp;v=1.1.1" rel="noopener" target="_blank">Lambda Calculus iJS New York 2025</a>.</p>
+For example, let’s enable playing the video at <a href="https://www.youtube.com/watch?v=gBhOg0Vriik&#x26;v=1.1.1" rel="noopener" target="_blank">Lambda Calculus iJS New York 2025</a>.</p>
 <pre><code class="language-adoc">.Lambda Calculus
 video::gBhOg0Vriik[youtube, width=600, height=338]
 </code></pre>
 <p>Supposedly there are options to cause the video to autoplay and loop,
 but I could not get them to work.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://asciidoc.org?v=1.1.1" rel="noopener" target="_blank">AsciiDoc home page</a></li>
 <li><a href="https://docs.asciidoctor.org/asciidoc/latest/?v=1.1.1" rel="noopener" target="_blank">AsciiDoc Language Documentation</a></li>
@@ -2040,10 +2125,11 @@ but I could not get them to work.</p>
 <li><a href="https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference?v=1.1.1" rel="noopener" target="_blank">AsciiDoc Syntax Quick Reference</a></li>
 <li><a href="https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf?v=1.1.1" rel="noopener" target="_blank">AsciiDoc Syntax Quick Reference</a> from Dan Allen and Sarah White</li>
 <li><a href="https://asciidoctor.org/docs/asciidoc-writers-guide/?v=1.1.1" rel="noopener" target="_blank">AsciiDoc Writer</a></li>
-<li><a href="https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla&amp;v=1.1.1" rel="noopener" target="_blank">AsciiDoc: The Complete Guide in 2025</a></li>
+<li><a href="https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla&#x26;v=1.1.1" rel="noopener" target="_blank">AsciiDoc: The Complete Guide in 2025</a></li>
 <li><a href="https://docs.asciidoctor.org/epub3-converter/latest/?v=1.1.1" rel="noopener" target="_blank">AsciiDoctor EPUB3 Documentation</a></li>
 <li><a href="https://asciidoctor.zulipchat.com?v=1.1.1" rel="noopener" target="_blank">AsciiDoctor Forum</a></li>
 <li><a href="https://docs.asciidoctor.org/pdf-converter/latest/?v=1.1.1" rel="noopener" target="_blank">AsciiDoctor PDF Documentation</a></li>
 <li><a href="https://powerman.name/doc/asciidoc/?v=1.1.1" rel="noopener" target="_blank">POWERMAN AsciiDoc cheatsheet</a></li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

@@ -1,68 +1,70 @@
-<!DOCTYPE html><html lang="en"> <head><title>Localization</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Localization</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#specifying-supported-languages">Specifying Supported Languages</a></li><li><a href="#string-catalogs">String Catalogs</a></li><ul><li><a href="#creating">Creating</a></li><li><a href="#languages">Languages</a></li><li><a href="#automatic-keys">Automatic Keys</a></li><li><a href="#translations">Translations</a></li><li><a href="#manual-keys">Manual Keys</a></li><li><a href="#plurals">Plurals</a></li><li><a href="#device-specific-translations">Device-specific Translations</a></li><li><a href="#more-strings-catalog-editor-features">More Strings Catalog Editor Features</a></li></ul><li><a href="#strings-files">Strings Files</a></li><ul><li><a href="#creating-a-strings-file">Creating a Strings File</a></li><li><a href="#populating-a-strings-file">Populating a Strings File</a></li><li><a href="#preview-locale">Preview Locale</a></li></ul><li><a href="#simulator-and-device-locale">Simulator and Device Locale</a></li><li><a href="#user-selected-locale">User-selected Locale</a></li><li><a href="#localizing-strings">Localizing Strings</a></li><li><a href="#localized-string-arguments">Localized String Arguments</a></li><li><a href="#stringsdict-files">Stringsdict Files</a></li><li><a href="#numbers-and-currency">Numbers and Currency</a></li><li><a href="#dates">Dates</a></li><li><a href="#images">Images</a></li><li><a href="#device-testing">Device Testing</a></li><li><a href="#exporting-and-importing-localizations">Exporting and Importing Localizations</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Localization</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Localization</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#specifying-supported-languages">Specifying Supported Languages</a></li><li><a href="#string-catalogs">String Catalogs</a></li><ul><li><a href="#creating">Creating</a></li><li><a href="#languages">Languages</a></li><li><a href="#automatic-keys">Automatic Keys</a></li><li><a href="#translations">Translations</a></li><li><a href="#manual-keys">Manual Keys</a></li><li><a href="#plurals">Plurals</a></li><li><a href="#device-specific-translations">Device-specific Translations</a></li><li><a href="#more-strings-catalog-editor-features">More Strings Catalog Editor Features</a></li></ul><li><a href="#strings-files">Strings Files</a></li><ul><li><a href="#creating-a-strings-file">Creating a Strings File</a></li><li><a href="#populating-a-strings-file">Populating a Strings File</a></li><li><a href="#preview-locale">Preview Locale</a></li></ul><li><a href="#simulator-and-device-locale">Simulator and Device Locale</a></li><li><a href="#user-selected-locale">User-selected Locale</a></li><li><a href="#localizing-strings">Localizing Strings</a></li><li><a href="#localized-string-arguments">Localized String Arguments</a></li><li><a href="#stringsdict-files">Stringsdict Files</a></li><li><a href="#numbers-and-currency">Numbers and Currency</a></li><li><a href="#dates">Dates</a></li><li><a href="#images">Images</a></li><li><a href="#device-testing">Device Testing</a></li><li><a href="#exporting-and-importing-localizations">Exporting and Importing Localizations</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>There many facets to localization including
 text translation, enabling users to select a locale within an app,
 plural forms, numbers, currency, dates, and images.
 Each of these are discussed here.</p>
 <p>Many SwiftUI views automatically perform translations.
 These include <code>Text</code>, <code>Label</code>, and <code>Button</code>.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li>WWDC 2023 video <a href="https://developer.apple.com/videos/play/wwdc2022/10110/?v=1.1.1" rel="noopener" target="_blank">Build global apps: Localization by example</a></li>
 <li>WWDC 2023 video <a href="https://developer.apple.com/videos/play/wwdc2023/10155/?v=1.1.1" rel="noopener" target="_blank">Discover String Catalogs</a></li>
 </ul>
-<h2 id="specifying-supported-languages" tabindex="-1">Specifying Supported Languages</h2>
+<h2 id="specifying-supported-languages">Specifying Supported Languages</h2>
 <ol>
 <li>Select the top entry in the Project Navigator.</li>
 <li>In the left nav of the project editor, select the project.</li>
-<li>Select the &quot;Info&quot; tab.</li>
-<li>In the &quot;Localization&quot; section there will already be an entry for &quot;English&quot;.
+<li>Select the “Info” tab.</li>
+<li>In the “Localization” section there will already be an entry for “English”.
 For each additional language to be supported,
-click the &quot;+&quot; Button and select a language.</li>
+click the ”+” Button and select a language.</li>
 </ol>
-<h2 id="string-catalogs" tabindex="-1">String Catalogs</h2>
+<h2 id="string-catalogs">String Catalogs</h2>
 <p>Support for String Catalogs was added in iOS 17.
-These supercede &quot;Strings&quot; and &quot;StringsDict&quot; files.
+These supercede “Strings” and “StringsDict” files.
 Behind the scenes the build process compiles
 String Catalog files to Strings and StringsDict files,
 but those do not appear in the Project Navigator.</p>
 <p>Existing String and StringsDict files can be converted to String Catalog files.
 To do so, right-click on any one of them
-and select &quot;Migrate to String Catalog...&quot;.
+and select “Migrate to String Catalog…”.
 In the dialog that appears, select
 all the migratable files that should be migrated.
-Then click the &quot;Migrate&quot; button.</p>
+Then click the “Migrate” button.</p>
 <p>A String Catalog is a JSON file
 that stores the translations for all supported languages.
 Most projects will have a single String Catalog file.</p>
 <p>Xcode provides a specialized editor for String Catalog files
 that displays a separate table for each supported language.</p>
-<h3 id="creating" tabindex="-1">Creating</h3>
+<h3 id="creating">Creating</h3>
 <p>To create a String Catalog file:</p>
 <ul>
-<li>Select File ... New or press cmd-n.</li>
-<li>Select &quot;String Catalog&quot; in the &quot;Resource&quot; section.</li>
-<li>Click the &quot;Next&quot; button.</li>
+<li>Select File … New or press cmd-n.</li>
+<li>Select “String Catalog” in the “Resource” section.</li>
+<li>Click the “Next” button.</li>
 <li>Specify the name of the file.
-Typically the default name &quot;Localizable.xcstrings&quot; is retained.</li>
-<li>Click the &quot;Create&quot; button.</li>
+Typically the default name “Localizable.xcstrings” is retained.</li>
+<li>Click the “Create” button.</li>
 </ul>
 <p>A project can use multiple String Catalog,
 but for most projects there is no reason to have more than one.</p>
-<h3 id="languages" tabindex="-1">Languages</h3>
+<h3 id="languages">Languages</h3>
 <p>There are two ways to add a language to a project.</p>
 <p>The older, long way is to:</p>
 <ul>
 <li>Select the topmost entry in the Project Navigator.</li>
 <li>Select the project.</li>
-<li>Select the &quot;Info&quot; tab.</li>
-<li>Expand the &quot;Localizations&quot; section.</li>
-<li>Click the &quot;+&quot; at the bottom of the section.</li>
+<li>Select the “Info” tab.</li>
+<li>Expand the “Localizations” section.</li>
+<li>Click the ”+” at the bottom of the section.</li>
 <li>Select a language from the dropdown.</li>
 </ul>
 <p>The newer, short way is to:</p>
 <ul>
 <li>Select the String Catalog file which is typically named <code>Localized.xcstrings</code>.</li>
-<li>Click the &quot;+&quot; in the lower-left corner of the language list.</li>
+<li>Click the ”+” in the lower-left corner of the language list.</li>
 <li>Select a language from the dropdown.</li>
 </ul>
 <p>Either way all current translation keys will now appear
@@ -72,26 +74,24 @@ ready for their translations to be entered.</p>
 <ul>
 <li>Select the topmost entry in the Project Navigator.</li>
 <li>Select the project.</li>
-<li>Select the &quot;Info&quot; tab.</li>
-<li>Expand the &quot;Localizations&quot; section.</li>
+<li>Select the “Info” tab.</li>
+<li>Expand the “Localizations” section.</li>
 <li>Select the language to be deleted.</li>
-<li>Click the &quot;-&quot; at the bottom of the section.</li>
+<li>Click the ”-” at the bottom of the section.</li>
 </ul>
 <p>Languages cannot be deleted from the String Catalog editor.</p>
-<h3 id="automatic-keys" tabindex="-1">Automatic Keys</h3>
+<h3 id="automatic-keys">Automatic Keys</h3>
 <p>A String Catalog can be automatically populated from string literals
 in source files that define SwiftUI views.
 To enable this:</p>
 <ul>
 <li>select the top-most entry in the Project Navigator</li>
 <li>select the project</li>
-<li>select the &quot;Build Settings&quot; tab</li>
-<li>scroll down to the &quot;Localization&quot; section</li>
-<li>change &quot;Use Compiler to Extract Swift Strings&quot; from &quot;No&quot; to &quot;Yes&quot;</li>
+<li>select the “Build Settings” tab</li>
+<li>scroll down to the “Localization” section</li>
+<li>change “Use Compiler to Extract Swift Strings” from “No” to “Yes”</li>
 </ul>
-<p><img alt="Xcode Build Settings for Localization" style="width: 80%"
-  src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1"
-  title="Xcode Build Settings for Localization"></p>
+<p><img alt="Xcode Build Settings for Localization" style="width: 80%" src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1" title="Xcode Build Settings for Localization"></p>
 <p>Once this is enabled, the String Catalog file will be updated during each build.</p>
 <p>The build process looks for string literals in view code.
 It uses all strings passed to functions where
@@ -100,15 +100,15 @@ the parameter type is <code>LocalizedStringKey</code>.</p>
 Use these instead of plain String values
 to indicate that they require language translation.</p>
 <pre><code class="language-swift">LocalizedStringResource(
-    &quot;some text&quot;,
-    table: &quot;SomeTable&quot;, // optional
+    "some text",
+    table: "SomeTable", // optional
     local: someLocale, // optional
-    comment: &quot;some comment&quot; // optiona
+    comment: "some comment" // optiona
 )
 
-String(localized: &quot;some text&quot;)
+String(localized: "some text")
 
-AtributedString(localized: &quot;some text&quot;)
+AtributedString(localized: "some text")
 </code></pre>
 <p><code>LocalizedStringResource</code> is a new type that can hold
 the following four components of localizable strings:</p>
@@ -133,16 +133,16 @@ The default locale can be selected in the project editor.</p>
 <li>
 <p>table</p>
 <p>One or more files where translations are stored.
-By default the &quot;localizable&quot; table is used.</p>
+By default the “localizable” table is used.</p>
 </li>
 </ul>
 <p>For long sentences or paragraphs, it is useful to choose a key
 rather than typing the full text into a source file.
 This requires entering the translation for the default locale
 (often English).</p>
-<p>For example, the key &quot;app-overview&quot; could have the English translation
-&quot;This app provides weather forecasts in a delightful way.&quot;</p>
-<h3 id="translations" tabindex="-1">Translations</h3>
+<p>For example, the key “app-overview” could have the English translation
+“This app provides weather forecasts in a delightful way.”</p>
+<h3 id="translations">Translations</h3>
 <p>To add or edit translations for a given language:</p>
 <ul>
 <li>Select the Project Navigator.</li>
@@ -160,29 +160,29 @@ language translation is complete for the current set of keys.</p>
 <p>The last column in the translations tables indicates the
 state of the translations which can be one of the following:</p>
 <ul>
-<li>&quot;NEW&quot; - found in code, but no translation has been supplied yet</li>
-<li>&quot;STALE&quot; - no longer found in code, but a translation has been supplied</li>
+<li>“NEW” - found in code, but no translation has been supplied yet</li>
+<li>“STALE” - no longer found in code, but a translation has been supplied</li>
 <li>NEEDS REVIEW - someone marked the translation as needing review
-by right-clicking the row and selecting &quot;Mark for Review&quot;</li>
+by right-clicking the row and selecting “Mark for Review”</li>
 <li>green check mark - successfully translateds</li>
 </ul>
 <p>Keys for stale translations can be deleted
 if it is suspected that it will never be used in the future.</p>
 <p>After a translation that needs review is reviewed,
-right-click it and select &quot;Mark as Reviewed&quot;.</p>
+right-click it and select “Mark as Reviewed”.</p>
 <p>To delete a translation, select it and press the delete key.
 This removes the key from all languages,
 not just from the currently selected language.
 Do not press cmd-delete because that offers to
 delete the entire String Catalog file!</p>
-<h3 id="manual-keys" tabindex="-1">Manual Keys</h3>
+<h3 id="manual-keys">Manual Keys</h3>
 <p>Translations can be manually added to String Catalog.
 This enables working on translations before
 their keys are actually used in the code.</p>
 <p>To add a new key:</p>
 <ul>
 <li>Select any language on the left.</li>
-<li>Click the &quot;+&quot; at the top of the list of keys.</li>
+<li>Click the ”+” at the top of the list of keys.</li>
 <li>Enter a key which adds it to the table for all current languages.</li>
 <li>For each language:
 <ul>
@@ -195,17 +195,15 @@ their keys are actually used in the code.</p>
 This means they will not be automatically updated or removed by Xcode.
 To cause a manually added key to be managed by Xcode,
 select its row, open the inspector on the right, and
-change the value for &quot;Managed&quot; from &quot;Manually&quot; to &quot;Automatically&quot;.</p>
-<p><img alt="Xcode Strings Catalog Inspector" style="width: 50%"
-  src="/blog/assets/xcode-strings-catalog-inspector.png?v=1.1.1"
-  title="Xcode Strings Catalog Inspector"></p>
-<h3 id="plurals" tabindex="-1">Plurals</h3>
+change the value for “Managed” from “Manually” to “Automatically”.</p>
+<p><img alt="Xcode Strings Catalog Inspector" style="width: 50%" src="/blog/assets/xcode-strings-catalog-inspector.png?v=1.1.1" title="Xcode Strings Catalog Inspector"></p>
+<h3 id="plurals">Plurals</h3>
 <p>To support plurals in a translation:</p>
 <ul>
 <li>Add count placeholders for each count in the key.
-For example, &quot;The %lld dogs barked at the %lld squirrels.&quot;.
+For example, “The %lld dogs barked at the %lld squirrels.”.
 Note that <code>%lld</code> is a C-style format specifier.</li>
-<li>For each count placeholder, right-click the row and select &quot;Vary by Plural&quot;.
+<li>For each count placeholder, right-click the row and select “Vary by Plural”.
 This adds sub-rows that are appropriate for the language.</li>
 <li>Enter translations for each plural option.</li>
 </ul>
@@ -221,80 +219,76 @@ and <code>@arg2</code> might be renamed to <code>@squirrels</code>.</p>
 <p>The following view code might be used with the example translation.</p>
 <pre><code class="language-swift">VStack {
     HStack {
-        Stepper(&quot;Dog Count&quot;, value: $dogCount)
-        Text(&quot;\(dogCount)&quot;)
+        Stepper("Dog Count", value: $dogCount)
+        Text("\(dogCount)")
     }
     HStack {
-        Stepper(&quot;Squirrel Count&quot;, value: $squirrelCount)
-        Text(&quot;\(squirrelCount)&quot;)
+        Stepper("Squirrel Count", value: $squirrelCount)
+        Text("\(squirrelCount)")
     }
     Text(
         String(
-            localized: &quot;The \(dogCount) dogs barked at the \(squirrelCount) squirrels.&quot;
+            localized: "The \(dogCount) dogs barked at the \(squirrelCount) squirrels."
         )
     )
 }
 </code></pre>
 <p>The following screenshot shows the definition for this plural translation
 in the Strings Catalog file.</p>
-<p><img alt="Xcode Strings Catalog plurals" style="width: 100%"
-  src="/blog/assets/xcode-strings-catalog-plurals.png?v=1.1.1"
-  title="Xcode Strings Catalog plurals"></p>
+<p><img alt="Xcode Strings Catalog plurals" style="width: 100%" src="/blog/assets/xcode-strings-catalog-plurals.png?v=1.1.1" title="Xcode Strings Catalog plurals"></p>
 <p>The full code for this project can be found at <a href="https://github.com/mvolkmann/Localization2023Demo?v=1.1.1" rel="noopener" target="_blank">Localization2023Demo</a>.</p>
 <p>As of Xcode 15 beta, translated plurals
 always display English in previews instead of the requested locale.
 However, they display correctly in the Simulator.</p>
-<h3 id="device-specific-translations" tabindex="-1">Device-specific Translations</h3>
+<h3 id="device-specific-translations">Device-specific Translations</h3>
 <p>The translated strings can vary by device.
-For example, the word &quot;tap&quot; which is appropriate for iOS and iPadOS
-can be changed to &quot;click&quot; for macOS.</p>
+For example, the word “tap” which is appropriate for iOS and iPadOS
+can be changed to “click” for macOS.</p>
 <p>To add device-specific translations for a key:</p>
 <ul>
 <li>Select a language.</li>
 <li>Right-click a translation row.</li>
-<li>Select &quot;Vary by Device&quot; and a device type such as &quot;Mac&quot; or &quot;Apple Watch&quot;.</li>
+<li>Select “Vary by Device” and a device type such as “Mac” or “Apple Watch”.</li>
 <li>Enter the translation text for each device type.
 For example, it may be desirable to have shorter translation strings
-on &quot;Apple Watch&quot; to fit on the smaller screen.</li>
+on “Apple Watch” to fit on the smaller screen.</li>
 </ul>
 <p>This will add sub-rows to the row where each row
-begins with a platform name or &quot;Other&quot;.</p>
-<p><img alt="Xcode Strings Catalog Vary by Device" style="width: 100%"
-  src="/blog/assets/xcode-strings-catalog-vary-by-device.png?v=1.1.1"
-  title="Xcode Strings Catalog Vary by Device"></p>
+begins with a platform name or “Other”.</p>
+<p><img alt="Xcode Strings Catalog Vary by Device" style="width: 100%" src="/blog/assets/xcode-strings-catalog-vary-by-device.png?v=1.1.1" title="Xcode Strings Catalog Vary by Device"></p>
 <p>Repeat the steps above for each language that requires
 platform-specific translations.</p>
-<h3 id="more-strings-catalog-editor-features" tabindex="-1">More Strings Catalog Editor Features</h3>
-<p>The &quot;Filter&quot; input can be used to filter the list of translations
+<h3 id="more-strings-catalog-editor-features">More Strings Catalog Editor Features</h3>
+<p>The “Filter” input can be used to filter the list of translations
 to those that contain given text in their key or translation.</p>
 <p>Any table column heading can be clicked to sort the rows on that column
 in either ascending or descending order.</p>
-<h2 id="strings-files" tabindex="-1">Strings Files</h2>
+<h2 id="strings-files">Strings Files</h2>
 <p>These were used before iOS 17.
 For iOS 17 and beyond, using String Catalogs is preferred.</p>
-<h3 id="creating-a-strings-file" tabindex="-1">Creating a Strings File</h3>
-<p>Translations are described in a &quot;Strings&quot; file.
+<h3 id="creating-a-strings-file">Creating a Strings File</h3>
+<p>Translations are described in a “Strings” file.
 To create one:</p>
 <ol>
 <li>Add a file to the project by pressing cmd-n.</li>
-<li>In the Resource section, select the &quot;Strings File&quot; template.</li>
-<li>Click the &quot;Next&quot; button.</li>
-<li>Keep the default directory and the default file name &quot;Localizable.strings&quot;.</li>
-<li>Click the &quot;Create&quot; button.</li>
-<li>Select the &quot;Localizable.strings&quot; file in the Project Navigator.</li>
+<li>In the Resource section, select the “Strings File” template.</li>
+<li>Click the “Next” button.</li>
+<li>Keep the default directory and the default file name “Localizable.strings”.</li>
+<li>Click the “Create” button.</li>
+<li>Select the “Localizable.strings” file in the Project Navigator.</li>
 <li>Open the Inspector panel on the right.</li>
-<li>Under &quot;Localization&quot;, click the &quot;Localize...&quot; button.</li>
-<li>In the dialog that appears, click the &quot;Localize&quot; button.</li>
-<li>Once again, select the &quot;Localizable.strings&quot; file in the Project Navigator.</li>
-<li>In the Inspector panel on the right under &quot;Localization&quot;,
+<li>Under “Localization”, click the “Localize…” button.</li>
+<li>In the dialog that appears, click the “Localize” button.</li>
+<li>Once again, select the “Localizable.strings” file in the Project Navigator.</li>
+<li>In the Inspector panel on the right under “Localization”,
 check all the language checkboxes.
-This will add one entry under &quot;Localizable.strings&quot;
+This will add one entry under “Localizable.strings”
 in the Project Navigator for each selected language.</li>
 </ol>
-<h3 id="populating-a-strings-file" tabindex="-1">Populating a Strings File</h3>
+<h3 id="populating-a-strings-file">Populating a Strings File</h3>
 <ol>
 <li>
-<p>In the Project Navigator, expand the &quot;Localizable.strings&quot; entry
+<p>In the Project Navigator, expand the “Localizable.strings” entry
 to expose an entry for each supported language.</p>
 </li>
 <li>
@@ -307,7 +301,7 @@ to expose an entry for each supported language.</p>
 <p>For each string to be translated</p>
 <ol>
 <li>
-<p>Enter an assignment statement of the form <code>&quot;key&quot; = &quot;translation&quot;;</code></p>
+<p>Enter an assignment statement of the form <code>"key" = "translation";</code></p>
 <p><strong>Note the semicolon at the end.</strong></p>
 </li>
 </ol>
@@ -315,16 +309,16 @@ to expose an entry for each supported language.</p>
 </ol>
 </li>
 </ol>
-<p>For example, the key could be &quot;greeting&quot;,
-the English translation could be &quot;Hello&quot;,
-and the French translation could be &quot;Bonjour&quot;.</p>
+<p>For example, the key could be “greeting”,
+the English translation could be “Hello”,
+and the French translation could be “Bonjour”.</p>
 <p>When no translation is found for a given key in the current language,
 the key itself is used.</p>
 <p>If a key is the same as its English translation then it is
 not necessary to add an entry for it in the English file.
-For example, if the key is &quot;Hello&quot; then
-there is no need to add <code>&quot;Hello&quot; = &quot;Hello&quot;;&quot;</code> in the English file
-and the French file could contain <code>&quot;Hello&quot; = &quot;Bonjour&quot;;</code>.
+For example, if the key is “Hello” then
+there is no need to add <code>"Hello" = "Hello";"</code> in the English file
+and the French file could contain <code>"Hello" = "Bonjour";</code>.
 This is the recommend approach unless the English translation is long.</p>
 <p>Translation strings can contain Markdown syntax.
 For example, this can be used to make some of the text
@@ -333,85 +327,83 @@ bold, italic, or underlined.</p>
 <p>To validate a <code>Localizable.strings</code> file,
 cd to the project directory that contains the <code>.lproj</code> files and
 enter <code>plutil -lint {language-code}.lproj/Localizable.strings</code>.</p>
-<h3 id="preview-locale" tabindex="-1">Preview Locale</h3>
+<h3 id="preview-locale">Preview Locale</h3>
 <p>To select a locale to use in the Preview,
 apply the <code>environment</code> view modifier to the top-most view.
 For example:</p>
 <pre><code class="language-swift">ContentView()
-    .environment(\.locale, .init(identifier: &quot;la&quot;))
+    .environment(\.locale, .init(identifier: "la"))
 </code></pre>
 <p>where <code>la</code> is replaced by a language abbreviation such as <code>en</code> for English
 or a combination of a language and region abbreviation such as <code>en-US</code>.</p>
 <p>A view can have multiple previews.
 A button for each preview is displays at the top of the canvas.
 Click a button to see the corresponding preview.</p>
-<p><img alt="Xcode Preview buttons" style="width: 50%"
-  src="/blog/assets/xcode-preview-buttons.png?v=1.1.1"
-  title="Xcode Preview buttons"></p>
-<pre><code class="language-swift">#Preview(&quot;English&quot;) {
+<p><img alt="Xcode Preview buttons" style="width: 50%" src="/blog/assets/xcode-preview-buttons.png?v=1.1.1" title="Xcode Preview buttons"></p>
+<pre><code class="language-swift">#Preview("English") {
     ContentView()
-        .environment(\.locale, .init(identifier: &quot;en&quot;))
+        .environment(\.locale, .init(identifier: "en"))
 }
 
-#Preview(&quot;Spanish&quot;) {
+#Preview("Spanish") {
     ContentView()
-        .environment(\.locale, .init(identifier: &quot;es&quot;))
+        .environment(\.locale, .init(identifier: "es"))
 }
 
-#Preview(&quot;French&quot;) {
+#Preview("French") {
     ContentView()
-        .environment(\.locale, .init(identifier: &quot;fr&quot;))
+        .environment(\.locale, .init(identifier: "fr"))
 }
 </code></pre>
-<h2 id="simulator-and-device-locale" tabindex="-1">Simulator and Device Locale</h2>
+<h2 id="simulator-and-device-locale">Simulator and Device Locale</h2>
 <p>To select a locale in the Simulator or on a device:</p>
 <ul>
 <li>Open the Settings app.</li>
 <li>Select General.</li>
-<li>If the desired language is not displayed under &quot;PREFERRED LANGUAGES&quot;,
-tap &quot;Add Language...&quot;, select the language,
-and tap one of the &quot;Use {language}&quot; buttons
+<li>If the desired language is not displayed under “PREFERRED LANGUAGES”,
+tap “Add Language…”, select the language,
+and tap one of the “Use {language}” buttons
 to specify which language should be active now.</li>
 <li>Drag the language to be used now to the top of the list of languages
 using the drag handles to right of each language name.</li>
-<li>Tap the &quot;Continue&quot; button.</li>
+<li>Tap the “Continue” button.</li>
 <li>Return to the app being tested.</li>
 </ul>
 <p>Another way to select the locale to use is to:</p>
 <ul>
 <li>Click the project name in top-center of Xcode.</li>
-<li>Select &quot;Edit Scheme...&quot;</li>
-<li>Select &quot;Run&quot; in the left nav.</li>
-<li>Select the &quot;Options&quot; tab.</li>
-<li>Change the value of the &quot;App Language&quot; dropdown from &quot;System Language&quot; to the language to be used.</li>
-<li>Click the &quot;Close&quot; button.</li>
+<li>Select “Edit Scheme…”</li>
+<li>Select “Run” in the left nav.</li>
+<li>Select the “Options” tab.</li>
+<li>Change the value of the “App Language” dropdown from “System Language” to the language to be used.</li>
+<li>Click the “Close” button.</li>
 <li>Run the app.</li>
 </ul>
-<h2 id="user-selected-locale" tabindex="-1">User-selected Locale</h2>
+<h2 id="user-selected-locale">User-selected Locale</h2>
 <p>The <code>environment</code> view modifier can be used to
 allow the user to select a locale within the app.</p>
-<p>This <a href="https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022&amp;v=1.1.1" rel="noopener" target="_blank">Apple Forums post</a> says the following:</p>
+<p>This <a href="https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022&#x26;v=1.1.1" rel="noopener" target="_blank">Apple Forums post</a> says the following:</p>
 <blockquote>
 <p>If the system puts up a UI component on your behalf it will do so
 in the localization that it thinks that your app is running in.
-If your app is 'pretending' to run in some other language,
-you'll end up with a mixed localization, where some parts of your app
+If your app is ‘pretending’ to run in some other language,
+you’ll end up with a mixed localization, where some parts of your app
 (the parts you control) are in one language and other parts of your app
 (the parts controlled by the OS) are in another.
-That's a very poor user experience.</p>
+That’s a very poor user experience.</p>
 </blockquote>
 <p>Despite this warning, the <code>environment</code> view modifier
 can be used to change the current locale.
 For example:</p>
 <pre><code class="language-swift">        VStack {
-            Picker(&quot;Locale&quot;, selection: $language) {
-                Text(&quot;English in U.S.&quot;).tag(&quot;en-US&quot;)
-                Text(&quot;French in France&quot;).tag(&quot;fr-FR&quot;)
-                Text(&quot;Spanish in Spain&quot;).tag(&quot;es-ES&quot;)
+            Picker("Locale", selection: $language) {
+                Text("English in U.S.").tag("en-US")
+                Text("French in France").tag("fr-FR")
+                Text("Spanish in Spain").tag("es-ES")
             }
             .pickerStyle(.segmented)
 
-            Text(&quot;Hello!&quot;)
+            Text("Hello!")
         }
         .padding()
         .environment(\.locale, .init(identifier: language))
@@ -422,39 +414,39 @@ works for many kinds of translations, but not all.</p>
 <pre><code class="language-swift">let translation = Bundle.main.localizedString(
     forKey: key,
     value: key, // translation defaults to the key
-    table: nil // defaults to &quot;Localizable&quot;
+    table: nil // defaults to "Localizable"
                // which uses the file Localizable.strings
 )
 
 // This is a shortcut for the above where table is nil
 // which causes it to use `Localizable` for the table.
-let translation = NSLocalizedString(key, comment: &quot;&quot;)
+let translation = NSLocalizedString(key, comment: "")
 </code></pre>
 <p>These approaches get a translation based on
 the locale selected in the Settings app.
 However, neither of these honor the locale specified with
 the environment view modifier.</p>
-<p>The same issue exists with retrieving localized images from an &quot;Image Set&quot;.
+<p>The same issue exists with retrieving localized images from an “Image Set”.
 TODO: Is this a bug in SwiftUI?</p>
-<h2 id="localizing-strings" tabindex="-1">Localizing Strings</h2>
+<h2 id="localizing-strings">Localizing Strings</h2>
 <p>The <a href="https://developer.apple.com/documentation/foundation/nslocalizedstring?v=1.1.1" rel="noopener" target="_blank">macro</a> returns a localized string.
 To simplify use of this, define the following <code>String</code> extension:</p>
 <pre><code class="language-swift">import Foundation
 
 extension String {
     var localized: String {
-        return NSLocalizedString(self, comment: &quot;&quot;)
+        return NSLocalizedString(self, comment: "")
     }
 }
 </code></pre>
 <p>To use this, add references to this new computed property to any string.
 For example:</p>
-<pre><code class="language-swift">print(&quot;Hello&quot;.localized)
+<pre><code class="language-swift">print("Hello".localized)
 
-let greeting = &quot;Hello&quot;
+let greeting = "Hello"
 print(greeting.localized)
 </code></pre>
-<h2 id="localized-string-arguments" tabindex="-1">Localized String Arguments</h2>
+<h2 id="localized-string-arguments">Localized String Arguments</h2>
 <p>Localized strings can specify arguments accepted and
 where they should be inserted in translations.
 Arguments are represented by <code>%@</code> for <code>String</code> values,
@@ -463,31 +455,31 @@ Arguments are passed to the <code>LocalizedStringKey</code> initializer
 using string interpolation.</p>
 <p>For example, the following translations can be defined:</p>
 <pre><code class="language-text">// English
-&quot;Annie %@ %@&quot; = &quot;The %@ will come out %@.&quot;;
+"Annie %@ %@" = "The %@ will come out %@.";
 
 // French
-&quot;Annie %@ %@&quot; = &quot;Le %@ sortira %@.&quot;;
-&quot;sun&quot; = &quot;soleil&quot;;
-&quot;tomorrow&quot; = &quot;demain&quot;;
+"Annie %@ %@" = "Le %@ sortira %@.";
+"sun" = "soleil";
+"tomorrow" = "demain";
 
 // Spanish
-&quot;Annie %@ %@&quot; = &quot;El %@ saldra %@.&quot;;
-&quot;sun&quot; = &quot;sol&quot;;
-&quot;tomorrow&quot; = &quot;mañana&quot;;
+"Annie %@ %@" = "El %@ saldra %@.";
+"sun" = "sol";
+"tomorrow" = "mañana";
 </code></pre>
 <p>The following code uses these translations:</p>
-<pre><code class="language-swift">let thing = &quot;sun&quot;
-let time = &quot;tomorrow&quot;
-Text(&quot;Annie \(sun) \(tomorrow)&quot;)
+<pre><code class="language-swift">let thing = "sun"
+let time = "tomorrow"
+Text("Annie \(sun) \(tomorrow)")
 </code></pre>
-<p>TODO: How can we translate the strings &quot;sun&quot; and &quot;tomorrow&quot;?</p>
-<h2 id="stringsdict-files" tabindex="-1">Stringsdict Files</h2>
+<p>TODO: How can we translate the strings “sun” and “tomorrow”?</p>
+<h2 id="stringsdict-files">Stringsdict Files</h2>
 <p>Stringsdict files provide a way to define pluralization rules for translations.
 These were used before iOS 17.
 For iOS 17 and beyond, using String Catalogs is preferred.</p>
 <p>SwiftUI can automate displaying phrases that describe a number of things
 where the word that describes the thing varies based on the count.
-For example, &quot;dog&quot; vs. &quot;dogs&quot; or &quot;cactus&quot; vs. &quot;cacti&quot;.</p>
+For example, “dog” vs. “dogs” or “cactus” vs. “cacti”.</p>
 <p>There are two kinds of plural values to consider.
 Cardinal numbers specify a count or quantity (ex. two).
 Ordinal numbers specify a position within an ordered list (ex. second).</p>
@@ -498,22 +490,22 @@ as described in the <a href="#numbers-and-currency">Numbers and Currency</a> sec
 <p>To define how specific words should be pluralized based on a count:</p>
 <ol>
 <li>Add a file to the project by pressing cmd-n.</li>
-<li>In the Resource section, select the &quot;Stringsdict File&quot; template.</li>
-<li>Click the &quot;Next&quot; button.</li>
+<li>In the Resource section, select the “Stringsdict File” template.</li>
+<li>Click the “Next” button.</li>
 <li>Keep the default directory and the default file name
-&quot;Localizable.stringsdict&quot;.</li>
-<li>Click the &quot;Create&quot; button.</li>
+“Localizable.stringsdict”.</li>
+<li>Click the “Create” button.</li>
 <li>To support multiple languages:
 <ol>
-<li>Select the &quot;Localizable.stringsdict&quot; file in the Project Navigator.</li>
+<li>Select the “Localizable.stringsdict” file in the Project Navigator.</li>
 <li>Open the Inspector panel on the right.</li>
-<li>Under &quot;Localization&quot;, click the &quot;Localize...&quot; button.</li>
-<li>In the dialog that appears, click the &quot;Localize&quot; button.</li>
-<li>Once again, select the &quot;Localizable.stringsdict&quot; file
+<li>Under “Localization”, click the “Localize…” button.</li>
+<li>In the dialog that appears, click the “Localize” button.</li>
+<li>Once again, select the “Localizable.stringsdict” file
 in the Project Navigator.</li>
-<li>In the Inspector panel on the right under &quot;Localization&quot;,
+<li>In the Inspector panel on the right under “Localization”,
 check all the language checkboxes.
-This will add one entry under &quot;Localizable.stringsdict&quot;
+This will add one entry under “Localizable.stringsdict”
 in the Project Navigator for each selected language.</li>
 </ol>
 </li>
@@ -528,21 +520,15 @@ from one language entry to another to save typing.</li>
 </li>
 </ol>
 <figure style="width: 90%">
-  <img alt="SwiftUI English plural localization"
-    src="/blog/assets/swiftui-plural-localization-en.png?v=1.1.1"
-    title="Swift English plural localization">
+  <img alt="SwiftUI English plural localization" src="/blog/assets/swiftui-plural-localization-en.png?v=1.1.1" title="Swift English plural localization">
   <figcaption>English plural rules</figcaption>
 </figure>
 <figure style="width: 90%">
-  <img alt="SwiftUI French plural localization"
-    src="/blog/assets/swiftui-plural-localization-fr.png?v=1.1.1"
-    title="Swift French plural localization">
+  <img alt="SwiftUI French plural localization" src="/blog/assets/swiftui-plural-localization-fr.png?v=1.1.1" title="Swift French plural localization">
   <figcaption>French plural rules</figcaption>
 </figure>
 <figure style="width: 90%">
-  <img alt="SwiftUI Spanish plural localization"
-    src="/blog/assets/swiftui-plural-localization-es.png?v=1.1.1"
-    title="Swift Spanish plural localization">
+  <img alt="SwiftUI Spanish plural localization" src="/blog/assets/swiftui-plural-localization-es.png?v=1.1.1" title="Swift Spanish plural localization">
   <figcaption>Spanish plural rules</figcaption>
 </figure>
 <p>The supported format specifiers include:</p>
@@ -555,41 +541,41 @@ from one language entry to another to save typing.</li>
 <p><code>%lld</code> works for <code>Int</code> values, but it seems the <code>%d</code> and <code>%u</code> do not!</p>
 <p>The following keys are used to define how counts should be pluralized.
 Their meaning differs based on the locale,
-especially the meaning of &quot;few&quot; and &quot;many&quot;.</p>
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>English Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>zero</code></td>
-<td>0</td>
-</tr>
-<tr>
-<td><code>one</code></td>
-<td>1</td>
-</tr>
-<tr>
-<td><code>two</code></td>
-<td>2</td>
-</tr>
-<tr>
-<td><code>few</code></td>
-<td>3</td>
-</tr>
-<tr>
-<td><code>many</code></td>
-<td>&gt; 3</td>
-</tr>
-<tr>
-<td><code>other</code></td>
-<td>any value not specified</td>
-</tr>
-</tbody>
-</table>
+especially the meaning of “few” and “many”.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Key</th><th>English Meaning</th></tr></thead><tbody><tr><td><code>zero</code></td><td>0</td></tr><tr><td><code>one</code></td><td>1</td></tr><tr><td><code>two</code></td><td>2</td></tr><tr><td><code>few</code></td><td>3</td></tr><tr><td><code>many</code></td><td>> 3</td></tr><tr><td><code>other</code></td><td>any value not specified</td></tr></tbody></table>
 <p>Many languages such as English, French, German, Italian, and Spanish
 only use <code>zero</code>, <code>one</code>, and <code>other</code>.
 Chinese and Japanese only use one form.
@@ -600,11 +586,11 @@ Arabic uses all six forms.</p>
 The string to be formatted must contain one string interpolation.
 The count can be hard-coded in the interpolation
 or provided by a variable.</p>
-<pre><code class="language-swift">Text(&quot;apple \(2)&quot;) // a pair of apples
+<pre><code class="language-swift">Text("apple \(2)") // a pair of apples
 let appleCount = 7
-Text(&quot;apple \(appleCount)&quot;) // 7 apples
+Text("apple \(appleCount)") // 7 apples
 </code></pre>
-<h2 id="numbers-and-currency" tabindex="-1">Numbers and Currency</h2>
+<h2 id="numbers-and-currency">Numbers and Currency</h2>
 <p>The <a href="https://developer.apple.com/documentation/foundation/numberformatter?v=1.1.1" rel="noopener" target="_blank">NumberFormatter</a> class will localize date formats
 when its <code>locale</code> property is set.</p>
 <p>Currency formatting requires the locale identifier
@@ -615,10 +601,10 @@ let formatter = NumberFormatter()
 
 func demo(_ style: NumberFormatter.Style) {
     formatter.numberStyle = style
-    formatter.locale = Locale(identifier: &quot;en-US&quot;) // English U.S.
-    print(formatter.string(from: number) ?? &quot;invalid&quot;)
-    formatter.locale = Locale(identifier: &quot;fr-FR&quot;) // French France
-    print(formatter.string(from: number) ?? &quot;invalid&quot;)
+    formatter.locale = Locale(identifier: "en-US") // English U.S.
+    print(formatter.string(from: number) ?? "invalid")
+    formatter.locale = Locale(identifier: "fr-FR") // French France
+    print(formatter.string(from: number) ?? "invalid")
 }
 
 demo(.none)
@@ -650,7 +636,7 @@ demo(.currency)
 // 1 234,57 €
 
 // From the Apple documentation,
-// &quot;This style behaves like the .currency style,
+// "This style behaves like the .currency style,
 // except that negative numbers representations are
 // surrounded by parentheses rather than preceded by a negative symbol.
 demo(.currencyAccounting)
@@ -661,7 +647,7 @@ demo(.currencyPlural)
 // 1,234.57 US dollars
 // 1 234,57 euros
 </code></pre>
-<h2 id="dates" tabindex="-1">Dates</h2>
+<h2 id="dates">Dates</h2>
 <p>The <a href="https://developer.apple.com/documentation/foundation/dateformatter?v=1.1.1" rel="noopener" target="_blank">DateFormatter</a> class will localize date formats
 when its <code>locale</code> property is set.
 This works with predefined date/time styles
@@ -672,46 +658,46 @@ let formatter = DateFormatter()
 
 formatter.dateStyle = .short
 formatter.timeStyle = .short
-formatter.locale = Locale(identifier: &quot;en&quot;) // English
+formatter.locale = Locale(identifier: "en") // English
 print(formatter.string(from: date)) // 1/3/23, 1:36 PM
 
-formatter.locale = Locale(identifier: &quot;fr&quot;) // French
+formatter.locale = Locale(identifier: "fr") // French
 print(formatter.string(from: date)) // 3/01/2023 13:36
 
-Text(&quot;apple \(0)&quot;)
-Text(&quot;apple \(1)&quot;)
-Text(&quot;apple \(2)&quot;)
-Text(&quot;apple \(3)&quot;)
-Text(&quot;apple \(4)&quot;)
+Text("apple \(0)")
+Text("apple \(1)")
+Text("apple \(2)")
+Text("apple \(3)")
+Text("apple \(4)")
 let appleCount = 7
-Text(&quot;apple \(appleCount)&quot;)
+Text("apple \(appleCount)")
 
-formatter.setLocalizedDateFormatFromTemplate(&quot;dd MMMM&quot;)
-formatter.locale = Locale(identifier: &quot;en&quot;) // English
+formatter.setLocalizedDateFormatFromTemplate("dd MMMM")
+formatter.locale = Locale(identifier: "en") // English
 print(formatter.string(from: date)) // 03 January
 
-formatter.locale = Locale(identifier: &quot;fr&quot;) // French
+formatter.locale = Locale(identifier: "fr") // French
 print(formatter.string(from: date)) // 03 janvier
 </code></pre>
 <p>For a summary of patterns for formatting dates and times see <a href="https://www.datetimeformatter.com/how-to-format-date-time-in-swift/?v=1.1.1" rel="noopener" target="_blank">How To Format Date Time In Swift</a>.</p>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>To render a localized image where
 a different image is displayed for each supported language:</p>
 <ol>
-<li>Add an &quot;Image Set&quot; to the <code>Assets.xcassets</code> file.</li>
+<li>Add an “Image Set” to the <code>Assets.xcassets</code> file.</li>
 <li>Open the Inspector pane on the right side.</li>
-<li>Click the last tab which shows the &quot;Attributes Inspector&quot;.</li>
-<li>In the &quot;Localizations&quot; section, check all the languages to be supported.
+<li>Click the last tab which shows the “Attributes Inspector”.</li>
+<li>In the “Localizations” section, check all the languages to be supported.
 This opens a separate area in the image editor panel
 for each language where 1x, 2x, and 3x images can be added.</li>
 <li>Add at least one image size for each language.</li>
 <li>Render the image by passing the image set name to the <code>Image</code> view
 in the same way as for any other image.</li>
 </ol>
-<p>The following code assumes that an Image Set named &quot;landmark&quot;
+<p>The following code assumes that an Image Set named “landmark”
 was created in the <code>Assets.xcassets</code> file and it
 contains different images for English, French, and Spanish.</p>
-<pre><code class="language-swift">Image(&quot;landmark&quot;)
+<pre><code class="language-swift">Image("landmark")
     .resizable()
     .aspectRatio(contentMode: .fit)
     .frame(height: 150)
@@ -726,23 +712,23 @@ Perhaps this is a SwiftUI bug.</p>
 <p>Another approach that does work is to create a separate Image Set
 for each supported locale.
 The following code assumes that Image Sets named
-&quot;landmark-en-US&quot;, &quot;landmark-fr-FR&quot;, and &quot;landmark-es-ES&quot;
+“landmark-en-US”, “landmark-fr-FR”, and “landmark-es-ES”
 were created in the <code>Assets.xcassets</code> file.
 It does update when the value of the <code>locale</code> variable changes.</p>
-<pre><code class="language-swift">Image(&quot;landmark-&quot; + locale)
+<pre><code class="language-swift">Image("landmark-" + locale)
     .resizable()
     .aspectRatio(contentMode: .fit)
     .frame(height: 150)
 </code></pre>
-<h2 id="device-testing" tabindex="-1">Device Testing</h2>
+<h2 id="device-testing">Device Testing</h2>
 <p>To change the default language on an iOS device:</p>
 <ol>
 <li>Open the Settings app.</li>
-<li>Tap &quot;General&quot;.</li>
-<li>Tap &quot;Language &amp; Region&quot;.</li>
-<li>To add a language to the list of &quot;PREFERRED LANGUAGES&quot;:
+<li>Tap “General”.</li>
+<li>Tap “Language &#x26; Region”.</li>
+<li>To add a language to the list of “PREFERRED LANGUAGES”:
 <ol>
-<li>Tap &quot;Add Language...&quot;</li>
+<li>Tap “Add Language…”</li>
 <li>Tap a language in the list.</li>
 <li>Tap a button to either use that language now or continue using the current language.</li>
 </ol>
@@ -750,22 +736,22 @@ It does update when the value of the <code>locale</code> variable changes.</p>
 <li>To change the current language, drag it to the top of the list
 using the drag handles on the trailing edge of the list rows.</li>
 <li>To delete a language, swipe its row to the left,
-tap the &quot;Delete&quot; button, and tap the &quot;Continue&quot; button.</li>
+tap the “Delete” button, and tap the “Continue” button.</li>
 </ol>
 <p>It can be important to also select a specific region.
 For example, an iOS device in the United States will typically have
-the language set to &quot;English&quot; and the region set to &quot;United States&quot;.
-If the language is changed to &quot;Français&quot;,
-but the region remains set to &quot;United States&quot;
+the language set to “English” and the region set to “United States”.
+If the language is changed to “Français”,
+but the region remains set to “United States”
 then dates will not be formatted in the expected way for French.
-Changing the region to &quot;France&quot; corrects this.</p>
+Changing the region to “France” corrects this.</p>
 <p>To also change the default region on an iOS device:</p>
 <ol>
-<li>Tap &quot;Region&quot;</li>
+<li>Tap “Region”</li>
 <li>Tap the name of a region.</li>
-<li>Tap the &quot;Change to {region-name}&quot; button.</li>
+<li>Tap the “Change to {region-name}” button.</li>
 </ol>
-<h2 id="exporting-and-importing-localizations" tabindex="-1">Exporting and Importing Localizations</h2>
+<h2 id="exporting-and-importing-localizations">Exporting and Importing Localizations</h2>
 <p>Localization strings found in String Catalog files, Strings files,
 and StringsDict files can be exported to a file that can be
 sent to localization experts that will supply translations.
@@ -775,28 +761,26 @@ to update the files that define them.</p>
 <ul>
 <li>Select the top-most entry in the Project Navigator.</li>
 <li>Select the project.</li>
-<li>Select the &quot;Build Settings&quot; tab.</li>
-<li>Scroll down to the &quot;Localizations&quot; section.</li>
-<li>Verify that &quot;Localization Prefers String Catalogs&quot; is set to &quot;Yes&quot;</li>
+<li>Select the “Build Settings” tab.</li>
+<li>Scroll down to the “Localizations” section.</li>
+<li>Verify that “Localization Prefers String Catalogs” is set to “Yes”</li>
 </ul>
-<p><img alt="Xcode Build Settings for Localization" style="width: 80%"
-  src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1"
-  title="Xcode Build Settings for Localization"></p>
+<p><img alt="Xcode Build Settings for Localization" style="width: 80%" src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1" title="Xcode Build Settings for Localization"></p>
 <p>To export the localizations:</p>
 <ul>
-<li>Select Product ... Export Localizations...</li>
+<li>Select Product … Export Localizations…</li>
 <li>Select the directory where a new directory will be created
 (defaults to the project directory).</li>
 <li>Enter a name for the new directory
-(defaults to &quot;{project-name} Localizations&quot;).</li>
+(defaults to “{project-name} Localizations”).</li>
 <li>Uncheck any languages whose translations should not be exported.</li>
-<li>Click the &quot;Export&quot; button.</li>
+<li>Click the “Export” button.</li>
 </ul>
 <p>The new directory will contain one localization catalog (<code>.xcloc</code> directory)
 for each supported language.
 A localization catalog contains several subdirectories and files.
 The translations for a localization catalog can be found in the <code>.xliff</code> file
-inside the &quot;Localized Contents&quot; subdirectory.</p>
+inside the “Localized Contents” subdirectory.</p>
 <p><a href="http://docs.oasis-open.org/xliff/xliff-core/v2.1/os/xliff-core-v2.1-os.html?v=1.1.1" rel="noopener" target="_blank">XLIFF</a> is an industry standard XML format.
 XLIFF files contains one <code>trans-unit</code> element for each translation.
 These elements contain the child elements <code>source</code>, <code>target</code>, and <code>comment</code>.
@@ -804,15 +788,16 @@ People with language translation experience can edit these files,
 modifying the <code>target</code> and <code>comment</code> element contents.</p>
 <p>To import modified localizations:</p>
 <ul>
-<li>Select Product ... Import Localizations...</li>
+<li>Select Product … Import Localizations…</li>
 <li>Select a <code>.xcloc</code> file for a specific language.</li>
-<li>Click the &quot;Import&quot; button.</li>
+<li>Click the “Import” button.</li>
 <li>Differences between the current translations and the
 translations to be imported will be displayed side-by-side.
 No editing can be performed here.</li>
-<li>If the differences are acceptable, click the &quot;Import&quot; button.
+<li>If the differences are acceptable, click the “Import” button.
 The changes will be merged into the file from which they originated,
 a Strings Catalog file or a Strings File.
 However, it seems that modified comments are not merged.</li>
-</ul>
-</article> </body></html>
+</ul> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

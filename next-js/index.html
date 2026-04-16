@@ -1,9 +1,11 @@
-<!DOCTYPE html><html lang="en"> <head><title>Next.js</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Next.js</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#vs-code-tips">VS Code Tips</a></li><li><a href="#tailwind">Tailwind</a></li><li><a href="#import-aliases">Import Aliases</a></li><li><a href="#modifying-app">Modifying App</a></li><li><a href="#page-components">Page Components</a></li><li><a href="#non-page-components">Non-page Components</a></li><li><a href="#static-resources">Static Resources</a></li><li><a href="#client-vs.-server-components">Client vs. Server Components</a></li><li><a href="#css">CSS</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#google-fonts">Google Fonts</a></li><li><a href="#fontawesome-icons">Fontawesome Icons</a></li><li><a href="#layouts">Layouts</a></li><li><a href="#page-generation">Page Generation</a></li><li><a href="#data-fetching">Data Fetching</a></li><li><a href="#react-suspense">React Suspense</a></li><li><a href="#data-caching">Data Caching</a></li><li><a href="#loading-pages">Loading Pages</a></li><li><a href="#error-pages">Error Pages</a></li><li><a href="#page-metadata">Page Metadata</a></li><li><a href="#links">Links</a></li><li><a href="#images">Images</a></li><li><a href="#router">Router</a></li><li><a href="#dynamic-routes">Dynamic Routes</a></li><li><a href="#not-found-pages">Not Found Pages</a></li><li><a href="#custom-types">Custom Types</a></li><li><a href="#generating-static-pages">Generating Static Pages</a></li><li><a href="#context-api-in-next.js">Context API in Next.js</a></li><li><a href="#route-handlers">Route Handlers</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#middleware">Middleware</a></li><li><a href="#rate-limiting">Rate Limiting</a></li><li><a href="#sitemaps">Sitemaps</a></li><li><a href="#example-app">Example App</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Next.js</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Next.js</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#vs-code-tips">VS Code Tips</a></li><li><a href="#tailwind">Tailwind</a></li><li><a href="#import-aliases">Import Aliases</a></li><li><a href="#modifying-app">Modifying App</a></li><li><a href="#page-components">Page Components</a></li><li><a href="#non-page-components">Non-page Components</a></li><li><a href="#static-resources">Static Resources</a></li><li><a href="#client-vs-server-components">Client vs. Server Components</a></li><li><a href="#css">CSS</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#google-fonts">Google Fonts</a></li><li><a href="#fontawesome-icons">Fontawesome Icons</a></li><li><a href="#layouts">Layouts</a></li><li><a href="#page-generation">Page Generation</a></li><li><a href="#data-fetching">Data Fetching</a></li><li><a href="#react-suspense">React Suspense</a></li><li><a href="#data-caching">Data Caching</a></li><li><a href="#loading-pages">Loading Pages</a></li><li><a href="#error-pages">Error Pages</a></li><li><a href="#page-metadata">Page Metadata</a></li><li><a href="#links">Links</a></li><li><a href="#images">Images</a></li><li><a href="#router">Router</a></li><li><a href="#dynamic-routes">Dynamic Routes</a></li><li><a href="#not-found-pages">Not Found Pages</a></li><li><a href="#custom-types">Custom Types</a></li><li><a href="#generating-static-pages">Generating Static Pages</a></li><li><a href="#context-api-in-nextjs">Context API in Next.js</a></li><li><a href="#route-handlers">Route Handlers</a></li><li><a href="#authentication">Authentication</a></li><li><a href="#environment-variables">Environment Variables</a></li><li><a href="#middleware">Middleware</a></li><li><a href="#rate-limiting">Rate Limiting</a></li><li><a href="#sitemaps">Sitemaps</a></li><li><a href="#example-app">Example App</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p><a href="https://nextjs.org?v=1.1.1" rel="noopener" target="_blank">Next.js</a>
 is a full-stack web framework built on React.</p>
 <p>Next.js uses <a href="https://turbo.build/pack?v=1.1.1" rel="noopener" target="_blank">Turbopack</a>
 rather than Vite as its module bundler.
-Turbopack bills itself as the &quot;Rust-powered successor to Webpack&quot;.
+Turbopack bills itself as the “Rust-powered successor to Webpack”.
 It claims to be 10 times faster than Vite and 700 times faster than Webpack.</p>
 <p>Next.js supports the following features:</p>
 <ul>
@@ -32,7 +34,7 @@ which pages are static, SSR, or SSG.</p>
 </li>
 </ul>
 <p>Next.js requires Node.js 16.8 or later.</p>
-<h2 id="getting-started" tabindex="-1">Getting Started</h2>
+<h2 id="getting-started">Getting Started</h2>
 <p>To create a new Next.js project, enter <code>npx create-next-app@latest</code>.
 This will ask a series of questions and
 produce output similar to what is shown below.</p>
@@ -69,17 +71,17 @@ Installing dependencies:
 </code></pre>
 <p>Cd to the new project directory.
 It will contain a <code>package.json</code> file that defines the following scripts:</p>
-<pre><code class="language-json">    &quot;dev&quot;: &quot;next dev&quot;,
-    &quot;build&quot;: &quot;next build&quot;,
-    &quot;start&quot;: &quot;next start&quot;,
-    &quot;lint&quot;: &quot;next lint&quot;
+<pre><code class="language-json">    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
 </code></pre>
 <p>To start a local web server for running the app, enter <code>npm run dev</code>.
 Then browse <code>localhost:3000</code>.</p>
 <p>See the provided <code>README.md</code> file in each project for more detail.</p>
-<h2 id="vs-code-tips" tabindex="-1">VS Code Tips</h2>
-<p>The extension &quot;ES7+ React/Redux/React-Native snippets&quot; is quite useful.
-For example, the snippet &quot;tsrfc&quot; inserts the boilerplate code for a
+<h2 id="vs-code-tips">VS Code Tips</h2>
+<p>The extension “ES7+ React/Redux/React-Native snippets” is quite useful.
+For example, the snippet “tsrfc” inserts the boilerplate code for a
 TypeScript React Functional Component which is the following
 when the filename is <code>Foo.tsx</code>:</p>
 <pre><code class="language-js">import React from 'react';
@@ -87,59 +89,59 @@ when the filename is <code>Foo.tsx</code>:</p>
 type Props = {};
 
 export default function Foo({}: Props) {
-  return &lt;div&gt;Foo&lt;/div&gt;;
+  return &#x3C;div>Foo&#x3C;/div>;
 }
 </code></pre>
 <p>When using Tailwind, consider installing the extensions
-&quot;Tailwind CSS IntelliSense&quot; and &quot;Tailwind Fold&quot;.</p>
-<h2 id="tailwind" tabindex="-1">Tailwind</h2>
+“Tailwind CSS IntelliSense” and “Tailwind Fold”.</p>
+<h2 id="tailwind">Tailwind</h2>
 <p>To configure the use of Tailwind in a Next.js project, see <a href="https://tailwindcss.com/docs/guides/nextjs?v=1.1.1" rel="noopener" target="_blank">Install Tailwind CSS with Next.js</a>.
 These steps should not be necessary if you opted into use of Tailwind
 when the project was created.</p>
-<h2 id="import-aliases" tabindex="-1">Import Aliases</h2>
+<h2 id="import-aliases">Import Aliases</h2>
 <p>Import statements can use paths that begin with the character <code>@</code>
 to specify a path that begins at the root of the project
 rather than being relative to the current directory. See <a href="https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases?v=1.1.1" rel="noopener" target="_blank">Module Aliases</a>.</p>
 <p>By default the file <code>tsconfig.json</code> contains the following:</p>
-<pre><code class="language-json">    &quot;paths&quot;: {
-      &quot;@/*&quot;: [&quot;./src/*&quot;]
+<pre><code class="language-json">    "paths": {
+      "@/*": ["./src/*"]
     }
 </code></pre>
 <p>This enables imports from paths like <code>@app/api/some-name</code>.
 To remove the need for including a slash after <code>@</code>,
-modify the key in the <code>paths</code> object above to be <code>&quot;@*&quot;</code>.
+modify the key in the <code>paths</code> object above to be <code>"@*"</code>.
 All imports on this page assume this has been done.</p>
-<h2 id="modifying-app" tabindex="-1">Modifying App</h2>
+<h2 id="modifying-app">Modifying App</h2>
 <p>Begin by modifying <code>app/page.tsx</code> which is used to
 render the page at the <code>/</code> URL path.</p>
-<h2 id="page-components" tabindex="-1">Page Components</h2>
-<p>The &quot;app&quot; directory holds source files that define page components.
+<h2 id="page-components">Page Components</h2>
+<p>The “app” directory holds source files that define page components.
 The directory structure maps directly to the URLs used to access the pages.</p>
 <p>To add a new page, create a directory in <code>app</code>
 whose name is the route name and
 create the file <code>page.tsx</code> inside that directory.</p>
 <p>The file <code>app/page.tsx</code> defines the home page
 that is rendered for the <code>/</code> URL path.</p>
-<p>While the file must have the name &quot;page&quot;,
+<p>While the file must have the name “page”,
 the name of the function that defines the page component
 should reflect the route name.
-For example, &quot;TodoPage&quot;.
-Adding the name suffix &quot;Page&quot; is often useful when TypeScript is being used
-because there will likely be a custom type named &quot;Page.</p>
+For example, “TodoPage”.
+Adding the name suffix “Page” is often useful when TypeScript is being used
+because there will likely be a custom type named “Page.</p>
 <p>In React, unlike in Svelte, the JSX returned by a component can be split
 into related pieces by writing functions that return snippets of JSX.
 Often this makes the code easier to read and understand.</p>
-<h2 id="non-page-components" tabindex="-1">Non-page Components</h2>
+<h2 id="non-page-components">Non-page Components</h2>
 <p>Components used by page components can be defined in two places.
 Page-specific components can be defined in
 the same directory as the page that uses them.
 Components that can potentially be reused across multiple pages
-should be placed in a top-level directory named &quot;components&quot;.</p>
-<h2 id="static-resources" tabindex="-1">Static Resources</h2>
+should be placed in a top-level directory named “components”.</p>
+<h2 id="static-resources">Static Resources</h2>
 <p>Static resources like images are typically placed in
-a top-level &quot;public&quot; directory.
-This directory can have subdirectories such as &quot;images&quot;.</p>
-<h2 id="client-vs.-server-components" tabindex="-1">Client vs. Server Components</h2>
+a top-level “public” directory.
+This directory can have subdirectories such as “images”.</p>
+<h2 id="client-vs-server-components">Client vs. Server Components</h2>
 <p>In Next.js, React components are either server or client components.
 Server components are rendered on the server.
 Client components are pre-rendered on the server and hydrated on the client.
@@ -156,8 +158,8 @@ and are better for search engine optimization (SEO).</p>
 </ul>
 <p>Client components can:</p>
 <ul>
-<li>handle DOM events (<code>onClick</code>, <code>onChange</code>, ...)</li>
-<li>use provided hooks (<code>useEffect</code>, <code>useState</code>, <code>useContext</code>, ...)</li>
+<li>handle DOM events (<code>onClick</code>, <code>onChange</code>, …)</li>
+<li>use provided hooks (<code>useEffect</code>, <code>useState</code>, <code>useContext</code>, …)</li>
 <li>use custom hooks that use the provided hooks</li>
 <li>use browser-only APIs (such as accessing the <code>window</code> object)</li>
 </ul>
@@ -167,7 +169,7 @@ it must be split into server and client components.
 Typically server component render client components,
 but the opposite is also supported.</p>
 <p>For more detail, see <a href="https://nextjs.org/docs/getting-started/react-essentials?v=1.1.1" rel="noopener" target="_blank">React Essentials</a>.</p>
-<h2 id="css" tabindex="-1">CSS</h2>
+<h2 id="css">CSS</h2>
 <p>The file <code>app/global.css</code> defines CSS rules that affect elements on all pages.
 This should be imported in <code>app/layout.tsx</code>.</p>
 <p>One way to use vanilla CSS is to
@@ -196,11 +198,11 @@ For example:</p>
 avoid having to repeat the root element CSS class name.
 For example:</p>
 <pre><code class="language-css">.dog-component {
-  &gt; button {
+  > button {
     border-color: red;
     border-width: 1px;
   }
-  &gt; span {
+  > span {
     font-weight: bold;
   }
 }
@@ -213,16 +215,16 @@ For example:</p>
 </ol>
 <pre><code class="language-js">'tailwindcss/nesting': 'postcss-nesting',
 </code></pre>
-<h2 id="event-handling" tabindex="-1">Event Handling</h2>
+<h2 id="event-handling">Event Handling</h2>
 <p>To determine the TypeScript type of an event
 that is passed to an event handling function in VSCode,
 temporarily change the value of the event handling prop
 to be an anonymous function whose parameter is <code>e</code>
 and hover over it.
 The type will be displayed in a popup and can be copied.</p>
-<p>For example, temporarily change <code>&lt;button onClick={handleClick}</code>
-to <code>&lt;button onClick={e =&gt; handleClick(e)}</code>.</p>
-<h2 id="google-fonts" tabindex="-1">Google Fonts</h2>
+<p>For example, temporarily change <code>&#x3C;button onClick={handleClick}</code>
+to <code>&#x3C;button onClick={e => handleClick(e)}</code>.</p>
+<h2 id="google-fonts">Google Fonts</h2>
 <p>To use a Google Font, import it as follows:</p>
 <pre><code class="language-js">import {Borel} from 'next/font/google';
 const font = Borel({
@@ -230,20 +232,20 @@ const font = Borel({
   // requested font has been loaded and can be swapped in.
   display: 'swap',
   subsets: ['latin'],
-  // &quot;Variable fonts&quot; do not need to specify weights.
+  // "Variable fonts" do not need to specify weights.
   weight: '400' // can be an array of weight strings
 });
 </code></pre>
 <p>Specify the font on the element that should use it
 with <code>className={font.className}</code>.</p>
-<h2 id="fontawesome-icons" tabindex="-1">Fontawesome Icons</h2>
+<h2 id="fontawesome-icons">Fontawesome Icons</h2>
 <p>To use Fontawesome Icons:</p>
 <ol>
 <li>Install with <code>npm install react-icons</code></li>
 <li>Import specific icons. For example, <code>import { FaYouTube, FaLaptop } from 'react-icons/fa';</code></li>
-<li>Use as React components. For example, <code>&lt;FaLaptop /&gt;</code></li>
+<li>Use as React components. For example, <code>&#x3C;FaLaptop /></code></li>
 </ol>
-<h2 id="layouts" tabindex="-1">Layouts</h2>
+<h2 id="layouts">Layouts</h2>
 <p>The file <code>app/layout.tsx</code> defines the layout for all pages in the app.
 This renders the topmost HTML elements like <code>html</code>, <code>head</code>, and <code>body</code>.
 It is a good place to render a header, footer, and nav
@@ -252,14 +254,14 @@ Site-wide fonts can also be configured here.</p>
 <p>Additional <code>layout.tsx</code> files in page route directories define
 the layout for all pages at specific URL routes.
 These are nested inside the main layout.</p>
-<h2 id="page-generation" tabindex="-1">Page Generation</h2>
+<h2 id="page-generation">Page Generation</h2>
 <p>Next.js supports four kinds of page generation.</p>
 <ul>
 <li>
 <p><a href="https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering?v=1.1.1" rel="noopener" target="_blank">Client-side Rendering</a></p>
 <p>CSR pages are generated on the client.
 These pages can perform data fetching in a <code>useEffect</code> hook
-or using the <code>useSWR</code> hook (&quot;stale-while-revalidate&quot;).
+or using the <code>useSWR</code> hook (“stale-while-revalidate”).
 Another way to indicate that a page should be rendered on the client
 is to begin the source file with <code>'use client';</code>.</p>
 <p>This option is the least desirable for search engine optimization (SEO).</p>
@@ -313,11 +315,11 @@ This is preferred when possible and is the default
 when the criteria for the options above are not present.</p>
 </li>
 </ul>
-<h2 id="data-fetching" tabindex="-1">Data Fetching</h2>
+<h2 id="data-fetching">Data Fetching</h2>
 <p>Components can use the fetch API to send API requests.
 These can fetch data that is then presented in a page.</p>
 <p>The following code is an example of a function that fetches data:</p>
-<pre><code class="language-js">async function getTodos(): Promise&lt;Todo[]&gt; {
+<pre><code class="language-js">async function getTodos(): Promise&#x3C;Todo[]> {
   const url = 'https://jsonplaceholder.typicode.com/todosx';
   const res = await fetch(url);
 
@@ -333,7 +335,7 @@ For example, passing <code>{ cache: 'no-store' }</code> disables caching of the 
 <p>Functions like the one above can be defined
 in the source files of components that use them.
 They can also be defined in separate source files,
-often in the top-level &quot;lib&quot; directory, and imported where needed.</p>
+often in the top-level “lib” directory, and imported where needed.</p>
 <p>A server component can call a data fetching function as follows:</p>
 <pre><code class="language-js">const todos: Todo[] = await getTodos();
 </code></pre>
@@ -342,24 +344,24 @@ call each of the data fetching functions without the <code>await</code> keyword
 so <code>Promise</code> objects are obtained.
 Then call <code>await Promise.all(promises)</code>
 where <code>promises</code> is an array of the promises.</p>
-<h2 id="react-suspense" tabindex="-1">React Suspense</h2>
+<h2 id="react-suspense">React Suspense</h2>
 <p>To allow data from the first fetch call to render
 before data from the next fetch call is available, use React Suspense.
 For example:</p>
 <pre><code class="language-js">const promise2 = getData2(...);
 const data1 = await getData1(...);
 return (
-  &lt;&gt;
-    &lt;div&gt;{data1.someProperty}&lt;/div&gt;
-    &lt;Suspense fallback={&lt;p&gt;loading data2&lt;/p&gt;}&gt;
+  &#x3C;>
+    &#x3C;div>{data1.someProperty}&#x3C;/div>
+    &#x3C;Suspense fallback={&#x3C;p>loading data2&#x3C;/p>}>
       {/* The Data2 component will render in place of the fallback content
           when promise2 resolves. */}
-      &lt;Data2 promise={promise2} /&gt;
-    &lt;/Suspense&gt;
-  &lt;/&gt;
+      &#x3C;Data2 promise={promise2} />
+    &#x3C;/Suspense>
+  &#x3C;/>
 );
 </code></pre>
-<h2 id="data-caching" tabindex="-1">Data Caching</h2>
+<h2 id="data-caching">Data Caching</h2>
 <p>Sometimes it is convenient to call a data fetching function in multiple places.
 This will not result in duplicate fetches.
 Next.js will automatically cache the result of the first call
@@ -372,11 +374,11 @@ add an option to the <code>fetch</code> call. For example:</p>
 expire after a given number of seconds, add the following:</p>
 <pre><code class="language-js">export const revalidate = 60;
 </code></pre>
-<p>To manually control caching, use React's <code>cache</code> function.
+<p>To manually control caching, use React’s <code>cache</code> function.
 See <a href="https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#fetching-data-on-the-server-with-third-party-libraries?v=1.1.1" rel="noopener" target="_blank">Fetching data on the Server with third-party libraries</a>.
 This is especially useful when data is fetched
 in a way that does not use the <code>fetch</code> function.</p>
-<h2 id="loading-pages" tabindex="-1">Loading Pages</h2>
+<h2 id="loading-pages">Loading Pages</h2>
 <p>Page route directories that contain a <code>loading.tsx</code> file
 will render that while data is being loaded.
 This can be any content including only a spinner.</p>
@@ -385,9 +387,9 @@ to allow other content to render while waiting for a Promise to resolve.</p>
 <p>For example:</p>
 <pre><code class="language-js">export default function TodoLoading() {
   return (
-    &lt;section&gt;
-      &lt;h2&gt;The Todos page is loading.&lt;/h2&gt;
-    &lt;/section&gt;
+    &#x3C;section>
+      &#x3C;h2>The Todos page is loading.&#x3C;/h2>
+    &#x3C;/section>
   );
 }
 </code></pre>
@@ -395,28 +397,28 @@ to allow other content to render while waiting for a Promise to resolve.</p>
 it is useful to simulate long-running requests.
 The following function simplifies this.
 Just call <code>await sleep(1000);</code> before sending a fetch request.</p>
-<pre><code class="language-js">const sleep = async (ms: number) =&gt;
-  new Promise(resolve =&gt; setTimeout(resolve, ms));
+<pre><code class="language-js">const sleep = async (ms: number) =>
+  new Promise(resolve => setTimeout(resolve, ms));
 </code></pre>
-<h2 id="error-pages" tabindex="-1">Error Pages</h2>
+<h2 id="error-pages">Error Pages</h2>
 <p>Error pages are rendered when an error is thrown from a page component.
 A common example is errors that occur when fetching data.</p>
-<p>Error pages wrap the page in a &quot;React Error Boundary&quot; and
+<p>Error pages wrap the page in a “React Error Boundary” and
 must be written in a specific way that differs from normal components.
 See <a href="https://nextjs.org/docs/app/building-your-application/routing/error-handling?v=1.1.1" rel="noopener" target="_blank">Error Handling</a>.</p>
 <p>Source files for error pages must begin with <code>'use client';</code>.</p>
-<h2 id="page-metadata" tabindex="-1">Page Metadata</h2>
+<h2 id="page-metadata">Page Metadata</h2>
 <p>To add static metadata such as title and description to a page:</p>
 <pre><code class="language-js">import type {Metadata} from 'next';
 
 export const metadata: Metadata = {
-  title: 'some title', // results in &lt;title&gt; in &lt;head&gt;
-  description: 'some description' // results in &lt;meta&gt; in &lt;head&gt;
+  title: 'some title', // results in &#x3C;title> in &#x3C;head>
+  description: 'some description' // results in &#x3C;meta> in &#x3C;head>
 };
 </code></pre>
 <p>Older versions of Next.js used <code>head.tsx</code> files to specify these.
 These define a component that renders a fragment containing
-elements to add as children of the <code>&lt;head&gt;</code> element.</p>
+elements to add as children of the <code>&#x3C;head></code> element.</p>
 <p>To add dynamic metadata, export the function <code>generateMetadata</code>.
 For example:</p>
 <pre><code class="language-ts">export async function generateMetadata({params, searchParams}) {
@@ -427,29 +429,29 @@ For example:</p>
   };
 }
 </code></pre>
-<h2 id="links" tabindex="-1">Links</h2>
+<h2 id="links">Links</h2>
 <p>To add hyperlinks to a page:</p>
 <pre><code class="language-js">import Link from 'next/link';
 
-&lt;Link href=&quot;some-url&quot;&gt;link text&lt;/Link&gt;;
+&#x3C;Link href="some-url">link text&#x3C;/Link>;
 </code></pre>
 <p>To add query parameters to a URL, consider using <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams?v=1.1.1" rel="noopener" target="_blank">URLSearchParams</a>.</p>
 <p>To prevent prefetching of the <code>Link</code> target, add <code>prefetch={false}</code>.</p>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>Next.js provides an <a href="https://nextjs.org/docs/app/building-your-application/optimizing/images?v=1.1.1" rel="noopener" target="_blank">Image</a> component that optimizes images.
 This should be used in place of the HTML <code>img</code> element.
 For example:</p>
 <pre><code class="language-js">import Image from 'next/image';
 ...
-&lt;Image src={someImageURL} alt=&quot;some description&quot; /&gt;
+&#x3C;Image src={someImageURL} alt="some description" />
 </code></pre>
-<p>For other supported props, see <a href="https://nextjs.org/docs/app/api-reference/components/image?v=1.1.1" rel="noopener" target="_blank"><Image></a>.</p>
-<p>The npm package <a href="https://www.npmjs.com/package/sharp?v=1.1.1" rel="noopener" target="_blank">sharp</a> is used to &quot;convert large images in common formats to smaller,
-web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions.&quot;
+<p>For other supported props, see <a href="https://nextjs.org/docs/app/api-reference/components/image?v=1.1.1" rel="noopener" target="_blank"><img></a>.</p>
+<p>The npm package <a href="https://www.npmjs.com/package/sharp?v=1.1.1" rel="noopener" target="_blank">sharp</a> is used to “convert large images in common formats to smaller,
+web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions.”
 TODO: Should this be used in conjunction with the <code>Image</code> component?</p>
 <p>To use this, install it with <code>npm install sharp</code>
 and import it with <code>import sharp;</code>.</p>
-<h2 id="router" tabindex="-1">Router</h2>
+<h2 id="router">Router</h2>
 <p>The <code>useRouter</code> hook creates a router object.
 Call the <code>push</code> method on the router, passing it a URL,
 for for programmatic navigation.
@@ -466,15 +468,15 @@ export default function BlogButton() {
   }
 
   return (
-    &lt;button className=&quot;button&quot; onClick={goToBlog}&gt;
+    &#x3C;button className="button" onClick={goToBlog}>
       My Blog
-    &lt;/button&gt;
+    &#x3C;/button>
   );
 }
 </code></pre>
 <p>The router object also has the methods <code>back</code>, <code>forward</code>, <code>prefetch</code>,
 <code>refresh</code>, and <code>replace</code>.</p>
-<h2 id="dynamic-routes" tabindex="-1">Dynamic Routes</h2>
+<h2 id="dynamic-routes">Dynamic Routes</h2>
 <p>Dynamic routes are pages whose URLs contain path parameters
 that are used to render the page.
 For example, the path parameter can be the ID of an object
@@ -502,25 +504,25 @@ export default async function TodoPage({params: {id}}: Props) {
 
   // The param properties are always strings.
   const number = Number(id);
-  const todo = todos.find(t =&gt; t.id === number);
+  const todo = todos.find(t => t.id === number);
 
   return (
-    &lt;section&gt;
-      &lt;h1&gt;Todo&lt;/h1&gt;
-      &lt;p&gt;Id: {todo.id}&lt;/p&gt;
-      &lt;p&gt;Title: {todo?.title ?? 'missing title'}&lt;/p&gt;
-      &lt;p&gt;Completed: {String(todo.completed)}&lt;/p&gt;
-      &lt;Link href=&quot;/todos&quot;&gt;Back&lt;/Link&gt;
-    &lt;/section&gt;
+    &#x3C;section>
+      &#x3C;h1>Todo&#x3C;/h1>
+      &#x3C;p>Id: {todo.id}&#x3C;/p>
+      &#x3C;p>Title: {todo?.title ?? 'missing title'}&#x3C;/p>
+      &#x3C;p>Completed: {String(todo.completed)}&#x3C;/p>
+      &#x3C;Link href="/todos">Back&#x3C;/Link>
+    &#x3C;/section>
   );
 }
 </code></pre>
-<h2 id="not-found-pages" tabindex="-1">Not Found Pages</h2>
+<h2 id="not-found-pages">Not Found Pages</h2>
 <p>The return value of the <code>notFound</code> function can be
 returned from a component when data it needs is not found.
 This provides a default 404 page that just says
-&quot;404 | This page could not be found.&quot;
-For example, suppose we can't find a todo item with a specific id.
+“404 | This page could not be found.”
+For example, suppose we can’t find a todo item with a specific id.
 We could handle that as follows:</p>
 <pre><code class="language-js">import { notFound } from 'next/navigation';
 import { getTodos } from '@lib/apis';
@@ -536,7 +538,7 @@ export default async function TodoPage({ params: { id } }: Props) {
   const number = Number(id);
 
   const todos: Todo[] = await getTodos();
-  const todo = todos.find(t =&gt; t.id === number);
+  const todo = todos.find(t => t.id === number);
   if (!todo) return notFound();
 
   return (
@@ -551,28 +553,28 @@ For example:</p>
 
 export default function NotFound() {
   return (
-    &lt;div&gt;
-      &lt;h2&gt;Out of luck today!&lt;/h2&gt;
-      &lt;Link href=&quot;/todos&quot;&gt;
-        &lt;span className=&quot;button&quot;&gt;Back to List&lt;/span&gt;
-      &lt;/Link&gt;
-    &lt;/div&gt;
+    &#x3C;div>
+      &#x3C;h2>Out of luck today!&#x3C;/h2>
+      &#x3C;Link href="/todos">
+        &#x3C;span className="button">Back to List&#x3C;/span>
+      &#x3C;/Link>
+    &#x3C;/div>
   );
 }
 </code></pre>
-<h2 id="custom-types" tabindex="-1">Custom Types</h2>
+<h2 id="custom-types">Custom Types</h2>
 <p>Custom TypeScript types can be defined in many places.
 One option is to create the top-level file <code>types.d.ts</code>
 and define all custom types used by a project there.</p>
 <p>The file <code>tsconfig.json</code> specifies files that should be automatically imported
-in the <code>&quot;include&quot;</code> option.
+in the <code>"include"</code> option.
 By default this includes <code>**/*.ts</code>, but this can be modified for each project.
 With the default setting, <code>types.d.ts</code> is automatically imported.
 Any source file in the project can use the types defined there
 without importing them.
 However, code editors may not recognized the types as being defined
 unless they are imported.</p>
-<h2 id="generating-static-pages" tabindex="-1">Generating Static Pages</h2>
+<h2 id="generating-static-pages">Generating Static Pages</h2>
 <p>To generate static pages (SSG) that use path parameters at build time,
 define and export the <a href="https://nextjs.org/docs/app/api-reference/functions/generate-static-params?v=1.1.1" rel="noopener" target="_blank">generateStaticParams</a> function.
 This only works if the <code>dynamicParams</code> configuration option is set to <code>true</code>,
@@ -581,11 +583,11 @@ which it is by default.</p>
 that are the props required by the page component.
 A static page will be generated corresponding to each of the objects.</p>
 <p>The generated pages can still be generated again at runtime
-using the <code>revalidate</code> option described in the &quot;Data Fetching&quot; section.</p>
-<h2 id="context-api-in-next.js" tabindex="-1">Context API in Next.js</h2>
+using the <code>revalidate</code> option described in the “Data Fetching” section.</p>
+<h2 id="context-api-in-nextjs">Context API in Next.js</h2>
 <p>The React Context API is a great option for
 sharing data across multiple React components.
-While it isn't particularly easy to configure, it requires far less code
+While it isn’t particularly easy to configure, it requires far less code
 than using other React state management approaches such as Redux.</p>
 <p>The first step in using the Context API in a Next.js application
 is to create a source file that creates and exports two things.</p>
@@ -606,33 +608,33 @@ import {createContext, ReactNode, useContext, useState} from 'react';
 interface DogData {
   breed: string;
   name: string;
-  setBreed: (breed: string) =&gt; void;
-  setName: (name: string) =&gt; void;
+  setBreed: (breed: string) => void;
+  setName: (name: string) => void;
 }
 
-const DogContext = createContext&lt;DogData&gt;({
+const DogContext = createContext&#x3C;DogData>({
   breed: '',
   name: '',
-  setBreed: string =&gt; {},
-  setName: string =&gt; {}
+  setBreed: string => {},
+  setName: string => {}
 });
 
 interface Props {
   children: ReactNode;
 }
 
-export const DogContextProvider = ({children}: Props) =&gt; {
+export const DogContextProvider = ({children}: Props) => {
   const [breed, setBreed] = useState('Whippet');
   const [name, setName] = useState('Comet');
 
   return (
-    &amp;lt;DogContext.Provider value={{breed, name, setBreed, setName}}&amp;gt;
+    &#x26;lt;DogContext.Provider value={{breed, name, setBreed, setName}}&#x26;gt;
       {children}
-    &amp;lt;/DogContext.Provider&amp;gt;
+    &#x26;lt;/DogContext.Provider&#x26;gt;
   );
 };
 
-export const useDogContext = () =&gt; useContext(DogContext);
+export const useDogContext = () => useContext(DogContext);
 </code></pre>
 <p>The second step is to use the custom provider in some client component
 at a location in the component hierarchy such that
@@ -650,14 +652,14 @@ type Props = {children: React.ReactNode};
 
 export default function RootLayout({children}: Props) {
   return (
-    &lt;html lang=&quot;en&quot;&gt;
-      &lt;body&gt;
-        &lt;DogContextProvider&gt;
-          &lt;h1&gt;My App Title&lt;/h1&gt;
+    &#x3C;html lang="en">
+      &#x3C;body>
+        &#x3C;DogContextProvider>
+          &#x3C;h1>My App Title&#x3C;/h1>
           {children}
-        &lt;/DogContextProvider&gt;
-      &lt;/body&gt;
-    &lt;/html&gt;
+        &#x3C;/DogContextProvider>
+      &#x3C;/body>
+    &#x3C;/html>
   );
 }
 </code></pre>
@@ -671,11 +673,11 @@ import {useDogContext} from '@app/context/dog-context';
 export default function Dog() {
   const {breed, name} = useDogContext();
   return (
-    &lt;section&gt;
-      &lt;p&gt;
+    &#x3C;section>
+      &#x3C;p>
         Dog {name} is a {breed}.
-      &lt;/p&gt;
-    &lt;/section&gt;
+      &#x3C;/p>
+    &#x3C;/section>
   );
 }
 </code></pre>
@@ -693,13 +695,13 @@ export default async function DogManager() {
   }
 
   return (
-    &lt;section&gt;
-      &lt;button onClick={handleClick}&gt;Change Dog&lt;/button&gt;
-    &lt;/section&gt;
+    &#x3C;section>
+      &#x3C;button onClick={handleClick}>Change Dog&#x3C;/button>
+    &#x3C;/section>
   );
 }
 </code></pre>
-<h2 id="route-handlers" tabindex="-1">Route Handlers</h2>
+<h2 id="route-handlers">Route Handlers</h2>
 <p>REST APIs can be implemented by defining <a href="https://nextjs.org/docs/app/building-your-application/routing/route-handlers?v=1.1.1" rel="noopener" target="_blank">route handlers</a>.
 These can export any of the following functions:
 <code>DELETE</code>, <code>GET</code>, <code>HEAD</code>, <code>OPTIONS</code>, <code>PATCH</code>, <code>POST</code>, and <code>PUT</code>.</p>
@@ -724,13 +726,13 @@ and deleting a specific dog.</p>
 <p>To get the dog with a given name, send a GET request to
 <code>http://localhost:3000/api/dogs/Comet</code> where Comet is a dog name.</p>
 <p>To add a dog, send a POST request to <code>http://localhost:3000/api/dogs</code>
-with a JSON body like <code>{ &quot;name&quot;: &quot;Snoopy&quot;, &quot;breed&quot;: &quot;Beagle&quot; }</code>.</p>
+with a JSON body like <code>{ "name": "Snoopy", "breed": "Beagle" }</code>.</p>
 <p>To update an existing dog,
 send a PUT request to <code>http://localhost:3000/api/dogs</code>
-with a JSON body like <code>{ &quot;name&quot;: &quot;Snoopy&quot;, &quot;breed&quot;: &quot;Great Dane&quot; }</code>.</p>
+with a JSON body like <code>{ "name": "Snoopy", "breed": "Great Dane" }</code>.</p>
 <p>To delete an existing dog,
 send a DELETE request to <code>http://localhost:3000/api/dogs/Snoopy</code>
-where &quot;Snoopy&quot; is the name of the dog to delete.</p>
+where “Snoopy” is the name of the dog to delete.</p>
 <pre><code class="language-js">// app/api/dogs/dogs.ts
 export type Dog = {
   name: string,
@@ -749,20 +751,20 @@ export function addDog(dog: Dog) {
 }
 
 export function deleteDog(name: string): Dog | undefined {
-  const dog = dogs.find(d =&gt; d.name === name);
-  if (dog) dogs = dogs.filter(d =&gt; d.name !== name);
+  const dog = dogs.find(d => d.name === name);
+  if (dog) dogs = dogs.filter(d => d.name !== name);
   return dog;
 }
 
-export const getDogs = () =&gt; dogs;
+export const getDogs = () => dogs;
 
 export function getDog(name: string): Dog | undefined {
-  return dogs.find(d =&gt; d.name === name);
+  return dogs.find(d => d.name === name);
 }
 
 export function updateDog(dog: Dog): Dog | undefined {
   const {breed, name} = dog;
-  const existingDog = dogs.find(d =&gt; d.name === name);
+  const existingDog = dogs.find(d => d.name === name);
   if (existingDog) existingDog.breed = breed;
   return existingDog;
 }
@@ -820,7 +822,7 @@ they can be obtained as follows:</p>
 <pre><code class="language-js">const {searchParams} = new URL(request.url);
 const name = searchParams.get('name');
 </code></pre>
-<h2 id="authentication" tabindex="-1">Authentication</h2>
+<h2 id="authentication">Authentication</h2>
 <p>The <a href="https://next-auth.js.org?v=1.1.1" rel="noopener" target="_blank">NextAuth.js</a> library
 makes it very easy to add authentication
 using any of the following OAuth providers: Apple, Facebook, Google.
@@ -854,29 +856,29 @@ async function setProviders() {
   setProviders(response);
 }
 
-useEffect(() =&gt; {
+useEffect(() => {
   setProviders();
 });
 
 ...
 
-{providers &amp;&amp; Object.values(providers).map(provider =&gt; (
-  &lt;button
+{providers &#x26;&#x26; Object.values(providers).map(provider => (
+  &#x3C;button
     key={provider.name}
-    onClick={() =&gt; signIn(provider.id)}
-    type=&quot;button&quot;
-  &gt;
+    onClick={() => signIn(provider.id)}
+    type="button"
+  >
     Sign In
-  &lt;/button&gt;
+  &#x3C;/button>
 )}
 </code></pre>
-<h2 id="environment-variables" tabindex="-1">Environment Variables</h2>
+<h2 id="environment-variables">Environment Variables</h2>
 <p>To provide environment variables to a Next.js app,
 define them in the file <code>.env.local</code> in the root project directory.
 See <a href="https://nextjs.org/docs/app/building-your-application/configuring/environment-variables?v=1.1.1" rel="noopener" target="_blank">Environment Variables</a>.</p>
 <p>The default <code>.gitignore</code> file in Next.js apps includes this file,
 so it will not be committed.</p>
-<p>Environment variables whose names that begin with &quot;NEXT_PUBLIC_&quot;
+<p>Environment variables whose names that begin with “NEXT_PUBLIC_”
 are available in both client and server code.
 Other variables are only available in server code.</p>
 <p>For example, suppose the following is in <code>.env.local</code>:</p>
@@ -894,7 +896,7 @@ When this code runs on the client, <code>DB_PASS</code> will be undefined,
 but <code>NEXT_PUBLIC_DOG</code> will print.</p>
 <p>It is safe to use this for API keys and other secrets
 as long as names do not begin with <code>NEXT_PUBLIC_</code>.</p>
-<h2 id="middleware" tabindex="-1">Middleware</h2>
+<h2 id="middleware">Middleware</h2>
 <p>Next.js supports defining <a href="https://nextjs.org/docs/app/building-your-application/routing/middleware?v=1.1.1" rel="noopener" target="_blank">middleware</a> that runs before API calls are processed.</p>
 <p>Each Next.js app can include one <code>middleware.ts</code> file in the
 project root directory which is typically the <code>src</code> directory.</p>
@@ -932,15 +934,15 @@ export function middleware(request: NextRequest) {
   const origin = headers.get('origin');
 
   // method is GET, POST, PUT, or DELETE.
-  // url is a string like &quot;http://localhost:3000/api/dogs&quot;.
-  // origin can be null or a string like &quot;http://localhost:3000&quot;.
+  // url is a string like "http://localhost:3000/api/dogs".
+  // origin can be null or a string like "http://localhost:3000".
   // nextURL is a URL object w/ many properties.
   console.log('middleware:', method, url, 'from', origin);
 
   // This enforces CORS restrictions.
-  // In production mode you may want to add &quot;|| !origin&quot;
+  // In production mode you may want to add "|| !origin"
   // to block access from tools like Postman or Thunder Client.
-  if (origin &amp;&amp; !allowedOrigins.includes(origin)) {
+  if (origin &#x26;&#x26; !allowedOrigins.includes(origin)) {
     return new NextResponse(null, {
       status: 400,
       statusText: 'Bad Request'
@@ -988,18 +990,18 @@ in the handler that retrieves an array of all dogs, change</p>
 <p>to</p>
 <pre><code class="language-js">return jsonCorsResponse(request, dogs);
 </code></pre>
-<p>For testing purposes, we can send requests from the <a href="http://google.com">google.com</a> domain
+<p>For testing purposes, we can send requests from the google.com domain
 when running in development mode.
-To do this, browse <a href="http://google.com">google.com</a>, open the DevTools console,
+To do this, browse google.com, open the DevTools console,
 and enter the following:</p>
 <pre><code class="language-js">const res = await fetch('http://localhost:3000/api/dogs');
 console.log(await res.json());
 </code></pre>
-<h2 id="rate-limiting" tabindex="-1">Rate Limiting</h2>
+<h2 id="rate-limiting">Rate Limiting</h2>
 <p>We can configure routes to perform rate limiting
 which limits the number of requests that can be sent to
 a given API endpoint or set of them over a given period of time.</p>
-<p>First, install the NPM package <code>limiter&quot; by entering </code>npm install limiter`.</p>
+<p>First, install the NPM package <code>limiter" by entering </code>npm install limiter`.</p>
 <p>Second, create the following file which defines the limits to enforce and
 exports a function that simplifies checking for requests that exceed the limit.
 Routes can call this function and
@@ -1019,10 +1021,10 @@ const limiter = new RateLimiter({
 
 export async function getLimitedResponse(
   request: Request
-): Promise&lt;NextResponse | null&gt; {
+): Promise&#x3C;NextResponse | null> {
   const remaining = await limiter.removeTokens(1);
   console.log('limiter.ts: remaining =', remaining);
-  if (remaining &gt;= 0) return null; // allow request
+  if (remaining >= 0) return null; // allow request
 
   // Reject request.
   const origin = request.headers.get('origin');
@@ -1043,11 +1045,11 @@ export async function getLimitedResponse(
 const response = await getLimitedResponse(request);
 if (response) return response;
 </code></pre>
-<p>This cannot be done in <code>middleware.ts</code> and I don't know why.
+<p>This cannot be done in <code>middleware.ts</code> and I don’t know why.
 When I tried that I got
-&quot;error Cannot read properties of undefined (reading 'now')&quot;
+“error Cannot read properties of undefined (reading ‘now’)”
 when <code>limiter.ts</code> tries to create a <code>RateLimiter</code> object.</p>
-<h2 id="sitemaps" tabindex="-1">Sitemaps</h2>
+<h2 id="sitemaps">Sitemaps</h2>
 <p>From <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?v=1.1.1" rel="noopener" target="_blank">Learn about sitemaps</a>:</p>
 <blockquote>
 <p>A sitemap is a file where you provide information about the pages, videos,
@@ -1069,7 +1071,7 @@ For example, when the page was last updated and any alternate language versions 
 <p>Add the following in that file:</p>
 <pre><code class="language-js">/** @type { import('next-sitemap').IConfig } */
 module.exports = {
-  // Set this environment variable in &quot;.env.local&quot;.
+  // Set this environment variable in ".env.local".
   siteUrl: process.env.SITE_URL || 'http://localhost:3000',
   generateRobotsTxt: true,
   generateIndexSitemap: false
@@ -1078,7 +1080,7 @@ module.exports = {
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>:</p>
-<pre><code class="language-json">&quot;postbuild&quot;: &quot;next-sitemap&quot;
+<pre><code class="language-json">"postbuild": "next-sitemap"
 </code></pre>
 </li>
 <li>
@@ -1086,18 +1088,16 @@ module.exports = {
 This generates the files <code>public/robots.txt</code> and <code>public/sitemap.xml</code>.</p>
 </li>
 </ol>
-<h2 id="example-app" tabindex="-1">Example App</h2>
-<p>Let's create a Next.js web app for managing a collection of dogs.</p>
-<p><img alt="Dog CRUD app" style="width: 50%"
-  src="/blog/assets/htmx-dog-crud.png?v=1.1.1"></p>
+<h2 id="example-app">Example App</h2>
+<p>Let’s create a Next.js web app for managing a collection of dogs.</p>
+<p><img alt="Dog CRUD app" style="width: 50%" src="/blog/assets/htmx-dog-crud.png?v=1.1.1"></p>
 <p>All the code can be found in the GitHub repository at
-<a href="https://github.com/mvolkmann/nextjs-dogs-crud"
-target="_blank">nextjs-dogs-crud</a>.</p>
+<a href="https://github.com/mvolkmann/nextjs-dogs-crud" target="_blank">nextjs-dogs-crud</a>.</p>
 <p>The following steps create this app from scratch.</p>
 <ol>
 <li>
 <p><code>npx create-next-app@latest</code></p>
-<p>I chose the name &quot;dogs-crud&quot; and
+<p>I chose the name “dogs-crud” and
 accepted all the defaults except using Tailwind.</p>
 </li>
 <li>
@@ -1132,7 +1132,7 @@ button {
   margin-bottom: 1rem;
   padding: 0.5rem;
 
-  &amp;:disabled {
+  &#x26;:disabled {
     background-color: gray;
   }
 }
@@ -1187,7 +1187,7 @@ th {
 td {
   background-color: white;
 
-  &amp; button {
+  &#x26; button {
     background-color: transparent;
     color: white;
   }
@@ -1201,8 +1201,8 @@ th {
 <li>
 <p>Edit <code>src/app/layout.tsx</code>.</p>
 <ul>
-<li>Delete the two lines that refer to the &quot;Inter&quot; font.</li>
-<li>Change the title from &quot;Create Next App&quot; to &quot;Dogs CRUD&quot;.</li>
+<li>Delete the two lines that refer to the “Inter” font.</li>
+<li>Change the title from “Create Next App” to “Dogs CRUD”.</li>
 <li>Remove the <code>className</code> attribute from the <code>body</code> element.</li>
 </ul>
 </li>
@@ -1217,7 +1217,7 @@ export type Dog = {
   breed: string;
 };
 
-const dogMap = new Map&lt;string, Dog&gt;();
+const dogMap = new Map&#x3C;string, Dog>();
 
 addDog('Comet', 'Whippet');
 addDog('Oscar', 'German Shorthaired Pointer');
@@ -1235,7 +1235,7 @@ export function deleteDog(id: string): boolean {
 
 export function getDogs(): Dog[] {
   const dogs = Array.from(dogMap.values());
-  return dogs.sort((a: Dog, b: Dog) =&gt; a.name.localeCompare(b.name));
+  return dogs.sort((a: Dog, b: Dog) => a.name.localeCompare(b.name));
 }
 
 export function updateDog(
@@ -1315,11 +1315,11 @@ import {useEffect, useState} from 'react';
 
 type Dog = {id: string; name: string; breed: string};
 
-const Home = () =&gt; {
-  const [dogMap, setDogMap] = useState&lt;Map&lt;string, Dog&gt;&gt;(new Map());
-  const [selectedDog, setSelectedDog] = useState&lt;Dog | undefined&gt;();
+const Home = () => {
+  const [dogMap, setDogMap] = useState&#x3C;Map&#x3C;string, Dog>>(new Map());
+  const [selectedDog, setSelectedDog] = useState&#x3C;Dog | undefined>();
 
-  useEffect(() =&gt; {
+  useEffect(() => {
     loadDogs();
   }, []);
 
@@ -1335,7 +1335,7 @@ const Home = () =&gt; {
     setDogMap(newDogMap);
   }
 
-  async function handleDelete(event: React.MouseEvent&lt;HTMLButtonElement&gt;) {
+  async function handleDelete(event: React.MouseEvent&#x3C;HTMLButtonElement>) {
     if (!confirm('Are you sure?')) return;
 
     const tr = event.currentTarget.closest('tr');
@@ -1352,13 +1352,13 @@ const Home = () =&gt; {
     }
   }
 
-  function handleEdit(event: React.MouseEvent&lt;HTMLButtonElement&gt;) {
+  function handleEdit(event: React.MouseEvent&#x3C;HTMLButtonElement>) {
     const tr = event.currentTarget.closest('tr');
     if (!tr) throw new Error('tr not found');
     setSelectedDog(dogMap.get(tr.id));
   }
 
-  async function handleSubmit(event: React.FormEvent&lt;HTMLFormElement&gt;) {
+  async function handleSubmit(event: React.FormEvent&#x3C;HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
 
@@ -1381,7 +1381,7 @@ const Home = () =&gt; {
   async function loadDogs() {
     const res = await fetch('/api/dogs');
     const dogArray = await res.json();
-    const dogMap = new Map&lt;string, Dog&gt;();
+    const dogMap = new Map&#x3C;string, Dog>();
     for (const dog of dogArray) {
       dogMap.set(dog.id, dog);
     }
@@ -1389,76 +1389,76 @@ const Home = () =&gt; {
   }
 
   return (
-    &lt;main&gt;
-      &lt;h1&gt;Dogs&lt;/h1&gt;
-      &lt;form onSubmit={handleSubmit}&gt;
-        &lt;div&gt;
-          &lt;label htmlFor=&quot;name&quot;&gt;Name&lt;/label&gt;
-          &lt;input
-            id=&quot;name&quot;
-            name=&quot;name&quot;
+    &#x3C;main>
+      &#x3C;h1>Dogs&#x3C;/h1>
+      &#x3C;form onSubmit={handleSubmit}>
+        &#x3C;div>
+          &#x3C;label htmlFor="name">Name&#x3C;/label>
+          &#x3C;input
+            id="name"
+            name="name"
             required
             size={30}
-            type=&quot;text&quot;
+            type="text"
             defaultValue={selectedDog ? selectedDog.name : ''}
-          /&gt;
-        &lt;/div&gt;
-        &lt;div&gt;
-          &lt;label htmlFor=&quot;breed&quot;&gt;Breed&lt;/label&gt;
-          &lt;input
-            id=&quot;breed&quot;
-            name=&quot;breed&quot;
+          />
+        &#x3C;/div>
+        &#x3C;div>
+          &#x3C;label htmlFor="breed">Breed&#x3C;/label>
+          &#x3C;input
+            id="breed"
+            name="breed"
             required
             size={30}
-            type=&quot;text&quot;
+            type="text"
             defaultValue={selectedDog ? selectedDog.breed : ''}
-          /&gt;
-        &lt;/div&gt;
+          />
+        &#x3C;/div>
 
-        &lt;div className=&quot;buttons&quot;&gt;
-          &lt;button id=&quot;submit-btn&quot;&gt;{selectedDog ? 'Update' : 'Add'}&lt;/button&gt;
-          {selectedDog &amp;&amp; (
-            &lt;button type=&quot;button&quot; onClick={() =&gt; setSelectedDog(undefined)}&gt;
+        &#x3C;div className="buttons">
+          &#x3C;button id="submit-btn">{selectedDog ? 'Update' : 'Add'}&#x3C;/button>
+          {selectedDog &#x26;&#x26; (
+            &#x3C;button type="button" onClick={() => setSelectedDog(undefined)}>
               Cancel
-            &lt;/button&gt;
+            &#x3C;/button>
           )}
-        &lt;/div&gt;
-      &lt;/form&gt;
-      &lt;table&gt;
-        &lt;thead&gt;
-          &lt;tr&gt;
-            &lt;th&gt;Name&lt;/th&gt;
-            &lt;th&gt;Breed&lt;/th&gt;
-          &lt;/tr&gt;
-        &lt;/thead&gt;
-        &lt;tbody&gt;
-          {Array.from(dogMap.values()).map(dog =&gt; (
-            &lt;tr className=&quot;on-hover&quot; id={dog.id} key={dog.id}&gt;
-              &lt;td&gt;{dog.name}&lt;/td&gt;
-              &lt;td&gt;{dog.breed}&lt;/td&gt;
-              &lt;td className=&quot;buttons&quot;&gt;
-                &lt;button
-                  className=&quot;show-on-hover&quot;
+        &#x3C;/div>
+      &#x3C;/form>
+      &#x3C;table>
+        &#x3C;thead>
+          &#x3C;tr>
+            &#x3C;th>Name&#x3C;/th>
+            &#x3C;th>Breed&#x3C;/th>
+          &#x3C;/tr>
+        &#x3C;/thead>
+        &#x3C;tbody>
+          {Array.from(dogMap.values()).map(dog => (
+            &#x3C;tr className="on-hover" id={dog.id} key={dog.id}>
+              &#x3C;td>{dog.name}&#x3C;/td>
+              &#x3C;td>{dog.breed}&#x3C;/td>
+              &#x3C;td className="buttons">
+                &#x3C;button
+                  className="show-on-hover"
                   onClick={handleDelete}
-                  type=&quot;button&quot;
-                &gt;
+                  type="button"
+                >
                   ✕
-                &lt;/button&gt;
+                &#x3C;/button>
                 {/* This selects the dog which triggers a selection-change event
              which causes the form to update. */}
-                &lt;button
-                  className=&quot;show-on-hover&quot;
+                &#x3C;button
+                  className="show-on-hover"
                   onClick={handleEdit}
-                  type=&quot;button&quot;
-                &gt;
+                  type="button"
+                >
                   ✎
-                &lt;/button&gt;
-              &lt;/td&gt;
-            &lt;/tr&gt;
+                &#x3C;/button>
+              &#x3C;/td>
+            &#x3C;/tr>
           ))}
-        &lt;/tbody&gt;
-      &lt;/table&gt;
-    &lt;/main&gt;
+        &#x3C;/tbody>
+      &#x3C;/table>
+    &#x3C;/main>
   );
 };
 
@@ -1471,18 +1471,19 @@ export default Home;
 <li>
 <p>Add a dog.</p>
 <p>Enter a name and breed in the form at the top.
-Click the &quot;Add&quot; button to add a new dog.</p>
+Click the “Add” button to add a new dog.</p>
 </li>
 <li>
 <p>Edit a dog.</p>
 <p>Hover over one of the dog rows and click the pencil icon that appears.
 Modify the name and/or breed in the form at the top.
-Click the &quot;Update&quot; button to submit the changes.</p>
+Click the “Update” button to submit the changes.</p>
 </li>
 <li>
 <p>Delete a dog.</p>
-<p>Hover over one of the dog rows and click the &quot;X&quot; icon that appears.
-Click the &quot;OK&quot; button in the confirmation dialog.</p>
+<p>Hover over one of the dog rows and click the “X” icon that appears.
+Click the “OK” button in the confirmation dialog.</p>
 </li>
-</ol>
-</article> </body></html>
+</ol> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

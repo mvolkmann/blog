@@ -1,15 +1,17 @@
-<!DOCTYPE html><html lang="en"> <head><title>Concurrency</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Concurrency</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#issues">Issues</a></li><li><a href="#other-approaches">Other Approaches</a></li><ul><li><a href="#posix-threads-(pthreads)">POSIX Threads (pthreads)</a></li><li><a href="#nsthreads">NSThreads</a></li><li><a href="#grand-central-dispatch-(gcd)">Grand Central Dispatch (GCD)</a></li><li><a href="#nsoperation-apis">NSOperation APIs</a></li></ul><li><a href="#tasks%2C-queues%2C-and-threads">Tasks, Queues, and Threads</a></li><li><a href="#async%2Fawait-keywords">async/await keywords</a></li><li><a href="#continuations">Continuations</a></li><li><a href="#structured-concurrency">Structured Concurrency</a></li><ul><li><a href="#async-let">async let</a></li><li><a href="#task-groups">Task Groups</a></li></ul><li><a href="#unstructured-concurrency">Unstructured Concurrency</a></li><ul><li><a href="#task">Task</a></li><li><a href="#task-tree">Task Tree</a></li></ul><li><a href="#actors">Actors</a></li><li><a href="#sendable-types">Sendable Types</a></li><li><a href="#main-actor">Main Actor</a></li><li><a href="#custom-global-actors">Custom Global Actors</a></li><li><a href="#asyncsequence">AsyncSequence</a></li><li><a href="#task-local-variables">Task Local Variables</a></li><li><a href="#thread-sanitizer">Thread Sanitizer</a></li><li><a href="#swift-async-algorithms">Swift Async Algorithms</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Concurrency</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Concurrency</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#resources">Resources</a></li><li><a href="#issues">Issues</a></li><li><a href="#other-approaches">Other Approaches</a></li><ul><li><a href="#posix-threads-pthreads">POSIX Threads (pthreads)</a></li><li><a href="#nsthreads">NSThreads</a></li><li><a href="#grand-central-dispatch-gcd">Grand Central Dispatch (GCD)</a></li><li><a href="#nsoperation-apis">NSOperation APIs</a></li></ul><li><a href="#tasks-queues-and-threads">Tasks, Queues, and Threads</a></li><li><a href="#asyncawait-keywords">async/await keywords</a></li><li><a href="#continuations">Continuations</a></li><li><a href="#structured-concurrency">Structured Concurrency</a></li><ul><li><a href="#async-let">async let</a></li><li><a href="#task-groups">Task Groups</a></li></ul><li><a href="#unstructured-concurrency">Unstructured Concurrency</a></li><ul><li><a href="#task">Task</a></li><li><a href="#task-tree">Task Tree</a></li></ul><li><a href="#actors">Actors</a></li><li><a href="#sendable-types">Sendable Types</a></li><li><a href="#main-actor">Main Actor</a></li><li><a href="#custom-global-actors">Custom Global Actors</a></li><li><a href="#asyncsequence">AsyncSequence</a></li><li><a href="#task-local-variables">Task Local Variables</a></li><li><a href="#thread-sanitizer">Thread Sanitizer</a></li><li><a href="#swift-async-algorithms">Swift Async Algorithms</a></li></ul></aside> <article> <style>
     img {
         border: 1px solid gray;
     }
 </style>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p>Apple added the async/await system to Swift in 2021.
 This removes most needs to use lower level concurrency mechanisms
 and Grand Central Dispatch (GCD).
 It also removes the need to use completion handlers (aka callbacks)
 and some uses of the delegate pattern.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li>
 <p>Apple documentation on <a href="https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html?v=1.1.1" rel="noopener" target="_blank">Concurrency</a>.</p>
@@ -19,10 +21,10 @@ and some uses of the delegate pattern.</p>
 </li>
 <li>
 <p>iOS Conf SG 2022 talk from Daniel H. Steinberg,
-<a href="https://www.youtube.com/watch?v=FEqmYi-FaB8&amp;v=1.1.1" rel="noopener" target="_blank">Willing Suspension of Disbelief</a>.</p>
+<a href="https://www.youtube.com/watch?v=FEqmYi-FaB8&#x26;v=1.1.1" rel="noopener" target="_blank">Willing Suspension of Disbelief</a>.</p>
 </li>
 </ul>
-<h2 id="issues" tabindex="-1">Issues</h2>
+<h2 id="issues">Issues</h2>
 <p>Common issues encountered when writing code involving concurrency include:</p>
 <ul>
 <li>
@@ -30,7 +32,7 @@ and some uses of the delegate pattern.</p>
 <p>This occurs when two processes are waiting each other to finish
 so neither can finish.
 This is typically solved by using mutexes of semaphores.</p>
-<p>Mutex is short for &quot;MUTually EXclusive lock&quot;.
+<p>Mutex is short for “MUTually EXclusive lock”.
 Each mutex is owned by one process at a time.
 Processes that wish to access a resource that is protected by such a lock
 cannot do so until they acquire the lock.</p>
@@ -55,22 +57,22 @@ This can result in processes taking too long to complete or never completing
 because they do not hold locks long enough to do so.</p>
 </li>
 </ul>
-<h2 id="other-approaches" tabindex="-1">Other Approaches</h2>
+<h2 id="other-approaches">Other Approaches</h2>
 <p>The following libraries and frameworks for managing concurrency
 predate the async/await system. They are now rarely needed,
 but can be useful in very specific circumstances.</p>
-<h3 id="posix-threads-(pthreads)" tabindex="-1">POSIX Threads (pthreads)</h3>
+<h3 id="posix-threads-pthreads">POSIX Threads (pthreads)</h3>
 <p><a href="https://man7.org/linux/man-pages/man7/pthreads.7.html?v=1.1.1" rel="noopener" target="_blank">pthreads</a> are not specific to Apple operating systems
 and are available in many operating systems.
 They are implemented in C and have a steep learning curve.
 Using pthreads requires manual thread management and
 use of locks such as mutexes and semaphores.</p>
-<h3 id="nsthreads" tabindex="-1">NSThreads</h3>
+<h3 id="nsthreads">NSThreads</h3>
 <p>The <a href="https://developer.apple.com/documentation/foundation/nsthread?v=1.1.1" rel="noopener" target="_blank">NSThread</a> class is part of the Apple Foundation framework.
 It provides another low-level approach to managing concurrency,
 but is somewhat easier to use than pthreads.
 This class can be accessed from Objective-C instead of C.</p>
-<h3 id="grand-central-dispatch-(gcd)" tabindex="-1">Grand Central Dispatch (GCD)</h3>
+<h3 id="grand-central-dispatch-gcd">Grand Central Dispatch (GCD)</h3>
 <p>The <a href="https://developer.apple.com/documentation/DISPATCH?v=1.1.1" rel="noopener" target="_blank">Dispatch</a> framework (aka Grand Central Dispatch)
 provides a higher level API than NSThreads and pthreads.
 It was originally specific to Apple operating systems,
@@ -82,7 +84,7 @@ For example:</p>
     // Code to update the UI goes here.
 }
 </code></pre>
-<h3 id="nsoperation-apis" tabindex="-1">NSOperation APIs</h3>
+<h3 id="nsoperation-apis">NSOperation APIs</h3>
 <p>The <a href="https://developer.apple.com/documentation/foundation/nsoperation?v=1.1.1" rel="noopener" target="_blank">NSOperation</a> class is part of the Apple Foundation framework.
 To use this:</p>
 <ul>
@@ -93,15 +95,15 @@ by passing it to the <code>addOperation</code> method of the <code>NSOperationQu
 <li>Wait for all the operations to complete by calling the
 <code>waitUntilAllOperationsAreFinished</code> method of the <code>NSOperationQueue</code>.</li>
 </ul>
-<h2 id="tasks%2C-queues%2C-and-threads" tabindex="-1">Tasks, Queues, and Threads</h2>
-<p>Tasks (also referred to as &quot;work items&quot;)
+<h2 id="tasks-queues-and-threads">Tasks, Queues, and Threads</h2>
+<p>Tasks (also referred to as “work items”)
 represent a body of work to be performed.
 To schedule the work, a <code>Task</code> is added to a queue
 in either a blocking fashion (runs synchronously)
 or a non-blocking fashion (runs asynchronously).</p>
 <p>A queue is responsible for determining when its tasks will run
 and the threads on which they will run.
-Each queue is either &quot;serial&quot; or &quot;concurrent&quot;.
+Each queue is either “serial” or “concurrent”.
 Both kinds execute their tasks in the order in which they were added.</p>
 <p>Serial queues execute one task at a time
 and each task can run on a different thread.
@@ -116,7 +118,7 @@ than they were started since each task can have a different duration.</p>
 <p>Each queue collects tasks to be run at
 a given priority or quality of service (QoS).
 Applications can create any number of queues.
-There are five &quot;global queues&quot; that are typically used
+There are five “global queues” that are typically used
 instead of custom queues.</p>
 <p>While it is possible to write code that
 explicitly runs a task on a specific thread,
@@ -167,10 +169,10 @@ using one of the enum cases at <a href="https://developer.apple.com/documentatio
 let queue = DispatchQueue.global(qos)
 </code></pre>
 <p>To create a new queue:</p>
-<pre><code class="language-swift">let mySerialQueue = DispatchQueue(label: &quot;my-queue-name&quot;)
+<pre><code class="language-swift">let mySerialQueue = DispatchQueue(label: "my-queue-name")
 
 let myConcurrentQueue =
-    DispatchQueue(label: &quot;my-queue-name&quot;, attributes: .concurrent)
+    DispatchQueue(label: "my-queue-name", attributes: .concurrent)
 </code></pre>
 <p>To submit a task to a queue to run synchronously,
 which blocks the caller until the task completes,
@@ -178,7 +180,7 @@ pass a closure to the <code>sync</code> method of the queue.</p>
 <p>To submit a task to a queue to run asynchronously,
 which does not wait for the task to complete and does not blocks the caller,
 pass a closure to the <code>async</code> method of the queue.</p>
-<h2 id="async%2Fawait-keywords" tabindex="-1">async/await keywords</h2>
+<h2 id="asyncawait-keywords">async/await keywords</h2>
 <p>The <code>async</code> and <code>await</code> keywords free developers from
 the low-level details of thread management.
 They allow concurrent code to be written in a manner
@@ -191,7 +193,7 @@ of all functions that run asynchronously.
 Inside the function, add the <code>await</code> keyword
 before all calls to other asynchronous functions.
 For example:</p>
-<pre><code class="language-swift">func getCurrentCity() async throws -&gt; String {
+<pre><code class="language-swift">func getCurrentCity() async throws -> String {
     let coordinates = await getCurrentCoordinates() // implemented elsewhere
     let address = await getAddress(of: coordinates) // implemented elsewhere
     return address.city
@@ -199,20 +201,20 @@ For example:</p>
 </code></pre>
 <p>All <code>async</code> functions:</p>
 <ul>
-<li>must be called from a &quot;concurrent context&quot; (aka asynchronous context)</li>
+<li>must be called from a “concurrent context” (aka asynchronous context)</li>
 <li>run in a concurrent context, so they can call other <code>async</code> functions</li>
 </ul>
 <p>The <code>await</code> keyword can choose to suspend execution of the current function.
 This allows the thread executing the function to perform other work.
 When the <code>await</code> keyword is applied to a function call,
-it creates a &quot;suspension point&quot;.
-The code after the call is referred to as the &quot;continuation&quot;.
+it creates a “suspension point”.
+The code after the call is referred to as the “continuation”.
 When the function is resumed later, the continuation is executed,
 possibly in a different thread than the one in which function execution began.</p>
 <p>In iOS 15 and above, all Apple provided functions that
 take a completion handler also have an <code>async</code> version.
 This means there is no longer a need to
-pass completion handlers to Apple's APIs.
+pass completion handlers to Apple’s APIs.
 For example, <a href="https://developer.apple.com/documentation/foundation/urlsession?v=1.1.1" rel="noopener" target="_blank">URLSession</a> has many async methods.
 The resulting code is easier to write and read.</p>
 <p>One way to create a concurrent context is it create a <a href="https://developer.apple.com/documentation/swift/task?v=1.1.1" rel="noopener" target="_blank">Task</a> object.</p>
@@ -234,13 +236,13 @@ struct ContentView: View {
 
     @State private var isShowingError = false
     @State private var joke: Joke?
-    @State private var message = &quot;&quot;
+    @State private var message = ""
 
     private let apiURL =
-        URL(string: &quot;https://official-joke-api.appspot.com/random_joke&quot;)!
+        URL(string: "https://official-joke-api.appspot.com/random_joke")!
 
-    private func getJoke() async -&gt; Joke? {
-        message = &quot;&quot;
+    private func getJoke() async -> Joke? {
+        message = ""
         do {
             // The data method returns a tuple.
             // The type of response is URLResponse.
@@ -267,14 +269,14 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text(&quot;Jokester&quot;).font(.largeTitle)
+            Text("Jokester").font(.largeTitle)
             Spacer()
             if let joke {
                 Text(joke.setup).font(.title).foregroundColor(.green)
                 Text(joke.punchline).font(.title).foregroundColor(.red)
                     .padding(.top)
                 Spacer()
-                Button(&quot;Next&quot;) {
+                Button("Next") {
                     Task { self.joke = await getJoke() }
                 }
                 .buttonStyle(.borderedProminent)
@@ -289,7 +291,7 @@ struct ContentView: View {
             joke = await getJoke()
         }
         .alert(
-            &quot;Error&quot;,
+            "Error",
             isPresented: $isShowingError,
             actions: {},
             message: { Text(message) }
@@ -318,7 +320,7 @@ in place of <code>joke.setup</code> and <code>joke.punchline</code>.</li>
     let accessibility: Double
 }
 </code></pre>
-<h2 id="continuations" tabindex="-1">Continuations</h2>
+<h2 id="continuations">Continuations</h2>
 <p>Functions that take a completion handler (aka callback)
 can be wrapped in a new <code>async</code> function that does not take a callback
 in order to simplify their use.</p>
@@ -334,8 +336,8 @@ While the <code>fetchActivityWithContinuation</code> function below
 is somewhat complicated,
 calling it does not require passing a completion handler.
 This simplifies the code in callers.</p>
-<pre><code class="language-swift">    private func getJoke() async -&gt; Joke? {
-        message = &quot;&quot;
+<pre><code class="language-swift">    private func getJoke() async -> Joke? {
+        message = ""
         do {
             let joke = try await fetchActivityWithContinuation()
             return joke
@@ -345,7 +347,7 @@ This simplifies the code in callers.</p>
         }
     }
 
-    private func fetchActivityWithContinuation() async throws -&gt; Joke {
+    private func fetchActivityWithContinuation() async throws -> Joke {
         // The closure passed to `withCheckedThrowingContinuation`
         // is passed a `CheckedContinuation` object.
         // This has a `resume` method that must be called
@@ -382,11 +384,11 @@ This simplifies the code in callers.</p>
 </code></pre>
 <p>The example above demonstrates using the <a href="https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)?v=1.1.1" rel="noopener" target="_blank">withCheckedThrowingContinuation</a> function.
 If <code>completion.resume</code> is never called, the runtime error
-&quot;SWIFT TASK CONTINUATION MISUSE: ... leaked its continuation!&quot;
+“SWIFT TASK CONTINUATION MISUSE: … leaked its continuation!”
 will be triggered.
 If <code>completion.resume</code> is called more than once, the runtime error
-&quot;SWIFT TASK CONTINUATION MISUSE: ... tried to resume its continuation
-more than once&quot; will be triggered.</p>
+“SWIFT TASK CONTINUATION MISUSE: … tried to resume its continuation
+more than once” will be triggered.</p>
 <p>There are three other similar functions that can be used.</p>
 <ul>
 <li>
@@ -408,13 +410,13 @@ This makes it slightly faster.</p>
 </li>
 </ul>
 <p>Use of the unsafe versions is generally not recommended.</p>
-<h2 id="structured-concurrency" tabindex="-1">Structured Concurrency</h2>
+<h2 id="structured-concurrency">Structured Concurrency</h2>
 <p>Structured concurrency provides a way to
 execute multiple tasks at the same time AND
 write code in the order in which it is expected to run.
 The async/await system provides two ways to do this,
 <code>async let</code> and task groups.</p>
-<h3 id="async-let" tabindex="-1">async let</h3>
+<h3 id="async-let">async let</h3>
 <p>An <code>async let</code> statement is a special variable declaration
 whose value is computed asynchronously in a new, implicit child task.
 These statements must be used inside a concurrent context
@@ -431,11 +433,11 @@ For example:</p>
     @State private var dogImage: DogImage?
     ...
     // This could use the API at https://www.boredapi.com/api/activity.
-    private func getActivity() async throws -&gt; Activity {
+    private func getActivity() async throws -> Activity {
         ...
     }
     // This could use the API at https://dog.ceo/api/breeds/image/random.
-    private func getDogImage() async throws -&gt; DogImage {
+    private func getDogImage() async throws -> DogImage {
         ...
     }
     ...
@@ -453,7 +455,7 @@ For example:</p>
         }
     }
 </code></pre>
-<h3 id="task-groups" tabindex="-1">Task Groups</h3>
+<h3 id="task-groups">Task Groups</h3>
 <p>Task groups enable computing a variable number of values concurrently.</p>
 <p>In the previous example we only needed to compute two values concurrently,
 an activity and a dog image.</p>
@@ -477,13 +479,13 @@ can be obtained using a <code>for await</code> loop when the tasks cannot throw
 or a <code>for try await</code> loop when the tasks can throw.</p>
 <p>The following code demonstrates the downloading
 a random number (1 to 5) of dog image URLs.</p>
-<pre><code class="language-swift">    private func getDogImages() async throws -&gt; [DogImage] {
+<pre><code class="language-swift">    private func getDogImages() async throws -> [DogImage] {
         var dogImages: [DogImage] = []
         let count = Int.random(in: 1 ... 5)
 
         try await withThrowingTaskGroup(of: DogImage.self) { group in
             // Add tasks to the group.
-            for _ in 0 ..&lt; count {
+            for _ in 0 ..&#x3C; count {
                 // Each task *can* begin executing
                 // as soon is it is added to the group.
                 // .userInitiated is the highest priority.
@@ -508,12 +510,12 @@ a random number (1 to 5) of dog image URLs.</p>
         return dogImages
     }
 </code></pre>
-<h2 id="unstructured-concurrency" tabindex="-1">Unstructured Concurrency</h2>
+<h2 id="unstructured-concurrency">Unstructured Concurrency</h2>
 <p>Unstructured concurrency, like structured concurrency,
 provides a way to execute multiple tasks at the same time.
 However, it does not emphasize writing code
 in the order in which it is expected to run.</p>
-<h3 id="task" tabindex="-1">Task</h3>
+<h3 id="task">Task</h3>
 <p>Unstructured concurrency relies on creating <a href="https://developer.apple.com/documentation/swift/task?v=1.1.1" rel="noopener" target="_blank">Task</a> objects
 which are passed a closure that runs in a concurrent context.
 The system typically runs the <code>Task</code> immediately, but can choose to
@@ -561,9 +563,7 @@ This can be useful in scenarios where the <code>id</code> represents a
 query to be performed which provides new data to be displayed.</p>
 <p>The following code demonstrates using the <code>task</code> view modifier
 with the <code>id</code> argument:</p>
-<p><img alt="SwiftUI task view modifier" style="width: 50%"
-  src="/blog/assets/SwiftUI-task-with-id.png?v=1.1.1"
-  title="SwiftUI task view modifier"></p>
+<p><img alt="SwiftUI task view modifier" style="width: 50%" src="/blog/assets/SwiftUI-task-with-id.png?v=1.1.1" title="SwiftUI task view modifier"></p>
 <pre><code class="language-swift">import SwiftUI
 
 struct ContentView: View {
@@ -579,12 +579,12 @@ struct ContentView: View {
         let state: String
 
         // We need this because the API returns JSON
-        // with a key of &quot;place name&quot; which is not a valid
+        // with a key of "place name" which is not a valid
         // Swift property name due to containing a space.
         private enum CodingKeys: String, CodingKey {
             case latitude
             case longitude
-            case placeName = &quot;place name&quot;
+            case placeName = "place name"
             case state
         }
     }
@@ -595,21 +595,21 @@ struct ContentView: View {
         let places: [Place]
     }
 
-    @State private var errorMessage = &quot;&quot;
+    @State private var errorMessage = ""
     @State private var isShowingError = false
-    @State private var message = &quot;&quot;
-    @State private var zipCode = &quot;&quot;
+    @State private var message = ""
+    @State private var zipCode = ""
     // This will hold data from an API service.
     @State private var zipInfo: ZIPInfo?
 
     // The API at this URL returns data about a given U.S. ZIP code.
     private var apiURL: URL {
-        URL(string: &quot;https://api.zippopotam.us/us/\(zipCode)&quot;)!
+        URL(string: "https://api.zippopotam.us/us/\(zipCode)")!
     }
 
     private func getInfo() async {
-        errorMessage = &quot;&quot;
-        message = &quot;&quot;
+        errorMessage = ""
+        message = ""
         zipInfo = nil
 
         // All U.S. ZIP codes consist of 5 digits.
@@ -625,7 +625,7 @@ struct ContentView: View {
                 throw MyError.badResponseType
             }
             if response.statusCode == 404 {
-                message = &quot;No match was found.&quot;
+                message = "No match was found."
                 return
             }
             guard response.statusCode == 200 else {
@@ -636,7 +636,7 @@ struct ContentView: View {
             // If the zip code is changes while an API call
             // is running, the task will be cancelled.
             // We don't want to report that as an error.
-            if error.localizedDescription != &quot;cancelled&quot; {
+            if error.localizedDescription != "cancelled" {
                 errorMessage = error.localizedDescription
                 isShowingError = true
             }
@@ -645,21 +645,21 @@ struct ContentView: View {
 
     var body: some View {
         VStack {
-            Text(&quot;U.S. ZIP Code Information&quot;).font(.title)
+            Text("U.S. ZIP Code Information").font(.title)
 
-            TextField(&quot;ZIP Code&quot;, text: $zipCode)
+            TextField("ZIP Code", text: $zipCode)
                 .keyboardType(.numberPad)
                 .textFieldStyle(.roundedBorder)
                 .frame(width: 85)
                 .onChange(of: zipCode) { _ in
-                    if zipCode.count &gt; 5 {
+                    if zipCode.count > 5 {
                         zipCode = String(zipCode.prefix(5))
                     }
                 }
 
             if message.isEmpty {
                 if let zipInfo, let place = zipInfo.places.first {
-                    Text(&quot;\(place.placeName), \(place.state)&quot;).font(.title3)
+                    Text("\(place.placeName), \(place.state)").font(.title3)
                 }
             } else {
                 Text(message)
@@ -672,7 +672,7 @@ struct ContentView: View {
             await getInfo() // uses zipCode
         }
         .alert(
-            &quot;Error&quot;,
+            "Error",
             isPresented: $isShowingError,
             actions: {},
             message: { Text(errorMessage) }
@@ -699,19 +699,19 @@ when it appears and cancels it when the view disappears:</p>
 <pre><code class="language-swift">import SwiftUI
 
 struct Demo: View {
-    @State private var task: Task&lt;Void, Error&gt;?
+    @State private var task: Task&#x3C;Void, Error>?
 
     var body: some View {
         VStack {
-            Text(&quot;in Demo&quot;)
+            Text("in Demo")
         }
         .onAppear {
             task = Task {
-                print(&quot;in Task&quot;)
+                print("in Task")
             }
         }
         .onDisappear {
-            print(&quot;cancelling Task&quot;)
+            print("cancelling Task")
             task?.cancel()
         }
     }
@@ -807,12 +807,12 @@ struct ContentView: View {
         case badStatus(status: Int)
     }
 
-    private let usersURL = URL(string: &quot;https://randomuser.me/api/&quot;)!
+    private let usersURL = URL(string: "https://randomuser.me/api/")!
 
-    typealias UserTask = Task&lt;User?, Error&gt;
+    typealias UserTask = Task&#x3C;User?, Error>
 
     @State private var isShowingError = false
-    @State private var message = &quot;&quot;
+    @State private var message = ""
     @State private var userTask: UserTask?
     @State private var user: User?
 
@@ -831,7 +831,7 @@ struct ContentView: View {
                 try await Task.sleep(nanoseconds: 1_000_000_000)
 
                 // If `userTask` is cancelled before the `data` method
-                // completes, it will throw a &quot;cancelled&quot; error.
+                // completes, it will throw a "cancelled" error.
                 let (data, response) =
                     try await URLSession.shared.data(from: usersURL)
                 guard let res = response as? HTTPURLResponse else {
@@ -863,7 +863,7 @@ struct ContentView: View {
 
             // If `userTask` has been cancelled, the value will be `nil`.
             user = try await userTask?.value
-            message = &quot;&quot;
+            message = ""
 
             // Once we get the value from the task, clear it
             // as an indication that it is no longer running.
@@ -874,17 +874,17 @@ struct ContentView: View {
         }
     }
 
-    private func render(user: User) -&gt; some View {
+    private func render(user: User) -> some View {
         VStack(alignment: .leading) {
             let name = user.name
             let location = user.location
             let street = location.street
-            Text(&quot;\(name.title) \(name.first) \(name.last)&quot;)
+            Text("\(name.title) \(name.first) \(name.last)")
             // Using the String initializer prevents comma separators
             // when numbers are converted to strings.
-            Text(String(street.number) + &quot; &quot; + street.name)
-            Text(&quot;\(location.city), \(location.state)&quot;)
-            Text(&quot;\(location.country) \(location.postcode)&quot;)
+            Text(String(street.number) + " " + street.name)
+            Text("\(location.city), \(location.state)")
+            Text("\(location.country) \(location.postcode)")
             Text(user.email)
         }
     }
@@ -892,7 +892,7 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 20) {
             if userTask == nil {
-                Button(&quot;Get Another User&quot;) {
+                Button("Get Another User") {
                     Task { await fetchUser() }
                 }
                 .buttonStyle(.borderedProminent)
@@ -901,9 +901,9 @@ struct ContentView: View {
             if let user {
                 render(user: user)
             } else if userTask == nil {
-                Text(&quot;The task was cancelled.&quot;)
+                Text("The task was cancelled.")
             } else {
-                Button(&quot;Cancel&quot;) {
+                Button("Cancel") {
                     cancel()
                 }
                 .buttonStyle(.bordered)
@@ -916,7 +916,7 @@ struct ContentView: View {
             await fetchUser()
         }
         .alert(
-            &quot;Error&quot;,
+            "Error",
             isPresented: $isShowingError,
             actions: {},
             message: { Text(message) }
@@ -924,16 +924,16 @@ struct ContentView: View {
     }
 }
 </code></pre>
-<h3 id="task-tree" tabindex="-1">Task Tree</h3>
+<h3 id="task-tree">Task Tree</h3>
 <p>When a <code>Task</code> create other tasks, those are considered to be
 child tasks of their parent <code>Task</code>.
-This creates a &quot;task tree&quot;.</p>
+This creates a “task tree”.</p>
 <p>A parent <code>Task</code> is not considered finished
 until all of its child tasks complete.</p>
 <p>If an error is thrown by a <code>Task</code>, the <code>Task</code> ends
 and the error is propagated to its parent <code>Task</code>.
 Sibling tasks that are running or waiting to run are cancelled.</p>
-<h2 id="actors" tabindex="-1">Actors</h2>
+<h2 id="actors">Actors</h2>
 <p>Tasks can share mutable data across threads without danger of race conditions
 by using an <a href="https://developer.apple.com/documentation/swift/actor?v=1.1.1" rel="noopener" target="_blank">Actor</a>.</p>
 <p>Actors:</p>
@@ -1036,7 +1036,7 @@ struct Users: Decodable {
 // access an array of `User` objects and
 // call the `addUser` method to add another user.
 actor UsersActor {
-    let usersURL = URL(string: &quot;https://randomuser.me/api/&quot;)!
+    let usersURL = URL(string: "https://randomuser.me/api/")!
 
     // Multiple threads can safely access this property concurrently.
     var users: [User] = []
@@ -1112,17 +1112,17 @@ struct ContentView: View {
     @StateObject private var viewModel =
         UsersViewModel(usersActor: UsersActor())
 
-    func render(user: User) -&gt; some View {
+    func render(user: User) -> some View {
         VStack(alignment: .leading) {
             let name = user.name
             let location = user.location
             let street = location.street
-            Text(&quot;\(name.title) \(name.first) \(name.last)&quot;)
+            Text("\(name.title) \(name.first) \(name.last)")
             // Using the String initializer prevents comma separators
             // when numbers are converted to strings.
-            Text(String(street.number) + &quot; &quot; + street.name)
-            Text(&quot;\(location.city), \(location.state)&quot;)
-            Text(&quot;\(location.country) \(location.postcode)&quot;)
+            Text(String(street.number) + " " + street.name)
+            Text("\(location.city), \(location.state)")
+            Text("\(location.country) \(location.postcode)")
             Text(user.email)
         }
         .padding(.top)
@@ -1131,7 +1131,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack {
-                Button(&quot;Get Another User&quot;) {
+                Button("Get Another User") {
                     Task {
                         try await viewModel.addUser()
                     }
@@ -1139,7 +1139,7 @@ struct ContentView: View {
                 .buttonStyle(.borderedProminent)
 
                 if viewModel.running {
-                    Button(&quot;Cancel&quot;) {
+                    Button("Cancel") {
                         viewModel.cancel()
                     }
                 }
@@ -1153,7 +1153,7 @@ struct ContentView: View {
     }
 }
 </code></pre>
-<h2 id="sendable-types" tabindex="-1">Sendable Types</h2>
+<h2 id="sendable-types">Sendable Types</h2>
 <p>In order to pass data from one <code>Task</code> to another,
 the data must be thread-safe.
 This is achieved by using data types that conform to the <a href="https://developer.apple.com/documentation/swift/sendable?v=1.1.1" rel="noopener" target="_blank">Sendable</a> protocol.</p>
@@ -1169,7 +1169,7 @@ and have no mutable properties</li>
 <li>methods and closures that are marked with the <code>@Sendable</code> attribute
 (Such closures can only capture sendable types.)</li>
 </ul>
-<h2 id="main-actor" tabindex="-1">Main Actor</h2>
+<h2 id="main-actor">Main Actor</h2>
 <p><a href="https://developer.apple.com/documentation/swift/mainactor?v=1.1.1" rel="noopener" target="_blank">MainActor</a> is a system-provided global actor
 that performs its work on the main thread.</p>
 <p>One way to ensure that code runs in the main thread
@@ -1226,7 +1226,7 @@ DispatchQueue.main.async {
     ...
 }
 </code></pre>
-<h2 id="custom-global-actors" tabindex="-1">Custom Global Actors</h2>
+<h2 id="custom-global-actors">Custom Global Actors</h2>
 <p>Recall that the purpose of an actor is to enable tasks to
 share mutable data without danger of race conditions.
 To simplify accessing a custom actor from many functions,
@@ -1254,7 +1254,7 @@ struct MyStruct {
     ...
 }
 </code></pre>
-<h2 id="asyncsequence" tabindex="-1">AsyncSequence</h2>
+<h2 id="asyncsequence">AsyncSequence</h2>
 <p>An <a href="https://developer.apple.com/documentation/swift/asyncsequence?v=1.1.1" rel="noopener" target="_blank">AsyncSequence</a> supports iterating over a sequence of values
 that are obtained asynchronously.
 Unlike a <a href="https://developer.apple.com/documentation/swift/sequence?v=1.1.1" rel="noopener" target="_blank">Sequence</a>
@@ -1280,9 +1280,9 @@ when code begins asking for values.</p>
 and the results are cached.
 If an <code>AsyncSequence</code> is iterated over again, the cached results are returned.
 TODO: Does it cache all the values even if it is a very long sequence?
-TODO: See <a href="https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-book-code/issues/2">https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-book-code/issues/2</a>.</p>
+TODO: See <a href="https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-book-code/issues/2" rel="noopener" target="_blank">https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-book-code/issues/2</a>.</p>
 <p>It is not possible to ask an <code>AsyncSequence</code> for its count.</p>
-<p>The <a href="https://developer.apple.com/documentation/foundation/url?v=1.1.1" rel="noopener" target="_blank">URL</a> struct has a <a href="https://developer.apple.com/documentation/foundation/url/3767315-lines?v=1.1.1" rel="noopener" target="_blank">lines</a> property whose type is <code>AsyncLineSequence&lt;URL.AsyncBytes&gt;</code>.
+<p>The <a href="https://developer.apple.com/documentation/foundation/url?v=1.1.1" rel="noopener" target="_blank">URL</a> struct has a <a href="https://developer.apple.com/documentation/foundation/url/3767315-lines?v=1.1.1" rel="noopener" target="_blank">lines</a> property whose type is <code>AsyncLineSequence&#x3C;URL.AsyncBytes></code>.
 This enables iterating over the lines found at a URL asynchronously.</p>
 <p>The following code demonstrates
 reading the lines in a CSV file found at a <code>URL</code>.
@@ -1291,12 +1291,12 @@ There are ten columns in each row.
 The last column holds a state abbreviation.
 The <code>await</code> keyword must be used to wait for each line to be delivered.
 The lines are filtered to only get data for cities in a certain state.</p>
-<pre><code class="language-swift">let citiesURL = &quot;https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv&quot;
+<pre><code class="language-swift">let citiesURL = "https://people.sc.fsu.edu/~jburkardt/data/csv/cities.csv"
 let url = URL(string: citiesURL)!
 let citiesInMissouri = url.lines.filter { line in
-    let columns = line.components(separatedBy: &quot;,&quot;)
+    let columns = line.components(separatedBy: ",")
     let state = columns.last!.trimmingCharacters(in: .whitespaces)
-    return state == &quot;MO&quot;
+    return state == "MO"
 }
 for try await line in citiesInMissouri {
     print(line)
@@ -1311,10 +1311,10 @@ for try await line in citiesInMissouri {
 </ul>
 <p>Just like in synchronous <code>for</code> loops, the <code>continue</code> and <code>break</code> keywords
 can be used in <code>for await</code> and <code>for try await</code> loops.</p>
-<h2 id="task-local-variables" tabindex="-1">Task Local Variables</h2>
+<h2 id="task-local-variables">Task Local Variables</h2>
 <p>The <code>@TaskLocal</code> attribute can be applied to
 <code>static</code> property declarations in a type definition.
-This allows data, referred to as &quot;task local variables&quot;,
+This allows data, referred to as “task local variables”,
 to be shared across tasks in the task tree.
 These properties must be given a default value or have an optional type.</p>
 <p>Task local variables in type instances that are created in a task
@@ -1334,38 +1334,39 @@ For example:</p>
 spawned by the closure passed to the <code>withValue</code> method.</p>
 <p><code>SomeClass</code> in the examples above can be replaced by <code>Self</code>
 when inside the same class that defines the task local variable.</p>
-<h2 id="thread-sanitizer" tabindex="-1">Thread Sanitizer</h2>
+<h2 id="thread-sanitizer">Thread Sanitizer</h2>
 <p>A data race can occur when multiple concurrently running threads
 access the same memory and at least one is modifying the memory.
 This can cause unpredictable results, data corruption,
 and application crashes.</p>
 <p>Typically using actors and serial queues prevents data races.
 But they can still occur when using concurrent queues.
-The &quot;Thread Sanitizer&quot; (aka TSan) is a tool built into Xcode
+The “Thread Sanitizer” (aka TSan) is a tool built into Xcode
 that aids in detecting and debugging data races.
 It is supported on all 64-bit platforms.
 However, the app must be run in the Simulator rather than on a device.</p>
 <p>To use the Thread Sanitizer in Xcode:</p>
 <ul>
-<li>Select &quot;Edit Scheme...&quot; from the dropdown menu to the left of the
+<li>Select “Edit Scheme…” from the dropdown menu to the left of the
 device dropdown which appears at the top center of the Xcode window.</li>
-<li>Select the &quot;Run&quot; category in the left nav.</li>
-<li>Select the &quot;Diagnostics&quot; tab.</li>
-<li>Check the &quot;Thread Sanitizer&quot; checkbox.</li>
-<li>Click the &quot;Close&quot; button.</li>
+<li>Select the “Run” category in the left nav.</li>
+<li>Select the “Diagnostics” tab.</li>
+<li>Check the “Thread Sanitizer” checkbox.</li>
+<li>Click the “Close” button.</li>
 <li>Rebuild the app. This will add code
 around all memory accesses to log them.</li>
 <li>Run the app in the Simulator.
 This will decrease the performance of the app,
 running up to 20 times slower.</li>
-<li>See warnings about data races in the &quot;Issue Navigator&quot;
+<li>See warnings about data races in the “Issue Navigator”
 and on specific lines of code in code editor panels.</li>
 </ul>
-<h2 id="swift-async-algorithms" tabindex="-1">Swift Async Algorithms</h2>
+<h2 id="swift-async-algorithms">Swift Async Algorithms</h2>
 <p>The Apple open source package <a href="https://github.com/apple/swift-async-algorithms?v=1.1.1" rel="noopener" target="_blank">swift-async-algorithms</a>
 provides types and functions for operating on asynchronous sequences
 that provide values over time.
 Examples include <code>debounce</code> and <code>throttle</code>.</p>
 <p>In many cases this package can be used in place of the <a href="https://developer.apple.com/documentation/combine?v=1.1.1" rel="noopener" target="_blank">Combine</a> framework.</p>
-<p>To use this, add <code>AsyncAlgorithms</code> as a package dependency.</p>
-</article> </body></html>
+<p>To use this, add <code>AsyncAlgorithms</code> as a package dependency.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

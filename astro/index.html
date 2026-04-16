@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Astro</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Astro</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#top-benefits">Top Benefits</a></li><li><a href="#projects">Projects</a></li><ul><li><a href="#configuration">Configuration</a></li></ul><li><a href="#vs-code">VS Code</a></li><li><a href="#prettier">Prettier</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#pages">Pages</a></li><li><a href="#astro-components">Astro Components</a></li><ul><li><a href="#slots">Slots</a></li></ul><li><a href="#builtin-components">Builtin Components</a></li><li><a href="#shorthand-attributes">Shorthand Attributes</a></li><li><a href="#naming-conventions">Naming Conventions</a></li><li><a href="#styling">Styling</a></li><li><a href="#layouts">Layouts</a></li><li><a href="#imports">Imports</a></li><ul><li><a href="#path-aliases">Path Aliases</a></li></ul><li><a href="#images">Images</a></li><li><a href="#icons">Icons</a></li><li><a href="#dynamic-routes">Dynamic Routes</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#content-collections">Content Collections</a></li><ul><li><a href="#references">References</a></li><li><a href="#sanitizing-content">Sanitizing Content</a></li><li><a href="#pagination">Pagination</a></li><li><a href="#incremental-content-caching">Incremental Content Caching</a></li></ul><li><a href="#astro.glob">Astro.glob</a></li><li><a href="#content-management-systems-(cms)">Content Management Systems (CMS)</a></li><li><a href="#mdx">MDX</a></li><li><a href="#other-frameworks">Other Frameworks</a></li><ul><li><a href="#react">React</a></li><li><a href="#svelte">Svelte</a></li><li><a href="#alpine">Alpine</a></li><ul><li><a href="#defining-functions">Defining Functions</a></li><li><a href="#alpine-example">Alpine Example</a></li></ul><li><a href="#component-communication">Component Communication</a></li></ul><li><a href="#sharing-state-(nanostores)">Sharing State (nanostores)</a></li><ul><li><a href="#store-setup">Store Setup</a></li><li><a href="#persistence">Persistence</a></li><li><a href="#store-creation">Store Creation</a></li><li><a href="#react-component">React Component</a></li><li><a href="#svelte-component">Svelte Component</a></li><li><a href="#astro-component">Astro Component</a></li><li><a href="#page-component">Page Component</a></li></ul><li><a href="#directives">Directives</a></li><li><a href="#dev-toolbar">Dev Toolbar</a></li><li><a href="#custom-404-page">Custom 404 Page</a></li><li><a href="#view-transitions">View Transitions</a></li><li><a href="#prefetching">Prefetching</a></li><li><a href="#middleware">Middleware</a></li><li><a href="#cookies">Cookies</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#api-endpoints">API Endpoints</a></li><ul><li><a href="#form-submits">Form Submits</a></li></ul><li><a href="#htmx">HTMX</a></li><li><a href="#internationalization">Internationalization</a></li><li><a href="#tailwind-typography-plugin">Tailwind Typography Plugin</a></li><li><a href="#bun-instead-of-node">Bun instead of Node</a></li><li><a href="#starlight">Starlight</a></li><li><a href="#resources">Resources</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article><style>
+<!DOCTYPE html><html lang="en"> <head><title>Astro</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link active expanded" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Astro</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#top-benefits">Top Benefits</a></li><li><a href="#projects">Projects</a></li><ul><li><a href="#configuration">Configuration</a></li></ul><li><a href="#vs-code">VS Code</a></li><li><a href="#prettier">Prettier</a></li><li><a href="#directory-structure">Directory Structure</a></li><li><a href="#pages">Pages</a></li><li><a href="#astro-components">Astro Components</a></li><ul><li><a href="#slots">Slots</a></li></ul><li><a href="#builtin-components">Builtin Components</a></li><li><a href="#shorthand-attributes">Shorthand Attributes</a></li><li><a href="#naming-conventions">Naming Conventions</a></li><li><a href="#styling">Styling</a></li><li><a href="#layouts">Layouts</a></li><li><a href="#imports">Imports</a></li><ul><li><a href="#path-aliases">Path Aliases</a></li></ul><li><a href="#images">Images</a></li><li><a href="#icons">Icons</a></li><li><a href="#dynamic-routes">Dynamic Routes</a></li><li><a href="#event-handling">Event Handling</a></li><li><a href="#content-collections">Content Collections</a></li><ul><li><a href="#references">References</a></li><li><a href="#sanitizing-content">Sanitizing Content</a></li><li><a href="#pagination">Pagination</a></li><li><a href="#incremental-content-caching">Incremental Content Caching</a></li></ul><li><a href="#astroglob">Astro.glob</a></li><li><a href="#content-management-systems-cms">Content Management Systems (CMS)</a></li><li><a href="#mdx">MDX</a></li><li><a href="#other-frameworks">Other Frameworks</a></li><ul><li><a href="#react">React</a></li><li><a href="#svelte">Svelte</a></li><li><a href="#alpine">Alpine</a></li><ul><li><a href="#defining-functions">Defining Functions</a></li><li><a href="#alpine-example">Alpine Example</a></li></ul><li><a href="#component-communication">Component Communication</a></li></ul><li><a href="#sharing-state-nanostores">Sharing State (nanostores)</a></li><ul><li><a href="#store-setup">Store Setup</a></li><li><a href="#persistence">Persistence</a></li><li><a href="#store-creation">Store Creation</a></li><li><a href="#react-component">React Component</a></li><li><a href="#svelte-component">Svelte Component</a></li><li><a href="#astro-component">Astro Component</a></li><li><a href="#page-component">Page Component</a></li></ul><li><a href="#directives">Directives</a></li><li><a href="#dev-toolbar">Dev Toolbar</a></li><li><a href="#custom-404-page">Custom 404 Page</a></li><li><a href="#view-transitions">View Transitions</a></li><li><a href="#prefetching">Prefetching</a></li><li><a href="#middleware">Middleware</a></li><li><a href="#cookies">Cookies</a></li><li><a href="#table-of-contents">Table of Contents</a></li><li><a href="#api-endpoints">API Endpoints</a></li><ul><li><a href="#form-submits">Form Submits</a></li></ul><li><a href="#htmx">HTMX</a></li><li><a href="#internationalization">Internationalization</a></li><li><a href="#tailwind-typography-plugin">Tailwind Typography Plugin</a></li><li><a href="#bun-instead-of-node">Bun instead of Node</a></li><li><a href="#starlight">Starlight</a></li><li><a href="#resources">Resources</a></li><li><a href="#unorganized-content">Unorganized Content</a></li></ul></aside> <article> <style>
   figcaption {
     margin-top: 0.5rem;
     text-align: center;
@@ -13,20 +15,18 @@
 </style>
 <div class="row">
   <figure style="width: 40%">
-    <img alt="Astro logo" style="border: 0"
-      src="/blog/assets/astro-logo.svg?v=1.1.1">
+    <img alt="Astro logo" style="border: 0" src="/blog/assets/astro-logo.svg?v=1.1.1">
     <figcaption>Astro logo</figcaption>
   </figure>
   <figure style="width: 20%">
-    <img alt="Houston" style="border: 0"
-      src="/blog/assets/astro-houston.png?v=1.1.1">
-    <figcaption>Houston,<br />the Astro mascot</figcaption>
+    <img alt="Houston" style="border: 0" src="/blog/assets/astro-houston.png?v=1.1.1">
+    <figcaption>Houston,<br>the Astro mascot</figcaption>
   </figure>
 </div>
-<h2 id="overview" tabindex="-1">Overview</h2>
+<h2 id="overview">Overview</h2>
 <p><a href="https://astro.build?v=1.1.1" rel="noopener" target="_blank">Astro</a> is
 a free, open-source (MIT license) framework that is
-&quot;the web framework for content-driven websites&quot;.
+“the web framework for content-driven websites”.
 It can be used to generate static sites,
 build server-side rendered (SSR) sites,
 and define API endpoints.</p>
@@ -36,13 +36,13 @@ and doing more work on the server side.</p>
 Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.</p>
 <p>Astro uses the <a href="https://docs.astro.build/en/concepts/islands/?v=1.1.1" rel="noopener" target="_blank">Islands architecture</a>. Jason Miller (creator of the Preact framework)
 describes this approach as a way to
-&quot;render HTML pages on the server, and inject placeholders or slots
+“render HTML pages on the server, and inject placeholders or slots
 around highly dynamic regions that can then be
 hydrated on the client into small self-contained widgets,
-reusing their server-rendered initial HTML.&quot;
+reusing their server-rendered initial HTML.”
 Each island is a bit of JavaScript-enabled interactivity
 and the water around them is static HTML.</p>
-<p>Astro allows each &quot;island&quot; to use a different web UI frameworks,
+<p>Astro allows each “island” to use a different web UI frameworks,
 combining them into in a single web application.</p>
 <p>Astro supports SSR adapters for Cloudflare, Netlify, Node, and Vercel.</p>
 <p>Astro provides integrations with Tailwind for CSS styling
@@ -55,13 +55,13 @@ the page defined in the file <code>src/pages/foo/bar.astro</code>.</p>
 <a href="http://fredkschott.com/about/?v=1.1.1" rel="noopener" target="_blank">Fred K. Schott</a>.
 Fred previously worked on WebComponents at Google and was on the Polymer team.
 He also created <a href="https://www.snowpack.dev?v=1.1.1" rel="noopener" target="_blank">Snowpack</a>,
-&quot;a lightning-fast frontend build tool&quot;, that is no longer maintained.
+“a lightning-fast frontend build tool”, that is no longer maintained.
 The functionality of Snowpack was superseded by
 <a href="https://vitejs.dev?v=1.1.1" rel="noopener" target="_blank">Vite</a>
 which is used as the build tool in Astro.</p>
-<p>Development of Astro is managed by &quot;The Astro Technology Company&quot;
+<p>Development of Astro is managed by “The Astro Technology Company”
 which was founded in January 2022 with $7M in seed funding.</p>
-<h2 id="top-benefits" tabindex="-1">Top Benefits</h2>
+<h2 id="top-benefits">Top Benefits</h2>
 <p>The top benefits of using Astro include:</p>
 <ul>
 <li>sends less JavaScript code (zero by default)
@@ -70,7 +70,7 @@ to browsers resulting in faster startup</li>
 <li>provides image optimization</li>
 <li>makes static site generation (SSG) easy</li>
 <li>supports server-side rendering (SSR) of pages</li>
-<li>optimizes static content by confining dynamic behavior to &quot;islands&quot;</li>
+<li>optimizes static content by confining dynamic behavior to “islands”</li>
 <li>supports TypeScript for providing intellisense
 and detecting errors while writing code</li>
 <li>can describe pages, components, and content with Markdown</li>
@@ -91,7 +91,7 @@ generate static pages from data at build time</li>
 (but combining the use of Alpine provides excellent support)</li>
 <li>fewer available component libraries than with other frameworks</li>
 </ul>
-<h2 id="projects" tabindex="-1">Projects</h2>
+<h2 id="projects">Projects</h2>
 <p>To create an Astro project, enter <code>npm create astro@latest</code>.
 This will prompt for the following:</p>
 <ul>
@@ -99,33 +99,32 @@ This will prompt for the following:</p>
 <p>permission to install create-astro</p>
 </li>
 <li>
-<p>&quot;Where should we created your new project?&quot;</p>
+<p>“Where should we created your new project?”</p>
 <p>Enter the name of a new subdirectory to be created.
-To create the project in the current directory, enter only &quot;.&quot;.
-To enter a relative path, begin with &quot;./&quot;.</p>
+To create the project in the current directory, enter only ”.”.
+To enter a relative path, begin with ”./”.</p>
 </li>
 <li>
-<p>&quot;How would you like to start your new project?&quot;</p>
-<p>The options are &quot;Include sample files&quot;, &quot;Use blog template&quot;, and &quot;Empty&quot;.</p>
+<p>“How would you like to start your new project?”</p>
+<p>The options are “Include sample files”, “Use blog template”, and “Empty”.</p>
 </li>
 <li>
-<p>&quot;Install dependencies?&quot; Yes or No</p>
-<p>Press return to accept the default of &quot;Yes&quot;.</p>
+<p>“Install dependencies?” Yes or No</p>
+<p>Press return to accept the default of “Yes”.</p>
 </li>
 <li>
-<p>&quot;Do you plan to write TypeScript?&quot; Yes or No</p>
-<p>Press return to accept the default of &quot;Yes&quot;.</p>
+<p>“Do you plan to write TypeScript?” Yes or No</p>
+<p>Press return to accept the default of “Yes”.</p>
 </li>
 <li>
-<p>&quot;How strict should TypeScript be? Strict, Strictest, or Relaxed</p>
-<p>The default is &quot;Strict&quot;, but its best to select &quot;Strictest&quot;.</p>
+<p>“How strict should TypeScript be? Strict, Strictest, or Relaxed</p>
+<p>The default is “Strict”, but its best to select “Strictest”.</p>
 </li>
 <li>
-<p>&quot;Initialize a new git repository? Yes or No</p>
+<p>“Initialize a new git repository? Yes or No</p>
 </li>
 </ul>
-<p><img alt="Astro create project" style="width: 70%"
-  src="/blog/assets/astro-create-project.png?v=1.1.1"></p>
+<p><img alt="Astro create project" style="width: 70%" src="/blog/assets/astro-create-project.png?v=1.1.1"></p>
 <p>Once the project is created, follow the instructions that are output.</p>
 <ul>
 <li><code>cd</code> to the newly created directory.</li>
@@ -149,12 +148,12 @@ Then it runs <code>astro build</code> which creates a <code>dist</code> director
 containing all the files needed to deploy the site.
 The output lists all the generated files.</p>
 <p>To preview the built site, enter <code>npm run preview</code> and browse localhost:4321.</p>
-<p>To see a list of the available &quot;astro&quot; commands, enter <code>npm run astro</code>.</p>
+<p>To see a list of the available “astro” commands, enter <code>npm run astro</code>.</p>
 <p>To open the Astro documentation in the default web browser,
 enter <code>npm run astro docs</code>. For help on a specific topic,
 click in the search input or press the slash key to move focus there.
 Then enter a topic.</p>
-<h3 id="configuration" tabindex="-1">Configuration</h3>
+<h3 id="configuration">Configuration</h3>
 <p>The file <code>astro.config.mjs</code> defines Astro configuration options
 including adapters (like node) and integrations (like Tailwind).</p>
 <p>While this file can be manually modified,
@@ -178,37 +177,37 @@ export default defineConfig({
 </code></pre>
 <p>The values for <code>output</code> and <code>adapter</code> shown above result from
 adding an adapter with the command <code>npx astro add {adapter-name}</code>.
-In this case the adapter name was &quot;node&quot;.</p>
+In this case the adapter name was “node”.</p>
 <p>The <code>output</code> property can be set to the following values:</p>
-<table>
-<thead>
-<tr>
-<th><code>output</code> value</th>
-<th>Meaning</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>'static'</code></td>
-<td>All pages are generated at build time. (default)</td>
-</tr>
-<tr>
-<td><code>'hybrid'</code></td>
-<td>All pages default to being generated at build time.</td>
-</tr>
-<tr>
-<td><code>'server'</code></td>
-<td>All pages default to being generated on the server when requested.</td>
-</tr>
-</tbody>
-</table>
-<p>Perhaps a better name for &quot;hybrid&quot; would have been &quot;ssg&quot; (at build time)
-and a better name for &quot;server&quot; would have been &quot;ssr&quot; (on request).</p>
-<p>In &quot;hybrid&quot; mode, to cause a specific page to NOT be generated at build time,
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th><code>output</code> value</th><th>Meaning</th></tr></thead><tbody><tr><td><code>'static'</code></td><td>All pages are generated at build time. (default)</td></tr><tr><td><code>'hybrid'</code></td><td>All pages default to being generated at build time.</td></tr><tr><td><code>'server'</code></td><td>All pages default to being generated on the server when requested.</td></tr></tbody></table>
+<p>Perhaps a better name for “hybrid” would have been “ssg” (at build time)
+and a better name for “server” would have been “ssr” (on request).</p>
+<p>In “hybrid” mode, to cause a specific page to NOT be generated at build time,
 add the following line in the component script:</p>
 <pre><code class="language-js">export const prerender = false;
 </code></pre>
-<p>In &quot;server&quot; mode, to cause a specific page to be generated at build time,
+<p>In “server” mode, to cause a specific page to be generated at build time,
 add the following line in the component script:</p>
 <pre><code class="language-js">export const prerender = true;
 </code></pre>
@@ -216,28 +215,28 @@ add the following line in the component script:</p>
 that is to be generated at build time
 does not export a <code>getStaticPaths</code> function,
 the following error message will be output by <code>npm run build</code>:
-&quot;[GetStaticPathsRequired] <code>getStaticPaths()</code> function
-is required for dynamic routes.&quot;</p>
+“[GetStaticPathsRequired] <code>getStaticPaths()</code> function
+is required for dynamic routes.”</p>
 <p>If a page for a dynamic route
 that is to be generated on the server when requested
 does define a <code>getStaticPaths</code> function, it will be ignored
 and the following warning message will be output by <code>npm run build</code>:
-&quot;[WARN] [router] getStaticPaths() ignored
-in dynamic page /src/pages/{path}/[{param}].astro.&quot;</p>
-<p>When <code>output</code> is set to &quot;server&quot; or &quot;hybrid&quot;,
+“[WARN] [router] getStaticPaths() ignored
+in dynamic page /src/pages/{path}/[{param}].astro.”</p>
+<p>When <code>output</code> is set to “server” or “hybrid”,
 a server adapter must be installed.
 Otherwise running <code>npm run build</code> will output the error message
-&quot;[NoAdapterInstalled] Cannot use <code>output: 'server'</code> or <code>output: 'hybrid'</code>
+“[NoAdapterInstalled] Cannot use <code>output: 'server'</code> or <code>output: 'hybrid'</code>
 without an adapter. Please install and configure the appropriate server adapter
-for your final deployment.&quot;</p>
+for your final deployment.”</p>
 <p>Astro maintains SSR adapters for Cloudflare, Netlify, Node, and Vercel.
 There are also community-maintained SSR adapters for AWS, Deno, and more.</p>
-<p>For an excellent video on Astro rendering options, see <a href="https://www.youtube.com/watch?v=aIHRjloFASU&amp;v=1.1.1" rel="noopener" target="_blank">Choosing between SSR, SSG, and dynamic rendering in Astro</a>.</p>
-<h2 id="vs-code" tabindex="-1">VS Code</h2>
+<p>For an excellent video on Astro rendering options, see <a href="https://www.youtube.com/watch?v=aIHRjloFASU&#x26;v=1.1.1" rel="noopener" target="_blank">Choosing between SSR, SSG, and dynamic rendering in Astro</a>.</p>
+<h2 id="vs-code">VS Code</h2>
 <p>If you use VS Code as your editor, consider installing these extensions:</p>
 <ul>
 <li>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode&amp;v=1.1.1" rel="noopener" target="_blank">Astro</a> from astro.build</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode&#x26;v=1.1.1" rel="noopener" target="_blank">Astro</a> from astro.build</p>
 <p>This provides language support for <code>.astro</code> files
 using the Astro language server.
 It includes syntax highlighting, intellisense code completions,
@@ -248,40 +247,40 @@ code folding,
 and more.</p>
 </li>
 <li>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=astro-build.houston&amp;v=1.1.1" rel="noopener" target="_blank">Houston</a> from astro.build</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=astro-build.houston&#x26;v=1.1.1" rel="noopener" target="_blank">Houston</a> from astro.build</p>
 <p>Houston is the Astro mascot.</p>
 <p>This extension provides a color theme using Astro colors which include
-&quot;cool blues, minty greens, and soft purples&quot;.</p>
-<p>This extension also adds a &quot;HOUSTON&quot; section to the Explorer pane
+“cool blues, minty greens, and soft purples”.</p>
+<p>This extension also adds a “HOUSTON” section to the Explorer pane
 which becomes visible after restarting VS Code.
 This displays the mascot with a smiley face if the project has no errors.
 If there are errors, it displays a frowning face, sad face, or crying face
 depending on the number of errors.</p>
-<p>Error messages are displayed in the &quot;Problems&quot; panel.
+<p>Error messages are displayed in the “Problems” panel.
 When this panel is not visible, it can be displayed by
-selecting &quot;Problems: Focus on Problems View&quot; from the command palette.
+selecting “Problems: Focus on Problems View” from the command palette.
 It can also be toggled by pressing ctrl-shift-m (cmd-shift-m on macOS).</p>
 </li>
 <li>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx&amp;v=1.1.1" rel="noopener" target="_blank">MDX</a> from unified</p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx&#x26;v=1.1.1" rel="noopener" target="_blank">MDX</a> from unified</p>
 <p>This provides language support for <code>.mdx</code> files.</p>
 </li>
 <li>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode&amp;v=1.1.1" rel="noopener" target="_blank">Prettier - Code Formatter</a> from <a href="http://prettier.io">prettier.io</a></p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode&#x26;v=1.1.1" rel="noopener" target="_blank">Prettier - Code Formatter</a> from prettier.io</p>
 <p>This formats code using <a href="https://prettier.io?v=1.1.1" rel="noopener" target="_blank">Prettier</a>.</p>
 <p>To configure code formatting, open any <code>.astro</code> file,
-open the Command Palette, and enter &quot;Format Document&quot;.
+open the Command Palette, and enter “Format Document”.
 It will prompt for configuring this and automatically do so.</p>
 </li>
 <li>
-<p><a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss&amp;v=1.1.1" rel="noopener" target="_blank">Tailwind CSS Intellisense</a> from <a href="http://tailwindcss.com">tailwindcss.com</a></p>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss&#x26;v=1.1.1" rel="noopener" target="_blank">Tailwind CSS Intellisense</a> from tailwindcss.com</p>
 <p>This provides autocomplete, syntax highlighting, and linting
 for Tailwind CSS classes.
 When entering Tailwind class names for colors,
 it provides color preview swatches.</p>
 </li>
 </ul>
-<h2 id="prettier" tabindex="-1">Prettier</h2>
+<h2 id="prettier">Prettier</h2>
 <p>The steps to configure an Astro project to use Prettier are:</p>
 <ul>
 <li>
@@ -292,72 +291,72 @@ it provides color preview swatches.</p>
 <p>Some suggested options are shown here.
 The only one that is required is <code>plugins</code>.</p>
 <pre><code class="language-json">{
-  &quot;arrowParens&quot;: &quot;avoid&quot;,
-  &quot;astroAllowShorthand&quot;: true,
-  &quot;bracketSpacing&quot;: false,
-  &quot;singleQuote&quot;: true,
-  &quot;trailingComma&quot;: &quot;none&quot;,
-  &quot;plugins&quot;: [&quot;prettier-plugin-astro&quot;]
+  "arrowParens": "avoid",
+  "astroAllowShorthand": true,
+  "bracketSpacing": false,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "plugins": ["prettier-plugin-astro"]
 }
 </code></pre>
 </li>
 <li>
 <p>Add the following script in <code>package.json</code>.</p>
-<pre><code class="language-json">&quot;format&quot;: &quot;prettier --write '{public,src}/**/*.{astro,css,html,js,ts}'&quot;,
+<pre><code class="language-json">"format": "prettier --write '{public,src}/**/*.{astro,css,html,js,ts}'",
 </code></pre>
 </li>
 </ul>
 <p>To format all the files in the project, enter <code>npm run format</code>.</p>
-<h2 id="directory-structure" tabindex="-1">Directory Structure</h2>
+<h2 id="directory-structure">Directory Structure</h2>
 <p>The <code>public</code> directory holds assets such as audio, images, and video
 that will be served as-is and not affected by any optimizations.</p>
 <p>Common subdirectories of the <code>src</code> directory are described in the table below.
 The only special names are <code>pages</code> and <code>content</code>.
 There are common names used for the others, but they are not enforced.</p>
-<table>
-<thead>
-<tr>
-<th>Directory Name</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>src/components</code></td>
-<td>This contains component source files that can be used in page components.</td>
-</tr>
-<tr>
-<td><code>src/content</code></td>
-<td>This holds collections of content files.</td>
-</tr>
-<tr>
-<td><code>src/images</code></td>
-<td>This holds images that will be used with the provided <code>Image</code> component in order to optimized them.</td>
-</tr>
-<tr>
-<td><code>src/layouts</code></td>
-<td>This holds component source files that typically provide boilerplate HTML used by pages.</td>
-</tr>
-<tr>
-<td><code>src/pages</code></td>
-<td>This contains component source files that represent complete pages of the app or API endpoints. Initially only <code>index.astro</code> is present.</td>
-</tr>
-<tr>
-<td><code>src/styles</code></td>
-<td>This contains CSS files that define global styling.</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Directory Name</th><th>Purpose</th></tr></thead><tbody><tr><td><code>src/components</code></td><td>This contains component source files that can be used in page components.</td></tr><tr><td><code>src/content</code></td><td>This holds collections of content files.</td></tr><tr><td><code>src/images</code></td><td>This holds images that will be used with the provided <code>Image</code> component in order to optimized them.</td></tr><tr><td><code>src/layouts</code></td><td>This holds component source files that typically provide boilerplate HTML used by pages.</td></tr><tr><td><code>src/pages</code></td><td>This contains component source files that represent complete pages of the app or API endpoints. Initially only <code>index.astro</code> is present.</td></tr><tr><td><code>src/styles</code></td><td>This contains CSS files that define global styling.</td></tr></tbody></table>
 <p>For site-wide constants, consider creating the file <code>src/constants.ts</code>
 that export the constants.
 In files that need the constants, import them from this file.</p>
-<h2 id="pages" tabindex="-1">Pages</h2>
+<h2 id="pages">Pages</h2>
 <p>Pages are defined by files in the <code>src/pages</code> directory.</p>
 <p>Think of pages like oceans and components like islands
 in the islands architecture.
 Islands are where interactivity can reside.
 Examining the source of a page containing islands
-reveals that Astro uses custom elements named &quot;<code>astro-island</code>&quot;.</p>
+reveals that Astro uses custom elements named “<code>astro-island</code>”.</p>
 <p>Pages can be described by
 Astro (<code>.astro</code>), HTML (<code>.html</code>), Markdown (<code>.md</code>), and MDX (<code>.mdx</code>) files.
 Pages cannot be described by components from frameworks like React and Svelte
@@ -368,8 +367,7 @@ that compiles page files into HTML files.</p>
 <p>The URL path of a page is determined by its subdirectory path and file name.</p>
 <p>For example, the file <code>src/pages/demo/colors.md</code>
 defines the page at the URL path <code>/demo/colors/</code>.</p>
-<p><img alt="Astro colors page" style="width: 25%"
-  src="/blog/assets/astro-colors-page.png?v=1.1.1"></p>
+<p><img alt="Astro colors page" style="width: 25%" src="/blog/assets/astro-colors-page.png?v=1.1.1"></p>
 <pre><code class="language-md">---
 layout: ../layouts/Layout.astro
 ---
@@ -386,26 +384,26 @@ This can include <code>link</code> tags that refer to CSS files used to style th
 <p>This same page can be implemented as an Astro component
 in the file <code>src/pages/demo/colors.astro</code> as follows:</p>
 <pre><code class="language-js">---
-import Layout from &quot;../../layouts/Layout.astro&quot;;
+import Layout from "../../layouts/Layout.astro";
 
-const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+const colors = ["red", "green", "blue"];
 ---
 
-&lt;Layout&gt;
-  &lt;h1&gt;Colors&lt;/h1&gt;
-  &lt;ul&gt;
-    {colors.map((color) =&gt; &lt;li&gt;{color}&lt;/li&gt;)}
-  &lt;/ul&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;h1>Colors&#x3C;/h1>
+  &#x3C;ul>
+    {colors.map((color) => &#x3C;li>{color}&#x3C;/li>)}
+  &#x3C;/ul>
+&#x3C;/Layout>
 </code></pre>
 <p>Unlike with many other web frameworks, Astro does not require
 specifying a key for repeated elements like the <code>li</code> elements above.
 This is because Astro generates the elements at build-time and
-doesn't use client-side JavaScript to add, modify, and delete them
+doesn’t use client-side JavaScript to add, modify, and delete them
 based on changes to collections.</p>
 <p>A page can return the result of calling <code>Astro.redirect({url})</code>
 to redirect to another page.</p>
-<h2 id="astro-components" tabindex="-1">Astro Components</h2>
+<h2 id="astro-components">Astro Components</h2>
 <p>Astro components are defined in source files with a <code>.astro</code> file extension.
 These describe HTML that will be rendered on the server.
 This can contain three sections:</p>
@@ -413,8 +411,8 @@ This can contain three sections:</p>
 <li>
 <p>optional component script</p>
 <p>This section begins and ends with lines that only contain three dashes,
-referred to as &quot;code fences&quot;.
-This is is the same syntax that is used in Markdown files for &quot;front matter&quot;.</p>
+referred to as “code fences”.
+This is is the same syntax that is used in Markdown files for “front matter”.</p>
 <p>Write JavaScript code inside the code fences.
 If TypeScript was enabled for the project, it can be used here.</p>
 <p>The code in component scripts only runs at build time or during SSR.
@@ -431,7 +429,7 @@ that appears after the component script.</p>
 <li>
 <p>declare types, such as the type of the props it accepts</p>
 <p>For example:</p>
-<pre><code class="language-ts">// This can be defined with either &quot;type&quot; or &quot;interface&quot;.
+<pre><code class="language-ts">// This can be defined with either "type" or "interface".
 type Props {
   prop1?: string; // optional prop
   prop2: number; // required prop
@@ -462,13 +460,13 @@ Unlike JSX, this content is not pure XML.
 For example, it an contain unclosed elements like <code>!doctype</code>
 and self closing elements like <code>br</code> and <code>hr</code>.</p>
 <p>A root element is not required,
-but the fragment syntax from React is supported (<code>&lt;&gt;...&lt;/&gt;</code>).</p>
+but the fragment syntax from React is supported (<code>&#x3C;>...&#x3C;/></code>).</p>
 <p>To insert the value of a JavaScript expression, use <code>{expression}</code>.
 This can appear in element attribute values and content.</p>
 <p>Conditional logic uses the same syntax as in React.
-For example, <code>{condition &amp;&amp; HTML}</code> or <code>{condition ? HTML1 : HTML2}</code>.</p>
+For example, <code>{condition &#x26;&#x26; HTML}</code> or <code>{condition ? HTML1 : HTML2}</code>.</p>
 <p>Iteration also uses the same approach as in React.
-For example, <code>{collection.map(element =&gt; HTML)}</code>.</p>
+For example, <code>{collection.map(element => HTML)}</code>.</p>
 <p>Expressions in curly braces are not reactive.
 <code>.astro</code> files are rendered on the server only one time.</p>
 </li>
@@ -482,8 +480,8 @@ reusable, customizable <code>Button</code> component, see <a href="https://githu
 This uses TypeScript to describe all the supported props
 which provides intellisense and error checking.</p>
 <p>An Astro component can render another instances of itself recursively
-using <code>&lt;Astro.self {props} /&gt;</code>.</p>
-<h3 id="slots" tabindex="-1">Slots</h3>
+using <code>&#x3C;Astro.self {props} /></code>.</p>
+<h3 id="slots">Slots</h3>
 <p>The HTML of a component can contain a <code>slot</code> element
 which marks where content will be inserted.
 For example, the following component in <code>src/components/Border.astro</code>
@@ -493,7 +491,7 @@ interface Props {
   color?: string;
 }
 
-const { color = &quot;black&quot; } = Astro.props;
+const { color = "black" } = Astro.props;
 
 const style = {
   borderColor: color,
@@ -501,142 +499,133 @@ const style = {
 };
 ---
 
-&lt;div class=&quot;border&quot; {style}&gt;
-  &lt;slot /&gt;
-&lt;/div&gt;
+&#x3C;div class="border" {style}>
+  &#x3C;slot />
+&#x3C;/div>
 
-&lt;style&gt;
+&#x3C;style>
   .border {
     border-width: 3px;
     border-radius: 1rem;
     display: inline-block;
     padding: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>The <code>slot</code> element can include content to be used when none is provided.
-For example, the <code>&lt;slot /&gt;</code> element above
-can be replaced by <code>&lt;slot&gt;Press Me&lt;/slot&gt;</code>.</p>
+For example, the <code>&#x3C;slot /></code> element above
+can be replaced by <code>&#x3C;slot>Press Me&#x3C;/slot></code>.</p>
 <p>This <code>Border</code> component can be used as follows.
 Note how content is included.</p>
-<p><img alt="Astro component with slot" style="border: none; width: 30%"
-  src="/blog/assets/astro-component-with-slot.png?v=1.1.1" /></p>
-<pre><code class="language-html">&lt;Border color=&quot;red&quot;&gt;
+<p><img alt="Astro component with slot" style="border: none; width: 30%" src="/blog/assets/astro-component-with-slot.png?v=1.1.1"></p>
+<pre><code class="language-html">&#x3C;Border color="red">
   What is with this code?
-  &lt;br /&gt;
+  &#x3C;br />
   Oh my, looks like I wrote it.
-  &lt;br /&gt;
+  &#x3C;br />
   What was I thinking?
-&lt;/Border&gt;
+&#x3C;/Border>
 </code></pre>
-<h2 id="builtin-components" tabindex="-1">Builtin Components</h2>
+<h2 id="builtin-components">Builtin Components</h2>
 <p>Astro provides the following components:</p>
 <ul>
 <li>
-<p><code>&lt;Code code={codeString} lang=&quot;{lang}&quot; /&gt;</code></p>
+<p><code>&#x3C;Code code={codeString} lang="{lang}" /></code></p>
 <p>This renders source code with syntax highlighting provided by
 <a href="https://github.com/shikijs/shiki#?v=1.1.1" rel="noopener" target="_blank">Shiki</a>.
-Shiki &quot;generates HTML that looks exactly like your code in VS Code&quot;.</p>
+Shiki “generates HTML that looks exactly like your code in VS Code”.</p>
 <p>This component takes the optional props <code>theme</code>, <code>inline</code>, and <code>wrap</code>.</p>
 <p>Import this component with:</p>
 <pre><code class="language-ts">import {Code} from 'astro:components';
 </code></pre>
 <p>Render this component with:</p>
-<pre><code class="language-html">&lt;code code=&quot;{codeString.trim()}&quot; lang=&quot;js&quot; /&gt;
+<pre><code class="language-html">&#x3C;code code="{codeString.trim()}" lang="js" />
 </code></pre>
 <p>Add styling with:</p>
-<pre><code class="language-html">&lt;style is:global&gt;
+<pre><code class="language-html">&#x3C;style is:global>
   .astro-code {
     padding: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
-<p>For more detail see <a
-href="https://docs.astro.build/en/reference/api-reference/#code-"
-target="_blank">Code</a>.</p>
+<p>For more detail see <a href="https://docs.astro.build/en/reference/api-reference/#code-" target="_blank">Code</a>.</p>
 </li>
 <li>
-<p><code>&lt;Content /&gt;</code></p>
+<p><code>&#x3C;Content /></code></p>
 <p>This renders the content of a content collection entry.
 See the <a href="#content-collections">Content Collections</a> section.</p>
 </li>
 <li>
-<p><code>&lt;Debug name={value} /&gt;</code></p>
+<p><code>&#x3C;Debug name={value} /></code></p>
 <p>This renders a red bar with white text that
-displays &quot;DEBUG&quot; followed by the given name,
+displays “DEBUG” followed by the given name,
 followed by a black bar with white text that displays the given value.
 It is alternative to <code>console.log</code> that seems worse.</p>
-<p>For more detail see <a
-href="https://docs.astro.build/en/reference/api-reference/#debug-"
-target="_blank">Debug</a>.</p>
+<p>For more detail see <a href="https://docs.astro.build/en/reference/api-reference/#debug-" target="_blank">Debug</a>.</p>
 </li>
 <li>
-<p><code>&lt;Fragment set:html={htmlString} /&gt;</code></p>
+<p><code>&#x3C;Fragment set:html={htmlString} /></code></p>
 <p>This renders multiple HTML elements without a wrapping element.
 This component does not need to be imported.</p>
 </li>
 <li>
-<p><code>&lt;Image /&gt;</code></p>
+<p><code>&#x3C;Image /></code></p>
 <p>This renders an optimized images.
 This component does not need to be imported.
 See the <a href="#images">Images</a> section.</p>
 </li>
 <li>
-<p><code>&lt;Picture /&gt;</code></p>
+<p><code>&#x3C;Picture /></code></p>
 <p>This is an alternative to the <code>Image</code> component that displays
 a responsive image selected from possible formats and sizes.</p>
 <p>For example:</p>
 <pre><code class="language-html">---
 import { Picture } from 'astro:assets';
-import myDog from &quot;../images/dog.png&quot;;
+import myDog from "../images/dog.png";
 ---
 
-&lt;Picture alt=&quot;my dog&quot; src={myDog} formats={[&quot;webp&quot;, &quot;avif&quot;]} width={400} /&gt;
+&#x3C;Picture alt="my dog" src={myDog} formats={["webp", "avif"]} width={400} />
 </code></pre>
-<p>For more detail see <a
-href="https://docs.astro.build/en/guides/images/#picture-"
-target="_blank">Picture</a>.</p>
+<p>For more detail see <a href="https://docs.astro.build/en/guides/images/#picture-" target="_blank">Picture</a>.</p>
 </li>
 <li>
-<p><code>&lt;Prism /&gt;</code></p>
+<p><code>&#x3C;Prism /></code></p>
 <p>This is an alternative to the <code>Code</code> component that the uses the
 <a href="https://prismjs.com?v=1.1.1" rel="noopener" target="_blank">Prism</a> library.
 It must be installed with <code>npm install @astrojs/prism</code>.</p>
 <p>Download a theme CSS file from <a href="https://github.com/PrismJS/prism-themes/tree/master/themes?v=1.1.1" rel="noopener" target="_blank">PrismJS/prism-themes</a> and import it.
 For example:</p>
-<pre><code class="language-html">import &quot;../styles/prism-gruvbox-dark.css&quot;;
+<pre><code class="language-html">import "../styles/prism-gruvbox-dark.css";
 </code></pre>
 <p>Import this component with:</p>
 <pre><code class="language-ts">import {Prism} from '@astrojs/prism';
 </code></pre>
 <p>Render this component with:</p>
-<pre><code class="language-html">&lt;Prism code=&quot;{codeString.trim()}&quot; lang=&quot;js&quot; /&gt;
+<pre><code class="language-html">&#x3C;Prism code="{codeString.trim()}" lang="js" />
 </code></pre>
-<p>For more detail see <a
-href="https://docs.astro.build/en/reference/api-reference/#prism-"
-target="_blank">Prism</a>.</p>
+<p>For more detail see <a href="https://docs.astro.build/en/reference/api-reference/#prism-" target="_blank">Prism</a>.</p>
 </li>
 <li>
-<p><code>&lt;ViewTransitions /&gt;</code></p>
+<p><code>&#x3C;ViewTransitions /></code></p>
 <p>This enables the use of view transitions.
 See the <a href="#view-transitions">View Transitions</a> section.</p>
 </li>
 </ul>
-<h2 id="shorthand-attributes" tabindex="-1">Shorthand Attributes</h2>
+<h2 id="shorthand-attributes">Shorthand Attributes</h2>
 <p>Astro supports shorthand syntax for attributes like Svelte.
-For example, <code>&lt;Layout title={title}&gt;</code> can be written as <code>&lt;Layout {title}&gt;</code>.</p>
-<h2 id="naming-conventions" tabindex="-1">Naming Conventions</h2>
+For example, <code>&#x3C;Layout title={title}></code> can be written as <code>&#x3C;Layout {title}></code>.</p>
+<h2 id="naming-conventions">Naming Conventions</h2>
 <p>Files under the <code>src/pages</code> directory have lowercase names
 because their names are used in URL paths.</p>
 <p>Files under the <code>src/components</code> directory have PascalCase names
 because their names become UI component names.</p>
-<h2 id="styling" tabindex="-1">Styling</h2>
+<h2 id="styling">Styling</h2>
 <p>As described above, components defined in <code>.astro</code> files can include
 a <code>style</code> tag that defines CSS rules that are scoped to the component.</p>
 <p>Global styles can be defined in three ways.</p>
 <p>The first option is to add a <code>link</code> tag to the <code>head</code> section of the HTML
 that refers to a CSS file.</p>
-<p>The second option is to include a <code>&lt;style is:global&gt;</code> tag
+<p>The second option is to include a <code>&#x3C;style is:global></code> tag
 in a layout source file that is used by many pages.</p>
 <p>The third option is to define a file like <code>global.css</code>
 in the <code>src</code> or <code>src/styles</code> directory and include it
@@ -645,7 +634,7 @@ in all the page components that wish to use it as follows.</p>
 </code></pre>
 <p>TODO: Is the third option the only one that supports hot reload of the browser
 when styles are modified?</p>
-<h2 id="layouts" tabindex="-1">Layouts</h2>
+<h2 id="layouts">Layouts</h2>
 <p>By convention, the <code>src/layouts</code> directory contains <code>.astro</code> files
 that describe common content that should wrap around the content of pages.
 Any number of layout components can be defined.
@@ -653,7 +642,7 @@ Each page can choose the layout component it wishes to wrap its content inside.<
 <p>Layout components can do all the things other components can do including
 taking props, importing files, and using other components.</p>
 <p>For example, the file <code>src/layouts/Layout.astro</code> could contain the following.
-Note the use of <code>&lt;slot /&gt;</code> to specify where
+Note the use of <code>&#x3C;slot /></code> to specify where
 content will be inserted into the layout.
 Only one <code>slot</code> element can be used
 and named slots are not supported.</p>
@@ -664,42 +653,42 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-&lt;!doctype html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;meta name=&quot;description&quot; content=&quot;Astro description&quot; /&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width&quot; /&gt;
-    &lt;link rel=&quot;icon&quot; type=&quot;image/svg+xml&quot; href=&quot;/favicon.svg&quot; /&gt;
-    &lt;meta name=&quot;generator&quot; content={Astro.generator} /&gt;
-    &lt;title&gt;{title}&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;slot /&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-&lt;style is:global&gt;
+&#x3C;!doctype html>
+&#x3C;html lang="en">
+  &#x3C;head>
+    &#x3C;meta charset="UTF-8" />
+    &#x3C;meta name="description" content="Astro description" />
+    &#x3C;meta name="viewport" content="width=device-width" />
+    &#x3C;link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    &#x3C;meta name="generator" content={Astro.generator} />
+    &#x3C;title>{title}&#x3C;/title>
+  &#x3C;/head>
+  &#x3C;body>
+    &#x3C;slot />
+  &#x3C;/body>
+&#x3C;/html>
+&#x3C;style is:global>
   html {
     font-family: system-ui, sans-serif;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>This layout can be used in a page <code>.astro</code> file as follows.
 Attribute syntax is used to pass props to components.
 Note how the <code>title</code> prop value is passed to the <code>Layout</code> component.</p>
 <pre><code class="language-js">---
-import Layout from &quot;../layouts/Layout.astro&quot;;
+import Layout from "../layouts/Layout.astro";
 ---
 
-&lt;Layout title=&quot;My Page&quot;&gt;
-  &lt;main&gt;
-    &lt;h1&gt;My Page&lt;/h1&gt;
-  &lt;/main&gt;
-&lt;/Layout&gt;
+&#x3C;Layout title="My Page">
+  &#x3C;main>
+    &#x3C;h1>My Page&#x3C;/h1>
+  &#x3C;/main>
+&#x3C;/Layout>
 </code></pre>
 <p>Layouts can be nested. For example, a page component <code>MyPage</code>
 can wrap itself in <code>LayoutInner</code> which wraps itself in <code>LayoutOuter</code>.</p>
-<h2 id="imports" tabindex="-1">Imports</h2>
+<h2 id="imports">Imports</h2>
 <p>Astro supports importing many kinds of file in JavaScript code.
 The supported file types include:</p>
 <ul>
@@ -720,7 +709,7 @@ a JSON file with the path <code>src/data/dogs.json</code>
 from a <code>.astro</code> file in the <code>src/pages</code> directory:</p>
 <pre><code class="language-ts">import dogs from '../data/dogs.json';
 </code></pre>
-<h3 id="path-aliases" tabindex="-1">Path Aliases</h3>
+<h3 id="path-aliases">Path Aliases</h3>
 <p>Import paths can be relative to the current file,
 be absolute from the root directory of the project,
 or using a path alias defined in <code>tsconfig.json</code>.</p>
@@ -733,13 +722,13 @@ import dogImage from '/src/images/animals/dog.png';
 to simplify importing files from commonly used directories.
 For example:</p>
 <pre><code class="language-json">{
-  &quot;extends&quot;: &quot;astro/tsconfigs/strictest&quot;,
-  &quot;compilerOptions&quot;: {
-    &quot;baseUrl&quot;: &quot;./src&quot;,
-    &quot;paths&quot;: {
-      &quot;@components/*&quot;: [&quot;components/*&quot;],
-      &quot;@images/*&quot;: [&quot;images/*&quot;],
-      &quot;@layouts/*&quot;: [&quot;layouts/*&quot;]
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@images/*": ["images/*"],
+      "@layouts/*": ["layouts/*"]
     }
   }
 }
@@ -750,11 +739,11 @@ For example:</p>
 <p>with this:</p>
 <pre><code class="language-js">import Layout from '@layouts/Layout.astro';
 </code></pre>
-<h2 id="images" tabindex="-1">Images</h2>
+<h2 id="images">Images</h2>
 <p>Images can be placed under the <code>public</code> directory, typically in <code>public/images</code>.
 These can be referenced using a path string
 that is relative to the <code>public</code> directory.
-For example, <code>&lt;img alt=&quot;logo&quot; src=&quot;/images/logo.png&quot; /&gt;</code>
+For example, <code>&#x3C;img alt="logo" src="/images/logo.png" /></code>
 searches from the <code>public</code> directory.
 Astro will server images files placed under the <code>public</code> directory as-is
 and will not provide image optimization.</p>
@@ -766,21 +755,21 @@ The <code>Image</code> component does not wait until it scrolls into view
 before loading the image.</p>
 <p>For example:</p>
 <pre><code class="language-ts">---
-import { Image } from &quot;astro:assets&quot;;
-import logo from &quot;../images/logo.png&quot;;
+import { Image } from "astro:assets";
+import logo from "../images/logo.png";
 ---
 
-&lt;Image alt=&quot;logo&quot; src={logo} height={200} /&gt;
+&#x3C;Image alt="logo" src={logo} height={200} />
 </code></pre>
 <p>Content collection files can also use optimized images.
-This is described the &quot;Content Collections&quot; section.</p>
+This is described the “Content Collections” section.</p>
 <p>For static sites, optimized images are generated concurrently at build time.</p>
 <p>From the documentation at <a href="https://docs.astro.build/en/guides/images/?v=1.1.1" rel="noopener" target="_blank">Images</a>,
 The <code>Image</code> component
-&quot;can transform a local or authorized remote image's dimensions, file type,
+“can transform a local or authorized remote image’s dimensions, file type,
 and quality for control over your displayed image.
-The resulting <code>&lt;img&gt;</code> tag includes <code>alt</code>, <code>loading</code>, and <code>decoding</code> attributes
-and infers image dimensions to avoid Cumulative Layout Shift (CLS).&quot;</p>
+The resulting <code>&#x3C;img></code> tag includes <code>alt</code>, <code>loading</code>, and <code>decoding</code> attributes
+and infers image dimensions to avoid Cumulative Layout Shift (CLS).”</p>
 <p>Astro will also optimize remote images if the following
 appears in the <code>astro.config.mjs</code> file:</p>
 <pre><code class="language-js">export default defineConfig({
@@ -791,7 +780,7 @@ appears in the <code>astro.config.mjs</code> file:</p>
 </code></pre>
 <p>Astro image optimization includes:</p>
 <ul>
-<li>adding <code>img</code> element attributes like <code>decoding=&quot;async&quot;</code> and <code>loading=&quot;lazy&quot;</code>.</li>
+<li>adding <code>img</code> element attributes like <code>decoding="async"</code> and <code>loading="lazy"</code>.</li>
 <li>generating WEBP versions of images to reduce file sizes
 (All major web browsers support the WEBP format.)</li>
 <li>adding attributes required to take advantage of services like Cloudinary</li>
@@ -804,28 +793,28 @@ optimized <code>.webp</code> files are created in the <code>dist</code> director
 <p>Image optimization is performed by the <a href="https://github.com/lovell/sharp?v=1.1.1" rel="noopener" target="_blank">sharp</a> package.</p>
 <p>The <a href="https://docs.astro.build/en/guides/images/#picture-?v=1.1.1" rel="noopener" target="_blank">Picture</a> component can be used in place of the <code>Image</code> component
 to render an appropriate image from a selection of multiple formats and sizes.</p>
-<h2 id="icons" tabindex="-1">Icons</h2>
+<h2 id="icons">Icons</h2>
 <p><a href="https://www.astroicon.dev?v=1.1.1" rel="noopener" target="_blank">Astro Icon</a>
 provides access to many icon sets.</p>
-<p>To install the &quot;Astro Icon&quot; integration, enter <code>npx astro add astro-icon</code>.</p>
+<p>To install the “Astro Icon” integration, enter <code>npx astro add astro-icon</code>.</p>
 <p>To see the available icon sets, browse <a href="https://icon-sets.iconify.design?v=1.1.1" rel="noopener" target="_blank">icon sets</a>.</p>
 <p>To install an icon set, enter <code>npm i -D @iconify-json/{set-name}</code>.
-Some valid icon set names include &quot;fa6-solid&quot; (Fontawesome),
-&quot;material-symbols&quot;, &quot;mdi&quot;, &quot;solar&quot;, &quot;tdesign&quot;, and many more.</p>
+Some valid icon set names include “fa6-solid” (Fontawesome),
+“material-symbols”, “mdi”, “solar”, “tdesign”, and many more.</p>
 <p>To use an icon, import the <code>Icon</code> component in the component script as follows:</p>
 <pre><code class="language-js">import {Icon} from 'astro-icon/components';
 </code></pre>
 <p>Then render an icon with with something like the following:</p>
-<pre><code class="language-text">&lt;Icon name=&quot;fa6-solid:hat-wizard&quot; size={60} title=&quot;wizard hat&quot; /&gt;
+<pre><code class="language-text">&#x3C;Icon name="fa6-solid:hat-wizard" size={60} title="wizard hat" />
 </code></pre>
 <p>The <code>Icon</code> component can als render SVG files
 found in the <code>src/icons</code> directory.
 For example, if the file <code>src/icons/heart.svg</code> exists,
 it can be rendered with the following.
 Note that there is no icon set name prefix on the icon name.</p>
-<pre><code class="language-text">&lt;Icon name=&quot;heart&quot; size={60} title=&quot;heart&quot; /&gt;
+<pre><code class="language-text">&#x3C;Icon name="heart" size={60} title="heart" />
 </code></pre>
-<h2 id="dynamic-routes" tabindex="-1">Dynamic Routes</h2>
+<h2 id="dynamic-routes">Dynamic Routes</h2>
 <p>Dynamic routes are routes defined under the <code>pages</code> directory with
 directory or file names that contain a variable name inside square brackets.
 These can be used for both pages and API endpoints.</p>
@@ -834,39 +823,39 @@ contains links to pages that are provided by a dynamic route.</p>
 <pre><code class="language-js">---
 import Layout from '../layouts/Layout.astro';
 
-const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
+const colors = ["red", "green", "blue"];
 ---
 
-&lt;Layout&gt;
+&#x3C;Layout>
   {
-    colors.map((color) =&gt; (
-      &lt;div&gt;
-        &lt;a href={`/${color}`}&gt;{color}&lt;/a&gt;
-      &lt;/div&gt;
+    colors.map((color) => (
+      &#x3C;div>
+        &#x3C;a href={`/${color}`}>{color}&#x3C;/a>
+      &#x3C;/div>
     ))
   }
-&lt;/Layout&gt;
+&#x3C;/Layout>
 </code></pre>
 <p>Rather than create a <code>.astro</code> file for each color,
 we can create the file <code>[color].astro</code> shown below.
 This file is used to render each of the color pages.</p>
 <pre><code class="language-js">---
 export function getStaticPaths() {
-  const colors = [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;];
-  return colors.map((color) =&gt; ({ params: { color } }));
+  const colors = ["red", "green", "blue"];
+  return colors.map((color) => ({ params: { color } }));
 }
 
 // Astro.params contains matched segments of a dynamic route
-// where directory names under the &quot;pages&quot; directory
+// where directory names under the "pages" directory
 // are surrounded by square brackets.
 const { color } = Astro.params;
 ---
 
-&lt;Layout&gt;
-  &lt;h1&gt;
-    You selected &lt;span style={`color: ${color}`}&gt;{color}&lt;/span&gt;.
-  &lt;/h1&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;h1>
+    You selected &#x3C;span style={`color: ${color}`}>{color}&#x3C;/span>.
+  &#x3C;/h1>
+&#x3C;/Layout>
 </code></pre>
 <p>The <code>getStaticPaths</code> function is required when not using SSR
 so Astro knows the pages it should generate at build time.
@@ -880,8 +869,8 @@ This is a limitation that the Astro team hopes remove in the future.</p>
 in a content collection represented by <code>CollectionEntry</code> objects.
 In this case it can be written similar to the following:</p>
 <pre><code class="language-ts">export async function getStaticPaths() {
-  const dogs: CollectionEntry&lt;'dogs'&gt;[] = await getCollection('dogs');
-  return dogs.map(dog =&gt; ({params: {name: dog.data.name}}));
+  const dogs: CollectionEntry&#x3C;'dogs'>[] = await getCollection('dogs');
+  return dogs.map(dog => ({params: {name: dog.data.name}}));
 }
 </code></pre>
 <p><code>ContentCollection</code> objects have the following properties:</p>
@@ -904,7 +893,7 @@ the following files and more:</p>
 <p>The <code>getStaticPaths</code> function is only required if SSR is not enabled.
 One way to enable SSR is to install the node adapter
 by entering <code>npx astro add node</code>.
-This changes the <code>astro.config.mjs</code> file to use <code>output: &quot;server&quot;</code>.</p>
+This changes the <code>astro.config.mjs</code> file to use <code>output: "server"</code>.</p>
 <p>When SSR is enabled, running <code>npm run build</code>
 will not generate HTML files for dynamic routes.
 Instead, the HTML for dynamic routes
@@ -912,30 +901,30 @@ will be generated when requested by a client.</p>
 <p>When a dynamic route such as <code>[name].astro</code> is used to
 render a content collection document and no matching document is found,
 it can use code like the following in the component script
-to treat this like a &quot;404 Not Found&quot; error:</p>
+to treat this like a “404 Not Found” error:</p>
 <pre><code class="language-js">if (!document) return new Response('', {status: 404});
 </code></pre>
 <p>Dynamic route file names can contain an ellipsis to use <a href="https://docs.astro.build/en/core-concepts/routing/#rest-parameters?v=1.1.1" rel="noopener" target="_blank">rest parameters</a>.
 For example, the file <code>src/pages/zoo/[...path].astro</code> can match the paths
 <code>/zoo</code>, <code>/zoo/cats</code>, and <code>/zoo/cats/panther</code>.</p>
-<h2 id="event-handling" tabindex="-1">Event Handling</h2>
+<h2 id="event-handling">Event Handling</h2>
 <p>Code in the component script section is only run on the server-side.
 This means functions defined there
 cannot be used for client-side event handling.</p>
 <p>One way specify client-side JavaScript code is to
 place it in a script tag within the HTML section.
 For example:</p>
-<pre><code class="language-js">&lt;button id=&quot;my-btn&quot;&gt;Press Me&lt;/button&gt;
+<pre><code class="language-js">&#x3C;button id="my-btn">Press Me&#x3C;/button>
 
-&lt;script&gt;
+&#x3C;script>
   function handleClick() {
     alert('got click');
   }
   const myBtn = document.getElementById('my-btn');
   myBtn.addEventListener('click', handleClick);
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
-<h2 id="content-collections" tabindex="-1">Content Collections</h2>
+<h2 id="content-collections">Content Collections</h2>
 <p>Astro supports describing and retrieving collections of data
 from files that are in a subdirectory the <code>src/content</code> directory.
 Each subdirectory represents a different collection.
@@ -968,7 +957,7 @@ to describe and validate the schema of each collection.
 The schema defines which front matter properties are valid
 and provides a type-safe way to use the data.
 Editors like VS Code use the types to provide intellisense.</p>
-<p>For example, the following describes a single collection named &quot;dogs&quot;.</p>
+<p>For example, the following describes a single collection named “dogs”.</p>
 <pre><code class="language-ts">import {defineCollection, z} from 'astro:content';
 
 const dogs = defineCollection({
@@ -985,7 +974,7 @@ export const collections = {dogs};
 </code></pre>
 <p>To include references to optimized images,
 change the schema property as follows:</p>
-<pre><code class="language-ts">schema: ({image}) =&gt;
+<pre><code class="language-ts">schema: ({image}) =>
   z.object({
     name: z.string(),
     breed: z.string(),
@@ -1026,30 +1015,29 @@ website: https://www.akc.org/dog-breeds/whippet/
 </code></pre>
 <p>Here is an example JSON file:</p>
 <pre><code class="language-json">{
-  &quot;name&quot;: &quot;Comet&quot;,
-  &quot;breed&quot;: &quot;Whippet&quot;,
-  &quot;website&quot;: &quot;https://www.akc.org/dog-breeds/whippet/&quot;
+  "name": "Comet",
+  "breed": "Whippet",
+  "website": "https://www.akc.org/dog-breeds/whippet/"
 }
 </code></pre>
 </li>
 <li>
 <p>Access the collection in a component.</p>
 <p>For example:</p>
-<p><img alt="Astro Dogs" style="width: 50%"
-  src="/blog/assets/astro-dogs.png?v=1.1.1"></p>
+<p><img alt="Astro Dogs" style="width: 50%" src="/blog/assets/astro-dogs.png?v=1.1.1"></p>
 <pre><code class="language-js">---
-import Layout from &quot;../../layouts/Layout.astro&quot;;
-import Dog from &quot;../../components/Dog.astro&quot;;
-import { getCollection, type CollectionEntry } from &quot;astro:content&quot;;
+import Layout from "../../layouts/Layout.astro";
+import Dog from "../../components/Dog.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
 
-const dogs: CollectionEntry&lt;&quot;dogs&quot;&gt;[] = await getCollection(&quot;dogs&quot;);
+const dogs: CollectionEntry&#x3C;"dogs">[] = await getCollection("dogs");
 ---
 
-&lt;Layout title=&quot;Dogs I Know&quot;&gt;
-  &lt;main class=&quot;m-4&quot;&gt;
-    { dogs.map(dog =&gt; &lt;Dog {dog} /&gt;) }
-  &lt;/main&gt;
-&lt;/Layout&gt;
+&#x3C;Layout title="Dogs I Know">
+  &#x3C;main class="m-4">
+    { dogs.map(dog => &#x3C;Dog {dog} />) }
+  &#x3C;/main>
+&#x3C;/Layout>
 </code></pre>
 <p>The <code>getCollection</code> function accepts a second argument
 that is a function used to filter the entries.
@@ -1059,13 +1047,12 @@ should return a boolean value indicating whether the corresponding
 </li>
 <li>
 <p>Create the <code>Dog</code> component:</p>
-<p><img alt="Astro Dog component" style="width: 30%"
-  src="/blog/assets/astro-content-collections-comet.png?v=1.1.1"></p>
+<p><img alt="Astro Dog component" style="width: 30%" src="/blog/assets/astro-content-collections-comet.png?v=1.1.1"></p>
 <pre><code class="language-ts">---
-import { type CollectionEntry } from &quot;astro:content&quot;;
+import { type CollectionEntry } from "astro:content";
 
 interface Props {
-  dog: CollectionEntry&lt;&quot;dogs&quot;&gt;;
+  dog: CollectionEntry&#x3C;"dogs">;
 }
 
 const { dog } = Astro.props;
@@ -1075,12 +1062,12 @@ const { breed, image, name } = dog.data;
 const { Content } = await dog.render();
 ---
 
-&lt;hr /&gt;
-&lt;div class=&quot;my-4&quot;&gt;
-  &lt;p class=&quot;font-bold&quot;&gt;{name} is a {breed}.&lt;/p&gt;
-  &lt;Content /&gt;
-  &lt;a href={website}&gt;American Kennel Club&lt;/a&gt;
-&lt;/div&gt;
+&#x3C;hr />
+&#x3C;div class="my-4">
+  &#x3C;p class="font-bold">{name} is a {breed}.&#x3C;/p>
+  &#x3C;Content />
+  &#x3C;a href={website}>American Kennel Club&#x3C;/a>
+&#x3C;/div>
 </code></pre>
 </li>
 </ul>
@@ -1089,10 +1076,8 @@ see the project <a href="https://github.com/mvolkmann/astro-examples/tree/main/c
 This displays a component for each NFL team on the initial page.
 Clicking the component for any team navigates to a detail page
 using view transitions.</p>
-<p><img alt="Astro content collections NFL home" style="width: 49%"
-  src="/blog/assets/astro-content-collections-nfl-home.png?v=1.1.1">
-<img alt="Astro content collections NFL detail" style="width: 49%"
-  src="/blog/assets/astro-content-collections-nfl-detail.png?v=1.1.1"></p>
+<p><img alt="Astro content collections NFL home" style="width: 49%" src="/blog/assets/astro-content-collections-nfl-home.png?v=1.1.1">
+<img alt="Astro content collections NFL detail" style="width: 49%" src="/blog/assets/astro-content-collections-nfl-detail.png?v=1.1.1"></p>
 <p>The file <code>src/content/config.ts</code> which defines the schema
 for the for collection documents contains the following:</p>
 <pre><code class="language-ts">import {defineCollection, z} from 'astro:content';
@@ -1130,11 +1115,11 @@ pushing changes to the GitHub repository of the app
 will trigger a new build and deployment of the app.
 If content collection documents were added, modified, or deleted,
 this will result in changes to the deployed static pages.</p>
-<h3 id="references" tabindex="-1">References</h3>
+<h3 id="references">References</h3>
 <p>A content collection document can contain properties that refer to
 one or more other documents in the same or a different collection.
 For example, a document describing one football team
-in a collection named &quot;nfl&quot; can refer to other teams
+in a collection named “nfl” can refer to other teams
 with the following property defined in <code>src/content/config.ts</code>:</p>
 <pre><code class="language-ts">relatedTeams: z.array(reference('nfl')).optional();
 </code></pre>
@@ -1155,7 +1140,7 @@ For example:</p>
 import {getEntries, type CollectionEntry} from 'astro:content';
 
 interface Props {
-  team: CollectionEntry&lt;'nfl'&gt;;
+  team: CollectionEntry&#x3C;'nfl'>;
 }
 
 const {team} = Astro.props;
@@ -1163,13 +1148,13 @@ const {relatedTeams} = team.data;
 const relatedEntries = await getEntries(relatedTeams || []);
 ---
 
-&lt;ul&gt;
-  {relatedEntries.map((entry) =&gt; (
-    &lt;li&gt;{entry.data.name}&lt;/li&gt;
+&#x3C;ul>
+  {relatedEntries.map((entry) => (
+    &#x3C;li>{entry.data.name}&#x3C;/li>
   ))}
-&lt;/ul&gt;
+&#x3C;/ul>
 </code></pre>
-<h3 id="sanitizing-content" tabindex="-1">Sanitizing Content</h3>
+<h3 id="sanitizing-content">Sanitizing Content</h3>
 <p>The content below the front matter in collection documents is not sanitized.
 If there is a possibility that the content might contain something that
 causes a Cross Site Scripting (XSS) attack (such as <code>script</code> tags),
@@ -1184,18 +1169,17 @@ import sanitizeHtml from 'sanitize-html';
 const content = sanitizeHtml(collectionEntry.body);
 const html = marked.parse(content);
 </code></pre>
-<p>Then instead of rendering <code>&lt;Content /&gt;</code>, render <code>&lt;div set:html={html} /&gt;</code>.</p>
+<p>Then instead of rendering <code>&#x3C;Content /></code>, render <code>&#x3C;div set:html={html} /></code>.</p>
 <p>If the styling is less that desirable, consider applying the <code>prose</code> CSS class
 from the @tailwindcss/typography plugin.</p>
-<h3 id="pagination" tabindex="-1">Pagination</h3>
+<h3 id="pagination">Pagination</h3>
 <p>Astro provides help for implementing pagination of content collections.
 For details, see <a href="https://docs.astro.build/en/core-concepts/routing/#pagination?v=1.1.1" rel="noopener" target="_blank">Routing - Pagination</a>.</p>
 <p>The project <a href="https://github.com/mvolkmann/astro-examples/tree/main/content-collections?v=1.1.1" rel="noopener" target="_blank">content-collections</a> provides a good example.
 The file <code>src/pages/[...page].astro</code>, shown below, defines the pages for
-the URLs &quot;/&quot; (first page) and &quot;/{page-number}&quot; (all pages after the first).
-The URL &quot;/all&quot; navigates to the page that shows all the teams.</p>
-<p><img alt="Astro Pagination" style="width: 100%"
-  src="/blog/assets/astro-pagination.png?v=1.1.1"></p>
+the URLs ”/” (first page) and ”/{page-number}” (all pages after the first).
+The URL “/all” navigates to the page that shows all the teams.</p>
+<p><img alt="Astro Pagination" style="width: 100%" src="/blog/assets/astro-pagination.png?v=1.1.1"></p>
 <pre><code class="language-js">---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 import {getCollection, getEntry, type CollectionEntry} from 'astro:content';
@@ -1203,11 +1187,11 @@ import TeamSmall from '../components/TeamSmall.astro';
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 
-type Props = InferGetStaticPropsType&lt;typeof getStaticPaths&gt;;
+type Props = InferGetStaticPropsType&#x3C;typeof getStaticPaths>;
 
-export const getStaticPaths = (async ({paginate}) =&gt; {
-    const teams: CollectionEntry&lt;'nfl'&gt;[] = await getCollection('nfl');
-    const pages = teams.map((team) =&gt; (
+export const getStaticPaths = (async ({paginate}) => {
+    const teams: CollectionEntry&#x3C;'nfl'>[] = await getCollection('nfl');
+    const pages = teams.map((team) => (
         { params: { slug: team.slug } }
     ));
     return paginate(pages, { pageSize: 8 });
@@ -1219,34 +1203,34 @@ const nextUrl = url.next;
 const prevUrl = url.prev;
 
 // Get entries to render on the current page.
-const promises = data.map(async (obj) =&gt; getEntry('nfl', obj.params.slug));
+const promises = data.map(async (obj) => getEntry('nfl', obj.params.slug));
 const entries = await Promise.all(promises);
 ---
 
-&lt;Layout&gt;
-  &lt;main class=&quot;bg-black h-full min-h-screen p-8&quot;&gt;
-    &lt;h1&gt;Page {currentPage} of {lastPage}&lt;/h1&gt;
-    &lt;p&gt;The teams appear alphabetically by their city.&lt;/p&gt;
-    &lt;nav&gt;
-      &lt;a class:list={{disabled: currentPage === 1}} href=&quot;/&quot;&gt;First&lt;/a&gt;
-      &lt;a class:list={{disabled: !prevUrl}} href={prevUrl}&gt;Previous&lt;/a&gt;
-      &lt;a class:list={{disabled: !nextUrl}} href={nextUrl}&gt;Next&lt;/a&gt;
-      &lt;a class:list={{disabled: currentPage === lastPage}}
-        href={`/${lastPage}`}&gt;Last&lt;/a&gt;
-      &lt;a href=&quot;/all&quot;&gt;All&lt;/a&gt;
-    &lt;/nav&gt;
-    &lt;section class=&quot;gap-4 grid grid-cols-4&quot;&gt;
-      {entries.map(entry =&gt; &lt;TeamSmall team={entry} /&gt;)}
-    &lt;/section&gt;
-  &lt;/main&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;main class="bg-black h-full min-h-screen p-8">
+    &#x3C;h1>Page {currentPage} of {lastPage}&#x3C;/h1>
+    &#x3C;p>The teams appear alphabetically by their city.&#x3C;/p>
+    &#x3C;nav>
+      &#x3C;a class:list={{disabled: currentPage === 1}} href="/">First&#x3C;/a>
+      &#x3C;a class:list={{disabled: !prevUrl}} href={prevUrl}>Previous&#x3C;/a>
+      &#x3C;a class:list={{disabled: !nextUrl}} href={nextUrl}>Next&#x3C;/a>
+      &#x3C;a class:list={{disabled: currentPage === lastPage}}
+        href={`/${lastPage}`}>Last&#x3C;/a>
+      &#x3C;a href="/all">All&#x3C;/a>
+    &#x3C;/nav>
+    &#x3C;section class="gap-4 grid grid-cols-4">
+      {entries.map(entry => &#x3C;TeamSmall team={entry} />)}
+    &#x3C;/section>
+  &#x3C;/main>
+&#x3C;/Layout>
 </code></pre>
 <p>The code above uses the <a href="https://docs.astro.build/en/reference/api-reference/#getentry?v=1.1.1" rel="noopener" target="_blank">getEntry</a>
 function to retrieve a specific content collection entry.</p>
 <p>An entry can have a property whose value is
 an array of ids for related entries within the same collection.
 To retrieve those, pass the array to the <a href="https://docs.astro.build/en/reference/api-reference/#getentries?v=1.1.1" rel="noopener" target="_blank">getEntries</a> function.</p>
-<h3 id="incremental-content-caching" tabindex="-1">Incremental Content Caching</h3>
+<h3 id="incremental-content-caching">Incremental Content Caching</h3>
 <p>Build times for projects that generate pages from large content collection
 can be significantly reduced by enabling an experimental feature that
 avoids doing work for documents that have not changed since the last build.
@@ -1261,9 +1245,9 @@ and adds files in the <code>node_modules/.astro</code> directory.
 In the future this may also cache the generated <code>.html</code> files.</p>
 <p>Unfortunately, I could not get this feature to work.
 From a comment in the Discord channel,
-&quot;It's still quite early and very experimental, so I wouldn't be
-surprised if there's a lot of edge cases where it doesn't work.&quot;</p>
-<h2 id="astro.glob" tabindex="-1">Astro.glob</h2>
+“It’s still quite early and very experimental, so I wouldn’t be
+surprised if there’s a lot of edge cases where it doesn’t work.”</p>
+<h2 id="astroglob">Astro.glob</h2>
 <p>The <a href="https://docs.astro.build/en/guides/imports/#astroglob?v=1.1.1" rel="noopener" target="_blank">Astro.glob</a> function provides another way to
 access the content of a collection of Markdown files.</p>
 <p>For example, the Markdown files from the NFL content collection example above
@@ -1282,17 +1266,16 @@ After losing to the Raiders on Christmas Day, the Chiefs ...
 </code></pre>
 <p>The following Astro component reads and renders
 the data in these Markdown files:</p>
-<p><img alt="Astro.glob demo" style="width: 100%"
-  src="/blog/assets/astro-glob-demo.png?v=1.1.1"></p>
+<p><img alt="Astro.glob demo" style="width: 100%" src="/blog/assets/astro-glob-demo.png?v=1.1.1"></p>
 <pre><code class="language-js">---
-const teams = await Astro.glob(&quot;../data/nfl/*.md&quot;);
+const teams = await Astro.glob("../data/nfl/*.md");
 ---
 
-teams.map(({ Content, frontmatter }) =&gt; (
-  &lt;div&gt;
-    &lt;h2&gt;{frontmatter.name} {frontmatter.city}&lt;/h2&gt;
-    &lt;Content /&gt;
-  &lt;/div&gt;
+teams.map(({ Content, frontmatter }) => (
+  &#x3C;div>
+    &#x3C;h2>{frontmatter.name} {frontmatter.city}&#x3C;/h2>
+    &#x3C;Content />
+  &#x3C;/div>
 ))
 </code></pre>
 <p>Using <code>Astro.glob</code> is a bit easier than using content collections.
@@ -1304,29 +1287,29 @@ pagination support, and incremental content caching.</p>
 For example, suppose each of the NFL <code>.md</code> files
 were instead <code>.json</code> files like the following:</p>
 <pre><code class="language-json">{
-  &quot;city&quot;: &quot;Kansas City&quot;,
-  &quot;name&quot;: &quot;Chiefs&quot;,
-  &quot;conference&quot;: &quot;AFC West&quot;,
-  &quot;logoUrl&quot;: &quot;https://res.cloudinary.com/nflleague/image/private/f_auto/league/ujshjqvmnxce8m4obmvs&quot;,
-  &quot;headCoach&quot;: &quot;Andy Reid&quot;,
-  &quot;established&quot;: 1960,
-  &quot;content&quot;: &quot;After losing to the Raiders on Christmas Day, the Chiefs ...&quot;
+  "city": "Kansas City",
+  "name": "Chiefs",
+  "conference": "AFC West",
+  "logoUrl": "https://res.cloudinary.com/nflleague/image/private/f_auto/league/ujshjqvmnxce8m4obmvs",
+  "headCoach": "Andy Reid",
+  "established": 1960,
+  "content": "After losing to the Raiders on Christmas Day, the Chiefs ..."
 }
 </code></pre>
 <p>The following Astro component reads and renders the data in these JSON files:</p>
 <pre><code class="language-js">---
-const teams = await Astro.glob(&quot;../data/nfl/*.json&quot;);
+const teams = await Astro.glob("../data/nfl/*.json");
 ---
 
-teams.map(({ city, content, logoUrl, name }) =&gt; (
-  &lt;div&gt;
-    &lt;h2&gt;{name} {city}&lt;/h2&gt;
-    &lt;img alt=&quot;team logo&quot; src={logoUrl} width={50} /&gt;
-    &lt;p&gt;{content}&lt;/p&gt;
-  &lt;/div&gt;
+teams.map(({ city, content, logoUrl, name }) => (
+  &#x3C;div>
+    &#x3C;h2>{name} {city}&#x3C;/h2>
+    &#x3C;img alt="team logo" src={logoUrl} width={50} />
+    &#x3C;p>{content}&#x3C;/p>
+  &#x3C;/div>
 ))
 </code></pre>
-<h2 id="content-management-systems-(cms)" tabindex="-1">Content Management Systems (CMS)</h2>
+<h2 id="content-management-systems-cms">Content Management Systems (CMS)</h2>
 <p>Astro can fetch content from many kinds of CMSes.
 These typically provide a better content authoring experience
 for non-technical users than editing Markdown files.</p>
@@ -1338,9 +1321,9 @@ must be written to access and render the content.</p>
 CloudCannon, Contentful, Netlify, Sanity, Storyblok, Strapi, Wordpress,
 and many more.</p>
 <p>For general details, see <a href="https://docs.astro.build/en/guides/cms/?v=1.1.1" rel="noopener" target="_blank">Use a CMS with Astro</a>.</p>
-<p>For details on using the Strapi CMS, see the YouTube video <a href="https://www.youtube.com/watch?v=pVJCROlsIp4&amp;v=1.1.1" rel="noopener" target="_blank">Getting Started with Astro and Strapi</a>
+<p>For details on using the Strapi CMS, see the YouTube video <a href="https://www.youtube.com/watch?v=pVJCROlsIp4&#x26;v=1.1.1" rel="noopener" target="_blank">Getting Started with Astro and Strapi</a>
 and the associated article <a href="https://strapi.io/blog/how-to-build-a-blog-with-astro-strapi-and-tailwind-css?v=1.1.1" rel="noopener" target="_blank">How to Build a Blog with Astro, Strapi, and Tailwind CSS</a>.</p>
-<h2 id="mdx" tabindex="-1">MDX</h2>
+<h2 id="mdx">MDX</h2>
 <p>The MDX integration adds the following features to Markdown:</p>
 <ul>
 <li>
@@ -1382,7 +1365,7 @@ export const twoPi = (Math.PI \* 2).toFixed(4);
 const { name } = Astro.props;
 ---
 
-&lt;p class=&quot;text-bold text-red-500&quot;&gt;Hello, {name}!&lt;/p&gt;
+&#x3C;p class="text-bold text-red-500">Hello, {name}!&#x3C;/p>
 </code></pre>
 <p>Here is MDX in the file <code>src/content/dogs/comet.mdx</code>
 that imports and renders the <code>Greet</code> component.</p>
@@ -1393,9 +1376,9 @@ breed: Whippet
 website: https://www.akc.org/dog-breeds/whippet/
 ---
 
-import Greet from &quot;../../components/Greet.astro&quot;;
+import Greet from "../../components/Greet.astro";
 
-&lt;Greet name={frontmatter.name} /&gt;
+&#x3C;Greet name={frontmatter.name} />
 
 He loves the following:
 
@@ -1403,13 +1386,13 @@ He loves the following:
 - basketballs
 - frisbees
 
-Learn about the &lt;a href={frontmatter.website}&gt;{frontmatter.breed}&lt;/a&gt;.
+Learn about the &#x3C;a href={frontmatter.website}>{frontmatter.breed}&#x3C;/a>.
 </code></pre>
-<h2 id="other-frameworks" tabindex="-1">Other Frameworks</h2>
+<h2 id="other-frameworks">Other Frameworks</h2>
 <p>Astro supports using components from many other frameworks including
 Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.</p>
-<h3 id="react" tabindex="-1">React</h3>
-<p>Let's walk through the steps to use a
+<h3 id="react">React</h3>
+<p>Let’s walk through the steps to use a
 <a href="https://react.dev?v=1.1.1" rel="noopener" target="_blank">React</a> component.</p>
 <ol>
 <li>
@@ -1425,18 +1408,18 @@ interface Props {
   start?: number;
 }
 
-const Counter: FC&lt;Props&gt; = ({label = '', start = 0}) =&gt; {
+const Counter: FC&#x3C;Props> = ({label = '', start = 0}) => {
   const [count, setCount] = useState(start);
 
   return (
-    &lt;div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}&gt;
-      {label &amp;&amp; &lt;div&gt;{label}&lt;/div&gt;}
-      &lt;button disabled={count &lt;= 0} onClick={() =&gt; setCount(c =&gt; c - 1)}&gt;
+    &#x3C;div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+      {label &#x26;&#x26; &#x3C;div>{label}&#x3C;/div>}
+      &#x3C;button disabled={count &#x3C;= 0} onClick={() => setCount(c => c - 1)}>
         -
-      &lt;/button&gt;
-      &lt;div&gt;{count}&lt;/div&gt;
-      &lt;button onClick={() =&gt; setCount(c =&gt; c + 1)}&gt;+&lt;/button&gt;
-    &lt;/div&gt;
+      &#x3C;/button>
+      &#x3C;div>{count}&#x3C;/div>
+      &#x3C;button onClick={() => setCount(c => c + 1)}>+&#x3C;/button>
+    &#x3C;/div>
   );
 };
 
@@ -1445,9 +1428,9 @@ export default Counter;
 </li>
 <li>
 <p>Use the new component in another component or page.</p>
-<pre><code class="language-js">import Counter from &quot;@components/Counter.tsx&quot;;
+<pre><code class="language-js">import Counter from "@components/Counter.tsx";
 ...
-&lt;Counter label=&quot;Tally&quot; start={3} client:load /&gt;
+&#x3C;Counter label="Tally" start={3} client:load />
 </code></pre>
 <p>There are five provided <code>client</code> directives that tell Astro that a
 non-Astro component requires client-side JavaScript code to be loaded.
@@ -1455,42 +1438,42 @@ The <code>client</code> directives differ in when the JavaScript will be loaded.
 When not applied, JavaScript for non-Astro components is not loaded.</p>
 <p><code>client</code> directives cannot be applied to Astro components.
 However, <code>script</code> tags in Astro components are always included in clients.</p>
-<table>
-<thead>
-<tr>
-<th>Directive</th>
-<th>When JS is loaded</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>client:idle</code></td>
-<td>when browser is idle</td>
-</tr>
-<tr>
-<td><code>client:load</code></td>
-<td>immediately</td>
-</tr>
-<tr>
-<td><code>client:media</code></td>
-<td>when a CSS media query condition is met</td>
-</tr>
-<tr>
-<td><code>client:only</code></td>
-<td>after page load with no SSR</td>
-</tr>
-<tr>
-<td><code>client:visible</code></td>
-<td>when component becomes visible</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Directive</th><th>When JS is loaded</th></tr></thead><tbody><tr><td><code>client:idle</code></td><td>when browser is idle</td></tr><tr><td><code>client:load</code></td><td>immediately</td></tr><tr><td><code>client:media</code></td><td>when a CSS media query condition is met</td></tr><tr><td><code>client:only</code></td><td>after page load with no SSR</td></tr><tr><td><code>client:visible</code></td><td>when component becomes visible</td></tr></tbody></table>
 <p>Integrations can add support for custom <code>client</code> directives.</p>
 </li>
 </ol>
 <p>For more detail on using React components in Astro, see <a href="https://docs.astro.build/en/guides/integrations-guide/react/?v=1.1.1" rel="noopener" target="_blank">React integration</a>.</p>
-<h3 id="svelte" tabindex="-1">Svelte</h3>
-<p>Let's walk through the steps to use a
+<h3 id="svelte">Svelte</h3>
+<p>Let’s walk through the steps to use a
 <a href="https://svelte.dev?v=1.1.1" rel="noopener" target="_blank">Svelte</a> component.</p>
 <ol>
 <li>
@@ -1499,41 +1482,41 @@ However, <code>script</code> tags in Astro components are always included in cli
 <li>
 <p>Define a Svelte component in the <code>src/components</code> directory.</p>
 <p>For example, here is the file <code>Counter.svelte</code>:</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   export let label = '';
   export let start = 0;
 
   let count = start;
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;div class=&quot;row&quot;&gt;
+&#x3C;div class="row">
   {#if label}
-    &lt;div&gt;{label}&lt;/div&gt;
+    &#x3C;div>{label}&#x3C;/div>
   {/if}
-  &lt;button disabled={count &lt;= 0} on:click={() =&gt; count--}&gt;-&lt;/button&gt;
-  &lt;div&gt;{count}&lt;/div&gt;
-  &lt;button on:click={() =&gt; count++}&gt;+&lt;/button&gt;
-&lt;/div&gt;
+  &#x3C;button disabled={count &#x3C;= 0} on:click={() => count--}>-&#x3C;/button>
+  &#x3C;div>{count}&#x3C;/div>
+  &#x3C;button on:click={() => count++}>+&#x3C;/button>
+&#x3C;/div>
 
-&lt;style&gt;
+&#x3C;style>
   .row {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 </li>
 <li>
 <p>Use the new component in another component or page.</p>
-<pre><code class="language-js">import Counter from &quot;@components/Counter.svelte&quot;;
+<pre><code class="language-js">import Counter from "@components/Counter.svelte";
 ...
-&lt;Counter label=&quot;Tally&quot; start={3} client:load /&gt;
+&#x3C;Counter label="Tally" start={3} client:load />
 </code></pre>
 </li>
 </ol>
 <p>For more detail on using Svelte components in Astro, see <a href="https://docs.astro.build/en/guides/integrations-guide/svelte/?v=1.1.1" rel="noopener" target="_blank">Svelte integration</a>.</p>
-<h3 id="alpine" tabindex="-1">Alpine</h3>
+<h3 id="alpine">Alpine</h3>
 <p>The <a href="https://alpinejs.dev?v=1.1.1" rel="noopener" target="_blank">Alpine</a> JavaScript library
 can be used in Astro components to add interactivity.
 This is an alternative to implementing interactive components
@@ -1549,7 +1532,7 @@ than implementing components in a framework like Svelte.</p>
 <p>A better alternative is to update the Alpine <code>x-data</code> objects
 that supply data to the components that need to update.
 For an example of this approach, see <a href="https://github.com/mvolkmann/astro-examples/tree/main/alpine-demo?v=1.1.1" rel="noopener" target="_blank">alpine-demo</a></p>
-<h4 id="defining-functions" tabindex="-1">Defining Functions</h4>
+<h4 id="defining-functions">Defining Functions</h4>
 <p>Often Astro components that use Alpine need to call custom JavaScript functions.
 But where should the functions be defined?</p>
 <p>Alpine CANNOT call functions defined in these ways:</p>
@@ -1567,63 +1550,63 @@ function demo() {
 </code></pre>
 </li>
 <li>
-<p><code>&lt;script&gt;</code> with no attributes</p>
+<p><code>&#x3C;script></code> with no attributes</p>
 <p>Vite performs tree shaking and
 will not recognize function calls made in Alpine directives.
 This will result in the removal of function definitions
 that appear in plain <code>script</code> tags.</p>
 <p>For example, this WILL NOT make the <code>demo</code> function available to Alpine.</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   function demo() {
     console.log('in demo');
   }
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 <li>
-<p><code>&lt;script type=&quot;module&quot;&gt;</code></p>
+<p><code>&#x3C;script type="module"></code></p>
 <p>Module scripts create their own scope,
 so functions defined in these are not visible outside
 unless they are exported and then imported into another <code>script</code>.
 But <code>import</code> statements can only appear in other module scripts.</p>
 <p>For example, this WILL NOT make the <code>demo</code> function available to Alpine.</p>
-<pre><code class="language-html">&lt;script type=&quot;module&quot;&gt;
+<pre><code class="language-html">&#x3C;script type="module">
   function demo() {
     console.log('in demo');
   }
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 </ul>
 <p>Alpine CAN call functions defined in these ways:</p>
 <ul>
 <li>
-<p><code>&lt;script defer&gt;</code></p>
-<p>From MDN, the <code>defer</code> attribute &quot;is set to indicate to a browser that
+<p><code>&#x3C;script defer></code></p>
+<p>From MDN, the <code>defer</code> attribute “is set to indicate to a browser that
 the script is meant to be executed after the document has been parsed,
-but before firing DOMContentLoaded.&quot;</p>
+but before firing DOMContentLoaded.”</p>
 <p>Vite does not perform tree shaking of
 functions defined in this kind of <code>script</code> tag.</p>
 <p>For example, this WILL make the <code>demo</code> function available to Alpine.</p>
-<pre><code class="language-html">&lt;script defer&gt;
+<pre><code class="language-html">&#x3C;script defer>
   function demo() {
     console.log('in demo');
   }
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 <li>
-<p><code>&lt;script is:inline&gt;</code></p>
+<p><code>&#x3C;script is:inline></code></p>
 <p>The <code>is:inline</code> directive tells Astro include this <code>script</code> as-is in the DOM.
 Astro will not bundle this JavaScript or remove duplicates.</p>
 <p>Vite does not perform tree shaking of
 functions defined in this kind of <code>script</code> tag.</p>
 <p>For example, this WILL make the <code>demo</code> function available to Alpine.</p>
-<pre><code class="language-html">&lt;script is:inline&gt;
+<pre><code class="language-html">&#x3C;script is:inline>
   function demo() {
     console.log('in demo');
   }
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 <li>
@@ -1634,13 +1617,13 @@ consider attaching one object to the global object
 that holds all the functions.</p>
 <p>For example, this WILL make the <code>ns.demo</code> function available to Alpine
 and can be called with <code>ns.demo()</code>.</p>
-<pre><code class="language-html">&lt;script is:inline&gt;
+<pre><code class="language-html">&#x3C;script is:inline>
   globalThis.ns = {
     demo() {
       console.log('in demo');
     }
   };
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 </li>
 <li>
@@ -1652,21 +1635,21 @@ and can be called with <code>ns.demo()</code>.</p>
 }
 </code></pre>
 <p>This WILL make the <code>demo</code> function available to Alpine.</p>
-<pre><code class="language-html">&lt;script is:inline&gt;
+<pre><code class="language-html">&#x3C;script is:inline>
   import('/src/my-module.js')
-    .then(module =&gt; {
+    .then(module => {
       demo = module.demo;
     })
-    .catch(err =&gt; {
+    .catch(err => {
       console.log('error importing my-module.js:', err);
     });
-&lt;/script&gt;
+&#x3C;/script>
 </code></pre>
 <p>Regardless of the number of times a component containing this <code>script</code> tag
 is used, the browser will only load the file <code>my-module.js</code> one time.</p>
 </li>
 <li>
-<p><code>&lt;script src=&quot;{path}&quot;&gt;</code></p>
+<p><code>&#x3C;script src="{path}"></code></p>
 <p>With this approach, functions are defined in a separate source file.
 For example, here is the file <code>src/components/my-script.js</code>.</p>
 <pre><code class="language-js">globalThis.ns = {
@@ -1679,18 +1662,18 @@ For example, here is the file <code>src/components/my-script.js</code>.</p>
 and can be called with <code>ns.demo()</code>.
 Regardless of the number of times a component containing this <code>script</code> tag
 is used, the browser will only load the file <code>my-script.js</code> one time.</p>
-<pre><code class="language-html">&lt;script src=&quot;./my-script.js&quot;&gt;&lt;/script&gt;
+<pre><code class="language-html">&#x3C;script src="./my-script.js">&#x3C;/script>
 </code></pre>
 </li>
 </ul>
-<p>From the Astro docs at <a href="https://docs.astro.build/en/reference/directives-reference/#isinline?v=1.1.1" rel="noopener" target="_blank">is:inline</a>, &quot;The <code>is:inline</code> directive is implied whenever
-any attribute other than <code>src</code> is used on a <code>&lt;script&gt;</code> or <code>&lt;style&gt;</code> tag.&quot;</p>
-<p>An issue with scripts that are &quot;inline&quot;
+<p>From the Astro docs at <a href="https://docs.astro.build/en/reference/directives-reference/#isinline?v=1.1.1" rel="noopener" target="_blank">is:inline</a>, “The <code>is:inline</code> directive is implied whenever
+any attribute other than <code>src</code> is used on a <code>&#x3C;script></code> or <code>&#x3C;style></code> tag.”</p>
+<p>An issue with scripts that are “inline”
 is that no deduplication is performed on them.
 If an Astro component contains inline scripts,
 they will appear in the DOM once for every usage of the component.</p>
-<h4 id="alpine-example" tabindex="-1">Alpine Example</h4>
-<p>Now let's walk through the steps to use
+<h4 id="alpine-example">Alpine Example</h4>
+<p>Now let’s walk through the steps to use
 <a href="https://alpinejs.dev?v=1.1.1" rel="noopener" target="_blank">Alpine</a> in Astro.
 Alpine is a much lighter weight framework than
 frameworks like React, Svelte and Vue.
@@ -1708,45 +1691,45 @@ interface Props {
   start?: number;
 }
 
-const { label = &quot;&quot;, start = 0 } = Astro.props;
+const { label = "", start = 0 } = Astro.props;
 ---
 
-&lt;div class=&quot;row&quot; x-data={`{ count: ${start} }`}&gt;
-  {label &amp;&amp;
-  &lt;div&gt;{label}&lt;/div&gt;
+&#x3C;div class="row" x-data={`{ count: ${start} }`}>
+  {label &#x26;&#x26;
+  &#x3C;div>{label}&#x3C;/div>
   }
-  &lt;button :disabled=&quot;count &lt;= 0&quot; @click=&quot;count--&quot;&gt;-&lt;/button&gt;
-  &lt;div x-text=&quot;count&quot;&gt;&lt;/div&gt;
-  &lt;button @click=&quot;count++&quot;&gt;+&lt;/button&gt;
+  &#x3C;button :disabled="count &#x3C;= 0" @click="count--">-&#x3C;/button>
+  &#x3C;div x-text="count">&#x3C;/div>
+  &#x3C;button @click="count++">+&#x3C;/button>
 
-  &lt;!-- This demonstrates calling client-side JS code
-       in Alpine event handling. --&gt;
-  &lt;button @click=&quot;demo&quot;&gt;Click Me&lt;/button&gt;
-&lt;/div&gt;
+  &#x3C;!-- This demonstrates calling client-side JS code
+       in Alpine event handling. -->
+  &#x3C;button @click="demo">Click Me&#x3C;/button>
+&#x3C;/div>
 
-&lt;!-- The is:inline directive opts out of Astro processing
+&#x3C;!-- The is:inline directive opts out of Astro processing
      and includes the script tag as-is.  See detail below.
-     A workaround is to attach the function to the window object.  --&gt;
-&lt;script is:inline&gt;
+     A workaround is to attach the function to the window object.  -->
+&#x3C;script is:inline>
   function demo() {
-    alert(&quot;Demo time!&quot;);
+    alert("Demo time!");
   }
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;style&gt;
+&#x3C;style>
   .row {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 </li>
 <li>
 <p>Use the new component in another component or page.</p>
-<pre><code class="language-js">import Counter from &quot;@components/Counter.astro&quot;;
+<pre><code class="language-js">import Counter from "@components/Counter.astro";
 ...
-&lt;Counter label=&quot;Tally&quot; start={3} /&gt;
+&#x3C;Counter label="Tally" start={3} />
 </code></pre>
 <p>Unlike with Svelte and other components,
 Astro components that use Alpine do not need a <code>client:*</code> directive
@@ -1754,7 +1737,7 @@ in order to have client-side interactivity.</p>
 </li>
 </ol>
 <p>For more detail on using Alpine in Astro, see <a href="https://docs.astro.build/en/guides/integrations-guide/alpinejs/?v=1.1.1" rel="noopener" target="_blank">Alpine integration</a>.</p>
-<h3 id="component-communication" tabindex="-1">Component Communication</h3>
+<h3 id="component-communication">Component Communication</h3>
 <p>Server-side generated (SSG) components which include all <code>.astro</code> files
 cannot pass functions to other components.
 This prevents server-side rendered (SSR) components
@@ -1769,34 +1752,34 @@ defines a value for <code>score</code> using <code>x-data</code>.
 The file <code>src/components/Demo.astro</code> is rendered by the previous file.
 It has access to <code>x-data</code> defined on any element
 to which it is a descendant in the DOM tree.
-It can also define it's own <code>x-data</code> properties.
+It can also define it’s own <code>x-data</code> properties.
 In this case is defines a <code>double</code> function
 which doubles the value of the <code>score</code> property.
 This change will be visible back in <code>index.astro</code>.</p>
 <p><code>src/pages/index.astro</code></p>
 <pre><code class="language-js">---
-import Demo from &quot;../components/Demo.astro&quot;;
+import Demo from "../components/Demo.astro";
 ---
 
-&lt;html&gt;
-  &lt;body x-data=&quot;{score: 19}&quot;&gt;
-    &lt;p&gt;index score = &lt;span x-text=&quot;score&quot;&gt;&lt;/span&gt;&lt;/p&gt;
-    &lt;Demo /&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+&#x3C;html>
+  &#x3C;body x-data="{score: 19}">
+    &#x3C;p>index score = &#x3C;span x-text="score">&#x3C;/span>&#x3C;/p>
+    &#x3C;Demo />
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p><code>src/components/Demo.astro</code></p>
-<pre><code class="language-js">&lt;div x-data=&quot;{ double() { score *= 2; } }&quot;&gt;
-  &lt;p&gt;Demo score = &lt;span x-text=&quot;score&quot;&gt;&lt;/span&gt;&lt;/p&gt;
-  &lt;button @click=&quot;double&quot;&gt;Double it!&lt;/button&gt;
-&lt;/div&gt;
+<pre><code class="language-js">&#x3C;div x-data="{ double() { score *= 2; } }">
+  &#x3C;p>Demo score = &#x3C;span x-text="score">&#x3C;/span>&#x3C;/p>
+  &#x3C;button @click="double">Double it!&#x3C;/button>
+&#x3C;/div>
 </code></pre>
 <p>A downside of this approach is that because the data is not passed using props,
 it is not clear what data the <code>Demo</code> component might be using.
 It has access to all the data in the <code>x-data</code> objects of all ancestor elements.</p>
 <p>Also, if the nesting of components that use <code>x-data</code> becomes somewhat deep,
 the danger of unintentional name clashes in <code>x-data</code> property names increases.</p>
-<h2 id="sharing-state-(nanostores)" tabindex="-1">Sharing State (nanostores)</h2>
+<h2 id="sharing-state-nanostores">Sharing State (nanostores)</h2>
 <p>The recommended way to share state (data) between components is to use the
 <a href="https://github.com/nanostores/nanostores?v=1.1.1" rel="noopener" target="_blank">nanostores</a>
 library.
@@ -1807,17 +1790,17 @@ nanostores are somewhat similar to Svelte stores.</p>
 enter <code>npm install nanostores</code>.</p>
 <p>There are three kinds of stores:</p>
 <ul>
-<li>&quot;atom&quot; stores hold a single data value which can be of any type
+<li>“atom” stores hold a single data value which can be of any type
 including boolean, number, string, array, or object.
 When the value is an object, the entire value can be modified,
 but not individual properties.</li>
-<li>&quot;map&quot; stores hold multiple named properties.
+<li>“map” stores hold multiple named properties.
 This is typically used for objects rather than using an atom store.</li>
-<li>&quot;computed&quot; stores compute their value based on the values of other stores.</li>
+<li>“computed” stores compute their value based on the values of other stores.</li>
 </ul>
 <p>One limitation is that nanostores cannot be passed as props to components.</p>
-<h3 id="store-setup" tabindex="-1">Store Setup</h3>
-<p>Let's walk through an example of using an atom nanostore
+<h3 id="store-setup">Store Setup</h3>
+<p>Let’s walk through an example of using an atom nanostore
 to share a number value between three components
 that are implemented in React, Svelte, and Astro.
 The three components have identical functionality.
@@ -1825,14 +1808,13 @@ Each component renders a count whose value comes from an atom store.
 Minus and plus buttons enable changing the count value.
 Changing the value from any component affects the value
 displayed in all of them since they all use the same nanostore.</p>
-<p><img alt="Astro nanostores Counters" style="width: 50%"
-  src="/blog/assets/astro-nanostores-counters.png?v=1.1.1"></p>
+<p><img alt="Astro nanostores Counters" style="width: 50%" src="/blog/assets/astro-nanostores-counters.png?v=1.1.1"></p>
 <p>To install the nanostores library, enter <code>npm install nanostores</code>.</p>
 <p>To use nanostores in React components,
 also enter <code>npm install nanostores @nanostores/react</code>.</p>
 <p>To add support for the Alpine library which is used in the Astro component,
 enter <code>npx astro add alpinejs</code>.</p>
-<h3 id="persistence" tabindex="-1">Persistence</h3>
+<h3 id="persistence">Persistence</h3>
 <p>For sharing state across page transitions, see <a href="https://github.com/nanostores/persistent?v=1.1.1" rel="noopener" target="_blank">@nanostores/persistent</a>.</p>
 <p>To install this, enter <code>npm install nanostores @nanostores/persistent</code>.</p>
 <p>To use this to define stores, import it as follows:</p>
@@ -1845,7 +1827,7 @@ to the following:</p>
   decode: JSON.parse
 });
 </code></pre>
-<h3 id="store-creation" tabindex="-1">Store Creation</h3>
+<h3 id="store-creation">Store Creation</h3>
 <p>Here is the code the creates the nanostore defined in the file <code>src/stores.ts</code>.
 It also defines a helper function that is needed by the Astro component.</p>
 <pre><code class="language-ts">import {atom, computed, map} from 'nanostores';
@@ -1857,7 +1839,7 @@ globalThis.stores = {
   count: atom(1)
 };
 </code></pre>
-<h3 id="react-component" tabindex="-1">React Component</h3>
+<h3 id="react-component">React Component</h3>
 <p>Here is a React component that uses the <code>count</code> nanostore
 defined in the file <code>src/components/Counter.tsx</code>.</p>
 <pre><code class="language-tsx">import {type FC} from 'react';
@@ -1867,52 +1849,52 @@ interface Props {
   label?: string;
 }
 
-const Counter: FC&lt;Props&gt; = ({label = ''}) =&gt; {
+const Counter: FC&#x3C;Props> = ({label = ''}) => {
   // @ts-ignore
   const {count} = globalThis.stores;
   const value = useStore(count);
   return (
-    &lt;div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}&gt;
-      {label &amp;&amp; &lt;div&gt;{label}&lt;/div&gt;}
-      &lt;button disabled={value &lt;= 0} onClick={() =&gt; count.set(value - 1)}&gt;
+    &#x3C;div style={{display: 'flex', alignItems: 'center', gap: '1rem'}}>
+      {label &#x26;&#x26; &#x3C;div>{label}&#x3C;/div>}
+      &#x3C;button disabled={value &#x3C;= 0} onClick={() => count.set(value - 1)}>
         -
-      &lt;/button&gt;
-      &lt;div&gt;{value}&lt;/div&gt;
-      &lt;button onClick={() =&gt; count.set(value + 1)}&gt;+&lt;/button&gt;
-    &lt;/div&gt;
+      &#x3C;/button>
+      &#x3C;div>{value}&#x3C;/div>
+      &#x3C;button onClick={() => count.set(value + 1)}>+&#x3C;/button>
+    &#x3C;/div>
   );
 };
 
 export default Counter;
 </code></pre>
-<h3 id="svelte-component" tabindex="-1">Svelte Component</h3>
+<h3 id="svelte-component">Svelte Component</h3>
 <p>Here is a Svelte component that uses the <code>count</code> nanostore
 defined in the file <code>src/components/Counter.svelte</code>.</p>
-<pre><code class="language-html">&lt;script&gt;
+<pre><code class="language-html">&#x3C;script>
   const {count} = globalThis.stores;
 
   export let label = '';
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;div class=&quot;row&quot;&gt;
+&#x3C;div class="row">
   {#if label}
-    &lt;div&gt;{label}&lt;/div&gt;
+    &#x3C;div>{label}&#x3C;/div>
   {/if}
-  &lt;!-- In Svelte, add $ prefix to get the value of a nanostore. --&gt;
-  &lt;button disabled={$count &lt;= 0} on:click={() =&gt; count.set($count - 1)}&gt;-&lt;/button&gt;
-  &lt;div&gt;{$count}&lt;/div&gt;
-  &lt;button on:click={() =&gt; count.set($count + 1)}&gt;+&lt;/button&gt;
-&lt;/div&gt;
+  &#x3C;!-- In Svelte, add $ prefix to get the value of a nanostore. -->
+  &#x3C;button disabled={$count &#x3C;= 0} on:click={() => count.set($count - 1)}>-&#x3C;/button>
+  &#x3C;div>{$count}&#x3C;/div>
+  &#x3C;button on:click={() => count.set($count + 1)}>+&#x3C;/button>
+&#x3C;/div>
 
-&lt;style&gt;
+&#x3C;style>
   .row {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
-<h3 id="astro-component" tabindex="-1">Astro Component</h3>
+<h3 id="astro-component">Astro Component</h3>
 <p>Here is an Astro component that uses the <code>count</code> nanostore
 defined in the file <code>src/components/Counter.astro</code>.</p>
 <pre><code class="language-js">---
@@ -1923,23 +1905,23 @@ interface Props {
 const {label = ''} = Astro.props;
 ---
 
-&lt;div
-  class=&quot;row&quot;
+&#x3C;div
+  class="row"
   x-data
-  x-init=&quot;counterSetup($data)&quot;
-  x-effect=&quot;setCount(Number(count))&quot;
-&gt;
-  {label &amp;&amp; &lt;div&gt;{label}&lt;/div&gt; }
-  &lt;button :disabled=&quot;count &lt;= 0&quot; @click=&quot;count--&quot;&gt;-&lt;/button&gt;
-  &lt;div x-text=&quot;count&quot;&gt;&lt;/div&gt;
-  &lt;button @click=&quot;count++&quot;&gt;+&lt;/button&gt;
-&lt;/div&gt;
+  x-init="counterSetup($data)"
+  x-effect="setCount(Number(count))"
+>
+  {label &#x26;&#x26; &#x3C;div>{label}&#x3C;/div> }
+  &#x3C;button :disabled="count &#x3C;= 0" @click="count--">-&#x3C;/button>
+  &#x3C;div x-text="count">&#x3C;/div>
+  &#x3C;button @click="count++">+&#x3C;/button>
+&#x3C;/div>
 
-&lt;script is:inline&gt;
+&#x3C;script is:inline>
   // This updates an Alpine x-data property
   // every time a related store value changes.
   function sync(store, data, property) {
-    store.subscribe(value =&gt; data[property] = value);
+    store.subscribe(value => data[property] = value);
   }
 
   function counterSetup(data) {
@@ -1947,17 +1929,17 @@ const {label = ''} = Astro.props;
     sync(count, data, 'count');
     data.setCount = count.set;
   }
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;style&gt;
+&#x3C;style>
   .row {
     display: flex;
     align-items: center;
     gap: 1rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
-<h3 id="page-component" tabindex="-1">Page Component</h3>
+<h3 id="page-component">Page Component</h3>
 <p>Here is an Astro page that uses all three of the components defined above.
 This is defined in the file <code>src/pages/index.astro</code>.</p>
 <pre><code class="language-html">---
@@ -1967,77 +1949,77 @@ import Counter2 from '../components/Counter.svelte';
 import Counter3 from '../components/Counter.astro';
 ---
 
-&lt;script type=&quot;module&quot;&gt;
+&#x3C;script type="module">
   import '/src/stores.js'; // sets a global variable
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;Layout&gt;
-  &lt;h1&gt;nanostores Demo&lt;/h1&gt;
+&#x3C;Layout>
+  &#x3C;h1>nanostores Demo&#x3C;/h1>
 
-  &lt;main x-data x-init=&quot;topSetup($data)&quot;&gt;
-    &lt;!-- Using client:only instead of client:load addresses
-         a timing issue with setting globalThis.stores. --&gt;
-    &lt;Counter1 label=&quot;React&quot; client:only=&quot;react&quot; /&gt;
-    &lt;Counter2 label=&quot;Svelte&quot; client:only=&quot;svelte&quot; /&gt;
-    &lt;!-- client:* directives cannot be applied to Astro components. --&gt;
-    &lt;Counter3 label=&quot;Astro&quot; /&gt;
-  &lt;/main&gt;
-&lt;/Layout&gt;
+  &#x3C;main x-data x-init="topSetup($data)">
+    &#x3C;!-- Using client:only instead of client:load addresses
+         a timing issue with setting globalThis.stores. -->
+    &#x3C;Counter1 label="React" client:only="react" />
+    &#x3C;Counter2 label="Svelte" client:only="svelte" />
+    &#x3C;!-- client:* directives cannot be applied to Astro components. -->
+    &#x3C;Counter3 label="Astro" />
+  &#x3C;/main>
+&#x3C;/Layout>
 </code></pre>
-<h2 id="directives" tabindex="-1">Directives</h2>
+<h2 id="directives">Directives</h2>
 <p>In addition to the <code>client:</code> directives described in the previous section,
 Astro supports these directives:</p>
-<table>
-<thead>
-<tr>
-<th>Directive</th>
-<th>Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>class:list={[...]}</code></td>
-<td>converts an array of CSS class names into a string of class names</td>
-</tr>
-<tr>
-<td><code>define:vars</code></td>
-<td>applied to <code>style</code> or <code>script</code> elements to provide access to the values of front matter variables</td>
-</tr>
-<tr>
-<td><code>is:inline</code></td>
-<td>disables Astro processing of <code>style</code> and <code>script</code> elements leaving them as-is</td>
-</tr>
-<tr>
-<td><code>is:global</code></td>
-<td>applied to a <code>style</code> element to make the styles global rather than scoped to the current component</td>
-</tr>
-<tr>
-<td><code>is:raw</code></td>
-<td>treats descendant elements and interpolations as text</td>
-</tr>
-<tr>
-<td><code>set:html={string}</code></td>
-<td>injects a string of HTML into the element</td>
-</tr>
-<tr>
-<td><code>set:text</code></td>
-<td>injects a string of text into the element</td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Directive</th><th>Action</th></tr></thead><tbody><tr><td><code>class:list={[...]}</code></td><td>converts an array of CSS class names into a string of class names</td></tr><tr><td><code>define:vars</code></td><td>applied to <code>style</code> or <code>script</code> elements to provide access to the values of front matter variables</td></tr><tr><td><code>is:inline</code></td><td>disables Astro processing of <code>style</code> and <code>script</code> elements leaving them as-is</td></tr><tr><td><code>is:global</code></td><td>applied to a <code>style</code> element to make the styles global rather than scoped to the current component</td></tr><tr><td><code>is:raw</code></td><td>treats descendant elements and interpolations as text</td></tr><tr><td><code>set:html={string}</code></td><td>injects a string of HTML into the element</td></tr><tr><td><code>set:text</code></td><td>injects a string of text into the element</td></tr></tbody></table>
 <p>If a value in the <code>class:list</code> array is an object,
 the keys must be class names and the values must be Boolean expressions
 that determine whether the class name should be included.
 If a value is array, it is flattened into the surrounding array.
 If a value is <code>false</code>, <code>undefined</code>, or <code>null</code>, it is skipped.</p>
 <p>For example:</p>
-<pre><code class="language-html">&lt;nav&gt;
-  &lt;a class:list={{disabled: currentPage === 1}} href=&quot;/&quot;&gt;First&lt;/a&gt;
-  &lt;a class:list={{disabled: !prevUrl}} href={prevUrl}&gt;Previous&lt;/a&gt;
-  &lt;a class:list={{disabled: !nextUrl}} href={nextUrl}&gt;Next&lt;/a&gt;
-  &lt;a class:list={{disabled: currentPage === lastPage}}
-    href={`/${lastPage}`}&gt;Last&lt;/a&gt;
-&lt;/nav&gt;
+<pre><code class="language-html">&#x3C;nav>
+  &#x3C;a class:list={{disabled: currentPage === 1}} href="/">First&#x3C;/a>
+  &#x3C;a class:list={{disabled: !prevUrl}} href={prevUrl}>Previous&#x3C;/a>
+  &#x3C;a class:list={{disabled: !nextUrl}} href={nextUrl}>Next&#x3C;/a>
+  &#x3C;a class:list={{disabled: currentPage === lastPage}}
+    href={`/${lastPage}`}>Last&#x3C;/a>
+&#x3C;/nav>
 </code></pre>
 <p>The <code>define:vars</code> directive turns front matter variables into CSS variables.
 For example, here is an Astro component defined in <code>src/components/Text.astro</code>:</p>
@@ -2045,28 +2027,27 @@ For example, here is an Astro component defined in <code>src/components/Text.ast
 const { bg, fg } = Astro.props;
 ---
 
-&lt;div class=&quot;text&quot;&gt;
-  &lt;slot /&gt;
-&lt;/div&gt;
+&#x3C;div class="text">
+  &#x3C;slot />
+&#x3C;/div>
 
-&lt;style define:vars={{ bg, fg }}&gt;
+&#x3C;style define:vars={{ bg, fg }}>
   .text {
     background: var(--bg, yellow);
     color: var(--fg, black);
     display: inline-block;
     padding: 0.5rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>This component can be used as follows:</p>
-<p><img alt="Astro define:vars" style="border: none; width: 20%"
-  src="/blog/assets/astro-define-vars.png?v=1.1.1" /></p>
+<p><img alt="Astro define:vars" style="border: none; width: 20%" src="/blog/assets/astro-define-vars.png?v=1.1.1"></p>
 <pre><code class="language-html">---
-import Text from &quot;../components/Text.astro&quot;;
+import Text from "../components/Text.astro";
 ---
 
-&lt;Text&gt;First&lt;/Text&gt;
-&lt;Text fg=&quot;white&quot; bg=&quot;blue&quot;&gt;Second&lt;/Text&gt;
+&#x3C;Text>First&#x3C;/Text>
+&#x3C;Text fg="white" bg="blue">Second&#x3C;/Text>
 </code></pre>
 <p>Applying the <code>is:inline</code> directive to a <code>style</code> or <code>script</code> element
 has the following effects:</p>
@@ -2087,23 +2068,22 @@ when a wrapping element is not needed.
 If the value is a <code>Promise</code>, Astro will wait for it to resolve
 and use the result as the HTML to insert.</p>
 <p>The string value of <code>set:text</code> is automatically escaped, replacing
-certain characters such as <code>&quot;</code> with a character entity such as <code>&amp;quot;</code>.</p>
-<h2 id="dev-toolbar" tabindex="-1">Dev Toolbar</h2>
+certain characters such as <code>"</code> with a character entity such as <code>&#x26;quot;</code>.</p>
+<h2 id="dev-toolbar">Dev Toolbar</h2>
 <p>When running in dev mode, Astro provides a Dev Toolbar in
 a dark gray oval that is centered at the bottom of the browser window.
 It is partially hidden from view until the mouse hovers over it.</p>
-<p><img alt="Astro Dev Toolbar" style="border: none; width: 30%"
-  src="/blog/assets/astro-dev-toolbar.png?v=1.1.1" /></p>
+<p><img alt="Astro Dev Toolbar" style="border: none; width: 30%" src="/blog/assets/astro-dev-toolbar.png?v=1.1.1"></p>
 <p>The toolbar contains the following four buttons:</p>
 <ul>
 <li>
 <p>Menu (Astro icon)</p>
-<p>This provides options to &quot;Report a Bug&quot;, provide &quot;Feedback&quot;,
-view &quot;Documentation&quot;, and join the &quot;Community&quot; (on Discord).
+<p>This provides options to “Report a Bug”, provide “Feedback”,
+view “Documentation”, and join the “Community” (on Discord).
 It also features some optional integrations.
-The &quot;View all&quot; link opens a browser tab
+The “View all” link opens a browser tab
 for viewing all available integrations.</p>
-<p>The &quot;Copy debug info&quot; button in the upper-right
+<p>The “Copy debug info” button in the upper-right
 copies information to the clipboard that is useful when reporting a bug.
 This includes the version of Astro, version of Node, operating system,
 package manager (ex. npm), the adapter in use (ex. @astrojs/node),
@@ -2134,7 +2114,7 @@ Hover over them to see a dialog that describes the issues.</p>
 <p>Settings (gear icon)</p>
 <p>This displays a dialog for modifying settings.
 There are currently only two settings,
-&quot;Verbose logging&quot; and &quot;Disable notifications&quot;,
+“Verbose logging” and “Disable notifications”,
 both of which are off by default.</p>
 </li>
 </ul>
@@ -2142,40 +2122,39 @@ both of which are off by default.</p>
 <p>If having access to the Dev Toolbar is not desired,
 it can be disabled by entering <code>npx astro preferences disable devToolbar</code>.
 It can be enabled again by entering <code>npx astro preferences enable devToolbar</code>.</p>
-<h2 id="custom-404-page" tabindex="-1">Custom 404 Page</h2>
+<h2 id="custom-404-page">Custom 404 Page</h2>
 <p>To create a custom 404 page, add the file <code>src/pages/404.astro</code>.
 This page can import and use layouts and other components
 just like any other page.</p>
 <p>The following is an example.</p>
-<p><img alt="Astro 404 page" style="width: 30%"
-  src="/blog/assets/astro-404-page.png?v=1.1.1"></p>
+<p><img alt="Astro 404 page" style="width: 30%" src="/blog/assets/astro-404-page.png?v=1.1.1"></p>
 <pre><code class="language-html">---
-import Layout from &quot;../layouts/Layout.astro&quot;;
+import Layout from "../layouts/Layout.astro";
 ---
 
-&lt;Layout&gt;
-  &lt;main&gt;
-    &lt;p&gt;
+&#x3C;Layout>
+  &#x3C;main>
+    &#x3C;p>
       The Web site you seek
-      &lt;br /&gt;
+      &#x3C;br />
       cannot be located, but
-      &lt;br /&gt;
+      &#x3C;br />
       countless more exist.
-    &lt;/p&gt;
-    &lt;p&gt;
+    &#x3C;/p>
+    &#x3C;p>
       No content was found at
-      &lt;br /&gt;
-      &lt;span id=&quot;path&quot;&gt;&lt;/span&gt;
-    &lt;/p&gt;
-  &lt;/main&gt;
-&lt;/Layout&gt;
+      &#x3C;br />
+      &#x3C;span id="path">&#x3C;/span>
+    &#x3C;/p>
+  &#x3C;/main>
+&#x3C;/Layout>
 
-&lt;script&gt;
+&#x3C;script>
   const span = document.getElementById('path');
   if (span) span.textContent = window.location.pathname;
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;style&gt;
+&#x3C;style>
   main {
     display: flex;
     flex-direction: column;
@@ -2200,12 +2179,12 @@ import Layout from &quot;../layouts/Layout.astro&quot;;
   #path {
     color: red;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
-<h2 id="view-transitions" tabindex="-1">View Transitions</h2>
+<h2 id="view-transitions">View Transitions</h2>
 <p>Astro supports adding <a href="https://docs.astro.build/en/guides/view-transitions/?v=1.1.1" rel="noopener" target="_blank">view transitions</a>
 that are applied when navigating from one page to another.
-This includes clicking links implemented with <code>&lt;a&gt;</code> elements,
+This includes clicking links implemented with <code>&#x3C;a></code> elements,
 triggering the browser forward and back buttons, and submitting forms.
 For more control over when transitions occur, see <a href="https://docs.astro.build/en/guides/view-transitions/#router-control?v=1.1.1" rel="noopener" target="_blank">router control</a>.</p>
 <p>This feature is built on the Web <a href="https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API?v=1.1.1" rel="noopener" target="_blank">View Transitions API</a>.
@@ -2213,26 +2192,26 @@ As of December 2023, the only major web browsers that support this
 are Chrome and Edge. Polyfills are provided to support view transitions
 in browsers that do not yet support the View Transitions API.</p>
 <p>Astro disables all view transitions when
-the CSS media feature &quot;prefer-reduce-motion&quot; is enabled.
+the CSS media feature “prefer-reduce-motion” is enabled.
 This is based on an operating system specific setting.
 For example, in macOS this is configured in the Settings app under
-Accessibility ... Display ... Reduce motion.</p>
+Accessibility … Display … Reduce motion.</p>
 <p>For basic fade out, fade in transitions between all pages,
 modify the layout files used by all the pages as follows.
 This specifies the transition that should occur when leaving a page.</p>
 <pre><code class="language-html">---
-import { ViewTransitions } from &quot;astro:transitions&quot;;
+import { ViewTransitions } from "astro:transitions";
 ...
 
 ---
 
-&lt;html&gt;
-  &lt;head&gt;
+&#x3C;html>
+  &#x3C;head>
     ...
-    &lt;ViewTransitions /&gt;
-  &lt;/head&gt;
+    &#x3C;ViewTransitions />
+  &#x3C;/head>
   ...
-&lt;/html&gt;
+&#x3C;/html>
 </code></pre>
 <p>The <code>ViewTransitions</code> component must appear as a child of the <code>head</code> element
 for <em>any</em> transitions to occur, including custom transitions.</p>
@@ -2265,25 +2244,25 @@ For example, the following will configure a slide transition where
 going forward causes the current page to slide out to the left
 and the new page to slide in from the right.
 Going back triggers the opposite transitions.</p>
-<pre><code class="language-html">&lt;body class=&quot;p-4&quot; transition:animate={slide({ duration: '1s' })}&gt;
+<pre><code class="language-html">&#x3C;body class="p-4" transition:animate={slide({ duration: '1s' })}>
 </code></pre>
 <p>To specify a transition on a specific element
 (which can be the root element of a page),
-add the <code>transition:animate=&quot;{transition-type}&quot;</code> directive.
-For example, <code>&lt;main transition:animate=&quot;slide&quot;&gt;</code>.</p>
+add the <code>transition:animate="{transition-type}"</code> directive.
+For example, <code>&#x3C;main transition:animate="slide"></code>.</p>
 <p>To transition certain elements on a page but not the whole page,
-add <code>transition:animate=&quot;none&quot;</code> to the <code>html</code> element
-and <code>transition:animate=&quot;{transition-name}&quot;</code> to specific elements.</p>
+add <code>transition:animate="none"</code> to the <code>html</code> element
+and <code>transition:animate="{transition-name}"</code> to specific elements.</p>
 <p>To customize the transition,
 pass a configuration object to the transition function.
-For example, <code>&lt;main transition:animate={slide({ duration: '2s' })}&gt;</code>.</p>
+For example, <code>&#x3C;main transition:animate={slide({ duration: '2s' })}></code>.</p>
 <p>When identical <code>Image</code> components are on both the current page
 and the next page and they have the <code>transition:name</code> directive,
 one will morph into the other through the view transition.
 This is especially useful when the image size of each of the pages differs.</p>
 <p>For example:</p>
-<pre><code class="language-html">import whippet from &quot;../images/whippet.webp&quot;; ... --- ...
-&lt;img alt=&quot;whippet&quot; src=&quot;{whippet}&quot; transition:name=&quot;whippet&quot; /&gt;
+<pre><code class="language-html">import whippet from "../images/whippet.webp"; ... --- ...
+&#x3C;img alt="whippet" src="{whippet}" transition:name="whippet" />
 ...
 </code></pre>
 <p>When identical <code>audio</code> and <code>video</code> elements are on both
@@ -2291,15 +2270,15 @@ the current page and the next page and they are playing
 and they have the <code>transition:name</code> and <code>transition:persist</code> directives,
 they will continue playing without interruption through the view transition.</p>
 <p>For example:</p>
-<pre><code class="language-html">&lt;audio
+<pre><code class="language-html">&#x3C;audio
   controls
-  src=&quot;/sample.mp3&quot;
-  transition:name=&quot;my-audio&quot;
+  src="/sample.mp3"
+  transition:name="my-audio"
   transition:persist
-&gt;&lt;/audio&gt;
-&lt;video controls width=&quot;200&quot; transition:name=&quot;my-video&quot; transition:persist&gt;
-  &lt;source src=&quot;/bunny-video.mp4&quot; type=&quot;video/mp4&quot; /&gt;
-&lt;/video&gt;
+>&#x3C;/audio>
+&#x3C;video controls width="200" transition:name="my-video" transition:persist>
+  &#x3C;source src="/bunny-video.mp4" type="video/mp4" />
+&#x3C;/video>
 </code></pre>
 <p>To define a custom transition, create an object that
 conforms to the <code>TransitionDirectionalAnimations</code> interface
@@ -2332,13 +2311,13 @@ const spin = {
 </code></pre>
 <p>For more detail, see <a href="https://docs.astro.build/en/guides/view-transitions/?v=1.1.1" rel="noopener" target="_blank">View Transitions</a>.
 Also, check out <a href="https://github.com/martrapp/astro-vt-bot#readme?v=1.1.1" rel="noopener" target="_blank">astro-vt-bot</a>.</p>
-<h2 id="prefetching" tabindex="-1">Prefetching</h2>
+<h2 id="prefetching">Prefetching</h2>
 <p>Prefetching is the act of loading resources that will be needed
 to render a page before navigating to that page.
 In Astro, this can be triggered by hovering over link, clicking a link,
 or merely scrolling a link into view.</p>
 <p>Prefetching is automatically enabled when view transitions are enabled.
-That is done by including the <code>&lt;ViewTransitions /&gt;</code> component
+That is done by including the <code>&#x3C;ViewTransitions /></code> component
 in the <code>head</code> section of the HTML.</p>
 <p>When not using view transitions, prefetching can be enabled
 by adding the following in <code>astro.config.mjs</code>:</p>
@@ -2346,8 +2325,8 @@ by adding the following in <code>astro.config.mjs</code>:</p>
 </code></pre>
 <p>Then add the <code>data-astro-prefetch</code> to each <code>a</code> element
 where prefetching should be performed.</p>
-<p>The default prefetching strategy is &quot;hover&quot;.
-To use the &quot;tap&quot; or &quot;viewport&quot; strategy, set the value of the
+<p>The default prefetching strategy is “hover”.
+To use the “tap” or “viewport” strategy, set the value of the
 <code>data-astro-prefetch</code> attribute to one of those values.</p>
 <p>To change the default prefetch strategy,
 change the <code>prefetch</code> value in <code>astro.config.mjs</code> to the following:</p>
@@ -2372,7 +2351,7 @@ For example:</p>
 prefetch('/some/path');
 </code></pre>
 <p>For more detail, see <a href="https://docs.astro.build/en/guides/prefetch/#enable-prefetching?v=1.1.1" rel="noopener" target="_blank">Prefetch</a>.</p>
-<h2 id="middleware" tabindex="-1">Middleware</h2>
+<h2 id="middleware">Middleware</h2>
 <p>Astro supports defining a middleware function named <code>onRequest</code>
 in the file <code>src/middleware.ts</code> that is called before each page transition.
 This function can:</p>
@@ -2390,7 +2369,7 @@ let score = 0;
 
 const securePaths = ['/secret'];
 
-export const onRequest = defineMiddleware(async (context, next) =&gt; {
+export const onRequest = defineMiddleware(async (context, next) => {
   score++;
 
   const {locals, url} = context;
@@ -2416,14 +2395,14 @@ export const onRequest = defineMiddleware(async (context, next) =&gt; {
         status: 401,
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'WWW-Authenticate': 'Basic realm=&quot;Secure Area&quot;'
+          'WWW-Authenticate': 'Basic realm="Secure Area"'
         }
       });
       */
 
       return new Response('Unauthorized', {
-        // status: 401, // &quot;Forbidden&quot;; will not redirect to Location
-        status: 302, // &quot;See Other&quot;; will redirect to Location
+        // status: 401, // "Forbidden"; will not redirect to Location
+        status: 302, // "See Other"; will redirect to Location
         headers: {
           'Cache-Control': 'no-cache, no-store, must-revalidate',
           Location: url.origin + '/unauthorized' // a defined page
@@ -2445,15 +2424,14 @@ export const onRequest = defineMiddleware(async (context, next) =&gt; {
   return response; // unaltered
 });
 </code></pre>
-<h2 id="cookies" tabindex="-1">Cookies</h2>
+<h2 id="cookies">Cookies</h2>
 <p>Cookies provide one way for an Astro page
 to share data with other pages in the same app.</p>
 <p>One downside of using cookies is the legal requirement
 to prompt users for permission to store them.</p>
 <p>Here is a page defined in <code>src/pages/index.astro</code>
 that sets a cookie based on user input using Alpine.</p>
-<p><img alt="Astro cookies home" style="width: 70%"
-  src="/blog/assets/astro-cookies-home.png?v=1.1.1" /></p>
+<p><img alt="Astro cookies home" style="width: 70%" src="/blog/assets/astro-cookies-home.png?v=1.1.1"></p>
 <pre><code class="language-js">---
 import Layout from '../layouts/Layout.astro';
 
@@ -2461,15 +2439,15 @@ const cookie = Astro.cookies.get('score');
 let score = cookie?.number() ?? 0;
 ---
 
-&lt;Layout&gt;
-  &lt;div x-data={`{score: ${score}}`} x-effect=&quot;ns.setScore(Number(score))&quot;&gt;
-    &lt;input type=&quot;range&quot; min=&quot;0&quot; max=&quot;10&quot; x-model=&quot;score&quot; /&gt;
-    &lt;span x-text=&quot;score&quot;&gt;&lt;/span&gt;
-  &lt;/div&gt;
-  &lt;a href=&quot;/report&quot;&gt;Report&lt;/a&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;div x-data={`{score: ${score}}`} x-effect="ns.setScore(Number(score))">
+    &#x3C;input type="range" min="0" max="10" x-model="score" />
+    &#x3C;span x-text="score">&#x3C;/span>
+  &#x3C;/div>
+  &#x3C;a href="/report">Report&#x3C;/a>
+&#x3C;/Layout>
 
-&lt;script&gt;
+&#x3C;script>
   // @ts-ignore
   globalThis.ns = {
 	  setScore(score: number) {
@@ -2478,34 +2456,33 @@ let score = cookie?.number() ?? 0;
 	    document.cookie = `score=${score}; expires=${expires}`;
     }
   };
-&lt;/script&gt;
+&#x3C;/script>
 
-&lt;style&gt;
+&#x3C;style>
   input[type='range'] {
     width: 20rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>Here is a page defined in <code>src/pages/report.astro</code>
 that gets the cookie and displays its value.</p>
-<p><img alt="Astro cookies report" style="width: 15%"
-  src="/blog/assets/astro-cookies-report.png?v=1.1.1" /></p>
+<p><img alt="Astro cookies report" style="width: 15%" src="/blog/assets/astro-cookies-report.png?v=1.1.1"></p>
 <pre><code class="language-js">---
 import Layout from '../layouts/Layout.astro';
 
-// If the output mode is &quot;static&quot;, this will output the following warning:
-// [WARN] `Astro.request.headers` is not available in &quot;static&quot; output mode.
+// If the output mode is "static", this will output the following warning:
+// [WARN] `Astro.request.headers` is not available in "static" output mode.
 // To enable header access, enable SSR.
 const cookie = Astro.cookies.get('score');
 const score = cookie?.number() ?? 0;
 ---
 
-&lt;Layout&gt;
-  &lt;div&gt;score = {score}&lt;/div&gt;
-  &lt;a href=&quot;/&quot;&gt;Home&lt;/a&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;div>score = {score}&#x3C;/div>
+  &#x3C;a href="/">Home&#x3C;/a>
+&#x3C;/Layout>
 </code></pre>
-<h2 id="table-of-contents" tabindex="-1">Table of Contents</h2>
+<h2 id="table-of-contents">Table of Contents</h2>
 <p>The markdown plugin <a href="https://github.com/remarkjs/remark-toc?v=1.1.1" rel="noopener" target="_blank">remark-toc</a> can automatically generate a table of contents
 for Markdown files based on headings.
 It will render a hyperlink for each heading that can be clicked to jump to it.</p>
@@ -2551,8 +2528,8 @@ to something like the following:</p>
 <p><code>heading</code></p>
 <p>This is a case-insensitive regular expression that matches headings
 that specify where the TOC should be inserted.
-It defaults to <code>&quot;(table[ -]of[ -])?contents?|toc&quot;</code>.
-This matches &quot;table of contents&quot;, &quot;table-of-contents&quot;, &quot;contents&quot;, and &quot;toc&quot;.</p>
+It defaults to <code>"(table[ -]of[ -])?contents?|toc"</code>.
+This matches “table of contents”, “table-of-contents”, “contents”, and “toc”.</p>
 </li>
 <li>
 <p><code>maxDepth</code></p>
@@ -2615,12 +2592,11 @@ The National Football League (NFL) ...
 ### Cincinnati Bengals
 </code></pre>
 <p>Here is the table of contents that is rendered.</p>
-<p><img alt="Astro remark-toc plugin" style="width: 40%"
-  src="/blog/assets/astro-remark-toc.png?v=1.1.1" /></p>
-<h2 id="api-endpoints" tabindex="-1">API Endpoints</h2>
+<p><img alt="Astro remark-toc plugin" style="width: 40%" src="/blog/assets/astro-remark-toc.png?v=1.1.1"></p>
+<h2 id="api-endpoints">API Endpoints</h2>
 <p>Endpoint functions can be invoked at build time or run time.
 They are defined in <code>.js</code> and <code>.ts</code> files under the <code>src/pages</code> directory.
-Consider placing these files in a subdirectory named &quot;api&quot;.</p>
+Consider placing these files in a subdirectory named “api”.</p>
 <p>All <code>.js</code> and <code>.ts</code> files in an Astro project
 are only used on the server side, never in browsers.</p>
 <p>For endpoints that return JSON, consider including <code>.json</code>
@@ -2636,7 +2612,7 @@ However, currently endpoints cannot use Astro components to generate HTML.
 That capability is planned for the future.
 For now, see the HTMX section below which uses Astro pages as endpoints.</p>
 <p>Endpoints can be defined by dynamic routes
-where directory names under the &quot;pages&quot; directory
+where directory names under the “pages” directory
 are surrounded by square brackets.
 <code>Astro.params</code> contains the matched segments of a dynamic route
 and can be used in endpoint functions to access those matches.</p>
@@ -2657,8 +2633,8 @@ data found in the collection defined in the previous section.</p>
 <pre><code class="language-ts">import {getCollection, type CollectionEntry} from 'astro:content';
 
 export async function GET() {
-  const dogs: CollectionEntry&lt;'dogs'&gt;[] = await getCollection('dogs');
-  const data = dogs.map(dog =&gt; dog.data);
+  const dogs: CollectionEntry&#x3C;'dogs'>[] = await getCollection('dogs');
+  const data = dogs.map(dog => dog.data);
   return new Response(JSON.stringify(data));
 }
 </code></pre>
@@ -2666,7 +2642,7 @@ export async function GET() {
 define endpoint functions as follows:</p>
 <pre><code class="language-ts">import type {APIRoute} from 'astro';
 
-export const GET: APIRoute = () =&gt; {
+export const GET: APIRoute = () => {
   ...
 };
 </code></pre>
@@ -2705,7 +2681,7 @@ The following file in <code>src/pages/todo-state.ts</code> does this.</p>
   completed: boolean;
 };
 
-export const todoMap = new Map&lt;number, Todo&gt;();
+export const todoMap = new Map&#x3C;number, Todo>();
 </code></pre>
 <p>The endpoints defined in <code>src/pages/todos.ts</code> do two things:</p>
 <ul>
@@ -2792,7 +2768,7 @@ export async function PATCH({params, request}: APIContext) {
 
 export async function DELETE({params, request}: APIContext) {
   const {id} = params;
-  if (!id) return new Response('missing &quot;id&quot; parameter', {status: 400});
+  if (!id) return new Response('missing "id" parameter', {status: 400});
 
   const idNumber = Number(id);
   const status = todoMap.delete(idNumber) ? 200 : 404;
@@ -2803,100 +2779,98 @@ export async function DELETE({params, request}: APIContext) {
 to enable using <code>localhost</code> in URLs that hit the endpoints.
 For example, the <code>dev</code> and <code>start</code> scripts in <code>package.json</code>
 should match the following:</p>
-<pre><code class="language-json">    &quot;dev&quot;: &quot;astro dev --host&quot;,
-    &quot;start&quot;: &quot;astro dev --host&quot;,
+<pre><code class="language-json">    "dev": "astro dev --host",
+    "start": "astro dev --host",
 </code></pre>
 <p>For more detail, see <a href="https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes?v=1.1.1" rel="noopener" target="_blank">Server Endpoints (API Routes)</a>.</p>
-<h3 id="form-submits" tabindex="-1">Form Submits</h3>
+<h3 id="form-submits">Form Submits</h3>
 <p>Form submits can be handled by an Astro page or an API endpoint.
 Using an Astro page is ideal when no server-side processing is needed.
 Using an API endpoint enables server-side processing
 and redirecting to another Astro page.
-Let's examine both cases.</p>
+Let’s examine both cases.</p>
 <p>Here is an Astro page defined in <code>src/pages/index.astro</code> that renders a <code>form</code>.</p>
-<p><img alt="Astro form submission" style="width: 40%"
-  src="/blog/assets/astro-form-submission.png?v=1.1.1" /></p>
+<p><img alt="Astro form submission" style="width: 40%" src="/blog/assets/astro-form-submission.png?v=1.1.1"></p>
 <pre><code class="language-js">---
-import Layout from &quot;../layouts/Layout.astro&quot;;
+import Layout from "../layouts/Layout.astro";
 
 // Choose one of the following lines.
-// const action = &quot;/api/form-handler&quot;; // uses API endpoint
-const action = &quot;/form-handler&quot;; // uses another page
+// const action = "/api/form-handler"; // uses API endpoint
+const action = "/form-handler"; // uses another page
 ---
 
-&lt;Layout&gt;
-  &lt;form action={action} method=&quot;POST&quot;&gt;
-    &lt;div&gt;
-      &lt;label for=&quot;name&quot;&gt;Name:&lt;/label&gt;
-      &lt;input type=&quot;text&quot; name=&quot;name&quot; required size=&quot;20&quot; /&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;label for=&quot;age&quot;&gt;Age:&lt;/label&gt;
-      &lt;input type=&quot;number&quot; name=&quot;age&quot; required /&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-      &lt;button&gt;Submit&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/form&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;form action={action} method="POST">
+    &#x3C;div>
+      &#x3C;label for="name">Name:&#x3C;/label>
+      &#x3C;input type="text" name="name" required size="20" />
+    &#x3C;/div>
+    &#x3C;div>
+      &#x3C;label for="age">Age:&#x3C;/label>
+      &#x3C;input type="number" name="age" required />
+    &#x3C;/div>
+    &#x3C;div>
+      &#x3C;button>Submit&#x3C;/button>
+    &#x3C;/div>
+  &#x3C;/form>
+&#x3C;/Layout>
 
-&lt;style&gt;
+&#x3C;style>
   form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
-  input[type=&quot;number&quot;] {
+  input[type="number"] {
     width: 3rem;
   }
-&lt;/style&gt;
+&#x3C;/style>
 </code></pre>
 <p>Here is a page defined in <code>src/pages/form-handler.astro</code>
 that can handle a form submission using POST
 or a redirect from an API endpoint using GET.</p>
-<p><img alt="Astro form submission result" style="width: 40%"
-  src="/blog/assets/astro-form-submission-result.png?v=1.1.1" /></p>
+<p><img alt="Astro form submission result" style="width: 40%" src="/blog/assets/astro-form-submission-result.png?v=1.1.1"></p>
 <pre><code class="language-js">---
-import Layout from &quot;../layouts/Layout.astro&quot;;
-import { categorizeByAge } from &quot;../categorize.ts&quot;;
+import Layout from "../layouts/Layout.astro";
+import { categorizeByAge } from "../categorize.ts";
 
-let message = &quot;&quot;;
+let message = "";
 const { request } = Astro;
 const { method } = request;
 
-if (method === &quot;GET&quot;) {
+if (method === "GET") {
   // This is used by the redirect in src/pages/api/form-handler.ts.
-  message = Astro.url.searchParams.get(&quot;message&quot;) || &quot;missing message&quot;;
-} else if (method === &quot;POST&quot;) {
-  // This is used when the form action is &quot;/form-handler&quot;.
+  message = Astro.url.searchParams.get("message") || "missing message";
+} else if (method === "POST") {
+  // This is used when the form action is "/form-handler".
   try {
     const data = await request.formData();
-    const name = data.get(&quot;name&quot;);
-    const age = Number(data.get(&quot;age&quot;));
+    const name = data.get("name");
+    const age = Number(data.get("age"));
     const category = categorizeByAge(age);
     message = `${name} is ${category}.`;
   } catch (error) {
-    message = error instanceof Error ? error.message : &quot;unknown error&quot;;
+    message = error instanceof Error ? error.message : "unknown error";
   }
 }
 ---
 
-&lt;Layout&gt;
-  &lt;h1&gt;Age Assessment&lt;/h1&gt;
-  &lt;p&gt;{message}&lt;/p&gt;
-&lt;/Layout&gt;
+&#x3C;Layout>
+  &#x3C;h1>Age Assessment&#x3C;/h1>
+  &#x3C;p>{message}&#x3C;/p>
+&#x3C;/Layout>
 </code></pre>
 <p>Here is an API endpoint defined in the file <code>src/pages/api/form-handler.ts</code>.</p>
 <pre><code class="language-js">import type {APIContext, APIRoute} from 'astro';
 import {categorizeByAge} from '../../categorize.ts';
 
-// This is used when the form action is &quot;/api/form-handler&quot;.
+// This is used when the form action is "/api/form-handler".
 // This requires SSR configuration.
 export const POST: APIRoute = async ({
   redirect,
   request
-}: APIContext): Promise&lt;Response&gt; =&gt; {
+}: APIContext): Promise&#x3C;Response> => {
   const data = await request.formData();
   const name = data.get('name');
   const age = Number(data.get('age'));
@@ -2907,16 +2881,16 @@ export const POST: APIRoute = async ({
 </code></pre>
 <p>Here is the <code>categorizeByAge</code> function defined in <code>src/categorize.ts</code>.</p>
 <pre><code class="language-ts">export function categorizeByAge(age: number): string {
-  if (age &lt;= 12) return 'a child';
-  if (age &lt;= 19) return 'a teenager';
-  if (age &lt;= 65) return 'an adult';
+  if (age &#x3C;= 12) return 'a child';
+  if (age &#x3C;= 19) return 'a teenager';
+  if (age &#x3C;= 65) return 'an adult';
   return 'a senior';
 }
 </code></pre>
-<h2 id="htmx" tabindex="-1">HTMX</h2>
-<p>Astro added support for &quot;page partials&quot; which make it more natural to use HTMX.
+<h2 id="htmx">HTMX</h2>
+<p>Astro added support for “page partials” which make it more natural to use HTMX.
 These render HTML with only <code>body</code> element content.
-The <code>&lt;!doctype html&gt;</code>, <code>html</code>, <code>head</code> (and its contents), and <code>body</code> elements
+The <code>&#x3C;!doctype html></code>, <code>html</code>, <code>head</code> (and its contents), and <code>body</code> elements
 are not output.</p>
 <p>To indicate that an Astro component should be rendered as a partial,
 add the following in its component script:</p>
@@ -2924,8 +2898,7 @@ add the following in its component script:</p>
 </code></pre>
 <p>For an example app that combines Astro and HTMX, see <a href="https://github.com/mvolkmann/astro-htmx-todo-app?v=1.1.1" rel="noopener" target="_blank">astro-htmx-todo-app</a>.
 This uses Astro page as endpoints.</p>
-<p><img alt="Astro HTMX Todo app" style="width: 70%"
-  src="/blog/assets/astro-htmx-todo-app.png?v=1.1.1" /></p>
+<p><img alt="Astro HTMX Todo app" style="width: 70%" src="/blog/assets/astro-htmx-todo-app.png?v=1.1.1"></p>
 <p>HTTP requests can be triggered by interacting with
 any HTML element and use any HTTP verb.
 These requests can target an Astro page.
@@ -2934,18 +2907,18 @@ which verb was used and respond accordingly.</p>
 <p>Another option to consider is implementing Astro endpoints
 that are invoked using HTMX and having those use <code>hx-redirect</code>
 to redirect to a specific Astro page that generates the HTML to be returned.</p>
-<h2 id="internationalization" tabindex="-1">Internationalization</h2>
+<h2 id="internationalization">Internationalization</h2>
 <p>Astro supports <a href="https://docs.astro.build/en/guides/internationalization/?v=1.1.1" rel="noopener" target="_blank">internationalization</a>.</p>
 <p>The Astro approach is it to duplicate each component for each supported language
 and store them in directories whose names are language codes.
 This is a bad approach because any changes require modifying multiple files.</p>
 <p>TODO: Describe how to use this.</p>
-<h2 id="tailwind-typography-plugin" tabindex="-1">Tailwind Typography Plugin</h2>
-<p>The Tailwind <a href="https://tailwindcss.com/docs/typography-plugin?v=1.1.1" rel="noopener" target="_blank">@tailwindcss/typography</a> plugin &quot;provides a set of &quot;prose&quot; classes
+<h2 id="tailwind-typography-plugin">Tailwind Typography Plugin</h2>
+<p>The Tailwind <a href="https://tailwindcss.com/docs/typography-plugin?v=1.1.1" rel="noopener" target="_blank">@tailwindcss/typography</a> plugin “provides a set of “prose” classes
 you can use to add beautiful typographic defaults to any vanilla HTML
-you don't control, like HTML rendered from Markdown, or pulled from a CMS.&quot;</p>
+you don’t control, like HTML rendered from Markdown, or pulled from a CMS.”</p>
 <p>There are a large number of provided CSS classes
-whose names all begin with &quot;prose&quot;.
+whose names all begin with “prose”.
 These control the font size, text color, and more.
 See the documentation linked above for details.</p>
 <p>To install and configure this plugin:</p>
@@ -2966,25 +2939,24 @@ See the documentation linked above for details.</p>
 that contain the elements to be styled.</p>
 <p>The large screenshot below demonstrates how
 many features of Markdown are styled by this plugin.</p>
-<p><img alt="Astro Tailwind Typography" style="width: 70%"
-  src="/blog/assets/astro-tailwind-typography.png?v=1.1.1" /></p>
+<p><img alt="Astro Tailwind Typography" style="width: 70%" src="/blog/assets/astro-tailwind-typography.png?v=1.1.1"></p>
 <p>The following files from an Astro project produce the screenshot above.</p>
 <p><i>src/layouts/Layout.astro</i></p>
 <p>Note the use of the CSS class <code>prose</code> and
 the <code>slot</code> element that marks where content will be inserted.</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-    &lt;style&gt;
+<pre><code class="language-html">&#x3C;!DOCTYPE html>
+&#x3C;html lang="en">
+  &#x3C;head>
+    &#x3C;style>
       body {
         padding: 1rem;
       }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body class=&quot;prose&quot;&gt;
-    &lt;slot /&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
+    &#x3C;/style>
+  &#x3C;/head>
+  &#x3C;body class="prose">
+    &#x3C;slot />
+  &#x3C;/body>
+&#x3C;/html>
 </code></pre>
 <p><i>src/pages/index.md</i></p>
 <p>Note the reference to the layout above using a front matter property.</p>
@@ -2997,10 +2969,10 @@ layout: ../layouts/Layout.astro
 This demonstrates use of the Tailwind plugin
 [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin).
 
-&gt; The official Tailwind CSS Typography plugin provides
-&gt; a set of prose classes you can use to add beautiful
-&gt; typographic defaults to any vanilla HTML you don’t control,
-&gt; like HTML rendered from Markdown, or pulled from a CMS.
+> The official Tailwind CSS Typography plugin provides
+> a set of prose classes you can use to add beautiful
+> typographic defaults to any vanilla HTML you don’t control,
+> like HTML rendered from Markdown, or pulled from a CMS.
 
 ## Colors
 
@@ -3041,11 +3013,11 @@ function add(n1, n2) {
 }
 ```
 </code></pre>
-<h2 id="bun-instead-of-node" tabindex="-1">Bun instead of Node</h2>
+<h2 id="bun-instead-of-node">Bun instead of Node</h2>
 <p>Astro provides the following caution about using Bun instead of Node
 to execute <code>astro</code> commands and run the Astro server:
-&quot;Using Bun with Astro may reveal rough edges.
-Some integrations may not work as expected.&quot;</p>
+“Using Bun with Astro may reveal rough edges.
+Some integrations may not work as expected.”</p>
 <p>To create an Astro project using Bun:</p>
 <ul>
 <li>
@@ -3059,8 +3031,8 @@ Some integrations may not work as expected.&quot;</p>
 </li>
 <li>
 <p>Edit <code>tsconfig.json</code> and add the following:</p>
-<pre><code class="language-json"> &quot;compilerOptions&quot;: {
-  &quot;types&quot;: [&quot;bun-types&quot;]
+<pre><code class="language-json"> "compilerOptions": {
+  "types": ["bun-types"]
 }
 </code></pre>
 </li>
@@ -3078,8 +3050,8 @@ Some integrations may not work as expected.&quot;</p>
 It also enables using all the features of Bun such as SQLite support.
 The following Astro page demonstrates this.</p>
 <pre><code class="language-js">---
-import { Database } from &quot;bun:sqlite&quot;;
-import Layout from &quot;../layouts/Layout.astro&quot;;
+import { Database } from "bun:sqlite";
+import Layout from "../layouts/Layout.astro";
 
 type Todo = {
   id: number;
@@ -3087,33 +3059,34 @@ type Todo = {
   completed: number; // 0 or 1 for SQLite compatibility
 };
 
-const db = new Database(&quot;todos.db&quot;, { create: true });
-const query = db.query(&quot;select * from todos;&quot;);
+const db = new Database("todos.db", { create: true });
+const query = db.query("select * from todos;");
 const todos = query.all() as Todo[];
 ---
 
-&lt;Layout&gt;
-  &lt;h1&gt;Astro with Bun&lt;/h1&gt;
-  { todos.map((todo) =&gt; (
-    &lt;div&gt;
-      &lt;input type=&quot;checkbox&quot; checked={todo.completed === 1} /&gt;
-      &lt;span&gt;{todo.text}&lt;/span&gt;
-    &lt;/div&gt;
+&#x3C;Layout>
+  &#x3C;h1>Astro with Bun&#x3C;/h1>
+  { todos.map((todo) => (
+    &#x3C;div>
+      &#x3C;input type="checkbox" checked={todo.completed === 1} />
+      &#x3C;span>{todo.text}&#x3C;/span>
+    &#x3C;/div>
   )) }
-&lt;/Layout&gt;
+&#x3C;/Layout>
 </code></pre>
 <p>For more details, see <a href="https://docs.astro.build/en/recipes/bun/?v=1.1.1" rel="noopener" target="_blank">Using Bun with Astro</a>.</p>
-<h2 id="starlight" tabindex="-1">Starlight</h2>
+<h2 id="starlight">Starlight</h2>
 <p><a href="https://starlight.astro.build?v=1.1.1" rel="noopener" target="_blank">Starlight</a>
 is a documentation theme built on Astro.</p>
 <p>TODO: Describe how to use this.</p>
-<h2 id="resources" tabindex="-1">Resources</h2>
+<h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://astro.build?v=1.1.1" rel="noopener" target="_blank">Astro Home Page</a></li>
-<li><a href="https://www.youtube.com/watch?v=XoIHKO6AkoM&amp;v=1.1.1" rel="noopener" target="_blank">Astro Quick Start Course</a> by Traversy Media</li>
+<li><a href="https://www.youtube.com/watch?v=XoIHKO6AkoM&#x26;v=1.1.1" rel="noopener" target="_blank">Astro Quick Start Course</a> by Traversy Media</li>
 </ul>
-<h2 id="unorganized-content" tabindex="-1">Unorganized Content</h2>
+<h2 id="unorganized-content">Unorganized Content</h2>
 <p>Summarize the steps to deploy an Astro project to Netlify and Vercel.</p>
-<p>See the commercial CloudCannon CMS (<a href="https://cloudcannon.com">https://cloudcannon.com</a>)
-which uses Astro content collection documents.</p>
-</article> </body></html>
+<p>See the commercial CloudCannon CMS (<a href="https://cloudcannon.com" rel="noopener" target="_blank">https://cloudcannon.com</a>)
+which uses Astro content collection documents.</p> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>

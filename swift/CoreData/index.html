@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><title>Core Data</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.7"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/TopicLayout.astro_astro_type_script_index_0_lang.1kNvo-QB.js"></script></head> <body> <h2>Core Data</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#%22use-core-data%22-option">&amp;quot;Use Core Data&amp;quot; Option</a></li><li><a href="#manual-setup">Manual Setup</a></li><li><a href="#defining-entities">Defining Entities</a></li><li><a href="#entity-codegen">Entity Codegen</a></li><li><a href="#%40fetchrequest-vs.-viewmodel">@FetchRequest vs. ViewModel</a></li><ul><li><a href="#using-%40fetchrequest">Using @FetchRequest</a></li><li><a href="#using-a-viewmodel">Using a ViewModel</a></li></ul><li><a href="#entity-objects">Entity Objects</a></li><li><a href="#fetching-entities">Fetching Entities</a></li><li><a href="#starting-over">Starting Over</a></li><li><a href="#cloudkit-integration">CloudKit Integration</a></li></ul></aside> <article><h2 id="overview" tabindex="-1">Overview</h2>
+<!DOCTYPE html><html lang="en"> <head><title>Core Data</title><meta charset="utf-8"><meta name="description" content="Mark Volkmann's Tech Blog"><meta name="generator" content="Astro v6.0.8"><meta name="theme-color" content="cornflowerblue"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="apple-touch-icon" href="/blog/assets/mark-volkmann-192.png"><link rel="icon" type="image/png" sizes="96x96" href="/blog/assets/favicon-blue.png"><link rel="manifest" href="/blog/assets/manifest.json"><link rel="preload" as="style" href="/blog/assets/styles.css"><link rel="stylesheet" href="/blog/assets/styles.css"><link rel="preload" as="style" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/prism-a11y.css"><link rel="stylesheet" href="/blog/assets/topic.css"><script src="/blog/js/top-layout.js"></script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><script type="module" src="/blog/_astro/BaseLayout.astro_astro_type_script_index_0_lang.BRHsPMVm.js"></script></head> <body> <header> <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button> <h1>The Question Mark - blog by Mark Volkmann</h1> </header> <main> <script src="/blog/js/topics.js"></script> <nav> <ul> <li class="top"> <a class="nav-link" href="/blog/about-me/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> About Me  </a>  </li><li class="top"> <a class="nav-link" href="/blog/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility  </a>  </li><li class="top"> <a class="nav-link" href="/blog/agile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Agile  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alfred/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alfred  </a>  </li><li class="top"> <a class="nav-link" href="/blog/alpine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Alpine  </a>  </li><li class="top"> <a class="nav-link" href="/blog/animated-gifs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animated GIFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/apple-reminders-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Apple Reminders App  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aria/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARIA  </a>  </li><li class="top"> <a class="nav-link" href="/blog/asciidoc/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AsciiDoc  </a>  </li><li class="top"> <a class="nav-link" href="/blog/astro/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Astro  </a>  </li><li class="top"> <a class="nav-link" href="/blog/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class="top"> <a class="nav-link" href="/blog/aws-lambda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AWS Lambda  </a>  </li><li class="top"> <a class="nav-link" href="/blog/better-touch-tool/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Better Touch Tool  </a>  </li><li class="top"> <a class="nav-link" href="/blog/bun/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bun  </a>  </li><li class="top"> <a class="nav-link" href="/blog/chess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Chess  </a>  </li><li class="top"> <a class="nav-link" href="/blog/claude-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Claude Code  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cloudflare-workers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cloudflare Workers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/codeium/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Codeium  </a>  </li><li class="top"> <a class="nav-link" href="/blog/containers/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Containers  </a>  </li><li class="top"> <a class="nav-link" href="/blog/content-security-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Content Security Policy (CSP)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/coolify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coolify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/css-modules/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CSS Modules  </a>  </li><li class="top"> <a class="nav-link" href="/blog/cursor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Cursor  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> D3 <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/d3/00-intro-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Article  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/01-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/02-d3-and-the-dom/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 and the DOM  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/03-svg-basics/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SVG Basics  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/04-data-enter-exit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> data, enter, &amp; exit  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/05-bar-charts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bar Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/12-pie-chart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pie Charts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/13-loading-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Loading Data  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/14-topojson/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> topojson Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/15-geo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> d3-geo Library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/d3/16-map-article/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> D3 Maps Article  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/dart/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dart  </a>  </li><li class="top"> <a class="nav-link" href="/blog/deno/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deno  </a>  </li><li class="top"> <a class="nav-link" href="/blog/docker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Docker  </a>  </li><li class="top"> <a class="nav-link" href="/blog/drizzle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Drizzle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/dynamodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DynamoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ecmascript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ECMAScript  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Eleventy <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/eleventy/ssgs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Static Site Generators  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/why-11ty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why 11ty?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/eleventy/11ty-configuration/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> 11ty Configuration  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/accessibility/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Accessibility Testing  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/data-cascade/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Data Cascade  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/debugging-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Debugging Tips  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/filters/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Filters  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/front-matter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Front Matter  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/global-data/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Global Data  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/internationalization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Internationalization  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/minify-html/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Minify HTML  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/pagination/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pagination  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/permalinks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Permalinks  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Plugins <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/plugins/navigation-plugin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation Plugin  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/plugins/syntax-highlighting/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax Highlighting  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/pwa/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/rest-services/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REST Services  </a>  </li><li class> <a class="nav-link" href="/blog/eleventy/shortcodes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcodes  </a>  </li><li class> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Styling <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/eleventy/styling-with-sass/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Styling with Sass  </a>  </li> </ul> </li><li class> <a class="nav-link" href="/blog/eleventy/templating-languages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Templating Languages  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/elysia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Elysia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/emmet/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Emmet Editor Plugin  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> English <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/english/changes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Changes  </a>  </li><li class> <a class="nav-link" href="/blog/english/punctuation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Punctuation  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/eslint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fastify/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastify  </a>  </li><li class="top"> <a class="nav-link" href="/blog/feather-weather/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Feather Weather Forecasts  </a>  </li><li class="top"> <a class="nav-link" href="/blog/firebase/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Firebase  </a>  </li><li class="top"> <a class="nav-link" href="/blog/fish/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> fish Shell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/flutter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Flutter  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ghostty/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ghostty  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gift-track/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> GiftTrack  </a>  </li><li class="top"> <a class="nav-link" href="/blog/git/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Git  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> GitHub <div class="triangle">▶︎</div> </a> <ul> <li class> <a class="nav-link" href="/blog/github/actions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Actions  </a>  </li><li class> <a class="nav-link" href="/blog/github/authentication/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Authentication  </a>  </li><li class> <a class="nav-link" href="/blog/github/coming-soon/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coming Soon  </a>  </li><li class> <a class="nav-link" href="/blog/github/copilot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Copilot  </a>  </li><li class> <a class="nav-link" href="/blog/github/extensions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Extensions  </a>  </li><li class> <a class="nav-link" href="/blog/github/pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pages  </a>  </li><li class> <a class="nav-link" href="/blog/github/pricing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pricing  </a>  </li><li class> <a class="nav-link" href="/blog/github/projects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Projects  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/gleam/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gleam  </a>  </li><li class="top"> <a class="nav-link" href="/blog/go/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Go  </a>  </li><li class="top"> <a class="nav-link" href="/blog/gradle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gradle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/here-movie-review/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Here - Movie Review  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hono/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hono  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hot-topics-2024/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hot Topics 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-dialog-element/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML dialog Element  </a>  </li><li class="top"> <a class="nav-link" href="/blog/html-css/holy-grail/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HTML/CSS Holy Grail  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx  </a>  </li><li class="top"> <a class="nav-link" href="/blog/htmx-book-errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> htmx Book Errata  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hypercard/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HyperCard  </a>  </li><li class="top"> <a class="nav-link" href="/blog/hyperscript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Hyperscript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/imac-g3/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> iMac G3  </a>  </li><li class="top"> <a class="nav-link" href="/blog/indexeddb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IndexedDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-signals/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Signals  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-temporal/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JavaScript Temporal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/jq/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> jq  </a>  </li><li class="top"> <a class="nav-link" href="/blog/js-iterators-and-generators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JS Iterators and Generators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/julia/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Julia  </a>  </li><li class="top"> <a class="nav-link" href="/blog/key-mappings/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Key Mappings  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kindle/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kindle  </a>  </li><li class="top"> <a class="nav-link" href="/blog/kotlin/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Kotlin  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lambda-calculus/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lambda Calculus  </a>  </li><li class="top"> <a class="nav-link" href="/blog/latex/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LaTeX  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lit  </a>  </li><li class="top"> <a class="nav-link" href="/blog/long-polling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Long Polling  </a>  </li><li class="top"> <a class="nav-link" href="/blog/love2d/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> LÖVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/lua/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lua  </a>  </li><li class="top"> <a class="nav-link" href="/blog/macintosh-emulators/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macintosh Emulators  </a>  </li><li class="top"> <a class="nav-link" href="/blog/markdown/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Markdown  </a>  </li><li class="top"> <a class="nav-link" href="/blog/meteor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Meteor  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-app-options/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile App Options  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mobile-design/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Mobile Design  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mongodb/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MongoDB  </a>  </li><li class="top"> <a class="nav-link" href="/blog/mysql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MySQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nearley/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nearley  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neo4j/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neo4j  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/neovim-plugins/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Neovim Plugins  </a>  </li><li class="top"> <a class="nav-link" href="/blog/next-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Next.js  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ngrok/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ngrok  </a>  </li><li class="top"> <a class="nav-link" href="/blog/npm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> npm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nunjucks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nunjucks  </a>  </li><li class="top"> <a class="nav-link" href="/blog/nushell/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Nushell  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ocaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OCaml  </a>  </li><li class="top"> <a class="nav-link" href="/blog/PDFs/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PDFs  </a>  </li><li class="top"> <a class="nav-link" href="/blog/php/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PHP  </a>  </li><li class="top"> <a class="nav-link" href="/blog/podman/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Podman  </a>  </li><li class="top"> <a class="nav-link" href="/blog/postgresql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PostgreSQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prisma/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prisma  </a>  </li><li class="top"> <a class="nav-link" href="/blog/progressive-web-apps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Progressive Web Apps (PWAs)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/prolog/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Prolog  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Python <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/python/python-compared-to-js/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python compared to JavaScript  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-versions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python versions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python collections module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-functools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python functools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-itertools/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python itertools module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-operator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python operator module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-os/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python os module  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/anaconda/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Anaconda tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/jupyter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Jupyter tools  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/python-testing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Python testing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/vs-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> VS Code Python support  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/numpy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> NumPy library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pandas/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> pandas library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/matplotlib/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> matplotlib library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/plotly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Plotly library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/seaborn/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> seaborn library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/tkinter/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tkinter library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/pytorch/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PyTorch library  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/python/sqlite-in-python/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite in Python  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/quotes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quotes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ranger/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Ranger  </a>  </li><li class="top"> <a class="nav-link" href="/blog/raycast/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Raycast  </a>  </li><li class="top"> <a class="nav-link" href="/blog/react-native/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> React Native  </a>  </li><li class="top"> <a class="nav-link" href="/blog/recommend-practices/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Recommended Practices  </a>  </li><li class="top"> <a class="nav-link" href="/blog/remix/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Remix  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rove/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ROVE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/roy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Roy 2024  </a>  </li><li class="top"> <a class="nav-link" href="/blog/rust/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Rust  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sed/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> sed text processing  </a>  </li><li class="top"> <a class="nav-link" href="/blog/server-sent-events/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Server-Sent Events (SSE)  </a>  </li><li class="top"> <a class="nav-link" href="/blog/shoelace/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shoelace  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Smalltalk <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/smalltalk/01-quick-introduction/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Quick Introduction to Smalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/02-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Overview  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/03-oo-overview/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Object-Oriented Programming  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/04-getting-started/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Getting Started  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/05-images/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Images  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/06-help/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Help  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/10-syntax/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Syntax  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/11-blocks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Blocks  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/12-exception-handling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Exception Handling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/13-messages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Messages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/14-objects/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Objects  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/15-classes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Classes  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/16-variables/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Variables  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/17-methods/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Methods  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/20-basic-data-types/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Basic Data Types  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/21-collections/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Collections  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/22-control-flow/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Control Flow  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/23-does-not-understand/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Does Not Understand  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/24-reflection/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reflection  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/25-parsing-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Parsing Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/26-dependency-mechanism/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Dependency Mechanism  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/30-development-environment/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Development Environment  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/31-preferences/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Preferences  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/32-saving-code/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Saving Code  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/33-optional-packages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Optional Packages  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/40-colors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Colors  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/41-morphic/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Morphic  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/42-unit-tests/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Unit Tests  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/43-startup-scripts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Startup Scripts  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/44-deploying/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Deploying  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/45-bitmaps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Bitmaps  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-databases/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Databases  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-editor-customization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Editor Customization  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-ffi/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> FFI  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-games/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Games  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-json/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> JSON  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-osprocess/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OSProcess  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-pen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Pen  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-streams/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Streams  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/50-web-development/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-annoyances/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Annoyances  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-coding-conventions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Coding Conventions  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-contributing/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contributing  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-opensmalltalk/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> OpenSmalltalk  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/60-transpiling/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Transpiling  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/smalltalk/61-questions/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Questions  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/spring-boot/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Spring Boot  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sql/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQL  </a>  </li><li class="top"> <a class="nav-link" href="/blog/sqlite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SQLite  </a>  </li><li class="top"> <a class="nav-link" href="/blog/starship/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Starship  </a>  </li><li class="top"> <a class="nav-link" href="#" onclick="return handleLinkClick(event, this, true)"> Svelte <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/svelte/book/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> My Book  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/component-libraries/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Component Libraries  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/eslint-prettier/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ESLint and Prettier with Svelte  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/ie11-support/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> IE11 Support  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/repls/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> REPLs  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/resources/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Resources  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/stores-vs-context/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Stores vs. Context  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/storybook/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte and Storybook  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/from-react/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte from React Components  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/svelte-material-ui/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Material UI (SMUI)  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/sveltekit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SvelteKit  </a>  </li><li class> <a class="nav-link" href="/blog/svelte/vite/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vite  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/svelte-and-sapper-in-action/errata/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Svelte Book Errata  </a>  </li><li class="top"> <a class="nav-link expanded" href="#" onclick="return handleLinkClick(event, this, true)"> Swift <div class="triangle">▶︎</div> </a> <ul> <li class="ordered"> <a class="nav-link" href="/blog/swift/why-swift/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Why Swift?  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/swift-lang/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Language  </a>  </li><li class="ordered"> <a class="nav-link" href="/blog/swift/SwiftUI/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftUI  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ActivityKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ActivityKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Animation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Animation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppReviews/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> App Reviews  </a>  </li><li class> <a class="nav-link" href="/blog/swift/AppInfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> AppInfo  </a>  </li><li class> <a class="nav-link" href="/blog/swift/ARKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> ARKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CallingC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Calling C  </a>  </li><li class> <a class="nav-link" href="/blog/swift/CloudKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> CloudKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Combine/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Combine  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Concurrency/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Concurrency  </a>  </li><li class> <a class="nav-link" href="/blog/swift/console-app/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Console App  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Contacts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Contacts  </a>  </li><li class> <a class="nav-link active expanded" href="/blog/swift/CoreData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Core Data  </a>  </li><li class> <a class="nav-link" href="/blog/swift/dataTile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> dataTile  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocC/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> DocC  </a>  </li><li class> <a class="nav-link" href="/blog/swift/DocumentBasedApps/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Document-based Apps  </a>  </li><li class> <a class="nav-link" href="/blog/swift/FaceID/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Face ID  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Fastlane/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Fastlane  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Gauges/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Gauges  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Grid/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Grid  </a>  </li><li class> <a class="nav-link" href="/blog/swift/HealthKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> HealthKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Inspectors/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Inspectors  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Instruments/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Instruments  </a>  </li><li class> <a class="nav-link" href="/blog/swift/launch-screen/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Launch Screens  </a>  </li><li class> <a class="nav-link" href="/blog/swift/LayoutProtocol/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Layout Protocol  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Localization/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Localization  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Lottie/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Lottie  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Macros/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Macros  </a>  </li><li class> <a class="nav-link" href="/blog/swift/MapKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> MapKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Navigation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Navigation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/notifications/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Notifications  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Observation/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Observation  </a>  </li><li class> <a class="nav-link" href="/blog/swift/PhotosPicker/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> PhotosPicker  </a>  </li><li class> <a class="nav-link" href="/blog/swift/privacy-policy/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Privacy Policy  </a>  </li><li class> <a class="nav-link" href="/blog/swift/project-structure/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Project Structure  </a>  </li><li class> <a class="nav-link" href="/blog/swift/provisioning-profile/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Provisioning Profiles  </a>  </li><li class> <a class="nav-link" href="/blog/swift/RealityComposer/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Reality Composer  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Realm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Realm  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SFSymbols/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SF Symbols  </a>  </li><li class> <a class="nav-link" href="/blog/swift/shortcuts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Shortcuts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Simulator/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Simulator  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SpriteKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SpriteKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/StoreKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> StoreKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftCharts/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Charts  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftPackageManager/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Swift Package Manager  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftData/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftData  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftFormat/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftFormat  </a>  </li><li class> <a class="nav-link" href="/blog/swift/SwiftLint/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> SwiftLint  </a>  </li><li class> <a class="nav-link" href="/blog/swift/talks/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Talks  </a>  </li><li class> <a class="nav-link" href="/blog/swift/TestFlight/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TestFlight  </a>  </li><li class> <a class="nav-link" href="/blog/swift/UIKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UIKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Vapor/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vapor  </a>  </li><li class> <a class="nav-link" href="/blog/swift/watchOS/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> watchOS  </a>  </li><li class> <a class="nav-link" href="/blog/swift/WeatherKit/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WeatherKit  </a>  </li><li class> <a class="nav-link" href="/blog/swift/widgets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Widgets  </a>  </li><li class> <a class="nav-link" href="/blog/swift/Xcode/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Xcode  </a>  </li><li class> <a class="nav-link" href="/blog/swift/xctest/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> XCTest  </a>  </li> </ul> </li><li class="top"> <a class="nav-link" href="/blog/tailwind/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Tailwind  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-ide/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal IDE  </a>  </li><li class="top"> <a class="nav-link" href="/blog/terminal-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Terminal Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/texinfo/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Texinfo  </a>  </li><li class="top"> <a class="nav-link" href="/blog/thunder-client/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Thunder Client  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ti-84/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TI-84 Calculator  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tldr-pages/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tldr pages  </a>  </li><li class="top"> <a class="nav-link" href="/blog/tmux/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> tmux  </a>  </li><li class="top"> <a class="nav-link" href="/blog/turso/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Turso  </a>  </li><li class="top"> <a class="nav-link" href="/blog/typescript/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript  </a>  </li><li class="top"> <a class="nav-link" href="/blog/ts-effect/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> TypeScript Effect  </a>  </li><li class="top"> <a class="nav-link" href="/blog/unix-notes/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> UNIX Notes  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vale/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vale  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vifm/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vifm  </a>  </li><li class="top"> <a class="nav-link" href="/blog/vim/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Vim  </a>  </li><li class="top"> <a class="nav-link" href="/blog/warp/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Warp Terminal  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wcag/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WCAG  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-app-step-by-step/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web App Step-by-Step  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-awesome/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Awesome  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-components/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Components  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-dev-tips/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Development Tips  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-framework-comparison/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Web Framework Comparison  </a>  </li><li class="top"> <a class="nav-link" href="/blog/web-translate/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> web-translate Library  </a>  </li><li class="top"> <a class="nav-link" href="/blog/webassembly/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebAssembly  </a>  </li><li class="top"> <a class="nav-link" href="/blog/websockets/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> WebSockets  </a>  </li><li class="top"> <a class="nav-link" href="/blog/workout-entry/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Workout Entry  </a>  </li><li class="top"> <a class="nav-link" href="/blog/wrec/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> wrec  </a>  </li><li class="top"> <a class="nav-link" href="/blog/yaml/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> YAML  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zig/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zig  </a>  </li><li class="top"> <a class="nav-link" href="/blog/zod/?v=1.1.1" onclick="return handleLinkClick(event, this, false)"> Zod  </a>  </li> </ul> </nav> <section class="topic-background"> <section class="topic-content"> <button id="print-btn" onclick="print()" style="position: absolute; right: 20px">
+Print
+</button> <section class="topic-page">  <h2>Core Data</h2> <aside><ul><li><a href="#overview">Overview</a></li><li><a href="#use-core-data-option">”Use Core Data” Option</a></li><li><a href="#manual-setup">Manual Setup</a></li><li><a href="#defining-entities">Defining Entities</a></li><li><a href="#entity-codegen">Entity Codegen</a></li><li><a href="#fetchrequest-vs-viewmodel">@FetchRequest vs. ViewModel</a></li><ul><li><a href="#using-fetchrequest">Using @FetchRequest</a></li><li><a href="#using-a-viewmodel">Using a ViewModel</a></li></ul><li><a href="#entity-objects">Entity Objects</a></li><li><a href="#fetching-entities">Fetching Entities</a></li><li><a href="#starting-over">Starting Over</a></li><li><a href="#cloudkit-integration">CloudKit Integration</a></li></ul></aside> <article> <h2 id="overview">Overview</h2>
 <p>Core Data is an object/graph persistence framework.
 It supports many features including
 data validation, undo/redo, and lazy loading.
@@ -6,17 +8,17 @@ By default it stores data using SQLite.</p>
 <p>Apps that use Core Data will not run in Preview mode.
 The Simulator must be used instead.</p>
 <p>One way to setup use of Core Data is to
-check the &quot;Use Core Data&quot; checkbox on the options panel
+check the “Use Core Data” checkbox on the options panel
 when creating a new project.
 This adds all the setup code and UI code for a simple app
 that allows creating, deleting, and listing <code>Item</code> entities.
 The app can be modified to work with other kinds of entities.</p>
-<p>Another approach is to uncheck the &quot;Use Core Data&quot; checkbox
+<p>Another approach is to uncheck the “Use Core Data” checkbox
 and set up use of Core Data manually.</p>
-<h2 id="%22use-core-data%22-option" tabindex="-1">&quot;Use Core Data&quot; Option</h2>
-<p>When the &quot;Use Core Data&quot; checkbox is checked,
+<h2 id="use-core-data-option">”Use Core Data” Option</h2>
+<p>When the “Use Core Data” checkbox is checked,
 the generated files configure the use of Core Data.
-The file <code>{app-name}App.swift</code> registers an &quot;environment&quot;
+The file <code>{app-name}App.swift</code> registers an “environment”
 with the main <code>ContentView</code> that uses
 a <code>PersistenceController</code> instance defined in <code>Persistence.swift</code>
 and made available through a static <code>shared</code> property.
@@ -28,87 +30,87 @@ and has a single attribute <code>timestamp</code>.</p>
 <p>The generated app is fully functional.
 It displays a list of items that each have a timestamp.
 Tap an item to navigate to a screen that displays detail about just that item.
-To delete an item, swipe it left and click the &quot;Delete&quot; button that appears.
-To add an item with the current timestamp, click the &quot;+&quot; button at the top.
-To delete items without swiping them, click the &quot;Edit&quot; button at the top.
+To delete an item, swipe it left and click the “Delete” button that appears.
+To add an item with the current timestamp, click the ”+” button at the top.
+To delete items without swiping them, click the “Edit” button at the top.
 This displays a red circle containing a minus sign to left of each item.
 Click those to delete items.
-When finished, click the &quot;Done&quot; button at the top
-that replaced the &quot;Edit&quot; button.
+When finished, click the “Done” button at the top
+that replaced the “Edit” button.
 From here you can edit the code to provide your own CRUD functionality.</p>
-<h2 id="manual-setup" tabindex="-1">Manual Setup</h2>
-<p>When the &quot;Use Core Data&quot; checkbox was not checked,
+<h2 id="manual-setup">Manual Setup</h2>
+<p>When the “Use Core Data” checkbox was not checked,
 a data model must be created manually as follows:</p>
 <ol>
-<li>Select File ... New File... or press cmd-n.</li>
-<li>Filter the list of templates by entering &quot;Data&quot;.</li>
-<li>In the &quot;Core Data&quot; section, select &quot;Data Model&quot; template.</li>
-<li>Click the &quot;Next&quot; button.</li>
+<li>Select File … New File… or press cmd-n.</li>
+<li>Filter the list of templates by entering “Data”.</li>
+<li>In the “Core Data” section, select “Data Model” template.</li>
+<li>Click the “Next” button.</li>
 <li>Select the directory where it should be stored.</li>
-<li>For most projects the default file name of &quot;Model.xcdatamodeld&quot; is fine.</li>
-<li>Click the &quot;Create&quot; button.</li>
+<li>For most projects the default file name of “Model.xcdatamodeld” is fine.</li>
+<li>Click the “Create” button.</li>
 </ol>
-<h2 id="defining-entities" tabindex="-1">Defining Entities</h2>
+<h2 id="defining-entities">Defining Entities</h2>
 <p>To define Core Data entity types,
 click the <code>{app-name}.xcdatamodeld</code> file in the Navigator pane.
 This will display an entity editor.</p>
-<p>If the &quot;Use Core Data&quot; option was checked,
+<p>If the “Use Core Data” option was checked,
 consider deleting the provided <code>Item</code> entity
 and any code that is specific to it.</p>
 <p>Entities are similar to tables in a relational database.
-Add entities to the model by clicking the &quot;Add Entity&quot; button at the bottom.
-This will create an empty entity named &quot;Entity&quot;.
+Add entities to the model by clicking the “Add Entity” button at the bottom.
+This will create an empty entity named “Entity”.
 Double-click the name and change it.
 These become the names of generated class definitions,
 so they should begin with an uppercase letter.
-It is recommended to give them names that end in &quot;Entity&quot;
+It is recommended to give them names that end in “Entity”
 so it is clear in code that uses them that they are Core Data entities.
 The generated classes inherit from <code>NSManagedObject</code>.</p>
-<p>For each entity, click the &quot;Module&quot; drop-down inside
-the Inspector on the right, select &quot;Current Product Module&quot;.
+<p>For each entity, click the “Module” drop-down inside
+the Inspector on the right, select “Current Product Module”.
 TODO: Is this really desirable? What is the benefit?</p>
 <p>Add attributes to each entity by
-clicking the &quot;+&quot; at the bottom of the attribute list.
-Each attribute is given a default name of &quot;attribute&quot;.
+clicking the ”+” at the bottom of the attribute list.
+Each attribute is given a default name of “attribute”.
 Double-click the name and change it.
-Some names, such as &quot;description&quot; and &quot;for&quot;, are not allowed.
+Some names, such as “description” and “for”, are not allowed.
 Select a type from a drop-down list of primitive types.
-The type &quot;Data&quot; is for byte buffers.</p>
+The type “Data” is for byte buffers.</p>
 <p>Optionally sort the attributes.
 They can be sorted on their name or type
-by clicking on the &quot;Attribute&quot; or &quot;Type&quot; column heading.</p>
+by clicking on the “Attribute” or “Type” column heading.</p>
 <p>By default each attribute is optional.
 For any that are required, select the attribute and
-uncheck the &quot;Optional&quot; checkbox in the inspector.</p>
+uncheck the “Optional” checkbox in the inspector.</p>
 <p>Optionally specify default values for each attribute.
-Select an attribute and enter a value for &quot;Default Value&quot; in the inspector.</p>
+Select an attribute and enter a value for “Default Value” in the inspector.</p>
 <p>Optionally specify validation criteria for each attribute.
-Select an attribute and enter values for &quot;Validation&quot; in the inspector.</p>
+Select an attribute and enter values for “Validation” in the inspector.</p>
 <p>Optionally add relationships between entities.
 Each relationship specifies a
 Relationship name, Destination, Type, and Delete Rule.
-The &quot;Type&quot; in the Inspector can be &quot;To One&quot; or &quot;To Many&quot;.</p>
-<p>The &quot;Delete Rule&quot; in the Inspector can be &quot;Nullify&quot;, &quot;Cascade&quot;, or &quot;Deny&quot;.</p>
+The “Type” in the Inspector can be “To One” or “To Many”.</p>
+<p>The “Delete Rule” in the Inspector can be “Nullify”, “Cascade”, or “Deny”.</p>
 <ul>
-<li>&quot;Nullify&quot; means instances can be deleted
+<li>“Nullify” means instances can be deleted
 without also deleting related entities.
 References to deleted entities are set to <code>nil</code>.</li>
-<li>&quot;Cascade&quot; means instances can be deleted
+<li>“Cascade” means instances can be deleted
 and related entities will also be deleted.</li>
-<li>&quot;Deny&quot; means instances with related entities cannot be deleted.</li>
+<li>“Deny” means instances with related entities cannot be deleted.</li>
 </ul>
 <p>Specify inverse relationships for most relationships.
-For example, &quot;PersonEntity&quot; can have
-an &quot;owns&quot; relationship &quot;To Many&quot; &quot;DogEntity&quot; and
-&quot;DogEntity&quot; can have an &quot;ownedBy&quot; relationship &quot;To One&quot; &quot;PersonEntity&quot;.</p>
+For example, “PersonEntity” can have
+an “owns” relationship “To Many” “DogEntity” and
+“DogEntity” can have an “ownedBy” relationship “To One” “PersonEntity”.</p>
 <p>Optionally view the entities and their relationships as a graph.
 To switch between viewing entities and their relationships
-in &quot;table&quot; or &quot;graph&quot; style,
-click the buttons in the lower-right labelled &quot;Editor Style&quot;.
+in “table” or “graph” style,
+click the buttons in the lower-right labelled “Editor Style”.
 In graph view it may be necessary to toggle the relationships
-in each entity by clicking the triangle to the left of &quot;Relationships&quot;
+in each entity by clicking the triangle to the left of “Relationships”
 in order to see all of them.</p>
-<p>If you see the error &quot;cannot find type 'SomeEntityName' in scope&quot;,
+<p>If you see the error “cannot find type ‘SomeEntityName’ in scope”,
 close and reopen the project in Xcode.
 In some cases, such as renaming entities,
 it is necessary to clear existing data and start over.
@@ -120,17 +122,17 @@ To do this:</p>
 <li>run the <code>rm -rf</code> command on the directory for the project</li>
 <li>restart Xcode</li>
 </ul>
-<h2 id="entity-codegen" tabindex="-1">Entity Codegen</h2>
+<h2 id="entity-codegen">Entity Codegen</h2>
 <p>When an entity is selected in the Core Data model editor,
 the Inspector displays its configuration options.
-One of these is &quot;Codegen&quot; that has a default value of &quot;Class Definition&quot;.
+One of these is “Codegen” that has a default value of “Class Definition”.
 This means that Xcode will automatically generate a class definition
 for the entity.
 Typically this is the desired option.</p>
 <p>By default, the source files for generated entity classes
 do not appear in the Navigator.
 However, they can be viewed by selecting
-Product ... Show Build Folder in Finder.
+Product … Show Build Folder in Finder.
 The source files can be found in the ridiculously deep directory structure
 Build/Intermediates.noindex/{app-name}.build/Debug-iphonesimulator/
 {app-name}.build/DerivedSources/CoreDataGenerated/Model directory.</p>
@@ -139,50 +141,50 @@ Build/Intermediates.noindex/{app-name}.build/Debug-iphonesimulator/
 and should not be modified.
 <code>{entity-name}+CoreDataProperties.swift</code> defines extensions to the class
 and can be safely modified to add computed properties and methods.</p>
-<p>Choosing a different value for the entity &quot;Codegen&quot; enables
+<p>Choosing a different value for the entity “Codegen” enables
 generating entity sources files that appear in the Navigator.
-The &quot;Manual/None&quot; option means that Xcode will not automatically generate
+The “Manual/None” option means that Xcode will not automatically generate
 either of the files described above.
-The &quot;Category/Extension&quot; option means that Xcode will
+The “Category/Extension” option means that Xcode will
 generate the <code>{entity-name}+CoreDataClass.swift</code> files,
 but not the <code>{entity-name}+CoreDataProperties.swift</code> files.
-TODO: Why does this also generate &quot;Class&quot; files?</p>
+TODO: Why does this also generate “Class” files?</p>
 <p>To request generation of source files for entities whose
-&quot;Codegen&quot; option is set to a value other than &quot;Class Definition&quot;:</p>
+“Codegen” option is set to a value other than “Class Definition”:</p>
 <ul>
-<li>Select Editor ... Create NSManagedObject Subclass...</li>
-<li>Select a model and click &quot;Next&quot;. Most projects only have one model.</li>
-<li>Select the entities for which code should be generated and click &quot;Next&quot;.</li>
+<li>Select Editor … Create NSManagedObject Subclass…</li>
+<li>Select a model and click “Next”. Most projects only have one model.</li>
+<li>Select the entities for which code should be generated and click “Next”.</li>
 <li>Select the project subdirectory where the source files should be written.
 TODO: It seems this is ignored and the files are
 always written to the top project directory.</li>
-<li>Click &quot;Create&quot;.</li>
+<li>Click “Create”.</li>
 </ul>
-<p>The generated &quot;Class&quot; files define a class for an entity
+<p>The generated “Class” files define a class for an entity
 that inherits from <code>NSManagedObject</code>.
 These file should not be modified.</p>
-<p>The generated &quot;Properties&quot; files define extensions to the entity that
+<p>The generated “Properties” files define extensions to the entity that
 include a <code>fetchRequest</code> method.
 This fetches all the instances of the entity,
 properties that correspond to the entity attributes,
 and methods for adding and removing other kinds of entities
 that have a relationship to this one.
 Theses file can be modified to add computed properties and methods.</p>
-<h2 id="%40fetchrequest-vs.-viewmodel" tabindex="-1">@FetchRequest vs. ViewModel</h2>
+<h2 id="fetchrequest-vs-viewmodel">@FetchRequest vs. ViewModel</h2>
 <p>There are two popular ways for views to access data from Core Data.
 One is to use <code>@FetchRequest</code>.
 The other is to define a ViewModel class that views can use
 which abstracts the use of Core Data away from them.</p>
-<h3 id="using-%40fetchrequest" tabindex="-1">Using @FetchRequest</h3>
+<h3 id="using-fetchrequest">Using @FetchRequest</h3>
 <p>TODO: Add this based on code in your SwiftUI-GiftTrack project.</p>
-<h3 id="using-a-viewmodel" tabindex="-1">Using a ViewModel</h3>
+<h3 id="using-a-viewmodel">Using a ViewModel</h3>
 <p>Here are the steps to define and use a ViewModel
 for accessing data in Core Data.</p>
 <ul>
 <li>
 <p>Create a view model class.</p>
-<p>This can be defined in a file named &quot;ViewModel.swift&quot;.
-It can define a class named &quot;ViewModel&quot; that inherits from <code>ObservableObject</code>
+<p>This can be defined in a file named “ViewModel.swift”.
+It can define a class named “ViewModel” that inherits from <code>ObservableObject</code>
 which comes from the Combine framework.</p>
 </li>
 <li>
@@ -202,18 +204,18 @@ all the instances of each entity type as follows:</p>
 </code></pre>
 </li>
 <li>
-<p>If Xcode doesn't recognize the entity types,
+<p>If Xcode doesn’t recognize the entity types,
 close the project and reopen it.</p>
 </li>
 <li>
 <p>Define an initializer as follows:</p>
 <pre><code class="language-swift">init() {
-    // &quot;Model&quot; here must be the name of the &quot;Data Model&quot; file.
-    container = NSPersistentContainer(name: &quot;Model&quot;)
+    // "Model" here must be the name of the "Data Model" file.
+    container = NSPersistentContainer(name: "Model")
 
     container.loadPersistentStores { _, error in
         if let error = error {
-            print(&quot;error loading Core Data:&quot;, error)
+            print("error loading Core Data:", error)
         } else {
             self.fetchPeople()
             // Possibly also fetch other kinds of entities here.
@@ -226,12 +228,12 @@ close the project and reopen it.</p>
 <p>Define a method for each entity type that fetches all of its instances.
 The <code>List</code> view is useful for displaying them in a list.</p>
 <pre><code class="language-swift">func fetchPeople() {
-    // &quot;PersonEntity&quot; here must be the name of the entity type.
-    let request = NSFetchRequest&lt;PersonEntity&gt;(entityName: &quot;PersonEntity&quot;)
+    // "PersonEntity" here must be the name of the entity type.
+    let request = NSFetchRequest&#x3C;PersonEntity>(entityName: "PersonEntity")
     // Optionally specify how the instances should be sorted.
     request.sortDescriptors = [
         NSSortDescriptor(
-            key: &quot;name&quot;,
+            key: "name",
             ascending: true,
             #selector(NSString.localizedStandardCompare) // case-insensitive
         )
@@ -241,7 +243,7 @@ The <code>List</code> view is useful for displaying them in a list.</p>
         // @Published property declared above.
         people = try context.fetch(request)
     } catch {
-        print(&quot;fetchPeople error:&quot;, error.localizedDescription)
+        print("fetchPeople error:", error.localizedDescription)
     }
 }
 </code></pre>
@@ -256,7 +258,7 @@ The <code>List</code> view is useful for displaying them in a list.</p>
     do {
         try context.save()
     } catch {
-        print(&quot;saveContext error:&quot;, error)
+        print("saveContext error:", error)
     }
 }
 </code></pre>
@@ -270,7 +272,7 @@ to add a new entity instance.</p>
     person.name = name
     saveContext()
     people.append(person)
-    people.sort { ($0.name ?? &quot;&quot;) &lt; ($1.name ?? &quot;&quot;) }
+    people.sort { ($0.name ?? "") &#x3C; ($1.name ?? "") }
 }
 </code></pre>
 </li>
@@ -296,13 +298,13 @@ it will be passed in from a parent view.</p>
 </li>
 <li>
 <p>To add an entity instance,
-call an &quot;add&quot; method defined in <code>ViewModel.swift</code>.</p>
+call an “add” method defined in <code>ViewModel.swift</code>.</p>
 <pre><code class="language-swift">vm.addPerson(name: name)
 </code></pre>
 </li>
 <li>
 <p>To delete an entity instance,
-call a &quot;delete&quot; method defined in <code>ViewModel.swift</code>.
+call a “delete” method defined in <code>ViewModel.swift</code>.
 Often this is done with the <code>onDelete</code> view modifier on a <code>ForEach</code>
 because that provides an <code>IndexSet</code> of selected indexes.</p>
 <pre><code class="language-swift">.onDelete(perform: vm.deletePerson)
@@ -311,24 +313,24 @@ because that provides an <code>IndexSet</code> of selected indexes.</p>
 <li>
 <p>To update an entity instance directly modify the attributes
 of an existing entity and then call the <code>saveContext</code> method</p>
-<pre><code class="language-swift">person.name = &quot;Some New Name&quot;
+<pre><code class="language-swift">person.name = "Some New Name"
 vm.savePeople()
 </code></pre>
 </li>
 </ul>
-<h2 id="entity-objects" tabindex="-1">Entity Objects</h2>
+<h2 id="entity-objects">Entity Objects</h2>
 <p>Core Data entity objects have many properties and methods.</p>
 <p>Each attribute is represented by a property
 that can be directly accessed and modified.
 Changes are not persisted unless <code>context.save()</code> is called.</p>
 <p>Each relationship is represented by a property.</p>
-<p>Properties for &quot;To One&quot; relationships have
+<p>Properties for “To One” relationships have
 an optional type matching the referenced entity type.
 For example, <code>DogEntity</code> with an <code>ownedBy</code> relationship to a <code>PersonEntity</code>
 has an <code>ownedBy</code> property with a type of <code>PersonEntity?</code>.
 This can be directly set to a <code>PersonEntity</code> or <code>nil</code>.
 For example, <code>someDog.ownedBy = somePerson</code> or <code>someDog.ownedBy = nil</code>.</p>
-<p>Properties for &quot;To Many&quot; relationships have a type of optional <code>NSSet</code>.
+<p>Properties for “To Many” relationships have a type of optional <code>NSSet</code>.
 For example, <code>PersonEntity</code> with an <code>owns</code> relationship to <code>DogEntity</code> instances
 has an <code>owns</code> property whose type is <code>NSSet?</code>.
 There are also <code>addToOwns</code> and <code>removeFromOwns</code> methods on the entity
@@ -336,76 +338,76 @@ that take a <code>DogEntity</code> and add to or remove from the <code>NSSet</co
 For example, <code>somePerson.addToOwns(someDog)</code>
 or <code>somePerson.removeFromOwns(someDog)</code>.</p>
 <p>TODO: How can all instances of a given entity type be deleted?</p>
-<h2 id="fetching-entities" tabindex="-1">Fetching Entities</h2>
+<h2 id="fetching-entities">Fetching Entities</h2>
 <p>To fetch entities from an <code>NSManagedObjectContext</code>,
 create an <code>NSFetchRequest</code> that identifies an entity type.
 Optionally specify how the fetched entity instances should be sorted.
 Also, optionally specify filtering to be applied
 so that only a subset of the the entity instances will be fetched.</p>
 <p>For details on the syntax used to specify filtering, see <a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html?v=1.1.1" rel="noopener" target="_blank">Predicate Format String Syntax</a>.</p>
-<pre><code class="language-swift">let request = NSFetchRequest&lt;PersonEntity&gt;(entityName: &quot;PersonEntity&quot;)
+<pre><code class="language-swift">let request = NSFetchRequest&#x3C;PersonEntity>(entityName: "PersonEntity")
 
-// Sort in ascending order on the &quot;name&quot; property.
+// Sort in ascending order on the "name" property.
 request.sortDescriptors = [
     NSSortDescriptor(
-        key: &quot;name&quot;,
+        key: "name",
         ascending: true,
         #selector(NSString.localizedStandardCompare) // case-insensitive
     )
 ]
 
-// Filter so only entities with a name beginning with &quot;T&quot; are fetched.
-request.predicate = NSPredicate(format: &quot;name beginswith %@&quot;, &quot;T&quot;)
+// Filter so only entities with a name beginning with "T" are fetched.
+request.predicate = NSPredicate(format: "name beginswith %@", "T")
 
 do {
     people = try context.fetch(request)
 } catch {
-    print(&quot;fetchPeople error:&quot;, error)
+    print("fetchPeople error:", error)
 }
 </code></pre>
-<h2 id="starting-over" tabindex="-1">Starting Over</h2>
+<h2 id="starting-over">Starting Over</h2>
 <p>The easiest way to delete the data an app has stored in Core Data
 and start over with a clean slate
 is to delete the app from the Simulator or a device
 and reinstall it.</p>
-<h2 id="cloudkit-integration" tabindex="-1">CloudKit Integration</h2>
+<h2 id="cloudkit-integration">CloudKit Integration</h2>
 <p>The contents of a Core Data database can be automatically synchronized
 with a CloudKit database in iCloud.</p>
-<p>When the database is &quot;private&quot; (the default), the data is
+<p>When the database is “private” (the default), the data is
 shared between all devices owned by a single user.
-When the database is &quot;public&quot;, the data is
+When the database is “public”, the data is
 shared between all users and all devices.
-When the database is &quot;shared&quot;, the data is
+When the database is “shared”, the data is
 shared only with specific users.</p>
 <p>For a working example, see this <a href="https://github.com/mvolkmann/swiftui-cloudkit-core-data?v=1.1.1" rel="noopener" target="_blank">GitHub project</a>.</p>
 <p>Both Core Data and CloudKit support storing structured data,
 but they use different terminology.</p>
-<table>
-<thead>
-<tr>
-<th>Topic</th>
-<th>Core Data</th>
-<th>CloudKit</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>objects</td>
-<td><code>NSManagedObject</code></td>
-<td><code>CKRecord</code></td>
-</tr>
-<tr>
-<td>models</td>
-<td><code>NSManagedObjectModel</code></td>
-<td><code>Schema</code></td>
-</tr>
-<tr>
-<td>stores</td>
-<td><code>NSPersistentStore</code></td>
-<td><code>CKRecordZone</code> or <code>CKDatabase</code></td>
-</tr>
-</tbody>
-</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Topic</th><th>Core Data</th><th>CloudKit</th></tr></thead><tbody><tr><td>objects</td><td><code>NSManagedObject</code></td><td><code>CKRecord</code></td></tr><tr><td>models</td><td><code>NSManagedObjectModel</code></td><td><code>Schema</code></td></tr><tr><td>stores</td><td><code>NSPersistentStore</code></td><td><code>CKRecordZone</code> or <code>CKDatabase</code></td></tr></tbody></table>
 <p>Conversions between these types are performed automatically by
 <code>NSPersistentCloudKitContainer</code>.
 The file <code>Model.swift</code> in the example app,
@@ -413,20 +415,20 @@ creates a container of this type and ties it to the model
 defined in the file <code>Model.xcdatamodeld</code>.</p>
 <p>To combine the use of Core Data and CloudKit:</p>
 <ol>
-<li>Create a new app and check the &quot;Use Core Data&quot;
-and &quot;Host in CloudKit&quot; checkboxes.</li>
-<li>Add the &quot;iCloud&quot; capability.</li>
-<li>Under &quot;Services&quot;, check the &quot;CloudKit&quot; checkbox.</li>
-<li>Under &quot;Containers&quot;, click the &quot;+&quot; button and enter a container name
-that is &quot;iCloud.&quot; plus your reverse internet domain
+<li>Create a new app and check the “Use Core Data”
+and “Host in CloudKit” checkboxes.</li>
+<li>Add the “iCloud” capability.</li>
+<li>Under “Services”, check the “CloudKit” checkbox.</li>
+<li>Under “Containers”, click the ”+” button and enter a container name
+that is “iCloud.” plus your reverse internet domain
 followed by a period and the app name.</li>
-<li>Add the &quot;Background Modes&quot; capability.</li>
-<li>Check the &quot;Remote notifications&quot; checkbox.</li>
+<li>Add the “Background Modes” capability.</li>
+<li>Check the “Remote notifications” checkbox.</li>
 <li>Add source files similar to those in the example app linked above.</li>
 </ol>
-<p>CloudKit prefixes all record and field names with &quot;CD_&quot;,
-which is an abbreviation for &quot;Core Data&quot;.
-A system record named &quot;Users&quot; is created by default.
+<p>CloudKit prefixes all record and field names with “CD_”,
+which is an abbreviation for “Core Data”.
+A system record named “Users” is created by default.
 These records cannot be queried.</p>
 <p>By default, a private database is created.
 This is restricted to the current app user,
@@ -434,38 +436,39 @@ but is shared across all of their devices.</p>
 <p>To enable querying records from the CloudKit Dashboard website:</p>
 <ol>
 <li>Browse the CloudKit Dashboard at
-<a href="https://icloud.developer.apple.com/dashboard/">https://icloud.developer.apple.com/dashboard/</a>.</li>
-<li>Click the big &quot;CloudKit Database&quot; button.</li>
+<a href="https://icloud.developer.apple.com/dashboard/" rel="noopener" target="_blank">https://icloud.developer.apple.com/dashboard/</a>.</li>
+<li>Click the big “CloudKit Database” button.</li>
 <li>Select a CloudKit database from the dropdown at the top.</li>
-<li>In the left nav under &quot;Schema&quot;, click &quot;Indexes&quot;.</li>
+<li>In the left nav under “Schema”, click “Indexes”.</li>
 <li>For each record type, select it,
-click &quot;Add Basic Index&quot;, select &quot;recordName&quot; from the dropdown,
-verify that an &quot;Index Type&quot; of &quot;Queryable&quot; is selected,
-click &quot;Add Basic Index&quot; again, select &quot;modifiedTimestamp&quot; from the dropdown,
-verify that an &quot;Index Type&quot; of &quot;Queryable&quot; is selected,
-and click the &quot;Save Changes&quot; button.</li>
-<li>Under &quot;Data&quot; in the left nav, click &quot;Records&quot;.</li>
-<li>In the Database dropdown, select &quot;Private Database&quot;.</li>
+click “Add Basic Index”, select “recordName” from the dropdown,
+verify that an “Index Type” of “Queryable” is selected,
+click “Add Basic Index” again, select “modifiedTimestamp” from the dropdown,
+verify that an “Index Type” of “Queryable” is selected,
+and click the “Save Changes” button.</li>
+<li>Under “Data” in the left nav, click “Records”.</li>
+<li>In the Database dropdown, select “Private Database”.</li>
 <li>In the Zone dropdown, select the zone created for you
 by <code>NSPersistentCloudKitDatabase</code> which is named
-&quot;com.apple.coredata.cloudkit.zone&quot;, not &quot;_defaultZone&quot;.</li>
-<li>In the &quot;Record Type&quot; dropdown, select a record name.</li>
-<li>Click the &quot;Query Records&quot; button.
+“com.apple.coredata.cloudkit.zone”, not “_defaultZone”.</li>
+<li>In the “Record Type” dropdown, select a record name.</li>
+<li>Click the “Query Records” button.
 Note that after adding records in the app it can take a minute
 until they appear in the CloudKit Dashboard.</li>
-<li>To create a new record, click the &quot;+&quot; button after the &quot;Records&quot; heading,
-select a record type from the &quot;Type&quot; dropdown,
-select &quot;Create New Record&quot;, enter a record name in the &quot;CD_entityName&quot; input,
+<li>To create a new record, click the ”+” button after the “Records” heading,
+select a record type from the “Type” dropdown,
+select “Create New Record”, enter a record name in the “CD_entityName” input,
 enter attribute values in the remaining inputs,
-and click the &quot;Save&quot; button.
+and click the “Save” button.
 Relationship attribute values must be set to the unique id string
 of record to which they refer.</li>
 <li>To modify record attributes, click a record name (blue link),
 edit data in the inspector panel on the right,
-click the &quot;Save&quot; button.
-To undo changes before saving them, click the &quot;Reload&quot; button.</li>
+click the “Save” button.
+To undo changes before saving them, click the “Reload” button.</li>
 <li>To see changes in the record table, re-run the query.</li>
 <li>To delete a record, click a record name (blue link),
-click the &quot;Delete&quot; button, and confirm by clicking another &quot;Delete&quot; button.</li>
-</ol>
-</article> </body></html>
+click the “Delete” button, and confirm by clicking another “Delete” button.</li>
+</ol> </article>  </section> </section> </section>  </main> <footer> <a href="https://tinyletter.com/mvolkmann?v=1.1.1" rel="noopener" target="_blank">
+subscribe
+</a> <div>&copy; R. Mark Volkmann, 2020-2026</div> </footer> </body></html>
