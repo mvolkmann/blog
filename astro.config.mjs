@@ -1,7 +1,10 @@
 import {defineConfig} from 'astro/config';
+import rehypeExternalLinks from './scripts/rehype-external-links.mjs';
 
 export default defineConfig({
-  srcDir: './app',
+  markdown: {
+    rehypePlugins: [rehypeExternalLinks]
+  },
   outDir: './_site',
   site: 'https://mvolkmann.github.io',
   base: '/blog',

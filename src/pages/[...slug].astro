@@ -1,0 +1,31 @@
+---
+import {render} from 'astro:content';
+import TopicLayout from '../layouts/TopicLayout.astro';
+import {
+  buildTocHtml,
+  getEntryTitle,
+  getTopicEntries,
+  toRoutePath
+} from '../lib/content';
+
+export async function getStaticPaths() {
+  const entries = await getTopicEntries();
+
+  return entries.map(entry => ({
+    params: {slug: toRoutePath(entry)},
+    props: {entry}
+  }));
+}
+
+const {entry} = Astro.props;
+const headingText = `${getEntryTitle(entry)}${entry.data.extraTitle ? ` ${entry.data.extraTitle}` : ''}`;
+const {Content, headings} = await render(entry);
+const tocHtml = buildTocHtml(headings);
+---
+
+<TopicLayout
+  Content={Content}
+  css={entry.data.css}
+  headingText={headingText}
+  tocHtml={tocHtml}
+/>

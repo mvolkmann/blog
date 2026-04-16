@@ -1,0 +1,1594 @@
+---
+eleventyNavigation:
+  key: wrec
+layout: topic-layout.njk
+---
+
+<script src="/blog/js/basic-wrec.js" type="module"></script>
+<script src="/blog/js/color-demo.js" type="module"></script>
+<script src="/blog/js/color-picker.js" type="module"></script>
+<script src="/blog/js/counter-wrec.js" type="module"></script>
+<script src="/blog/js/data-binding.js" type="module"></script>
+<script src="/blog/js/hello-world.js" type="module"></script>
+<script src="/blog/js/number-slider.js" type="module"></script>
+<script src="/blog/js/radio-group.js" type="module"></script>
+<script src="/blog/js/rectangle-area.js" type="module"></script>
+<script src="/blog/js/select-list.js" type="module"></script>
+<script src="/blog/js/table-wired.js" type="module"></script>
+<script src="/blog/js/temperature-eval.js" type="module"></script>
+<script src="/blog/js/toggle-switch.js" type="module"></script>
+<script>
+  window.onload = () => {
+    const tableWired = document.querySelector('table-wired');
+      // The property "properties" must be set before the property "headings"
+      // because changing headings triggers the buildTh method
+      // which uses properties to determine the data to sort.k
+      tableWired.propNames = ['name', 'age', 'occupation'];
+      tableWired.headings = ['Name', 'Age', 'Occupation'];
+      tableWired.data = [
+        {name: 'Alice', age: 30, occupation: 'Engineer'},
+        {name: 'Bob', age: 25, occupation: 'Designer'},
+        {name: 'Charlie', age: 35, occupation: 'Teacher'}
+      ];
+  };
+</script>
+
+<style>
+  img {
+    border: 1px solid gray;
+  }
+</style>
+
+<figure style="width: 30%">
+  <img alt="wrec logo" style="border: 0"
+    src="/blog/assets/wrec-logo.png?v=1.1.1">
+</figure>
+
+## Overview
+
+[wrec](<https://www.npmjs.com/package/wrec?v=1.1.1>) is a small,
+zero dependency library that greatly simplifies building web components.
+Its main features are that it automates
+wiring event listeners and implementing reactivity.
+
+If you're new to web components, see my slides
+from a one-hour talk on web components at [Web Components](<https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf?v=1.1.1>).
+A video of the talk is at
+<a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
+target="_blank">OCI Tech Lunch - July 2025</a>.
+Also see my series of
+<a href="https://www.youtube.com/playlist?list=PLGhglgQb4jVk3-_wc8srORlGalSRFMEpR"
+target="_blank">YouTube videos</a> on web components and the wrec library.
+
+Wrec was inspired by [Lit](<https://lit.dev?v=1.1.1>).
+It has the following advantages over Lit:
+
+- Wrec is simpler ... just a single class to extend (Wrec).
+- Wrec has a cleaner syntax ... no need to
+  surround JS expressions with `${...}`.
+- Wrec provides automatic 2-way data binding ...
+  no need to dispatch custom events and listen for them.
+- Wrec doesn't require a special syntax for Boolean attributes.
+- Wrec enables specifying the content of a `textarea` element
+  with a JavaScript expression in its text content.
+
+Wrec components have many of the features provided by Alpine.js.
+
+To install wrec in one of your projects, enter `npm install wrec`.
+
+## Reactivity
+
+When we use the word "reactivity", we mean the ability to automatically
+update the DOM when the value of a component property changes.
+
+There are many approaches that can be used to implement reactivity.
+One approach is to use a virtual DOM.
+When a component property changes,
+a new version of the component DOM is created.
+That DOM is compared to the existing DOM for the component,
+referred to as "diffing".
+Then the existing DOM is updated, but only the parts where a "diff" was found.
+Web frameworks that use this approach include React and Vue.js.
+
+Wrec takes a more surgical approach to reactivity.
+
+- The first time an instance of a given web component class is used,
+  wrec searches all attribute values, element text content, and
+  CSS properties for expressions matching `this.{property-name}`
+  using a regular expression.
+- It creates a static map (one per `Wrec` subclass) named `propToExprsMap`
+  whose keys are property names and
+  whose values are the expressions where they are found.
+- It creates a map (one per instance of each `Wrec` subclass)
+  whose keys are the expressions and whose values are references to
+  the elements, attributes, and CSS variable declarations where they appear.
+  This map is held in the Wrec property `exprToRefsMap`.
+- When a property in an instance changes, wrec gets a list of the expressions
+  that use the property and computes their new values.
+- Then for each expression whose value was computed,
+  it gets a list of all references to the expression in the instance
+  and updates them with the new value.
+
+This approach is highly efficient.
+
+## Getting Started
+
+To define a web component using wrec:
+
+1. Install wrec by entering `npm install wrec`.
+1. Define a class that extends the `Wrec` class.
+1. Optionally define a static property named `css`
+   whose value is a string containing CSS rules.
+1. Define a static property named `html`
+   whose value is a string containing the HTML to render.
+1. Register the class as a custom element definition
+   by calling the `define` method.
+
+For example:
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class BasicWrec extends Wrec {
+  static css = css`
+    span {
+      font-family: fantasy;
+      font-size: 2rem;
+    }
+  `;
+  static html = html`<span>Hello, World!</span>`;
+}
+
+BasicWrec.define('basic-wrec');
+```
+
+The `css` and `html` properties above use tagged template literals.
+This allows the text to span multiple lines.
+The tags `css` and `html` are optional.
+They trigger the VS Code extension Prettier to format the code
+and the "Inline HTML" extension to add syntax highlighting.
+
+The `define` method registers a custom HTML element with
+a kebab-case name which is typically based on the class name.
+For `BasicWrec`, the element name is `basic-wrec`.
+This is an optional convenience method.
+An alternative is to use the `define` method as follows:
+
+```js
+customElements.define('element-name', SomeClass);
+```
+
+To use this in a web page or Markdown file, include the following:
+
+```html
+<script src="some-path/basic-wrec.js" type="module"></script>
+<basic-wrec></basic-wrec>
+```
+
+Here it is in action.
+
+<basic-wrec></basic-wrec>
+
+## Tooling
+
+Wrec provides three tools.
+
+To check for issues in wrec component implementations,
+enter `npx wrec-lint [file-path]`.
+When no file path is specified, it runs on every `.js` and `.ts` file
+that defines a class that extends `Wrec`.
+
+To automatically run the wrec linter in VS Code
+when component source files are saved,
+install the "wrec" extension.
+
+To automatically add `usedBy` properties to
+the configuration objects of properties that need them,
+enter `npx wrec-usedby {file-path}`.
+See examples of the `usedBy` property later in this document.
+
+## Properties
+
+Web components defined with wrec can define and use properties.
+Properties are automatically mapped to attributes in the custom element.
+Here's a simple example that enables specifying a name.
+
+```js
+import {html, Wrec} from './wrec.min.js';
+
+class HelloWorld extends Wrec {
+  static properties = {
+    name: {type: String, value: 'World'}
+  };
+
+  static html = html`<div>Hello, <span>this.name</span>!</div>`;
+}
+
+HelloWorld.define('hello-world');
+```
+
+We can use this custom element as follows:
+
+```html
+<hello-world></hello-world>
+
+<hello-world name="wrec"></hello-world>
+```
+
+This will render the following:
+
+<hello-world></hello-world>
+<hello-world name="wrec"></hello-world>
+
+Use your browser DevTools to inspect the
+last instance of the `hello-world` custom element.
+Double-click the value of the `name` attribute and change it to your name.
+Press the return key or tab key, or click away from the value
+to commit the change.
+Note how the page updates to greet you.
+
+The value of the static variable `properties` is
+an object describing each of the component instance properties.
+The keys are property names and
+the values are objects that describe the property.
+Those objects support the following keys:
+
+- `doc`: a documentation string used when generating a Custom Elements Manifest file
+- `type`: a class name such as `Boolean`, `Number`, `String`, or `Array<Object>`
+- `value`: the default value
+- `required`: set to `true` to throw an error when the corresponding argument is not supplied
+- `computed`: a JavaScript expression from which the value is computed
+- `uses`: a comma-separated list of other property names used to compute the value
+- `dispatch`: set to `true` to cause a "change" event to be dispatched
+  every time the value of the property changes
+
+The `value` and `computed` properties should not both be specified.
+
+The `uses` property should only be specified
+if the `computed` property is also specified.
+It is needed when the `computed` expression
+doesn't directly reference the listed properties.
+This situation arises when the expression is a method call
+where the properties are not explicitly passed.
+Supplying `uses` causes the `computed` expression to be re-evaluated
+every time the value of any of the listed properties changes.
+
+The `detail` property of the dispatched "change" events is set to an object
+with the properties `tagName`, `property`, `oldValue`, and `value`.
+
+## Event Listeners
+
+To wire event listeners,
+Wrec looks for attributes whose name begins with "on".
+It assumes the remainder of the attribute name is an event name.
+It also assumes that the value of the attribute is either
+a method name that should be called or code that should be executed
+when that event is dispatched.
+For example, with the attribute `onclick="increment"`,
+if `increment` is a method in the component, wrec will
+add an event listener to the element containing the attribute
+for "click" events and call `this.increment(event)`.
+Alternatively, the attribute `onclick="this.count++"`
+adds an event listener that increments `this.count`
+when the element is clicked.
+
+The case of the event name within the attribute name
+does not matter because Wrec lowercases the name.
+So the attributes in the previous examples
+can be replaced by `onClick="increment"`.
+
+## JavaScript Expressions
+
+In the HTML to be rendered, CSS property values,
+element attributes, and element text content
+can contain raw JavaScript expressions.
+By "raw" we mean that the expressions
+are not surrounded by noisy syntax like `${...}`.
+
+If the expressions contain references to properties in the form
+`this.propertyName`, wrec automatically watches them for changes.
+In this context, `this` always refers to the parent web component.
+When changes are detected, wrec automatically reevaluates the expressions
+and replaces the attribute values or text contents with new values.
+Wrec does not rerender the entire web component.
+
+Here's an example of a counter component that takes advantage of this feature:
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class CounterWrec extends Wrec {
+  static properties = {
+    label: {type: String},
+    count: {type: Number}
+  };
+
+  static css = css`
+    :host {
+      display: block;
+    }
+    button {
+      background-color: lightgreen;
+    }
+    button:disabled {
+      opacity: 0.8;
+    }
+  `;
+
+  static html = html`
+    <label>this.label</label>
+    <button onClick="this.count--" type="button" disabled="this.count === 0">
+      -
+    </button>
+    <span>this.count</span>
+    <button onClick="this.count++" type="button">+</button>
+  `;
+}
+
+CounterWrec.define('counter-wrec');
+```
+
+When the value of an attribute is a Boolean,
+wrec adds the attribute to the element with no value
+or removes the attribute from the element.
+This is commonly used for attributes like `disabled`.
+
+Here it is in action.
+
+```html
+<counter-wrec label="Score" count="0"></counter-wrec>
+```
+
+<counter-wrec label="Score" count="0"></counter-wrec>
+
+Click the "+" and "-" buttons to try it.
+
+It is highly unlikely that an attribute value or element text content
+will ever need to render the word "this", followed by a period,
+followed by a valid JavaScript identifier.
+But if that need arises, just escape the period by using two.
+Wrec will render only a single period.
+
+To follow the word "this" with an ellipsis,
+include a space before it as in "this ... and that".
+
+By default the JavaScript expressions in HTML only have access to
+the properties/methods of the component class and global functions.
+To enable access to other functions and variables,
+list them in the component `context` object.
+For example, suppose a component source file defines
+the function `average` and the constant `COUNT` outside its class definition.
+To allow using them in expressions,
+add the following line in the component class:
+
+```js
+static context = { average, COUNT };
+```
+
+## Unchanging Expressions
+
+In insert the value of an expression
+that does not use properties of the web component,
+into an HTML template string,
+surround the expression with the syntax `${...}`.
+For example, assuming `DAYS` is a variable
+whose value is an array of month names:
+
+```html
+<p>The month is ${DAYS[new Date().getDay()]}.</p>
+```
+
+## Conditional and Iterative HTML Generation
+
+Wrec supports conditional and iterative generation of HTML.
+
+The following web component demonstrates conditional generation
+using the ternary operator.
+
+```js
+import {html, Wrec} from './wrec.min.js';
+
+class TemperatureEval extends Wrec {
+  static properties = {
+    temperature: {type: Number}
+  };
+
+  static html = html`
+    <p>this.temperature < 32 ? "freezing" : "not freezing"</p>
+  `;
+}
+
+TemperatureEval.define('temperature-eval');
+```
+
+Here it is in action.
+
+```html
+<temperature-eval temperature="100"></temperature-eval>
+```
+
+<temperature-eval temperature="100"></temperature-eval>
+
+Use your browser DevTools to inspect the
+instance of the `temperature-eval` custom element.
+Double-click the value of the `temperature` attribute and change it "20".
+Note how the rendered output changes from "not freezing" to "freezing".
+
+For an example of a web component that iterates over values
+in a comma-delimited attribute value to determine what to render,
+see the `RadioGroup` and `SelectList` classes
+in the "Kicking it up a Notch" section below.
+
+## Element References
+
+HTML elements rendered by wrec can have a `ref` attribute
+whose value is the name of property of type `HTMLElement`.
+That property will be set to a reference to the element.
+
+For example, the component `light-controller` below
+uses this to get a reference to a `traffic-light` element.
+It uses that property in the `connectedCallback` method
+to call a method (`next`) on that element.
+
+```typescript
+import {html, Wrec} from 'wrec';
+import './traffic-light'; // register custom element
+
+const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+class LightController extends Wrec {
+  static properties = {tl: {type: HTMLElement}};
+  static html = html`<traffic-light ref="tl"></traffic-light>`;
+
+  async ready() {
+    const {tl} = this;
+    while (true) {
+      const {state} = tl;
+      const seconds = state === 'stop' ? 3 : state === 'yield' ? 1 : 2;
+      await sleep(seconds * 1000);
+      tl.next();
+    }
+  }
+}
+
+LightController.define('light-controller');
+```
+
+Overriding the `ready` lifecycle method is equivalent to the following:
+
+```javascript
+  async connectedCallback() {
+    await super.connectedCallback();
+    ...
+  }
+```
+
+## Form Elements
+
+Wrec supports two-way data binding for HTML form elements.
+
+- `input` and `select` elements can have a `value` attribute
+  whose value is "this.somePropertyName".
+  An event listener for "change" events will be added.
+  To instead listen for "input" events, use the attribute `value:input`.
+- `textarea` elements can have text content
+  that is "this.somePropertyName".
+  An event listener for "change" events will be added.
+
+When the user changes the value of these form elements,
+the associated property is automatically updated.
+When code changes the value of an associated property,
+the form element is automatically updated.
+
+The following web component demonstrates this.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class NumberSlider extends Wrec {
+  static properties = {
+    label: {type: String},
+    labelWidth: {type: String},
+    max: {type: Number, value: 100},
+    min: {type: Number, value: 0},
+    value: {type: Number}
+  };
+
+  static css = css`
+    :host {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    input[type='number'] {
+      width: 6rem;
+    }
+
+    label {
+      font-weight: bold;
+      text-align: right;
+      width: this.labelWidth;
+    }
+  `;
+
+  static html = html`
+    <label>this.label</label>
+    <input
+      type="range"
+      min="this.min"
+      max="this.max"
+      value:input="this.value"
+    />
+    <span>this.value</span>
+  `;
+}
+
+NumberSlider.define('number-slider');
+```
+
+Here it is in action.
+
+```html
+<number-slider label="Rating" max="10"></number-slider>
+```
+
+<number-slider label="Rating" max="10"></number-slider>
+
+Drag the slider thumb to change the value.
+
+Data binding in Lit is not two-way like in wrec.
+A Lit component cannot simply pass one of its properties to
+a child Lit component and have the child can update the property.
+The child must dispatch custom events that
+the parent listens for so it can update its own state.
+For an example of this, see
+[wrec-compare](https://github.com/mvolkmann/lit-examples/blob/main/wrec-compare/binding-demo.ts).
+
+## Disabling Components
+
+Adding the `disabled` attribute to a wrec component instance or removing it,
+automatically does the same to all applicable descendant elements,
+even those in nested shadow DOMs.
+Applicable elements include
+`button`, `fieldset`, `input`, `select`, and `textarea` elements,
+and also nested wrec component instances.
+
+## Computed Properties
+
+The value of a property can be computed using the values of other properties.
+To do this, add the `computed` attribute to the description of the property.
+
+The example component below has a computed property
+that compute the area of a rectangle.
+It shows three ways to accomplish this, with the first two commented out.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class RectangleArea extends Wrec {
+  static properties = {
+    width: {type: Number, value: 10, usedBy: ['rectangleArea']},
+    height: {type: Number, value: 5, usedBy: ['rectangleArea']},
+    /*
+    area: {
+      type: Number,
+      computed: "this.width * this.height",
+    },
+    */
+    area: {
+      type: Number,
+      computed: 'this.rectangleArea()'
+    }
+  };
+
+  static css = css`
+    .area {
+      font-weight: bold;
+    }
+  `;
+
+  static html = html`
+    <number-slider label="Width" value="this.width"></number-slider>
+    <number-slider label="Height" value="this.height"></number-slider>
+    <div class="area">Area: <span>this.area</span></div>
+  `;
+
+  rectangleArea() {
+    return this.width * this.height;
+  }
+}
+
+RectangleArea.define('rectangle-area');
+```
+
+Since the `rectangleArea` method uses properties
+that don't appear in the expression,
+we need to let wrec know when the expression should be reevaluated.
+The configuration object for each component property can include
+the `usedBy` property to indicate which methods use the property.
+Its value is a method name or array of them.
+When the value of that property changes,
+all expressions that call those methods are reevaluated.
+In this case, the `width` and `height` properties
+are both used by the `rectangleArea` method.
+
+Here it is in action:
+
+```html
+<rectangle-area></rectangle-area>
+```
+
+Drag the "Width" and "Height" sliders and
+note how the "Area" is automatically updated.
+
+It is possible for computed property expressions to form a cycle.
+For example, given properties `a`, `b`, and `c`, they can be defined
+such that `a` depends on `b`, `b` depends on `c`, and `c` depends on `a`.
+Wrec detects these cycles and throws an error.
+
+## Reactive CSS
+
+Wrec supports JavaScript expressions in CSS property values.
+
+The following color picker component demonstrates this.
+It also defines a computed property whose value
+can be any valid JavaScript expression.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class ColorPicker extends Wrec {
+  static properties = {
+    labelWidth: {type: String, value: '3rem'},
+    red: {type: Number},
+    green: {type: Number},
+    blue: {type: Number},
+    color: {
+      type: String,
+      computed: '`rgb(${this.red}, ${this.green}, ${this.blue})`'
+    }
+  };
+
+  static css = css`
+    :host {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    #sliders {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    #swatch {
+      background-color: this.color;
+      height: 5rem;
+      width: 5rem;
+    }
+  `;
+
+  static html = html`
+    <div id="swatch"></div>
+    <div id="sliders">
+      <!-- prettier-ignore -->
+      ${this.makeSlider('Red')}
+      ${this.makeSlider('Green')}
+      ${this.makeSlider('Blue')}
+    </div>
+  `;
+
+  static makeSlider(label) {
+    return html`
+      <number-slider
+        label=${label}
+        label-width="this.labelWidth"
+        max="255"
+        value="this.${label.toLowerCase()}"
+      ></number-slider>
+    `;
+  }
+}
+
+ColorPicker.define('color-picker');
+```
+
+Here it is in action.
+
+```html
+<color-picker></color-picker>
+```
+
+<color-picker></color-picker>
+
+Drag the sliders to change the color of the swatch on the left.
+
+## Nested Web Components
+
+Let's define a web component that uses `color-picker`
+to change the color of some text.
+It also uses a `number-slider` to change the size of the text.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class ColorDemo extends Wrec {
+  static properties = {
+    color: {type: String},
+    size: {type: Number, value: 18}
+  };
+
+  static css = css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-family: sans-serif;
+    }
+    p {
+      color: this.color;
+      font-size: this.size + 'px';
+    }
+  `;
+
+  static html = html`
+    <color-picker color="this.color"></color-picker>
+    <number-slider
+      label="Size"
+      max="48"
+      min="12"
+      value="this.size"
+    ></number-slider>
+    <p>This is a test.</p>
+  `;
+}
+
+ColorDemo.define('color-demo');
+```
+
+Here it is in action.
+
+```html
+<color-demo></color-demo>
+```
+
+<color-demo></color-demo>
+
+CSS variable values can be any valid JavaScript expression.
+The example above can be changed to double the size by adding
+the CSS variable `--size` and modifying the rule for `font-size` as follows:
+
+```css
+--size: this.size * 2;
+font-size: calc(var(--size) * 1px);
+```
+
+## Kicking it up a Notch
+
+For this demo we need to define three more custom elements which are:
+
+- `radio-group`: renders a set of radio buttons which are `input` elements with `type="radio"`
+- `select-list`: renders a `select` element with `option` children
+- `data-binding`: renders elements that tie everything together
+
+We will also use `number-slider` which was defined above.
+
+Here is the class that defines the `radio-group` custom element.
+Note how properties that are mapped to required attributes,
+such as `values` below, specify that with `required: true`.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class RadioGroup extends Wrec {
+  static formAssociated = true;
+
+  static properties = {
+    labels: {type: String, required: true},
+    values: {type: String, required: true},
+    value: {type: String}
+  };
+
+  static css = css`
+    :host > div {
+      display: flex;
+      gap: 0.5rem;
+
+      > div {
+        display: flex;
+        align-items: center;
+      }
+    }
+  `;
+
+  static html = html`
+    <div>
+      <!-- prettier-ignore -->
+      this.values
+        .split(",")
+        .map(this.makeRadio)
+        .join("")
+    </div>
+  `;
+
+  #labelArray = [];
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#fixValue();
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    super.attributeChangedCallback(attrName, oldValue, newValue);
+    if (attrName === 'value') {
+      // Update the checked state of the radio buttons.
+      const inputs = this.shadowRoot.querySelectorAll('input');
+      for (const input of inputs) {
+        input.checked = input.value === newValue;
+      }
+    } else if (attrName === 'labels') {
+      this.#labelArray = this.labels.split(',');
+    } else if (attrName === 'values') {
+      this.#fixValue();
+    }
+  }
+
+  // This handles the case when the specified value
+  // is not in the list of values.
+  #fixValue() {
+    requestAnimationFrame(() => {
+      const values = this.values.split(',');
+      if (this.value) {
+        if (!values.includes(this.value)) this.value = values[0];
+      } else {
+        this.value = values[0];
+      }
+    });
+  }
+
+  // This method cannot be private because it is called when
+  // a change event is dispatched from a radio button.
+  handleChange(event) {
+    this.value = event.target.value;
+  }
+
+  // This method cannot be private because it is
+  // called from the expression in the html method.
+  makeRadio(value, index) {
+    value = value.trim();
+    return html`
+      <div>
+        <input
+          type="radio"
+          id="${value}"
+          onchange="handleChange"
+          value="${value}"
+          ${value === this.value ? 'checked' : ''}
+        />
+        <label for="${value}">${this.#labelArray[index]}</label>
+      </div>
+    `;
+  }
+}
+
+RadioGroup.define('radio-group');
+```
+
+Here is the class that defines the `select-list` custom element:
+
+```js
+import {html, Wrec} from './wrec.min.js';
+
+class SelectList extends Wrec {
+  static formAssociated = true;
+
+  static properties = {
+    labels: {type: String, required: true},
+    values: {type: String, required: true},
+    value: {type: String}
+  };
+
+  static html = html`
+    <select value="this.value">
+      <!-- prettier-ignore -->
+      this.values
+        .split(",")
+        .map(this.makeOption)
+        .join("")
+    </select>
+  `;
+
+  #labelArray = [];
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.#fixValue();
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    super.attributeChangedCallback(attrName, oldValue, newValue);
+    if (attrName === 'labels') {
+      this.#labelArray = this.labels.split(',');
+    }
+  }
+
+  // This handles the case when the specified value
+  // is not in the list of values.
+  #fixValue() {
+    requestAnimationFrame(() => {
+      const values = this.values.split(',');
+      if (this.value) {
+        if (!values.includes(this.value)) this.value = values[0];
+      } else {
+        this.value = values[0];
+      }
+    });
+  }
+
+  // This method cannot be private because it is
+  // called from the expression in the html method.
+  makeOption(value, index) {
+    return html`
+      <option value="${value.trim()}">${this.#labelArray[index]}</option>
+    `;
+  }
+}
+
+SelectList.define('select-list');
+```
+
+Here is the class that defines the `data-binding` custom element.
+
+The `label` property is a computed property that
+calls a method in the class to obtain its value.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+const capitalize = str =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+
+class DataBinding extends Wrec {
+  static properties = {
+    color: {type: String},
+    colors: {type: String, required: true, usedBy: ['getLabels']},
+    labels: {
+      type: String,
+      computed: 'this.getLabels()'
+    },
+    size: {type: Number, value: 18}
+  };
+
+  static css = css`
+    :host {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-family: sans-serif;
+    }
+    p {
+      color: this.color;
+      font-size: this.size + 'px';
+      margin: 6px 0;
+    }
+  `;
+
+  static html = html`
+    <div>
+      <label>Color Options (comma-separated):</label>
+      <input value="this.colors" />
+    </div>
+    <radio-group
+      labels="this.labels"
+      name="color1"
+      value="this.color"
+      values="this.colors"
+    ></radio-group>
+    <select-list
+      labels="this.labels"
+      name="color2"
+      value="this.color"
+      values="this.colors"
+    ></select-list>
+    <number-slider
+      label="Size"
+      max="48"
+      min="12"
+      name="size"
+      value="this.size"
+    ></number-slider>
+    <p>You selected the color <span id="selected-color">this.color</span>.</p>
+  `;
+
+  getLabels() {
+    return this.colors.split(',').map(capitalize).join(',');
+  }
+}
+
+DataBinding.define('data-binding');
+```
+
+Finally, here it is in action.
+
+```html
+<data-binding color="blue" colors="red,green,blue"></data-binding>
+```
+
+<data-binding color="blue" colors="red,green,blue"></data-binding>
+
+Select one of the radio buttons and
+note how the color of the text at the bottom updates.
+Also, the corresponding `option` is selected in the `select` element.
+
+Select a different color in the `select-list` and
+note how the color of the text at the bottom updates.
+Also, the corresponding radio button is selected.
+
+Drag the "Size" slider to change the size of the text at the bottom.
+
+For the most amazing part,
+change the comma-separated list of colors in the input at the top
+and press the return key to commit the change.
+Notice how the radio buttons and the select options update.
+The first color in the list is selected by default.
+Selecting other colors via the radio buttons or the `select` works as before.
+
+Take a moment to review the code above that implements these web components.
+Consider how much code would be required to reproduce this
+using another library or framework and
+how much more complicated that code would be!
+
+## Non-primitive Properties
+
+Wrec automatically keeps
+primitive web component properties (Boolean, Number, or String)
+in sync with corresponding attributes.
+Non-primitive web component properties (objects, including arrays)
+are not reflected in attributes because they are not valid attribute values.
+
+Non-primitive web component properties are useful in scenarios where
+JavaScript code will find instances of the web component
+and directly set the properties.
+
+For an example of this, see `src/examples/table-wired.ts`
+and the corresponding file `src/examples/table-demo.html`.
+This implements an HTML table that supports
+sorting the rows by clicking a column heading.
+The sort begins in ascending order.
+Clicking the heading currently used for sorting reverses the sort order.
+
+The `table-manual` component is similar to `table-wired`, but it provides an
+example of implementing reactivity through the `propertyChangedCallback` method
+rather than through JavaScript expressions embedded in HTML.
+Wrec components can override the `propertyChangedCallback` method
+to be notified of changes to any of their properties,
+including computed properties.
+
+Here it is in action.
+
+```html
+<table-wired></table-wired>
+```
+
+The properties of the `table-wired` component are set with the following code:
+
+```js
+window.onload = () => {
+  const tableWired = document.querySelector('table-wired');
+  // The property "properties" must be set before the property "headings"
+  // because changing "headings" triggers the "buildTh" method
+  // which uses properties to determine the data to sort.
+  tableWired.properties = ['name', 'age', 'occupation'];
+  tableWired.headings = ['Name', 'Age', 'Occupation'];
+  tableWired.data = [
+    {name: 'Alice', age: 30, occupation: 'Engineer'},
+    {name: 'Bob', age: 25, occupation: 'Designer'},
+    {name: 'Charlie', age: 35, occupation: 'Teacher'}
+  ];
+};
+```
+
+<table-wired></table-wired>
+
+Try these steps to experiment with the reactivity of the table.
+
+1. Click the table headings to sort the rows.
+1. Right-click the table and select "Inspect".
+1. In the DevTools Elements tab, click the `<table-wired>` element.
+1. Click the "Console" tab.
+1. To see the current data objects that are being rendered,
+   enter `$0.data`
+1. To see the current properties from the `data` objects
+   whose values are rendered, enter `$0.properties`
+1. Change the properties that are rendered by
+   entering `$0.properties = ['occupation', 'name']`
+   The headings are incorrect now, but we'll fix that in the next step.
+1. Change the table headings by entering `$0.headings = ['Job', 'Call Me']`
+1. Change the data objects that are being rendered by entering
+   `$0.data = [{name: 'Mark', age: 64, occupation: 'retired'}, {name: 'Tami', age: 63, occupation: 'receptionist'}]`
+
+## Changing Multiple Properties
+
+Suppose a component has the properties `color` and `size`,
+and the variable `component` is set to a reference to an instance.
+To change both properties, you could use the following:
+
+```js
+component.color = 'yellow';
+component.size = 'large';
+```
+
+But that will cause two rounds of UI updates.
+Usually this will be imperceptible to users.
+But there is a way to only trigger a single round of UI updates.
+Use the following instead:
+
+```js
+component.batchSet({color: 'yellow'; size: 'large'});
+```
+
+## Property Change Events
+
+Wrec components will dispatch "change" events whenever
+a property configured with `dispatch: true` changes.
+For an example of this,
+see the `checked` property in `src/examples/toggle-switch.js`.
+The component defined in `src/examples/binding-demo.js`
+listens for that event, as does the `script` in `src/examples/index.html`.
+
+The following web component implements a toggle switch.
+The code was generated by ChatGPT using the "o3 pro" model,
+and then modified.
+
+A "change" event is dispatched each time
+the value of the `checked` property changes.
+The event `detail` property is set to an object
+with the properties `tagName`, `property`, `oldValue`, and `value`.
+
+```js
+import {css, html, Wrec} from './wrec.min.js';
+
+class ToggleSwitch extends Wrec {
+  static properties = {
+    checked: {type: Boolean, dispatch: true}
+  };
+
+  static css = css`
+    :host {
+      --padding: 2px;
+      --thumb-size: 22px;
+      --height: calc(var(--thumb-size) + var(--padding) * 2);
+      --checked-x: calc(var(--thumb-size) - var(--padding) * 2);
+    }
+
+    div {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      width: calc(var(--thumb-size) * 2);
+      height: var(--height);
+      outline: none;
+    }
+
+    .track {
+      position: absolute;
+      inset: 0;
+      background: #ccc;
+      border-radius: calc(var(--height) / 2);
+      transition: background 160ms;
+    }
+
+    .thumb {
+      position: absolute;
+      top: var(--padding);
+      left: var(--padding);
+      width: var(--thumb-size);
+      height: var(--thumb-size);
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 2px rgb(0 0 0 / 0.4);
+      transition: transform 160ms;
+    }
+
+    .checked .track {
+      background: #4caf50;
+    }
+
+    /* thumb slides with a CSS transition */
+    .checked .thumb {
+      transform: translateX(var(--checked-x));
+    }
+  `;
+
+  // The tabindex attribute is required to make the div focusable.
+  static html = html`
+    <div
+      aria-checked="this.checked"
+      class="this.checked ? 'checked' : ''"
+      onClick="toggle"
+      onKeyDown="handleKey"
+      role="switch"
+      tabindex="0"
+    >
+      <span class="track"></span>
+      <span class="thumb"></span>
+    </div>
+  `;
+
+  handleKey(e) {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      e.preventDefault();
+      this.toggle();
+    }
+  }
+
+  toggle() {
+    this.checked = !this.checked;
+  }
+}
+
+ToggleSwitch.define('toggle-switch');
+```
+
+Here it is in action.
+
+```html
+<toggle-switch checked></toggle-switch>
+```
+
+<toggle-switch checked></toggle-switch>
+
+## Form Submissions
+
+Wrec components can use the same approach as vanilla web components
+to implement form submissions.
+But wrec also provides an easier approach.
+
+Start by adding the following line in classes that extend `Wrec`:
+
+```js
+static formAssociated = true;
+```
+
+If a component only contributes a single value in form submissions,
+and that value is held in a property named `value` then each instance
+can specify the key to be contributed with the `name` attribute.
+This matches how the built-in elements `input`, `select`, and `textarea`
+contribute to form submissions.
+
+If a component contributes multiple values in form submissions than
+each instance must specify the properties to be contributed
+and the corresponding form keys to be used using the `form-assoc` attribute.
+The value of this attribute is a comma-separated list of pairs.
+Each pair is a property name and form key separated by a colon.
+
+For example, suppose we have a `color-picker` component
+with the properties "red", "green", and "blue".
+An instance inside a `form` could look like the following
+in order to submit those values with the keys "r", "g", and "b":
+
+```html
+<color-picker form-assoc="red: r, green: g, blue: b"></color-picker>
+```
+
+Wrec automatically updates the form values to be submitted
+when the values of the specified properties change.
+
+The components must be included in a `form` element
+that provides a way for the user to submit the `form`.
+If the `method` attribute value is "POST",
+each of the component properties is added to the form data.
+If the `method` attribute value is "GET",
+each of the component properties is added as a query parameter.
+
+If multiple web components use the same property names,
+there will be duplicate form property names
+and the values for each will be included.
+
+To set a form value that is not mapped to a property, use the following:
+
+```js
+this.setFormValue('someName', someValue);
+```
+
+Wrec automatically handles form resets.
+The initial value of each component property is saved
+when each instance is created.
+When a `button` with `type="reset"` inside a `form` element is clicked,
+the provided `formResetCallback` method sets the values of
+each component property back to their initial values.
+
+## State
+
+Wrec supports holding state outside of web components and
+creating two-way bindings between state properties and web component properties.
+This can be used as an alternative to holding state in a parent component
+of multiple components that use the state.
+For examples of using the `WrecState` class, see the files
+`src/examples/hello-world-with-state.html`
+and `src/examples/data-binding2.ts`.
+
+Let's walk through the `hello-world-with-state` example.
+First, we define the custom element `labeled-input`
+in the file `labeled-input.js`.
+
+```js
+import {css, html, Wrec} from '../wrec';
+
+class LabeledInput extends Wrec {
+  static properties = {
+    id: {type: String, required: true},
+    label: {type: String, required: true},
+    name: {type: String},
+    value: {type: String}
+  };
+
+  static css = css`
+    div {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  `;
+
+  static html = html`
+    <div>
+      <label for="this.id">this.label</label>
+      <input id="this.id" name="this.name" type="text" value="this.value" />
+    </div>
+  `;
+}
+
+LabeledInput.define('labeled-input');
+```
+
+Next, we define the custom element `hello-world`
+in the file `hello-world.js`.
+
+```js
+import {css, html, Wrec} from '../wrec';
+
+class HelloWorld extends Wrec {
+  static properties = {
+    name: {type: String, value: 'World'}
+  };
+
+  static css = css`
+    p {
+      color: purple;
+    }
+  `;
+
+  static html = html` <p>Hello, <span>this.name</span>!</p> `;
+}
+
+HelloWorld.define('hello-world');
+```
+
+Finally, we use these components inside `hello-world-with-state.html`.
+Note below how we:
+
+- Create a `WrecState` object with a name (ex. "vault").
+  The second argument specifies whether the data
+  should be persisted to `sessionStorage`.
+
+  ```js
+  const state = new WrecState('vault', true, {name: 'World'});
+  ```
+
+- associate the `WrecState` property "name" with the `labeled-input` property "value"
+
+  ```js
+  li.useState(state, {name: 'value'});
+  ```
+
+- associate the `WrecState` property "name" with the `hello-world` property "name"
+
+  It is not necessary to specify the mapping from state properties
+  to component properties when they are the same.
+
+  ```js
+  hw.useState(state);
+  ```
+
+Changing the value of the input updates the `WrecState`
+which updates the `hello-world` element.
+
+Clicking the "Reset" button updates the `WrecState`,
+which updates both the `labeled-input` and `hello-world` elements.
+
+```html
+<html>
+  <head>
+    <style>
+      body {
+        font-family: sans-serif;
+      }
+    </style>
+    <script src="hello-world.js" type="module"></script>
+    <script src="labeled-input.js" type="module"></script>
+    <script type="module">
+      import {WrecState} from '../wrec-state.js';
+      const state = new WrecState('vault', true, {name: 'World'});
+
+      const li = document.querySelector('labeled-input');
+      li.useState(state, {name: 'value'});
+      const hw = document.querySelector('hello-world');
+      hw.useState(state);
+
+      const button = document.querySelector('button');
+      button.addEventListener('click', () => {
+        state.name = 'World';
+      });
+
+      // This demonstrates listening for state changes
+      // and running arbitrary code.
+      // A callback function is passed to the addChangeCallback method.
+      // A second, optional argument can be supplied which is
+      // an array of strings that are the state paths of interest.
+      // When omitted, the callback function is called for all state changes.
+      state.addChangeCallback((statePath, newValue, oldValue) => {
+        const msg = `${statePath} changed from ${oldValue} to ${newValue}`;
+        console.log('state-demo.html:', msg);
+      });
+    </script>
+  </head>
+  <body>
+    <labeled-input id="name" label="Name"></labeled-input>
+    <hello-world></hello-world>
+    <button>Reset</button>
+  </body>
+</html>
+```
+
+This example creates a single `WrecState` object,
+but any number can be created as a way of logically grouping
+the properties to be shared.
+
+A `WrecState` object can contain properties whose values are objects.
+The constructor takes two required arguments and one optional argument.
+The first argument is a name associated with the `WrecState`
+which can be used to retrieve it later.
+The second argument is a `boolean` that specifies
+whether the data should be persisted to `sessionStorage`.
+The optional third argument specifies initial data.
+For example:
+
+```js
+const state = new WrecState('vault', true, {
+  color: 'red',
+  team: {leader: {name: 'World'}},
+  notUsed: 'not used'
+});
+```
+
+Nested `WrecState` properties can be mapped to component properties.
+For example:
+
+```js
+const c1 = document.querySelector('component-one');
+// The second argument object keys are state property paths
+// and the values are component property names.
+c1.useState(state, {color: 'color', 'team.leader.name': 'name'});
+```
+
+When running in development mode (`NODE_ENV` set to "development"),
+`WrecState` objects can be accessed from the DevTools console.
+For example:
+
+```js
+state = WrecState.get('vault'); // gets a WrecState object by name
+state.log(); // outputs all the key/value pairs
+state.color = 'red'; // reactively changes a state property
+state.team.leader.name = 'Mark'; // reactively changes a state property
+```
+
+The data in each `WrecState` object can be persisted to `sessionStorage`
+so the data is not lost if the user refreshes the page.
+The keys are "wrec-state-" followed by the `WrecState` name.
+The data is automatically restored as long as each `WrecState` object
+is created in a `Window` `onload` handler, as shown above.
+This also enables sharing state between pages of a multi-page web app.
+
+The `WrecState` `subscribe` method enables arbitrary code
+to listen for state changes at specified paths.
+To listen for changes at all paths, omit the second parameter.
+For example, if `myState` is a `WrecState` object that holds a "color" property,
+the following code listens for changes to it.
+When finished listening, call the `unsubscribe` function that is returned.
+
+Data in `WrecState` objects is subject to potential XSS attacks
+and exposure to malicious browser extensions.
+For this reason, sensitive data should not be stored in `WrecState` objects.
+
+## Error Checking
+
+Wrec checks for many kinds of errors and throws an `Error` when they are found.
+Look for messages in the DevTools console.
+The kinds of errors that are detected include:
+
+- use of custom elements that are not defined
+- attribute names with no matching property declaration
+- attribute values with a type that differs from the declared property type
+- expressions in element text content or attribute values
+  that reference undeclared web component properties
+- expressions in element text content
+  that do not evaluate to a string or number
+- event handling function names that
+  don't match any method name in the web component
+
+## Security
+
+Wrec uses the JavaScript `eval` function to evaluate JavaScript expressions
+that are placed in attribute values and the text content of elements.
+This has security implications if those expressions
+can come from untrusted sources, so it is best avoid
+creating web components that use untrusted content in those ways.
+
+Perhaps the most dangerous thing the use of `eval` allows
+is sending HTTP requests to other servers.
+Such requests could contain data scraped from your web app
+in order to share it with unscrupulous sites.
+
+The easiest way to prevent this is to add a
+Content Security Policy (CSP) to your web app.
+Simply adding the following element as a child of the
+`head` element in each page blocks sending HTTP requests
+to any domain except that of your web app:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="connect-src 'self'" />
+```
+
+## Server-Side Rendering
+
+A wrec component can use server-side rendering (SSR) if it
+imports the `Wrec` class from 'wrec/ssr' instead of 'wrec'.
+For an example, see
+https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo.
+The file `hello-world.ts` imports the `Wrec` class from 'wrec/ssr'.
+The file `server.ts` calls the `ssr` method on the `HelloWorld` class
+to generate HTML required for SSR.
+
+## More Examples
+
+Check out the `src/examples` directory in the
+[wrec GitHub repository](https://github.com/mvolkmann/wrec).
+This contains many example web components that are defined using wrec.
+
+Compare the files `counter-vanilla.js` and `counter-wrec.js`
+to get a feel for how much using wrec
+simplifies the code required to define a web component.
+
+To try the examples:
+
+1. Clone the wrec repository.
+1. Enter `cd wrec`.
+1. Enter `npm install`.
+1. Enter `npm run dev`.
+1. Browse localhost:5173/examples/index.html.
+
+Also try browsing other `.html` files besides `index.html`.
+
+## Tests
+
+wrec has an extensive set of Playwright tests.
+To run them:
+
+1. Clone the wrec repository.
+1. cd to the `wrec` directory.
+1. Enter `npm install`.
+1. Enter `npm run testui`.
+1. Click the right pointing triangle.
+
+If there is no "Action" tab which displays a browser view of the running tests,
+reset the Playwright UI settings by entering one of these commands:
+
+```bash
+# macOS
+rm -rf ~/Library/Caches/ms-playwright/.settings
+
+# Windows
+del %LOCALAPPDATA%\ms-playwright\.settings /s /q
+```

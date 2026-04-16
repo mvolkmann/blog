@@ -1,0 +1,74 @@
+---
+import pkg from '../../package.json';
+
+interface Props {
+  css?: string;
+  title?: string;
+}
+
+const {css, title = "Mark Volkmann's blog"} = Astro.props;
+const generator = Astro.generator;
+const siteVersion = pkg.version;
+const basePath = '/blog/';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>{title}</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="Mark Volkmann's Tech Blog" />
+    <meta name="generator" content={generator} />
+    <meta name="theme-color" content="cornflowerblue" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="apple-touch-icon"
+      href={`${basePath}assets/mark-volkmann-192.png`}
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href={`${basePath}assets/favicon-blue.png`}
+    />
+    <link rel="manifest" href={`${basePath}assets/manifest.json`} />
+
+    <link rel="preload" as="style" href={`${basePath}assets/styles.css`} />
+    <link rel="stylesheet" href={`${basePath}assets/styles.css`} />
+    <link rel="preload" as="style" href={`${basePath}assets/prism-a11y.css`} />
+    <link rel="stylesheet" href={`${basePath}assets/prism-a11y.css`} />
+
+    {css ? <link rel="stylesheet" href={css} /> : null}
+    <slot name="head" />
+
+    <script
+      async
+      is:inline
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script is:inline src={`${basePath}js/top-layout.js`}></script>
+    <script>
+      import '../scripts/prism';
+    </script>
+  </head>
+  <body>
+    <header>
+      <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button
+      >
+      <h1>The Question Mark - blog by Mark Volkmann</h1>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer>
+      <a
+        href={`https://tinyletter.com/mvolkmann?v=${siteVersion}`}
+        rel="noopener"
+        target="_blank"
+      >
+        subscribe
+      </a>
+      <div>&copy; R. Mark Volkmann, 2020-2026</div>
+    </footer>
+  </body>
+</html>

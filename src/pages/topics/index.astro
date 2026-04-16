@@ -1,0 +1,8 @@
+---
+import TopicsLayout from '../../layouts/TopicsLayout.astro';
+import {getNavTree} from '../../lib/content';
+
+const navTree = await getNavTree();
+---
+
+<TopicsLayout navTree={navTree} />
