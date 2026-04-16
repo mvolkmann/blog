@@ -87,7 +87,6 @@ with their equivalent AsciiDoc syntax.
 | Task List           | `- [x] Done`                             | `* [x] Done`                           |
 
 TODO: Describe the difference in table syntax.
-GRONK
 
 ## Comparison to LaTeX
 
