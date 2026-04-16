@@ -3,6 +3,7 @@
   --active-link-color: purple;
   --bg-color: white;
   --fg-color: black;
+  --header-height: 3.25rem;
   --header-bg-color: var(--accent-color);
   --header-fg-color: var(--bg-color);
   --nav-bg-color: linen;
@@ -48,9 +49,12 @@ body > header {
   background-color: var(--header-bg-color);
   color: var(--header-fg-color);
   display: flex;
+  inset: 0 0 auto 0;
   margin: 0;
   padding: 0.5rem;
+  position: fixed;
   text-align: center;
+  z-index: 2;
 }
 
 body > header > h1 {
@@ -71,6 +75,7 @@ body > main {
   align-items: stretch;
   display: flex;
   flex-grow: 1;
+  margin-top: var(--header-height);
   position: relative;
   width: 100%;
 }
