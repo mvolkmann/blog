@@ -1,19 +1,25 @@
-name: Eleventy build and deploy
+name: Astro build and deploy
 on:
   push:
     branches: [master]
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v5
+
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.x
+          node-version: 22.x
+          cache: npm
+
       - run: npm ci
       - run: npm run lint
-      - run: npm run format
+      - run: npm run format:check
       - run: npm run build
+
       - name: site deploy
         uses: peaceiris/actions-gh-pages@v4
         with:

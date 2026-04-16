@@ -3,10 +3,17 @@ import pkg from '../../package.json';
 
 interface Props {
   css?: string;
+  hasCodeBlocks?: boolean;
+  hasMath?: boolean;
   title?: string;
 }
 
-const {css, title = "Mark Volkmann's blog"} = Astro.props;
+const {
+  css,
+  hasCodeBlocks = false,
+  hasMath = false,
+  title = "Mark Volkmann's blog"
+} = Astro.props;
 const generator = Astro.generator;
 const siteVersion = pkg.version;
 const basePath = '/blog/';
@@ -36,20 +43,33 @@ const basePath = '/blog/';
 
     <link rel="preload" as="style" href={`${basePath}assets/styles.css`} />
     <link rel="stylesheet" href={`${basePath}assets/styles.css`} />
-    <link rel="preload" as="style" href={`${basePath}assets/prism-a11y.css`} />
-    <link rel="stylesheet" href={`${basePath}assets/prism-a11y.css`} />
+    {
+      hasCodeBlocks ? (
+        <>
+          <link
+            rel="preload"
+            as="style"
+            href={`${basePath}assets/prism-a11y.css`}
+          />
+          <link rel="stylesheet" href={`${basePath}assets/prism-a11y.css`} />
+        </>
+      ) : null
+    }
 
     {css ? <link rel="stylesheet" href={css} /> : null}
     <slot name="head" />
 
-    <script
-      async
-      is:inline
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
     <script is:inline src={`${basePath}js/top-layout.js`}></script>
-    <script>
-      import '../scripts/prism';
-    </script>
+    {
+      hasMath ? (
+        <script
+          async
+          is:inline
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+        />
+      ) : null
+    }
+    {hasCodeBlocks ? <script>import '../scripts/prism';</script> : null}
   </head>
   <body>
     <header>

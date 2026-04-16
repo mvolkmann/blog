@@ -9,28 +9,44 @@ if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
 
 var navLeftWhenClosed;
 
-window.onload = () => {
-  // If the URL contains a hash, use it to
-  // restore the proper page in the iframe.
-  const {hash} = location;
-  if (hash) {
-    const iframe = document.querySelector('iframe');
-    iframe.src = hash.substring(1); // removes leading #
-  }
+/**
+ * This computes the off-screen position used to hide the nav.
+ */
+function getClosedNavOffset(nav) {
+  return '-' + nav.getBoundingClientRect().width + 'px';
+}
 
+/**
+ * This initializes the nav position when the page loads.
+ */
+function initializeNav() {
   const nav = document.querySelector('nav');
-  if (nav) {
-    // eslint-disable-next-line no-unused-vars
-    navLeftWhenClosed = '-' + nav.getBoundingClientRect().width + 'px';
-    nav.style.left = navLeftWhenClosed; // to initially hide it
+  if (!nav) return;
+
+  navLeftWhenClosed = getClosedNavOffset(nav);
+  nav.style.left = navLeftWhenClosed;
+
+  if (location.pathname === '/blog/topics/') {
+    nav.style.left = 0;
   }
+}
+
+/**
+ * This toggles the hamburger menu open and closed.
+ */
+// eslint-disable-next-line no-unused-vars
+function toggleHamburgerMenu() {
+  const nav = document.querySelector('nav');
+  if (!nav) return;
+
+  const {left} = nav.style;
+  const isOpen = !left || left === '0px';
+  nav.style.left = isOpen ? navLeftWhenClosed : 0;
+}
+
+window.onload = () => {
+  initializeNav();
 
   // Make "Topics" be the default page.
   if (location.pathname === '/blog/') location.href += 'topics/';
-
-  // Open the hamburger menu when on the "Topics" page.
-  if (location.href.endsWith('/topics/')) {
-    const nav = document.querySelector('nav');
-    nav.style.left = 0;
-  }
 };

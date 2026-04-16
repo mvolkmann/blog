@@ -1,10 +1,14 @@
 ---
 import {render} from 'astro:content';
+import TopicsLayout from '../layouts/TopicsLayout.astro';
 import TopicLayout from '../layouts/TopicLayout.astro';
 import {
   buildTocHtml,
   getEntryTitle,
+  getNavTree,
   getTopicEntries,
+  hasCodeContent,
+  hasMathContent,
   toRoutePath
 } from '../lib/content';
 
@@ -19,13 +23,21 @@ export async function getStaticPaths() {
 
 const {entry} = Astro.props;
 const headingText = `${getEntryTitle(entry)}${entry.data.extraTitle ? ` ${entry.data.extraTitle}` : ''}`;
+const hasCodeBlocks = hasCodeContent(entry);
+const hasMath = hasMathContent(entry);
+const navTree = await getNavTree();
 const {Content, headings} = await render(entry);
 const tocHtml = buildTocHtml(headings);
+const currentPath = `/blog/${toRoutePath(entry)}/`;
 ---
 
-<TopicLayout
-  Content={Content}
+<TopicsLayout
   css={entry.data.css}
-  headingText={headingText}
-  tocHtml={tocHtml}
-/>
+  currentPath={currentPath}
+  hasCodeBlocks={hasCodeBlocks}
+  hasMath={hasMath}
+  navTree={navTree}
+  title={headingText}
+>
+  <TopicLayout Content={Content} headingText={headingText} tocHtml={tocHtml} />
+</TopicsLayout>

@@ -37,7 +37,9 @@ function appendVersion(url: string) {
  * This converts rendered headings into nested HTML for the table of contents.
  */
 export function buildTocHtml(headings: Heading[]) {
-  const filteredHeadings = headings.filter(({depth}) => depth >= 2 && depth <= 6);
+  const filteredHeadings = headings.filter(
+    ({depth}) => depth >= 2 && depth <= 6
+  );
   if (filteredHeadings.length === 0) return '';
 
   let currentLevel = 0;
@@ -68,6 +70,13 @@ export function buildTocHtml(headings: Heading[]) {
 }
 
 /**
+ * This determines whether a topic entry contains fenced code blocks.
+ */
+export function hasCodeContent(entry: TopicEntry) {
+  return /```|~~~/.test(entry.body ?? '');
+}
+
+/**
  * This returns the path segments used to route a topic entry.
  */
 function getEntryPath(entry: TopicEntry) {
@@ -80,6 +89,14 @@ function getEntryPath(entry: TopicEntry) {
   }
 
   return entry.id;
+}
+
+/**
+ * This determines whether a topic entry appears to contain MathJax content.
+ */
+export function hasMathContent(entry: TopicEntry) {
+  const body = entry.body ?? '';
+  return /\\\(|\\\)|\\\[|\\\]|\\begin\{|\\end\{|\$[^$\n]+\$/.test(body);
 }
 
 /**

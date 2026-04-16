@@ -2,11 +2,61 @@
 import type {NavNode} from '../lib/content';
 
 interface Props {
+  currentPath?: string;
   items: NavNode[];
   topLevel?: boolean;
 }
 
-const {items, topLevel = false} = Astro.props;
+const {currentPath = '', items, topLevel = false} = Astro.props;
+
+/**
+ * This finds the set of nav keys that should be expanded for the current path.
+ */
+function findExpandedKeys(
+  nodes: NavNode[],
+  path: string,
+  expandedKeys = new Set<string>()
+) {
+  for (const node of nodes) {
+    const isCurrent = normalizePath(node.url) === path;
+    const childMatches = node.children?.some(child =>
+      findMatchingNode(child, path, expandedKeys)
+    );
+
+    if (isCurrent || childMatches) {
+      expandedKeys.add(node.key);
+    }
+  }
+
+  return expandedKeys;
+}
+
+/**
+ * This determines whether a node or any of its descendants matches the path.
+ */
+function findMatchingNode(
+  node: NavNode,
+  path: string,
+  expandedKeys: Set<string>
+) {
+  const isCurrent = normalizePath(node.url) === path;
+  const childMatches =
+    node.children?.some(child => findMatchingNode(child, path, expandedKeys)) ??
+    false;
+
+  if (childMatches) expandedKeys.add(node.key);
+  return isCurrent || childMatches;
+}
+
+/**
+ * This normalizes internal URLs by removing the origin, query string, and hash.
+ */
+function normalizePath(url: string) {
+  if (!url.startsWith('/')) return url;
+  return url.replace(/[?#].*$/, '');
+}
+
+const expandedKeys = findExpandedKeys(items, currentPath);
 ---
 
 <ul>
@@ -17,18 +67,30 @@ const {items, topLevel = false} = Astro.props;
         : typeof item.order === 'number'
           ? 'ordered'
           : '';
+      const hasChildren = Boolean(item.children?.length);
+      const isActive = normalizePath(item.url) === currentPath;
+      const isExpanded = expandedKeys.has(item.key);
+      const linkClass = [
+        'nav-link',
+        isActive ? 'active' : '',
+        isExpanded ? 'expanded' : ''
+      ]
+        .filter(Boolean)
+        .join(' ');
 
       return (
         <li class={itemClass}>
           <a
-            class="nav-link"
-            onclick={`handleLinkClick(this, '${item.url}')`}
-            target="frame"
+            class={linkClass}
+            href={hasChildren ? '#' : item.url}
+            onclick={`return handleLinkClick(event, this, ${hasChildren})`}
           >
             {item.title}
-            {item.children?.length ? <div class="triangle">▶︎</div> : null}
+            {hasChildren ? <div class="triangle">▶︎</div> : null}
           </a>
-          {item.children?.length ? <Astro.self items={item.children} /> : null}
+          {hasChildren ? (
+            <Astro.self currentPath={currentPath} items={item.children} />
+          ) : null}
         </li>
       );
     })

@@ -1,8 +1,36 @@
 ---
+import {getEntry, render} from 'astro:content';
+import TopicLayout from '../../layouts/TopicLayout.astro';
 import TopicsLayout from '../../layouts/TopicsLayout.astro';
-import {getNavTree} from '../../lib/content';
+import {
+  buildTocHtml,
+  getEntryTitle,
+  getNavTree,
+  hasCodeContent,
+  hasMathContent
+} from '../../lib/content';
 
 const navTree = await getNavTree();
+const entry = await getEntry('topics', 'welcome');
+
+if (!entry) {
+  throw new Error('Expected the welcome topic entry to exist.');
+}
+
+const headingText = getEntryTitle(entry);
+const hasCodeBlocks = hasCodeContent(entry);
+const hasMath = hasMathContent(entry);
+const {Content, headings} = await render(entry);
+const tocHtml = buildTocHtml(headings);
 ---
 
-<TopicsLayout navTree={navTree} />
+<TopicsLayout
+  css={entry.data.css}
+  currentPath="/blog/topics/"
+  hasCodeBlocks={hasCodeBlocks}
+  hasMath={hasMath}
+  navTree={navTree}
+  title={headingText}
+>
+  <TopicLayout Content={Content} headingText={headingText} tocHtml={tocHtml} />
+</TopicsLayout>

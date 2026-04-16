@@ -4,17 +4,35 @@ import type {NavNode} from '../lib/content';
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
+  css?: string;
+  currentPath?: string;
+  hasCodeBlocks?: boolean;
+  hasMath?: boolean;
   navTree: NavNode[];
+  title?: string;
 }
 
-const {navTree} = Astro.props;
+const {
+  css,
+  currentPath = '',
+  hasCodeBlocks = false,
+  hasMath = false,
+  navTree,
+  title
+} = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout
+  css="/blog/assets/topic.css"
+  hasCodeBlocks={hasCodeBlocks}
+  hasMath={hasMath}
+  title={title}
+>
+  {css ? <link rel="stylesheet" href={css} slot="head" /> : null}
   <script is:inline src="/blog/js/topics.js"></script>
 
   <nav>
-    <NavTree items={navTree} topLevel={true} />
+    <NavTree currentPath={currentPath} items={navTree} topLevel={true} />
   </nav>
 
   <section class="topic-background">
@@ -26,12 +44,9 @@ const {navTree} = Astro.props;
       >
         Print
       </button>
-      <iframe
-        id="topic-content"
-        name="frame"
-        onload="iframeLoaded(this)"
-        src="../welcome/"
-        title="topic content"></iframe>
+      <section class="topic-page">
+        <slot />
+      </section>
     </section>
   </section>
 </BaseLayout>

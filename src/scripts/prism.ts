@@ -38,4 +38,23 @@ import 'prismjs/components/prism-yaml';
 Prism.languages.shell = Prism.languages.bash;
 Prism.languages.zsh = Prism.languages.bash;
 
-Prism.highlightAll();
+/**
+ * This highlights all Prism code blocks after the page becomes visible.
+ */
+function highlightAllCodeBlocks() {
+  Prism.highlightAll();
+}
+
+/**
+ * This defers Prism highlighting until the browser has time to do the work.
+ */
+function scheduleHighlighting() {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(highlightAllCodeBlocks, {timeout: 150});
+    return;
+  }
+
+  window.setTimeout(highlightAllCodeBlocks, 0);
+}
+
+scheduleHighlighting();

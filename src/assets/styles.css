@@ -161,11 +161,9 @@ body > main > .topic-background > .topic-content {
   width: 100%;
 }
 
-body > main > .topic-background > .topic-content > iframe {
-  border: none;
+body > main > .topic-background > .topic-content > .topic-page {
   box-sizing: border-box;
-  transition-duration: 500ms;
-  transition-property: opacity;
+  padding: 1rem;
   width: 100%;
 }
 
