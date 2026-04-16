@@ -35,12 +35,12 @@ const {
     <NavTree currentPath={currentPath} items={navTree} topLevel={true} />
   </nav>
 
-    <section class="topic-background">
-      <section class="topic-content">
-        <button id="print-btn" onclick="print()">Print</button>
-        <section class="topic-page">
-          <slot />
-        </section>
+  <section class="topic-background">
+    <section class="topic-content">
+      <button id="print-btn" onclick="print()">Print</button>
+      <section class="topic-page">
+        <slot />
       </section>
+    </section>
   </section>
 </BaseLayout>

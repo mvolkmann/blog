@@ -1,3 +1,4 @@
 {
+  "ignorePatterns": ["src/assets/lit-components.js"],
   "plugins": ["jsx-a11y"]
 }
