@@ -10,6 +10,8 @@
   --ordered-link-color: green;
   --sidebar-bg-color: lightblue;
   --table-border-color: lightgray;
+  --table-cell-bg-color: #fff9f2;
+  --table-header-bg-color: #f6d078;
   --topic-max-width: 50rem;
 }
 
@@ -208,13 +210,13 @@ table th {
 }
 
 table td {
-  background-color: var(--fg-color);
-  color: var(--bg-color);
+  background-color: var(--table-cell-bg-color);
+  color: var(--fg-color);
 }
 
 table th {
-  background-color: var(--accent-color);
-  color: var(--bg-color);
+  background-color: var(--table-header-bg-color);
+  color: var(--fg-color);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -225,5 +227,7 @@ table th {
     --nav-bg-color: #0047ab;
     --nav-fg-color: linen;
     --sidebar-bg-color: #013a86;
+    --table-cell-bg-color: #0047ab;
+    --table-header-bg-color: var(--accent-color);
   }
 }
