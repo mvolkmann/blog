@@ -19,6 +19,6 @@ function handleLinkClick(event, link, hasChildren) {
  * This prints the current page.
  */
 // eslint-disable-next-line no-unused-vars
-function print() {
+function printCurrentPage() {
   window.print();
 }

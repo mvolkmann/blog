@@ -5,6 +5,7 @@ interface Props {
   css?: string;
   hasCodeBlocks?: boolean;
   hasMath?: boolean;
+  showPrintButton?: boolean;
   title?: string;
 }
 
@@ -12,6 +13,7 @@ const {
   css,
   hasCodeBlocks = false,
   hasMath = false,
+  showPrintButton = false,
   title = "Mark Volkmann's blog"
 } = Astro.props;
 const generator = Astro.generator;
@@ -76,6 +78,13 @@ const basePath = '/blog/';
       <button class="hamburger" onclick="toggleHamburgerMenu()">&#x2630;</button
       >
       <h1>The Question Mark - blog by Mark Volkmann</h1>
+      {
+        showPrintButton ? (
+          <button id="print-btn" onclick="printCurrentPage()">
+            Print
+          </button>
+        ) : null
+      }
     </header>
     <main>
       <slot />

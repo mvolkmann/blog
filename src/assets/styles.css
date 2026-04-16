@@ -71,6 +71,16 @@ body > header > .hamburger {
   outline: none;
 }
 
+body > header > #print-btn {
+  background-color: transparent;
+  border: 1px solid var(--header-fg-color);
+  border-radius: 0.25rem;
+  color: var(--header-fg-color);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.35rem 0.75rem;
+}
+
 body > main {
   align-items: stretch;
   display: flex;
@@ -174,13 +184,6 @@ body > main > .topic-background > .topic-content > .topic-page {
   width: 100%;
 }
 
-#print-btn {
-  position: fixed;
-  right: 1rem;
-  top: calc(var(--header-height) + 1rem);
-  z-index: 2;
-}
-
 .bold {
   font-weight: bold;
 }
@@ -229,6 +232,34 @@ table td {
 table th {
   background-color: var(--table-header-bg-color);
   color: var(--fg-color);
+}
+
+@media print {
+  body {
+    display: block;
+    height: auto;
+  }
+
+  body > footer,
+  body > header {
+    display: none;
+  }
+
+  body > main {
+    display: block;
+    margin-top: 0;
+  }
+
+  body > main > .topic-background {
+    background-color: transparent;
+    display: block;
+  }
+
+  body > main > .topic-background > .topic-content {
+    display: block;
+    max-width: none;
+    overflow: visible;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

@@ -26,6 +26,7 @@ const {
   css="/blog/assets/topic.css"
   hasCodeBlocks={hasCodeBlocks}
   hasMath={hasMath}
+  showPrintButton={true}
   title={title}
 >
   {css ? <link rel="stylesheet" href={css} slot="head" /> : null}
@@ -37,7 +38,6 @@ const {
 
   <section class="topic-background">
     <section class="topic-content">
-      <button id="print-btn" onclick="print()">Print</button>
       <section class="topic-page">
         <slot />
       </section>
