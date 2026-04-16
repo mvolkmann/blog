@@ -46,13 +46,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-[wrec](<https://www.npmjs.com/package/wrec?v=1.1.1>) is a small,
+[wrec](https://www.npmjs.com/package/wrec?v=1.1.1) is a small,
 zero dependency library that greatly simplifies building web components.
 Its main features are that it automates
 wiring event listeners and implementing reactivity.
 
 If you're new to web components, see my slides
-from a one-hour talk on web components at [Web Components](<https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf?v=1.1.1>).
+from a one-hour talk on web components at [Web Components](https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf?v=1.1.1).
 A video of the talk is at
 <a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
 target="_blank">OCI Tech Lunch - July 2025</a>.
@@ -60,7 +60,7 @@ Also see my series of
 <a href="https://www.youtube.com/playlist?list=PLGhglgQb4jVk3-_wc8srORlGalSRFMEpR"
 target="_blank">YouTube videos</a> on web components and the wrec library.
 
-Wrec was inspired by [Lit](<https://lit.dev?v=1.1.1>).
+Wrec was inspired by [Lit](https://lit.dev?v=1.1.1).
 It has the following advantages over Lit:
 
 - Wrec is simpler ... just a single class to extend (Wrec).
@@ -471,6 +471,17 @@ Wrec supports two-way data binding for HTML form elements.
   whose value is "this.somePropertyName".
   An event listener for "change" events will be added.
   To instead listen for "input" events, use the attribute `value:input`.
+- For `input` elements with `type="checkbox"`
+  the `checked` attribute can be set to a reference to a Boolean property.
+  That creates a two-way binding where
+  clicking the checkbox updates the property and
+  changing the property updates the checkbox.
+- For `input` elements with `type="radio"`
+  the `checked` attribute can be set to a reference to a String property.
+  That creates a two-way binding where clicking the radio button
+  sets the property to the value of the `value` attribute and
+  changing the property updates the `checked` value based on
+  whether the property value matches the value of the `value` attribute.
 - `textarea` elements can have text content
   that is "this.somePropertyName".
   An event listener for "change" events will be added.
