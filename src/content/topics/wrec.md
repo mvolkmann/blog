@@ -171,21 +171,46 @@ Here it is in action.
 
 ## Tooling
 
-Wrec provides three tools.
+Wrec provides four scripts that aid in developing wrec components.
+
+To generate starter code for a new wrec component,
+enter `npx scaffold {tag-name}`.
+This generates the file `tag-name.ts` that defines the class `TagName`.
 
 To check for issues in wrec component implementations,
 enter `npx wrec-lint [file-path]`.
 When no file path is specified, it runs on every `.js` and `.ts` file
-that defines a class that extends `Wrec`.
+in and below the current directory that defines a class that extends `Wrec`.
 
-To automatically run the wrec linter in VS Code
-when component source files are saved,
-install the "wrec" extension.
+To automatically add a `declare` statement for each property
+described in the `static properties` object,
+enter `npx wrec-declare {file-path}`.
+The `declare` statements allow TypeScript-aware code editors
+to provide type checking.
+This only works in files with a `.ts` file extension.
 
 To automatically add `usedBy` properties to
 the configuration objects of properties that need them,
 enter `npx wrec-usedby {file-path}`.
 See examples of the `usedBy` property later in this document.
+
+The [wrec](https://marketplace.visualstudio.com/items?itemName=RMarkVolkmann.wrec)
+VS Code extension provides commands in the Command Palette
+that run the four scripts described above.
+
+To use this extension, the `package.json` file for the project
+that is opened in VS Code must have a dependency on the wrec package and
+it must be installed to use these commands.
+
+The supported commands are:
+
+- wrec: Scaffold New Component
+- wrec: Lint Current File
+- wrec: Add declare Statements in Current File
+- wrec: Set usedBy Properties in Current File
+
+The "wrec: Lint Current File" command is run automatically
+when a component source file is saved.
 
 ## Properties
 
