@@ -182,12 +182,11 @@ enter `npx wrec-lint [file-path]`.
 When no file path is specified, it runs on every `.js` and `.ts` file
 in and below the current directory that defines a class that extends `Wrec`.
 
-To automatically add a `declare` statement for each property
-described in the `static properties` object,
+To automatically add `declare` statements in a given TypeScript source file
+for each property described in the `static properties` object,
 enter `npx wrec-declare {file-path}`.
 The `declare` statements allow TypeScript-aware code editors
 to provide type checking.
-This only works in files with a `.ts` file extension.
 
 To automatically add `usedBy` properties to
 the configuration objects of properties that need them,
