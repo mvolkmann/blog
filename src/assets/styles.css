@@ -106,10 +106,12 @@ body > main > nav {
   color: var(--nav-fg-color);
   display: inline-block;
   height: 100%;
+  left: 0;
   overflow: auto;
   padding-right: 1rem;
   position: absolute;
   transition-duration: 0.5s;
+  transition-property: left;
   width: fit-content;
   z-index: 1;
 }

@@ -446,8 +446,9 @@ in the "Kicking it up a Notch" section below.
 ## Element References
 
 HTML elements rendered by wrec can have a `ref` attribute
-whose value is the name of property of type `HTMLElement`.
-That property will be set to a reference to the element.
+whose value is the name of property with type `HTMLElement`.
+That property will be set to a reference to the element
+so it can be accessed from component methods.
 
 For example, the component `light-controller` below
 uses this to get a reference to a `traffic-light` element.
@@ -1581,7 +1582,7 @@ to any domain except that of your web app:
 A wrec component can use server-side rendering (SSR) if it
 imports the `Wrec` class from 'wrec/ssr' instead of 'wrec'.
 For an example, see
-https://github.com/mvolkmann/web-component-book-code/tree/main/ch15/wrec-ssr-demo.
+https://github.com/mvolkmann/web-component-book-code/tree/main/ch14/wrec-ssr-demo.
 The file `hello-world.ts` imports the `Wrec` class from 'wrec/ssr'.
 The file `server.ts` calls the `ssr` method on the `HelloWorld` class
 to generate HTML required for SSR.
