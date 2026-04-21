@@ -17,18 +17,33 @@ function getClosedNavOffset(nav) {
 }
 
 /**
+ * This gets the sidebar nav element in the main layout.
+ */
+function getSidebarNav() {
+  return document.querySelector('body > main > nav');
+}
+
+/**
  * This initializes the nav position when the page loads.
  */
 function initializeNav() {
-  const nav = document.querySelector('nav');
+  const nav = getSidebarNav();
   if (!nav) return;
 
   navLeftWhenClosed = getClosedNavOffset(nav);
   nav.style.left = navLeftWhenClosed;
 
   if (location.pathname === '/blog/topics/') {
-    nav.style.left = 0;
+    nav.style.left = '0px';
   }
+}
+
+/**
+ * This determines whether the nav is currently visible.
+ */
+function isNavOpen(nav) {
+  const left = nav.style.left || getComputedStyle(nav).left;
+  return left === '0' || left === '0px';
 }
 
 /**
@@ -36,12 +51,15 @@ function initializeNav() {
  */
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
-  const nav = document.querySelector('nav');
+  const nav = getSidebarNav();
   if (!nav) return;
 
-  const {left} = nav.style;
-  const isOpen = !left || left === '0px';
-  nav.style.left = isOpen ? navLeftWhenClosed : 0;
+  if (isNavOpen(nav)) {
+    navLeftWhenClosed = getClosedNavOffset(nav);
+    nav.style.left = navLeftWhenClosed;
+  } else {
+    nav.style.left = '0px';
+  }
 }
 
 window.onload = () => {

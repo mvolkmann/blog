@@ -47,11 +47,13 @@ body > footer > a {
 body > header {
   align-items: center;
   background-color: var(--header-bg-color);
+  box-sizing: border-box;
   color: var(--header-fg-color);
   display: flex;
+  height: var(--header-height);
   inset: 0 0 auto 0;
   margin: 0;
-  padding: 0.5rem;
+  padding: 0 0.5rem;
   position: fixed;
   text-align: center;
   z-index: 2;
