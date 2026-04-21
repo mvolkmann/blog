@@ -258,7 +258,8 @@ the values are objects that describe the property.
 Those objects support the following keys:
 
 - `doc`: a documentation string used when generating a Custom Elements Manifest file
-- `type`: a class name such as `Boolean`, `Number`, `String`, or `Array<Object>`
+- `type`: the runtime type constructor
+  `Boolean`, `Number`, `String`, `Object`, `Array`, or `HTMLElement`
 - `value`: the default value
 - `required`: set to `true` to throw an error when the corresponding argument is not supplied
 - `computed`: a JavaScript expression from which the value is computed
