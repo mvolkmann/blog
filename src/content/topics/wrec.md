@@ -1410,8 +1410,8 @@ Finally, we use these components inside `hello-world-with-state.html`.
 Note below how we:
 
 - Create a `WrecState` object with a name (ex. "vault").
-  The second argument specifies whether the data
-  should be persisted to `sessionStorage`.
+  If the second argument is a Boolean value,
+  it specifies whether the data should be persisted to `sessionStorage`.
 
   ```js
   const state = new WrecState('vault', true, {name: 'World'});
