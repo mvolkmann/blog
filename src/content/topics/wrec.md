@@ -193,6 +193,9 @@ the configuration objects of properties that need them,
 enter `npx wrec-usedby {file-path}`.
 See examples of the `usedBy` property later in this document.
 
+When the `type` of a property is `Object` or `Array`, you should
+further customize the `declare` statement type to make it more specific.
+
 The [wrec](https://marketplace.visualstudio.com/items?itemName=RMarkVolkmann.wrec)
 VS Code extension provides commands in the Command Palette
 that run the four scripts described above.
