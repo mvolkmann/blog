@@ -1585,6 +1585,110 @@ at an online web site like https://editor.codecogs.com[Equation Editor],
 take a screenshot of the result,
 and include that image in an AsciiDoc document.
 
+## Numbering
+
+AsciiDoc can automatically number structural elements
+by enabling built-in document attributes.
+The structural elements include
+chapters, sections, subsections, figures, tables, and listings.
+
+To do this, add attributes like the following near the top of the document:
+
+```asciidoc
+= Book Title
+:doctype: book
+:sectnums:
+:figure-number:
+:listing-number:
+:table-number:
+:chapter-signifier: Chapter
+:figure-caption: Figure
+:listing-caption: Listing
+:table-caption: Table
+```
+
+Including `:sectnums:` enables section numbering.
+
+In a `book` document, level-1 sections become chapters.
+For example, the following:
+
+```asciidoc
+= My Book
+:doctype: book
+:sectnums:
+
+== Introduction
+
+=== Background
+
+==== Details
+```
+
+will render as
+
+```text
+Chapter 1. Introduction
+1.1. Background
+1.1.1. Details
+```
+
+Specify how deep section numbering goes
+by adding an attribute like the following:
+
+```asciidoc
+:sectnumlevels: 3
+```
+
+Figures, tables, and listings are numbered automatically
+when they have captions.
+
+This figure ...
+
+```asciidoc
+.This is the system architecture.
+image::architecture.png[]
+```
+
+will be numbered as follows:
+
+```text
+Figure 1. This is the system architecture.
+```
+
+This table ...
+
+```asciidoc
+.Student scores
+|===
+|Name |Score
+
+|Ada  |98
+|Linus|91
+|===
+```
+
+will be numbered as follows:
+
+```text
+Table 1. Student scores
+```
+
+This listing ...
+
+```asciidoc
+[source,js]
+.Greeting example
+----
+console.log("Hello");
+----
+```
+
+will be numbered as follows:
+
+```text
+Listing 1. Greeting example
+```
+
 ## Page Breaks
 
 To add a page break in PDF output,
