@@ -294,6 +294,7 @@ This explains that the custom roles must be defined
 in a YAML theme file rather than in a CSS file.
 
 The following theme file is the equivalent of the CSS above.
+The file extension must be `.yml`, not `.yaml`.
 
 ```yaml
 extends: default
@@ -2388,7 +2389,7 @@ extends: default
 
 page:
   # Order of values is [top, right, bottom, left].
-  margin: [$base_line_height_length * 4, 0, $base_line_height_length * 2, 0]
+  margin: [$base-line-height-length * 4, 0, $base-line-height-length * 2, 0]
 
   # This causes Roman numeral page numbers to be used before page 5
   # (which includes the preface and table of contents)
@@ -2405,8 +2406,9 @@ heading:
   # Colors can also be specified using other syntaxes.
 
 header:
-  height: $base_line_height_length * 4
-  padding: [$base_line_height_length, 0, 0, 0]
+  height: $base-line-height-length * 4 # required
+  # Add bottom padding for space between header and body content.
+  padding: [0, 0, $base-line-height-length, 0]
   # This prevents {section-title} from including the section number.
   title-style: basic
   vertical_align: top
