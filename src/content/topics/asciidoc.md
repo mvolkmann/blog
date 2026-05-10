@@ -2418,6 +2418,7 @@ header:
       content: '*{page-number}*'
     center:
       content: 'Chapter {chapter-numeral} {nbsp} {chapter-title}'
+      #content: '{document-title}'
     right:
       content: ''
   recto:
