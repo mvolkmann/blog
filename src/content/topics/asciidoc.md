@@ -68,7 +68,7 @@ Markdown:
 The following table compares common Markdown features
 with their equivalent AsciiDoc syntax.
 
-| Markdown Feature    | Markdown Syntax                          | AsciiDoc Syntax                        |
+| Feature             | Markdown Syntax                          | AsciiDoc Syntax                        |
 | ------------------- | ---------------------------------------- | -------------------------------------- |
 | Heading 1           | `# Heading 1`                            | `= Heading 1`                          |
 | Heading 2 (up to 6) | `## Heading 2`                           | `== Heading 2`                         |
@@ -833,13 +833,14 @@ digraph G {
     B -> D [label="Failure"]; // Flow bypasses validation on failure
     C -> D;
 }
+----
 ```
 
 The installs required to support this are:
 
 - `brew install graphviz`
 - `gem install bundler`
-- `gem install asciidoctor-diagram`.
+- `gem install asciidoctor-diagram`
 
 The steps convert the `.adoc` file to HTML are:
 
@@ -2419,15 +2420,11 @@ header:
     center:
       content: 'Chapter {chapter-numeral} {nbsp} {chapter-title}'
       #content: '{document-title}'
-    right:
-      content: ''
   recto:
-    left:
-      content: ''
     center:
       content: '{section-title}'
     right:
-      content: '*{page-number}*'
+      content: $footer-verso-left-content
 
 # The default footer is suppressed by setting :nofooter:
 # in main .adoc file, so the following strictly necessary.
