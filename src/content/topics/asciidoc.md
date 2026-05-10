@@ -927,13 +927,14 @@ Consider adding the document attributes like the following
 in the header of the `.adoc` file before generating the `.epub` file
 to add metadata:
 
-````adoc
+```adoc
 :producer: Manning
 :revdate: 2020
 :revnumber: 1
 :lang: en-US
 :uuid: 9781617297946
 :keywords: web,JavaScript,Svelte
+```
 
 The `:uuid:` value can be a book ISBN.
 
@@ -958,7 +959,7 @@ For example:
 My whippet footnote:fn1[The Whippet is a British breed of dog of sighthound type.] is very fast!
 ...
 Comet footnote:fn1[] is ready to play.
-````
+```
 
 No space is required before the `footnote` macro,
 but omitting it will cause spell checkers to complain.
