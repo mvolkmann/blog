@@ -1583,7 +1583,7 @@ This works for HTML output.
 Producing PDF output requires installing the Ruby gem `asciidoctor-mathematical`.
 Unfortunately, running `gem install asciidoctor-mathematical` fails in macOS!
 See [issue #133](https://github.com/asciidoctor-contrib/asciidoctor-mathematical/issues/133).
-A workaround is to enter a LaTex math equation
+A workaround is to enter a LaTeX math equation
 at an online web site like https://editor.codecogs.com[Equation Editor],
 take a screenshot of the result,
 and include that image in an AsciiDoc document.
