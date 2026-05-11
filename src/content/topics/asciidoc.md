@@ -769,7 +769,7 @@ It cannot use arithmetic operators like `+`, `-`, `*`, and `/`.
 For example:
 
 ```adoc
-// When assign a string value to an attribute,
+// When assigning a string value to an attribute,
 // do not surround the value in quotes.
 :city: St. Louis
 :season: Winter
