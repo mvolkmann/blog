@@ -105,11 +105,12 @@ body > main > nav {
   background-color: var(--nav-bg-color);
   color: var(--nav-fg-color);
   display: inline-block;
-  height: 100%;
+  height: calc(100vh - var(--header-height));
   left: 0;
   overflow: auto;
   padding-right: 1rem;
-  position: absolute;
+  position: fixed;
+  top: var(--header-height);
   transition-duration: 0.5s;
   transition-property: left;
   width: fit-content;
@@ -252,6 +253,10 @@ table th {
   body > main {
     display: block;
     margin-top: 0;
+  }
+
+  body > main > nav {
+    display: none;
   }
 
   body > main > .topic-background {
