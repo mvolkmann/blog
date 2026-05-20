@@ -5,6 +5,13 @@ css: '/blog/assets/about-me.css'
 layout: topic-layout.njk
 ---
 
+<style>
+  .topic-page a > img {
+    display: inline-block;
+    width: auto;
+  }
+</style>
+
 <img
 alt="head-shot"
 class="head-shot keep-size"
@@ -35,10 +42,6 @@ In my spare time I do a lot of running.
 So far I have run 51 marathons in 41 states,
 including the Boston Marathon in 2013.
 
-[![GitHub](/blog/assets/github.svg)](https://github.com/mvolkmann)
-
-[![Twitter](/blog/assets/twitter.svg)](https://twitter.com/mark_volkmann)
-
-[![Facebook](/blog/assets/facebook.svg)](https://www.facebook.com/mark.volkmann)
-
 [![GMail](/blog/assets/gmail.svg)](mailto://r.mark.volkmann@gmail.com)
+[![GitHub](/blog/assets/github.svg)](https://github.com/mvolkmann)
+[![Facebook](/blog/assets/facebook.svg)](https://www.facebook.com/mark.volkmann)
