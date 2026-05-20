@@ -85,6 +85,7 @@ body > header > #print-btn {
 
 body > main {
   align-items: stretch;
+  background-color: var(--sidebar-bg-color);
   display: flex;
   flex-grow: 1;
   margin-top: var(--header-height);
