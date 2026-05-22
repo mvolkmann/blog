@@ -7,20 +7,40 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Xcode](<https://developer.apple.com/xcode/?v=1.1.1>)
+[Xcode](https://developer.apple.com/xcode/?v=1.1.1)
 is an IDE from Apple for creating apps for
-iPhone, iPad, macOS, Apple Watch, and Apple TV.
+iPhone, iPad, macOS, Apple Watch, Apple TV, and Apple Vision Pro.
 
-Starting in Xcode 14, the SDKs for every OS
-are no longer automatically downloaded when Xcode is installed.
-Only the iOS and macOS SDKs are downloaded, not watchOS or tvOS.
-This makes it faster to install Xcode.
-Additionally SDKs can be downloaded after Xcode is installed.
+Xcode 26 includes Swift 6.2 and SDKs for
+iOS 26, iPadOS 26, tvOS 26, watchOS 26,
+macOS Tahoe 26, and visionOS 26.
+Xcode 26 requires macOS Sequoia 15.6 or later.
+
+Recent notable changes include:
+
+- Xcode 15 added String Catalogs, Swift and Objective-C asset symbols,
+  bookmarks, and the `#Preview` macro.
+- Xcode 16 added predictive code completion on Apple silicon Macs,
+  EditorConfig support, Swift Testing, buildable folders,
+  explicit module builds, a faster Previews engine,
+  and the `@Previewable` and `PreviewModifier` preview APIs.
+- Xcode 26 added Coding Intelligence with ChatGPT, Claude,
+  other Chat Completions-compatible providers, and local models
+  on Apple silicon Macs.
+- Xcode 26.3 added agentic coding, enabling agents such as
+  Claude Agent and OpenAI Codex to work in Xcode.
+  Xcode also exposes capabilities through the Model Context Protocol (MCP).
+
+SDKs and simulator runtimes that are not installed with Xcode
+can be downloaded later from Xcode ... Settings ... Components.
 
 ## Resources
 
-Paul Hudson provided an excellent summary of the new features added in Xcode 14
-at [What](<https://www.youtube.com/watch?v=V2TDGeevDWo&v=1.1.1>).
+- Apple describes the latest Xcode features at
+  [Xcode](https://developer.apple.com/xcode/?v=1.1.1).
+- Apple maintains [Xcode Release Notes](https://developer.apple.com/documentation/xcode-release-notes?v=1.1.1).
+- Apple describes Coding Intelligence setup in
+  [Setting up coding intelligence](https://developer.apple.com/documentation/xcode/setting-up-coding-intelligence?v=1.1.1).
 
 ## Panels
 
@@ -43,7 +63,7 @@ This can be toggled between showing and hiding by pressing cmd-0
 or tapping the following button on the left side of the title bar:
 
 <img alt="Xcode toggle Navigator panel" class="keep-size"
-  src="/blog/assets/Xcode-toggle-panel.png?v=1.1.1">
+  src="/blog/assets/xcode-toggle-panel.png?v=1.1.1">
 
 The Navigator panel displays the following nine icon buttons at the top:
 
@@ -121,13 +141,21 @@ The Navigator panel displays the following nine icon buttons at the top:
   Oddly it seems the only way to commit multiple files at once
   is to select "Commit..." from the "Source Control" menu.
 
-- 3rd tab - Symbol Navigator (tree diagram icon)
+- 3rd tab - Bookmark Navigator (bookmark icon)
 
-  This displays an alphabetized list of files.
-  Click a file to expand it to a list of the properties and methods it defines.
-  These can be clicked to navigate to their definition.
-  The "Hierarchical" and "Flat" options at the top of the list
-  seem identical.
+  This displays bookmarks for files, lines, and find results.
+  Bookmarks are useful for collecting places to revisit
+  without leaving temporary comments in source files.
+  To create a bookmark, right-click a line in the source editor
+  and select "Bookmark".
+  To bookmark search results, use the Find Navigator
+  and save the search as a bookmark.
+
+  Xcode 15 removed the old Symbol Navigator.
+  To navigate symbols in the current file, use the jump menu
+  above the editor or press ctrl-6.
+  To search for symbols across the project, use Open Quickly
+  with cmd-shift-o or the Find Navigator.
 
 - 4th tab - Find Navigator (magnifier glass icon)
 
@@ -168,14 +196,16 @@ The Navigator panel displays the following nine icon buttons at the top:
   <img alt="Xcode Find" class="keep-size"
     src="/blog/assets/xcode-find-navigator-dropdown5.png?v=1.1.1">
 
-- 5th tab - Test Navigator (warning icon - triangle containing !)
+- 5th tab - Issue Navigator (warning icon - triangle containing !)
 
-  This displays "Buildtime" and "Runtime" issues.
+  This displays build-time and runtime issues.
 
 - 6th tab - Test Navigator (diamond containing checkmark icon)
 
   This displays a list of tests.
-  TODO: Can they be run individually from here?
+  Tests and test suites can be run individually from here
+  by clicking the run button next to their name.
+  Swift Testing tests are discovered here in Xcode 16 and later.
 
 - 7th tab - Debug Navigator (spray can icon)
 
@@ -186,7 +216,7 @@ The Navigator panel displays the following nine icon buttons at the top:
 - 8th tab - Breakpoint Navigator (tag icon)
 
   This displays debugging breakpoints.
-  TODO: Can they be disabled and/or deleted here?
+  Breakpoints can be disabled, enabled, edited, and deleted here.
 
 - 9th tab - Report Navigator (document icon)
 
@@ -230,7 +260,6 @@ The typical contents include:
   which includes everything displayed when
   the top entry in the Project Navigator is selected.
   Highlights include:
-
   - a list of groups (directories) and files in the project in the\
     order in which they should appear in the Project Navigator
   - the deployment target (ex. iOS 16.2)
@@ -238,7 +267,6 @@ The typical contents include:
   - project build settings
   - package dependencies
   - targets with the following information for each:
-
     - display name
     - bundle identifier
     - version
@@ -272,11 +300,21 @@ The typical contents include:
 
   This directory should not be saved in a source control repository.
 
-When files are added to a project directory from outside of Xcode
-(such as in the Finder or a Terminal window)
+In older Xcode projects, when files are added to a project directory
+from outside of Xcode (such as in the Finder or a Terminal window),
 it is necessary to select File ... Add Files... in Xcode
 in order to add entries in the `.xcodeproj` file
 so they are seen as belonging to the project.
+
+Xcode 16 added buildable folders.
+When a project uses these, Xcode tracks a folder rather than
+recording every file in the `.xcodeproj` file.
+This reduces project file churn and merge conflicts.
+Files added to a buildable folder from outside Xcode can appear
+without manually adding each file to the project.
+To get the older behavior where each file is listed separately
+and can be manually ordered, right-click a folder in the Project Navigator
+and select "Convert to Group".
 
 When deleting files under a project directory, it is best to
 do so from Xcode rather than the Finder or a Terminal window.
@@ -342,7 +380,7 @@ that can include the following options:
 - Extract All Occurrences
 
 Note that the "Extract Subview" option and the "Embed in \*" options
-only appear a preview is displayed and a view name is command-clicked.
+only appear when a preview is displayed and a view name is command-clicked.
 
 In the past there was a "Rename..." option in this menu.
 It was moved to Editor ... Refactor ... Rename.
@@ -369,12 +407,12 @@ Then release the keys, hover over where the file should be opened.
 Potential locations are highlighted as you hover.
 Click when the desired location is highlighted.
 
-Alternatively, click the button the upper-right
+Alternatively, click the button in the upper-right
 that is a rectangle containing a vertical line and a "+" to open
-a split pane containing the same file in the the currently editor pane.
+a split pane containing the same file in the current editor pane.
 
 To open a new split below the current one instead of to the right,
-open down the option key before clicking the button.
+hold down the option key before clicking the button.
 
 The dropdown menu to the left of this button enables
 toggling the display of the Canvas area and much more.
@@ -391,7 +429,13 @@ double-click either one of them.
 
 ### Code Completion
 
-Xcode provides great intellisense and code completion.
+Xcode provides good code completion.
+
+On Apple silicon Macs, Xcode 16 and later provide
+predictive code completion using an on-device model
+trained for Swift and Apple SDKs.
+These completions can suggest larger pieces of code
+based on the surrounding project context.
 
 When accepting a function completion, only non-dimmed arguments are included.
 To also include the dimmed arguments, hold down the option key
@@ -410,6 +454,17 @@ automatically turn it into a trailing closure.
 To configure Xcode to check spelling while typing, select
 Edit ... Format ... Spelling and Grammar ... Check Spelling While Typing.
 A faint red line will be displayed under all misspelled words.
+
+### EditorConfig
+
+Xcode 16 and later can read indentation and whitespace settings
+from `.editorconfig` files.
+Supported settings include `indent_style`, `indent_size`, `tab_width`,
+`end_of_line`, `insert_final_newline`, `max_line_length`,
+and `trim_trailing_whitespace`.
+
+This can be disabled by selecting Xcode ... Settings ... Text Editing ...
+Indentation and unchecking "Prefer Settings from EditorConfig".
 
 ### Code Folding
 
@@ -514,18 +569,19 @@ adds a static `==` method that returns `true` if all the properties are equal.
 There are more context-sensitive Refactor menu options
 that are less frequently used.
 
-For more on Xcode refactoring, see [Xcode refactoring options explained with examples](<https://www.avanderlee.com/swift/xcode-refactoring/?v=1.1.1>) from SwiftLee.
+For more on Xcode refactoring, see [Xcode refactoring options explained with examples](https://www.avanderlee.com/swift/xcode-refactoring/?v=1.1.1) from SwiftLee.
 
 ### Sorting
 
 By default Xcode does not have the ability to sort selected lines.
+The most reliable options are to use another editor,
+run a command-line tool, or install an Xcode Source Editor extension
+such as xcsort.
+Source Editor extensions must be enabled in
+System Settings ... Privacy & Security ... Extensions ...
+Xcode Source Editor before their commands appear in Xcode's Editor menu.
 
-WARNING! The following does not work in Xcode 14!
-
-The ability to sort selected lines can be added
-using the extension [xcsort](<?v=1.1.1>).
-
-Once installed:
+After installing xcsort:
 
 - Open the System Settings app.
 - In the left nav, click "Privacy & Security".
@@ -550,8 +606,9 @@ such as that from `print` function calls.
 Click the trashcan icon in the lower-right to clear the output.
 The output from `print` calls only appears when running in the debug mode.
 
-Xcode used to support debug mode in Previews,
-but now it is only supported in the Simulator.
+For debugging, prefer running in the Simulator or on a device.
+Previews are optimized for fast UI iteration rather than
+full debugger and console workflows.
 
 To make the console area appear automatically when new text is written to it,
 select Xcode ... Settings ... Behaviors ... Generates output,
@@ -630,8 +687,8 @@ automatically indents the surrounded code
 when the closing brace is typed.
 
 Other options for Swift code formatting include
-[SwiftFormat](<https://github.com/nicklockwood/SwiftFormat?v=1.1.1>)
-and [swift-format](<https://github.com/apple/swift-format?v=1.1.1>).
+[SwiftFormat](https://github.com/nicklockwood/SwiftFormat?v=1.1.1)
+and [swift-format](https://github.com/apple/swift-format?v=1.1.1).
 
 SwiftFormat can be run as a command-line tool or an Xcode extension
 
@@ -660,8 +717,8 @@ select Editor ... SwiftFormat ... Format File.
 
 There is currently no way within Xcode to format files on save.
 However, this can be configured using an Automator script
-and a System Preferences keyboard shortcut.
-The steps to configure this are described at [Xcode Format and Save](<https://luisramos.dev/xcode-format-and-save?v=1.1.1>).
+and a System Settings keyboard shortcut.
+The steps to configure this are described at [Xcode Format and Save](https://luisramos.dev/xcode-format-and-save?v=1.1.1).
 
 ## Code Generation
 
@@ -698,6 +755,49 @@ Xcode can generate implementations of protocol implementations.
 For example, in a `struct` that conforms to the `Codable` protocol,
 type `encode` and accept the completion.
 Then customize the provided code as needed.
+
+Xcode 26 adds Coding Intelligence.
+To configure it, select Xcode ... Settings ... Intelligence.
+Depending on availability and account setup, it can use ChatGPT,
+Claude, other providers that support the Chat Completions API,
+or a local model on Apple silicon Macs.
+
+Coding Intelligence can answer questions about code,
+make inline edits, generate tests and documentation,
+explain selected code, create previews and playgrounds,
+and help fix errors.
+In Xcode 26.3 and later, agentic coding enables supported agents
+such as Claude Agent and OpenAI Codex to work more autonomously
+with the project.
+Xcode also exposes capabilities through MCP
+for compatible external agents and tools.
+
+Because Coding Intelligence can share project files
+and other context with configured model providers,
+review the privacy information in Xcode's Intelligence settings
+before enabling it for private or proprietary code.
+
+## Swift Testing
+
+Xcode 16 added Swift Testing,
+a Swift-native testing framework that can be used alongside XCTest.
+Tests use macros such as `#expect` and are automatically discovered
+in the Test Navigator and source editor.
+
+Swift Testing supports parameterized tests,
+test traits, better failure details for expressions,
+and integration with Test Reports and `.xcresult` bundles.
+
+## Localization
+
+Xcode 15 added String Catalogs (`.xcstrings`).
+They provide a native editor for app localization, track translation progress,
+and can be kept in sync with localizable strings found in source code.
+
+To create one, select File ... New ... File...
+and choose "String Catalog".
+To convert existing `.strings` or `.stringsdict` files,
+select Edit ... Convert ... To String Catalog...
 
 ## Documentation Generation
 
@@ -747,7 +847,7 @@ defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
 To customize build settings, select the top item in the Project Navigator,
 select a target, click the "Build Settings" tab, and make changes.
 
-For details on the available build settings, see [Xcode Build Settings](<https://xcodebuildsettings.com?v=1.1.1>).
+For details on the available build settings, see [Xcode Build Settings](https://xcodebuildsettings.com?v=1.1.1).
 
 ## Clean Builds
 
@@ -788,7 +888,7 @@ To configure a device to run apps wirelessly:
 - Attach the device to the computer with a cable.
 - Select Window ... Devices and Simulators.
 - In the dialog that appears, select the device in the left nav.
-- Check the "Connect vis network" checkbox.
+- Check the "Connect via network" checkbox.
 - In the Finder, eject the device.
 - Disconnect the device from the computer.
 
@@ -801,17 +901,28 @@ To run the current app on a device wirelessly:
 
 Previews allow testing a single view outside of the Simulator or a real device.
 
-Previews are always live meaning they
-update automatically when code changes are saved.
+Xcode 15 added the `#Preview` macro,
+which is now the preferred way to define previews.
+Older `PreviewProvider` previews still work in existing projects.
+
+Xcode 16 added a new Previews execution engine
+that shares build products with normal build and run actions.
+This makes switching between previews and running the app faster
+and makes many preview updates faster.
+
+Previews usually update automatically when code changes are saved.
 However, previews still sometimes need to be resumed
 by either clicking the "Resume" button or pressing cmd-option-p.
 
 To toggle between showing and hiding the preview area, press cmd-option-return.
 
-Calls to the `print` function are ignored when running a preview.
-To enable this, right-click on the play button in the canvas
-and select "Debug Preview".
-TODO: This must have moved in Xcode 14 and I can't find it!
+Calls to the `print` function are not a reliable way to debug previews.
+For debugging and console output, run the app in the Simulator
+or on a device.
+
+Xcode 16 added `PreviewModifier` for reusable preview setup
+and the `@Previewable` macro for using property wrappers such as `@State`
+directly inside a `#Preview`.
 
 A new "variants" button appears as the third button
 at the bottom of the preview area.
@@ -822,7 +933,8 @@ and "Dynamic Text Variants" (X Small through XXX Large and AX 1 through AX 5)
 
 If a preview defines multiple views,
 they are presented in separate tabs in the preview area.
-TODO: How are the tab titles specified?
+The tab title is taken from the display name passed to `#Preview`,
+such as `#Preview("Empty State") { ... }`.
 
 ## Debugging
 
@@ -835,7 +947,7 @@ This is much easier than modifying code to `border` view modifiers.
 To open the debug area, select View ... Debug Area ... Show Debug Area,
 press cmd-shift-y, or drag the bottom bar up.
 There are two sides to the debug area.
-The left size displays variable names and values.
+The left side displays variable names and values.
 Variable values can also be seen by
 hovering over their names in the editor area.
 The right side displays `print` function output.
@@ -854,7 +966,12 @@ the default scheme "Run" settings has "Build Configuration" set to "Debug".
 
 ## App Icons
 
-To add app icons:
+App icons are configured in an asset catalog,
+typically in `Assets.xcassets` under `AppIcon`.
+Modern projects usually use a single 1024x1024 source image
+and let Xcode generate the required sizes.
+
+To add app icons using a generated icon set:
 
 - browse <https://appicon.co>
 - drag an image file into the drag area
@@ -869,6 +986,12 @@ To add app icons:
 - drag the `AppIcon.appiconset` folder from the Finder
   into the directory opened by the previous command
   and click the "Replace" button
+
+Xcode 15 and later generate Swift and Objective-C symbols
+for colors and images in asset catalogs.
+For example, an image asset named `logo` can be referenced
+with APIs such as `Image(.logo)` in SwiftUI
+instead of stringly typed names like `Image("logo")`.
 
 ## SF Symbols
 
@@ -897,7 +1020,6 @@ To **allow Xcode to access your GitHub account**:
 - Select Xcode ... Settings...
 - Select the Accounts tab.
 - If no account for GitHub is present:
-
   - Click the "+" in the lower-right.
   - In the dialog that appears, select "GitHub" and click the "Continue" button.
   - Enter your account name and paste your personal access token (PAT).
@@ -911,7 +1033,7 @@ indicates their source control status with the following letters
 on the trailing edge of the file names:
 
 - A for added files
-- D for delete files
+- D for deleted files
 - M for modified files
 - R for renamed files
 
@@ -935,9 +1057,9 @@ To **refresh the Git status** shown for files in the Project Navigator,
 perhaps because their status has been changed outside of Xcode,
 select Source Control ... Refresh File Status.
 
-To **delete a local repository**:
-
-- TODO: Is this possible?
+To **delete a local repository**,
+use Finder or the command line to delete the repository's `.git` directory.
+Xcode does not provide a dedicated command for this.
 
 ### .gitignore File
 
@@ -945,16 +1067,16 @@ All Swift project Git repositories should have a `.gitignore` file
 in their root directory that specifies files
 that should be committed to the repository.
 This file is not automatically created.
-This file can be obtained from [gitignore.io](<https://gitignore.io?v=1.1.1>).
+This file can be obtained from [gitignore.io](https://gitignore.io?v=1.1.1).
 
-- Browse [gitignore.io](<https://gitignore.io?v=1.1.1>).
+- Browse [gitignore.io](https://gitignore.io?v=1.1.1).
 - Enter "Swift" in the search input.
 - Click the "Create" button.
 - Select File ... Save As...
 - Save the file in the root project directory and name it `.gitignore`.
 - If this adds a file extension of `.txt`, rename the file to remove that.
 - This file will not be visible inside Xcode, but can be
-  edited outside of Xcode using another editor such a TextEdit.
+  edited outside of Xcode using another editor such as TextEdit.
 - Optionally delete lines from this file that do not apply to your project
   such as lines that apply to older versions of Xcode and
   lines that apply to tools you are not using
@@ -1092,14 +1214,12 @@ To **merge one branch to another**:
 - Select "Merge {source-branch} into {target-branch}...".
 - In the dialog that appears, click the "Merge" button.
 - If there are any conflicts:
-
   - A dialog will open that displays
     a list of files with conflicts in the left nav.
   - Selecting a file displays a side-by-side diff
     with red conflict buttons in the center gutter.
   - Clicking a conflict button displays a popup
     with four options for resolving the conflict:
-
     - "Choose Left"
     - "Choose Right"
     - "Choose Left Then Right"
@@ -1338,11 +1458,11 @@ To give the app a different name from the project:
 
 - In the Navigator, select the root project directory.
 - In the editor that appears, select the first entry under "Targets".
-- Rename "Development Assets" under "Development".
-- In the General tab under Identity, modify the "Display Name".
-- In the Navigator, rename the root directory
-  and the directory below that with the same name.
-- TODO: I'm not confident all of these steps are correct or required.
+- In the General tab under Identity, modify "Display Name".
+
+This changes the name displayed under the app icon.
+It does not require renaming the Xcode project,
+the product name, or folders in the Project Navigator.
 
 ## New Files
 
@@ -1425,18 +1545,16 @@ The Run phase specifies many things including:
 - shell scripts to run BEFORE the run begins (pre-actions)
 - emails to send BEFORE the run begins (pre-actions)
 - run options including:
-
   - whether to run the app in a debug or release build configuration
 
   - arguments to be passed to the executable
 
-    TODO: Are these only boolean flags (present or not)?
-
-    TODO: Do the names need to begin with a dash?
-
     Access these in the `App` subclass `init` method with
     `CommandLine.arguments` or `ProcessInfo.processInfo.arguments`
     which have the type `[String]`.
+    Arguments are plain strings.
+    They can be flags such as `-useMockData` or values such as `staging`;
+    Xcode does not require a leading dash.
 
   - environment variables to be set before executing
 
@@ -1468,7 +1586,6 @@ The Test phase specifies:
 - shell scripts to run BEFORE the tests begin (pre-actions)
 - emails to send BEFORE the tests begin (pre-actions)
 - test options including:
-
   - whether to run the tests in a debug or release build configuration
   - argument to be passed to the tests when they are executed
 
@@ -1495,16 +1612,15 @@ The Profile phase specifies:
 - shell scripts to run BEFORE profiling begins (pre-actions)
 - emails to send BEFORE profiling begins (pre-actions)
 - profiling options including:
-
   - argument to be passed to the executable
   - environment variables to be set before executing
 
 - shell scripts to run AFTER profiling ends (post-actions)
 - emails to send AFTER profiling ends (post-actions)
 
-The Analyze phase only specifies whether a
-Debug or Release build configuration should used.
-TODO: What does this phase do?
+The Analyze phase runs the static analyzer.
+It can find some bugs without launching the app,
+such as certain memory-management and logic issues.
 
 The Archive phase specifies the archive name and
 whether a Debug or Release build configuration should used.
@@ -1522,7 +1638,7 @@ could automatically build and reload when changes to a project file are saved.
 By default Xcode does not do this automatically, but it can be configured.
 
 Krzysztof Zabłocki describes a way to implement this in his article
-[Hot Reloading in Swift](<https://www.merowing.info/hot-reloading-in-swift/?v=1.1.1>). This uses his [Inject](<https://github.com/krzysztofzablocki/Inject?v=1.1.1>) package.
+[Hot Reloading in Swift](https://www.merowing.info/hot-reloading-in-swift/?v=1.1.1). This uses his [Inject](https://github.com/krzysztofzablocki/Inject?v=1.1.1) package.
 The solution involves installing an app that watches specified directories
 for file changes. When a file change is detected, it is rebuilt
 and injected into the app without rebuilding the entire app.
@@ -1530,7 +1646,7 @@ The updated version of the app is then loaded into the Simulator.
 
 The one-time steps are:
 
-1. Browse the GitHub repo [InjectionIII](<https://github.com/johnno1962/InjectionIII/releases?v=1.1.1>)
+1. Browse the GitHub repo [InjectionIII](https://github.com/johnno1962/InjectionIII/releases?v=1.1.1)
    and download the file `InjectionIII.app.zip`.
    The file `InjectionIII.app` will appear in the `Downloads` directory.
 1. Drag the downloaded app to the `Applications` directory.
@@ -1570,7 +1686,7 @@ Note that the added code does not need to be removed before releasing
 the app to production because it does nothing unless it is run in debug mode.
 
 If the directory being watched is nested inside the
-`Desktop` or `Documents` directory, another dialog map appear
+`Desktop` or `Documents` directory, another dialog may appear
 requesting permission to access files in those directories.
 https://github.com/johnno1962/InjectionIII/releases?v=1.0.20
 
@@ -1578,12 +1694,12 @@ If you override the cmd-s keybinding to run something like
 "SwiftFormat - Format File" and also save changes,
 pressing it will not trigger the Simulator to update.
 In this case the Simulator will update
-if you active any other app besides Xcode.
-See this [issue](<https://github.com/johnno1962/InjectionIII/issues/426?v=1.1.1>).
+if you activate any other app besides Xcode.
+See this [issue](https://github.com/johnno1962/InjectionIII/issues/426?v=1.1.1).
 
 It seems that some changes do not get injected into the running app.
 For example changes to property initial values do not take effect.
-See this [issue](<https://github.com/johnno1962/InjectionIII/issues/425?v=1.1.1>).
+See this [issue](https://github.com/johnno1962/InjectionIII/issues/425?v=1.1.1).
 In the code below, hot reload will not pick up
 a change to the value of the `name` property.
 
@@ -1591,7 +1707,7 @@ a change to the value of the `name` property.
 
 Xcode supports a large number of keyboard shortcuts,
 many of which were described in the previous sections.
-The following table summarize the most commonly used keyboard shortcuts.
+The following tables summarize the most commonly used keyboard shortcuts.
 
 ### Visibility of UI Parts
 
@@ -1600,7 +1716,7 @@ The following table summarize the most commonly used keyboard shortcuts.
 | show quick actions                                  | cmd-shift-a           |
 | show file navigator                                 | cmd-1                 |
 | show local changes navigator                        | cmd-2                 |
-| show symbols navigator                              | cmd-3                 |
+| show bookmarks navigator                            | cmd-3                 |
 | show find navigator                                 | cmd-4                 |
 | show issues navigator                               | cmd-5                 |
 | show tests navigator                                | cmd-6                 |
@@ -1637,7 +1753,7 @@ When the button has a blue background it means editor splits are hidden.
 
 To add and customize keyboard shortcuts,
 select Xcode ... Settings ... Key Bindings.
-Location a command whose keyboard shortcut is to be changed,
+Locate a command whose keyboard shortcut is to be changed,
 double-click the "Key" column of that row,
 and press the desired keyboard shortcut.
 If the new keyboard shortcut is already in use,
@@ -1690,7 +1806,8 @@ To make it easier to find a particular item in the list, type part of its name.
 ### Code Formatting
 
 Code formatting can happen automatically when changes are saved
-by following the direction at [SwiftFormat](</blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1>).
+by following the directions at
+[SwiftFormat](/blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1).
 
 | Action                                   | Key    |
 | ---------------------------------------- | ------ |
@@ -1791,7 +1908,7 @@ Snippets I have defined include:
 
 ## Using a New Swift Version
 
-See [How to use a pre-release Swift version in Xcode](<https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/?v=1.1.1>).
+See [How to use a pre-release Swift version in Xcode](https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/?v=1.1.1).
 
 ## Xcode Issues
 
@@ -1815,4 +1932,4 @@ While using Xcode is generally fine, it does have a few issues.
   but it does not support regular expressions.
   It does not support repeating commands with the period key,
   defining macros, and other more advanced Vim features.
-  For a list of supported Vim commands, see this [Apple Developer Forum post](<https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022&v=1.1.1>).
+  For a list of supported Vim commands, see this [Apple Developer Forum post](https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022&v=1.1.1).
