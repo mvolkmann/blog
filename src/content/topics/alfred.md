@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Alfred](<https://www.alfredapp.com?v=1.1.1>) is a macOS app
+[Alfred](https://www.alfredapp.com?v=1.1.1) is a macOS app
 that provides a more powerful replacement for the built-in Spotlight app.
 
 This is a free app, however many features are
@@ -223,7 +223,7 @@ by simply typing the affix character(s) followed by the keyword.
 For example, I created a snippet named "full name" with the keyword "rmv".
 Typing "!rmv" expands to "R. Mark Volkmann".
 
-Snippet text can include the following [dynamic placeholders](<https://www.alfredapp.com/help/workflows/advanced/placeholders/?v=1.1.1>):
+Snippet text can include the following [dynamic placeholders](https://www.alfredapp.com/help/workflows/advanced/placeholders/?v=1.1.1):
 
 - `{clipboard}`
 - `{cursor}` - moves the cursor to this spot after expanding
@@ -264,11 +264,11 @@ If the Terminal app is not running, it will be launched.
 If it is already running, the command will run in the active Terminal window.
 
 To use iTerm instead of the Terminal app in the "Open Terminal Here" action,
-see [custom-alfred-iterm-scripts](<https://github.com/vitorgalvao/custom-alfred-iterm-scripts#copy-the-script?v=1.1.1>).
+see [custom-alfred-iterm-scripts](https://github.com/vitorgalvao/custom-alfred-iterm-scripts#copy-the-script?v=1.1.1).
 
 ## Timezones
 
-The [TimeZones-Alfred](<https://github.com/jaroslawhartman/TimeZones-Alfred?v=1.1.1>) workflow enables
+The [TimeZones-Alfred](https://github.com/jaroslawhartman/TimeZones-Alfred?v=1.1.1) workflow enables
 quickly finding information about another location including
 current time, day of week, date, telephone prefix, timezone, and UTC offset.
 
@@ -375,12 +375,12 @@ AppleScript, bash, JavaScript, Perl, php, Python, Ruby, and zsh.
 You can write your own or use workflows implemented by others.
 
 Two sources of free Alfred workflows are
-[Packal](<http://www.packal.org?v=1.1.1>) and
-[Alfred Workflows](<https://www.alfredapp.com/workflows/?v=1.1.1>).
+[Packal](http://www.packal.org?v=1.1.1) and
+[Alfred Workflows](https://www.alfredapp.com/workflows/?v=1.1.1).
 
 Some recommended workflows include:
 
-- [Emoji Taco](<http://www.packal.org/workflow/emoji-taco?v=1.1.1>)
+- [Emoji Taco](http://www.packal.org/workflow/emoji-taco?v=1.1.1)
 
   After installing, enter "`init emoji`" to complete installation.
   Progress will be displayed.
@@ -390,16 +390,16 @@ Some recommended workflows include:
   This is alternative to pressing the globe (fn) key to open the emoji picker
   ... which seems better than using this workflow.
 
-- [GitHub](<http://www.packal.org/workflow/github?v=1.1.1>)
+- [GitHub](http://www.packal.org/workflow/github?v=1.1.1)
 
   This searches GitHub repositories, their files, issues, and more.
-  I couldn't get this to work. See this [issue](<https://github.com/gharlan/alfred-github-workflow/issues/132?v=1.1.1>).
+  I couldn't get this to work. See this [issue](https://github.com/gharlan/alfred-github-workflow/issues/132?v=1.1.1).
 
-- [Kill](<http://www.packal.org/workflow/kill-process?v=1.1.1>)
+- [Kill](http://www.packal.org/workflow/kill-process?v=1.1.1)
 
   This kills the process with a specified name.
 
-- [TimeZones](<http://www.packal.org/workflow/timezones?v=1.1.1>)
+- [TimeZones](http://www.packal.org/workflow/timezones?v=1.1.1)
 
   This enables quickly finding information about a location including
   current time, day of week, date, telephone prefix, tiomezone, and UTC offset.
@@ -415,7 +415,6 @@ Some recommended workflows include:
     title="Alfred custom workflow">
 
   The steps to create this workflow are:
-
   - Open the Alfred Preferences.
   - Select "Workflows" in the left nav.
   - Click the "+" button at the bottom.

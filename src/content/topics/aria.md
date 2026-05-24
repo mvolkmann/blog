@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Accessible Rich Internet Applications](<https://www.w3.org/WAI/standards-guidelines/aria/?v=1.1.1>) ARIA defines
+[Accessible Rich Internet Applications](https://www.w3.org/WAI/standards-guidelines/aria/?v=1.1.1) ARIA defines
 attributes and roles that make web content more accessible
 by providing information that can be used by assistive technologies.
 
@@ -37,9 +37,7 @@ For example:
 
 ```html
 <button aria-describedby="launch-desc">Launch</button>
-<p id="launch-desc">
-  Click the "Launch" button to launch missiles that may cause destruction.
-</p>
+<p id="launch-desc">Click the "Launch" button to launch missiles that may cause destruction.</p>
 ```
 
 This attribute can refer to multiple elements. For example:
