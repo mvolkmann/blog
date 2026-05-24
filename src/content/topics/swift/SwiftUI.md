@@ -15,7 +15,8 @@ layout: topic-layout.njk
 ## Overview
 
 [SwiftUI](<https://developer.apple.com/xcode/swiftui/?v=1.1.1>)
-is a Swift framework for building iOS, iPadOS, watchOS, macOS, and tvOS apps.
+is a Swift framework for building apps for all Apple platforms:
+iOS, iPadOS, watchOS, macOS, tvOS, and visionOS.
 It is an alternative to its predecessor
 [UIKit](<https://developer.apple.com/documentation/uikit?v=1.1.1>).
 
@@ -25,9 +26,8 @@ By comparison SwiftUI ...
 - emphasizes use of structs over classes (UIKit uses classes)
 - requires far less code to do the same things
 - has somewhat better performance
-- only runs on iOS 13 and above
-- is currently missing some features of UIKit
-  (ex. SwiftUI `Text` is less powerful than UIKit `UITextView`.)
+- only runs on iOS 13 and above, but many modern APIs require newer releases
+- now covers many features that once required UIKit, AppKit, or WebKit wrappers
 - doesn't use Storyboard to build views
 - doesn't use `AppDelegate` or `SceneDelegate`
   (read about these [here](<https://learnappmaking.com/scene-delegate-app-delegate-xcode-11-ios-13/?v=1.1.1>))
@@ -44,9 +44,44 @@ It is possible to use UIKit components in a SwiftUI app
 by wrapping them in a struct that conforms to the [UIViewRepresentable](<https://developer.apple.com/documentation/swiftui/uiviewrepresentable?v=1.1.1>) protocol.
 However, there is enough functionality in SwiftUI
 that this is typically not necessary.
+Use this approach mainly when a platform framework still exposes
+important behavior only through UIKit, AppKit, or another imperative API.
 
 To use SwiftUI in a source file, add `import SwiftUI` at the top of the file.
 Most example code here assumes this is done and does not include it.
+
+## Notable Changes Since 2023
+
+SwiftUI has continued to grow quickly.
+Some older APIs still work, but are no longer the preferred approach.
+These are the main changes to keep in mind when reading older examples:
+
+- `NavigationView` is deprecated.
+  Use `NavigationStack` for stack-style navigation and `NavigationSplitView`
+  for two- or three-column adaptive navigation.
+- `ActionSheet` and the `actionSheet` modifiers are deprecated.
+  Use `confirmationDialog` for action-sheet-style choices.
+- `PreviewProvider` still works, but new Xcode projects use
+  the `#Preview` macro for previews.
+- `ObservableObject`, `@Published`, `@StateObject`, and `@ObservedObject`
+  remain useful for older deployment targets.
+  For iOS 17 and later, the Observation framework's `@Observable` macro
+  is usually the simpler model layer choice, often used with `@State`,
+  `@Bindable`, and typed `@Environment` values.
+- `ShareLink` provides a SwiftUI-native share sheet for values that
+  conform to `Transferable`.
+- `Grid`, `Table`, `Layout`, `ViewThatFits`, and custom `Layout` types
+  reduced the need to drop down to UIKit collection or layout APIs.
+- Scroll views gained newer APIs such as `scrollPosition`,
+  `scrollTargetBehavior`, `scrollTransition`, `contentMargins`,
+  `safeAreaPadding`, and programmatic scroll indicator flashing.
+- `onChange(of:perform:)` is deprecated in favor of newer `onChange`
+  overloads that take zero or two closure parameters.
+- SwiftUI now includes WebKit's SwiftUI `WebView`/`WebPage` API,
+  so simple embedded web content no longer requires a manual
+  `WKWebView` wrapper on current OS releases.
+- Current platform releases add Liquid Glass styling APIs such as
+  `glassEffect`, glass button styles, and related toolbar/tab changes.
 
 ## Getting Started
 
@@ -85,16 +120,18 @@ The group contains the following files:
 
   This defines the `ContentView` struct which implements the `View` protocol
   and is the topmost view.
-  It also defines the `ContentView_Previews` struct
+  Modern Xcode project templates also include a `#Preview` block
   which describes the previews that should display in the Canvas area.
-  This can be one or more views that are each displayed in a separate Preview.
+  Older projects used a `ContentView_Previews` struct
+  that conformed to `PreviewProvider`.
+  Both forms can display one or more previews.
 
 - `Assets.xcassets`
 
   This associates names with assets such as colors, images, and data files.
   It is not used for audio and video files.
-  Initially this only contains `AccentColor` and `AppIcon`
-  that both have no value.
+  Initially this typically contains `AppIcon`
+  and may also contain accent or tint color assets.
 
 - `Preview Content` group
 
@@ -209,9 +246,10 @@ This only works when not in "Live Preview" mode.
 The same button appears in the Simulator.
 
 It is possible for the Preview area to show more than one preview.
-This is controlled by the `ContentView_Previews` struct
+In modern Xcode versions this is usually controlled with the `#Preview` macro.
+Older projects used a `ContentView_Previews` struct
 defined in `ContentView.swift`.
-For example, the following renders
+For example, the following older syntax renders
 `ContentView` in portrait orientation and light mode,
 `ContentView` in landscape orientation and dark mode.
 
@@ -235,6 +273,8 @@ Exit out of that mode to get the other previews to display again.
 To reduce the size of previews to only show their content
 and not the surrounding device chrome,
 call `.previewLayout(.sizeThatFits)`.
+With the `#Preview` macro, apply the same preview modifiers
+to the view returned by the macro body.
 
 ### Inspector
 
@@ -343,11 +383,11 @@ Most properties declared in a `View` struct should be `private`.
 Exceptions include the `body` property and
 any properties that are passed in when instances are created.
 The `body` value is a `ViewBuilder` that
-can contain up to 10 child view instances.
-When this limit is exceeded, the rather unhelpful error
-"Extra argument in call" will be reported.
-The `Group` view can be used to work around this limitation
-since each `Group` only counts as one view instance.
+was historically limited to 10 child view instances.
+Modern SwiftUI and Swift compilers support larger result-builder blocks,
+but breaking very large bodies into smaller views, computed properties,
+or helper methods is still easier to read and compile.
+The `Group` view remains useful for grouping views without changing layout.
 
 Functions that create views often take a `ViewBuilder` their last argument.
 These are typically written as trailing closures.
@@ -380,8 +420,9 @@ The following sections describe the views defined by SwiftUI.
   - on small screens, slides in from bottom
   - on large screens, appears as a Popover
   - can use to request confirmation before a destructive operation
-  - SwiftUI creates this with `ActionSheet`, but that is deprecated.
-    TODO: What takes its place? Perhaps it must be created using `Sheet`.
+  - SwiftUI used to create this with `ActionSheet`,
+    but that is deprecated.
+    Use the `confirmationDialog` view modifier instead.
 
 - [Activity View](<https://developer.apple.com/design/human-interface-guidelines/ios/views/activity-views/?v=1.1.1>)
 
@@ -389,8 +430,9 @@ The following sections describe the views defined by SwiftUI.
     such as Copy, Add, or Find
   - also referred to as a "share sheet"
   - appears as a Sheet or Popover
-  - SwiftUI creates this with what?
-    TODO: Is this supported in SwiftUI? Maybe UIKit is required.
+  - SwiftUI creates this with `ShareLink` for values that
+    conform to `Transferable`.
+    More advanced sharing can still use UIKit's `UIActivityViewController`.
 
 - [Alert](<https://developer.apple.com/design/human-interface-guidelines/ios/views/alerts/?v=1.1.1>)
 
@@ -409,8 +451,8 @@ The following sections describe the views defined by SwiftUI.
   - tap an item to select
   - touch and hold an item to edit
   - swipe to scroll
-  - SwiftUI creates this with what?
-    TODO: Is this supported in SwiftUI? Maybe UIKit is required.
+  - SwiftUI commonly creates this with `LazyVGrid`, `LazyHGrid`,
+    `Grid`, or `List`, depending on the desired layout.
 
 - [Image View](<https://developer.apple.com/design/human-interface-guidelines/ios/views/image-views/?v=1.1.1>)
 
@@ -464,9 +506,9 @@ The following sections describe the views defined by SwiftUI.
   - used in Mail app where primary is a list of mailboxes,
     supplementary is a list of messages in the selected mailbox,
     and content is the content of the selected email
-  - SwiftUI doesn't directly support this, but
-    similar functionality can be implemented using `NavigationView`.
-    This displays side-by-side views on iPads in landscape mode.
+  - SwiftUI creates this with `NavigationSplitView`.
+    It supports two- and three-column layouts and collapses adaptively
+    on compact displays.
 
 - [Table](<https://developer.apple.com/design/human-interface-guidelines/ios/views/tables/?v=1.1.1>)
 
@@ -496,8 +538,9 @@ The following sections describe the views defined by SwiftUI.
 
   - renders embedded HTML or HTML from a web site
   - can enable forward and backward navigation
-  - SwiftUI does not include support for web views.
-    `WKWebView` can be used, but setting it up in SwiftUI app is not trivial.
+  - Current SwiftUI apps can use WebKit's SwiftUI `WebView`
+    with `WebPage` to display and control web content.
+    Older deployment targets still require wrapping `WKWebView`.
 
 ### Controls
 
@@ -749,7 +792,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - can have a tint color
   - can have an inline or large title
   - can use a "Segmented Control" in place of title
-  - SwiftUI creates this with `NavigationView`
+  - SwiftUI creates this with `NavigationStack` or `NavigationSplitView`
 
 - [Search Bar](<https://developer.apple.com/design/human-interface-guidelines/ios/bars/search-bars/?v=1.1.1>)
 
@@ -758,7 +801,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - can display in a Navigation Bar
   - can include clear and confirm buttons
   - SwiftUI creates this with the `searchable` view modifier
-    can be applied to a view that is inside a `NavigationView`.
+    can be applied to a view that is inside a navigation container.
     See an example in the [Search](#search) section.
 
 - [Sidebar](<https://developer.apple.com/design/human-interface-guidelines/ios/bars/sidebars/?v=1.1.1>)
@@ -778,7 +821,7 @@ For example, `Text(AwesomeIcon.aws.rawValue)`.
   - can style to light or dark mode and customize colors
   - should not replace with a custom status bar
   - can temporarily hide it, but should never permanently hide it
-  - to hide the system status bar, apply the [statusBarHidden](<https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)?v=1.1.1>) view modifier to the top `NavigationView`
+  - to hide the system status bar, apply the [statusBarHidden](<https://developer.apple.com/documentation/swiftui/view/statusbarhidden(_:)?v=1.1.1>) view modifier to the top view
   - SwiftUI needs nothing to support this because the system provides it
 
 - [Tab Bar](<https://developer.apple.com/design/human-interface-guidelines/ios/bars/tab-bars/?v=1.1.1>)
@@ -1852,26 +1895,28 @@ The name of the SwiftUI view that corresponds to a UIKit class
 is often the same without the "UI" prefix.
 The table below lists the corresponding names.
 
-| UIKit Class               | SwiftUI View                 |
-| ------------------------- | ---------------------------- |
-| `NSAttributedString`      | `Text`                       |
-| `UIActivityIndicatorView` | `ProgressView` without value |
-| `UIAlertController`       | `Alert` or `ActionSheet`     |
-| `UIButton`                | `Button`                     |
-| `UICollectionView`        | `LazyHGrid` or `LazyVGrid`   |
-| `UIDatePicker`            | `DatePicker`                 |
-| `UIImageView`             | `Image`                      |
-| `UILabel`                 | `Text`                       |
-| `UINavigationController`  | `NavigationView`             |
-| `UIProgressView`          | `ProgressView` with value    |
-| `UISegmentedControl`      | `Picker`                     |
-| `UISlider`                | `Slider`                     |
-| `UIStackView`             | `HStack` or `VStack`         |
-| `UIStepper`               | `Stepper`                    |
-| `UISwitch`                | `Toggle`                     |
-| `UITableView`             | `List`                       |
-| `UITextField`             | `TextField` or `SecureField` |
-| `UITextView`              | `TextEditor`                 |
+| UIKit Class                | SwiftUI View                            |
+| -------------------------- | --------------------------------------- |
+| `NSAttributedString`       | `Text`                                  |
+| `UIActivityIndicatorView`  | `ProgressView` without value            |
+| `UIAlertController`        | `Alert` or `confirmationDialog`         |
+| `UIButton`                 | `Button`                                |
+| `UICollectionView`         | `Grid`, `LazyHGrid`, or `LazyVGrid`     |
+| `UIDatePicker`             | `DatePicker`                            |
+| `UIImageView`              | `Image`                                 |
+| `UILabel`                  | `Text`                                  |
+| `UINavigationController`   | `NavigationStack` or `NavigationSplitView` |
+| `UIProgressView`           | `ProgressView` with value               |
+| `UISegmentedControl`       | `Picker`                                |
+| `UISlider`                 | `Slider`                                |
+| `UIStackView`              | `HStack` or `VStack`                    |
+| `UIStepper`                | `Stepper`                               |
+| `UISwitch`                 | `Toggle`                                |
+| `UITableView`              | `List`                                  |
+| `UITextField`              | `TextField` or `SecureField`            |
+| `UITextView`               | `TextEditor`                            |
+| `UIActivityViewController` | `ShareLink`                             |
+| `WKWebView`                | `WebView`                               |
 
 ## Container Views
 
@@ -2419,7 +2464,7 @@ struct ContentView: View {
     }
 
     var body: some View {
-        NavigationView { // deprecated in iOS 16
+        NavigationStack {
             Form {
                 Section(header: Text("Profile")) {
                     // When LabeledContent is used inside a Form
@@ -4166,10 +4211,14 @@ struct ContentView: View {
 
 ### NavigationLink
 
-The [NavigationLink](<https://developer.apple.com/documentation/swiftui/navigationlink?v=1.1.1>) view is used inside a `NavigationView`.
+The [NavigationLink](<https://developer.apple.com/documentation/swiftui/navigationlink?v=1.1.1>) view is used inside a navigation container.
 
-This is deprecated in iOS 16.
-See the new approach at [Navigation](/blog/swift/Navigation/).
+Older examples commonly place `NavigationLink` inside `NavigationView`.
+In iOS 16 and above, prefer using it inside `NavigationStack`
+or `NavigationSplitView`.
+For programmatic or data-driven navigation,
+prefer value-based links and `navigationDestination`.
+See [Navigation](/blog/swift/Navigation/).
 
 ### NavigationView
 
@@ -4181,7 +4230,9 @@ to be rendered inside the `NavigationView`.
 See the [Navigation](/blog/swift/Navigation/) section.
 
 This is deprecated in iOS 16.
-See the new approach at [Navigation](/blog/swift/navigation).
+Use `NavigationStack` for single-column navigation and
+`NavigationSplitView` for adaptive multi-column navigation.
+See [Navigation](/blog/swift/navigation).
 
 ### PasteButton
 
@@ -6518,6 +6569,15 @@ TODO: Resume adding view modifier descriptions here!
 ### Deprecated Modifiers
 
 See [Deprecated Modifiers](<https://developer.apple.com/documentation/swiftui/view-deprecated?v=1.1.1>).
+Common replacements include:
+
+- `accentColor` -> `tint`
+- `actionSheet` -> `confirmationDialog`
+- `navigationBarHidden` -> `toolbar(.hidden, for: .navigationBar)`
+- `navigationBarItems` -> `toolbar`
+- `navigationBarTitle` -> `navigationTitle`
+- `onChange(of:perform:)` -> the newer `onChange` overloads
+- `statusBar(hidden:)` -> `statusBarHidden`
 
 ### Color Modifiers
 
@@ -7885,24 +7945,27 @@ These include:
 
   The [onChange](<https://developer.apple.com/documentation/swiftui/view/onchange(of:perform:)?v=1.1.1>) view modifier registers a closure to be invoked
   when the value of a given state property or computed property changes.
-  The closure is passed the new value.
+  In iOS 17 and above, use one of the newer overloads.
+  The closure can take no parameters, or it can take both the old
+  and new values.
   For example:
 
   ```swift
   VStack {
       ...
   }
-  .onChange(of: someState) { newValue in
+  .onChange(of: someState) {
       ...
   }
   ```
 
-  If the closure passed to `onChange` does not have a parameter,
-  the somewhat confusing error message
-  "Type '()' cannot conform to '{some-type}'" will appear
-  where some-type is the type of the variable being watched.
-  To fix this, add a parameter to the closure
-  which can be `_` if the value is not used.
+  Older examples use the deprecated one-parameter form:
+
+  ```swift
+  .onChange(of: someState) { newValue in
+      ...
+  }
+  ```
 
   In cases where both the old and new value are needed,
   the following can be used:
@@ -8118,9 +8181,9 @@ struct ContentView: View {
     @State private var name = ""
 
     var body: some View {
-        // A NavigationView is required in order for
+        // A navigation container is required in order for
         // the keyboard toolbar button to appear and work.
-        NavigationView {
+        NavigationStack {
             VStack {
                 TextField("Name", text: $name)
                     .textFieldStyle(.roundedBorder)
@@ -9638,7 +9701,8 @@ func sd(_ css: CustomStringConvertible) -> String {
 Toolbars are collections of buttons that can be
 displayed at the top or bottom of the display.
 The are created by applying the `toolbar` view modifier
-to the top view inside a `NavigationView`.
+to the top view inside a `NavigationStack`, `NavigationSplitView`,
+or other view that supports toolbars.
 Single buttons can be described inside a `ToolbarItem` view.
 Multiple buttons can be described inside a `ToolbarItemGroup` view.
 
@@ -9669,11 +9733,11 @@ struct ContentView: View {
     @State private var selection = "Tap a toolbar button."
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Text(selection).padding()
                 .navigationTitle("Toolbar Demo")
                 .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    ToolbarItemGroup(placement: .topBarTrailing) {
                         Button(
                             action: { selection = "planes" },
                             label: { Image(systemName: "airplane") }
@@ -9742,7 +9806,10 @@ struct SomeView: View {
 
 ## Navigation
 
-The approach described here is deprecated in iOS 16. See the new approach at
+The approach described here uses `NavigationView`
+and is deprecated in iOS 16.
+New code should use `NavigationStack` or `NavigationSplitView`.
+See the newer approach at
 [Navigation](</blog/topics/#/blog/swift/Navigation/?v=1.1.1>).
 
 The [NavigationView](<https://developer.apple.com/documentation/swiftui/navigationview?v=1.1.1>) view marks the spot where
