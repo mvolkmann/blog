@@ -9,7 +9,7 @@ layout: topic-layout.njk
 
 Shortcuts enabling defining app-specific actions that can be
 invoked from the Shortcuts app or with Siri voice commands.
-For details, watch the [Introduction to Siri Shortcuts](<https://developer.apple.com/videos/play/wwdc2018/211/?v=1.1.1>) video from WWDC 2018.
+For details, watch the [Introduction to Siri Shortcuts](https://developer.apple.com/videos/play/wwdc2018/211/) video from WWDC 2018.
 
 ## Two APIs
 
@@ -43,7 +43,7 @@ There are predefined intents and custom intents can be defined.
    that include parameters names (ex. set background to color).
    Parameter names are selected from dropdowns while typing the suggestion.
    Users can choose other phrases to invoke your shortcuts
-   (in the Shortcuts app?)
+   (in the Shortcuts app)
 1. If the app must be in the foreground in order to execute the intent,
    uncheck "Supports background execution".
 1. Multiple suggestions for the same intent can be defined.
@@ -100,7 +100,7 @@ To add shortcuts to Siri:
 1. Donated shortcuts should appear here BUT THEY DO NOT!
 1. Select a shortcut.
 1. Tap the record button to record the phrase to use to invoke it.
-   (Is the application-suggested phrase used if this is skipped?)
+   (Is the application-suggested phrase used if this is skipped)
 
 ## Debugging
 

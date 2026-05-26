@@ -12,7 +12,7 @@ that runs on an Apple Watch.
 It also shows how to create and run paired iOS and watchOS apps
 that can send messages between each other.
 
-Apple guidelines on watchOS development can be found [here](<https://developer.apple.com/documentation/watchosapps/?v=1.1.1>).
+Apple guidelines on watchOS development can be found [here](https://developer.apple.com/documentation/watchosapps/).
 This begins with
 "Apple Watch provides easy access to vital information on someone’s wrist.
 The watchOS experience focuses on quick actions that
@@ -51,13 +51,13 @@ by using the WatchConnectivity framework to send messages.
 The following code implements a countdown timer app.
 
 <img alt="WatchOS Timer App #1" style="width: 30%"
-  src="/blog/assets/watchOS-timer-app1.png?v=1.1.1"
+  src="/blog/assets/watchOS-timer-app1.png"
   title="WatchOS Timer App #1">
 <img alt="WatchOS Timer App #2" style="width: 30%"
-  src="/blog/assets/watchOS-timer-app2.png?v=1.1.1"
+  src="/blog/assets/watchOS-timer-app2.png"
   title="WatchOS Timer App #2">
 <img alt="WatchOS Timer App #3" style="width: 30%"
-  src="/blog/assets/watchOS-timer-app3.png?v=1.1.1"
+  src="/blog/assets/watchOS-timer-app3.png"
   title="WatchOS Timer App #3">
 
 ```swift
@@ -264,5 +264,5 @@ On the phone, ADD THIS DETAIL.
 On the watch, launch the Settings app and select
 Privacy & Security ... Developer Mode and toggle it on.
 
-For an example app, see [watch-with-ios-2](<https://github.com/mvolkmann/watch-with-ios-2?v=1.1.1>)
+For an example app, see [watch-with-ios-2](https://github.com/mvolkmann/watch-with-ios-2)
 in GitHub.

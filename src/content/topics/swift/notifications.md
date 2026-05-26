@@ -17,7 +17,7 @@ can an app listen for notifications and act on them?
 ## Local Notifications
 
 Stewart Lynch created an excellent 4-part series of YouTube videos
-[Local Notifications](<https://www.youtube.com/watch?v=tNaSlfLeCB0&v=1.1.1>).
+[Local Notifications](https://www.youtube.com/watch?v=tNaSlfLeCB0).
 The code below is my version of his code.
 
 ### LocalNotification struct
@@ -319,7 +319,7 @@ extension LocalNotificationManager: UNUserNotificationCenterDelegate {
 ### Example App
 
 For an example of sending local notifications
-using the utility type defined above, see the [NotificationsDemo](<https://github.com/mvolkmann/NotificationsDemo?v=1.1.1>)
+using the utility type defined above, see the [NotificationsDemo](https://github.com/mvolkmann/NotificationsDemo)
 project in GitHub.
 
 ## Remote Notifications

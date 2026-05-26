@@ -18,7 +18,7 @@ guidelines that beginner to intermediate players might find useful.
    but it is a good goal.
 
    <img alt="controlling center" style="width: 60%"
-     src="/blog/assets/chess-controlling-center.png?v=1.1.1"
+     src="/blog/assets/chess-controlling-center.png"
      title="controlling center">
 
 1. Castle before attacking.
@@ -40,7 +40,7 @@ guidelines that beginner to intermediate players might find useful.
 1. Try to move rooks to open files and connect them so they protect each other.
 1. Bishops ar better in open positions
    and knights are better in closed positions.
-1. Having two bishops and no knights is typically slightly better (half point?)
+1. Having two bishops and no knights is typically slightly better (half point)
    than having only two knights or having only one bishop and one knight,
    but it depends on whether the board is in an open of closed position.
 1. Plan and defend against forks.

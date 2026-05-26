@@ -11,12 +11,12 @@ This page contains a collection of tips related to PDF files.
 ## Extracting Images
 
 One way to extract images from a PDF file is to use the browser-based tool
-[PDFCandy](<https://pdfcandy.com?v=1.1.1>).
+[PDFCandy](https://pdfcandy.com).
 The free tier has a limit of one download per hour.
 
 To use this:
 
-1. Browse [PDFCandy](<https://pdfcandy.com?v=1.1.1>).
+1. Browse [PDFCandy](https://pdfcandy.com).
 1. Click the "PDF to JPG" button.
 1. Click the "+ ADD FILE" button.
 1. In the dialog that appears, select a PDF file and click the "OK" button.

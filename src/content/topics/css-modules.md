@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[CSS Modules](<https://github.com/css-modules/css-modules?v=1.1.1>)
+[CSS Modules](https://github.com/css-modules/css-modules)
 provides a way to scope CSS rules with selectors that are class names
 to a component in a web framework.
 It does not support scoping CSS rules with
@@ -25,15 +25,15 @@ and web frameworks built-in on React such as Next.js.
 
 ## Installing
 
-[Next.js](<https://nextjs.org/docs/app/building-your-application/styling/css-modules?v=1.1.1>) projects and React projects created with [create-react-app](<https://create-react-app.dev?v=1.1.1>)
+[Next.js](https://nextjs.org/docs/app/building-your-application/styling/css-modules) projects and React projects created with [create-react-app](https://create-react-app.dev)
 automatically include support for CSS Modules.
 
 React projects created in other ways may require configuration.
 Options include:
 
-- [babel-plugin-react-css-modules](<https://github.com/gajus/babel-plugin-react-css-modules?v=1.1.1>).
-- Webpack module [css-loader](<https://github.com/webpack-contrib/css-loader?v=1.1.1>)
-- PostCSS plugin [postcss-modules](<https://github.com/madyankin/postcss-modules?v=1.1.1>)
+- [babel-plugin-react-css-modules](https://github.com/gajus/babel-plugin-react-css-modules).
+- Webpack module [css-loader](https://github.com/webpack-contrib/css-loader)
+- PostCSS plugin [postcss-modules](https://github.com/madyankin/postcss-modules)
 
 ## Component Styles
 
@@ -106,7 +106,7 @@ This component can be used as follows:
 ```
 
 <img alt="CSS Modules demo" style="width: 40%"
-  src="/blog/assets/css-modules-demo.png?v=1.1.1"
+  src="/blog/assets/css-modules-demo.png"
   title="CSS Modules demo">
 
 The `styles` object imported above will have a value similar to the following:

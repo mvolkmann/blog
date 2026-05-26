@@ -7,23 +7,23 @@ layout: topic-layout.njk
 Containers are packages of application and dependency code.
 These can be executed on all the popular operating systems.
 
-For many years [Docker](<https://www.docker.com?v=1.1.1>)
+For many years [Docker](https://www.docker.com)
 has been the most popular tool for creating and running containers.
 In 2022 Docker licensing changed so that it is no longer free to use.
 
-A [blog post](<https://www.docker.com/blog/do-the-new-terms-of-docker-desktop-apply-if-you-dont-use-the-docker-desktop-ui/?v=1.1.1>) on the Docker web site says the following:
+A [blog post](https://www.docker.com/blog/do-the-new-terms-of-docker-desktop-apply-if-you-dont-use-the-docker-desktop-ui/) on the Docker web site says the following:
 "Docker Desktop now requires a per-user paid subscription
 (Pro, Team, or Business) for professional use in larger companies
 (larger than 250 employees OR greater than $10 million in annual revenue)."
 
 A popular alternative to Docker is to use
-[Buildah](<https://buildah.io?v=1.1.1>) to create containers and
-[podman](<https://podman.io?v=1.1.1>) to run them.
+[Buildah](https://buildah.io) to create containers and
+[podman](https://podman.io) to run them.
 Unfortunately, Buildah only runs on Linux systems and
 cannot be used on macOS and Windows.
 
 Another alternative that works on Linux, macOS, and Windows is
-[Rancher Desktop](<https://rancherdesktop.io?v=1.1.1>).
+[Rancher Desktop](https://rancherdesktop.io).
 
 ## Why Containers?
 
@@ -81,7 +81,7 @@ To run an app in Docker, create a file named `Dockerfile`.
 This defines everything that must be included in an "image" in order to run.
 
 Publicly available images can be found at
-[DockerHub](<https://hub.docker.com?v=1.1.1>).
+[DockerHub](https://hub.docker.com).
 This site requires creating a free account.
 These images can be used as the base
 for creating an application-specific image.

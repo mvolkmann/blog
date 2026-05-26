@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ### Overview
 
-Meteor ([meteor.com](<https://meteor.com/?v=1.1.1>))
+Meteor ([meteor.com](https://meteor.com/))
 is an open-source, full-stack, JavaScript
 platform for building web and mobile (Android and iOS) applications.
 It is referred to as a platform instead of a framework
@@ -36,7 +36,7 @@ as an alternative to HTTP to achieve real-time updates.
 But the attention faded quickly as other frameworks garnered more notice.
 It is seeing some resurgence in 2020.
 
-Tiny ([tinycapital.com](<https://www.tinycapital.com/?v=1.1.1>)),
+Tiny ([tinycapital.com](https://www.tinycapital.com/)),
 a Canadian technology holding company,
 acquired Meteor from the Meteor Development Group in October, 2019.
 This occurred after most of the Meteor Development Group team
@@ -50,7 +50,7 @@ Enterprise support is available in order to have
 guaranteed support response times and service-level agreements (SLAs).
 
 Meteor provides many command-line tools summarized
-[here](<https://docs.meteor.com/commandline.html?v=1.1.1>).
+[here](https://docs.meteor.com/commandline.html).
 After installing Meteor, enter `meteor help` for help on using these.
 
 ### Key Benefits
@@ -81,13 +81,13 @@ in a small amount of code.
 ### Installing
 
 For platform-specific instructions on installing Meteor,
-see [here](<https://www.meteor.com/install?v=1.1.1>).
+see [here](https://www.meteor.com/install).
 On Linux or macOS, enter `curl https://install.meteor.com | sh`.
 On Windows, install Chocolatey and enter `choco install meteor`.
 
 Install Meteor also installs several tools used by it
 including MongoDB and TypeScript.
-[Node.js](<https://nodejs.org/?v=1.1.1>)
+[Node.js](https://nodejs.org/)
 must be installed separately and that includes the npm tool.
 
 Repeating the install command will update the existing installation.
@@ -171,7 +171,7 @@ These are referred to as "Isopacks" because they are typically
 isomorphic, meaning that the code can run on the client or server.
 
 To see the available packages in Atmosphere,
-browse [atmosphere.com](<https://atmospherejs.com/?v=1.1.1>).
+browse [atmosphere.com](https://atmospherejs.com/).
 Packages without an author prefix followed by a colon
 are official Meteor packages.
 This page lists packages that are trending, recently added/updated,
@@ -269,7 +269,7 @@ This can be useful to start an app in a pristine state.
 
 Multiple Meteor apps can use the same MongoDB database to share data.
 Search for "Multiple apps use the same database" in the
-[Meteor Up](<http://meteor-up.com/docs.html?v=1.1.1>) docs.
+[Meteor Up](http://meteor-up.com/docs.html) docs.
 
 ### Collections
 
@@ -351,14 +351,14 @@ const myCollection = new Mongo.Collection('some-name', {connection: null});
 
 To support associations between documents in different collections,
 see the Meteor package
-[cultofcoders:grapher](<https://atmospherejs.com/cultofcoders/grapher?v=1.1.1>).
+[cultofcoders:grapher](https://atmospherejs.com/cultofcoders/grapher).
 
 ### Collection Schemas
 
 A schema can be associated with a collection
 in order to provide validation when documents are added or updated.
 Schemas can be described using the npm package
-[simpl-schema](<https://github.com/aldeed/simpl-schema?v=1.1.1>),
+[simpl-schema](https://github.com/aldeed/simpl-schema),
 which is installed by entering `npm install simpl-schema`.
 
 The type of each property can be specified with
@@ -430,7 +430,7 @@ Meetings.attachSchema(Meetings.schema);
 ```
 
 For more detail on schema definitions, see
-[simpl-schema](<https://github.com/aldeed/simpl-schema?v=1.1.1>).
+[simpl-schema](https://github.com/aldeed/simpl-schema).
 
 Creating collections whose documents can be deeply nested
 or can contain large arrays is not recommended.
@@ -487,7 +487,7 @@ Note that TypeScript types are only checked at compile-time.
 The `check` function throws a `Match.Error` error
 if unexpected types are passed.
 For details on the `check` function,
-see [here](<https://docs.meteor.com/api/check.html?v=1.1.1>).
+see [here](https://docs.meteor.com/api/check.html).
 
 To report other kinds of parameter validation errors
 that are based on values rather than types,
@@ -571,7 +571,7 @@ import {Meteor} from 'meteor/meteor';
 
 Meteor.methods({
   sum(n1, n2) {
-    console.log('sum called; on server?', Meteor.isServer);
+    console.log('sum called; on server', Meteor.isServer);
     check(n1, Number); // parameter type validation
     check(n2, Number); // parameter type validation
     return n1 + n2;
@@ -643,8 +643,8 @@ Meteor will wait for the `Promise` to resolve or reject
 before returning a result or an error to the client.
 
 Two alternate ways to define Methods are
-[Advanced Method boilerplate](<https://guide.meteor.com/methods.html#advanced-boilerplate?v=1.1.1>) and
-[mdg:validated-method](<https://guide.meteor.com/methods.html#validated-method?v=1.1.1>).
+[Advanced Method boilerplate](https://guide.meteor.com/methods.html#advanced-boilerplate) and
+[mdg:validated-method](https://guide.meteor.com/methods.html#validated-method).
 These provide additional features, but may be overkill for most Methods.
 
 Typically client code only invokes methods that
@@ -940,7 +940,7 @@ are sent from the server to initially populate Minimongo.
 Tracker is a dependency tracking system used by Meteor to
 update UIs when reactive variables and data sources change.
 From the Meteor
-[Tracker docs](<https://docs.meteor.com/api/tracker.html?v=1.1.1>),
+[Tracker docs](https://docs.meteor.com/api/tracker.html),
 "When you call a function that supports reactive updates
 (such as a database query),
 it automatically saves the current `Computation` object, if any
@@ -953,11 +953,11 @@ but there are easier ways to use it in React and Svelte.
 
 For React there is hook called `useTracker` for responding to tracker changes.
 This is provided by the Meteor package
-[react-meteor-data](<https://atmospherejs.com/meteor/react-meteor-data?v=1.1.1>).
+[react-meteor-data](https://atmospherejs.com/meteor/react-meteor-data).
 
 For Svelte, there is a `useTracker` function.
 This is provided by the Meteor package
-[rdb/svelte-meteor-data](<https://atmospherejs.com/rdb/svelte-meteor-data?v=1.1.1>).
+[rdb/svelte-meteor-data](https://atmospherejs.com/rdb/svelte-meteor-data).
 
 For example, to always get the current user in a Svelte component
 when the accounts-password package is used:
@@ -990,7 +990,7 @@ so references to them should have a `$` prefix.
 
 For more information on the relationship between
 `useTracker` and Svelte stores, see this
-[issue](<https://github.com/rdb/svelte-meteor-data/issues/6?v=1.1.1>).
+[issue](https://github.com/rdb/svelte-meteor-data/issues/6).
 
 ### ReactiveVar
 
@@ -1131,7 +1131,7 @@ Here is a Svelte component that demonstrates using a `Session`:
 ```
 
 The ESLint plugin eslint-plugin-meteor will complain about
-the use of `Session` based on the [meteor/no-session](<https://github.com/dferber90/eslint-plugin-meteor/blob/master/docs/rules/no-session.md?v=1.1.1>) rule.
+the use of `Session` based on the [meteor/no-session](https://github.com/dferber90/eslint-plugin-meteor/blob/master/docs/rules/no-session.md) rule.
 Disable this ESLint rule if you decide to use `Session`.
 
 For the same reasons explained in the previous section on `ReactiveVar`,
@@ -1235,12 +1235,12 @@ The Chrome extension "Meteor DevTools Evolved" displays
 DDP messages, Minimongo contents, and subscriptions.
 
 To install it, browse
-[here](<https://chrome.google.com/webstore/search/meteor%20devtools%20evolved?v=1.1.1>).
+[here](https://chrome.google.com/webstore/search/meteor%20devtools%20evolved).
 
 ### Tutorials
 
 The Meteor web site contains several tutorials
-[here](<https://www.meteor.com/tutorials?v=1.1.1>)
+[here](https://www.meteor.com/tutorials)
 that provide introductions to using Meteor.
 
 ### Todo App
@@ -1249,7 +1249,7 @@ Let's walk through the steps to build a Todo app using Meteor.
 This is a modified version of the Todo app presented at the Meteor site
 that demonstrates additional features.
 Code for the final version of this app can be found in
-[GitHub](<https://github.com/mvolkmann/meteor-svelte-todos?v=1.1.1>).
+[GitHub](https://github.com/mvolkmann/meteor-svelte-todos).
 
 1. Create the app starting point by entering `meteor create todos`.
 
@@ -1265,7 +1265,7 @@ Code for the final version of this app can be found in
    We will learn how to fix this later.
    For details on the Meteor packages included by default
    and with each of the options see
-   [here](<https://docs.meteor.com/commandline.html#meteorcreate?v=1.1.1>).
+   [here](https://docs.meteor.com/commandline.html#meteorcreate).
 
 1. Modify the `start` script in `package.json` as follows
    if you are not targeting older browsers or mobile devices
@@ -1298,7 +1298,7 @@ Code for the final version of this app can be found in
 
    Svelte is a good choice due to its use of reactive statements.
    For more information about Svelte, see
-   [my article](<https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte?v=1.1.1>).
+   [my article](https://objectcomputing.com/resources/publications/sett/july-2019-web-dev-simplified-with-svelte).
 
    - Install Svelte by entering `meteor npm install svelte`.
 
@@ -1402,7 +1402,7 @@ Code for the final version of this app can be found in
    ![Todo App after step 14](/blog/assets/meteor-todo-1.png)
 
 1. Replace the contents of `client/main.css` with what is found at
-   [here](<https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css?v=1.1.1>).
+   [here](https://github.com/meteor/simple-todos-svelte/blob/master/client/main.css).
    Now the task list is styled nicely.
 
    ![Todo App after step 15](/blog/assets/meteor-todo-2.png)
@@ -1541,7 +1541,7 @@ Code for the final version of this app can be found in
      <input type="checkbox" checked="{task.done}" on:click="{toggleDone}" />
      <span class:done="{task.done}">{item}</span>
      <!-- using Unicode trash can -->
-     <button on:click="{deleteTask}">&#x1f5d1;</button>
+     <button on:click="{deleteTask}">#x1f5d1;</button>
    </li>
 
    <style>
@@ -1804,11 +1804,11 @@ Code for the final version of this app can be found in
 
    For more information on users and accounts features
    and ways to customize them, see
-   [here](<https://guide.meteor.com/accounts.html?v=1.1.1>).
+   [here](https://guide.meteor.com/accounts.html).
    This includes adding support for OAuth logins
    and changing password validation rules.
    To give users role-based permissions and per-document permissions, see
-   [here](<https://guide.meteor.com/accounts.html#roles-and-permissions?v=1.1.1>).
+   [here](https://guide.meteor.com/accounts.html#roles-and-permissions).
 
 1. Add support for "forgot password" emails.
 
@@ -1841,7 +1841,7 @@ Code for the final version of this app can be found in
      a Google G Suite account for sending email.
      The values will differ if you are using a different email service.
      Another service to consider is
-     [MailChimp](<https://mailchimp.com/?v=1.1.1>).
+     [MailChimp](https://mailchimp.com/).
 
    - If you are saving the project in a Git repository,
      add `secrets.json` to the `.gitignore` file
@@ -2143,9 +2143,9 @@ using anything other than Meteor!
 
 For apps that need client-side page routing there are two popular libraries:
 
-- [FlowRouter](<https://github.com/kadirahq/flow-router?v=1.1.1>)
+- [FlowRouter](https://github.com/kadirahq/flow-router)
   (with flow-router-extra) - recommended by the Meteor Guide
-- [Iron.Router](<https://github.com/iron-meteor/iron-router?v=1.1.1>)
+- [Iron.Router](https://github.com/iron-meteor/iron-router)
 
 Typically these are used with the Blaze framework.
 When using a different web framework such a Svelte or React,
@@ -2167,8 +2167,8 @@ we are ready to deploy it to a server so real users can access it.
 If your Meteor app uses MongoDB, and most do,
 the first step is to select a hosting platform.
 One option is
-[MongoDB Atlas](<https://www.mongodb.com/cloud/atlas?v=1.1.1>).
-Another option is [mLab](<https://mlab.com/?v=1.1.1>).
+[MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+Another option is [mLab](https://mlab.com/).
 
 MongoDB Atlas has an endless free tier referred to as "Shared Clusters"
 that does not provide backup.
@@ -2176,7 +2176,7 @@ that does not provide backup.
 To configure MongoDB Atlas:
 
 - Browse
-  [here](<https://www.mongodb.com/cloud/atlas?v=1.1.1>).
+  [here](https://www.mongodb.com/cloud/atlas).
 - Choose between AWS, GCP, and Azure for the cloud provider.
 - Create a cluster.
 - In the left nav. under "SECURITY", click "Database Access"
@@ -2248,12 +2248,12 @@ You will want to associate a domain name with your DigitalOcean server
 so you can enable SSL encryption later.
 There are many domain registrars to choose from.
 A popular, low cost option is
-[hover.com](<https://hover.com?v=1.1.1>).
+[hover.com](https://hover.com).
 You can also get a free domain name from
-[freenom.com](<https://www.freenom.com/?v=1.1.1>).
+[freenom.com](https://www.freenom.com/).
 
 To associate a domain name with a DigitalOcean project, browse
-[cloud.digitalocean.com](<https://cloud.digitalocean.com?v=1.1.1>),
+[cloud.digitalocean.com](https://cloud.digitalocean.com),
 sign in, click "Networking" in the left nav., enter a domain for a project,
 and press "Add Domain".
 Then under "Create new record", select "A", enter "@" for "HOSTNAME",
@@ -2336,7 +2336,7 @@ To enable nginx to act as a proxy for a server that listens on a particular port
   `/etc/nginx/sites-available/{your-domain}` below.
 
 Setup nginx "server blocks" by following the steps
-[here](<https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)?v=1.1.1>) which are summaries below:
+[here](<https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04#step-5-%E2%80%93-setting-up-server-blocks-(recommended)>) which are summaries below:
 
 1. Enter `sudo mkdir -p /var/www/{your-domain}/html`
 1. Enter `sudo chown -R $USER:$USER /var/www/{your-domain}/html`
@@ -2387,7 +2387,7 @@ Setup nginx "server blocks" by following the steps
 1. Browse <http://{your-domain}> to verify that nginx can server the earlier HTML.
 
 Enable SSL by following the steps
-[here](<https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04?v=1.1.1>).
+[here](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04).
 These instructions specific to Ubuntu version 20.04.
 It uses a "certbot" which will automatically renew the certificate
 before it expires.
@@ -2471,8 +2471,8 @@ This gives the error MongoNetworkError: failed to connect to server
 cluster0-shard-00-00.tqq7g.mongodb.net:27017 closed
 
 Other alternatives for deploying Meteor apps include
-Galaxy ([here](<https://www.meteor.com/hosting?v=1.1.1>))
-and Meteor Up ([here](<http://meteor-up.com/?v=1.1.1>)).
+Galaxy ([here](https://www.meteor.com/hosting))
+and Meteor Up ([here](http://meteor-up.com/)).
 Meteor Up, a.k.a mup, can be used to deploy a Meteor app
 to any server to which you can `ssh`.
 
@@ -2507,7 +2507,7 @@ The steps to deploy a Meteor app using Meteor Up are:
     Also kill the process for MongoDB listening on port 27017.
   - Set `app.env.MONGO_URL` to the URL of your MongoDB server.
   - To enable SSL:
-    - See [How to Secure Nginx](<https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04?v=1.1.1>)
+    - See [How to Secure Nginx](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04)
     - This requires a domain name, not just an ip address.
     - Set `proxy.domains` to `'https://{server-ip-address}:80'`, // nginx proxy
     - Set `proxy.ssl.forceSSL` to `true`.
@@ -2533,7 +2533,7 @@ Galaxy does not provided MongoDB hosting.
 
 To use Galaxy:
 
-- Browse [galaxy.meteor.com](<https://galaxy.meteor.com?v=1.1.1>)
+- Browse [galaxy.meteor.com](https://galaxy.meteor.com)
 - Press "SIGN IN WITH METEOR" and authenticate.
 - Create a free trial account
 - Choose a region (ex. "US-East-1")
@@ -2638,11 +2638,11 @@ adding the use of packages to a project and importing values from them.
 
 ### Resources
 
-- [Meteor home page](<https://meteor.com/?v=1.1.1>)
-- [Meteor Guide](<https://guide.meteor.com/?v=1.1.1>)
-- [Meteor API docs](<https://docs.meteor.com/?v=1.1.1>)
-- [Awesome Meteor](<https://github.com/Urigo/awesome-meteor?v=1.1.1>)
+- [Meteor home page](https://meteor.com/)
+- [Meteor Guide](https://guide.meteor.com/)
+- [Meteor API docs](https://docs.meteor.com/)
+- [Awesome Meteor](https://github.com/Urigo/awesome-meteor)
   curated list of packages and libraries
-- [Atmosphere Meteor package repository](<https://atmospherejs.com/?v=1.1.1>)
-- [Meteor Forum](<https://forums.meteor.com/?v=1.1.1>)
-- [Stack Overflow](<https://stackoverflow.com/questions/tagged/meteor?v=1.1.1>)
+- [Atmosphere Meteor package repository](https://atmospherejs.com/)
+- [Meteor Forum](https://forums.meteor.com/)
+- [Stack Overflow](https://stackoverflow.com/questions/tagged/meteor)

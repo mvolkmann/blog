@@ -17,8 +17,8 @@ These include `Text`, `Label`, and `Button`.
 
 ## Resources
 
-- WWDC 2023 video [Build global apps: Localization by example](<https://developer.apple.com/videos/play/wwdc2022/10110/?v=1.1.1>)
-- WWDC 2023 video [Discover String Catalogs](<https://developer.apple.com/videos/play/wwdc2023/10155/?v=1.1.1>)
+- WWDC 2023 video [Build global apps: Localization by example](https://developer.apple.com/videos/play/wwdc2022/10110/)
+- WWDC 2023 video [Discover String Catalogs](https://developer.apple.com/videos/play/wwdc2023/10155/)
 
 ## Specifying Supported Languages
 
@@ -112,7 +112,7 @@ To enable this:
 - change "Use Compiler to Extract Swift Strings" from "No" to "Yes"
 
 <img alt="Xcode Build Settings for Localization" style="width: 80%"
-  src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1"
+  src="/blog/assets/xcode-build-settings-localization.png"
   title="Xcode Build Settings for Localization">
 
 Once this is enabled, the String Catalog file will be updated during each build.
@@ -231,7 +231,7 @@ select its row, open the inspector on the right, and
 change the value for "Managed" from "Manually" to "Automatically".
 
 <img alt="Xcode Strings Catalog Inspector" style="width: 50%"
-  src="/blog/assets/xcode-strings-catalog-inspector.png?v=1.1.1"
+  src="/blog/assets/xcode-strings-catalog-inspector.png"
   title="Xcode Strings Catalog Inspector">
 
 ### Plurals
@@ -281,10 +281,10 @@ The following screenshot shows the definition for this plural translation
 in the Strings Catalog file.
 
 <img alt="Xcode Strings Catalog plurals" style="width: 100%"
-  src="/blog/assets/xcode-strings-catalog-plurals.png?v=1.1.1"
+  src="/blog/assets/xcode-strings-catalog-plurals.png"
   title="Xcode Strings Catalog plurals">
 
-The full code for this project can be found at [Localization2023Demo](<https://github.com/mvolkmann/Localization2023Demo?v=1.1.1>).
+The full code for this project can be found at [Localization2023Demo](https://github.com/mvolkmann/Localization2023Demo).
 
 As of Xcode 15 beta, translated plurals
 always display English in previews instead of the requested locale.
@@ -309,7 +309,7 @@ This will add sub-rows to the row where each row
 begins with a platform name or "Other".
 
 <img alt="Xcode Strings Catalog Vary by Device" style="width: 100%"
-  src="/blog/assets/xcode-strings-catalog-vary-by-device.png?v=1.1.1"
+  src="/blog/assets/xcode-strings-catalog-vary-by-device.png"
   title="Xcode Strings Catalog Vary by Device">
 
 Repeat the steps above for each language that requires
@@ -404,7 +404,7 @@ A button for each preview is displays at the top of the canvas.
 Click a button to see the corresponding preview.
 
 <img alt="Xcode Preview buttons" style="width: 50%"
-  src="/blog/assets/xcode-preview-buttons.png?v=1.1.1"
+  src="/blog/assets/xcode-preview-buttons.png"
   title="Xcode Preview buttons">
 
 ```swift
@@ -454,7 +454,7 @@ Another way to select the locale to use is to:
 The `environment` view modifier can be used to
 allow the user to select a locale within the app.
 
-This [Apple Forums post](<https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022&v=1.1.1>) says the following:
+This [Apple Forums post](https://developer.apple.com/forums/thread/13155?answerId=36704022#36704022) says the following:
 
 > If the system puts up a UI component on your behalf it will do so
 > in the localization that it thinks that your app is running in.
@@ -511,7 +511,7 @@ TODO: Is this a bug in SwiftUI?
 
 ## Localizing Strings
 
-The [macro](<https://developer.apple.com/documentation/foundation/nslocalizedstring?v=1.1.1>) returns a localized string.
+The [macro](https://developer.apple.com/documentation/foundation/nslocalizedstring) returns a localized string.
 To simplify use of this, define the following `String` extension:
 
 ```swift
@@ -617,19 +617,19 @@ To define how specific words should be pluralized based on a count:
 
 <figure style="width: 90%">
   <img alt="SwiftUI English plural localization"
-    src="/blog/assets/swiftui-plural-localization-en.png?v=1.1.1"
+    src="/blog/assets/swiftui-plural-localization-en.png"
     title="Swift English plural localization">
   <figcaption>English plural rules</figcaption>
 </figure>
 <figure style="width: 90%">
   <img alt="SwiftUI French plural localization"
-    src="/blog/assets/swiftui-plural-localization-fr.png?v=1.1.1"
+    src="/blog/assets/swiftui-plural-localization-fr.png"
     title="Swift French plural localization">
   <figcaption>French plural rules</figcaption>
 </figure>
 <figure style="width: 90%">
   <img alt="SwiftUI Spanish plural localization"
-    src="/blog/assets/swiftui-plural-localization-es.png?v=1.1.1"
+    src="/blog/assets/swiftui-plural-localization-es.png"
     title="Swift Spanish plural localization">
   <figcaption>Spanish plural rules</figcaption>
 </figure>
@@ -662,7 +662,7 @@ Chinese and Japanese only use one form.
 Arabic uses all six forms.
 
 For more details see the Unicode Common Locale Data Repository (CLDR)
-[Plural Rules](<https://cldr.unicode.org/index/cldr-spec/plural-rules?v=1.1.1>) and [Language Plural Rules](<https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html?v=1.1.1>).
+[Plural Rules](https://cldr.unicode.org/index/cldr-spec/plural-rules) and [Language Plural Rules](https://unicode-org.github.io/cldr-staging/charts/latest/supplemental/language_plural_rules.html).
 
 The following code demonstrates displaying a number of apples.
 The string to be formatted must contain one string interpolation.
@@ -677,7 +677,7 @@ Text("apple \(appleCount)") // 7 apples
 
 ## Numbers and Currency
 
-The [NumberFormatter](<https://developer.apple.com/documentation/foundation/numberformatter?v=1.1.1>) class will localize date formats
+The [NumberFormatter](https://developer.apple.com/documentation/foundation/numberformatter) class will localize date formats
 when its `locale` property is set.
 
 Currency formatting requires the locale identifier
@@ -740,7 +740,7 @@ demo(.currencyPlural)
 
 ## Dates
 
-The [DateFormatter](<https://developer.apple.com/documentation/foundation/dateformatter?v=1.1.1>) class will localize date formats
+The [DateFormatter](https://developer.apple.com/documentation/foundation/dateformatter) class will localize date formats
 when its `locale` property is set.
 This works with predefined date/time styles
 and also with custom date/time templates.
@@ -774,7 +774,7 @@ formatter.locale = Locale(identifier: "fr") // French
 print(formatter.string(from: date)) // 03 janvier
 ```
 
-For a summary of patterns for formatting dates and times see [How To Format Date Time In Swift](<https://www.datetimeformatter.com/how-to-format-date-time-in-swift/?v=1.1.1>).
+For a summary of patterns for formatting dates and times see [How To Format Date Time In Swift](https://www.datetimeformatter.com/how-to-format-date-time-in-swift/).
 
 ## Images
 
@@ -872,7 +872,7 @@ When using String Catalogs:
 - Verify that "Localization Prefers String Catalogs" is set to "Yes"
 
 <img alt="Xcode Build Settings for Localization" style="width: 80%"
-  src="/blog/assets/xcode-build-settings-localization.png?v=1.1.1"
+  src="/blog/assets/xcode-build-settings-localization.png"
   title="Xcode Build Settings for Localization">
 
 To export the localizations:
@@ -891,7 +891,7 @@ A localization catalog contains several subdirectories and files.
 The translations for a localization catalog can be found in the `.xliff` file
 inside the "Localized Contents" subdirectory.
 
-[XLIFF](<http://docs.oasis-open.org/xliff/xliff-core/v2.1/os/xliff-core-v2.1-os.html?v=1.1.1>) is an industry standard XML format.
+[XLIFF](http://docs.oasis-open.org/xliff/xliff-core/v2.1/os/xliff-core-v2.1-os.html) is an industry standard XML format.
 XLIFF files contains one `trans-unit` element for each translation.
 These elements contain the child elements `source`, `target`, and `comment`.
 People with language translation experience can edit these files,

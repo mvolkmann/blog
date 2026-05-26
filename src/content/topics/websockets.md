@@ -11,11 +11,11 @@ layout: topic-layout.njk
 </style>
 
 <img alt="WebSocket logo" style="border: none; width: 30%"
-  src="/blog/assets/websocket-logo.svg?v=1.1.1">
+  src="/blog/assets/websocket-logo.svg">
 
 ## Overview
 
-[WebSockets](<https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications?v=1.1.1>) are a standardized protocol for
+[WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications) are a standardized protocol for
 two-way communication between clients and servers using TCP.
 They are widely supported by web browsers.
 
@@ -27,7 +27,7 @@ When only text is needed, SSE is a good option because
 the required code is a bit easier to write than the code for WebSockets.
 
 WebSockets require upgrading an existing HTTP connection.
-For details, see the MDN page [Protocal upgrade mechanism](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism?v=1.1.1>).
+For details, see the MDN page [Protocal upgrade mechanism](https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism).
 
 Unlike Server-Sent Events (SSE), WebSockets do not provide
 automatic reconnection after the connection is closed.
@@ -36,10 +36,10 @@ However, this can be implemented as shown in the "Bun and Hono" section below.
 Many WebSocket libraries for server-side
 programming languages/environments exist.
 The example below demonstrates using the highly popular Node.js library
-[ws](<https://github.com/websockets/ws?v=1.1.1>).
+[ws](https://github.com/websockets/ws).
 
 All the example code below can be found in the GitHub repository
-[websocket-examples](<https://github.com/mvolkmann/websocket-examples?v=1.1.1>).
+[websocket-examples](https://github.com/mvolkmann/websocket-examples).
 
 ## Use Cases
 
@@ -56,7 +56,7 @@ If a WebSocket connection is closed, perhaps due to a network issue,
 clients will not automatically attempt to reconnect to the server.
 Additional code must be written to poll the server and reconnect.
 
-Some WebSocket libraries such as [Socket.IO](<https://socket.io?v=1.1.1>) provide reconnection support.
+Some WebSocket libraries such as [Socket.IO](https://socket.io) provide reconnection support.
 This is also a built-in feature of Server-Sent Events (SSE).
 
 ## Demo Client
@@ -101,9 +101,9 @@ Note the use of the class `WebSocket`.
 ## Demo Server
 
 The following server code uses Node.js,
-the [Express](<https://expressjs.com?v=1.1.1>) framework, and the
-[ws](<https://www.npmjs.com/package/ws?v=1.1.1>) WebSocket library.
-It also uses [nodemon](<https://nodemon.io?v=1.1.1>)
+the [Express](https://expressjs.com) framework, and the
+[ws](https://www.npmjs.com/package/ws) WebSocket library.
+It also uses [nodemon](https://nodemon.io)
 to automatically restart the server when its code is modified,
 which is useful during iterative development and debugging.
 
@@ -199,12 +199,12 @@ The following screenshot shows the request and response HTTP headers
 for the WebSocket connection.
 
 <img alt="WebSockets DevTools Network tab Headers" style="width: 100%"
-  src="/blog/assets/websockets-node-devtools-network-headers.png?v=1.1.1">
+  src="/blog/assets/websockets-node-devtools-network-headers.png">
 
 The following screenshot shows the messages for the WebSocket connection.
 
 <img alt="WebSockets DevTools Network tab Messages" style="width: 70%"
-  src="/blog/assets/websockets-node-devtools-network-messages.png?v=1.1.1">
+  src="/blog/assets/websockets-node-devtools-network-messages.png">
 
 ## Bun and Hono
 
@@ -214,7 +214,7 @@ It differs from the previous example in that it automatically attempts
 to reconnect to the WebSocket server if the connection is closed.
 
 <img alt="WebSocket reconnecting" style="width: 50%"
-  src="/blog/assets/websocket-reconnecting.png?v=1.1.1">
+  src="/blog/assets/websocket-reconnecting.png">
 
 ```js
 <!DOCTYPE html>
@@ -291,7 +291,7 @@ to reconnect to the WebSocket server if the connection is closed.
 ```
 
 The following server code uses Bun and
-the [Hono](<https://hono.dev?v=1.1.1>) framework.
+the [Hono](https://hono.dev) framework.
 The client code remains the same.
 
 ```ts

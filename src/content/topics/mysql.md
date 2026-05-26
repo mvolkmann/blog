@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[MySQL](<https://www.mysql.com?v=1.1.1>)
+[MySQL](https://www.mysql.com)
 is an open-source relational database.
 It is implemented in C++.
 MySL runs on all common operating systems.

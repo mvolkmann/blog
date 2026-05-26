@@ -76,14 +76,14 @@ To use a C library from Swift:
 ## Invoking Lua
 
 For details on the Lua programming language, see
-[Lua](</blog/topics/#/blog/lua/?v=1.1.1>).
+[Lua](/blog/topics/#/blog/lua/).
 This contains details on starting the Lua virtual machine from C
 and deciding which standard libraries should be loaded.
 For example, by not loading the "os" library,
 Lua code is unable to read or write files.
 
 1. Build a version of Lua that is compatible with iOS.
-   See [lua-iosx](<https://github.com/apotocki/lua-iosx?v=1.1.1>).
+   See [lua-iosx](https://github.com/apotocki/lua-iosx).
    Enter the following commands to generate
    the directory `frameworks/lua.xcframework`:
    - `git clone -b 5.4.4 https://github.com/apotocki/lua-iosx`
@@ -100,5 +100,5 @@ from functions defined in C source files.
 Those C functions can be called from Swift code.
 
 For an example of embedding the Lua interpreter in a SwiftUI application, see
-[Swift Calling C](</blog/topics/#/blog/swift/CallingC?v=1.1.1>) and
-the GitHub respository [SwiftUICallsC](<https://github.com/mvolkmann/SwiftUICallsC?v=1.1.1>).
+[Swift Calling C](/blog/topics/#/blog/swift/CallingC) and
+the GitHub respository [SwiftUICallsC](https://github.com/mvolkmann/SwiftUICallsC).

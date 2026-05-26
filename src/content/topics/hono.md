@@ -11,12 +11,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="Hono logo" style="border: none; width: 20%"
-  src="/blog/assets/hono-logo.png?v=1.1.1"
+  src="/blog/assets/hono-logo.png"
   title="Hono logo">
 
 ## Overview
 
-[Hono](<https://hono.dev/?v=1.1.1>)
+[Hono](https://hono.dev/)
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
 This includes AWS Lambda, Bun, Cloudflare Pages, Cloudflare Workers,
 Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
@@ -24,10 +24,10 @@ Deno, Fastly, Lagon, Netlify, NextJS, Node.js, and Vercel.
 "Honō" is the Japanese word for "flame" or "blaze" which explains its logo.
 
 Hono is significantly faster than
-[Express](<https://expressjs.com?v=1.1.1>)
+[Express](https://expressjs.com)
 which is the most popular HTTP library for Node.js.
 
-[Elysia](<https://elysiajs.com?v=1.1.1>) is a competitor to Hono.
+[Elysia](https://elysiajs.com) is a competitor to Hono.
 It has slightly better performance than Hono, but only runs in Bun.
 
 ## Projects
@@ -74,7 +74,7 @@ app.get('/some/path', (c: Context) => {
 
 Path parameters are described in URL path strings as a name preceded by a colon.
 Optional parameters are followed by `?`.
-For example: `'/population/:state/:year?'`.
+For example: `'/population/:state/:year'`.
 
 Path parameter names can also include a regular expression.
 For example: `'/population/:state{[0-9]*}'`
@@ -89,7 +89,7 @@ For example instead of having the callback functions return a `Response` object,
 they could return a string (which could automatically use `c.text`),
 JSX (which could automatically use `c.html`), or
 any other kind of value (which could automatically use `c.json`).
-This idea is implemented in code found in the issue [endpoints returning raw values](<https://github.com/honojs/hono/issues/2037#issuecomment-1910957072?v=1.1.1>).
+This idea is implemented in code found in the issue [endpoints returning raw values](https://github.com/honojs/hono/issues/2037#issuecomment-1910957072).
 
 ## Context
 
@@ -128,7 +128,7 @@ are described in the following table.
 
 In the `c.html` method, `someHTML` is a string of HTML or JSX.
 
-See the [endpoints returning raw values](<https://github.com/honojs/hono/issues/2037?v=1.1.1>) proposal.
+See the [endpoints returning raw values](https://github.com/honojs/hono/issues/2037) proposal.
 
 To share values between routes,
 set them in one route with `c.set('someName', 'some value');`
@@ -138,7 +138,7 @@ and get them other routes with `c.get('someName')`.
 
 Hono supports using JSX to generate HTML responses.
 This is useful in conjunction with
-[htmx](<https://htmx.org?v=1.1.1>).
+[htmx](https://htmx.org).
 
 IMPORTANT: Source files that use JSX must have a file extension of `.tsx`.
 
@@ -155,7 +155,7 @@ Remove the `jsxFragmentFactory` property if it is present.
 
 ## Routers
 
-Hono includes [five routers](<https://hono.dev/concepts/routers?v=1.1.1>).
+Hono includes [five routers](https://hono.dev/concepts/routers).
 Typically the default router is fine and this information can be ignored.
 
 The provided routers are:
@@ -216,7 +216,7 @@ CRUD operations on a collection of dogs.
 This code does not require any additional packages to be installed.
 
 <img alt="Hono dog app" style="width: 50%"
-  src="/blog/assets/hono-dog-app.png?v=1.1.1">
+  src="/blog/assets/hono-dog-app.png">
 
 ### src/index.ts
 
@@ -483,7 +483,7 @@ describe('dog endpoints', () => {
 ## File-based Routing
 
 Hono does not support file-based routing, but the addon package
-[honox](<https://github.com/honojs/honox?v=1.1.1>) does.
+[honox](https://github.com/honojs/honox) does.
 
 The following steps demonstrate using file-based routing with honox.
 
@@ -584,7 +584,7 @@ The following steps demonstrate using file-based routing with honox.
 
 1. Start the server by entering `bun dev`.
 
-   This gives me the error described in this [issue](<https://github.com/honojs/honox/issues/38?v=1.1.1>).
+   This gives me the error described in this [issue](https://github.com/honojs/honox/issues/38).
 
 1. Browse localhost:3000.
 
@@ -878,7 +878,7 @@ dogs = {
 }
 ```
 
-For more detail, see [RPC/Client](<https://hono.dev/guides/rpc#rpc-client?v=1.1.1>).
+For more detail, see [RPC/Client](https://hono.dev/guides/rpc#rpc-client).
 
 ## Tests
 
@@ -994,15 +994,15 @@ describe('dog endpoints', () => {
 
 The following sites provide relevant benchmarks:
 
-- [Deno — Express vs Fastify vs Oak vs Hono: Who’s runs fastest?](<https://medium.com/deno-the-complete-reference/deno-express-vs-fastify-vs-oak-vs-hono-whos-runs-fastest-0657d791c17a?v=1.1.1>)
+- [Deno — Express vs Fastify vs Oak vs Hono: Who’s runs fastest?](https://medium.com/deno-the-complete-reference/deno-express-vs-fastify-vs-oak-vs-hono-whos-runs-fastest-0657d791c17a)
 
   This shows Hono to be significantly faster than Fastify, Oak, and Express.
 
-- [Bun: Elysia.js vs Hono](<https://medium.com/deno-the-complete-reference/bun-elysia-js-vs-hono-hello-world-b655a20f1f2b?v=1.1.1>)
+- [Bun: Elysia.js vs Hono](https://medium.com/deno-the-complete-reference/bun-elysia-js-vs-hono-hello-world-b655a20f1f2b)
 
   This concludes that "Elysia is marginally faster than Hono,
   but the winning margin is negligible."
 
-- [find-my-way](<https://github.com/delvedor/find-my-way?v=1.1.1>)
+- [find-my-way](https://github.com/delvedor/find-my-way)
   is another HTTP library to consider. Some benchmarks
   show this to be considerably faster than Elysia and Hono.

@@ -110,7 +110,7 @@ world := UISupervisor ui.
         "browser activateWindow." "brings to front"
 
         "Add buttons in upper-left to toggle full screen mode."
-        "WHY DOES THIS FAIL IN SCRIPT, BUT NOT FROM WORKSPACE?"
+        "WHY DOES THIS FAIL IN SCRIPT, BUT NOT FROM WORKSPACE"
         "(Delay forSeconds: 1) wait.
         VFullScreenButtons new."
     ]
@@ -144,7 +144,7 @@ enter `Feature require: #RMVSetup`, and "Do it".
 This results in the following window:
 
 <img alt="Cuis-Smalltalk-RMVSetup" style="width: 100%"
-  src="/blog/assets/cuis-smalltalk-rmvsetup.png?v=1.1.1">
+  src="/blog/assets/cuis-smalltalk-rmvsetup.png">
 
 Installing the package runs the class method `initialize`
 which calls the class method `openWindows`.

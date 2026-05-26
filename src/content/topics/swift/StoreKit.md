@@ -7,16 +7,16 @@ layout: topic-layout.njk
 
 ## Overview
 
-[StoreKit](<https://developer.apple.com/documentation/storekit?v=1.1.1>) is an Apple framework that supports
+[StoreKit](https://developer.apple.com/documentation/storekit) is an Apple framework that supports
 in-app purchases, ad network attribution, Apple Music integration,
 and enabling app ratings and reviews.
 
 ## Resources
 
-- WWDC 2022 video [What](<https://developer.apple.com/videos/play/wwdc2022/10007/?v=1.1.1>)
-- WWDC 2022 video [Implement proactive in-app purchase restore](<https://developer.apple.com/videos/play/wwdc2022/110404/?v=1.1.1>)
-- WWDC 2022 video [What](<https://developer.apple.com/videos/play/wwdc2022/10039/?v=1.1.1>)
-- WWDC 2023 video [Meet StoreKit for SwiftUI](<https://developer.apple.com/wwdc23/10013?v=1.1.1>)
+- WWDC 2022 video [What](https://developer.apple.com/videos/play/wwdc2022/10007/)
+- WWDC 2022 video [Implement proactive in-app purchase restore](https://developer.apple.com/videos/play/wwdc2022/110404/)
+- WWDC 2022 video [What](https://developer.apple.com/videos/play/wwdc2022/10039/)
+- WWDC 2023 video [Meet StoreKit for SwiftUI](https://developer.apple.com/wwdc23/10013)
 
 ## Usage
 
@@ -155,7 +155,7 @@ The `.large` option has an issue with horizontal alignment.
 
 Xcode and the Simulator can be used to test in-app purchases
 without the need to configure them in AppStoreConnect.
-See the YouTube video [How to easily test InApp Purchases in an iOS app](<https://www.youtube.com/watch?v=o_YMsmmkfFc&feature=youtu.be&v=1.1.1>) with Josh Holtz.
+See the YouTube video [How to easily test InApp Purchases in an iOS app](https://www.youtube.com/watch?v=o_YMsmmkfFc&feature=youtu.be) with Josh Holtz.
 
 To create a StoreKit configuration file to be used for testing:
 
@@ -211,5 +211,5 @@ To test an in-app purchase:
 
 ## Example Project
 
-See [StoreKitDemo](<https://github.com/mvolkmann/StoreKitDemo?v=1.1.1>) which is not yet fully functional.
+See [StoreKitDemo](https://github.com/mvolkmann/StoreKitDemo) which is not yet fully functional.
 StoreKit still seems difficult to correctly configure and use!

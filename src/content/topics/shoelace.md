@@ -12,15 +12,15 @@ layout: topic-layout.njk
 
 <figure style="width: 50%">
   <img alt="Shoelace logo" style="border: 0"
-    src="/blog/assets/shoelace-logo.svg?v=1.1.1">
+    src="/blog/assets/shoelace-logo.svg">
 </figure>
 
 ## Overview
 
-[Shoelace](<https://shoelace.style/?v=1.1.1>)
+[Shoelace](https://shoelace.style/)
 is an open source "forward-thinking library of web components".
 The web components are defined using
-[Lit](<https://lit.dev?v=1.1.1>).
+[Lit](https://lit.dev).
 
 Shoelace provides a large collection of UI components that can be
 used with all web frameworks or vanilla JavaScript with no framework.
@@ -35,7 +35,7 @@ Range, Rating, Relative Time, Resize Observer, Select, Skeleton, Spinner,
 Split Panel, Switch, Tab, Tab Group, Tab Panel, Tag, Textarea, Tooltip,
 Tree, Tree Item, and Visually Hidden.
 
-The left nav of the [Shoelace](<https://shoelace.style/?v=1.1.1>)
+The left nav of the [Shoelace](https://shoelace.style/)
 website lists all the current components.
 Clicking a component name displays detailed documentation
 that includes example usages with source code.
@@ -146,7 +146,7 @@ which prevents rendering components that are not yet "defined".
 ```
 
 A more involved approach using `customElements.whenDefined`
-is described in [Waiting for Components to Load](<https://shoelace.style/getting-started/usage#waiting-for-components-to-load?v=1.1.1>).
+is described in [Waiting for Components to Load](https://shoelace.style/getting-started/usage#waiting-for-components-to-load).
 
 ## Light/Dark Mode
 
@@ -161,7 +161,7 @@ and then clicking "Light", "Dark", or "Auto".
 The user should also be allowed to change the mode,
 perhaps using a Switch component.
 
-The following code uses [Alpine](</blog/topics/#/blog/alpine/?v=1.1.1>)
+The following code uses [Alpine](/blog/topics/#/blog/alpine/)
 to implement this.
 
 ```js
@@ -235,7 +235,7 @@ is not affected by the order in which they appear in the HTML.
 For example, the following Card component uses all four slots.
 
 <img alt="Shoelace Card component" style="border: 0; width: 40%"
-  src="/blog/assets/shoelace-card-component.png?v=1.1.1">
+  src="/blog/assets/shoelace-card-component.png">
 
 ```html
 <sl-card class="my-card">
@@ -292,4 +292,4 @@ and the Switch component dispatches `s-change` events.
 
 To listen for events, register event listeners on the components.
 This can be done with vanilla JavaScript
-or with [Alpine](</blog/topics/#/blog/alpine/?v=1.1.1>).
+or with [Alpine](/blog/topics/#/blog/alpine/).

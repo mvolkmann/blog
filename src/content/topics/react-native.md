@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[React Native](<https://reactnative.dev?v=1.1.1>)
+[React Native](https://reactnative.dev)
 enables using JavaScript and React to implement Android and iOS applications.
 
 There are two command-line tools that can be used
@@ -64,5 +64,5 @@ Expo and the React Native CLI.
 
 ## Icons
 
-See [react-native-vector-icons](<https://github.com/oblador/react-native-vector-icons?v=1.1.1>) and
-[@expo/vector-icons](<https://icons.expo.fyi?v=1.1.1>).
+See [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) and
+[@expo/vector-icons](https://icons.expo.fyi).

@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="JavaScript Signals logo" style="border: 0"
-    src="/blog/assets/signals-logo.png?v=1.1.1">
+    src="/blog/assets/signals-logo.png">
 </figure>
 
 ## Overview
@@ -214,7 +214,7 @@ target="_blank">js-signals-demo</a>.
   `index.ts`, `effect.ts`, and `utilities.ts`.
 
 <img alt="JavaScript Signals demo app" style="width: 60%"
-  src="/blog/assets/js-signals-demo.png?v=1.1.1">
+  src="/blog/assets/js-signals-demo.png">
 
 ## FAQ
 
@@ -223,7 +223,7 @@ The proposal contains an extensive
 target="_blank">FAQ</a> section.
 
 One particularly interesting question asks "Is the Signal API meant to be
-used directly by application developers, or wrapped by frameworks?"
+used directly by application developers, or wrapped by frameworks"
 The answer given is:
 
 "While this API could be used directly by application developers,

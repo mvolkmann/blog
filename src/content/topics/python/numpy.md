@@ -10,13 +10,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-[NumPy](<https://numpy.org/?v=1.1.1>)
+[NumPy](https://numpy.org/)
 is a Python library for scientific computing.
 It is primarily implemented in optimized C code.
 It is an alternative to MatLab for use in Python.
 
 NumPy supports many operations on matrices.
-[SciPy](<https://www.scipy.org/?v=1.1.1>)
+[SciPy](https://www.scipy.org/)
 builds on NumPy to add support for even more mathematical operations.
 NumPy is also a dependency of the pandas package.
 
@@ -178,4 +178,4 @@ Here is a sampling of other operations on two arrays.
 | matrix multiplication | `b = np.matmul(a1, a2)`<br>The number of columns in `a1` must<br>equal the number of rows in `a2`. |
 
 The `np.linalg` package provides many more functions in addition to `det`.
-See [Linear algebra (numpy.linalg)](<https://numpy.org/doc/stable/reference/routines.linalg.html?v=1.1.1>).
+See [Linear algebra (numpy.linalg)](https://numpy.org/doc/stable/reference/routines.linalg.html).

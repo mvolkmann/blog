@@ -12,7 +12,7 @@ and triggering SwiftUI updates based on changes to model objects.
 
 ## Resources
 
-- [What is Observation?](<https://developer.apple.com/wwdc23/10149?v=1.1.1>) video from WWDC 2023
+- [What is Observation?](https://developer.apple.com/wwdc23/10149) video from WWDC 2023
 
 ## @Binding
 
@@ -51,7 +51,7 @@ struct ContentView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Checkbox(label: "Happy?", isOn: $isHappy)
+            Checkbox(label: "Happy", isOn: $isHappy)
             Text(isHappy ? "Good for you!" : "Maybe tomorrow.")
         }
         .padding()
@@ -76,7 +76,7 @@ The `@Bindable` property wrapper creates a two-way binding
 to instance of a class to which the `@Observable` macro is applied.
 This binding can be used to get and set properties in the object.
 
-The app [ObservableDemo](<https://github.com/mvolkmann/ObservationDemo/blob/main/ObservationDemo/ContentView.swift?v=1.1.1>) demonstrates this.
+The app [ObservableDemo](https://github.com/mvolkmann/ObservationDemo/blob/main/ObservationDemo/ContentView.swift) demonstrates this.
 It defines a `ViewModel` as follows:
 
 ```swift
@@ -216,4 +216,4 @@ struct Checkbox: View {
 
 ## Example App
 
-See [ObservableDemo](<https://github.com/mvolkmann/ObservationDemo/blob/main/ObservationDemo/ContentView.swift?v=1.1.1>).
+See [ObservableDemo](https://github.com/mvolkmann/ObservationDemo/blob/main/ObservationDemo/ContentView.swift).

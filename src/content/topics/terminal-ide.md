@@ -8,18 +8,18 @@ layout: topic-layout.njk
 
 There are many popular integrated development environments (IDEs)
 for creating software applications.
-Popular examples include [VS Code](<https://vscode.dev?v=1.1.1>)
-and various [JetBrains](<https://www.jetbrains.com?v=1.1.1>)
+Popular examples include [VS Code](https://vscode.dev)
+and various [JetBrains](https://www.jetbrains.com)
 products such as Intellij IDEA, GoLand, PyCharm, and WebStorm
 that are all native applications.
 But is it possible to get the same level of features
 from a terminal based editor?
 This article hopes to convince you that you can using Neovim.
 
-[Neovim](<https://neovim.io?v=1.1.1>) is a modern fork of
-[Vim](<https://www.vim.org?v=1.1.1>) that adds many features such as
-[Language Server Protocol](<https://microsoft.github.io/language-server-protocol/?v=1.1.1>) (LSP) integration and configuration using
-the [Lua](<https://www.lua.org?v=1.1.1>) programming language.
+[Neovim](https://neovim.io) is a modern fork of
+[Vim](https://www.vim.org) that adds many features such as
+[Language Server Protocol](https://microsoft.github.io/language-server-protocol/) (LSP) integration and configuration using
+the [Lua](https://www.lua.org) programming language.
 
 In general software developers either love or hate Vim.
 This is heavily influenced by the fact that it is a modal editor.
@@ -50,12 +50,12 @@ to prevent myself for using it out of habit.
 ## Vim Basics
 
 <img alt="Vim logo" style="width: 20%"
-  src="/blog/assets/vim-logo.png?v=1.1.1"
+  src="/blog/assets/vim-logo.png"
   title="Vim logo">
 
 The following sections describe the use of selected Vim features
 that are not unique to Neovim, but important to know.
-If you are new to Vim, checkout [Vim Jump Start](<https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start?v=1.1.1>).
+If you are new to Vim, checkout [Vim Jump Start](https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start).
 
 ### Spell Checking
 
@@ -89,7 +89,7 @@ return {
 
 Camel-cased words are not handled properly.
 For example, "catDog" is marked as misspelled.
-See this [reddit post](<https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3&v=1.1.1>).
+See this [reddit post](https://www.reddit.com/r/AstroNvim/comments/12lxn7j/spell_checking/?utm_source=share&utm_medium=web2x&context=3).
 
 The following default key mappings perform actions related to spell checking.
 
@@ -156,7 +156,7 @@ To execute this macro on the next 15 lines, type `15@i` or `15@@`.
 
 ## Language Server Protocol (LSP)
 
-Microsoft invented the [LSP](<https://microsoft.github.io/language-server-protocol/?v=1.1.1>)
+Microsoft invented the [LSP](https://microsoft.github.io/language-server-protocol/)
 in order to provide better support for TypeScript in VS Code.
 LSP is an open protocol that anyone can implement.
 
@@ -191,7 +191,7 @@ along with recommended plugins.
 | Feature             | Popular Plugins                                                                         |
 | ------------------- | --------------------------------------------------------------------------------------- |
 | auto pairs          | nvim-autopairs                                                                          |
-| better navigation   | [hop.nvim](<https://github.com/phaazon/hop.nvim?v=1.1.1>)                    |
+| better navigation   | [hop.nvim](https://github.com/phaazon/hop.nvim)                    |
 | better status line  | heirline                                                                                |
 | code formatting     | null-ls.nvim                                                                            |
 | color themes        | many to choose from; prefer those with Tree-sitter support                              |
@@ -199,7 +199,7 @@ along with recommended plugins.
 | commenting          | Comment.nvim                                                                            |
 | debugger            | nvim-dap, nvim-dap-ui                                                                   |
 | file explorer       | neo-tree.nvim                                                                           |
-| fuzzy finder        | [telescope.nvim](<https://github.com/nvim-telescope/telescope.nvim?v=1.1.1>) |
+| fuzzy finder        | [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) |
 | Git support         | gitsigns.nvim                                                                           |
 | icons               | nvim-web-devicons                                                                       |
 | keymap display      | which-key.nvim                                                                          |
@@ -215,17 +215,17 @@ along with recommended plugins.
 ## Neovim Bundles
 
 <img alt="Neovim logo" style="width: 50%"
-  src="/blog/assets/neovim.png?v=1.1.1"
+  src="/blog/assets/neovim.png"
   title="Neovim logo">
 
 Configuring a large number of plugins is a daunting task.
 For this reason, pre-built Neovim configurations are popular.
 There are many to choose from, but the most popular seem to be:
 
-- [AstroNvim](<https://astronvim.com?v=1.1.1>)
-- [LunarVim](<https://www.lunarvim.org?v=1.1.1>)
-- [NvChad](<https://github.com/NvChad/NvChad?v=1.1.1>)
-- [SpaceVim](<?v=1.1.1>)
+- [AstroNvim](https://astronvim.com)
+- [LunarVim](https://www.lunarvim.org)
+- [NvChad](https://github.com/NvChad/NvChad)
+- [SpaceVim](<>)
 
 The remainder of this article focuses on AstroNvim.
 Using other pre-built configurations will be similar.
@@ -233,17 +233,17 @@ Using other pre-built configurations will be similar.
 ## AstroNvim
 
 <img alt="AstroNvim logo" style="width: 15%"
-  src="/blog/assets/astronvim-logo.png?v=1.1.1"
+  src="/blog/assets/astronvim-logo.png"
   title="AstroNvim logo">
 
-[AstroNvim](<https://astronvim.com?v=1.1.1>) is
+[AstroNvim](https://astronvim.com) is
 a popular pre-built configuration for Neovim.
 It describes itself as "an aesthetic and feature-rich neovim config
 that is extensible and easy to use with a great set of plugins".
 
-For a list of plugins used by AstroNvim by default, see [Acknowledgements](<https://astronvim.com/acknowledgements?v=1.1.1>).
+For a list of plugins used by AstroNvim by default, see [Acknowledgements](https://astronvim.com/acknowledgements).
 
-AstroNvim uses the [Lazy](<https://github.com/folke/lazy.nvim?v=1.1.1>) plugin manager.
+AstroNvim uses the [Lazy](https://github.com/folke/lazy.nvim) plugin manager.
 For details on the options for configuring plugins using this plugin manager,
 see the "Plugin Spec" section at the previous link.
 
@@ -251,26 +251,26 @@ There are several optional tools that
 AstroNvim will use if they are installed.
 These include:
 
-- [ripgrep](<https://github.com/BurntSushi/ripgrep?v=1.1.1>) - for live grep Telescope search; `<leader>fw`
-- [lazygit](<https://github.com/jesseduffield/lazygit?v=1.1.1>) - Git UI; `<leader>gg` for Git Gui or `<leader>tl`
-- [bottom](<https://github.com/ClementTsang/bottom?v=1.1.1>) - process viewer; `<leader>tt`
-- [Python](<https://www.python.org?v=1.1.1>) - for the Python REPL; `<leader>tp`
-- [Node](<https://nodejs.org/en?v=1.1.1>) - required by many LSPs and for the Node REPL; `<leader>tn`
+- [ripgrep](https://github.com/BurntSushi/ripgrep) - for live grep Telescope search; `<leader>fw`
+- [lazygit](https://github.com/jesseduffield/lazygit) - Git UI; `<leader>gg` for Git Gui or `<leader>tl`
+- [bottom](https://github.com/ClementTsang/bottom) - process viewer; `<leader>tt`
+- [Python](https://www.python.org) - for the Python REPL; `<leader>tp`
+- [Node](https://nodejs.org/en) - required by many LSPs and for the Node REPL; `<leader>tn`
 
 All of these are great, but I highly recommend installing ripgrep and lazygit.
 File search performance is dramatically improved by ripgrep
 and Git integration is much better using lazygit.
 
-[ripgrep](<https://github.com/BurntSushi/ripgrep?v=1.1.1>) is
+[ripgrep](https://github.com/BurntSushi/ripgrep) is
 "a line-oriented search tool that recursively searches
 the current directory for a regex pattern."
 To install it, enter `brew install ripgrep`.
 This adds the command `rg`.
 
-[lazygit](<https://github.com/jesseduffield/lazygit#homebrew?v=1.1.1>) is a terminal UI for Git commands.
+[lazygit](https://github.com/jesseduffield/lazygit#homebrew) is a terminal UI for Git commands.
 To install it, enter `brew install lazygit`.
 
-[bottom](<https://clementtsang.github.io/bottom/?v=1.1.1>)
+[bottom](https://clementtsang.github.io/bottom/)
 is a "graphical process/system monitor for the terminal".
 To install it, enter `brew install bottom`.
 This installs the command `btm`.
@@ -284,7 +284,7 @@ To install AstroNvim:
 1. Install Neovim. If using macOS, install Homebrew
    and enter `brew install neovim`.
    For other operating systems, see
-   [Installation](<https://astronvim.com/#%EF%B8%8F-installation>).
+   [Installation](https://astronvim.com/#%EF%B8%8F-installation).
 1. If you already have a `~/.config/nvim` directory,
    rename is to something like `nvim-backup`.
 1. Enter `git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim`
@@ -413,13 +413,13 @@ end
 ### Key Mappings
 
 The default key mappings provided by AstroNvim are described
-[here](<https://astronvim.com/Basic%20Usage/mappings?v=1.1.1>).
+[here](https://astronvim.com/Basic%20Usage/mappings).
 Most of these are defined in `~/.config/nvim/lua/astronvim/mappings.lua`.
 
 AstroNvim defines the key mappings `jj` and `jk` to exit insert mode
 as alternatives to pressing the `<esc>` key.
 
-AstroNvim uses the [which-key](<https://github.com/folke/which-key.nvim?v=1.1.1>) plugin to display applicable key mappings
+AstroNvim uses the [which-key](https://github.com/folke/which-key.nvim) plugin to display applicable key mappings
 at the bottom of the screen when you pause during entry.
 This includes default and custom key mappings.
 For example, press the leader key (`space` by default) and pause.
@@ -433,11 +433,11 @@ that begin with the `<leader>` key and
 type `<leader>f` to see all the "Find" key mappings.
 
 <img alt="which-key <leader>" style="width: 100%"
-    src="/blog/assets/neovim-which-key-1.png?v=1.1.1"
+    src="/blog/assets/neovim-which-key-1.png"
     title="which-key <leader>">
 
 <img alt="which-key <leader>f" style="width: 100%"
-    src="/blog/assets/neovim-which-key-2.png?v=1.1.1"
+    src="/blog/assets/neovim-which-key-2.png"
     title="which-key <leader>f">
 
 In order reach maximum efficiency with Neovim it is necessary to
@@ -455,9 +455,9 @@ can be accomplished by clicking.
 
 Several areas of the AstroNvim UI attempt to display icons.
 This requires using a
-[Nerd font](<https://www.nerdfonts.com/?v=1.1.1>).
+[Nerd font](https://www.nerdfonts.com/).
 One that I recommend is "Caskaydia Cove Nerd Font" which is very similar to
-the non-Nerd font [Cascadia Code](<https://github.com/microsoft/cascadia-code?v=1.1.1>) from Microsoft.
+the non-Nerd font [Cascadia Code](https://github.com/microsoft/cascadia-code) from Microsoft.
 
 ### Basics
 
@@ -470,7 +470,7 @@ To write the buffer to a file relative to the directory from which
 To open the AstroNvim home screen, press `<leader>h`.
 
 <img alt="AstroNvim home screen" style="width: 50%"
-  src="/blog/assets/AstroNvim-home-screen.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-home-screen.png"
   title="AstroNvim home screen">
 
 This displays a menu of common commands that includes:
@@ -492,7 +492,7 @@ This displays a menu of common commands that includes:
   The keyboard shortcut for this is `<leader>ff` for "Find File".
 
   <img alt="AstroNvim Find File" style="width: 100%"
-    src="/blog/assets/AstroNvim-Find-File.png?v=1.1.1"
+    src="/blog/assets/AstroNvim-Find-File.png"
     title="AstroNvim Find File">
 
 - "Recents"
@@ -504,7 +504,7 @@ This displays a menu of common commands that includes:
   The keyboard shortcut for this is `<leader>fo` for "Find Old".
 
   <img alt="AstroNvim Recents" style="width: 100%"
-    src="/blog/assets/AstroNvim-Recents.png?v=1.1.1"
+    src="/blog/assets/AstroNvim-Recents.png"
     title="AstroNvim Recents">
 
 - "Find Word"
@@ -517,7 +517,7 @@ This displays a menu of common commands that includes:
   The keyboard shortcut for this is `<leader>fw` for "Find Word".
 
   <img alt="AstroNvim Find Word" style="width: 100%"
-    src="/blog/assets/AstroNvim-Find-Word.png?v=1.1.1"
+    src="/blog/assets/AstroNvim-Find-Word.png"
     title="AstroNvim Find Word">
 
 - "Bookmarks"
@@ -537,12 +537,12 @@ press `<esc>` to exit insert mode and press `q`.
 
 ### File Explorer
 
-AstroNvim uses the [neo-tree.nvim](<https://github.com/nvim-neo-tree/neo-tree.nvim?v=1.1.1>) plugin
+AstroNvim uses the [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) plugin
 for the file explorer that appears on the left side.
 To toggle display of the file explorer, press `<leader>e`.
 
 <img alt="AstroNvim File Explorer" style="width: 40%"
-  src="/blog/assets/AstroNvim-File-Explorer.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-File-Explorer.png"
   title="AstroNvim File Explorer">
 
 The file explorer contains three tabs:
@@ -671,7 +671,7 @@ To edit one of the buffers inside a specific pane,
 move focus to the pane and then click the tab of the desired buffer.
 
 <img alt="AstroNvim Splits" style="width: 100%"
-  src="/blog/assets/AstroNvim-splits.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-splits.png"
   title="AstroNvim Splits">
 
 The following key mappings perform actions related to the editing area.
@@ -698,12 +698,12 @@ The following screenshot shows the key mappings that need to changed or
 disabled to allow the AstroNvim default resize key mappings to work.
 
 <img alt="AstroNvim smart-splits keys" style="width: 80%"
-  src="/blog/assets/astronvim-smart-splits-keys.png?v=1.1.1"
+  src="/blog/assets/astronvim-smart-splits-keys.png"
   title="AstroNvim smart-splits keys">
 
 ### Telescope
 
-The [telescope.nvim](<https://github.com/nvim-telescope/telescope.nvim?v=1.1.1>) plugin "is a highly extendable fuzzy finder over lists".
+The [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) plugin "is a highly extendable fuzzy finder over lists".
 It provides many commands and default key mappings them.
 
 Key mappings for operating on the current buffer include:
@@ -846,7 +846,7 @@ described in the "Custom Plugins" section.
 
 ### Auto-pairs
 
-AstroNvim uses the [nvim-autopairs](<https://github.com/windwp/nvim-autopairs?v=1.1.1>) plugin to manage
+AstroNvim uses the [nvim-autopairs](https://github.com/windwp/nvim-autopairs) plugin to manage
 pairs of parentheses, square brackets, and curly braces.
 When one of the opening characters (`(`, `[`, or `{`) is typed,
 the closing character (`)`, `]`, or `}`) is automatically supplied
@@ -854,12 +854,12 @@ and the cursor is placed between them.
 
 ### Status Line
 
-AstroNvim uses the [heirline.nvim](<https://github.com/rebelot/heirline.nvim?v=1.1.1>) plugin to render a nice status line.
+AstroNvim uses the [heirline.nvim](https://github.com/rebelot/heirline.nvim) plugin to render a nice status line.
 This includes information about the current Git repository
 such as the current branch and number of modified files.
 
 <img alt="AstroNvim heirline" style="width: 40%"
-  src="/blog/assets/astronvim-heirline.png?v=1.1.1"
+  src="/blog/assets/astronvim-heirline.png"
   title="AstroNvim heirline">
 
 ### Git Integration
@@ -889,7 +889,7 @@ the "Git Branch Preview" pane on the right shows the commits on the branch.
 ### Lazygit
 
 A better way to manage Git repositories from inside Neovim is to use
-[lazygit](<https://github.com/jesseduffield/lazygit?v=1.1.1>)
+[lazygit](https://github.com/jesseduffield/lazygit)
 which is a terminal UI for executing Git commands.
 
 To launch lazygit from a terminal window,
@@ -901,7 +901,7 @@ This opens a floating terminal and runs `lazygit` inside it.
 To close this window, press `q`.
 
 <img alt="AstroNvim lazygit" style="width: 100%"
-  src="/blog/assets/astronvim-lazygit.png?v=1.1.1"
+  src="/blog/assets/astronvim-lazygit.png"
   title="AstroNvim lazygit">
 
 The `lazygit` UI has a left and right side.
@@ -1081,7 +1081,7 @@ use `ctrl-j` and `ctrl-k` to move down and up
 and press `return` to select the highlighted completion.
 
 <img alt="AstroNvim completions" style="width: 40%"
-  src="/blog/assets/AstroNvim-completions.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-completions.png"
   title="AstroNvim completions">
 
 The key mappings related to code completion include:
@@ -1096,14 +1096,14 @@ The key mappings related to code completion include:
 
 ### Snippets
 
-AstroNvim uses the [LuaSnip](<https://github.com/L3MON4D3/LuaSnip?v=1.1.1>) plugin to support snippets.
+AstroNvim uses the [LuaSnip](https://github.com/L3MON4D3/LuaSnip) plugin to support snippets.
 Snippet suggestions appear when the beginning of their trigger words are typed.
 When a list of possible snippets appears,
 repeatedly press the `tab` key, `ctrl-j`, or `ctrl-k` to highlight one,
 and press the `return` key to select it.
 
 <img alt="AstroNvim snippets" style="width: 70%"
-  src="/blog/assets/AstroNvim-snippets.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-snippets.png"
   title="AstroNvim snippets">
 
 For snippets that have placeholders, type text or paste text into each one.
@@ -1216,11 +1216,11 @@ These are displayed by both `:marks` and `<leader>f'`.
 
 ### Bottom (btm)
 
-[bottom](<https://clementtsang.github.io/bottom/?v=1.1.1>)
+[bottom](https://clementtsang.github.io/bottom/)
 is a "graphical process/system monitor for the terminal".
 
 <img alt="AstroNvim bottom" style="width: 100%"
-  src="/blog/assets/AstroNvim-bottom.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-bottom.png"
   title="AstroNvim bottom">
 
 To install btm in MacOS, enter `brew install bottom`.
@@ -1232,11 +1232,11 @@ To quit `btm` and close the terminal that is running it, press `q`.
 
 ### Go DiskUsage (gdu)
 
-[gdu](<https://github.com/dundee/gdu?v=1.1.1>)
+[gdu](https://github.com/dundee/gdu)
 is a disk usage analyzer written in Go.
 
 <img alt="AstroNvim Go DiskUsage" style="width: 100%"
-  src="/blog/assets/AstroNvim-Go-DiskUsage.png?v=1.1.1"
+  src="/blog/assets/AstroNvim-Go-DiskUsage.png"
   title="AstroNvim Go DiskUsage">
 
 To install gdu in MacOS using Homebrew, enter the following command:
@@ -1289,7 +1289,7 @@ whose only purpose is top run a specific command.
 ### Custom Plugins
 
 There are a large number of plugins available for Neovim.
-A nice summary of them can be found at [Awesome Neovim Overview](<https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/#media?v=1.1.1>).
+A nice summary of them can be found at [Awesome Neovim Overview](https://www.trackawesomelist.com/rockerBOO/awesome-neovim/readme/#media).
 
 When AstroNvim starts, it executes all the `.lua` files
 in the `~/.config/nvim/lua/plugins` directory
@@ -1314,16 +1314,16 @@ When this completes, press `q` to close the window.
 The contents of the plugin configuration files
 should be similar to those shown in the subsections below.
 For details on the supported keys, see the "Plugin Spec" section in the  
-[Lazy doc](<https://github.com/folke/lazy.nvim?v=1.1.1>).
+[Lazy doc](https://github.com/folke/lazy.nvim).
 
 For help on a specific custom plugin, enter `:h {name}-config`.
 
-For information on writing your own Neovim plugins, see [Writing Plugins - It](<https://www.youtube.com/watch?v=PdaObkGazoU&v=1.1.1>)
+For information on writing your own Neovim plugins, see [Writing Plugins - It](https://www.youtube.com/watch?v=PdaObkGazoU)
 from DevOnDuty at NeovimConf 2022.
 
 #### Comment.nvim
 
-The [Comment.nvim](<https://github.com/numToStr/Comment.nvim?v=1.1.1>) plugin integrates with Tree-sitter
+The [Comment.nvim](https://github.com/numToStr/Comment.nvim) plugin integrates with Tree-sitter
 to provide language-specific smart commenting.
 It can recognizes different syntaxes in the same file,
 such as JavaScript, HTML, and CSS in a Svelte file,
@@ -1365,17 +1365,17 @@ Entering `gcc` as the same effect as the built-in mapping `<leader>/`.
 
 #### Emmet
 
-[Emmet](<https://docs.emmet.io?v=1.1.1>) is an editor plugin
+[Emmet](https://docs.emmet.io) is an editor plugin
 for quickly entering HTML, XML, and CSS.
 It also supports many "actions" that operate on HTML and XML elements.
 The most commonly used action is to expand an abbreviation or snippet.
 
 AstroNvim does not ship with Emmett support.
-To add it, see [emmet-vim](<https://github.com/mattn/emmet-vim?v=1.1.1>).
+To add it, see [emmet-vim](https://github.com/mattn/emmet-vim).
 
 #### git-blame.nvim
 
-The [git-blame.nvim](<https://github.com/f-person/git-blame.nvim?v=1.1.1>) plugin displays a git blame description
+The [git-blame.nvim](https://github.com/f-person/git-blame.nvim) plugin displays a git blame description
 after the current line in source files that are in a git repository.
 
 To install and configure this plugin, create the file
@@ -1396,8 +1396,8 @@ Consider adding a "gb" key mapping that runs the `GitBlameToggle` command.
 
 #### hop.nvim
 
-The [hop.nvim](<https://github.com/phaazon/hop.nvim?v=1.1.1>)
-plugin is a rewrite of the [EasyMotion](<https://github.com/easymotion/vim-easymotion?v=1.1.1>) Vim plugin
+The [hop.nvim](https://github.com/phaazon/hop.nvim)
+plugin is a rewrite of the [EasyMotion](https://github.com/easymotion/vim-easymotion) Vim plugin
 for Neovim.
 It provides an efficient way to jump to a specific place within a file
 that is currently visible.
@@ -1448,7 +1448,7 @@ are the most frequently used.
 
 #### neoformat
 
-The [neoformat](<https://github.com/sbdchd/neoformat?v=1.1.1>) plugin
+The [neoformat](https://github.com/sbdchd/neoformat) plugin
 formats text in many file types.
 It selects a formatter to use based on file type of the current buffer.
 The text in the buffer is then formatted.
@@ -1473,7 +1473,7 @@ By default AstroNvim formats files on save.
 
 #### nvim-surround
 
-The [nvim-surround](<https://github.com/kylechui/nvim-surround?v=1.1.1>) plugin makes it easy to
+The [nvim-surround](https://github.com/kylechui/nvim-surround) plugin makes it easy to
 add, change, or delete the delimiter surrounding a word or selected text.
 
 To install and configure this plugin, create the file
@@ -1502,7 +1502,7 @@ where `{d}` is replaced by delimiter text:
 
 #### smartcolumn.nvim
 
-The [smartcolumn.nvim](<https://github.com/m4xshen/smartcolumn.nvim?v=1.1.1>) plugin displays a vertical line at a given column
+The [smartcolumn.nvim](https://github.com/m4xshen/smartcolumn.nvim) plugin displays a vertical line at a given column
 only if at least one line in the file extends past that column.
 
 To install smartcolumn.nvim, create the file
@@ -1522,7 +1522,7 @@ return {
 
 #### todo-comments.nvim
 
-The [todo-comments.nvim](<https://github.com/folke/todo-comments.nvim?v=1.1.1>) plugin highlights comments that begin with
+The [todo-comments.nvim](https://github.com/folke/todo-comments.nvim) plugin highlights comments that begin with
 "FIX:", "HACK:", "NOTE:", "PERF:", "TODO:", or "WARNING:".
 Each of these are highlighted with a different background color.
 This plugin also defines commands for navigating to these comments.
@@ -1566,7 +1566,7 @@ It's unclear why that is necessary.
 
 #### treesj
 
-The [treesj](<https://github.com/Wansmer/treesj?v=1.1.1>) plugin makes it easy to split and join "blocks of code
+The [treesj](https://github.com/Wansmer/treesj) plugin makes it easy to split and join "blocks of code
 like arrays, hashes, statements, objects, dictionaries, etc."
 
 To install and configure this plugin, create the file
@@ -1601,7 +1601,7 @@ Consider adding a "sj" key mapping that runs the `TSJToggle` command.
 
 #### trouble
 
-The [trouble.nvim](<https://github.com/folke/trouble.nvim?v=1.1.1>)
+The [trouble.nvim](https://github.com/folke/trouble.nvim)
 plugin provides "a pretty list for showing diagnostics, references,
 telescope results, quickfix and location lists
 to help you solve all the trouble your code is causing."
@@ -1633,7 +1633,7 @@ is issued, closes the buffer AND the window it is inside.
 Typically there is only one window, so Vim exits.
 And typically this is NOT the desired behavior!
 
-To fix this, install the [vim-bbye](<https://github.com/moll/vim-bbye?v=1.1.1>) plugin.
+To fix this, install the [vim-bbye](https://github.com/moll/vim-bbye) plugin.
 This provides the commands `Bdelete` and `Bwipeout`.
 The `Bdelete` command "removes the file from the buffer list and
 clears its options, variables and mappings. However, it remains in the
@@ -1655,7 +1655,7 @@ To do this, enter `:Bw` in place of `:bd`.
 
 ### AstroNvim Community
 
-The [AstroNvim Community Repository](<https://github.com/AstroNvim/astrocommunity?v=1.1.1>) is a collection of
+The [AstroNvim Community Repository](https://github.com/AstroNvim/astrocommunity) is a collection of
 AstroNvim plugins and their configurations.
 These are typically easier to install that configuring them manually.
 

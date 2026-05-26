@@ -10,7 +10,7 @@ JavaScript Object Notation (JSON) is a data format that is
 frequently returned by API services and read from files.
 Often all the data is on a single line with no added spaces,
 so it is not easy for humans to read.
-The tool [jq](<https://stedolan.github.io/jq/?v=1.1.1>)
+The tool [jq](https://stedolan.github.io/jq/)
 helps with this and does much more.
 
 jq is a command-line JSON processor that is implemented in C.
@@ -25,24 +25,24 @@ custom function definitions, variables, streaming, and more.
 
 ## Resources
 
-- [jq Home Page](<https://stedolan.github.io/jq/?v=1.1.1>)
-- [An Introduction to JQ](<https://earthly.dev/blog/jq-select/?v=1.1.1>)
+- [jq Home Page](https://stedolan.github.io/jq/)
+- [An Introduction to JQ](https://earthly.dev/blog/jq-select/)
   by Adam Gordon Bell
-- [Processing JSON in the command-line made easy - jq tutorial (first steps)](<https://www.youtube.com/watch?v=FSn_38gDvzM&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=1&v=1.1.1>)
+- [Processing JSON in the command-line made easy - jq tutorial (first steps)](https://www.youtube.com/watch?v=FSn_38gDvzM&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=1)
   YouTube video by Szymon Stepniak
-- [Transforming, sorting, and grouping JSON documents in the command-line - jq tutorial](<https://www.youtube.com/watch?v=EIhLl9ebeiA&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=2&v=1.1.1>)
+- [Transforming, sorting, and grouping JSON documents in the command-line - jq tutorial](https://www.youtube.com/watch?v=EIhLl9ebeiA&list=PLKaiHc24qCTSOGkkEpeIMupEmnInqHbbV&index=2)
   YouTube video by Szymon Stepniak
 
 ## Installing
 
-There is a [web-based UI](<https://jqplay.org/?v=1.1.1>) for jq
+There is a [web-based UI](https://jqplay.org/) for jq
 that can be used as an alternative to installing it locally
 or just to experiment.
 
 To install jq in macOX using Homebrew, enter `brew install jq`.
 To install jq in other operating systems or
 use a different approach for installing in macOS, see
-[Download jq](<https://stedolan.github.io/jq/download/?v=1.1.1>).
+[Download jq](https://stedolan.github.io/jq/download/).
 
 ## Basic Usage
 
@@ -113,7 +113,7 @@ This outputs the following which is a compact (`-c`) JSON array.
 To get the second variety of the "hound" breed
 enter `jq '.message.hound[1]' dogs.json` which outputs `"basset"`.
 
-[Open Library](<https://openlibrary.org?v=1.1.1>) supports
+[Open Library](https://openlibrary.org) supports
 an API for getting publications whose description contains a given word.
 For example, the following command captures JSON describing publications
 related to Svelte which is a web framework.

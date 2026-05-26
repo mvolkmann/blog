@@ -25,11 +25,11 @@ For xample, they cannot interact with the file system or the network.
 
 ## Resources
 
-- [Write Swift macros](<https://developer.apple.com/wwdc23/10166?v=1.1.1>) WWDC 2023 video
+- [Write Swift macros](https://developer.apple.com/wwdc23/10166) WWDC 2023 video
 
-- [Expand on Swift macros](<https://developer.apple.com/wwdc23/10167?v=1.1.1>) WWDC 2023 video
+- [Expand on Swift macros](https://developer.apple.com/wwdc23/10167) WWDC 2023 video
 
-- [SwiftSyntax](<https://swiftpackageindex.com/apple/swift-syntax/main/documentation/swiftsyntax?v=1.1.1>) framework documentation
+- [SwiftSyntax](https://swiftpackageindex.com/apple/swift-syntax/main/documentation/swiftsyntax) framework documentation
 
   This package parses, inspects, manipulates, and generates Swift source code.
 
@@ -46,9 +46,9 @@ For xample, they cannot interact with the file system or the network.
 
 The following macros are provided by Swift and SwiftUI:
 
-- [@OptionSet](<https://developer.apple.com/documentation/swift/optionset-swift.macro?v=1.1.1>) creates an option set from a `struct`
+- [@OptionSet](https://developer.apple.com/documentation/swift/optionset-swift.macro) creates an option set from a `struct`
   that contains a nested `Options` `enum`.
-- [#Preview](<https://developer.apple.com/documentation/widgetkit/preview-macros?v=1.1.1>) generates code to
+- [#Preview](https://developer.apple.com/documentation/widgetkit/preview-macros) generates code to
   display a preview of a SwiftUI widget in Xcode.
 
 - TODO: Find more of these.
@@ -57,7 +57,7 @@ The following macros are provided by Swift and SwiftUI:
 
 The following macros are not provided by Apple:
 
-- [SwiftRequest](<https://github.com/ailtonvivaz/swift-request?v=1.1.1>) provides macros for sending all kinds of HTTP requests.
+- [SwiftRequest](https://github.com/ailtonvivaz/swift-request) provides macros for sending all kinds of HTTP requests.
 
 ## Defining Macros
 
@@ -287,6 +287,6 @@ To run the tests, select Product ... Test or press cmd-u.
 
 ## Examples
 
-- [TypeInitMacro](<https://github.com/mvolkmann/TypeInitMacro?v=1.1.1>)
+- [TypeInitMacro](https://github.com/mvolkmann/TypeInitMacro)
 
   This macro adds a member-wise initializer to a `class` or `struct`.

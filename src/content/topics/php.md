@@ -5,7 +5,7 @@ layout: topic-layout.njk
 ---
 
 <img alt="PHP mascot" class="keep-size"
-  src="/blog/assets/php-mascot.png?v=1.1.1">
+  src="/blog/assets/php-mascot.png">
 
 PHP is an interpreted scripting language.
 It is typically used to implement web applications,
@@ -31,7 +31,7 @@ HTML forms can contain `input` elements with `type="hidden"`
 to send data that is not rendered.
 
 A great source of PHP documentation is the
-[PHP Manual](<https://www.php.net/manual/en/?v=1.1.1>).
+[PHP Manual](https://www.php.net/manual/en/).
 
 ## Pros
 
@@ -62,7 +62,7 @@ For example, create the file `hello.php` containing the following:
 ```php
 <?php
 echo "Hello, World!\n";
-?>
+>
 ```
 
 To run this, enter `php hello.php`.
@@ -73,11 +73,11 @@ A recommended way to obtain a local HTTP server
 is to use XAMPP. I tried this, but failed to get it to work in macOS.
 
 Another option in macOS is to use the built-in support for Apache and PHP.
-See [Installing Apache, PHP, and MySQL on macOS Catalina](<https://jasonmccreary.me/articles/install-apache-php-mysql-mac-os-x-catalina/?v=1.1.1>).
+See [Installing Apache, PHP, and MySQL on macOS Catalina](https://jasonmccreary.me/articles/install-apache-php-mysql-mac-os-x-catalina/).
 
 1. Start the Apache HTTP server.
    - `sudo apachectl start`
-1. Browse [http://localhost](<http://localhost?v=1.1.1>)
+1. Browse [http://localhost](http://localhost)
    to verify that it is running.
 1. Make a backup of the Apache configuration file.
    - `cd /etc/apache2/`
@@ -91,7 +91,7 @@ See [Installing Apache, PHP, and MySQL on macOS Catalina](<https://jasonmccreary
    - `sudo chmod a+w /Library/WebServer/Documents`
 1. Create the file `/Library/WebServer/Documents/phpinfo.php`
    containing `<?php phpinfo();`
-1. Browse [http://localhost/phpinfo.php](<http://localhost/phpinfo.php?v=1.1.1>).
+1. Browse [http://localhost/phpinfo.php](http://localhost/phpinfo.php).
 1. Create your first PHP page.
 
    - Create the file `hello.php`
@@ -108,7 +108,7 @@ See [Installing Apache, PHP, and MySQL on macOS Catalina](<https://jasonmccreary
        <h1>Verifying PHP</h1>
          <?php
            echo "Hello, World!";
-         ?>
+         >
          <p>Did you see it?</p>
        </body>
      </html>
@@ -131,7 +131,7 @@ To format PHP files using Prettier:
 - `prettier {filename}.php --write` or `prettier *.php --write`
 
 For details on the Prettier plugin for PHP, see
-[here](<https://github.com/prettier/plugin-php?v=1.1.1>).
+[here](https://github.com/prettier/plugin-php).
 
 To configure Prettier for PHP,
 create a `.prettierrc` file similar to the following:
@@ -156,7 +156,7 @@ To embed PHP code in HTML and CSS, use the following syntax:
 ```php
 <?php
   // code
-?>
+>
 ```
 
 This code can add to the response using the `echo` command.
@@ -166,7 +166,7 @@ Note that HTML tags can be output.
 To embed the value of a PHP variable, use the following syntax:
 
 ```php
-<?= $variableName ?>
+<?= $variableName >
 ```
 
 PHP statements are separated from each other by semicolons,
@@ -392,7 +392,7 @@ and refer to properties of that object using `->`.
 
 ## Magic Methods
 
-See [here](<https://www.php.net/manual/en/language.oop5.magic.php?v=1.1.1>).
+See [here](https://www.php.net/manual/en/language.oop5.magic.php).
 
 They include:
 
@@ -533,7 +533,7 @@ For example:
 <?php
   include 'file-name.php';
   include 'subdirectory/file-name.php';
-?>
+>
 
 It is an error to define a function or class multiple times.
 If a file being included defines functions or classes,
@@ -548,7 +548,7 @@ function sum($n1, $n2) {
   return $n1 + $n2;
 }
 // Could define more math functions here.
-?>
+>
 ````
 
 Note that the above file doesn't indicate what it exports.
@@ -564,7 +564,7 @@ Here is a PHP file that uses this:
     include 'math.php';
 
     echo 'sum = ' . sum(2, 3) . '<br>'; // 5
-    ?>
+    >
   </body>
 </html>
 ```
@@ -584,7 +584,7 @@ PHP currently defines these:
   - `$_SERVER['SERVER_ADDR']` holds the server IP address.
   - `$_SERVER['SERVER_HOST']` holds the server host name.
 
-  For a complete list, see [here](<https://www.php.net/manual/en/reserved.variables.server.php?v=1.1.1>).
+  For a complete list, see [here](https://www.php.net/manual/en/reserved.variables.server.php).
 
 - `$_GET` is an associative array that holds URL query parameters
   that are typically specified in the URL of an HTTP GET request.
@@ -625,7 +625,7 @@ To start a session, add the following on every page that accesses it,
 or in a file that all such pages include:
 
 ```php
-<?php session_start(); ?>
+<?php session_start(); >
 ```
 
 To set a session variable, use the syntax `$_SESSION['name'] = value;`
@@ -648,7 +648,7 @@ This is a ridiculous use of PHP because every button push triggers
 a page refresh. But it does work and it illustrates many PHP concepts.
 
 <img alt="PHP Calculator" class="keep-size"
-  src="/blog/assets/php-calculator.png?v=1.1.1">
+  src="/blog/assets/php-calculator.png">
 
 ```php
 <!DOCTYPE html>
@@ -775,10 +775,10 @@ a page refresh. But it does work and it illustrates many PHP concepts.
       }
       $lastOperator = $operator;
     }
-    ?>
+    >
     <form>
       <div class="result">
-        <?= $display ?>
+        <?= $display >
       </div>
       <div class="row">
         <button name="special" value="clear">AC</button>
@@ -809,9 +809,9 @@ a page refresh. But it does work and it illustrates many PHP concepts.
         <button name="digit" value=".">.</button>
         <button name="operator" value="=">＝</button>
       </div>
-      <input type="hidden" name="n1" value="<?= $n1 ?>">
-      <input type="hidden" name="n2" value="<?= $n2 ?>">
-      <input type="hidden" name="lastOperator" value="<?= $lastOperator ?>">
+      <input type="hidden" name="n1" value="<?= $n1 >">
+      <input type="hidden" name="n2" value="<?= $n2 >">
+      <input type="hidden" name="lastOperator" value="<?= $lastOperator >">
     <form>
   </body>
 </html>
@@ -822,7 +822,7 @@ a page refresh. But it does work and it illustrates many PHP concepts.
 MySQL is the most commonly used relational database in PHP applications.
 
 To install MySQL on macOS,
-install [Homebrew](<https://brew.sh/?v=1.1.1>)
+install [Homebrew](https://brew.sh/)
 and enter `brew install mysql`.
 
 Edit `/usr/local/etc/my.cnf`
@@ -844,12 +844,12 @@ To set a password for the "root" user:
 
 ## phpMyAdmin
 
-[phpMyAdmin](<https://www.phpmyadmin.net/?v=1.1.1>)
+[phpMyAdmin](https://www.phpmyadmin.net/)
 is a free tool implemented in PHP
 that provides a web UI for managing MySQL databases.
 
 Download phpMyAdmin from
-[here](<https://www.phpmyadmin.net/?v=1.1.1>).
+[here](https://www.phpmyadmin.net/).
 Unzip the downloaded file and copy the directory created
 to your server documents directory.
 For example, in Apache running in macOS
@@ -880,28 +880,28 @@ To run phpMyAdmin, browse `localhost/phpMyAdmin`.
 Enter a username and password such as for the "root" user.
 
 <img alt="phpMyAdmin login" style="width: 20%"
-  src="/blog/assets/phpMyAdmin-1-login.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-1-login.png">
 
 After logging in, the settings page is displayed.
 
 <img alt="phpMyAdmin settings" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-2-settings.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-2-settings.png">
 
 Click the "Databases" tab to see a list of existing databases
 and create new ones.
 
 <img alt="phpMyAdmin databases" style="width: 50%"
-  src="/blog/assets/phpMyAdmin-3-databases.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-3-databases.png">
 
 Click the link for an existing database to see its tables.
 
 <img alt="phpMyAdmin structure" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-4-structure.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-4-structure.png">
 
 Click the link for an existing table to see its rows.
 
 <img alt="phpMyAdmin tables" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-5-table-browse.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-5-table-browse.png">
 
 Click the "SQL" tab to enter SQL for any kind of operation
 including creating tables, querying, inserting, updating, and deleting.
@@ -909,7 +909,7 @@ The UI also provides ways of doing all of these things
 without writing SQL.
 
 <img alt="phpMyAdmin SQL" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-6-sql.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-6-sql.png">
 
 To create a new table without writing SQL,
 click a database in the left nav,
@@ -920,7 +920,7 @@ Note that the "A_I" checkboxes are for auto-increment
 which is often used with primary keys.
 
 <img alt="phpMyAdmin columns" style="width: 70%"
-  src="/blog/assets/phpMyAdmin-7-columns.png?v=1.1.1">
+  src="/blog/assets/phpMyAdmin-7-columns.png">
 
 ## Database with CRUD
 
@@ -928,7 +928,7 @@ Here is an example web app that performs
 Create/Retrieve/Update/Delete operations on a database table.
 
 <img alt="PHP dogs app" style="width: 30%"
-  src="/blog/assets/php-dogs-app.png?v=1.1.1">
+  src="/blog/assets/php-dogs-app.png">
 
 Let's start with the file `includes/db.php`
 which creates a connection to the database.
@@ -1067,19 +1067,19 @@ Finally, the file `dogs.php` generates the HTML for the app.
       }
       array_push($dogs, $dog);
     }
-    ?>
+    >
 
     <form method="POST" action="includes/dog-crud.php">
       <div class="row">
         <label for="name">Name</label>
-        <input id="name" name="name" value="<?= $name ?>">
+        <input id="name" name="name" value="<?= $name >">
       </div>
       <div class="row">
         <label for="breed">Breed</label>
-        <input id="breed" name="breed" value="<?= $breed ?>">
+        <input id="breed" name="breed" value="<?= $breed >">
       </div>
-      <button name="action" value="<?= $btnAction ?>">
-        <?= $btnText ?>
+      <button name="action" value="<?= $btnAction >">
+        <?= $btnText >
       </button>
 
       <table>
@@ -1105,7 +1105,7 @@ Finally, the file `dogs.php` generates the HTML for the app.
               echo '</td>';
               echo '</tr>';
             }
-          ?>
+          >
         </tbody>
       </table>
     </form>
@@ -1117,7 +1117,7 @@ Finally, the file `dogs.php` generates the HTML for the app.
         echo "An invalid action \"$pieces[1]\" was submitted.";
         echo '</div>';
       }
-    ?>
+    >
   </body>
 </html>
 ```

@@ -11,12 +11,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="PWA logo" style="border: none; width: 30%"
-  src="/blog/assets/pwa-logo.svg?v=1.1.1"
+  src="/blog/assets/pwa-logo.svg"
   title="PWA logo">
 
 ## Overview
 
-[IndexedDB](<https://www.w3.org/TR/IndexedDB/?v=1.1.1>)
+[IndexedDB](https://www.w3.org/TR/IndexedDB/)
 is a JavaScript-based, object-oriented database
 that is supported by modern web browsers.
 
@@ -104,11 +104,11 @@ The IndexedDB API defines many interfaces that implementations implement.
 The following subsections summarized the most important
 properties and methods of these interfaces.
 
-Also see the Promise-based library [idb](<https://github.com/jakearchibald/idb#opendb?v=1.1.1>) from Jake Archibald.
+Also see the Promise-based library [idb](https://github.com/jakearchibald/idb#opendb) from Jake Archibald.
 
 ### IDBFactory
 
-The [IDBFactory](<https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory?v=1.1.1>) interface provides access to databases.
+The [IDBFactory](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory) interface provides access to databases.
 
 Instances support the following operations.
 
@@ -165,7 +165,7 @@ request.onerror = event => {
 
 ### IDBDatabase
 
-The [IDBDatabase](<https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase?v=1.1.1>) interface provides a connection to a database.
+The [IDBDatabase](https://developer.mozilla.org/en-US/docs/Web/API/IDBDatabase) interface provides a connection to a database.
 
 Instances support the following operations.
 
@@ -199,7 +199,7 @@ db.close();
 
 ### IDBTransaction
 
-The [IDBTransaction](<https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction?v=1.1.1>) interface provides an asynchronous transaction
+The [IDBTransaction](https://developer.mozilla.org/en-US/docs/Web/API/IDBTransaction) interface provides an asynchronous transaction
 over a set of stores in a common database.
 
 Instances have the following properties.
@@ -256,7 +256,7 @@ txn.onerror = event => {
 
 ### IDBObjectStore
 
-The [IDBObjectStore](<https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore?v=1.1.1>) interface represents a database store
+The [IDBObjectStore](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore) interface represents a database store
 which is similar to a table in a relational database.
 
 Instances have the following properties.
@@ -306,7 +306,7 @@ The `count` method can:
 - determine if a record with a given key exists, returning 0 or 1
   (string key passed)
 - get the number of records whose keys fall in a given range
-  (instance of [IDBKeyRange](<https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange?v=1.1.1>) passed)
+  (instance of [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) passed)
 
 ```js
 const query = ...;
@@ -382,7 +382,7 @@ The `getAll` method can:
 - get all the records in a store (no argument passed)
 - get the record with a given key (string key passed)
 - get all the records whose keys fall in a given range
-  (instance of [IDBKeyRange](<https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange?v=1.1.1>) passed)
+  (instance of [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) passed)
   This is useful for pagination.
 
 ```js
@@ -404,7 +404,7 @@ request.onerror = event => {
 #### get keys
 
 The `getAllKeys` method gets an array of all the keys of existing records
-that fall in a specified [IDBKeyRange](<https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange?v=1.1.1>).
+that fall in a specified [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange).
 
 #### open index over all records
 
@@ -451,7 +451,7 @@ request.onerror = event => {
 
 ### IDBRequest
 
-The [IDBRequest](<https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest?v=1.1.1>) interface represents the result of an asynchronous operation.
+The [IDBRequest](https://developer.mozilla.org/en-US/docs/Web/API/IDBRequest) interface represents the result of an asynchronous operation.
 It is common to set the `onsuccess` and `onerror` properties
 to a callback function that is passed an event object.
 
@@ -468,7 +468,7 @@ Instances do not support any operations.
 
 ### IDBCursor
 
-The [IDBCursor](<https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor?v=1.1.1>) interface is used to iterate over records in a store.
+The [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor) interface is used to iterate over records in a store.
 
 Instances support the following operations.
 
@@ -544,7 +544,7 @@ request.onerror = event => {
 
 ### IDBIndex
 
-The [IDBIndex](<https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex?v=1.1.1>) interface provides efficient retrieval of records in a store
+The [IDBIndex](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex) interface provides efficient retrieval of records in a store
 based on one or more properties of the records.
 
 Instances have the following properties.
@@ -560,7 +560,7 @@ Instances do not support any operations.
 
 ### IDBKeyRange
 
-The [IDBKeyRange](<https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange?v=1.1.1>) interface describes a range of keys.
+The [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) interface describes a range of keys.
 It is used to retrieve matching keys or records from a store.
 
 To create a range, call one of the following static methods:

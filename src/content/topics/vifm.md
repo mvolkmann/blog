@@ -6,24 +6,24 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Vifm](<https://vifm.info?v=1.1.1>)
+[Vifm](https://vifm.info)
 is a terminal-based file manager that uses Vim keybindings
 and is implemented in C.
 It is similar to Ranger, but is more heavily based on Vim.
 
 For documentation see the
-[Manual](<https://vifm.info/manual.shtml?v=1.1.1>).
+[Manual](https://vifm.info/manual.shtml).
 
 For key bindings see the
-[Cheatsheet](<https://vifm.info/cheatsheets.shtml?v=1.1.1>).
+[Cheatsheet](https://vifm.info/cheatsheets.shtml).
 
 For color schemes see the
-[Color Schemes](<https://vifm.info/colorschemes.shtml?v=1.1.1>).
+[Color Schemes](https://vifm.info/colorschemes.shtml).
 
 ## Installing
 
 See the "Download link" at the bottom of the
-[home page](<https://vifm.info?v=1.1.1>)
+[home page](https://vifm.info)
 for downloading the source or Windows executables.
 
 To install Vifm in macOS, install Homebrew and enter `brew install vifm`.
@@ -132,7 +132,7 @@ By default `vifm` is configured in the file `~/.vifm/vifmrc`.
 ## Color Schemes
 
 Vifm provides predefined
-[color schemes](<https://vifm.info/colorschemes.shtml?v=1.1.1>).
+[color schemes](https://vifm.info/colorschemes.shtml).
 To use these, download their `.vifm` files
 into the `~/.config/vifm/colors` directory.
 Then edit `~/.config/vifm/vifmrc` and change the `colorscheme` setting.

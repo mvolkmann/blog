@@ -10,9 +10,9 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Plotly](<https://plotly.com/python/?v=1.1.1>)
+[Plotly](https://plotly.com/python/)
 is a Python library for creating interactive data visualizations.
-It builds on the [Plotly JavaScript library](<https://plotly.com/javascript/?v=1.1.1>) which uses [D3](../../d3/01-overview/).
+It builds on the [Plotly JavaScript library](https://plotly.com/javascript/) which uses [D3](../../d3/01-overview/).
 
 To install this package, enter `pip install plotly`.
 
@@ -68,7 +68,7 @@ JupyterLab launched from Anaconda Navigator!
 
 The following code can be entered in a Jupyter Notebook
 to render a line chart that shows stock prices.
-It uses a dataset provided by Plotly in [`plotly.express.data`](<https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data?v=1.1.1>).
+It uses a dataset provided by Plotly in [`plotly.express.data`](https://plotly.com/python-api-reference/generated/plotly.data.html#module-plotly.data).
 These include:
 
 | Dataset Name     | Description                                                                         |

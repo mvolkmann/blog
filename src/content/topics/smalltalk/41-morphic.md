@@ -181,7 +181,7 @@ until a halo appears around the desired `Morph`.
 The class of the `Morph` will be displayed at the bottom of the `Morph`.
 
 <img alt="Smalltalk halo" style="width: 50%"
-  src="/blog/assets/smalltalk-halo.png?v=1.1.1">
+  src="/blog/assets/smalltalk-halo.png">
 
 The following buttons are provided:
 
@@ -233,7 +233,7 @@ When changing a color, select a color palette and
 drag a color swatch onto the instance variable.
 
 <img alt="Crayon Colors palette"
-  src="/blog/assets/cuis-crayon-colors-palette.png?v=1.1.1"
+  src="/blog/assets/cuis-crayon-colors-palette.png"
   style="width: 100%">
 
 Color swatches can be dragged from one menu to another to copy colors.
@@ -398,7 +398,7 @@ send it the `#addMorph:` message.
 For example:
 
 <img alt="LayoutMorph" style="width: 30%"
-  src="/blog/assets/cuis-smalltalk-layoutmorph.png?v=1.1.1">
+  src="/blog/assets/cuis-smalltalk-layoutmorph.png">
 
 ```smalltalk
 box1 := ColoredBoxMorph new color: Color red; morphExtent: 50 @ 50.
@@ -431,7 +431,7 @@ can be configured interactively.
 - When satisfied with the changes, close the dialog.
 
 <img alt="Cuis Morphic Layout dialog" style="width: 75%"
-  src="/blog/assets/cuis-morphic-layout-dialog.png?v=1.1.1">
+  src="/blog/assets/cuis-morphic-layout-dialog.png">
 
 To change the background color of a `LayoutMorph` instance,
 send it `#color:` with an argument that is the new color.
@@ -533,7 +533,7 @@ offAxisEdgeWeight: aNumber
 The following code demonstrates layout of submorphs.
 
 <img alt="Cuis Morphic layout" style="width: 40%"
-  src="/blog/assets/cuis-morphic-layout1.png?v=1.1.1">
+  src="/blog/assets/cuis-morphic-layout1.png">
 
 ```smalltalk
 row := LayoutMorph newRow.
@@ -569,7 +569,7 @@ row openInWorld.
 Here is one more example.
 
 <img alt="Cuis Morphic layout" style="width: 40%"
-  src="/blog/assets/cuis-morphic-layout2.png?v=1.1.1">
+  src="/blog/assets/cuis-morphic-layout2.png">
 
 ```smalltalk
 column := LayoutMorph newColumn.
@@ -614,7 +614,7 @@ until the halo appears around the target `Morph`.
 The following menu will appear:
 
 <img alt="Cuis halo blue menu" style="width: 60%"
-  src="/blog/assets/cuis-halo-blue-menu.png?v=1.1.1">
+  src="/blog/assets/cuis-halo-blue-menu.png">
 
 Click the push pin at the upper-right of the menu
 to keep the menu open, which simplifies making multiple changes.
@@ -688,7 +688,7 @@ To edit the width, height, and off-axis edge weight of a submorph
 - When satisfied with the changes, close the dialog.
 
 <img alt="Cuis edit my LayoutSpec" style="width: 80%"
-  src="/blog/assets/cuis-edit-my-layoutspec.png?v=1.1.1">
+  src="/blog/assets/cuis-edit-my-layoutspec.png">
 
 For more detail on layouts, see
 <a href="https://github.com/Cuis-Smalltalk/Learning-Cuis/blob/master/LayoutTour.md"
@@ -717,7 +717,7 @@ For example, the following image is from
 target="_blank">VisualParadox</a>.
 
 <img alt="Altitude"
-    src="/blog/assets/altitude1600.jpg?v=1.1.1">
+    src="/blog/assets/altitude1600.jpg">
 
 ```smalltalk
 "Relative file references start from the Cuis-Smalltalk-Dev-UserFiles directory."
@@ -1016,7 +1016,7 @@ The following code demonstrates using the
 to draw an oval at a 45 degree angle.
 
 <img alt="Cuis arcTo:" style="width: 30%"
-  src="/blog/assets/cuis-morphic-oval.png?v=1.1.1">
+  src="/blog/assets/cuis-morphic-oval.png">
 
 ```smalltalk
 drawOn: aCanvas
@@ -1196,7 +1196,7 @@ tmm keystrokeAction: [:event |
 By default, if the user attempts to close a `SystemWindow`
 and it contains `TextModelMorph` instances that have unsaved changes,
 the user will be asked to confirm this with the message
-"Changes have not been saved. Is it OK to cancel those changes?".
+"Changes have not been saved. Is it OK to cancel those changes".
 They must select "Yes" to close the window.
 To disable this check for a particular instance of `TextModelMorph`,
 send it `askBeforeDiscardingEdits: false`.
@@ -1249,7 +1249,7 @@ The user can enter their first and last name.
 Clicking the "Greet" button displays a greeting message below the button.
 
 <img alt="Cuis user interaction demo" style="width: 40%"
-  src="/blog/assets/cuis-user-interaction-demo.png?v=1.1.1">
+  src="/blog/assets/cuis-user-interaction-demo.png">
 
 Create the class `UserInteractionDemo` as follows:
 
@@ -1524,7 +1524,7 @@ and open a menu of other window-related commands (blue).
 The menu includes:
 
 - change title...
-- window color... (broken?)
+- window color... (broken)
 - close others...
 - send to back
 - make next-to-topmost (moves behind one other window)
@@ -1575,10 +1575,10 @@ The window prompts for your name.
 When a name is entered, it displays "Hello {name}!" below in the text input.
 
 <img alt="window before entering name" style="width: 40%"
-  src="/blog/assets/cuis-smalltalk-greeter1.png?v=1.1.1">
+  src="/blog/assets/cuis-smalltalk-greeter1.png">
 
 <img alt="window after entering name" style="width: 40%"
-  src="/blog/assets/cuis-smalltalk-greeter2.png?v=1.1.1">
+  src="/blog/assets/cuis-smalltalk-greeter2.png">
 
 ```smalltalk
 SystemWindow subclass: #Greeter
@@ -2012,7 +2012,7 @@ The following class defines a class method `buttons` that displays buttons
 that activate and deactivate full screen mode.
 
 <img alt="Cuis full screen buttons" class="logo" style="width: 20%"
-  src="/blog/assets/cuis-full-screen-buttons.png?v=1.1.1">
+  src="/blog/assets/cuis-full-screen-buttons.png">
 
 ```smalltalk
 Object subclass: #VFullScreenButtons
@@ -2076,33 +2076,33 @@ It is similar to the JavaScript DOM functions `alert` and `confirm`.
 For example:
 
 <img alt="Cuis PopupMenu inform" style="width: 50%"
-  src="/blog/assets/cuis-popupmenu-inform.png?v=1.1.1">
+  src="/blog/assets/cuis-popupmenu-inform.png">
 
 ```smalltalk
 PopUpMenu inform: 'Something interesting just happened.'.
 ```
 
 <img alt="Cuis PopupMenu confirm" style="width: 32%"
-  src="/blog/assets/cuis-popupmenu-confirm.png?v=1.1.1">
+  src="/blog/assets/cuis-popupmenu-confirm.png">
 
 ```smalltalk
-likesIceCream := PopUpMenu confirm: 'Do you like ice cream?'.
+likesIceCream := PopUpMenu confirm: 'Do you like ice cream'.
 likesIceCream print. "prints true or false"
 ```
 
 <img alt="Cuis PopupMenu confirm:trueChoice:falseChoice:" style="width: 32%"
-  src="/blog/assets/cuis-popupmenu-confirm-truechoice-falsechoice.png?v=1.1.1">
+  src="/blog/assets/cuis-popupmenu-confirm-truechoice-falsechoice.png">
 
 ```smalltalk
 likesIceCream := PopUpMenu
-    confirm: 'Do you like ice cream?'
+    confirm: 'Do you like ice cream'
     trueChoice: 'Love it!'
     falseChoice: 'Not for me'.
 likesIceCream print. "prints true or false"
 ```
 
 <img alt="Cuis PopupMenu withCaption:chooseFrom" style="width: 24%"
-  src="/blog/assets/cuis-popupmenu-withcaption-choosefrom.png?v=1.1.1">
+  src="/blog/assets/cuis-popupmenu-withcaption-choosefrom.png">
 
 ```smalltalk
 color := PopUpMenu withCaption: 'Choose a color.' chooseFrom: #('red' 'green' 'blue').
@@ -2115,7 +2115,7 @@ The `SelectionMenu` class is a subclass of `PopupMenu`.
 For example:
 
 <img alt="Cuis SelectionMenu" style="width: 18%"
-  src="/blog/assets/cuis-selectionmenu.png?v=1.1.1">
+  src="/blog/assets/cuis-selectionmenu.png">
 
 ```smalltalk
 labels := #(burrito enchilada taco chips quacamole salsa water soda tea).
@@ -2129,13 +2129,13 @@ The following code demonstrates opening a `SelectionMenu`
 when a button is clicked.
 
 <img alt="Cuis SelectionMenu closed" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu1.png?v=1.1.1">
+  src="/blog/assets/cuis-selectionmenu1.png">
 
 <img alt="Cuis SelectionMenu open" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu2.png?v=1.1.1">
+  src="/blog/assets/cuis-selectionmenu2.png">
 
 <img alt="Cuis SelectionMenu selected" style="width: 40%"
-  src="/blog/assets/cuis-selectionmenu3.png?v=1.1.1">
+  src="/blog/assets/cuis-selectionmenu3.png">
 
 Define the following class:
 
@@ -2208,7 +2208,7 @@ It can also evaluate a block if the user clicks the cancel button.
 For example:
 
 <img alt="Cuis StringRequestMorph" style="width: 40%"
-  src="/blog/assets/cuis-stringrequestmorph.png?v=1.1.1">
+  src="/blog/assets/cuis-stringrequestmorph.png">
 
 ```smalltalk
 StringRequestMorph
@@ -2232,7 +2232,7 @@ In addition to demonstrating the use of `PluggableListMorph`,
 this also disables buttons when their use is not appropriate.
 
 <img alt="Cuis PluggableListMorph" style="width: 30%"
-  src="/blog/assets/cuis-pluggablelistmorph.png?v=1.1.1">
+  src="/blog/assets/cuis-pluggablelistmorph.png">
 
 Create the following class:
 

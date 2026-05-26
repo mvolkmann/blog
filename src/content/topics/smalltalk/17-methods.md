@@ -298,7 +298,7 @@ When a method is saved, if it assigns a value to an unknown variable
 then the following dialog will appear:
 
 <img alt="Unknown Variable"
-  src="/blog/assets/cuis-unknown-variable.png?v=1.1.1"
+  src="/blog/assets/cuis-unknown-variable.png"
   style="width: 65%">
 
 Choose "declare instance" to add the variable to the

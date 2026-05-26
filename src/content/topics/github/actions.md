@@ -438,14 +438,14 @@ This workflow runs the following commands:
 
 - `actions/checkout@v2` is a predefined action that checks out
   the most recent commit to a given branch which defaults to "master".
-  See [checkout](<https://github.com/actions/checkout?v=1.1.1>)
+  See [checkout](https://github.com/actions/checkout)
   for options.
 - `actions/setup-node@v1` is a predefined action that sets the Node environment.
   It uses a version specified in `strategy.matrix.node-version`
   unless the `node-version` property is specified.
   When the matrix property specifies Node versions,
   the version used in a particular run becomes part of the step name.
-  See [setup-node](<https://github.com/actions/setup-node?v=1.1.1>)
+  See [setup-node](https://github.com/actions/setup-node)
   for options.
 - `npm ci` does a clean install of all dependencies.
   It is similar to `npm install`, but differs the following ways:
@@ -599,7 +599,7 @@ see <https://github.com/peaceiris/actions-gh-pages>.
 Currently there is no way to manually
 trigger a workflow from the GitHub web UI.
 It is a frequently requested feature, as indicated at
-[feature request](<https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504?v=1.1.1>).
+[feature request](https://github.community/t5/GitHub-Actions/GitHub-Actions-Manual-Trigger-Approvals/td-p/31504).
 
 However, workarounds are possible.
 One workaround is to configure a workflow to be triggered
@@ -650,7 +650,7 @@ It is stored in the following context objects:
 `env`, `github`, `job`, `matrix`, `needs`,
 `runner`, `secrets`, `steps`, and `strategy`.
 To learn more about these, see
-[contexts](<https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts?v=1.1.1>).
+[contexts](https://help.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#contexts).
 
 To output the data in a particular context in a step,
 use the `toJson` function to put the JSON representation of the object

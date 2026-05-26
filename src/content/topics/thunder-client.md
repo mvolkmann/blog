@@ -6,14 +6,14 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Thunder Client](<https://www.thunderclient.io?v=1.1.1>)
+[Thunder Client](https://www.thunderclient.io)
 is a VS Code extension for testing APIs.
-It is similar to [Postman](<?v=1.1.1>),
+It is similar to [Postman](<>),
 but has the advantage of being able to test APIs
 in the same tool where code is being written.
 
 <img alt="Thunder Client" style="width: 90%"
-  src="/blog/assets/vs-code-thunder-client.png?v=1.1.1"
+  src="/blog/assets/vs-code-thunder-client.png"
   title="Thunder Client">
 
 ## Installing
@@ -31,7 +31,7 @@ To start Thunder Client, click the sidebar icon
 that is a circle containing a lightning bolt.
 
 <img alt="Thunder Client icon" style="width: 10%"
-  src="/blog/assets/vs-code-thunder-client-icon.png?v=1.1.1"
+  src="/blog/assets/vs-code-thunder-client-icon.png"
   title="Thunder Client icon">
 
 To create a new collection of requests,

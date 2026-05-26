@@ -7,12 +7,12 @@ layout: topic-layout.njk
 ## Overview
 
 <img alt="Flutter logo" style="width: 40%"
-    src="/blog/assets/flutter-logo.svg?v=1.1.1"
+    src="/blog/assets/flutter-logo.svg"
     title="Flutter logo">
 
-[Flutter](<https://flutter.dev?v=1.1.1>), originally named "Sky",
+[Flutter](https://flutter.dev), originally named "Sky",
 enables writing mobile, web, desktop, and embedded apps
-It uses the [Dart programming language](<https://dart.dev?v=1.1.1>).
+It uses the [Dart programming language](https://dart.dev).
 For details on the Dart programming language,
 see this <a href="../dart/">blog page</a>.
 
@@ -20,23 +20,23 @@ Everything rendered by a Flutter app is rendered by a "widget".
 There are many provided widgets and custom ones can be defined.
 
 The Flutter framework is implemented in Dart,
-except for the [Skia](<https://skia.org?v=1.1.1>)
+except for the [Skia](https://skia.org)
 2D graphics library which is implemented in C++.
-Flutter is not the only user of Skia. From [Graphics and Skia](<https://www.chromium.org/developers/design-documents/graphics-and-skia?v=1.1.1>), "Chrome uses Skia
+Flutter is not the only user of Skia. From [Graphics and Skia](https://www.chromium.org/developers/design-documents/graphics-and-skia), "Chrome uses Skia
 for nearly all graphics operations, including text rendering."
-From [Wikipedia](<https://en.wikipedia.org/wiki/Skia_Graphics_Engine?v=1.1.1>), "the library (Skia) is used as of 2021 in
+From [Wikipedia](https://en.wikipedia.org/wiki/Skia_Graphics_Engine), "the library (Skia) is used as of 2021 in
 Google Chrome, Chrome OS, Chromium OS, Mozilla Firefox,
 Mozilla Thunderbird, Android, Firefox OS, LibreOffice, Flutter and Avalonia."
 
-[FlutterFlow](<https://flutterflow.io?v=1.1.1>) is a
+[FlutterFlow](https://flutterflow.io) is a
 relatively new, low-code tool for building Flutter applications.
 
 ## Resources
 
-- [Flutter home page](<https://flutter.dev/?v=1.1.1>)
-- [Flutter official documentation](<https://flutter.dev/docs?v=1.1.1>)
-- [Write your first Flutter app](<https://flutter.dev/docs/get-started/codelab?v=1.1.1>)
-- [Cookbook: Useful Flutter samples](<https://flutter.dev/docs/cookbook?v=1.1.1>)
+- [Flutter home page](https://flutter.dev/)
+- [Flutter official documentation](https://flutter.dev/docs)
+- [Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
 ## Comparison to React Native
 
@@ -72,13 +72,13 @@ Because everything rendered by Flutter is just drawn on a canvas,
 it can take advantage of device GPUs.
 This is one reason it has better performance than React Native.
 
-Flutter uses [Skia](<https://skia.org?v=1.1.1>)
+Flutter uses [Skia](https://skia.org)
 to draw everything it renders.
 "Skia is an open source 2D graphics library which provides common APIs
 that work across a variety of hardware and software platforms.
 It serves as the graphics engine for Google Chrome and Chrome OS,
 Android, Flutter, Mozilla Firefox and Firefox OS, and many other products."
-[Jetpack Compose](<https://developer.android.com/jetpack/compose?v=1.1.1>), a Kotlin toolkit for building native Android applications,
+[Jetpack Compose](https://developer.android.com/jetpack/compose), a Kotlin toolkit for building native Android applications,
 also uses Skia.
 
 Companies using React Native include
@@ -105,7 +105,7 @@ This document refers to both as a simulator.
 
   - Update to the latest version of macOS.
   - Download an OS-specific version of Flutter from
-    [here](<https://docs.flutter.dev/get-started/install?v=1.1.1>).
+    [here](https://docs.flutter.dev/get-started/install).
   - Unzip the downloaded file.
   - Move the "flutter" directory your preferred directory.
   - Add the path to the `flutter/bin` directory
@@ -126,7 +126,7 @@ This document refers to both as a simulator.
 - To enable testing on Android:
 
   - Warning: This seems complicated and error prone!
-  - Install [Android Studio](<https://developer.android.com/studio?v=1.1.1>), even when using a different editor such as VS Code.
+  - Install [Android Studio](https://developer.android.com/studio), even when using a different editor such as VS Code.
   - Select Android Studio ... Preferences ... Appearance & Behavior ...
     System Settings ... Android SDK ... SDK Tools.
   - Check "Android SDK Command-line Tools (latest).
@@ -284,7 +284,7 @@ android {
 Running a Flutter app from VS Code opens the following floating toolbar:
 
 <img alt="VS Code Flutter Toolbar" style="width: 80%"
-    src="/blog/assets/flutter-vs-code-toolbar.png?v=1.1.1"
+    src="/blog/assets/flutter-vs-code-toolbar.png"
     title="VS Code Flutter Toolbar">
 
 The orange lightning bolt does a hot reload of the app.
@@ -338,7 +338,7 @@ linter:
 
 ## Code Formatting
 
-Formatting of Dart code is provided by [dart format](<https://dart.dev/tools/dart-format?v=1.1.1>).
+Formatting of Dart code is provided by [dart format](https://dart.dev/tools/dart-format).
 To get the best formatting, include a comma after every function parameter,
 even the last one.
 
@@ -442,7 +442,7 @@ expecially when the extensions described below are installed.
 
 ### Dart Extension
 
-Install the [Dart extension](<https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code&v=1.1.1>).
+Install the [Dart extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code).
 This extension provides many things including:
 
 - syntax highlighting
@@ -474,8 +474,8 @@ Consider adding the following in `settings.json`:
 
 ### Flutter Extension
 
-Install the [Flutter extension](<https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter&v=1.1.1>).
-This uses the [Dart Analysis Server](<https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server?v=1.1.1>), as does Android Studio,
+Install the [Flutter extension](https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter).
+This uses the [Dart Analysis Server](https://github.com/dart-lang/sdk/tree/master/pkg/analysis_server), as does Android Studio,
 to power many IDE operations.
 This extension provides many things including:
 
@@ -687,7 +687,7 @@ From this file, continue using cmd-click on other class names to see their code.
 
 ### Awesome Flutter Snippets Extension
 
-It is recommended to install the [Awesome Flutter Snippets](<https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets&v=1.1.1>) extension.
+It is recommended to install the [Awesome Flutter Snippets](https://marketplace.visualstudio.com/items?itemName=Nash.awesome-flutter-snippets) extension.
 This provides snippets for
 "a collection of commonly used Flutter classes and methods."
 Highlights are described below:
@@ -713,7 +713,7 @@ Highlights are described below:
 
 ### Todo Tree Extension
 
-It is recommended to install the [Todo Tree](<https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree&v=1.1.1>) extension.
+It is recommended to install the [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) extension.
 This extension adds a tree icon to the activity bar.
 When clicked, it displays a directory tree in the navigator area
 that shows files and lines within them that have comments that contain
@@ -723,7 +723,7 @@ Clicking an identified line opens the file and positions the cursor on the line.
 ## Packages
 
 The official package registry for Flutter is
-[pub.dev](<https://pub.dev?v=1.1.1>).
+[pub.dev](https://pub.dev).
 It hosts a large number of packages and plugins.
 The distinction between these is that
 plugins provide integration with platform features such as cameras.
@@ -734,7 +734,7 @@ To find packages, search for them by name or browse the categorized lists of
 "Top Dart packages", and "Package of the Week".
 
 Some popular packages from pub.dev are described
-on my [Dart](</blog/topics/#/blog/dart?v=1.1.1>) page.
+on my [Dart](/blog/topics/#/blog/dart) page.
 
 To install a package in a Flutter project,
 enter `flutter pub add {package-name}`.
@@ -794,7 +794,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   // Widget build methods describe what a widget renders.
-  // In stateless widgets it is only called once (true?).
+  // In stateless widgets it is only called once (true).
   // In stateful widgets it is called initially
   // and again every time the state changes.
   // Typically the topmost widget build method returns
@@ -839,7 +839,7 @@ The styling defined by the `ThemeData` object
 that is passed to the `MaterialApp` constructor
 can affect all other widgets in the app.
 The ThemeData constructor takes a large number of arguments.
-For details, see [ThemeData constructor](<https://api.flutter.dev/flutter/material/ThemeData/ThemeData.html?v=1.1.1>).
+For details, see [ThemeData constructor](https://api.flutter.dev/flutter/material/ThemeData/ThemeData.html).
 
 To avoid drawing in unsafe areas such as those that contain notches,
 wrap the `Scaffold` widget in a `SafeArea` widget.
@@ -899,7 +899,7 @@ To get the platform, get a `ThemeData` object from `Theme.of(context)`.
 That has a `platform` property which holds a `TargetPlatform` enum value.
 Possible values include `android`, `fuchsia`,
 `iOS`, `Linux`, `macOS`, and `windows`.
-[Fuchsia](<https://fuchsia.dev?v=1.1.1>) is an
+[Fuchsia](https://fuchsia.dev) is an
 experimental operating system being developed by Google.
 
 For example:
@@ -917,7 +917,7 @@ but this cannot be used in Flutter apps.
 
 ## Widgets
 
-All the predefined widgets are documented in the [Widget Catalog](<https://docs.flutter.dev/development/ui/widgets?v=1.1.1>).
+All the predefined widgets are documented in the [Widget Catalog](https://docs.flutter.dev/development/ui/widgets).
 
 Flutter provides two sets of themed widgets,
 one for Material Design and
@@ -929,7 +929,7 @@ Some Material widgets are platform-ware meaning that
 they are styled different on iOS versus Android.
 However, some have Material look and feel on all devices, including iOS.
 
-Material widgets are documented at [Material Component widgets](<https://docs.flutter.dev/development/ui/widgets/material?v=1.1.1>).
+Material widgets are documented at [Material Component widgets](https://docs.flutter.dev/development/ui/widgets/material).
 
 To use Material widgets in a Dart source file, add the following import:
 
@@ -947,7 +947,7 @@ To use Cupertino widgets in a Dart source file, add the following import:
 import 'package:flutter/cupertino.dart';
 ```
 
-All widgets have a `build` method that is passed a [BuildContext](<https://api.flutter.dev/flutter/widgets/BuildContext-class.html?v=1.1.1>) object.
+All widgets have a `build` method that is passed a [BuildContext](https://api.flutter.dev/flutter/widgets/BuildContext-class.html) object.
 This provides "a handle to the location of a widget in the widget tree."
 It can be used to traverse up and down the widget tree.
 Supposedly one use is for finding ancestor styles
@@ -1098,7 +1098,7 @@ Here is an example of a stateless widget that renders a greeting
 for a given name.
 
 <img alt="Flutter Greet" style="width: 60%"
-    src="/blog/assets/flutter-greet.png?v=1.1.1"
+    src="/blog/assets/flutter-greet.png"
     title="Flutter Greet">
 
 ```dart
@@ -1131,7 +1131,7 @@ class Greet extends StatelessWidget {
 
 Stateful widgets render initially and again each time their state changes.
 
-Stateful widgets are defined by [two classes](<https://flutteragency.com/stateful-widgets-defined-as-two-classes/?v=1.1.1>).
+Stateful widgets are defined by [two classes](https://flutteragency.com/stateful-widgets-defined-as-two-classes/).
 
 The first class extends `StatefulWidget`,
 defines final properties, defines a constructor, and
@@ -1155,7 +1155,7 @@ State instances hold a reference to their associated `StatefulWidget` instance
 in the property `widget`.
 This allows them to access properties in the widget instance.
 
-There is an [on-going discussion](<https://github.com/dart-lang/language/issues/329?v=1.1.1>) about whether it would be possible
+There is an [on-going discussion](https://github.com/dart-lang/language/issues/329) about whether it would be possible
 to define stateful widgets in another way that
 doesn't require defining two classes.
 
@@ -1187,7 +1187,7 @@ is similar to the `setState` function in React.
 This is described in more detail later in the "Managing State" section.
 
 <img alt="Flutter Counter" style="width: 60%"
-    src="/blog/assets/Flutter-Counter.png?v=1.1.1"
+    src="/blog/assets/Flutter-Counter.png"
     title="Flutter Counter">
 
 ```dart
@@ -1293,23 +1293,23 @@ The most commonly used application structure widgets are described below:
 
 | Widget                                                                                                              | Description                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| [AppBar](<https://api.flutter.dev/flutter/material/AppBar-class.html?v=1.1.1>)                           | appears at top of app; can contain "leading", "title", "actions" and a `TabBar`                         |
-| [BottomAppBar](<https://api.flutter.dev/flutter/material/BottomAppBar-class.html?v=1.1.1>)               | appears at bottom of app; contains buttons used to switch between top-level views                       |
-| [BottomNavigationBar](<https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html?v=1.1.1>) | row of tappable icons and labels typically used to navigate to a page; styled for Material 2            |
-| [Drawer](<https://api.flutter.dev/flutter/material/Drawer-class.html?v=1.1.1>)                           | panel that slides in from left (by default) and can contain navigation links                            |
-| [MaterialApp](<https://api.flutter.dev/flutter/material/MaterialApp-class.html?v=1.1.1>)                 | topmost widget; "wraps a number of widgets that are commonly required for material design applications" |
-| [NavigationBar](<https://api.flutter.dev/flutter/material/NavigationBar-class.html?v=1.1.1>)             | similar to `BottomNavigationBar`, but styled for Material 3; still renders at bottom                    |
-| [Scaffold](<https://api.flutter.dev/flutter/material/Scaffold-class.html?v=1.1.1>)                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets (like modals)                  |
-| [TabBar](<https://api.flutter.dev/flutter/material/TabBar-class.html?v=1.1.1>)                           | horizontal row of tabs                                                                                  |
-| [TabBarView](<https://api.flutter.dev/flutter/material/TabBarView-class.html?v=1.1.1>)                   | a page that corresponds to a `TabBar` tab                                                               |
-| [TabPageSelector](<https://api.flutter.dev/flutter/material/TabPageSelector-class.html?v=1.1.1>)         | renders dots that indicate current carousel item; cannot click to switch                                |
+| [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html)                           | appears at top of app; can contain "leading", "title", "actions" and a `TabBar`                         |
+| [BottomAppBar](https://api.flutter.dev/flutter/material/BottomAppBar-class.html)               | appears at bottom of app; contains buttons used to switch between top-level views                       |
+| [BottomNavigationBar](https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html) | row of tappable icons and labels typically used to navigate to a page; styled for Material 2            |
+| [Drawer](https://api.flutter.dev/flutter/material/Drawer-class.html)                           | panel that slides in from left (by default) and can contain navigation links                            |
+| [MaterialApp](https://api.flutter.dev/flutter/material/MaterialApp-class.html)                 | topmost widget; "wraps a number of widgets that are commonly required for material design applications" |
+| [NavigationBar](https://api.flutter.dev/flutter/material/NavigationBar-class.html)             | similar to `BottomNavigationBar`, but styled for Material 3; still renders at bottom                    |
+| [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html)                       | provides app structure; can show `Drawer`, `SnackBar`, and bottom sheets (like modals)                  |
+| [TabBar](https://api.flutter.dev/flutter/material/TabBar-class.html)                           | horizontal row of tabs                                                                                  |
+| [TabBarView](https://api.flutter.dev/flutter/material/TabBarView-class.html)                   | a page that corresponds to a `TabBar` tab                                                               |
+| [TabPageSelector](https://api.flutter.dev/flutter/material/TabPageSelector-class.html)         | renders dots that indicate current carousel item; cannot click to switch                                |
 
 See examples of using `ButtomNavigationBar` and `NavigationBar`
 in the "Navigation" section below.
 
 #### MaterialApp Widget
 
-The [MaterialApp](<https://api.flutter.dev/flutter/material/MaterialApp-class.html?v=1.1.1>) widget is topmost widget
+The [MaterialApp](https://api.flutter.dev/flutter/material/MaterialApp-class.html) widget is topmost widget
 of applications that use Material Design.
 
 The `MaterialApp` constructor takes the following named parameters and more:
@@ -1324,7 +1324,7 @@ The `MaterialApp` constructor takes the following named parameters and more:
 | `theme`                      | `ThemeData` to use when running in light mode                                                                                                  |
 | `title`                      | single-line `String` that describes the app; only rendered in Android task manager                                                             |
 
-The most common properties to set in [ThemeData](<https://api.flutter.dev/flutter/material/ThemeData-class.html?v=1.1.1>)
+The most common properties to set in [ThemeData](https://api.flutter.dev/flutter/material/ThemeData-class.html)
 property are `primarySwatch` and `textTheme`.
 `primarySwatch` is a `MaterialColor` object that specifies
 many shades of colors to be used throughout the app.
@@ -1348,7 +1348,7 @@ theme: ThemeData(
 
 #### Scaffold Widget
 
-The [Scaffold](<https://api.flutter.dev/flutter/material/Scaffold-class.html?v=1.1.1>)
+The [Scaffold](https://api.flutter.dev/flutter/material/Scaffold-class.html)
 widget "implements the basic material design layout structure."
 The `MaterialApp` constructor `home` argument is typically set to a
 custom widget whose `build` method returns an instance of the `Scaffold` class.
@@ -1371,11 +1371,11 @@ on the left side of the `AppBar`.
 
 #### AppBar Widget
 
-The [AppBar](<https://api.flutter.dev/flutter/material/AppBar-class.html?v=1.1.1>)
+The [AppBar](https://api.flutter.dev/flutter/material/AppBar-class.html)
 widget holds several other widgets referred to as
 `leading`, `title`, `actions`, `flexibleSpace`, and `bottom`.
 See the diagram in the
-[official documntation](<https://api.flutter.dev/flutter/material/AppBar-class.html?v=1.1.1>).
+[official documntation](https://api.flutter.dev/flutter/material/AppBar-class.html).
 The first row is referred to as the "toolbar" in documentation
 and includes the `leading`, `title`, and `actions` widgets.
 
@@ -1402,13 +1402,13 @@ The `bottom` parameter is typically used for page navigation buttons
 to be displayed near the top of the UI
 as an alternative to the `Scaffold` `botttomNavigationBar`.
 
-See the sample app in the GitHub repo [flutter_appbar](<https://github.com/mvolkmann/flutter_appbar?v=1.1.1>).
+See the sample app in the GitHub repo [flutter_appbar](https://github.com/mvolkmann/flutter_appbar).
 
 ### Cupertino Structure Widgets
 
-The [cupertino library](<https://api.flutter.dev/flutter/cupertino/cupertino-library.html?v=1.1.1>) defines widgets that implement iOS theming.
+The [cupertino library](https://api.flutter.dev/flutter/cupertino/cupertino-library.html) defines widgets that implement iOS theming.
 
-The [CupertinoApp](<https://api.flutter.dev/flutter/cupertino/CupertinoApp-class.html?v=1.1.1>) widget is topmost widget in Cupertino apps.
+The [CupertinoApp](https://api.flutter.dev/flutter/cupertino/CupertinoApp-class.html) widget is topmost widget in Cupertino apps.
 
 The `CupertinoApp` constructor takes the following named parameters and more:
 
@@ -1421,7 +1421,7 @@ The `CupertinoApp` constructor takes the following named parameters and more:
 | `theme`        | `CupertinoThemeData` for global styling                                            |
 | `title`        | single-line `String` that describes the app; only rendered in Android task manager |
 
-The `home` `Widget` is typically either a [CupertinoPageScaffold](<https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html?v=1.1.1>) or a [CupertinoTabScaffold](<https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html?v=1.1.1>).
+The `home` `Widget` is typically either a [CupertinoPageScaffold](https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html) or a [CupertinoTabScaffold](https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html).
 It is common to use a `CupertionPageScaffold` inside a `CupertinoTabScaffold`.
 
 The `CupertinoPageScaffold` constructor takes the following named parameters and more:
@@ -1447,11 +1447,11 @@ Note that neither Cupertino scaffold widget supports a `FloatingActionButton`.
 To render one in a Cupertino app,
 set the `CupertinoPageScaffold` `child` argument to a `Scaffold` widget
 and set the `Scaffold` `floatingActionButton` argument.
-For an example, see this [GitHub repo](<https://github.com/mvolkmann/flutter_floatingactionbutton?v=1.1.1>).
+For an example, see this [GitHub repo](https://github.com/mvolkmann/flutter_floatingactionbutton).
 
 ### Layout Widgets
 
-The layout widgets are documented at [Layout widgets](<https://docs.flutter.dev/development/ui/widgets/layout?v=1.1.1>).
+The layout widgets are documented at [Layout widgets](https://docs.flutter.dev/development/ui/widgets/layout).
 
 Some layout widgets accept a single `child`
 and others accept multiple `children`.
@@ -1463,10 +1463,10 @@ six colored squares is rendered and
 they do not all fit within the screen width.
 
 <img alt="widget overflow" style="width: 60%"
-    src="/blog/assets/flutter-widget-overflow.png?v=1.1.1"
+    src="/blog/assets/flutter-widget-overflow.png"
     title="widget overflow">
 
-One way to fix widget overflow is to nest children in a [widget that supports scrolling](<https://docs.flutter.dev/development/ui/widgets/scrolling?v=1.1.1>).
+One way to fix widget overflow is to nest children in a [widget that supports scrolling](https://docs.flutter.dev/development/ui/widgets/scrolling).
 These included `GridView`, `ListView`, `PageView`,
 `ReorderableListView`, `SingleChildScrollView`, and more.
 
@@ -1477,29 +1477,29 @@ are described below:
 
 | Widget                                                                                                                 | Description                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [Align](<https://api.flutter.dev/flutter/widgets/Align-class.html?v=1.1.1>)                                 | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
-| [AnimatedContainer](<https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html?v=1.1.1>)         | like `Container`, but "gradually changes its values over a period of time"; provides implicit animations                      |
-| [AspectRatio](<https://api.flutter.dev/flutter/widgets/AspectRatio-class.html?v=1.1.1>)                     | sizes its child to a specific aspect ratio                                                                                    |
-| [Center](<https://api.flutter.dev/flutter/widgets/Center-class.html?v=1.1.1>)                               | centers its child horizontally and vertically in the available space                                                          |
-| [ConstrainedBox](<https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html?v=1.1.1>)               | "imposes additional constraints on its child" which include min and max width and height                                      |
-| [Container](<https://api.flutter.dev/flutter/widgets/Container-class.html?v=1.1.1>)                         | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
-| [Expanded](<https://api.flutter.dev/flutter/widgets/Expanded-class.html?v=1.1.1>)                           | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
-| [FittedBox](<https://api.flutter.dev/flutter/widgets/FittedBox-class.html?v=1.1.1>)                         | "scales and positions its child within itself" including clipping                                                             |
-| [Flexible](<https://api.flutter.dev/flutter/widgets/Flexible-class.html?v=1.1.1>)                           | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
-| [FractionallySizedBox](<https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html?v=1.1.1>)   | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
-| [LayoutBuilder](<https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html?v=1.1.1>)                 | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
-| [LimitedBox](<https://api.flutter.dev/flutter/widgets/LimitedBox-class.html?v=1.1.1>)                       | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
-| [ListTile](<https://api.flutter.dev/flutter/widgets/ListTile-class.html?v=1.1.1>)                           | "single fixed-height row that typically contains some text as well as a leading or trailing icon"                             |
-| [Padding](<https://api.flutter.dev/flutter/widgets/Padding-class.html?v=1.1.1>)                             | "insets its child by the given padding"                                                                                       |
-| [SingleChildScrollView](<https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html?v=1.1.1>) | "box in which a single widget can be scrolled"                                                                                |
-| [SizedBox](<https://api.flutter.dev/flutter/widgets/SizedBox-class.html?v=1.1.1>)                           | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
-| [Transform](<https://api.flutter.dev/flutter/widgets/Transform-class.html?v=1.1.1>)                         | transforms its child by translating, rotating, and scaling it                                                                 |
+| [Align](https://api.flutter.dev/flutter/widgets/Align-class.html)                                 | specifies where its child should be positioned within its parent (ex. `Alignment.bottomRight`)                                |
+| [AnimatedContainer](https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html)         | like `Container`, but "gradually changes its values over a period of time"; provides implicit animations                      |
+| [AspectRatio](https://api.flutter.dev/flutter/widgets/AspectRatio-class.html)                     | sizes its child to a specific aspect ratio                                                                                    |
+| [Center](https://api.flutter.dev/flutter/widgets/Center-class.html)                               | centers its child horizontally and vertically in the available space                                                          |
+| [ConstrainedBox](https://api.flutter.dev/flutter/widgets/ConstrainedBox-class.html)               | "imposes additional constraints on its child" which include min and max width and height                                      |
+| [Container](https://api.flutter.dev/flutter/widgets/Container-class.html)                         | surrounds its child with optional `padding`, `decoration` (ex. `BoxDecoration` with optional border and shadow), and `margin` |
+| [Expanded](https://api.flutter.dev/flutter/widgets/Expanded-class.html)                           | "expands a child of a Row, Column, or Flex so that the child fills the available space"                                       |
+| [FittedBox](https://api.flutter.dev/flutter/widgets/FittedBox-class.html)                         | "scales and positions its child within itself" including clipping                                                             |
+| [Flexible](https://api.flutter.dev/flutter/widgets/Flexible-class.html)                           | "controls how a child of a Row, Column, or Flex flexes"; similar to CSS flex layout                                           |
+| [FractionallySizedBox](https://api.flutter.dev/flutter/widgets/FractionallySizedBox-class.html)   | "sizes its child to a fraction of the total available space"; can specify `widthFactor`, `heightFactor`, and `alignment`      |
+| [LayoutBuilder](https://api.flutter.dev/flutter/widgets/LayoutBuilder-class.html)                 | provides min/max width/height constraints that can be used to decide how/what a child component should render                 |
+| [LimitedBox](https://api.flutter.dev/flutter/widgets/LimitedBox-class.html)                       | "box that limits its size only when unconstrained"; useful for wrapping unconstrained children of a `ListView`                |
+| [ListTile](https://api.flutter.dev/flutter/widgets/ListTile-class.html)                           | "single fixed-height row that typically contains some text as well as a leading or trailing icon"                             |
+| [Padding](https://api.flutter.dev/flutter/widgets/Padding-class.html)                             | "insets its child by the given padding"                                                                                       |
+| [SingleChildScrollView](https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html) | "box in which a single widget can be scrolled"                                                                                |
+| [SizedBox](https://api.flutter.dev/flutter/widgets/SizedBox-class.html)                           | "box with a specified size" for taking up space; "if given a child, forces it to have a specific width and/or height"         |
+| [Transform](https://api.flutter.dev/flutter/widgets/Transform-class.html)                         | transforms its child by translating, rotating, and scaling it                                                                 |
 
 Details for some of the single-child layout widgets are provided below.
 
 ##### Center Widget
 
-The [Center](<https://api.flutter.dev/flutter/widgets/Center-class.html?v=1.1.1>)
+The [Center](https://api.flutter.dev/flutter/widgets/Center-class.html)
 widget centers its child in
 the available space of the parent widget by default.
 If the `heightFactor` argument is specified,
@@ -1510,7 +1510,7 @@ but affects the width in which the child is centered.
 
 ##### Container Widget
 
-The [Container](<https://api.flutter.dev/flutter/widgets/Container-class.html?v=1.1.1>)
+The [Container](https://api.flutter.dev/flutter/widgets/Container-class.html)
 widget is the most customizable single-child layout widget.
 By default its size is the size of its only child.
 
@@ -1538,8 +1538,8 @@ The only supported values are `circle` and `rectangle`.
 
 ##### Expanded and Flexible Widgets
 
-The [Expanded](<https://api.flutter.dev/flutter/widgets/Expanded-class.html?v=1.1.1>)
-widget extends from the [Flexible](<https://api.flutter.dev/flutter/widgets/Flexible-class.html?v=1.1.1>)
+The [Expanded](https://api.flutter.dev/flutter/widgets/Expanded-class.html)
+widget extends from the [Flexible](https://api.flutter.dev/flutter/widgets/Flexible-class.html)
 widget.
 Both take a `flex` argument that defaults to `1`
 and works similarly to the CSS `flex` property.
@@ -1563,7 +1563,7 @@ Otherwise it will choose its size just like `Expanded`.
 
 ##### ListTile Widget
 
-The [ListTile](<https://api.flutter.dev/flutter/material/ListTile-class.html?v=1.1.1>) widget renders a fixed-height row that contains text
+The [ListTile](https://api.flutter.dev/flutter/material/ListTile-class.html) widget renders a fixed-height row that contains text
 and optional leading and trailing widgets that are typically icons.
 By default the text is left justified in the space that remains
 after the leading and trailing widgets take their space.
@@ -1603,7 +1603,7 @@ and taps and long presses are ignored.
 
 ##### Padding Widget
 
-The [Padding](<https://api.flutter.dev/flutter/widgets/Padding-class.html?v=1.1.1>)
+The [Padding](https://api.flutter.dev/flutter/widgets/Padding-class.html)
 widget adds padding to its `child` widget.
 The constructor `child` argument specifies the `Widget` to be padded.
 
@@ -1623,7 +1623,7 @@ does not support specifying a background color.
 
 ##### SingleChildScrollView Widget
 
-The [SingleChildScrollView](<https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html?v=1.1.1>) widget allows a single child widget to be scrolled.
+The [SingleChildScrollView](https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html) widget allows a single child widget to be scrolled.
 It is most commonly wrapped around a `Row` or `Column` widget.
 When there is a need to scroll a large number of widgets vertically,
 using `ListView` is more efficient because it only renders the visible widgets.
@@ -1633,7 +1633,7 @@ around both a `Row` and a `Column`.
 It also demonstrates the alternative of using `ListView`.
 
 <img alt="Flutter SingleChildScrollView" style="width: 40%"
-    src="/blog/assets/flutter-singlechildscrollview.png?v=1.1.1"
+    src="/blog/assets/flutter-singlechildscrollview.png"
     title="Flutter SingleChildScrollView">
 
 ```dart
@@ -1751,7 +1751,7 @@ class MyListView extends StatelessWidget {
 
 ##### Transform Widget
 
-The [Transform](<https://api.flutter.dev/flutter/widgets/Transform-class.html?v=1.1.1>)
+The [Transform](https://api.flutter.dev/flutter/widgets/Transform-class.html)
 widget applies transformations to its `child` widget.
 
 The following code translates its `child` widget:
@@ -1806,20 +1806,20 @@ are described below:
 
 | Widget                                                                                               | Description                                                                            |
 | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [Column](<https://api.flutter.dev/flutter/widgets/Column-class.html?v=1.1.1>)             | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
-| [GridView](<https://api.flutter.dev/flutter/widgets/GridView-class.html?v=1.1.1>)         | "scrollable, 2D array of widgets"                                                      |
-| [IndexedStack](<https://api.flutter.dev/flutter/widgets/IndexedStack-class.html?v=1.1.1>) | "shows a single child from a list", "the one with the given index"                     |
-| [ListView](<https://api.flutter.dev/flutter/widgets/ListView-class.html?v=1.1.1>)         | arranges widgets vertically like `Column`, but scrolls when needed                     |
-| [Row](<https://api.flutter.dev/flutter/widgets/Row-class.html?v=1.1.1>)                   | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
-| [Stack](<https://api.flutter.dev/flutter/widgets/Stack-class.html?v=1.1.1>)               | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
-| [Table](<https://api.flutter.dev/flutter/widgets/Table-class.html?v=1.1.1>)               | similar to `GridView`, but is more configurable and doesn't scroll                     |
-| [Wrap](<https://api.flutter.dev/flutter/widgets/Wrap-class.html?v=1.1.1>)                 | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
+| [Column](https://api.flutter.dev/flutter/widgets/Column-class.html)             | arranges widgets vertically (like `HStack` in SwiftUI)                                 |
+| [GridView](https://api.flutter.dev/flutter/widgets/GridView-class.html)         | "scrollable, 2D array of widgets"                                                      |
+| [IndexedStack](https://api.flutter.dev/flutter/widgets/IndexedStack-class.html) | "shows a single child from a list", "the one with the given index"                     |
+| [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html)         | arranges widgets vertically like `Column`, but scrolls when needed                     |
+| [Row](https://api.flutter.dev/flutter/widgets/Row-class.html)                   | arranges widgets horizontally (like `HStack` in SwiftUI)                               |
+| [Stack](https://api.flutter.dev/flutter/widgets/Stack-class.html)               | stacks widgets on top of each other (like `ZStack` in SwiftUI)                         |
+| [Table](https://api.flutter.dev/flutter/widgets/Table-class.html)               | similar to `GridView`, but is more configurable and doesn't scroll                     |
+| [Wrap](https://api.flutter.dev/flutter/widgets/Wrap-class.html)                 | arranges widgets horizontally or vertically and wraps to a new row or column as needed |
 
 Details for some of the multi-child layout widgets are provided below.
 
 ##### Column Widget
 
-The [Column](<https://api.flutter.dev/flutter/widgets/Column-class.html?v=1.1.1>)
+The [Column](https://api.flutter.dev/flutter/widgets/Column-class.html)
 widget renders a vertical list of child widgets.
 It is similar to a SwiftUI `VStack`.
 The child widgets are specified in a `List` that is the value
@@ -1899,7 +1899,7 @@ Thanks to Pat Niemeyer for this suggestion!
 
 ##### ListView Widget
 
-The [ListView](<https://api.flutter.dev/flutter/widgets/ListView-class.html?v=1.1.1>)
+The [ListView](https://api.flutter.dev/flutter/widgets/ListView-class.html)
 widget displays a scrollable list of widgets
 that are often `ListTile` widgets.
 The list is vertical by default, but can be changed to horizontal
@@ -1969,7 +1969,7 @@ by creating a `ScrollController` object and setting it as the `controller`.
 For example:
 
 <img alt="Flutter ListView with Controller" style="width: 40%"
-    src="/blog/assets/flutter-listview-with-controller.png?v=1.1.1"
+    src="/blog/assets/flutter-listview-with-controller.png"
     title="Flutter ListView with Controller">
 
 ```dart
@@ -2031,7 +2031,7 @@ If desired this can be overridden.
 
 ##### Row Widget
 
-The [Row](<https://api.flutter.dev/flutter/widgets/Row-class.html?v=1.1.1>)
+The [Row](https://api.flutter.dev/flutter/widgets/Row-class.html)
 widget renders a horizontal list of child widgets.
 It is similar to a SwiftUI `HStack`.
 The "main" axis is horizontal and the "cross" axis is vertical.
@@ -2049,7 +2049,7 @@ that specify a `width` argument.
 
 ##### Stack Widget
 
-The [Stack](<https://api.flutter.dev/flutter/widgets/Stack-class.html?v=1.1.1>)
+The [Stack](https://api.flutter.dev/flutter/widgets/Stack-class.html)
 widget renders child widgets on top of each other
 the first child on the bottom and the last child on top.
 It is similar to a SwiftUI `ZStack`.
@@ -2084,7 +2084,7 @@ To constrain the size the child, specify the `width` and `height` arguments.
 
 ##### Wrap Widget
 
-The [Wrap](<https://api.flutter.dev/flutter/widgets/Wrap-class.html?v=1.1.1>)
+The [Wrap](https://api.flutter.dev/flutter/widgets/Wrap-class.html)
 widget renders widgets in rows or columns.
 It is similar to the `Row` and `Column` widgets,
 but differs in that it wraps children to multiple rows or columns
@@ -2125,7 +2125,7 @@ described with the `Column` widget above.
 
 ### Spacer Widget
 
-The [Spacer](<https://api.flutter.dev/flutter/widgets/Spacer-class.html?v=1.1.1>)
+The [Spacer](https://api.flutter.dev/flutter/widgets/Spacer-class.html)
 widget "creates an adjustable, empty spacer that can be used to
 tune the spacing between widgets in a `Flex` container, like `Row` or `Column`.
 It takes up all available space.
@@ -2146,23 +2146,23 @@ The most commonly used widgets for displaying content are described below:
 
 | Widget                                                                                                                          | Description                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| [Banner](<https://api.flutter.dev/flutter/widgets/Banner-class.html?v=1.1.1>)                                        | "displays a diagonal message above the corner of another widget"; can specify the corner                            |
-| [CircleAvatar](<https://api.flutter.dev/flutter/material/CircleAvatar-class.html?v=1.1.1>)                           | "circle that represents a user"                                                                                     |
-| [CircularProgressIndicator](<https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html?v=1.1.1>) | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete   |
-| [Divider](<https://api.flutter.dev/flutter/material/Divider-class.html?v=1.1.1>)                                     | "thin horizontal line, with padding on either side"                                                                 |
-| [ErrorWidget](<https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html?v=1.1.1>)                              | "renders an exception's message"; useful in an error dialog                                                         |
-| [ExpandIcon](<https://api.flutter.dev/flutter/material/ExpandIcon-class.html?v=1.1.1>)                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
-| [ExpansionPanelList](<https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html?v=1.1.1>)               | list of `ExpansionPanel` widgets that can be expanded and collapsed by clicking                                     |
-| [FlutterLogo](<https://api.flutter.dev/flutter/material/FlutterLogo-class.html?v=1.1.1>)                             | renders the Flutter logo; can specify the size                                                                      |
-| [Icon](<https://api.flutter.dev/flutter/material/Icon-class.html?v=1.1.1>)                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
-| [Image](<https://api.flutter.dev/flutter/material/Image-class.html?v=1.1.1>)                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
-| [LinearProgressIndicator](<https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html?v=1.1.1>)     | line used to indicate that background activity is occurring, such as waiting for an API call to complete            |
-| [Placeholder](<https://api.flutter.dev/flutter/material/Placeholder-class.html?v=1.1.1>)                             | renders a rectangle containing diagonal lines that represents where future widgets will be placed                   |
-| [RichText](<https://api.flutter.dev/flutter/material/RichText-class.html?v=1.1.1>)                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
-| [SnackBar](<https://api.flutter.dev/flutter/material/SnackBar-class.html?v=1.1.1>)                                   | renders "a lightweight message with an optional action which briefly displays at the bottom of the screen"          |
-| [Text](<https://api.flutter.dev/flutter/material/Text-class.html?v=1.1.1>)                                           | renders a run of text with a single style                                                                           |
-| [Tooltip](<https://api.flutter.dev/flutter/material/Tooltip-class.html?v=1.1.1>)                                     | used to explain the functionality of a button or other tappable UI widget; press and hold to display                |
-| [VerticalDivider](<https://api.flutter.dev/flutter/material/VerticalDivider-class.html?v=1.1.1>)                     | "thin vertical line, with padding on either side"                                                                   |
+| [Banner](https://api.flutter.dev/flutter/widgets/Banner-class.html)                                        | "displays a diagonal message above the corner of another widget"; can specify the corner                            |
+| [CircleAvatar](https://api.flutter.dev/flutter/material/CircleAvatar-class.html)                           | "circle that represents a user"                                                                                     |
+| [CircularProgressIndicator](https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html) | rotating icon used to indicate that background activity is occurring, such as waiting for an API call to complete   |
+| [Divider](https://api.flutter.dev/flutter/material/Divider-class.html)                                     | "thin horizontal line, with padding on either side"                                                                 |
+| [ErrorWidget](https://api.flutter.dev/flutter/widgets/ErrorWidget-class.html)                              | "renders an exception's message"; useful in an error dialog                                                         |
+| [ExpandIcon](https://api.flutter.dev/flutter/material/ExpandIcon-class.html)                               | "rotating expand/collapse button"; "rotates 180 degrees when pressed, then reverts the animation on a second press" |
+| [ExpansionPanelList](https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html)               | list of `ExpansionPanel` widgets that can be expanded and collapsed by clicking                                     |
+| [FlutterLogo](https://api.flutter.dev/flutter/material/FlutterLogo-class.html)                             | renders the Flutter logo; can specify the size                                                                      |
+| [Icon](https://api.flutter.dev/flutter/material/Icon-class.html)                                           | renders an icon; typically passed an `IconData` object from a constant in the `Icons` class                         |
+| [Image](https://api.flutter.dev/flutter/material/Image-class.html)                                         | renders an image from a source such as a URL, local file, or `AssetBundle`                                          |
+| [LinearProgressIndicator](https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html)     | line used to indicate that background activity is occurring, such as waiting for an API call to complete            |
+| [Placeholder](https://api.flutter.dev/flutter/material/Placeholder-class.html)                             | renders a rectangle containing diagonal lines that represents where future widgets will be placed                   |
+| [RichText](https://api.flutter.dev/flutter/material/RichText-class.html)                                   | renders runs of text that each use different styles; uses `TextSpan` objects                                        |
+| [SnackBar](https://api.flutter.dev/flutter/material/SnackBar-class.html)                                   | renders "a lightweight message with an optional action which briefly displays at the bottom of the screen"          |
+| [Text](https://api.flutter.dev/flutter/material/Text-class.html)                                           | renders a run of text with a single style                                                                           |
+| [Tooltip](https://api.flutter.dev/flutter/material/Tooltip-class.html)                                     | used to explain the functionality of a button or other tappable UI widget; press and hold to display                |
+| [VerticalDivider](https://api.flutter.dev/flutter/material/VerticalDivider-class.html)                     | "thin vertical line, with padding on either side"                                                                   |
 
 The primary widgets for rendering text are `Text` and `RichText`.
 Both automatically wrap their text if needed by default,
@@ -2171,20 +2171,20 @@ a value from the `TextOverflow` enum.
 These include `clip`, `ellipsis`, `fade`, and `visible`.
 
 There are many more display widgets provided in pub.dev.
-For example, the [badges package](<https://pub.dev/packages/badges?v=1.1.1>) provides the `Badge` widgets.
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=_CIHLJHVoN8&v=1.1.1>).
+For example, the [badges package](https://pub.dev/packages/badges) provides the `Badge` widgets.
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=_CIHLJHVoN8).
 
 Details for some of the display widgets are provided below.
 
 #### CircleAvatar Widget
 
-The [CircleAvatar](<https://api.flutter.dev/flutter/material/CircleAvatar-class.html?v=1.1.1>)
+The [CircleAvatar](https://api.flutter.dev/flutter/material/CircleAvatar-class.html)
 widget displays an image representing a user in a circle.
 The image can be specified using the `backgroundImage` or `child` arguments.
 The following code demonstrates each option:
 
 <img alt="Flutter CircleAvatar" style="width: 40%"
-    src="/blog/assets/flutter-circleavatar.png?v=1.1.1"
+    src="/blog/assets/flutter-circleavatar.png"
     title="Flutter CircleAvatar">
 
 ```dart
@@ -2213,7 +2213,7 @@ CircleAvatar(
 
 #### CircularProgressIndicator and LinearProgressIndicator
 
-The [CircularProgressIndicator](<https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html?v=1.1.1>) and [LinearProgressIndicator](<https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html?v=1.1.1>) widgets
+The [CircularProgressIndicator](https://api.flutter.dev/flutter/material/CircularProgressIndicator-class.html) and [LinearProgressIndicator](https://api.flutter.dev/flutter/material/LinearProgressIndicator-class.html) widgets
 are both used to indicate that some activity,
 such as an API call, is occuring in the background.
 And both have determinant and indeterminant forms.
@@ -2226,11 +2226,11 @@ The `CircularProgressIndicator` constructor takes a `strokeWidth` argument.
 
 #### ExpandIcon and AnimatedContainer Widgets
 
-The [ExpandIcon](<https://api.flutter.dev/flutter/material/ExpandIcon-class.html?v=1.1.1>) widget renders an icon button that toggles between
+The [ExpandIcon](https://api.flutter.dev/flutter/material/ExpandIcon-class.html) widget renders an icon button that toggles between
 a down and up pointing angle bracket when tapped by rotating it.
 The `isExpanded` argument dictates the direction and
 the `onPressed` argument can change the value inside a `StatefulWidget`.
-This can be used in combination with an [AnimatedContainer](<https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html?v=1.1.1>) to show and hide content.
+This can be used in combination with an [AnimatedContainer](https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html) to show and hide content.
 
 The following code demonstrates hiding and showing a `Text` widget
 by toggling its `height` between `0` and `20`:
@@ -2251,16 +2251,16 @@ AnimatedContainer(
 
 #### ExpansionPanelList Widget
 
-The [ExpansionPanelList](<https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html?v=1.1.1>) widget renders a vertical list
+The [ExpansionPanelList](https://api.flutter.dev/flutter/material/ExpansionPanelList-class.html) widget renders a vertical list
 of `ExpansionPanel` widgets that can be expanded and collapsed by clicking.
 
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=2aJZzRMziJc&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=2aJZzRMziJc).
 
-For example code, see this [GitHub repo](<https://github.com/mvolkmann/flutter_expansionpanel/blob/main/lib/main.dart?v=1.1.1>).
+For example code, see this [GitHub repo](https://github.com/mvolkmann/flutter_expansionpanel/blob/main/lib/main.dart).
 
 #### Icon Widget
 
-The [Icon](<https://api.flutter.dev/flutter/material/Icon-class.html?v=1.1.1>)
+The [Icon](https://api.flutter.dev/flutter/material/Icon-class.html)
 widget renders an icon.
 The icon to render is specified by the first positional argument
 whose value must be an `IconData` object.
@@ -2269,7 +2269,7 @@ Other arguments commonly used inlude `color` and `size`.
 The following example displays a large, red fire extinguisher icon.
 
 <img alt="Flutter Icon" style="width: 10%"
-  src="/blog/assets/flutter-icon-fire-extinguisher.png?v=1.1.1"
+  src="/blog/assets/flutter-icon-fire-extinguisher.png"
   title="Flutter Icon">
 
 ```dart
@@ -2278,12 +2278,12 @@ Icon(Icons.fire_extinguisher, size: 100, color: Colors.red)
 
 #### Image Widget
 
-The [Image](<https://api.flutter.dev/flutter/material/Image-class.html?v=1.1.1>)
+The [Image](https://api.flutter.dev/flutter/material/Image-class.html)
 widget renders an image.
 Supported image formats include
 BMP, GIF (including animated), JPEG, PNG, WBMP, and WebP.
 
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=7oIAs-0G4mw&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=7oIAs-0G4mw).
 
 The `width` and `height` arguments specify its size.
 
@@ -2340,7 +2340,7 @@ Image.network(
 
 #### SnackBar Widget
 
-The [SnackBar](<https://api.flutter.dev/flutter/material/SnackBar-class.html?v=1.1.1>)
+The [SnackBar](https://api.flutter.dev/flutter/material/SnackBar-class.html)
 widget renders "a lightweight message with an optional action
 which briefly displays at the bottom of the screen."
 
@@ -2366,7 +2366,7 @@ ElevatedButton(
 
 #### Text Widget
 
-The [Text](<https://api.flutter.dev/flutter/material/Text-class.html?v=1.1.1>)
+The [Text](https://api.flutter.dev/flutter/material/Text-class.html)
 widget renders text with a single style
 including color, font, font size, and weight.
 
@@ -2416,7 +2416,7 @@ and `blurRadius` (a `double`).
 
 #### RichText Widget
 
-The [RichText](<https://api.flutter.dev/flutter/material/RichText-class.html?v=1.1.1>)
+The [RichText](https://api.flutter.dev/flutter/material/RichText-class.html)
 widget renders runs of text that can each have a different style.
 It takes a `text` argument whose value is a `TextSpan` widget
 with a `children` argument that is typically a `List` of `TextSpan` widgets.
@@ -2470,7 +2470,7 @@ which is a function to call when a tap is detected.
 
 #### Tooltip Widget
 
-The [Tooltip](<https://api.flutter.dev/flutter/material/Tooltip-class.html?v=1.1.1>)
+The [Tooltip](https://api.flutter.dev/flutter/material/Tooltip-class.html)
 widget briefly describe the functionality of
 a button or other tappable UI widget.
 To see a tooltip, users must press and hold on a widget that has a tooltip.
@@ -2509,35 +2509,35 @@ that do not have an `onPressed` argument value.
 
 | Widget                                                                                                                | Description                                                                                                                        |
 | --------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [ActionChip](<https://api.flutter.dev/flutter/material/ActionChip-class.html?v=1.1.1>)                     | an oval containing a label and an optional avatar that responds to taps                                                            |
-| [Autocomplete](<https://api.flutter.dev/flutter/material/Autocomplete-class.html?v=1.1.1>)                 | text input for selecting from a list of options where only options that match the entered text are displayed                       |
-| [BackButton](<https://api.flutter.dev/flutter/material/BackButton-class.html?v=1.1.1>)                     | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| [Chip](<https://api.flutter.dev/flutter/material/Chip-class.html?v=1.1.1>)                                 | an oval containing a label, optional avatar, and optional delete icon                                                              |
-| [ChoiceChip](<https://api.flutter.dev/flutter/material/ChoiceChip-class.html?v=1.1.1>)                     | an oval containing a label and an optional avatar that exists in a set where only one can be selected                              |
-| [CloseButton](<https://api.flutter.dev/flutter/material/CloseButton-class.html?v=1.1.1>)                   | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
-| [CalendarDatePicker](<https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html?v=1.1.1>)     | inline calendar date picker                                                                                                        |
-| [Checkbox](<https://api.flutter.dev/flutter/material/Checkbox-class.html?v=1.1.1>)                         | checkbox for toggling a `bool` value                                                                                               |
-| [DropdownButton](<https://api.flutter.dev/flutter/material/DropdownButton-class.html?v=1.1.1>)             | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
-| [EditableText](<https://api.flutter.dev/flutter/widgets/EditableText-class.html?v=1.1.1>)                  | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
-| [ElevatedButton](<https://api.flutter.dev/flutter/material/ElevatedButton-class.html?v=1.1.1>)             | button containing any widget with a background color whose elevation increases when pressed                                        |
-| [FilterChip](<https://api.flutter.dev/flutter/material/FilterChip-class.html?v=1.1.1>)                     | an oval containing a label, optional avatar, and a checkmark when selected                                                         |
-| [FloatingActionButton](<https://api.flutter.dev/flutter/material/FloatingActionButton-class.html?v=1.1.1>) | circular (typically) button "that hovers over other content to promote a primary action"                                           |
-| [Form](<https://api.flutter.dev/flutter/widgets/Form-class.html?v=1.1.1>)                                  | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
-| [IconButton](<https://api.flutter.dev/flutter/material/IconButton-class.html?v=1.1.1>)                     | button containing an `Icon`                                                                                                        |
-| [InputChip](<https://api.flutter.dev/flutter/material/InputChip-class.html?v=1.1.1>)                       | an oval containing a label, optional avatar, an optional delete icon, and a checkmark when selected, that responds to taps         |
-| [OutlinedButton](<https://api.flutter.dev/flutter/material/OutlinedButton-class.html?v=1.1.1>)             | a `TextButton` with an outlined border                                                                                             |
-| [PopupMenuButton](<https://api.flutter.dev/flutter/material/PopupMenuButton-class.html?v=1.1.1>)           | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
-| [Radio](<https://api.flutter.dev/flutter/material/Radio-class.html?v=1.1.1>)                               | radio button for selecting between mutually exclusive options                                                                      |
-| [RangeSlider](<https://api.flutter.dev/flutter/material/RangeSlider-class.html?v=1.1.1>)                   | slider for selecting the minimum and maximum values from a range of `double` values                                                |
-| [ReorderableList](<https://api.flutter.dev/flutter/widgets/ReorderableList-class.html?v=1.1.1>)            | scrollable container where child widgets can be dragged to reorder them                                                            |
-| [Slider](<https://api.flutter.dev/flutter/material/Slider-class.html?v=1.1.1>)                             | slider for selecting a double value from a given range of `double` values                                                          |
-| [Stepper](<https://api.flutter.dev/flutter/material/Stepper-class.html?v=1.1.1>)                           | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
-| [Switch](<https://api.flutter.dev/flutter/material/Switch-class.html?v=1.1.1>)                             | toggle switch for selecting a `bool` value                                                                                         |
-| [TextButton](<https://api.flutter.dev/flutter/material/TextButton-class.html?v=1.1.1>)                     | button containing any widget, not just `Text`, with no visible border                                                              |
-| [TextField](<https://api.flutter.dev/flutter/material/TextField-class.html?v=1.1.1>)                       | basic text input                                                                                                                   |
-| [TextFormField](<https://api.flutter.dev/flutter/material/TextFormField-class.html?v=1.1.1>)               | like `TextField`, but supports validation                                                                                          |
-| [ToggleButtons](<https://api.flutter.dev/flutter/material/ToggleButtons-class.html?v=1.1.1>)               | set of toggle buttons, typically used to choose between exclusive options                                                          |
-| [YearPicker](<https://api.flutter.dev/flutter/material/YearPicker-class.html?v=1.1.1>)                     | scrollable list of years to pick from (I can't get this to work!)                                                                  |
+| [ActionChip](https://api.flutter.dev/flutter/material/ActionChip-class.html)                     | an oval containing a label and an optional avatar that responds to taps                                                            |
+| [Autocomplete](https://api.flutter.dev/flutter/material/Autocomplete-class.html)                 | text input for selecting from a list of options where only options that match the entered text are displayed                       |
+| [BackButton](https://api.flutter.dev/flutter/material/BackButton-class.html)                     | "<" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| [Chip](https://api.flutter.dev/flutter/material/Chip-class.html)                                 | an oval containing a label, optional avatar, and optional delete icon                                                              |
+| [ChoiceChip](https://api.flutter.dev/flutter/material/ChoiceChip-class.html)                     | an oval containing a label and an optional avatar that exists in a set where only one can be selected                              |
+| [CloseButton](https://api.flutter.dev/flutter/material/CloseButton-class.html)                   | "X" button that defaults to calling `Navigator.maybePop` when pressed                                                              |
+| [CalendarDatePicker](https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html)     | inline calendar date picker                                                                                                        |
+| [Checkbox](https://api.flutter.dev/flutter/material/Checkbox-class.html)                         | checkbox for toggling a `bool` value                                                                                               |
+| [DropdownButton](https://api.flutter.dev/flutter/material/DropdownButton-class.html)             | dropdown menu with `DropdownMenuItem` children similar to the HTML `select` element with `option` children                         |
+| [EditableText](https://api.flutter.dev/flutter/widgets/EditableText-class.html)                  | from the `TextField` docs, "EditableText ... is the raw text editing control at the heart of a TextField ... rarely used directly" |
+| [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html)             | button containing any widget with a background color whose elevation increases when pressed                                        |
+| [FilterChip](https://api.flutter.dev/flutter/material/FilterChip-class.html)                     | an oval containing a label, optional avatar, and a checkmark when selected                                                         |
+| [FloatingActionButton](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html) | circular (typically) button "that hovers over other content to promote a primary action"                                           |
+| [Form](https://api.flutter.dev/flutter/widgets/Form-class.html)                                  | container for grouping form fields; see `autovalidateMode` property and `createState` method                                       |
+| [IconButton](https://api.flutter.dev/flutter/material/IconButton-class.html)                     | button containing an `Icon`                                                                                                        |
+| [InputChip](https://api.flutter.dev/flutter/material/InputChip-class.html)                       | an oval containing a label, optional avatar, an optional delete icon, and a checkmark when selected, that responds to taps         |
+| [OutlinedButton](https://api.flutter.dev/flutter/material/OutlinedButton-class.html)             | a `TextButton` with an outlined border                                                                                             |
+| [PopupMenuButton](https://api.flutter.dev/flutter/material/PopupMenuButton-class.html)           | similar to `DropdownButton`, but displays an ellipsis instead an upside down caret                                                 |
+| [Radio](https://api.flutter.dev/flutter/material/Radio-class.html)                               | radio button for selecting between mutually exclusive options                                                                      |
+| [RangeSlider](https://api.flutter.dev/flutter/material/RangeSlider-class.html)                   | slider for selecting the minimum and maximum values from a range of `double` values                                                |
+| [ReorderableList](https://api.flutter.dev/flutter/widgets/ReorderableList-class.html)            | scrollable container where child widgets can be dragged to reorder them                                                            |
+| [Slider](https://api.flutter.dev/flutter/material/Slider-class.html)                             | slider for selecting a double value from a given range of `double` values                                                          |
+| [Stepper](https://api.flutter.dev/flutter/material/Stepper-class.html)                           | "displays progress through a sequence of steps" like in a wizard UI; not frequently used                                           |
+| [Switch](https://api.flutter.dev/flutter/material/Switch-class.html)                             | toggle switch for selecting a `bool` value                                                                                         |
+| [TextButton](https://api.flutter.dev/flutter/material/TextButton-class.html)                     | button containing any widget, not just `Text`, with no visible border                                                              |
+| [TextField](https://api.flutter.dev/flutter/material/TextField-class.html)                       | basic text input                                                                                                                   |
+| [TextFormField](https://api.flutter.dev/flutter/material/TextFormField-class.html)               | like `TextField`, but supports validation                                                                                          |
+| [ToggleButtons](https://api.flutter.dev/flutter/material/ToggleButtons-class.html)               | set of toggle buttons, typically used to choose between exclusive options                                                          |
+| [YearPicker](https://api.flutter.dev/flutter/material/YearPicker-class.html)                     | scrollable list of years to pick from (I can't get this to work!)                                                                  |
 
 Many of these widgets render buttons, including
 `DropDownButton`, `ElevatedButton`, `FloatingActionButton`,
@@ -2551,7 +2551,7 @@ OutlineButton -> OutlinedButton
 ```
 
 Basic usage of all of these widgets is demonstrated in the Flutter project at
-[flutter_input](<https://github.com/mvolkmann/flutter_input?v=1.1.1>).
+[flutter_input](https://github.com/mvolkmann/flutter_input).
 
 #### Chips
 
@@ -2561,11 +2561,11 @@ The table below indicates the event handling supported by each:
 
 | Chip Type                                                                                         | `onPressed` | `onSelected` | `onDeleted` |
 | ------------------------------------------------------------------------------------------------- | :---------: | :----------: | :---------: |
-| [ActionChip](<https://api.flutter.dev/flutter/material/ActionChip-class.html?v=1.1.1>) |      X      |              |             |
-| [Chip](<https://api.flutter.dev/flutter/material/Chip-class.html?v=1.1.1>)             |             |              |      X      |
-| [ChoiceChip](<https://api.flutter.dev/flutter/material/ChoiceChip-class.html?v=1.1.1>) |             |      X       |             |
-| [FilterChip](<https://api.flutter.dev/flutter/material/FilterChip-class.html?v=1.1.1>) |             |      X       |             |
-| [InputChip](<https://api.flutter.dev/flutter/material/InputChip-class.html?v=1.1.1>)   |      X      |      X       |      X      |
+| [ActionChip](https://api.flutter.dev/flutter/material/ActionChip-class.html) |      X      |              |             |
+| [Chip](https://api.flutter.dev/flutter/material/Chip-class.html)             |             |              |      X      |
+| [ChoiceChip](https://api.flutter.dev/flutter/material/ChoiceChip-class.html) |             |      X       |             |
+| [FilterChip](https://api.flutter.dev/flutter/material/FilterChip-class.html) |             |      X       |             |
+| [InputChip](https://api.flutter.dev/flutter/material/InputChip-class.html)   |      X      |      X       |      X      |
 
 The difference between `ChoiceChip` and `FilterChip` is that
 the former only allows one instance in a set to be selected
@@ -2582,7 +2582,7 @@ the orange `InputChip` was deleted,
 and the red and blue `InputChip`s were selected.
 
 <img alt="Flutter Chips" style="width: 60%"
-    src="/blog/assets/flutter-chips.png?v=1.1.1"
+    src="/blog/assets/flutter-chips.png"
     title="Flutter Chips">
 
 ```dart
@@ -2780,7 +2780,7 @@ class _HomeState extends State<Home> {
 
 #### ElevatedButton Widget
 
-The most commonly used button widget is [ElevatedButton](<https://api.flutter.dev/flutter/material/ElevatedButton-class.html?v=1.1.1>).
+The most commonly used button widget is [ElevatedButton](https://api.flutter.dev/flutter/material/ElevatedButton-class.html).
 
 The most commonly used constructor arguments are summaried below:
 
@@ -2813,7 +2813,7 @@ ElevatedButton(
 
 #### FloatingActionButton Widget
 
-The [FloatingActionButton](<https://api.flutter.dev/flutter/material/FloatingActionButton-class.html?v=1.1.1>) widget "is a circular icon button
+The [FloatingActionButton](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html) widget "is a circular icon button
 that hovers over content to promote a primary action".
 Typically these are used as the value of the
 `Scaffold` `floatingActionButton` argument.
@@ -2830,7 +2830,7 @@ The most commonly used constructor arguments are summaried below:
 
 To customize the location of the button, specify the
 `Scaffold` `floatingActionButtonLocation` argument
-which takes constant defined in the [FloatingActionButtonLocation](<https://api.flutter.dev/flutter/material/FloatingActionButtonLocation-class.html?v=1.1.1>) class.
+which takes constant defined in the [FloatingActionButtonLocation](https://api.flutter.dev/flutter/material/FloatingActionButtonLocation-class.html) class.
 Most of the constants place the button near the bottom of the screen,
 including the default of `endFloat` which places it in the lower-right corner.
 Constants with names names that end in "Top"
@@ -2885,7 +2885,7 @@ like any other widget.
 
 #### TextField and TextFormField Widgets
 
-The [TextField](<https://api.flutter.dev/flutter/material/TextField-class.html?v=1.1.1>) and [TextFormField](<https://api.flutter.dev/flutter/material/TextFormField-class.html?v=1.1.1>) widget constructors take many optional arguments.
+The [TextField](https://api.flutter.dev/flutter/material/TextField-class.html) and [TextFormField](https://api.flutter.dev/flutter/material/TextFormField-class.html) widget constructors take many optional arguments.
 The highlights are described in the following table:
 
 | Argument          | Description                                                           |
@@ -2954,7 +2954,7 @@ for entering a dollar amount.
 It uses `prefix` and `suffix` widgets.
 
 <img alt="Flutter TextFormField with prefix and suffix" style="width: 60%"
-    src="/blog/assets/flutter-textformfield-prefix-suffix.png?v=1.1.1"
+    src="/blog/assets/flutter-textformfield-prefix-suffix.png"
     title="Flutter TextFormField with prefix and suffix">
 
 ```dart
@@ -3004,7 +3004,7 @@ The `suffixIcon` is an `IconButton` that toggles the value of `obscureText`.
 ```dart
 import 'package:flutter/material.dart';
 
-typedef ValidatorFn = String? Function(String?)?;
+typedef ValidatorFn = String? Function(String)?;
 
 class MyPasswordField extends StatefulWidget {
   final String initialValue;
@@ -3053,7 +3053,7 @@ class _MyPasswordFieldState extends State<MyPasswordField> {
 }
 ```
 
-Instances of the [TextEditingController](<https://api.flutter.dev/flutter/widgets/TextEditingController-class.html?v=1.1.1>) class can be passed to the
+Instances of the [TextEditingController](https://api.flutter.dev/flutter/widgets/TextEditingController-class.html) class can be passed to the
 `TextField` and `TextFormField` constructors in their `controller` argument.
 These objects specify the initial value,
 hold the current value (in their `text` property),
@@ -3074,10 +3074,10 @@ The following code demonstrates using a `TextField` with an initial value
 that is specified using a `TextEditingController`.
 When the user types a new value, the `Text` below it is updated.
 The `TextField` contains an `IconButton` that when clicked clears the value.
-This code and the related code that follows can be found in [GitHub](<https://github.com/mvolkmann/flutter_testfield_vs_textformfield?v=1.1.1>).
+This code and the related code that follows can be found in [GitHub](https://github.com/mvolkmann/flutter_testfield_vs_textformfield).
 
 <img alt="Flutter TextField" style="width: 60%"
-    src="/blog/assets/flutter-textfield.png?v=1.1.1"
+    src="/blog/assets/flutter-textfield.png"
     title="Flutter TextField">
 
 ```dart
@@ -3375,14 +3375,14 @@ Each of these are described in the following table:
 
 | Widget                                                                                                                  | Description                                                                                                                                 |
 | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [AboutDialog](<https://api.flutter.dev/flutter/material/AboutDialog-class.html?v=1.1.1>)                     | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
-| [AlertDialog](<https://api.flutter.dev/flutter/material/AlertDialog-class.html?v=1.1.1>)                     | creates a dialog containing a message and some buttons                                                                                      |
-| [CupertinoAlertDialog](<https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html?v=1.1.1>)  | iOS-themed version of `AlertDialog`                                                                                                         |
-| [DatePickerDialog](<https://api.flutter.dev/flutter/material/DatePickerDialog-class.html?v=1.1.1>)           | contains help text and a `CalendarDatePicker`                                                                                               |
-| [DateRangePickerDialog](<https://api.flutter.dev/flutter/material/DateRangePickerDialog-class.html?v=1.1.1>) | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
-| [Dialog](<https://api.flutter.dev/flutter/material/Dialog-class.html?v=1.1.1>)                               | used by other dialogs, but not by extending; not typically used directly                                                                    |
-| [SimpleDialog](<https://api.flutter.dev/flutter/material/SimpleDialog-class.html?v=1.1.1>)                   | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
-| [TimePickerDialog](<https://api.flutter.dev/flutter/material/TimePickerDialog-class.html?v=1.1.1>)           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
+| [AboutDialog](https://api.flutter.dev/flutter/material/AboutDialog-class.html)                     | contains the "application's icon, name, version number, and copyright, plus a button to show licenses for software used by the application" |
+| [AlertDialog](https://api.flutter.dev/flutter/material/AlertDialog-class.html)                     | creates a dialog containing a message and some buttons                                                                                      |
+| [CupertinoAlertDialog](https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html)  | iOS-themed version of `AlertDialog`                                                                                                         |
+| [DatePickerDialog](https://api.flutter.dev/flutter/material/DatePickerDialog-class.html)           | contains help text and a `CalendarDatePicker`                                                                                               |
+| [DateRangePickerDialog](https://api.flutter.dev/flutter/material/DateRangePickerDialog-class.html) | contains help text and a `CalendarDatePicker` that supports selecting both a start and end date                                             |
+| [Dialog](https://api.flutter.dev/flutter/material/Dialog-class.html)                               | used by other dialogs, but not by extending; not typically used directly                                                                    |
+| [SimpleDialog](https://api.flutter.dev/flutter/material/SimpleDialog-class.html)                   | contains a title and a list of clickable `SimpleDialogOption` options                                                                       |
+| [TimePickerDialog](https://api.flutter.dev/flutter/material/TimePickerDialog-class.html)           | contains a "lollipop" UI for selecting an hour and minute in a day with toggle buttons for AM and PM                                        |
 
 Flutter also provides a set of functions that show a dialog.
 All of these return a `Future` that completes
@@ -3391,12 +3391,12 @@ These functions are described in the following table:
 
 | Function                                                                                                       | Description                                                                                |
 | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| [showDialog](<https://api.flutter.dev/flutter/material/showDialog.html?v=1.1.1>)                    | displays any dialog returned by the function specified in its `builder` argument           |
-| [showCupertinoDialog](<https://api.flutter.dev/flutter/cupertino/showCupertinoDialog.html?v=1.1.1>) | like `showDialog`, but themed for iOS                                                      |
-| [showGeneralDialog](<https://api.flutter.dev/flutter/widgets/showGeneralDialog.html?v=1.1.1>)       | like `showDialog` but supports customizing the transition used to display the dialog       |
-| [showDatePicker](<https://api.flutter.dev/flutter/material/showDatePicker.html?v=1.1.1>)            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
-| [showDateRangePicker](<https://api.flutter.dev/flutter/material/showDateRangePicker.html?v=1.1.1>)  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
-| [showTimePicker](<https://api.flutter.dev/flutter/material/showTimePicker.html?v=1.1.1>)            | provides an easier way to display a `TimePickerDialog` than using the above functions      |
+| [showDialog](https://api.flutter.dev/flutter/material/showDialog.html)                    | displays any dialog returned by the function specified in its `builder` argument           |
+| [showCupertinoDialog](https://api.flutter.dev/flutter/cupertino/showCupertinoDialog.html) | like `showDialog`, but themed for iOS                                                      |
+| [showGeneralDialog](https://api.flutter.dev/flutter/widgets/showGeneralDialog.html)       | like `showDialog` but supports customizing the transition used to display the dialog       |
+| [showDatePicker](https://api.flutter.dev/flutter/material/showDatePicker.html)            | provides an easier way to display a `DatePickerDialog` than using the above functions      |
+| [showDateRangePicker](https://api.flutter.dev/flutter/material/showDateRangePicker.html)  | provides an easier way to display a `DateRangePickerDialog` than using the above functions |
+| [showTimePicker](https://api.flutter.dev/flutter/material/showTimePicker.html)            | provides an easier way to display a `TimePickerDialog` than using the above functions      |
 
 By default, dialogs created with the `showDialog` function
 are dismissed if a user taps outside them. To prevent this,
@@ -3447,7 +3447,7 @@ Future<void> alert({
 /// Displays an AlertDialog with No and Yes buttons
 /// and returns a Future that succeeds with a String
 /// that is the text on the pressed button.
-Future<String?> confirm({
+Future<String> confirm({
   required BuildContext context,
   required String title,
   required String message,
@@ -3508,57 +3508,57 @@ The following code demonstrates using each of the supported dialog types.
 
 <figure style="width: 30%">
   <img alt="Flutter Dialogs"
-    src="/blog/assets/flutter-dialogs.png?v=1.1.1"
+    src="/blog/assets/flutter-dialogs.png"
     title="Flutter Dialogs">
   <figcaption>Flutter Dialogs</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter About Dialog"
-    src="/blog/assets/flutter-dialog-about.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-about.png"
     title="Flutter About Dialog">
   <figcaption>Flutter About Dialog</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter About Dialog Licenses"
-    src="/blog/assets/flutter-dialog-about-licenses.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-about-licenses.png"
     title="Flutter About Dialog Licenses">
   <figcaption>Flutter About Dialog Licenses</figcaption>
 </figure>
 
 <figure style="width: 30%">
   <img alt="Flutter Material Alert Dialog"
-    src="/blog/assets/flutter-dialog-alert.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-alert.png"
     title="Flutter Material Alert Dialog">
   <figcaption>Flutter Material Alert Dialog</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter Cupertino Alert Dialog"
-    src="/blog/assets/flutter-dialog-alert-cupertino.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-alert-cupertino.png"
     title="Flutter Cupertino Alert Dialog">
   <figcaption>Flutter Cupertino Alert Dialog</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter Confirm Dialog"
-    src="/blog/assets/flutter-dialog-confirm.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-confirm.png"
     title="Flutter Confirm Dialog">
   <figcaption>Flutter Confirm Dialog</figcaption>
 </figure>
 
 <figure style="width: 30%">
   <img alt="Flutter Date Picker Dialog"
-    src="/blog/assets/flutter-dialog-date-picker.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-date-picker.png"
     title="Flutter Date Picker Dialog">
   <figcaption>Flutter Date Picker Dialog</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter Date Range Dialog"
-    src="/blog/assets/flutter-dialog-date-range.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-date-range.png"
     title="Flutter Date Range Dialog">
   <figcaption>Flutter Date Range Dialog</figcaption>
 </figure>
 <figure style="width: 30%">
   <img alt="Flutter Time Picker Dialog"
-    src="/blog/assets/flutter-dialog-time-picker.png?v=1.1.1"
+    src="/blog/assets/flutter-dialog-time-picker.png"
     title="Flutter Time Picker Dialog">
   <figcaption>Flutter Time Picker Dialog</figcaption>
 </figure>
@@ -3702,7 +3702,7 @@ class MyHomePage extends StatelessWidget {
               child: Text('Show Confirm Dialog'),
               onPressed: () => _confirm(
                 context: context,
-                question: 'Are you sure?',
+                question: 'Are you sure',
               ),
             ),
             ElevatedButton(
@@ -3918,7 +3918,7 @@ Some of the `SnackBar` arguments are commented out
 just to show valid values for them.
 
 <img alt="Flutter SnackBar" style="width: 40%"
-    src="/blog/assets/flutter-snackbar.png?v=1.1.1"
+    src="/blog/assets/flutter-snackbar.png"
     title="Flutter SnackBar">
 
 ```dart
@@ -3996,7 +3996,7 @@ class MyHomePage extends StatelessWidget {
 ### Cupertino Widgets
 
 These widgets use iOS styling rather than Material Design.
-They are documented at [Cupertino (iOS-style) widgets](<https://docs.flutter.dev/development/ui/widgets/cupertino?v=1.1.1>).
+They are documented at [Cupertino (iOS-style) widgets](https://docs.flutter.dev/development/ui/widgets/cupertino).
 
 To use Cupertino widgets in a Dart source file, add the following import:
 
@@ -4004,7 +4004,7 @@ To use Cupertino widgets in a Dart source file, add the following import:
 import 'package:flutter/cupertino.dart';
 ```
 
-The [CupertinoColors](<https://api.flutter.dev/flutter/cupertino/CupertinoColors-class.html?v=1.1.1>) class defines constants for colors
+The [CupertinoColors](https://api.flutter.dev/flutter/cupertino/CupertinoColors-class.html) class defines constants for colors
 that are commonly used in iOS apps.
 The type of these constants is `CupertinoDynamicColor` which extends `Color`,
 so they can be used anywhere a `Color` value is expected.
@@ -4014,36 +4014,36 @@ Examples include `activeBlue`, `destructiveRed`, `inactiveGray`,
 
 | Widget                                                                                                                                               | Description                                                                                                        |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| [CupertinoActionSheet](<https://api.flutter.dev/flutter/cupertino/CupertinoActionSheet-class.html?v=1.1.1>)                               | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
-| [CupertinoActivityIndicator](<https://api.flutter.dev/flutter/cupertino/CupertinoActivityIndicator-class.html?v=1.1.1>)                   | iOS-style spinner                                                                                                  |
-| [CupertinoAlertDialog](<https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html?v=1.1.1>)                               | iOS-style alert dialog with a title, message, and set of buttons                                                   |
-| [CupertinoButton](<https://api.flutter.dev/flutter/cupertino/CupertinoButton-class.html?v=1.1.1>)                                         | iOS-style button that can be tapped to execute associated code                                                     |
-| [CupertinoContextMenu](<https://api.flutter.dev/flutter/cupertino/CupertinoContextMenu-class.html?v=1.1.1>)                               | iOS-style modal containing a set of tappable options rendered when a specific widget is long-pressed               |
-| [CupertinoDatePicker](<https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html?v=1.1.1>)                                 | iOS-style wheel picker for entering a date and time                                                                |
-| [CupertinoDialogAction](<https://api.flutter.dev/flutter/cupertino/CupertinoDialogAction-class.html?v=1.1.1>)                             | button with no background color or border, typically used in `CupertinoAlertDialog`                                |
-| [CupertinoFullScreenDialogTransition](<https://api.flutter.dev/flutter/cupertino/CupertinoFullscreenDialogTransition-class.html?v=1.1.1>) | iOS-style transition used to render fullscreen dialogs                                                             |
-| [CupertinoNavigationBar](<https://api.flutter.dev/flutter/cupertino/CupertinoNavigationBar-class.html?v=1.1.1>)                           | iOS-style top navigation bar typically used with `CupertinoPageScaffold`                                           |
-| [CupertinoPageScaffold](<https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html?v=1.1.1>)                             | common iOS-style page layout                                                                                       |
-| [CupertinoPageTransition](<https://api.flutter.dev/flutter/cupertino/CupertinoPageTransition-class.html?v=1.1.1>)                         | iOS-style page transition animation                                                                                |
-| [CupertinoPicker](<https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html?v=1.1.1>)                                         | iOS-style wheel picker                                                                                             |
-| [CupertinoPopupSurface](<https://api.flutter.dev/flutter/cupertino/CupertinoPopupSurface-class.html?v=1.1.1>)                             | rounded rectangle for an alert dialog or action sheet                                                              |
-| [CupertinoScrollbar](<https://api.flutter.dev/flutter/cupertino/CupertinoScrollbar-class.html?v=1.1.1>)                                   | iOS-style scrollbar                                                                                                |
-| [CupertinoSearchTextField](<https://api.flutter.dev/flutter/cupertino/CupertinoSearchTextField-class.html?v=1.1.1>)                       | iOS-style search input                                                                                             |
-| [CupertinoSegmentedControl](<https://api.flutter.dev/flutter/cupertino/CupertinoSegmentedControl-class.html?v=1.1.1>)                     | iOS-style segmented control which is a horizontal list of mutually-exclusive buttons                               |
-| [CupertinoSlider](<https://api.flutter.dev/flutter/cupertino/CupertinoSlider-class.html?v=1.1.1>)                                         | iOS-style slider for selecting a value from a range                                                                |
-| [CupertinoSlidingSegmentedControl](<https://api.flutter.dev/flutter/cupertino/CupertinoSlidingSegmentedControl-class.html?v=1.1.1>)       | iOS-style segmented control which is a horizontal list of buttons                                                  |
-| [CupertinoSliverNavigationBar](<https://api.flutter.dev/flutter/cupertino/CupertinoSliverNavigationBar-class.html?v=1.1.1>)               | iOS-style navigation bar with a large title                                                                        |
-| [CupertinoSwitch](<https://api.flutter.dev/flutter/cupertino/CupertinoSwitch-class.html?v=1.1.1>)                                         | iOS-style switch (like the SwiftUI `Toggle` view)                                                                  |
-| [CupertinoTabBar](<https://api.flutter.dev/flutter/cupertino/CupertinoTabBar-class.html?v=1.1.1>)                                         | iOS-style bottom tab bar that is typically used with `CupertinoTabScaffold`                                        |
-| [CupertinoTabScaffold](<https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html?v=1.1.1>)                               | positions a tab bar below the display of select tab content                                                        |
-| [CupertinoTabView](<https://api.flutter.dev/flutter/cupertino/CupertinoTabView-class.html?v=1.1.1>)                                       | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
-| [CupertinoTextField](<https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html?v=1.1.1>)                                   | iOS-style input text field                                                                                         |
-| [CupertinoTimerPicker](<https://api.flutter.dev/flutter/cupertino/CupertinoTimerPicker-class.html?v=1.1.1>)                               | iOS-style wheel picker for entering hours, minutes, and seconds that represent a countdown timer                   |
+| [CupertinoActionSheet](https://api.flutter.dev/flutter/cupertino/CupertinoActionSheet-class.html)                               | modal that slides up from bottom to allow selection from a set of options; sometimes used for confirmation dialogs |
+| [CupertinoActivityIndicator](https://api.flutter.dev/flutter/cupertino/CupertinoActivityIndicator-class.html)                   | iOS-style spinner                                                                                                  |
+| [CupertinoAlertDialog](https://api.flutter.dev/flutter/cupertino/CupertinoAlertDialog-class.html)                               | iOS-style alert dialog with a title, message, and set of buttons                                                   |
+| [CupertinoButton](https://api.flutter.dev/flutter/cupertino/CupertinoButton-class.html)                                         | iOS-style button that can be tapped to execute associated code                                                     |
+| [CupertinoContextMenu](https://api.flutter.dev/flutter/cupertino/CupertinoContextMenu-class.html)                               | iOS-style modal containing a set of tappable options rendered when a specific widget is long-pressed               |
+| [CupertinoDatePicker](https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html)                                 | iOS-style wheel picker for entering a date and time                                                                |
+| [CupertinoDialogAction](https://api.flutter.dev/flutter/cupertino/CupertinoDialogAction-class.html)                             | button with no background color or border, typically used in `CupertinoAlertDialog`                                |
+| [CupertinoFullScreenDialogTransition](https://api.flutter.dev/flutter/cupertino/CupertinoFullscreenDialogTransition-class.html) | iOS-style transition used to render fullscreen dialogs                                                             |
+| [CupertinoNavigationBar](https://api.flutter.dev/flutter/cupertino/CupertinoNavigationBar-class.html)                           | iOS-style top navigation bar typically used with `CupertinoPageScaffold`                                           |
+| [CupertinoPageScaffold](https://api.flutter.dev/flutter/cupertino/CupertinoPageScaffold-class.html)                             | common iOS-style page layout                                                                                       |
+| [CupertinoPageTransition](https://api.flutter.dev/flutter/cupertino/CupertinoPageTransition-class.html)                         | iOS-style page transition animation                                                                                |
+| [CupertinoPicker](https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html)                                         | iOS-style wheel picker                                                                                             |
+| [CupertinoPopupSurface](https://api.flutter.dev/flutter/cupertino/CupertinoPopupSurface-class.html)                             | rounded rectangle for an alert dialog or action sheet                                                              |
+| [CupertinoScrollbar](https://api.flutter.dev/flutter/cupertino/CupertinoScrollbar-class.html)                                   | iOS-style scrollbar                                                                                                |
+| [CupertinoSearchTextField](https://api.flutter.dev/flutter/cupertino/CupertinoSearchTextField-class.html)                       | iOS-style search input                                                                                             |
+| [CupertinoSegmentedControl](https://api.flutter.dev/flutter/cupertino/CupertinoSegmentedControl-class.html)                     | iOS-style segmented control which is a horizontal list of mutually-exclusive buttons                               |
+| [CupertinoSlider](https://api.flutter.dev/flutter/cupertino/CupertinoSlider-class.html)                                         | iOS-style slider for selecting a value from a range                                                                |
+| [CupertinoSlidingSegmentedControl](https://api.flutter.dev/flutter/cupertino/CupertinoSlidingSegmentedControl-class.html)       | iOS-style segmented control which is a horizontal list of buttons                                                  |
+| [CupertinoSliverNavigationBar](https://api.flutter.dev/flutter/cupertino/CupertinoSliverNavigationBar-class.html)               | iOS-style navigation bar with a large title                                                                        |
+| [CupertinoSwitch](https://api.flutter.dev/flutter/cupertino/CupertinoSwitch-class.html)                                         | iOS-style switch (like the SwiftUI `Toggle` view)                                                                  |
+| [CupertinoTabBar](https://api.flutter.dev/flutter/cupertino/CupertinoTabBar-class.html)                                         | iOS-style bottom tab bar that is typically used with `CupertinoTabScaffold`                                        |
+| [CupertinoTabScaffold](https://api.flutter.dev/flutter/cupertino/CupertinoTabScaffold-class.html)                               | positions a tab bar below the display of select tab content                                                        |
+| [CupertinoTabView](https://api.flutter.dev/flutter/cupertino/CupertinoTabView-class.html)                                       | supports "parallel navigation"? between tabs; typically used with `CupertinoTabScaffold`                           |
+| [CupertinoTextField](https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html)                                   | iOS-style input text field                                                                                         |
+| [CupertinoTimerPicker](https://api.flutter.dev/flutter/cupertino/CupertinoTimerPicker-class.html)                               | iOS-style wheel picker for entering hours, minutes, and seconds that represent a countdown timer                   |
 
 #### CupertinoDatePicker Widget
 
-The [CupertinoDatePicker](<https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html?v=1.1.1>) widget is an alternative
-to the Material UI [CalendarDatePicker](<https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html?v=1.1.1>) widget.
+The [CupertinoDatePicker](https://api.flutter.dev/flutter/cupertino/CupertinoDatePicker-class.html) widget is an alternative
+to the Material UI [CalendarDatePicker](https://api.flutter.dev/flutter/material/CalendarDatePicker-class.html) widget.
 It allows the user to select a date, time, or both
 by spinning wheel-like displays.
 
@@ -4072,12 +4072,12 @@ Container(
 
 Currently thewre are no enum values in `CupertinoDatePickerMode`
 to request getting only a month and year or only a month and day.
-See this [issue](<https://github.com/flutter/flutter/issues/93508?v=1.1.1>).
+See this [issue](https://github.com/flutter/flutter/issues/93508).
 
 #### CupertinoPicker Widget
 
-The [CupertinoPicker](<https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html?v=1.1.1>) widget is an alternative
-to the Material UI [DropdownButton](<https://api.flutter.dev/flutter/material/DropdownButton-class.html?v=1.1.1>) widget.
+The [CupertinoPicker](https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html) widget is an alternative
+to the Material UI [DropdownButton](https://api.flutter.dev/flutter/material/DropdownButton-class.html) widget.
 It allows the user to select an option from a wheel-like display.
 
 The following code allows the user to select from a `List` of words.
@@ -4104,7 +4104,7 @@ Container(
 
 ## Swipe to Delete
 
-The [Dismissible](<https://api.flutter.dev/flutter/widgets/Dismissible-class.html?v=1.1.1>) widget allows a widget to be dragged out of view.
+The [Dismissible](https://api.flutter.dev/flutter/widgets/Dismissible-class.html) widget allows a widget to be dragged out of view.
 The `onDismissed` argument can be set to a function that usually
 updates the state so the widget will not be rendered again.
 
@@ -4117,15 +4117,15 @@ While a background containing a "Delete" button
 can be exposed when the user drags a tile to the left,
 it is hidden when they release the tile
 which gives them no opportunity to tap the button.
-A better option is to use the [flutter_swipe_action_cell](<https://pub.dev/packages/flutter_swipe_action_cell?v=1.1.1>) package.
-For an example, see this [GitHub repo](<https://github.com/mvolkmann/flutter_dismissible/blob/main/lib/main.dart?v=1.1.1>).
+A better option is to use the [flutter_swipe_action_cell](https://pub.dev/packages/flutter_swipe_action_cell) package.
+For an example, see this [GitHub repo](https://github.com/mvolkmann/flutter_dismissible/blob/main/lib/main.dart).
 
 ## Pull to Refresh
 
-The [RefreshIndicator](<https://api.flutter.dev/flutter/material/RefreshIndicator-class.html?v=1.1.1>) widget wraps a vertical scroll view
+The [RefreshIndicator](https://api.flutter.dev/flutter/material/RefreshIndicator-class.html) widget wraps a vertical scroll view
 and provides the "pull to refresh" capability.
 
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=ORApMlzwMdM&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=ORApMlzwMdM).
 
 The following code demonstrates using the RefreshIndicator widget.
 Dragging the list down when the top item is displayed
@@ -4133,7 +4133,7 @@ cause three more items to be added to the beginning
 until there are no more items to load.
 
 <img alt="Flutter RefreshIndicator" style="width: 60%"
-    src="/blog/assets/flutter-refreshindicator.png?v=1.1.1"
+    src="/blog/assets/flutter-refreshindicator.png"
     title="Flutter RefreshIndicator">
 
 ```dart
@@ -4243,7 +4243,7 @@ class _HomeState extends State<Home> {
 ## Search with Type-Ahead
 
 Searching a list of options with type-ahead matching can be implemented
-using a combination of [showSearch](<https://api.flutter.dev/flutter/material/showSearch.html?v=1.1.1>) function and the [SearchDelegate](<https://api.flutter.dev/flutter/material/SDelegate-class.html?v=1.1.1>) class.
+using a combination of [showSearch](https://api.flutter.dev/flutter/material/showSearch.html) function and the [SearchDelegate](https://api.flutter.dev/flutter/material/SDelegate-class.html) class.
 
 The following example demonstrates implementing selection of a hockey team
 either by tapping a name or by tapping the search button
@@ -4251,10 +4251,10 @@ and entering a partial name to find one using typeahead.
 
 <div style="display: flex; align-items: flex-start; gap: 1rem">
   <img alt="Flutter showSearch #1" style="width: 40%"
-    src="/blog/assets/flutter-showSearch-1.png?v=1.1.1"
+    src="/blog/assets/flutter-showSearch-1.png"
     title="Flutter showSearch #1">
   <img alt="Flutter showSearch #2" style="width: 40%"
-    src="/blog/assets/flutter-showSearch-2.png?v=1.1.1"
+    src="/blog/assets/flutter-showSearch-2.png"
     title="Flutter showSearch #2">
 </div>
 
@@ -4507,10 +4507,10 @@ wrap the `Scaffold` widget in a `SafeArea` widget.
 
 ## Form Validation
 
-The [Form](<https://api.flutter.dev/flutter/widgets/Form-class.html?v=1.1.1>) widget supports form validation based on the form fields inside it.
+The [Form](https://api.flutter.dev/flutter/widgets/Form-class.html) widget supports form validation based on the form fields inside it.
 It takes a `children` argument that is a `List` of widgets.
 
-Widget classes that extend [`FormField`](<https://api.flutter.dev/flutter/widgets/FormField-class.html?v=1.1.1>) support a `validator` argument.
+Widget classes that extend [`FormField`](https://api.flutter.dev/flutter/widgets/FormField-class.html) support a `validator` argument.
 This can be set to a function that is passed the current value.
 Often these functions use the `RegExp` class and its `hasMatch` method
 to compare `String` values to regular expressions.
@@ -4522,7 +4522,7 @@ The only provided widgets that extend `FormField` are
 `TextFormField`, `DropdownButtonFormField`, and `CupertinoTextFormFieldRow`.
 Additional widget classes can be defined to
 add validation to other input widgets.
-To learn how to do this, watch [this video](<https://www.youtube.com/watch?v=1vHf5kQ0E2I&v=1.1.1>)
+To learn how to do this, watch [this video](https://www.youtube.com/watch?v=1vHf5kQ0E2I)
 starting at 9:21.
 
 `Form` is a stateful widget and the class that holds its state is `FormState`.
@@ -4558,7 +4558,7 @@ which could occur programmatically.
 To disable a button in a `Form` when the form is invalid,
 set its `onPressed` argument to `null`.
 
-The pub.dev package [form_field_validator](<https://pub.dev/packages/form_field_validator?v=1.1.1>)
+The pub.dev package [form_field_validator](https://pub.dev/packages/form_field_validator)
 provides a set of classes that simplify form validation.
 This may be overkill for most forms.
 
@@ -4566,10 +4566,10 @@ The following code demonstrates implementing a login form
 with validation:
 
 <img alt="Flutter Form Validation initial" style="width: 40%"
-    src="/blog/assets/flutter-form-validation-1.png?v=1.1.1"
+    src="/blog/assets/flutter-form-validation-1.png"
     title="Flutter Form Validation initial">
 <img alt="Flutter Form Validation with data" style="width: 40%"
-    src="/blog/assets/flutter-form-validation-2.png?v=1.1.1"
+    src="/blog/assets/flutter-form-validation-2.png"
     title="Flutter Form Validation with data">
 
 This code uses a custom widget that wraps the use of `TextFormField`
@@ -4580,7 +4580,7 @@ Here is the code from `my_text_field.dart`:
 import 'package:flutter/material.dart';
 import 'widget_extensions.dart';
 
-typedef ValidatorFn = String? Function(String?)?;
+typedef ValidatorFn = String? Function(String)?;
 
 class MyTextField extends StatefulWidget {
   final String hintText;
@@ -4784,13 +4784,13 @@ it is recommended to choose a state management package
 provided by the community.
 Popular packages include:
 
-- [bloc](<https://bloclibrary.dev/?v=1.1.1>)
-- [cubit](<https://pub.dev/documentation/flutter_cubit/latest/?v=1.1.1>)
-- [get_it](<https://pub.dev/packages/get_it?v=1.1.1>)
-- [GetX](<https://pub.dev/packages/get?v=1.1.1>)
-- [provider](<https://pub.dev/packages/provider?v=1.1.1>) package
+- [bloc](https://bloclibrary.dev/)
+- [cubit](https://pub.dev/documentation/flutter_cubit/latest/)
+- [get_it](https://pub.dev/packages/get_it)
+- [GetX](https://pub.dev/packages/get)
+- [provider](https://pub.dev/packages/provider) package
   (similar to the Context API in React)
-- [Riverpod](<https://riverpod.dev?v=1.1.1>)
+- [Riverpod](https://riverpod.dev)
 
 These reduce the need for stateful widgets.
 
@@ -4935,7 +4935,7 @@ class _NumbersState extends State<Numbers> {
 
 ### InheritedWidget
 
-The [InheritedWidget](<https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html?v=1.1.1>) class is a base class for
+The [InheritedWidget](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html) class is a base class for
 classes that wish to share data with descendant widgets.
 They take a child widget to wrap around.
 Instances are immutable, but they can
@@ -5033,14 +5033,14 @@ class ChildWidget extends StatelessWidget {
 
 ### provider Package
 
-The [provider](<https://pub.dev/packages/provider?v=1.1.1>) package
+The [provider](https://pub.dev/packages/provider) package
 is is the state management approach recommended by the Flutter team.
 It is "A wrapper around `InheritedWidget`
 to make them easier to use and more reusable."
 It vastly reduces the amount of boilerplate code that must be written
 and provides many features not present in `InheritedWidget`.
 
-The [official documentation](<https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple?v=1.1.1>) says
+The [official documentation](https://docs.flutter.dev/development/data-and-backend/state-mgmt/simple) says
 "If you are new to Flutter and you don’t have a strong reason
 to choose another approach (Redux, Rx, hooks, etc.),
 this is probably the approach you should start with."
@@ -5048,9 +5048,9 @@ In June 2019 Chris Sells, the Flutter Project Manager, said
 "Provider is the recommended way to do State Management for apps of all sizes."
 
 The provider package was created by Remi Rousselet.
-It is a wrapper around the [InheritedWidget](<https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html?v=1.1.1>) which is
+It is a wrapper around the [InheritedWidget](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html) which is
 a relatively complicated way to share mutable state.
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=utrvu-eow6U&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=utrvu-eow6U).
 
 The steps to use the provider package are:
 
@@ -5063,7 +5063,7 @@ The steps to use the provider package are:
 
 2. Install by entering `flutter pub get` unless your IDE does this for you.
 
-3. Create [ChangeNotifier](<https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html?v=1.1.1>) classes that hold state,
+3. Create [ChangeNotifier](https://api.flutter.dev/flutter/foundation/ChangeNotifier-class.html) classes that hold state,
    define methods for modifying it, and define getters and setters.
    For example, the following can be defined
    in the file `lib/count_state.dart`:
@@ -5232,10 +5232,10 @@ and three custom widgets that update and display the state.
 The user can enter a player name and a series of scores.
 The total and average of the scores is calculated and displayed.
 Code for this app is in
-[GitHub](<https://github.com/mvolkmann/flutter_provider?v=1.1.1>).
+[GitHub](https://github.com/mvolkmann/flutter_provider).
 
 <img alt="provider Demo" style="width: 40%"
-    src="/blog/assets/flutter-provider-demo.png?v=1.1.1"
+    src="/blog/assets/flutter-provider-demo.png"
     title="provider Demo">
 
 Here are examples of `ChangeNotifier` subclasses:
@@ -5482,7 +5482,7 @@ class ScoreReport extends StatelessWidget {
 
 ### GetX Framework
 
-[GetX](<https://pub.dev/packages/get?v=1.1.1>)
+[GetX](https://pub.dev/packages/get)
 is a Flutter framework that provides a dependency manager,
 state manager, navigation manager, and utility functions.
 It can be found in pub.dev under the name "get".
@@ -5577,10 +5577,10 @@ and three custom widgets that update and display the state.
 The user can enter a player name and a series of scores.
 The total and average of the scores is calculated and displayed.
 Code for this app is in
-[GitHub](<https://github.com/mvolkmann/flutter_getx?v=1.1.1>).
+[GitHub](https://github.com/mvolkmann/flutter_getx).
 
 <img alt="GetX Demo" style="width: 40%"
-    src="/blog/assets/flutter-getx-demo.png?v=1.1.1"
+    src="/blog/assets/flutter-getx-demo.png"
     title="GetX Demo">
 
 Here are examples of controller classes:
@@ -5837,9 +5837,9 @@ The most useful of these functions are summarized below:
 
 | Function   | Description                                                         | Documentation                                                                                                                         |
 | ---------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `Get.back` | goes back to previous route, popping current route off of the stack | [back](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/back.html?v=1.1.1>) |
-| `Get.to`   | goes to a new route, pushing it onto the stack                      | [to](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html?v=1.1.1>)     |
-| `Get.off`  | pops current route and pushes new route                             | [to](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html?v=1.1.1>)     |
+| `Get.back` | goes back to previous route, popping current route off of the stack | [back](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/back.html) |
+| `Get.to`   | goes to a new route, pushing it onto the stack                      | [to](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html)     |
+| `Get.off`  | pops current route and pushes new route                             | [to](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/to.html)     |
 
 #### Utilities
 
@@ -5850,26 +5850,26 @@ The most useful of these functions are summarized below:
 
 | Function                 | Description                                                                      | Documentation                                                                                                                                              |
 | ------------------------ | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `Get.bottomSheet`        | displays a bottom sheet                                                          | [bottomSheet](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionBottomSheet/bottomSheet.html?v=1.1.1>) |
-| `Get.changeTheme`        | changes to a given theme such as `ThemeData.dark()`                              | [changeTheme](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/changeTheme.html?v=1.1.1>)        |
-| `Get.defaultDialog`      | displays a dialog                                                                | [defaultDialog](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionDialog/defaultDialog.html?v=1.1.1>)  |
-| `Get.snackbar`           | displays a snackbar                                                              | [snackbar](<https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionSnackbar/snackbar.html?v=1.1.1>)          |
-| `GetUtils.camelCase`     | returns camelCase version of a `String`                                          | [camelCase](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/camelCase.html?v=1.1.1>)                       |
-| `GetUtils.capitalize`    | returns version of a `String` where the first letter of each word is capitalized | [capitalize](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/capitalize.html?v=1.1.1>)                     |
-| `GetUtils.isEmail`       | returns a `bool` indicaing if a `String` is a valid email address                | [isEmail](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isEmail.html?v=1.1.1>)                           |
-| `GetUtils.isPhoneNumber` | returns a `bool` indicaing if a `String` is a valid phone number                 | [isPhoneNumber](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isPhoneNumber.html?v=1.1.1>)               |
-| `GetUtils.isSSN`         | returns a `bool` indicaing if a `String` is a valid social security number       | [isSSN](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isSSN.html?v=1.1.1>)                               |
-| `GetUtils.isURL`         | returns a `bool` indicaing if a `String` is a valid URL                          | [isURL](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isURL.html?v=1.1.1>)                               |
-| `GetUtils.snakeCase`     | returns snake_case version of a `String`                                         | [snakeCase](<https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/snakeCase.html?v=1.1.1>)                       |
+| `Get.bottomSheet`        | displays a bottom sheet                                                          | [bottomSheet](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionBottomSheet/bottomSheet.html) |
+| `Get.changeTheme`        | changes to a given theme such as `ThemeData.dark()`                              | [changeTheme](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/GetNavigation/changeTheme.html)        |
+| `Get.defaultDialog`      | displays a dialog                                                                | [defaultDialog](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionDialog/defaultDialog.html)  |
+| `Get.snackbar`           | displays a snackbar                                                              | [snackbar](https://pub.dev/documentation/get/latest/get_navigation_src_extension_navigation/ExtensionSnackbar/snackbar.html)          |
+| `GetUtils.camelCase`     | returns camelCase version of a `String`                                          | [camelCase](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/camelCase.html)                       |
+| `GetUtils.capitalize`    | returns version of a `String` where the first letter of each word is capitalized | [capitalize](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/capitalize.html)                     |
+| `GetUtils.isEmail`       | returns a `bool` indicaing if a `String` is a valid email address                | [isEmail](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isEmail.html)                           |
+| `GetUtils.isPhoneNumber` | returns a `bool` indicaing if a `String` is a valid phone number                 | [isPhoneNumber](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isPhoneNumber.html)               |
+| `GetUtils.isSSN`         | returns a `bool` indicaing if a `String` is a valid social security number       | [isSSN](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isSSN.html)                               |
+| `GetUtils.isURL`         | returns a `bool` indicaing if a `String` is a valid URL                          | [isURL](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/isURL.html)                               |
+| `GetUtils.snakeCase`     | returns snake_case version of a `String`                                         | [snakeCase](https://pub.dev/documentation/get/latest/get_utils_src_get_utils_get_utils/GetUtils/snakeCase.html)                       |
 
 GetX provides language translation using the `.tr` getter functino
 and the `Get.changeLocale` function.`
 
 ### Riverpod Package
 
-[Riverpod](<https://riverpod.dev?v=1.1.1>)
+[Riverpod](https://riverpod.dev)
 was created by Remi Rousselet, who is the same developer that created
-[provider](<https://pub.dev/packages/provider?v=1.1.1>).
+[provider](https://pub.dev/packages/provider).
 The name comes from rearranging the letters in "provider".
 It addresses several issues with provider including:
 
@@ -5890,10 +5890,10 @@ It addresses several issues with provider including:
 
 There are three packages for using Riverpod.
 
-1. [riverpod](<https://github.com/rrousselGit/river_pod/tree/master/packages/riverpod?v=1.1.1>) for non-Flutter Dart applications.
-1. [flutter_riverpod](<https://pub.dev/packages/flutter_riverpod?v=1.1.1>) for Flutter applications.
-1. [hooks_riverpod](<https://pub.dev/packages/hooks_riverpod?v=1.1.1>) for Flutter applications
-   that also use [flutter_hooks](<https://github.com/rrousselGit/flutter_hooks?v=1.1.1>).
+1. [riverpod](https://github.com/rrousselGit/river_pod/tree/master/packages/riverpod) for non-Flutter Dart applications.
+1. [flutter_riverpod](https://pub.dev/packages/flutter_riverpod) for Flutter applications.
+1. [hooks_riverpod](https://pub.dev/packages/hooks_riverpod) for Flutter applications
+   that also use [flutter_hooks](https://github.com/rrousselGit/flutter_hooks).
 
 Only use of flutter_riverpod v2 is described here.
 
@@ -5937,10 +5937,10 @@ It also has the advantage that change notification is automatic.
 
 The following app demonstrates basic usage of each provider type.
 Code for this app is in
-[GitHub](<https://github.com/mvolkmann/flutter_riverpod_demo?v=1.1.1>).
+[GitHub](https://github.com/mvolkmann/flutter_riverpod_demo).
 
 <img alt="Riverpod Demo" style="width: 40%"
-    src="/blog/assets/flutter-riverpod-demo.png?v=1.1.1"
+    src="/blog/assets/flutter-riverpod-demo.png"
     title="Riverpod Demo">
 
 ```dart
@@ -6451,11 +6451,11 @@ class StateNotifierPage extends ConsumerWidget {
 
 In some cases it is desireable to load data in an asynchronous way
 before rendering a given widget.
-Two options for achieving this are to use the [FutureBuilder](<https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html?v=1.1.1>) or [StreamBuilder](<https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html?v=1.1.1>) widgets.
+Two options for achieving this are to use the [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html) or [StreamBuilder](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html) widgets.
 
 ### FutureBuilder Widget
 
-The [FutureBuilder](<https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html?v=1.1.1>) widget builds a widget based on
+The [FutureBuilder](https://api.flutter.dev/flutter/widgets/FutureBuilder-class.html) widget builds a widget based on
 whether a `Future` has completed and its value.
 It is typically used in the `build` method of a `StatefulWidget`.
 
@@ -6501,7 +6501,7 @@ Container(
 
 ### StreamBuilder Widget
 
-The [StreamBuilder](<https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html?v=1.1.1>) widget rebuilds a single widget
+The [StreamBuilder](https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html) widget rebuilds a single widget
 in response to new data becoming available on a stream.
 It is typically used in the `build` method of a `StatefulWidget`.
 
@@ -6580,12 +6580,12 @@ There are many approaches to persisting app data
 so it is not lost when an app is closed.
 Two popular options are:
 
-- [shared_preferences](<https://pub.dev/packages/shared_preferences?v=1.1.1>) package
-- [SQLite](<https://docs.flutter.dev/cookbook/persistence/sqlite?v=1.1.1>) database on the device
+- [shared_preferences](https://pub.dev/packages/shared_preferences) package
+- [SQLite](https://docs.flutter.dev/cookbook/persistence/sqlite) database on the device
 
 ### shared_preferences Package
 
-The pub.dev package [shared_preferences](<https://pub.dev/packages/shared_preferences?v=1.1.1>)
+The pub.dev package [shared_preferences](https://pub.dev/packages/shared_preferences)
 "wraps platform-specific persistent storage for simple data."
 It is used to hold key/value pairs where the keys are strings and the
 values have the types `bool`, `int`, `double`, `String`, or `List<String>`.
@@ -6625,10 +6625,10 @@ void removeDemo() {
 
 The SQLite database is a popular choice for persisting data on mobile devices.
 The pub.dev package
-[sqflite](<https://pub.dev/packages/sqflite?v=1.1.1>)
+[sqflite](https://pub.dev/packages/sqflite)
 is the most popular way to access a SQLite database in a Flutter application.
 
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=HefHf5B1YM0&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=HefHf5B1YM0).
 
 The steps to use sqflite are:
 
@@ -6732,7 +6732,7 @@ class Dog {
      return database.update(
        'dogs',
        dog.toMap(),
-       where: 'id = ?',
+       where: 'id = ',
        // This prevents SQL injection.
        whereArgs: [dog.id],
      );
@@ -6748,7 +6748,7 @@ class Dog {
    Future<void> deleteDog(int id) {
      return database.delete(
        'dogs',
-       where: 'id = ?',
+       where: 'id = ',
        whereArgs: [id],
      );
    }
@@ -6756,7 +6756,7 @@ class Dog {
    await deleteDog(comet.id);
    ```
 
-For a working example, see this [GitHub repo](<https://github.com/mvolkmann/flutter_sqlite?v=1.1.1>).
+For a working example, see this [GitHub repo](https://github.com/mvolkmann/flutter_sqlite).
 
 ## Navigation
 
@@ -6837,7 +6837,7 @@ class HelpPage extends StatelessWidget {
 
 To navigate to a new page, push it onto the navigation stack.
 One way to do this is to specify the widget responsible for
-rendering the new page with the [MaterialPageRoute](<https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html?v=1.1.1>) or [CupertinoPageRoute](<https://api.flutter.dev/flutter/cupertino/CupertinoPageRoute-class.html?v=1.1.1>) class.
+rendering the new page with the [MaterialPageRoute](https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html) or [CupertinoPageRoute](https://api.flutter.dev/flutter/cupertino/CupertinoPageRoute-class.html) class.
 These differ in the transition animation they provide.
 
 For example:
@@ -7050,7 +7050,7 @@ Here is an example of using the helper class above
 to add a `BottomNavigationBar` to an app:
 
 <img alt="Flutter BottomNavigationBar" style="width: 40%"
-    src="/blog/assets/flutter-bottomnavigationbar.png?v=1.1.1"
+    src="/blog/assets/flutter-bottomnavigationbar.png"
     title="Flutter BottomNavigationBar">
 
 ```dart
@@ -7225,7 +7225,7 @@ Here is an example of using the helper class above
 to add a `Drawer` to an app:
 
 <img alt="Flutter Drawer" style="width: 40%"
-    src="/blog/assets/flutter-drawer.png?v=1.1.1"
+    src="/blog/assets/flutter-drawer.png"
     title="Flutter Drawer">
 
 ```dart
@@ -7259,7 +7259,7 @@ class MyApp extends StatelessWidget {
 
 ### PageView Widget
 
-The [PageView](<https://api.flutter.dev/flutter/widgets/PageView-class.html?v=1.1.1>) widget provides a carousel-like scrollable list of pages.
+The [PageView](https://api.flutter.dev/flutter/widgets/PageView-class.html) widget provides a carousel-like scrollable list of pages.
 Users can swipe through viewing the pages one at a time
 or the current page can be changed programmatically.
 
@@ -7270,7 +7270,7 @@ Page transitions are animated by default and the animation can be customized.
 The following code demonstrates using `PageView`:
 
 <img alt="Flutter PageView" style="width: 40%"
-    src="/blog/assets/flutter-pageview.png?v=1.1.1"
+    src="/blog/assets/flutter-pageview.png"
     title="Flutter PageView">
 
 ```dart
@@ -7568,7 +7568,7 @@ Text('Hello, World!',
 )
 ```
 
-Another way to get fonts is use the [google_fonts](<https://pub.dev/packages/google_fonts?v=1.1.1>) package.
+Another way to get fonts is use the [google_fonts](https://pub.dev/packages/google_fonts) package.
 This provides over 1000 fonts.
 Instead of downloading each of the fonts, they are
 fetched via HTTP at runtime and cached in the app's file system.
@@ -7619,7 +7619,7 @@ assets:
   - assets/fonts/
 ```
 
-To download font files ahead of time, browse [fonts.google.com](<https:/fonts.google.com?v=1.1.1>).
+To download font files ahead of time, browse [fonts.google.com](https:/fonts.google.com).
 For example, download the "Dancing Script" font
 and move all the `.ttf` files in the downloaded `static` directory
 to a project `assets/fonts` directory.
@@ -7665,7 +7665,7 @@ The `Colors` class defines a large number of colors as static constants.
 For example, `Colors.pink.shade700` is a specific shade of pink.
 
 To see all the colors defined by the `Colors` class,
-see the documentation for the [Colors class](<https://api.flutter.dev/flutter/material/Colors-class.html?v=1.1.1>).
+see the documentation for the [Colors class](https://api.flutter.dev/flutter/material/Colors-class.html).
 Note that `grey` is one of the defined colors, but `gray` is not.
 
 To get a color from the current theme, call the `Theme.of(context)` method.
@@ -7704,7 +7704,7 @@ to be used for all `ElevatedButtonWidgets` in an app as follows:
 
 The `ButtonStyle` `background` argument
 must be set to a `MaterialStateProperty` object.
-From the documentation for the [ButtonStyle](<https://api.flutter.dev/flutter/material/ButtonStyle-class.html?v=1.1.1>) class,
+From the documentation for the [ButtonStyle](https://api.flutter.dev/flutter/material/ButtonStyle-class.html) class,
 "Many of the `ButtonStyle` properties are `MaterialStateProperty` objects
 which resolve to different values depending on the button's state.
 For example the `Color` properties are defined with
@@ -7740,10 +7740,10 @@ Icon(Icons.audiotrack, color: Colors.red, size: 30)
 ```
 
 To see all the icons defined by the `Icons` class,
-see the documentation for the [Icons class](<https://api.flutter.dev/flutter/material/Icons-class.html?v=1.1.1>).
+see the documentation for the [Icons class](https://api.flutter.dev/flutter/material/Icons-class.html).
 
 Cupertino icons are provided by the "Cupertino Icons" package
-which is documented at [cupertino_icons](<https://pub.dev/packages/cupertino_icons?v=1.1.1>).
+which is documented at [cupertino_icons](https://pub.dev/packages/cupertino_icons).
 
 ## Images
 
@@ -7785,7 +7785,7 @@ ClipOval(child: Image.asset('assets/images/comet.jpg'))
 To blend a color with an image, specify the color with the `color` argument
 and add the `colorBlendMode` argument to specify how it should be blended.
 The `colorBlendMode` value should be one of the constants defined in the
-[BlendMode](<https://api.flutter.dev/flutter/dart-ui/BlendMode.html?v=1.1.1>) class.
+[BlendMode](https://api.flutter.dev/flutter/dart-ui/BlendMode.html) class.
 
 The `Image` widget does not support SVG files.
 To render SVGs, add a dependency on the pub.dev package flutter_svg.
@@ -7807,7 +7807,7 @@ but can also be applied to other widgets.
 The built-in way to implement this is to use `InteractiveViewer`.
 This is suitable for most use cases.
 
-The pub.dev package [photo_view](<https://pub.dev/packages/photo_view?v=1.1.1>) provides additional features such as
+The pub.dev package [photo_view](https://pub.dev/packages/photo_view) provides additional features such as
 rotating and photo galleries.
 
 To zoom in and out in the iOS Simulator using a trackpad,
@@ -7900,14 +7900,14 @@ return CustomPaint(
 
 ## Charts
 
-The pub.dev package [fl_chart](<https://pub.dev/packages/fl_chart?v=1.1.1>) draws line, bar, pie, scatter, and radar charts.
+The pub.dev package [fl_chart](https://pub.dev/packages/fl_chart) draws line, bar, pie, scatter, and radar charts.
 The charts are quite fancy and even support animations.
 
 The following code demonstrates creating a simple bar chart.
 Other kinds are charts are created in a similar way.
 
 <img alt="fl_chart bar chart" style="width: 50%"
-    src="/blog/assets/flutter-fl_chart.png?v=1.1.1"
+    src="/blog/assets/flutter-fl_chart.png"
     title="fl_chart bar chart">
 
 ```dart
@@ -8024,7 +8024,7 @@ Flutter animations provide a way to rebuild parts of the widget tree
 on every frame with a goal of rendering at least 60 frames per second (fps).
 Typically Flutter widget building is fast enough to support this.
 
-For official documentation on Flutter animations, see [Introduction to animations](<https://docs.flutter.dev/development/ui/animations?v=1.1.1>).
+For official documentation on Flutter animations, see [Introduction to animations](https://docs.flutter.dev/development/ui/animations).
 This page contains six videos on the topic
 and a flow chart for deciding which kind of animation to use.
 
@@ -8047,21 +8047,21 @@ These are listed in the table below.
 
 | Property to Animate     | Implicit Animation                                                                                                                                                                                                                                          | Explicit Animation                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `alignment`             | [AnimatedAlign](<https://api.flutter.dev/flutter/widgets/AnimatedAlign-class.html?v=1.1.1>)                                                                                                                                                      | [AlignTransition](<https://api.flutter.dev/flutter/widgets/AlignTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                                 |
-| `decoration`            |                                                                                                                                                                                                                                                             | [DecoratedBoxTransition](<https://api.flutter.dev/flutter/widgets/DecoratedBoxTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                   |
-| `List` items            | [AnimatedList](<https://api.flutter.dev/flutter/widgets/AnimatedList-class.html?v=1.1.1>) and [AnimatedListState](<https://api.flutter.dev/flutter/widgets/AnimatedListState-class.html?v=1.1.1>)                                     |                                                                                                                                                                                                                                                                                                                                                                            |
-| `Listenable` value      | [AnimatedWidget](<https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html?v=1.1.1>)                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                            |
-| multiple properties     | [AnimatedContainer](<https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html?v=1.1.1>)                                                                                                                                              | [TweenAnimationBuilder](<https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html?v=1.1.1>)                                                                                                                                                                                                                                                     |
-| `offset`                | [AnimatedSlide](<https://api.flutter.dev/flutter/widgets/AnimatedSlide-class.html?v=1.1.1>)                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
-| `opacity`               | [AnimatedOpacity](<https://api.flutter.dev/flutter/widgets/AnimatedOpacity-class.html?v=1.1.1>)                                                                                                                                                  | [FadeTransition](<https://api.flutter.dev/flutter/widgets/FadeTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                                   |
-| `padding`               | [AnimatedPadding](<https://api.flutter.dev/flutter/widgets/AnimatedPadding-class.html?v=1.1.1>)                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                            |
-| `position`              | [AnimatedPositioned](<https://api.flutter.dev/flutter/widgets/AnimatedPositioned-class.html?v=1.1.1>) and [AnimatedPositionedDirectional](<https://api.flutter.dev/flutter/widgets/AnimatedPositionedDirectional-class.html?v=1.1.1>) | [PositionedTransition](<https://api.flutter.dev/flutter/widgets/PositionedTransition-class.html?v=1.1.1>), [RelativePositionedTransition](<https://api.flutter.dev/flutter/widgets/RelativePositionedTransition-class.html?v=1.1.1>), and [SlideTransition](<https://api.flutter.dev/flutter/widgets/SlideTransition-class.html?v=1.1.1>) |
-| `rotation`              | [AnimatedRotation](<https://api.flutter.dev/flutter/widgets/AnimatedRotation-class.html?v=1.1.1>)                                                                                                                                                | [RotationTransition](<https://api.flutter.dev/flutter/widgets/RotationTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                           |
-| `scale`                 | [AnimatedScale](<https://api.flutter.dev/flutter/widgets/AnimatedScale-class.html?v=1.1.1>)                                                                                                                                                      | [ScaleTransition](<https://api.flutter.dev/flutter/widgets/ScaleTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                                 |
-| `shadow`                | [AnimatedPhysicalModel](<https://api.flutter.dev/flutter/widgets/AnimatedPhysicalModel-class.html?v=1.1.1>)                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
-| `size`                  | [AnimatedSize](<https://api.flutter.dev/flutter/widgets/AnimatedSize-class.html?v=1.1.1>)                                                                                                                                                        | [SizeTransition](<https://api.flutter.dev/flutter/widgets/SizeTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                                                   |
-| text style              | [AnimatedDefaultTextStyle](<https://api.flutter.dev/flutter/widgets/AnimatedDefaultTextStyle-class.html?v=1.1.1>)                                                                                                                                | [DefaultTextStyleTransition](<https://api.flutter.dev/flutter/widgets/DefaultTextStyleTransition-class.html?v=1.1.1>)                                                                                                                                                                                                                                           |
-| widget pair showing one | [AnimatedSwitcher](<https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html?v=1.1.1>) and [AnimatedCrossFade](<https://api.flutter.dev/flutter/widgets/AnimatedCrossFade-class.html?v=1.1.1>)                             |                                                                                                                                                                                                                                                                                                                                                                            |
+| `alignment`             | [AnimatedAlign](https://api.flutter.dev/flutter/widgets/AnimatedAlign-class.html)                                                                                                                                                      | [AlignTransition](https://api.flutter.dev/flutter/widgets/AlignTransition-class.html)                                                                                                                                                                                                                                                                 |
+| `decoration`            |                                                                                                                                                                                                                                                             | [DecoratedBoxTransition](https://api.flutter.dev/flutter/widgets/DecoratedBoxTransition-class.html)                                                                                                                                                                                                                                                   |
+| `List` items            | [AnimatedList](https://api.flutter.dev/flutter/widgets/AnimatedList-class.html) and [AnimatedListState](https://api.flutter.dev/flutter/widgets/AnimatedListState-class.html)                                     |                                                                                                                                                                                                                                                                                                                                                                            |
+| `Listenable` value      | [AnimatedWidget](https://api.flutter.dev/flutter/widgets/AnimatedWidget-class.html)                                                                                                                                                    |                                                                                                                                                                                                                                                                                                                                                                            |
+| multiple properties     | [AnimatedContainer](https://api.flutter.dev/flutter/widgets/AnimatedContainer-class.html)                                                                                                                                              | [TweenAnimationBuilder](https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html)                                                                                                                                                                                                                                                     |
+| `offset`                | [AnimatedSlide](https://api.flutter.dev/flutter/widgets/AnimatedSlide-class.html)                                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
+| `opacity`               | [AnimatedOpacity](https://api.flutter.dev/flutter/widgets/AnimatedOpacity-class.html)                                                                                                                                                  | [FadeTransition](https://api.flutter.dev/flutter/widgets/FadeTransition-class.html)                                                                                                                                                                                                                                                                   |
+| `padding`               | [AnimatedPadding](https://api.flutter.dev/flutter/widgets/AnimatedPadding-class.html)                                                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                            |
+| `position`              | [AnimatedPositioned](https://api.flutter.dev/flutter/widgets/AnimatedPositioned-class.html) and [AnimatedPositionedDirectional](https://api.flutter.dev/flutter/widgets/AnimatedPositionedDirectional-class.html) | [PositionedTransition](https://api.flutter.dev/flutter/widgets/PositionedTransition-class.html), [RelativePositionedTransition](https://api.flutter.dev/flutter/widgets/RelativePositionedTransition-class.html), and [SlideTransition](https://api.flutter.dev/flutter/widgets/SlideTransition-class.html) |
+| `rotation`              | [AnimatedRotation](https://api.flutter.dev/flutter/widgets/AnimatedRotation-class.html)                                                                                                                                                | [RotationTransition](https://api.flutter.dev/flutter/widgets/RotationTransition-class.html)                                                                                                                                                                                                                                                           |
+| `scale`                 | [AnimatedScale](https://api.flutter.dev/flutter/widgets/AnimatedScale-class.html)                                                                                                                                                      | [ScaleTransition](https://api.flutter.dev/flutter/widgets/ScaleTransition-class.html)                                                                                                                                                                                                                                                                 |
+| `shadow`                | [AnimatedPhysicalModel](https://api.flutter.dev/flutter/widgets/AnimatedPhysicalModel-class.html)                                                                                                                                      |                                                                                                                                                                                                                                                                                                                                                                            |
+| `size`                  | [AnimatedSize](https://api.flutter.dev/flutter/widgets/AnimatedSize-class.html)                                                                                                                                                        | [SizeTransition](https://api.flutter.dev/flutter/widgets/SizeTransition-class.html)                                                                                                                                                                                                                                                                   |
+| text style              | [AnimatedDefaultTextStyle](https://api.flutter.dev/flutter/widgets/AnimatedDefaultTextStyle-class.html)                                                                                                                                | [DefaultTextStyleTransition](https://api.flutter.dev/flutter/widgets/DefaultTextStyleTransition-class.html)                                                                                                                                                                                                                                           |
+| widget pair showing one | [AnimatedSwitcher](https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html) and [AnimatedCrossFade](https://api.flutter.dev/flutter/widgets/AnimatedCrossFade-class.html)                             |                                                                                                                                                                                                                                                                                                                                                                            |
 
 In order of difficulty from easiest to most difficult,
 the options for implementing animattions are
@@ -8089,7 +8089,7 @@ The `curve` argument takes a `Curve` object
 that specifies an easing curve to use.`
 This controls the rate of change in an animation over its duration.
 
-See the [Curves](<https://api.flutter.dev/flutter/animation/Curves-class.html?v=1.1.1>)
+See the [Curves](https://api.flutter.dev/flutter/animation/Curves-class.html)
 class for a graphical represenation of each of the built-in easing curves.
 In the page linked above, each curve has a play button.
 Clicking it animates movement along the curve and demonstrates
@@ -8109,7 +8109,7 @@ Both add a shadow to a shape based on `elevation` and other arguments.
 The `AnimatedContainer` widget provides
 implicit animation of multiple properties.
 
-The [AnimationBuilder](<https://api.flutter.dev/flutter/widgets/AnimatedBuilder/AnimatedBuilder.html?v=1.1.1>) and [TweenAnimationBuilder](<https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html?v=1.1.1>) classes
+The [AnimationBuilder](https://api.flutter.dev/flutter/widgets/AnimatedBuilder/AnimatedBuilder.html) and [TweenAnimationBuilder](https://api.flutter.dev/flutter/widgets/TweenAnimationBuilder-class.html) classes
 are used to create custom implicit animations.
 For an example, see the "Animation From Scratch" section below.
 
@@ -8124,12 +8124,12 @@ If these approaches have performance issues, consider using `CustomPainter`.
 Built-in explicit animations all extend `AnimatedWidget`.
 This automatically rebuilds when a given `Listenable` changes.
 
-Explict animations require the use of an [AnimationController](<https://api.flutter.dev/flutter/animation/AnimationController-class.html?v=1.1.1>) that is maintained inside a `StatefulWidget`.
+Explict animations require the use of an [AnimationController](https://api.flutter.dev/flutter/animation/AnimationController-class.html) that is maintained inside a `StatefulWidget`.
 This produces values that are typically in the range 0 to 1.
-They also require a [TickerProvider](<https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html?v=1.1.1>) to provide a `Ticker`.
-A [Ticker](<https://api.flutter.dev/flutter/scheduler/Ticker-class.html?v=1.1.1>) calls a callback function
+They also require a [TickerProvider](https://api.flutter.dev/flutter/scheduler/TickerProvider-class.html) to provide a `Ticker`.
+A [Ticker](https://api.flutter.dev/flutter/scheduler/Ticker-class.html) calls a callback function
 once for each animation frame that is rendered.
-Often the `Ticker` is provided by the mixin [SingleTickerProviderStateMixin](<https://api.flutter.dev/flutter/widgets/SingleTickerProviderStateMixin-mixin.html?v=1.1.1>).
+Often the `Ticker` is provided by the mixin [SingleTickerProviderStateMixin](https://api.flutter.dev/flutter/widgets/SingleTickerProviderStateMixin-mixin.html).
 
 An `AnimationController` typically obtains
 60 values per second from the `Ticker` and
@@ -8169,7 +8169,7 @@ The most commonly used `AnimationController` methods are described below:
 | `stop()`                                     | stops animation                                              |
 
 The listener function passed to `addStatusListener`
-is passed an [AnimationStatus](<https://api.flutter.dev/flutter/animation/AnimationStatus.html?v=1.1.1>) constant.
+is passed an [AnimationStatus](https://api.flutter.dev/flutter/animation/AnimationStatus.html) constant.
 When the `forward` method is called,
 the status begins as `forward` and ends as `completed` (at end).
 When the `reverse` method is called,
@@ -8195,7 +8195,7 @@ widget instances to be created at compile time.
 
 ### AnimatedSwitcher Widget
 
-The [AnimatedSwitcher](<https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html?v=1.1.1>) widget renders a given widget
+The [AnimatedSwitcher](https://api.flutter.dev/flutter/widgets/AnimatedSwitcher-class.html) widget renders a given widget
 and then animates displaying a different widget
 when the value of its `child` argument changes.
 By default it uses a `FadeTransition`.
@@ -8265,20 +8265,20 @@ class _ImageCycleState extends State<ImageCycle> {
 
 ### Hero Widget
 
-The [Hero](<https://docs.flutter.dev/development/ui/animations/hero-animations?v=1.1.1>) widget animates a widget between two routes or pages.
+The [Hero](https://docs.flutter.dev/development/ui/animations/hero-animations) widget animates a widget between two routes or pages.
 For example, suppose an app has a page that renders a `ListView`.
 This contains a `ListTile` widget for each item.
 Each of these displays a thumbnail image and a description.
 
 <img alt="Flutter Hero List View" style="width: 50%"
-    src="/blog/assets/flutter-hero-1.png?v=1.1.1"
+    src="/blog/assets/flutter-hero-1.png"
     title="Flutter Hero List View">
 
 Tapping a `ListTile` navigates to the detail page that displays
 a larger version of the image and detailed information about the item.
 
 <img alt="Flutter Hero Detail View" style="width: 50%"
-    src="/blog/assets/flutter-hero-2.png?v=1.1.1"
+    src="/blog/assets/flutter-hero-2.png"
     title="Flutter Hero Detail View">
 
 The image on each page can be wrapped in a `Hero` widget
@@ -8410,7 +8410,7 @@ class FadeIn extends StatefulWidget {
 }
 
 class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
-  late Animation<Color?> _colorAnimation;
+  late Animation<Color> _colorAnimation;
   late Animation<double> _opacityAnimation;
   late AnimationController _controller;
 
@@ -8564,12 +8564,12 @@ class _LowLevelAnimationState extends State<LowLevelAnimation>
 
 For animations of drawings rather than widgets,
 consider using the packages
-[rive](<https://pub.dev/packages/rive?v=1.1.1>) and
-[lottie](<https://pub.dev/packages/lottie?v=1.1.1>) in pub.dev.
+[rive](https://pub.dev/packages/rive) and
+[lottie](https://pub.dev/packages/lottie) in pub.dev.
 
 ### More on Animation
 
-For more on animation, see this [GitHub repo](<https://github.com/mvolkmann/flutter_animation?v=1.1.1>)
+For more on animation, see this [GitHub repo](https://github.com/mvolkmann/flutter_animation)
 which contains a Flutter project that uses several animations.
 These include:
 
@@ -8587,17 +8587,17 @@ These include:
 
 ## Browsing URLs
 
-The pub.dev package [url_launcher](<https://pub.dev/packages/url_launcher?v=1.1.1>) supports launching another app to process a given URL.
+The pub.dev package [url_launcher](https://pub.dev/packages/url_launcher) supports launching another app to process a given URL.
 This includes browsing a web page (`https://somesite.com`),
 dialing the phone (`tel://+1 123 456 7890`),
 sending an email (`mailto:somebody@somewhere.com`), and
 sending a text message (`sms:+1 123 456 7890`).
 
-For a short introduction, see this [YouTube video](<https://www.youtube.com/watch?v=qYxRYB1oszw&v=1.1.1>).
+For a short introduction, see this [YouTube video](https://www.youtube.com/watch?v=qYxRYB1oszw).
 
 The ability to launch other apps for browsing URLs
 must be specifically configured for Android and iOS.
-See the [url_launcher](<https://pub.dev/packages/url_launcher?v=1.1.1>) web page for details.
+See the [url_launcher](https://pub.dev/packages/url_launcher) web page for details.
 After modifying the configuration files, restart the app
 in order for the changes to take effect.
 
@@ -8619,12 +8619,12 @@ IconButton(
 
 ## Audio
 
-The [audioplayers](<https://pub.dev/packages/audioplayers?v=1.1.1>)
+The [audioplayers](https://pub.dev/packages/audioplayers)
 plugin is a popular option for playing audio files in Flutter applications.
 It is fairly low-level and has some quirks.
 For a working example that provides a simplified layer over this plugin
 and a widget that provides a play/pause button, a stop button,
-and a progress bar, see this [GitHub repo](<https://github.com/mvolkmann/flutter_audio?v=1.1.1>).
+and a progress bar, see this [GitHub repo](https://github.com/mvolkmann/flutter_audio).
 
 ## Camera and Photo Plugins
 
@@ -8639,14 +8639,14 @@ so apps that require camera access must be run on iOS devices.
 
 ### camera Plugin
 
-The [camera](<https://pub.dev/packages/camera?v=1.1.1>) plugin
+The [camera](https://pub.dev/packages/camera) plugin
 in pub.dev provides access to device cameras in Android, iOS, and the web.
 It does not provide access to device photo libraries.
-See this excellent [cookbook page](<https://docs.flutter.dev/cookbook/plugins/picture-using-camera?v=1.1.1>) for step-by-step instructions on using the "camera" plugin,
+See this excellent [cookbook page](https://docs.flutter.dev/cookbook/plugins/picture-using-camera) for step-by-step instructions on using the "camera" plugin,
 including example code.
 
 While the "camera" plugin is popular, it is not nearly as easy to use or
-as full-featured as the [image_picker](<https://pub.dev/packages/image_picker?v=1.1.1>) plugin which is described in the next section.
+as full-featured as the [image_picker](https://pub.dev/packages/image_picker) plugin which is described in the next section.
 
 To use the "camara" plugin:
 
@@ -8681,11 +8681,11 @@ To use the "camara" plugin:
 1. Use an `Image` widget to display the photo.
 
 For an example Flutter app that uses the "camera" plugin,
-see the "main" branch of this [GitHub repo](<https://github.com/mvolkmann/flutter_camera?v=1.1.1>).
+see the "main" branch of this [GitHub repo](https://github.com/mvolkmann/flutter_camera).
 
 ### image_picker Plugin
 
-The [image_picker](<https://pub.dev/packages/image_picker?v=1.1.1>) plugin in pub.dev provides
+The [image_picker](https://pub.dev/packages/image_picker) plugin in pub.dev provides
 access to device cameras and photo libraries in Android and iOS.
 
 To use this plugin:
@@ -8740,14 +8740,14 @@ To use this plugin:
    Unless this is done, a MissingPluginException will occur.
 
 For an example Flutter app that uses the "image_picker" plugin,
-see the "image_picker" branch of this [GitHub repo](<https://github.com/mvolkmann/flutter_camera/tree/image_picker?v=1.1.1>).
+see the "image_picker" branch of this [GitHub repo](https://github.com/mvolkmann/flutter_camera/tree/image_picker).
 
 ## GeoLocation
 
-The [geolocator](<https://pub.dev/packages/geolocator?v=1.1.1>)
+The [geolocator](https://pub.dev/packages/geolocator)
 package is a popular option for getting
 the current latitude and longitude of a device.
-For a basic example app that uses this package, see this [GitHub repo](<https://github.com/mvolkmann/flutter_geolocation?v=1.1.1>).
+For a basic example app that uses this package, see this [GitHub repo](https://github.com/mvolkmann/flutter_geolocation).
 The README contains instructions on configuring Android and iOS
 to request permission for obtaining geolocation data.
 
@@ -8759,11 +8759,11 @@ but it cannot detect the location of the computer on which it is running.
 
 To display a map of a given location with Google Maps:
 
-1. Install the [google_maps_flutter](<https://pub.dev/packages/google_maps_flutter?v=1.1.1>) plugin from pub.dev.
+1. Install the [google_maps_flutter](https://pub.dev/packages/google_maps_flutter) plugin from pub.dev.
 
 1. Get an API key.
 
-   - Browse the [Google Maps Platform](<https://mapsplatform.google.com?v=1.1.1>).
+   - Browse the [Google Maps Platform](https://mapsplatform.google.com).
    - Click the "Get Started" button.
    - Click the project dropdown in the header.
    - In the dialog that opens, click "NEW PROJECT".
@@ -8826,7 +8826,7 @@ To display a map of a given location with Google Maps:
    ```
 
    - Render a map with the following code inside a `StatefulWidget`.
-     Zoom controls are only supported in Android. See [this discussion](<https://github.com/flutter/plugins/pull/831#discussion_r400472577?v=1.1.1>).
+     Zoom controls are only supported in Android. See [this discussion](https://github.com/flutter/plugins/pull/831#discussion_r400472577).
      The code below adds its own zoom in and zoom out buttons
      for a consistent UI in Android and iOS.
      It wraps the `GoogleMap` widget in a `Stack`
@@ -8918,7 +8918,7 @@ The steps to customize the launcher icon used by a Flutter app are:
 
 ## Splash Screens
 
-The pub.dev package [splashscreen](<https://pub.dev/packages/splashscreen?v=1.1.1>) displays a splash screen for a given number of seconds
+The pub.dev package [splashscreen](https://pub.dev/packages/splashscreen) displays a splash screen for a given number of seconds
 when an app starts and they displays the main screen of the app.
 
 One issue with this package is that the latest version in pub.dev (1.3.5)
@@ -8979,7 +8979,7 @@ to something like the following:
 
 ## Onboarding Screens
 
-The pub.dev package [introduction_screen](<https://pub.dev/packages/introduction_screen?v=1.1.1>)
+The pub.dev package [introduction_screen](https://pub.dev/packages/introduction_screen)
 simplifies the implemenation of app onboarding pages.
 These are typically used to provide an overview of the app functionality.
 Users can view each onboarding page in order,
@@ -8991,7 +8991,7 @@ This package does not provide a way to remember that a user has
 already seen the onboarding pages in order to
 avoid displaying them in subsequent runs of the app.
 A recommended way to implement this is to use the
-[shared_preferences](<https://pub.dev/packages/shared_preferences?v=1.1.1>) package which can save the fact that
+[shared_preferences](https://pub.dev/packages/shared_preferences) package which can save the fact that
 a user has already seen the onboarding pages on the device.
 
 The following code demonstrates implementing onboarding screens:
@@ -9128,21 +9128,21 @@ class _HomeState extends State<Home> {
 ## Logging
 
 It can be helpful to output messsges to the terminal when debugging an app.
-This can be done using the Dart [print](<https://api.dart.dev/be/148625/dart-core/print.html?v=1.1.1>) and
-[debugPrint](<https://api.flutter.dev/flutter/foundation/debugPrint.html?v=1.1.1>) functions.
+This can be done using the Dart [print](https://api.dart.dev/be/148625/dart-core/print.html) and
+[debugPrint](https://api.flutter.dev/flutter/foundation/debugPrint.html) functions.
 
 For even better logging output, consider using the pub.dev package
-[logger](<https://pub.dev/packages/logger?v=1.1.1>).
+[logger](https://pub.dev/packages/logger).
 
 The following code demonstrates using this.
 When the buttons are pressed in order, the colored output
 shown in the screenshot is produced in the terminal.
 
 <img alt="Flutter loggerUI" style="width: 30%"
-    src="/blog/assets/flutter-logger-ui.png?v=1.1.1"
+    src="/blog/assets/flutter-logger-ui.png"
     title="Flutter logger UI">
 <img alt="Flutter logger output" style="width: 65%"
-    src="/blog/assets/flutter-logger-output.png?v=1.1.1"
+    src="/blog/assets/flutter-logger-output.png"
     title="Flutter logger output">
 
 ```dart
@@ -9223,11 +9223,11 @@ Unit and widget tests run fairly quickly.
 Integration tests take a long time to build and start,
 often around two minutes.
 
-An additional kind of test is supported by the [golden_toolkit](<https://pub.dev/packages/golden_toolkit?v=1.1.1>) package.
+An additional kind of test is supported by the [golden_toolkit](https://pub.dev/packages/golden_toolkit) package.
 It is used to implement tests that capture an image of a widget
 and compare it to a previously captured image.
 These are regression tests that test fail if the images differ.
-For those familiar with the [Jest](<https://jestjs.io?v=1.1.1>)
+For those familiar with the [Jest](https://jestjs.io)
 testing framework for web applications,
 golden_toolkit is similar to Jest snapshot tests.
 
@@ -9245,11 +9245,11 @@ is present on the screen or that a button becomes enabled.
 Flutter projects created with the `flutter create` command
 already have a dev dependency on the `flutter_test` package
 which is built on the `test` package.
-Do not add a dependency on [test](<https://pub.dev/packages/test?v=1.1.1>) in`pubspec.yaml`.
+Do not add a dependency on [test](https://pub.dev/packages/test) in`pubspec.yaml`.
 This will likely cause a "version solving failed" error
 when the tests are run.
 
-The [flutter_test](<https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html?v=1.1.1>) package defines many
+The [flutter_test](https://api.flutter.dev/flutter/flutter_test/flutter_test-library.html) package defines many
 classes, constants, and functions used to implement tests.
 
 Commonly used test constants are described below.
@@ -9338,7 +9338,7 @@ If a corresponding test file exists in the `test` directory,
 it will be opened. If not, VS Code will offer to create it.
 
 The provided test code contains a single call to `testWidgets`,
-passing it a function that takes a [WidgetTester](<https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html?v=1.1.1>) object.
+passing it a function that takes a [WidgetTester](https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html) object.
 For non-widget tests, change this to a `test` function
 that is passed a function that takes no arguments.
 
@@ -9425,7 +9425,7 @@ Use this is as an example when writing widget tests.
 In contains a `main` function that makes
 a single call to the `testWidgets` function.
 This is passed a description `String` and
-a function that is passed a [WidgetTester](<https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html?v=1.1.1>) object.
+a function that is passed a [WidgetTester](https://api.flutter.dev/flutter/flutter_test/WidgetTester-class.html) object.
 The `WidgetTester` object is key to interacting with widgets.
 This includes tapping buttons, entering text, and dragging widgets.
 
@@ -9503,7 +9503,7 @@ text can be entered into it with the following:
 await tester.enterText(myTextField, 'some text');
 ```
 
-After interacting with widgets, call the `WidgetTester` [pump](<https://api.flutter.dev/flutter/flutter_test/WidgetTester/pump.html?v=1.1.1>) or [pumpAndSettle](<https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html?v=1.1.1>) method to rebuild the UI.
+After interacting with widgets, call the `WidgetTester` [pump](https://api.flutter.dev/flutter/flutter_test/WidgetTester/pump.html) or [pumpAndSettle](https://api.flutter.dev/flutter/flutter_test/WidgetTester/pumpAndSettle.html) method to rebuild the UI.
 Both methods return a `Future` to `await` before making assertions.
 By default the `pumpAndSettle` method repeatedly calls `pump`
 every 100ms until there are no longer any frames scheduled.
@@ -9855,7 +9855,7 @@ can be mocked to return the same data every time.
 This allows tests to focus on specific functionality being tested.
 It also allows tests to run without requiring an internet connection.
 
-The [http](<?v=1.1.1>) package includes
+The [http](<>) package includes
 the ability to mock responses to HTTP requests.
 
 The steps to use this are:
@@ -9899,7 +9899,7 @@ The steps to use this are:
 Mock operations other than HTTP requests
 is simplified by using a mocking package.
 The preferred Flutter mocking package is
-[mockito](<https://pub.dev/packages/mockito?v=1.1.1>).
+[mockito](https://pub.dev/packages/mockito).
 This generates code for mock implementations of classes
 and provides methods that are useful in writing tests.
 
@@ -9980,7 +9980,7 @@ These include `any`, `anyNamed`, `argThat`, and `captureThat`.
 - `captureThat`: matches the same as `argThat`, but also captures the value
   so it can be used in a test assertion
 
-For more details, see the [offical mockito documentation](<https://pub.dev/packages/mockito?v=1.1.1>).
+For more details, see the [offical mockito documentation](https://pub.dev/packages/mockito).
 
 Another mocking approach to consider is implementing a service registry class.
 This class becomes the authority on
@@ -10022,19 +10022,19 @@ Click the links for each source file to see
 detail on the lines covered by a test.
 
 <img alt="Test Coverage" style="width: 80%"
-    src="/blog/assets/flutter-lcov.png?v=1.1.1"
+    src="/blog/assets/flutter-lcov.png"
     title="Test Coverage">
 
 ## Deploying to App Stores
 
 Popular services that simpilify deploying Flutter apps
 to the Google Play Store and the iOS App Store include
-[fastlane](<https://docs.fastlane.tools?v=1.1.1>),
-[Codemagic](<https://blog.codemagic.io/getting-started-with-codemagic/?v=1.1.1>), [Bitrise](<https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html?v=1.1.1>), and [Appcircle](<https://appcircle.io/blog/guide-to-automated-mobile-ci-cd-for-flutter-projects-with-appcircle/?v=1.1.1>).
+[fastlane](https://docs.fastlane.tools),
+[Codemagic](https://blog.codemagic.io/getting-started-with-codemagic/), [Bitrise](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html), and [Appcircle](https://appcircle.io/blog/guide-to-automated-mobile-ci-cd-for-flutter-projects-with-appcircle/).
 
 TODO: Add more detail on at least one of these options.
 
-The pub.dev package [rename](<https://pub.dev/packages/rename?v=1.1.1>) "helps you to change your flutter project's
+The pub.dev package [rename](https://pub.dev/packages/rename) "helps you to change your flutter project's
 AppName and BundleId for different platforms."
 
 The Google app review process typically takes less than two days to complete.
@@ -10043,7 +10043,7 @@ The Google app review process typically takes less than two days to complete.
 
 Before deploying a new app it may be desirable to rename it.
 The easiest way to do this is to use the pub.dev package
-[rename](<https://pub.dev/packages/rename?v=1.1.1>).
+[rename](https://pub.dev/packages/rename).
 This updates `appName` and `bundleId`.
 
 The steps to use this are:
@@ -10070,9 +10070,9 @@ Examples include `-t android` and `-t ios`.
 A Google Developer account is required
 to deploy apps to the Google Play store.
 If you do not already have a Google account, create that first
-by browsing [accounts.google.com](<https://accounts.google.com/?v=1.1.1>).
+by browsing [accounts.google.com](https://accounts.google.com/).
 
-To create a developer account, browse the [Google Play console](<https://play.google.com/console/?v=1.1.1>)
+To create a developer account, browse the [Google Play console](https://play.google.com/console/)
 and click one of the "Get Started" links,
 either for "Yourself" or "An organization or business".
 Enter all the required data and click the "Create account and pay" button.
@@ -10195,7 +10195,7 @@ To prepare for uploading an app to the Google Play store:
   - Enter `flutter build appbundle` to build a new app bundle.
   - This creates the file `build/app/outputs/bundle/release/app-release.aab`.
 
-- Browse the [Goole Play Console](<https://play.google.com/console/?v=1.1.1>).
+- Browse the [Goole Play Console](https://play.google.com/console/).
 - Select your developer account.
 
 - Click the "Create app" button.
@@ -10246,7 +10246,7 @@ To share the app with testers:
 
   - Click the "New release" button.
   - Upload a new app bundle file.
-  - Browse [play.google.com](<https://play.google.com/store?hl=en_US&gl=US&v=1.1.1>).
+  - Browse [play.google.com](https://play.google.com/store?hl=en_US&gl=US).
   - Search for the app name.
   - Email the app URL to testers and ask them to install and test it.
 
@@ -10257,7 +10257,7 @@ This requires more knowledge of the available sections.
 In order to collect money for paid apps and apps that have in-app purchases,
 a payment profile must be created.
 
-- Browse the [Google Play Console](<https://play.google.com/console/?v=1.1.1>) and elect your developer account.
+- Browse the [Google Play Console](https://play.google.com/console/) and elect your developer account.
 - In the left nav., click "Payments profile".
 - Click the "Create payments profile".
 - Click your name.
@@ -10300,13 +10300,13 @@ a payment profile must be created.
   update it to match.
 - Create a new app bundle by entering `flutter build appbundle`.
   This creates the file `build/app/outputs/bundle/release/app-release.aab`.
-- Browse the [Goole Play Console](<https://play.google.com/console/?v=1.1.1>).
+- Browse the [Goole Play Console](https://play.google.com/console/).
 - Select your developer account.
 - Click the row of the app being updated.
 - In the left-nav, click "Testing", then "Open Testing".
 - Click the "New release" button.
 - Click "Upload" and upload the new `.aab` file.
-- Browse [play.google.com](<https://play.google.com/store?hl=en_US&gl=US&v=1.1.1>).
+- Browse [play.google.com](https://play.google.com/store?hl=en_US&gl=US).
 - Search for the app name.
 - Email the app URL to testers and ask them to install and test it.
 
@@ -10320,13 +10320,13 @@ TODO: Finish this section.
 ## In-App Purchases
 
 One approach to enabling in-app purchases in a Flutter app
-is to use the pub.dev package [in_app_purchase](<https://pub.dev/packages/in_app_purchase?v=1.1.1>).
+is to use the pub.dev package [in_app_purchase](https://pub.dev/packages/in_app_purchase).
 Click the link after "codelab" for a detailed guide.
 This requires having a backend such as Firebase.
 It is a good option for apps that are using Firebase for other purposes
 
 One way to enable in-app purchases that does not require configuring a backend
-is [RevenueCat](<https://docs.revenuecat.com/docs/flutter?v=1.1.1>).
+is [RevenueCat](https://docs.revenuecat.com/docs/flutter).
 This is a commercial service, but it is free for a single developer
 and up to 10,000 USD in monthly tracked revenue (MTR).
 
@@ -10336,7 +10336,7 @@ RevenueCat requires store setup of in-app purchases and subscriptions.
 
 For the Google Play Store:
 
-1. Browse the [Google Play Console](<https://play.google.com/console/?v=1.1.1>) and elect your developer account.
+1. Browse the [Google Play Console](https://play.google.com/console/) and elect your developer account.
 1. In the left nav., click "All apps".
 1. Click the row describing the app to which in-app payments will be added.
 1. In the left-nav, scroll down to the "Monetize" section,
@@ -10359,7 +10359,7 @@ Describing subscriptions is similar to describing one-time in-app payments.
 After configuring in-app purchases in the stores,
 configure RevenueCat by following these steps:
 
-1. Browse [revenuecat.com](<https://www.revenuecat.com?v=1.1.1>).
+1. Browse [revenuecat.com](https://www.revenuecat.com).
 1. Click the "Get Started ->" button.
 1. If you do not already have an account,
    enter account information and click the "Sign Up" button.
@@ -10370,7 +10370,7 @@ configure RevenueCat by following these steps:
 1. Enter the "Google Play package" which is the bundle ID.
 1. Create a "Service Account credentials JSON" file.
    This is very complicated.
-   The steps are described [here](<https://docs.revenuecat.com/docs/creating-play-service-credentials?v=1.1.1>).
+   The steps are described [here](https://docs.revenuecat.com/docs/creating-play-service-credentials).
    After all of this you will see the message in the Google Cloud Console page:
    "It can take up to 36 hours for your Play Service Credentials
    to work properly with the Google Play Developer API.
@@ -10496,7 +10496,7 @@ In the Flutter app:
           await alert(context, 'No in-app purchase offerings were found.');
         } else {
           final question = product.description +
-              ' Pay ${product.priceString} ${product.currencyCode} for this?';
+              ' Pay ${product.priceString} ${product.currencyCode} for this';
           purchase = await confirm(context, question);
           if (purchase) {
             //TODO: This is not working in the Android emulator!
@@ -10540,7 +10540,7 @@ launch the "Google Play" app and sign in.
   and provide application-specific styling.
 
 - Create extentions to provided Flutter classes that simplify there use.
-  Examples can be found in [GitHub](<https://github.com/mvolkmann/flutter_input/blob/main/lib/widget_extensions.dart?v=1.1.1>).
+  Examples can be found in [GitHub](https://github.com/mvolkmann/flutter_input/blob/main/lib/widget_extensions.dart).
 
 - Add a comma after every function argument value
   so Dart code formatting works better.
@@ -10551,7 +10551,7 @@ launch the "Google Play" app and sign in.
   For example, instead of `color: Colors.red,` I want to use `color: .red,`.
 
 - Flutter needs to find a way to define stateful widgets without defining two classes.
-  See this [on-going discussion](<https://github.com/dart-lang/language/issues/329?v=1.1.1>).
+  See this [on-going discussion](https://github.com/dart-lang/language/issues/329).
 
 - The VS Code Flutter extension displays a comment after the closing paren
   of all widgets. It isn't really in the code, but adds visual clutter.

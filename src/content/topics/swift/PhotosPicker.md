@@ -13,22 +13,22 @@ layout: topic-layout.njk
 
 ## Overview
 
-iOS 16 introduced the [PhotosPicker](<https://developer.apple.com/documentation/photokit/photospicker?v=1.1.1>) view.
+iOS 16 introduced the [PhotosPicker](https://developer.apple.com/documentation/photokit/photospicker) view.
 
 It provides an easier way to allow users to
-select assets from their photo library than using [UIPickerController](<https://developer.apple.com/documentation/uikit/uiimagepickercontroller?v=1.1.1>) from UIKit.
+select assets from their photo library than using [UIPickerController](https://developer.apple.com/documentation/uikit/uiimagepickercontroller) from UIKit.
 
-See the excellent YouTube videos from Stewart Lynch, [PhotosPicker - SwiftUI](<https://www.youtube.com/watch?v=gfUBKhZLcK0&v=1.1.1>).
+See the excellent YouTube videos from Stewart Lynch, [PhotosPicker - SwiftUI](https://www.youtube.com/watch?v=gfUBKhZLcK0).
 
 ## Example App
 
-See [PhotosPickerDemo](<https://github.com/mvolkmann/PhotosPickerDemo?v=1.1.1>) which demonstrates everything
+See [PhotosPickerDemo](https://github.com/mvolkmann/PhotosPickerDemo) which demonstrates everything
 shared in the Steward Lynch video linked above.
 
 The app has two tabs.
 
 <img alt="PhotosPicker Initial" style="width: 50%"
-  src="/blog/assets/swiftui-photospicker-initial.png?v=1.1.1">
+  src="/blog/assets/swiftui-photospicker-initial.png">
 
 ### Single Image tab
 
@@ -37,12 +37,12 @@ to select a single image from their photo library.
 Tap the icon in the upper-right corner to view the photo library.
 
 <img alt="PhotosPicker Single" style="width: 50%"
-  src="/blog/assets/swiftui-photospicker-single.png?v=1.1.1">
+  src="/blog/assets/swiftui-photospicker-single.png">
 
-See the code for [SingleImagePicker](<https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/SingleImagePicker.swift?v=1.1.1>).
+See the code for [SingleImagePicker](https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/SingleImagePicker.swift).
 
 The `matching` argument to `PhotosPicker` accepts many values.
-Examples from [How to let users select pictures using PhotosPicker](<https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-select-pictures-using-photospicker?v=1.1.1>) by Paul Hudson include:
+Examples from [How to let users select pictures using PhotosPicker](https://www.hackingwithswift.com/quick-start/swiftui/how-to-let-users-select-pictures-using-photospicker) by Paul Hudson include:
 
 - `.screenshots` to only accept screenshots.
 - `.any(of: [.panoramas, .screenshots])`
@@ -56,9 +56,9 @@ to select multiple images from their photo library.
 Tap the icon in the upper-right corner to view the photo library.
 
 <img alt="PhotosPicker Multiple" style="width: 50%"
-  src="/blog/assets/swiftui-photospicker-multiple.png?v=1.1.1">
+  src="/blog/assets/swiftui-photospicker-multiple.png">
 
-See the code for [MultipleImagePicker](<https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/MultipleImagePicker.swift?v=1.1.1>).
+See the code for [MultipleImagePicker](https://github.com/mvolkmann/PhotosPickerDemo/blob/main/PhotosPickerDemo/Views/MultipleImagePicker.swift).
 
 ## Embedding
 
@@ -93,10 +93,10 @@ The following view modifier hides all edges:
 .photosPickerAccessoryVisibility(.hidden, edges: .all)
 ```
 
-See the demo app [PhotosPicker2023Demo](<https://github.com/mvolkmann/PhotosPicker2023Demo/blob/main/PhotosPicker2023Demo/ContentView.swift?v=1.1.1>).
+See the demo app [PhotosPicker2023Demo](https://github.com/mvolkmann/PhotosPicker2023Demo/blob/main/PhotosPicker2023Demo/ContentView.swift).
 
 <img alt="PhotosPicker Single" style="width: 50%"
-  src="/blog/assets/swiftui-photospicker-embedded.png?v=1.1.1">
+  src="/blog/assets/swiftui-photospicker-embedded.png">
 
 The app above renders a `PhotoPicker` with the following:
 

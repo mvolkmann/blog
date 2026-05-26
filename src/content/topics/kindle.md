@@ -41,7 +41,7 @@ To add a `.epub` file to your Kindle:
 
 To checkout an ebook from the library and upload to Kindle:
 
-1. Browse your library website such as [St. Charles City-County Library](<https://www.stchlibrary.org?v=1.1.1>).
+1. Browse your library website such as [St. Charles City-County Library](https://www.stchlibrary.org).
    The following instructions are specific to this website.
 1. Enter a book title or author and click the "Search" button.
 1. Select a book.
@@ -54,7 +54,7 @@ To checkout an ebook from the library and upload to Kindle:
    1. Wait for the book to appear on your Kindle.
 1. If there is a "download EPUBs or PDFs using Libby" link:
    1. Click that link.
-   1. Browse [libbyapp.com](<libbyapp.com?v=1.1.1>).
+   1. Browse [libbyapp.com](libbyapp.com).
    1. Find the book under "Recent Loans".
    1. Click "Manage Loan".
    1. Click "Read With...".

@@ -7,14 +7,14 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Combine](<https://developer.apple.com/documentation/combine?v=1.1.1>) is a framework for processing values over time.
+[Combine](https://developer.apple.com/documentation/combine) is a framework for processing values over time.
 
-Combine defines the protocols [Publisher](<https://developer.apple.com/documentation/combine/publisher?v=1.1.1>)
-and [Subscriber](<https://developer.apple.com/documentation/combine/subscriber?v=1.1.1>).
+Combine defines the protocols [Publisher](https://developer.apple.com/documentation/combine/publisher)
+and [Subscriber](https://developer.apple.com/documentation/combine/subscriber).
 Publishers deliver elements to subscribers and
 subscribers receive a stream of elements from a publisher.
 
-TODO: See the free, online book [Using Combine](<https://heckj.github.io/swiftui-notes/?v=1.1.1>).
+TODO: See the free, online book [Using Combine](https://heckj.github.io/swiftui-notes/).
 
 ## Publishers
 

@@ -10,7 +10,7 @@ layout: topic-layout.njk
 It is implemented in JavaScript.
 
 The rationale for the name "11ty" is in the 11ty docs under
-[project naming](<https://www.zachleat.com/web/eleventy-birthday/#project-naming?v=1.1.1>).
+[project naming](https://www.zachleat.com/web/eleventy-birthday/#project-naming).
 It is related to how Zach Leatherman learned to count as a child.
 
 The 11ty mascot is a possum attached to a helium balloon.
@@ -22,7 +22,7 @@ A lot of big names in the web community love 11ty, including
 Andy Bell, Mathias Bynens, Chris Coyier, Rob Dodson, Una Kravets,
 Brian Leroux, Addy Osmani, Dave Rupert, Alex Russel, and Sara Soueidan.
 See
-[testimonials](<https://www.11ty.dev/docs/testimonials/?v=1.1.1>).
+[testimonials](https://www.11ty.dev/docs/testimonials/).
 
 11ty supports many markup languages including:
 
@@ -31,20 +31,20 @@ See
 
 11ty supports many templating languages including:
 
-- [Embedded JavaScript (EJS)](<https://ejs.co/?v=1.1.1>)
+- [Embedded JavaScript (EJS)](https://ejs.co/)
   in `.ejs` files
-- [Haml](<http://haml.info/?v=1.1.1>) in `.haml` files
-- [Handlebars](<https://handlebarsjs.com/?v=1.1.1>)
+- [Haml](http://haml.info/) in `.haml` files
+- [Handlebars](https://handlebarsjs.com/)
   in `.hbs` files
 - JavaScript in `.11ty.js` files
 - JavaScript Template Literals in `.jstl` files
-- [Liquid](<https://shopify.github.io/liquid/?v=1.1.1>)
+- [Liquid](https://shopify.github.io/liquid/)
   from Shopify in `.liquid` files
-- [Mustache](<https://mustache.github.io/?v=1.1.1>)
+- [Mustache](https://mustache.github.io/)
   in `.mustache` files
-- [Nunjucks](<https://mozilla.github.io/nunjucks/?v=1.1.1>)
+- [Nunjucks](https://mozilla.github.io/nunjucks/)
   from Mozilla in `.njk` files
-- [Pug](<https://pugjs.org/?v=1.1.1>) in `.pug` files
+- [Pug](https://pugjs.org/) in `.pug` files
 
 11ty does not currently support AsciiDoc.
 

@@ -26,11 +26,11 @@ You can also copy the code into a `.html` file and open it in a web browser.
 For information about fundamental web topics like
 HTML, CSS, and JavaScript that are not covered here,
 or to get more detail on topics that are covered here,
-your first stop should be the [Mozilla Developer Network (MDN) Web Docs](<https://developer.mozilla.org/en-US/?v=1.1.1>).
+your first stop should be the [Mozilla Developer Network (MDN) Web Docs](https://developer.mozilla.org/en-US/).
 Start a web search with "MDN"; for example, "MDN CSS transform".
 
 Another great resource is
-"[Can I use](<https://caniuse.com?v=1.1.1>)"
+"[Can I use](https://caniuse.com)"
 which provides details on browser support for
 all fundamental web development features.
 
@@ -63,7 +63,7 @@ Some of the most commonly used semantic elements include:
 - `summary`
 - `time`
 
-For descriptions of each of these elements, see the [MDN HTML elements reference](<https://developer.mozilla.org/en-US/docs/Web/HTML/Element?v=1.1.1>).
+For descriptions of each of these elements, see the [MDN HTML elements reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element).
 
 Two key tips to keep in mind:
 
@@ -74,7 +74,7 @@ Two key tips to keep in mind:
 
 ### Accessible Rich Internet Applications (ARIA)
 
-[ARIA](<https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA?v=1.1.1>)
+[ARIA](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA)
 defines a set of HTML attributes that make certain HTML elements
 more accessible to people with disabilities.
 This is a large topic and only the surface is scratched here.
@@ -90,7 +90,7 @@ For example:
 ```
 
 The table below summarizes the ARIA attributes.
-For more detail, see the [W3C documentation](<https://www.w3.org/TR/wai-aria-1.0/states_and_properties?v=1.1.1>).
+For more detail, see the [W3C documentation](https://www.w3.org/TR/wai-aria-1.0/states_and_properties).
 
 TODO: Are these only needed when using HTML elements in a non-standard way?
 For example, is `role="button"` only needed on non-button elements (like a `div`)?
@@ -137,7 +137,7 @@ rather than using something like `<input type="range" max="50" />`.
 | `aria-valuetext`        | defines the human readable text alternative of aria-valuenow for a range widget                                                                                                                |
 
 In addition to these, a `role` attribute can be added to an HTML element
-with one of the values described at [Using ARIA: Roles, states, and properties](<https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques?v=1.1.1>).
+with one of the values described at [Using ARIA: Roles, states, and properties](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques).
 
 ### `input` element `type` attribute
 
@@ -166,7 +166,7 @@ The values include:
 - `week`
 - ... and a few more less commonly used values
 
-For details on these attribute values, see the [MDN input element](<https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input?v=1.1.1>) page.
+For details on these attribute values, see the [MDN input element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input) page.
 
 The following example demonstrates styling invalid inputs
 so they have a red border when their value is invalid.
@@ -522,7 +522,7 @@ The popup is dismissed by clicking outside it or by pressing the escape key.
 As shown here, you can also add a close button.
 
 <img alt="HTML popover" style="width: 70%"
-  src="/blog/assets/html-popover.png?v=1.1.1"
+  src="/blog/assets/html-popover.png"
   title="HTML popover">
 
 ```html
@@ -590,7 +590,7 @@ As shown here, you can also add a close button.
 
 ### figure element
 
-The [figure element](<https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure?v=1.1.1>) associates a caption with any content.
+The [figure element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure) associates a caption with any content.
 Typically the content is a single `img` element,
 but it can be any content such as a `code` or `picture` element.
 The caption is specified with a `figcaption` element.
@@ -606,7 +606,7 @@ The following example adds a caption to an image:
   }
 </style>
 <figure class="figure-demo">
-  <img src="/blog/assets/comet.jpg?v=1.1.1" alt="Comet" />
+  <img src="/blog/assets/comet.jpg" alt="Comet" />
   <figcaption>Comet, the Whippet</figcaption>
 </figure>
 
@@ -1046,7 +1046,7 @@ A CSS reset is a set of CSS rules that attempt to
 set the CSS properties of standard HTML elements
 so they render the same across all popular web browsers.
 There are many such resets available.
-The most popular is [normalize.css](<https://necolas.github.io/normalize.css/?v=1.1.1>).
+The most popular is [normalize.css](https://necolas.github.io/normalize.css/).
 
 To use normalize.css:
 
@@ -1156,7 +1156,7 @@ are added to elements.
 - Margin is outside the border and can also be set to `0`.
 
 <img alt="CSS box model" style="width: 50%"
-  src="/blog/assets/css-box-model.png?v=1.1.1"
+  src="/blog/assets/css-box-model.png"
   title="CSS box model">
 
 Padding, border, and margin can be specified to be the same on all four sides
@@ -1192,7 +1192,7 @@ Specify one value for circular corners (same for each corner),
 two values for elliptical corners, or
 four values for a different curve in each corner.
 The possible values are quite complex.
-See [MDN](<https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius?v=1.1.1>)
+See [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius)
 for details.
 
 To change the shape of an element to an oval,
@@ -2224,7 +2224,7 @@ It's easy to create gradient borders using `border-image-source`.
 For example:
 
 <img alt="CSS gradient border" style="width: 30%"
-  src="/blog/assets/css-gradient-border.png?v=1.1.1"
+  src="/blog/assets/css-gradient-border.png"
   title="CSS gradient border">
 
 
@@ -2261,10 +2261,10 @@ For example:
 
 Unfortunately, this approach doesn't work if a `border-radius` is needed.
 But the somewhat more complicated approach below does work.
-See [Border with gradient and radius](<https://dev.to/afif/border-with-gradient-and-radius-387f?v=1.1.1>).
+See [Border with gradient and radius](https://dev.to/afif/border-with-gradient-and-radius-387f).
 
 <img alt="CSS gradient border rounded" style="width: 30%"
-  src="/blog/assets/css-gradient-border-rounded.png?v=1.1.1"
+  src="/blog/assets/css-gradient-border-rounded.png"
   title="CSS gradient border rounded">
 
 
@@ -2573,9 +2573,9 @@ Each of these approaches is demonstrated in the code below.
 
 ### Flex layout
 
-[Flex layout](<https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox?v=1.1.1>) is a powerful way to control
+[Flex layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) is a powerful way to control
 the layout of HTML elements in one dimension.
-[Flexbox Froggy](<https://flexboxfroggy.com?v=1.1.1>)
+[Flexbox Froggy](https://flexboxfroggy.com)
 provides a great way to learn about this.
 
 Many CSS properties affect flex layout.
@@ -2759,9 +2759,9 @@ by setting their `align-self` property.
 
 ### Grid layout
 
-[Grid layout](<https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids?v=1.1.1>) is a powerful way to control
+[Grid layout](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Grids) is a powerful way to control
 the layout of HTML elements in two dimensions.
-[Grid Garden](<https://cssgridgarden.com?v=1.1.1>)
+[Grid Garden](https://cssgridgarden.com)
 provides a great way to learn about this.
 
 Many CSS properties affect grid layout.
@@ -3255,7 +3255,7 @@ The following example demonstates many uses of `:has`.
 A lot is achieved without writing any JavaScript code!
 
 <img alt="CSS :has pseudo class" style="width: 70%"
-  src="/blog/assets/css-has-pseudo-class.png?v=1.1.1"
+  src="/blog/assets/css-has-pseudo-class.png"
   title="CSS :has pseudo class">
 
 ```html
@@ -3636,7 +3636,7 @@ class names, and element names appear in a selector
 does not affect its specificity calculation.
 
 For more details on CSS specificity, see
-[Specifics on CSS Specificity](<https://css-tricks.com/specifics-on-css-specificity/?v=1.1.1>) on the CSS-Tricks site.
+[Specifics on CSS Specificity](https://css-tricks.com/specifics-on-css-specificity/) on the CSS-Tricks site.
 
 ### Truncating text
 
@@ -3723,7 +3723,7 @@ non-truncated and truncated text.
 
 ### `scroll-behavior` property
 
-The CSS [scroll-behavior property](<https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior?v=1.1.1>) causes the page to
+The CSS [scroll-behavior property](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-behavior) causes the page to
 smoothly scroll rather than jump to a new page location
 when the user clicks a link that
 navigates to a different part of the same page.
@@ -4110,13 +4110,13 @@ Vendor prefixes include `-moz-` for Firefox,
 Over time the need for these prefixes has diminished,
 but many CSS properties still require them.
 For a list of CSS properties that still require vendor prefixes in 2021,
-see the section "Prefixing in 2021" in this [CSS Tricks article](<https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021?v=1.1.1>).
+see the section "Prefixing in 2021" in this [CSS Tricks article](https://css-tricks.com/is-vendor-prefixing-dead/#prefixing-in-2021).
 
 It is not necessary to manually write CSS properties with vendor prefixes.
-Tools such as [PostCSS](<https://postcss.org?v=1.1.1>) and
-[Sass](<https://sass-lang.com?v=1.1.1>) can generate these for you.
+Tools such as [PostCSS](https://postcss.org) and
+[Sass](https://sass-lang.com) can generate these for you.
 Here are the steps to setup and use PostCSS and the
-[autoprefixer](<https://github.com/postcss/autoprefixer?v=1.1.1>)
+[autoprefixer](https://github.com/postcss/autoprefixer)
 plugin to do this:
 
 1. For projects that do not have a `package.json` file,
@@ -4153,17 +4153,17 @@ select {
 The `autoprefixer` npm package is one of many plugins available for PostCSS.
 Other popular plugins include:
 
-- [postcss-preset-env](<https://github.com/csstools/postcss-preset-env?v=1.1.1>)
+- [postcss-preset-env](https://github.com/csstools/postcss-preset-env)
 
   This "lets you convert modern CSS into something most browsers can understand,
   determining the polyfills you need based on
   your targeted browsers or runtime environments."
 
-- [postcss-sorting](<https://github.com/hudochenkov/postcss-sorting?v=1.1.1>)
+- [postcss-sorting](https://github.com/hudochenkov/postcss-sorting)
 
   This sorts properties within rules, not rules based on selectors.
 
-- [stylelint](<https://stylelint.io/user-guide/usage/postcss-plugin?v=1.1.1>)
+- [stylelint](https://stylelint.io/user-guide/usage/postcss-plugin)
 
   This is a "linter that helps you avoid errors and enforce conventions."
 
@@ -4336,10 +4336,10 @@ downward pointing triangle on the right side of the `select`.
 
 ### Transitions
 
-The CSS [transition properties](<https://developer.mozilla.org/en-US/docs/Web/CSS/transition?v=1.1.1>) cause changes to specific CSS properties
+The CSS [transition properties](https://developer.mozilla.org/en-US/docs/Web/CSS/transition) cause changes to specific CSS properties
 to be applied over a given time duration, resulting in animation.
 Note that not all CSS properties can be animated.
-For a list of those that can, see [Animatable CSS properties](<https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties?v=1.1.1>).
+For a list of those that can, see [Animatable CSS properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties).
 
 | CSS Property                 | Description                                                        |
 | ---------------------------- | ------------------------------------------------------------------ |
@@ -4703,7 +4703,7 @@ Keyboard ... Shortcuts and checking the checkbox for
 
 ### Transforms
 
-The CSS [transform property](<https://developer.mozilla.org/en-US/docs/Web/CSS/transform?v=1.1.1>) translates, rotates, scales, and skews DOM elements.
+The CSS [transform property](https://developer.mozilla.org/en-US/docs/Web/CSS/transform) translates, rotates, scales, and skews DOM elements.
 
 The example below renders a button containing a finger pointing emoji.
 When the button is pressed, a `rotate` `transform` is applied
@@ -4951,7 +4951,7 @@ Some alternatives to consider include
 describing triangles with SVG,
 drawing triangles with Canvas, and
 using the many triangle Unicode characters
-such as <code>&amp;#9650;</code> (&#9650;).
+such as <code>&amp;#9650;</code> (#9650;).
 
 <style>
   /* This rule must precede the rules for
@@ -5154,7 +5154,7 @@ such as <code>&amp;#9650;</code> (&#9650;).
 
 We have seen how animations can be implemented
 using the CSS `transition` and `transform` properties.
-Another approach is to use the [animation properties](<https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations?v=1.1.1>) along with `@keyframes`.
+Another approach is to use the [animation properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations) along with `@keyframes`.
 
 Keyframes specify changes to CSS properties
 that should be animated over some time duration
@@ -5646,7 +5646,7 @@ and chaining animations.
 
 ### Media queries
 
-CSS [media queries](<https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries?v=1.1.1>) have many uses, but the most common is to
+CSS [media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries) have many uses, but the most common is to
 apply different CSS properties based on the window width.
 
 The following example lays out elements
@@ -5776,7 +5776,7 @@ The card width changes based on the window width
 and the card heights are controlled by an aspect ratio.
 
 <img alt="CSS container query units" style="width: 80%"
-  src="/blog/assets/css-container-query-units.gif?v=1.1.1"
+  src="/blog/assets/css-container-query-units.gif"
   title="CSS container query units">
 
 
@@ -5900,7 +5900,7 @@ The following example uses a container query to change the
 `flex-direction` CSS property based on the width of a container.
 
 <img alt="CSS container query" style="width: 80%"
-  src="/blog/assets/css-container-query.gif?v=1.1.1"
+  src="/blog/assets/css-container-query.gif"
   title="CSS container query">
 
 
@@ -6002,11 +6002,11 @@ The following example uses a container query to change the
 
 ### Light and dark modes
 
-The easiest way to support light and dark modes is to use the [color-scheme](<https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme?v=1.1.1>) CSS property and the
-[light-dark](<https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark?v=1.1.1>) CSS function.
+The easiest way to support light and dark modes is to use the [color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme) CSS property and the
+[light-dark](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/light-dark) CSS function.
 The example below demonstrates this.
-It also uses the [Oklab](<https://bottosson.github.io/posts/oklab/?v=1.1.1>) color space via the CSS function
-[oklch](<https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch?v=1.1.1>).
+It also uses the [Oklab](https://bottosson.github.io/posts/oklab/) color space via the CSS function
+[oklch](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/oklch).
 
 - `l` is for lightness: 0 to 1 or 0% to 100%
 - `c` is for chroma: 0 to 1 or 0% to 100%
@@ -6104,7 +6104,7 @@ unless the "Force Dark Mode" checkbox is checked.
 Try changing the value of `--base-color` and refreshing the page.
 
 Another way to support light and dark modes is to use media queries
-and the CSS Object Model (CSSOM) method [window.matchMedia](<https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia?v=1.1.1>).
+and the CSS Object Model (CSSOM) method [window.matchMedia](https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia).
 For example, the following line of JavaScript code
 determines if the user has configured their operating system
 to prefer dark mode:
@@ -6412,7 +6412,7 @@ To use a custom font in a web app:
 
 ### clip-path property
 
-The CSS [clip-path property](<https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path?v=1.1.1>) defines a clipping region
+The CSS [clip-path property](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path) defines a clipping region
 that determines the parts of an element that should be visible.
 It is often used with images, but is not limited to those.
 
@@ -6571,7 +6571,7 @@ For example, the `clip-path` can become larger or smaller on hover.
 
 ### filter property
 
-The CSS [filter property](<https://developer.mozilla.org/en-US/docs/Web/CSS/filter?v=1.1.1>) applies special effects to elements.
+The CSS [filter property](https://developer.mozilla.org/en-US/docs/Web/CSS/filter) applies special effects to elements.
 Each effect is described by a function call
 that is the value of the `filter` property.
 For example, `filter: sepia(100%);`
@@ -7154,7 +7154,7 @@ the `some-url` refers to a file that defines an SVG filter.
 
 ### backdrop-filter property
 
-The CSS property [backdrop-filter](<https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter?v=1.1.1>) applies an effect to the area behind an element.
+The CSS property [backdrop-filter](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter) applies an effect to the area behind an element.
 In order to see this, the element must be partially transparent.
 
 One use is to simulate the liquid glass effect
@@ -7251,11 +7251,11 @@ used in the 2026 version of Apple OSes. For example:
 
 ### Linting
 
-The [stylelint](<https://stylelint.io?v=1.1.1>) linter
+The [stylelint](https://stylelint.io) linter
 is a great option for detecting errors and formatting issues in CSS.
 It can validate CSS rules found in many file types including
 CSS, HTML, JavaScript, Markdown, PostCSS,
-[Sass](<https://sass-lang.com?v=1.1.1>),
+[Sass](https://sass-lang.com),
 Svelte, TypeScript, and Vue.
 
 To add this to a project:
@@ -7279,7 +7279,7 @@ and run it by entering `npm run stylelint`:
 "stylelint": "stylelint **/*.{css,svelte}"
 ```
 
-There is a VS Code extension for stylelint ([stylelint.vscode-stylelint](<https://github.com/stylelint/vscode-stylelint#readme?v=1.1.1>))
+There is a VS Code extension for stylelint ([stylelint.vscode-stylelint](https://github.com/stylelint/vscode-stylelint#readme))
 that automatically validates CSS and identifies issues.
 
 ## Images
@@ -7519,11 +7519,11 @@ For each image size to be created:
 1. Press the "OK" button.
 
 There are web sites that convert JPEG images to the WebP format for free.
-One is [Squoosh](<https://squoosh.app/?v=1.1.1>)
+One is [Squoosh](https://squoosh.app/)
 which is an experimental project from Google Chrome Labs.
 It "make images smaller using best-in-class codecs, right in the browser."
-Another option is [Convertio](<https://convertio.co/jpg-webp/?v=1.1.1>)
-from [softo](<https://softo.co?v=1.1.1>).
+Another option is [Convertio](https://convertio.co/jpg-webp/)
+from [softo](https://softo.co).
 
 These images can also be created with different aspect ratios
 and have different parts of the image cropped out.
@@ -8101,7 +8101,7 @@ The `this` and `super` keywords are used in functions
 that are methods of some object, so arrow functions
 cannot be used to define methods that use these keywords.
 
-The `yield` keyword is used in [generator functions](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*?v=1.1.1>), so arrow functions cannot be used to define them.
+The `yield` keyword is used in [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*), so arrow functions cannot be used to define them.
 
 There are a few other differences that rarely come up in practice.
 
@@ -8437,9 +8437,9 @@ and modifies it based on its current value.
 ### CSS variables from JavaScript
 
 JavaScript code can access the values of CSS variables using a
-combination of the [getComputedStyle](<https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle?v=1.1.1>) and [getPropertyValue](<https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue?v=1.1.1>) methods.
+combination of the [getComputedStyle](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle) and [getPropertyValue](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/getPropertyValue) methods.
 JavaScript code can also modify the values of CSS variables
-using the [setProperty](<https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty?v=1.1.1>) method.
+using the [setProperty](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration/setProperty) method.
 This updates the use of all CSS properties that reference them.
 
 These method names are a bit inconsistent as there is
@@ -8514,7 +8514,7 @@ and modifies it based on its current value.
 
 ### Getting element size
 
-DOM elements support the method [getBoundingClientRect](<https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect?v=1.1.1>) that returns a `DOMRect` object.
+DOM elements support the method [getBoundingClientRect](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect) that returns a `DOMRect` object.
 This object contains the properties `width` and `height`,
 which provide the size of the element including the border.
 It also contains the following properties that describe its position:
@@ -8625,7 +8625,7 @@ in a read-only `textarea`.
 
 ### Promises
 
-The JavaScript [Promise](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise?v=1.1.1>) class provides an alternative to callback functions
+The JavaScript [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) class provides an alternative to callback functions
 for dealing with asynchronous operations.
 Many JavaScript functions return `Promise` objects.
 One example is the `fetch` function described in the next section.
@@ -8817,7 +8817,7 @@ in the same order as the promises that were passed in.
 
 If the promise returned by `Promise.any` resolves,
 the value is that of the first promise that resolved.
-If it rejects, the value is an [AggregateError](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError?v=1.1.1>) object that holds a collection of the errors.
+If it rejects, the value is an [AggregateError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AggregateError) object that holds a collection of the errors.
 
 If the promise returned by `Promise.race` resolves,
 the value is that of the first promise that resolves.
@@ -8830,11 +8830,11 @@ To create such a promise, call the static methods
 
 ### Fetch API
 
-The [Fetch API](<https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API?v=1.1.1>),
-defined by the [Web Hypertext Application Working Group (WHATWG)](<https://fetch.spec.whatwg.org?v=1.1.1>)
+The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API),
+defined by the [Web Hypertext Application Working Group (WHATWG)](https://fetch.spec.whatwg.org)
 provides a JavaScript API for fetching resources, typically using HTTP.
-It defines a single function, [fetch](<https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch?v=1.1.1>), that takes a URL that
-identifies a resource (or a [Request](<https://developer.mozilla.org/en-US/docs/Web/API/Request?v=1.1.1>) object) and an optional options object.
+It defines a single function, [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), that takes a URL that
+identifies a resource (or a [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) object) and an optional options object.
 The options object can include the following properties:
 
 - `method`: This is an HTTP method name, such as
@@ -8872,7 +8872,7 @@ can contains many properties including:
 
 Here are examples of using the `fetch` function to
 create (POST), retrieve (GET), update (PUT), and delete (DELETE)
-resources using a fictional set of [REST](<https://en.wikipedia.org/wiki/Representational_state_transfer?v=1.1.1>) services.
+resources using a fictional set of [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) services.
 
 ```js
 const DOG_SERVICE_URL = 'https://dogs.com/manage';
@@ -8990,7 +8990,7 @@ function downloadFile(filename, content) {
 
 ### Intersection Observer API
 
-The [Intersection Observer API](<https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API?v=1.1.1>) enables executing JavaScript code
+The [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) enables executing JavaScript code
 when an element intersect (or stops intersecting)
 an ancestor element (or the browser viewport).
 Often the goal is to perform some processing when the user scrolls the page,
@@ -9196,7 +9196,7 @@ and the text color temporarily changes to red.
 
 Implementing a carousel component is not a difficult as it might seem.
 Here is a simple implementation inspired by
-[Kevin Powell](<https://www.youtube.com/watch?v=VYsVOamdB0g&v=1.1.1>).
+[Kevin Powell](https://www.youtube.com/watch?v=VYsVOamdB0g).
 
 <style>
   .carousel {
@@ -9567,8 +9567,8 @@ Here is a simple implementation inspired by
 
 ## Drawing
 
-Both [SVG](<https://developer.mozilla.org/en-US/docs/Web/SVG?v=1.1.1>)
-and the [Canvas API](<https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API?v=1.1.1>) can be used to draw things on a web page.
+Both [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG)
+and the [Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API) can be used to draw things on a web page.
 
 SVG stands for "Scalable Vector Graphics".
 It is a markup language similar to HTML, which makes it declarative.
@@ -9760,7 +9760,7 @@ The basics steps to use the Canvas API are:
 1. Create a `canvas` element.
 1. Get a reference to the `canvas` DOM element.
 1. Get a context object from the `canvas` DOM element
-   by calling the [getContext](<https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext?v=1.1.1>) method.
+   by calling the [getContext](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext) method.
 1. Call methods on the context object to specify styling,
    draw paths, and fill paths.
 1. Call the context `beginPath` method to start a new path.
@@ -9976,7 +9976,7 @@ Note that the duck image is quite pixelated compared to the SVG version.
 
 ## `Intl`
 
-The ECMAScript Internationalization API defines the [Intl](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl?v=1.1.1>) namespace, which defines constructor functions and
+The ECMAScript Internationalization API defines the [Intl](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl) namespace, which defines constructor functions and
 associated methods for "language sensitive string comparison,
 number formatting, and date and time formatting."
 A locale and an options object can optionally
@@ -9988,7 +9988,7 @@ This section provides examples of the most commonly used features in this API.
 
 ### `Intl.Collator`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator?v=1.1.1>) returns an object with a `compare` function that
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) returns an object with a `compare` function that
 is suitable for use as a comparator function for the `Array` `sort` method.
 It performs language-sensitive string comparison.
 
@@ -10005,7 +10005,7 @@ console.log('names =', names);
 
 ### `Intl.DateTimeFormat`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat?v=1.1.1>) returns an object with a `format` method
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat) returns an object with a `format` method
 that can be passed a `Date` object or a number of milliseconds since the epoch.
 The constructor takes an options object which supports many options.
 The most commonly used options are:
@@ -10079,7 +10079,7 @@ console.log('custom =', formatter.format(date)); // Sun, Apr 16, 1961
 
 ### `Intl.DisplayNames`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames?v=1.1.1>) returns an object with an `of` method.
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames) returns an object with an `of` method.
 One use is to pass a region identifier and obtain the region name.
 For example:
 
@@ -10098,7 +10098,7 @@ for (const region of regions) {
 
 ### `Intl.ListFormat`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat/ListFormat?v=1.1.1>) returns an object with a `format` method
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat/ListFormat) returns an object with a `format` method
 that takes an array of strings and returns a string
 that is a specific concatenation of the values.
 
@@ -10120,7 +10120,7 @@ console.log(formatter.format(colors)); // red, green, or blue
 
 ### `Intl.NumberFormat`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat?v=1.1.1>) returns an object with a `format` method
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat/NumberFormat) returns an object with a `format` method
 that takes a number and returns a formatted string.
 It supports many options. The most commonly used options are:
 
@@ -10186,7 +10186,7 @@ for (const unit of units) {
 
 ### `Intl.RelativeTimeFormat`
 
-This [constructor function](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat?v=1.1.1>) returns an object with a `format` method
+This [constructor function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat/RelativeTimeFormat) returns an object with a `format` method
 that takes a numeric value and a unit name such as `day` or `month`.
 The most commonly used options are:
 
@@ -10257,41 +10257,41 @@ Common ports include 3000, 5000, and 8080.
 These make it easy to test web applications that are
 being developed and run locally.
 I learned this from
-[Bill Odom](<http://www.billodom.com?v=1.1.1>).
+[Bill Odom](http://www.billodom.com).
 
 ## Editors
 
 ### VS Code
 
-[VS Code](<https://code.visualstudio.com?v=1.1.1>)
+[VS Code](https://code.visualstudio.com)
 is a very popular, free code editor from Microsoft.
 It has many built-in features and more can be added through extensions.
 
 Recommended VS Code extensions include:
 
-- [Bracket Pair Colorizer 2](<https://github.com/CoenraadS/Bracket-Pair-Colorizer-2?v=1.1.1>)
+- [Bracket Pair Colorizer 2](https://github.com/CoenraadS/Bracket-Pair-Colorizer-2)
 
   This colorizes matching parentheses, square brackets, and curly braces
   to make it easier to find matching pairs.
 
-- [Code Spell Checker](<https://github.com/streetsidesoftware/vscode-spell-checker?v=1.1.1>)
+- [Code Spell Checker](https://github.com/streetsidesoftware/vscode-spell-checker)
 
   This performs spell checking in source code considering the parts of camelCase names separately.
   It enables adding words to the user dictionary and workspace dictionaries.
   Spell checking can be disabled and enabled within a file
   and a list of words to ignore can be specified with special comments.
 
-- [colorize](<https://github.com/kamikillerto/vscode-colorize?v=1.1.1>)
+- [colorize](https://github.com/kamikillerto/vscode-colorize)
 
   This adds color swatches before all CSS colors to visualize them.
 
-- [ESLint](<https://github.com/Microsoft/vscode-eslint?v=1.1.1>)
+- [ESLint](https://github.com/Microsoft/vscode-eslint)
 
   This integrates the
-  [ESLint](<https://eslint.org?v=1.1.1>) tool
+  [ESLint](https://eslint.org) tool
   for reporting problems in JavaScript and TypeScript files.
 
-- [GitLens](<https://github.com/eamodio/vscode-gitlens?v=1.1.1>)
+- [GitLens](https://github.com/eamodio/vscode-gitlens)
 
   This adds Git capabilities including:
 
@@ -10304,42 +10304,42 @@ Recommended VS Code extensions include:
   - interactive rebase editor
   - and much more
 
-- [Live Server](<https://github.com/ritwickdey/vscode-live-server?v=1.1.1>)
+- [Live Server](https://github.com/ritwickdey/vscode-live-server)
 
   This launches a local development server with live reload.
   It is described in more detail below.
 
-- [Prettier](<https://github.com/prettier/prettier-vscode?v=1.1.1>)
+- [Prettier](https://github.com/prettier/prettier-vscode)
 
   This integrates the
-  [Prettier](<https://prettier.io?v=1.1.1>) code formatter
+  [Prettier](https://prettier.io) code formatter
   and is typically configured to run when file changes are saved.
 
-- [stylelint](<https://github.com/stylelint/vscode-stylelint?v=1.1.1>)
+- [stylelint](https://github.com/stylelint/vscode-stylelint)
 
   This integrates the
-  [stylelint](<https://stylelint.io?v=1.1.1>) tool
+  [stylelint](https://stylelint.io) tool
   for reporting problems in CSS and Sass files.
 
-- [Thunder Client](<https://github.com/rangav/thunder-client-support?v=1.1.1>)
+- [Thunder Client](https://github.com/rangav/thunder-client-support)
 
   This is a lightweight Rest API client, similar to
-  [Postman](<https://www.postman.com?v=1.1.1>).
+  [Postman](https://www.postman.com).
   For more detail, see this [blog page](/blog/thunder-client/).
 
-- [Todo Tree](<https://github.com/Gruntfuggly/todo-tree?v=1.1.1>)
+- [Todo Tree](https://github.com/Gruntfuggly/todo-tree)
 
   This searches your workspace for comment tags like "TODO" and "FIXME".
   It then displays them in a tree view in the EXPLORER pane.
   To navigate to the source file and line of a TODO, click a line in the tree.
 
-- [Version Lens](<https://gitlab.com/versionlens/vscode-versionlens?v=1.1.1>)
+- [Version Lens](https://gitlab.com/versionlens/vscode-versionlens)
 
   When viewing dependencies in a `package.json` file, this shows the latest version of each and enables updating to that version.
 
-- [Vim](<https://github.com/VSCodeVim/Vim?v=1.1.1>)
+- [Vim](https://github.com/VSCodeVim/Vim)
 
-  This provides [Vim](<https://www.vim.org?v=1.1.1>) emulation, including support for Vim macros.
+  This provides [Vim](https://www.vim.org) emulation, including support for Vim macros.
   Use this if you value efficient text editing!
 
 ### Emmet
@@ -10414,11 +10414,11 @@ if you guess an abbreviation you will usually be correct.
 | `w`    | `width: ;`                        |
 | `z`    | `z-index: ;`                      |
 
-For more detail, see my [Emmet article](<https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin?v=1.0.15&v=1.1.1>).
+For more detail, see my [Emmet article](https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin).
 
 ### Live Server VS Code extension
 
-[Live Server](<https://ritwickdey.github.io/vscode-live-server/?v=1.1.1>) is a VS Code extension that
+[Live Server](https://ritwickdey.github.io/vscode-live-server/) is a VS Code extension that
 starts a local file server and watches files for changes,
 reloading a browser page when detected.
 This is great for experimenting with HTML, CSS, and JavaScript
@@ -10457,11 +10457,11 @@ specify it in the `liveserver.settings.CustomBrowser` setting.
 Options include `chrome`, `chrome:PrivateMode`,
 `firefox`, `firefox:PrivateMode`, `microsoft-edge`, and `blisk`.
 
-[Blisk](<https://blisk.io?v=1.1.1>)
+[Blisk](https://blisk.io)
 is a Chromium-based, developer-oriented web browser
 for testing various device types including desktop, tablet, and mobile.
 
-Live Server supports many more [settings](<https://github.com/ritwickdey/vscode-live-server/blob/master/docs/settings.md?v=1.1.1>).
+Live Server supports many more [settings](https://github.com/ritwickdey/vscode-live-server/blob/master/docs/settings.md).
 
 ## Miscellaneous
 
@@ -10469,7 +10469,7 @@ Live Server supports many more [settings](<https://github.com/ritwickdey/vscode-
 
 There are many tools for serving local files over HTTP.
 This useful for testing HTML, CSS, and JavaScript in a web browser.
-One option is [http-server](<https://github.com/http-party/http-server?v=1.1.1>)
+One option is [http-server](https://github.com/http-party/http-server)
 in npm.
 
 To use this, enter `npx http-server` and note the port number it selects.

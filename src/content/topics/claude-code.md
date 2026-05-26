@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Claude Code](<https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview?v=1.1.1>) is "an agentic coding tool made by Anthropic.
+[Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) is "an agentic coding tool made by Anthropic.
 Currently in beta as a research preview."
 
 The cost is based on usage, not on a flat monthly fee.
@@ -208,7 +208,7 @@ The app looks good!
 
 "Store the workouts in a SQLite database instead of a JSON file."
 
-"Where is the workouts.db file stored?"
+"Where is the workouts.db file stored"
 
 It told me the file is in the root directory of the project.
 I had to restart the server to get it to create that file.

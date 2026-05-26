@@ -11,12 +11,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="Cloudflare Workers logo" style="border: none; width: 30%"
-  src="/blog/assets/cloudflare-workers-logo.svg?v=1.1.1"
+  src="/blog/assets/cloudflare-workers-logo.svg"
   title="Hono logo">
 
 ## Overview
 
-[Cloudflare Workers](<https://workers.cloudflare.com?v=1.1.1>)
+[Cloudflare Workers](https://workers.cloudflare.com)
 host edge functions.
 
 Features provided include:
@@ -54,7 +54,7 @@ Features provided include:
 A Cloudflare Worker can be created, edited, tested, and deployed
 directly from the website without downloading any code.
 
-- Browse [cloudflare.com](<https://www.cloudflare.com?v=1.1.1>).
+- Browse [cloudflare.com](https://www.cloudflare.com).
 - If you do not yet have an account, click the "Sign up" button.
 - If you do have an account, click the "Log in" button.
 - Click "Workers & Pages" in the left nav.
@@ -96,14 +96,14 @@ To install it globally, enter `npm install -g wrangler`.
 To authenticate Wrangler with your Cloudflare account,
 enter `wrangler login`.
 This opens a browser window that prompts
-"Allow Wrangler to make changes to your Cloudflare account?"
+"Allow Wrangler to make changes to your Cloudflare account"
 Click the "Allow" button.
 When the message "You have granted authorization to Wrangler!" appears,
 close the browser window.
 
 To continue development of a worker created in the Web UI, enter
 `npm create cloudflare@2 {worker-name} -- --type pre-existing --existing-script {worker-name}`
-This will ask "Do you want to use git for version control?"
+This will ask "Do you want to use git for version control"
 It will then download the project and install the dependencies.
 
 To start a local server for the app,
@@ -167,7 +167,7 @@ TODO: How does this approach differ?
 ## Using Hono
 
 This section walks through creating a Cloudflare Worker project that
-uses [Hono](<https://hono.dev/?v=1.1.1>) for request routing.
+uses [Hono](https://hono.dev/) for request routing.
 
 - Create a new project named "hono-dogs" as described above.
 
@@ -201,7 +201,7 @@ uses [Hono](<https://hono.dev/?v=1.1.1>) for request routing.
   Browse localhost:8787/dog to see the following:
 
   <img alt="Cloudflare Workers Hono dogs" style="width: 60%"
-    src="/blog/assets/cloudflare-workers-hono-dogs.png?v=1.1.1"
+    src="/blog/assets/cloudflare-workers-hono-dogs.png"
     title="Cloudflare Workers Hono dogs">
 
 - Deploy the app by entering `npm run deploy`.
@@ -357,7 +357,7 @@ Click a worker to see detail about it, including its deployed URL.
 
 ## KV Stores
 
-"[Workers KV](<https://developers.cloudflare.com/kv/get-started/?v=1.1.1>) provides low-latency, high-throughput global storage
+"[Workers KV](https://developers.cloudflare.com/kv/get-started/) provides low-latency, high-throughput global storage
 to your Cloudflare Workers applications.
 Workers KV is ideal for storing user configuration data, routing data,
 A/B testing configurations, authentication tokens,
@@ -365,7 +365,7 @@ and is well suited for read-heavy workloads."
 
 To enable use of KV in a worker:
 
-- Browse the [Cloudflare Dashboard](<https://dash.cloudflare.com/?v=1.1.1>) and log in if not already logged in.
+- Browse the [Cloudflare Dashboard](https://dash.cloudflare.com/) and log in if not already logged in.
 - Click "Workers & Pages" in the left nav.
 - Click the subcategory "Plans" in the left nav.
 
@@ -450,4 +450,4 @@ TODO: Try this!
 
 ## Astro
 
-To deploy an Astro app to Cloudflare, see [@astrojs/cloudflare](<https://docs.astro.build/en/guides/integrations-guide/cloudflare/?v=1.1.1>).
+To deploy an Astro app to Cloudflare, see [@astrojs/cloudflare](https://docs.astro.build/en/guides/integrations-guide/cloudflare/).

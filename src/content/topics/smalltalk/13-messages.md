@@ -120,7 +120,7 @@ If a message is sent to an object and no compatible method is found,
 the following popup will appear:
 
 <img alt="Unknown Selector popup" style="width: 50%"
-  src="/blog/assets/smalltalk-unknown-selector.png?v=1.1.1">
+  src="/blog/assets/smalltalk-unknown-selector.png">
 
 If the selector was incorrectly typed,
 any implemented selector can be selected from this popup.
@@ -129,7 +129,7 @@ If the selector is confirmed or if such a message is sent from running code,
 the following Debugger window will appear:
 
 <img alt="Debugger MessageNotUnderstood"
-  src="/blog/assets/smalltalk-message-not-understood.png?v=1.1.1">
+  src="/blog/assets/smalltalk-message-not-understood.png">
 
 One option is to implement the missing method.
 To do this:

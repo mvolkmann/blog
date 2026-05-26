@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[Firebase](<https://firebase.google.com?v=1.1.1>)
+[Firebase](https://firebase.google.com)
 is a suite of products from Google,
 primarily known for providing a cloud-based database.
 
@@ -35,13 +35,13 @@ Features that the Realtime Database and Cloud Firestore have in common include:
 - data syncs across multiple clients in near realtime
 - data remains available when clients go offline
 
-For details on the differences and cost of each option, see [Choose a database](<https://firebase.google.com/docs/firestore/rtdb-vs-firestore?v=1.1.1>).
+For details on the differences and cost of each option, see [Choose a database](https://firebase.google.com/docs/firestore/rtdb-vs-firestore).
 
 TODO: Can data be modified when offline and re-synced when back online?
 
 ## Pricing
 
-For details, see the [Pricing](<https://firebase.google.com/pricing?v=1.1.1>) page.
+For details, see the [Pricing](https://firebase.google.com/pricing) page.
 There are two pricing plans, "Spark" and "Blaze".
 
 The Realtime Database only charges for bandwidth and storage
@@ -83,7 +83,7 @@ There are two types of databases to choose between,
 1. Click the "Rules" tab.
 1. Change the line `allow read, write: if true;` to
    `allow read, write: if true;` to allow everyone to read and write.
-   Consider locking this down more. See [Writing conditions for Cloud Firestore Security Rules](<https://firebase.google.com/docs/firestore/security/rules-conditions?v=1.1.1>).
+   Consider locking this down more. See [Writing conditions for Cloud Firestore Security Rules](https://firebase.google.com/docs/firestore/security/rules-conditions).
 
 ## Realtime Database
 
@@ -208,7 +208,7 @@ It listens for documents in a collection named "Residents".
 It supports adding, updating, and deleting the documents in this collection.
 
 <img alt="Firestore in Svelte" style="width: 50%"
-  src="/blog/assets/firestore-svelte.png?v=1.1.1"
+  src="/blog/assets/firestore-svelte.png"
   title="Firestore in Svelte">
 
 
@@ -378,7 +378,7 @@ It supports adding, updating, and deleting the documents in this collection.
 
 To enable use of Firebase authentication:
 
-- Browse the [Firebase Console](<https://console.firebase.google.com?v=1.1.1>).
+- Browse the [Firebase Console](https://console.firebase.google.com).
 - Click a project box.
 - In the left nav, click "Authentication".
 - Click the "Get started" button.

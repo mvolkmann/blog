@@ -6,12 +6,12 @@ layout: topic-layout.njk
 
 <figure style="width: 33%">
   <img alt="Bun logo" style="border: 0"
-    src="/blog/assets/bun-logo.svg?v=1.1.1">
+    src="/blog/assets/bun-logo.svg">
 </figure>
 
 ## Overview
 
-"[Bun](<https://bun.sh?v=1.1.1>) is a fast JavaScript all-in-one toolkit."
+"[Bun](https://bun.sh) is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
 All of this is free and open source under the MIT license.
 
@@ -70,7 +70,7 @@ Development of Bun started in 2022 by Jarred Sumner with VC funding.
 Bun became stable (1.0) in September 2023.
 
 Bun was created by the startup company
-[Oven.sh](<https://oven.sh/?v=1.1.1>)
+[Oven.sh](https://oven.sh/)
 because that’s what buns come out of.
 “Oven has decided to adopt a strategy twinned with Deno Company.
 They will launch sales of a cloud architecture based on Bun.”
@@ -364,7 +364,7 @@ Bun.build({
 ```
 
 For an example of Bun bundling that uses the htmx and wrec libraries,
-[wrec-hono-htmx](<https://github.com/mvolkmann/wrec-hono-htmx?v=1.1.1>).
+[wrec-hono-htmx](https://github.com/mvolkmann/wrec-hono-htmx).
 
 ## Unit Tests
 
@@ -410,7 +410,7 @@ To change this, add the `--timeout {seconds}` option.
 ## Global Variables
 
 Bun provides the following global variables.
-For details, see [Globals](<https://bun.sh/docs/api/globals?v=1.1.1>).
+For details, see [Globals](https://bun.sh/docs/api/globals).
 
 - Bun-specific
 
@@ -626,7 +626,7 @@ To patch the code in place when code changes are detected
 and not restart the server, use the `--hot` flag in place of `--watch`.
 Technically this updates the internal module cache with the new code.
 
-For more detail, see [Watch mode](<https://bun.sh/docs/runtime/hot?v=1.1.1>).
+For more detail, see [Watch mode](https://bun.sh/docs/runtime/hot).
 
 This will not refresh a web browser that is
 displaying content obtained from a Bun server.
@@ -799,7 +799,7 @@ including:
 | `version`                           | string containing bun version                                              |
 | `which(executableName)`             | returns absolute path to an executable                                     |
 
-For more detail see [Utils](<https://bun.sh/docs/api/utils?v=1.1.1>).
+For more detail see [Utils](https://bun.sh/docs/api/utils).
 
 ## JSX
 
@@ -836,7 +836,7 @@ when the variables `class` and `value` are in scope:
 ```
 
 For more detail, see the Bun documentation on
-[JSX](<https://bun.sh/docs/runtime/jsx?v=1.1.1>).
+[JSX](https://bun.sh/docs/runtime/jsx).
 
 ## Serializing Objects
 
@@ -900,7 +900,7 @@ for await (const file of glob.scan('.')) {
 }
 ```
 
-For more detail see [Glob](<https://bun.sh/docs/api/glob?v=1.1.1>).
+For more detail see [Glob](https://bun.sh/docs/api/glob).
 
 ## WebSockets
 
@@ -1021,13 +1021,13 @@ const db = new Database('todos.db');
 // import {Statement} from 'bun:sqlite';
 // import db from "./todos.db" with {"type": "sqlite"};
 const deleteAllTodosPS = db.prepare('delete from todos');
-const deleteTodoPS = db.prepare('delete from todos where id = ?');
-const getTodoQuery = db.query('select * from todos where id = ?');
+const deleteTodoPS = db.prepare('delete from todos where id = ');
+const getTodoQuery = db.query('select * from todos where id = ');
 const getAllTodosQuery = db.query('select * from todos;');
 const insertTodoQuery = db.query(
   'insert into todos (text, completed) values (?, 0) returning id'
 );
-const updateTodoPS = db.prepare('update todos set completed=? where id = ?');
+const updateTodoPS = db.prepare('update todos set completed=? where id = ');
 
 test('sqlite', () => {
   deleteAllTodosPS.run();
@@ -1106,12 +1106,12 @@ console.log('average is', result);
 To run this, enter `bun run index.ts`.
 The expected output is "average is 2.5".
 
-For more detail, see [FFI](<https://bun.sh/docs/api/ffi?v=1.1.1>).
+For more detail, see [FFI](https://bun.sh/docs/api/ffi).
 That page includes a list of all the supported FFI types.
 
 ## Bun Shell
 
-"The [Bun Shell](<https://bun.sh/blog/the-bun-shell?v=1.1.1>)
+"The [Bun Shell](https://bun.sh/blog/the-bun-shell)
 is a new experimental embedded language and interpreter in Bun
 that allows you to run cross-platform shell scripts in JavaScript & TypeScript."
 
@@ -1129,12 +1129,12 @@ for await (const line of lines) {
 
 ## Elysia
 
-[Elysia](<https://elysiajs.com?v=1.1.1>) is a
+[Elysia](https://elysiajs.com) is a
 "TypeScript framework supercharged by Bun with End-to-End Type Safety,
 unified type system and outstanding developer experience."
 
 Elysia is a bun-specific server framework that is 18 times faster than Express.
-[Hono](<https://hono.dev?v=1.1.1>) is a close competitor to Elysia.
+[Hono](https://hono.dev) is a close competitor to Elysia.
 
 To create a new Bun project that uses Elysia:
 
@@ -1149,13 +1149,13 @@ To create a new Bun project that uses Elysia:
 
 To define new routes in the project ...
 
-See the example at [bun-elysia-demo](<https://github.com/mvolkmann/bun-elysia-demo?v=1.1.1>)
+See the example at [bun-elysia-demo](https://github.com/mvolkmann/bun-elysia-demo)
 GitHub repository.
 
 When a URL path for hitting an Elysia server does not end in a file name,
 it does not default to rendering the file "index.html".
 To do that, end the URL with "/index.html".
-See this [issue](<https://github.com/elysiajs/elysia/issues/327?v=1.1.1>).
+See this [issue](https://github.com/elysiajs/elysia/issues/327).
 
 For an alternative that runs in Bun and other JavaScript runtimes, see
 <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a>.

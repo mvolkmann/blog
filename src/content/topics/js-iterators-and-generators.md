@@ -13,7 +13,7 @@ It assumes that you are familiar with several ES 2015 features,
 including arrow functions, classes, destructuring, for-of loop, let/const,
 and the spread operator.
 If you need to brush up on these, check out Luke Hoban's overview at
-[ES6 Features](<https://github.com/lukehoban/es6features?v=1.1.1>).
-There is also a video of a talk I gave on ES 2015 [here](<https://www.youtube.com/watch?v=13kawyfG_mc&feature=youtu.be&v=1.1.1>).
+[ES6 Features](https://github.com/lukehoban/es6features).
+There is also a video of a talk I gave on ES 2015 [here](https://www.youtube.com/watch?v=13kawyfG_mc&feature=youtu.be).
 
-See my Object Computing (OCI) article [JavaScript Iterators and Generators](<https://objectcomputing.com/resources/publications/sett/javascript-iterators-and-generators?v=1.1.1>).
+See my Object Computing (OCI) article [JavaScript Iterators and Generators](https://objectcomputing.com/resources/publications/sett/javascript-iterators-and-generators).

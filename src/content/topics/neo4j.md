@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[Neo4j](<https://neo4j.com/?v=1.1.1>) is a graph database.
+[Neo4j](https://neo4j.com/) is a graph database.
 It was first released in February 2010.
 There are free and commercial versions.
 The free version is limited to run on a single node
@@ -27,20 +27,20 @@ Community supported languages include
 C/C++, Clojure, Erlang, PHP, R, and Ruby.
 
 "Cypher" is the query language used to obtain data from a Neo4j database.
-A good summary of Cypher syntax can be found at [Neo4j Cypher Refcard](<https://neo4j.com/docs/cypher-refcard/4.1/?v=1.1.1>).
+A good summary of Cypher syntax can be found at [Neo4j Cypher Refcard](https://neo4j.com/docs/cypher-refcard/4.1/).
 
-[neovis.js](<https://github.com/neo4j-contrib/neovis.js/?v=1.1.1>)
+[neovis.js](https://github.com/neo4j-contrib/neovis.js/)
 is a JavaScript library for visualizing the result of Cypher queries
 in a web browser.
 It connects to a running Neo4j database instance
 and renders live data updates.
-See this [issue](<https://github.com/neo4j-contrib/neovis.js/issues/141?v=1.1.1>).
+See this [issue](https://github.com/neo4j-contrib/neovis.js/issues/141).
 
 ## Installing
 
 To install Neo4j:
 
-- Browse [https://neo4j.com/](<https://neo4j.com/?v=1.1.1>).
+- Browse [https://neo4j.com/](https://neo4j.com/).
 - Click the "GET STARTED" button.
 - Click the "Download Neo4j Desktop" button.
 - Click the "Download" button.
@@ -93,7 +93,7 @@ can be clicked to initiate the following actions:
 - close (X)
 
 <img alt="Neo4j Browser icons" class="keep-size"
-  src="/blog/assets/neo4j-browser-icons.png?v=1.1.1">
+  src="/blog/assets/neo4j-browser-icons.png">
 
 To execute the code in a cell,
 click the blue play icon (triangle) on the right side of the cell
@@ -180,7 +180,7 @@ match (p:Person) return p
 ```
 
 <img alt="Neo4j Person relationships" class="keep-size"
-  src="/blog/assets/neo4j-person-relationships.png?v=1.1.1">
+  src="/blog/assets/neo4j-person-relationships.png">
 
 The nodes in the diagram can be dragged to new positions
 in order to manually change their layout.
@@ -190,20 +190,20 @@ click the download icon in the upper-right corner of its cell
 and select one of those formats.
 
 <img alt="Neo4j Browser export menu" class="keep-size"
-  src="/blog/assets/neo4j-browser-export-menu.png?v=1.1.1">
+  src="/blog/assets/neo4j-browser-export-menu.png">
 
 In addition to displaying query results as a "Graph",
 they can also be viewed as a "Table", "Text", or "Code"
 by clicking the corresponding buttons on the left side of the cell.
 
 <img alt="Neo4j Browser views" class="keep-size"
-  src="/blog/assets/neo4j-browser-views.png?v=1.1.1">
+  src="/blog/assets/neo4j-browser-views.png">
 
 To temporarily hide a node, click its circle and then
 click the icon containing an eye with a minus sign.
 
 <img alt="Neo4j node selected" class="keep-size"
-  src="/blog/assets/neo4j-node-selected.png?v=1.1.1">
+  src="/blog/assets/neo4j-node-selected.png">
 
 To get only the nodes that have a specific relationship,
 enter a Cypher query like the following:
@@ -213,7 +213,7 @@ match (p1:Person)-[m:father]->(p2:Person) return p1, m, p2
 ```
 
 <img alt="Neo4j father edges" class="keep-size"
-  src="/blog/assets/neo4j-father-edges.png?v=1.1.1">
+  src="/blog/assets/neo4j-father-edges.png">
 
 Let's make this more interesting by adding `Dog` nodes
 and relationships between them and their `Person` owners.
@@ -259,7 +259,7 @@ match (n) return n
 ```
 
 <img alt="Neo4j all nodes" class="keep-size"
-  src="/blog/assets/neo4j-all-nodes.png?v=1.1.1">
+  src="/blog/assets/neo4j-all-nodes.png">
 
 Queries can be more specific. For example:
 
@@ -273,12 +273,12 @@ click the node to display a ring around it
 and then click the graph icon in the ring.
 
 <img alt="Neo4j Amanda with ring" class="keep-size"
-  src="/blog/assets/neo4j-amanda-ring.png?v=1.1.1">
+  src="/blog/assets/neo4j-amanda-ring.png">
 
 The resulting displays is as follows:
 
 <img alt="Neo4j Amanda with links" class="keep-size"
-  src="/blog/assets/neo4j-amanda-with-links.png?v=1.1.1">
+  src="/blog/assets/neo4j-amanda-with-links.png">
 
 Queries on labels are more efficient that queries on properties,
 but adding indexes to properties reduces the performance difference.
@@ -320,16 +320,16 @@ neo4j-admin restore --from={some-directory} --database={db-name}
 TODO: It is possible that different commands are required when using
 TODO: the community version of Neo4j instead of the enterprise version.
 
-For more detail, see [Backup](<https://neo4j.com/docs/operations-manual/current/backup/?v=1.1.1>).
+For more detail, see [Backup](https://neo4j.com/docs/operations-manual/current/backup/).
 
 ## Accessing from a web app
 
-The npm package [neovis.js](<https://github.com/neo4j-contrib/neovis.js?v=1.1.1>)
+The npm package [neovis.js](https://github.com/neo4j-contrib/neovis.js)
 supports rendering diagrams based on Neo4j Cypher queries.
-This builds on the npm package [vis-network](<https://visjs.github.io/vis-network/docs/network/?v=1.1.1>)
+This builds on the npm package [vis-network](https://visjs.github.io/vis-network/docs/network/)
 for the visualization implementation.
 
-For detailed documentation on options, see [vis.js](<https://visjs.github.io/vis-network/docs/network/?v=1.1.1>).
+For detailed documentation on options, see [vis.js](https://visjs.github.io/vis-network/docs/network/).
 
 Here is an example of a simple web page that renders
 the `Person` and `Dog` nodes created earlier.
@@ -414,6 +414,6 @@ the `Person` and `Dog` nodes created earlier.
 This produces a page like the following:
 
 <img alt="neovis page" class="keep-size"
-  src="/blog/assets/neovis-page.png?v=1.1.1">
+  src="/blog/assets/neovis-page.png">
 
 Hover over a node or edge to see its properties in a popup.

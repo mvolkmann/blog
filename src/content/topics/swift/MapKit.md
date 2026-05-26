@@ -7,11 +7,11 @@ layout: topic-layout.njk
 
 ## TODO
 
-Add content from [MapKit Beginner](<https://www.appcoda.com/mapkit-polyline-polygon/?v=1.1.1>)
+Add content from [MapKit Beginner](https://www.appcoda.com/mapkit-polyline-polygon/)
 
 ## Overview
 
-[MapKit](<https://developer.apple.com/documentation/mapkit/?v=1.1.1>)
+[MapKit](https://developer.apple.com/documentation/mapkit/)
 enables embedding maps in apps.
 Users can pan and zoom to adjust their view of the map.
 The maps can contain markers that can be tappable
@@ -19,9 +19,9 @@ to invoke app-specific actions.
 
 ## Resources
 
-- [What](<https://developer.apple.com/videos/play/wwdc2022/10035/?v=1.1.1>) from WWDC 2022
-- [New MapKit Configurations with SwiftUI](<https://holyswift.app/new-mapkit-configurations-with-swiftui/?v=1.1.1>)
-- [Meet MapKit for SwiftUI](<https://developer.apple.com/videos/play/wwdc2023/10043/?v=1.1.1>) from WWDC 2023
+- [What](https://developer.apple.com/videos/play/wwdc2022/10035/) from WWDC 2022
+- [New MapKit Configurations with SwiftUI](https://holyswift.app/new-mapkit-configurations-with-swiftui/)
+- [Meet MapKit for SwiftUI](https://developer.apple.com/videos/play/wwdc2023/10043/) from WWDC 2023
 
 ## Getting Started
 
@@ -38,20 +38,20 @@ To enable use of MapKit in a project:
 
 ## Example App
 
-See the demo apps at [MapKitForSwiftUI](<https://github.com/mvolkmann/MapKitForSwiftUI?v=1.1.1>)
-(iOS 17+) and [swiftui-mapkit](<https://github.com/mvolkmann/swiftui-mapkit?v=1.1.1>).
+See the demo apps at [MapKitForSwiftUI](https://github.com/mvolkmann/MapKitForSwiftUI)
+(iOS 17+) and [swiftui-mapkit](https://github.com/mvolkmann/swiftui-mapkit).
 
 <img alt="MapKit iOS 17+" style="width: 32%"
-  src="/blog/assets/mapkit-initial.jpg?v=1.1.1"
+  src="/blog/assets/mapkit-initial.jpg"
   title="MapKit Initial">
 <img alt="MapKit Initial" style="width: 32%"
-  src="/blog/assets/mapkit-initial.jpg?v=1.1.1"
+  src="/blog/assets/mapkit-initial.jpg"
   title="MapKit Initial">
 <img alt="MapKit Selected Place" style="width: 32%"
-  src="/blog/assets/mapkit-selected-place.jpg?v=1.1.1"
+  src="/blog/assets/mapkit-selected-place.jpg"
   title="MapKit Selected Place">
 <img alt="MapKit Browse Place" style="width: 32%"
-  src="/blog/assets/mapkit-browse-place.jpg?v=1.1.1"
+  src="/blog/assets/mapkit-browse-place.jpg"
   title="MapKit Browse Place">
 
 ## Basic Map Display
@@ -105,7 +105,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
 }
 ```
 
-The [CLLocationCoordinate2D](<https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d?v=1.1.1>) struct from the Core Location framework
+The [CLLocationCoordinate2D](https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d) struct from the Core Location framework
 does not conform to the `Equatable` protocol.
 We need it to do that in order to listen for changes to a location
 using the `onChange` view modifier.
@@ -122,7 +122,7 @@ extension CLLocationCoordinate2D: Equatable {
 }
 ```
 
-The following view displays a [Map](<https://developer.apple.com/documentation/mapkit/map?v=1.1.1>)
+The following view displays a [Map](https://developer.apple.com/documentation/mapkit/map)
 that begins by showing Apple Park.
 The user can tap "Current Location" button
 to obtain their latitude and longitude.
@@ -202,7 +202,7 @@ struct ContentView: View {
 }
 ```
 
-The `Map` view currently lacks many features found in [MKMapView](<https://developer.apple.com/documentation/mapkit/mkmapview?v=1.1.1>).
+The `Map` view currently lacks many features found in [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview).
 One example is the ability to display a satellite view.
 Until `Map` becomes more full-featured,
 it is useful to wrap `MKMapView` in `UIViewRepresentable`
@@ -265,7 +265,7 @@ For example, if r is given in meters then d will be in meters.
 
 ## Map Points
 
-MapKit provides the [MKMapPoint](<https://developer.apple.com/documentation/mapkit/mkmappoint?v=1.1.1>) struct which represents an Earth coordinate
+MapKit provides the [MKMapPoint](https://developer.apple.com/documentation/mapkit/mkmappoint) struct which represents an Earth coordinate
 that has been projected onto a two-dimensional map.
 
 To create an `MKMapPoint` for a given `CLLocationCoordinate2D` object
@@ -297,10 +297,10 @@ let distance = MKMapPoint(coordinate1).distance(to: MKMapPoint(coordinate2))
 ## Annotations
 
 Annotations are markers that are rendered on a map.
-The easiest way to add annotations is to use the provided [MKMarkerAnnotationView](<https://developer.apple.com/documentation/mapkit/mkmarkerannotationview?v=1.1.1>) which displays a pin in a bubble.
+The easiest way to add annotations is to use the provided [MKMarkerAnnotationView](https://developer.apple.com/documentation/mapkit/mkmarkerannotationview) which displays a pin in a bubble.
 
-Custom annotations can be created using [MKAnnotationView](<https://developer.apple.com/documentation/mapkit/mkannotationview?v=1.1.1>).
-See the Swiftful Thinking YouTube video [Custom Map Annotation Pins for SwiftUI MapKit Map](<https://www.youtube.com/watch?v=javFZbCYGfc&v=1.1.1>).
+Custom annotations can be created using [MKAnnotationView](https://developer.apple.com/documentation/mapkit/mkannotationview).
+See the Swiftful Thinking YouTube video [Custom Map Annotation Pins for SwiftUI MapKit Map](https://www.youtube.com/watch?v=javFZbCYGfc).
 
 ## Overlays
 
@@ -308,23 +308,23 @@ Overlays draw on top of a map.
 A common example is drawing route lines that
 indicate how to travel from one location to another.
 
-The provided subclasses of [MKOverlayRenderer](<https://developer.apple.com/documentation/mapkit/mkoverlayrenderer?v=1.1.1>) include:
+The provided subclasses of [MKOverlayRenderer](https://developer.apple.com/documentation/mapkit/mkoverlayrenderer) include:
 
-- [MKCircleRenderer](<https://developer.apple.com/documentation/mapkit/mkcirclerenderer?v=1.1.1>) fills and strokes a circle
-- [MKPolygonRenderer](<https://developer.apple.com/documentation/mapkit/mkpolygonrenderer?v=1.1.1>) fills and strokes a polygon
-- [MKPolylineRenderer](<https://developer.apple.com/documentation/mapkit/mkpolylinerenderer?v=1.1.1>) is like MKPolygonRender but doesn't fill
+- [MKCircleRenderer](https://developer.apple.com/documentation/mapkit/mkcirclerenderer) fills and strokes a circle
+- [MKPolygonRenderer](https://developer.apple.com/documentation/mapkit/mkpolygonrenderer) fills and strokes a polygon
+- [MKPolylineRenderer](https://developer.apple.com/documentation/mapkit/mkpolylinerenderer) is like MKPolygonRender but doesn't fill
   because the shape isn't necessarily closed
-- [MKOverlayPathRenderer](<https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer?v=1.1.1>) renders a shape defined by a CGPath
-- [MKTileOverlayRenderer](<https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer?v=1.1.1>) renders a bitmap image over a map tile
-- [MKGradientPolygonRenderer](<https://developer.apple.com/documentation/mapkit/mkgradientpolygonrenderer?v=1.1.1>) is like MKPolylineRenderer but uses gradient color
-- [MKMultiPolygonRenderer](<https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer?v=1.1.1>) renders multiple polygons
-- [MKMultiPolylineRenderer](<https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer?v=1.1.1>) renders multiple polylines
+- [MKOverlayPathRenderer](https://developer.apple.com/documentation/mapkit/mkoverlaypathrenderer) renders a shape defined by a CGPath
+- [MKTileOverlayRenderer](https://developer.apple.com/documentation/mapkit/mktileoverlayrenderer) renders a bitmap image over a map tile
+- [MKGradientPolygonRenderer](https://developer.apple.com/documentation/mapkit/mkgradientpolygonrenderer) is like MKPolylineRenderer but uses gradient color
+- [MKMultiPolygonRenderer](https://developer.apple.com/documentation/mapkit/mkmultipolygonrenderer) renders multiple polygons
+- [MKMultiPolylineRenderer](https://developer.apple.com/documentation/mapkit/mkmultipolylinerenderer) renders multiple polylines
 
 ## Directions
 
 Driving and walking directions are available in most cities.
 But as of 2022, transit directions are only available in around 80 cities.
-For a list, see [iOS and iPadOS 16 Feature Availability](<https://www.apple.com/ios/feature-availability/#maps-look-around?v=1.1.1>).
+For a list, see [iOS and iPadOS 16 Feature Availability](https://www.apple.com/ios/feature-availability/#maps-look-around).
 Click the "Transit" link in the "Maps" section.
 Transit directions are not currently available in London or Paris.
 Actually I've never been able to get transit directions
@@ -333,7 +333,7 @@ from the `MKDirections` `calculate` method in any city!
 The list also includes many cities outside the U.S.
 such as Berlin, Germany, London, United Kingdom, and Venice, Italy.
 
-The [MKLocalSearch](<https://developer.apple.com/documentation/mapkit/mklocalsearch?v=1.1.1>) class can be used to search for places that match given text
+The [MKLocalSearch](https://developer.apple.com/documentation/mapkit/mklocalsearch) class can be used to search for places that match given text
 and markers for each match can be added to the map.
 
 ## Look Around
@@ -343,7 +343,7 @@ can be added to display street level views.
 See https://developer.apple.com/videos/play/wwdc2022/10035/.
 
 Countries and cities for which Look Around support has been added
-are listed at [iOS and iPadOS 16 Feature Availability](<https://www.apple.com/ios/feature-availability/#maps-look-around?v=1.1.1>).
+are listed at [iOS and iPadOS 16 Feature Availability](https://www.apple.com/ios/feature-availability/#maps-look-around).
 Click the "Look Around" link in the "Maps" section.
 
 The list includes the following U.S. cities:
@@ -377,8 +377,8 @@ This works in iOS Maps app, but doesn't not seem to work in macOS Maps app.
 ## Map vs MKMapView
 
 There are two options for displaying maps.
-UIKit provides [MKMapView](<https://developer.apple.com/documentation/mapkit/mkmapview?v=1.1.1>).
-In iOS 14 MapKit added the SwiftUI view [Map](<https://developer.apple.com/documentation/mapkit/map?v=1.1.1>).
+UIKit provides [MKMapView](https://developer.apple.com/documentation/mapkit/mkmapview).
+In iOS 14 MapKit added the SwiftUI view [Map](https://developer.apple.com/documentation/mapkit/map).
 `Map` only supports a subset of the features available in `MKMapView`.
 For this reason in SwiftUI apps it is often desirable to define a struct that
 conforms to `UIViewRepresentable` and wraps access to a `MKMapView`.
@@ -400,16 +400,16 @@ instead of relying on the default map tiles.
 
 ## Relationships
 
-[MKPlacemark](<https://developer.apple.com/documentation/mapkitjs/place?v=1.1.1>) objects provide a description of a map location.
+[MKPlacemark](https://developer.apple.com/documentation/mapkitjs/place) objects provide a description of a map location.
 This class inherits from the `CLPlacemark` class.
 
-[CLPlacemark](<https://developer.apple.com/documentation/corelocation/clplacemark?v=1.1.1>) objects also provide a description of a map location.
+[CLPlacemark](https://developer.apple.com/documentation/corelocation/clplacemark) objects also provide a description of a map location.
 The `location` property is a `CLLocation`
 
-[CLLocation](<https://developer.apple.com/documentation/corelocation/cllocation?v=1.1.1>) holds latitude, longitude, and course information.
+[CLLocation](https://developer.apple.com/documentation/corelocation/cllocation) holds latitude, longitude, and course information.
 The `coordinate` property has the type `CLLocationCoordinate2D`.
 
-[CLLocationCoordinate2D](<https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d?v=1.1.1>) holds latitude and longitude values.
+[CLLocationCoordinate2D](https://developer.apple.com/documentation/corelocation/cllocationcoordinate2d) holds latitude and longitude values.
 
 MKPlacemark -> CLLocation -> CLLocationCoordinate2D
 
@@ -472,7 +472,7 @@ The `Info.plist` file in one of my apps needed the following
 in order to deploy an archive without warnings:
 
 ```xml
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8">
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>

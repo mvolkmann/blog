@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Realm](<https://realm.io/?v=1.1.1>) is an object database that
+[Realm](https://realm.io/) is an object database that
 can be used by web applications and mobile applications (Android and iOS).
 The data can remain local on each device or it can be synced with the cloud.
 It provides an alternative to SQLite.
@@ -41,10 +41,10 @@ Realm supports database triggers for:
 - data: insert, update, replace, and delete operations
 - scheduled operations similar to CRON
 
-[Realm Studio](<https://www.mongodb.com/docs/realm/studio/?v=1.1.1>)
+[Realm Studio](https://www.mongodb.com/docs/realm/studio/)
 is a visual tool for designing Realm databases and
 adding, viewing, and editing data.
-It is similar to [Compass](<https://www.mongodb.com/products/compass?v=1.1.1>) for MongoDB databases.
+It is similar to [Compass](https://www.mongodb.com/products/compass) for MongoDB databases.
 
 Realm Studio provides two-way live updates.
 Changes made in the Realm Studio appear in running apps
@@ -52,7 +52,7 @@ and changes made in running apps appear in Realm Studio.
 
 ## Setup
 
-1. Browse [MongoDB Cloud Services](<https://www.mongodb.com/cloud?v=1.1.1>).
+1. Browse [MongoDB Cloud Services](https://www.mongodb.com/cloud).
 1. Click "Try Free".
 1. Enter the required information to create an Atlas account.
 1. Click the "Build a Database" button.

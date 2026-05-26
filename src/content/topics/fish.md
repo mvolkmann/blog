@@ -36,4 +36,4 @@ string operations, and so on.
 If writing scripts in other shells has felt tedious in the past,
 this is your chance to learn a shell that makes scripting easier!
 
-See my Object Computing (OCI) article [The fish Shell](<https://objectcomputing.com/resources/publications/sett/november-2017-sett-article-fish-shell?v=1.1.1>).
+See my Object Computing (OCI) article [The fish Shell](https://objectcomputing.com/resources/publications/sett/november-2017-sett-article-fish-shell).

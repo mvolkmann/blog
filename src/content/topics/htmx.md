@@ -16,12 +16,12 @@ layout: topic-layout.njk
 
 <figure style="width: 60%">
   <img alt="htmx logo" style="border: 0"
-    src="/blog/assets/htmx-logo.png?v=1.1.1">
+    src="/blog/assets/htmx-logo.png">
 </figure>
 
 ## Overview
 
-[Htmx](<https://htmx.org?v=1.1.1>)
+[Htmx](https://htmx.org)
 is a hypermedia-oriented, client-side JavaScript library.
 Hypermedia is any data format that can describe
 branching from one "media" (ex. a document) to another.
@@ -42,7 +42,7 @@ Htmx removes the need to serialize data to JSON on the server,
 parse the JSON on the client, and build an HTML representation from the data.
 
 <img alt="hypermedia driven applications" style="border: none; width: 70%"
-  src="/blog/assets/hypermedia-driven-applications.png?v=1.1.1">
+  src="/blog/assets/hypermedia-driven-applications.png">
 
 The server endpoints can be implemented using
 any programming language and server framework.
@@ -206,15 +206,15 @@ for achieving other goals such as the ones described above.
 
 ## History and Future
 
-Htmx was created by [Carson Gross](<https://bigsky.software/cv/?v=1.1.1>). He is a principal software engineer at
-[Big Sky Software](<https://bigsky.software/?v=1.1.1>)
+Htmx was created by [Carson Gross](https://bigsky.software/cv/). He is a principal software engineer at
+[Big Sky Software](https://bigsky.software/)
 and a part-time Computer Science instructor at Montana State University.
 
 Carson been working on the approach of simplifying web development
 by adding attributes to HTML for a long time.
 
 The predecessor of htmx, also created by Carson Gross,
-is [intercooler.js](<https://intercoolerjs.org?v=1.1.1>).
+is [intercooler.js](https://intercoolerjs.org).
 Work on intercooler.js began in 2013
 and the first version was released in April 2014.
 Intercooler had a dependency on jQuery, but htmx does not.
@@ -227,11 +227,11 @@ Htmx has an extensive set of integration tests implemented in Mocha.
 
 Interest in htmx exploded in 2023 after YouTube videos
 from ThePrimeagen and Fireship were released.
-See [htmx](<https://www.youtube.com/watch?v=zjHHIqI9lUY&v=1.1.1>) and
-[htmx in 100 seconds](<https://www.youtube.com/watch?v=r-GSGH2RxJs&v=1.1.1>).
+See [htmx](https://www.youtube.com/watch?v=zjHHIqI9lUY) and
+[htmx in 100 seconds](https://www.youtube.com/watch?v=r-GSGH2RxJs).
 
 Htmx had a strong showing in the 2023 JavaScript Rising Stars results.
-See [Front-end Frameworks](<https://risingstars.js.org/2023/en#section-framework?v=1.1.1>).
+See [Front-end Frameworks](https://risingstars.js.org/2023/en#section-framework).
 
 Htmx 2.0 is expected in early 2024.
 It will remove legacy support for things like IE,
@@ -244,7 +244,7 @@ Carson Gross wishes that the functionality of htmx would be folded into HTML,
 making htmx unnecessary.
 
 Companies that sponsor the development of htmx are listed on the
-[htmx home page](<https://htmx.org?v=1.1.1>).
+[htmx home page](https://htmx.org).
 They include GitHub and JetBrains.
 
 ## REST
@@ -261,9 +261,9 @@ and breaks if the endpoints change to return different data.
 Many developers refer to this architecture as "REST".
 
 This is not what Roy Fielding had in mind
-when he wrote his famous PhD dissertation "[Architectural Styles and the Design of Network-based Software Architectures](<https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf?v=1.1.1>)"
+when he wrote his famous PhD dissertation "[Architectural Styles and the Design of Network-based Software Architectures](https://ics.uci.edu/~fielding/pubs/dissertation/fielding_dissertation.pdf)"
 that gave birth to REST.
-Roy has been [quoted](<https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven?v=1.1.1>) saying "I am getting frustrated by
+Roy has been [quoted](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven) saying "I am getting frustrated by
 the number of people calling any HTTP-based interface a REST API.
 ... That is RPC."
 
@@ -287,7 +287,7 @@ A uniform interface is one where:
 ## HATEOAS
 
 "Hypermedia As The Engine Of Application State"
-([HATEOAS](<https://htmx.org/essays/hateoas/?v=1.1.1>)) is
+([HATEOAS](https://htmx.org/essays/hateoas/)) is
 a specific use of the REST architecture where services return hypermedia.
 The acronym HATEOAS does not appear in the dissertation,
 but its concepts are discussed.
@@ -397,10 +397,10 @@ get new HTML updates to the UI.
 
 One way to achieve this is to use a service worker
 to intercept and process HTTP requests.
-For an example of this approach, see [htmx-offline](<https://github.com/mvolkmann/htmx-offline?v=1.1.1>).
+For an example of this approach, see [htmx-offline](https://github.com/mvolkmann/htmx-offline).
 
 An effort is underway to address offline usage of htmx at
-[htmx-offline-mode](<https://github.com/spirodonfl/htmx-offline-mode?v=1.1.1>).
+[htmx-offline-mode](https://github.com/spirodonfl/htmx-offline-mode).
 
 ## Choosing a Stack
 
@@ -424,7 +424,7 @@ Good choices make it easy to do the following:
   Request data includes request headers, path parameters, query parameters,
   and request bodies that can contain text, form data, JSON.
   An example is the TypeScript library
-  [Zod](<https://zod.dev?v=1.1.1>).
+  [Zod](https://zod.dev).
 
 - Get request data in the form of request headers, path parameters,
   query parameters, and request bodies that can contain text, form data, JSON.
@@ -441,7 +441,7 @@ Good choices have tooling that supports the following:
   rather than relying on string concatenation.
   JSX is an XML-based syntax popularized by the React framework
   for embedding HTML-like syntax directly in JavaScript code.
-  Another option to consider is my library [js2htmlstr](<https://www.npmjs.com/package/js2htmlstr?v=1.1.1>).
+  Another option to consider is my library [js2htmlstr](https://www.npmjs.com/package/js2htmlstr).
 - Syntax highlighting of HTML in code editors.
 
 One tech stack that meets all these criteria includes the following:
@@ -459,17 +459,17 @@ performance of Bun/Hono, and the simplicity of Hono
 which supports defining endpoints with very little code.
 
 <img alt="htmx plus Bun" style="width: 40%"
-  src="/blog/assets/htmx-plus-bun.jpg?v=1.1.1">
+  src="/blog/assets/htmx-plus-bun.jpg">
 
 Other popular tech stacks for htmx include:
 
-- [AHA stack](<https://ahastack.dev?v=1.1.1>)
-  which uses Astro, htmx, and [AlpineJS](</blog/topics/#/blog/alpine/?v=1.1.1>)
-- [BETH stack](<https://github.com/ethanniser/the-beth-stack?v=1.1.1>) which uses Bun, Elysia, Turso, and htmx.
-- Go with [templ](<https://templ.guide?v=1.1.1>)
+- [AHA stack](https://ahastack.dev)
+  which uses Astro, htmx, and [AlpineJS](/blog/topics/#/blog/alpine/)
+- [BETH stack](https://github.com/ethanniser/the-beth-stack) which uses Bun, Elysia, Turso, and htmx.
+- Go with [templ](https://templ.guide)
 - Python with Flask (see the `render_template` function) or
   Django (see the `loader.get_template` and `template.render` methods)
-- [Hype](<https://github.com/stolinski/hype?v=1.1.1>)
+- [Hype](https://github.com/stolinski/hype)
   which uses TypeScript, Bun, Elysia, SQLite, and Drizzle.
 
 One downside of having many options is that there are no canonical examples
@@ -565,8 +565,8 @@ for every user interaction.
 For user interactions that do not require server-side updates,
 consider using HTML elements such as `details` and `dialog`.
 Also consider client-side scripting options including vanilla JavaScript,
-[AlpineJS](</blog/topics/#/blog/alpine/?v=1.1.1>), and
-[_hyperscript](</blog/topics/#/blog/hyperscript/?v=1.1.1>).
+[AlpineJS](/blog/topics/#/blog/alpine/), and
+[_hyperscript](/blog/topics/#/blog/hyperscript/).
 All of these support updating the UI by performing DOM manipulations.
 
 Alpine adds support for many new HTML attributes.
@@ -623,7 +623,7 @@ There are three ways to use htmx.
 
 1. Download htmx as a single, minified JavaScript file
    by clicking the "~14k min.gz’d" link near the top of the
-   [htmx home page](<https://htmx.org?v=1.1.1>).
+   [htmx home page](https://htmx.org).
    Place the downloaded file in a directory whose files are served by
    your application server and include a `script` tag like the following:
 
@@ -660,7 +660,7 @@ add the following `meta` tag in the `head` tag of all pages.
 <meta name="htmx-config" content='{"timeout": 2000}' />
 ```
 
-To set a timeout to be used for a specific request, add the [hx-request](<https://htmx.org/attributes/hx-request/?v=1.1.1>) attribute.
+To set a timeout to be used for a specific request, add the [hx-request](https://htmx.org/attributes/hx-request/) attribute.
 This attribute is inherited by all descendant elements, so it can be placed
 on the element that triggers the request OR on any of its ancestor elements.
 
@@ -807,7 +807,7 @@ The steps to do this are as follows:
    it defaults to looking in the `public` directory,
    but it actual defaults to looking in the root directory
    and I haven't found a way to change that.
-   See this [issue](<https://github.com/elysiajs/elysia/issues/352?v=1.1.1>).
+   See this [issue](https://github.com/elysiajs/elysia/issues/352).
 
 This also requires enabling serving static files with the following steps:
 
@@ -904,11 +904,11 @@ Interacting with any HTML element can trigger an HTTP request.
 The following attributes all specify the URL
 to which a specific kind of HTTP request should be sent
 when the user triggers the element:
-[hx-get](<https://htmx.org/attributes/hx-get/?v=1.1.1>),
-[hx-post](<https://htmx.org/attributes/hx-post/?v=1.1.1>),
-[hx-put](<https://htmx.org/attributes/hx-put/?v=1.1.1>),
-[hx-patch](<https://htmx.org/attributes/hx-patch/?v=1.1.1>), and
-[hx-delete](<https://htmx.org/attributes/hx-delete/?v=1.1.1>).
+[hx-get](https://htmx.org/attributes/hx-get/),
+[hx-post](https://htmx.org/attributes/hx-post/),
+[hx-put](https://htmx.org/attributes/hx-put/),
+[hx-patch](https://htmx.org/attributes/hx-patch/), and
+[hx-delete](https://htmx.org/attributes/hx-delete/).
 
 When an HTTP request is triggered on a `form` element,
 the values of all inputs inside the form will be included in the request.
@@ -921,17 +921,17 @@ the element that triggered the request is included.
 
 To include the values of additional form elements
 that are outside the `form` (or when no `form` is used),
-add the [hx-include](<https://htmx.org/attributes/hx-include/?v=1.1.1>) attribute.
+add the [hx-include](https://htmx.org/attributes/hx-include/) attribute.
 Its value is a comma-separated list of CSS selectors,
 include the relative values described in the "Targets" section.
 
-See the working example project that uses `hx-include` at [non-form-submit](<https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit?v=1.1.1>).
+See the working example project that uses `hx-include` at [non-form-submit](https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit).
 
 To omit the values of some of the form elements
 that are inside the form, add the `hx-params` attribute.
-For more detail, see [hx-params](<https://htmx.org/attributes/hx-params/?v=1.1.1>).
+For more detail, see [hx-params](https://htmx.org/attributes/hx-params/).
 
-The [hx-sync](<https://htmx.org/attributes/hx-sync/?v=1.1.1>)
+The [hx-sync](https://htmx.org/attributes/hx-sync/)
 attribute coordinates concurrent requests.
 For example, entering data in an `input` that is inside a `form`
 could trigger two requests, one to validate the `input` value
@@ -962,13 +962,13 @@ The confirmation dialog is very plain and cannot be styled.
 It may be preferable to use a dialog that can be styled,
 perhaps using the HTML `dialog` element.
 Another option is to use a dialog library like
-[sweetalert2](<https://sweetalert2.github.io?v=1.1.1>).
+[sweetalert2](https://sweetalert2.github.io).
 
 The following code demonstrates using using `hx-confirm`
 with a sweetalert2 confirmation dialog.
 
 <img alt="htmx hx-confirm with sweetalert2" style="width: 60%"
-  src="/blog/assets/htmx-hx-confirm-sweetalert2.png?v=1.1.1">
+  src="/blog/assets/htmx-hx-confirm-sweetalert2.png">
 
 ```js
 <html>
@@ -983,7 +983,7 @@ with a sweetalert2 confirmation dialog.
         Swal.fire({
           icon: 'question',
           title: 'Confirm Action',
-          text: 'Are you sure you want to do this?',
+          text: 'Are you sure you want to do this',
           showCancelButton: true,
           cancelButtonText: 'No way!',
           confirmButtonText: 'Yes, do it!'
@@ -997,7 +997,7 @@ with a sweetalert2 confirmation dialog.
   </head>
   <body>
     <button
-      hx-confirm="Are you sure you want to do this?"
+      hx-confirm="Are you sure you want to do this"
       hx-get="/pokemon"
       hx-indicator=".htmx-indicator"
       hx-target="#pokemon-list"
@@ -1051,17 +1051,17 @@ This CSP says:
 With this CSP in place, all JavaScript libraries including htmx
 will need to be downloaded and served from the web app domain.
 
-For more detail on what can be specified in a CSP, see the MDN [Content-Security-Policy](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy?v=1.1.1>) page.
+For more detail on what can be specified in a CSP, see the MDN [Content-Security-Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) page.
 
 ### Sanitizing HTML
 
-A good library for sanitizing HTML is [sanitize-html](<https://github.com/apostrophecms/sanitize-html?v=1.1.1>).
+A good library for sanitizing HTML is [sanitize-html](https://github.com/apostrophecms/sanitize-html).
 This provides the function `sanitizeHtml` which
 strips out all elements that are not in an approved list.
 The `script` element is not in the approved list
 because they may do malicious things.
 
-See the working example project at [sanitizing-html](<https://github.com/mvolkmann/htmx-examples/tree/main/sanitizing-html?v=1.1.1>).
+See the working example project at [sanitizing-html](https://github.com/mvolkmann/htmx-examples/tree/main/sanitizing-html).
 
 The following are the relevant lines of code from that project.
 
@@ -1123,14 +1123,14 @@ Supported values include:
 - `none`: do not change the DOM; new content is not used
 
 <img alt="hx-swap" style="width: 80%"
-  src="/blog/assets/htmx-hx-swap.png?v=1.1.1">
+  src="/blog/assets/htmx-hx-swap.png">
 
 The `hx-swap` attribute also supports the following space-separated modifiers:
 
 - `focus-scroll`: enables scrolling to a focused input
 - `ignoreTitle`: disables default behavior of updating the page title when the content contains a `title` element
 - `scroll`: smoothly scrolls the page to the `top` or `bottom` of the target element or a specified element
-- `settle`: specifies the time between the swap and settle (?) logic
+- `settle`: specifies the time between the swap and settle () logic
 - `show`: abruptly scrolls the page to the `top` or `bottom` of the target element or a specified element
 - `swap`: specifies time to wait after receiving new content before swapping/inserting it
 - `transition`: uses the View Transitions API
@@ -1220,7 +1220,7 @@ Much of it will likely be identical to what is already rendered.
 ### Out-of-band Updates
 
 Top-level HTML elements in endpoint responses can include the
-[hx-swap-oob](<https://htmx.org/attributes/hx-swap-oob/?v=1.1.1>) attribute.
+[hx-swap-oob](https://htmx.org/attributes/hx-swap-oob/) attribute.
 This attribute typical has the value `"true"` which specifies that
 an element with the same id should be replaced by this element.
 The elements being replaced do not need to have the `hx-swap-oob` attribute,
@@ -1242,7 +1242,7 @@ the following in addition to any other HTML they need to return.
 </p>
 ```
 
-The [hx-select-oob](<https://htmx.org/attributes/hx-select-oob/?v=1.1.1>) attribute provides a list of CSS selectors
+The [hx-select-oob](https://htmx.org/attributes/hx-select-oob/) attribute provides a list of CSS selectors
 that specify elements in the response to be included out-of-band.
 It provides a way to only use a subset of the elements in the response
 that have the `hx-swap-oob` attributes.
@@ -1250,7 +1250,7 @@ The `hx-select-oob` attribute is typically used together with
 the `hx-select` attribute which also provides a list of CSS selectors,
 but those specify a subset the elements to be included at the target location.
 
-The [multi-swap](<https://htmx.org/extensions/multi-swap/?v=1.1.1>)
+The [multi-swap](https://htmx.org/extensions/multi-swap/)
 extension supports more advanced use cases.
 
 ### Custom Events
@@ -1285,7 +1285,7 @@ because `load` is also one of the triggers.
 <p hx-get="/todos/status" hx-trigger="load, status-change from:body" />
 ```
 
-See the working example project at [todo-hono](<https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono?v=1.1.1>).
+See the working example project at [todo-hono](https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono).
 This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
@@ -1304,10 +1304,10 @@ For example:
 <table hx-get="/weather/forecast" hx-trigger="revealed"></table>
 ```
 
-See the working example project at [lazy-load](<https://github.com/mvolkmann/htmx-examples/tree/main/lazy-load?v=1.1.1>).
+See the working example project at [lazy-load](https://github.com/mvolkmann/htmx-examples/tree/main/lazy-load).
 
 <img alt="htmx Lazy Loading" style="width: 70%"
-  src="/blog/assets/htmx-lazy-loading.png?v=1.1.1">
+  src="/blog/assets/htmx-lazy-loading.png">
 
 The following HTML appears near the bottom of the page
 so it is out of view when the page is first loaded.
@@ -1375,7 +1375,7 @@ The returned string is used at the content of the `span` element
 that follows the `input` element.
 
 <img alt="htmx Input Validation" style="width: 50%"
-  src="/blog/assets/htmx-input-validation.png?v=1.1.1">
+  src="/blog/assets/htmx-input-validation.png">
 
 ```html
 <label for="email">Email</label>
@@ -1390,7 +1390,7 @@ that follows the `input` element.
 <span class="error" id="email-error" />
 ```
 
-See the working example project at [email-validation](<https://github.com/mvolkmann/htmx-examples/tree/main/email-validation?v=1.1.1>).
+See the working example project at [email-validation](https://github.com/mvolkmann/htmx-examples/tree/main/email-validation).
 
 ### Deleting an Element
 
@@ -1402,7 +1402,7 @@ so the todo can be deleted on the server.
 Then the row describing the todo should be removed from the DOM.
 
 <img alt="htmx Todo App" style="width: 50%"
-  src="/blog/assets/htmx-todo-app.png?v=1.1.1">
+  src="/blog/assets/htmx-todo-app.png">
 
 The following HTML is used to describe each todo.
 Note the use of `hx-swap="delete"` and `hx-target="closest div"`
@@ -1432,7 +1432,7 @@ return any HTML and the `div` that contains the `button` will be deleted.
 </div>
 ```
 
-See the working example project at [todo-hono](<https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono?v=1.1.1>).
+See the working example project at [todo-hono](https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono).
 This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
@@ -1497,7 +1497,7 @@ until the CSS transition has time to complete.
 ```js
 <button
   class="plain"
-  hx-confirm="Are you sure?"
+  hx-confirm="Are you sure"
   hx-delete={`/todos/${id}`}
   hx-swap="outerHTML swap:1s"
   hx-target="closest div"
@@ -1526,7 +1526,7 @@ The following CSS are rules are all that is required to fade it into view.
 ```
 
 For another example of using a CSS transition, see the working project
-[progress-bar](<https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar?v=1.1.1>).
+[progress-bar](https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar).
 This repeatedly renders an element with a fixed `id` value
 and achieves smooth animation using a CSS transition.
 
@@ -1584,7 +1584,7 @@ Those replace the current content (`innerHTML`) of the
 unordered list (`ul`) element with an id of "matches".
 
 <img alt="htmx Active Search" style="width: 30%"
-  src="/blog/assets/htmx-active-search.png?v=1.1.1">
+  src="/blog/assets/htmx-active-search.png">
 
 ```html
 <html>
@@ -1652,7 +1652,7 @@ app.post('/search', async (c: Context) => {
 export default app;
 ```
 
-The full project can be found in [GitHub](<https://github.com/mvolkmann/bun-examples/tree/main/active-search?v=1.1.1>).
+The full project can be found in [GitHub](https://github.com/mvolkmann/bun-examples/tree/main/active-search).
 
 ### Optimistic Updates
 
@@ -1671,7 +1671,7 @@ The following HTML renders a table of dog breeds.
 The table rows are inserted by sending a GET request to the `/dogs` endpoint
 as soon as the table becomes visible.
 
-The "Like?" column displays a colored heart that is
+The "Like" column displays a colored heart that is
 red the user likes the dog breed and white if they do not.
 All the breeds begin not being liked.
 
@@ -1684,7 +1684,7 @@ That endpoint returns a new heart that will be either red or white
 and that replaces the pink heart that was temporarily displayed.
 
 <img alt="htmx Optimistic Updates" style="width: 30%"
-  src="/blog/assets/htmx-optimistic-updates.png?v=1.1.1">
+  src="/blog/assets/htmx-optimistic-updates.png">
 
 ```js
 <html>
@@ -1785,11 +1785,11 @@ app.put('/dog/:breed', async (c: Context) => {
 export default app;
 ```
 
-See the working example project at [optimistic-updates](<https://github.com/mvolkmann/bun-examples/tree/main/optimistic-updates?v=1.1.1>).
+See the working example project at [optimistic-updates](https://github.com/mvolkmann/bun-examples/tree/main/optimistic-updates).
 
 ### Pagination
 
-See the working example project at [pagination](<https://github.com/mvolkmann/htmx-examples/tree/main/pagination?v=1.1.1>).
+See the working example project at [pagination](https://github.com/mvolkmann/htmx-examples/tree/main/pagination).
 
 This example initially renders the following HTML which includes
 the initial `table`, loaded with the first "page" of rows.
@@ -1849,11 +1849,11 @@ return (
 ```
 
 <img alt="htmx Pagination" style="width: 30%"
-  src="/blog/assets/htmx-pagination.png?v=1.1.1">
+  src="/blog/assets/htmx-pagination.png">
 
 ### Infinite Scroll
 
-See the working example project at [infinite-scroll](<https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll?v=1.1.1>).
+See the working example project at [infinite-scroll](https://github.com/mvolkmann/htmx-examples/tree/main/infinite-scroll).
 
 This example renders the following HTML which includes a `table`
 and a loading spinner that is only displayed when waiting on an HTTP response.
@@ -1926,7 +1926,7 @@ function TableRow(page: number, pokemon: Pokemon, isLast: boolean) {
 ```
 
 <img alt="htmx Infinite Scroll" style="width: 30%"
-  src="/blog/assets/htmx-infinite-scroll.png?v=1.1.1">
+  src="/blog/assets/htmx-infinite-scroll.png">
 
 ### Toggling Selection
 
@@ -1938,7 +1938,7 @@ This code uses TypeScript and the
 but the same pattern can be applied with other languages and libraries.
 
 <img alt="htmx Toggling Selection" style="width: 60%"
-  src="/blog/assets/htmx-toggling-selection.png?v=1.1.1">
+  src="/blog/assets/htmx-toggling-selection.png">
 
 ```js
 import {Hono} from 'hono';
@@ -2034,7 +2034,7 @@ Two polling approaches supported by htmx are
 
 Fixed rate polling sends requests at regular intervals.
 
-See the working example of fixed rate polling at [fixed-rate-polling](<https://github.com/mvolkmann/htmx-examples/tree/main/fixed-rate-polling?v=1.1.1>).
+See the working example of fixed rate polling at [fixed-rate-polling](https://github.com/mvolkmann/htmx-examples/tree/main/fixed-rate-polling).
 
 This example renders the following HTML
 which reports the current score of an NFL game.
@@ -2045,7 +2045,7 @@ returning a status code of 286 which is not a standard code.
 This is done when the score of either team exceeds 30.
 
 <img alt="htmx Fixed Rate Polling" style="width: 30%"
-  src="/blog/assets/htmx-fixed-rate-polling.png?v=1.1.1">
+  src="/blog/assets/htmx-fixed-rate-polling.png">
 
 ```js
 app.get('/', () => {
@@ -2089,12 +2089,12 @@ app.get('/score', async () => {
 Load polling sends a single request and then sends another
 after the HTML response from the previous request is loaded.
 
-See the working example of load polling at [progress-bar](<https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar?v=1.1.1>).
+See the working example of load polling at [progress-bar](https://github.com/mvolkmann/htmx-examples/tree/main/progress-bar).
 This also demonstrates repeatedly rendering an element with a fixed `id` value
 and achieving smooth animation using a CSS transition.
 
 <img alt="htmx Load Polling" style="width: 100%"
-  src="/blog/assets/htmx-load-polling.png?v=1.1.1">
+  src="/blog/assets/htmx-load-polling.png">
 
 The following HTML renders a progress bar.
 
@@ -2220,7 +2220,7 @@ Parameters can also be removed or modified, but that seems less useful.
 The values of `event.detail.target` and `event.detail.verb`
 can also be modified, but both seem like odd things to do.
 
-See the working example at [token-header](<https://github.com/mvolkmann/htmx-examples/tree/main/token-header?v=1.1.1>).
+See the working example at [token-header](https://github.com/mvolkmann/htmx-examples/tree/main/token-header).
 
 ### Click to Edit
 
@@ -2257,12 +2257,12 @@ While both a text description AND a text `input` are present in the DOM,
 at any point in time only one of them should be rendered.
 The other will have the CSS property `display: none` applied to it.
 
-See the working example at [todo-hono](<https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono?v=1.1.1>).
+See the working example at [todo-hono](https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono).
 This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
 <img alt="htmx Todo App" style="width: 50%"
-  src="/blog/assets/htmx-todo-app.png?v=1.1.1">
+  src="/blog/assets/htmx-todo-app.png">
 
 The Alpine directives `x-bind`, `x-data`, `x-on`, and `x-show`
 are used in `src/components.tsx`.
@@ -2278,7 +2278,7 @@ It can, for example, change whenever the value of an Alpine variable changes.
 The three approaches shown below all uses the following UI.
 
 <img alt="htmx dynamic endpoint" style="width: 50%"
-  src="/blog/assets/htmx-dynamic-endpoint.png?v=1.1.1">
+  src="/blog/assets/htmx-dynamic-endpoint.png">
 
 The following code implements the server and
 the endpoint that will be invoked by `hx-get`.
@@ -2429,7 +2429,7 @@ that is accessible to the `setPath` function.
 In some cases it is useful to have endpoints that return the same data,
 but different formats ... such as HTML versus JSON.
 
-The [todo-hono](<https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono?v=1.1.1>) app does this for retrieving all the current todos.
+The [todo-hono](https://github.com/mvolkmann/htmx-examples/tree/main/todo-hono) app does this for retrieving all the current todos.
 This uses <a href="/blog/topics/#/blog/bun/" target="_blank">Bun</a> and
 the <a href="/blog/topics/#/blog/hono/" target="_blank">Hono</a> framework.
 
@@ -2514,7 +2514,7 @@ HTTP header names are case-insensitive.
 An endpoint can cause a client-side redirection
 by including the `HX-Location` response header.
 
-See the working example at [redirection](<https://github.com/mvolkmann/htmx-examples/tree/main/redirection?v=1.1.1>).
+See the working example at [redirection](https://github.com/mvolkmann/htmx-examples/tree/main/redirection).
 
 The following endpoint receives a number in the `value` body property.
 It doubles the value and returns it.
@@ -2552,27 +2552,27 @@ This enables writing JavaScript functions that act like React components
 (minus support for hooks and DOM diffing), taking props and returning JSX.
 
 Bun can be combined with a server framework like
-[Hono](<https://hono.dev?v=1.1.1>) and
-[Elysia](<https://elysiajs.com?v=1.1.1>).
+[Hono](https://hono.dev) and
+[Elysia](https://elysiajs.com).
 
 For a potential solution, see
 <a href="/blog/alpine#components" target="_blank">Components</a>.
 
 ## Events
 
-The [hx-on](<https://htmx.org/docs/#hx-on?v=1.1.1>) attribute
+The [hx-on](https://htmx.org/docs/#hx-on) attribute
 supports handling of more types of events
 than the HTML `on*` attributes such as `onclick`.
 It provides a small subset of the capabilities in
-[Alpine](<https://alpinejs.dev?v=1.1.1>) and
-[_hyperscript](<https://hyperscript.org?v=1.1.1>)
+[Alpine](https://alpinejs.dev) and
+[_hyperscript](https://hyperscript.org)
 which can be used in place of this attribute.
 
 ## Validation
 
 TODO: Try this.
 
-The [hx-validate](<https://htmx.org/attributes/hx-validate/?v=1.1.1>) attribute causes an element to validate itself
+The [hx-validate](https://htmx.org/attributes/hx-validate/) attribute causes an element to validate itself
 using the HTML5 Validation API before a request is sent.
 This occurs by default for `form` elements,
 but not for `input`, `textarea`, and `select`elements.
@@ -2589,7 +2589,7 @@ When an anchor is clicked, a GET request is sent.
 When a `form` is submitted, a GET or POST request
 (depending on the `method` attribute value) is sent.
 
-The [hx-boost](<https://htmx.org/attributes/hx-boost/?v=1.1.1>)
+The [hx-boost](https://htmx.org/attributes/hx-boost/)
 attribute can be added to any element.
 This changes descendant anchor and `form` elements
 that do not have attributes like `hx-get` or `hx-post`
@@ -2615,11 +2615,11 @@ Note that many features of htmx will not work if JavaScript is disable.
 
 ## Other Attributes
 
-- [hx-disinherit](<https://htmx.org/attributes/hx-disinherit/?v=1.1.1>)
+- [hx-disinherit](https://htmx.org/attributes/hx-disinherit/)
 
-- [hx-encoding](<https://htmx.org/attributes/hx-encoding/?v=1.1.1>)
+- [hx-encoding](https://htmx.org/attributes/hx-encoding/)
 
-- [hx-vals](<https://htmx.org/attributes/hx-vals/?v=1.1.1>)
+- [hx-vals](https://htmx.org/attributes/hx-vals/)
 
   This specifies additional, static data to be passed in HTTP requests.
   The value is string representing a JSON object.
@@ -2632,9 +2632,9 @@ Note that many features of htmx will not work if JavaScript is disable.
   The values will be passed a query parameters for GET requests
   and in the request body for all other kinds of requests.
 
-  See the working example project that uses `hx-vals` at [non-form-submit](<https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit?v=1.1.1>).
+  See the working example project that uses `hx-vals` at [non-form-submit](https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit).
 
-- [hx-vars](<https://htmx.org/attributes/hx-vars/?v=1.1.1>)
+- [hx-vars](https://htmx.org/attributes/hx-vars/)
 
 ## JavaScript API
 
@@ -2751,12 +2751,12 @@ export default app;
 The following screenshot shows the UI after the first button click.
 
 <img alt="htmx ajax function" style="width: 50%"
-  src="/blog/assets/htmx-ajax-function-1.png?v=1.1.1">
+  src="/blog/assets/htmx-ajax-function-1.png">
 
 The following screenshot shows the UI after the fourth button click.
 
 <img alt="htmx ajax function" style="width: 50%"
-  src="/blog/assets/htmx-ajax-function-4.png?v=1.1.1">
+  src="/blog/assets/htmx-ajax-function-4.png">
 
 See <a href="https://htmx.org/api/#ajax" target="_blank">htmx-ajax</a>
 for details on the arguments that can be passed to this function.
@@ -2824,7 +2824,7 @@ TODO: Try this.
 
 ## WebSockets
 
-The [htmx web-sockets](<https://htmx.org/extensions/web-sockets/?v=1.1.1>) extension adds the ability to connect to a
+The [htmx web-sockets](https://htmx.org/extensions/web-sockets/) extension adds the ability to connect to a
 WebSocket server, send messages to it,
 and insert responses into the current page.
 It is defined by a separate JavaScript file
@@ -2920,7 +2920,7 @@ The code below listens for the `htmx:wsAfterSend` event
 in order to reset the `form` which clears the `input`.
 
 <img alt="htmx WebSockets" style="width: 50%"
-  src="/blog/assets/htmx-websockets.png?v=1.1.1">
+  src="/blog/assets/htmx-websockets.png">
 
 ```js
 <html>
@@ -2950,11 +2950,11 @@ in order to reset the `form` which clears the `input`.
 </html>
 ```
 
-See the working example project that includes the code above at [websocket-examples](<https://github.com/mvolkmann/websocket-examples?v=1.1.1>).
+See the working example project that includes the code above at [websocket-examples](https://github.com/mvolkmann/websocket-examples).
 
 ## Server-Sent Events
 
-The htmx [server-sent-events](<https://htmx.org/extensions/server-sent-events/?v=1.1.1>) extension adds the ability to listen for
+The htmx [server-sent-events](https://htmx.org/extensions/server-sent-events/) extension adds the ability to listen for
 <a href="/blog/topics/#/blog/server-sent-events/"
 target="_blank">Server-Sent Events</a> (SSE).
 It is defined by a separate JavaScript file
@@ -3062,7 +3062,7 @@ app.get('/sse', (c: Context) => {
 export default app;
 ```
 
-See the working example project that includes the code above at [websocket-examples](<https://github.com/mvolkmann/websocket-examples?v=1.1.1>).
+See the working example project that includes the code above at [websocket-examples](https://github.com/mvolkmann/websocket-examples).
 
 ## Browser History
 
@@ -3079,11 +3079,11 @@ The value of this attribute can be:
 - `"false"` to avoid creating an entry when
   the value `"true"` would be inherited from an ancestor element
 
-See the working example project that uses `hx-push-url` at [non-form-submit](<https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit?v=1.1.1>).
+See the working example project that uses `hx-push-url` at [non-form-submit](https://github.com/mvolkmann/htmx-examples/tree/main/non-form-submit).
 
 ## \_hyperscript
 
-[_hyperscript](<https://hyperscript.org?v=1.1.1>) is
+[_hyperscript](https://hyperscript.org) is
 "an easy & approachable language for modern web front-ends".
 It can be used in conjunction with htmx.
 
@@ -3106,37 +3106,37 @@ _="on submit target.reset()"
 
 The hypermedia approach used by htmx to build web applications
 can also be used to build mobile apps.
-See [Hyperview](<https://hyperview.org?v=1.1.1>)
+See [Hyperview](https://hyperview.org)
 which builds on React Native.
 
-Another option is to build a [Progressive Web App](</blog/topics/#/blog/progressive-web-apps?v=1.1.1>) (PWA).
+Another option is to build a [Progressive Web App](/blog/topics/#/blog/progressive-web-apps) (PWA).
 
 For PWAs that hold all their data on the device using localStorage or
-[IndexedDB](</blog/topics/#/blog/indexeddb?v=1.1.1>),
+[IndexedDB](/blog/topics/#/blog/indexeddb),
 there is no need for user authentication.
 The endpoints used by htmx to get HTML snippets
 can be managed by a service worker which intercepts fetch requests
 and runs local JavaScript code to build responses.
-For an example of this approach, see [pwa-cloudflare-demo](<https://github.com/mvolkmann/pwa-cloudflare-demo?v=1.1.1>).
+For an example of this approach, see [pwa-cloudflare-demo](https://github.com/mvolkmann/pwa-cloudflare-demo).
 
 ## Resources
 
-- [htmx Home Page](<https://htmx.org?v=1.1.1>)
-- [htmx Documentation](<https://htmx.org/docs/?v=1.1.1>)
-- [htmx Reference](<https://htmx.org/reference/?v=1.1.1>)
-- [htmx Examples](<https://htmx.org/examples/?v=1.1.1>)
-- [htmx-related Essays](<https://htmx.org/essays/?v=1.1.1>)
-- [How Did REST Come To Mean The Opposite of REST?](<https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/?v=1.1.1>)
+- [htmx Home Page](https://htmx.org)
+- [htmx Documentation](https://htmx.org/docs/)
+- [htmx Reference](https://htmx.org/reference/)
+- [htmx Examples](https://htmx.org/examples/)
+- [htmx-related Essays](https://htmx.org/essays/)
+- [How Did REST Come To Mean The Opposite of REST?](https://htmx.org/essays/how-did-rest-come-to-mean-the-opposite-of-rest/)
 
-- [htmx Discord Channel](<https://htmx.org/discord?v=1.1.1>)
-- [Hypermedia Systems](<https://hypermedia.systems?v=1.1.1>) book
-- [Big Sky Software](<https://bigsky.software?v=1.1.1>)
-- [Carson Gross on Twitter](<https://twitter.com/htmx_org?v=1.1.1>)
-- [The Valley of CODE - htmx](<https://thevalleyofcode.com/htmx?v=1.1.1>)
-- [The AHA Stack](<https://ahastack.dev?v=1.1.1>)
+- [htmx Discord Channel](https://htmx.org/discord)
+- [Hypermedia Systems](https://hypermedia.systems) book
+- [Big Sky Software](https://bigsky.software)
+- [Carson Gross on Twitter](https://twitter.com/htmx_org)
+- [The Valley of CODE - htmx](https://thevalleyofcode.com/htmx)
+- [The AHA Stack](https://ahastack.dev)
 
-- [Hotwire](<https://hotwired.dev?v=1.1.1>) competitor to htmx
-- [Unpoly](<https://unpoly.com?v=1.1.1>) competitor to htmx
+- [Hotwire](https://hotwired.dev) competitor to htmx
+- [Unpoly](https://unpoly.com) competitor to htmx
 
 TODO: Read "The Valley of CODE" page above!
 
@@ -3149,7 +3149,7 @@ TODO: Read "The Valley of CODE" page above!
   can go to a previous state of the UI. Try this!
   It does this by creating a snapshot of the entire DOM
   and saving it in `localStorage`.
-  This uses the standard Web [History API](<https://developer.mozilla.org/en-US/docs/Web/API/History_API?v=1.1.1>).
+  This uses the standard Web [History API](https://developer.mozilla.org/en-US/docs/Web/API/History_API).
   Writing to `localstorage` can be disabled if desired.
 
 - The `HX-Request` HTTP header can be used to determine

@@ -10,7 +10,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[matplotlib](<https://matplotlib.org/?v=1.1.1>)
+[matplotlib](https://matplotlib.org/)
 is a Python library for data visualization.
 
 To install this package, enter `pip install matplotlib`.
@@ -166,7 +166,7 @@ Supported line styles include:
 | dashed  | `'dashed'` or `'--'`  |
 | dashdot | `'dashdot'` or `'-.'` |
 
-For more line style variations, see [matplotlib Linestyles](<https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html?v=1.1.1>).
+For more line style variations, see [matplotlib Linestyles](https://matplotlib.org/3.1.0/gallery/lines_bars_and_markers/linestyles.html).
 
 ### Markers
 
@@ -196,7 +196,7 @@ Marker values include:
 | plus filled     | `'P'`  |
 | star            | `'*'`  |
 
-For more marker variations, see [matplotlib Markers](<https://matplotlib.org/api/markers_api.html?v=1.1.1>).
+For more marker variations, see [matplotlib Markers](https://matplotlib.org/api/markers_api.html).
 
 To change the size of markers, specify a `markersize` argument.
 
@@ -690,5 +690,5 @@ mainloop()  # start the event loop
 
 ## Annotations
 
-See [mpldatacursor](<https://github.com/joferkington/mpldatacursor?v=1.1.1>)
-and [mplcursors](<https://mplcursors.readthedocs.io/en/stable/?v=1.1.1>).
+See [mpldatacursor](https://github.com/joferkington/mpldatacursor)
+and [mplcursors](https://mplcursors.readthedocs.io/en/stable/).

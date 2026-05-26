@@ -11,7 +11,7 @@ It chose this model because it is one of the newest Macintosh computers
 that can run the HyperCard application.
 I'm learning about HyperCard so I can attempt to recreate it as web application.
 
-The specs for this computer can be found at [everymac.com](<https://everymac.com/systems/apple/imac/specs/imac_dv_se_500.html?v=1.1.1>).
+The specs for this computer can be found at [everymac.com](https://everymac.com/systems/apple/imac/specs/imac_dv_se_500.html).
 The highlights are:
 
 - Apple iMac G3/500 DV SE (Summer 2000)
@@ -36,31 +36,31 @@ This is one of the cleanest iMac G3 computers I was able to find,
 as evidenced by the photos below.
 
 <img alt="iMac G3 full" style="width: 100%"
-  src="/blog/assets/imac-g3-full.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-full.jpeg">
 
 <img alt="iMac G3 top" style="width: 100%"
-  src="/blog/assets/imac-g3-top.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-top.jpeg">
 
 <img alt="iMac G3 bottom" style="width: 100%"
-  src="/blog/assets/imac-g3-bottom.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-bottom.jpeg">
 
 <img alt="iMac G3 barcodes" style="width: 50%"
-   src="/blog/assets/imac-g3-barcodes.jpeg?v=1.1.1">
+   src="/blog/assets/imac-g3-barcodes.jpeg">
 
 <img alt="iMac G3 left" style="width: 100%"
-  src="/blog/assets/imac-g3-left.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-left.jpeg">
 
 <img alt="iMac G3 right" style="width: 100%"
-  src="/blog/assets/imac-g3-right.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-right.jpeg">
 
 <img alt="iMac G3 ports" style="width: 100%"
-  src="/blog/assets/imac-g3-ports.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-ports.jpeg">
 
 <img alt="iMac G3 back" style="width: 100%"
-  src="/blog/assets/imac-g3-back.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-back.jpeg">
 
 <img alt="iMac G3 keyboard and mouse" style="width: 100%"
-  src="/blog/assets/imac-g3-keyboard-mouse.jpeg?v=1.1.1">
+  src="/blog/assets/imac-g3-keyboard-mouse.jpeg">
 
 ## Setup
 
@@ -94,7 +94,7 @@ It's highly recommended to replace the PRAM battery with a new one
 as soon as possible.
 
 In an iMac G3 computer, the PRAM battery is a 1/2 AA 3.6 volt lithium battery.
-I ordered a [Xeno Energy XL-050F](<https://www.amazon.com/dp/B008POD4E2?ref=ppx_yo2ov_dt_b_fed_asin_title&v=1.1.1>) battery from Amazon.
+I ordered a [Xeno Energy XL-050F](https://www.amazon.com/dp/B008POD4E2?ref=ppx_yo2ov_dt_b_fed_asin_title) battery from Amazon.
 
 The steps to install a new PRAM battery are shown below.
 
@@ -109,9 +109,9 @@ The steps to install a new PRAM battery are shown below.
    The photos below show the location of the four screws.
 
    <img alt="iMac G3 bottom plastic screws set #1" style="width: 49%"
-     src="/blog/assets/imac-g3-bottom-plastic-screws-1.jpeg?v=1.1.1">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-1.jpeg">
    <img alt="iMac G3 bottom plastic screws set #2" style="width: 49%"
-     src="/blog/assets/imac-g3-bottom-plastic-screws-2.jpeg?v=1.1.1">
+     src="/blog/assets/imac-g3-bottom-plastic-screws-2.jpeg">
 
 1. Gently remove the bottom plastic case.
    It will be somewhat difficult to free the edge that is near the CD slot.
@@ -125,12 +125,12 @@ The steps to install a new PRAM battery are shown below.
    The photo below shows the location of the six screws.
 
    <img alt="iMac G3 bottom plastic removed" style="width: 70%"
-     src="/blog/assets/imac-g3-bottom-plastic-removed.jpeg?v=1.1.1">
+     src="/blog/assets/imac-g3-bottom-plastic-removed.jpeg">
 
 1. Remove the EMI shield.
 
    <img alt="iMac G3 EMI shield removed" style="width: 70%"
-     src="/blog/assets/imac-g3-emi-shield-removed.jpeg?v=1.1.1">
+     src="/blog/assets/imac-g3-emi-shield-removed.jpeg">
 
 1. Remove the old PRAM battery.
 
@@ -139,7 +139,7 @@ The steps to install a new PRAM battery are shown below.
 1. Insert the new PRAM battery.
 
    <img alt="iMac G3 new PRAM battery" style="width: 70%"
-     src="/blog/assets/imac-g3-new-pram-battery.jpeg?v=1.1.1">
+     src="/blog/assets/imac-g3-new-pram-battery.jpeg">
 
 1. Replace the EMI shield.
    Be careful not to allow the screws to fall inside the computer!
@@ -174,7 +174,7 @@ To clean the top and bottom parts of the plastic case of an iMac G3 computer:
 
 ### Pro Keyboard
 
-To disassemble, clean, and reassemble the Pro Keyboard, see this [YouTube video](<https://www.youtube.com/watch?v=dnO3kCGxdgY&v=1.1.1>).
+To disassemble, clean, and reassemble the Pro Keyboard, see this [YouTube video](https://www.youtube.com/watch?v=dnO3kCGxdgY).
 
 To clean the key caps and the area beneath all the keys,
 gently pop them off with something like a butter knife.
@@ -204,7 +204,7 @@ free from the tabs that snap it into place,
 being careful not to crack the case.
 
 <img alt="iMac G3 keyboard screw hole" style="width: 70%"
-  src="/blog/assets/imac-g3-keyboard-screw-hole.jpg?v=1.1.1">
+  src="/blog/assets/imac-g3-keyboard-screw-hole.jpg">
 
 ## Speakers
 
@@ -214,10 +214,10 @@ the speakers will begin making an annoying, vibrating sound.
 This is caused by the metal speakers rattling against their plastic enclosure.
 
 To fix this, order new form rings and install them.
-They can be ordered from [AliExpress](<https://www.aliexpress.com/i/3256804516580076.html?gatewayAdapt=4itemAdapt&v=1.1.1>).
+They can be ordered from [AliExpress](https://www.aliexpress.com/i/3256804516580076.html?gatewayAdapt=4itemAdapt).
 The item description is "SOTAMIA 2Pcs 1 Inch Speaker Foam Folding Ring
 Speakers Repair Accessories DIY Harman Laptop JBL Speaker Edge Repair".
-See the YouTube video [iMac G3 speaker replacement (2023)](<https://www.youtube.com/watch?v=_W38TJNgxmE&v=1.1.1>) which walks through
+See the YouTube video [iMac G3 speaker replacement (2023)](https://www.youtube.com/watch?v=_W38TJNgxmE) which walks through
 the steps to remove and repair the speakers.
 
 Make sure you remove the large screw from each plastic speaker enclosure
@@ -227,12 +227,12 @@ before attempting to pry it open with a flathead screw driver!
 
 The internal hard drive in an iMac G3 is typically quite small and loud.
 It's a good idea to replace it with an SSD drive.
-I purchased a kit from Other World Computing (OWC) called [250GB OWC Mercury Pro Legacy](<https://eshop.macsales.com/item/OWC/SSDMXLE250/?v=1.1.1>).
+I purchased a kit from Other World Computing (OWC) called [250GB OWC Mercury Pro Legacy](https://eshop.macsales.com/item/OWC/SSDMXLE250/).
 The iMac G3 can only address up to 128GB, so
 about half the available drive space will not be used,
 but it still works fine.
 
-See the YouTube video [installing an SSD in an iMac G3](<https://www.youtube.com/watch?v=fq3QMli0sZU&v=1.1.1>) which walks through
+See the YouTube video [installing an SSD in an iMac G3](https://www.youtube.com/watch?v=fq3QMli0sZU) which walks through
 the steps to remove the old hard drive and install the SSD kit.
 
 The steps I followed were:
@@ -252,8 +252,8 @@ The steps I followed were:
 ## Installing Software
 
 The websites
-[Macintosh Garden](<https://macintoshgarden.org?v=1.1.1>) and
-[Macintosh Repository](<https://www.macintoshrepository.org?v=1.1.1>)
+[Macintosh Garden](https://macintoshgarden.org) and
+[Macintosh Repository](https://www.macintoshrepository.org)
 provide lots of software that can be
 downloaded and installed on older Macintoshes.
 
@@ -294,7 +294,7 @@ The software comes in many file formats:
 - `.tar.gz` or `.tgz`: gzipped Tape Archive; a Unix utility for bundling
   multiple files into a single archive that is then compressed with gzip
 
-The utility "Toast 5 Titanium" can be obtained from [Macintosh Garden](<https://macintoshgarden.org/apps/toast-5-titanium?v=1.1.1>).
+The utility "Toast 5 Titanium" can be obtained from [Macintosh Garden](https://macintoshgarden.org/apps/toast-5-titanium).
 The first "www" link downloads the file `Toast_501_523_Install.sit`.
 Copy the file to the old Mac and double-click it to expand.
 Install version ? and then each of the updates in order.
@@ -327,7 +327,7 @@ The PDF can be copied to another computer, perhaps via a USB stick,
 that has access to a real printer.
 
 Adobe Acrobat PDFWriter 4.0 can be downloaded from
-[Macintosh Garden](<https://macintoshgarden.org/apps/adobe-acrobat-pdfwriter-40?v=1.1.1>).
+[Macintosh Garden](https://macintoshgarden.org/apps/adobe-acrobat-pdfwriter-40).
 
 The steps to configure this are:
 
@@ -431,7 +431,7 @@ On the computer running Mac OS 9:
    check the "Enable File Sharing clients to connect over TCP/IP" checkbox
    and click the "Start" button.
 1. Make a note of the IP address that is displayed after "afp://".
-1. Download and install [Netpresenz 4.1](<https://macintoshgarden.org/apps/netpresenz?v=1.1.1>)
+1. Download and install [Netpresenz 4.1](https://macintoshgarden.org/apps/netpresenz)
    on the computer running Mac OS 9.
 1. Double-click "NetPresenz Setup".
 1. Dismiss the "About" dialog.
@@ -516,7 +516,7 @@ As an alternative to steps 2, 3, and 4, right-click a ".pict" file
 and select Open With ... XnConvert.
 
 For a more powerful screenshot solution that supports many graphics formats
-including GIF, JPEG, and PNG, see [Snapz Pro 2](<https://macintoshgarden.org/apps/snapz-pro-2?v=1.1.1>).
+including GIF, JPEG, and PNG, see [Snapz Pro 2](https://macintoshgarden.org/apps/snapz-pro-2).
 License keys are provided in a text file.
 This adds the "Snapz Pro" control panel.
 Click the "Settings..." button to configure.
@@ -564,7 +564,7 @@ located in `System Folder:Appearance:Sound Sets`.
 
 To extract a sound resource from a file:
 
-1. Download the "SoundApp" application from [Macintosh Garden](<https://macintoshgarden.org/apps/soundapp?v=1.1.1>)
+1. Download the "SoundApp" application from [Macintosh Garden](https://macintoshgarden.org/apps/soundapp)
 1. Install the SoundApp application on a Mac running OS 9.
 1. Launch the SoundApp.
 1. Select File ... Convert...
@@ -600,7 +600,7 @@ and played there.
 
 AppleWorks is an office suite from Apple that supersedes ClarisWorks.
 The final version was 6.2.9.
-It can be downloaded from [Macintosh Repository](<https://www.macintoshrepository.org/21008-appleworks-6-2-9-691-4718-a-cd-?v=1.1.1>).
+It can be downloaded from [Macintosh Repository](https://www.macintoshrepository.org/21008-appleworks-6-2-9-691-4718-a-cd-).
 
 To install AppleWorks:
 

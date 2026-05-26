@@ -25,7 +25,7 @@ Pen makeStar display.
 The following code draws a house.
 
 <img alt="Pen house" style="width: 30%"
-  src="/blog/assets/cuis-pen-house.png?v=1.1.1">
+  src="/blog/assets/cuis-pen-house.png">
 
 ```smalltalk
 height := 300.

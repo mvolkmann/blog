@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Server-Sent Events](<https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events?v=1.1.1>) (SSE) are used to send data from a server to a client,
+[Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) (SSE) are used to send data from a server to a client,
 but not in the other direction.
 
 For two-way communication, consider using
@@ -31,10 +31,10 @@ WebSockets do not provide this, so code must be written
 to listen for disconnects and reconnect later.
 This feature alone may be a good reason to choose SSE over WebSockets.
 
-For a great video on SSE, see [Server-Sent Events Crash Course](<https://www.youtube.com/watch?v=4HlNv1qpZFY&v=1.1.1>).
+For a great video on SSE, see [Server-Sent Events Crash Course](https://www.youtube.com/watch?v=4HlNv1qpZFY).
 
 All the example code below can be found in the GitHub repository
-[server-sent-events-examples](<https://github.com/mvolkmann/server-sent-events-examples?v=1.1.1>).
+[server-sent-events-examples](https://github.com/mvolkmann/server-sent-events-examples).
 
 ## Use Cases
 
@@ -50,7 +50,7 @@ When using HTTP/1, SSE supports a maximum of
 six concurrent connections per browser/domain.
 When using HTTP/2, the client and server can negotiate the limit
 and the default is 100.
-See the MDN [EventSource](<https://developer.mozilla.org/en-US/docs/Web/API/EventSource?v=1.1.1>) documentation.
+See the MDN [EventSource](https://developer.mozilla.org/en-US/docs/Web/API/EventSource) documentation.
 
 ## Demo Client
 
@@ -104,7 +104,7 @@ the "Content-Type" header to "text/event–stream" and
 the "Transfer-Encoding" header to "chunked".
 
 The following server code uses Node.js and the
-[Express](<https://expressjs.com?v=1.1.1>) library.
+[Express](https://expressjs.com) library.
 
 When using the Node.js Express library,
 the "Transfer-Encoding" response header is set to "chunked" automatically
@@ -182,12 +182,12 @@ The following screenshot shows the request and response HTTP headers
 for the SSE connection.
 
 <img alt="SSE DevTools Network tab Headers" style="width: 100%"
-  src="/blog/assets/sse-devtools-network-headers.png?v=1.1.1">
+  src="/blog/assets/sse-devtools-network-headers.png">
 
 The following screenshot shows the event stream for the SSE connection.
 
 <img alt="SSE DevTools Network tab EventStream" style="width: 70%"
-  src="/blog/assets/sse-devtools-network-eventstream.png?v=1.1.1">
+  src="/blog/assets/sse-devtools-network-eventstream.png">
 
 ## Bun and Hono
 

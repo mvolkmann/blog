@@ -22,11 +22,11 @@ Double-clicking the map zooms in, or zooms out if the shift key is down.
 ![D3 World Map](/blog/assets/d3-world-map.png)
 
 To see this in action, browse
-[Country Populations](<https://world-map.rmarkvolkmann.now.sh?v=1.1.1>).
+[Country Populations](https://world-map.rmarkvolkmann.now.sh).
 
 This uses two input files, `world-countries.json` and `world-population.tsv`.
 These files can be obtained from a
-[gist by Jeremy Lin](<https://gist.github.com/jeremycflin/b43ab253f3ae02dced07?v=1.1.1>).
+[gist by Jeremy Lin](https://gist.github.com/jeremycflin/b43ab253f3ae02dced07).
 
 ### index.html
 
@@ -271,19 +271,19 @@ function addControlButtons(svg, svgWidth, svgHeight) {
   const panDiv = controls.append('div').attr('class', 'pan');
 
   let div = panDiv.append('div');
-  addButton(div, '&#x25b2;', panUp);
+  addButton(div, '#x25b2;', panUp);
 
   div = panDiv.append('div');
-  addButton(div, '&#x25c0;', panLeft);
-  addButton(div, '&#x21ba;', reset);
-  addButton(div, '&#x25b6;', panRight);
+  addButton(div, '#x25c0;', panLeft);
+  addButton(div, '#x21ba;', reset);
+  addButton(div, '#x25b6;', panRight);
 
   div = panDiv.append('div');
-  addButton(div, '&#x25bc;', panDown);
+  addButton(div, '#x25bc;', panDown);
 
   div = controls.append('div').attr('class', 'zoom');
-  addButton(div, '&#x2795;', zoomIn);
-  addButton(div, '&#x2796;', zoomOut);
+  addButton(div, '#x2795;', zoomIn);
+  addButton(div, '#x2796;', zoomOut);
 }
 
 function getParentSelection(selection) {

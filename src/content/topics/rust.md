@@ -7,14 +7,14 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 <img alt="Rust logo" style="width: 20%"
-  src="/blog/assets/rust-logo.png?v=1.1.1" title="Rust logo">
+  src="/blog/assets/rust-logo.png" title="Rust logo">
 <img alt="Rust mascot" style="width: 30%"
-  src="/blog/assets/rustacean-ferris-crab.png?v=1.1.1"
+  src="/blog/assets/rustacean-ferris-crab.png"
   title="Rust mascot, Ferris the crab">
 
 ## Overview
 
-[Rust](<https://www.rust-lang.org/?v=1.1.1>)
+[Rust](https://www.rust-lang.org/)
 is a programming language with the goal of
 "empowering everyone to build reliable and efficient software."
 
@@ -24,7 +24,7 @@ Features of Rust include:
 - memory-efficiency
 - ownership model that guarantees memory-safety and thread-safety
 - rich, static type system with type inference
-- targets [LLVM](<https://llvm.org?v=1.1.1>) to
+- targets [LLVM](https://llvm.org) to
   enable Rust programs to run on a wide variety of platforms
 - ability to call and be called by languages that support
   the C Application Binary Interface (ABI) with no overhead
@@ -45,12 +45,12 @@ It was formally announced in 2010.
 Version 1.0 was released in May 2015.
 A new point release is made every six weeks.
 
-From [rust-lang.org](<https://doc.rust-lang.org/edition-guide/editions/?v=1.1.1>),
+From [rust-lang.org](https://doc.rust-lang.org/edition-guide/editions/),
 "Every two or three years, we'll be producing a new edition of Rust.
 Each edition brings together the features that have landed into
 a clear package, with fully updated documentation and tooling."
 
-The [Rust Foundation](<https://foundation.rust-lang.org?v=1.1.1>)
+The [Rust Foundation](https://foundation.rust-lang.org)
 was announced in February 2021.
 It is "an independent non-profit organization to
 steward the Rust programming language and ecosystem."
@@ -61,7 +61,7 @@ Rust developers are referred to as "Rustaceans"
 which is derived from the word "crustaceans".
 Rust mascot is Ferris the crab, a crustacean.
 The name is fitting because ferrous metals are subject to rust.
-Images of Ferris can be found at [rustacean.net](<https://rustacean.net/?v=1.1.1>).
+Images of Ferris can be found at [rustacean.net](https://rustacean.net/).
 
 ## Why use Rust
 
@@ -207,15 +207,15 @@ of an application that uses them can reduce the time to test changes.
 ## Installing
 
 It is recommended to install Rust using the
-[rustup](<https://github.com/rust-lang/rustup/blob/master/README.md?v=1.1.1>) tool.
+[rustup](https://github.com/rust-lang/rustup/blob/master/README.md) tool.
 This enables having multiple versions of Rust installed
 and switching between them.
 
 To install rustup in macOS:
 
-1. Install "Command Line Tools for Xcode" from [developer.apple.com](<https://developer.apple.com/downloads/more?v=1.1.1>)
+1. Install "Command Line Tools for Xcode" from [developer.apple.com](https://developer.apple.com/downloads/more)
    (requires a free Apple ID)
-1. Install [homebrew](<?v=1.1.1>).
+1. Install [homebrew](<>).
 1. Enter `brew install rustup`
 
 Enter the following command to install rustup in Linux (or macOS):
@@ -225,10 +225,10 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
 To install rustup in Windows,
-use [Chocolately](<https://chocolatey.org/?v=1.1.1>)
-or [Scoop](<https://scoop.sh/?v=1.1.1>).
+use [Chocolately](https://chocolatey.org/)
+or [Scoop](https://scoop.sh/).
 
-For more details, see [Other Rust Installation Methods](<https://forge.rust-lang.org/infra/other-installation-methods.html?v=1.1.1>).
+For more details, see [Other Rust Installation Methods](https://forge.rust-lang.org/infra/other-installation-methods.html).
 
 After installing rustup, enter `rustup-init`.
 This installs many toolchain items including `cargo` (build/run tool),
@@ -251,9 +251,9 @@ enter `rustup update`.
 
 Resources for learning Rust include:
 
-- [Rust Language Cheat Sheet](<https://cheats.rs?v=1.1.1>)
+- [Rust Language Cheat Sheet](https://cheats.rs)
 
-- [Take your first steps with Rust](<https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/?v=1.1.1>) from Microsoft
+- [Take your first steps with Rust](https://docs.microsoft.com/en-us/learn/paths/rust-first-steps/) from Microsoft
 
 - `rustup doc` command
 
@@ -271,50 +271,50 @@ Resources for learning Rust include:
   - "The Cargo Book" book
   - and much more
 
-- [Rust website](<https://www.rust-lang.org/?v=1.1.1>)
+- [Rust website](https://www.rust-lang.org/)
 
-- [The Rust Programming Language](<https://doc.rust-lang.org/book/?v=1.1.1>) book
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) book
 
   This is a free, open source book.
-  A print copy can be purchased from [No Starch Press](<https://nostarch.com/Rust2018?v=1.1.1>).
+  A print copy can be purchased from [No Starch Press](https://nostarch.com/Rust2018).
 
-- [The Rust Reference](<https://doc.rust-lang.org/stable/reference/?v=1.1.1>)
+- [The Rust Reference](https://doc.rust-lang.org/stable/reference/)
 
   This is "the primary reference for the Rust programming language".
 
-- [Rust Cookbook](<https://rust-lang-nursery.github.io/rust-cookbook/?v=1.1.1>)
+- [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)
 
   This is a "collection of simple examples that demonstrate
   good practices to accomplish common programming tasks".
 
-- [Rust by Example](<https://doc.rust-lang.org/stable/rust-by-example/?v=1.1.1>)
+- [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/)
 
   This is a free, online set of examples in many categories.
 
-- [Rust Standard Library](<https://doc.rust-lang.org/std/index.html?v=1.1.1>)
+- [Rust Standard Library](https://doc.rust-lang.org/std/index.html)
   API documentation
 
-- [Programming Rust](<https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/?v=1.1.1>) book (O'Reilly)
+- [Programming Rust](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/) book (O'Reilly)
 
-- [Rust in Motion](<https://www.manning.com/livevideo/rust-in-motion?a_aid=cnichols&a_bid=6a993c2e&v=1.1.1>) video course (Manning)
+- [Rust in Motion](https://www.manning.com/livevideo/rust-in-motion?a_aid=cnichols&a_bid=6a993c2e) video course (Manning)
 
-- [Doug Milford Rust Tutorial series](<https://www.youtube.com/watch?v=Az3jBd4xdF4&list=PLLqEtX6ql2EyPAZ1M2_C0GgVd4A-_L4_5&v=1.1.1>) YouTube videos
+- [Doug Milford Rust Tutorial series](https://www.youtube.com/watch?v=Az3jBd4xdF4&list=PLLqEtX6ql2EyPAZ1M2_C0GgVd4A-_L4_5) YouTube videos
 
-- [Jon Gjengset Crust of Rust](<https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s&v=1.1.1>) YouTube videos
+- [Jon Gjengset Crust of Rust](https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s) YouTube videos
 
-- [Ryan Levick Introduction to Rust](<https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s&v=1.1.1>) YouTube videos
+- [Ryan Levick Introduction to Rust](https://www.youtube.com/watch?v=WnWGO-tLtLA&t=2s) YouTube videos
 
-- [Rustlings](<https://github.com/rust-lang/rustlings?v=1.1.1>)
+- [Rustlings](https://github.com/rust-lang/rustlings)
 
   This "contains small exercises to get you used to
   reading and writing Rust code".
 
-- [exercism Rust track](<https://exercism.io/tracks/rust?v=1.1.1>)
+- [exercism Rust track](https://exercism.io/tracks/rust)
 
   This provides "code practice and mentorship for everyone".
   The exercism site includes exercises across 52 languages.
 
-- [rust-learning](<https://github.com/ctjhoa/rust-learning?v=1.1.1>)
+- [rust-learning](https://github.com/ctjhoa/rust-learning)
 
   This includes "a bunch of links to blog posts, articles, videos, etc
   for learning Rust."
@@ -325,13 +325,13 @@ TODO: Add more terminology in this section? ownership, borrow checker, ...
 
 - [Cargo](#cargo)
   - a command-line utility for building and running Rust programs
-- [Clippy](<https://github.com/rust-lang/rust-clippy?v=1.1.1>)
+- [Clippy](https://github.com/rust-lang/rust-clippy)
   - a code linter with over 400 checks for
     correctness, style, complexity, an performance
 - [crate](#crates)
   - a Rust program (binary) or library
   - contains a tree of modules
-- [crates.io](<https://crates.io/?v=1.1.1>)
+- [crates.io](https://crates.io/)
   - repository of Rust crates, similar to npm for JavaScript
 - [enum](#enums)
   - a named type whose values come from a list of named variants
@@ -372,11 +372,11 @@ TODO: Add more terminology in this section? ownership, borrow checker, ...
 ## Rust Playground
 
 To try Rust code online, browse the
-[Rust Playground](<https://play.rust-lang.org/?v=1.1.1>).
+[Rust Playground](https://play.rust-lang.org/).
 This includes access to the top 100 most downloaded crates (libraries)
-from [crates.io](<https://crates.io/?v=1.1.1>)
+from [crates.io](https://crates.io/)
 and crates from the
-[Rust Cookbook](<https://rust-lang-nursery.github.io/rust-cookbook/?v=1.1.1>).
+[Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/).
 
 A good use for the Rust Playground is to copy code examples
 from this blog post into it and run them.
@@ -386,7 +386,7 @@ The example code shown in the screenshot below
 will be more clear after structs and traits are explained.
 
 <img alt="Rust Playground" style="width: 100%"
-  src="/blog/assets/rust-playground.png?v=1.1.1"
+  src="/blog/assets/rust-playground.png"
   title="Rust Playground">
 
 All of the code must be entered in a single editor pane,
@@ -448,7 +448,7 @@ Press the "TOOLS" button to open a popup with the following options:
 - "Clippy" runs the Clippy code linter with over 400 checks for
   correctness, style, complexity, an performance.
 - "Miri" runs the program using the
-  [Miri interpreter](<https://github.com/rust-lang/miri?v=1.1.1>)
+  [Miri interpreter](https://github.com/rust-lang/miri)
   which is an experimental interpreter for Rust's
   mid-level intermediate representation (MIR).
   It can detect some bugs not detected by pressing the "RUN" button.
@@ -462,7 +462,7 @@ Press the "CONFIG" button to open a popup with the following options:
 - "Style" enables switching between "SIMPLE" (no line numbers)
   and "ADVANCED" (line numbers).
 - "Keybinding" enables choosing between keybindings supported by the
-  [Ace](<https://github.com/ajaxorg/ace?v=1.1.1>) (Cloud9) editor
+  [Ace](https://github.com/ajaxorg/ace) (Cloud9) editor
   which is used by this tool.
   Options include ace, emacs, sublime, vim, and vscode.
 - "Theme" enables choosing between 30+ themes including
@@ -551,7 +551,7 @@ See the [Cargo](#cargo) section for details on creating this.
 
 ## <a name="toml">TOML</a>
 
-[TOML](<https://github.com/toml-lang/toml?v=1.1.1>)
+[TOML](https://github.com/toml-lang/toml)
 is a configuration file format that maps to a hash table.
 The Rust Cargo tool uses this format for `Cargo.toml` configuration files.
 
@@ -612,9 +612,9 @@ The following table describes the `cargo` subcommands:
 | `init`                          | creates a new Rust project in the current directory                                             |
 | `install`                       | installs the project executable, by default in `~/.cargo/bin`                                   |
 | `new`                           | creates a new Rust project in a new subdirectory                                                |
-| `publish`                       | publishes the project crate in the [crates.io](<https://crates.io?v=1.1.1>) registry |
+| `publish`                       | publishes the project crate in the [crates.io](https://crates.io) registry |
 | `run` or `r`                    | builds and runs the project                                                                     |
-| <code>search <i>name</i></code> | searches the [crates.io](<https://crates.io?v=1.1.1>) registry for matching crates   |
+| <code>search <i>name</i></code> | searches the [crates.io](https://crates.io) registry for matching crates   |
 | `test` or `t`                   | runs the project tests                                                                          |
 | `uninstall`                     | removes the project executable, by default from `~/.cargo/bin`                                  |
 | `update`                        | updates dependencies in the `Cargo.lock` file                                                   |
@@ -673,7 +673,7 @@ described in the table below are not followed.
 | constants                                                                                      | `SCREAMING_SNAKE_CASE`               |
 | constructor functions                                                                          | `snake_case`                         |
 | crates                                                                                         | `snake_case` or `kebab-case`         |
-| [crate features](<https://doc.rust-lang.org/cargo/reference/features.html?v=1.1.1>) | no convention                        |
+| [crate features](https://doc.rust-lang.org/cargo/reference/features.html) | no convention                        |
 | enums                                                                                          | `PascalCase`                         |
 | enum variants                                                                                  | `PascalCase`                         |
 | file names                                                                                     | `snake_case` or `kebab-case`         |
@@ -817,19 +817,19 @@ The following table summarizes commonly used built-in attributes.
 | `should_panic`                   | indicates that a test function is expected to panic                                |
 | `test`                           | indicates that a function is a test                                                |
 
-For a list of linting rules that produce warnings, see [Warn-by-default lints](<https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html?v=1.1.1>).
+For a list of linting rules that produce warnings, see [Warn-by-default lints](https://doc.rust-lang.org/rustc/lints/listing/warn-by-default.html).
 Examples include `dead_code`, `unreachable_code`, `unused_assignment`,
 `unused_imports`, and `unused_variables`.
 These warnings can be disabled using the `allow` attribute.
 
 The [table of provided traits](#trait-table) in the "Traits" section
 indicates those can be automatically implemented using the `derive` attribute.
-For more detail, see [Derive](<https://doc.rust-lang.org/rust-by-example/trait/derive.html?v=1.1.1>).
+For more detail, see [Derive](https://doc.rust-lang.org/rust-by-example/trait/derive.html).
 
 For more built-in attributes,
-see the list in "The Rust Reference" at [Attributes](<https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index?v=1.1.1>).
+see the list in "The Rust Reference" at [Attributes](https://doc.rust-lang.org/reference/attributes.html#built-in-attributes-index).
 
-Custom attributes can be implemented by defining [attribute-like macros](<https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros?v=1.1.1>).
+Custom attributes can be implemented by defining [attribute-like macros](https://doc.rust-lang.org/book/ch19-06-macros.html#attribute-like-macros).
 
 ## Formatted Print
 
@@ -944,7 +944,7 @@ fn main() {
 ```
 
 For more formatting options, see
-[std::fmt](<https://doc.rust-lang.org/std/fmt/?v=1.1.1>).
+[std::fmt](https://doc.rust-lang.org/std/fmt/).
 
 ## <a name="variables">Variables</a>
 
@@ -1701,7 +1701,7 @@ where lifetime annotations are required:
 //fn get_greater(s1: &str, s2: &str) -> &str {
 
 // The next function signature includes lifetime specifiers.
-fn get_greater<'a>(s1: &'a str, s2: &'a str) -> &'a str {
+fn get_greater<'a>(s1: 'a str, s2: 'a str) -> 'a str {
     if s1 > s2 {
         s1
     } else {
@@ -1867,7 +1867,7 @@ There are many ways to handle variants from these enum types.
    fn divide2(numerator: f64, denominator: f64)
    -> Result<f64, MathError> {
    //fn divide2(numerator: f64, denominator: f64)
-   //-> Result<f64, &'static str> {
+   //-> Result<f64, 'static str> {
        if denominator == 0.0 {
            Err(MathError::DivisionByZero)
            //Err(DIV_BY_ZERO)
@@ -2022,7 +2022,7 @@ There are many ways to handle variants from these enum types.
 The following example demonstrates several approaches to error handling
 for functions that can return multiple error types.
 To experiment with this code, download it from the GitHub repo named
-[rust-error-handling](<https://github.com/mvolkmann/rust-error-handling?v=1.1.1>).
+[rust-error-handling](https://github.com/mvolkmann/rust-error-handling).
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -2181,7 +2181,7 @@ adding `quick-error` as a dependency in `Cargo.toml`.
 Note that we no longer need to manually implement the
 `Error`, `Display`, and `From` traits for our custom error enum.
 To experiment with this code, see the `quick_error` branch of the
-[rust-error-handling](<https://github.com/mvolkmann/rust-error-handling?v=1.1.1>) GitHub repo.
+[rust-error-handling](https://github.com/mvolkmann/rust-error-handling) GitHub repo.
 
 ```rust
 #[macro_use]
@@ -2223,7 +2223,7 @@ Rust provides many built-types.
 The following diagram summarizes them.
 
 <img alt="Rust Built-in Data Types" style="width: 70%"
-  src="/blog/assets/rust-types.png?v=1.1.1"
+  src="/blog/assets/rust-types.png"
   title="Rust Built-in Data Types">
 
 ### <a name="scalar-types">Built-in Scalar Types</a>
@@ -2320,11 +2320,11 @@ which all the number types do:
 use std::cmp::{ Eq, Ord };
 
 trait Days {
-    fn days_from_now(self) -> &'static str;
+    fn days_from_now(self) -> 'static str;
 }
 
 impl<T: Eq + Ord + From<i8>> Days for T {
-    fn days_from_now(self) -> &'static str {
+    fn days_from_now(self) -> 'static str {
         // Can't use match with Self::from(n) values.
         if self == Self::from(0) {
             "today"
@@ -2460,7 +2460,7 @@ and the standard library defines the `String` type.
 A `&str` value is a reference (or pointer) to data that includes
 the length of the string and a pointer to where the character data is stored,
 which can be on the stack or the heap.
-A `String` value is a [smart pointer](<#smart-pointers?v=1.1.1>)
+A `String` value is a [smart pointer](#smart-pointers)
 that holds a pointer to the character data on the heap,
 a length, and a capacity.
 The capacity is the length to which the character data can grow
@@ -3103,7 +3103,7 @@ fn main() {
 ```
 
 For a longer example of using a `HashMap` and the `entry` method,
-see [rust-poker](<https://github.com/mvolkmann/rust-poker?v=1.1.1>).
+see [rust-poker](https://github.com/mvolkmann/rust-poker).
 The file `src/lib.rs` defines the `evaluate` method of the `Hand` struct.
 This uses the `entry` method to determine the number of cards in the hand
 from each suit and rank.
@@ -3229,7 +3229,7 @@ Patterns can be literal values of the types
 tuple of these types, array of these types,
 inclusive range (`m..=n`, not `m..n`), enum variant, or struct.
 There are a few more less commonly used patterns that are supported.
-For details, see [Patterns](<https://doc.rust-lang.org/reference/patterns.html?v=1.1.1>).
+For details, see [Patterns](https://doc.rust-lang.org/reference/patterns.html).
 
 The part on the right side of `=>` can be an expression or a block.
 
@@ -3428,7 +3428,7 @@ use futures::executor::block_on;
 use rand::Rng;
 
 // Pretend this function makes a REST call that could possibly fail.
-async fn get_data() -> Result<i8, &'static str> {
+async fn get_data() -> Result<i8, 'static str> {
   // rng stands for "random number generator".
   let mut rng = rand::thread_rng();
   let n = rng.gen_range(1..11); // number from 1 to 10
@@ -3520,7 +3520,7 @@ since one of them will be returned.
 We must specify that with lifetime annotations (`'a` below).
 
 ```rust
-fn longest<'a>(strings: &[&'a str]) -> &'a str {
+fn longest<'a>(strings: &['a str]) -> 'a str {
     strings
         .iter()
         .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
@@ -3625,7 +3625,7 @@ For example:
 ```rust
 // This takes an array of strings and returns one of them.
 // Lifetimes must be specified, but why?
-fn longest<'a>(strings: &'a [&str]) -> &'a str {
+fn longest<'a>(strings: 'a [&str]) -> 'a str {
     strings
         .iter()
         .fold("", |acc, s| if s.len() > acc.len() { s } else { acc })
@@ -3888,7 +3888,7 @@ println!("all < 30? {}", numbers.iter().all(|&n| n < 30));
 
 Regular expressions for string pattern matching are not directly supported.
 Instead an external crate such as
-[regex](<https://crates.io/crates/regex?v=1.1.1>) must be used.
+[regex](https://crates.io/crates/regex) must be used.
 For example:
 
 ```rust
@@ -5005,7 +5005,7 @@ It implements the following type conversions:
 - `Point3D` -> `Point2D` discards the `z` coordinate.
 - `Point3D` -> `f64` calculates the distance from the origin.
 
-This code can also be found in the GitHub repo [rust-from-into](<https://github.com/mvolkmann/rust-from-into?v=1.1.1>).
+This code can also be found in the GitHub repo [rust-from-into](https://github.com/mvolkmann/rust-from-into).
 
 ```rust
 use std::convert::{From, Into};
@@ -5191,7 +5191,7 @@ where T: Debug + ToString {
 }
 
 fn main() {
-  print_string("Name", &"Mark");
+  print_string("Name", "Mark");
   // Name: Mark
   // debug: "Mark"
 
@@ -5278,9 +5278,9 @@ impl<T> Number for T where
        Into<f64> + Mul + MulAssign + Sub + SubAssign {}
 ```
 
-A similar approach is used by [num_traits](<https://docs.rs/num-traits/?v=1.1.1>) library crate.
+A similar approach is used by [num_traits](https://docs.rs/num-traits/) library crate.
 
-Another approach is to use the [num](<https://crates.io/crates/num?v=1.1.1>) crate.
+Another approach is to use the [num](https://crates.io/crates/num) crate.
 Add this as a dependency in `Cargo.toml` with a line like `num = "0.3.1"`.
 
 For example:
@@ -5596,7 +5596,7 @@ macro_rules! vec {
     ($elem:expr; $n:expr) => (
         $crate::vec::from_elem($elem, $n)
     );
-    ($($x:expr),+ $(,)?) => (
+    ($($x:expr),+ $(,)) => (
         <[_]>::into_vec(box [$($x),+])
     );
 }
@@ -5609,7 +5609,7 @@ TODO: What is the syntax for defining a procedural macro?
 Rust supports three kinds of tests:
 doc tests, unit tests, and integration tests.
 Examples of each kind of test can be found in the Rust application at
-[rust-poker](<https://github.com/mvolkmann/rust-poker?v=1.1.1>).
+[rust-poker](https://github.com/mvolkmann/rust-poker).
 All of these tests are executed by entering `cargo test`.
 To run only test files whose names match a pattern,
 enter `cargo test {pattern}`.
@@ -5642,7 +5642,7 @@ pub fn get_suit(hand: &Hand, rank: char) -> char {
     if let Some(card) = hand.cards.iter().find(|&c| c.rank == rank) {
         card.suit
     } else {
-        '?'
+        ''
     }
 }
 ````
@@ -5845,7 +5845,7 @@ fn read_file(path: &str) -> Result<()> {
     let f = File::open(path)?;
     let reader = BufReader::new(f);
     for line in reader.lines() {
-        println!("line = {}", line?);
+        println!("line = {}", line);
     }
 
     Ok(()) // returning unit value
@@ -5859,7 +5859,7 @@ fn main() -> Result<()> {
 ```
 
 To read and write JSON files, consider using
-[Serde JSON](<https://github.com/serde-rs/json?v=1.1.1>).
+[Serde JSON](https://github.com/serde-rs/json).
 The name is short for "<b>ser</b>ializing and <b>de</b>serializing".
 This requires adding the following dependencies in `cargo.toml`:
 
@@ -5868,7 +5868,7 @@ serde = { version = "1.0.118", features = ["derive"] }
 serde_json = "1.0.60"
 ```
 
-Rust allows libraries to "feature-gate" [feature-gate](<https://doc.rust-lang.org/cargo/reference/features.html?v=1.1.1>) some their features.
+Rust allows libraries to "feature-gate" [feature-gate](https://doc.rust-lang.org/cargo/reference/features.html) some their features.
 This enables reduced compile times and generated binary sizes
 for applications that do not use all the features of a library.
 The "features" option above specifies that we wish to use
@@ -5939,7 +5939,7 @@ let args: Vec<String> = std::env::args().collect();
 
 Command-line arguments can represent options
 that affect what an application does.
-A library crate like [clap](<https://crates.io/crates/clap?v=1.1.1>)
+A library crate like [clap](https://crates.io/crates/clap)
 can be used to simplify parsing of the options and provide help.
 
 The `clap` crate supports many features including the ability to:
@@ -6064,7 +6064,7 @@ fn main() {
         .arg(
             Arg::with_name("size")
                 .takes_value(true)
-                .help("how big?")
+                .help("how big")
                 .required(true),
         )
 
@@ -6179,7 +6179,7 @@ where `main.rs` is the file that contains the module definition
 (determined by the compiler).
 
 Values in the `std::prelude` module are automatically made available.
-A list of these values can be found [here](<https://doc.rust-lang.org/std/prelude/?v=1.1.1>)
+A list of these values can be found [here](https://doc.rust-lang.org/std/prelude/)
 and include `Box`, `Option`, `Result`, `String`, and `Vec`.
 
 Other libraries can also define a `prelude` module,
@@ -6187,7 +6187,7 @@ but the values it defines are not automatically imported.
 Users of the library can include all the items defined in a `prelude` module
 using `use library_name::prelude::\*;`.
 This is most useful for bringing traits into scope.
-(See this comment in the [Rust Forum](<https://users.rust-lang.org/t/defining-a-prelude-module-for-a-library-crate/54018/2?v=1.1.1>)).
+(See this comment in the [Rust Forum](https://users.rust-lang.org/t/defining-a-prelude-module-for-a-library-crate/54018/2)).
 
 The `use` statement binds a module path to a new name for easier access.
 For example, `use A::B::C` enables using `C` with just that name
@@ -6312,25 +6312,25 @@ Library (lib) crates provide code used by other crates.
 TODO: Can a crate be both types?
 
 The most popular source of open source crates is
-[crates.io](<https://crates.io/?v=1.1.1>).
+[crates.io](https://crates.io/).
 Commonly used crates found here include:
 
-- [actix-web](<https://crates.io/crates/actix-web?v=1.1.1>) - web framework
-- [chrono](<https://crates.io/crates/chrono?v=1.1.1>) - date and time library
-- [clap](<https://crates.io/crates/clap?v=1.1.1>) - command-line argument parser
-- [futures](<https://crates.io/crates/futures?v=1.1.1>) -
+- [actix-web](https://crates.io/crates/actix-web) - web framework
+- [chrono](https://crates.io/crates/chrono) - date and time library
+- [clap](https://crates.io/crates/clap) - command-line argument parser
+- [futures](https://crates.io/crates/futures) -
   "An implementation of futures and streams featuring
   zero allocations, composability, and iterator-like interfaces.
-- [hyper](<https://crates.io/crates/hyper?v=1.1.1>) - HTTP client library
-- [log](<https://crates.io/crates/log?v=1.1.1>) - logging API
-- [log](<https://crates.io/crates/nom?v=1.1.1>) - parser combinators library
-- [num-traits](<https://crates.io/crates/num-traits?v=1.1.1>) - generic mathematics
-- [rand](<https://crates.io/crates/rand?v=1.1.1>) - random number generation
-- [rayon](<https://crates.io/crates/rayon?v=1.1.1>) - "data-parallelism library"
-- [reqwest](<https://crates.io/crates/reqwest?v=1.1.1>) - HTTP client
-- [rocket](<https://crates.io/crates/rocket?v=1.1.1>) - web framework
-- [serde](<https://crates.io/crates/serde?v=1.1.1>) - data structure serialization and deserialization, including JSON
-- [tokio](<https://crates.io/crates/tokio?v=1.1.1>) - "An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications."
+- [hyper](https://crates.io/crates/hyper) - HTTP client library
+- [log](https://crates.io/crates/log) - logging API
+- [log](https://crates.io/crates/nom) - parser combinators library
+- [num-traits](https://crates.io/crates/num-traits) - generic mathematics
+- [rand](https://crates.io/crates/rand) - random number generation
+- [rayon](https://crates.io/crates/rayon) - "data-parallelism library"
+- [reqwest](https://crates.io/crates/reqwest) - HTTP client
+- [rocket](https://crates.io/crates/rocket) - web framework
+- [serde](https://crates.io/crates/serde) - data structure serialization and deserialization, including JSON
+- [tokio](https://crates.io/crates/tokio) - "An event-driven, non-blocking I/O platform for writing asynchronous I/O backed applications."
 
 ## Creating and Using a Library
 
@@ -6664,7 +6664,7 @@ The file `src/main.rs` exercises all four options using a single crate.
 To use a different crate, uncomment the related code in this file
 and comment the previously uncommented part.
 This code can be found in the GitHub repo at
-[rust-parallel-options](<https://github.com/mvolkmann/rust-parallel-options?v=1.1.1>).
+[rust-parallel-options](https://github.com/mvolkmann/rust-parallel-options).
 
 ```rust
 use std::error::Error;
@@ -6801,7 +6801,7 @@ to enable using multiple threads.
 The elapsed time for each approach is output
 to show the speed benefit of using multiple threads.
 
-The code can be found at [rust-web-scrape](<https://github.com/mvolkmann/rust-web-scrape?v=1.1.1>).
+The code can be found at [rust-web-scrape](https://github.com/mvolkmann/rust-web-scrape).
 With 19 web sites listed in `web-sites.txt` and
 running on a 2019 MacBook Pro laptop with 32GB of memory,
 the single-threaded approach took 16.18 seconds
@@ -6904,7 +6904,7 @@ async fn main() -> Result<()> {
 }
 ```
 
-[rayon](<https://github.com/rayon-rs/rayon?v=1.1.1>)
+[rayon](https://github.com/rayon-rs/rayon)
 is a Rust "data parallelism library".
 It supports the parallel iterator methods `par_iter` and `par_iter_mut`.
 It also supports parallel sorting of slices and vectors.j
@@ -6950,9 +6950,9 @@ Consider using those in `std::sync` and the `parking_lot` crate.
 
 The `parking_lot` versions of `Mutex` and `RwLock`
 are generally preferred over the `std::sync` versions for reasons described at
-[parking_lot::Mutex](<https://docs.rs/parking_lot/0.11.1/parking_lot/type.Mutex.html?v=1.1.1>)
+[parking_lot::Mutex](https://docs.rs/parking_lot/0.11.1/parking_lot/type.Mutex.html)
 and
-[parking_lot::RwLock](<https://docs.rs/parking_lot/0.11.1/parking_lot/type.RwLock.html?v=1.1.1>).:w
+[parking_lot::RwLock](https://docs.rs/parking_lot/0.11.1/parking_lot/type.RwLock.html).:w
 The reasons include better poison handling, less memory usage,
 better fairness of lock sharing, and better performance.
 
@@ -7129,7 +7129,7 @@ Then add the following attribute before the `main` function:
 
 ## Tokio
 
-[tokio](<https://crates.io/crates/tokio?v=1.1.1>) is a popular crate
+[tokio](https://crates.io/crates/tokio) is a popular crate
 that makes implementing asynchronous code even easier.
 It was initially created by Carl Lerche and is supported by
 many contributors including Alex Crichton, Ivan Petkov, Alice Rhyl,
@@ -7193,10 +7193,10 @@ TODO: Add information from <https://github.com/mvolkmann/rust-parallel-options>.
 
 ## Standard Library
 
-The [Rust Standard Library](<https://doc.rust-lang.org/std/index.html?v=1.1.1>) is relatively small.
+The [Rust Standard Library](https://doc.rust-lang.org/std/index.html) is relatively small.
 Often commonly needed functionality is instead found
 in the collection of crates at
-[crates.io](<https://crates.io/?v=1.1.1>).
+[crates.io](https://crates.io/).
 
 ## Databases
 
@@ -7204,11 +7204,11 @@ Rust can access many kinds of databases including
 PostgreSQL, MySQL, SQLite, and MongoDB.
 This is supported by several crates including:
 
-- [diesel](<https://crates.io/crates/diesel?v=1.1.1>)
-- [postgres](<https://crates.io/crates/postgres?v=1.1.1>)
-- [mongodb](<https://crates.io/crates/mongodb?v=1.1.1>)
-- [mysql](<https://crates.io/crates/mysql?v=1.1.1>)
-- [rusqlite](<https://crates.io/crates/rusqlite?v=1.1.1>)
+- [diesel](https://crates.io/crates/diesel)
+- [postgres](https://crates.io/crates/postgres)
+- [mongodb](https://crates.io/crates/mongodb)
+- [mysql](https://crates.io/crates/mysql)
+- [rusqlite](https://crates.io/crates/rusqlite)
 
 Here is an example of using the `postgres` crate:
 
@@ -7303,7 +7303,7 @@ Here is an example of using the `postgres` crate:
 
 Here is an example of using the `diesel` crate
 to access the same PostgreSQL database:
-This code can also be found at [rust-diesel-demo](<https://github.com/mvolkmann/rust-diesel-demo?v=1.1.1>).
+This code can also be found at [rust-diesel-demo](https://github.com/mvolkmann/rust-diesel-demo).
 
 1. Enter `cargo new diesel_demo`
 
@@ -7458,7 +7458,7 @@ This code can also be found at [rust-diesel-demo](<https://github.com/mvolkmann/
        result
    }
 
-   // The return type specified here allows using "?" for error handling
+   // The return type specified here allows using "" for error handling
    // regardless of the specific kinds of errors that occur.
    fn main() -> Result<(), Box<dyn std::error::Error>> {
        let conn = get_connection()?;
@@ -7564,12 +7564,12 @@ Here is an example of using the `mongodb` crate:
 
 ## Sending HTTP Requests
 
-The [reqwest](<https://crates.io/crates/reqwest?v=1.1.1>)
+The [reqwest](https://crates.io/crates/reqwest)
 crate is a popular option for sending HTTP requests.
 Here is an example of using it along with
-[tokio](<https://crates.io/crates/tokio?v=1.1.1>)
+[tokio](https://crates.io/crates/tokio)
 for asynchronous calls and
-[serde](<https://crates.io/crates/serde?v=1.1.1>)
+[serde](https://crates.io/crates/serde)
 for data structure deserialization.
 
 ```rust
@@ -7616,7 +7616,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 Here is an example that uses reqwest to benchmark REST service implementations.
-This code can be found at [rust-rest-benchmark](<https://github.com/mvolkmann/rust-rest-benchmark?v=1.1.1>).
+This code can be found at [rust-rest-benchmark](https://github.com/mvolkmann/rust-rest-benchmark).
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -7704,10 +7704,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 There are many ways to listen for and process HTTP requests.
 Popular creates for implementing HTTP servers include:
 
-- [actix-web](<https://crates.io/crates/actix-web?v=1.1.1>)
-- [rocket](<https://crates.io/crates/rocket?v=1.1.1>)
-- [warp](<https://crates.io/crates/warp?v=1.1.1>)
-- [tide](<https://crates.io/crates/tide?v=1.1.1>)
+- [actix-web](https://crates.io/crates/actix-web)
+- [rocket](https://crates.io/crates/rocket)
+- [warp](https://crates.io/crates/warp)
+- [tide](https://crates.io/crates/tide)
 
 In order to demonstrate using each of these frameworks,
 we will implement the same set of CRUD REST services
@@ -7717,7 +7717,7 @@ to keep the focus on the frameworks it will just be held in memory.
 This requires learning how each framework manages application state.
 
 All of this code, along with benchmark results, can be found in GitHub at
-[rust-rest](<https://github.com/mvolkmann/rust-rest?v=1.1.1>).
+[rust-rest](https://github.com/mvolkmann/rust-rest).
 
 The endpoints exposed will be:
 
@@ -7727,7 +7727,7 @@ The endpoints exposed will be:
 - PUT /dog/{id} - to update a dog
 - DELETE /dog/{id} - to delete a dog
 
-[TechEmpower](<https://www.techempower.com/benchmarks/#section=intro&hw=ph&test=fortune?v=1.1.1>) is a company that has been performing benchmarks of
+[TechEmpower](https://www.techempower.com/benchmarks/#section=intro&hw=ph&test=fortune) is a company that has been performing benchmarks of
 web application frameworks since 2013.
 They catalog community-provided code and results for a large number
 of frameworks performing the same set of tasks that include
@@ -7772,7 +7772,7 @@ Why start with one that is significantly slower?
 
 ### Actix-web
 
-This crate had a bad reputation for using unsafe code. See [Actix-web is dead](<https://deavid.wordpress.com/2020/01/18/actix-web-is-dead-about-unsafe-rust/?v=1.1.1>).
+This crate had a bad reputation for using unsafe code. See [Actix-web is dead](https://deavid.wordpress.com/2020/01/18/actix-web-is-dead-about-unsafe-rust/).
 However, as of January 2020, this crate has new maintainers
 and perhaps the issues raised will be addressed.
 They claim that all of the unsafe code has been carefully analyzed
@@ -7911,14 +7911,14 @@ async fn main() -> std::io::Result<()> {
 
 An issue with using Rocket is that it currently
 requires using a nightly version of Rust.
-For details, see [this issue](<https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259?v=1.1.1>).
+For details, see [this issue](https://github.com/SergioBenitez/Rocket/issues/19#issuecomment-736637259).
 However, the stable version of Rust can be used with the master branch of Rocket
 if that is specified in the `rocket` dependency.
 
 Rocket includes built-in support for accessing the following databases:
 Memcache, MongoDB, MySQL, Neo4J, PostgreSQL, Redis, and SQLite.
 
-The [Rocket configuration guide](<https://rocket.rs/v0.4/guide/configuration/?v=1.1.1>) says
+The [Rocket configuration guide](https://rocket.rs/v0.4/guide/configuration/) says
 "Warning: Rocket's built-in TLS is not considered ready for
 production use. It is intended for development use only."
 Presumably production uses of Rocket place the Rocket server
@@ -8085,7 +8085,7 @@ uuid = { version = "0.8.2", features = ["serde", "v4"] }
 While it may be possible to get Tide to work with tokio instead of async_std,
 the author has not provided an easy way to do this
 and no examples of doing it were found. See
-[this issue](<https://github.com/http-rs/tide/issues/791?v=1.1.1>).
+[this issue](https://github.com/http-rs/tide/issues/791).
 
 Add the following code in `src/main.rs`:
 
@@ -8137,7 +8137,7 @@ async fn main() -> tide::Result<()> {
             let dog_map = req.state().dog_map.read();
             let dogs: Vec<Dog> = dog_map.values().cloned().collect();
             let mut res = Response::new(StatusCode::Ok);
-            res.set_body(Body::from_json(&dogs)?);
+            res.set_body(Body::from_json(&dogs));
             Ok(res)
         })
         // Create a dog.
@@ -8148,7 +8148,7 @@ async fn main() -> tide::Result<()> {
             let mut dog_map = req.state().dog_map.write();
             dog_map.insert(id, dog.clone());
             let mut res = tide::Response::new(StatusCode::Created);
-            res.set_body(Body::from_json(&dog)?);
+            res.set_body(Body::from_json(&dog));
             Ok(res)
         });
 
@@ -8159,7 +8159,7 @@ async fn main() -> tide::Result<()> {
             let dog_map = req.state().dog_map.read();
             if let Some(dog) = dog_map.get(id.clone()) {
                 let mut res = Response::new(StatusCode::Ok);
-                res.set_body(Body::from_json(&dog)?);
+                res.set_body(Body::from_json(&dog));
                 Ok(res)
             } else {
                 Ok(Response::new(StatusCode::NotFound))
@@ -8173,7 +8173,7 @@ async fn main() -> tide::Result<()> {
             if let Some(_dog) = dog_map.get(id) {
                 dog_map.insert(id.to_string(), dog.clone());
                 let mut res = tide::Response::new(StatusCode::Ok);
-                res.set_body(Body::from_json(&dog)?);
+                res.set_body(Body::from_json(&dog));
                 Ok(res)
             } else {
                 Ok(Response::new(StatusCode::NotFound))
@@ -8288,7 +8288,7 @@ async fn main() {
         if let Some(dog) = dog_map.get(&id) {
             Ok(with_status(json(&dog), StatusCode::OK))
         } else {
-            Ok(with_status(json(&""), StatusCode::NOT_FOUND))
+            Ok(with_status(json(""), StatusCode::NOT_FOUND))
         }
     }
 

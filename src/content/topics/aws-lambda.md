@@ -359,36 +359,36 @@ is selected in the dropdown in the upper right.
 Then click the "Upload from" button and select ".zip or .jar file".
 
 <img alt="AWS Lambda code upload #1" style="width: 100%"
-  src="/blog/assets/aws-lambda-code-upload1.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-code-upload1.png">
 
 Click the "Upload" button in the following screenshot.
 
 <img alt="AWS Lambda code upload #2" style="width: 60%"
-  src="/blog/assets/aws-lambda-code-upload2.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-code-upload2.png">
 
 Select the generated `.zip` file and click the "Upload" button
 in the following screenshot.
 
 <img alt="AWS Lambda code upload #3" style="width: 90%"
-  src="/blog/assets/aws-lambda-code-upload3.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-code-upload3.png">
 
 Click the "Save" button in the following screenshot.
 
 <img alt="AWS Lambda code upload #4" style="width: 60%"
-  src="/blog/assets/aws-lambda-code-upload4.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-code-upload4.png">
 
 To test the Lambda function:
 
 Click the "Test" tab and click the "Test" button in the following screenshot.
 
 <img alt="AWS Lambda test #1" style="width: 100%"
-  src="/blog/assets/aws-lambda-test1.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-test1.png">
 
 Expand the "Details" section and examine the "Log output" section
 in the following screenshot.
 
 <img alt="AWS Lambda test #2" style="width: 100%"
-  src="/blog/assets/aws-lambda-test2.png?v=1.1.1">
+  src="/blog/assets/aws-lambda-test2.png">
 
 To verify that the DynamoDB index was properly updated:
 
@@ -402,4 +402,4 @@ To verify that the DynamoDB index was properly updated:
 This will display something similar to the screenshot below.
 
 <img alt="AWS DynamoDB results" style="width: 100%"
-  src="/blog/assets/aws-dynamodb-results.png?v=1.1.1">
+  src="/blog/assets/aws-dynamodb-results.png">

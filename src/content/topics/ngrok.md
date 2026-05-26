@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[ngrok](<https://ngrok.com?v=1.1.1>) is an HTTP tunneling tool.
+[ngrok](https://ngrok.com) is an HTTP tunneling tool.
 It can be used to expose a locally running server to the outside world
 using HTTP or HTTPS.
 
@@ -15,7 +15,7 @@ Basic usage is free.
 
 ## Steps to Use
 
-1. Sign up for an account at [ngrok](<https://ngrok.com?v=1.1.1>).
+1. Sign up for an account at [ngrok](https://ngrok.com).
 1. Login at the same URL.
 1. Download an OS-specific version of the `ngrok` command.
 1. Copy your auth token from the "Setup & Installation" page.

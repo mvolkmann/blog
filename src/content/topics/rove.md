@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[ROVE](<https://buttonshygames.com/products/rove?v=1.1.1>)
+[ROVE](https://buttonshygames.com/products/rove)
 "is a solo spatial puzzle game" consisting of only 18 cards.
 The object of the game is to complete at least seven "missions".
 

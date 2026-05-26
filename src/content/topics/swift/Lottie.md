@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-The [Lottie](<https://airbnb.design/lottie/?v=1.1.1>) is a
+The [Lottie](https://airbnb.design/lottie/) is a
 mobile, cross-platform, open-source library
 for rendering vector motion graphics that are described by JSON files.
 It was created by Airbnb.
@@ -16,7 +16,7 @@ Currently there is support for using Lottie in UIKit, but not SwiftUI.
 However, we can wrap using the the UIKit version in a `UIViewRepresentable`
 so it can be used in SwiftUI.
 
-The iOS version of Lottie uses the [Core Animation](<https://developer.apple.com/documentation/quartzcore?v=1.1.1>)
+The iOS version of Lottie uses the [Core Animation](https://developer.apple.com/documentation/quartzcore)
 framework.
 
 ## Installing
@@ -31,7 +31,7 @@ To install Lottie in an Xcode project:
 
 ## Animation Files
 
-Many Lottie animations are available at [LottieFiles](<https://lottiefiles.com?v=1.1.1>).
+Many Lottie animations are available at [LottieFiles](https://lottiefiles.com).
 Downloading them requires creating a free account.
 
 Many of the animations are free, but some require a paid account.
@@ -62,7 +62,7 @@ Add each animation JSON file to the project with the following steps:
 
 There is a fair amount of complexity in setting this up.
 Stewart Lynch provides a fantastic solution in his YouTube video
-[Lottie 4 in SwiftUI](<https://www.youtube.com/watch?v=kUjHl7zfCeg&v=1.1.1>).
+[Lottie 4 in SwiftUI](https://www.youtube.com/watch?v=kUjHl7zfCeg).
 The follow code is a modified version of what Stewart provides:
 
 ```swift

@@ -15,10 +15,10 @@ of Python and JavaScript. Lesser used features are omitted.
 
 | Topic                   | JavaScript                                                                                                | Python                                                                                                                                 |
 | ----------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| standard                | [ECMAScript](<https://www.ecma-international.org/publications/standards/Ecma-262.htm?v=1.1.1>) | [Python 3 documentation](<https://docs.python.org/3/?v=1.1.1>)                                                              |
+| standard                | [ECMAScript](https://www.ecma-international.org/publications/standards/Ecma-262.htm) | [Python 3 documentation](https://docs.python.org/3/)                                                              |
 | evaluation              | dynamic                                                                                                   | dynamic                                                                                                                                |
 | performance             | fast                                                                                                      | slow unless libraries call C/C++ functions                                                                                             |
-| style guide             | [Prettier](<https://prettier.io/?v=1.1.1>)                                                     | [PEP 8](<https://www.python.org/dev/peps/pep-0008/?v=1.1.1>), [Black](<https://pypi.org/project/black/?v=1.1.1>) |
+| style guide             | [Prettier](https://prettier.io/)                                                     | [PEP 8](https://www.python.org/dev/peps/pep-0008/), [Black](https://pypi.org/project/black/) |
 | most common indentation | 2 spaces                                                                                                  | 4 spaces (not tabs)                                                                                                                    |
 | type coercion           | implicit                                                                                                  | explicit except between number types                                                                                                   |
 
@@ -90,7 +90,7 @@ cons:
   until the `asyncio` module was added in Python 3.4.
   Some features require Python 3.7+.
 - Python programs have poor performance.
-  For examples, see [The Computer Language Benchmark Game](<https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html?v=1.1.1>)).
+  For examples, see [The Computer Language Benchmark Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/fastest/python.html)).
 - V3 contains breaking changes, so care must be taken when
   reading documentation and examples to verify version compatibility.
 
@@ -101,7 +101,7 @@ or `.mjs` (for ECMAScript modules).
 
 To run a JavaScript script outside a web browser:
 
-- install [Node.js](<https://nodejs.org/?v=1.1.1>).
+- install [Node.js](https://nodejs.org/).
 - enter `node {name}.js`
 
 Python source files have an extension of `.py`.
@@ -114,7 +114,7 @@ because doing so will prevent being able to import the existing module.
 To run a Python script:
 
 - install the Python interpreter from
-  [python.org](<https://www.python.org/downloads/?v=1.1.1>)
+  [python.org](https://www.python.org/downloads/)
 - enter `python3 {name}.py` or `python {name}.py`
 
 In both cases, command line arguments can be passed to the script.
@@ -278,7 +278,7 @@ Several module-related topics are described in the following table:
 | import entire module       | `const name from 'modname';`                                                                            | `import modname` or <br>`import modname as other` or<br>`from modname import *`                      |
 | import specific values     | `const {name1, name2} from 'modname';` or<br>`const {name1 as other1, name2 as other2} from 'modname';` | `from modname import name1, name2` or<br>`from modname import name1 as other1, name2 as other2`      |
 | import default and named   | `import name, {name1, name2} from 'path';`                                                              | not supported                                                                                        |
-| open source catalog        | [https://www.npmjs.com/](<https://www.npmjs.com/?v=1.1.1>)                                   | [https://pypi.org/](<https://pypi.org/?v=1.1.1>)                                          |
+| open source catalog        | [https://www.npmjs.com/](https://www.npmjs.com/)                                   | [https://pypi.org/](https://pypi.org/)                                          |
 | tool to install            | `npm` (installed with Node.js)                                                                          | `pip` (installed with Python) or<br>`conda` (installed with Anaconda)                                |
 
 In Python aliases are typically assigned to commonly used packages.
@@ -311,7 +311,7 @@ Python "packages" are managed using the `pip` tool
 which is installed when Python is installed.
 The name is an acronym for "Pip Installs Packages".
 It installs packages from the
-[Python Package Index](<https://pypi.org/?v=1.1.1>) (pypi).
+[Python Package Index](https://pypi.org/) (pypi).
 To upgrade the version of `pip` being used, enter
 `python -m pip install --upgrade pip`.
 
@@ -320,9 +320,9 @@ and make it easy for other developers to install the same set of packages,
 create a virtual environment.
 There are several tools that can be used to do this.
 Options include <a href="../anaconda/">Anaconda</a>,
-[`virtualenv`](<https://virtualenv.pypa.io/en/latest/?v=1.1.1>)
+[`virtualenv`](https://virtualenv.pypa.io/en/latest/)
 (primarily for Python 2), and
-[`venv`](<https://docs.python.org/3/library/venv.html?v=1.1.1>)
+[`venv`](https://docs.python.org/3/library/venv.html)
 (a subset of `virtualenv` for Python 3).
 
 To create a virtual environment using `venv`,
@@ -391,7 +391,7 @@ When there are nested packages, imports look like
 `from pkg1.pkg2.module-name import name1, name2`.
 
 For more information on Python packages, see the
-[Packages](<https://docs.python.org/3/tutorial/modules.html#packages?v=1.1.1>) in the Python Tutorial.
+[Packages](https://docs.python.org/3/tutorial/modules.html#packages) in the Python Tutorial.
 
 ## Printing/logging
 
@@ -568,7 +568,7 @@ Python uses "dictionaries" (or dicts) to store key/value pairs.
 
 | Topic                            | JavaScript                                                           | Python                                    |
 | -------------------------------- | -------------------------------------------------------------------- | ----------------------------------------- |
-| classic for loop                 | `for (let index = start; index < stop; index += step)`               | `for value in range(start, stop, step?):` |
+| classic for loop                 | `for (let index = start; index < stop; index += step)`               | `for value in range(start, stop, step):` |
 | over collection                  | `for (const value of iterable)`                                      | `for value in iterable:`                  |
 | over object/dict keys            | `for (const key of Object.keys(obj))`<br>or `for (const key in obj)` | `for key in dict.keys():`                 |
 | over object/dict values          | `for (const value of Object.values(obj))`                            | `for value in dict.values():`             |
@@ -617,8 +617,8 @@ Python named functions can have a docstring as their first line.
 This is used by tools that generate documentation from code.
 It is typically delimited by triple quotes.
 For guidelines on the content of docstrings, see the
-[Documentation Strings](<https://docs.python.org/3/tutorial/controlflow.html#documentation-strings?v=1.1.1>) in the Python Tutorial and
-[PEP-8 documentation strings](<https://www.python.org/dev/peps/pep-0008/#documentation-strings?v=1.1.1>).
+[Documentation Strings](https://docs.python.org/3/tutorial/controlflow.html#documentation-strings) in the Python Tutorial and
+[PEP-8 documentation strings](https://www.python.org/dev/peps/pep-0008/#documentation-strings).
 A good docstring for a function looks like:
 
 ```python
@@ -797,11 +797,11 @@ finished
 ```
 
 In Python 3.4, the
-[asyncio](<https://docs.python.org/3.8/library/asyncio.html?v=1.1.1>)
+[asyncio](https://docs.python.org/3.8/library/asyncio.html)
 library was added.
 It can be used to create coroutines which are similar to JavaScript Promises.
 The Python language doesn't provide the equivalent of the JavaScript promises,
-but [libraries](<https://pypi.org/project/promise/?v=1.1.1>) do.
+but [libraries](https://pypi.org/project/promise/) do.
 
 Here is an implementation of the previous JavaScript example in Python
 that produces the same output:
@@ -1208,14 +1208,14 @@ The Python `random` module also provides:
 | concatenate         | `s1 + n1`                                       | `s1 + str(n1)` or<br>`s1 str(n1)` with only a space between them                   |
 | lowercase           | `s.toLowerCase()`                               | `s.lower()`                                                                        |
 | uppercase           | `s.toUpperCase()`                               | `s.upper()`                                                                        |
-| substring           | `s1.substring(start, end?)`                     | `s[start:end]` or `s[start:]` or `s[:end]`                                         |
+| substring           | `s1.substring(start, end)`                     | `s[start:end]` or `s[start:]` or `s[:end]`                                         |
 | slice               | like `substring`, but supports negative indexes | same as above                                                                      |
 | split               | `s.split(delimiter)` returns array              | `s.split(delimiter)` returns list                                                  |
 | starts with         | `s.startsWith(sub)` returns Boolean             | `s.startswith(sub)` returns Boolean                                                |
 | ends with           | `s.endsWith(sub)` returns Boolean               | `s.endswith(sub)` returns Boolean                                                  |
 | contains            | `s.includes(sub)` returns Boolean               | `sub in s` returns Boolean                                                         |
-| index of            | `s.indexOf(sub)` returns number                 | `s.index(sub, start?, end?)` returns int                                           |
-| last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub, start?, end?)` returns int                                          |
+| index of            | `s.indexOf(sub)` returns number                 | `s.index(sub, start?, end)` returns int                                           |
+| last index of       | `s.lastIndexOf(sub)` returns number             | `s.rindex(sub, start?, end)` returns int                                          |
 | compare             | `s1.localeCompare(s2)` returns -1, 0, or 1      | `import locale`<br>`locale.strcoll(s1, s2)`<br>returns negative, zero, or positive |
 | remove prefix       | not supported                                   | `s.removeprefix(p)`                                                                |
 | remove suffix       | not supported                                   | `s.removesuffix(p)`                                                                |
@@ -1264,7 +1264,7 @@ To create a Python `range`:
 
 ```python
 myRange = range(end) # 0 to end-1
-myRange = range(start, end, step?) # start to end-1 where step defaults to 1
+myRange = range(start, end, step) # start to end-1 where step defaults to 1
 ```
 
 To create a Python `set`:
@@ -1313,7 +1313,7 @@ print(len(dog)) # 2
 | concatenate                  | `const newArr = arr1.concat(arr2, arr3, ...);`                                                      | `newSeq = seq1 + seq2 + seq3`                                                                                                                      |
 | copy (shallow)               | `[...arr]` or `arr.slice()`                                                                         | `list.copy()` - only for lists                                                                                                                     |
 | find                         | `arr.find(predicate);`                                                                              | `next(filter(predicate, seq))` - see note below this table                                                                                         |
-| find index                   | `arr.findIndex(predicate);`                                                                         | `index = seq.index(value, start?, end?)` - see note below this table                                                                               |
+| find index                   | `arr.findIndex(predicate);`                                                                         | `index = seq.index(value, start?, end)` - see note below this table                                                                               |
 | iterate over                 | `for (const value of arr)` or<br>`arr.forEach((value, index) => { ... });`                          | `for item in seq:` or<br>`for index, item in enumerate(seq):`                                                                                      |
 | iterate over in reverse      | iterate over `arr.reverse()`                                                                        | `for item in reversed(seq):`                                                                                                                       |
 | iterate over in sorted order | create a sorted copy and iterate over it                                                            | `for item in sorted(seq):`                                                                                                                         |
@@ -1328,7 +1328,7 @@ print(len(dog)) # 2
 | reduce                       | `const value = arr.reduce((acc, value) => { ... });`                                                | `from functools import reduce`<br>`value = reduce(lambda acc, item: ..., seq, initial)`                                                            |
 | some/any (Boolean)           | `arr.some(predicate)` - short circuits                                                              | `any(map(predicate, seq))` - no short circuit                                                                                                      |
 | every/all (Boolean)          | `arr.every(predicate)` - short circuits                                                             | `all(map(predicate, seq))` - no short circuit                                                                                                      |
-| sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse?)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on                     |
+| sort                         | `arr.sort(comparator);`<br>`comparator` is a function that compares two elements                    | `list.sort(key=k, reverse)`<br>`k` is an attribute name or a function that takes<br>an element and returns a value to sort on                     |
 | reverse                      | `arr.reverse()`                                                                                     | `list.reverse()` - only for lists                                                                                                                  |
 | destructure/unpack           | `const [v1, v2, v3] = arr;`<br># of variables on left can differ from # of array elements           | `v1, v2, v3 = seq`<br># of variables on left must match # of sequence elements<br>which limits usefulness                                          |
 
@@ -1625,7 +1625,7 @@ Python match objects support the following methods:
 - `span()` - returns a tuple containing the start and end indexes
 
 For more information on regular expression support in Python, see the
-[Python Standard Library Documentation](<https://docs.python.org/3/library/re.html?v=1.1.1>).
+[Python Standard Library Documentation](https://docs.python.org/3/library/re.html).
 
 ## Error handling
 
@@ -1673,7 +1673,7 @@ include a `pass` statement in an `except` block.
 There are many built-in Python exception classes.
 The base class of all of them is `Exception`.
 Names of built-in exception classes end in "Error".
-For a list of them, see [Built-in Exceptions](<https://docs.python.org/3/library/exceptions.html?v=1.1.1>).
+For a list of them, see [Built-in Exceptions](https://docs.python.org/3/library/exceptions.html).
 
 Names of custom exception classes should also end in "Error".
 Here is an example of defining one:
@@ -1717,9 +1717,9 @@ In Python, in order to use JSON methods include `import json`.
 
 Node.js and Python can both read and write files containing text or binary data.
 For details on how this works in Node.js, see the
-[Node.js File system docs](<https://nodejs.org/dist/latest-v14.x/docs/api/fs.html?v=1.1.1>).
+[Node.js File system docs](https://nodejs.org/dist/latest-v14.x/docs/api/fs.html).
 For details on how this works in Python, see
-[Reading and Writing Files in Python](<https://realpython.com/read-write-files-python/?v=1.1.1>).
+[Reading and Writing Files in Python](https://realpython.com/read-write-files-python/).
 
 One case to consider is when the file can easily fit in memory.
 We will see an example using JSON that demonstrates this.
@@ -1954,7 +1954,7 @@ The built-in Python decorators include:
   and cannot access class state.
   It is useful for utility functions.
 
-For more information, see [Real Python Primer on Python Decorators](<https://realpython.com/primer-on-python-decorators/#decorating-classes?v=1.1.1>).
+For more information, see [Real Python Primer on Python Decorators](https://realpython.com/primer-on-python-decorators/#decorating-classes).
 
 ## Check for running as main
 
@@ -1971,10 +1971,10 @@ In Python, use `if __name__ == '__main__': ...`
 
 HTTP servers can be implemented in both Node.js and Python.
 In Node.js, a popular option is to use the
-[Express](<https://expressjs.com/?v=1.1.1>) package.
+[Express](https://expressjs.com/) package.
 In Python, popular options include
-[Flask](<https://flask.palletsprojects.com/?v=1.1.1>) and
-[FastAPI](<https://fastapi.tiangolo.com/?v=1.1.1>).
+[Flask](https://flask.palletsprojects.com/) and
+[FastAPI](https://fastapi.tiangolo.com/).
 
 To demonstrate these options, we will implement HTTP servers that:
 
@@ -2081,7 +2081,7 @@ We want the servers to:
 ### Python Flask REST server
 
 Key benefits of
-[Flask](<https://flask.palletsprojects.com/?v=1.1.1>) are:
+[Flask](https://flask.palletsprojects.com/) are:
 
 - ability to implement REST APIs
 - server-side HTML generation
@@ -2089,7 +2089,7 @@ Key benefits of
 - provided file watch and server restart
 
 1. Install the required dependencies by entering `pip install flask flask-cors`.
-   [Flask-CORS](<https://flask-cors.readthedocs.io/en/latest/?v=1.1.1>)
+   [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/)
    supports enabling CORS in Flask servers.
 1. If running in a UNIX environment, create the script file `start` shown below
    and make it executable by entering `chmod a+x start`:
@@ -2171,7 +2171,7 @@ Key benefits of
 ### Python FastAPI REST server
 
 Key benefits of
-[FastAPI](<https://fastapi.tiangolo.com/?v=1.1.1>) are:
+[FastAPI](https://fastapi.tiangolo.com/) are:
 
 - type validation of request/response bodies and path/query parameters
 - automatic generation of Open API documentation
@@ -2292,7 +2292,7 @@ doIt();
 ```
 
 Python applications often use the
-[`requests`](<https://requests.readthedocs.io/en/master/?v=1.1.1>)
+[`requests`](https://requests.readthedocs.io/en/master/)
 package to send HTTP requests.
 It can be installed by entering `pip install requests`.
 
@@ -2427,8 +2427,8 @@ To gain type checking for JavaScript, use the TypeScript compiler.
 TypeScript is a superset of JavaScript that adds types.
 
 Two popular tools that provide type checking on Python source files
-are [mypy](<http://mypy-lang.org/?v=1.1.1>) and
-[Pyright](<https://github.com/microsoft/pyright?v=1.1.1>).
+are [mypy](http://mypy-lang.org/) and
+[Pyright](https://github.com/microsoft/pyright).
 
 The remainder of this section focuses on Python type checking.
 
@@ -2522,7 +2522,7 @@ def get_possible_actions() -> List[Action]:
 
 ### mypy
 
-[mypy](<http://mypy-lang.org/?v=1.1.1>)
+[mypy](http://mypy-lang.org/)
 is a Python type checking tool that is implemented in Python.
 Development began in 2014.
 
@@ -2539,7 +2539,7 @@ parameters that collect variadic arguments in a tuple or dict.
 
 ### Pyright
 
-[Pyright](<https://github.com/microsoft/pyright?v=1.1.1>)
+[Pyright](https://github.com/microsoft/pyright)
 is a Python type checking tool that is implemented in TypeScript.
 Development began in 2019.
 It is used by the VS Code extension Pylance
@@ -2550,7 +2550,7 @@ To install Pyright, install Node.js and enter `npm install -g pyright`.
 To run Pyright on a source file and all the files it imports,
 enter `pyright {filename}.py`.
 To run in watch mode, enter `pyright -w`.
-See [this issue](<https://github.com/microsoft/pyright/issues/330?v=1.1.1>).
+See [this issue](https://github.com/microsoft/pyright/issues/330).
 
 To configure options for Pyright, create a `pyrightconfig.json` file
 in the project root directory. For example, the following content
@@ -2562,7 +2562,7 @@ configures strict type checking for all files in the current directory.
 }
 ```
 
-In answer to the question "What is the long-term plan for Pyright?"
+In answer to the question "What is the long-term plan for Pyright"
 the Pyright FAQ says:
 
 "Pyright is a side project with no dedicated team.
@@ -2575,7 +2575,7 @@ Types can be specified in "stub files" with a `.pyi` extension
 instead of directly in `.py` files.
 
 Stub files for popular Python libraries can be downloaded from
-[typeshed](<https://github.com/python/typeshed?v=1.1.1>).
+[typeshed](https://github.com/python/typeshed).
 These are included as a submodule of mypy.
 See the typeshed link for instructions on installing them.
 
@@ -2583,7 +2583,7 @@ Note that the number of libraries represented here is currently small
 and it does not contain stub files for many popular libraries
 including mathplotlib, numpy, and pandas.
 Type stub files for matplotlib, numpy, and pandas can be found at
-[data-science-types](<https://pypi.org/project/data-science-types/?v=1.1.1>).
+[data-science-types](https://pypi.org/project/data-science-types/).
 
 When creating your own stub files, create `.pyi` files
 with the same names as the `.py` files whose types they describe.
@@ -2664,7 +2664,7 @@ See [Python testing](/blog/python/python-testing/).
 
 ## Linting
 
-To lint JavaScript using [ESLint](<https://eslint.org/?v=1.1.1>):
+To lint JavaScript using [ESLint](https://eslint.org/):
 
 - `npm install eslint eslint-plugin-import`
 - `eslint *.js`
@@ -2693,7 +2693,7 @@ For example:
 ```
 
 To lint Python code using
-[pylint](<https://www.pylint.org/?v=1.1.1>):
+[pylint](https://www.pylint.org/):
 
 - `pip install pylint`
 - `pylint *.py`
@@ -2730,7 +2730,7 @@ For example:
 ```
 
 To lint Python code using
-[flake8](<https://flake8.pycqa.org/?v=1.1.1>):
+[flake8](https://flake8.pycqa.org/):
 
 - `pip install flake8`
 - `flake8`
@@ -2798,18 +2798,18 @@ autopep8 and pylint.
 
 ### JavaScript resources
 
-- [Node API docs](<https://nodejs.org/dist/latest-v14.x/docs/api/?v=1.1.1>)
-- [npm](<https://npmjs.com/?v=1.1.1>)
-- [Mozilla Developer Network](<https://developer.mozilla.org/en-US/?v=1.1.1>)
+- [Node API docs](https://nodejs.org/dist/latest-v14.x/docs/api/)
+- [npm](https://npmjs.com/)
+- [Mozilla Developer Network](https://developer.mozilla.org/en-US/)
 
 ### Python resources
 
-- [Python home page](<https://www.python.org/?v=1.1.1>)
-- [Python Tutorial](<https://docs.python.org/3/tutorial/?v=1.1.1>)
-- [Python Standard Library](<https://docs.python.org/3/library/?v=1.1.1>)
-- [Python Language Reference](<https://docs.python.org/3/reference/?v=1.1.1>)
-- [Python HOWTOs](<https://docs.python.org/3/howto/?v=1.1.1>)
-- [Python FAQ](<https://docs.python.org/3/faq/?v=1.1.1>)
-- [Real Python](<https://realpython.com/start-here/?v=1.1.1>)
-- [tutororialspoint Learn Python 3](<https://www.tutorialspoint.com/python/?v=1.1.1>)
-- [Get into Python](<https://jobtensor.com/Python-Introduction?v=1.1.1>)
+- [Python home page](https://www.python.org/)
+- [Python Tutorial](https://docs.python.org/3/tutorial/)
+- [Python Standard Library](https://docs.python.org/3/library/)
+- [Python Language Reference](https://docs.python.org/3/reference/)
+- [Python HOWTOs](https://docs.python.org/3/howto/)
+- [Python FAQ](https://docs.python.org/3/faq/)
+- [Real Python](https://realpython.com/start-here/)
+- [tutororialspoint Learn Python 3](https://www.tutorialspoint.com/python/)
+- [Get into Python](https://jobtensor.com/Python-Introduction)

@@ -17,7 +17,7 @@ are described below.
 
 #### Overview
 
-The [pytest](<https://pytest.org?v=1.1.1>) framework
+The [pytest](https://pytest.org) framework
 runs unit tests of Python code and reports test results.
 It can also run tests written with the unittest and nose test frameworks.
 
@@ -188,7 +188,7 @@ These are counted separately from passing, failing, and skipped tests.
 It's not clear to me why this is a useful alternative to skipping tests.
 
 For additional variations such as conditionally skipping tests,
-see [Skip and xfail](<https://docs.pytest.org/en/latest/skipping.html?v=1.1.1>).
+see [Skip and xfail](https://docs.pytest.org/en/latest/skipping.html).
 
 #### Fixtures
 
@@ -231,12 +231,12 @@ def test_greet(capsys):
     assert captured.out = 'Hello, Mark!'
 ```
 
-For more detail, see [pytest fixtures](<https://docs.pytest.org/en/stable/fixture.html?v=1.1.1>).
+For more detail, see [pytest fixtures](https://docs.pytest.org/en/stable/fixture.html).
 
 #### Watching files
 
 To watch files for changes and automatically rerun tests, use
-[pytest-watch](<https://github.com/joeyespo/pytest-watch?v=1.1.1>).
+[pytest-watch](https://github.com/joeyespo/pytest-watch).
 To install it, enter `pip install pytest-watch`.
 To run tests in watch mode, enter `ptw`.
 Options after `--` are passed on to `pytest`.
@@ -244,18 +244,18 @@ For example, to run tests in quiet mode, enter `ptw -- -q`.
 
 ### Alternatives
 
-[unittest](<https://docs.python.org/3/library/unittest.html?v=1.1.1>)
+[unittest](https://docs.python.org/3/library/unittest.html)
 is another Python testing framework.
 It is notable in that it is included in the Python standard library,
 so does not need to be installed.
 However, it is more complicated and less popular than pytest.
 
-[nose2](<https://docs.nose2.io/en/latest/?v=1.1.1>)
+[nose2](https://docs.nose2.io/en/latest/)
 is another Python test framework that is less popular than pytest.
 
 ## Code coverage
 
-[Coverage.py](<https://coverage.readthedocs.io/en/coverage-5.3/?v=1.1.1>) is a tool for reporting code coverage of Python tests.
+[Coverage.py](https://coverage.readthedocs.io/en/coverage-5.3/) is a tool for reporting code coverage of Python tests.
 
 To install this tool, enter `pip install coverage`.
 
@@ -283,5 +283,5 @@ To view the report, open the `index.html` in this directory in any web browser.
 ## End-to-end tests
 
 There is nothing Python-specific about implementing end-to-end tests.
-For web applications, [Cypress](<https://www.cypress.io/?v=1.1.1>)
+For web applications, [Cypress](https://www.cypress.io/)
 is recommended.

@@ -12,12 +12,12 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Docker logo" style="border: 0"
-    src="/blog/assets/docker.png?v=1.1.1">
+    src="/blog/assets/docker.png">
 </figure>
 
 ## Overview
 
-[Docker](<https://www.docker.com?v=1.1.1>)
+[Docker](https://www.docker.com)
 "helps developers build, share, run, and verify applications anywhere —
 without tedious environment configuration or management."
 

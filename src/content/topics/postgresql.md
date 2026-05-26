@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[PostgreSQL](<https://www.postgresql.org?v=1.1.1>)
+[PostgreSQL](https://www.postgresql.org)
 claims to be "the world's most advanced open source relational database".
 It is implemented in C.
 PostgreSQL runs on all common operating systems.

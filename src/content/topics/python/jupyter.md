@@ -10,7 +10,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-From [jupyter.org](<https://jupyter.org/?v=1.1.1>),
+From [jupyter.org](https://jupyter.org/),
 "Project Jupyter exists to develop open-source software, open-standards,
 and services for interactive computing across dozens of programming languages."
 
@@ -28,7 +28,7 @@ an terminal windows for executing shell commands.
 Additional features include support for Jupyter Notebooks
 and many file formats such as CSV, GeoJSON, and Vega.
 
-[JupyterHub](<https://jupyter.org/hub?v=1.1.1>)
+[JupyterHub](https://jupyter.org/hub)
 allows groups of users to collaborate on notebooks
 over the web without installing any software.
 
@@ -239,7 +239,7 @@ select File ... Export Notebook As ... Export Notebook to PDF.
 This requires nbconvert and Pandoc be installed.
 To install nbconvert, enter `pip install nbconvert`.
 To install Pandoc in macOS, enter `brew install pandoc xelatex`.
-Also see [Install TeX](<https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex?v=1.1.1>) for platform-specific install instructions.
+Also see [Install TeX](https://nbconvert.readthedocs.io/en/latest/install.html#installing-tex) for platform-specific install instructions.
 This is a very large install! I did not try this.
 
 ### Markdown Cells
@@ -300,7 +300,7 @@ stats = Statistics(1, 2, 3, 4, 5, 6)
 stats.report()
 ```
 
-For more tips, see [Jupyter Notebook Tips, Tricks, & Shortcuts](<https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts?v=1.1.1>).
+For more tips, see [Jupyter Notebook Tips, Tricks, & Shortcuts](https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts).
 
 ## JavaScript Kernel
 
@@ -309,13 +309,13 @@ Additional language kernels can be installed
 to support other programming languages.
 These implement the Jupyter messaging protocol.
 
-[IJavascript](<https://github.com/n-riesco/ijavascript?v=1.1.1>)
+[IJavascript](https://github.com/n-riesco/ijavascript)
 is a Jupyter kernel for JavaScript.
 To install it:
 
-- Install [Node.js](<https://nodejs.org/?v=1.1.1>).
+- Install [Node.js](https://nodejs.org/).
 - See the installation at
-  [IJavaScript Installation](<https://github.com/n-riesco/ijavascript#installation?v=1.1.1>).
+  [IJavaScript Installation](https://github.com/n-riesco/ijavascript#installation).
   On macOS:
   - `brew install pkg-config zeromq`
   - `sudo easy_install pip`
@@ -332,7 +332,7 @@ Cells that have a type of "Code" can contain and execute JavaScript code.
 ## Plots
 
 There are many libraries that can be used to create plots inside Jupyter.
-A popular option is [matplotlib](<https://matplotlib.org/?v=1.1.1>).
+A popular option is [matplotlib](https://matplotlib.org/).
 To install it, enter `pip install matplotlib`.
 
 To draw a line chart, save it to a PNG file, and display it,
@@ -402,7 +402,7 @@ plt.show()
 
 ## Vega
 
-[Vega](<https://vega.github.io/vega/?v=1.1.1>)
+[Vega](https://vega.github.io/vega/)
 is a JSON format for describing data visualizations.
 Jupyter has built-in support for rendering Vega files
 with a `.vg` or `.vg.json` file extension.
@@ -411,7 +411,7 @@ Copy the JSON for one into a `.vg` file
 and open it in Jupyter to see the result.
 
 An example of a Vega line chart can be found at
-[Line Chart Example](<https://vega.github.io/vega/examples/line-chart/?v=1.1.1>).
+[Line Chart Example](https://vega.github.io/vega/examples/line-chart/).
 It produces the following chart:
 
 ![Vega chart](/blog/assets/vega.png)
@@ -495,10 +495,10 @@ The user interface is slightly different than the JupyterLab web UI.
 Methods in matplotlab that save plots to files
 do not seem to work when called inside VS Code.
 
-For more details, see [Working with Jupyter Notebooks in Visual Studio Code](<https://code.visualstudio.com/docs/python/jupyter-support?v=1.1.1>).
+For more details, see [Working with Jupyter Notebooks in Visual Studio Code](https://code.visualstudio.com/docs/python/jupyter-support).
 
 ## Resources
 
 For help, join the Jupyter Discourse by browsing the
-[Community](<https://jupyter.org/community?v=1.1.1>) page
+[Community](https://jupyter.org/community) page
 and clicking the "View" button for "Jupyter Discourse".

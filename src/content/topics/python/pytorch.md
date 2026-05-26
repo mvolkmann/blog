@@ -10,12 +10,12 @@ layout: topic-layout.njk
 
 ## Overview
 
-[PyTorch](<https://pytorch.org/?v=1.1.1>) is a
+[PyTorch](https://pytorch.org/) is a
 deep learning library for Python.
-It is a port of [Torch](<http://torch.ch/?v=1.1.1>)
+It is a port of [Torch](http://torch.ch/)
 which is implemented in C and Lua.
 Many PyTorch operations are primarily implemented in C++ and
-[CUDA](<https://developer.nvidia.com/cuda-zone?v=1.1.1>).
+[CUDA](https://developer.nvidia.com/cuda-zone).
 CUDA is a language created by NVIDIA that is similar to C++
 and supports massive parallelism on graphical processing units (GPUs).
 Both are frameworks for implementing deep learning algorithms.
@@ -95,7 +95,7 @@ by building PyTorch from source
 Some cloud platforms provide online access to Jupyter Notebooks
 that have PyTorch preinstalled and can process code using GPUs.
 One example is
-[Colabortory](<https://colab.research.google.com?v=1.1.1>).
+[Colabortory](https://colab.research.google.com).
 
 ## Installing PyTorch
 
@@ -131,11 +131,11 @@ A model must be designed.
 Training the model can take many hours.
 
 Another option it to use a pre-trained model created by someone else.
-[PyTorch Hub](<https://pytorch.org/hub/?v=1.1.1>)
+[PyTorch Hub](https://pytorch.org/hub/)
 provides some of these.
 
 Another source is the
-[TorchVision](<http://github.com/pytorch/vision?v=1.1.1>) project
+[TorchVision](http://github.com/pytorch/vision) project
 which contains a collection of notable neural network models
 for computer vision.
 
@@ -151,9 +151,9 @@ Names that start with an uppercase letter represent Python model classes.
 Names that start with a lowercase letter represent Python functions
 that can be called to instantiate a model using one of the model classes.
 For example, model classes include `AlexNet`, `Inception3`, and `ResNet`.
-[AlexNet](<http://mng.bz/lo6z?v=1.1.1>),
-[Inception3](<http://arxiv.org/pdf/1512.00567.pdf?v=1.1.1>), and
-[ResNet](<http://arxiv.org/pdf/1512.03385.pdf?v=1.1.1>).
+[AlexNet](http://mng.bz/lo6z),
+[Inception3](http://arxiv.org/pdf/1512.00567.pdf), and
+[ResNet](http://arxiv.org/pdf/1512.03385.pdf).
 Functions include `alexnet`, `inception_v3`, and `resnet101`.
 
 The ImageNet Large Scale Visual Recognition Competition (ILSVRC)
@@ -313,12 +313,12 @@ toy terrier - 0.15%
 The input image used is:
 
 <img alt="input image" class="keep-size"
-  src="/blog/assets/pytorch-input.jpg?v=1.1.1">
+  src="/blog/assets/pytorch-input.jpg">
 
 The image that results from preprocessing is:
 
 <img alt="preprocessed image" class="keep-size"
-  src="/blog/assets/pytorch-input-preprocessed.png?v=1.1.1">
+  src="/blog/assets/pytorch-input-preprocessed.png">
 
 Note that if an image is fed into the model that
 does not match any of the 1000 training categories,
@@ -326,7 +326,7 @@ matches will still be reported ... possibly with high confidence.
 
 ## Data sources
 
-[ImageNet](<http://imagenet.stanford.edu?v=1.1.1>)
+[ImageNet](http://imagenet.stanford.edu)
 hosts a collection of over 14 million labeled images (with nouns)
 that can be used as input to deep learning models.
 It is maintained by Stanford University.
@@ -353,7 +353,7 @@ sorted from most to least likely match.
 
 ## Generative Adversarial Network (GAN)
 
-From [Machine Learning Mastery](<https://machinelearningmastery.com/what-are-generative-adversarial-networks-gans/?v=1.1.1>), "Generative modeling is
+From [Machine Learning Mastery](https://machinelearningmastery.com/what-are-generative-adversarial-networks-gans/), "Generative modeling is
 an unsupervised learning task in machine learning that involves
 automatically discovering and learning the regularities or patterns
 in input data in such a way that the model can be used to
@@ -384,12 +384,12 @@ Such models are interesting, but they their results
 are not yet consistent enough for real-world usage.
 
 An implementation can be found in the GitHub repository for
-[deep-learning-with-pytorch/ImageCaptioning.pytorch](<https://github.com/deep-learning-with-pytorch/ImageCaptioning.pytorch?v=1.1.1>)
+[deep-learning-with-pytorch/ImageCaptioning.pytorch](https://github.com/deep-learning-with-pytorch/ImageCaptioning.pytorch)
 Note that this requires a GPU.
 
 ## Torch Hub
 
-[Torch Hub](<https://pytorch.org/hub/?v=1.1.1>) is a web site to
+[Torch Hub](https://pytorch.org/hub/) is a web site to
 "discover and publish models to a pre-trained model repository
 designed for research exploration."
 These models can be accessed through a PyTorch interface.

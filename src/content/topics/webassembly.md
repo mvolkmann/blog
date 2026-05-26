@@ -17,9 +17,9 @@ WASM code can be run in modern web browsers including
 Chrome (including Android), Edge, Firefox (including Android),
 Safari (including iOS), Opera, and Android Browser, but not Internet Explorer.
 It can also be run outside of web browsers using tools such as
-[Wasmtime](<https://wasmtime.dev?v=1.1.1>),
-[WASM3](<https://github.com/wasm3/wasm3?v=1.1.1>),
-[WebAssembly Micro Runtime (WAMR)](<https://github.com/bytecodealliance/wasm-micro-runtime?v=1.1.1>).
+[Wasmtime](https://wasmtime.dev),
+[WASM3](https://github.com/wasm3/wasm3),
+[WebAssembly Micro Runtime (WAMR)](https://github.com/bytecodealliance/wasm-micro-runtime).
 
 There are two primary reasons to run WASM code in a web browser.
 The first is that it typically executes much faster than
@@ -41,14 +41,14 @@ The only way it can access those things is if the code
 that invokes it passes in functions that have those capabilities.
 This is referred to as capability-based security".
 Actually, WASM itself has no access to these and only gains it through the
-[WebAssembly System Interface (WASI)](<https://wasi.dev?v=1.1.1>).
+[WebAssembly System Interface (WASI)](https://wasi.dev).
 
 WASM code can also be compiled to native executables
 that run on x86 and ARM processors.
 
 ## Resources
 
-- [Bytecode Alliance](<https://bytecodealliance.org?v=1.1.1>)
+- [Bytecode Alliance](https://bytecodealliance.org)
 
   This is "an open source community dedicated to creating secure new
   software foundations, building on standards such as
@@ -69,12 +69,12 @@ Other types such as strings and structs must be
 serialized into these number types and deserialized from them
 using linear memory.
 Tools such as
-[wasm_bindgen](<https://github.com/rustwasm/wasm-bindgen?v=1.1.1>)
+[wasm_bindgen](https://github.com/rustwasm/wasm-bindgen)
 for Rust and
-[Emscripten](<https://emscripten.org?v=1.1.1>) for C/C++
+[Emscripten](https://emscripten.org) for C/C++
 generate code that does this.
 
-The [Interface Types proposal](<https://github.com/WebAssembly/interface-types?v=1.1.1>) seeks to change this. It "adds a new set
+The [Interface Types proposal](https://github.com/WebAssembly/interface-types) seeks to change this. It "adds a new set
 of interface types to WebAssembly that describe high-level values".
 These can be implemented using linear memory
 and the standard WASM numeric types.
@@ -129,11 +129,11 @@ Modules can define many kinds of things including:
 
 ## Tools
 
-The [WebAssembly Binary Toolkit (WABT)](<https://github.com/WebAssembly/wabt?v=1.1.1>)
+The [WebAssembly Binary Toolkit (WABT)](https://github.com/WebAssembly/wabt)
 includes a set of command line tools including
 `wat2wasm`, `wasm2wat`, `wasm-validate`, and `wasm-interp`.
 In macOS these can be installed by installing
-[Homebrew](<https://brew.sh?v=1.1.1>)
+[Homebrew](https://brew.sh)
 and entering `brew install wabt`.
 
 The `wat2wasm` tool compiles a `.wat` file to a `.wasm` file.
@@ -331,7 +331,7 @@ The rest compute the distance between two points
 using the formula `sqrt(dx**2 + dy**2)`.
 Three versions are presented to show different approaches.
 This code is available in the GitHub repo
-[wasm-demo](<https://github.com/mvolkmann/wasm-demo/?v=1.1.1>).
+[wasm-demo](https://github.com/mvolkmann/wasm-demo/).
 
 1. Create the file `math.wat` containing the following:
 
@@ -448,7 +448,7 @@ This code is available in the GitHub repo
 )
 ```
 
-1. Install the [WebAssembly Binary Toolkit (WABT)](<https://github.com/WebAssembly/wabt?v=1.1.1>).
+1. Install the [WebAssembly Binary Toolkit (WABT)](https://github.com/WebAssembly/wabt).
    This includes a set of command line tools including
    wat2wasm, wasm2wat, wasm-validate, and wasm-interp.
    In macOS this can be installed using Homebrew
@@ -529,14 +529,14 @@ TODO: Consider deleting this table if it just duplicates what is explained later
 | grow linear memory                         | `memory.grow {pages}`                                         |
 | shrink linear memory?                      | not currently supported, but being discussed (1)              |
 
-(1) [memory management issue](<https://github.com/WebAssembly/design/issues/1397?v=1.1.1>)
+(1) [memory management issue](https://github.com/WebAssembly/design/issues/1397)
 
 The tables below summarize the currently supported WASM instructions.
 Understanding these is only necessary when
 directly writing WASM code in text format or
 to understand what compilers for higher level languages like Rust generate.
 
-For more detail, see the [WASM Reference Manual](<https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md?v=1.1.1>).
+For more detail, see the [WASM Reference Manual](https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md).
 
 The tables below use the following abbreviations
 for substitutions in instruction names:
@@ -1419,11 +1419,11 @@ is that the Rust compiler makes certain kinds of error impossible,
 such as those related to memory management and access.
 
 Tools for compiling Rust code to WebAssembly include
-[wasm-pack](<https://rustwasm.github.io/wasm-pack/?v=1.1.1>) and
-[ssvmup](<https://www.secondstate.io/articles/ssvmup/?v=1.1.1>)
+[wasm-pack](https://rustwasm.github.io/wasm-pack/) and
+[ssvmup](https://www.secondstate.io/articles/ssvmup/)
 The ssvmup tool was inspired by wasm-pack and has explicit support for Deno.
 Also see the support for Rust in the
-[Parcel bundler](<https://parceljs.org/rust.html?v=1.1.1>)!
+[Parcel bundler](https://parceljs.org/rust.html)!
 
 TODO: Demonstrate using emscripten to compile C code to WASM.
 
@@ -1685,7 +1685,7 @@ so we will also use that. This tool:
 
      const color = getColor();
      console.log('color =', color);
-     console.log('color instanceof Color?', color instanceof Color); // true
+     console.log('color instanceof Color', color instanceof Color); // true
      console.log('color.red =', color.red); // 1
      console.log('color.green =', color.green); // 2
      console.log('color.blue =', color.blue); // 3
@@ -1726,7 +1726,7 @@ TODO: See https://rustwasm.github.io/docs/wasm-bindgen/examples/import-js.html!
 
 ## C With Emscripten
 
-To install Emscripten, browse [Download and install](<https://emscripten.org/docs/getting_started/downloads.html?v=1.1.1>)
+To install Emscripten, browse [Download and install](https://emscripten.org/docs/getting_started/downloads.html)
 and follow the instructions for installing using emsdk.
 This will result in the `emcc` executable being in your `PATH`.
 
@@ -1744,7 +1744,7 @@ Linear memory is also used by libraries such as wasm-bindgen
 to enable passing non-numeric values to functions
 and returning non-numeric values from them.
 
-From [Implementing Conway](<https://rustwasm.github.io/book/game-of-life/implementing.html?v=1.1.1>),
+From [Implementing Conway](https://rustwasm.github.io/book/game-of-life/implementing.html),
 "As a general rule of thumb, a good JavaScript/WebAssembly interface design
 is often one where large, long-lived data structures are implemented as
 Rust types that live in the WebAssembly linear memory,
@@ -1768,7 +1768,7 @@ Note that it is not possible to allocate space outside the WASM code
 and get WASM code to share it.
 
 Let's walk through an example that demonstrates this.
-The code is available in the GitHub repo [wasm-rust-linear-memory](<https://github.com/mvolkmann/wasm-rust-linear-memory?v=1.1.1>).
+The code is available in the GitHub repo [wasm-rust-linear-memory](https://github.com/mvolkmann/wasm-rust-linear-memory).
 TODO: Why did you need to use wasm-bindgen in this example
 TODO: since it only uses numbers?
 
@@ -1820,7 +1820,7 @@ The remainder of the file is divided into 12 sections.
 
 ## AssemblyScript
 
-[AssemblyScript](<https://www.assemblyscript.org?v=1.1.1>)
+[AssemblyScript](https://www.assemblyscript.org)
 is a programming language designed to compile to WASM.
 
 AssemblyScript is a variant of TypeScript.
@@ -1857,7 +1857,7 @@ Macro types
 - `returnof<T>`
 - `valueof<T>`
 
-Supported math instructions are described [here](<https://www.assemblyscript.org/stdlib/math.html?v=1.1.1>).
+Supported math instructions are described [here](https://www.assemblyscript.org/stdlib/math.html).
 
 The easiest way to create an AssemblyScript project is to:
 
@@ -1963,17 +1963,17 @@ that computes the distance between two points and call it from JavaScript:
    the port on which the local server is listening.
 
 Another approach for implementing tests of AssemblyScript functions is to use
-[as-pect](<https://github.com/jtenner/as-pect?v=1.1.1>) tool.
+[as-pect](https://github.com/jtenner/as-pect) tool.
 
 AssemblyScript can call WASI functions using the
-[as-wasi](<https://github.com/jedisct1/as-wasi?v=1.1.1>) library.
+[as-wasi](https://github.com/jedisct1/as-wasi) library.
 
 The memory management code added to `.wasm` files generated from AssemblyScript
 adds about 2K bytes. This can be removed if not needed.
 
 ## WebAssembly System Interface (WASI)
 
-The [WebAssembly System Interface (WASI)](<https://wasi.dev?v=1.1.1>)
+The [WebAssembly System Interface (WASI)](https://wasi.dev)
 defines a way to communicate with the system
 that focuses on portability and security.
 This includes things like stdout/stdin, the file system, and network resources.
@@ -1985,10 +1985,10 @@ ability to combine code compiled from many higher-level programming languages.
 WASM code using WASI is portable across operating systems.
 
 Implementations of WASI include
-[Wasmtime](<https://wasmtime.dev?v=1.1.1>) (developed at Mozilla) and
-[Lucet](<https://bytecodealliance.github.io/lucet/?v=1.1.1>)
+[Wasmtime](https://wasmtime.dev) (developed at Mozilla) and
+[Lucet](https://bytecodealliance.github.io/lucet/)
 (developed at Fastly).
-There is a [plan](<https://github.com/bytecodealliance/lucet/issues/607?v=1.1.1>)
+There is a [plan](https://github.com/bytecodealliance/lucet/issues/607)
 to merge Lucet with Wasmtime.
 
 Rust code compiled to WASM can use WASI features
@@ -2036,7 +2036,7 @@ asynchronous I/O, file watching, and file locking.
 There are currently three tools for running WASM code outside a web browser.
 Each is described below.
 
-### [WASM3](<https://github.com/wasm3/wasm3?v=1.1.1>)
+### [WASM3](https://github.com/wasm3/wasm3)
 
 To install this in macOS, install Homebrew and enter `brew install wasm3`.
 Installing for other platforms is more complicated.
@@ -2053,7 +2053,7 @@ TODO: I can't get either of these approaches to work on a `.wasm` file
 TODO: I created from a Rust programing using
 TODO: `rustc {path-to-rust-file} --target wasm32-wasi`!
 
-### [Wasmtime](<https://wasmtime.dev?v=1.1.1>)
+### [Wasmtime](https://wasmtime.dev)
 
 To install this in Linux or macOS:
 
@@ -2063,7 +2063,7 @@ To install this in Linux or macOS:
 Visit the Wasmtime site linked above for instructions to install in Windows.
 
 One way to demonstrate running this is to compile Rust code to
-[WebAssembly System Interface (WASI)](<https://wasi.dev?v=1.1.1>).
+[WebAssembly System Interface (WASI)](https://wasi.dev).
 To do so, enter `rustc {path-to-rust-file} --target wasm32-wasi`.
 This produces a `.wasm` file.
 The Rust code can use features such as the `println!` macro to produce output.
@@ -2083,14 +2083,14 @@ To execute a `.wast` test file, enter `wasmtime wast {path-to-wast-file}`.
 Unlike wasm3, Wasmtime does not provide a REPL or
 support running a specific function from the command-line.
 
-### [WebAssembly Micro Runtime (WAMR)](<https://github.com/bytecodealliance/wasm-micro-runtime?v=1.1.1>)
+### [WebAssembly Micro Runtime (WAMR)](https://github.com/bytecodealliance/wasm-micro-runtime)
 
 Instructions for installing this tool on various platforms can be found at
-[build_wamr.md](<https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md?v=1.1.1>).
+[build_wamr.md](https://github.com/bytecodealliance/wasm-micro-runtime/blob/main/doc/build_wamr.md).
 
 To install this in macOS:
 
-- Browse [wasm-micro-runtime](<https://github.com/bytecodealliance/wasm-micro-runtime?v=1.1.1>).
+- Browse [wasm-micro-runtime](https://github.com/bytecodealliance/wasm-micro-runtime).
 - Click the "Code" button and "Download ZIP".
 - Unzip the downloaded file.
 - cd into its directory and into `product-mini/platforms/darwin`.
@@ -2154,7 +2154,7 @@ To create a project that uses wasm-pack::
    TODO: Maybe this is no longer an issue.
    To run a simple Deno HTTP file server:
 
-   1. Install [Deno](<https://deno.land/#installation?v=1.1.1>).
+   1. Install [Deno](https://deno.land/#installation).
    1. Enter `deno install --allow-net --allow-read https://deno.land/std@0.83.0/http/file_server.ts`
    1. Enter `file_server .`
    1. Browse `localhost:4507`

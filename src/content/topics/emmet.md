@@ -19,4 +19,4 @@ Emmet is not just a simple snippet manager.
 It parses entered text to extract meaning.
 These kinds of snippets are referred to as "dynamic snippets."
 
-See my Object Computing (OCI) article [Emmet Editor Plugin for Dynamic HTML/CSS Snippets](<https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin?v=1.1.1>).
+See my Object Computing (OCI) article [Emmet Editor Plugin for Dynamic HTML/CSS Snippets](https://objectcomputing.com/resources/publications/sett/march-2018-emmet-editor-plugin).

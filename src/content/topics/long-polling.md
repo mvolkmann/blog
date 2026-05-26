@@ -32,7 +32,7 @@ The server does not respond until there is a change in the data to be reported.
 When the client receives the data, it immediately requests the next update.
 
 All the example code below can be found in the GitHub repository
-[long-polling-examples](<https://github.com/mvolkmann/long-polling-examples?v=1.1.1>).
+[long-polling-examples](https://github.com/mvolkmann/long-polling-examples).
 
 ## Demo Client
 
@@ -85,7 +85,7 @@ Responses sent from a long polling endpoint must
 set the "Transfer-Encoding" header to "chunked".
 
 The following server code uses Node.js and the
-[Express](<https://expressjs.com?v=1.1.1>) library.
+[Express](https://expressjs.com) library.
 
 ```js
 import express from 'express';
@@ -168,12 +168,12 @@ The following screenshot shows the request and response HTTP headers
 for the SSE connection.
 
 <img alt="SSE DevTools Network tab Headers" style="width: 100%"
-  src="/blog/assets/sse-devtools-network-headers.png?v=1.1.1">
+  src="/blog/assets/sse-devtools-network-headers.png">
 
 The following screenshot shows the event stream for the SSE connection.
 
 <img alt="SSE DevTools Network tab EventStream" style="width: 70%"
-  src="/blog/assets/sse-devtools-network-eventstream.png?v=1.1.1">
+  src="/blog/assets/sse-devtools-network-eventstream.png">
 
 ## Bun and Hono
 

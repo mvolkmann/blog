@@ -98,27 +98,27 @@ querying, creating, updating, and deleting records.
 - Operation
 
   A CloudKit operation describes a specific operation on a database.
-  To perform multiple operations as a group (a.k.a. batch), see [CKOperationGroup](<https://developer.apple.com/documentation/cloudkit/ckoperationgroup?v=1.1.1>).
+  To perform multiple operations as a group (a.k.a. batch), see [CKOperationGroup](https://developer.apple.com/documentation/cloudkit/ckoperationgroup).
 
   CloudKit provides convenience APIs to simplify code,
-  but for full power subclasses of [CKOperation](<https://developer.apple.com/documentation/cloudkit/ckoperation?v=1.1.1>) can be used.
+  but for full power subclasses of [CKOperation](https://developer.apple.com/documentation/cloudkit/ckoperation) can be used.
   These include the following:
 
-  - [CKFetchRecordsOperation](<https://developer.apple.com/documentation/cloudkit/ckfetchrecordsoperation?v=1.1.1>)
+  - [CKFetchRecordsOperation](https://developer.apple.com/documentation/cloudkit/ckfetchrecordsoperation)
 
     This is used to fetch complete records or
     a subset of their fields (`desiredKeys`)
     by the unique ids of the records.
 
-  - [CKModifyRecordsOperation](<https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation?v=1.1.1>)
+  - [CKModifyRecordsOperation](https://developer.apple.com/documentation/cloudkit/ckmodifyrecordsoperation)
 
     This is used to create, modify, and delete records.
 
-  - [CKQueryOperation](<https://developer.apple.com/documentation/cloudkit/ckqueryoperation?v=1.1.1>)
+  - [CKQueryOperation](https://developer.apple.com/documentation/cloudkit/ckqueryoperation)
 
     This is used to fetch complete records or
     a subset of their fields (`desiredKeys`)
-    using query predicates specified with a [CKQuery](<https://developer.apple.com/documentation/cloudkit/ckquery?v=1.1.1>)
+    using query predicates specified with a [CKQuery](https://developer.apple.com/documentation/cloudkit/ckquery)
     object.
 
 - Zones
@@ -134,7 +134,7 @@ querying, creating, updating, and deleting records.
 
 ## Sample Code
 
-See the app [CloudKitDemo](<https://github.com/mvolkmann/CloudKitDemo?v=1.1.1>) which demonstrates performing all the CRUD operations
+See the app [CloudKitDemo](https://github.com/mvolkmann/CloudKitDemo) which demonstrates performing all the CRUD operations
 on records in a CloudKit database.
 
 ## Adding CloudKit to a Project
@@ -359,7 +359,7 @@ To enable use of subscriptions from Xcode:
 
 For a good example of using CloudKit including performing CRUD operations
 and subscribing to be notified of changes see
-[CloudKitDemo](<https://github.com/mvolkmann/CloudKitDemo?v=1.1.1>).
+[CloudKitDemo](https://github.com/mvolkmann/CloudKitDemo).
 
 ## Push Notifications
 
@@ -387,7 +387,7 @@ perhaps being released to the App Store,
 deploy the container to production.
 Apps in the App Store can only access production containers.
 
-From [Managing iCloud Containers](<https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema?v=1.1.1>), "Deploying the schema copies its
+From [Managing iCloud Containers](https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema), "Deploying the schema copies its
 record types, fields, and indexes to the production environment,
 but doesn’t copy any records."
 
@@ -402,7 +402,7 @@ To deploy a container to production:
 
 Records in the development container will remain.
 
-The [Managing iCloud Containers](<https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema?v=1.1.1>), page also says:
+The [Managing iCloud Containers](https://developer.apple.com/documentation/cloudkit/managing_icloud_containers_with_the_cloudkit_database_app/deploying_an_icloud_container_s_schema), page also says:
 "To prevent conflicts, you can’t
 delete record types or fields that are already in production.
 Every time you deploy the development schema, its
@@ -419,7 +419,7 @@ and redeploying the schema changes to production.
 
 ## CloudKit in Code
 
-The following code is a heavily modified version of [CloudKitUtility.swift](<https://github.com/SwiftfulThinking/SwiftUI-Advanced-Learning/blob/main/SwiftfulThinkingAdvancedLearning/CloudKitBootcamps/CloudKitUtility.swift?v=1.1.1>) from Nick Sarno of Swiftful Thinking.
+The following code is a heavily modified version of [CloudKitUtility.swift](https://github.com/SwiftfulThinking/SwiftUI-Advanced-Learning/blob/main/SwiftfulThinkingAdvancedLearning/CloudKitBootcamps/CloudKitUtility.swift) from Nick Sarno of Swiftful Thinking.
 
 Define a class corresponding to each record type that
 conforms to the `CloudKitable` protocol defined below.
@@ -755,9 +755,9 @@ to an array of property name strings.
 ## Key-value Storage
 
 An iCloud container can hold a collection of key-value pairs.
-They are accessed from code using the [NSUbiquitousKeyValueStore](<https://developer.apple.com/documentation/foundation/nsubiquitouskeyvaluestore?v=1.1.1>) class.
+They are accessed from code using the [NSUbiquitousKeyValueStore](https://developer.apple.com/documentation/foundation/nsubiquitouskeyvaluestore) class.
 
-This class is similar to [UserDefaults](<https://developer.apple.com/documentation/foundation/userdefaults?v=1.1.1>) class.
+This class is similar to [UserDefaults](https://developer.apple.com/documentation/foundation/userdefaults) class.
 The main difference is that `UseDefaults` data
 only resides on the device where the app runs,
 whereas `NSUbiquitousKeyValueStore` data resides in iCloud

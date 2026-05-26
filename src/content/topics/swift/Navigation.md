@@ -10,13 +10,13 @@ layout: topic-layout.njk
 iOS 16 introduced new ways to manage screen navigation.
 
 See the WWDC 2022 video on the new navigation API titled
-[The SwiftUI cookbook for navigation](<https://developer.apple.com/videos/play/wwdc2022/10054/?v=1.1.1>).
+[The SwiftUI cookbook for navigation](https://developer.apple.com/videos/play/wwdc2022/10054/).
 
 Also see the excellent YouTube videos from Stewart Lynch:
 
-- [NavigationStack in iOS 16](<https://www.youtube.com/watch?v=6-OeaFfDXXw&v=1.1.1>)
-- [Back to Root and Deep Links](<https://www.youtube.com/watch?v=pwP3_OX2G9A&v=1.1.1>)
-- [NavigationSplitView in iOS 16](<https://www.youtube.com/watch?v=RsmMLLL8FB0&v=1.1.1>)
+- [NavigationStack in iOS 16](https://www.youtube.com/watch?v=6-OeaFfDXXw)
+- [Back to Root and Deep Links](https://www.youtube.com/watch?v=pwP3_OX2G9A)
+- [NavigationSplitView in iOS 16](https://www.youtube.com/watch?v=RsmMLLL8FB0)
 
 ## Basic Example
 
@@ -25,7 +25,7 @@ and a `Button`. Tapping any of these navigates
 to a detail view for a selected kind of fruit.
 
 <img alt="SwiftUI Navigation Basic" style="width: 50%"
-  src="/blog/assets/SwiftUI-navigation-basic.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-navigation-basic.png"
   title="SwiftUI Navigation Basic">
 
 ```swift
@@ -96,7 +96,7 @@ struct CherryView: View {
 
 ## Example App
 
-See [NavigationStackDemo](<https://github.com/mvolkmann/NavigationStackDemo?v=1.1.1>) which demonstrates everything
+See [NavigationStackDemo](https://github.com/mvolkmann/NavigationStackDemo) which demonstrates everything
 shared in the Steward Lynch videos linked above.
 
 The app has four tabs.
@@ -108,7 +108,7 @@ It uses a `NavigationStack` to allow the user
 to select a fruit from a `List` of `NavigationLink` views.
 
 <img alt="Fruits List"
-  src="/blog/assets/swiftui-navigation-01-fruits.png?v=1.1.1">
+  src="/blog/assets/swiftui-navigation-01-fruits.png">
 
 Nested inside the `NavigationStack` are instances of `NavigationLink`.
 This struct supports many initializers, some of which take a `value` argument.
@@ -118,7 +118,7 @@ When a fruit is selected, a view that displays "You chose {fruit-emoji}."
 is pushed onto the navigation stack.
 
 <img alt="Fruits Detail"
-  src="/blog/assets/swiftui-navigation-02-fruit.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-02-fruit.png" />
 
 Click "< Fruits" in the upper-left to return to the list of fruits.
 The "Show Favorite" button at the bottom demonstrates a `NavigationList`
@@ -134,13 +134,13 @@ It uses a `NavigationStack` to allow the user
 to select an `Author` from a `List` of `NavigationLink` views.
 
 <img alt="Authors List"
-  src="/blog/assets/swiftui-navigation-03-authors.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-03-authors.png" />
 
 When an author is selected, a view that displays specific information
 about the author is pushed onto the navigation stack.
 
 <img alt="Author Detail"
-  src="/blog/assets/swiftui-navigation-04-author.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-04-author.png" />
 
 There are four `navigationDestination` registrations that handle the types:
 
@@ -177,13 +177,13 @@ The third tab "Countries Stack" uses a `NavigationStack` to allow the user
 to select a `Country` from a `List` of `NavigationLink` views.
 
 <img alt="Countries List"
-  src="/blog/assets/swiftui-navigation-05-stack.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-05-stack.png" />
 
 When a country is selected, a view that displays a list of
 cities in the country is pushed onto the navigation stack.
 
 <img alt="Cities List"
-  src="/blog/assets/swiftui-navigation-06-stack.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-06-stack.png" />
 
 Each city is represented by a `NavigationLink`. Tapping one of these pushes
 a view onto the stack that displays detailed information about that city.
@@ -195,7 +195,7 @@ The "Back to Countries" button demonstrates popping back to
 the initial view in this tab.
 
 <img alt="City Detail"
-  src="/blog/assets/swiftui-navigation-07-stack.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-07-stack.png" />
 
 ### Countries Split tab
 
@@ -210,13 +210,13 @@ and the third column contains detail about the selected city.
 Having a "Back to Countries" button doesn't apply in this scenario.
 
 <img alt="Countries List"
-  src="/blog/assets/swiftui-navigation-08-split.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-08-split.png" />
 
 <img alt="Cities List"
-  src="/blog/assets/swiftui-navigation-09-split.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-09-split.png" />
 
 <img alt="City Detail"
-  src="/blog/assets/swiftui-navigation-10-split.png?v=1.1.1" />
+  src="/blog/assets/swiftui-navigation-10-split.png" />
 
 ## Deep Linking
 

@@ -8,14 +8,14 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-[Anaconda](<https://www.anaconda.com/?v=1.1.1>)
+[Anaconda](https://www.anaconda.com/)
 is data science platform that provides a Python distribution,
 a GUI application for managing Python virtual environments,
 and a command-line command for doing the same.
 Anaconda comes in three editions, Individual (free),
 Team (\$10K+), and Enterprise (contact sales).
 
-To install the Individual Edition of Anaconda, browse the [Individual Edition](<https://www.anaconda.com/products/individual?v=1.1.1>) page,
+To install the Individual Edition of Anaconda, browse the [Individual Edition](https://www.anaconda.com/products/individual) page,
 press the "Download" button, and click the link for the desired version.
 Then double-click the downloaded installer and follow the instructions.
 This installs the "Anaconda Navigator" app and
@@ -199,14 +199,14 @@ The following table summarizes commands for common operations.
 | create new environment from YAML file                                                                                                                     | `conda env create -f {env}.yaml`                                        |
 
 When installing a package, if it is not found browse
-[anaconda.org](<https://anaconda.org/?v=1.1.1>)
+[anaconda.org](https://anaconda.org/)
 and search for the package to determine
 what non-default "channels" might host it.
 Then include the channel name in the install command.
 For example, to install the matplotlib package,
 enter `conda install -c conda-forge matplotlib`.
 To specify a version to install other than the latest,
-see "Specifying version numbers" in the [Conda Cheat Sheet](<https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf?v=1.1.1>).
+see "Specifying version numbers" in the [Conda Cheat Sheet](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf).
 
 ## VS Code
 

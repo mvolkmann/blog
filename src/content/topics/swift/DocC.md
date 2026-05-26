@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[DocC](<https://developer.apple.com/documentation/docc?v=1.1.1>)
+[DocC](https://developer.apple.com/documentation/docc)
 stands for "Documentation Compiler".
 It generates nicely formatted documentation for
 the public items in Swift packages.
@@ -224,7 +224,7 @@ The exported file will have an extension of `.doccarchive`.
 It can be shared with other developers using email or other means.
 Double-clicking the file opens the documentation in Xcode.
 
-For more information about exporting documentation, see [Distributing Documentation to External Developers](<https://developer.apple.com/documentation/xcode/distributing-documentation-to-external-developers?v=1.1.1>).
+For more information about exporting documentation, see [Distributing Documentation to External Developers](https://developer.apple.com/documentation/xcode/distributing-documentation-to-external-developers).
 
 Documentation archive files includes a single-page web app
 for rendering the documentation on the web.
@@ -239,5 +239,5 @@ articles, tutorials, and extension files.
 
 ## Resources
 
-For more detail on symbol links, see [Formatting Your Documentation Content](<https://developer.apple.com/documentation/xcode/formatting-your-documentation-content?v=1.1.1>).
-Also see the article [DocC Tutorial for Swift : Getting Started](<https://www.raywenderlich.com/34919511-docc-tutorial-for-swift-getting-started?v=1.1.1>).
+For more detail on symbol links, see [Formatting Your Documentation Content](https://developer.apple.com/documentation/xcode/formatting-your-documentation-content).
+Also see the article [DocC Tutorial for Swift : Getting Started](https://www.raywenderlich.com/34919511-docc-tutorial-for-swift-getting-started).

@@ -41,18 +41,18 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="wrec logo" style="border: 0"
-    src="/blog/assets/wrec-logo.png?v=1.1.1">
+    src="/blog/assets/wrec-logo.png">
 </figure>
 
 ## Overview
 
-[wrec](https://www.npmjs.com/package/wrec?v=1.1.1) is a small,
+[wrec](https://www.npmjs.com/package/wrec) is a small,
 zero dependency library that greatly simplifies building web components.
 Its main features are that it automates
 wiring event listeners and implementing reactivity.
 
 If you're new to web components, see my slides
-from a one-hour talk on web components at [Web Components](https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf?v=1.1.1).
+from a one-hour talk on web components at [Web Components](https://github.com/mvolkmann/talks/blob/master/web-components.key.pdf).
 A video of the talk is at
 <a href="https://drive.google.com/file/d/16rGM2L8psBGlQ-Zhu6EBXN1GMO30YdRF/view"
 target="_blank">OCI Tech Lunch - July 2025</a>.
@@ -60,7 +60,7 @@ Also see my series of
 <a href="https://www.youtube.com/playlist?list=PLGhglgQb4jVk3-_wc8srORlGalSRFMEpR"
 target="_blank">YouTube videos</a> on web components and the wrec library.
 
-Wrec was inspired by [Lit](https://lit.dev?v=1.1.1).
+Wrec was inspired by [Lit](https://lit.dev).
 It has the following advantages over Lit:
 
 - Wrec is simpler ... just a single class to extend (Wrec).

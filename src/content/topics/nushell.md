@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Nushell](<https://www.nushell.sh?v=1.1.1>) is "a new type of shell".
+[Nushell](https://www.nushell.sh) is "a new type of shell".
 "The goal of this project is to take the Unix philosophy of shells,
 where pipes connect simple commands together,
 and bring it to the modern style of development."
@@ -22,7 +22,7 @@ Nushell includes the Nu language which excels at
 "processing streams of structured data".
 This provides features that are somewhat like SQL for databases.
 It also has similarities to the Python-based
-[Pandas](<https://pandas.pydata.org?v=1.1.1>) data analysis library.
+[Pandas](https://pandas.pydata.org) data analysis library.
 These are features not typically seen in shell environments.
 It is far from a toy project and uses recursive descent parser
 that is driven by its many supported data types.
@@ -50,7 +50,7 @@ If a command becomes invalid, all the text changes to red.
 Because Rust is a great source for compiling to WebAssembly, it was
 possible to implement a web-based environment for experimenting with Nushell.
 This can be found at
-[Nushell demo](<https://www.nushell.sh/demo/?v=1.1.1>).
+[Nushell demo](https://www.nushell.sh/demo/).
 
 The Nu language can be used outside Nushell, such as in Jupyter Notebooks.
 
@@ -98,7 +98,7 @@ For more information on installation options, click the Nushell link above.
 If you are interested in peeking at the source code, clone the GitHub repo.
 To build it locally enter `cargo build --release --features=extra`.
 To see the extra features this includes, search for "extra" at
-[Cargo.toml](<https://github.com/nushell/nushell/blob/main/Cargo.toml?v=1.1.1>).
+[Cargo.toml](https://github.com/nushell/nushell/blob/main/Cargo.toml).
 
 ## Upgrading
 
@@ -127,7 +127,7 @@ In version 0.60.0 there are 262 Nushell commands.
 
 For help on a specific command,
 enter `help {command-name}` or {command-name} -h`.
-For more detail on supported commands, see the [Command Reference](<https://www.nushell.sh/book/command_reference.html?v=1.1.1>).
+For more detail on supported commands, see the [Command Reference](https://www.nushell.sh/book/command_reference.html).
 
 <aside>
 To search for commands whose name or help text contains given text,
@@ -172,10 +172,10 @@ rather than the version defined by Nushell.
 
 
 For detailed documentation on Nushell commands, see the
-[Book](<https://www.nushell.sh/book/?v=1.1.1>)
+[Book](https://www.nushell.sh/book/)
 link in the top nav of the Nushell website.
 
-For more help, join the [nushell Discord channel](<https://discord.gg/NtAbbGn?v=1.1.1>).
+For more help, join the [nushell Discord channel](https://discord.gg/NtAbbGn).
 
 ## Subcommands
 
@@ -244,7 +244,7 @@ They are `host`, `path`, `query`, and `scheme` (ex. http).
 ## Configuration
 
 The configuration for Nushell is stored in a
-[TOML](<https://github.com/toml-lang/toml?v=1.1.1>)
+[TOML](https://github.com/toml-lang/toml)
 (Tom's Obvious, Minimal Language) file
 whose path can be obtained by entering `echo $nu.config-path`.
 Configuration settings can be changed by editing this file
@@ -277,7 +277,7 @@ Notable top-level options include:
 | `startup`               | list of commands to execute when a shell starts;<br>typically defines aliases and custom commands |
 | `table_mode`            | controls the border lines drawn when tables are rendered<br>(more detail below)                   |
 
-For details on configuration options, see [Configuration](<https://www.nushell.sh/book/configuration.html?v=1.1.1>).
+For details on configuration options, see [Configuration](https://www.nushell.sh/book/configuration.html).
 
 The `config` command supports many subcommands that operate on the config file.
 These are summarized in the table below.
@@ -341,7 +341,7 @@ which makes reading these definitions difficult.
 VS Code and the "TOML Language Support" extension does not do this.
 
 Aliases that use the "cd" command currently causes Nushell to crash.
-See [issue 3138](<https://github.com/nushell/nushell/issues/3138?v=1.1.1>).
+See [issue 3138](https://github.com/nushell/nushell/issues/3138).
 
 ### `table_mode` Setting
 
@@ -406,13 +406,13 @@ primitive_string = "w"
 ### `line_editor` Section
 
 Nushell line editing is provided by
-[rustyline](<https://crates.io/crates/rustyline?v=1.1.1>).
+[rustyline](https://crates.io/crates/rustyline).
 It can be configured with the "[line_editor]" section.
 Notable settings include:
 
 | Setting                | Description                                                                                                                           |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `edit_mode`            | `"emacs"` or `"vi"`<br>default is to use [rustyline key bindings](<https://github.com/kkawakam/rustyline#actions?v=1.1.1>) |
+| `edit_mode`            | `"emacs"` or `"vi"`<br>default is to use [rustyline key bindings](https://github.com/kkawakam/rustyline#actions) |
 | `history_duplicates`   | `"alwaysadd"` or `"ignoreconsecutive"` (default)                                                                                      |
 | `history_ignore_space` | `true` (default) or `false`;<br>when true, commands with leading whitespace are not added to history                                  |
 
@@ -469,7 +469,7 @@ which is used by the `open` command to view text files.
 | vcs_modification_markers | `true` or `false` (seems to have no effect) |
 
 TODO: Setting vcs_modification_markers to true has no effect.
-See [issue 3254](<https://github.com/nushell/nushell/issues/3254?v=1.1.1>).
+See [issue 3254](https://github.com/nushell/nushell/issues/3254).
 
 To see the supported themes, install `bat` by entering `cargo install bat`
 and enter `bat --list-themes`. There are over 20.
@@ -530,25 +530,25 @@ To see a description of the value of an expression,
 pipe it to the `describe` command.
 This is not its real type.
 Values of type of `int` are reported as `integer`.
-This is likely a bug. See [issue 3206](<https://github.com/nushell/nushell/issues/3206?v=1.1.1>).
+This is likely a bug. See [issue 3206](https://github.com/nushell/nushell/issues/3206).
 For example, `date now | describe` outputs `date`.
 
 <aside>
 It seems like many of the conceptual types should become real types long-term.
 I would think at least these could become real types:
-boolean, date, decimal (remove number?), and list.
+boolean, date, decimal (remove number), and list.
 
 Related to this is the fact that the `describe` command
 doesn't strictly return real type names.
 One of the oddities is that if you pipe an `int` value to `describe`,
 it outputs "integer".
-See [issue 3206](<https://github.com/nushell/nushell/issues/3206?v=1.1.1>).
+See [issue 3206](https://github.com/nushell/nushell/issues/3206).
 Maybe it would be good to add a `type` command
 that returns the real type of a value.
 
 </aside>
 
-Details about Nushell data types can be found at [Types of data](<https://www.nushell.sh/book/types_of_data.html?v=1.1.1>).
+Details about Nushell data types can be found at [Types of data](https://www.nushell.sh/book/types_of_data.html).
 
 ### Type Conversions
 
@@ -597,7 +597,7 @@ echo "2021-3-21 14:30" |
 ```
 
 Formatting characters supported by `date format` are described
-[here](<https://man7.org/linux/man-pages/man1/date.1.html?v=1.1.1>).
+[here](https://man7.org/linux/man-pages/man1/date.1.html).
 
 This handy custom command produces a string from the items in a list
 where the value of each item is followed by a newline character.
@@ -910,7 +910,7 @@ echo $data.flavor # outputs vanilla
 Nushell is currently very picky about
 splitting table data over multiple lines.
 The newlines in the table definition below break it!
-See [issue 3204](<https://github.com/nushell/nushell/issues/3204?v=1.1.1>).
+See [issue 3204](https://github.com/nushell/nushell/issues/3204).
 
 ```bash
 # This way of adding newlines in a table definition is not parsed correctly.
@@ -1051,7 +1051,7 @@ There is no `dec` command for decrementing values.
 
 The `fetch` command can be used to get data from a URL.
 
-The website [JSONPlaceholder](<https://jsonplaceholder.typicode.com?v=1.1.1>)
+The website [JSONPlaceholder](https://jsonplaceholder.typicode.com)
 provides access to free sample JSON data.
 The following example gets data about TODOs from this site.
 
@@ -1341,8 +1341,8 @@ def logv-color [
   text: string,
   --color (-c): string # a flag
 ] {
-  #if (echo $color | empty?) { # same as next line
-  if ($color | empty?) {
+  #if (echo $color | empty) { # same as next line
+  if ($color | empty) {
     logv $text
   } {
     logv (build-string (ansi $color) $text (ansi reset))
@@ -1602,7 +1602,7 @@ For example, `open scores.csv --raw` outputs the following:
 
 To process data from a URL instead of a local file, use the `fetch` command.
 For example, the
-[{JSON} Placeholder](<https://jsonplaceholder.typicode.com?v=1.1.1>)
+[{JSON} Placeholder](https://jsonplaceholder.typicode.com)
 site provides free data for testing and prototyping.
 Todo data from this site can be rendered as a table with the following commands:
 
@@ -1950,7 +1950,7 @@ This produces the following table:
 The percentage values are double what you might expect.
 This is because the value when the largest count is assigned a percentage of 100
 and all the other percentages are calculated relative to that count.
-See [issue 3215](<https://github.com/nushell/nushell/issues/3215?v=1.1.1>).
+See [issue 3215](https://github.com/nushell/nushell/issues/3215).
 
 ### `split` and `headers` Commands
 
@@ -2091,7 +2091,7 @@ echo $colors
 
 This does not currently produce the expected output,
 but piping the output to the `flatten` command fixes it.
-See [issue 3269](<https://github.com/nushell/nushell/issues/3269?v=1.1.1>).
+See [issue 3269](https://github.com/nushell/nushell/issues/3269).
 
 ### `split column` Command
 
@@ -2148,7 +2148,7 @@ Tami,21
 ## Plugins
 
 Nushell plugins add new commands.
-Supported plugins can be found in the [crates](<https://github.com/nushell/nushell/tree/main/crates?v=1.1.1>)
+Supported plugins can be found in the [crates](https://github.com/nushell/nushell/tree/main/crates)
 directory of the Nushell GitHub repository.
 Look for subdirectories whose names being with "nu_plugin\_".
 All of these are installed by default if Nushell is installed
@@ -2195,7 +2195,7 @@ Unfortunately these plot the frequencies of the values
 and not values themselves.
 So the bar chart shows four bars at 100% because
 the values 19, 21, 17, and 15 each occur once.
-See [issue 3096](<https://github.com/nushell/nushell/issues/3096?v=1.1.1>).
+See [issue 3096](https://github.com/nushell/nushell/issues/3096).
 
 ## Default Shell
 
@@ -2213,7 +2213,7 @@ To execute a script, enter `nu {name}.nu`.
 To "source" a script so its definitions become available in the current shell,
 enter `source {name}.nu`.
 
-For examples of Nushell scripts, see [Nu_101 Scripts](<https://github.com/nushell/nu_scripts/tree/main/nu_101?v=1.1.1>).
+For examples of Nushell scripts, see [Nu_101 Scripts](https://github.com/nushell/nu_scripts/tree/main/nu_101).
 
 To add comments or comment-out a line of code,
 begin the comment with a `#` character.
@@ -2314,7 +2314,7 @@ report $names
 
 There is a VS Code extension for Nushell that
 provides syntax highlighting for Nushell scripts.
-See [vscode-nushell-lang](<https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang&v=1.1.1>).
+See [vscode-nushell-lang](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang).
 
 ## Comparison to Bash
 
@@ -2410,10 +2410,10 @@ Here is a summary of the commands related to working with multiple shells.
   but not names that merely contain `foo`.
 - The literal syntax for tables is currently very picky
   about the location of newline characters due to a parser bug.
-  See [issue 3204](<https://github.com/nushell/nushell/issues/3204?v=1.1.1>)
+  See [issue 3204](https://github.com/nushell/nushell/issues/3204)
 - Several data types discussed in the official documentation
   cannot be used as parameter types of custom commands.
   These include boolean, date, decimal, duration, filesize, and list.
   Perhaps these will become real types in the future.
 - There is no built-in `grep` command.
-  Consider using [ripgrep](<https://github.com/BurntSushi/ripgrep?v=1.1.1>).
+  Consider using [ripgrep](https://github.com/BurntSushi/ripgrep).

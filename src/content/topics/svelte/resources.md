@@ -6,6 +6,6 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-- [Svelte Society Cheat Sheet](<https://sveltesociety.dev/cheatsheet/?v=1.1.1>)
+- [Svelte Society Cheat Sheet](https://sveltesociety.dev/cheatsheet/)
 
 TODO: Add more!

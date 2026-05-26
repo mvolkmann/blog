@@ -6,11 +6,11 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Warp](<https://app.warp.dev/referral/24D6GX?v=1.1.1>) is
+[Warp](https://app.warp.dev/referral/24D6GX) is
 "the terminal for the 21st century".
 
 <img alt="Warp Logo" style="width: 20%"
-  src="/blog/assets/warp-logo.png?v=1.1.1"
+  src="/blog/assets/warp-logo.png"
   title="Warp Logo">
 
 Currently Warp only runs in macOS, but there are plans to
@@ -29,7 +29,7 @@ The Warp team has stated that they would like to support Nushell in the future.
 Warp is implemented in Rust which makes it very fast.
 From the Warp FAQ, "The UI is built on our own rendering layer
 that leverages lower-level graphics APIs like
-[Metal](<https://developer.apple.com/metal/?v=1.1.1>)."
+[Metal](https://developer.apple.com/metal/)."
 
 Warp uses GPU-acceleration.
 From the Warp FAQ, "Picking GPU acceleration
@@ -37,7 +37,7 @@ has allowed us to be a way over 60fps on a 4K screen."
 
 Vim keybindings are not currently supported, but
 the Warp team has stated that they want to add support.
-See [issue 159](<https://github.com/warpdotdev/warp/issues/159?v=1.1.1>).
+See [issue 159](https://github.com/warpdotdev/warp/issues/159).
 
 ## Installing
 
@@ -65,10 +65,10 @@ Click the "Show running processes" button to see a list of the processes.
 To get help on using Warp, open the "Warp Essentials" panel
 by clicking the button on the right side of the title bar.
 This contains four sections titled
-"What's New?", "Getting Started", "Maximize Warp", and "Advanced Setup".
+"What's New", "Getting Started", "Maximize Warp", and "Advanced Setup".
 
 <img alt="Warp Essentials panel" style="width: 50%"
-  src="/blog/assets/warp-essentials-panel.png?v=1.1.1"
+  src="/blog/assets/warp-essentials-panel.png"
   title="Warp Essentials panel">
 
 To view "Keyboard Shortcuts", click the keyboard icon.
@@ -76,7 +76,7 @@ To view "Keyboard Shortcuts", click the keyboard icon.
 To open the Settings dialog, click the gear icon.
 
 For online help, click "Docs" at the bottom of the "Warp Essentials" panel
-or browse [Warp Documentation](<https://docs.warp.dev?v=1.1.1>).
+or browse [Warp Documentation](https://docs.warp.dev).
 
 ## Hierarchy
 
@@ -281,7 +281,7 @@ The following table summarizes the most useful shortcuts.
 | Delete Word Left       | option-delete      |
 | Delete Word Right      | option-fn-delete   |
 
-For more keyboard shortcuts, see the [Keyboard Shortcuts](<https://docs.warp.dev/features/keyboard-shortcuts#input-editor?v=1.1.1>).
+For more keyboard shortcuts, see the [Keyboard Shortcuts](https://docs.warp.dev/features/keyboard-shortcuts#input-editor).
 
 ## AI Commands
 
@@ -289,7 +289,7 @@ To generate a shell command using an AI search,
 enter a # character of press ctrl-\`.
 
 <img alt="Warp AI Command Search" style="width: 80%"
-  src="/blog/assets/warp-ai-command-search.png?v=1.1.1"
+  src="/blog/assets/warp-ai-command-search.png"
   title="Warp AI Command Search">
 
 Enter English text describing the desired command and press the return key.
@@ -303,7 +303,7 @@ Sometimes the suggested commands are correct for Linux and not macOS.
 To get macOS equivalents, add "on mac" to the English description.
 
 AI search can also be used to ask questions not related to shell commands.
-For example, asking "What is a Whippet?" gives the suggestion
+For example, asking "What is a Whippet" gives the suggestion
 "A whippet is a small breed of dog with a distinctively tightly curled tail."
 Unfortunately this is a bad description.
 
@@ -318,7 +318,7 @@ Each workflow is defined by a `.yaml` file.
 To search for a workflow, press ctrl-shift-r.
 
 <img alt="Warp Workflows" style="width: 80%"
-  src="/blog/assets/warp-workflows.png?v=1.1.1"
+  src="/blog/assets/warp-workflows.png"
   title="Warp Workflows">
 
 In the popup that appears, select a category in the left nav such as "git".
@@ -327,9 +327,9 @@ Replace any placeholders and press the return key to execute the workflow.
 
 Warp ships with over 100 predefined workflows.
 
-To install additional workflows, see the GitHub repository [warpdotdev/workflows](<https://github.com/warpdotdev/workflows?v=1.1.1>).
+To install additional workflows, see the GitHub repository [warpdotdev/workflows](https://github.com/warpdotdev/workflows).
 
-To create custom workflows, see [Creating Custom Workflows](<https://docs.warp.dev/features/entry/workflows#creating-custom-workflows?v=1.1.1>).
+To create custom workflows, see [Creating Custom Workflows](https://docs.warp.dev/features/entry/workflows#creating-custom-workflows).
 
 ## Selecting Text
 
@@ -347,7 +347,7 @@ in the upper-right corner of the pane from which they were issued.
 Search text can be entered here.
 
 <img alt="Warp find dialog" style="width: 80%"
-  src="/blog/assets/warp-find-dialog.png?v=1.1.1"
+  src="/blog/assets/warp-find-dialog.png"
   title="Warp find dialog">
 
 All matches are highlighted in yellow except for
@@ -377,7 +377,7 @@ click its bookmark icon in the upper-right.
 Alternatively if the block is selected, press cmd-b.
 
 <img alt="Warp Bookmark" style="width: 20%"
-  src="/blog/assets/warp-bookmark.png?v=1.1.1"
+  src="/blog/assets/warp-bookmark.png"
   title="Warp Bookmark">
 
 The pane scrollbar on the right will contain horizontal lines
@@ -406,7 +406,7 @@ filter the list of commands by typing part of its name,
 and click a command.
 
 <img alt="Warp Command Palette" style="width: 80%"
-  src="/blog/assets/warp-command-palette.png?v=1.1.1"
+  src="/blog/assets/warp-command-palette.png"
   title="Warp Command Palette">
 
 ## Themes
@@ -420,7 +420,7 @@ or press cmd-ctrl-t.
 This opens a panel on the left that lists all the available themes.
 
 <img alt="Warp Theme Picker" style="width: 50%"
-  src="/blog/assets/warp-theme-picker.png?v=1.1.1"
+  src="/blog/assets/warp-theme-picker.png"
   title="Warp Theme Picker">
 
 The list of themes can be filtered by entering part of a theme name.
@@ -443,7 +443,7 @@ placed in the `~/.warp/themes` directory.
 Create this directory if it doesn't exist.
 
 To download additional open source themes, see the Git repository
-[warpdotdev/themes](<https://github.com/warpdotdev/themes?v=1.1.1>).
+[warpdotdev/themes](https://github.com/warpdotdev/themes).
 This contains several subdirectories such as `base16`, `holiday`, `standard`,
 and `warp_bundled` (themes that ship with Warp).
 Each subdirectory contains a README.md file that
@@ -500,7 +500,7 @@ terminal_colors:
     white: '#ffffff' # 15
 ```
 
-For more detail see [Custom Themes](<https://docs.warp.dev/appearance/custom-themes?v=1.1.1>).
+For more detail see [Custom Themes](https://docs.warp.dev/appearance/custom-themes).
 
 ## Permalinks / Shared Blocks
 
@@ -515,7 +515,7 @@ There are multiple ways to initiate create a permalink:
 Either way a dialog will appear.
 
 <img alt="Warp Share Block" style="width: 80%"
-  src="/blog/assets/warp-share-block.png?v=1.1.1"
+  src="/blog/assets/warp-share-block.png"
   title="Warp Share Block">
 
 Click the "Create and Copy Link" button to create the permalink.
@@ -539,7 +539,7 @@ There are several ways to view and modify settings:
 - Press cmd-,
 
 <img alt="Warp Settings" style="width: 80%"
-  src="/blog/assets/warp-settings.png?v=1.1.1"
+  src="/blog/assets/warp-settings.png"
   title="Warp Settings">
 
 The left nav of the Settings dialog contains the following sections:
@@ -599,7 +599,7 @@ The left nav of the Settings dialog contains the following sections:
       To save the current configuration, open the command palette
       and select the "Save New Launch Configuration" command.
       This opens a dialog containing a "Save Configuration" button.
-      For more detail, see [Launch Configurations](<https://docs.warp.dev/features/sessions/launch-configurations?v=1.1.1>).
+      For more detail, see [Launch Configurations](https://docs.warp.dev/features/sessions/launch-configurations).
 
     - "Show sticky command header" (on by default)
 
@@ -736,7 +736,7 @@ To modify keyboard shortcuts, see "Keyboard shortcuts section"
 described in "Settings" above.
 
 <img alt="Warp Settings Keyboard Shortcuts" style="width: 80%"
-  src="/blog/assets/warp-settings-keyboard-shortcuts.png?v=1.1.1"
+  src="/blog/assets/warp-settings-keyboard-shortcuts.png"
   title="Warp Settings Keyboard Shortcuts">
 
 ## Issues
@@ -744,6 +744,6 @@ described in "Settings" above.
 I have filed the following issues:
 
 - order in theme picker
-  [2721](<https://github.com/warpdotdev/Warp/issues/2721?v=1.1.1>)
+  [2721](https://github.com/warpdotdev/Warp/issues/2721)
 - persist bookmarked blocks
-  [2722](<https://github.com/warpdotdev/Warp/issues/2722?v=1.1.1>)
+  [2722](https://github.com/warpdotdev/Warp/issues/2722)

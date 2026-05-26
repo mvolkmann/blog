@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Remix](<https://remix.run?v=1.1.1>) is
+[Remix](https://remix.run) is
 "a full stack web framework that lets you
 focus on the user interface and work back through web standards
 to deliver a fast, slick, and resilient user experience."
@@ -30,7 +30,7 @@ Remix automatically provides route-level code splitting.
 
 ## Resources
 
-- [EpicWeb.dev](<https://www.epicweb.dev/?v=1.1.1>) -
+- [EpicWeb.dev](https://www.epicweb.dev/) -
   hosts articles and tutorials on Remix from Kent C. Dodds
 
 ## Creating a new project
@@ -39,8 +39,8 @@ Remix automatically provides route-level code splitting.
 1. `cd` to the directory where the project will be created.
 1. Enter `npx create-remix@latest`
 1. Enter a project directory path (ex. `./dogs`).
-1. Press return for "Initialize a new git repository?".
-1. Press return for "Install dependencies with npm?".
+1. Press return for "Initialize a new git repository".
+1. Press return for "Install dependencies with npm".
 1. `cd` to the new project directory.
 1. See the `README.md` file for instructions.
 1. Enter `npm run dev`
@@ -101,7 +101,7 @@ Routes can be in deeper subdirectories to require a deeper URL path.
 ## UI Components
 
 Consider using the React component library
-[Reach UI](<https://reach.tech?v=1.1.1>).
+[Reach UI](https://reach.tech).
 It provides many components including `Accordion`, `Alert`, `Combobox`,
 `Dialog`, `Portal`, `Slider`, `Tabs`, and `Tooltip`.
 
@@ -375,7 +375,7 @@ To this, add the prop `prefetch="intent"`.
 Remix automatically displays a spinner in the browser tab
 when it is waiting for a `loader` or `action` function to complete.
 
-For spinners on the page, see [spin-delay](<https://github.com/smeijer/spin-delay?v=1.1.1>).
+For spinners on the page, see [spin-delay](https://github.com/smeijer/spin-delay).
 
 ## Input Validation
 
@@ -454,7 +454,7 @@ export default function Todos() {
 
 ## Schema Validation
 
-Consider using [zod](<https://zod.dev?v=1.1.1>)
+Consider using [zod](https://zod.dev)
 for schema validation.
 
 ## Client Only Code

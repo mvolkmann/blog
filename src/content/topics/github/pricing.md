@@ -21,14 +21,14 @@ These are summarized at <https://github.com/pricing>.
 | **Price/month/user**           |   free   |   \$4    |    \$21    | contact sales |
 | **Actions minutes/month**      |  2,000   |  3,000   |   50,000   |    50,000     |
 | **Packages storage**           |  500MB   |   2GB    |    50GB    |     50GB      |
-| **Required reviewers**         | &#x2718; | &#x2714; |  &#x2714;  |   &#x2714;    |
-| **Code owners**                | &#x2718; | &#x2714; |  &#x2714;  |   &#x2714;    |
-| **SAML single sign-on**        | &#x2718; | &#x2718; |  &#x2714;  |   &#x2714;    |
-| **Advanced auditing**          | &#x2718; | &#x2718; |  &#x2714;  |   &#x2714;    |
-| **Community-powered security** | &#x2718; | &#x2718; |  &#x2718;  |   &#x2714;    |
-| **Actionable metrics**         | &#x2718; | &#x2718; |  &#x2718;  |   &#x2714;    |
-| **24/7 support**               | &#x2718; | &#x2718; |  &#x2718;  |   &#x2714;    |
-| **Continuous learning**        | &#x2718; | &#x2718; |  &#x2718;  |   &#x2714;    |
+| **Required reviewers**         | #x2718; | #x2714; |  #x2714;  |   #x2714;    |
+| **Code owners**                | #x2718; | #x2714; |  #x2714;  |   #x2714;    |
+| **SAML single sign-on**        | #x2718; | #x2718; |  #x2714;  |   #x2714;    |
+| **Advanced auditing**          | #x2718; | #x2718; |  #x2714;  |   #x2714;    |
+| **Community-powered security** | #x2718; | #x2718; |  #x2718;  |   #x2714;    |
+| **Actionable metrics**         | #x2718; | #x2718; |  #x2718;  |   #x2714;    |
+| **24/7 support**               | #x2718; | #x2718; |  #x2718;  |   #x2714;    |
+| **Continuous learning**        | #x2718; | #x2718; |  #x2718;  |   #x2714;    |
 
 **Actions** use "hosted runners to automate
 your software development workflows.

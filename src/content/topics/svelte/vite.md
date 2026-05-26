@@ -5,7 +5,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[Vite](<https://vitejs.dev?v=1.1.1>) is a build tool
+[Vite](https://vitejs.dev) is a build tool
 that can be used as a replacement for Webpack, Rollup, and Parcel.
 It differs from those in that it uses ES modules to avoid
 having to create a new, all-encompassing bundle of JavaScript code
@@ -18,9 +18,9 @@ The name comes from the French word which means "fast"
 and is pronounced "vēt".
 
 Another build to tool that is similar to Vite is
-[Snowpack](<https://www.snowpack.dev?v=1.1.1>).
+[Snowpack](https://www.snowpack.dev).
 
-[SvelteKit](<https://kit.svelte.dev?v=1.1.1>)
+[SvelteKit](https://kit.svelte.dev)
 adds many features on top of Svelte including
 the use of Vite, file-based page routing, code splitting,
 hot module reloading, and server-side rendering.

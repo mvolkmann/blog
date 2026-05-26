@@ -7,10 +7,10 @@ layout: topic-layout.njk
 ## Overview
 
 <img alt="Dart logo" style="width: 40%"
-    src="/blog/assets/dart-logo.png?v=1.1.1"
+    src="/blog/assets/dart-logo.png"
     title="Dart logo">
 
-[Dart](<https://dart.dev?v=1.1.1>) is a
+[Dart](https://dart.dev) is a
 general purpose, strongly typed, programming language from Google.
 It has a "sound type system" which means it can never be in an unknown state.
 Dart was first announced in October, 2012.
@@ -21,7 +21,7 @@ The Chrome browser planned to include a Dart VM for this purpose,
 but that plan has been abandoned in favor of compiling to JavaScript.
 
 Currently Dart is primarily used by the
-[Flutter](<https://flutter.dev?v=1.1.1>) framework
+[Flutter](https://flutter.dev) framework
 for building mobile, web, and desktop applications.
 
 The syntax of Dart is somewhat similar to Java.
@@ -35,23 +35,23 @@ of operators when applied to instances of custom classes.
 
 ## Resources
 
-- [Dart home page](<https://dart.dev?v=1.1.1>)
-- [Dart Language Specification](<https://dart.dev/guides/language/spec?v=1.1.1>)
-- [Effective Dart](<https://dart.dev/guides/language/effective-dart?v=1.1.1>) - tips to "write consistent, robust, and fast code"
-- [Dart Complete Course](<https://www.youtube.com/watch?v=F3JuuYuOUK4&v=1.1.1>) - on Youtube by Flutterly/WCKD
-- [DartPad](<https://dartpad.dev/?v=1.1.1>) -
+- [Dart home page](https://dart.dev)
+- [Dart Language Specification](https://dart.dev/guides/language/spec)
+- [Effective Dart](https://dart.dev/guides/language/effective-dart) - tips to "write consistent, robust, and fast code"
+- [Dart Complete Course](https://www.youtube.com/watch?v=F3JuuYuOUK4) - on Youtube by Flutterly/WCKD
+- [DartPad](https://dartpad.dev/) -
   web-based editor for experimenting with Dart
 
 ## Editors
 
 Many code editors can be used for writing Dart programs.
 Popular options include VS Code, Intellij IDEA, and Android Studio.
-[DartPad](<https://dartpad.dev?v=1.1.1>)
+[DartPad](https://dartpad.dev)
 is an online editor for experimenting with Dart features.
 
 Recommended VS Code extensions for Dart include:
 
-- [Dart](<https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code&v=1.1.1>)
+- [Dart](https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code)
 
   "Provides tools for effectively editing, refactoring, running,
   and reloading Flutter mobile apps."
@@ -64,7 +64,7 @@ Recommended VS Code extensions for Dart include:
   These prompt for a pub.dev library name,
   update the `pubspec.yaml` file, and download the library.
 
-- [Dart Data Class Generator](<https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator&v=1.1.1>)
+- [Dart Data Class Generator](https://marketplace.visualstudio.com/items?itemName=BendixMa.dart-data-class-generator)
 
   "Create dart data classes easily, fast and
   without writing boilerplate or running code generation."
@@ -82,7 +82,7 @@ Recommended VS Code extensions for Dart include:
   and the following methods: `copyWith`, `fromJson`, `fromMap`,
   `hashCode`, `toMap`, `toString`, and `operator ==`.
 
-- [Pubspec Assist](<https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist&v=1.1.1>)
+- [Pubspec Assist](https://marketplace.visualstudio.com/items?itemName=jeroen-meijer.pubspec-assist)
 
   "To easily add dependencies to your Dart and Flutter project's pubspec.yaml."
 
@@ -96,7 +96,7 @@ In the same way that `npm` relies on the files
 
 ## pub.dev
 
-[pub.dev](<https://pub.dev?v=1.1.1>) is the
+[pub.dev](https://pub.dev) is the
 official package repository for Dart and Flutter apps.
 Packages here are listed in five catagories:
 "Flutter Favorites", "Most popular packages", "Top Flutter packages",
@@ -109,37 +109,37 @@ and can depend on library packages.
 
 Some notable packages to consider using include:
 
-- [data_table_2](<https://pub.dev/packages/data_table_2?v=1.1.1>)
+- [data_table_2](https://pub.dev/packages/data_table_2)
 
   This is a "substitute for Flutter's stock `DataTable` and
   `PaginatedDataTable` widgets with fixed header/sticky top row
   and other useful features missing in the originals."
 
-- [drift](<https://pub.dev/packages/drift?v=1.1.1>)
+- [drift](https://pub.dev/packages/drift)
 
   "Drift is a reactive persistence library for Flutter and Dart,
   built on top of sqlite."
 
-- [fpdart](<https://pub.dev/packages/fpdart?v=1.1.1>)
+- [fpdart](https://pub.dev/packages/fpdart)
 
   "Functional programming in Dart and Flutter.
   All the main functional programming types and patterns
   fully documented, tested, and with examples."
 
-- [http](<https://pub.dev/packages/http?v=1.1.1>)
+- [http](https://pub.dev/packages/http)
 
   "A composable, multi-platform, Future-based API for HTTP requests."
 
-- [json_serializable](<?v=1.1.1>)
+- [json_serializable](<>)
 
   "Automatically generate code for converting to and from JSON
   by annotating Dart classes."
 
-- [hive](<https://pub.dev/packages/hive?v=1.1.1>)
+- [hive](https://pub.dev/packages/hive)
 
   "Lightweight and blazing fast key-value database"
 
-- [lints](<https://pub.dev/packages/lints?v=1.1.1>)
+- [lints](https://pub.dev/packages/lints)
 
   "Official Dart lint rules. Defines the 'core' and 'recommended'
   set of lints suggested by the Dart team."  
@@ -152,7 +152,7 @@ Some notable packages to consider using include:
 
   Edit the `analysis_options.yaml` file to configure the use of specific rules.
   An older set of lint rules called `pedantic` is deprecated.
-  Another set of lint rules to consider using is [Very Good Analysis](<https://pub.dev/packages/very_good_analysis?v=1.1.1>).
+  Another set of lint rules to consider using is [Very Good Analysis](https://pub.dev/packages/very_good_analysis).
 
   Here are some recommended rule configurations that include
   suppressing warnings about use of the `const` keyword:
@@ -165,7 +165,7 @@ Some notable packages to consider using include:
   prefer_single_quotes: true
   ```
 
-- [nil](<https://pub.dev/packages/nil?v=1.1.1>)
+- [nil](https://pub.dev/packages/nil)
 
   This is "a simple widget to add in the widget tree
   when you want to show nothing.
@@ -173,15 +173,15 @@ Some notable packages to consider using include:
   Usually when we can't return null,
   we would return something like const SizedBox()."
 
-- [sqflite](<https://pub.dev/packages/sqflite?v=1.1.1>)
+- [sqflite](https://pub.dev/packages/sqflite)
 
   "SQLite plugin for Flutter."
 
-- [status_change](<https://pub.dev/packages/status_change?v=1.1.1>)
+- [status_change](https://pub.dev/packages/status_change)
 
   This is a Flutter widget that displays progress through a set of wizard steps.
 
-- [supabase](<https://pub.dev/packages/supabase?v=1.1.1>)
+- [supabase](https://pub.dev/packages/supabase)
 
   "Supabase is an open source Firebase alternative. We are a service to:"
 
@@ -217,7 +217,7 @@ It gives a project a standard directory structure,
 makes it easy to add dependencies,
 enables writing tests,
 makes it easy to publish packages to
-[pub.dev](<https://pub.dev?v=1.1.1>),
+[pub.dev](https://pub.dev),
 and much more.
 
 To create a new Dart project, enter `dart create {project-name}`.
@@ -343,7 +343,7 @@ and its public API can be shared with other Dart packages.
 The Dart SDK includes all the tools needed to
 create, build, and run Dart applications.
 It can be downloaded from
-[get-dart](<https://dart.dev/get-dart?v=1.1.1>)
+[get-dart](https://dart.dev/get-dart)
 which provides instructions for installing in Windows, Linux, and macOS.
 
 The Flutter SDK includes the Dart SDK.
@@ -380,7 +380,7 @@ The Dart SDK contains three compilers.
 ## Keywords
 
 For a list of keywords in the Dart language
-with links to their descriptions, see [Language Tour - Keywords](<https://dart.dev/guides/language/language-tour#keywords?v=1.1.1>).
+with links to their descriptions, see [Language Tour - Keywords](https://dart.dev/guides/language/language-tour#keywords).
 
 ## Comments
 
@@ -621,7 +621,7 @@ The collection classes `List`, `Set`, and `Map`
 do not override the `==` operator.
 
 To test whether two objects contain the same properties and values,
-consider using the [equatable](<https://pub.dev/packages/equatable?v=1.1.1>) library.
+consider using the [equatable](https://pub.dev/packages/equatable) library.
 Custom classes can extend `Equatable` to
 override the `==` operator and the `hashCode` method
 so instances are compared by value instead of by reference.
@@ -677,12 +677,12 @@ All types except `Null` are subclasses of the `Object` class.
 Dart supports the following built-in basic types:
 
 - `void`: means a value is never used
-- [Null](<https://api.dart.dev/stable/2.16.1/dart-core/Null-class.html?v=1.1.1>): represents not having a value
-- [bool](<https://api.dart.dev/stable/2.16.1/dart-core/bool-class.html?v=1.1.1>): boolean value with literal values `true` and `false`
-- [int](<https://api.dart.dev/stable/2.16.1/dart-core/int-class.html?v=1.1.1>): 64-bit integer
-- [double](<https://api.dart.dev/stable/2.16.1/dart-core/double-class.html?v=1.1.1>): 64-bit floating point number
-- [String](<https://api.dart.dev/stable/2.16.1/dart-core/String-class.html?v=1.1.1>): sequence of UTF-16 characters delimited by single or double quotes
-- [Symbol](<https://api.dart.dev/stable/2.16.1/dart-core/Symbol-class.html?v=1.1.1>): represents an operator or identifier with literal syntax `#name`
+- [Null](https://api.dart.dev/stable/2.16.1/dart-core/Null-class.html): represents not having a value
+- [bool](https://api.dart.dev/stable/2.16.1/dart-core/bool-class.html): boolean value with literal values `true` and `false`
+- [int](https://api.dart.dev/stable/2.16.1/dart-core/int-class.html): 64-bit integer
+- [double](https://api.dart.dev/stable/2.16.1/dart-core/double-class.html): 64-bit floating point number
+- [String](https://api.dart.dev/stable/2.16.1/dart-core/String-class.html): sequence of UTF-16 characters delimited by single or double quotes
+- [Symbol](https://api.dart.dev/stable/2.16.1/dart-core/Symbol-class.html): represents an operator or identifier with literal syntax `#name`
 - `Never`: has no values
 
 The `void` type is used at the return type
@@ -984,7 +984,7 @@ Unicode character codes can be embedded in a `String` with `\u{hex-code}`.
 For example:
 
 ```dart
-print('Do you prefer a \u{1F436} or \u{1F431}?'); // Do you prefer a 🐶 or 🐱?
+print('Do you prefer a \u{1F436} or \u{1F431}'); // Do you prefer a 🐶 or 🐱?
 ```
 
 Raw strings are strings where backslash character is not treated specially.
@@ -1094,7 +1094,7 @@ add `import 'package:flutter/foundation.dart';` and
 pass an `enum` value to the `describeEnum` function.
 For example: `describeEnum(Color.blue)` returns the `String` `'blue'`.
 
-There is a [proposal](<https://github.com/dart-lang/language/issues/357?v=1.1.1>) to allow omitting enum names when referring to their values
+There is a [proposal](https://github.com/dart-lang/language/issues/357) to allow omitting enum names when referring to their values
 if the enum type can be inferred.
 For example, in Flutter it is common to see arguments whose type is
 `MaterialColor` which extends `ColorSwatch` which extends `Color`.
@@ -1213,7 +1213,7 @@ These include `DoubleLinkedQueue`, `HashMap`, `HashSet`,
 and `SplayTreeMap`, `SplayTreeSet`.
 
 For even more collection functions, classes, and extensions,
-see [package:collection](<https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html?v=1.1.1>) which is included in the Flutter SDK.
+see [package:collection](https://api.flutter.dev/flutter/package-collection_collection/package-collection_collection-library.html) which is included in the Flutter SDK.
 Some of the capabilities of this package are described later in this section.
 
 ### Iterable
@@ -1236,7 +1236,7 @@ The `Iterable` class provides the following constructors:
 | ------------------------------------------------------- | ----------------------------------------------- |
 | `Iterable()`                                            | used as superclass of classes that are iterable |
 | `Iterable.empty()`                                      | contains no values                              |
-| `Iterable.generate(int count, E generator(int index)?)` | generates values on request                     |
+| `Iterable.generate(int count, E generator(int index))` | generates values on request                     |
 
 The `Iterable` class provides the following read-only properties:
 
@@ -1467,12 +1467,12 @@ In addition to the methods provided by the `Iterable` class,
 | `clear()`                               | removes all the elements                                                     |
 | `contains(Object? value)`               | returns a `bool` indicating if an element is present                         |
 | `containsAll(Iterable<Object>? other)`  | returns a `bool` indicating if all the elements in an `Iterable` are present |
-| `difference(Set<Object?> other)`        | returns a new `Set` containing all elements in this one not found in `other` |
+| `difference(Set<Object> other)`        | returns a new `Set` containing all elements in this one not found in `other` |
 | `lookup(Object? object)`                | returns `object` if found in the `Set` or `null`                             |
 | `remove(Object? value)`                 | removes the first occurrence of an element                                   |
-| `removeAll(Iterable<Object?> elements)` | removes all the elements in an `Iterable`                                    |
+| `removeAll(Iterable<Object> elements)` | removes all the elements in an `Iterable`                                    |
 | `removeWhere(bool test(E element))`     | removes all elements that pass a test                                        |
-| `retainAll(Iterable<Object?> elements)` | removes all the elements not in an `Iterable`                                |
+| `retainAll(Iterable<Object> elements)` | removes all the elements not in an `Iterable`                                |
 | `retainWhere(bool test(E element))`     | removes all elements that do not pass a test                                 |
 | `union(Set<E> other)`                   | returns a new `Set` containing all elements in this one and `other`          |
 
@@ -1571,9 +1571,9 @@ These objects have `key` and `value` properties and a `toString` method.
 
 ### package:collection
 
-The [collection library](<https://pub.dev/documentation/collection/latest/collection/collection-library.html?v=1.1.1>) is a collection of functions, classes, and extensions
+The [collection library](https://pub.dev/documentation/collection/latest/collection/collection-library.html) is a collection of functions, classes, and extensions
 that extend the capabilities of the collections provided by Dart.
-These are briefly described in this [Flutter Package of the Week](<https://www.youtube.com/watch?v=Ymw9xfRucK0&v=1.1.1>) YouTube video.
+These are briefly described in this [Flutter Package of the Week](https://www.youtube.com/watch?v=Ymw9xfRucK0) YouTube video.
 
 To uses this package, add the following `import`:
 
@@ -1590,13 +1590,13 @@ use `ListEquality().equals(list1, list2)`.
 To test whether two collections contain the contents,
 use `DeepCollectionEquality().equals(collection1, collection2)`.
 
-The [IterableIntegerExtension](<https://pub.dev/documentation/collection/latest/collection/IterableIntegerExtension.html?v=1.1.1>) and [IterableDoubleExtension](<https://pub.dev/documentation/collection/latest/collection/IterableDoubleExtension.html?v=1.1.1>) extensions
+The [IterableIntegerExtension](https://pub.dev/documentation/collection/latest/collection/IterableIntegerExtension.html) and [IterableDoubleExtension](https://pub.dev/documentation/collection/latest/collection/IterableDoubleExtension.html) extensions
 add the methods `average` and `sum` to `Iterables` of `int` and `double` values.
 Just importing the `collection` package adds all the extensions it defines.
 To get the sum of a `List` of numbers, use `myList.sum`.
 To get the average of a `List` of numbers, use `myList.average`.
 
-The [IterableExtension](<https://pub.dev/documentation/collection/latest/collection/IterableExtension.html?v=1.1.1>) adds properties and methods to
+The [IterableExtension](https://pub.dev/documentation/collection/latest/collection/IterableExtension.html) adds properties and methods to
 all objects that implement the `Iterable` interface.
 
 To get the first element of an `Iterable` or `null` if it is empty,
@@ -2145,7 +2145,7 @@ followed by named parameters in any order.
 
 A future version of Dart will allow named parameters
 to appear anywhere in an argument list.
-See [issue 47451](<https://github.com/dart-lang/sdk/issues/47451?v=1.1.1>).
+See [issue 47451](https://github.com/dart-lang/sdk/issues/47451).
 
 Required positional parameters cannot be given default values.
 Optional positional parameters must appear inside square brackets
@@ -3831,7 +3831,7 @@ Each of these classes are described in the following sections.
 
 ### Future Class
 
-The `dart:async` library defines the [Future](<https://api.dart.dev/stable/2.16.1/dart-async/Future-class.html?v=1.1.1>) class.
+The `dart:async` library defines the [Future](https://api.dart.dev/stable/2.16.1/dart-async/Future-class.html) class.
 A `Future` represents the result of code that will run in the future
 inside the current thread.
 
@@ -4027,7 +4027,7 @@ builds widgets from a single value returned by a `Future`.
 
 ### Completer Class
 
-The `dart:async` library defines the [Completer](<https://api.dart.dev/stable/2.16.1/dart-async/Completer-class.html?v=1.1.1>) class.
+The `dart:async` library defines the [Completer](https://api.dart.dev/stable/2.16.1/dart-async/Completer-class.html) class.
 It is used to create and manage a `Future`.
 
 Instances of `Completer` have the properties `future` and `isCompleted`.
@@ -4326,8 +4326,8 @@ Flutter provides the `StreamBuilder` class
 which builds widgets from data in a `Stream`.
 
 For more advanced stream processing, see the pub.dev packages
-[async](<https://pub.dev/packages/async?v=1.1.1>) and
-[rxdart](<https://pub.dev/packages/async?v=1.1.1>).
+[async](https://pub.dev/packages/async) and
+[rxdart](https://pub.dev/packages/async).
 These provides classes that can cache elements, memoized elements,
 merge streams, and more.
 
@@ -4477,7 +4477,7 @@ or the `then` method to get the result.
 
 ### Code Formatting
 
-Formatting of Dart code is provided by the [dart format](<https://dart.dev/tools/dart-format?v=1.1.1>) command.
+Formatting of Dart code is provided by the [dart format](https://dart.dev/tools/dart-format) command.
 
 To get the best formatting, include a comma after every function argument,
 even the last one. This places each argument on a separate line.
@@ -4535,7 +4535,7 @@ It also accepts the optional named parameters `reason` and `skip`.
 The `reason` parameter is a `String` to be displayed
 when the actual and expected values do not match.
 
-The expected value can be a [matcher](<https://pub.dev/documentation/matcher/latest/matcher/matcher-library.html?v=1.1.1>).
+The expected value can be a [matcher](https://pub.dev/documentation/matcher/latest/matcher/matcher-library.html).
 This supports more complex validation such as the following:
 
 ```dart

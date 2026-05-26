@@ -11,7 +11,7 @@ layout: topic-layout.njk
 </style>
 
 <img alt="PWA logo" style="border: none; width: 30%"
-  src="/blog/assets/pwa-logo.svg?v=1.1.1"
+  src="/blog/assets/pwa-logo.svg"
   title="PWA logo">
 
 ## Overview
@@ -58,9 +58,9 @@ TODO: Fix the order of the remaining sections.
 
 ## Service Workers
 
-[Service Workers](<https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API?v=1.1.1>) are the key to many PWA features.
+[Service Workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) are the key to many PWA features.
 
-A service worker is a kind of [Web Worker](<https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API?v=1.1.1>).
+A service worker is a kind of [Web Worker](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
 This means that its functionality is defined in a JavaScript source file
 and it runs in a background thread.
 
@@ -159,7 +159,7 @@ by clicking the "Application" tab and clicking "Manifest" in the left nav.
 
 ## Generating Icons
 
-The Node package [pwa-asset-generator](<https://github.com/elegantapp/pwa-asset-generator?v=1.1.1>)
+The Node package [pwa-asset-generator](https://github.com/elegantapp/pwa-asset-generator)
 generates all the icons required by a PWA from a single image file.
 To use this:
 
@@ -239,7 +239,7 @@ The diagram below is helpful in describing the various caching strategies.
 The descriptions below refer to the letters in this diagram.
 
 <img alt="Service Workers" style="border: 0; width: 60%"
-  src="/blog/assets/service-workers.png?v=1.1.1"
+  src="/blog/assets/service-workers.png"
   title="Service Workers">
 
 Possible caching strategies include:
@@ -632,7 +632,7 @@ The main area will display information about each of the
 service workers for the site.
 
 <img alt="Service Workers in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-workers.png?v=1.1.1"
+  src="/blog/assets/devtools-service-workers.png"
   title="Service Workers in Chrome DevTools">
 
 The status of a service worker is displayed after the Status label.
@@ -652,14 +652,14 @@ This is useful for debugging the code that handles those events.
 
 To unregister a service worker in Chrome, click the "Unregister" link
 to the right of a service worker description
-and refresh the page (twice?).
+and refresh the page (twice).
 
 In Chrome, to enable page refreshes
 to reload service workers during development,
 check the "Update on reload" checkbox and refresh the page.
 
 <img alt="Service Workers Update on reload" style="width: 100%"
-  src="/blog/assets/service-workers-update-on-reload.png?v=1.1.1"
+  src="/blog/assets/service-workers-update-on-reload.png"
   title="Service Workers Update on reload">
 
 By default, changes to deployed service workers will not take effect for users
@@ -691,14 +691,14 @@ This switches to the Sources tab and displays the code.
 Typically the code will have been minified.
 
 <img alt="Minimized service worker code in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-worker-code-minimized.png?v=1.1.1"
+  src="/blog/assets/devtools-service-worker-code-minimized.png"
   title="Minimized service worker code in Chrome DevTools">
 
 To see a pretty-printed version of this,
 click the “{}” at the bottom.
 
 <img alt="Pretty-printed service worker code in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-service-worker-code-pretty-printed.png?v=1.1.1"
+  src="/blog/assets/devtools-service-worker-code-pretty-printed.png"
   title="Pretty-printed service worker code in Chrome DevTools">
 
 ### Cached Files
@@ -709,7 +709,7 @@ This is useful for determining whether specific files
 were served from the network or from a cache.
 
 <img alt="Files loaded from cache in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-network-files-from-cache.png?v=1.1.1"
+  src="/blog/assets/devtools-network-files-from-cache.png"
   title="Files loaded from cache in Chrome DevTools">
 
 To see the space being used by the current application domain,
@@ -726,13 +726,13 @@ Click the "Clear Site Data" button above the checkboxes
 to clear the data associated with every checked category.
 
 <img alt="Clearing storage in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-clear-storage.png?v=1.1.1"
+  src="/blog/assets/devtools-clear-storage.png"
   title="Clearing storage in Chrome DevTools">
 
 A great video covering most of the topics in this section,
-created by the Chrome team, can be found at [Debugging Service Workers in Chrome](<http://mng.bz/oPwp?v=1.1.1>).
+created by the Chrome team, can be found at [Debugging Service Workers in Chrome](http://mng.bz/oPwp).
 
-A similar video for Firefox from the same team can be found at [Debugging Service Workers in Firefox](<http://mng.bz/nPw2?v=1.1.1>).
+A similar video for Firefox from the same team can be found at [Debugging Service Workers in Firefox](http://mng.bz/nPw2).
 
 To see the files that have been cached,
 click the DevTools "Application" tab.
@@ -743,7 +743,7 @@ of the files that it has cached in the main area.
 Click a file to see its contents at the bottom of the main area.
 
 <img alt="Cached files in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-cache.png?v=1.1.1"
+  src="/blog/assets/devtools-cache.png"
   title="Cached files in Chrome DevTools">
 
 There are several ways to remove an individual file from a cache.
@@ -766,7 +766,7 @@ verify that all the checkboxes at the bottom are checked,
 and click the "Clear site data" button.
 
 <img alt="Chrome Clear site data button" style="width: 100%"
-  src="/blog/assets/chrome-clear-site-data.png?v=1.1.1"
+  src="/blog/assets/chrome-clear-site-data.png"
   title="Cached files in Chrome DevTools">
 
 ### Simulating Offline
@@ -782,7 +782,7 @@ A warning icon will appear in the Network tab
 to remind you that you are offline.
 
 <img alt="Simulating being offline in Chrome DevTools" style="width: 100%"
-  src="/blog/assets/devtools-offline.png?v=1.1.1"
+  src="/blog/assets/devtools-offline.png"
   title="Simulating being offline in Chrome DevTools">
 
 ### Bypassing Service Workers
@@ -827,7 +827,7 @@ indexedDB.deleteDatabase('db-name');
 The following steps enable debugging PWAs running in iOS Safari.
 
 1. Attach the device (iPhone or iPad) to a Mac using a USB cable.
-1. A "Trust This Computer?" dialog will appear on the device.
+1. A "Trust This Computer" dialog will appear on the device.
 1. Tap "Trust".
 1. Enter the device passcode.
 1. Launch Safari on the device.
@@ -836,7 +836,7 @@ The following steps enable debugging PWAs running in iOS Safari.
 1. Click the "Develop" menu.
 1. Hover over the device name that appears.
 1. Click "Use for Development..."
-1. A "Trust This Computer?" dialog will appear again on the device.
+1. A "Trust This Computer" dialog will appear again on the device.
 1. Tap "Trust" again.
 1. Enter the device passcode again.
 1. Click the "Develop" menu again.
@@ -879,7 +879,7 @@ To reset back to "default" in Chrome:
 - Click the "Reset Permissions" button.
 
 <img alt="Chrome Notification Permissions" style="; width: 40%"
-  src="/blog/assets/chrome-notification-permissions.png?v=1.1.1"
+  src="/blog/assets/chrome-notification-permissions.png"
   title="Chrome Notification Permissions">
 
 To reset back to "default" in Safari:
@@ -891,7 +891,7 @@ To reset back to "default" in Safari:
 - Select it and click the "Remove" button.
 
 <img alt="Safari Notification Permissions" style="; width: 100%"
-  src="/blog/assets/safari-notification-permissions.png?v=1.1.1"
+  src="/blog/assets/safari-notification-permissions.png"
   title="Safari Notification Permissions">
 
 Web app client-side code can create subscriptions to push notifications
@@ -907,11 +907,11 @@ Chrome has excellent support for push notifications.
 Safari uses a non-standard push notifications API,
 so supporting both browsers is difficult.
 
-The app at [pwa-cloudflare-demo](<https://github.com/mvolkmann/pwa-cloudflare-demo?v=1.1.1>) demonstrates all the steps required
+The app at [pwa-cloudflare-demo](https://github.com/mvolkmann/pwa-cloudflare-demo) demonstrates all the steps required
 to handle push notifications in Chrome.
 While the name includes "cloudflare", it does not currently support
 running in a Cloudflare Worker. The reason is that the app uses the
-[web-push](<https://github.com/web-push-libs/web-push?v=1.1.1>)
+[web-push](https://github.com/web-push-libs/web-push)
 library which does not work in Cloudflare Workers.
 
 The steps to support push notifications are described below.
@@ -971,10 +971,10 @@ Each step indicates where the corresponding code is found in the demo app.
    // Prepare to use a SQLite database.
    type DBSubscription = {id: number; json: string};
    const db = new Database('pwa.db', {create: true});
-   const deleteTodoPS = db.prepare('delete from subscriptions where id = ?');
+   const deleteTodoPS = db.prepare('delete from subscriptions where id = ');
    const getAllSubscriptions = db.query('select * from subscriptions;');
    const insertSubscription = db.query(
-     'insert into subscriptions (json) values (?)'
+     'insert into subscriptions (json) values ()'
    );
 
    // Restore previous subscriptions from database.
@@ -1397,7 +1397,7 @@ Each step indicates where the corresponding code is found in the demo app.
 
 ## Workbox
 
-[Workbox](<https://web.dev/learn/pwa/workbox?v=1.1.1>) is a set of
+[Workbox](https://web.dev/learn/pwa/workbox) is a set of
 open-source libraries that help with implementing PWA caching strategies
 in service workers.
 
@@ -1442,7 +1442,7 @@ TODO: Describe how to load this service worker from a script!
 
 ## Resources
 
-- [web.dev](<https://web.dev/explore/progressive-web-apps?v=1.1.1>) on PWAs
+- [web.dev](https://web.dev/explore/progressive-web-apps) on PWAs
 
 TODO: For more content, see https://github.com/mvolkmann/pwa-demo/blob/master/pwa.md.
 

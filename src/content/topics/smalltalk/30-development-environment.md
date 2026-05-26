@@ -177,7 +177,7 @@ If the token is a message name, it will list the classes that implement it.
 If an attempt is made to close a window that contains unsaved changes
 or move focus from an editing pane that contains unsaved changes,
 a popup will appear with the prompt
-"Changes have not been saved. Is it OK to cancel those changes?".
+"Changes have not been saved. Is it OK to cancel those changes".
 Click the "Yes" to discard the changes or
 "No" to continue working in the editing pane.
 
@@ -188,7 +188,7 @@ To open one, select an object reference or place the cursor immediately after it
 and press cmd-i (Inspect it).
 
 <img alt="Cuis Inspect window" style="width: 40%"
-  src="/blog/assets/cuis-inspect-window.png?v=1.1.1">
+  src="/blog/assets/cuis-inspect-window.png">
 
 Clicking an item in the top left pane,
 displays related information in the top right pane.
@@ -263,7 +263,7 @@ but clicking another object within its tree
 changes `self` to refer to that object.
 
 <img alt="Cuis Explore window" style="width: 40%"
-  src="/blog/assets/cuis-explore-window.png?v=1.1.1">
+  src="/blog/assets/cuis-explore-window.png">
 
 Unlike Inspector windows, Explore windows are not live.
 Changes made to the instance variables are not reflected,
@@ -345,7 +345,7 @@ target="_blank">A brief introduction to the System Browser</a>.
 ### System Browser UI
 
 <img alt="Cuis System Browser" style="width: 100%"
-  src="/blog/assets/cuis-system-browser-window.png?v=1.1.1">
+  src="/blog/assets/cuis-system-browser-window.png">
 
 System Browsers contain four rows.
 
@@ -372,7 +372,7 @@ System Browsers contain four rows.
   opens a new System Browser with that class selected.
 
   The second pane contains three buttons at the bottom.
-  Clicking the "?" button shows the class comment for the select class.
+  Clicking the "" button shows the class comment for the select class.
   Clicking the "instance" or "class" button causes the remaining panes
   to display information about instance or class methods, respectively.
   If no method is selected and the "instance" button is selected,
@@ -711,7 +711,7 @@ When renaming a method:
 1. A popup will prompt for the scope where the
    methods and message sends will be updated.
    The scope can be "In Class" (only in the current class),
-   "In Hierarchy" (in the current class and all subclasses? TODO: also superclasses?),
+   "In Hierarchy" (in the current class and all subclasses? TODO: also superclasses),
    "In Category" (in all classes in the same class category),
    "In Hierarchy and its Categories", or
    "In System" (all classes).
@@ -825,7 +825,7 @@ This window is similar to a System Browser, but it:
 Here's an example of a Hierarchy Browser for the `Array` class:
 
 <img alt="Cuis Hierarchy window" style="width: 40%"
-  src="/blog/assets/cuis-hierarchy-window.png?v=1.1.1">
+  src="/blog/assets/cuis-hierarchy-window.png">
 
 ## Protocol Browsers
 
@@ -851,7 +851,7 @@ to see its implementation in the bottom pane.
 Here's an example of a Protocol window for the `Array` class:
 
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
-  src="/blog/assets/cuis-protocol-window.png?v=1.1.1">
+  src="/blog/assets/cuis-protocol-window.png">
 
 ## Text Editor Windows
 
@@ -873,7 +873,7 @@ The results include `Bag`, `Collection`, `Dictionary`, `Heap`,
 Click one the class names to see the method implementation.
 
 <img alt="Cuis Smalltalk Protocol window" style="width: 100%"
-  src="/blog/assets/cuis-protocol-window.png?v=1.1.1">
+  src="/blog/assets/cuis-protocol-window.png">
 
 Regular expression searches are not currently supported.
 
@@ -935,7 +935,7 @@ repeat: anInteger
 ```
 
 <img alt="Cuis MessageNotUnderstood window" style="width: 85%"
-  src="/blog/assets/cuis-messagenotunderstood-window.png?v=1.1.1">
+  src="/blog/assets/cuis-messagenotunderstood-window.png">
 
 ## Debug Windows
 
@@ -946,7 +946,7 @@ Execution will be stopped at the beginning of the selected code,
 waiting for you examine variables and decide whether/how to proceed.
 
 <img alt="Cuis Debug window" style="width: 100%"
-  src="/blog/assets/cuis-debug-window.png?v=1.1.1">
+  src="/blog/assets/cuis-debug-window.png">
 
 The top pane shows the execution stack.
 Each message send causes another stack entry
@@ -1027,7 +1027,7 @@ and select Open ... Change Sorter or Changes ... Change Sorter.
 This window summarize all the currently unsaved changes.
 
 <img alt="Cuis Change Sorter" style="width: 100%"
-  src="/blog/assets/cuis-change-sorter.png?v=1.1.1">
+  src="/blog/assets/cuis-change-sorter.png">
 
 The first row left pane displays a list of change set names.
 Unsaved change set names are preceded by an asterisk.
@@ -1092,7 +1092,7 @@ To view local files and operate on them,
 select Open ... File List from the World menu.
 
 <img alt="Cuis File List" style="width: 100%"
-  src="/blog/assets/cuis-file-list.png?v=1.1.1">
+  src="/blog/assets/cuis-file-list.png">
 
 By default, the top directory will be one from which Cuis was started,
 referred to as "Cuis top".
@@ -1124,7 +1124,7 @@ and select Open...Installed Packages.
 This opens an "Installed Packages" window.
 
 <img alt="Cuis Installed Packages" style="width: 100%"
-  src="/blog/assets/cuis-installed-packages.png?v=1.1.1">
+  src="/blog/assets/cuis-installed-packages.png">
 
 To see a description of a package, select the package
 and see the text in the pane above the bottom one
@@ -1267,7 +1267,7 @@ This is especially useful for terminating
 processes named "WebServer's listening process".
 
 <img alt="Cuis Process Browser" style="width: 85%"
-  src="/blog/assets/cuis-process-browser-window.png?v=1.1.1">
+  src="/blog/assets/cuis-process-browser-window.png">
 
 For example, the following code starts a process that
 writes to the Transcript every five seconds.
@@ -1329,7 +1329,7 @@ enter "revert" to revert the last code modification
 or enter "exit" to exit this window.
 
 <img alt="Cuis Emergency Evaluator" style="width: 30%"
-  src="/blog/assets/cuis-emergency-evaluator.png?v=1.1.1">
+  src="/blog/assets/cuis-emergency-evaluator.png">
 
 After entering one of these commands, to hide the Emergency Evaluator dialog
 open the World menu and select "Restore Display".

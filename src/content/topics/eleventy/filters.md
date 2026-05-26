@@ -29,7 +29,7 @@ Note that the `get*CollectionItem`and`log` filters
 are coming in version 0.11.0.
 
 Nunjucks provides the following filters documented at
-[built-in-filters](<https://mozilla.github.io/nunjucks/templating.html#built-in-filters?v=1.1.1>):
+[built-in-filters](https://mozilla.github.io/nunjucks/templating.html#built-in-filters):
 `abs`, `batch`, `capitalize`, `center`, `default`, `dictsort`,
 `dump`, `escape`, `first`, `float`, `forceescape`, `groupby`,
 `indent`, `int`, `join`, `last`, `length`, `list`, `lower`,
@@ -42,7 +42,7 @@ The first is boolean indicating whether the sort should be in reverse order.
 The second is a boolean indicating whether the comparisons should be case-sensitive.
 The third is the property on which to sort.
 It can only sort on top-level properties. See
-[issue 911](<https://github.com/11ty/eleventy/issues/911?v=1.1.1>).
+[issue 911](https://github.com/11ty/eleventy/issues/911).
 
 You can implement custom filters in the 11ty configuration file,
 typically `.eleventy.js`.
@@ -69,8 +69,8 @@ eleventyConfig.addFilter('mySort', (value, property) => {
 
 To sort on a property that isn't at the top of the items,
 consider using the lodash
-[get function](<https://lodash.com/docs/4.17.15#get?v=1.1.1>)
+[get function](https://lodash.com/docs/4.17.15#get)
 to get the values to be compared.
 
 More more information, see
-[Filters](<https://www.11ty.dev/docs/filters/?v=1.1.1>).
+[Filters](https://www.11ty.dev/docs/filters/).

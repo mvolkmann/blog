@@ -8,7 +8,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-D3 ([d3js.org](<https:/d3js.org?v=1.1.1>))
+D3 ([d3js.org](https:/d3js.org))
 stands for Data-Driven Documents.
 It renders, and re-renders, HTML elements (including `svg`) in a web browser
 based on data and changes to the data.
@@ -41,13 +41,13 @@ It is open source and uses a BSD license.
 D3 uses HTML, CSS, JavaScript, the DOM, and SVG,
 so knowledge of those topics is helpful.
 To see examples of using D3, click the "Examples" link
-near the top of [d3.js.org](<https://d3.js.org?v=1.1.1>).
+near the top of [d3.js.org](https://d3.js.org).
 
 There are 3 levels of D3 usage, using higher-level libraries,
 copying and modifying examples, and coding from scratch.
 
 An example of a library that uses D3 is C3
-([c3js.org](<https://c3js.org/?v=1.1.1>)).
+([c3js.org](https://c3js.org/)).
 It uses D3 under the hood to render many kinds of charts.
 These charts are customizable,
 but not to the extent that coding from scratch provides.
@@ -57,7 +57,7 @@ They respond well to changes in data,
 including transitions from old to new values.
 
 Another good library of data visualization components that use D3
-is at [nivo.rocks](<https://nivo.rocks/?v=1.1.1>).
+is at [nivo.rocks](https://nivo.rocks/).
 
 There are many sites that provided examples of charts implemented with D3.
 Perhaps you can find an example that almost exactly what you want.

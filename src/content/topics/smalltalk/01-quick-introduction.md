@@ -43,7 +43,7 @@ is its simple, minimal syntax.
 The entire syntax of Smalltalk can be demonstrated on a post card.
 
 <img alt="Smalltalk on a post card"
-  src="/blog/assets/smalltalk-on-postcard.jpg?v=1.1.1"
+  src="/blog/assets/smalltalk-on-postcard.jpg"
   style="width: 100%">
 
 Smalltalk is a dynamically typed language.
@@ -209,7 +209,7 @@ Do not enter that text.
 We will discuss how to print those results below.
 
 <img alt="Cuis Smalltalk Workspace session"
-  src="/blog/assets/cuis-workspace-session.png?v=1.1.1"
+  src="/blog/assets/cuis-workspace-session.png"
   style="width: 50%">
 
 The period character is used to separate, not terminate, expressions.
@@ -278,7 +278,7 @@ Browser windows contains four panes across the top row.
 - The second pane displays a list of classes in the selected class category.
   There are three buttons at the bottom of this pane.
   - The "instance" button causes the remaining panes to show instance methods.
-  - The "?" button causes the bottom pane to display
+  - The "" button causes the bottom pane to display
     the comment for the selected class.
   - The "class" button causes the remaining panes to show class methods.
 - The third pane displays a list of method categories in the selected class.
@@ -289,7 +289,7 @@ Enter "Array" and press return.
 The `Array` class will be selected in the second pane.
 
 <img alt="Cuis Smalltalk Browser"
-  src="/blog/assets/cuis-browser.png?v=1.1.1"
+  src="/blog/assets/cuis-browser.png"
   style="width: 100%">
 
 There is no method named `average` in the `Array` class,
@@ -325,7 +325,7 @@ This opens a new window that shows the method implementation,
 which returns the result of dividing `self sum` by `self size`.
 
 <img alt="Cuis Smalltalk Array average"
-  src="/blog/assets/cuis-array-average.png?v=1.1.1"
+  src="/blog/assets/cuis-array-average.png"
   style="width: 100%">
 
 What we have learned from this is that all the code can be easily browsed.
@@ -426,7 +426,7 @@ For our final exercise let's create a new class and use it.
 1. Locate the image file and double-click it to reopen the image.
 
    In Windows, the first time you do this a dialog will appear asking
-   "How do you want to open this file?".
+   "How do you want to open this file".
    Click "Look for another app on this PC" and
    navigate to the file `Squeak.exe`.
    It will be in the `CuisVM.app\Contents\Windows-x86_64` subdirectory

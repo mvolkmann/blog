@@ -359,7 +359,7 @@ This does not include changes to the contents of Workspace windows.
    the "fileIn selections" button to restore all the changes.
 
 <img alt="Cuis Recent Changes window" style="width: 100%"
-  src="/blog/assets/cuis-recent-changes.png?v=1.1.1">
+  src="/blog/assets/cuis-recent-changes.png">
 
 TODO: When are unrestored changes deleted, if ever?
 
@@ -375,7 +375,7 @@ With this enabled, if the VM crashes before changes are saved,
 it will display the following popup when restarted:
 
 <img alt="Cuis recover last changes" style="width: 50%"
-  src="/blog/assets/cuis-recover-last-changes.png?v=1.1.1">
+  src="/blog/assets/cuis-recover-last-changes.png">
 
 TODO: This DOES NOT WORK in macOS!
 

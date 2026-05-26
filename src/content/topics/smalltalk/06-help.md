@@ -25,11 +25,11 @@ The World menu contains a Help submenu which contains the following:
   performing a large number of common tasks.
 
   If the prompt "The Terse Guide is not loaded.
-  Would you like me to load it for you now?" appears, select "Yes".
+  Would you like me to load it for you now" appears, select "Yes".
   The following window will open.
 
   <img alt="Cuis Terse Guide"
-    src="/blog/assets/cuis-terse-guide.jpg?v=1.1.1">
+    src="/blog/assets/cuis-terse-guide.jpg">
 
   Click a topic to see example code.
   Select code and "Do it" or "Print it" to experiment.

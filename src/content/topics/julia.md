@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Julia](<https://julialang.org?v=1.1.1>) is a
+[Julia](https://julialang.org) is a
 dynamically typed programming language that provides high performance.
 It is often used as an alternative to Python or Matlab for data visualization.
 
@@ -30,7 +30,7 @@ Julia source files have an extension of `.jl`.
 Julia is great for applications that involve math.
 It supports a very concise syntax for defining functions like polynomials.
 
-Julia uses the [LLVM](<https://llvm.org?v=1.1.1>)
+Julia uses the [LLVM](https://llvm.org)
 compiler infrastructure.
 
 ## Installing
@@ -62,9 +62,9 @@ circleArea(r) = π*r^2
 ## Jupyter Notebooks
 
 Jupyter Notebooks can be configured to run Julia code as described
-[here](<https://datatofish.com/add-julia-to-jupyter/?v=1.1.1>).
+[here](https://datatofish.com/add-julia-to-jupyter/).
 
-A popular alternative is [JuliaHub](<https://juliahub.com?v=1.1.1>)
+A popular alternative is [JuliaHub](https://juliahub.com)
 which is the successor to JuliaBox.
 
 ## Outstanding Queestions

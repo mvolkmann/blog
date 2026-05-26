@@ -6,14 +6,14 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Starship](<https://starship.rs?v=1.1.1>)
+[Starship](https://starship.rs)
 is a highly customizable tool for customizing shell prompts.
 It works in nearly all shells including Bash, Fish, Nushell, Powershell, and Zsh.
 This removes the need to customize the prompt in shell-specific ways.
 It can be configured in one place for all shells,
 which is great for users that utilize multiple shells.
 
-Starship was inspired by [spaceship-prompt](<https://github.com/denysdovhan/spaceship-prompt?v=1.1.1>)
+Starship was inspired by [spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt)
 which has similar functionality, but only for Zsh.
 
 Starship is implemented in Rust, so it is very fast.
@@ -24,10 +24,10 @@ One way to install Starship is to install Rust
 and enter `cargo install starship`.
 It can also be installed via a `curl` command,
 using Scoop in Windows, or using Homebrew in macOS.
-For more details on installation, see [Installation](<https://starship.rs/guide/#🚀-installation?v=1.1.1>).
+For more details on installation, see [Installation](https://starship.rs/guide/#🚀-installation).
 
 Starship uses "Nerd Font" characters, so a font must be installed.
-Browse [nerdfonts.com](<https://www.nerdfonts.com?v=1.1.1>)
+Browse [nerdfonts.com](https://www.nerdfonts.com)
 and download a font such as "FiraCode Nerd Font".
 To install the font in macOS, double-click the file
 `Fira Code Regular Nerd Font Complete.ttf`
@@ -88,7 +88,7 @@ To enable the use of Starship in each shell:
 - for Zsh, edit `.zshrc` and add  
   `eval "$(starship init zsh)"`
 
-- for other shells, see [Getting Started](<https://starship.rs/guide/#🚀-installation?v=1.1.1>)
+- for other shells, see [Getting Started](https://starship.rs/guide/#🚀-installation)
 
 ## Configuring
 
@@ -99,15 +99,15 @@ The example configuration below results in the following prompts
 which begin by indicating the current shell: bash, fish, or Nushell.
 
 <img alt="Starship bash prompt" style="width: 40%"
-  src="/blog/assets/starship-bash-prompt.png?v=1.1.1"
+  src="/blog/assets/starship-bash-prompt.png"
   title="Starship bash prompt">
 
 <img alt="Starship fish prompt" style="width: 40%"
-  src="/blog/assets/starship-fish-prompt.png?v=1.1.1"
+  src="/blog/assets/starship-fish-prompt.png"
   title="Starship fish prompt">
 
 <img alt="Starship Nushell prompt" style="width: 40%"
-  src="/blog/assets/starship-nu-prompt.png?v=1.1.1"
+  src="/blog/assets/starship-nu-prompt.png"
   title="Starship Nushell prompt">
 
 Many string values in the configuration file can contain the syntax
@@ -119,7 +119,7 @@ A color specifier can be one of the following:
 - red, green, blue, yellow, purple, cyan, black, or white
 - `#` followed by a six-digit hexadecimal number
   (ex. cornflower blue is #6495ed)
-- number between 0-255 to specify an 8-bit [ANSI color code](<https://i.stack.imgur.com/KTSQa.png?v=1.1.1>)
+- number between 0-255 to specify an 8-bit [ANSI color code](https://i.stack.imgur.com/KTSQa.png)
   (ex. orange is 208)
 
 Style prefixes include:
@@ -185,7 +185,7 @@ $custom$character'''
 ```
 
 The prompt can contain icons.
-To see available icons, browse [Nerd Fonts Cheatsheet](<https://www.nerdfonts.com/cheat-sheet?v=1.1.1>).
+To see available icons, browse [Nerd Fonts Cheatsheet](https://www.nerdfonts.com/cheat-sheet).
 
 The prompt defined above displays an icon at the beginning
 to indicate the current shell.
@@ -231,4 +231,4 @@ add `$command` to the prompt string.
 To run a specific custom command, add `${custom.name}` to the prompt string
 where `name` is the name of a custom command.
 
-For more details on configuration, see [Configuration](<https://starship.rs/config/#prompt?v=1.1.1>).
+For more details on configuration, see [Configuration](https://starship.rs/config/#prompt).

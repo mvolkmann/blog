@@ -13,7 +13,7 @@ extracted from the book "Eats, Shoots & Leaves".
 
 Rules for periods are simple compared to other punctuation.
 Sentences end in a period or a substitute such as
-an exclamation mark (!) or a question mark (?).
+an exclamation mark (!) or a question mark ().
 
 ## Comma
 
@@ -46,7 +46,7 @@ Valid uses of a comma include:
 
 - end a statement with a question
 
-  "You didn't actually write that, did you?"
+  "You didn't actually write that, did you"
 
 - follow direct address
 
@@ -91,7 +91,7 @@ Valid uses of an apostrophe include:
 
   Names that end in "s" are treated like singular nouns.
 
-  "Have you read Keats's poems?" (Keats is singular a name that ends in "s".)
+  "Have you read Keats's poems" (Keats is singular a name that ends in "s".)
 
   An exception is made if the name if the name ends an "iz" sound.
 
@@ -128,5 +128,5 @@ Valid uses of an apostrophe include:
 
 - plural of letters or words
 
-  "How many t's are in traitor?"
+  "How many t's are in traitor"
   "Just tell me the do's and don't's."

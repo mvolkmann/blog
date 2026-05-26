@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Prisma](<https://www.prisma.io?v=1.1.1>) is the
+[Prisma](https://www.prisma.io) is the
 "next-generation Node.js and TypeScript ORM".
 
 Prisma supports managing and interacting with the following databases:
@@ -67,7 +67,7 @@ and select different options.
 
 ## Example Schema
 
-This example comes from the Prisma [Quickstart](<https://www.prisma.io/docs/getting-started/quickstart?v=1.1.1>) page.
+This example comes from the Prisma [Quickstart](https://www.prisma.io/docs/getting-started/quickstart) page.
 
 ```
 model User {
@@ -163,5 +163,5 @@ const users = await prisma.user.deleteMany({
 
 ## Pagination
 
-Prisma supports [pagination](<https://www.prisma.io/docs/concepts/components/prisma-client/pagination?v=1.1.1>) with the `skip` and `take` properties
+Prisma supports [pagination](https://www.prisma.io/docs/concepts/components/prisma-client/pagination) with the `skip` and `take` properties
 of the object passed to the `findMany` method.

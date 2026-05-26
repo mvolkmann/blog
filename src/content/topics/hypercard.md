@@ -5,10 +5,10 @@ layout: topic-layout.njk
 ---
 
 <img alt="HyperCard logo" style="width: 10%"
-  src="/blog/assets/hypercard-logo.jpg?v=1.1.1">
+  src="/blog/assets/hypercard-logo.jpg">
 <br />
 <img alt="HyperCard Welcome card" style="width: 80%"
-  src="/blog/assets/hypercard-home-stack.jpg?v=1.1.1">
+  src="/blog/assets/hypercard-home-stack.jpg">
 
 ## Overview
 
@@ -103,7 +103,7 @@ and click the "HyperCard Help" button.
 For help on HyperTalk, go to the Home stack, click the "Stack Kit" button,
 and click the "HyperTalk Reference" button.
 
-Another source of help on HyperTalk is the [HyperTalk QuickRef](<https://archive.org/details/hypercard_ht_quickref?v=1.1.1>)
+Another source of help on HyperTalk is the [HyperTalk QuickRef](https://archive.org/details/hypercard_ht_quickref)
 stack. After downloading this, open it in HyperCard,
 click the "Install..." button, and click the "Install" button.
 To get help on a particular topic, open the Message Box
@@ -182,7 +182,7 @@ If the Home stack is not currently open,
 it can be opened by selecting Go ... Home or pressing cmd-h.
 
 <img alt="HyperCard Home stack" style="width: 60%"
-  src="/blog/assets/hypercard-home-stack.jpg?v=1.1.1">
+  src="/blog/assets/hypercard-home-stack.jpg">
 
 When HyperCard is launched, it looks for the file `Home`
 in the following locations in this order:
@@ -313,17 +313,17 @@ To create a new stack from stack template:
 - Click the "Stack Templates" button to display a list of templates.
 
   <img alt="HyperCard Stack Kit card" style="width: 60%"
-    src="/blog/assets/hypercard-stack-kit-card.png?v=1.1.1">
+    src="/blog/assets/hypercard-stack-kit-card.png">
 
 - Click the name of one of the 15 stack templates.
 
   <img alt="HyperCard Stack Templates" style="width: 60%"
-    src="/blog/assets/hypercard-stack-templates.png?v=1.1.1">
+    src="/blog/assets/hypercard-stack-templates.png">
 
 - In the dialog that appears on top of the template:
 
   <img alt="HyperCard Todo List template" style="width: 60%"
-    src="/blog/assets/hypercard-todo-list-template.png?v=1.1.1">
+    src="/blog/assets/hypercard-todo-list-template.png">
 
   - Click the lightbulb button to display information about the template.
   - Click the "Create Stack" button to
@@ -382,7 +382,7 @@ To edit the properties of the current stack, select Objects ... Stack Info...
 which opens the following dialog:
 
 <img alt="HyperCard Stack Info" style="width: 45%"
-  src="/blog/assets/hypercard-stack-info.png?v=1.1.1">
+  src="/blog/assets/hypercard-stack-info.png">
 
 To enable opening your stacks from the Home stack:
 
@@ -492,7 +492,7 @@ open the stack and select File ... Protect Stack...
 which opens the following dialog:
 
 <img alt="HyperCard Protect Stack dialog" style="width: 50%"
-  src="/blog/assets/hypercard-protect-stack.png?v=1.1.1">
+  src="/blog/assets/hypercard-protect-stack.png">
 
 If the user level of the stack causes
 the "Protect Stack..." menu item to be missing from "File" menu,
@@ -591,7 +591,7 @@ To edit the properties of the current card, select Objects ... Card Info...
 which opens the following dialog:
 
 <img alt="HyperCard Card Info" style="width: 45%"
-  src="/blog/assets/hypercard-card-info.png?v=1.1.1">
+  src="/blog/assets/hypercard-card-info.png">
 
 Cards can be assigned names up to 30 characters.
 A HyperTalk script can go to a card with a given name
@@ -628,7 +628,7 @@ by entering the command `nav` in the Message Box.
 This contains buttons that map to the each of the Go menu items except "Scroll".
 
 <img alt="HyperCard Navigator Palette" style="width: 20%"
-  src="/blog/assets/hypercard-navigator-palette.png?v=1.1.1">
+  src="/blog/assets/hypercard-navigator-palette.png">
 
 ### Saving Cards
 
@@ -850,7 +850,7 @@ For example, `find chars "ome pet"` matches a card with
 a field that contains "Comet Fireball" AND
 a field that contains "Brindle Whippet".
 
-HyperCard does not treat the characters "?" and "*"
+HyperCard does not treat the characters "" and "*"
 in search terms like wildcards.
 Instead of using `find chars "wh*pet"`and hoping to match "Whippet", use `find chars "wh pet"` which is almost the same.
 It differs in that words containing "wh" and "pet"
@@ -991,7 +991,7 @@ to create a floating palette of tool buttons.
 Alternatively, press option-tab to toggle display of the Tools palette.
 
 <img alt="HyperCard Tools" style="width: 15%"
-  src="/blog/assets/hypercard-tools.png?v=1.1.1">
+  src="/blog/assets/hypercard-tools.png">
 
 Painting can be performed in both the background and card domains.
 
@@ -1146,7 +1146,7 @@ The tools include:
     Select Options ... Brush Shape... before painting.
 
     <img alt="HyperCard Brush dialog" style="width: 50%"
-      src="/blog/assets/hypercard-brush-dialog.png?v=1.1.1">
+      src="/blog/assets/hypercard-brush-dialog.png">
 
     For example, select the diagonal line brush shape
     to draw calligraphy.
@@ -1210,7 +1210,7 @@ The tools include:
     a width of 1, 2, 3, 4, 6, or 8 pixels can be selected.
 
     <img alt="HyperCard Line Size palette" style="width: 30%"
-      src="/blog/assets/hypercard-line-size-dialog.png?v=1.1.1">
+      src="/blog/assets/hypercard-line-size-dialog.png">
 
     To constrain the angle of the line to multiples of 15 degrees,
     hold down the shift key
@@ -1241,7 +1241,7 @@ The tools include:
     1. Drag to create a dashed line that is horizontal or vertical.
 
     <img alt="HyperCard dashed line pattern" style="width: 30%"
-      src="/blog/assets/hypercard-dashed-line-pattern.png?v=1.1.1">
+      src="/blog/assets/hypercard-dashed-line-pattern.png">
 
 - Row #4
 
@@ -1299,7 +1299,7 @@ The tools include:
     select that pattern, and draw the rectangle with the option key held down.
 
     <img alt="HyperCard dashed line pattern" style="width: 30%"
-      src="/blog/assets/hypercard-dashed-line-pattern.png?v=1.1.1">
+      src="/blog/assets/hypercard-dashed-line-pattern.png">
 
   - **Round Rectangle** (12)
 
@@ -1425,7 +1425,7 @@ The tools include:
     hexagon (6), octagon (8), and circle (infinite).
 
     <img alt="HyperCard Polygon Sides dialog" style="width: 40%"
-     src="/blog/assets/hypercard-polygon-sides-dialog.png?v=1.1.1">
+     src="/blog/assets/hypercard-polygon-sides-dialog.png">
 
     Click the center location and draw outward
     to specify the size and rotation of the shape.
@@ -1593,7 +1593,7 @@ This menu contains the following menu items:
   The screenshot below shows the effect when it is applied to text four times.
 
   <img alt="HyperCard Trace Edges multiple times" style="width: 25%"
-    src="/blog/assets/hypercard-trace-edges-multiple.png?v=1.1.1">
+    src="/blog/assets/hypercard-trace-edges-multiple.png">
 
 - Rotate Left
 
@@ -1751,7 +1751,7 @@ The Options menu contains the following menu items:
   and remains in effect until changed.
 
   <img alt="HyperCard Line Size dialog" style="width: 30%"
-    src="/blog/assets/hypercard-line-size-dialog.png?v=1.1.1">
+    src="/blog/assets/hypercard-line-size-dialog.png">
 
 - Brush Shape...
 
@@ -1761,7 +1761,7 @@ The Options menu contains the following menu items:
   and remains in effect until it is changed.
 
   <img alt="HyperCard Brush Shape dialog" style="width: 50%"
-    src="/blog/assets/hypercard-brush-shape-dialog.png?v=1.1.1">
+    src="/blog/assets/hypercard-brush-shape-dialog.png">
 
 - Edit Pattern...
 
@@ -1772,7 +1772,7 @@ The Options menu contains the following menu items:
   Other painting tools such as Line and Rectangle cannot be used here.
 
   <img alt="HyperCard Edit Pattern dialog" style="width: 30%"
-    src="/blog/assets/hypercard-dashed-line-pattern.png?v=1.1.1">
+    src="/blog/assets/hypercard-dashed-line-pattern.png">
 
   The supplied patterns are designed for placing copies in columns and rows.
   This means that their right edges flow nicely into their left edges
@@ -1790,7 +1790,7 @@ The Options menu contains the following menu items:
   hexagon (6), octagon (8), and circle (infinite).
 
   <img alt="HyperCard Polygon Sides dialog" style="width: 40%"
-   src="/blog/assets/hypercard-polygon-sides-dialog.png?v=1.1.1">
+   src="/blog/assets/hypercard-polygon-sides-dialog.png">
 
 - Draw Filled:
 
@@ -1827,7 +1827,7 @@ The Options menu contains the following menu items:
   to create something like the screenshot below.
 
   <img alt="HyperCard Regular Polygon Draw Multiple" style="width: 40%"
-    src="/blog/assets/hypercard-regular-polygon-draw-multiple.png?v=1.1.1">
+    src="/blog/assets/hypercard-regular-polygon-draw-multiple.png">
 
 - Rotate
 
@@ -1869,7 +1869,7 @@ which contains a grid of 40 buttons that can clicked
 to select the pattern that is used by the Bucket and Spray Can tools.
 
 <img alt="HyperCard Patterns" style="width: 15%"
-  src="/blog/assets/hypercard-patterns.png?v=1.1.1">
+  src="/blog/assets/hypercard-patterns.png">
 
 Like the Tools menu, the Patterns menu can be
 dragged off of the menu bar to create a floating palette.
@@ -1906,7 +1906,7 @@ select all the text, select Paint ... Trace Edges, and use
 the Bucket tool to fill the resulting character outlines with a pattern.
 
 <img alt="HyperCard Text Patterns" style="width: 30%"
-  src="/blog/assets/hypercard-text-patterns.png?v=1.1.1">
+  src="/blog/assets/hypercard-text-patterns.png">
 
 ## Buttons
 
@@ -1941,7 +1941,7 @@ See the demo <a href="#list-selection">List Selection</a> below.
 Each of the supported button styles are shown below.
 
 <img alt="HyperCard button types" style="width: 50%"
-  src="/blog/assets/hypercard-button-types.png?v=1.1.1">
+  src="/blog/assets/hypercard-button-types.png">
 
 ### Creating Buttons
 
@@ -1957,7 +1957,7 @@ To add a button to the current card.
 1. Double-click the button to open its "Button Info" dialog.
 
    <img alt="HyperCard Button Info" style="width: 50%"
-     src="/blog/assets/hypercard-button-info.png?v=1.1.1">
+     src="/blog/assets/hypercard-button-info.png">
 
 1. Change "Button Name" to be a name used to refer to the button
    and the text that will appear on it.
@@ -2153,7 +2153,7 @@ Here's an icon of the creator of HyperCard, Bill Atkinson.
 It is an ICON resource in the HyperCard app with the ID 2002 and name "Bill".
 
 <img alt="HyperCard Atkinson icon" style="width: 60%"
-  src="/blog/assets/hypercard-atkinson-icon.png?v=1.1.1">
+  src="/blog/assets/hypercard-atkinson-icon.png">
 
 To add an icon to a button:
 
@@ -2647,7 +2647,7 @@ To specify the options, click the "Contents..." button
 and enter each option on its own line.
 
 <img alt="HyperCard color popup Button Info" style="width: 60%"
-  src="/blog/assets/hypercard-color-popup-button-info.png?v=1.1.1">
+  src="/blog/assets/hypercard-color-popup-button-info.png">
 
 The name assigned to the button is used for
 a label that appears to the left of the dropdown.
@@ -2661,9 +2661,9 @@ to reveal the title and set the "Title Width".
 
 <div style="display: flex; align-items: start">
   <img alt="HyperCard color popup Button" style="width: 23%"
-    src="/blog/assets/hypercard-color-popup-button.png?v=1.1.1">
+    src="/blog/assets/hypercard-color-popup-button.png">
   <img alt="HyperCard color popup Button open" style="width: 28%"
-    src="/blog/assets/hypercard-color-popup-button-open.png?v=1.1.1">
+    src="/blog/assets/hypercard-color-popup-button-open.png">
 </div>
 
 To get the selected text or line number of a Popup,
@@ -2687,7 +2687,7 @@ that describes the data that should be entered.
 Different values can be entered in background fields for each card.
 
 <img alt="HyperCard Addresses stack" style="width: 60%"
-  src="/blog/assets/hypercard-addresses-stack.png?v=1.1.1">
+  src="/blog/assets/hypercard-addresses-stack.png">
 
 The values of fields are saved automatically and
 retained when the HyperCard application is quit.
@@ -2719,7 +2719,7 @@ To add a field to the current card:
 1. Double-click the field to open its "Button Info" dialog.
 
 <img alt="HyperCard Field Info" style="width: 50%"
-    src="/blog/assets/hypercard-field-info.png?v=1.1.1">
+    src="/blog/assets/hypercard-field-info.png">
 
 1. Enter a "Field Name" which can be used to
    refer to the field in scripts and reports.
@@ -3294,7 +3294,7 @@ To edit the properties of the background of the current card,
 select Objects ... Bkgnd Info... which opens the following dialog:
 
 <img alt="HyperCard Background Info" style="width: 45%"
-  src="/blog/assets/hypercard-background-info.png?v=1.1.1">
+  src="/blog/assets/hypercard-background-info.png">
 
 Assigning a name to a background is optional,
 but they are handy when printing reports and
@@ -3441,7 +3441,7 @@ It also shows the portion of the Home stack that is visible
 based on the state of the scroll window.
 
 <img alt="HyperCard Scroll Window" style="width: 70%"
-  src="/blog/assets/hypercard-scroll-window.png?v=1.1.1">
+  src="/blog/assets/hypercard-scroll-window.png">
 
 ## Menu Bar
 
@@ -3525,7 +3525,7 @@ they run faster because there is no need to compile them again.
 This remains true unless the machine code is pushed out of memory
 by more newly generated machine code due to memory limits.
 
-The commands supported by HyperTalk are documented at [HyperTalk Reference](<https://www.hypercard.center/HyperTalkReference#commands?v=1.1.1>).
+The commands supported by HyperTalk are documented at [HyperTalk Reference](https://www.hypercard.center/HyperTalkReference#commands).
 Each command sends a message
 that is typically handled by the HyperCard application.
 Messages can accept arguments that become
@@ -4118,7 +4118,7 @@ the elements up to the end are used and no error is reported.
 ### Scripts
 
 A HyperCard script is a collection of message handler and function definitions.
-Those contain [HyperTalk](<https://en.wikipedia.org/wiki/HyperTalk?v=1.1.1>) (most common) or AppleScript commands.
+Those contain [HyperTalk](https://en.wikipedia.org/wiki/HyperTalk) (most common) or AppleScript commands.
 Both have an English-like syntax.
 
 Scripts are associated with a specific object
@@ -4139,7 +4139,7 @@ To open a Script editor for any kind of object,
 open its "Info" window and click the "Script..." button.
 
 <img alt="HyperCard Script editor" style="width: 80%"
-  src="/blog/assets/hypercard-script-editor.png?v=1.1.1">
+  src="/blog/assets/hypercard-script-editor.png">
 
 The title bar describes the object whose script is being edited.
 
@@ -4223,7 +4223,7 @@ The Script menu contains the following:
   This opens the Find dialog shown below.
 
   <img alt="HyperCard Find dialog" style="width: 45%"
-    src="/blog/assets/hypercard-find-dialog.png?v=1.1.1">
+    src="/blog/assets/hypercard-find-dialog.png">
 
   If there are no occurrences then a beep is played.
 
@@ -4248,7 +4248,7 @@ The Script menu contains the following:
   This opens the Replace dialog shown below.
 
   <img alt="HyperCard Replace dialog" style="width: 45%"
-    src="/blog/assets/hypercard-replace-dialog.png?v=1.1.1">
+    src="/blog/assets/hypercard-replace-dialog.png">
 
   If there are no occurrences then a beep is played.
 
@@ -4350,7 +4350,7 @@ The debug menu contains the following menu items:
   the values of all variables in scope are displayed.
 
   <img alt="HyperCard Variable Watcher" style="width: 45%"
-    src="/blog/assets/hypercard-variable-watcher.png?v=1.1.1">
+    src="/blog/assets/hypercard-variable-watcher.png">
 
   To change the values of variables:
 
@@ -4370,7 +4370,7 @@ The debug menu contains the following menu items:
   which logs the names of all messages that are sent.
 
   <img alt="HyperCard Message Watcher" style="width: 45%"
-    src="/blog/assets/hypercard-message-watcher.png?v=1.1.1">
+    src="/blog/assets/hypercard-message-watcher.png">
 
 ### Messages
 
@@ -5207,7 +5207,7 @@ The value must be 254 characters.
 Only the first 14 lines are displayed.
 
 Add the `with` keyword to specify one, two, or three button labels.
-For example, `answer "Do you like this card?" with "Yes" or "No" or "Maybe"`.
+For example, `answer "Do you like this card" with "Yes" or "No" or "Maybe"`.
 The last button is styled as the default button
 that is selected if the return key is pressed.
 
@@ -6938,7 +6938,7 @@ For example:
 
 ```text
 on mouseUp
-  answer "Are you happy?" with Yes or No or Maybe
+  answer "Are you happy" with Yes or No or Maybe
   put it into card field "user name" -- can change card to background
 end mouseUp
 ```
@@ -6953,7 +6953,7 @@ For example, the following script can be attached to a button:
 
 ```text
 on mouseUp
-  ask "What is your name?"
+  ask "What is your name"
   put "Hello," && it & "!" into greeting
   put greeting into card field "user name"
 end mouseUp
@@ -6963,11 +6963,11 @@ To supply a default response in the dialog, add the `with` keyword
 followed by an expression that evaluates to the default value.
 The default value will appear in the dialog field and
 will be selected so the user can just begin typing to replace it.
-For example, `ask "What is your favorite color?" with "yellow"`.
+For example, `ask "What is your favorite color" with "yellow"`.
 
 The default value can be just a string that
 shows the required format of the value.
-For example, `ask "When is your birthday?" with "month day"`.
+For example, `ask "When is your birthday" with "month day"`.
 
 To hide the user response from onlookers, use the `ask password` command.
 This displays filled circles in the field
@@ -7304,7 +7304,7 @@ on doMenu menuItem
 end doMenu
 
 on greet
-  ask "What is your name?"
+  ask "What is your name"
   if it is not empty
   then answer "Hello," && it & "!"
 end greet
@@ -7532,7 +7532,7 @@ The second field allows the contents to be edited.
 The "Save" button saves the modified content back to the text file.
 
 <img alt="HyperCard read/write files" style="width: 70%"
-  src="/blog/assets/hypercard-read-write-files.png?v=1.1.1">
+  src="/blog/assets/hypercard-read-write-files.png">
 
 The following message handler is for the "Open" button:
 
@@ -7599,7 +7599,7 @@ Each button has a script that specifies the command to execute when clicked.
 
 ## Popular Stacks
 
-- [The Haunted House](<https://macintoshgarden.org/games/the-haunted-house?v=1.1.1>) by Mark Klink
+- [The Haunted House](https://macintoshgarden.org/games/the-haunted-house) by Mark Klink
 
 ## Power Tools
 
@@ -7608,7 +7608,7 @@ To access this stack, go the Home stack, click the "Stack Kit" button,
 and click "Power Tools".
 
 <img alt="HyperCard Power Tools" style="width: 80%"
-  src="/blog/assets/hypercard-Power-Tools.png?v=1.1.1">
+  src="/blog/assets/hypercard-Power-Tools.png">
 
 The following subsections describe each of the tools.
 
@@ -7621,7 +7621,7 @@ adjust their spacing, duplicate them, and delete them.
 To open the palette, click "Super Grouper" and click the "Show Palette" button.
 
 <img alt="HyperCard Super Grouper" style="width: 80%"
-  src="/blog/assets/hypercard-Super-Grouper.png?v=1.1.1">
+  src="/blog/assets/hypercard-Super-Grouper.png">
 
 To "Group Objects":
 
@@ -7772,7 +7772,7 @@ To display a card number on each card in a stack:
 - Add the following field to each background:
 
   <img alt="HyperCard card number field" style="width: 60%"
-    src="/blog/assets/hypercard-card-number-field.png?v=1.1.1">
+    src="/blog/assets/hypercard-card-number-field.png">
 
 - Add the following script to each background:
 
@@ -7785,7 +7785,7 @@ To display a card number on each card in a stack:
 ### Experimenting With HyperTalk
 
 <img alt="HyperCard Experimenting" style="width: 60%"
-  src="/blog/assets/hypercard-experimenting.png?v=1.1.1">
+  src="/blog/assets/hypercard-experimenting.png">
 
 Create a Field where arbitrary HyperTalk statements can be entered.
 Set its Field Name to "code" and set its Style to "Scrolling".
@@ -7809,12 +7809,12 @@ Start by creating the following objects:
 - "+" button to increment the value
 
 <img alt="HyperCard Counter" style="width: 20%"
-  src="/blog/assets/hypercard-counter.png?v=1.1.1">
+  src="/blog/assets/hypercard-counter.png">
 
 The following screenshot shows the field configuration:
 
 <img alt="HyperCard Counter field" style="width: 60%"
-  src="/blog/assets/hypercard-counter-field.png?v=1.1.1">
+  src="/blog/assets/hypercard-counter-field.png">
 
 Add the following script to the card
 to reset the state every time to card is opened:
@@ -7854,12 +7854,12 @@ Each time the button is clicked, its icon changes to 10 random values,
 before settling on a new value.
 
 <img alt="HyperCard Dice Button" style="width: 6%"
-  src="/blog/assets/hypercard-dice-button.png?v=1.1.1">
+  src="/blog/assets/hypercard-dice-button.png">
 
 Create the following button with its icon set to any of the dice icons:
 
 <img alt="HyperCard Dice Button Info" style="width: 55%"
-  src="/blog/assets/hypercard-dice-button-info.png?v=1.1.1">
+  src="/blog/assets/hypercard-dice-button-info.png">
 
 Add the following script to the button:
 
@@ -7884,7 +7884,7 @@ The screenshot below shows a common choices
 that often appear at the bottom of each card.
 
 <img alt="HyperCard Previous and Next Buttons" style="width: 70%"
-  src="/blog/assets/hypercard-prev-next-buttons.png?v=1.1.1">
+  src="/blog/assets/hypercard-prev-next-buttons.png">
 
 To implement buttons like these:
 
@@ -7892,14 +7892,14 @@ To implement buttons like these:
 - Add the following buttons in the lower-left and lower-right corners:
 
   <img alt="HyperCard Previous Button" style="width: 49%"
-    src="/blog/assets/hypercard-prev-button.png?v=1.1.1">
+    src="/blog/assets/hypercard-prev-button.png">
   <img alt="HyperCard Next Button" style="width: 49%"
-    src="/blog/assets/hypercard-next-button.png?v=1.1.1">
+    src="/blog/assets/hypercard-next-button.png">
 
 - Create the following field between the buttons:
 
   <img alt="HyperCard Card Number Field" style="width: 49%"
-    src="/blog/assets/hypercard-card-number-field.png?v=1.1.1">
+    src="/blog/assets/hypercard-card-number-field.png">
 
 - Select Objects .. Bkgnd Info...
 - Click the Script button.
@@ -7946,7 +7946,7 @@ separate lines in the field is computed and displayed inside the field.
 When the "Clear" button is clicked, the contents of the field is cleared.
 
 <img alt="HyperCard Adding Numbers" style="width: 50%"
-  src="/blog/assets/hypercard-adding-numbers.png?v=1.1.1">
+  src="/blog/assets/hypercard-adding-numbers.png">
 
 ```text
 -- Script for "Add Number" button
@@ -8051,7 +8051,7 @@ end keyDown
 The card shown below computes compound interest.
 
 <img alt="HyperCard Compound Interest" style="width: 25%"
-  src="/blog/assets/hypercard-compound-interest.png?v=1.1.1">
+  src="/blog/assets/hypercard-compound-interest.png">
 
 The stack has the script described in the section
 <a href="#number-fields">Number Fields</a>.
@@ -8105,14 +8105,14 @@ begin with the letter "g" and are followed by a CamelCase name.
 So we will use the global variable `gColorListIndex`.
 
 <img alt="HyperCard List Selection" style="width: 30%"
-  src="/blog/assets/hypercard-list-selection.png?v=1.1.1">
+  src="/blog/assets/hypercard-list-selection.png">
 
 Create fields like the following:
 
 <img alt="HyperCard field #1 for list selection" style="width: 49%"
-  src="/blog/assets/hypercard-field1-for-list-selection.png?v=1.1.1">
+  src="/blog/assets/hypercard-field1-for-list-selection.png">
 <img alt="HyperCard field #2 for list selection" style="width: 49%"
-  src="/blog/assets/hypercard-field2-for-list-selection.png?v=1.1.1">
+  src="/blog/assets/hypercard-field2-for-list-selection.png">
 
 Note that currently "Lock Text" is not checked in the "colorList" field.
 Enter the options in the "colorList" field on separate lines.
@@ -8230,15 +8230,15 @@ The screenshots below show this in its collapsed and expanded forms.
 
 <div style="display: flex; align-items: start">
   <img alt="HyperCard color dropdown collapsed" style="width: 14%"
-    src="/blog/assets/hypercard-color-dropdown-collapsed.png?v=1.1.1">
+    src="/blog/assets/hypercard-color-dropdown-collapsed.png">
   <img alt="HyperCard color dropdown expanded" style="width: 15%"
-    src="/blog/assets/hypercard-color-dropdown-expanded.png?v=1.1.1">
+    src="/blog/assets/hypercard-color-dropdown-expanded.png">
 </div>
 
 1. Create a field to hold and display the selected value.
 
    <img alt="HyperCard color dropdown value" style="width: 60%"
-     src="/blog/assets/hypercard-color-dropdown-value.png?v=1.1.1">
+     src="/blog/assets/hypercard-color-dropdown-value.png">
 
 1. Add the following script to the field
    which toggles the visibility of the list when it is clicked:
@@ -8253,7 +8253,7 @@ The screenshots below show this in its collapsed and expanded forms.
 1. Create a field to allow selection of a color from a list.
 
    <img alt="HyperCard color dropdown list" style="width: 60%"
-     src="/blog/assets/hypercard-color-dropdown-list.png?v=1.1.1">
+     src="/blog/assets/hypercard-color-dropdown-list.png">
 
 1. Add the following script to the field
    which displays the selected value and hides the list
@@ -8275,7 +8275,7 @@ The screenshots below show this in its collapsed and expanded forms.
 1. Create a button that can be clicked to toggle display of the color list.
 
    <img alt="HyperCard color dropdown toggle" style="width: 50%"
-     src="/blog/assets/hypercard-color-dropdown-toggle.png?v=1.1.1">
+     src="/blog/assets/hypercard-color-dropdown-toggle.png">
 
 1. Edit the button icon to match the following.
    This can be created by copying an existing icon that is similar,
@@ -8283,7 +8283,7 @@ The screenshots below show this in its collapsed and expanded forms.
    modifying the pixels slightly in the "Icon Editor".
 
    <img alt="HyperCard color dropdown button icon" style="width: 40%"
-     src="/blog/assets/hypercard-color-dropdown-button-icon.png?v=1.1.1">
+     src="/blog/assets/hypercard-color-dropdown-button-icon.png">
 
 1. Add the following script to the button,
    which is identical to the script in the first field:
@@ -8416,27 +8416,27 @@ This version of HyperCard ...
 
 ## Resources
 
-- [HyperCard on Wikipedia](<https://en.wikipedia.org/wiki/HyperCard?v=1.1.1>)
-- [hypercard.org](<https://hypercard.org?v=1.1.1>)
-- [NOTACON 5: Wasn](<https://www.youtube.com/watch?v=fFX1otbE_wU&v=1.1.1>) by Drew Ivan
-- [Eric](<https://www.youtube.com/playlist?list=PL1GQPxft2cQh_KsYz399Hlq7FHPp7XhBJ&v=1.1.1>) YouTube videos on HyperCard
-- [HyperCard Simulator](<https://hcsimulator.com?v=1.1.1>) -
+- [HyperCard on Wikipedia](https://en.wikipedia.org/wiki/HyperCard)
+- [hypercard.org](https://hypercard.org)
+- [NOTACON 5: Wasn](https://www.youtube.com/watch?v=fFX1otbE_wU) by Drew Ivan
+- [Eric](https://www.youtube.com/playlist?list=PL1GQPxft2cQh_KsYz399Hlq7FHPp7XhBJ) YouTube videos on HyperCard
+- [HyperCard Simulator](https://hcsimulator.com) -
   web-based
-- [Decker](<https://beyondloom.com/decker?v=1.1.1>)
+- [Decker](https://beyondloom.com/decker)
   open-source, web-based HyperCard clone
-- [[LIVE](<https://www.youtube.com/watch?v=x-FkNd5DkOQ&v=1.1.1>)
+- [[LIVE](https://www.youtube.com/watch?v=x-FkNd5DkOQ)
   YouTube video
-- [HyperTalk Reference](<https://hypercard.org/HyperTalk%20Reference%202.4.pdf?v=1.1.1>) - a PDF containing screenshots
+- [HyperTalk Reference](https://hypercard.org/HyperTalk%20Reference%202.4.pdf) - a PDF containing screenshots
   of most of the pages of the HyperTalk Reference stack
   that came with HyperCard 2.4 (362 pages!)
   To see this inside HyperCard, open the Message Box
   and enter `go "HyperCard Help".
-- [HyperCard Script Language Guide](<https://cancel.fm/stuff/share/HyperCard_Script_Language_Guide_1.pdf?v=1.1.1>)
-- [HyperTalk Reference](<https://www.hypercard.center/HyperTalkReference?v=1.1.1>) - another reference with links for each command
-- [Macintosh System 7.5.3](<https://archive.org/details/AppleMacintoshSystem753?v=1.1.1>) on Internet Archive;
+- [HyperCard Script Language Guide](https://cancel.fm/stuff/share/HyperCard_Script_Language_Guide_1.pdf)
+- [HyperTalk Reference](https://www.hypercard.center/HyperTalkReference) - another reference with links for each command
+- [Macintosh System 7.5.3](https://archive.org/details/AppleMacintoshSystem753) on Internet Archive;
   click to begin; includes HyperCard
-- [HyperCard Stacks](<https://archive.org/details/hypercardstacks?v=1.1.1>)
-- [LiveCode](<https://livecode.com?v=1.1.1>) active,
+- [HyperCard Stacks](https://archive.org/details/hypercardstacks)
+- [LiveCode](https://livecode.com) active,
   commercial alternative to HyperCard
-- [ViperCard](<https://www.vipercard.net?v=1.1.1>) -
+- [ViperCard](https://www.vipercard.net) -
   an open source recreation and re-imagination of HyperCard

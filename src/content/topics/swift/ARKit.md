@@ -7,18 +7,18 @@ layout: topic-layout.njk
 
 ## Overview
 
-[ARKit](<https://developer.apple.com/documentation/arkit?v=1.1.1>)
+[ARKit](https://developer.apple.com/documentation/arkit)
 is an Apple framework for rendering augmented reality experiences
 in iOS and iPadOS.
 ARKit utilizes device front and rear facing cameras and motion sensors.
 
-[RealityKit](<https://developer.apple.com/documentation/realitykit/?v=1.1.1>) is another Apple framework that is often used with ARKit.
+[RealityKit](https://developer.apple.com/documentation/realitykit/) is another Apple framework that is often used with ARKit.
 It renders 3D images and simulates changes to them.
 RealityKit can be used to add virtual objects to an ARKit view.
 
 ARKit and RealityKit use the USDZ file format to describe 3D objects.
 The USDZ file format was created by Pixar.
-Many USDZ files can be downloaded from the [Apple Developer website](<https://developer.apple.com/augmented-reality/quick-look/?v=1.1.1>).
+Many USDZ files can be downloaded from the [Apple Developer website](https://developer.apple.com/augmented-reality/quick-look/).
 
 ## Resources
 
@@ -45,7 +45,7 @@ and produces a 3D model in the USDZ format.
 
 Apple provides the HelloPhotogrammetry Xcode project
 that uses the Object Capture API.
-It can be downloaded at [Creating a Photogrammetry Command-Line App](<https://developer.apple.com/documentation/realitykit/creating_a_photogrammetry_command-line_app?v=1.1.1>).
+It can be downloaded at [Creating a Photogrammetry Command-Line App](https://developer.apple.com/documentation/realitykit/creating_a_photogrammetry_command-line_app).
 Building this project creates a command-line app
 that generates a model file from a collection of model photos.
 
@@ -149,55 +149,56 @@ in order to access it from SwiftUI.
 1. Hover over any row and click the "+" button.
 1. For the value, describe for users why camera access is needed.
    For example, "Need for augmented reality view".
-1. See code in the example project [ARKitDemo](<https://github.com/mvolkmann/ARKitDemo/?v=1.1.1>).
+1. See code in the example project [ARKitDemo](https://github.com/mvolkmann/ARKitDemo/).
 
 ### ARView Configuration
 
 To change the configuration of an `ARView` session,
-pass a configuration object to the `run` method of the [ARSession](<https://developer.apple.com/documentation/arkit/arsession?v=1.1.1>)  
+pass a configuration object to the `run` method of the
+[ARSession](https://developer.apple.com/documentation/arkit/arsession)
 object stored in the `session` property of the `ARView` object.
 Supported configuration types include:
 
-- [ARBodyTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arbodytrackingconfiguration?v=1.1.1>)
+- [ARBodyTrackingConfiguration](https://developer.apple.com/documentation/arkit/arbodytrackingconfiguration)
   "tracks human body poses, planar surfaces, and images using the rear-facing camera".
 
-- [ARFaceTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arfacetrackingconfiguration?v=1.1.1>)
+- [ARFaceTrackingConfiguration](https://developer.apple.com/documentation/arkit/arfacetrackingconfiguration)
   "tracks facial movement and expressions using the front camera".
 
-- [ARGeoTrackingConfiguration](<https://developer.apple.com/documentation/arkit/argeotrackingconfiguration?v=1.1.1>)
+- [ARGeoTrackingConfiguration](https://developer.apple.com/documentation/arkit/argeotrackingconfiguration)
   "tracks locations with GPS, map data, and a device's compass".
   For a list of supported cities, scroll to the
   "Supported Areas and Cities" section of the `ARGeoTrackingConfiguration` page.
 
-- [ARImageTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arimagetrackingconfiguration?v=1.1.1>)
+- [ARImageTrackingConfiguration](https://developer.apple.com/documentation/arkit/arimagetrackingconfiguration)
   "tracks known images using the rear-facing camera".
 
-- [ARObjectScanningConfiguration](<https://developer.apple.com/documentation/arkit/arobjectscanningconfiguration?v=1.1.1>)
+- [ARObjectScanningConfiguration](https://developer.apple.com/documentation/arkit/arobjectscanningconfiguration)
   "recognizes objects and collects high-fidelity data about specific objects using the rear-facing camera".
 
-- [AROrientationTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration?v=1.1.1>)
+- [AROrientationTrackingConfiguration](https://developer.apple.com/documentation/arkit/arorientationtrackingconfiguration)
   "tracks only the device’s orientation using the rear-facing camera".
 
-- [ARPositionalTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arpositionaltrackingconfiguration?v=1.1.1>)
+- [ARPositionalTrackingConfiguration](https://developer.apple.com/documentation/arkit/arpositionaltrackingconfiguration)
   "tracks only the device’s position in 3D space".
 
-- [ARWorldTrackingConfiguration](<https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration?v=1.1.1>)
+- [ARWorldTrackingConfiguration](https://developer.apple.com/documentation/arkit/arworldtrackingconfiguration)
   "tracks the position of a device in relation to objects in the environment".
 
 ### Important RealityKit Types
 
-- [ARView](<https://developer.apple.com/documentation/realitykit/arview?v=1.1.1>)
+- [ARView](https://developer.apple.com/documentation/realitykit/arview)
   class manages and displays a single `Scene`
   along with a camera stream on a device.
-- [Scene](<https://developer.apple.com/documentation/realitykit/scene?v=1.1.1>)
+- [Scene](https://developer.apple.com/documentation/realitykit/scene)
   class holds a `Scene.AnchorCollection`.
-- [Scene.AnchorCollection](<https://developer.apple.com/documentation/realitykit/scene/anchorcollection?v=1.1.1>)
+- [Scene.AnchorCollection](https://developer.apple.com/documentation/realitykit/scene/anchorcollection)
   struct holds a collection of `AnchorEntity` objects that are accessed by subscript.
-- [AnchorEntity](<https://developer.apple.com/documentation/realitykit/anchorentity/?v=1.1.1>)
+- [AnchorEntity](https://developer.apple.com/documentation/realitykit/anchorentity/)
   class inherits from `Entity` and anchors any number of entities to a `Scene`.
-- [Entity](<https://developer.apple.com/documentation/realitykit/entity?v=1.1.1>)
+- [Entity](https://developer.apple.com/documentation/realitykit/entity)
   class instances represent virtual or physical objects that can have appearance and behaviors.
-- [ModelEntity](<https://developer.apple.com/documentation/realitykit/modelentity?v=1.1.1>)
+- [ModelEntity](https://developer.apple.com/documentation/realitykit/modelentity)
   class is a subclass of `Entity`.
   Instances represent physical objects to be rendered.
 
@@ -211,7 +212,7 @@ let entity = try? Entity.load(named: "usdz-file-name")
 anchor.addChild(entity)
 ```
 
-The Apple [Augmented Reality Tools](<https://developer.apple.com/augmented-reality/tools/?v=1.1.1>) web page contains links for downloading
+The Apple [Augmented Reality Tools](https://developer.apple.com/augmented-reality/tools/) web page contains links for downloading
 the tools "Reality Composer" (iPhone and iPad only) and "Reality Converter".
 
 [Reality Composer](#reality-composer) is described below.
@@ -225,7 +226,7 @@ and edit the file's metadata."
 Files produced by these apps can be loaded into an ARKIt app
 in the same way as USDZ files.
 
-Entities can be created using the [MeshResource](<https://developer.apple.com/documentation/realitykit/meshresource?v=1.1.1>) class provided by ARKit.
+Entities can be created using the [MeshResource](https://developer.apple.com/documentation/realitykit/meshresource) class provided by ARKit.
 This has the methods `generateBox`, `generatePlane`, and `generateSphere`.
 For example, to create and display a blue box:
 
@@ -245,7 +246,7 @@ scene.addAnchor(anchor)
 Apple provides the CaptureSample project that implements an iOS app
 for capturing photos of a real-world object
 in preparation for generating a USDZ model file.
-The project can be downloaded from [Taking Pictures for 3D Object Capture](<https://developer.apple.com/documentation/realitykit/taking_pictures_for_3d_object_capture?v=1.1.1>).
+The project can be downloaded from [Taking Pictures for 3D Object Capture](https://developer.apple.com/documentation/realitykit/taking_pictures_for_3d_object_capture).
 
 I was able to run this app and capture images, but the images
 were not saved anywhere so I could not use them to create a USDZ model file.
@@ -265,7 +266,7 @@ To build and run the CaptureSample app:
 
 ## Pre-built models
 
-Apple provides some pre-built USDZ at [AR Quick Look](<https://developer.apple.com/augmented-reality/quick-look/?v=1.1.1>).
+Apple provides some pre-built USDZ at [AR Quick Look](https://developer.apple.com/augmented-reality/quick-look/).
 
 ## Viewing Models
 
@@ -298,4 +299,4 @@ When creating models from real-world objects:
 
 ## Example Project
 
-See [ARKitDemo](<https://github.com/mvolkmann/ARKitDemo/?v=1.1.1>).
+See [ARKitDemo](https://github.com/mvolkmann/ARKitDemo/).

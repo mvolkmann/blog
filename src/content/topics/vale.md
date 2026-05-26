@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Vale CLI](<https://vale.sh?v=1.1.1>)
+[Vale CLI](https://vale.sh)
 is an open source, command-line tool that
 reports on writing style issues found in text files.
 It does not provide suggestions for fixing the issues.
@@ -59,7 +59,7 @@ To install Vale in macOS:
 
 ## VS Code
 
-Install the [Vale VSCode](<https://github.com/chrischinchilla/vale-vscode?v=1.1.1>)
+Install the [Vale VSCode](https://github.com/chrischinchilla/vale-vscode)
 extension from Chris Chinchilla.
 This causes VS Code to flag writing style issues.
 

@@ -68,7 +68,7 @@ tap "Settings" and tap the "Reset" button.
 The amount of detail that can be entered for each gift is up to you.
 
 <img alt="GiftTrack Gift Form" style="width: 40%"
-    src="/blog/assets/GiftTrack-GiftForm.png?v=1.1.1"
+    src="/blog/assets/GiftTrack-GiftForm.png"
     title="GiftTrack Gift Form">
 
 Here's a list of the information that can be entered for a gift.

@@ -429,7 +429,7 @@ For example:
   </head>
   <body>
     <script>
-      const lockUnicode = '&#x1F512;';
+      const lockUnicode = '#x1F512;';
       d3.select('body')
         .append('button')
         .attr('disabled', 'true')

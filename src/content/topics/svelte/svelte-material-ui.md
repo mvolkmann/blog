@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Svelte Material UI](<https://sveltematerialui.com/?v=1.1.1>) (SMUI)
+[Svelte Material UI](https://sveltematerialui.com/) (SMUI)
 is a library of Svelte components that implement Material UI.
 It is implemented in TypeScript and uses Sass for style theme files.
 
@@ -16,7 +16,7 @@ and see the list in the left nav.
 
 The creator of SMUI, Hunter Perrin, created a great video
 detailing how to get started using this library on
-[YouTube](<https://www.youtube.com/watch?v=OyjZ7dezADw&v=1.1.1>).
+[YouTube](https://www.youtube.com/watch?v=OyjZ7dezADw).
 
 ## Installing
 
@@ -69,7 +69,7 @@ To install it in a Svelte project:
 
 To customize theme colors:
 
-- Browse [MUI Colors](<https://materialui.co/colors/?v=1.1.1>)
+- Browse [MUI Colors](https://materialui.co/colors/)
   to see names for recommended colors.
 - Edit `.scss` files for light and dark themes under `src/themes`
   These already import `@material/theme/color-palette`
@@ -84,7 +84,7 @@ To add a top app bar:
 
 - Enter `npm install -D @smui/top-app-bar`.
 - Copy the example code for a "page level" standard top app bar from
-  [Top App Bar](<https://sveltematerialui.com/demo/top-app-bar/?v=1.1.1>).
+  [Top App Bar](https://sveltematerialui.com/demo/top-app-bar/).
 - Create the file `src/routes/__layout.svelte` and paste the code there.
   This will be used as the layout for every page.
 - Replace the contents of the `AutoAdjust` element with `<slot />`.
@@ -188,7 +188,7 @@ change `src/routes/__layout.svelte` to the following:
 
 
 The code above uses
-[Material Icons](<https://fonts.google.com/icons?selected=Material%2BIcons>).
+[Material Icons](https://fonts.google.com/icons?selected=Material%2BIcons).
 
 ## Example Component
 
@@ -196,7 +196,7 @@ Here's an example of using the `Button` and `Switch` components
 in a Svelte component.
 
 <img alt="app screenshot" class="keep-size"
-  src="/blog/assets/svelte-material-ui.png?v=1.1.1">
+  src="/blog/assets/svelte-material-ui.png">
 
 
 

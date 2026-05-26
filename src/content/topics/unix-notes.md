@@ -244,7 +244,7 @@ that contain a given string, enter `grep '{string}' *.{extension}`.
 
 ### ripgrep
 
-[ripgrep](<https://github.com/BurntSushi/ripgrep?v=1.1.1>)
+[ripgrep](https://github.com/BurntSushi/ripgrep)
 implements the `rg` command in Rust
 and is a much faster alternative to the `find` command.
 
@@ -605,7 +605,7 @@ for library files (such as .so files).
   - see C:\Program Files\PuTTY on your laptop
 - need public and private SSH keys
   - yours are in C:\OCI\OCI*Putty*\*\_key.ppk
-- double-click the Pageant icon on your laptop desktop (needed?)
+- double-click the Pageant icon on your laptop desktop (needed)
 - add the environment variable SVN_SSH="ssh -l volkmanm -P 12345"
 - to generate a new SSH key
   - run C:\Program Files\PuTTY\puttygen.exe on laptop
@@ -634,7 +634,7 @@ for library files (such as .so files).
 - to redirect both to the same place
   command > file 2>&1
   or (bash only)
-  command &> file
+  command > file
 
 ## Switch User (su and sudo)
 

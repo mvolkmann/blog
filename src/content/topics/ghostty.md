@@ -11,7 +11,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Ghosty](<https://ghostty.org?v=1.1.1>)
+[Ghosty](https://ghostty.org)
 "is a fast, feature-rich, and cross-platform terminal emulator
 that uses platform-native UI and GPU acceleration".
 It is currently available for macOS and Linux.
@@ -26,7 +26,7 @@ All the keyboard shortcuts described below are for macOS.
 
 ## Installing
 
-Browse [ghostty.org](<https://ghostty.org?v=1.1.1>)
+Browse [ghostty.org](https://ghostty.org)
 and click the "Download" button, choose an installation method,
 and follow the directions.
 
@@ -142,7 +142,7 @@ font-family
 
 Ghostty ships with support for hundreds of color themes,
 including all of them from
-[Iterm2-color-schemes](<https://iterm2colorschemes.com?v=1.1.1>).
+[Iterm2-color-schemes](https://iterm2colorschemes.com).
 
 To view the available color themes, enter the following in a split:
 
@@ -256,7 +256,7 @@ As of Ghostty version 1.1.3, the supported actions include:
 - `write_scrollback_file`
 - `write_selection_file`
 
-For more detail, see [Custom Keybindings](<https://ghostty.org/docs/config/keybind?v=1.1.1>).
+For more detail, see [Custom Keybindings](https://ghostty.org/docs/config/keybind).
 
 ## More Command-Line Interface (CLI)
 
@@ -294,7 +294,7 @@ They are typically written in the OpenGL Shading Language (GLSL).
 Shaders can create dynamic, animated, or stylized effects.
 
 There is a collection of shaders for Ghostty at
-[ghostty-shaders](<https://github.com/hackr-sh/ghostty-shaders/?v=1.1.1>).
+[ghostty-shaders](https://github.com/hackr-sh/ghostty-shaders/).
 Most of these work, but a few seem to have no effect.
 
 For example, download the file `cineShader-Lava.glsl`

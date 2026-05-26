@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Tailwind](<https://tailwindcss.com/?v=1.1.1>)
+[Tailwind](https://tailwindcss.com/)
 is a CSS utility framework.
 It provides a large number of pre-built CSS classes
 that often only set a single CSS property.
@@ -192,9 +192,9 @@ enter `npm run build:css`.
 This will replace `@tailwind` directives above with generated CSS.
 The generated CSS file will contain:
 
-- [normalize.css](<https://github.com/necolas/normalize.css?v=1.1.1>)
+- [normalize.css](https://github.com/necolas/normalize.css)
   CSS rules
-- Tailwind [Preflight](<https://tailwindcss.com/docs/preflight?v=1.1.1>) CSS rules
+- Tailwind [Preflight](https://tailwindcss.com/docs/preflight) CSS rules
 - all Tailwind utility class definitions in the categories referenced
   by the `@tailwind` directives in `src/style.css`
 
@@ -217,7 +217,7 @@ and the Tailwind CSS classes being used have changed.
 Avoiding rebuilds speeds development.
 
 For details on configuring various build tools to support Tailwind, see
-[Tailwind installation](<https://tailwindcss.com/docs/installation?v=1.1.1>).
+[Tailwind installation](https://tailwindcss.com/docs/installation).
 
 ## PostCSS Build Process
 
@@ -359,7 +359,7 @@ that will break in future releases.
 
 ## Using With Frameworks
 
-From the website for [tailwind-merge](<https://github.com/dcastil/tailwind-merge?v=1.1.1>),
+From the website for [tailwind-merge](https://github.com/dcastil/tailwind-merge),
 "If you use Tailwind CSS with a component-based UI renderer like React or Vue,
 you're probably familiar with the situation that you want to
 change some styles of a component, but only in a one-off case."
@@ -373,7 +373,7 @@ The `purge` configuration property can be modified to purge unused CSS classes.
 If this is not done, the generated CSS file will be massive.
 As of 10/13/2020, the size is 2413K uncompressed, 1967K minified,
 190K gzipped, and 46K compressed with
-[Brotli](<https://github.com/google/brotli?v=1.1.1>).
+[Brotli](https://github.com/google/brotli).
 
 The `purge` property should be set to an array of glob patterns
 for file paths that can contain references to CSS classes.
@@ -422,13 +422,13 @@ in order to make it smaller:
    ```
 
 It may be desirable to only minimize CSS in production builds.
-To modify `postcss.config.js` to do this, see the end of [How to setup Tailwind with PurgeCSS and PostCSS](<https://flaviocopes.com/tailwind-setup/?v=1.1.1>).
+To modify `postcss.config.js` to do this, see the end of [How to setup Tailwind with PurgeCSS and PostCSS](https://flaviocopes.com/tailwind-setup/).
 
 ## Serving Changes
 
 There are many approaches to serve a site from local files and
 automatically refresh the browser when changes are detected.
-One simple approach is to use [live-server](<https://github.com/tapio/live-server?v=1.1.1>).
+One simple approach is to use [live-server](https://github.com/tapio/live-server).
 
 To use live-server:
 
@@ -438,7 +438,7 @@ To use live-server:
 
 ## VS Code Support
 
-The VS Code extension [Tailwind CSS IntelliSense](<https://tailwindcss.com/docs/intellisense?v=1.1.1>)
+The VS Code extension [Tailwind CSS IntelliSense](https://tailwindcss.com/docs/intellisense)
 provides autocomplete, syntax highlighting, and linting.
 
 While entering Tailwind CSS class names,
@@ -451,12 +451,12 @@ hover over its name.
 A small color swatch is displayed in front of each
 Tailwind class name that represents a color.
 
-The VS Code extension [Tailwind Fold](<https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold&v=1.1.1>) automatically folds the values of
+The VS Code extension [Tailwind Fold](https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold) automatically folds the values of
 `class` attributes in HTML and `className` props in JSX.
 To see one of these values, move the cursor to its line.
 To toggle the folding behavior off and on, press ctrl-option-a.
 
-To enable [Emmet](<https://emmet.io/?v=1.1.1>)
+To enable [Emmet](https://emmet.io/)
 completions of Tailwind CSS class names,
 add the following in the VS Code `settings.json` file:
 
@@ -467,7 +467,7 @@ add the following in the VS Code `settings.json` file:
 ## Icons
 
 The makers of Tailwind created
-[heroicons](<https://heroicons.com?v=1.1.1>)
+[heroicons](https://heroicons.com)
 which is a website that provides a large collection of free SVG icons.
 Hover over an icon to expose buttons for downloading it in SVG or JSX.
 Paste this into an HTML file or React component.
@@ -563,7 +563,7 @@ Tailwind supports several directives described below.
 
 ### `@apply`
 
-The [`@apply`](<https://tailwindcss.com/docs/functions-and-directives#apply?v=1.1.1>) directive includes properties from
+The [`@apply`](https://tailwindcss.com/docs/functions-and-directives#apply) directive includes properties from
 any number of Tailwind classes in a custom CSS rule.
 This enables a set of Tailwind classes to be reused on several elements
 without repeating them.
@@ -591,12 +591,12 @@ For example:
 
 ### `@layer`
 
-The [`@layer`](<https://tailwindcss.com/docs/functions-and-directives#layer?v=1.1.1>) directive is used to add custom CSS rules
+The [`@layer`](https://tailwindcss.com/docs/functions-and-directives#layer) directive is used to add custom CSS rules
 to a specific bucket of Tailwind CSS rules.
 
 ### `@responsive`
 
-The [`@responsive`](<https://tailwindcss.com/docs/functions-and-directives#responsive?v=1.1.1>) directive generates
+The [`@responsive`](https://tailwindcss.com/docs/functions-and-directives#responsive) directive generates
 responsive variants of custom CSS classes
 where the same styling is used for every breakpoint.
 To use different styling for some breakpoints,
@@ -604,7 +604,7 @@ define media queries that override these.
 
 ### `@screen`
 
-The [`@screen`](<https://tailwindcss.com/docs/functions-and-directives#screen?v=1.1.1>) directive creates a media query that utilizes
+The [`@screen`](https://tailwindcss.com/docs/functions-and-directives#screen) directive creates a media query that utilizes
 a breakpoint value.
 For example, instead of writing a media query like this:
 
@@ -625,13 +625,13 @@ specified for the `md` breakpoint:
 
 ### `@tailwind`
 
-The [`@tailwind`](<https://tailwindcss.com/docs/functions-and-directives#tailwind?v=1.1.1>) directive is used to inject Tailwind CSS class definitions
+The [`@tailwind`](https://tailwindcss.com/docs/functions-and-directives#tailwind) directive is used to inject Tailwind CSS class definitions
 into the content of a CSS file.
 Earlier we saw this used in the `src/style.css` file.
 
 ### `@variants`
 
-The [`@variants`](<https://tailwindcss.com/docs/functions-and-directives#variants?v=1.1.1>) directive is used to
+The [`@variants`](https://tailwindcss.com/docs/functions-and-directives#variants) directive is used to
 generate variants of your own CSS classes that are responsive or
 are only used when an element is hovered over, has focus, or is active.
 
@@ -641,7 +641,7 @@ Tailwind currently provides a single function, `theme`.
 
 ### `theme` Function
 
-The [`theme`](<https://tailwindcss.com/docs/functions-and-directives#theme?v=1.1.1>) function is used obtain values from the Tailwind config
+The [`theme`](https://tailwindcss.com/docs/functions-and-directives#theme) function is used obtain values from the Tailwind config
 in CSS property values.
 For example, to use a shade of yellow from Tailwind
 in a custom CSS rule:
@@ -675,7 +675,7 @@ The following sections list all the provided Tailwind CSS classes.
 There are a large number of them!
 
 This same information is available in the official docs at
-[tailwindcss.com/docs](<https://tailwindcss.com/docs/?v=1.1.1>).
+[tailwindcss.com/docs](https://tailwindcss.com/docs/).
 It is included here in a more compact manner that is
 more easily searchable because they are all on a single page.
 
@@ -963,7 +963,7 @@ For example, `lg:container` or `container`.
 ### Effects
 
 The `box-shadow` values set by the `shadow` classes
-are somewhat complicated. For details see the [Box Shadow](<https://tailwindcss.com/docs/box-shadow?v=1.1.1>) docs.
+are somewhat complicated. For details see the [Box Shadow](https://tailwindcss.com/docs/box-shadow) docs.
 
 | Name Prefix      | CSS Property                                           |
 | ---------------- | ------------------------------------------------------ |
@@ -1291,7 +1291,7 @@ The size of the button also increases slightly on hover.
 ```
 
 The `animation` and `@keyframe` values set by the `animate` classes
-are somewhat complicated. For details see the [Animation](<https://tailwindcss.com/docs/animation?v=1.1.1>) docs.
+are somewhat complicated. For details see the [Animation](https://tailwindcss.com/docs/animation) docs.
 
 | Name Prefix            | CSS Property                                                                                                           |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------------------- |
@@ -1469,7 +1469,7 @@ For example, `text-red` is not a valid Tailwind CSS class name.
 
 ## HyperUI
 
-[HyperUI](<https://www.hyperui.dev?v=1.1.1>)
+[HyperUI](https://www.hyperui.dev)
 is a collection of free UI components defined with
 Tailwind CSS classes and optionally AlpineJS directives.
 

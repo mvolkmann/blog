@@ -8,13 +8,13 @@ This page describes terminology and strategies
 related to implementing authentication in web applications.
 
 The strategies described here are used in a demonstration app found in the
-[authentication-fastify](<https://github.com/mvolkmann/authentication-fastify?v=1.1.1>) GitHub repo.
+[authentication-fastify](https://github.com/mvolkmann/authentication-fastify) GitHub repo.
 The user interface is built with HTML, CSS, and JavaScript
 rather than using a particular web framework.
 Much of the interesting code can be found in the file `api/api.js`
 which is well-commented.
 
-Also see [svelte-account-demo](<https://github.com/mvolkmann/svelte-account-demo?v=1.1.1>) which uses Svelte and Node.js.
+Also see [svelte-account-demo](https://github.com/mvolkmann/svelte-account-demo) which uses Svelte and Node.js.
 
 ## Terminology
 
@@ -27,16 +27,16 @@ These values are often stored in a database and used for authentication.
 The password entered in a login attempt is hashed using the same approach
 and that is compared to the hashed value in the database.
 Commonly used hashing algorithms include
-[bcrypt](<https://github.com/kelektiv/node.bcrypt.js?v=1.1.1>),
+[bcrypt](https://github.com/kelektiv/node.bcrypt.js),
 MD4, MD5, and SHA (Security Hashing Algorithm).
 
-**[Rainbow tables](<https://en.wikipedia.org/wiki/Rainbow_table?v=1.1.1>)** can be used by hackers to determine if
+**[Rainbow tables](https://en.wikipedia.org/wiki/Rainbow_table)** can be used by hackers to determine if
 a hashed password corresponds to a commonly used password.
 These map the hashes of commonly used passwords
 to their plain text equivalents.
 Rainbow tables for specific hashing algorithms can be found on the internet.
 
-**Bcrypt** as described by [Wikipedia](<https://en.wikipedia.org/wiki/Bcrypt?v=1.1.1>)
+**Bcrypt** as described by [Wikipedia](https://en.wikipedia.org/wiki/Bcrypt)
 is a password-hashing function designed by
 Niels Provos and David Mazières, based on the Blowfish cipher."
 The bcrypt hashing algorithm is purposely slower than other hashing algorithms

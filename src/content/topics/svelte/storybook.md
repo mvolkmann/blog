@@ -6,7 +6,7 @@ layout: topic-layout.njk
 ---
 
 by R. Mark Volkmann, partner and Distinguished Software Engineer at
-[Object Computing, Inc.](<https://objectcomputing.com?v=1.1.1>).
+[Object Computing, Inc.](https://objectcomputing.com).
 
 ## Overview
 
@@ -32,10 +32,10 @@ and focus on the design and styling of each component.
 Storybook can be used with many web frameworks.
 Let's dive into how it can be used with Svelte,
 appropriate as I'm the author of the Manning book
-[Svelte and Sapper in Action](<https://www.manning.com/books/svelte-and-sapper-in-action?v=1.1.1>).
+[Svelte and Sapper in Action](https://www.manning.com/books/svelte-and-sapper-in-action).
 Detailed instructions for using Storybook with Svelte components
 can be found in the Storybook documentation at
-[Introduction to Storybook for Svelte](<https://storybook.js.org/docs/guides/guide-svelte/?v=1.1.1>).
+[Introduction to Storybook for Svelte](https://storybook.js.org/docs/guides/guide-svelte/).
 
 To add the use of Storybook to an existing Svelte application,
 `cd` to the top application directory and enter `npx sb init`.
@@ -171,7 +171,7 @@ opens the Storybook app in your default web browser.
 Click the `Pie` component in the left nav to render the following:
 
 <img alt="Pie story"
-  src="/blog/assets/svelte-storybook.png?v=1.1.1">
+  src="/blog/assets/svelte-storybook.png">
 
 If desired, the example components can be deleted
 from the `src/stories` directory so they no longer render.
@@ -200,7 +200,7 @@ open the `index.html` file in a web browser.
 To deploy the site, copy the contents of the 'storybook-static' directory
 to any web server.
 
-For more detail on deploying Storybook, see [Publish Storybook](<https://storybook.js.org/docs/react/workflows/publish-storybook?v=1.1.1>).
+For more detail on deploying Storybook, see [Publish Storybook](https://storybook.js.org/docs/react/workflows/publish-storybook).
 
 ## Conclusion
 
@@ -214,4 +214,4 @@ This is typically faster than debugging in an app that uses the component
 because there is no need to navigate to where the component is used.
 
 More more on Svelte, check out
-[Svelte and Sapper in Action](<https://www.manning.com/books/svelte-and-sapper-in-action?v=1.1.1>).
+[Svelte and Sapper in Action](https://www.manning.com/books/svelte-and-sapper-in-action).

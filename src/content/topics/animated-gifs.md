@@ -11,7 +11,7 @@ Video files in many formats including `.mov` can be converted to animated GIFs.
 ## Using cloudconvert
 
 One way to create an animated GIF from a `.mov` file is to use the website
-[MOV to GIF Converter](https://cloudconvert.com/mov-to-gif?v=1.1.1).
+[MOV to GIF Converter](https://cloudconvert.com/mov-to-gif).
 
 1. Click the "Select File" button.
 1. Select a `.mov` file.
@@ -25,7 +25,7 @@ One way to create an animated GIF from a `.mov` file is to use the website
 ## Using FFmpeg
 
 Another way to create an animated GIF from a `.mov` file is to use
-[FFmpeg](https://ffmpeg.org?v=1.1.1).
+[FFmpeg](https://ffmpeg.org).
 
 To install this in macOS using Homebrew, enter `brew install ffmpeg`.
 This takes around 10 minutes to complete.

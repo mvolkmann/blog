@@ -11,12 +11,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="Elysia logo" style="border: none; width: 20%"
-  src="/blog/assets/elysia-logo.png?v=1.1.1"
+  src="/blog/assets/elysia-logo.png"
   title="Elysia logo">
 
 ## Overview
 
-[Elysia](<https://elysiajs.com?v=1.1.1>)
+[Elysia](https://elysiajs.com)
 is a JavaScript HTTP server library that targets the Bun JavaScript runtime.
 
 Elysia is a competitor to <a href="/blog/topics/#/hono" target="_blank">Hono</a>.

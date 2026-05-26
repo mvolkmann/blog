@@ -259,7 +259,7 @@ and so on.
 The following code demonstrates using the `do:displayingProgress:` method.
 
 <img alt="Cuis SequenceableCollection do:displayingProgress:" style="width: 20%"
-  src="/blog/assets/cuis-SequenceableCollection-do-displayingProgress.png?v=1.1.1">
+  src="/blog/assets/cuis-SequenceableCollection-do-displayingProgress.png">
 
 ```smalltalk
 c := #(10 20 30 40 50).

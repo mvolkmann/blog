@@ -15,7 +15,7 @@ Here are the most basic steps to create and build an 11ty site.
 1. Add the file `layout.md` in the `_includes`
    directory containing the following.
    The `meta` tags are necessary to get a perfect
-   [Lighthouse](<https://developers.google.com/web/tools/lighthouse?v=1.1.1>) score.
+   [Lighthouse](https://developers.google.com/web/tools/lighthouse) score.
 
    
 

@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Fastlane](<https://fastlane.tools/?v=1.1.1>)
+[Fastlane](https://fastlane.tools/)
 is an open source platform managed by Google that automates
 many tasks related to iOS and Android mobile app deployment.
 These include running tests, generating screenshots,
@@ -15,14 +15,14 @@ deploying iOS apps to TestFlight,
 deploying iOS apps to the App Store, and more.
 
 Management of the Fastlane project may be moving from Google to the
-[Mobile Native Foundation](<https://mobilenativefoundation.org?v=1.1.1>) soon.
+[Mobile Native Foundation](https://mobilenativefoundation.org) soon.
 This is seen as a positive move since Google has not
 devoted time to Fastlane development lately.
 
 This page focuses on usage for iOS apps.
 
-Some tasks require interacting with the [Apple Developer Portal](<https://developer.apple.com/?v=1.1.1>) and
-[App Store Connect](<https://appstoreconnect.apple.com/?v=1.1.1>).
+Some tasks require interacting with the [Apple Developer Portal](https://developer.apple.com/) and
+[App Store Connect](https://appstoreconnect.apple.com/).
 Fastlane provides a way to do this from the command line.
 
 Fastlane is primarily implemented in Ruby.
@@ -36,13 +36,13 @@ The final section pulls it all together into a complete `Fastfile`.
 
 ## Resources
 
-- [Fastlane home page](<https://fastlane.tools?v=1.1.1>)
-- [How to build the perfect fastlane pipeline for iOS](<https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios?v=1.1.1>)
+- [Fastlane home page](https://fastlane.tools)
+- [How to build the perfect fastlane pipeline for iOS](https://www.runway.team/blog/how-to-build-the-perfect-fastlane-pipeline-for-ios)
 
 ## Provisioning Profiles and Code Signing
 
 For details on "code signing" and "provisioning profiles",
-see the Apple Tech Note [TN3125: Inside Code Signing: Provisioning Profiles](<https://developer.apple.com/documentation/technotes/tn3125-inside-code-signing-provisioning-profiles?v=1.1.1>).
+see the Apple Tech Note [TN3125: Inside Code Signing: Provisioning Profiles](https://developer.apple.com/documentation/technotes/tn3125-inside-code-signing-provisioning-profiles).
 This document says the following:
 
 > Apple platforms, except macOS, won't run arbitrary third-party code.
@@ -156,7 +156,7 @@ itc_team_id "{app-store-connect-team-id}" # 9-digit number
 
 To get the Developer Portal Team ID:
 
-1. Browse [developer.apple.com](<https://developer.apple.com/?v=1.1.1>).
+1. Browse [developer.apple.com](https://developer.apple.com/).
 1. Click "Account" and sign in.
 1. Scroll down to the "Membership Details" section.
 1. Copy the "Team ID" value.
@@ -174,7 +174,7 @@ To get the AppStoreConnect Team ID:
 1. Paste the ITC team id as the value for `itc_team_id` in `fastlane/Appfile`.
 
 For more information about the file `Appfile`, see the fastlane docs on
-[Appfile](<https://docs.fastlane.tools/advanced/#appfile?v=1.1.1>).
+[Appfile](https://docs.fastlane.tools/advanced/#appfile).
 
 ### Snapfile
 
@@ -251,7 +251,7 @@ It is a Ruby source file found in the `fastlane` directory.
 To register the app to be managed on the Apple Developer Portal
 and App Store Connect, see [TestFlight](/blog/swift/TestFlight).
 
-The fastlane action [produce](<https://docs.fastlane.tools/actions/produce/?v=1.1.1>)
+The fastlane action [produce](https://docs.fastlane.tools/actions/produce/)
 which is an alias for `create_app_online`
 can be used to automate this process.
 Since new apps are not created frequently,
@@ -308,7 +308,7 @@ For information on creating unit and UI tests for a project,
 see [XCTest](/blog/swift/XCTest).
 
 To run all the automated unit and UI tests in the project,
-use the fastlane tool [scan](<https://docs.fastlane.tools/actions/scan/?v=1.1.1>)
+use the fastlane tool [scan](https://docs.fastlane.tools/actions/scan/)
 which is an alias for `run_tests`.
 The tests run in a Simulator or on a connected device.
 They run much faster in Xcode than they do from fastlane.
@@ -331,7 +331,7 @@ From the project root directory enter `fastlane tests`.
 
 ## Creating a Signing Certificate
 
-To create a signing certificate, use the fastlane action [cert](<https://docs.fastlane.tools/actions/cert/?v=1.1.1>)
+To create a signing certificate, use the fastlane action [cert](https://docs.fastlane.tools/actions/cert/)
 which is an alias for `get_certificates`.
 This determines if a new signing certificate is needed. If so it:
 
@@ -348,13 +348,13 @@ This file should be excluded from Git by adding it in `.gitignore`.
 
 This can be combined with the next step.
 
-To see all your certificates, browse [developer.apple.com](<https://developer.apple.com?v=1.1.1>),
+To see all your certificates, browse [developer.apple.com](https://developer.apple.com),
 click "Account", sign in, and click "Certificates" under the
 "Certificates, Identifiers & Profiles" section.
 
 ## Creating a Provisioning Profile
 
-To create a provisioning profile, use the fastlane action [sigh](<https://docs.fastlane.tools/actions/sigh/?v=1.1.1>)
+To create a provisioning profile, use the fastlane action [sigh](https://docs.fastlane.tools/actions/sigh/)
 which is an alias for `get_provisioning_profile`.
 This can create, renew, download, and repair provisioning profiles.
 
@@ -376,7 +376,7 @@ This file should be excluded from Git by adding it in `.gitignore`.
 ## Team Development
 
 To configure Fastlane for use by a development team,
-use the fastlane action [match](<https://docs.fastlane.tools/actions/match/?v=1.1.1>)
+use the fastlane action [match](https://docs.fastlane.tools/actions/match/)
 which is an alias for `sync_code_signing`.
 This combines the functionality of `cert` and `sigh`.
 In addition, it stores the certificates and provisioning profiles
@@ -392,7 +392,7 @@ and I have not used it yet.
 ## Building an App Archive
 
 To build an app archive file (.ipa),
-use the fastlane tool [gym](<https://docs.fastlane.tools/actions/gym/?v=1.1.1>)
+use the fastlane tool [gym](https://docs.fastlane.tools/actions/gym/)
 which is an alias for `build_app`.
 This builds and packages an app, creating a signed `.ipa` or `.app` file.
 
@@ -460,7 +460,7 @@ This builds and packages an app, creating a signed `.ipa` or `.app` file.
 
 To register beta testers in TestFlight:
 
-1. Browse [App Store Connect](<https://appstoreconnect.apple.com?v=1.1.1>).
+1. Browse [App Store Connect](https://appstoreconnect.apple.com).
 1. Click the "My Apps" button.
 1. Click the button for the app to be tested.
 1. Click the "TestFlight" tab.
@@ -473,7 +473,7 @@ To register beta testers in TestFlight:
 ## Deploying to TestFlight
 
 To deploy the app to TestFlight,
-use the fastlane tool [pilot](<https://docs.fastlane.tools/actions/pilot/?v=1.1.1>)
+use the fastlane tool [pilot](https://docs.fastlane.tools/actions/pilot/)
 which is an alias for `upload_to_testflight`.
 This can upload a build to TestFlight, add or remove testers,
 get information about testers and devices,
@@ -481,7 +481,7 @@ and import or export data describing all the testers.
 
 1. Create an app-specific password.
 
-   1. Browse [appleid.apple.com](<https://appleid.apple.com/account/manage?v=1.1.1>).
+   1. Browse [appleid.apple.com](https://appleid.apple.com/account/manage).
    1. Click the "Sign In" button and sign in.
    1. Click "App-Specific Passwords".
    1. If there are no existing app-specific passwords,
@@ -531,7 +531,7 @@ and import or export data describing all the testers.
 ## Creating Screenshots
 
 To create localized screenshots for each screen in the app,
-use the fastlane tool [snapshot](<https://docs.fastlane.tools/actions/snapshot/?v=1.1.1>)
+use the fastlane tool [snapshot](https://docs.fastlane.tools/actions/snapshot/)
 which is an alias for `capture_screenshots`
 which is an alias for `capture_ios_screenshots`.
 This automates generating screenshots for each screen navigated to in a UI Test.
@@ -650,12 +650,12 @@ when the `fastlane init` command was run.
    skip_open_summary(true)
    ```
 
-For more information, see [fastlane screenshots](<https://docs.fastlane.tools/getting-started/ios/screenshots/?v=1.1.1>).
+For more information, see [fastlane screenshots](https://docs.fastlane.tools/getting-started/ios/screenshots/).
 
 ## Adding Device Frames to Screenshots
 
 To add device frames around screenshots,
-use the fastlane tool "frameit" [frameit](<https://docs.fastlane.tools/actions/frameit/?v=1.1.1>)
+use the fastlane tool "frameit" [frameit](https://docs.fastlane.tools/actions/frameit/)
 which is an alias for `frame_screenshots`.
 
 Before running this, enter `brew install imagemagick`.
@@ -664,7 +664,7 @@ This action creates new `.png` files below the `fastlane/screenshots` directory
 that have `_framed` appended to their names.
 The framed screenshots are beautiful, but they are all larger than
 the originals and are incompatible with the sizes the App Store accepts.
-See this [issue](<https://github.com/fastlane/fastlane/issues/21067?v=1.1.1>).
+See this [issue](https://github.com/fastlane/fastlane/issues/21067).
 
 Add the following lane in `fastlane/Fastfile`:
 
@@ -680,7 +680,7 @@ From the project root directory enter `fastlane frames`.
 ## Uploading Screenshots
 
 To upload the app to the App Store,
-use the fastlane tool [deliver](<https://docs.fastlane.tools/actions/deliver/?v=1.1.1>)
+use the fastlane tool [deliver](https://docs.fastlane.tools/actions/deliver/)
 which is an alias for `upload_to_app_store`.
 This can upload screenshots, metadata, and binaries to App Store Connect.
 It can also update the app version number and submit the app for review.
@@ -707,7 +707,7 @@ From the project root directory enter `fastlane upload_screenshots`.
 
 ## Deploying to the App Store
 
-The same fastlane action used to upload screenshots, [deliver](<https://docs.fastlane.tools/actions/deliver/?v=1.1.1>)
+The same fastlane action used to upload screenshots, [deliver](https://docs.fastlane.tools/actions/deliver/)
 is used to upload an app to the App Store.
 
 I prefer to submit manually on the App Store Connect web page
@@ -715,7 +715,7 @@ so I can enter a description of what changed in the new version.
 
 The lane definition below has not worked for me yet,
 but it provides a starting point.
-See [deliver - Submit Build](<https://docs.fastlane.tools/actions/deliver/#submit-build?v=1.1.1>).
+See [deliver - Submit Build](https://docs.fastlane.tools/actions/deliver/#submit-build).
 
 1. Add the following lane in `fastlane/Fastfile`:
 
@@ -738,12 +738,12 @@ See [deliver - Submit Build](<https://docs.fastlane.tools/actions/deliver/#submi
 
 ## Other Actions
 
-All the actions supported by fastlane are listed at [fastlane actions](<https://docs.fastlane.tools/actions/?v=1.1.1>).
+All the actions supported by fastlane are listed at [fastlane actions](https://docs.fastlane.tools/actions/).
 There are many more than were described above!
 
 In addition to the actions already described, consider using these:
 
-- The [get_version_number](<https://docs.fastlane.tools/actions/get_version_number/?v=1.1.1>) and [get_build_number](<https://docs.fastlane.tools/actions/get_build_number/?v=1.1.1>) actions return values.
+- The [get_version_number](https://docs.fastlane.tools/actions/get_version_number/) and [get_build_number](https://docs.fastlane.tools/actions/get_build_number/) actions return values.
   They can be combined in a lane like the following:
 
   ```ruby
@@ -755,7 +755,7 @@ In addition to the actions already described, consider using these:
   end
   ```
 
-- The [notification](<https://docs.fastlane.tools/actions/notification/?v=1.1.1>) displays a macOS notification.
+- The [notification](https://docs.fastlane.tools/actions/notification/) displays a macOS notification.
   The first time this is used, the System Settings app will open.
   To enable "terminal-notifier" to display notifications,
   toggle "Allow Notifications" to on and select "Alerts".
@@ -770,21 +770,21 @@ In addition to the actions already described, consider using these:
   )
   ```
 
-- The [puts](<https://docs.fastlane.tools/actions/puts/?v=1.1.1>)
+- The [puts](https://docs.fastlane.tools/actions/puts/)
   prints given text to stdout.
   `echo` is an alias for this.
 
-- The [say](<https://docs.fastlane.tools/actions/say/?v=1.1.1>)
+- The [say](https://docs.fastlane.tools/actions/say/)
   action speaks given text.
   It is useful for announcing when a lane completes.
 
-- The [sh](<https://docs.fastlane.tools/actions/sh/?v=1.1.1>)
+- The [sh](https://docs.fastlane.tools/actions/sh/)
   to execute a shell command.
 
-- The [slather](<https://docs.fastlane.tools/actions/slather/?v=1.1.1>)
+- The [slather](https://docs.fastlane.tools/actions/slather/)
   action generates a code coverage report.
 
-- The [swiftlint](<https://docs.fastlane.tools/actions/swiftlint/?v=1.1.1>)
+- The [swiftlint](https://docs.fastlane.tools/actions/swiftlint/)
   action performs code validation using SwiftLint.
 
 ## Ruby vs. Swift
@@ -792,14 +792,14 @@ In addition to the actions already described, consider using these:
 By default `Fastfile` contains code written in the Ruby programming language.
 There is a option to use code written in the Swift programming language,
 but that executes more slowly because it still interacts with Ruby.
-See [Getting Started with Fastlane.swift](<https://docs.fastlane.tools/getting-started/ios/fastlane-swift/?v=1.1.1>).
+See [Getting Started with Fastlane.swift](https://docs.fastlane.tools/getting-started/ios/fastlane-swift/).
 
 ## Authentication
 
 The information in this section may only be needed
 when using the `match` action.
 
-1. Browse [App Store Connect](<https://appstoreconnect.apple.com?v=1.1.1>).
+1. Browse [App Store Connect](https://appstoreconnect.apple.com).
 1. Login
 1. Click the "Users and Access" button.
 1. Select the "Keys" tab.

@@ -19,10 +19,10 @@ you are building it for, and then replay it on your iOS device".
 
 Non-Apple alternatives to Reality Composer include:
 
-- [Blender](<https://www.blender.org?v=1.1.1>)
-- [Maya](<https://www.autodesk.com/products/maya/?v=1.1.1>)
-- [Unity](<https://unity.com?v=1.1.1>)
-- [Unreal Engine](<https://www.unrealengine.com/?v=1.1.1>)
+- [Blender](https://www.blender.org)
+- [Maya](https://www.autodesk.com/products/maya/)
+- [Unity](https://unity.com)
+- [Unreal Engine](https://www.unrealengine.com/)
 
 To launch the "Reality Composer" app in macOS, launch Xcode and
 select Xcode ... Open Developer Tool .. Reality Composer.
@@ -55,7 +55,7 @@ To create a new project:
 - To remove the cube, tap it and press the delete key.
   Alternatively, tap the cube, tap it again to get a popup of options,
   and tap "Delete".
-- To delete the thing (what is it?) that was below the cube,
+- To delete the thing (what is it) that was below the cube,
   use the same steps.
 
 To rename a project:

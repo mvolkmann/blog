@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Accessible Rich Internet Applications](https://www.w3.org/WAI/standards-guidelines/aria/?v=1.1.1) ARIA defines
+[Accessible Rich Internet Applications](https://www.w3.org/WAI/standards-guidelines/aria/) ARIA defines
 attributes and roles that make web content more accessible
 by providing information that can be used by assistive technologies.
 

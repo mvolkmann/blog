@@ -13,12 +13,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="Swift logo" style="width: 30%"
-  src="/blog/assets/swift-logo.png?v=1.1.1"
+  src="/blog/assets/swift-logo.png"
   title="Swift logo">
 
 ## Overview
 
-[Swift](https://swift.org?v=1.1.1)
+[Swift](https://swift.org)
 is an open source programming language created by Apple.
 Key facts about Swift include the following:
 
@@ -43,10 +43,10 @@ Key facts about Swift include the following:
 - recent standout features include macros, ownership modifiers,
   noncopyable types, typed throws, Swift Testing, and
   much stronger concurrency checking
-- built on [LLVM](https://llvm.org?v=1.1.1)
+- built on [LLVM](https://llvm.org)
   (Low Level Virtual Machine)
-- interoperates with [Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/?v=1.1.1) code
-- includes a [Standard Library](https://developer.apple.com/documentation/swift/swift_standard_library?v=1.1.1)
+- interoperates with [Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/) code
+- includes a [Standard Library](https://developer.apple.com/documentation/swift/swift_standard_library)
 - compiler is slow, not swift
 - language makes some efforts to be concise,
   but also uses many long keywords and method names
@@ -81,41 +81,41 @@ Important changes since then include the following:
 
 ## Resources
 
-- [Apple Developer](https://apps.apple.com/us/app/apple-developer/id640199958?v=1.1.1) app in the macOS and iOS App Stores
+- [Apple Developer](https://apps.apple.com/us/app/apple-developer/id640199958) app in the macOS and iOS App Stores
   This is a large collection of developer resources from Apple
   include all WWDC videos.
 
-- Swift home page - [https://swift.org](https://swift.org?v=1.1.1)
+- Swift home page - [https://swift.org](https://swift.org)
 
-- [The Swift Programming Language Book](https://docs.swift.org/swift-book/?v=1.1.1)
+- [The Swift Programming Language Book](https://docs.swift.org/swift-book/)
 
-- [Swift Playgrounds](https://www.apple.com/swift/playgrounds/?v=1.1.1) iOS app - free
+- [Swift Playgrounds](https://www.apple.com/swift/playgrounds/) iOS app - free
 
-- [Unwrap](https://apps.apple.com/us/app/unwrap/id1440611372?v=1.1.1) app from Paul Hudson for learning Swift on an iPhone or iPad
+- [Unwrap](https://apps.apple.com/us/app/unwrap/id1440611372) app from Paul Hudson for learning Swift on an iPhone or iPad
 
-- [Hacking with Swift](https://www.youtube.com/c/PaulHudson?v=1.1.1)
+- [Hacking with Swift](https://www.youtube.com/c/PaulHudson)
   video series on Swift and SwiftUI by Paul Hudson (@twostraws) - free
 
-- [100 Days of Swift](https://www.hackingwithswift.com/100?v=1.1.1)
+- [100 Days of Swift](https://www.hackingwithswift.com/100)
   by Paul Hudson (@twostraws) - free
 
-- [Swiftful Thinking](https://www.youtube.com/channel/UCp25X4LzOLaksp5qY0YMUzg?v=1.1.1) YouTube videos by Nick Sarno - free
+- [Swiftful Thinking](https://www.youtube.com/channel/UCp25X4LzOLaksp5qY0YMUzg) YouTube videos by Nick Sarno - free
 
-- [Swift by Sundell](https://www.swiftbysundell.com?v=1.1.1)
+- [Swift by Sundell](https://www.swiftbysundell.com)
   by John Sundell
 
-- [CreaTECH Solutions](https://www.youtube.com/c/StewartLynch?v=1.1.1)
+- [CreaTECH Solutions](https://www.youtube.com/c/StewartLynch)
   YouTube videos by StewartLynch- free
 
-- [Sean Allen](https://seanallen.co?v=1.1.1)
+- [Sean Allen](https://seanallen.co)
   YouTube videos and paid courses
 
-- [Code With Chris](https://codewithchris.com/swift-tutorial/?v=1.1.1)
+- [Code With Chris](https://codewithchris.com/swift-tutorial/)
   by Chris Ching
 
-- [Stanford CS193p - Developing Apps for iOS](https://cs193p.sites.stanford.edu?v=1.1.1) course by Paul Hegarty - free
+- [Stanford CS193p - Developing Apps for iOS](https://cs193p.sites.stanford.edu) course by Paul Hegarty - free
 
-- [iOS & Swift - The Complete iOS App Development Bootcamp](https://www.udemy.com/course/ios-13-app-development-bootcamp/?v=1.1.1)
+- [iOS & Swift - The Complete iOS App Development Bootcamp](https://www.udemy.com/course/ios-13-app-development-bootcamp/)
   Udemy course by Angela Yu - $14.99
 
 ## Installing
@@ -128,7 +128,7 @@ so check the Swift install page instead of relying on a fixed list.
 
 To install Swift on macOS, install Xcode from the macOS App Store.
 For other operating systems, download it from
-[Install Swift](https://swift.org/install/?v=1.1.1).
+[Install Swift](https://swift.org/install/).
 
 ## Editing
 
@@ -141,7 +141,7 @@ VS Code as the following advantages over Xcode:
   To format code in Xcode, select the lines to be formatted
   and press ctrl-shift-i.
   Xcode can be configured to run
-  [SwiftFormat](/blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1) on save,
+  [SwiftFormat](/blog/topics/#/blog/swift/SwiftFormat/) on save,
   but this requires a number of undocumented steps.
   SwiftFormat is a separate tool that is similar to a combination of
   the JavaScript tools ESLint (with autofix) and Prettier.
@@ -188,7 +188,7 @@ with contents like the following:
 ```
 
 For more options supported by SwiftFormat, see
-[Rules](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md?v=1.1.1).
+[Rules](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md).
 
 ## Using the Interpreter
 
@@ -210,7 +210,7 @@ The most commonly used commands are described in the table below.
 
 ## Debugging Output
 
-The global functions [print](<https://developer.apple.com/documentation/swift/print(_:separator:terminator:)?v=1.1.1>) and [dump](<https://developer.apple.com/documentation/swift/dump(_:name:indent:maxdepth:maxitems:)?v=1.1.1>) functions are useful for debugging Swift code.
+The global functions [print](<https://developer.apple.com/documentation/swift/print(_:separator:terminator:)>) and [dump](<https://developer.apple.com/documentation/swift/dump(_:name:indent:maxdepth:maxitems:)>) functions are useful for debugging Swift code.
 
 The `print` function takes any number of arguments and prints them to stdout.
 
@@ -272,7 +272,7 @@ print("id = \(ObjectIdentifier(myObject))")
 
 ## Packages
 
-The [Swift Package Manager](https://www.swift.org/package-manager/?v=1.1.1) is a
+The [Swift Package Manager](https://www.swift.org/package-manager/) is a
 "tool for managing the distribution of Swift code".
 It is similar to npm for JavaScript.
 Installing the Swift compiler also installs the Swift package manager.
@@ -292,7 +292,7 @@ Swift 6.2 added exit testing, attachments, and raw identifier display names.
 
 ## Swift Standard Library
 
-The [Swift Standard Library](https://developer.apple.com/documentation/swift/swift-standard-library?v=1.1.1) defines
+The [Swift Standard Library](https://developer.apple.com/documentation/swift/swift-standard-library) defines
 fundamental types, protocols, and global functions.
 These include:
 
@@ -318,7 +318,7 @@ These are mostly useful in performance-sensitive and systems code.
 
 ## Foundation Framework
 
-The [Foundation](https://developer.apple.com/documentation/foundation?v=1.1.1) framework defines many types including
+The [Foundation](https://developer.apple.com/documentation/foundation) framework defines many types including
 `AttributedString`, `Bundle`, `Calendar`, `CGFloat`, `Data`, `Date`,
 `DateFormatter`, `DateInterval`, `Decimal`, `Dimension`, `Error`, `FileManager`,
 `HTTPURLResponse`, `InputStream`, `Locale`, `Measurement`, `NumberFormatter`,
@@ -405,7 +405,7 @@ can be written in three ways:
 | closed range   | `a...b` (inclusive upper), `a..<b` (exclusive upper) |
 | open range     | `a...`, `...b`, `..<b`                               |
 | nil-coalescing | a `??` b (value is `a` if not nil and `b` otherwise) |
-| bit shift      | `<<`, `>>`, `&<<`, `&>>`                             |
+| bit shift      | `<<`, `>>`, `&<<`, `>>`                             |
 | bitwise        | `&` (and), `\|` (or), `^` (xor)                      |
 | types          | `is` (type check), `as`, `as?`, `as!` (type cast)    |
 
@@ -726,14 +726,14 @@ to it will have to account for the possibility of it being `nil`.
 
 Swift provides three global functions that can stop program execution.
 
-The [assert](<https://developer.apple.com/documentation/swift/assert(_:_:file:line:)?v=1.1.1>) function conditionally prints a message that
+The [assert](<https://developer.apple.com/documentation/swift/assert(_:_:file:line:)>) function conditionally prints a message that
 includes the current file and line number and then stops the program.
 These calls are ignored in release builds.
 
-The [precondition](<https://developer.apple.com/documentation/swift/precondition(_:_:file:line:)?v=1.1.1>) function is the same as the `assert` function,
+The [precondition](<https://developer.apple.com/documentation/swift/precondition(_:_:file:line:)>) function is the same as the `assert` function,
 but it is also honored in release builds.
 
-The [fatalError](<https://developer.apple.com/documentation/swift/fatalerror(_:file:line:)?v=1.1.1>) function unconditionally prints a message that
+The [fatalError](<https://developer.apple.com/documentation/swift/fatalerror(_:file:line:)>) function unconditionally prints a message that
 includes the current file and line number and then stops the program,
 even in release builds.
 
@@ -751,17 +751,17 @@ summarized below.
 Perhaps only `DecodingError` and `EncodingError` are suitable
 for throwing from your own functions.
 
-- [CancellationError](https://developer.apple.com/documentation/swift/cancellationerror?v=1.1.1) is thrown when a `Task` is cancelled.
-- [DecodingError](https://developer.apple.com/documentation/swift/decodingerror?v=1.1.1) is thrown when a value cannot be decoded.
-- [DistributedActorCodingError](https://developer.apple.com/documentation/distributed/distributedactorcodingerror?v=1.1.1) is thrown when a distributed actor cannot encode or decode a value.
-- [EncodingError](https://developer.apple.com/documentation/swift/encodingerror?v=1.1.1) is thrown when a value cannot be encoded
-- [ExecuteDistributedGTargetError](https://developer.apple.com/documentation/distributed/executedistributedtargeterror?v=1.1.1) is thrown by the `executeDistributedTargetError` method
-- [LocalTestingDistributedActorSystemError](https://developer.apple.com/documentation/distributed/localtestingdistributedactorsystemerror?v=1.1.1) is not described in the Apple documentation.
-- [Never](https://developer.apple.com/documentation/swift/never?v=1.1.1) is the return type of functions that should never return. It's not clear why this conforms to the `Error` protocol.
+- [CancellationError](https://developer.apple.com/documentation/swift/cancellationerror) is thrown when a `Task` is cancelled.
+- [DecodingError](https://developer.apple.com/documentation/swift/decodingerror) is thrown when a value cannot be decoded.
+- [DistributedActorCodingError](https://developer.apple.com/documentation/distributed/distributedactorcodingerror) is thrown when a distributed actor cannot encode or decode a value.
+- [EncodingError](https://developer.apple.com/documentation/swift/encodingerror) is thrown when a value cannot be encoded
+- [ExecuteDistributedGTargetError](https://developer.apple.com/documentation/distributed/executedistributedtargeterror) is thrown by the `executeDistributedTargetError` method
+- [LocalTestingDistributedActorSystemError](https://developer.apple.com/documentation/distributed/localtestingdistributedactorsystemerror) is not described in the Apple documentation.
+- [Never](https://developer.apple.com/documentation/swift/never) is the return type of functions that should never return. It's not clear why this conforms to the `Error` protocol.
 
 Typically custom error types are defined and used.
 Often these are define as an `enum` that conforms to the
-[Error](https://developer.apple.com/documentation/swift/error?v=1.1.1) or [LocalizedError](https://developer.apple.com/documentation/foundation/localizederror?v=1.1.1) protocol.
+[Error](https://developer.apple.com/documentation/swift/error) or [LocalizedError](https://developer.apple.com/documentation/foundation/localizederror) protocol.
 Each `enum` `case` represents a variation of the error
 and specific cases are thrown.
 
@@ -1171,10 +1171,10 @@ let formatted = String(format: "Angle: %.2f", angle) // 57.22
 
 ### Measurement Type
 
-The [Measurement](https://developer.apple.com/documentation/foundation/measurement?v=1.1.1) struct from the Foundation library
+The [Measurement](https://developer.apple.com/documentation/foundation/measurement) struct from the Foundation library
 is used to specify a quantity (`Double`) with a unit of measure.
 Values of this type can be passed to the `Text` initializer
-along with a `format` argument of type [Measurement.FormatStyle](https://developer.apple.com/documentation/foundation/measurement/formatstyle?v=1.1.1).
+along with a `format` argument of type [Measurement.FormatStyle](https://developer.apple.com/documentation/foundation/measurement/formatstyle).
 
 The supported quantity types include `UnitAcceleration`, `UnitAngle`,
 `UnitArea`, `UnitDispersion`, `UnitDuration`, `UnitElectricalCharge`,
@@ -1214,11 +1214,11 @@ including their value and unit.
 
 ### String Type
 
-The [String](https://developer.apple.com/documentation/swift/string?v=1.1.1) type is a `struct` that represents a sequence of Unicode characters.
-Literal [Character](https://developer.apple.com/documentation/swift/character?v=1.1.1)
+The [String](https://developer.apple.com/documentation/swift/string) type is a `struct` that represents a sequence of Unicode characters.
+Literal [Character](https://developer.apple.com/documentation/swift/character)
 and single-line `String` values are both delimited by double-quotes.
 
-The type [StaticString](https://developer.apple.com/documentation/swift/staticstring?v=1.1.1) represents text that is known at compile-time
+The type [StaticString](https://developer.apple.com/documentation/swift/staticstring) represents text that is known at compile-time
 which means it is not formed using string interpolation.
 
 Multi-line `String` values are delimited by triple double-quotes
@@ -1256,7 +1256,7 @@ For example, `"\(s1)\(s2)\(s3)"` is more efficient than `s1 + s2 + s3`.
 
 There are two approaches that can be used to included double quotes in a string.
 The first is to escape them by preceding them with a backslash.
-The second is to use a [raw string](https://www.hackingwithswift.com/articles/162/how-to-use-raw-strings-in-swift?v=1.1.1) which surrounds a string literal with `#` characters.
+The second is to use a [raw string](https://www.hackingwithswift.com/articles/162/how-to-use-raw-strings-in-swift) which surrounds a string literal with `#` characters.
 
 **Raw strings** differ in the following ways from normal strings:
 
@@ -1412,7 +1412,7 @@ let formatted = formatter.string(from: number) ?? "" // 1,234,567
 
 The `formatted` method can be applied to many kinds of values
 to produce a locale-specific, formatted string.
-See the example code at [FormattingDemo](https://github.com/mvolkmann/FormattingDemo/tree/main?v=1.1.1).
+See the example code at [FormattingDemo](https://github.com/mvolkmann/FormattingDemo/tree/main).
 
 Many `String` methods return a `String.SubSequence`.
 Values of this type cannot be passed to functions that expect a `String`.
@@ -1503,11 +1503,11 @@ print(now.formatted(.dateTime.weekday(.wide))) // Saturday
 print(now.formatted(.dateTime.year())) // 2022
 ```
 
-For custom date formats, create a [DateFormater](https://developer.apple.com/documentation/foundation/dateformatter?v=1.1.1) object, set its `dateFormat` property,
+For custom date formats, create a [DateFormater](https://developer.apple.com/documentation/foundation/dateformatter) object, set its `dateFormat` property,
 and call its `string` method, passing it a `Date` object.
 The characters that can be used in `dateFormat` strings
-are summarized in [Date Format Cheatsheet](https://www.advancedswift.com/date-formatter-cheatsheet-formulas-swift/#date-format-cheatsheet?v=1.1.1) and
-[NSDateFormatter](https://nsdateformatter.com?v=1.1.1).
+are summarized in [Date Format Cheatsheet](https://www.advancedswift.com/date-formatter-cheatsheet-formulas-swift/#date-format-cheatsheet) and
+[NSDateFormatter](https://nsdateformatter.com).
 
 For example:
 
@@ -2235,7 +2235,7 @@ they can be any type that conforms to the `Hashable` protocol.
 Tuples cannot be made to conform to `Hashable`,
 so they cannot be used as `Dictionary` keys.
 For details on the `Hashable` protocol, see the
-[Apple Developer Documentation](https://developer.apple.com/documentation/swift/hashable?v=1.1.1).
+[Apple Developer Documentation](https://developer.apple.com/documentation/swift/hashable).
 
 ```swift
 // When the type can't be inferred, it must be specified.
@@ -2438,12 +2438,12 @@ let sortedPeople = people.sorted {
 
 Swift 5.7 added support for regular expressions.
 
-The [Regex](https://developer.apple.com/documentation/swift/regex?v=1.1.1) struct represents a regular expression.
+The [Regex](https://developer.apple.com/documentation/swift/regex) struct represents a regular expression.
 Instances can be created in three ways:
 
 - Use the literal syntax that surrounds the regular expression with slashes.
 - Use one of several `Regex` initializers.
-- Use the [RegexBuilder](https://developer.apple.com/documentation/regexbuilder?v=1.1.1)
+- Use the [RegexBuilder](https://developer.apple.com/documentation/regexbuilder)
   framework which supports passing a closure to `Regex`
   that contains DSL-like syntax using types defined by this framework.
 
@@ -2528,7 +2528,7 @@ let re3: MyRegex = Regex {
 
 Each of the regular expressions defined above produce the same results.
 The following code demonstrates using each of them.
-The `match` variable below is a [Match](https://developer.apple.com/documentation/swift/regex/match?v=1.1.1)
+The `match` variable below is a [Match](https://developer.apple.com/documentation/swift/regex/match)
 struct instance.
 This has an `output` property whose value is a tuple containing
 the full match and each of the capture group values.
@@ -2638,7 +2638,7 @@ if sentence.starts(with: prefixRE) {
     print("starts with success")
 }
 
-let newSentence = sentence.replacing(digitsRE, with: "?")
+let newSentence = sentence.replacing(digitsRE, with: "")
 print(newSentence) // The Chiefs defeated the Eagles ? to ?.
 
 let trimmedSentence = sentence.trimmingPrefix(prefixRE)
@@ -2662,8 +2662,8 @@ print("tes".contains(re)) // false
 ```
 
 There were plans to allow switch cases to match regular expressions.
-It was shown in the WWDC video [Swift Regex: Beyond the basics](https://developer.apple.com/videos/play/wwdc2022/110358/?v=1.1.1) but it doesn't seem to be supported yet.
-See this [StackOverflow post](https://stackoverflow.com/questions/75078966/how-to-use-swift-literal-regex-expressions-in-switch-case-pattern-statements?v=1.1.1).
+It was shown in the WWDC video [Swift Regex: Beyond the basics](https://developer.apple.com/videos/play/wwdc2022/110358/) but it doesn't seem to be supported yet.
+See this [StackOverflow post](https://stackoverflow.com/questions/75078966/how-to-use-swift-literal-regex-expressions-in-switch-case-pattern-statements).
 
 ```swift
 func classify(_ token: String) {
@@ -2981,7 +2981,7 @@ if let msg = message {
 }
 
 // Print the message if it is set, otherwise do nothing.
-func printMessage(_ message: String?) {
+func printMessage(_ message: String) {
     guard let msg = message else { return }
     print(msg)
 }
@@ -3948,7 +3948,7 @@ public extension String {
 
 The following code demonstrates using the methods
 added by the extension above.
-It uses the built-in [assert](https://developer.apple.com/documentation/swift/1541112-assert?v=1.1.1) function.
+It uses the built-in [assert](https://developer.apple.com/documentation/swift/1541112-assert) function.
 
 ```swift
 var text = "Mark"
@@ -4357,7 +4357,7 @@ node1.printDepthFirst()
 
 ## Attributes
 
-Swift provides many [attributes](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html?v=1.1.1) that can be applied either to
+Swift provides many [attributes](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html) that can be applied either to
 types or declarations (such as properties and functions).
 
 Attributes are applied by preceding a type definition or a declaration
@@ -4406,7 +4406,7 @@ However, property wrappers can be used in any Swift code
 and are not only for use in SwiftUI.
 Custom property wrappers can also be defined.
 
-A property wrapper is defined by applying the [propertyWrapper](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID621?v=1.1.1) attribute to a
+A property wrapper is defined by applying the [propertyWrapper](https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID621) attribute to a
 `struct` (most common), `class`, or `enum` (least common).
 
 The type must define a property named `wrappedValue`.
@@ -4429,7 +4429,7 @@ The functionality of a property wrapper is triggered when
 a property to which it is applied is initialized, accessed, or modified.
 
 For a great video demonstrating how to define custom property wrappers,
-see [Custom Swift Property Wrappers](https://www.youtube.com/watch?v=AXfSE2ET8c8&t=1092s&v=1.1.1) from Stewart Lynch.
+see [Custom Swift Property Wrappers](https://www.youtube.com/watch?v=AXfSE2ET8c8&t=1092s) from Stewart Lynch.
 
 Most property wrappers are defined using a `struct`
 in order to use value semantics.
@@ -4479,7 +4479,7 @@ Note how multiple property wrappers can be applied to the same property,
 in this case `@State` and `@InRange`.
 
 <img alt="Swift Property Wrappers" style="width: 30%"
-  src="/blog/assets/Swift-Property-Wrappers.png?v=1.1.1"
+  src="/blog/assets/Swift-Property-Wrappers.png"
   title="Swift Property Wrappers">
 
 ```swift
@@ -4572,7 +4572,7 @@ struct ContentView: View {
 
 The following code demonstrates an attempt to implement our own version
 of the `State` property wrapper. We can of course just use that,
-but this provides an interesting example of using [DynamicProperty](https://developer.apple.com/documentation/swiftui/dynamicproperty?v=1.1.1) and defining a `projectValue` computed property.
+but this provides an interesting example of using [DynamicProperty](https://developer.apple.com/documentation/swiftui/dynamicproperty) and defining a `projectValue` computed property.
 
 Conforming to the `DynamicProperty` protocol makes it so any time the state
 of this property wrapper changes, all views that are watching it update.
@@ -4687,7 +4687,7 @@ let pType = type(of: p) // Person.Type
 let pTypeName = String(describing: pType) // "Person"
 ```
 
-Swift also provides the [Mirror](https://developer.apple.com/documentation/swift/mirror?v=1.1.1) API
+Swift also provides the [Mirror](https://developer.apple.com/documentation/swift/mirror) API
 for discovering the stored properties of an object at runtime.
 It does not support discovering the
 computed properties and methods of an object.
@@ -5108,9 +5108,9 @@ can use `private` or `fileprivate` access control.
 ## Concurrency
 
 See my newer blog page
-[Concurrency](/blog/topics/#/blog/swift/Concurrency?v=1.1.1).
+[Concurrency](/blog/topics/#/blog/swift/Concurrency).
 
-See [Swift Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html?v=1.1.1).
+See [Swift Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html).
 
 Swift 5.5 added support for the `async` and `await` keywords.
 This was announced at the WWDC 2021 event.
@@ -5179,8 +5179,8 @@ func taskDemo() {
 ```
 
 To bridge between functions that take callback functions,
-referred to as "completion handlers", use the [withCheckedContinuation](<https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)?v=1.1.1>) or the [withCheckedThrowingContinuation](<https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)?v=1.1.1>) function.
-See this post from [Hacking with Swift](https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions?v=1.1.1).
+referred to as "completion handlers", use the [withCheckedContinuation](<https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)>) or the [withCheckedThrowingContinuation](<https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)>) function.
+See this post from [Hacking with Swift](https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-continuations-to-convert-completion-handlers-into-async-functions).
 
 Suppose `getData` is a function that takes a completion handler.
 To call this function inside an `async` function
@@ -5202,7 +5202,7 @@ func getDataAsync() async -> SomeData {
 
 ## File I/O
 
-One way to write and read files is to use the [FileManager](https://developer.apple.com/documentation/foundation/filemanager?v=1.1.1) class.
+One way to write and read files is to use the [FileManager](https://developer.apple.com/documentation/foundation/filemanager) class.
 For example:
 
 ```swift
@@ -5347,7 +5347,7 @@ decoder.dateDecodingStrategy = .iso8601
 
 If any properties of a type to be decoded have a data type that varies,
 decode must be performed manually.
-For example, the [RandomUser](https://randomuser.me/api/?v=1.1.1)
+For example, the [RandomUser](https://randomuser.me/api/)
 API endpoint sometimes returns a `postcode` property as a `String`
 and sometimes as an `Int`.
 Here are all the required struct definitions
@@ -5501,12 +5501,12 @@ When this is not the case, consider using Core Data, CloudKit, or Realm.
 
 For an example of an app that writes JSON data to a file
 and restores the data from that file every time the app is launched,
-see [JSONFileIODemo](https://github.com/mvolkmann/JSONFileIODemo/tree/main/JSONFileIODemo?v=1.1.1).
-This is inspired by the Stewart Lynch video [Persisting to JSON or MarkDown in SwiftUI](https://www.youtube.com/watch?v=8D8pb3ycdqw&list=RDCMUCOWdR4sFkmolWkU2fg669Gg&start_radio=1&v=1.1.1).
+see [JSONFileIODemo](https://github.com/mvolkmann/JSONFileIODemo/tree/main/JSONFileIODemo).
+This is inspired by the Stewart Lynch video [Persisting to JSON or MarkDown in SwiftUI](https://www.youtube.com/watch?v=8D8pb3ycdqw&list=RDCMUCOWdR4sFkmolWkU2fg669Gg&start_radio=1).
 
 ### Bundle Decoding
 
-The following extension from Paul Hudson at [How to decode JSON from your app bundle the easy way](https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way?v=1.1.1)
+The following extension from Paul Hudson at [How to decode JSON from your app bundle the easy way](https://www.hackingwithswift.com/example-code/system/how-to-decode-json-from-your-app-bundle-the-easy-way)
 simplifies decoding UTF-8 data from a file in the app `Bundle`:
 
 ```swift
@@ -5603,7 +5603,7 @@ let dogs = Bundle.main.decode([Dog].self, from: "dogs.json")
 
 ### Mock Data
 
-[Mockaroo](https://mockaroo.com?v=1.1.1) is a great site
+[Mockaroo](https://mockaroo.com) is a great site
 for generating test data.
 It is great for generating data in JSON, CSV, XML, SQL, and other formats.
 A common use is to generate a JSON array of objects
@@ -5615,7 +5615,7 @@ Using this service requires signing up for a free account.
 
 Comma Separated Value (CSV) files are text files where each line contains values separated by commas.
 This is a common format for exporting spreadsheets.
-While there are Swift packages for parsing CSV data such as [SwiftCSV](https://github.com/swiftcsv/SwiftCSV?v=1.1.1),
+While there are Swift packages for parsing CSV data such as [SwiftCSV](https://github.com/swiftcsv/SwiftCSV),
 writing the code yourself (minus certain features and error handling)
 is relatively easy.
 
@@ -5738,11 +5738,11 @@ TODO: Add more detail?
 
 ## AsyncStream
 
-The Swift Standard Library defines the [AsyncStream](https://developer.apple.com/documentation/swift/asyncstream?v=1.1.1) `struct` which supports asynchronous sequences
+The Swift Standard Library defines the [AsyncStream](https://developer.apple.com/documentation/swift/asyncstream) `struct` which supports asynchronous sequences
 that are generated by a closure that produces new elements.
 
-The Swift Standard Library also defines the [Clock](https://developer.apple.com/documentation/swift/clock?v=1.1.1) protocol
-and the conforming structs [ContinuousClock](https://developer.apple.com/documentation/swift/continuousclock?v=1.1.1) and [SuspendingClock](https://developer.apple.com/documentation/swift/suspendingclock?v=1.1.1).
+The Swift Standard Library also defines the [Clock](https://developer.apple.com/documentation/swift/clock) protocol
+and the conforming structs [ContinuousClock](https://developer.apple.com/documentation/swift/continuousclock) and [SuspendingClock](https://developer.apple.com/documentation/swift/suspendingclock).
 The `Clock` protocol describes methods that measure
 the time required to execute a closure.
 It has two associated types, `Duration` and `Instant`.
@@ -5805,22 +5805,22 @@ Task {
 
 ## AsyncAlgorithms
 
-[AsyncAlgorithms](https://github.com/apple/swift-async-algorithms?v=1.1.1) is a Swift package from Apple that implements
+[AsyncAlgorithms](https://github.com/apple/swift-async-algorithms) is a Swift package from Apple that implements
 many algorithms for working with asynchronous sequences.
 
 TODO: Add lots of examples!
 
-See the SwiftLeeds talk [SwiftUI, Async/Await, AsyncAlgorithms: How does it all fit?](https://www.youtube.com/watch?v=ObYLV30-dwg&v=1.1.1).
+See the SwiftLeeds talk [SwiftUI, Async/Await, AsyncAlgorithms: How does it all fit?](https://www.youtube.com/watch?v=ObYLV30-dwg).
 
 ## Actors
 
-An [Actor](https://developer.apple.com/documentation/swift/actor?v=1.1.1) is a data type that is used to isolate parallel tasks.
+An [Actor](https://developer.apple.com/documentation/swift/actor) is a data type that is used to isolate parallel tasks.
 Actors are defined similarly to classes,
 but use the `actor` keyword instead of the `class` keyword.
 
 TODO: Add much more detail about these!
 
-[MainActor](?v=1.1.1) is a provided global actor
+[MainActor]() is a provided global actor
 that executes the associated code in the main queue.
 
 To cause a function or method to run in the main queue,
@@ -5839,7 +5839,7 @@ await MainActor.run {
 }
 ```
 
-For more on `MainActor` see the [Hacking With Swift](https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-mainactor-to-run-code-on-the-main-queue?v=1.1.1) post.
+For more on `MainActor` see the [Hacking With Swift](https://www.hackingwithswift.com/quick-start/concurrency/how-to-use-mainactor-to-run-code-on-the-main-queue) post.
 
 ## HTTP
 
@@ -6071,9 +6071,9 @@ class ViewModel: ObservableObject {
 
 It is also possible to implement HTTP servers in Swift.
 The most popular package for doing this is
-[Vapor](https://github.com/vapor/vapor?v=1.1.1).
+[Vapor](https://github.com/vapor/vapor).
 To install Vapor, first install
-[Homebrew](https://brew.sh?v=1.1.1)
+[Homebrew](https://brew.sh)
 and then enter `brew install vapor`.
 
 To create, build, and run a new Vapor project:
@@ -6411,7 +6411,7 @@ See [Xcode](/blog/swift/Xcode/).
 ### VS Code
 
 For tips on writing Swift code in VS Code, see
-[Swift Development with Visual Studio Code](https://nshipster.com/vscode/?v=1.1.1).
+[Swift Development with Visual Studio Code](https://nshipster.com/vscode/).
 
 The old setup process required building the SourceKit-LSP extension yourself.
 That is no longer necessary for most developers.
@@ -6421,7 +6421,7 @@ and live DocC preview.
 
 ### Fastlane
 
-[Fastlane](https://fastlane.tools?v=1.1.1) is
+[Fastlane](https://fastlane.tools) is
 "the easiest way to build and release mobile apps."
 
 Fastlane provides the ability to:

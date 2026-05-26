@@ -13,7 +13,7 @@ These are documented here.
 
 <figure style="width: 100%">
   <img alt="Mobile App Elements" style="width: 100%"
-    src="/blog/assets/mobile-app-elements.png?v=1.1.1"
+    src="/blog/assets/mobile-app-elements.png"
     title="Mobile App Elements">
   <figcaption>Mobile App Elements</figcaption>
 </figure>

@@ -11,7 +11,7 @@ SwiftUI document-based apps "are apps that let users
 create, edit, and share documents such as text files."
 
 The information below was derived form the Hacking With Swift article at
-[How to create a document-based app using FileDocument and DocumentGroup](<https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-document-based-app-using-filedocument-and-documentgroup?v=1.1.1>).
+[How to create a document-based app using FileDocument and DocumentGroup](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-document-based-app-using-filedocument-and-documentgroup).
 
 ## Steps
 
@@ -31,12 +31,12 @@ The steps to create such a document-based app are:
    Then add an entry in the "Document Types" section.
 
    <img alt="Xcode Custom File Type" style="width: 100%"
-     src="/blog/assets/xcode-custom-file-type.png?v=1.1.1"
+     src="/blog/assets/xcode-custom-file-type.png"
      title="Xcode Custom File Type">
 
 1. Optionally create an icon for your file type.
    Create an image that is 1024 x 1024.
-   Browse [cloudconvert](<https://cloudconvert.com/png-to-icns?v=1.1.1>), click the "Select File" button, select your file,
+   Browse [cloudconvert](https://cloudconvert.com/png-to-icns), click the "Select File" button, select your file,
    select "ICNS" in the "Convert to" dropdown, and click the "Convert" button.
    When it completes, click the "Download" button.
    Within the "Icons" section, click the "+" button,
@@ -59,7 +59,7 @@ The steps to create such a document-based app are:
    }
    ```
 
-1. Define a struct that conforms to the [FileDocument](<https://developer.apple.com/documentation/swiftui/filedocument?v=1.1.1>) protocol.
+1. Define a struct that conforms to the [FileDocument](https://developer.apple.com/documentation/swiftui/filedocument) protocol.
    This will hold all the data associated with each document
    using one or more properties.
    For example, for basic text documents we could create
@@ -149,7 +149,7 @@ The steps to create such a document-based app are:
 
 ## Result
 
-The app in the screenshots below can be found at [SwiftUICallsC](<https://github.com/mvolkmann/SwiftUICallsC?v=1.1.1>).
+The app in the screenshots below can be found at [SwiftUICallsC](https://github.com/mvolkmann/SwiftUICallsC).
 It demonstrates embedding the Lua interpreter in a SwiftUI app.
 Each document contains Lua code that is
 executed by tapping the "Execute" button.
@@ -162,14 +162,14 @@ In the screenshot below, two documents named "Complex" and "Simple"
 have already been created.
 
 <img alt="SwiftUI Document-Based App Recents" style="width: 50%"
-src="/blog/assets/SwiftUI-document-based-1.png?v=1.1.1"
+src="/blog/assets/SwiftUI-document-based-1.png"
 title="SwiftUI Document-Based App Recents">
 
 The "Browse" tab displays a "Create Document" button along with
 thumbnail buttons for all documents already created.
 
 <img alt="SwiftUI Document-Based App Browse" style="width: 50%"
-src="/blog/assets/SwiftUI-document-based-2.png?v=1.1.1"
+src="/blog/assets/SwiftUI-document-based-2.png"
 title="SwiftUI Document-Based App Browse">
 
 Clicking the "Create Document" button or the button for an existing document
@@ -177,7 +177,7 @@ advances to the view passed to `DocumentGroup`
 inside the struct that conforms to `App`.
 
 <img alt="SwiftUI Document-Based App Document" style="width: 50%"
-src="/blog/assets/SwiftUI-document-based-3.png?v=1.1.1"
+src="/blog/assets/SwiftUI-document-based-3.png"
 title="SwiftUI Document-Based App Document">
 
 To return to the document picker screen, tap the "<" button in the upper-left.

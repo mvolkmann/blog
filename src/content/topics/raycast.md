@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Raycast logo" style="border: 0"
-    src="/blog/assets/raycast-logo.png?v=1.1.1">
+    src="/blog/assets/raycast-logo.png">
 </figure>
 
 ## Overview

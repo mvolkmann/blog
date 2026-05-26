@@ -12,41 +12,41 @@ layout: topic-layout.njk
 
 The name "tkinter" is short for "Tk interface".
 It is a Python interface to
-[Tk](<https://tkdocs.com/?v=1.1.1>) which is a GUI toolkit
+[Tk](https://tkdocs.com/) which is a GUI toolkit
 originally created for the
-[Tcl](<https://www.tcl.tk/?v=1.1.1>) programming language.
+[Tcl](https://www.tcl.tk/) programming language.
 The Tk license allows free commercial usage.
 
 The official documentation for tkinter can be found
-[here](<https://docs.python.org/3/library/tkinter.html?v=1.1.1>).
-Better documentation can be found at [tutorialspoint](<https://www.tutorialspoint.com/python3/python_gui_programming.htm?v=1.1.1>).
+[here](https://docs.python.org/3/library/tkinter.html).
+Better documentation can be found at [tutorialspoint](https://www.tutorialspoint.com/python3/python_gui_programming.htm).
 Many of the links on this page are to pages of the tutorialspoint site.
 
 Tk 8.5 added themed widgets.
 These are not yet covered here.
-See [Tk themed widgets](<https://docs.python.org/3/library/tkinter.ttk.html?v=1.1.1>).
+See [Tk themed widgets](https://docs.python.org/3/library/tkinter.ttk.html).
 
 ## Alternatives
 
 Alternative GUI libraries for Python include:
 
-- [Jython](<https://www.jython.org/?v=1.1.1>)  
+- [Jython](https://www.jython.org/) -
   This is a Java implementation of Python that enables use of
   Java-based GUI libraries such as JavaFX and Swing
   whose licenses allow free commercial usage.
 
-- [Kivy](<https://kivy.org/?v=1.1.1>)  
+- [Kivy](https://kivy.org/) -
   This library was officially released in 2011.
   Apps that use it run on Linux, Windows, macOS, Android, and iOS.
   The Kivy license allows free commercial usage.
 
-- [PyQt](<https://riverbankcomputing.com/software/pyqt/intro?v=1.1.1>)  
-  This is a set of Python bindings for the [Qt](<https://riverbankcomputing.com/software/pyqt?v=1.1.1>) C++ GUI framework.
+- [PyQt](https://riverbankcomputing.com/software/pyqt/intro) -
+  This is a set of Python bindings for the [Qt](https://riverbankcomputing.com/software/pyqt) C++ GUI framework.
   The Qt license does not allow free commercial usage.
   At last check the cost of commercial licenses was \$550 USD per developer.
 
-- [wxPython](<https://www.wxpython.org/?v=1.1.1>)  
-  This is a set of Python bindings for the [wxWidgets](<https://wxwidgets.org/?v=1.1.1>) C++ GUI library.
+- [wxPython](https://www.wxpython.org/) -
+  This is a set of Python bindings for the [wxWidgets](https://wxwidgets.org/) C++ GUI library.
   Apps that use it run on Linux, Windows, and macOS.
   It uses platform-specific widgets.
   The wxWidgets license allows free commercial usage.
@@ -136,39 +136,39 @@ and those that do not.
 
 | Name                                                                                        | Description                                                 | Nearest DOM/HTML Equivalent |
 | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------- |
-| [`Frame`](<https://www.tutorialspoint.com/python3/tk_frame.htm?v=1.1.1>)         | container                                                   | `<div>`                     |
-| [`LabelFrame`](<https://www.tutorialspoint.com/python3/tk_labelframe?v=1.1.1>)   | labeled container                                           | `<fieldset>`                |
-| [`PanedWindow`](<https://www.tutorialspoint.com/python3/tk_panedwindow?v=1.1.1>) | horizontal or vertical set of children<br>that is resizable | `<div>`                     |
-| [`Tk`](<https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1>)             | root window                                                 | DOM `Window`                |
-| [`Toplevel`](<https://www.tutorialspoint.com/python3/tk_toplevel?v=1.1.1>)       | additional window                                           | DOM `Window`                |
+| [`Frame`](https://www.tutorialspoint.com/python3/tk_frame.htm)         | container                                                   | `<div>`                     |
+| [`LabelFrame`](https://www.tutorialspoint.com/python3/tk_labelframe)   | labeled container                                           | `<fieldset>`                |
+| [`PanedWindow`](https://www.tutorialspoint.com/python3/tk_panedwindow) | horizontal or vertical set of children<br>that is resizable | `<div>`                     |
+| [`Tk`](https://www.tutorialspoint.com/python3/tk_toplevel)             | root window                                                 | DOM `Window`                |
+| [`Toplevel`](https://www.tutorialspoint.com/python3/tk_toplevel)       | additional window                                           | DOM `Window`                |
 
 ### Non-container Widgets
 
 | Name                                                                                        | Description                                                                                      | Nearest DOM/HTML Equivalent                            |
 | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| [`Button`](<https://www.tutorialspoint.com/python3/tk_button?v=1.1.1>)           | button that can be pressed;<br>`command` option specifies function to call when clicked.         | `<button>`                                             |
-| [`Canvas`](<https://www.tutorialspoint.com/python3/tk_canvas?v=1.1.1>)           | for drawing lines and shapes                                                                     | `<canvas>` or `<svg>`                                  |
-| [`Checkbutton`](<https://www.tutorialspoint.com/python3/tk_checkbutton?v=1.1.1>) | checkbox                                                                                         | `<input type="checkbox">`                              |
-| [`Entry`](<https://www.tutorialspoint.com/python3/tk_entry?v=1.1.1>)             | single-line text input<br>`command` option specifies function to call<br>when user changes value | `<input type="text">`                                  |
-| [`Label`](<https://www.tutorialspoint.com/python3/tk_label?v=1.1.1>)             | label                                                                                            | `<label>`                                              |
-| [`Listbox`](<https://www.tutorialspoint.com/python3/tk_listbox?v=1.1.1>)         | select list (not a drop-down)                                                                    | `<select>` with `<option>` children                    |
-| [`Menu`](<https://www.tutorialspoint.com/python3/tk_menu?v=1.1.1>)               | menu bar or menu;<br>call `add_*` methods to add menu items<br>with a `label` and a `command`    | none                                                   |
-| [`Menubutton`](<https://www.tutorialspoint.com/python3/tk_menubutton?v=1.1.1>)   | menu name that can be clicked to open a menu                                                     | none                                                   |
-| [`OptionMenu`](<https://effbot.org/tkinterbook/optionmenu.htm?v=1.1.1>)          | drop-down list                                                                                   | `<select>` with `<option>` children                    |
-| [`Radiobutton`](<https://www.tutorialspoint.com/python3/tk_radiobutton?v=1.1.1>) | radio button                                                                                     | `<input type="radio">`<br>See example at link to left. |
-| [`Scale`](<https://www.tutorialspoint.com/python3/tk_scale?v=1.1.1>)             | slider                                                                                           | `<input type="range">`                                 |
-| [`Scrollbar`](<https://www.tutorialspoint.com/python3/tk_scrollbar?v=1.1.1>)     | scrollbar                                                                                        | `<div>` with CSS `overflow` set to `scroll`            |
-| [`Text`](<https://www.tutorialspoint.com/python3/tk_text?v=1.1.1>)               | multi-line text input                                                                            | `<textarea>`                                           |
-| [`Spinbox`](<https://www.tutorialspoint.com/python3/tk_spinbox?v=1.1.1>)         | number input                                                                                     | `<input type="number">`                                |
-| [`tkMessageBox`](<https://www.tutorialspoint.com/python3/tk_messagebox?v=1.1.1>) | dialog box;<br>see `ask*` and `show*` methods                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
+| [`Button`](https://www.tutorialspoint.com/python3/tk_button)           | button that can be pressed;<br>`command` option specifies function to call when clicked.         | `<button>`                                             |
+| [`Canvas`](https://www.tutorialspoint.com/python3/tk_canvas)           | for drawing lines and shapes                                                                     | `<canvas>` or `<svg>`                                  |
+| [`Checkbutton`](https://www.tutorialspoint.com/python3/tk_checkbutton) | checkbox                                                                                         | `<input type="checkbox">`                              |
+| [`Entry`](https://www.tutorialspoint.com/python3/tk_entry)             | single-line text input<br>`command` option specifies function to call<br>when user changes value | `<input type="text">`                                  |
+| [`Label`](https://www.tutorialspoint.com/python3/tk_label)             | label                                                                                            | `<label>`                                              |
+| [`Listbox`](https://www.tutorialspoint.com/python3/tk_listbox)         | select list (not a drop-down)                                                                    | `<select>` with `<option>` children                    |
+| [`Menu`](https://www.tutorialspoint.com/python3/tk_menu)               | menu bar or menu;<br>call `add_*` methods to add menu items<br>with a `label` and a `command`    | none                                                   |
+| [`Menubutton`](https://www.tutorialspoint.com/python3/tk_menubutton)   | menu name that can be clicked to open a menu                                                     | none                                                   |
+| [`OptionMenu`](https://effbot.org/tkinterbook/optionmenu.htm)          | drop-down list                                                                                   | `<select>` with `<option>` children                    |
+| [`Radiobutton`](https://www.tutorialspoint.com/python3/tk_radiobutton) | radio button                                                                                     | `<input type="radio">`<br>See example at link to left. |
+| [`Scale`](https://www.tutorialspoint.com/python3/tk_scale)             | slider                                                                                           | `<input type="range">`                                 |
+| [`Scrollbar`](https://www.tutorialspoint.com/python3/tk_scrollbar)     | scrollbar                                                                                        | `<div>` with CSS `overflow` set to `scroll`            |
+| [`Text`](https://www.tutorialspoint.com/python3/tk_text)               | multi-line text input                                                                            | `<textarea>`                                           |
+| [`Spinbox`](https://www.tutorialspoint.com/python3/tk_spinbox)         | number input                                                                                     | `<input type="number">`                                |
+| [`tkMessageBox`](https://www.tutorialspoint.com/python3/tk_messagebox) | dialog box;<br>see `ask*` and `show*` methods                                                    | `alert`, `confirm`, `prompt`, and `<dialog>`           |
 
 ## Styling Limitations
 
 Tk has some platform-specific styling limitations. For example,
 in macOS the background color and relief of a button cannot be changed.
 This makes it difficult to implement hover effects.
-One option for macOS is to use [tkmacos](<https://github.com/Saadmairaj/tkmacosx?v=1.1.1>).
-Another may be to use [Tk themed widgets](<https://docs.python.org/3/library/tkinter.ttk.html?v=1.1.1>).
+One option for macOS is to use [tkmacos](https://github.com/Saadmairaj/tkmacosx).
+Another may be to use [Tk themed widgets](https://docs.python.org/3/library/tkinter.ttk.html).
 
 ### `command` Option
 
@@ -226,7 +226,7 @@ myListbox.configure(state=DISABLED)
 
 ### Variable Wrappers
 
-[Variable wrappers](<https://effbot.org/tkinterbook/variable.htm?v=1.1.1>) are classes provided by tkinter
+[Variable wrappers](https://effbot.org/tkinterbook/variable.htm) are classes provided by tkinter
 that track changes to Python variables that hold primitive values.
 The classes are `BooleanVar`, `DoubleVar`, `IntVar`, and `StringVar`.
 For example, an `IntVar` can be used to track the state of a `Checkbutton`.
@@ -240,7 +240,7 @@ root = Tk()
 cb_wrapper = IntVar(value=1) # initially checked
 
 def report():
-    print('checked?', cb_wrapper.get() == 1)
+    print('checked', cb_wrapper.get() == 1)
 
 cb = Checkbutton(root, command=report, text='My Label', variable=cb_wrapper)
 cb.pack()
@@ -309,9 +309,9 @@ mainloop()
 
 | Layout Method                                                                       | Details                                             |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------- |
-| [`pack`](<https://www.tutorialspoint.com/python3/tk_pack.htm?v=1.1.1>)   | arranges widgets on the four sides of container     |
-| [`place`](<https://www.tutorialspoint.com/python3/tk_place.htm?v=1.1.1>) | places widgets and specific positions in container  |
-| [`grid`](<https://www.tutorialspoint.com/python3/tk_grid.htm?v=1.1.1>)  | places widgets at row/column positions in container |
+| [`pack`](https://www.tutorialspoint.com/python3/tk_pack.htm)   | arranges widgets on the four sides of container     |
+| [`place`](https://www.tutorialspoint.com/python3/tk_place.htm) | places widgets and specific positions in container  |
+| [`grid`](https://www.tutorialspoint.com/python3/tk_grid.htm)  | places widgets at row/column positions in container |
 
 The layout method is specified on a widget, not on a container.
 This means it is possible for a container to contain widgets
@@ -329,7 +329,7 @@ In the tables below:
 
 ### `pack`
 
-The [`pack`](<https://www.tutorialspoint.com/python3/tk_pack.htm?v=1.1.1>) method accepts the following options:
+The [`pack`](https://www.tutorialspoint.com/python3/tk_pack.htm) method accepts the following options:
 
 | Option   | Values                                                                                           |
 | -------- | ------------------------------------------------------------------------------------------------ |
@@ -370,7 +370,7 @@ TODO: Why is centering off here?
 
 ### `grid`
 
-The [`grid`](<https://www.tutorialspoint.com/python3/tk_grid.htm?v=1.1.1>) method accepts the following options:
+The [`grid`](https://www.tutorialspoint.com/python3/tk_grid.htm) method accepts the following options:
 
 | Option       | Values                                                                                                              |
 | ------------ | ------------------------------------------------------------------------------------------------------------------- |
@@ -388,7 +388,7 @@ Skipped rows and columns do not occupy any space.
 
 ### `place`
 
-The [`place`](<https://www.tutorialspoint.com/python3/tk_place.htm?v=1.1.1>) method accepts the following options.
+The [`place`](https://www.tutorialspoint.com/python3/tk_place.htm) method accepts the following options.
 
 | Option       | Values                                                                                 |
 | ------------ | -------------------------------------------------------------------------------------- |

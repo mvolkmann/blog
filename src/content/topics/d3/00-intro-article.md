@@ -7,7 +7,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-The Object Computing (OCI) version of this article can be found [here](<https://objectcomputing.com/resources/publications/sett/august-2020-mastering-d3-basics?v=1.1.1>).
+The Object Computing (OCI) version of this article can be found [here](https://objectcomputing.com/resources/publications/sett/august-2020-mastering-d3-basics).
 
 ## Introduction
 
@@ -787,7 +787,7 @@ updateData();
 ```
 
 To see this in action, click
-[Basic Bar Chart](<https://bar-chart.vercel.app/?v=1.1.1>).
+[Basic Bar Chart](https://bar-chart.vercel.app/).
 
 ## Adding a Y Axis
 
@@ -848,7 +848,7 @@ The result looks like this:
 ![D3 bar chart with y axis](/blog/assets/d3-bar-chart-with-y-axis.png)
 
 To see this in action, click
-[Bar Chart with y axis](<https://bar-chart-with-y-axis.vercel.app/?v=1.1.1>).
+[Bar Chart with y axis](https://bar-chart-with-y-axis.vercel.app/).
 
 ## Adding an X Axis
 
@@ -916,7 +916,7 @@ The result looks like this:
 ![D3 bar chart with x axis](/blog/assets/d3-bar-chart-with-x-axis.png)
 
 To see this in action, click
-[Bar Chart with x axis](<https://bar-chart-with-x-axis.vercel.app/?v=1.1.1>).
+[Bar Chart with x axis](https://bar-chart-with-x-axis.vercel.app/).
 
 ## Adding Text on Bars
 
@@ -1002,7 +1002,7 @@ The result looks like this:
 Note how some bars have white text, while others have black text.
 
 To see this in action, click
-[Bar Chart with text](<https://bar-chart-with-text.vercel.app/?v=1.1.1>).
+[Bar Chart with text](https://bar-chart-with-text.vercel.app/).
 
 ## Adding Transitions
 
@@ -1097,10 +1097,10 @@ changes to the data cause everything in the bar chart
 to transition from its previous state to its new state.
 
 To see this in action, click
-[Bar Chart with transitions](<https://bar-chart-with-transitions.vercel.app/?v=1.1.1>).
+[Bar Chart with transitions](https://bar-chart-with-transitions.vercel.app/).
 
 The final code can be found in GitHub at
-[d3-bar-chart-with-transitions](<https://github.com/mvolkmann/d3-bar-chart-with-transitions?v=1.1.1>).
+[d3-bar-chart-with-transitions](https://github.com/mvolkmann/d3-bar-chart-with-transitions).
 
 ## Conclusion
 

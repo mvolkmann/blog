@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[LÖVE](<https://love2d.org/?v=1.1.1>) is
+[LÖVE](https://love2d.org/) is
 "an _awesome_ framework you can use to make 2D games in Lua.
 It's free, open-source, and works on Windows, Mac OS X, Linux, Android and iOS."
 
@@ -17,28 +17,28 @@ It includes some Lua 5.2 and 5.3 features.
 
 ## Resources
 
-- [Awesome Löve](<https://github.com/love2d-community/awesome-love2d?v=1.1.1>) - "A categorized community-driven collection of
+- [Awesome Löve](https://github.com/love2d-community/awesome-love2d) - "A categorized community-driven collection of
   high-quality, awesome LÖVE libraries, projects, and resources."
 
-- [LÖVE Game Framework Discord Channel](<https://discord.gg/r5JjuFU8?v=1.1.1>)
+- [LÖVE Game Framework Discord Channel](https://discord.gg/r5JjuFU8)
 
-- [Falling in LÖVE with Lua](<https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s&v=1.1.1>)
+- [Falling in LÖVE with Lua](https://www.youtube.com/watch?v=3k4CMAaNCuk&t=3309s)
 
   This is a great YouTube video on the LÖVE framework.
   Colton Ogden walks through the beginnings of writing a Super Mario game.
-  The source code is available at [cs502019games-track](<https://github.com/coltonoscopy/cs502019games-track/tree/master/mario?v=1.1.1>).
+  The source code is available at [cs502019games-track](https://github.com/coltonoscopy/cs502019games-track/tree/master/mario).
 
-- [Sheepolution](<https://www.sheepolution.com/learn?v=1.1.1>)
+- [Sheepolution](https://www.sheepolution.com/learn)
 
   "Learn how to make games with LÖVE."
   This provides a series of articles and videos.
 
-- [love2d-book](<https://love2d-community.github.io/love2d-book/?v=1.1.1>)
+- [love2d-book](https://love2d-community.github.io/love2d-book/)
 
   This is a collaborative book about LÖVE.
   Clone the repository and follow the directions to generate a PDF.
 
-- The LÖVE [Snippets](<https://love2d.org/wiki/Category:Snippets?v=1.1.1>) page includes a list of snippets that each provide
+- The LÖVE [Snippets](https://love2d.org/wiki/Category:Snippets) page includes a list of snippets that each provide
   code that be copied for specific functionality.
   For example, it provides code for generating gradients
   and testing whether a point is in a shape.
@@ -48,13 +48,13 @@ It includes some Lua 5.2 and 5.3 features.
 The LÖVE home page is shown below:
 
 <img alt="LÖVE Home Page" style="width: 100%"
-  src="/blog/assets/love2d-home-page.png?v=1.1.1"
+  src="/blog/assets/love2d-home-page.png"
   title="LÖVE Home Page">
 
 Clicking the "Wiki" button in the upper-right navigates to the following page:
 
 <img alt="LÖVE Wiki" style="width: 100%"
-    src="/blog/assets/love2d-wiki.png?v=1.1.1"
+    src="/blog/assets/love2d-wiki.png"
     title="LÖVE Wiki">
 
 Click a module name in the left nav to see documentation
@@ -99,7 +99,7 @@ To creating a new LÖVE app:
   end
   ```
 
-For a list of additional configuration options, see [Config Files](<https://love2d.org/wiki/Config_Files?v=1.1.1>).
+For a list of additional configuration options, see [Config Files](https://love2d.org/wiki/Config_Files).
 
 LÖVE apps always define the functions
 `love.load()`, `love.draw()`, and `love.update(dt)` in their `main.lua` file.
@@ -136,7 +136,7 @@ When the LÖVE app is run without this file,
 a window matching the screenshot below is displayed.
 
 <img alt="LÖVE No Game" style="width: 80%"
-    src="/blog/assets/love2d-no-game.png?v=1.1.1"
+    src="/blog/assets/love2d-no-game.png"
     title="LÖVE No Game">
 
 Note that the kite tail on the balloon says "NO GAME".
@@ -205,7 +205,7 @@ Double-click this file to run the app locally.
 
 It is convenient to configure the app to restart
 any time a file within the project is modified.
-The Lua module [lurker](<https://github.com/rxi/lurker?v=1.1.1>)
+The Lua module [lurker](https://github.com/rxi/lurker)
 is perfect for this!
 
 To configure this:
@@ -288,7 +288,7 @@ end
 ## Fonts
 
 LÖVE uses the font "Bitstream Vera Sans" by default.
-Any font types supported by [loFreeType 2](<https://freetype.org/?v=1.1.1>) can be also be used.
+Any font types supported by [loFreeType 2](https://freetype.org/) can be also be used.
 This includes TrueType, WOFF, and many others.
 
 To create a font object, use
@@ -587,7 +587,7 @@ Typically an easing function is selected to control the rate of change
 over the duration.
 
 There are several libraries that implementing tweening.
-One example is [tween.lua](<https://github.com/kikito/tween.lua?v=1.1.1>).
+One example is [tween.lua](https://github.com/kikito/tween.lua).
 
 To install this, copy the `tween.lua` from the link above into your project.
 
@@ -624,22 +624,22 @@ labelTween:update(dt)
 ## Physics
 
 The `love.physics` module provides many functions that wrap the functionality
-of [Box2D](<https://box2d.org/?v=1.1.1>) which is
+of [Box2D](https://box2d.org/) which is
 a C++-based 2D physics engine.
 Box2D was created by Erin Catto who works at Blizzard Games.
 Box2D is used by many games including Angry Birds.
 
-For an example project that uses `love.physics`, see [Monkey Nim](<https://github.com/mvolkmann/lua-examples/tree/main/love/monkey-nim?v=1.1.1>).
+For an example project that uses `love.physics`, see [Monkey Nim](https://github.com/mvolkmann/lua-examples/tree/main/love/monkey-nim).
 
 ## Deploying
 
 LÖVE apps can be deployed to Windows, macOS, Linux, Android, and iOS.
-Details can be found at [Game Distribution](<https://love2d.org/wiki/Game_Distribution?v=1.1.1>).
+Details can be found at [Game Distribution](https://love2d.org/wiki/Game_Distribution).
 
 ### Web
 
-One way to deploy a LÖVE app to the web is to use [love.js](<https://github.com/Davidobot/love.js?v=1.1.1>).
-This uses [Emscripten](<https://emscripten.org/?v=1.1.1>)
+One way to deploy a LÖVE app to the web is to use [love.js](https://github.com/Davidobot/love.js).
+This uses [Emscripten](https://emscripten.org/)
 to compile the C code from Lua and LÖVE to WebAssembly
 so it can be run in web browsers.
 
@@ -708,7 +708,7 @@ To run this, enter `./websrv`.
 
 ### iOS
 
-The YouTube video [Build LOVE2D for iOS iPhone, iPad, iPod Touch](<https://www.youtube.com/watch?v=MsYanwcU42E&list=WL&index=108&t=6s&v=1.1.1>)
+The YouTube video [Build LOVE2D for iOS iPhone, iPad, iPod Touch](https://www.youtube.com/watch?v=MsYanwcU42E&list=WL&index=108&t=6s)
 walks through the steps to deploy a LÖVE app to iOS.
 This must be done in macOS.
 
@@ -717,9 +717,9 @@ The following steps create a default iOS project and run it:
 1. If not already installed, install Xcode.
 1. Download iOS source by clicking the "iOS source" link
    in the Download section of the
-   [LÖVE](<https://love2d.org/?v=1.1.1>) home page.
+   [LÖVE](https://love2d.org/) home page.
    <img alt="LÖVE iOS Source" style="width: 100%"
-    src="/blog/assets/love2d-ios-source.png?v=1.1.1"
+    src="/blog/assets/love2d-ios-source.png"
     title="LÖVE iOS Source">
 1. Double-click the downloaded file to unzip it.
 1. Move this directory to its desired location and rename it.

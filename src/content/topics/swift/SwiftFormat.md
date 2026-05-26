@@ -7,16 +7,16 @@ layout: topic-layout.njk
 
 ## Overview
 
-[SwiftFormat](<https://github.com/nicklockwood/SwiftFormat?v=1.1.1>)
+[SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
 is a "command-line tool and Xcode Extension for formatting Swift code".
 
 ## Installing
 
 One way to install SwiftFormat is to use
-[HomeBrew](<https://brew.sh?v=1.1.1>).
+[HomeBrew](https://brew.sh).
 Enter `brew install swiftformat`.
 
-For other options, see the [How do I install it?](<https://github.com/nicklockwood/SwiftFormat#how-do-i-install-it?v=1.1.1>).
+For other options, see the [How do I install it?](https://github.com/nicklockwood/SwiftFormat#how-do-i-install-it).
 
 Create the file `.swift-version` in each project root directory
 that contains the version of Swift being used such as "5.6".
@@ -78,7 +78,7 @@ There is currently no way to configure Xcode to run SwiftFormat
 every time a file is saved.
 
 To configure Xcode to run SwiftFormat every time the project is built, see
-[Xcode build phase](<https://github.com/nicklockwood/SwiftFormat#xcode-build-phase?v=1.1.1>).
+[Xcode build phase](https://github.com/nicklockwood/SwiftFormat#xcode-build-phase).
 
 ### WARNING
 
@@ -94,7 +94,7 @@ PATH=/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices
 lsregister -f /Applications/Xcode.app # or whatever executable name is used
 ```
 
-This tip was found in this GitHub [issue](<https://github.com/nicklockwood/SwiftFormat/issues/494?v=1.1.1>).
+This tip was found in this GitHub [issue](https://github.com/nicklockwood/SwiftFormat/issues/494).
 
 Since this fix is required periodically, it's a good idea to
 write a script that does this and an alias to make it easy to run.
@@ -142,4 +142,4 @@ Here are recommended rule settings:
 
 ## Rules
 
-For documentation on supported rules, see the [Rule.md](<https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md?v=1.1.1>).
+For documentation on supported rules, see the [Rule.md](https://github.com/nicklockwood/SwiftFormat/blob/master/Rules.md).

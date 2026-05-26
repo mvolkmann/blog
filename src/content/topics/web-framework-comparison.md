@@ -40,7 +40,7 @@ The following diagram describes commonly used values
 for the `hx-swap` attribute.
 
 <img alt="hx-swap" style="width: 70%"
-  src="/blog/assets/htmx-hx-swap.png?v=1.1.1">
+  src="/blog/assets/htmx-hx-swap.png">
 
 For more detail on htmx, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/htmx/"
@@ -63,7 +63,7 @@ They can also hover over of the table row of an existing dog
 to reveal buttons for deleting or editing it.
 
 <img alt="Dog CRUD app" style="width: 50%"
-  src="/blog/assets/htmx-dog-crud.png?v=1.1.1">
+  src="/blog/assets/htmx-dog-crud.png">
 
 ## Next.js Version
 
@@ -320,7 +320,7 @@ Follow these steps to create the app from scratch.
      }
 
      async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
-       if (!confirm('Are you sure?')) return;
+       if (!confirm('Are you sure')) return;
 
        const tr = event.currentTarget.closest('tr');
        // It should never fail to find a `tr` that wraps the clicked button.
@@ -487,7 +487,7 @@ so we will use that for our example app.
 Specifically, we will use the Bun JavaScript engine
 and the Hono server library.
 
-"[Bun](<https://bun.sh?v=1.1.1>)
+"[Bun](https://bun.sh)
 is a fast JavaScript all-in-one toolkit."
 It includes a JavaScript runtime, package manager, bundler, and test runner.
 
@@ -500,7 +500,7 @@ For more detail on Bun, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/bun/"
 target="_blank">bun blog page</a>.
 
-[Hono](<https://hono.dev/?v=1.1.1>)
+[Hono](https://hono.dev/)
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
 For more detail on Hono, see my
 <a href="https://mvolkmann.github.io/blog/topics/#/blog/hono/"
@@ -591,7 +591,7 @@ Follow these steps to create the app from scratch.
                should be deleted, which removes the table row. */}
            <button
              class="show-on-hover"
-             hx-confirm="Are you sure?"
+             hx-confirm="Are you sure"
              hx-delete={`/dog/${dog.id}`}
              hx-target="closest tr"
              hx-swap="delete"

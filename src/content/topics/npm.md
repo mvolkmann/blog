@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[npm](<https://docs.npmjs.com?v=1.1.1>)
+[npm](https://docs.npmjs.com)
 is short for "Node Package Manager".
 
 This page documents selected features of npm

@@ -25,4 +25,4 @@ that's a bit like playing football without a helmet
 or taking food out of an oven without mitts.
 Somebody is going to get hurt.
 
-See my Object Computing (OCI) article [ESLint, Don](<https://objectcomputing.com/resources/publications/sett/january-2017-eslint-dont-write-javascript-without-it?v=1.1.1>).
+See my Object Computing (OCI) article [ESLint, Don](https://objectcomputing.com/resources/publications/sett/january-2017-eslint-dont-write-javascript-without-it).

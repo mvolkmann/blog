@@ -251,7 +251,7 @@ For example, sending the message `#superclass` to `Circle` gives `Shape`
 and sending the message `#class` to `Circle` gives `Circle class`.
 
 <img alt="Smalltalk class hierarchy:" style="width: 100%"
-  src="/blog/assets/SmalltalkClassHierarchy.png?v=1.1.1">
+  src="/blog/assets/SmalltalkClassHierarchy.png">
 
 Here are some important facts about the diagram above:
 

@@ -129,4 +129,4 @@ eleventyConfig.addCollection('dogsByName', collection => {
 Use the collection `dogsByName` in a `for` loop
 to iterate in the new sorted order.
 For more information on 11ty collections, see
-[collections](<https://www.11ty.dev/docs/collections/?v=1.1.1>).
+[collections](https://www.11ty.dev/docs/collections/).

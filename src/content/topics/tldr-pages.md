@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[tldr pages](<https://tldr.sh?v=1.1.1>) "are a community effort
+[tldr pages](https://tldr.sh) "are a community effort
 to simplify the beloved man pages with practical examples."
 
 To install using npm, enter `npm install -g tldr`.

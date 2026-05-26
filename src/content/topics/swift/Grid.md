@@ -7,19 +7,19 @@ layout: topic-layout.njk
 
 ## Overview
 
-iOS 16 added the views [Grid](<https://developer.apple.com/documentation/swiftui/grid?v=1.1.1>)
-and [GridRow](<https://developer.apple.com/documentation/swiftui/gridrow?v=1.1.1>)
+iOS 16 added the views [Grid](https://developer.apple.com/documentation/swiftui/grid)
+and [GridRow](https://developer.apple.com/documentation/swiftui/gridrow)
 that are used to arrange other views in a grid of rows and columns.
 
 ## Example App
 
-See the example app [GridLayoutDemo](<https://github.com/mvolkmann/GridLayoutDemo?v=1.1.1>).
-It is based on the YouTube video [SwiftUI Grids in iOS 16](<https://www.youtube.com/watch?v=ZU_6RejjIKU&v=1.1.1>)
+See the example app [GridLayoutDemo](https://github.com/mvolkmann/GridLayoutDemo).
+It is based on the YouTube video [SwiftUI Grids in iOS 16](https://www.youtube.com/watch?v=ZU_6RejjIKU)
 by Stewart Lynch.
 
 ## `Grid`
 
-A [Grid](<https://developer.apple.com/documentation/swiftui/grid?v=1.1.1>) contains a number of rows.
+A [Grid](https://developer.apple.com/documentation/swiftui/grid) contains a number of rows.
 It is a container view that takes all the space offered to it.
 
 Each row contains the same number of columns
@@ -30,7 +30,7 @@ The sum of the cell spans in a row cannot exceed the number of columns.
 
 ## `GridRow`
 
-A [GridRow](<https://developer.apple.com/documentation/swiftui/gridrow?v=1.1.1>) is a child of a `Grid` that
+A [GridRow](https://developer.apple.com/documentation/swiftui/gridrow) is a child of a `Grid` that
 takes all the space inside its parent `Grid`.
 
 A `GridRow` adds
@@ -94,6 +94,6 @@ Using `EmptyView()` does not work.
 
 ## Resources
 
-- [SwiftUI Grid](<https://sarunw.com/posts/swiftui-grid/?v=1.1.1>) by Sarunw
-- [Mastering grid layout in SwiftUI](<https://swiftwithmajid.com/2022/08/10/mastering-grid-layout-in-swiftui/?v=1.1.1>) by Majid
-- [Eager Grids with SwiftUI](<https://swiftui-lab.com/eager-grids/?v=1.1.1>) by Javier
+- [SwiftUI Grid](https://sarunw.com/posts/swiftui-grid/) by Sarunw
+- [Mastering grid layout in SwiftUI](https://swiftwithmajid.com/2022/08/10/mastering-grid-layout-in-swiftui/) by Majid
+- [Eager Grids with SwiftUI](https://swiftui-lab.com/eager-grids/) by Javier

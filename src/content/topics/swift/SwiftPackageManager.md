@@ -7,11 +7,11 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Swift Package Manager](<https://www.swift.org/package-manager/?v=1.1.1>) (SPM) provides a standard way to
+[Swift Package Manager](https://www.swift.org/package-manager/) (SPM) provides a standard way to
 define and use software packages in Swift applications.
 SPM is preferred over other packaging options such as
-[CocoaPods](<https://cocoapods.org?v=1.1.1>) and
-[Carthage](<https://github.com/Carthage/Carthage?v=1.1.1>)
+[CocoaPods](https://cocoapods.org) and
+[Carthage](https://github.com/Carthage/Carthage)
 because it is provided by Apple and is integrated into Xcode.
 
 Packages can contain source code written in Swift, Objective-C, or C/C++,
@@ -28,11 +28,11 @@ Packages can contain unit and integration tests.
 
 Packages typically reside in their own Git repository.
 These repositories can be public or private.
-For details on using private Git repositories see [Building Swift Packages or Apps that Use Them in Continuous Integration Workflows](<https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows?v=1.1.1>)
+For details on using private Git repositories see [Building Swift Packages or Apps that Use Them in Continuous Integration Workflows](https://developer.apple.com/documentation/xcode/building-swift-packages-or-apps-that-use-them-in-continuous-integration-workflows)
 
 For example packages, see
-[RMVGeometry](<https://github.com/mvolkmann/RMVGeometry?v=1.1.1>) and
-[RMVSwiftUIViews](<https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1>).
+[RMVGeometry](https://github.com/mvolkmann/RMVGeometry) and
+[RMVSwiftUIViews](https://github.com/mvolkmann/RMVSwiftUIViews).
 
 ## Benefits
 
@@ -227,7 +227,7 @@ To add command-line argument parsing:
    ```
 
 1. Edit the `.swift` file in the `Sources` directory and replace the contents
-   with something like the following taken from [swift-argument-parser](<https://github.com/apple/swift-argument-parser?v=1.1.1>)
+   with something like the following taken from [swift-argument-parser](https://github.com/apple/swift-argument-parser)
    GitHub repo:
 
    ```swift
@@ -253,7 +253,7 @@ To add command-line argument parsing:
    }
    ```
 
-For more details, see [Creating a command line tool using the Swift Package Manager](<https://www.avanderlee.com/swift/command-line-tool-package-manager/?v=1.1.1>).
+For more details, see [Creating a command line tool using the Swift Package Manager](https://www.avanderlee.com/swift/command-line-tool-package-manager/).
 
 ## Package Contents
 
@@ -315,7 +315,7 @@ The `Package` initializer is passed the following arguments:
 
 - `name` is a `String` that specifies the package name.
 - `defaultLocalization` is a `String` that specifies the default language.
-- `platforms` is an optional array of [SupportedPlatform](<https://developer.apple.com/documentation/packagedescription/supportedplatform?v=1.1.1>) instances that describe the
+- `platforms` is an optional array of [SupportedPlatform](https://developer.apple.com/documentation/packagedescription/supportedplatform) instances that describe the
   operating systems and versions where the package can run.
   Versions can be specified using predefined constants or strings.
   For example, `[.iOS(.v14), .watchOS("7.0.0")]`.
@@ -326,11 +326,11 @@ The `Package` initializer is passed the following arguments:
   the first version of the platform that supports Swift
   is assumed to be the minimum supported platform version.
 
-- `products` is an array of [Product](<https://developer.apple.com/documentation/packagedescription/product?v=1.1.1>) objects that describe the
+- `products` is an array of [Product](https://developer.apple.com/documentation/packagedescription/product) objects that describe the
   executables, libraries, and plugins that the package produces.
-- `dependencies` is an array of [Package.Dependency](<https://developer.apple.com/documentation/packagedescription/package/dependency?v=1.1.1>) objects that describe the packages,
+- `dependencies` is an array of [Package.Dependency](https://developer.apple.com/documentation/packagedescription/package/dependency) objects that describe the packages,
   including version constraints, on which this package depends.
-- `targets` is an array of [Target](<https://developer.apple.com/documentation/packagedescription/target?v=1.1.1>) objects that describe the targets this package produces.
+- `targets` is an array of [Target](https://developer.apple.com/documentation/packagedescription/target) objects that describe the targets this package produces.
 
 This file takes the place of having a `.xcodeproj` file
 as is present in applications.
@@ -395,7 +395,7 @@ select Product ... Build or press cmd-b.
 ## Documentation
 
 Package documentation is provided by the README .md file and by
-[DocC](</blog/topics/#/blog/swift/DocC/?v=1.1.1>)
+[DocC](/blog/topics/#/blog/swift/DocC/)
 comments in the code.
 
 ## Available Features
@@ -468,8 +468,8 @@ To view the GitHub repository in your default web browser:
 
 ## Finding Packages
 
-There is no official package index similar to [npmjs](<https://www.npmjs.com?v=1.1.1>) for Node.js packages.
-[Swift Package Index](<https://swiftpackageindex.com?v=1.1.1>)
+There is no official package index similar to [npmjs](https://www.npmjs.com) for Node.js packages.
+[Swift Package Index](https://swiftpackageindex.com)
 is an unofficial index where you can search for open source packages.
 As of January 7, 2023 it provides information on 5,306 packages.
 
@@ -635,11 +635,11 @@ are treated as though they have an access level of `public`.
 This enables writing tests for them.
 
 Tests must be implemented as methods inside a `class` that inherits from
-[XCTestCase](<https://developer.apple.com/documentation/xctest/xctestcase?v=1.1.1>).
+[XCTestCase](https://developer.apple.com/documentation/xctest/xctestcase).
 The methods must have names that begin with "test".
 
 For example, the file `IconTests.swift` below
-comes from the package GitHub repository [RMVSwiftUIViews](<https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1>).
+comes from the package GitHub repository [RMVSwiftUIViews](https://github.com/mvolkmann/RMVSwiftUIViews).
 
 ```swift
 @testable import RMVSwiftUIViews
@@ -751,7 +751,7 @@ These include `.xcassets` files that hold images,
 `.strings` and `.stringsdict` files for localization,
 Core Data model files, and more.
 
-The following `package.swift` manifest file from the [RMVSwiftUIViews](<https://github.com/mvolkmann/RMVSwiftUIViews?v=1.1.1>) package
+The following `package.swift` manifest file from the [RMVSwiftUIViews](https://github.com/mvolkmann/RMVSwiftUIViews) package
 demonstrates including the file `Assets.xcassets`
 which contains several Image Sets.
 Note the line that begins with "resources:".
@@ -876,7 +876,7 @@ the corresponding files have the same name (ex. `message.txt`).
 
 <figure style="width: 40%">
   <img alt="SwiftUI Package Localized Resources"
-    src="/blog/assets/swiftui-package-localized-resources.png?v=1.1.1"
+    src="/blog/assets/swiftui-package-localized-resources.png"
     title="Swift Package Localized Resources">
   <figcaption>Swift Package Localized Resources</figcaption>
 </figure>

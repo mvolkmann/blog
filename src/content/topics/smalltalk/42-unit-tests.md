@@ -219,7 +219,7 @@ After adding new test classes, click the "Refresh" button
 to make the "SUnit Test Runner" window aware of them.
 
 <img alt="Cuis SUnit Test Runner" style="width: 90%"
-  src="/blog/assets/cuis-sunit-test-runner.png?v=1.1.1">
+  src="/blog/assets/cuis-sunit-test-runner.png">
 
 ## SetUp and TearDown
 

@@ -8,10 +8,10 @@ layout: topic-layout.njk
 
 Most software developers spend some amount of time in terminal windows
 entering commands in their favorite shell, be it
-[bash](<https://www.gnu.org/software/bash/?v=1.1.1>),
-[zsh](<https://zsh.sourceforge.io/?v=1.1.1>),
-[fish](<https://fishshell.com/?v=1.1.1>),
-[nushell](<https://www.nushell.sh/?v=1.1.1>),
+[bash](https://www.gnu.org/software/bash/),
+[zsh](https://zsh.sourceforge.io/),
+[fish](https://fishshell.com/),
+[nushell](https://www.nushell.sh/),
 or something else.
 
 If this describes you, perhaps there are
@@ -29,7 +29,7 @@ This might include answers to questions like:
 - Am I in a directory of a git repository?
 - If so, what branch am I on?
 
-[Starship](<https://starship.rs/?v=1.1.1>) is a
+[Starship](https://starship.rs/) is a
 highly customizable tool for customizing shell prompts.
 It works in nearly all shells including
 Bash, Fish, Nushell, Powershell, and Zsh.
@@ -38,7 +38,7 @@ This removes the need to customize the prompt in multiple, shell-specific ways.
 Starship is configured in one place for all shells,
 which is great for developers that utilize multiple shells.
 
-To install Starship, see the instructions at [Starship Installation](<https://starship.rs/guide/#🚀-installation?v=1.1.1>).
+To install Starship, see the instructions at [Starship Installation](https://starship.rs/guide/#🚀-installation).
 In macOS it can be installed using the Homebrew command `brew install starship`.
 
 To use Starship with zsh, add the following line in `~/.zshrc`:
@@ -100,7 +100,7 @@ zsh_indicator = "🧙"
 Here is a example of the Starship prompt configured above.
 
 <img alt="Starship prompt example" style="width: 70%"
-  src="/blog/assets/Starship-prompt-example.png?v=1.1.1"
+  src="/blog/assets/Starship-prompt-example.png"
   title="Starship prompt example">
 
 This shows the following in order:
@@ -140,9 +140,9 @@ a web server, an API server, and a database server.
 Other panes can be used for executing shell commands.
 
 In macOS some of the options for applications that manage terminal sessions
-include [Warp](<https://app.warp.dev/referral/24D6GX?v=1.1.1>),
-[iTerm2](<https://iterm2.com/?v=1.1.1>),
-[tmux](<https://github.com/tmux/tmux/wiki?v=1.1.1>)
+include [Warp](https://app.warp.dev/referral/24D6GX),
+[iTerm2](https://iterm2.com/),
+[tmux](https://github.com/tmux/tmux/wiki)
 (typically run inside iTerm2), and Terminal (built-in macOS app).
 
 The screenshot below shows a window with three tabs.
@@ -150,7 +150,7 @@ The currently selected tab is "Project #1".
 This tab contains four panes that each have a specific purpose.
 
 <img alt="Warp panes" style="width: 100%"
-  src="/blog/assets/warp-panes.png?v=1.1.1"
+  src="/blog/assets/warp-panes.png"
   title="Warp panes">
 
 ## Terminal Font
@@ -180,10 +180,10 @@ func max(n1: Double, n2: Double) -> Bool {
 And here is the same code displayed with ligatures:
 
 <img alt="font ligatures" style="width: 60%"
-  src="/blog/assets/font-ligatures.png?v=1.1.1"
+  src="/blog/assets/font-ligatures.png"
   title="font ligatures">
 
-My current favorite monospace font that supports ligatures is [FiraCode Nerd Font](<https://www.nerdfonts.com/font-downloads?v=1.1.1>).
+My current favorite monospace font that supports ligatures is [FiraCode Nerd Font](https://www.nerdfonts.com/font-downloads).
 
 Your chosen terminal app should have a settings screen
 that enables specifying the font that it should use.
@@ -342,7 +342,7 @@ find . -type f -name '*.js' | xargs grep 'some text'
 find . -type f -name '*.js' -exec grep 'some text' {} \;
 ```
 
-When using [Warp](<https://app.warp.dev/referral/24D6GX?v=1.1.1>),
+When using [Warp](https://app.warp.dev/referral/24D6GX),
 its "A.I. Command Search" feature can be used to build the command.
 Press the # key and enter a phrase like
 "find all js files containing some text".
@@ -352,7 +352,7 @@ To accept the suggestion, press cmd-return to copy the command
 into the input area and press return again to execute it.
 
 <img alt="Warp AI Command" style="width: 100%"
-  src="/blog/assets/warp-ai-command.gif?v=1.1.1"
+  src="/blog/assets/warp-ai-command.gif"
   title="Warp AI Command">
 
 The `find` command has several issues:
@@ -362,7 +362,7 @@ The `find` command has several issues:
 - The output doesn't indicate the line numbers where matches were found.
 - The output is not color-coded.
 
-A better alternative is to use [ripgrep](<https://github.com/BurntSushi/ripgrep?v=1.1.1>).
+A better alternative is to use [ripgrep](https://github.com/BurntSushi/ripgrep).
 This link contains installation instructions for Linux, macOS, and Windows.
 In macOS it can be installed using the Homebrew command `brew install ripgrep`.
 
@@ -398,13 +398,13 @@ to move the cursor within a command being entered:
 
 Most terminal programs do not support using a mouse or track pad
 to position the cursor by clicking within a command being entered.
-However, the [Warp](<https://app.warp.dev/referral/24D6GX?v=1.1.1>) terminal behaves much more like a standard text editor.
+However, the [Warp](https://app.warp.dev/referral/24D6GX) terminal behaves much more like a standard text editor.
 It supports positioning the cursor by clicking,
 selecting text with a mouse or trackpad,
 using cmd-c to copy, and using cmd-v to paste.
 
 <img alt="Warp command-line editing" style="width: 100%"
-  src="/blog/assets/warp-command-editing.gif?v=1.1.1"
+  src="/blog/assets/warp-command-editing.gif"
   title="Warp command-line editing">
 
 By default, Warp uses the following, easier to remember,
@@ -428,7 +428,7 @@ Often all the data is on a single line with no added spaces
 to make the data as compact as possible.
 But this make it difficult for humans to read.
 
-The tool [jq](<https://stedolan.github.io/jq/?v=1.1.1>)
+The tool [jq](https://stedolan.github.io/jq/)
 helps with this and does much more.
 It is a command-line JSON processor that is implemented in C.
 
@@ -439,7 +439,7 @@ In this example we get JSON data from an API endpoint
 and filter it to display all the varieties of the "hound" dog breed.
 
 <img alt="jq-dogs" style="width: 100%"
-  src="/blog/assets/jq-dogs.png?v=1.1.1"
+  src="/blog/assets/jq-dogs.png"
   title="jq dogs">
 
 jq is practically a programming language.
@@ -459,7 +459,7 @@ In addition, there is typically no way to search the output of the last command
 without also searching the output of all the previous commands
 that were entered since the last time the terminal was cleared.
 
-The [Warp](<https://app.warp.dev/referral/24D6GX?v=1.1.1>) terminal solves all of these issues.
+The [Warp](https://app.warp.dev/referral/24D6GX) terminal solves all of these issues.
 The last command entered sticks to the top of the pane
 while its output scrolls below it.
 Clicking the command causes the output to scroll back to its first line.
@@ -468,7 +468,7 @@ There are many commands that can be executed on a block
 including "Find Within Block" and "Copy Output".
 
 <img alt="Warp command output" style="width: 100%"
-  src="/blog/assets/warp-command-output.gif?v=1.1.1"
+  src="/blog/assets/warp-command-output.gif"
   title="Warp command output">
 
 ## Terminal-based File Editing
@@ -487,7 +487,7 @@ in order to derive a lot of its benefits.
 
 Even though some version of Vim is already installed
 in macOS and Linux environments, I recommend installing
-[neovim](<https://neovim.io?v=1.1.1>)
+[neovim](https://neovim.io)
 which is a modern replacement for Vim.
 Click the "Install Now" button at the link above
 for installation instructions.
@@ -502,7 +502,7 @@ see my [Vim blog page](/blog/vim).
 Especially see the section on netrw
 for managing multiple files in a single Vim session.
 
-Perhaps you are a fan of [VS Code](<https://code.visualstudio.com/?v=1.1.1>) and prefer to avoid using any flavor of Vim.
+Perhaps you are a fan of [VS Code](https://code.visualstudio.com/) and prefer to avoid using any flavor of Vim.
 Enter `vscode .` in a terminal to launch VS Code use it to
 edit any files in and below the current directory.
 
@@ -556,7 +556,7 @@ listening on the same port.
 Note the OSError message "Address already in use" at the bottom.
 
 <img alt="server before klp" style="width: 100%"
-  src="/blog/assets/kill-listening-process-1.png?v=1.1.1"
+  src="/blog/assets/kill-listening-process-1.png"
   title="server before klp">
 
 In the screenshot below we have used the `klp` alias
@@ -565,13 +565,13 @@ Note that the left pane reports that the server was "terminated"
 and the right pane reports the id of the process that it killed.
 
 <img alt="server after klp" style="width: 100%"
-  src="/blog/assets/kill-listening-process-2.png?v=1.1.1"
+  src="/blog/assets/kill-listening-process-2.png"
   title="server after klp">
 
 ## Having Fun
 
 The terminal is not just for work, it can also be fun.
-If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) installed, try these.
+If you are a macOS user and you have [Homebrew](https://brew.sh/) installed, try these.
 
 - asciiquarium
 
@@ -581,7 +581,7 @@ If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) inst
   Press ctrl-c to exit.
 
   <img alt="asciiquarium" style="width: 100%"
-    src="/blog/assets/asciiquarium.png?v=1.1.1"
+    src="/blog/assets/asciiquarium.png"
     title="asciiqarium">
 
 - cmatrix
@@ -591,7 +591,7 @@ If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) inst
   Press ctrl-c to exit.
 
   <img alt="cmatrix" style="width: 100%"
-    src="/blog/assets/cmatrix.png?v=1.1.1"
+    src="/blog/assets/cmatrix.png"
     title="cmatrix">
 
 - myman
@@ -601,7 +601,7 @@ If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) inst
   Press ctrl-c to exit.
 
   <img alt="myman" style="width: 100%"
-    src="/blog/assets/myman.png?v=1.1.1"
+    src="/blog/assets/myman.png"
     title="myman">
 
 - ninvaders
@@ -611,7 +611,7 @@ If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) inst
   Press ctrl-c to exit.
 
   <img alt="ninvaders" style="width: 100%"
-    src="/blog/assets/ninvaders.png?v=1.1.1"
+    src="/blog/assets/ninvaders.png"
     title="ninvaders">
 
 - tetris
@@ -621,7 +621,7 @@ If you are a macOS user and you have [Homebrew](<https://brew.sh/?v=1.1.1>) inst
   Press q to quit.
 
   <img alt="tetris" style="width: 100%"
-    src="/blog/assets/tetris.png?v=1.1.1"
+    src="/blog/assets/tetris.png"
     title="tetris">
 
 ## Wrap Up

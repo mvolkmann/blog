@@ -7,21 +7,21 @@ layout: topic-layout.njk
 <!-- markdownlint-disable MD013 -->
 
 <img alt="Deno logo" style="width: 30%"
-  src="/blog/assets/deno-logo.svg?v=1.1.1"
+  src="/blog/assets/deno-logo.svg"
   title="Deno logo">
 
 ## Overview
 
-[Deno](<https://deno.land/?v=1.1.1>) is a
+[Deno](https://deno.land/) is a
 "secure runtime for JavaScript and TypeScript".
 The name comes from moving the last two letters of "Node" to the front.
 Originally it was pronounced "den O", but was later changed to "D no"
 like the pet dinosaur in the Flintstones cartoon.
 
 Ryan Dahl created both
-[Node.js](<https://nodejs.org/?v=1.1.1>) and Deno.
+[Node.js](https://nodejs.org/) and Deno.
 In June 2018, he gave a talk at JSConf EU 2018 titled
-"[10 Things I Regret About Node.js](<https://www.youtube.com/watch?v=M3BM9TB-8yA&vl=en&v=1.1.1>).
+"[10 Things I Regret About Node.js](https://www.youtube.com/watch?v=M3BM9TB-8yA&vl=en).
 A prototype of Deno was presented during this talk.
 
 Version 1.0 of Deno was released on May 13, 2020.
@@ -73,26 +73,26 @@ Node.js is primarily implemented in C++.
 Deno was originally implemented in Go and later changed to Rust.
 It is also partially implemented in JavaScript.
 To learn why Deno internals use JavaScript instead of TypeScript,
-see this [Design Doc](<https://docs.google.com/document/d/1_WvwHl7BXUPmoiSeD8G83JmS8ypsTPqed4Btkqkn_-4/preview?v=1.1.1>).
+see this [Design Doc](https://docs.google.com/document/d/1_WvwHl7BXUPmoiSeD8G83JmS8ypsTPqed4Btkqkn_-4/preview).
 
 Event handling in Node.js is provided by the
-[libuv](<https://libuv.org/?v=1.1.1>) C++ library.
+[libuv](https://libuv.org/) C++ library.
 In Deno this is provided by the
-[Tokio](<https://tokio.rs/?v=1.1.1>) Rust library.
+[Tokio](https://tokio.rs/) Rust library.
 
 Deno supports WebAssembly (WASM).
 Many programming languages can be compiled to WASM, including
-[C](<https://emscripten.org/?v=1.1.1>), C++, C#,
+[C](https://emscripten.org/), C++, C#,
 Go, Java, Kotlin,
-[Python](<https://github.com/iodide-project/pyodide?v=1.1.1>),
-Prolog, Ruby, [Rust](<https://rustwasm.github.io/?v=1.1.1>),
+[Python](https://github.com/iodide-project/pyodide),
+Prolog, Ruby, [Rust](https://rustwasm.github.io/),
 Scheme, Swift, and others.
 The resulting WASM code can then be called from JavaScript or TypeScript code.
 TODO: Try this with Python!
 
 To get started with Deno and find documentation, see the
-[Deno Manual](<https://deno.land/manual?v=1.1.1>).
-The [Deno Discord channel](<https://discord.gg/deno?v=1.1.1>)
+[Deno Manual](https://deno.land/manual).
+The [Deno Discord channel](https://discord.gg/deno)
 is another great resource.
 
 ## Differences from Node.js
@@ -125,9 +125,9 @@ is another great resource.
   and configure a build process.
 - Deno supports modern JavaScript features that are not yet
   implemented in other JavaScript environments.
-  Examples include the [optional chaining operator](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining?v=1.1.1>) (`?.`),
-  the [nullish coalescing operator](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator?v=1.1.1>) (`??`),
-  and [top-level `await`](<https://github.com/tc39/proposal-top-level-await?v=1.1.1>).
+  Examples include the [optional chaining operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`),
+  the [nullish coalescing operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing_operator) (`??`),
+  and [top-level `await`](https://github.com/tc39/proposal-top-level-await).
 - Deno includes many development tools to support common activities such as
   linting, code formatting, running tests, and bundling code into a single file.
   This removes the need to select, install, and configure tools for these.
@@ -153,7 +153,7 @@ To install it:
 - for Linux, use curl: `curl -fsSL https://deno.land/x/install/install.sh | sh`
 
 For more install options, see the
-[main Deno website](<https://deno.land/?v=1.1.1>).
+[main Deno website](https://deno.land/).
 
 To update to the latest version, enter `deno upgrade`.
 
@@ -198,7 +198,7 @@ Deno supports the following permission flags:
 - `--allow-plugin`  
   This allows plugins implemented as Rust binaries to be loaded.
   JavaScript code can then invoke plugin code using OPs.
-  For an example, see [here](<https://denolib.gitbook.io/guide/codebase-basics/example-adding-a-deno-api?v=1.1.1>).
+  For an example, see [here](https://denolib.gitbook.io/guide/codebase-basics/example-adding-a-deno-api).
   Keep in mind that plugins are not limited by
   the normal Deno security restrictions.
   Plugins are currently an unstable feature.
@@ -256,10 +256,10 @@ for the remainder of the program.
 
 Here's an example Deno script to whet your appetite.
 It prompts for a U.S. ZIP code and uses the
-[OpenWeather API](<https://openweathermap.org/api?v=1.1.1>)
+[OpenWeather API](https://openweathermap.org/api)
 to get the city name, current temperature, and current wind speed.
 It was inspired by a
-[talk](<https://www.youtube.com/watch?v=3MapKMsioTo&v=1.1.1>)
+[talk](https://www.youtube.com/watch?v=3MapKMsioTo)
 given by Luca Casonato at an ING Tech Meetup on November 5, 2020.
 
 ```ts
@@ -376,10 +376,10 @@ The command `deno repl` or just `deno` starts a terminal-based REPL.
 It supports tab completion and syntax highlighting.
 
 There are also web-based REPLs.
-One is [Deno Playground](<https://deno-playground.now.sh/?v=1.1.1>).
+One is [Deno Playground](https://deno-playground.now.sh/).
 This supports code formatting and sharing code with others.
 Another less attractive option is
-[deno.town](<https://deno.town/?v=1.1.1>),
+[deno.town](https://deno.town/),
 which doesn't support code formatting or sharing code.
 
 ## Running
@@ -433,8 +433,8 @@ When a file change is detected, the program is restarted,
 but no output is generated to indicate that this happened.
 
 Another more full-featured option for watching files
-that is similar to [nodemon](<https://nodemon.io/?v=1.1.1>) is
-[denon](<https://github.com/denosaurs/denon?v=1.1.1>).
+that is similar to [nodemon](https://nodemon.io/) is
+[denon](https://github.com/denosaurs/denon).
 
 To install denon:
 
@@ -490,7 +490,7 @@ Enabling `deno.unstable` is required to use `deno lint`.
 
 This should use `deno fmt` to format `.js` and `.ts` files in the project,
 but this is not working for me.
-See this [issue](<https://github.com/denoland/vscode_deno/issues/267?v=1.1.1>).
+See this [issue](https://github.com/denoland/vscode_deno/issues/267).
 
 ## Linting
 
@@ -500,9 +500,9 @@ in and below the current directory, enter `deno lint --unstable`.
 To see a list of the rules checked by `deno lint`,
 enter `deno lint --rules --unstable`.
 This includes all of the rules in the
-[eslint:recommended](<https://eslint.org/docs/rules/?v=1.1.1>) set
-and many of the rules in the [plugin:@typescript-eslint/recommended](<https://www.npmjs.com/package/@typescript-eslint/eslint-plugin#supported-rules?v=1.1.1>) set.
-See this [issue](<https://github.com/denoland/deno_lint/issues/556?v=1.1.1>).
+[eslint:recommended](https://eslint.org/docs/rules/) set
+and many of the rules in the [plugin:@typescript-eslint/recommended](https://www.npmjs.com/package/@typescript-eslint/eslint-plugin#supported-rules) set.
+See this [issue](https://github.com/denoland/deno_lint/issues/556).
 
 The Deno linter is implemented in Rust in order to be
 significantly much faster than ESLint.
@@ -532,7 +532,7 @@ add the following comment before the line:
 
 To format all `.js`, `.json`, and `.ts` files
 in and below the current directory, enter `deno fmt`.
-This uses [dprint](<https://github.com/dprint/dprint?v=1.1.1>)
+This uses [dprint](https://github.com/dprint/dprint)
 (implemented in Rust) rather than Prettier.
 The primary reason for this choice is that dprint is significantly faster.
 
@@ -589,7 +589,7 @@ fields, and method signatures are output.
 Each of these are followed by the text
 of the `/** comment */` that precedes it.
 It does not perform any special parsing or formatting of
-[JSDoc](<https://jsdoc.app/?v=1.1.1>) comments
+[JSDoc](https://jsdoc.app/) comments
 and it does not generate HTML files.
 
 ## Debugging
@@ -622,10 +622,10 @@ The steps to use the debugger are:
     back in the original Chrome window.
 
 <img alt="Chrome debugger window #1" style="width: 40%"
-  src="/blog/assets/deno-chrome-debugger-1.png?v=1.1.1"
+  src="/blog/assets/deno-chrome-debugger-1.png"
   title="Chrome debugger window #1">
 <img alt="Chrome debugger window #2" style="width: 90%"
-  src="/blog/assets/deno-chrome-debugger-2.png?v=1.1.1"
+  src="/blog/assets/deno-chrome-debugger-2.png"
   title="Chrome debugger window #2">
 
 VS Code also supports debugging Deno programs.
@@ -662,7 +662,7 @@ The steps to do this are:
    select Run ... Stop Debugging, or press shift-F5.
 
 <img alt="VS Code debugger" style="width: 90%"
-  src="/blog/assets/deno-vs-code-debugger.png?v=1.1.1"
+  src="/blog/assets/deno-vs-code-debugger.png"
   title="VS Code debugger">
 
 Currently it reports the following error when importing modules from URLs:
@@ -671,12 +671,12 @@ Currently it reports the following error when importing modules from URLs:
 Could not load source '{file-system-path/some-name.ts}': Unable to retrieve source content.
 ```
 
-See this [issue](<https://github.com/denoland/vscode_deno/issues/233?v=1.1.1>).
+See this [issue](https://github.com/denoland/vscode_deno/issues/233).
 
 ## Testing
 
 Deno has built-in support for unit tests, documented
-[here](<https://deno.land/manual/testing?v=1.1.1>).
+[here](https://deno.land/manual/testing).
 
 Here is a simple module defined in `statistics.ts`:
 
@@ -729,7 +729,7 @@ The assertion functions provided by the `testing/assert.ts` module include:
 - `unreachable`
 
 Adding `.only` or `.skip` after `Deno.test` is not supported, but there is
-[discussion](<https://github.com/denoland/deno/issues/5197?v=1.1.1>)
+[discussion](https://github.com/denoland/deno/issues/5197)
 about adding them.
 
 In addition, test code can import and throw `AssertionError`.
@@ -751,7 +751,7 @@ It takes a `.js` or `.ts` file as input and produces a `.js` file.
 To bundle the program `demo.js` into `demob.js`,
 enter `deno bundle demo.js demob.js`.
 To run the bundled version, enter `deno run demob.js`.
-See this [issue](<https://github.com/denoland/deno/issues/8211?v=1.1.1>).
+See this [issue](https://github.com/denoland/deno/issues/8211).
 
 Some bundles can be run in web browsers.
 However, this command does not modify the use of top level `await`,
@@ -837,13 +837,13 @@ Deno library code comes from three categories.
 The "Runtime API" defines built-in things that are available without importing.
 The "Standard Library" defines things that are maintained by the Deno team.
 "Third Party Modules" are maintained by other developers.
-The main Deno website at [deno.land](<https://deno.land/?v=1.1.1>)
+The main Deno website at [deno.land](https://deno.land/)
 has links to documentation for all three categories at the top of the page.
 
 ## Built-ins
 
 For documentation on the built-in functions, see the
-[Runtime API](<https://doc.deno.land/built-in/stable?v=1.1.1>).
+[Runtime API](https://doc.deno.land/built-in/stable).
 
 These include the following from the Web API:
 
@@ -1142,7 +1142,7 @@ that has not previously been cached.
 
 ## Standard Library
 
-The Deno [Standard Library](<https://deno.land/std?v=1.1.1>)
+The Deno [Standard Library](https://deno.land/std)
 is modeled after that of the Go programming language.
 It is implemented in TypeScript.
 The Deno core team maintains and reviews it,
@@ -1183,7 +1183,7 @@ These libraries typically contain a `mod.ts` file
 that defines what is exported.
 
 To see documentation for a standard library source file,
-browse [deno.land](<https://deno.land/?v=1.1.1>),
+browse [deno.land](https://deno.land/),
 click "Standard Library" at the top,
 click the name of the library (such as `fs`),
 click a `.ts` source file (such as `mod.ts`),
@@ -1302,7 +1302,7 @@ it is easier to use `console.log` and `console.error`.
 ## Third Party Modules
 
 Many third party modules are registered at
-[deno.land/x](<https://deno.land/x?v=1.1.1>).
+[deno.land/x](https://deno.land/x).
 The code for these modules originates from a public GitHub repository.
 When a module is added to `deno.land/x`,
 an immutable copy is made in an S3 bucket and it is served from there.
@@ -1343,9 +1343,9 @@ console.log('upperFirst:', c.upperFirstCase(s)); // One FINE day
 ```
 
 Another site for third party Deno modules is
-[nest.land](<https://nest.land/?v=1.1.1>).
+[nest.land](https://nest.land/).
 This is a free repository of Deno modules that uses
-[Arweave](<https://www.arweave.org/?v=1.1.1>)
+[Arweave](https://www.arweave.org/)
 to permanently store them using Blockchain.
 As of 11/30/2020 there were 196 registered modules here.
 
@@ -1361,7 +1361,7 @@ i18next (internationalization framework).
 
 Node packages that only use Node.js APIs that have been polyfilled by Deno
 have a possibility of being usable in Deno programs. For example,
-[lodash](<https://www.npmjs.com/package/lodash?v=1.1.1>) can be used.
+[lodash](https://www.npmjs.com/package/lodash) can be used.
 To do this:
 
 1. Create a `package.json` file by entering `npm init`.
@@ -1383,7 +1383,7 @@ console.log('last score =', _.last(scores)); // 94
 To run this, enter `deno run --allow-env --allow-read --unstable use_node.js`.
 
 Deno provides polyfills for some Node packages.
-See the list at [Supported Builtins](<https://deno.land/std@0.79.0/node#supported-built-ins?v=1.1.1>).
+See the list at [Supported Builtins](https://deno.land/std@0.79.0/node#supported-built-ins).
 Use the `require` function to load these.
 For example, to load the `path` polyfill:
 
@@ -1536,10 +1536,10 @@ console.log(color); // undefined
 
 There are several Deno modules for parsing command line arguments.
 The standard library provides the
-[flags](<https://deno.land/std/flags?v=1.1.1>) module.
+[flags](https://deno.land/std/flags) module.
 Third party options include
-[yargs](<https://deno.land/x/yargs@v16.1.1-deno?v=1.1.1>) and
-[Cliffy](<https://github.com/c4spar/deno-cliffy?v=1.1.1>).
+[yargs](https://deno.land/x/yargs@v16.1.1-deno) and
+[Cliffy](https://github.com/c4spar/deno-cliffy).
 
 The `flags` module provides a `parse` function that gathers
 command line flags into an object and returns it.
@@ -1660,25 +1660,25 @@ Options:
 ## Databases
 
 The most popular Deno library for working with relational databases is
-[Cotton](<https://deno.land/x/cotton?v=1.1.1>).
+[Cotton](https://deno.land/x/cotton).
 It supports MySQL, PostgreSQL, and SQLite.
 
 For more details on SQLite, see [here](/blog/sqlite).
 
-Cotton supports [query builder](<https://deno.land/x/cotton@v0.7.4/docs/guide/query-builder.md?v=1.1.1>) functions that enable
+Cotton supports [query builder](https://deno.land/x/cotton@v0.7.4/docs/guide/query-builder.md) functions that enable
 creating SQL statements with function calls
 as an alternative to manually creating SQL statement strings.
 
-Cotton also supports [object-relational mapping](<https://deno.land/x/cotton@v0.7.4/docs/guide/model.md?v=1.1.1>) that maps a JavaScript class to a database table.
+Cotton also supports [object-relational mapping](https://deno.land/x/cotton@v0.7.4/docs/guide/model.md) that maps a JavaScript class to a database table.
 
-Finally, Cotton supports [database migrations](<https://deno.land/x/cotton@v0.7.4/docs/guide/migrations.md?v=1.1.1>) for making a series of changes to a database schema
+Finally, Cotton supports [database migrations](https://deno.land/x/cotton@v0.7.4/docs/guide/migrations.md) for making a series of changes to a database schema
 in a repeatable way.
 
 Here's an example using
-[SQLite](<https://www.sqlite.org/index.html?v=1.1.1>).
+[SQLite](https://www.sqlite.org/index.html).
 
 1. Install SQLite by downloading a version from the
-   [SQLite Download Page](<https://www.sqlite.org/download.html?v=1.1.1>).
+   [SQLite Download Page](https://www.sqlite.org/download.html).
 1. Create a pets database by entering `sqlite3 pets.db`
    This starts an interactive session, indicated by the `sqlite>` prompt.
 1. Create a "dogs" table by entering
@@ -1835,18 +1835,18 @@ must be present in a `tsconfig.json` file:
 
 It seems that Cotton does not currently support
 creating or executing for prepared statements?
-See this [issue](<https://github.com/rahmanfadhil/cotton/issues/32?v=1.1.1>).
+See this [issue](https://github.com/rahmanfadhil/cotton/issues/32).
 
 ## MongoDB
 
 One option for working with MongoDB databases in Deno
-is [deno_mongo](<https://deno.land/x/mongo@v0.20.0?v=1.1.1>).
+is [deno_mongo](https://deno.land/x/mongo@v0.20.0).
 Another option is
-[denodb](<https://eveningkid.github.io/denodb-docs/?v=1.1.1>)
+[denodb](https://eveningkid.github.io/denodb-docs/)
 which aims to works with many databases.
 It uses deno_mongo under the hood for MongoDB databases,
 but I wasn't able to get it to work.
-See this [issue](<https://github.com/eveningkid/denodb/issues/152?v=1.1.1>) and this [temporary fix](<https://github.com/eveningkid/denodb/commit/abed3063dd92436ceb4f124227daee5ee6604b2d#commitcomment-44634400?v=1.1.1>).
+See this [issue](https://github.com/eveningkid/denodb/issues/152) and this [temporary fix](https://github.com/eveningkid/denodb/commit/abed3063dd92436ceb4f124227daee5ee6604b2d#commitcomment-44634400).
 
 Here is an example of using deno_mongo:
 
@@ -1936,8 +1936,8 @@ for await (const req of server) {
 
 Here is a more advanced HTTP server written in TypeScript.
 Typically one would use a framework such as
-[oak](<https://oakserver.github.io/oak/?v=1.1.1>) (covered below) or
-[opine](<https://github.com/asos-craigmorten/opine?v=1.1.1>)
+[oak](https://oakserver.github.io/oak/) (covered below) or
+[opine](https://github.com/asos-craigmorten/opine)
 (port of Express) for this,
 but it demonstrates what is possible using only the standard library.
 It supports two operations, "add" and "multiply",
@@ -2024,7 +2024,7 @@ type Handler = (req: ServerRequest) => void;
 const routeHandlers: Record<string, Handler> = {add, echoJson, multiply, shout};
 
 function getFirstPathPart(url: string): string {
-  const [path] = url.split('?');
+  const [path] = url.split('');
   return path.split('/')[1];
 }
 
@@ -2054,12 +2054,12 @@ for await (const req: ServerRequest of server) {
 
 There are many HTTP server libraries for Deno.
 Currently the most popular is
-[oak](<https://oakserver.github.io/oak/?v=1.1.1>).
+[oak](https://oakserver.github.io/oak/).
 It is inspired by the Koa package for Node.js.
 
 Other HTTP server libraries to consider include
-[abc](<https://github.com/zhmushan/abc?v=1.1.1>) and
-[drash](<https://deno.land/x/drash@v1.3.0?v=1.1.1>).
+[abc](https://github.com/zhmushan/abc) and
+[drash](https://deno.land/x/drash@v1.3.0).
 
 Here is an example of implementing a REST server in oak
 that supports CRUD operations on dog objects.
@@ -2220,9 +2220,9 @@ console.log('client.js x: oscar =', await getDogById(oscar.id));
 
 Deno server libraries do not yet seem to support
 generating OpenAPI (Swagger) documentation.
-One module that claims to support this is [deno_swagger_doc](<https://deno.land/x/deno_swagger_doc@releasev1.0.0?v=1.1.1>),
+One module that claims to support this is [deno_swagger_doc](https://deno.land/x/deno_swagger_doc@releasev1.0.0),
 but I wasn't able to get it to work.
-See this [issue](<https://github.com/singhcool/deno-swagger-doc/issues/8?v=1.1.1>).
+See this [issue](https://github.com/singhcool/deno-swagger-doc/issues/8).
 
 ## WebSockets
 
@@ -2234,7 +2234,7 @@ Clicking on the `svg` adds a circle in that location on every connected client.
 This could be the start of a game.
 
 <img alt="Deno WebSocket demo" style="width: 30%"
-  src="/blog/assets/deno-websocket-demo.png?v=1.1.1"
+  src="/blog/assets/deno-websocket-demo.png"
   title="Deno WebSocket demo">
 
 Here is the server code:

@@ -6,12 +6,12 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Gleam logo" style="border: 0"
-    src="/blog/assets/gleam-logo.png?v=1.1.1">
+    src="/blog/assets/gleam-logo.png">
 </figure>
 
 ## Overview
 
-[Gleam](<https://gleam.run?v=1.1.1>) is
+[Gleam](https://gleam.run) is
 "a friendly language for building type-safe systems that scale!"
 It runs on BEAM (Björn’s Erlang Abstract Machine)
 which is the Erlang virtual machine that is also used by

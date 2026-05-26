@@ -8,16 +8,16 @@ layout: topic-layout.njk
 
 There are four primary ways to emulate older Macintosh computers.
 
-- [Basilisk II](<https://basilisk.cebix.net?v=1.1.1>) for MacOS 0.x to 8.1
-- [Infinite Mac](<https://infinitemac.org?v=1.1.1>) for MacOS 1.0 to 10.4
-- [Mini vMac](<https://www.gryphel.com/c/minivmac/?v=1.1.1>) for MacOS 1.1 to 7.5.5
-- [QEMU](<https://www.qemu.org?v=1.1.1>)
-- [SheepShaver](<https://sheepshaver.cebix.net?v=1.1.1>) for MacOS 7.5.2 to 9.0.4
-- [UTM](<https://mac.getutm.app?v=1.1.1>)
+- [Basilisk II](https://basilisk.cebix.net) for MacOS 0.x to 8.1
+- [Infinite Mac](https://infinitemac.org) for MacOS 1.0 to 10.4
+- [Mini vMac](https://www.gryphel.com/c/minivmac/) for MacOS 1.1 to 7.5.5
+- [QEMU](https://www.qemu.org)
+- [SheepShaver](https://sheepshaver.cebix.net) for MacOS 7.5.2 to 9.0.4
+- [UTM](https://mac.getutm.app)
 
 ## UTM
 
-1. Browse the [UTM home page](<https://mac.getutm.app?v=1.1.1>).
+1. Browse the [UTM home page](https://mac.getutm.app).
 1. Click the "Download" button to download the file `UTM.dmg`.
 1. Double-click the file `UTM.dmg`.
 1. Drag the icon for `UTM.app` to the `Applications` folder.
@@ -26,16 +26,16 @@ There are four primary ways to emulate older Macintosh computers.
 1. In the Finder window, click `Applications` in the left nav.
 1. Double-click `UTM.app`.
 1. Click the "Continue" button.
-1. Download `Mac OS X 9.2.2.utm.zip` from [Macintosh Repository](<https://www.macintoshrepository.org/85192-utm-powerpc-mac-os-archive-9-1-9-2-2-10-0-10-1-10-2-10-3-10-4-10-5-?v=1.1.1>).
+1. Download `Mac OS X 9.2.2.utm.zip` from [Macintosh Repository](https://www.macintoshrepository.org/85192-utm-powerpc-mac-os-archive-9-1-9-2-2-10-0-10-1-10-2-10-3-10-4-10-5-).
    I gave up here. I can't find the file anywhere.
 
 ## Basilisk II
 
-[Basilisk II](<https://basilisk.cebix.net?v=1.1.1>)
+[Basilisk II](https://basilisk.cebix.net)
 is an open source 68K Macintosh emulator.
 
 For instructions on installing this, see
-[Emulate a Classic Macintosh Today! Basilisk II Tutorial!](<https://www.youtube.com/watch?v=QSWWZ4hkvVk&v=1.1.1>).
+[Emulate a Classic Macintosh Today! Basilisk II Tutorial!](https://www.youtube.com/watch?v=QSWWZ4hkvVk).
 The main parts of this for installing and using the emulator
 in a modern Mac are described below.
 
@@ -135,7 +135,7 @@ In the Finder, do the following for `MacOS8_1.iso` and `PERFORMA.ROM`:
 
 Double-click the file "Basilisk II GUI.app".
 A warning dialog will appear that asks
-"Are you sure you want to open it?"
+"Are you sure you want to open it"
 Click the "Open" button.
 
 On the System tab:
@@ -204,16 +204,16 @@ The steps to install and configure this emulator are:
 
 TODO: These steps are not working! Maybe the downloaded files are incorrect.
 
-1. Download a ROM file for Mac OS 7.0.1 from the [Internet Archive](<https://archive.org/details/AppleMacintoshSystem701?v=1.1.1>)
+1. Download a ROM file for Mac OS 7.0.1 from the [Internet Archive](https://archive.org/details/AppleMacintoshSystem701)
    by clicking the "ISO IMAGE" link.
 1. Rename the downloaded file `System_7_0_1.img` to `vMac.ROM`.
-1. Download a bootable disk image for Mac OS 7.5.5 from [WinWorld](<https://winworldpc.com/product/mac-os-7/75?v=1.1.1>).
+1. Download a bootable disk image for Mac OS 7.5.5 from [WinWorld](https://winworldpc.com/product/mac-os-7/75).
    by clicking the "Apple Mac OS 7.5.5 [PowerPC Specific] (CD)" link
    at the bottom of the list.
 1. Double-click the downloaded file `Apple Mac OS 7.5.5.7z`
    to get the directory `Apple Mac OS 7.5.5`
    that contains the file `MacOS 7.5.5.iso`.
-1. Download `minivmac-36.04-mc64.bin.tar` from [Mini vMac](<https://www.gryphel.com/c/minivmac/?v=1.1.1>) web site.
+1. Download `minivmac-36.04-mc64.bin.tar` from [Mini vMac](https://www.gryphel.com/c/minivmac/) web site.
 1. Double-click the downloaded `.tar` file to get the file `Mini vMac.app`.
 1. Double-click the file `Mini vMac.app`.
 1. Drag the ROM file `System_7_0_1.img` onto the Mini vMac window.
@@ -222,8 +222,8 @@ TODO: These steps are not working! Maybe the downloaded files are incorrect.
 ## SheepShaver
 
 For instructions on installing this, see the YouTube videos
-[Mac OS 9 on SheepShaver](<https://www.youtube.com/watch?v=4kiACxmEe6Q&t=607s&v=1.1.1>) and
-[How To Install Mac OS 9 In OS X Using SheepShaver](<https://www.youtube.com/watch?v=XQAf7GII9NY&v=1.1.1>).
+[Mac OS 9 on SheepShaver](https://www.youtube.com/watch?v=4kiACxmEe6Q&t=607s) and
+[How To Install Mac OS 9 In OS X Using SheepShaver](https://www.youtube.com/watch?v=XQAf7GII9NY).
 
 The steps for installing this in macOS are summarized below.
 
@@ -317,7 +317,7 @@ The steps for installing this in macOS are summarized below.
 1. In the "Mac OS Setup Assistant" window,
    click the right triangle in the lower-right to advance to page 2.
 1. Click the right triangle again to advance to page 3.
-1. Under "What is your name?", enter your name.
+1. Under "What is your name", enter your name.
 1. Click the right triangle again to advance to page 4.
 1. If necessary, correct whether you are currently
    observing daylight savings time.
@@ -434,10 +434,10 @@ Press cmd-q to quit HyperCard.
 
 ## Resources
 
-- [Emaculation.com](<https://www.emaculation.com/doku.php?v=1.1.1>)
-- [Internet Archive](<https://archive.org?v=1.1.1>)
-- [MacFixer](<http://obsolete.macfixer.com/vintage-software/?v=1.1.1>)
-- [Macintosh Garden](<http://macintoshgarden.org?v=1.1.1>)
-- [Macintosh Repository](<https://www.macintoshrepository.org?v=1.1.1>)
-- [RescueMyClassicMac](<https://rescuemyclassicmac.com?v=1.1.1>)
-- [The Vintage Mac Museum](<https://vintagemacmuseum.com/resources/mac-software/?v=1.1.1>)
+- [Emaculation.com](https://www.emaculation.com/doku.php)
+- [Internet Archive](https://archive.org)
+- [MacFixer](http://obsolete.macfixer.com/vintage-software/)
+- [Macintosh Garden](http://macintoshgarden.org)
+- [Macintosh Repository](https://www.macintoshrepository.org)
+- [RescueMyClassicMac](https://rescuemyclassicmac.com)
+- [The Vintage Mac Museum](https://vintagemacmuseum.com/resources/mac-software/)

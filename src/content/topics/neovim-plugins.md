@@ -10,10 +10,10 @@ This article describes how to implement and share a custom plugin.
 
 ## Resources
 
-- [Writing Plugins - It](<https://www.youtube.com/watch?v=PdaObkGazoU&t=924s&v=1.1.1>) by DevOnDuty
-- [Automatically Execute *Anything* in Nvim](<https://www.youtube.com/watch?v=9gUatBHuXE0&v=1.1.1>)
-- [Execute **anything** in neovim (now customizable)](<https://www.youtube.com/watch?v=HlfjpstqXwE&v=1.1.1>)
-- [Neovim Plugins - Enhancing your Neovim editor with awesome plugins](<https://www.barbarianmeetscoding.com/notes/neovim-plugins/?v=1.1.1>)
+- [Writing Plugins - It](https://www.youtube.com/watch?v=PdaObkGazoU&t=924s) by DevOnDuty
+- [Automatically Execute *Anything* in Nvim](https://www.youtube.com/watch?v=9gUatBHuXE0)
+- [Execute **anything** in neovim (now customizable)](https://www.youtube.com/watch?v=HlfjpstqXwE)
+- [Neovim Plugins - Enhancing your Neovim editor with awesome plugins](https://www.barbarianmeetscoding.com/notes/neovim-plugins/)
 
 ## Basics
 
@@ -331,7 +331,7 @@ return {
 ```
 
 There are several popular plugin managers for Neovim.
-One that is highly recommended is [lazy.nvim](<https://github.com/folke/lazy.nvim?v=1.1.1>).
+One that is highly recommended is [lazy.nvim](https://github.com/folke/lazy.nvim).
 If this is being used, enter `:Lazy sync` to install
 any missing plugins that were configured,
 update any that have a new version,
@@ -401,7 +401,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 ## autorun Example
 
-See an example Neovim plugin in [GitHub](<https://github.com/mvolkmann/autorun.nvim?v=1.1.1>).
+See an example Neovim plugin in [GitHub](https://github.com/mvolkmann/autorun.nvim).
 This opens a new buffer in a vertical split,
 prompts for a file matching pattern (ex. `*.lua`), and
 prompts for a command to run if any matching files are saved
@@ -477,13 +477,13 @@ in `~/.config/nvim/lua/user/init.lua`.
 
 ## Neovim API
 
-The [Neovim API](<https://neovim.io/doc/user/api.html?v=1.1.1>)
+The [Neovim API](https://neovim.io/doc/user/api.html)
 provides functions in many categories.
 Each of these are summarized in the following subsections.
 
 ## Treesitter Playground
 
-[Treesitter](<https://github.com/nvim-treesitter/nvim-treesitter?v=1.1.1>) parses source code into an AST.
+[Treesitter](https://github.com/nvim-treesitter/nvim-treesitter) parses source code into an AST.
 
 For help on Treesitter, enter `:h nvim-treesitter`.
 
@@ -536,7 +536,7 @@ To use the playground plugin:
               unfocus_language = 'F',
               update = 'R',
               goto_node = '<cr>',
-              show_help = '?',
+              show_help = '',
             },
           },
           query_linter = {
@@ -577,7 +577,7 @@ The following key mappings can be used when focus is in the AST buffer:
 
 ## Plugin Using Treesitter
 
-See an example Neovim plugin that uses Treesitter in [GitHub](<https://github.com/mvolkmann/todo-quickfix.nvim?v=1.1.1>).
+See an example Neovim plugin that uses Treesitter in [GitHub](https://github.com/mvolkmann/todo-quickfix.nvim).
 This parses the source code in the current buffer,
 populates the quickfix list will all comment lines that contain "TODO",
 and opens the quickfix list.
@@ -604,7 +604,7 @@ To see a list of defined highlight groups, enter `:hi`.
 
 ## Neovim API
 
-The [Neovim API](<https://neovim.io/doc/user/api.html?v=1.1.1>)
+The [Neovim API](https://neovim.io/doc/user/api.html)
 provides functions in many categories.
 Each of these are summarized in the following subsections.
 

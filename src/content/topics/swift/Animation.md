@@ -58,18 +58,18 @@ Most of them take a single, optional argument
 which is the `duration` in seconds.
 The `spring` function takes three optional arguments named
 `response`, `dampingFunction`, and `blendDuration`.
-For details, see the [spring method](<https://developer.apple.com/documentation/swiftui/animation/spring(response:dampingfraction:blendduration:)?v=1.1.1>).
+For details, see the [spring method](<https://developer.apple.com/documentation/swiftui/animation/spring(response:dampingfraction:blendduration:)>).
 
-Custom easing functions can be defined with the [timingCurve](<https://developer.apple.com/documentation/swiftui/animation/timingcurve(_:_:_:_:duration:)?v=1.1.1>) function.
+Custom easing functions can be defined with the [timingCurve](<https://developer.apple.com/documentation/swiftui/animation/timingcurve(_:_:_:_:duration:)>) function.
 
-To begin an [Animation](<https://developer.apple.com/documentation/swiftui/animation?v=1.1.1>),
+To begin an [Animation](https://developer.apple.com/documentation/swiftui/animation),
 apply the `onAppear` view modifier to the view,
 passing it a closure that calls `withAnimation`.
 This is demonstrated in the [Marching Ants Border](#marching-ants-border)
 section below.
 
-To delay the start of an [Animation](<https://developer.apple.com/documentation/swiftui/animation?v=1.1.1>),
-chain a call to its [delay](<https://developer.apple.com/documentation/swiftui/animation/delay(_:)?v=1.1.1>) method .
+To delay the start of an [Animation](https://developer.apple.com/documentation/swiftui/animation),
+chain a call to its [delay](<https://developer.apple.com/documentation/swiftui/animation/delay(_:)>) method .
 For example:
 
 ```swift
@@ -85,7 +85,7 @@ The following example provides form elements
 for experimenting with different kinds of animations.
 
 <img alt="SwiftUI Animation" style="width: 40%"
-  src="/blog/assets/SwiftUI-Animation.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-Animation.png"
   title="SwiftUI Animation">
 
 ```swift
@@ -133,10 +133,10 @@ struct ContentView: View {
 
             NavigationView { // Picker will be disabled without this.
                 Form {
-                    Toggle("Animate Color?", isOn: $color)
-                    Toggle("Animate Opacity?", isOn: $opacity)
-                    Toggle("Animate Rotation?", isOn: $rotate)
-                    Toggle("Animate Scale?", isOn: $scale)
+                    Toggle("Animate Color", isOn: $color)
+                    Toggle("Animate Opacity", isOn: $opacity)
+                    Toggle("Animate Rotation", isOn: $rotate)
+                    Toggle("Animate Scale", isOn: $scale)
                     Picker("Easing Function", selection: $easingType) {
                         ForEach(EasingType.allCases, id: \.self) { easingType in
                             Text("\(easingType.rawValue)").tag(easingType)
@@ -165,7 +165,7 @@ This is implemented by using an `if` or `switch` statement inside a parent view.
 
 By default an `opacity` transition (fade) is used.
 This can be changed by applying the `transition` view modifier
-which is passed the kind of [AnyTransition](<https://developer.apple.com/documentation/swiftui/anytransition?v=1.1.1>) to perform.
+which is passed the kind of [AnyTransition](https://developer.apple.com/documentation/swiftui/anytransition) to perform.
 
 Transitions are defined as static properties on the `AnyTransition` struct.
 These include `move`, `opacity`, `scale`, and `slide`.
@@ -226,7 +226,7 @@ struct ContentView: View {
                     // If a Toggle is used instead of a Button
                     // to toggle the value of "include",
                     // there is no opportunity to use "withAnimation".
-                    //Toggle("Include Optional Text?", isOn: $include)
+                    //Toggle("Include Optional Text", isOn: $include)
 
                     Button("Toggle Optional Text") {
                         withAnimation(easeFn) {
@@ -261,7 +261,7 @@ determine whether a view should be shown or hidden.
 The following code demonstrates this:
 
 <img alt="SwiftUI Binding Animation" style="width: 50%"
-  src="/blog/assets/SwiftUI-Binding-Animation.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-Binding-Animation.png"
   title="SwiftUI Binding Animation">
 
 ```swift
@@ -283,7 +283,7 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Toggle(
-                "Show Greeting?",
+                "Show Greeting",
                 isOn: $isShowing.animation(.easeInOut(duration: 1))
             )
 
@@ -356,7 +356,7 @@ could be replaced by one of these:
 
 ### matchedGeometryEffect
 
-The [matchedGeometryEffect](<https://developer.apple.com/documentation/swiftui/view/matchedgeometryeffect(id:in:properties:anchor:issource:)?v=1.1.1>) view modifier is used to
+The [matchedGeometryEffect](<https://developer.apple.com/documentation/swiftui/view/matchedgeometryeffect(id:in:properties:anchor:issource:)>) view modifier is used to
 smoothly move views between container views.
 For example, this can be used to move `Text` views that describe food items
 between lists of foods that available and those that have been selected.
@@ -421,11 +421,11 @@ in both Preview and the Simulator?
 
 We can create an animated dashed border around any view
 that resembles marching ants.
-This was inspired by the Hacking With Swift post [How to create a marching ants effect using lineDashPhase](<https://www.hackingwithswift.com/example-code/calayer/how-to-create-a-marching-ants-effect-using-linedashphase?v=1.1.1>).
+This was inspired by the Hacking With Swift post [How to create a marching ants effect using lineDashPhase](https://www.hackingwithswift.com/example-code/calayer/how-to-create-a-marching-ants-effect-using-linedashphase).
 
 The following code is the contents of the file `MarchingAnts.swift`
 which can be added to any project.
-It uses [PreferenceKey](<https://developer.apple.com/documentation/swiftui/preferencekey?v=1.1.1>) which "automatically combines its values for
+It uses [PreferenceKey](https://developer.apple.com/documentation/swiftui/preferencekey) which "automatically combines its values for
 a given preference into a single value visible to its ancestors."
 In this case the preference is the size of the content view.
 The size is set in a `@State` property of
@@ -524,7 +524,7 @@ The following code demonstrates using the `marchingAnts` view modifier
 defined above.
 
 <img alt="SwiftUI Marching Ants" style="width: 40%"
-  src="/blog/assets/SwiftUI-Marching-Ants.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-Marching-Ants.png"
   title="SwiftUI Marching Ants">
 
 ```swift
@@ -558,7 +558,7 @@ By default this continues indefinitely.
 A trigger can be used to only run through the phases
 one time each time the trigger value changes.
 
-See the WWDC 2023 video [Wind your way through advanced animations in SwiftUI](<https://developer.apple.com/wwdc23/10157?v=1.1.1>)
+See the WWDC 2023 video [Wind your way through advanced animations in SwiftUI](https://developer.apple.com/wwdc23/10157)
 that was the basis for the following code.
 
 This demonstrates basic use of phaseAnimator.
@@ -631,7 +631,7 @@ enum MyPhase: CaseIterable {
 }
 ```
 
-See the demo project at [KeyframeAnimatorDemo](<https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift?v=1.1.1>).
+See the demo project at [KeyframeAnimatorDemo](https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift).
 Despite the project name, this does demonstrate using `phaseAnimator`.
 
 ## keyframeAnimator
@@ -643,7 +643,7 @@ There can be any number of tracks with different timings,
 one for each property whose changes should be animated.
 Keyframes can animate any property that conforms to the Animatable protocol.
 
-See the WWDC 2023 video [Wind your way through advanced animations in SwiftUI](<https://developer.apple.com/wwdc23/10157?v=1.1.1>)
+See the WWDC 2023 video [Wind your way through advanced animations in SwiftUI](https://developer.apple.com/wwdc23/10157)
 that was the basis for the following code.
 
 This demonstrates using keyframes to raise a view up, make it larger,
@@ -705,7 +705,7 @@ struct AnimationValues {
 }
 ```
 
-See the demo project at [KeyframeAnimatorDemo](<https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift?v=1.1.1>).
+See the demo project at [KeyframeAnimatorDemo](https://github.com/mvolkmann/KeyframeAnimatorDemo/blob/main/KeyframeAnimatorDemo/ContentView.swift).
 
 Also see `mapCameraKeyframeAnimator` for animation changes
 to the `centerCoordinate`, `heading`, and `distance` in a `Map` `camera`.

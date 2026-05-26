@@ -41,13 +41,13 @@ be opening an "info" sheet a given number of times.
 
 ## Resources
 
-- Apple Developer page [Requesting App Store reviews](<https://developer.apple.com/documentation/storekit/requesting_app_store_reviews?v=1.1.1>)
-- Stewart Lynch YouTube video [App Review Request iOS 16](<https://www.youtube.com/watch?v=fLR7E2579Dg&v=1.1.1>)
+- Apple Developer page [Requesting App Store reviews](https://developer.apple.com/documentation/storekit/requesting_app_store_reviews)
+- Stewart Lynch YouTube video [App Review Request iOS 16](https://www.youtube.com/watch?v=fLR7E2579Dg)
 
 ## AppReview Type
 
 The following code is derived from the excellent Stewart Lynch YouTube video
-[App Review Request iOS 16](<https://www.youtube.com/watch?v=fLR7E2579Dg&v=1.1.1>).
+[App Review Request iOS 16](https://www.youtube.com/watch?v=fLR7E2579Dg).
 
 ```swift
 import SwiftUI

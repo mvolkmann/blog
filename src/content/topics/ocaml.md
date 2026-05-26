@@ -6,12 +6,12 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="OCaml logo" style="border: 0"
-    src="/blog/assets/ocaml-logo.png?v=1.1.1">
+    src="/blog/assets/ocaml-logo.png">
 </figure>
 
 ## Overview
 
-[OCaml](<https://ocaml.org?v=1.1.1>) is
+[OCaml](https://ocaml.org) is
 "an industrial-strength functional programming language
 with an emphasis on expressiveness and safety."
 It was released in 1996
@@ -1194,7 +1194,7 @@ let dog1_opt = None
 let dog2_opt = Some { name = "Comet"; breed = "whippet" }
 
 let () =
-  let dog = Option.value ~default:{ name = "?"; breed = "?" } dog1_opt in
+  let dog = Option.value ~default:{ name = ""; breed = "" } dog1_opt in
   print_endline dog.breed;
 
   let breed =
@@ -4084,7 +4084,7 @@ If the templates are moved to separate files with the `.eml.html` file extension
 as recommended, hovering over OCaml values will not display their types.
 
 <img alt="OCaml Dream info" style="border: 0"
-  src="/blog/assets/ocaml-dune-dream-dialect.png?v=1.1.1">
+  src="/blog/assets/ocaml-dune-dream-dialect.png">
 
 For an alternative to Dream templates
 which doesn't having tooling support issues, see

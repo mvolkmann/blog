@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[Better Touch Tool](<https://folivora.ai/?v=1.1.1>)
+[Better Touch Tool](https://folivora.ai/)
 is a macOS tool for customizing keyboard shortcuts, mouse operation,
 trackpad operation, touch bar operation, and more.
 This is a commercial tool, but it is quite reasonably priced at \$8.50 USD.

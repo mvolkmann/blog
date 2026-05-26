@@ -17,13 +17,13 @@ WeatherKit requires iOS 16+.
 
 ## Resources
 
-- [Meet WeatherKit](<https://developer.apple.com/videos/play/wwdc2022/10003/?v=1.1.1>) WWDC 2022 video
-- [Introducing WeatherKit](<https://developer.apple.com/weatherkit/?v=1.1.1>)
-- [Swift Documentation](<https://developer.apple.com/documentation/weatherkit?v=1.1.1>)
+- [Meet WeatherKit](https://developer.apple.com/videos/play/wwdc2022/10003/) WWDC 2022 video
+- [Introducing WeatherKit](https://developer.apple.com/weatherkit/)
+- [Swift Documentation](https://developer.apple.com/documentation/weatherkit)
 
 ## Setup
 
-1. Browse [developer.apple.com](<https://developer.apple.com?v=1.1.1>).
+1. Browse [developer.apple.com](https://developer.apple.com).
 1. Click "Account" and sign in.
 1. Under "Certificates, Identifiers & Profiles", click "Identifiers".
 1. Click the "+" after the heading "Identifiers".
@@ -55,21 +55,21 @@ for the WeatherKit service to be enabled for your app.**
 
 ## Sample Code
 
-See the demo project [WeatherKitDemo](<https://github.com/mvolkmann/WeatherKitDemo?v=1.1.1>) in GitHub.
+See the demo project [WeatherKitDemo](https://github.com/mvolkmann/WeatherKitDemo) in GitHub.
 Here are screenshots from this app:
 
 <img alt="WeatherKit Current" style="width: 40%"
-  src="/blog/assets/weatherkit-current.png?v=1.1.1"
+  src="/blog/assets/weatherkit-current.png"
   title="WeatherKit Current">
 <img alt="WeatherKit Forecast" style="width: 40%"
-  src="/blog/assets/weatherkit-forecast.png?v=1.1.1"
+  src="/blog/assets/weatherkit-forecast.png"
   title="WeatherKit Forecast">
 
 <img alt="WeatherKit Current" style="width: 40%"
-  src="/blog/assets/weatherkit-chart.png?v=1.1.1"
+  src="/blog/assets/weatherkit-chart.png"
   title="WeatherKit Chart">
 <img alt="WeatherKit Heat Map" style="width: 40%"
-  src="/blog/assets/weatherkit-heatmap.png?v=1.1.1"
+  src="/blog/assets/weatherkit-heatmap.png"
   title="WeatherKit Heat Map">
 
 ## Temperature Conversion

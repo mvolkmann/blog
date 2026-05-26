@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[XCTest](<https://developer.apple.com/documentation/xctest?v=1.1.1>)
+[XCTest](https://developer.apple.com/documentation/xctest)
 is a unit testing and UI testing framework for Swift and SwiftUI.
 "XC" is an abbreviation for "Xcode".
 
@@ -88,7 +88,7 @@ For each set of related test methods:
      1. Select the appropriate test directory.
      1. Click the "Create" button.
 
-        The generated class will inherit from [XCTestCase](<https://developer.apple.com/documentation/xctest/xctestcase?v=1.1.1>).
+        The generated class will inherit from [XCTestCase](https://developer.apple.com/documentation/xctest/xctestcase).
 
      1. Add the line `@testable import {project-name}` before the class definition.
 
@@ -130,7 +130,7 @@ For each set of related test methods:
    `NoThrow`, and `ThrowsError`.
    Each of these has a version that takes and does not take an error message.
 
-   For documentation on the provided assertion functions, see [Test Assertions](<https://developer.apple.com/documentation/xctest?v=1.1.1>)
+   For documentation on the provided assertion functions, see [Test Assertions](https://developer.apple.com/documentation/xctest)
    (scroll down a bit).
 
    Here is an example of an assertion that verifies that a function
@@ -147,7 +147,7 @@ For each set of related test methods:
    ```
 
    An alternative to using `XCTAssertThrowsError` is ot use `do` and `catch`
-   along with [XCTFail](<https://developer.apple.com/documentation/xctest/xctfail?v=1.1.1>)
+   along with [XCTFail](https://developer.apple.com/documentation/xctest/xctfail)
    as follows:
 
    ```swift
@@ -224,11 +224,11 @@ final class MathTests: XCTestCase {
 
 ## UI Tests
 
-UI test cases create an instance of [XCUIApplication](<https://developer.apple.com/documentation/xctest/xcuiapplication?v=1.1.1>) and typically store it in a variable named `app`.
+UI test cases create an instance of [XCUIApplication](https://developer.apple.com/documentation/xctest/xcuiapplication) and typically store it in a variable named `app`.
 
 A call to `app.launch()` is required to launch the app.
 
-`XCUIApplication` inherits from [XCUIElement](<https://developer.apple.com/documentation/xctest/xcuielement?v=1.1.1>).
+`XCUIApplication` inherits from [XCUIElement](https://developer.apple.com/documentation/xctest/xcuielement).
 This enables finding all the `View` elements within the application.
 
 The following table highlights properties in the `XCUIElement` class.
@@ -236,7 +236,7 @@ Some of these are only available when running on a specific platform.
 For example, window elements are available in macOS, but not in iOS.
 
 Some of these properties are defined by the following protocols
-to which `XCUIElement` conforms: [XCUIElementAttributes](<https://developer.apple.com/documentation/xctest/xcuielementattributes?v=1.1.1>) and [XCUIElementTypeQueryProvider](<https://developer.apple.com/documentation/xctest/xcuielementtypequeryprovider?v=1.1.1>).
+to which `XCUIElement` conforms: [XCUIElementAttributes](https://developer.apple.com/documentation/xctest/xcuielementattributes) and [XCUIElementTypeQueryProvider](https://developer.apple.com/documentation/xctest/xcuielementtypequeryprovider).
 
 | Property                               | Description                                                                                                                              |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
@@ -247,14 +247,14 @@ to which `XCUIElement` conforms: [XCUIElementAttributes](<https://developer.appl
 | `datePickers: XCUIElementQuery`        | query that matches date picker elements                                                                                                  |
 | `debugDescription: String`             | debugging information                                                                                                                    |
 | `dialogs: XCUIElementQuery`            | query that matches dialog elements                                                                                                       |
-| `elementType: XCUIElement.ElementType` | enum value from [XCUIElement.ElementType](<https://developer.apple.com/documentation/xctest/xcuielement/elementtype?v=1.1.1>) |
+| `elementType: XCUIElement.ElementType` | enum value from [XCUIElement.ElementType](https://developer.apple.com/documentation/xctest/xcuielement/elementtype) |
 | `exists: Bool`                         | indicates if the element exists on the screen                                                                                            |
 | `firstMatch: XCUIElement`              | first element that matches                                                                                                               |
 | `hasFocus: Bool`                       | indicates whether the element has focus                                                                                                  |
 | `identifier: String`                   | associated with the element using the `.accessibilityIdentifier("id")` view modifier                                                     |
 | `images: XCUIElementQuery`             | query that matches image elements                                                                                                        |
 | `isEnabled: Bool`                      | indicates whether the element is enabled                                                                                                 |
-| `isHittable: Bool`                     | indicates if a hit point can be determined (visible?)                                                                                    |
+| `isHittable: Bool`                     | indicates if a hit point can be determined (visible)                                                                                    |
 | `isSelected: Bool`                     | indicates whether the element is selected                                                                                                |
 | `label: String`                        | label value of the element                                                                                                               |
 | `links: XCUIElementQuery`              | query that matches link elements                                                                                                         |
@@ -316,7 +316,7 @@ let viewExists = someView.waitForExistence(timeout: seconds)
 XCTAssertTrue(viewExists)
 ```
 
-The following table highlights properties in the [XCUIElementQuery](<https://developer.apple.com/documentation/xctest/xcuielementquery?v=1.1.1>) class.
+The following table highlights properties in the [XCUIElementQuery](https://developer.apple.com/documentation/xctest/xcuielementquery) class.
 
 | Property                                 | Description                                                |
 | ---------------------------------------- | ---------------------------------------------------------- |
@@ -325,7 +325,7 @@ The following table highlights properties in the [XCUIElementQuery](<https://dev
 | `element: XCUIElement`                   | the single matching element; test fails if not exactly one |
 | `firstMatch: XCUIElement`                | first matching element                                     |
 
-The following table highlights methods in the [XCUIElementQuery](<https://developer.apple.com/documentation/xctest/xcuielementquery?v=1.1.1>) class.
+The following table highlights methods in the [XCUIElementQuery](https://developer.apple.com/documentation/xctest/xcuielementquery) class.
 
 | Method                                 | Description                                                                              |
 | -------------------------------------- | ---------------------------------------------------------------------------------------- |
@@ -504,7 +504,7 @@ XCTestCase.app.launch()
 
 If a test performs a force unwrap on an optional whose value is `nil`,
 the tests will stop running.
-To avoid this, use [XCTUnwrap](<https://developer.apple.com/documentation/xctest/3380195-xctunwrap?v=1.1.1>) which fails the test if the value is `nil`.
+To avoid this, use [XCTUnwrap](https://developer.apple.com/documentation/xctest/3380195-xctunwrap) which fails the test if the value is `nil`.
 For example:
 
 ```swift
@@ -595,7 +595,7 @@ To enable collecting code coverage data:
 
 ## Run from Command Line
 
-See [Run Xcode Unit Tests From The Command Line](<https://www.appsdeveloperblog.com/run-xcode-unit-tests-from-the-command-line/?v=1.1.1>).
+See [Run Xcode Unit Tests From The Command Line](https://www.appsdeveloperblog.com/run-xcode-unit-tests-from-the-command-line/).
 
 To enable this, enter
 `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
@@ -627,8 +627,8 @@ Add `-quiet` to reduce the output and only show errors.
 ## Mocking
 
 One library to consider for adding mocking to XCTest tests is
-[Cuckoo](<https://github.com/Brightify/Cuckoo?v=1.1.1>).
+[Cuckoo](https://github.com/Brightify/Cuckoo).
 
 ## GitHub Actions
 
-See [How to use GitHub Actions for testing Xcode project](<https://vmois.dev/xcode-github-actions/?v=1.1.1>).
+See [How to use GitHub Actions for testing Xcode project](https://vmois.dev/xcode-github-actions/).

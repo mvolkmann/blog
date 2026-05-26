@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="TypeScript Effect logo" style="border: 0"
-    src="/blog/assets/ts-effect-logo.jpg?v=1.1.1">
+    src="/blog/assets/ts-effect-logo.jpg">
 </figure>
 
 ## Overview

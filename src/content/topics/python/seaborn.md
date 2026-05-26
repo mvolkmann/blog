@@ -10,7 +10,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[seaborn](<https://seaborn.pydata.org/?v=1.1.1>)
+[seaborn](https://seaborn.pydata.org/)
 is a Python library for data visualization.
 It builds on [matplotlib](../matplotlib)
 to provide a higher level API for creating charts with less code.
@@ -185,7 +185,7 @@ sns.despine(left=True, right=False, bottom=True, top=False)
 By default, Seaborn supports six variations of matplotlib palettes.
 These are "deep", "muted", "pastel", "bright", "dark", and "colorblind".
 The colors in each palette can be viewed at
-[color palettes](<https://seaborn.pydata.org/tutorial/color_palettes.html?v=1.1.1>).
+[color palettes](https://seaborn.pydata.org/tutorial/color_palettes.html).
 
 One of these color palettes is used in the next example.
 
@@ -348,7 +348,7 @@ plt.ylabel('Miles Per Gallon')
 
 The matplotlib package provides many pre-built colormaps
 whose names can be used as the value of the `palette` option.
-To see a list of colormap names, see [colormaps](<https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html?v=1.1.1>).
+To see a list of colormap names, see [colormaps](https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html).
 For example, here is the previous plot using the "hsv" colormap.
 
 ```python

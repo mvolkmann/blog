@@ -5,7 +5,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-On 4/21/2021 Tan Li Han posted an excellent [tweet thread](<https://twitter.com/lihautan/status/1385027047659950083?s=20&v=1.1.1>) on choosing between
+On 4/21/2021 Tan Li Han posted an excellent [tweet thread](https://twitter.com/lihautan/status/1385027047659950083?s=20) on choosing between
 storing data in a Svelte store or in context.
 This is my summary of his advice.
 

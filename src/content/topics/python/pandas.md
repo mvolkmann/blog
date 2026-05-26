@@ -10,10 +10,10 @@ layout: topic-layout.njk
 
 ## Overview
 
-[pandas](<https://pandas.pydata.org/?v=1.1.1>)
+[pandas](https://pandas.pydata.org/)
 is a Python library for data analysis.
 For details, see the
-[API Reference](<https://pandas.pydata.org/docs/reference/?v=1.1.1>).
+[API Reference](https://pandas.pydata.org/docs/reference/).
 
 To install pandas, enter `pip install pandas`.
 To see the version that is installed, print `pd.__version__`.
@@ -110,7 +110,7 @@ it converts Python string and number types to its own types.
 | int         | int64       |
 | float       | float64     |
 
-For more detail, see [Overview of Pandas Data Types](<https://pbpython.com/pandas_dtypes.html?v=1.1.1>).
+For more detail, see [Overview of Pandas Data Types](https://pbpython.com/pandas_dtypes.html).
 
 ## Getting Data
 
@@ -380,8 +380,8 @@ df.to_excel(file_path, index=False) # to omit index column
 Some datasets are too large to fit in memory.
 One way to work around this limitation is to process the data in chunks of rows.
 To demonstrate this, we will use data from the
-[TMBD 5000 Movie Dataset](<https://www.kaggle.com/tmdb/tmdb-movie-metadata?v=1.1.1>).
-This is found at the [Kaggle](<https://www.kaggle.com/datasets?v=1.1.1>) website which is a good source for public datasets.
+[TMBD 5000 Movie Dataset](https://www.kaggle.com/tmdb/tmdb-movie-metadata).
+This is found at the [Kaggle](https://www.kaggle.com/datasets) website which is a good source for public datasets.
 
 For example:
 

@@ -34,7 +34,7 @@ tan, lightBrown, brown, pink, lightRed and red in that order
 to get a sense of how they differ.
 
 <img alt="Cuis browns and reds" style="width: 30%"
-  src="/blog/assets/cuis-colors-browns-and-reds.png?v=1.1.1">
+  src="/blog/assets/cuis-colors-browns-and-reds.png">
 
 ## Custom Colors
 
@@ -162,7 +162,7 @@ that is used to select a color from a cube of colors.
 In menus this is referred to as the "ColorMix Editor".
 
 <img alt="ColorEditorPanel"
-  src="/blog/assets/cuis-color-editor-panel.png?v=1.1.1"
+  src="/blog/assets/cuis-color-editor-panel.png"
   style="width: 70%">
 
 The vertical slider in the middle specifies the value of

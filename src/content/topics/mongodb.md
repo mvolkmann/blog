@@ -11,7 +11,7 @@ Unlike relational databases that use SQL and are organized
 into tables that contains rows, and rows that contain columns,
 MongoDB stores _documents_ in _collections_.
 Each collection can have multiple indexes to make queries faster.
-These indexes are implemented as [B-tree](<https://en.wikipedia.org/wiki/B-tree?v=1.1.1>) data structures.
+These indexes are implemented as [B-tree](https://en.wikipedia.org/wiki/B-tree) data structures.
 The documents are JSON objects that are
 stored in a binary JSON format called BSON.
 
@@ -53,7 +53,7 @@ implementing CRUD operations on collections of data.
 It does not cover more advanced topics, such as
 query optimization, replication, sharding, backups, and security.
 For detail on these and many other MongoDB topics,
-see the Manning book [MongoDB in Action](<https://www.manning.com/books/mongodb-in-action?v=1.1.1>).
+see the Manning book [MongoDB in Action](https://www.manning.com/books/mongodb-in-action).
 
 We’ll look at how to perform various actions from JavaScript code.
 
@@ -61,7 +61,7 @@ We’ll look at how to perform various actions from JavaScript code.
 
 There are multiple ways to install MongoDB,
 and they vary based on the operating system of the computer.
-For details, see the [MongoDB documentation](<https://docs.mongodb.com/guides/server/install/?v=1.1.1>).
+For details, see the [MongoDB documentation](https://docs.mongodb.com/guides/server/install/).
 We will look at one way of installing for each operating system.
 
 ### Windows
@@ -109,7 +109,7 @@ One option for installing on macOS is to follow the same
 basic steps as for Linux.
 Another approach is as follows:
 
-1. Install [Homebrew](<https://brew.sh/?v=1.1.1>).
+1. Install [Homebrew](https://brew.sh/).
 1. Enter `brew tap mongodb/brew`.
 1. Enter `brew install mongodb-community`.
 
@@ -133,8 +133,8 @@ JavaScript to interact with a MongoDB database.
 There are also many free tools that provide a GUI
 for performing the same operations.
 Some to consider can be found at
-[here](<www.guru99.com/top-20-mongodb-tools.html?v=1.1.1>).
-One great option is [MongoDB Compass](<https://www.mongodb.com/products/compass?v=1.1.1>).
+[here](www.guru99.com/top-20-mongodb-tools.html).
+One great option is [MongoDB Compass](https://www.mongodb.com/products/compass).
 
 To start the MongoDB shell, enter `mongo`.
 This displays a prompt where JavaScript-based MongoDB commands can be entered.

@@ -9,7 +9,7 @@ layout: topic-layout.njk
 For details on SQLite, see [here](/blog/sqlite).
 
 Python has built-in support for
-[SQLite](<https://www.sqlite.org/?v=1.1.1>) databases
+[SQLite](https://www.sqlite.org/) databases
 provided by the package `sqlite3`.
 Here is an example program that performs many common operations.
 

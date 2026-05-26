@@ -152,7 +152,7 @@ provide a `compare` static method that compares two objects from the same class
 and returns -1, 0, or 1.
 It is suitable for passing to the `Array` `sort` method
 for sorting arrays of instances.
-(Why doesn't `MonthDay` support the static method `compare`?)
+(Why doesn't `MonthDay` support the static method `compare`)
 
 For example:
 

@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[TestFlight](<https://developer.apple.com/testflight/?v=1.1.1>)
+[TestFlight](https://developer.apple.com/testflight/)
 enables deploying test versions of an iOS app
 that does not require a full app review.
 New versions can be deployed without a followup review.
@@ -19,15 +19,15 @@ before it is added to the App Store.
 TODO: Add documentation on the steps to submit to the App Store.
 
 It is possible to get an app featured by Apple on the App Store.
-See [Getting Featured on the App Store](<https://developer.apple.com/app-store/getting-featured/?v=1.1.1>).
+See [Getting Featured on the App Store](https://developer.apple.com/app-store/getting-featured/).
 In order to be featured you must tell Apple about your app
-by completing the form at [Tell us about your app or game](<https://developer.apple.com/contact/app-store/promote/?v=1.1.1>).
+by completing the form at [Tell us about your app or game](https://developer.apple.com/contact/app-store/promote/).
 
 ## Steps
 
 ### Part 1 - Creating an App Identifier
 
-1. Browse [developer.apple.com](<https://developer.apple.com?v=1.1.1>) and sign in.
+1. Browse [developer.apple.com](https://developer.apple.com) and sign in.
 1. In the top nav bar, click "Account" and sign in.
 1. In the "Certificates, Identifiers & Profiles" section, click "Identifiers".
 1. To create a new identifier, click the "+" after "Identifiers".
@@ -48,7 +48,7 @@ by completing the form at [Tell us about your app or game](<https://developer.ap
 
 ### Part 2 - Creating an App
 
-1. Browse [appstoreconnect.apple.com](<https://appstoreconnect.apple.com?v=1.1.1>).
+1. Browse [appstoreconnect.apple.com](https://appstoreconnect.apple.com).
 1. Click the large "My Apps" button.
 1. Click the "+" button after "Apps".
 1. Select "New App" from the dropdown.
@@ -136,7 +136,7 @@ by completing the form at [Tell us about your app or game](<https://developer.ap
 By default every time an app is submitted
 there will be a prompt related to use of encryption.
 A dialog will appear with the title "Export Compliance Information"
-and the question "Does your app use encryption?".
+and the question "Does your app use encryption".
 To avoid the need to answer this question
 every time a new version of the app is released:
 
@@ -148,7 +148,7 @@ every time a new version of the app is released:
 
 ### Part 4 - Distributing an App
 
-1. Return to the [App Store Connect](<https://appstoreconnect.apple.com/?v=1.1.1>) web page.
+1. Return to the [App Store Connect](https://appstoreconnect.apple.com/) web page.
 1. Login with your Apple ID.
 1. Click the large "My Apps" button.
 1. Click the app to be distributed.
@@ -304,7 +304,7 @@ in order to download test builds of the app and provide feedback.
 ### Part 10 - Sales
 
 To see statistics on app sales, browse
-[App Store Connect](<https://appstoreconnect.apple.com?v=1.1.1>)
+[App Store Connect](https://appstoreconnect.apple.com)
 and click "Sales and Trends".
 
 ## Feedback

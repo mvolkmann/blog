@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Xcode](https://developer.apple.com/xcode/?v=1.1.1)
+[Xcode](https://developer.apple.com/xcode/)
 is an IDE from Apple for creating apps for
 iPhone, iPad, macOS, Apple Watch, Apple TV, and Apple Vision Pro.
 
@@ -37,10 +37,10 @@ can be downloaded later from Xcode ... Settings ... Components.
 ## Resources
 
 - Apple describes the latest Xcode features at
-  [Xcode](https://developer.apple.com/xcode/?v=1.1.1).
-- Apple maintains [Xcode Release Notes](https://developer.apple.com/documentation/xcode-release-notes?v=1.1.1).
+  [Xcode](https://developer.apple.com/xcode/).
+- Apple maintains [Xcode Release Notes](https://developer.apple.com/documentation/xcode-release-notes).
 - Apple describes Coding Intelligence setup in
-  [Setting up coding intelligence](https://developer.apple.com/documentation/xcode/setting-up-coding-intelligence?v=1.1.1).
+  [Setting up coding intelligence](https://developer.apple.com/documentation/xcode/setting-up-coding-intelligence).
 
 ## Panels
 
@@ -63,7 +63,7 @@ This can be toggled between showing and hiding by pressing cmd-0
 or tapping the following button on the left side of the title bar:
 
 <img alt="Xcode toggle Navigator panel" class="keep-size"
-  src="/blog/assets/xcode-toggle-panel.png?v=1.1.1">
+  src="/blog/assets/xcode-toggle-panel.png">
 
 The Navigator panel displays the following nine icon buttons at the top:
 
@@ -114,7 +114,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   whose source control status has changed (ex. modified files).
 
   <img alt="Xcode Project Navigator buttons" class="keep-size"
-    src="/blog/assets/xcode-project-navigator-buttons.png?v=1.1.1">
+    src="/blog/assets/xcode-project-navigator-buttons.png">
 
 - 2nd tab - Source Control Navigator ("x" in square icon)
 
@@ -162,7 +162,7 @@ The Navigator panel displays the following nine icon buttons at the top:
   This is used to find and replace text in the project.
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator.png">
 
   Click the magnifier glass icon to see a dropdown
   containing past searches that can be clicked to recall them.
@@ -170,31 +170,31 @@ The Navigator panel displays the following nine icon buttons at the top:
   Click "Find" to optionally switch to "Replace" mode.
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator-dropdown1.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator-dropdown1.png">
 
   Click "Text" to optionally switch to searching for "References",
   "Definitions", "Regular Expression", or "Call Hierarchy".
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator-dropdown2.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator-dropdown2.png">
 
   Click "Containing" to optionally switch to
   "Matching Word", "Starting With", or "Ending With".
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator-dropdown3.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator-dropdown3.png">
 
   Click "In Project" to optionally limit the search
   to a specific project directory
   and select "New Scope..." for advanced options.
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator-dropdown4.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator-dropdown4.png">
 
   Click "Ignoring Case" to optionally switch to "Matching Case".
 
   <img alt="Xcode Find" class="keep-size"
-    src="/blog/assets/xcode-find-navigator-dropdown5.png?v=1.1.1">
+    src="/blog/assets/xcode-find-navigator-dropdown5.png">
 
 - 5th tab - Issue Navigator (warning icon - triangle containing !)
 
@@ -232,7 +232,7 @@ This can be toggled between showing and hiding by pressing cmd-option-0
 or tapping the following button on the right side of the title bar:
 
 <img alt="Xcode toggle Inspector panel" class="keep-size"
-  src="/blog/assets/xcode-toggle-panel.png?v=1.1.1">
+  src="/blog/assets/xcode-toggle-panel.png">
 
 ## Files
 
@@ -569,7 +569,7 @@ adds a static `==` method that returns `true` if all the properties are equal.
 There are more context-sensitive Refactor menu options
 that are less frequently used.
 
-For more on Xcode refactoring, see [Xcode refactoring options explained with examples](https://www.avanderlee.com/swift/xcode-refactoring/?v=1.1.1) from SwiftLee.
+For more on Xcode refactoring, see [Xcode refactoring options explained with examples](https://www.avanderlee.com/swift/xcode-refactoring/) from SwiftLee.
 
 ### Sorting
 
@@ -687,8 +687,8 @@ automatically indents the surrounded code
 when the closing brace is typed.
 
 Other options for Swift code formatting include
-[SwiftFormat](https://github.com/nicklockwood/SwiftFormat?v=1.1.1)
-and [swift-format](https://github.com/apple/swift-format?v=1.1.1).
+[SwiftFormat](https://github.com/nicklockwood/SwiftFormat)
+and [swift-format](https://github.com/apple/swift-format).
 
 SwiftFormat can be run as a command-line tool or an Xcode extension
 
@@ -718,7 +718,7 @@ select Editor ... SwiftFormat ... Format File.
 There is currently no way within Xcode to format files on save.
 However, this can be configured using an Automator script
 and a System Settings keyboard shortcut.
-The steps to configure this are described at [Xcode Format and Save](https://luisramos.dev/xcode-format-and-save?v=1.1.1).
+The steps to configure this are described at [Xcode Format and Save](https://luisramos.dev/xcode-format-and-save).
 
 ## Code Generation
 
@@ -847,7 +847,7 @@ defaults write com.apple.dt.Xcode ShowBuildOperationDuration -bool YES
 To customize build settings, select the top item in the Project Navigator,
 select a target, click the "Build Settings" tab, and make changes.
 
-For details on the available build settings, see [Xcode Build Settings](https://xcodebuildsettings.com?v=1.1.1).
+For details on the available build settings, see [Xcode Build Settings](https://xcodebuildsettings.com).
 
 ## Clean Builds
 
@@ -955,14 +955,14 @@ The right side displays `print` function output.
 Set breakpoints by clicking on source file line numbers.
 
 <img alt="Xcode breakpoint" class="keep-size"
-  src="/blog/assets/xcode-breakpoint.png?v=1.1.1">
+  src="/blog/assets/xcode-breakpoint.png">
 
 Run the app and click the debugger buttons shown below.
 The app runs in debug mode by default because
 the default scheme "Run" settings has "Build Configuration" set to "Debug".
 
 <img alt="Xcode debugger buttons" style="width: 50%"
-  src="/blog/assets/xcode-debugger-buttons.png?v=1.1.1">
+  src="/blog/assets/xcode-debugger-buttons.png">
 
 ## App Icons
 
@@ -1067,9 +1067,9 @@ All Swift project Git repositories should have a `.gitignore` file
 in their root directory that specifies files
 that should be committed to the repository.
 This file is not automatically created.
-This file can be obtained from [gitignore.io](https://gitignore.io?v=1.1.1).
+This file can be obtained from [gitignore.io](https://gitignore.io).
 
-- Browse [gitignore.io](https://gitignore.io?v=1.1.1).
+- Browse [gitignore.io](https://gitignore.io).
 - Enter "Swift" in the search input.
 - Click the "Create" button.
 - Select File ... Save As...
@@ -1179,7 +1179,7 @@ To **delete a remote Git repository** that is known to Xcode:
   Sometimes a confirmation dialog appears.
   If it does, click the "Send SMS" button,
   enter the code received on your phone,
-  and click the "?" button.
+  and click the "" button.
 
 ### Branches
 
@@ -1286,7 +1286,7 @@ To **commit changes**:
   Uncheck any that should not be committed.
 - A letter will appear after files that will be affected by the commit,
   "A" for added, "C" for merge conflict, "D" for deleted, "M" for modified,
-  and "?" for files unknown to the local Git repository.
+  and "" for files unknown to the local Git repository.
 - In the left, make sure the checkboxes to the left
   of each filename to be committed are checked.
 - One at a time click the name of each file to be committed
@@ -1579,7 +1579,7 @@ The screenshot below shows changing the language and region
 which affects those values when the app is run in the Simulator or on a device.
 
 <img alt="Xcode scheme language and region" style="width: 100%"
-  src="/blog/assets/xcode-scheme-language-region.png?v=1.1.1">
+  src="/blog/assets/xcode-scheme-language-region.png">
 
 The Test phase specifies:
 
@@ -1638,7 +1638,7 @@ could automatically build and reload when changes to a project file are saved.
 By default Xcode does not do this automatically, but it can be configured.
 
 Krzysztof Zabłocki describes a way to implement this in his article
-[Hot Reloading in Swift](https://www.merowing.info/hot-reloading-in-swift/?v=1.1.1). This uses his [Inject](https://github.com/krzysztofzablocki/Inject?v=1.1.1) package.
+[Hot Reloading in Swift](https://www.merowing.info/hot-reloading-in-swift/). This uses his [Inject](https://github.com/krzysztofzablocki/Inject) package.
 The solution involves installing an app that watches specified directories
 for file changes. When a file change is detected, it is rebuilt
 and injected into the app without rebuilding the entire app.
@@ -1646,7 +1646,7 @@ The updated version of the app is then loaded into the Simulator.
 
 The one-time steps are:
 
-1. Browse the GitHub repo [InjectionIII](https://github.com/johnno1962/InjectionIII/releases?v=1.1.1)
+1. Browse the GitHub repo [InjectionIII](https://github.com/johnno1962/InjectionIII/releases)
    and download the file `InjectionIII.app.zip`.
    The file `InjectionIII.app` will appear in the `Downloads` directory.
 1. Drag the downloaded app to the `Applications` directory.
@@ -1688,18 +1688,18 @@ the app to production because it does nothing unless it is run in debug mode.
 If the directory being watched is nested inside the
 `Desktop` or `Documents` directory, another dialog may appear
 requesting permission to access files in those directories.
-https://github.com/johnno1962/InjectionIII/releases?v=1.0.20
+https://github.com/johnno1962/InjectionIII/releases
 
 If you override the cmd-s keybinding to run something like
 "SwiftFormat - Format File" and also save changes,
 pressing it will not trigger the Simulator to update.
 In this case the Simulator will update
 if you activate any other app besides Xcode.
-See this [issue](https://github.com/johnno1962/InjectionIII/issues/426?v=1.1.1).
+See this [issue](https://github.com/johnno1962/InjectionIII/issues/426).
 
 It seems that some changes do not get injected into the running app.
 For example changes to property initial values do not take effect.
-See this [issue](https://github.com/johnno1962/InjectionIII/issues/425?v=1.1.1).
+See this [issue](https://github.com/johnno1962/InjectionIII/issues/425).
 In the code below, hot reload will not pick up
 a change to the value of the `name` property.
 
@@ -1807,7 +1807,7 @@ To make it easier to find a particular item in the list, type part of its name.
 
 Code formatting can happen automatically when changes are saved
 by following the directions at
-[SwiftFormat](/blog/topics/#/blog/swift/SwiftFormat/?v=1.1.1).
+[SwiftFormat](/blog/topics/#/blog/swift/SwiftFormat/).
 
 | Action                                   | Key    |
 | ---------------------------------------- | ------ |
@@ -1908,7 +1908,7 @@ Snippets I have defined include:
 
 ## Using a New Swift Version
 
-See [How to use a pre-release Swift version in Xcode](https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/?v=1.1.1).
+See [How to use a pre-release Swift version in Xcode](https://sarunw.com/posts/how-to-use-pre-release-swift-version-in-xcode/).
 
 ## Xcode Issues
 
@@ -1932,4 +1932,4 @@ While using Xcode is generally fine, it does have a few issues.
   but it does not support regular expressions.
   It does not support repeating commands with the period key,
   defining macros, and other more advanced Vim features.
-  For a list of supported Vim commands, see this [Apple Developer Forum post](https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022&v=1.1.1).
+  For a list of supported Vim commands, see this [Apple Developer Forum post](https://developer.apple.com/forums/thread/681968?login=true&page=1#692795022).

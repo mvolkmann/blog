@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[nearley](<https://nearley.js.org?v=1.1.1>)
+[nearley](https://nearley.js.org)
 is a parsing toolkit with many features.
 
 - It handles all Backus-Naur Form (BNF) grammars,
@@ -22,7 +22,7 @@ is a parsing toolkit with many features.
 - It provides a railroad diagram generator that creates HTML files
   which include SVG-based diagrams (`nearley-railroad`).
 - It works with many lexers including its default lexer
-  [Moo](<https://github.com/no-context/moo?v=1.1.1>).
+  [Moo](https://github.com/no-context/moo).
   The lexer converts the input string into tokens
   that are matched by the parser rules.
 
@@ -542,7 +542,7 @@ To view the diagram, open the generated `.html` in any web browser.
 Here is the railroad diagram for our arithmetic grammar:
 
 <img alt="nearley Railroad Diagram" style="width: 60%"
-  src="/blog/assets/nearley-railroad-diagram.png?v=1.1.1">
+  src="/blog/assets/nearley-railroad-diagram.png">
 
 ## Unparsing
 

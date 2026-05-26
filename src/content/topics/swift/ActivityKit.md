@@ -15,7 +15,7 @@ Live activities were supported in the Xcode 14 beta,
 but are not supported in Xcode 14.
 Support should be added later in 2022.
 
-See the YouTube video [Create a Live Activity with ActivityKit & WidgetKit for iOS 16](<https://www.youtube.com/watch?v=oloHJn1kj3w&v=1.1.1>).
+See the YouTube video [Create a Live Activity with ActivityKit & WidgetKit for iOS 16](https://www.youtube.com/watch?v=oloHJn1kj3w).
 
 ## Setup Steps
 

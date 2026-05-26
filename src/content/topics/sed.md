@@ -22,4 +22,4 @@ that are used most often in practice.
 When necessary, you can return to this article for
 a refresher on the more advanced features of the tool.
 
-See my Object Computing (OCI) article [That](<https://objectcomputing.com/resources/publications/sett/august-2019-thats-what-i-sed?v=1.1.1>).
+See my Object Computing (OCI) article [That](https://objectcomputing.com/resources/publications/sett/august-2019-thats-what-i-sed).

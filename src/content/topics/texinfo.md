@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Texinfo](<https://www.gnu.org/software/texinfo/?v=1.1.1>)
+[Texinfo](https://www.gnu.org/software/texinfo/)
 is a markup language for software documentation.
 It can be used to generate output in many formats including
 DocBook, DVI, EPUB 3, HTML, info, LaTeX, plain text, and XML.
@@ -204,10 +204,10 @@ To output a literal { character, escape it with `@{`.
 The following Texinfo file demonstrates rendering bulleted and numbered lists.
 
 <img alt="Texinfo Itemized Lists" style="width: 30%"
-  src="/blog/assets/texinfo-itemized-lists.png?v=1.1.1">
+  src="/blog/assets/texinfo-itemized-lists.png">
 
 <img alt="Texinfo Enumerated Lists" style="width: 30%"
-  src="/blog/assets/texinfo-enumerated-lists.png?v=1.1.1">
+  src="/blog/assets/texinfo-enumerated-lists.png">
 
 ```text
 \input texinfo
@@ -330,4 +330,4 @@ Small, red, and juicy fruits.
 
 ## Resources
 
-- [Official texinfo Manual](<https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.pdf?v=1.1.1>)
+- [Official texinfo Manual](https://www.gnu.org/software/texinfo/manual/texinfo/texinfo.pdf)

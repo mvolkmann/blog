@@ -12,19 +12,19 @@ layout: topic-layout.njk
 
 <figure style="width: 50%">
   <img alt="Alpine logo" style="border: 0"
-    src="/blog/assets/alpine-logo.png?v=1.1.1">
+    src="/blog/assets/alpine-logo.png">
 </figure>
 
 ## Overview
 
-"[Alpine](<https://alpinejs.dev?v=1.1.1>)
+"[Alpine](https://alpinejs.dev)
 is a lightweight JavaScript framework that
 uses custom HTML attributes to add dynamic behavior.
 Alpine is notable for how easy it is to use and
 how small it is compared to other web frameworks.
 
 Alpine was created by Caleb Porzio.
-He also created [Livewire](<https://laravel-livewire.com?v=1.1.1>),
+He also created [Livewire](https://laravel-livewire.com),
 a full stack framework for Laravel which uses PHP.
 Quoting Caleb, "Alpine.js offers you the reactive and declarative nature
 of big frameworks like Vue or React at a much lower cost.
@@ -63,7 +63,7 @@ Many Alpine directives have the same name suffix as a Vue directives.
 
 ## Using VS Code
 
-The [Alpine.js IntelliSense](<https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.alpine-js-intellisense&v=1.1.1>) extension from Adrian Wilczyński provides
+The [Alpine.js IntelliSense](https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.alpine-js-intellisense) extension from Adrian Wilczyński provides
 intellisense and snippets for Alpine directives and magic properties.
 
 The intellisense provides great documentation of
@@ -74,12 +74,12 @@ Useful snippets include `x-for`, `x-for-index`, `x-for-key`, and `x-if`.
 Unfortunately this extension has not been updated since November 2020
 and some of it is specific to version 2 of Alpine.
 
-A more recent option that supports version 3 of Alpine is [Alpine.js IntelliSense](<https://marketplace.visualstudio.com/items?itemName=pcbowers.alpine-intellisense&v=1.1.1>) from P. Christopher Bowers.
+A more recent option that supports version 3 of Alpine is [Alpine.js IntelliSense](https://marketplace.visualstudio.com/items?itemName=pcbowers.alpine-intellisense) from P. Christopher Bowers.
 It was last updated in June 2022.
 
 ## Using TypeScript
 
-To use TypeScript in an Alpine project, see [Getting started with Alpine.js and TypeScript](<https://dev.to/wtho/get-started-with-alpinejs-and-typescript-4dgf?v=1.1.1>).
+To use TypeScript in an Alpine project, see [Getting started with Alpine.js and TypeScript](https://dev.to/wtho/get-started-with-alpinejs-and-typescript-4dgf).
 
 The following steps create a new project that uses Alpine, TypeScript, and Vite.
 Vite provides a local HTTP server with hot reload.
@@ -173,7 +173,7 @@ The steps to do this are as follows:
    it defaults to looking in the `public` directory,
    but it actual defaults to looking in the root directory
    and I haven't found a way to change that.
-   See this [issue](<https://github.com/elysiajs/elysia/issues/352?v=1.1.1>).
+   See this [issue](https://github.com/elysiajs/elysia/issues/352).
 
 1. Serve the app from any HTTP server.
 
@@ -230,7 +230,7 @@ before opening a page in a web browser.
 
 On initial page load Alpine crawls the DOM looking for directive attributes and
 configures everything that is needed to update the DOM when data changes.
-It uses [MutationObservers](<https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver?v=1.1.1>) for this.
+It uses [MutationObservers](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) for this.
 
 ### x-bind
 
@@ -335,7 +335,7 @@ Elements can access state properties on any of their ancestor elements.
 When the same property name is used at multiple nesting levels,
 the value of the nearest one is used.
 
-From [Data-less Alpine](<https://alpinejs.dev/essentials/state#data-less-alpine?v=1.1.1>), "Sometimes you may want to use Alpine functionality,
+From [Data-less Alpine](https://alpinejs.dev/essentials/state#data-less-alpine), "Sometimes you may want to use Alpine functionality,
 but don't need any reactive data.
 In these cases, you can opt out of passing an expression to x-data."
 For example: `<div x-data>`.
@@ -945,7 +945,7 @@ For example:
 
 It's a shame that a more terse syntax like `{{expression}}`
 instead of `<span x-text="var"></span>` isn't supported.
-See the `x-interpolate` directive described at [alpine-plugins](<https://github.com/mvolkmann/alpine-plugins?v=1.1.1>).
+See the `x-interpolate` directive described at [alpine-plugins](https://github.com/mvolkmann/alpine-plugins).
 
 ### x-transition
 
@@ -983,7 +983,7 @@ For example:
 <h2 x-show="score == 21" x-transition.scale.duration.1000ms>Blackjack!</h2>
 ```
 
-For more detail, see [x-transition](<https://alpinejs.dev/directives/transition?v=1.1.1>).
+For more detail, see [x-transition](https://alpinejs.dev/directives/transition).
 
 ## Custom Directives
 
@@ -1082,14 +1082,14 @@ a custom directive named `x-weather-feel`.
 </html>
 ```
 
-For more detail, see [Custom Directives](<https://alpinejs.dev/advanced/extending#custom-directives?v=1.1.1>).
+For more detail, see [Custom Directives](https://alpinejs.dev/advanced/extending#custom-directives).
 
 ## Progress Bar Example
 
 The following example combines some of the features we have seen so far.
 
 <img alt="Alpine progress bar" style="width: 50%"
-  src="/blog/assets/alpine-progress-bar.png?v=1.1.1">
+  src="/blog/assets/alpine-progress-bar.png">
 
 ```html
 <html>
@@ -1145,7 +1145,7 @@ The following example implements a To Do app using only Alpine.
 It persists the data using `localStorage`.
 
 <img alt="Alpine todo list" style="width: 50%"
-  src="/blog/assets/alpine-todo-list.png?v=1.1.1">
+  src="/blog/assets/alpine-todo-list.png">
 
 ```html
 <html>
@@ -1337,7 +1337,7 @@ the ids "abc-btn-1" and "abc-btn-2":
 ```
 
 For more detail, including use of the `x-id` directive for grouping ids,
-see [$id](<https://alpinejs.dev/magics/id?v=1.1.1>).
+see [$id](https://alpinejs.dev/magics/id).
 
 ### $nextTick
 
@@ -1457,10 +1457,10 @@ after the first click they do not change a value.
 ```
 
 The following is another example of using `$watch`.
-It is based on the YouTube video [Learn Alpine.js: Project - Hackernews search](<https://youtu.be/uc6D2yocRsI?si=ZecBbjHha7r0ugus&v=1.1.1>)
-by [Codecourse](<https://www.youtube.com/@codecourse?v=1.1.1>).
+It is based on the YouTube video [Learn Alpine.js: Project - Hackernews search](https://youtu.be/uc6D2yocRsI?si=ZecBbjHha7r0ugus)
+by [Codecourse](https://www.youtube.com/@codecourse).
 This allows users to enter a query which is used to search for matching
-articles on [HackerNews](<https://news.ycombinator.com?v=1.1.1>).
+articles on [HackerNews](https://news.ycombinator.com).
 
 ```html
 <html>
@@ -1519,7 +1519,7 @@ articles on [HackerNews](<https://news.ycombinator.com?v=1.1.1>).
 
 In addition to the provided magic properties,
 custom magic properties can be implemented.
-See [Custom Magics](<https://alpinejs.dev/advanced/extending#custom-magics?v=1.1.1>).
+See [Custom Magics](https://alpinejs.dev/advanced/extending#custom-magics).
 
 ## Global Functions
 
@@ -1531,7 +1531,7 @@ to avoid repetition and allow changes to be made in one place.
 
 This is likely rarely needed.
 
-For a contrived example, see [Alpine.bind](<https://alpinejs.dev/globals/alpine-bind?v=1.1.1>).
+For a contrived example, see [Alpine.bind](https://alpinejs.dev/globals/alpine-bind).
 
 ### Alpine.data
 
@@ -1549,7 +1549,7 @@ not to query or modify data.
 For example:
 
 <img alt="Alpine counter" style="width: 20%"
-  src="/blog/assets/alpine-counter.png?v=1.1.1">
+  src="/blog/assets/alpine-counter.png">
 
 ```js
 <html>
@@ -1624,7 +1624,7 @@ The following code demonstrates sharing Alpine data with JavaScript code.
 </html>
 ```
 
-For more detail, see [Alpine.data](<https://alpinejs.dev/globals/alpine-data?v=1.1.1>).
+For more detail, see [Alpine.data](https://alpinejs.dev/globals/alpine-data).
 
 ### Alpine.store
 
@@ -1663,14 +1663,14 @@ Each plugin used requires a new script tag.
 
 ### Anchor
 
-The [Anchor](<https://alpinejs.dev/plugins/anchor?v=1.1.1>) plugin
+The [Anchor](https://alpinejs.dev/plugins/anchor) plugin
 anchors the position of an element to another using CSS absolute positioning.
 
 In most cases this functionality can be achieved with HTML nesting and CSS.
 
 ### Collapse
 
-The [Collapse](<https://alpinejs.dev/plugins/collapse?v=1.1.1>)
+The [Collapse](https://alpinejs.dev/plugins/collapse)
 plugin enables expanding and collapsing elements with smooth animations.
 
 For example:
@@ -1701,17 +1701,17 @@ For example:
 
 ### Focus
 
-The [Focus](<https://alpinejs.dev/plugins/focus?v=1.1.1>)
+The [Focus](https://alpinejs.dev/plugins/focus)
 plugin manages focus within a page containing form elements.
 
 ### Intersect
 
-The [Intersect](<https://alpinejs.dev/plugins/intersect?v=1.1.1>)
+The [Intersect](https://alpinejs.dev/plugins/intersect)
 plugin enables reacting to an element entering the browser viewport.
 
 ### Mask
 
-The [Mask](<https://alpinejs.dev/plugins/mask?v=1.1.1>) plugin
+The [Mask](https://alpinejs.dev/plugins/mask) plugin
 formats text inputs in specific ways using a mask whose characters
 indicate the set of characters that can be entered.
 The supported mask characters are `*` for any character,
@@ -1762,14 +1762,14 @@ For entering currency amounts, use the value `$money($input)`.
 
 ### Morph
 
-The [Morph](<https://alpinejs.dev/plugins/morph?v=1.1.1>) plugin
+The [Morph](https://alpinejs.dev/plugins/morph) plugin
 enables moving an element into a provided HTML template.
 It is useful for updating the DOM from HTML received from an API request
 without losing page state.
 
 ### Persist
 
-The [Persist](<https://alpinejs.dev/plugins/persist?v=1.1.1>)
+The [Persist](https://alpinejs.dev/plugins/persist)
 plugin saves state across page loads, including browser refreshes.
 By default the data is saved in `localStorage`.
 
@@ -1847,7 +1847,7 @@ For example, we can't define a "ProgressBar" component and then
 render it with HTML like `<ProgressBar value={value} max={100} />`.
 
 The Alpine team provides a commercial set of predefined components at
-[Components](<https://alpinejs.dev/components?v=1.1.1>).
+[Components](https://alpinejs.dev/components).
 Each component is implemented as a custom directive
 that can be applied to an HTML element such as a `div`.
 A `script` tag is required to load the code for each component.
@@ -1866,7 +1866,7 @@ specifies an HTML file to load that defines a component.
 Data can be made available to an instance of a component
 using the `x-data` directive.
 
-This approach is implemented by an Alpine plugin at [alpine-plugins](<https://github.com/mvolkmann/alpine-plugins?v=1.1.1>).
+This approach is implemented by an Alpine plugin at [alpine-plugins](https://github.com/mvolkmann/alpine-plugins).
 See the description of the `x-include` directive.
 
 The following HTML provides an example of using the `x-include` directive.
@@ -1945,10 +1945,10 @@ For example:
 
 ### AJAX
 
-[Alpine AJAX](<https://alpine-ajax.js.org?v=1.1.1>)
+[Alpine AJAX](https://alpine-ajax.js.org)
 is an Alpine plugin that
 "enables your HTML elements to request remote content from your server."
-It provides functionality that is similar to [htmx](<https://htmx.org?v=1.1.1>), but is simpler and provides fewer features.
+It provides functionality that is similar to [htmx](https://htmx.org), but is simpler and provides fewer features.
 
 Alpine AJAX was not created by the team that created Alpine.
 
@@ -1961,7 +1961,7 @@ For example, `<span x-text="await getHighScore()"></span>`.
 ### CSP
 
 For applications that must adhere to the Content Security Policy (CSP),
-see [CSP](<https://alpinejs.dev/advanced/csp?v=1.1.1>).
+see [CSP](https://alpinejs.dev/advanced/csp).
 
 ### Reactivity
 
@@ -1969,7 +1969,7 @@ Alpine monitors state defined in `x-data` directives and stores and
 automatically updates parts of the UI that use the data when the values change.
 Reactivity is implemented by the functions `Alpine.reactive` and `Alpine.effect`.
 Alpine does not use a virtual DOM like React.
-For more detail, see [Reactivity](<https://alpinejs.dev/advanced/reactivity?v=1.1.1>).
+For more detail, see [Reactivity](https://alpinejs.dev/advanced/reactivity).
 
 ## Common Mistakes
 
@@ -1983,7 +1983,7 @@ Those directives can only be applied to `template` elements.
 
 ## Resources
 
-- [Alpine home page](<https://alpinejs.dev?v=1.1.1>)
-- [Say No To Complexity With AlpineJS](<https://www.youtube.com/watch?v=4c8dpZN0rqM&t=1s&v=1.1.1>) YouTube video by Caleb Porzio
-- [Mark Volkmann](<https://mvolkmann.github.io/blog/topics/#/blog/alpine/?v=1.0.22&v=1.1.1>)
-- [Alpine Toolbox](<https://www.alpinetoolbox.com?v=1.1.1>)
+- [Alpine home page](https://alpinejs.dev)
+- [Say No To Complexity With AlpineJS](https://www.youtube.com/watch?v=4c8dpZN0rqM&t=1s) YouTube video by Caleb Porzio
+- [Mark Volkmann](https://mvolkmann.github.io/blog/topics/#/blog/alpine/)
+- [Alpine Toolbox](https://www.alpinetoolbox.com)

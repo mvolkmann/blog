@@ -67,7 +67,7 @@ depicted in the movie include those when:
 - Richard's mother, Rose, has a stroke in the living room
 - Richard's parents move to Florida and give the house to Richard and Margaret
 - Richard and Margaret's daughter Vanessa goes to college and then law school
-- Margaret comments "Time sure does fly, doesn’t it?"
+- Margaret comments "Time sure does fly, doesn’t it"
 - Richard’s mother Rose passes and is missed by the family at Thanksgiving
 - a black father and mother instruct their son on how he should interact with a
   police officer when pulled over, so he can "go on with his life"

@@ -7,16 +7,16 @@ layout: topic-layout.njk
 
 ## Overview
 
-[SwiftLint](<https://realm.github.io/SwiftLint/?v=1.1.1>)
+[SwiftLint](https://realm.github.io/SwiftLint/)
 is a "tool to enforce Swift style and conventions".
 
 ## Installing
 
 One way to install SwiftLint is to use
-[HomeBrew](<https://brew.sh?v=1.1.1>).
+[HomeBrew](https://brew.sh).
 Enter `brew install swiftlint`.
 
-For other options, see the [SwiftLint home page](<https://realm.github.io/SwiftLint/?v=1.1.1>).
+For other options, see the [SwiftLint home page](https://realm.github.io/SwiftLint/).
 
 ## Running from a Terminal
 
@@ -96,7 +96,7 @@ line_length:
 
 ## Rules
 
-For documentation on supported rules, see the [Rule Directory](<https://realm.github.io/SwiftLint/rule-directory.html?v=1.1.1>).
+For documentation on supported rules, see the [Rule Directory](https://realm.github.io/SwiftLint/rule-directory.html).
 
 ## Selective Disabling
 

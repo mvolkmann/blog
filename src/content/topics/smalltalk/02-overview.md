@@ -23,7 +23,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Smalltalk Byte magazine cover"
-    src="/blog/assets/smalltalk-byte-cover.jpg?v=1.1.1">
+    src="/blog/assets/smalltalk-byte-cover.jpg">
 </figure>
 
 The target audience for this series of articles on Smalltalk
@@ -142,7 +142,7 @@ manufacturing, utilities, transportation, and academia.
 The entire syntax of Smalltalk can be demonstrated on a post card.
 
 <img alt="Smalltalk on a post card"
-  src="/blog/assets/smalltalk-on-postcard.jpg?v=1.1.1">
+  src="/blog/assets/smalltalk-on-postcard.jpg">
 
 ## Why Learn Smalltalk
 
@@ -445,19 +445,19 @@ The most popular open source Smalltalk implementations include the following:
 - <div class="row">
     <a href="https://squeak.org" target="_blank">Squeak (2,832 classes)</a>
     <img alt="Squeak Smalltalk log" class="logo"
-      src="/blog/assets/squeak-smalltalk-logo.svg?v=1.1.1">
+      src="/blog/assets/squeak-smalltalk-logo.svg">
   </div>
 
 - <div class="row">
     <a href="https://pharo.org" target="_blank">Pharo (10,405 classes)</a>
     <img alt="Pharo Smalltalk log" class="logo"
-      src="/blog/assets/pharo-smalltalk-logo.png?v=1.1.1">
+      src="/blog/assets/pharo-smalltalk-logo.png">
   </div>
 
 - <div class="row">
     <a href="https://cuis.st" target="_blank">Cuis (675 classes)</a>
     <img alt="Cuis Smalltalk log" class="logo"
-      src="/blog/assets/cuis-smalltalk-logo.png?v=1.1.1">
+      src="/blog/assets/cuis-smalltalk-logo.png">
   </div>
 
 Squeak, Pharo, and Cuis all use the MIT license.

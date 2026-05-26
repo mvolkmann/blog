@@ -143,7 +143,7 @@ matching a column value in one table with a column value in another.
 There are many kinds of joins.
 
 <figure style="width: 75%">
-  <img alt="SQL joins" src="/blog/assets/sql-joins.jpg?v=1.1.1">
+  <img alt="SQL joins" src="/blog/assets/sql-joins.jpg">
   <figcaption>SQL joins by @ezekiel_aleke</figcaption>
 </figure>
 
@@ -192,7 +192,7 @@ There are many kinds of joins.
   This returns the cartesian product (all possible combinations)
   of rows from two tables.
 
-For more detail, see [Wikipedia](<http://en.wikipedia.org/wiki/Join_(SQL)?v=1.1.1>).
+For more detail, see [Wikipedia](<http://en.wikipedia.org/wiki/Join_(SQL)>).
 
 ## Common Operations
 

@@ -4,7 +4,7 @@ eleventyNavigation:
 layout: topic-layout.njk
 ---
 
-[Fastify](<https://www.fastify.io?v=1.1.1>)
+[Fastify](https://www.fastify.io)
 is a web server framework for Node.js that is an alternative to Express.
 
 Benefits include:

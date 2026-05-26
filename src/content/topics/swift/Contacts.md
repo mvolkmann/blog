@@ -13,8 +13,8 @@ iOS apps can access data managed by the Apple Contacts app.
 
 We can define a `ContactPicker` SwiftUI view that allows the user
 to select a contact using the same UI as the Apple Contacts app.
-This is done using the [Contacts UI](<https://developer.apple.com/documentation/contactsui?v=1.1.1>)
-framework and its [CNContactPickerViewController](<https://developer.apple.com/documentation/contactsui/cncontactpickerviewcontroller?v=1.1.1>) class.
+This is done using the [Contacts UI](https://developer.apple.com/documentation/contactsui)
+framework and its [CNContactPickerViewController](https://developer.apple.com/documentation/contactsui/cncontactpickerviewcontroller) class.
 
 ```swift
 import ContactsUI
@@ -38,7 +38,7 @@ struct ContactPicker: UIViewControllerRepresentable {
 
     @Binding private var contact: CNContact?
 
-    init(contact: Binding<CNContact?>) {
+    init(contact: Binding<CNContact>) {
         _contact = contact
     }
 

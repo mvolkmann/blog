@@ -7,15 +7,15 @@ layout: topic-layout.njk
 ## Overview
 
 <img alt="Lua logo" style="width: 40%"
-    src="/blog/assets/lua-logo.svg?v=1.1.1"
+    src="/blog/assets/lua-logo.svg"
     title="Lua logo">
 
-[Lua](<https://www.lua.org/?v=1.1.1>) is a
+[Lua](https://www.lua.org/) is a
 dynamically typed scripting language created in 1993
-by a team at [Pontifical Catholic University of Rio de Janeiro](<http://www.puc-rio.br?v=1.1.1>) in Brazil.
-The team members include [Roberto Ierusalimschy](<https://en.wikipedia.org/wiki/Roberto_Ierusalimschy?v=1.1.1>),
-[Walemar Celes](<https://web.tecgraf.puc-rio.br/~celes/?v=1.1.1>),
-and [Luiz Henrique de Figueiredo](<https://lhf.impa.br/?v=1.1.1>).
+by a team at [Pontifical Catholic University of Rio de Janeiro](http://www.puc-rio.br) in Brazil.
+The team members include [Roberto Ierusalimschy](https://en.wikipedia.org/wiki/Roberto_Ierusalimschy),
+[Walemar Celes](https://web.tecgraf.puc-rio.br/~celes/),
+and [Luiz Henrique de Figueiredo](https://lhf.impa.br/).
 
 The Portuguese word "Lua" means "Moon".
 The Lua logo depicts the Moon orbiting around the Earth
@@ -40,7 +40,7 @@ Compiling to bytecode can be done at runtime or ahead of time
 
 Lua has a relatively small standard library, but a
 large collection of optional packages can be installed using the
-[LuaRocks](<https://luarocks.org?v=1.1.1>) package manager.
+[LuaRocks](https://luarocks.org) package manager.
 
 Pros of Lua include:
 
@@ -69,65 +69,65 @@ Cons of Lua include:
 
   Strings can contain Unicode characters,
   but indexing into such strings does not account for their size.
-  See [Lua Unicode](<http://lua-users.org/wiki/LuaUnicode?v=1.1.1>).
+  See [Lua Unicode](http://lua-users.org/wiki/LuaUnicode).
 
 - variables and functions are global by default,
   but can be declared `local`
 
-For a more extensive list of pros and cons, see [Lua: Good, bad, and ugly parts](<http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts?v=1.1.1>).
+For a more extensive list of pros and cons, see [Lua: Good, bad, and ugly parts](http://notebook.kulchenko.com/programming/lua-good-different-bad-and-ugly-parts).
 
 ## Used By
 
 Notable uses of Lua include:
 
-- [Angry Birds](<https://www.angrybirds.com?v=1.1.1>) game
-- [Codea](<https://codea.io?v=1.1.1>)
+- [Angry Birds](https://www.angrybirds.com) game
+- [Codea](https://codea.io)
   creates games and simulations on an iPad using Lua
-- [Lego Mindstorms NXT](<http://www.legoengineering.com/platform/nxt/?v=1.1.1>) robotics platform
-- [Minecraft](<https://www.minecraft.net/?v=1.1.1>) game
-- [Neovim](<https://neovim.io?v=1.1.1>) text editor
-- [Redis](<https://redis.io?v=1.1.1>) database
-- [Roblox](<https://www.roblox.com?v=1.1.1>) game
-- [World of Warcraft](<https://worldofwarcraft.blizzard.com/?v=1.1.1>) game
-- Texas Instruments [TI-Nspire](<https://education.ti.com/en/resources/lua-scripting?v=1.1.1>) graphing calculators
+- [Lego Mindstorms NXT](http://www.legoengineering.com/platform/nxt/) robotics platform
+- [Minecraft](https://www.minecraft.net/) game
+- [Neovim](https://neovim.io) text editor
+- [Redis](https://redis.io) database
+- [Roblox](https://www.roblox.com) game
+- [World of Warcraft](https://worldofwarcraft.blizzard.com/) game
+- Texas Instruments [TI-Nspire](https://education.ti.com/en/resources/lua-scripting) graphing calculators
 
-Roblox uses a variant of Lua called Luau. From [veilict](<https://devforum.roblox.com/t/what-is-the-difference-between-lua-and-luau/2181620/2?v=1.1.1>), "Luau's main focus was for much needed optimizations
+Roblox uses a variant of Lua called Luau. From [veilict](https://devforum.roblox.com/t/what-is-the-difference-between-lua-and-luau/2181620/2), "Luau's main focus was for much needed optimizations
 to the Lua VM and to add more complex type checking,
 which allows you to see more in-depth errors before runtime.
 You can specify the type of a given variable yourself,
 or you can have Luau infer the type for you."
 
-For a more extensive list of Lua use, see the [List of applications using Lua](<https://en.wikipedia.org/wiki/List_of_applications_using_Lua?v=1.1.1>) Wikipedia page.
+For a more extensive list of Lua use, see the [List of applications using Lua](https://en.wikipedia.org/wiki/List_of_applications_using_Lua) Wikipedia page.
 
 ## Resources
 
-- [Lua Reference Manual](<https://www.lua.org/manual/?v=1.1.1>)
-- [Programming in Lua](<https://www.lua.org/pil/?v=1.1.1>) official book
-- [Lua Programming Gems](<https://www.lua.org/gems/?v=1.1.1>) -
+- [Lua Reference Manual](https://www.lua.org/manual/)
+- [Programming in Lua](https://www.lua.org/pil/) official book
+- [Lua Programming Gems](https://www.lua.org/gems/) -
   "a collection of articles recording some of the wisdom and practice
   on how to program well in Lua"
-- [Why (and why not) Lua](<https://www.youtube.com/watch?v=XxcSvnEIUq4&v=1.1.1>) talk by Roberto Ierusalimschy (2019)
-- [Pallene](<https://github.com/pallene-lang/pallene?v=1.1.1>),
+- [Why (and why not) Lua](https://www.youtube.com/watch?v=XxcSvnEIUq4) talk by Roberto Ierusalimschy (2019)
+- [Pallene](https://github.com/pallene-lang/pallene),
   "a statically typed and ahead-of-time compiled sister language to Lua,
   with a focus on performance"
-- [Lua and Pallene](<https://www.youtube.com/watch?v=H3inzGGFefg&v=1.1.1>) talk by Roberto Ierusalimschy (2022)
-- [TJ DeVries](<https://www.youtube.com/@teej_dv?v=1.1.1>)
+- [Lua and Pallene](https://www.youtube.com/watch?v=H3inzGGFefg) talk by Roberto Ierusalimschy (2022)
+- [TJ DeVries](https://www.youtube.com/@teej_dv)
   YouTube channel; TJ is a Neovim core maintainer and
   is the creator of several Neovim plugins including:
 
-  - [telescope.nvim](<https://github.com/nvim-telescope/telescope.nvim?v=1.1.1>) "highly extendable fuzzy finder"
-  - [plenary.nvim](<https://github.com/nvim-lua/plenary.nvim?v=1.1.1>) collection of Lua functions used to write Neovim plugins
-  - [tree-sitter-lua](<https://github.com/tjdevries/tree-sitter-lua?v=1.1.1>) Tree-sitter grammar for Lua
-  - [colorbuddy.nvim](<https://github.com/tjdevries/colorbuddy.nvim?v=1.1.1>) for creating Neovim color schemes
+  - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) "highly extendable fuzzy finder"
+  - [plenary.nvim](https://github.com/nvim-lua/plenary.nvim) collection of Lua functions used to write Neovim plugins
+  - [tree-sitter-lua](https://github.com/tjdevries/tree-sitter-lua) Tree-sitter grammar for Lua
+  - [colorbuddy.nvim](https://github.com/tjdevries/colorbuddy.nvim) for creating Neovim color schemes
 
-- [Getting started using Lua in Neovim](<https://github.com/nanotee/nvim-lua-guide?v=1.1.1>)
-- [Awesome Lua](<https://github.com/LewisJEllis/awesome-lua?v=1.1.1>) - "a curated list of quality Lua packages and resources."
+- [Getting started using Lua in Neovim](https://github.com/nanotee/nvim-lua-guide)
+- [Awesome Lua](https://github.com/LewisJEllis/awesome-lua) - "a curated list of quality Lua packages and resources."
 
 ## Cheat Sheets
 
-- [DevHints.io](<https://devhints.io/lua?v=1.1.1>)
-- [Cheatography](<https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/?v=1.1.1>)
-- [codecademy](<https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet?v=1.1.1>)
+- [DevHints.io](https://devhints.io/lua)
+- [Cheatography](https://cheatography.com/srgmc/cheat-sheets/lua-scripting-5-1/)
+- [codecademy](https://www.codecademy.com/learn/learn-lua/modules/learn-lua-introduction/cheatsheet)
 
 ## Installing
 
@@ -136,10 +136,10 @@ Enter `brew install lua` to install it.
 Enter `lua -v` to verify that it worked and see the version.
 
 To install in other operating systems, see
-[Getting Started](<http://www.lua.org/start.html?v=1.1.1>).
+[Getting Started](http://www.lua.org/start.html).
 
 To experiment with Lua on the web without installing anything,
-see [Lua Demo](<http://www.lua.org/demo.html?v=1.1.1>).
+see [Lua Demo](http://www.lua.org/demo.html).
 
 ## Compiling
 
@@ -153,9 +153,9 @@ ahead of time (AOT) or just in time (JIT).
 
 There are multiple ways to produce and execute Lua bytecode.
 
-For a comparison of the performance of each approach, see [Performance Comparison Pallene vs. Lua vs. C](<https://eklausmeier.goip.de/blog/2020/05-14-performance-comparison-pallene-vs-lua-5-1-5-2-5-3-5-4-vs-c/?v=1.1.1>).
+For a comparison of the performance of each approach, see [Performance Comparison Pallene vs. Lua vs. C](https://eklausmeier.goip.de/blog/2020/05-14-performance-comparison-pallene-vs-lua-5-1-5-2-5-3-5-4-vs-c/).
 
-[luac](<https://www.lua.org/manual/5.1/luac.html?v=1.1.1>)
+[luac](https://www.lua.org/manual/5.1/luac.html)
 is the standard Lua compiler.
 It reads Lua source code and outputs Lua bytecode.
 
@@ -171,7 +171,7 @@ For example, `lua demo.luac`.
 
 VS Code has great support for Lua.
 
-The [Lua](<https://github.com/LuaLS/lua-language-server?v=1.1.1>)
+The [Lua](https://github.com/LuaLS/lua-language-server)
 extension from sumneko is a Lua language server.
 It provides code annotations, syntax checking, dynamic type checking,
 code formatting, spell checking, and more.
@@ -181,7 +181,7 @@ open Settings, filter on "Lua", scroll down to "Lua > Diagnostics: Disable",
 click the "Add Item" button, select a diagnostic name from the drop-down,
 and click the "OK" button.
 
-The [vscode-lua-format](<https://github.com/Koihik/vscode-lua-format?v=1.1.1>) extension from Koihik
+The [vscode-lua-format](https://github.com/Koihik/vscode-lua-format) extension from Koihik
 is a popular Lua code formatting extension.
 To configure this, open Settings, filter on "Lua", and enter the path
 to a configuration file in "Vscode-lua-format: Config Path" such as
@@ -202,7 +202,7 @@ single_quote_to_double_quote: true
 use_tab: false
 ```
 
-The [Lua Debug](<https://marketplace.visualstudio.com/items?itemName=actboy168.lua-debug&v=1.1.1>) VS Code extension supports
+The [Lua Debug](https://marketplace.visualstudio.com/items?itemName=actboy168.lua-debug) VS Code extension supports
 debugging Lua code with breakpoints and watches.
 
 ## Grammar
@@ -299,7 +299,7 @@ For more information on using `require`, see the "Modules" section.
 
 ## Running Code
 
-To use the Lua [REPL](<https://en.wikipedia.org/wiki/Read–eval–print_loop?v=1.1.1>),
+To use the Lua [REPL](https://en.wikipedia.org/wiki/Read–eval–print_loop),
 enter `lua` and then enter Lua statements.
 To exit the REPL, press ctrl-c or ctrl-d.
 
@@ -316,7 +316,7 @@ However, none of them seem to be popular or actively maintained.
 
 TODO: Add information about the `debug` standard library
 TODO: and debuggers built using its features.
-See https://github.com/LewisJEllis/awesome-lua?v=1.0.21#debugging-and-profiling.
+See https://github.com/LewisJEllis/awesome-lua#debugging-and-profiling.
 
 ## Keywords
 
@@ -523,7 +523,7 @@ end
 
 To print to the terminal using colors, see:
 
-- [ansicolors.lua](<https://github.com/kikito/ansicolors.lua?v=1.1.1>)
+- [ansicolors.lua](https://github.com/kikito/ansicolors.lua)
 
   To install, enter `luarocks install ansicolors`
 
@@ -537,7 +537,7 @@ To print to the terminal using colors, see:
   print('white')
   ```
 
-- [lua-term](<https://github.com/hoelzro/lua-term?v=1.1.1>)
+- [lua-term](https://github.com/hoelzro/lua-term)
 
   To install, enter `luarocks install lua-term`
 
@@ -625,7 +625,7 @@ The module `strict.lua` can be used to raise an error if
 an attempt is made to get or set a non-existent global variable.
 To use this:
 
-1. Copy the file `strict.lua` from [deepmind/strict](<https://github.com/deepmind/strict/blob/master/strict.lua?v=1.1.1>).
+1. Copy the file `strict.lua` from [deepmind/strict](https://github.com/deepmind/strict/blob/master/strict.lua).
 1. Place the file in `/usr/local/share/lua/5.4/`
    which is a directory in `package.path`.
 1. Run code with `lua -l strict {file-name}.lua`
@@ -1314,7 +1314,7 @@ A single table can be array-like, dictionary-like, or both.
 Assigning a table to a variable assigns the reference,
 not a copy of the table.
 
-_Implementation Detail from [Lua Programming Gems](<https://www.lua.org/gems/?v=1.1.1>)_
+_Implementation Detail from [Lua Programming Gems](https://www.lua.org/gems/)_
 
 > "Every table in Lua has two parts: the array part and the hash part.
 > The array part stores entries with integer keys in the range 1 to n,
@@ -2624,7 +2624,7 @@ print(every(function(n) return n < 7 end, numbers)) -- true
 ```
 
 The functions `map`, `filter`, and `reduce` (and many more)
-can be found in the [Lua Functional Library](<https://luafun.github.io/?v=1.1.1>).
+can be found in the [Lua Functional Library](https://luafun.github.io/).
 
 This library is distributed in the single file `fun.lua`.
 To download the file, enter
@@ -2877,7 +2877,7 @@ The `os` module defines the following functions:
 
 The `os.date` function takes a format string
 and an optional time that defaults to now.
-The format string uses the same characters as the C [strftime](<https://man7.org/linux/man-pages/man3/strftime.3.html?v=1.1.1>) function
+The format string uses the same characters as the C [strftime](https://man7.org/linux/man-pages/man3/strftime.3.html) function
 For example:
 
 ```lua
@@ -3159,11 +3159,11 @@ Lua does not directly support concurrently running threads,
 but they can be implemented using the approach described in
 chapter 26 of the "Programming in Lua - Fourth edition" book.
 There are many Lua libraries that support multithreading including
-[Lua Lanes](<http://lualanes.github.io/lanes/?v=1.1.1>).
+[Lua Lanes](http://lualanes.github.io/lanes/).
 
 Lua does not have the equivalent of the `async` and `await` keywords
 in other programming languages, but those can be simulated.
-See [async-await.lua](<https://github.com/iamcco/async-await.lua?v=1.1.1>).
+See [async-await.lua](https://github.com/iamcco/async-await.lua).
 
 For sending HTTP requests, see the "Networking" section below.
 
@@ -3171,15 +3171,15 @@ For sending HTTP requests, see the "Networking" section below.
 
 There are several popular Lua networking libraries.
 
-- [OpenResty](<http://openresty.org/en/?v=1.1.1>) is
+- [OpenResty](http://openresty.org/en/) is
   "a dynamic web platform based on NGINX and LuaJIT."
-- [lua-http](<https://github.com/daurnimator/lua-http?v=1.1.1>) -
+- [lua-http](https://github.com/daurnimator/lua-http) -
   supports implementing HTTP servers and clients
-- [LuaSocket](<https://lunarmodules.github.io/luasocket/?v=1.1.1>) -
+- [LuaSocket](https://lunarmodules.github.io/luasocket/) -
   "a C core that provides support for the TCP and UDP transport layers, and
   a set of Lua modules that add support for functionality
   commonly needed by applications that deal with the Internet"
-- [Luvit](<https://luvit.io?v=1.1.1>) -
+- [Luvit](https://luvit.io) -
   "asynchronous I/O for Lua; implements the same APIs as Node.js"
 
 ## Utility Functions
@@ -3322,7 +3322,7 @@ These are combined into the file `liblua.a`.
 Download the source for Lua and build it
 by following these steps:
 
-- Download the Lua source code from [Lua Download](<https://www.lua.org/download.html?v=1.1.1>).
+- Download the Lua source code from [Lua Download](https://www.lua.org/download.html).
 - Unzip and untar the downloaded file.
 - `cd` to the resulting directory.
 - Enter `make all test`
@@ -3341,7 +3341,7 @@ by following these steps:
   file built for macOS-x86_64".
 
 For an example of embedding the Lua interpreter in a C application, see
-the GitHub repository [c-calls-lua](<https://github.com/mvolkmann/lua-examples/tree/main/c-calls-lua?v=1.1.1>).
+the GitHub repository [c-calls-lua](https://github.com/mvolkmann/lua-examples/tree/main/c-calls-lua).
 
 To compile and link the C program, enter:
 
@@ -3352,8 +3352,8 @@ gcc main.c -o main -llua
 Run the executable by entering `./main`
 
 For an example of embedding the Lua interpreter in a SwiftUI application, see
-[Swift Calling C](</blog/topics/#/blog/swift/CallingC?v=1.1.1>) and
-the GitHub respository [SwiftUICallsC](<https://github.com/mvolkmann/SwiftUICallsC?v=1.1.1>).
+[Swift Calling C](/blog/topics/#/blog/swift/CallingC) and
+the GitHub respository [SwiftUICallsC](https://github.com/mvolkmann/SwiftUICallsC).
 
 To restrict what loaded Lua code is able to do,
 only load a subset of the standard libraries.
@@ -3418,7 +3418,7 @@ TODO: and do all the error checking.
 Before `lua_pcall` pushes return values onto the stack it
 remove the function and its arguments from the stack.
 
-See [Calling Lua From a C Program](<http://www.troubleshooters.com/codecorn/lua/lua_c_calls_lua.htm?v=1.1.1>).
+See [Calling Lua From a C Program](http://www.troubleshooters.com/codecorn/lua/lua_c_calls_lua.htm).
 
 TODO: How can you prevent Lua code executed from C from
 TODO: doing something dangerous like deleting files?
@@ -3434,21 +3434,21 @@ https://www.larsgregori.de/2019/12/27/lua-and-swift-in-ios/.
 
 ### LÖVE
 
-[LÖVE](<https://love2d.org?v=1.1.1>)
+[LÖVE](https://love2d.org)
 is a Lua framework for building 2D games.
 
 For details, see my [blog page](/blog/love2d/).
 
 ### LÖVR
 
-[LÖVR](<https://lovr.org?v=1.1.1>) is
+[LÖVR](https://lovr.org) is
 "an open source framework for rapidly building immersive 3D experiences."
 
 ## Flavors of Lua
 
 ### LuaJIT
 
-[LuaJIT](<https://luajit.org/?v=1.1.1>)
+[LuaJIT](https://luajit.org/)
 is a just-in-time Lua compiler.
 It can be used as an alternative to `luac` to produces smaller bytecode files.
 LuaJIT also executes bytecode files and provides runtime optimizations
@@ -3473,7 +3473,7 @@ LuaJIT uses a different syntax for vararg functions.
 
 TODO: Does LuaJIT only support 32-bit signed integers?
 
-Lua 5.2 changes from 5.1 are summarized [here](<https://www.lua.org/manual/5.2/readme.html#changes?v=1.1.1>).
+Lua 5.2 changes from 5.1 are summarized [here](https://www.lua.org/manual/5.2/readme.html#changes).
 These include:
 
 - ephemeron tables (tables with weak keys and strong values)
@@ -3486,7 +3486,7 @@ These include:
 - `io.lines` supports new options
 - many new functions in the C API
 
-Lua 5.3 changes from 5.2 are summarized [here](<https://www.lua.org/manual/5.3/readme.html#changes?v=1.1.1>).
+Lua 5.3 changes from 5.2 are summarized [here](https://www.lua.org/manual/5.3/readme.html#changes).
 These include:
 
 - support for integers that are 64-bit by default
@@ -3500,18 +3500,18 @@ These include:
 - many new functions in the C API
 - standalone interpreter
 
-Lua 5.4 changes from 5.3 are summarized [here](<https://www.lua.org/manual/5.4/readme.html#changes?v=1.1.1>).
+Lua 5.4 changes from 5.3 are summarized [here](https://www.lua.org/manual/5.4/readme.html#changes).
 They include:
 
 - `const` variables
 - to-be-closed variables
 - new function `coroutine.close`
 
-LuaJIT adds many [extensions](<https://luajit.org/extensions.html?v=1.1.1>) on top of Lua 5.1.
+LuaJIT adds many [extensions](https://luajit.org/extensions.html) on top of Lua 5.1.
 These include the `bit`, `ffi`, and `jit` modules.
 It also enhances some of the C API functions.
 
-From [api7.ai](<https://api7.ai/learning-center/openresty/luajit-vs-lua?v=1.1.1>):
+From [api7.ai](https://api7.ai/learning-center/openresty/luajit-vs-lua):
 
 > The LuaJIT runtime environment ... has a JIT compiler
 > that can generate machine code directly.
@@ -3554,7 +3554,7 @@ which performs just-in-time compilation at runtime.
 
 ### Pallene
 
-"[Pallene](<https://github.com/pallene-lang/pallene?v=1.1.1>)
+"[Pallene](https://github.com/pallene-lang/pallene)
 is a statically typed and ahead-of-time compiled sister language
 to Lua with a focus on performance. It is intended for
 writing performance sensitive code that interacts with Lua,
@@ -3576,7 +3576,7 @@ To install Pallene, see the detailed instructions at the Pallene link above.
 
 ### Teal
 
-[Teal](<https://github.com/teal-language/tl?v=1.1.1>) is a
+[Teal](https://github.com/teal-language/tl) is a
 typed dialect of Lua.
 Currently it can target Lua 5.1 or 5.3.
 
@@ -3604,7 +3604,7 @@ return {
 }
 ```
 
-The following code demonstrates using Teal to implement [Fizz buzz](<https://en.wikipedia.org/wiki/Fizz_buzz?v=1.1.1>).
+The following code demonstrates using Teal to implement [Fizz buzz](https://en.wikipedia.org/wiki/Fizz_buzz).
 This code will make more sense after reading the sections that follow.
 
 ```lua
@@ -3635,21 +3635,21 @@ fizzBuzz(30, {
 
 ## Languages Based on Lua
 
-[Ravi](<http://ravilang.github.io/?v=1.1.1>) is
+[Ravi](http://ravilang.github.io/) is
 a "dialect of Lua with limited optional static typing and JIT/AOT compilers".
 The name comes from Sanskrit word for "Sun".
 
-[MoonScript](<https://moonscript.org/?v=1.1.1>) is
+[MoonScript](https://moonscript.org/) is
 "programmer friendly language that compiles into Lua".
 It "gives you the power of the fastest scripting language
 combined with a rich set of features".
 
-[Terra](<https://terralang.org/?v=1.1.1>) is a
+[Terra](https://terralang.org/) is a
 "low-level system programming language that is designed to
 interoperate seamlessly with the Lua programming language".
 It "shares Lua's syntax and control-flow constructs".
 
-[Squirrel](<http://squirrel-lang.org/?v=1.1.1>) is a
+[Squirrel](http://squirrel-lang.org/) is a
 "high level imperative, object-oriented programming language,
 designed to be a light-weight scripting language"."
 It was "inspired by languages like Python,Javascript and especially Lua".

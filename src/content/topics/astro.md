@@ -21,19 +21,19 @@ layout: topic-layout.njk
 <div class="row">
   <figure style="width: 40%">
     <img alt="Astro logo" style="border: 0"
-      src="/blog/assets/astro-logo.svg?v=1.1.1">
+      src="/blog/assets/astro-logo.svg">
     <figcaption>Astro logo</figcaption>
   </figure>
   <figure style="width: 20%">
     <img alt="Houston" style="border: 0"
-      src="/blog/assets/astro-houston.png?v=1.1.1">
+      src="/blog/assets/astro-houston.png">
     <figcaption>Houston,<br />the Astro mascot</figcaption>
   </figure>
 </div>
 
 ## Overview
 
-[Astro](<https://astro.build?v=1.1.1>) is
+[Astro](https://astro.build) is
 a free, open-source (MIT license) framework that is
 "the web framework for content-driven websites".
 It can be used to generate static sites,
@@ -46,7 +46,7 @@ and doing more work on the server side.
 Astro supports using many kinds of UI components including
 Astro, Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 
-Astro uses the [Islands architecture](<https://docs.astro.build/en/concepts/islands/?v=1.1.1>). Jason Miller (creator of the Preact framework)
+Astro uses the [Islands architecture](https://docs.astro.build/en/concepts/islands/). Jason Miller (creator of the Preact framework)
 describes this approach as a way to
 "render HTML pages on the server, and inject placeholders or slots
 around highly dynamic regions that can then be
@@ -69,12 +69,12 @@ For example, the URL path `/foo/bar` refers to
 the page defined in the file `src/pages/foo/bar.astro`.
 
 Astro was created by
-[Fred K. Schott](<http://fredkschott.com/about/?v=1.1.1>).
+[Fred K. Schott](http://fredkschott.com/about/).
 Fred previously worked on WebComponents at Google and was on the Polymer team.
-He also created [Snowpack](<https://www.snowpack.dev?v=1.1.1>),
+He also created [Snowpack](https://www.snowpack.dev),
 "a lightning-fast frontend build tool", that is no longer maintained.
 The functionality of Snowpack was superseded by
-[Vite](<https://vitejs.dev?v=1.1.1>)
+[Vite](https://vitejs.dev)
 which is used as the build tool in Astro.
 
 Development of Astro is managed by "The Astro Technology Company"
@@ -118,21 +118,21 @@ This will prompt for the following:
 
 - permission to install create-astro
 
-- "Where should we created your new project?"
+- "Where should we created your new project"
 
   Enter the name of a new subdirectory to be created.
   To create the project in the current directory, enter only ".".
   To enter a relative path, begin with "./".
 
-- "How would you like to start your new project?"
+- "How would you like to start your new project"
 
   The options are "Include sample files", "Use blog template", and "Empty".
 
-- "Install dependencies?" Yes or No
+- "Install dependencies" Yes or No
 
   Press return to accept the default of "Yes".
 
-- "Do you plan to write TypeScript?" Yes or No
+- "Do you plan to write TypeScript" Yes or No
 
   Press return to accept the default of "Yes".
 
@@ -143,7 +143,7 @@ This will prompt for the following:
 - "Initialize a new git repository? Yes or No
 
 <img alt="Astro create project" style="width: 70%"
-  src="/blog/assets/astro-create-project.png?v=1.1.1">
+  src="/blog/assets/astro-create-project.png">
 
 Once the project is created, follow the instructions that are output.
 
@@ -261,13 +261,13 @@ for your final deployment."
 Astro maintains SSR adapters for Cloudflare, Netlify, Node, and Vercel.
 There are also community-maintained SSR adapters for AWS, Deno, and more.
 
-For an excellent video on Astro rendering options, see [Choosing between SSR, SSG, and dynamic rendering in Astro](<https://www.youtube.com/watch?v=aIHRjloFASU&v=1.1.1>).
+For an excellent video on Astro rendering options, see [Choosing between SSR, SSG, and dynamic rendering in Astro](https://www.youtube.com/watch?v=aIHRjloFASU).
 
 ## VS Code
 
 If you use VS Code as your editor, consider installing these extensions:
 
-- [Astro](<https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode&v=1.1.1>) from astro.build
+- [Astro](https://marketplace.visualstudio.com/items?itemName=astro-build.astro-vscode) from astro.build
 
   This provides language support for `.astro` files
   using the Astro language server.
@@ -278,7 +278,7 @@ If you use VS Code as your editor, consider installing these extensions:
   code folding,
   and more.
 
-- [Houston](<https://marketplace.visualstudio.com/items?itemName=astro-build.houston&v=1.1.1>) from astro.build
+- [Houston](https://marketplace.visualstudio.com/items?itemName=astro-build.houston) from astro.build
 
   Houston is the Astro mascot.
 
@@ -296,19 +296,19 @@ If you use VS Code as your editor, consider installing these extensions:
   selecting "Problems: Focus on Problems View" from the command palette.
   It can also be toggled by pressing ctrl-shift-m (cmd-shift-m on macOS).
 
-- [MDX](<https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx&v=1.1.1>) from unified
+- [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) from unified
 
   This provides language support for `.mdx` files.
 
-- [Prettier - Code Formatter](<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode&v=1.1.1>) from prettier.io
+- [Prettier - Code Formatter](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) from prettier.io
 
-  This formats code using [Prettier](<https://prettier.io?v=1.1.1>).
+  This formats code using [Prettier](https://prettier.io).
 
   To configure code formatting, open any `.astro` file,
   open the Command Palette, and enter "Format Document".
   It will prompt for configuring this and automatically do so.
 
-- [Tailwind CSS Intellisense](<https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss&v=1.1.1>) from tailwindcss.com
+- [Tailwind CSS Intellisense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) from tailwindcss.com
 
   This provides autocomplete, syntax highlighting, and linting
   for Tailwind CSS classes.
@@ -392,7 +392,7 @@ For example, the file `src/pages/demo/colors.md`
 defines the page at the URL path `/demo/colors/`.
 
 <img alt="Astro colors page" style="width: 25%"
-  src="/blog/assets/astro-colors-page.png?v=1.1.1">
+  src="/blog/assets/astro-colors-page.png">
 
 ```md
 ---
@@ -517,7 +517,7 @@ This can contain three sections:
   This defines CSS rules that are scoped to this component.
 
 For a good example of defining a
-reusable, customizable `Button` component, see [astro-component-example-btn](<https://github.com/coding-in-public/astro-component-example-btn/blob/main/src/components/Button.astro?v=1.1.1>).
+reusable, customizable `Button` component, see [astro-component-example-btn](https://github.com/coding-in-public/astro-component-example-btn/blob/main/src/components/Button.astro).
 This uses TypeScript to describe all the supported props
 which provides intellisense and error checking.
 
@@ -567,7 +567,7 @@ This `Border` component can be used as follows.
 Note how content is included.
 
 <img alt="Astro component with slot" style="border: none; width: 30%"
-  src="/blog/assets/astro-component-with-slot.png?v=1.1.1" />
+  src="/blog/assets/astro-component-with-slot.png" />
 
 ```html
 <Border color="red">
@@ -586,7 +586,7 @@ Astro provides the following components:
 - `<Code code={codeString} lang="{lang}" />`
 
   This renders source code with syntax highlighting provided by
-  [Shiki](<https://github.com/shikijs/shiki#?v=1.1.1>).
+  [Shiki](https://github.com/shikijs/shiki#).
   Shiki "generates HTML that looks exactly like your code in VS Code".
 
   This component takes the optional props `theme`, `inline`, and `wrap`.
@@ -667,10 +667,10 @@ Astro provides the following components:
 - `<Prism />`
 
   This is an alternative to the `Code` component that the uses the
-  [Prism](<https://prismjs.com?v=1.1.1>) library.
+  [Prism](https://prismjs.com) library.
   It must be installed with `npm install @astrojs/prism`.
 
-  Download a theme CSS file from [PrismJS/prism-themes](<https://github.com/PrismJS/prism-themes/tree/master/themes?v=1.1.1>) and import it.
+  Download a theme CSS file from [PrismJS/prism-themes](https://github.com/PrismJS/prism-themes/tree/master/themes) and import it.
   For example:
 
   ```html
@@ -814,7 +814,7 @@ The supported file types include:
 - Markdown (.md, .markdown, etc.)
 - NPM Packages
 - TypeScript (.ts)
-- Other kinds of assets (TODO: audio and video?)
+- Other kinds of assets (TODO: audio and video)
 
 For example, the following line imports
 a JSON file with the path `src/data/dogs.json`
@@ -901,7 +901,7 @@ This is described the "Content Collections" section.
 
 For static sites, optimized images are generated concurrently at build time.
 
-From the documentation at [Images](<https://docs.astro.build/en/guides/images/?v=1.1.1>),
+From the documentation at [Images](https://docs.astro.build/en/guides/images/),
 The `Image` component
 "can transform a local or authorized remote image's dimensions, file type,
 and quality for control over your displayed image.
@@ -934,19 +934,19 @@ optimized `.webp` files are created in the `dist` directory.
 
 This mostly removes the need to use tools like Squoosh to optimize images.
 
-Image optimization is performed by the [sharp](<https://github.com/lovell/sharp?v=1.1.1>) package.
+Image optimization is performed by the [sharp](https://github.com/lovell/sharp) package.
 
-The [Picture](<https://docs.astro.build/en/guides/images/#picture-?v=1.1.1>) component can be used in place of the `Image` component
+The [Picture](https://docs.astro.build/en/guides/images/#picture-) component can be used in place of the `Image` component
 to render an appropriate image from a selection of multiple formats and sizes.
 
 ## Icons
 
-[Astro Icon](<https://www.astroicon.dev?v=1.1.1>)
+[Astro Icon](https://www.astroicon.dev)
 provides access to many icon sets.
 
 To install the "Astro Icon" integration, enter `npx astro add astro-icon`.
 
-To see the available icon sets, browse [icon sets](<https://icon-sets.iconify.design?v=1.1.1>).
+To see the available icon sets, browse [icon sets](https://icon-sets.iconify.design).
 
 To install an icon set, enter `npm i -D @iconify-json/{set-name}`.
 Some valid icon set names include "fa6-solid" (Fontawesome),
@@ -1082,7 +1082,7 @@ to treat this like a "404 Not Found" error:
 if (!document) return new Response('', {status: 404});
 ```
 
-Dynamic route file names can contain an ellipsis to use [rest parameters](<https://docs.astro.build/en/core-concepts/routing/#rest-parameters?v=1.1.1>).
+Dynamic route file names can contain an ellipsis to use [rest parameters](https://docs.astro.build/en/core-concepts/routing/#rest-parameters).
 For example, the file `src/pages/zoo/[...path].astro` can match the paths
 `/zoo`, `/zoo/cats`, and `/zoo/cats/panther`.
 
@@ -1229,7 +1229,7 @@ The following steps can be taken to define and render a collection of dogs.
   For example:
 
   <img alt="Astro Dogs" style="width: 50%"
-    src="/blog/assets/astro-dogs.png?v=1.1.1">
+    src="/blog/assets/astro-dogs.png">
 
   ```js
   ---
@@ -1256,7 +1256,7 @@ The following steps can be taken to define and render a collection of dogs.
 - Create the `Dog` component:
 
   <img alt="Astro Dog component" style="width: 30%"
-    src="/blog/assets/astro-content-collections-comet.png?v=1.1.1">
+    src="/blog/assets/astro-content-collections-comet.png">
 
   ```ts
   ---
@@ -1282,15 +1282,15 @@ The following steps can be taken to define and render a collection of dogs.
   ```
 
 For a more complete example of using content collections,
-see the project [content-collections](<https://github.com/mvolkmann/astro-examples/tree/main/content-collections?v=1.1.1>).
+see the project [content-collections](https://github.com/mvolkmann/astro-examples/tree/main/content-collections).
 This displays a component for each NFL team on the initial page.
 Clicking the component for any team navigates to a detail page
 using view transitions.
 
 <img alt="Astro content collections NFL home" style="width: 49%"
-  src="/blog/assets/astro-content-collections-nfl-home.png?v=1.1.1">
+  src="/blog/assets/astro-content-collections-nfl-home.png">
 <img alt="Astro content collections NFL detail" style="width: 49%"
-  src="/blog/assets/astro-content-collections-nfl-detail.png?v=1.1.1">
+  src="/blog/assets/astro-content-collections-nfl-detail.png">
 
 The file `src/content/config.ts` which defines the schema
 for the for collection documents contains the following:
@@ -1362,7 +1362,7 @@ relatedIds: ['atlanta-falcons', 'baltimore-ravens', 'buffalo-bills']
 ---
 ```
 
-A component can access related documents with the [getEntries](<https://docs.astro.build/en/reference/api-reference/#getentries?v=1.1.1>) function.
+A component can access related documents with the [getEntries](https://docs.astro.build/en/reference/api-reference/#getentries) function.
 For example:
 
 ```ts
@@ -1413,15 +1413,15 @@ from the @tailwindcss/typography plugin.
 ### Pagination
 
 Astro provides help for implementing pagination of content collections.
-For details, see [Routing - Pagination](<https://docs.astro.build/en/core-concepts/routing/#pagination?v=1.1.1>).
+For details, see [Routing - Pagination](https://docs.astro.build/en/core-concepts/routing/#pagination).
 
-The project [content-collections](<https://github.com/mvolkmann/astro-examples/tree/main/content-collections?v=1.1.1>) provides a good example.
+The project [content-collections](https://github.com/mvolkmann/astro-examples/tree/main/content-collections) provides a good example.
 The file `src/pages/[...page].astro`, shown below, defines the pages for
 the URLs "/" (first page) and "/{page-number}" (all pages after the first).
 The URL "/all" navigates to the page that shows all the teams.
 
 <img alt="Astro Pagination" style="width: 100%"
-  src="/blog/assets/astro-pagination.png?v=1.1.1">
+  src="/blog/assets/astro-pagination.png">
 
 
 
@@ -1474,12 +1474,12 @@ const entries = await Promise.all(promises);
 
 
 
-The code above uses the [getEntry](<https://docs.astro.build/en/reference/api-reference/#getentry?v=1.1.1>)
+The code above uses the [getEntry](https://docs.astro.build/en/reference/api-reference/#getentry)
 function to retrieve a specific content collection entry.
 
 An entry can have a property whose value is
 an array of ids for related entries within the same collection.
-To retrieve those, pass the array to the [getEntries](<https://docs.astro.build/en/reference/api-reference/#getentries?v=1.1.1>) function.
+To retrieve those, pass the array to the [getEntries](https://docs.astro.build/en/reference/api-reference/#getentries) function.
 
 ### Incremental Content Caching
 
@@ -1506,7 +1506,7 @@ surprised if there's a lot of edge cases where it doesn't work."
 
 ## Astro.glob
 
-The [Astro.glob](<https://docs.astro.build/en/guides/imports/#astroglob?v=1.1.1>) function provides another way to
+The [Astro.glob](https://docs.astro.build/en/guides/imports/#astroglob) function provides another way to
 access the content of a collection of Markdown files.
 
 For example, the Markdown files from the NFL content collection example above
@@ -1531,7 +1531,7 @@ The following Astro component reads and renders
 the data in these Markdown files:
 
 <img alt="Astro.glob demo" style="width: 100%"
-  src="/blog/assets/astro-glob-demo.png?v=1.1.1">
+  src="/blog/assets/astro-glob-demo.png">
 
 ```js
 ---
@@ -1599,10 +1599,10 @@ Astro has integrations for the following CMSes including
 CloudCannon, Contentful, Netlify, Sanity, Storyblok, Strapi, Wordpress,
 and many more.
 
-For general details, see [Use a CMS with Astro](<https://docs.astro.build/en/guides/cms/?v=1.1.1>).
+For general details, see [Use a CMS with Astro](https://docs.astro.build/en/guides/cms/).
 
-For details on using the Strapi CMS, see the YouTube video [Getting Started with Astro and Strapi](<https://www.youtube.com/watch?v=pVJCROlsIp4&v=1.1.1>)
-and the associated article [How to Build a Blog with Astro, Strapi, and Tailwind CSS](<https://strapi.io/blog/how-to-build-a-blog-with-astro-strapi-and-tailwind-css?v=1.1.1>).
+For details on using the Strapi CMS, see the YouTube video [Getting Started with Astro and Strapi](https://www.youtube.com/watch?v=pVJCROlsIp4)
+and the associated article [How to Build a Blog with Astro, Strapi, and Tailwind CSS](https://strapi.io/blog/how-to-build-a-blog-with-astro-strapi-and-tailwind-css).
 
 ## MDX
 
@@ -1622,7 +1622,7 @@ to what would otherwise be static content.
 MDX files have the `.mdx` file extension.
 
 MDX syntax differs from Markdown syntax in a few ways
-that are described at [Deviations from Markdown](<https://github.com/micromark/mdx-state-machine#72-deviations-from-markdown?v=1.1.1>).
+that are described at [Deviations from Markdown](https://github.com/micromark/mdx-state-machine#72-deviations-from-markdown).
 
 To install the MDX integration in an Astro project, enter `npx astro add mdx`.
 
@@ -1687,7 +1687,7 @@ Alpine, Lit, Preact, React, SolidJS, Svelte, Vue, WebComponents, and more.
 ### React
 
 Let's walk through the steps to use a
-[React](<https://react.dev?v=1.1.1>) component.
+[React](https://react.dev) component.
 
 1. Install the React integration by entering `npx astro add react`.
 
@@ -1751,12 +1751,12 @@ Let's walk through the steps to use a
 
    Integrations can add support for custom `client` directives.
 
-For more detail on using React components in Astro, see [React integration](<https://docs.astro.build/en/guides/integrations-guide/react/?v=1.1.1>).
+For more detail on using React components in Astro, see [React integration](https://docs.astro.build/en/guides/integrations-guide/react/).
 
 ### Svelte
 
 Let's walk through the steps to use a
-[Svelte](<https://svelte.dev?v=1.1.1>) component.
+[Svelte](https://svelte.dev) component.
 
 1. Install the Svelte integration by entering `npx astro add svelte`.
 
@@ -1802,11 +1802,11 @@ Let's walk through the steps to use a
    <Counter label="Tally" start={3} client:load />
    ```
 
-For more detail on using Svelte components in Astro, see [Svelte integration](<https://docs.astro.build/en/guides/integrations-guide/svelte/?v=1.1.1>).
+For more detail on using Svelte components in Astro, see [Svelte integration](https://docs.astro.build/en/guides/integrations-guide/svelte/).
 
 ### Alpine
 
-The [Alpine](<https://alpinejs.dev?v=1.1.1>) JavaScript library
+The [Alpine](https://alpinejs.dev) JavaScript library
 can be used in Astro components to add interactivity.
 This is an alternative to implementing interactive components
 using another framework such as React, Svelte, or Vue.
@@ -1824,7 +1824,7 @@ than implementing components in a framework like Svelte.
 
 A better alternative is to update the Alpine `x-data` objects
 that supply data to the components that need to update.
-For an example of this approach, see [alpine-demo](<https://github.com/mvolkmann/astro-examples/tree/main/alpine-demo?v=1.1.1>)
+For an example of this approach, see [alpine-demo](https://github.com/mvolkmann/astro-examples/tree/main/alpine-demo)
 
 #### Defining Functions
 
@@ -1992,7 +1992,7 @@ Alpine CAN call functions defined in these ways:
   <script src="./my-script.js"></script>
   ```
 
-From the Astro docs at [is:inline](<https://docs.astro.build/en/reference/directives-reference/#isinline?v=1.1.1>), "The `is:inline` directive is implied whenever
+From the Astro docs at [is:inline](https://docs.astro.build/en/reference/directives-reference/#isinline), "The `is:inline` directive is implied whenever
 any attribute other than `src` is used on a `<script>` or `<style>` tag."
 
 An issue with scripts that are "inline"
@@ -2003,7 +2003,7 @@ they will appear in the DOM once for every usage of the component.
 #### Alpine Example
 
 Now let's walk through the steps to use
-[Alpine](<https://alpinejs.dev?v=1.1.1>) in Astro.
+[Alpine](https://alpinejs.dev) in Astro.
 Alpine is a much lighter weight framework than
 frameworks like React, Svelte and Vue.
 But Alpine is still quite capable.
@@ -2071,7 +2071,7 @@ But Alpine is still quite capable.
    Astro components that use Alpine do not need a `client:*` directive
    in order to have client-side interactivity.
 
-For more detail on using Alpine in Astro, see [Alpine integration](<https://docs.astro.build/en/guides/integrations-guide/alpinejs/?v=1.1.1>).
+For more detail on using Alpine in Astro, see [Alpine integration](https://docs.astro.build/en/guides/integrations-guide/alpinejs/).
 
 ### Component Communication
 
@@ -2131,7 +2131,7 @@ the danger of unintentional name clashes in `x-data` property names increases.
 ## Sharing State (nanostores)
 
 The recommended way to share state (data) between components is to use the
-[nanostores](<https://github.com/nanostores/nanostores?v=1.1.1>)
+[nanostores](https://github.com/nanostores/nanostores)
 library.
 This library is not specific to Astro and can be used with many web frameworks.
 It is very lightweight, adding less that 1KB to the project.
@@ -2164,7 +2164,7 @@ Changing the value from any component affects the value
 displayed in all of them since they all use the same nanostore.
 
 <img alt="Astro nanostores Counters" style="width: 50%"
-  src="/blog/assets/astro-nanostores-counters.png?v=1.1.1">
+  src="/blog/assets/astro-nanostores-counters.png">
 
 To install the nanostores library, enter `npm install nanostores`.
 
@@ -2176,7 +2176,7 @@ enter `npx astro add alpinejs`.
 
 ### Persistence
 
-For sharing state across page transitions, see [@nanostores/persistent](<https://github.com/nanostores/persistent?v=1.1.1>).
+For sharing state across page transitions, see [@nanostores/persistent](https://github.com/nanostores/persistent).
 
 To install this, enter `npm install nanostores @nanostores/persistent`.
 
@@ -2433,7 +2433,7 @@ const { bg, fg } = Astro.props;
 This component can be used as follows:
 
 <img alt="Astro define:vars" style="border: none; width: 20%"
-  src="/blog/assets/astro-define-vars.png?v=1.1.1" />
+  src="/blog/assets/astro-define-vars.png" />
 
 ```html
 ---
@@ -2473,7 +2473,7 @@ a dark gray oval that is centered at the bottom of the browser window.
 It is partially hidden from view until the mouse hovers over it.
 
 <img alt="Astro Dev Toolbar" style="border: none; width: 30%"
-  src="/blog/assets/astro-dev-toolbar.png?v=1.1.1" />
+  src="/blog/assets/astro-dev-toolbar.png" />
 
 The toolbar contains the following four buttons:
 
@@ -2534,7 +2534,7 @@ just like any other page.
 The following is an example.
 
 <img alt="Astro 404 page" style="width: 30%"
-  src="/blog/assets/astro-404-page.png?v=1.1.1">
+  src="/blog/assets/astro-404-page.png">
 
 ```html
 ---
@@ -2593,13 +2593,13 @@ import Layout from "../layouts/Layout.astro";
 
 ## View Transitions
 
-Astro supports adding [view transitions](<https://docs.astro.build/en/guides/view-transitions/?v=1.1.1>)
+Astro supports adding [view transitions](https://docs.astro.build/en/guides/view-transitions/)
 that are applied when navigating from one page to another.
 This includes clicking links implemented with `<a>` elements,
 triggering the browser forward and back buttons, and submitting forms.
-For more control over when transitions occur, see [router control](<https://docs.astro.build/en/guides/view-transitions/#router-control?v=1.1.1>).
+For more control over when transitions occur, see [router control](https://docs.astro.build/en/guides/view-transitions/#router-control).
 
-This feature is built on the Web [View Transitions API](<https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API?v=1.1.1>).
+This feature is built on the Web [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API).
 As of December 2023, the only major web browsers that support this
 are Chrome and Edge. Polyfills are provided to support view transitions
 in browsers that do not yet support the View Transitions API.
@@ -2744,8 +2744,8 @@ const spin = {
 };
 ```
 
-For more detail, see [View Transitions](<https://docs.astro.build/en/guides/view-transitions/?v=1.1.1>).
-Also, check out [astro-vt-bot](<https://github.com/martrapp/astro-vt-bot#readme?v=1.1.1>).
+For more detail, see [View Transitions](https://docs.astro.build/en/guides/view-transitions/).
+Also, check out [astro-vt-bot](https://github.com/martrapp/astro-vt-bot#readme).
 
 ## Prefetching
 
@@ -2803,7 +2803,7 @@ import { prefetch } from 'astro:prefetch';
 prefetch('/some/path');
 ```
 
-For more detail, see [Prefetch](<https://docs.astro.build/en/guides/prefetch/#enable-prefetching?v=1.1.1>).
+For more detail, see [Prefetch](https://docs.astro.build/en/guides/prefetch/#enable-prefetching).
 
 ## Middleware
 
@@ -2894,7 +2894,7 @@ Here is a page defined in `src/pages/index.astro`
 that sets a cookie based on user input using Alpine.
 
 <img alt="Astro cookies home" style="width: 70%"
-  src="/blog/assets/astro-cookies-home.png?v=1.1.1" />
+  src="/blog/assets/astro-cookies-home.png" />
 
 ```js
 ---
@@ -2934,7 +2934,7 @@ Here is a page defined in `src/pages/report.astro`
 that gets the cookie and displays its value.
 
 <img alt="Astro cookies report" style="width: 15%"
-  src="/blog/assets/astro-cookies-report.png?v=1.1.1" />
+  src="/blog/assets/astro-cookies-report.png" />
 
 ```js
 ---
@@ -2955,7 +2955,7 @@ const score = cookie?.number() ?? 0;
 
 ## Table of Contents
 
-The markdown plugin [remark-toc](<https://github.com/remarkjs/remark-toc?v=1.1.1>) can automatically generate a table of contents
+The markdown plugin [remark-toc](https://github.com/remarkjs/remark-toc) can automatically generate a table of contents
 for Markdown files based on headings.
 It will render a hyperlink for each heading that can be clicked to jump to it.
 
@@ -3070,7 +3070,7 @@ The National Football League (NFL) ...
 Here is the table of contents that is rendered.
 
 <img alt="Astro remark-toc plugin" style="width: 40%"
-  src="/blog/assets/astro-remark-toc.png?v=1.1.1" />
+  src="/blog/assets/astro-remark-toc.png" />
 
 ## API Endpoints
 
@@ -3293,7 +3293,7 @@ should match the following:
     "start": "astro dev --host",
 ```
 
-For more detail, see [Server Endpoints (API Routes)](<https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes?v=1.1.1>).
+For more detail, see [Server Endpoints (API Routes)](https://docs.astro.build/en/core-concepts/endpoints/#server-endpoints-api-routes).
 
 ### Form Submits
 
@@ -3306,7 +3306,7 @@ Let's examine both cases.
 Here is an Astro page defined in `src/pages/index.astro` that renders a `form`.
 
 <img alt="Astro form submission" style="width: 40%"
-  src="/blog/assets/astro-form-submission.png?v=1.1.1" />
+  src="/blog/assets/astro-form-submission.png" />
 
 ```js
 ---
@@ -3351,7 +3351,7 @@ that can handle a form submission using POST
 or a redirect from an API endpoint using GET.
 
 <img alt="Astro form submission result" style="width: 40%"
-  src="/blog/assets/astro-form-submission-result.png?v=1.1.1" />
+  src="/blog/assets/astro-form-submission-result.png" />
 
 ```js
 ---
@@ -3431,11 +3431,11 @@ add the following in its component script:
 export const partial = true;
 ```
 
-For an example app that combines Astro and HTMX, see [astro-htmx-todo-app](<https://github.com/mvolkmann/astro-htmx-todo-app?v=1.1.1>).
+For an example app that combines Astro and HTMX, see [astro-htmx-todo-app](https://github.com/mvolkmann/astro-htmx-todo-app).
 This uses Astro page as endpoints.
 
 <img alt="Astro HTMX Todo app" style="width: 70%"
-  src="/blog/assets/astro-htmx-todo-app.png?v=1.1.1" />
+  src="/blog/assets/astro-htmx-todo-app.png" />
 
 HTTP requests can be triggered by interacting with
 any HTML element and use any HTTP verb.
@@ -3449,7 +3449,7 @@ to redirect to a specific Astro page that generates the HTML to be returned.
 
 ## Internationalization
 
-Astro supports [internationalization](<https://docs.astro.build/en/guides/internationalization/?v=1.1.1>).
+Astro supports [internationalization](https://docs.astro.build/en/guides/internationalization/).
 
 The Astro approach is it to duplicate each component for each supported language
 and store them in directories whose names are language codes.
@@ -3459,7 +3459,7 @@ TODO: Describe how to use this.
 
 ## Tailwind Typography Plugin
 
-The Tailwind [@tailwindcss/typography](<https://tailwindcss.com/docs/typography-plugin?v=1.1.1>) plugin "provides a set of "prose" classes
+The Tailwind [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) plugin "provides a set of "prose" classes
 you can use to add beautiful typographic defaults to any vanilla HTML
 you don't control, like HTML rendered from Markdown, or pulled from a CMS."
 
@@ -3485,7 +3485,7 @@ The large screenshot below demonstrates how
 many features of Markdown are styled by this plugin.
 
 <img alt="Astro Tailwind Typography" style="width: 70%"
-  src="/blog/assets/astro-tailwind-typography.png?v=1.1.1" />
+  src="/blog/assets/astro-tailwind-typography.png" />
 
 The following files from an Astro project produce the screenshot above.
 
@@ -3628,19 +3628,19 @@ const todos = query.all() as Todo[];
 </Layout>
 ```
 
-For more details, see [Using Bun with Astro](<https://docs.astro.build/en/recipes/bun/?v=1.1.1>).
+For more details, see [Using Bun with Astro](https://docs.astro.build/en/recipes/bun/).
 
 ## Starlight
 
-[Starlight](<https://starlight.astro.build?v=1.1.1>)
+[Starlight](https://starlight.astro.build)
 is a documentation theme built on Astro.
 
 TODO: Describe how to use this.
 
 ## Resources
 
-- [Astro Home Page](<https://astro.build?v=1.1.1>)
-- [Astro Quick Start Course](<https://www.youtube.com/watch?v=XoIHKO6AkoM&v=1.1.1>) by Traversy Media
+- [Astro Home Page](https://astro.build)
+- [Astro Quick Start Course](https://www.youtube.com/watch?v=XoIHKO6AkoM) by Traversy Media
 
 ## Unorganized Content
 

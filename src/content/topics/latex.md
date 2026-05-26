@@ -18,7 +18,7 @@ The name was original composed of the Greek letters
 tau, epsilon, and chi (which looks like the Latin letter X).
 That is why TeX is pronounced "tech" and not "tex".
 
-[LaTeX](<https://www.latex-project.org?v=1.1.1>)
+[LaTeX](https://www.latex-project.org)
 is a high-level typesetting system built on TeX
 by defining a set of custom TeX commands.
 The initial version was created by Leslie Lamport in 1984.
@@ -108,7 +108,7 @@ This installs the following shell commands:
 ### Installing in Windows
 
 There preferred LaTeX distribution for windows is
-[MiKTeX](<https://miktex.org?v=1.1.1>).
+[MiKTeX](https://miktex.org).
 
 ### Installing in Linux
 
@@ -527,7 +527,7 @@ There are three sizes of dashes:
 - punctuation with `---`
 
 To print accented characters and symbols that appear in non-English text,
-see [LaTeX/Special Characters](<https://en.wikibooks.org/wiki/LaTeX/Special_Characters?v=1.1.1>).
+see [LaTeX/Special Characters](https://en.wikibooks.org/wiki/LaTeX/Special_Characters).
 
 ## Document Classes
 
@@ -716,14 +716,14 @@ The options include Bjarne, Bjornstrup, Conny, Glenn, Lenny, Rejne, and Sonny.
 For example:
 
 <img alt="LaTeX Bjornstrup" style="width: 80%"
-  src="/blog/assets/latex-fncychap-bjornstrup.png?v=1.1.1">
+  src="/blog/assets/latex-fncychap-bjornstrup.png">
 
 ```latex
 \usepackage[Bjornstrup]{fncychap}
 ```
 
 <img alt="LaTeX fncychap Glenn" style="width: 80%"
-  src="/blog/assets/latex-fncychap-glenn.png?v=1.1.1">
+  src="/blog/assets/latex-fncychap-glenn.png">
 
 ```latex
 \usepackage[Glenn]{fncychap}
@@ -793,7 +793,7 @@ the layout of pages, including the margins, the sizes of the areas,
 and the space between the areas.
 
 <img alt="LaTeX page styles" style="width: 90%"
-  src="/blog/assets/latex-page-styles.png?v=1.1.1">
+  src="/blog/assets/latex-page-styles.png">
 
 ## Page Numbers
 
@@ -1055,7 +1055,7 @@ conditional logic (`\ifthenelse` command) and iteration (`\whiledo` command)
 for choosing the text to render.
 These can be used anywhere in a document, including in macros.
 
-See [Master Loops & Conditionals in LaTeX: Beginner](<https://www.youtube.com/watch?v=6VMglkW9nFk&v=1.1.1>).
+See [Master Loops & Conditionals in LaTeX: Beginner](https://www.youtube.com/watch?v=6VMglkW9nFk).
 
 ## Fonts
 
@@ -1075,7 +1075,7 @@ surround with commands shown in the following table.
 The style "upright" seems to be same as "medium".
 
 <img alt="LaTeX font styles" style="width: 30%"
-  src="/blog/assets/latex-font-styles.png?v=1.1.1">
+  src="/blog/assets/latex-font-styles.png">
 
 ### Font Size
 
@@ -1363,7 +1363,7 @@ between the words "space" and "with".
 - `\qquad` inserts double the space inserted by `\quad`
 
 <img alt="LaTeX adding space" style="width: 30%"
-  src="/blog/assets/latex-space.png?v=1.1.1">
+  src="/blog/assets/latex-space.png">
 
 The image above was created with the following markup:
 
@@ -1507,7 +1507,7 @@ The `quotation` environment is used for multi-paragraph quotes.
 For example:
 
 <img alt="LaTeX quotes" style="width: 70%"
-  src="/blog/assets/latex-quotes.png?v=1.1.1">
+  src="/blog/assets/latex-quotes.png">
 
 ```latex
 \begin{quote}
@@ -1538,7 +1538,7 @@ Bulleted lists are created with `\item` commands
 inside the "itemize" environment. For example:
 
 <img alt="LaTeX itemize list" style="width: 10%"
-  src="/blog/assets/latex-itemize-list.png?v=1.1.1">
+  src="/blog/assets/latex-itemize-list.png">
 
 ```latex
 \begin{itemize}
@@ -1552,7 +1552,7 @@ Numbered lists are created with `\item` commands
 inside the "enumerate" environment. For example:
 
 <img alt="LaTeX enumerate list" style="width: 10%"
-  src="/blog/assets/latex-enumerate-list.png?v=1.1.1">
+  src="/blog/assets/latex-enumerate-list.png">
 
 ```latex
 \begin{enumerate}
@@ -1566,7 +1566,7 @@ Description lists are created with `\item` commands
 inside the "description" environment. For example:
 
 <img alt="LaTeX description list" style="width: 25%"
-  src="/blog/assets/latex-description-list.png?v=1.1.1">
+  src="/blog/assets/latex-description-list.png">
 
 ```latex
 \begin{description}
@@ -1580,7 +1580,7 @@ Lists can be nested up to four levels deep.
 For example:
 
 <img alt="LaTeX nested lists" style="width: 25%"
-  src="/blog/assets/latex-nested-lists.png?v=1.1.1">
+  src="/blog/assets/latex-nested-lists.png">
 
 ```latex
 \begin{itemize}
@@ -1616,7 +1616,7 @@ See the `\lstdefinelanguage` command that adds support for more languages.
 For example:
 
 <img alt="LaTeX listings" style="width: 80%"
-  src="/blog/assets/latex-listings.png?v=1.1.1">
+  src="/blog/assets/latex-listings.png">
 
 ```latex
 \usepackage{listings}
@@ -1657,7 +1657,7 @@ To install that in macOS, enter `brew install pygments`.
 The following is an example of rendering Smalltalk code:
 
 <img alt="LaTeX minted Smalltalk code" style="width: 85%"
-  src="/blog/assets/latex-minted-smalltalk.png?v=1.1.1">
+  src="/blog/assets/latex-minted-smalltalk.png">
 
 ```latex
 \begin{listing}[H] % see "here" in Figures section
@@ -1863,7 +1863,7 @@ For example, `red!30!yellow` means 30% red and 70% yellow.
 For example:
 
 <img alt="LaTeX tcolorbox" style="width: 80%"
-  src="/blog/assets/latex-tcolorbox.png?v=1.1.1">
+  src="/blog/assets/latex-tcolorbox.png">
 
 ```latex
 \usepackage{tcolorbox}
@@ -1912,7 +1912,7 @@ The same options can be used to control the placement of tables.
 The following example renders an image that is scaled to be 3 inches wide.
 
 <img alt="LaTeX figure image" style="width: 50%"
-  src="/blog/assets/latex-figure-image.png?v=1.1.1">
+  src="/blog/assets/latex-figure-image.png">
 
 ```latex
 \begin{figure}[H]
@@ -1927,7 +1927,7 @@ Any number of references to this figure can occur elsewhere in the document.
 For example:
 
 <img alt="LaTeX figure reference" style="width: 50%"
-  src="/blog/assets/latex-figure-reference.png?v=1.1.1">
+  src="/blog/assets/latex-figure-reference.png">
 
 ```latex
 My favorite programming language is Smalltalk \ref{smalltalk-balloon}.
@@ -2027,7 +2027,7 @@ To use inline math mode, surround content by single dollar signs,
 `\(` and `\)`, or `\begin{math}` and `\end{math}`. For example:
 
 <img alt="LaTeX inline math mode" style="width: 70%"
-  src="/blog/assets/latex-inline-math-mode.png?v=1.1.1">
+  src="/blog/assets/latex-inline-math-mode.png">
 
 
 
@@ -2046,7 +2046,7 @@ are specified in their own pair of curly braces.
 For example:
 
 <img alt="LaTeX inline fractions" style="width: 60%"
-  src="/blog/assets/latex-inline-fractions.png?v=1.1.1">
+  src="/blog/assets/latex-inline-fractions.png">
 
 ```latex
 Inline fractions can be small like $\frac{x}{y}$ or large like $\dfrac{x}{y}$.
@@ -2060,7 +2060,7 @@ LaTeX will not break a long formula over multiple lines,
 so each formula must fit on one line.
 
 <img alt="LaTeX display math mode" style="width: 70%"
-  src="/blog/assets/latex-display-math-mode.png?v=1.1.1">
+  src="/blog/assets/latex-display-math-mode.png">
 
 ```latex
 The Pythagorean theorem states that
@@ -2083,14 +2083,14 @@ In this case it is appropriate to write \verb|$2 \cdot 3|
 which is rendered as follows:
 
 <img alt="LaTeX cdot command" style="width: 6%"
-  src="/blog/assets/latex-cdot-command.png?v=1.1.1">
+  src="/blog/assets/latex-cdot-command.png">
 
 The `equation` environment is like the `displaymath` environment,
 but it adds numbers in parentheses to the right of equations
 to identify them. For example:
 
 <img alt="LaTeX equations" style="width: 55%"
-  src="/blog/assets/latex-equations.png?v=1.1.1">
+  src="/blog/assets/latex-equations.png">
 
 ```latex
 \begin{equation}
@@ -2105,7 +2105,7 @@ All roots, square and otherwise, are rendered with the `\sqrt` command.
 For example:
 
 <img alt="LaTeX math roots" style="width: 25%"
-  src="/blog/assets/latex-math-roots.png?v=1.1.1">
+  src="/blog/assets/latex-math-roots.png">
 
 ```latex
 $$ \sqrt{25} = 5 $$
@@ -2116,7 +2116,7 @@ $$ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
 The following are additional examples of using math mode:
 
 <img alt="LaTeX more math mode" style="width: 18%"
-  src="/blog/assets/latex-more-math-mode.png?v=1.1.1">
+  src="/blog/assets/latex-more-math-mode.png">
 
 ```latex
 $$ \frac{a}{b + \frac{c}{d}} $$ % nested fractions
@@ -2138,7 +2138,7 @@ The following example demonstrates what is rendered
 without and with those commands.
 
 <img alt="LaTeX \left and \right commands" style="width: 15%"
-  src="/blog/assets/latex-left-right-commands.png?v=1.1.1">
+  src="/blog/assets/latex-left-right-commands.png">
 
 ```latex
 $$ a (\frac{b + 1}{c + 2}) $$
@@ -2153,7 +2153,7 @@ It is not necessary to have any text before the equal sign.
 For example:
 
 <img alt="LaTeX equation equals align" style="width: 50%"
-  src="/blog/assets/latex-equation-equals-align.png?v=1.1.1">
+  src="/blog/assets/latex-equation-equals-align.png">
 
 ```latex
 \begin{align}
@@ -2198,7 +2198,7 @@ To add text below an `\underbrace`, use a subscript.
 For example:
 
 <img alt="LaTeX \overbrace and \underbrace" style="width: 20%"
-  src="/blog/assets/latex-overbrace-underbrace.png?v=1.1.1">
+  src="/blog/assets/latex-overbrace-underbrace.png">
 
 ```latex
 $$
@@ -2212,7 +2212,7 @@ $$
 The following examples demonstrate rendering limits, sums, and integrals:
 
 <img alt="LaTeX limits, sums, and integrals" style="width: 25%"
-  src="/blog/assets/latex-lim-sum-int.png?v=1.1.1">
+  src="/blog/assets/latex-lim-sum-int.png">
 
 ```latex
 $$ \lim_{x \to \infty} \frac{1}{x^r} = 0, r \in \mathbb{Z^+} $$
@@ -2244,7 +2244,7 @@ The following document demonstrates several of these.
 ```
 
 <img alt="LaTeX bar chart" style="width: 50%"
-  src="/blog/assets/latex-bar-chart.png?v=1.1.1">
+  src="/blog/assets/latex-bar-chart.png">
 
 ```latex
 \begin{figure}
@@ -2264,7 +2264,7 @@ The following document demonstrates several of these.
 ```
 
 <img alt="LaTeX pie chart" style="width: 50%"
-  src="/blog/assets/latex-pie-chart.png?v=1.1.1">
+  src="/blog/assets/latex-pie-chart.png">
 
 ```latex
 \begin{figure}
@@ -2286,7 +2286,7 @@ The following document demonstrates several of these.
 ```
 
 <img alt="LaTeX line plot" style="width: 50%"
-  src="/blog/assets/latex-line-plot.png?v=1.1.1">
+  src="/blog/assets/latex-line-plot.png">
 
 ```latex
 % TODO: How can this be modified to fill the area below the line?
@@ -2311,7 +2311,7 @@ The following document demonstrates several of these.
 ```
 
 <img alt="LaTeX curves plot" style="width: 50%"
-  src="/blog/assets/latex-curves-plot.png?v=1.1.1">
+  src="/blog/assets/latex-curves-plot.png">
 
 ```latex
 \begin{figure}
@@ -2340,7 +2340,7 @@ The following document demonstrates several of these.
 ```
 
 <img alt="LaTeX 3D plot" style="width: 50%"
-  src="/blog/assets/latex-3d-plot.png?v=1.1.1">
+  src="/blog/assets/latex-3d-plot.png">
 
 ```latex
 % This takes as long time to render (around 15 seconds)!
@@ -2376,7 +2376,7 @@ result in the correct spacing for an ellipsis.
 The following examples demonstrate the dot commands:
 
 <img alt="LaTeX dots" style="width: 15%"
-  src="/blog/assets/latex-dots.png?v=1.1.1">
+  src="/blog/assets/latex-dots.png">
 
 ```latex
 $ 1, 2, \dots, 10 $ \\ % horizontal dots
@@ -2436,7 +2436,7 @@ For example, `\left. ... \right\}` renders
 no delimeter on the left side and a curly brace on the right side.
 
 <img alt="LaTeX array delimiters" style="width: 25%"
-  src="/blog/assets/latex-array-delimiters.png?v=1.1.1">
+  src="/blog/assets/latex-array-delimiters.png">
 
 ```latex
 $$
@@ -2460,7 +2460,7 @@ The equation described in each row is numbered.
 For example:
 
 <img alt="LaTeX eqnarray" style="width: 60%"
-  src="/blog/assets/latex-eqnarray.png?v=1.1.1">
+  src="/blog/assets/latex-eqnarray.png">
 
 ```latex
 \begin{eqnarray}
@@ -2503,7 +2503,7 @@ In math mode a single quote renders a prime symbol,
 two single quotes render a double prime, and so on.
 
 <img alt="LaTeX matrices" style="width: 50%"
-  src="/blog/assets/latex-matrices.png?v=1.1.1">
+  src="/blog/assets/latex-matrices.png">
 
 ```latex
 $$
@@ -2550,7 +2550,7 @@ The following example creates a table describing dogs.
 It uses the `\textbf` command is used to make the column headings bold.
 
 <img alt="LaTeX table" style="width: 50%"
-  src="/blog/assets/latex-table.png?v=1.1.1">
+  src="/blog/assets/latex-table.png">
 
 ```latex
 \begin{tabular}{|l|l|c|}
@@ -2638,7 +2638,7 @@ To reference the table, use the `\ref{some-label}` command.
 For example:
 
 <img alt="LaTeX tabular in table" style="width: 50%"
-  src="/blog/assets/latex-tabular-in-table.png?v=1.1.1">
+  src="/blog/assets/latex-tabular-in-table.png">
 
 ```latex
 \usepackage{float}
@@ -2691,7 +2691,7 @@ Text in a table cell can contain paragraphs of text that wrap to multiple lines.
 For example:
 
 <img alt="LaTeX table with paragraphs" style="width: 70%"
-  src="/blog/assets/latex-table-paragraphs.png?v=1.1.1">
+  src="/blog/assets/latex-table-paragraphs.png">
 
 ```latex
 \begin{table}[H]
@@ -2729,7 +2729,7 @@ When the `\cellcolor` command is applied to a cell that spans more than one row,
 only the first row is affected. Is this a bug?
 
 <img alt="LaTeX table with spans" style="width: 30%"
-  src="/blog/assets/latex-table-with-spans.png?v=1.1.1">
+  src="/blog/assets/latex-table-with-spans.png">
 
 ```latex
 \usepackage{colortbl, multirow, xcolor}
@@ -2815,7 +2815,7 @@ The graphicsx package defines the following commands (and more):
 For example:
 
 <img alt="LaTeX scalebox, resizebox, and rotatebox" style="width: 30%"
-  src="/blog/assets/latex-scalebox-resizebox-rotatebox.png?v=1.1.1">
+  src="/blog/assets/latex-scalebox-resizebox-rotatebox.png">
 
 ```latex
 \scalebox{3}{TEST}
@@ -2855,7 +2855,7 @@ For shapes like rectangles, ovals, and circles,
 the reference point is its center.
 
 <img alt="LaTeX picture environment" style="width: 50%"
-  src="/blog/assets/latex-picture-environment.png?v=1.1.1">
+  src="/blog/assets/latex-picture-environment.png">
 
 ```latex
 \def\myWidth{200}
@@ -2924,7 +2924,7 @@ identical to the corresponding Latin letter,
 Latin letters are used for those.
 
 <img alt="LaTeX Greek letters" style="width: 30%"
-  src="/blog/assets/latex-greek-letters.png?v=1.1.1">
+  src="/blog/assets/latex-greek-letters.png">
 
 | Name    | Lowercase    | Uppercase   |
 | ------- | ------------ | ----------- |
@@ -2962,15 +2962,15 @@ The `\frownie` and `\smiley` commands
 are defined in the `wasysym` package.
 
 <img alt="LaTeX symbols part 1" style="width: 57%"
-  src="/blog/assets/latex-symbols1.png?v=1.1.1">
+  src="/blog/assets/latex-symbols1.png">
 <img alt="LaTeX symbols part 2" style="width: 57%"
-  src="/blog/assets/latex-symbols2.png?v=1.1.1">
+  src="/blog/assets/latex-symbols2.png">
 
 Symbols that represent classes of numbers
 are rendered with the `\mathbb` command.
 
 <img alt="LaTeX symbols part 3" style="width: 50%"
-  src="/blog/assets/latex-symbols3.png?v=1.1.1">
+  src="/blog/assets/latex-symbols3.png">
 
 For more, see
 <a href="https://artofproblemsolving.com/wiki/index.php/LaTeX:Symbols"
@@ -3011,7 +3011,7 @@ For example:
 This renders the following title information:
 
 <img alt="LaTeX maketitle output" style="width: 50%"
-  src="/blog/assets/latex-maketitle.png?v=1.1.1">
+  src="/blog/assets/latex-maketitle.png">
 
 ## Table of Contents
 
@@ -3064,7 +3064,7 @@ For example:
 This generates the following table of contents:
 
 <img alt="LaTeX table of contents" style="width: 80%"
-  src="/blog/assets/latex-table-of-contents.png?v=1.1.1">
+  src="/blog/assets/latex-table-of-contents.png">
 
 ## Formatting the Word LaTeX
 
@@ -3072,7 +3072,7 @@ The word LaTeX is specially formatted with the command `\LaTeX`
 which reneders the following:
 
 <img alt="LaTeX rendered" style="width: 10%"
-  src="/blog/assets/latex-rendered.png?v=1.1.1">
+  src="/blog/assets/latex-rendered.png">
 
 Similarly, the word TeX is spacially formatted with `\TeX`.
 
@@ -3092,13 +3092,13 @@ Oil that is, black gold, Texas tea.
 This adds a section at the bottom for page like the following:
 
 <img alt="LaTeX footnote" style="width: 40%"
-src="/blog/assets/latex-footnote.png?v=1.1.1">
+src="/blog/assets/latex-footnote.png">
 
 It also adds a number in square brackets like the following
 that acts a clickable link to the corresponding footnote.
 
 <img alt="LaTeX footnote number" style="width: 35%"
-src="/blog/assets/latex-footnote-number.png?v=1.1.1">
+src="/blog/assets/latex-footnote-number.png">
 
 ## Appendices
 
@@ -3166,7 +3166,7 @@ To add a bibliography pages to a document:
    This causes bibliography pages similar to the following to be generated.
 
    <img alt="LaTeX bibliography" style="width: 60%"
-     src="/blog/assets/latex-bibliography.png?v=1.1.1">
+     src="/blog/assets/latex-bibliography.png">
 
 1. Add citations within the document that link to bibliography entries.
    For example:
@@ -3268,7 +3268,7 @@ which is to a YouTube video from Dr. Trefor Bazett.
 The following screenshot shows the handout pages it generates.
 
 <img alt="LaTeX beamer example" style="width: 100%"
-src="/blog/assets/latex-beamer.png?v=1.1.1">
+src="/blog/assets/latex-beamer.png">
 
 ```latex
 % Specifying 14pt makes the text larger than the default.
@@ -3564,10 +3564,10 @@ while processing a specific generated file.
 
 ## Resources
 
-- [LaTeX2e: An unoffical reference manual](<https://latexref.xyz?v=1.1.1>)
-- [CTAN](<https://ctan.org/?v=1.1.1>)
+- [LaTeX2e: An unoffical reference manual](https://latexref.xyz)
+- [CTAN](https://ctan.org/)
   Comprehensive TeX Archive Network
-- [LaTeX Forum](<https://latex.org/forum/?v=1.1.1>)
+- [LaTeX Forum](https://latex.org/forum/)
 - <a href="https://www.youtube.com/watch?v=ydOTMQC7np0" target="_blank">
   LaTeX – Full Tutorial for Beginners</a> from Michelle Krummel
 - <a href="https://www.youtube.com/watch?v=Jp0lPj2-DQA&list=PLHXZ9OQGMqxcWWkx2DMnQmj5os2X5ZR73"

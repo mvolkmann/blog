@@ -175,7 +175,7 @@ iOS limits the number of times a widget can be reloaded each day.
 A typical number of daily refreshes is between 40 and 70
 which is approximately every 15 to 60 minutes.
 
-For more detail, see [Keeping a Widget Up To Date](<https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date?v=1.1.1>).
+For more detail, see [Keeping a Widget Up To Date](https://developer.apple.com/documentation/widgetkit/keeping-a-widget-up-to-date).
 
 ## Widget Title
 
@@ -299,7 +299,7 @@ run the widget target instead of the app target.
 
 ## Full Example
 
-For a full example of a widget, see the file [HelloWidget.swift](<https://github.com/mvolkmann/SwiftChartsDemo/blob/main/Widgets/HelloWidget.swift?v=1.1.1>) in the SwiftChartsDemo project.
+For a full example of a widget, see the file [HelloWidget.swift](https://github.com/mvolkmann/SwiftChartsDemo/blob/main/Widgets/HelloWidget.swift) in the SwiftChartsDemo project.
 
 ## Running Widget Code
 
@@ -336,7 +336,7 @@ The screenshot below shows defining a parameter called "Name"
 that allows the user to enter a name.
 
 <img alt="Widget Intent Configuration" style="width: 80%"
-    src="/blog/assets/SwiftUI-widget-intent-configuration.png?v=1.1.1"
+    src="/blog/assets/SwiftUI-widget-intent-configuration.png"
     title="Widget Intent Configuration">
 
 Note that a "Type" (set to "String"), a "Default Value",
@@ -420,19 +420,19 @@ To access UserDefaults data in a widget `Provider` struct,
 
 ## Lock Screen Widgets
 
-See [Lock screen widgets with SwiftUI](<https://swiftwithmajid.com/2022/08/30/lock-screen-widgets-in-swiftui/?v=1.1.1>).
+See [Lock screen widgets with SwiftUI](https://swiftwithmajid.com/2022/08/30/lock-screen-widgets-in-swiftui/).
 
 ## "Live Activities" Widgets
 
 iOS 16 beta 4 adds support for live activities widgets on the lock screen.
 These are supported by the new ActivityKit framework.
 
-From [Apple News and Updates](<https://developer.apple.com/news/?id=hi37aek8&v=1.1.1>),
+From [Apple News and Updates](https://developer.apple.com/news/?id=hi37aek8),
 "Live Activities and ActivityKit won’t be included
 in the initial public release of iOS 16.
 Later this year, they'll be publicly available in an update."
 
-From [Displaying live data on the Lock Screen with Live Activities](<https://developer.apple.com/documentation/activitykit/displaying-live-data-on-the-lock-screen-with-live-activities?v=1.1.1>),
+From [Displaying live data on the Lock Screen with Live Activities](https://developer.apple.com/documentation/activitykit/displaying-live-data-on-the-lock-screen-with-live-activities),
 "A Live Activity can be active for up to eight hours
 unless your app or the user explicitly ends it.
 After this limit, the system automatically ends a Live Activity

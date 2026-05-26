@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Instruments](<https://developer.apple.com/xcode/features/?v=1.1.1>)
+[Instruments](https://developer.apple.com/xcode/features/)
 is a profiling app included with Xcode for analyzing things like:
 
 - How many views were created?

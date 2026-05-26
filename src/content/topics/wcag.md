@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 This page copies and summarizes the Web Content Accessibility Guidelines (WCAG)
 version 2.2 which were last updated on 22 Sep 2025.
-For the full content, see [How to Meet WCAG (Quick Reference)](<https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0&v=1.1.1>).
+For the full content, see [How to Meet WCAG (Quick Reference)](https://www.w3.org/WAI/WCAG22/quickref/?versions=2.0).
 
 There are three levels to consider, A (easiest), AA, and AAA (hardest).
 Each application must choose the levels to support.

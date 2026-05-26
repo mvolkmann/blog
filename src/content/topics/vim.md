@@ -18,4 +18,4 @@ just that it isn't necessary in order to be productive.
 By learning only a few things,
 you can make the experience of using Vim much nicer.
 
-See my Object Computing (OCI) article [Vim Jump Start](<https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start?v=1.1.1>).
+See my Object Computing (OCI) article [Vim Jump Start](https://objectcomputing.com/resources/publications/sett/december-2017-vim-jump-start).

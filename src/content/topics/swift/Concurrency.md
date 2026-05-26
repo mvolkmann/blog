@@ -21,12 +21,12 @@ and some uses of the delegate pattern.
 
 ## Resources
 
-- Apple documentation on [Concurrency](<https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html?v=1.1.1>).
+- Apple documentation on [Concurrency](https://docs.swift.org/swift-book/LanguageGuide/Concurrency.html).
 
-- book [Modern Concurrency on Apple Platforms](<https://swiftasyncbook.com?v=1.1.1>) by Andrés Ibañez Kautsch
+- book [Modern Concurrency on Apple Platforms](https://swiftasyncbook.com) by Andrés Ibañez Kautsch
 
 - iOS Conf SG 2022 talk from Daniel H. Steinberg,
-  [Willing Suspension of Disbelief](<https://www.youtube.com/watch?v=FEqmYi-FaB8&v=1.1.1>).
+  [Willing Suspension of Disbelief](https://www.youtube.com/watch?v=FEqmYi-FaB8).
 
 ## Issues
 
@@ -44,7 +44,7 @@ Common issues encountered when writing code involving concurrency include:
   cannot do so until they acquire the lock.
 
   A semaphore is similar to mutex, but can protect access to a code path.
-  The Dispatch framework provides the [DispatchSemaphore](<https://developer.apple.com/documentation/dispatch/dispatchsemaphore?v=1.1.1>) class.
+  The Dispatch framework provides the [DispatchSemaphore](https://developer.apple.com/documentation/dispatch/dispatchsemaphore) class.
   It does not provide a mutex implementation.
 
 - Starvation
@@ -71,7 +71,7 @@ but can be useful in very specific circumstances.
 
 ### POSIX Threads (pthreads)
 
-[pthreads](<https://man7.org/linux/man-pages/man7/pthreads.7.html?v=1.1.1>) are not specific to Apple operating systems
+[pthreads](https://man7.org/linux/man-pages/man7/pthreads.7.html) are not specific to Apple operating systems
 and are available in many operating systems.
 They are implemented in C and have a steep learning curve.
 Using pthreads requires manual thread management and
@@ -79,14 +79,14 @@ use of locks such as mutexes and semaphores.
 
 ### NSThreads
 
-The [NSThread](<https://developer.apple.com/documentation/foundation/nsthread?v=1.1.1>) class is part of the Apple Foundation framework.
+The [NSThread](https://developer.apple.com/documentation/foundation/nsthread) class is part of the Apple Foundation framework.
 It provides another low-level approach to managing concurrency,
 but is somewhat easier to use than pthreads.
 This class can be accessed from Objective-C instead of C.
 
 ### Grand Central Dispatch (GCD)
 
-The [Dispatch](<https://developer.apple.com/documentation/DISPATCH?v=1.1.1>) framework (aka Grand Central Dispatch)
+The [Dispatch](https://developer.apple.com/documentation/DISPATCH) framework (aka Grand Central Dispatch)
 provides a higher level API than NSThreads and pthreads.
 It was originally specific to Apple operating systems,
 but since Swift has been open sourced it is now cross-platform.
@@ -103,11 +103,11 @@ DispatchQueue.main.async {
 
 ### NSOperation APIs
 
-The [NSOperation](<https://developer.apple.com/documentation/foundation/nsoperation?v=1.1.1>) class is part of the Apple Foundation framework.
+The [NSOperation](https://developer.apple.com/documentation/foundation/nsoperation) class is part of the Apple Foundation framework.
 To use this:
 
-- Create an instance of the [NSOperationQueue](<https://developer.apple.com/documentation/foundation/nsoperationqueue?v=1.1.1>) class.
-- Create one instance of [NSBlockOperation](<https://developer.apple.com/documentation/foundation/nsblockoperation?v=1.1.1>) for each concurrent operation.
+- Create an instance of the [NSOperationQueue](https://developer.apple.com/documentation/foundation/nsoperationqueue) class.
+- Create one instance of [NSBlockOperation](https://developer.apple.com/documentation/foundation/nsblockoperation) for each concurrent operation.
 - Add each `NSBlockOperation` instance to the `NSOperationQueue`
   by passing it to the `addOperation` method of the `NSOperationQueue`.
 - Wait for all the operations to complete by calling the
@@ -190,7 +190,7 @@ Additional queues using any of the QoS values can be created,
 but typically only the provided queues are used.
 
 To obtain a reference to a global queue for a given QoS
-using one of the enum cases at [DispatchQoS.QoSClass](<https://developer.apple.com/documentation/dispatch/dispatchqos/qosclass?v=1.1.1>):
+using one of the enum cases at [DispatchQoS.QoSClass](https://developer.apple.com/documentation/dispatch/dispatchqos/qosclass):
 
 ```swift
 // If qos is omitted, it defaults to `.default`.
@@ -256,10 +256,10 @@ In iOS 15 and above, all Apple provided functions that
 take a completion handler also have an `async` version.
 This means there is no longer a need to
 pass completion handlers to Apple's APIs.
-For example, [URLSession](<https://developer.apple.com/documentation/foundation/urlsession?v=1.1.1>) has many async methods.
+For example, [URLSession](https://developer.apple.com/documentation/foundation/urlsession) has many async methods.
 The resulting code is easier to write and read.
 
-One way to create a concurrent context is it create a [Task](<https://developer.apple.com/documentation/swift/task?v=1.1.1>) object.
+One way to create a concurrent context is it create a [Task](https://developer.apple.com/documentation/swift/task) object.
 
 The following sample app gets random jokes from a free, public API.
 It uses the `async` and `await` keywords.
@@ -436,7 +436,7 @@ This simplifies the code in callers.
     }
 ```
 
-The example above demonstrates using the [withCheckedThrowingContinuation](<https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)?v=1.1.1>) function.
+The example above demonstrates using the [withCheckedThrowingContinuation](<https://developer.apple.com/documentation/swift/withcheckedthrowingcontinuation(function:_:)>) function.
 If `completion.resume` is never called, the runtime error
 "SWIFT TASK CONTINUATION MISUSE: ... leaked its continuation!"
 will be triggered.
@@ -446,16 +446,16 @@ more than once" will be triggered.
 
 There are three other similar functions that can be used.
 
-- [withCheckedContinuation](<https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)?v=1.1.1>)
+- [withCheckedContinuation](<https://developer.apple.com/documentation/swift/withcheckedcontinuation(function:_:)>)
   is like `withCheckedThrowingContinuation`, but does not throw and
   the compiler will not allow calling `completion.resume(throwing: someError)`.
 
-- [withUnsafeContinuation](<https://developer.apple.com/documentation/swift/withunsafecontinuation(_:)?v=1.1.1>)
+- [withUnsafeContinuation](<https://developer.apple.com/documentation/swift/withunsafecontinuation(_:)>)
   is like `withCheckedContinuation` but does not perform runtime checks
   to ensure that `completion.resume` is called exactly once.
   This makes it slightly faster.
 
-- [withUnsafeThrowingContinuation](<https://developer.apple.com/documentation/swift/withunsafethrowingcontinuation(_:)?v=1.1.1>)
+- [withUnsafeThrowingContinuation](<https://developer.apple.com/documentation/swift/withunsafethrowingcontinuation(_:)>)
   is like `withCheckedThrowingContinuation` but does not perform runtime checks
   to ensure that `completion.resume` is called exactly once.
   This makes it slightly faster.
@@ -525,8 +525,8 @@ an activity and a dog image.
 Suppose we wanted to fetch a random number of dog images.
 We can do one of the following:
 
-- If the tasks cannot throw, call [withTaskGroup](<https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)?v=1.1.1>) which creates a [TaskGroup](<https://developer.apple.com/documentation/swift/taskgroup?v=1.1.1>).
-- If the tasks can throw, call [withThrowingTaskGroup](<https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)?v=1.1.1>) which creates a [ThrowingTaskGroup](<https://developer.apple.com/documentation/swift/throwingtaskgroup?v=1.1.1>).
+- If the tasks cannot throw, call [withTaskGroup](<https://developer.apple.com/documentation/swift/withtaskgroup(of:returning:body:)>) which creates a [TaskGroup](https://developer.apple.com/documentation/swift/taskgroup).
+- If the tasks can throw, call [withThrowingTaskGroup](<https://developer.apple.com/documentation/swift/withthrowingtaskgroup(of:returning:body:)>) which creates a [ThrowingTaskGroup](https://developer.apple.com/documentation/swift/throwingtaskgroup).
 
 Each these take a closure that is passed the created group.
 Inside the closure, call the `addTask` method of the group
@@ -539,7 +539,7 @@ Tasks are not guaranteed to run in the order
 in which they were added to the group.
 
 Both the `TaskGroup` and `ThrowingTaskGroup` structs conform to the
-[AsyncSequence](<https://developer.apple.com/documentation/swift/asyncsequence?v=1.1.1>) protocol described later.
+[AsyncSequence](https://developer.apple.com/documentation/swift/asyncsequence) protocol described later.
 This means that the values of the tasks added to the group
 can be obtained using a `for await` loop when the tasks cannot throw
 or a `for try await` loop when the tasks can throw.
@@ -589,7 +589,7 @@ in the order in which it is expected to run.
 
 ### Task
 
-Unstructured concurrency relies on creating [Task](<https://developer.apple.com/documentation/swift/task?v=1.1.1>) objects
+Unstructured concurrency relies on creating [Task](https://developer.apple.com/documentation/swift/task) objects
 which are passed a closure that runs in a concurrent context.
 The system typically runs the `Task` immediately, but can choose to
 defer execution based on the number of tasks that are already running.
@@ -628,13 +628,13 @@ Task {
 }
 ```
 
-Another way to create a `Task` is to apply the [task](<https://developer.apple.com/documentation/swiftui/view/task(priority:_:)?v=1.1.1>) view modifier which takes
+Another way to create a `Task` is to apply the [task](<https://developer.apple.com/documentation/swiftui/view/task(priority:_:)>) view modifier which takes
 an optional priority (defaults to `userInitiated`)
 and a closure to execute inside a new `Task`.
-This is similar to the [onAppear](<https://developer.apple.com/documentation/swiftui/view/onappear(perform:)?v=1.1.1>) view modifier in that the closure passed to it
+This is similar to the [onAppear](<https://developer.apple.com/documentation/swiftui/view/onappear(perform:)>) view modifier in that the closure passed to it
 is executed before the view on which is applied appears.
 
-A second [task](<https://developer.apple.com/documentation/swiftui/view/task(id:priority:_:)?v=1.1.1>) view modifier also takes an `id` argument
+A second [task](<https://developer.apple.com/documentation/swiftui/view/task(id:priority:_:)>) view modifier also takes an `id` argument
 which is a value of any type that conforms to the `Equatable` protocol.
 Like the other `task` view modifier, the closure passed to it
 is executed before the view on which is applied appears.
@@ -648,7 +648,7 @@ The following code demonstrates using the `task` view modifier
 with the `id` argument:
 
 <img alt="SwiftUI task view modifier" style="width: 50%"
-  src="/blog/assets/SwiftUI-task-with-id.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-task-with-id.png"
   title="SwiftUI task view modifier">
 
 ```swift
@@ -829,7 +829,7 @@ jump in before continuing. For example: `await Task.yield()`.
 
 Many `async` methods in Apple frameworks check for cancellation
 and stop their work gracefully.
-One example is methods in the [URLSession](<https://developer.apple.com/documentation/foundation/urlsession?v=1.1.1>) class.
+One example is methods in the [URLSession](https://developer.apple.com/documentation/foundation/urlsession) class.
 
 A `Task` inherits the following things from the `Task` that started it:
 
@@ -1043,7 +1043,7 @@ Sibling tasks that are running or waiting to run are cancelled.
 ## Actors
 
 Tasks can share mutable data across threads without danger of race conditions
-by using an [Actor](<https://developer.apple.com/documentation/swift/actor?v=1.1.1>).
+by using an [Actor](https://developer.apple.com/documentation/swift/actor).
 
 Actors:
 
@@ -1272,7 +1272,7 @@ struct ContentView: View {
 
 In order to pass data from one `Task` to another,
 the data must be thread-safe.
-This is achieved by using data types that conform to the [Sendable](<https://developer.apple.com/documentation/swift/sendable?v=1.1.1>) protocol.
+This is achieved by using data types that conform to the [Sendable](https://developer.apple.com/documentation/swift/sendable) protocol.
 
 Passing data from one `Task` to another is not common.
 
@@ -1289,7 +1289,7 @@ The following types are `Sendable`:
 
 ## Main Actor
 
-[MainActor](<https://developer.apple.com/documentation/swift/mainactor?v=1.1.1>) is a system-provided global actor
+[MainActor](https://developer.apple.com/documentation/swift/mainactor) is a system-provided global actor
 that performs its work on the main thread.
 
 One way to ensure that code runs in the main thread
@@ -1388,9 +1388,9 @@ struct MyStruct {
 
 ## AsyncSequence
 
-An [AsyncSequence](<https://developer.apple.com/documentation/swift/asyncsequence?v=1.1.1>) supports iterating over a sequence of values
+An [AsyncSequence](https://developer.apple.com/documentation/swift/asyncsequence) supports iterating over a sequence of values
 that are obtained asynchronously.
-Unlike a [Sequence](<https://developer.apple.com/documentation/swift/sequence?v=1.1.1>)
+Unlike a [Sequence](https://developer.apple.com/documentation/swift/sequence)
 which holds a collection of values,
 an `AsyncSequence` just provides a way to access values.
 
@@ -1423,7 +1423,7 @@ TODO: See https://github.com/AndyIbanez/modern-concurrency-on-apple-platforms-bo
 
 It is not possible to ask an `AsyncSequence` for its count.
 
-The [URL](<https://developer.apple.com/documentation/foundation/url?v=1.1.1>) struct has a [lines](<https://developer.apple.com/documentation/foundation/url/3767315-lines?v=1.1.1>) property whose type is `AsyncLineSequence<URL.AsyncBytes>`.
+The [URL](https://developer.apple.com/documentation/foundation/url) struct has a [lines](https://developer.apple.com/documentation/foundation/url/3767315-lines) property whose type is `AsyncLineSequence<URL.AsyncBytes>`.
 This enables iterating over the lines found at a URL asynchronously.
 
 The following code demonstrates
@@ -1449,10 +1449,10 @@ for try await line in citiesInMissouri {
 
 Other standard API methods that return an `AsyncSequence` include:
 
-- [FileHandle.standardInput.bytes.lines](<https://developer.apple.com/documentation/foundation/filehandle/asyncbytes/3766668-lines?v=1.1.1>)
-- [URL.resourceBytes](<https://developer.apple.com/documentation/foundation/url/3767316-resourcebytes?v=1.1.1>)
-- [URLSession.bytes](<https://developer.apple.com/documentation/foundation/urlsession/3767351-bytes?v=1.1.1>)
-- [NotificationCenter.notifications](<https://developer.apple.com/documentation/foundation/notificationcenter/3813137-notifications?v=1.1.1>)
+- [FileHandle.standardInput.bytes.lines](https://developer.apple.com/documentation/foundation/filehandle/asyncbytes/3766668-lines)
+- [URL.resourceBytes](https://developer.apple.com/documentation/foundation/url/3767316-resourcebytes)
+- [URLSession.bytes](https://developer.apple.com/documentation/foundation/urlsession/3767351-bytes)
+- [NotificationCenter.notifications](https://developer.apple.com/documentation/foundation/notificationcenter/3813137-notifications)
 
 Just like in synchronous `for` loops, the `continue` and `break` keywords
 can be used in `for await` and `for try await` loops.
@@ -1476,7 +1476,7 @@ For example:
 let value = await SomeClass.someTaskLocalVariable
 ```
 
-To modify the value of a task local variable, call the [withValue](<https://developer.apple.com/documentation/swift/tasklocal/withvalue(_:operation:file:line:)-79atg?v=1.1.1>) method on a binding to the property, passing it a new value.
+To modify the value of a task local variable, call the [withValue](<https://developer.apple.com/documentation/swift/tasklocal/withvalue(_:operation:file:line:)-79atg>) method on a binding to the property, passing it a new value.
 For example:
 
 ```swift
@@ -1523,11 +1523,11 @@ To use the Thread Sanitizer in Xcode:
 
 ## Swift Async Algorithms
 
-The Apple open source package [swift-async-algorithms](<https://github.com/apple/swift-async-algorithms?v=1.1.1>)
+The Apple open source package [swift-async-algorithms](https://github.com/apple/swift-async-algorithms)
 provides types and functions for operating on asynchronous sequences
 that provide values over time.
 Examples include `debounce` and `throttle`.
 
-In many cases this package can be used in place of the [Combine](<https://developer.apple.com/documentation/combine?v=1.1.1>) framework.
+In many cases this package can be used in place of the [Combine](https://developer.apple.com/documentation/combine) framework.
 
 To use this, add `AsyncAlgorithms` as a package dependency.

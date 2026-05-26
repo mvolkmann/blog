@@ -11,12 +11,12 @@ layout: topic-layout.njk
 </style>
 
 <img alt="Zod logo" style="border: none; width: 20%"
-  src="/blog/assets/zod-logo.svg?v=1.1.1"
+  src="/blog/assets/zod-logo.svg"
   title="Hono logo">
 
 ## Overview
 
-[Zod](<https://zod.dev?v=1.1.1>) is a TypeScript library
+[Zod](https://zod.dev) is a TypeScript library
 for validating JavaScript values.
 
 The rationale for the name "Zod" is not given in its documentation,
@@ -29,7 +29,7 @@ but some definitions include:
 
 The following sections provide an overview
 of specifying validation constraints using Zod.
-For more detail, see the Zod [home page](<https://zod.dev?v=1.1.1>).
+For more detail, see the Zod [home page](https://zod.dev).
 
 ## Primitive Types
 

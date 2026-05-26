@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[SvelteKit](<https://kit.svelte.dev?v=1.1.1>)
+[SvelteKit](https://kit.svelte.dev)
 is a framework that leverages Svelte
 and is a replacement for previous framework Sapper.
 It is similar to Next for React and Nuxt for Vue.
@@ -195,7 +195,7 @@ for a SvelteKit project.
     - components used by multiple pages
     - `stores.ts` defines stores used by multiple page
   - `routes`
-    - `index.svelte` defines the home page (import `global.css` here?)
+    - `index.svelte` defines the home page (import `global.css` here)
     - `api`
       - directories and files for file-based API routes
     - `page-name-1`
@@ -234,14 +234,14 @@ TODO: Finish this
 Creation of a new SvelteKit project prompts for desired features.
 It asks the following questions:
 
-"Use TypeScript in components?" This defaults to no.
+"Use TypeScript in components" This defaults to no.
 
-"What do you want to use for writing Styles in Svelte components?"
+"What do you want to use for writing Styles in Svelte components"
 The options are CSS (default), Less, and SCSS.
 
-"Add ESLint for code listing?" This defaults to no.
+"Add ESLint for code listing" This defaults to no.
 
-"Add Prettier for code formatting?" This defaults to no.
+"Add Prettier for code formatting" This defaults to no.
 
 ## Path Aliases
 
@@ -264,7 +264,7 @@ To use this module, import the desired items as follows:
 `import { amp, browser, dev } from '$app/env';`
 
 `amp` is a boolean that indicates whether the app uses
-[Accelerated Mobile Pages (AMP)](<https://developers.google.com/amp?v=1.1.1>) created by Google.
+[Accelerated Mobile Pages (AMP)](https://developers.google.com/amp) created by Google.
 
 `browser` is a boolean that indicates whether
 the code is running in the browser.

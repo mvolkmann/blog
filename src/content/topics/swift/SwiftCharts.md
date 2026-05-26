@@ -13,7 +13,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-Apple introduced the [Swift Charts](<https://developer.apple.com/documentation/charts?v=1.1.1>)
+Apple introduced the [Swift Charts](https://developer.apple.com/documentation/charts)
 framework in iOS 16.
 
 "Swift Charts is a powerful and concise SwiftUI framework
@@ -44,23 +44,23 @@ by their parent view.
 
 ## Resources
 
-- [Hello Swift Charts](<https://developer.apple.com/videos/play/wwdc2022/10136/?v=1.1.1>) from Apple WWDC 2022
-- [Swift Charts: Raise the bar](<https://developer.apple.com/videos/play/wwdc2022/10137?v=1.1.1>) from Apple WWDC 2022
-- [Charts Framework 1 - BarCharts Introduction](<https://www.youtube.com/watch?v=dIvE-E8nlsA&v=1.1.1>) from Stewart Lynch
-- [Charts Framework 2 - Visualizing Large Data Sets with Bar Charts](<https://www.youtube.com/watch?v=lB3poCA8ZN4&v=1.1.1>)
+- [Hello Swift Charts](https://developer.apple.com/videos/play/wwdc2022/10136/) from Apple WWDC 2022
+- [Swift Charts: Raise the bar](https://developer.apple.com/videos/play/wwdc2022/10137) from Apple WWDC 2022
+- [Charts Framework 1 - BarCharts Introduction](https://www.youtube.com/watch?v=dIvE-E8nlsA) from Stewart Lynch
+- [Charts Framework 2 - Visualizing Large Data Sets with Bar Charts](https://www.youtube.com/watch?v=lB3poCA8ZN4)
   from Stewart Lynch
-- [Explore pie charts and interactivity in Swift Charts](<https://developer.apple.com/videos/play/wwdc2023/10037/?v=1.1.1>)
+- [Explore pie charts and interactivity in Swift Charts](https://developer.apple.com/videos/play/wwdc2023/10037/)
   from Apple WWDC 2023
 
 ## Example App
 
-See [ChartsDemo](<https://github.com/mvolkmann/ChartsDemo?v=1.1.1>)
+See [ChartsDemo](https://github.com/mvolkmann/ChartsDemo)
 which is a SwiftUI app that demonstrates nearly everything
 shared in the Steward Lynch videos linked above.
 
 ## Chart
 
-The [Chart](<https://developer.apple.com/documentation/charts/chart?v=1.1.1>) view contains marks that define the chart to be displayed.
+The [Chart](https://developer.apple.com/documentation/charts/chart) view contains marks that define the chart to be displayed.
 
 Charts are composed of three kinds of areas,
 axes (x and y), plot area, and legend.
@@ -68,7 +68,7 @@ Each of these can be customizes.
 Axes and the legend can be hidden.
 
 To set the height of a chart, its background color, and a border,
-apply the [chartPlotStyle](<https://developer.apple.com/documentation/charts/chart/chartplotstyle(content:)?v=1.1.1>) view modifier to the `Chart`.
+apply the [chartPlotStyle](<https://developer.apple.com/documentation/charts/chart/chartplotstyle(content:)>) view modifier to the `Chart`.
 For example:
 
 ```swift
@@ -83,32 +83,32 @@ Chart {
 }
 ```
 
-To customize the x-axis, apply the [chartXAxis](<https://developer.apple.com/documentation/charts/chart/chartxaxis(content:)?v=1.1.1>) view modifier.
-To customize the y-axis, apply the [chartYAxis](<https://developer.apple.com/documentation/charts/chart/chartyaxis(content:)?v=1.1.1>) view modifier.
+To customize the x-axis, apply the [chartXAxis](<https://developer.apple.com/documentation/charts/chart/chartxaxis(content:)>) view modifier.
+To customize the y-axis, apply the [chartYAxis](<https://developer.apple.com/documentation/charts/chart/chartyaxis(content:)>) view modifier.
 For more on these, see the "Axis Labels" section below.
 
-To detect tap and drag gestures on the chart, apply the [chartOverlay](<https://developer.apple.com/documentation/charts/chart/chartoverlay(alignment:content:)?v=1.1.1>) view modifier or the [chartBackground](<https://developer.apple.com/documentation/charts/chart/chartbackground(alignment:content:)?v=1.1.1>) view modifier.
+To detect tap and drag gestures on the chart, apply the [chartOverlay](<https://developer.apple.com/documentation/charts/chart/chartoverlay(alignment:content:)>) view modifier or the [chartBackground](<https://developer.apple.com/documentation/charts/chart/chartbackground(alignment:content:)>) view modifier.
 For more on these, see the "Event Handling" section below.
 
 For a list of all view modifiers that can be applied to a `Chart`,
-see [Chart view modifiers](<https://developer.apple.com/documentation/swiftui/view-chart-view?v=1.1.1>).
+see [Chart view modifiers](https://developer.apple.com/documentation/swiftui/view-chart-view).
 
 ## Marks
 
 Swift Charts supports six kinds of "marks" for creating various kinds of charts.
-Each of these serve as direct children of the [Chart](<https://developer.apple.com/documentation/charts/chart?v=1.1.1>) view.
+Each of these serve as direct children of the [Chart](https://developer.apple.com/documentation/charts/chart) view.
 They include:
 
-- [AreaMark](<https://developer.apple.com/documentation/charts/areamark?v=1.1.1>)
-- [BarMark](<https://developer.apple.com/documentation/charts/barmark?v=1.1.1>)
-- [LineMark](<https://developer.apple.com/documentation/charts/linemark?v=1.1.1>)
-- [PointMark](<https://developer.apple.com/documentation/charts/pointmark?v=1.1.1>)
-- [RectangleMark](<https://developer.apple.com/documentation/charts/rectanglemark?v=1.1.1>)
-- [RuleMark](<https://developer.apple.com/documentation/charts/rulemark?v=1.1.1>)
-- [SectorMark](<https://developer.apple.com/documentation/charts/sectormark?v=1.1.1>)
+- [AreaMark](https://developer.apple.com/documentation/charts/areamark)
+- [BarMark](https://developer.apple.com/documentation/charts/barmark)
+- [LineMark](https://developer.apple.com/documentation/charts/linemark)
+- [PointMark](https://developer.apple.com/documentation/charts/pointmark)
+- [RectangleMark](https://developer.apple.com/documentation/charts/rectanglemark)
+- [RuleMark](https://developer.apple.com/documentation/charts/rulemark)
+- [SectorMark](https://developer.apple.com/documentation/charts/sectormark)
 
 The initializer for each mark type takes `x` and `y` arguments
-that have the type [PlottableValue](<https://developer.apple.com/documentation/charts/plottablevalue?v=1.1.1>).
+that have the type [PlottableValue](https://developer.apple.com/documentation/charts/plottablevalue).
 Instances are created by calling the `PlottableValue` static method `value`
 which takes a `String` label and a value that can be
 a number (quantitative), `String` (nominal), or `Date` (temporal).
@@ -127,7 +127,7 @@ The `Chart` initializer also supports the `id` argument.
 
 ### BarMark
 
-Instances of the [BarMark](<https://developer.apple.com/documentation/charts/barmark?v=1.1.1>)
+Instances of the [BarMark](https://developer.apple.com/documentation/charts/barmark)
 struct describe individual bars in a bar charts.
 
 Negative quantitative values cause the bar to be rendered
@@ -188,7 +188,7 @@ BarMark(x: value1, y: value2)
 
 ### LineMark
 
-Instances of the [LineMark](<https://developer.apple.com/documentation/charts/linemark?v=1.1.1>)
+Instances of the [LineMark](https://developer.apple.com/documentation/charts/linemark)
 struct are used to display line charts.
 
 To assign a different color to each corresponding `LineMark`,
@@ -225,7 +225,7 @@ LineMark(x: ageCategory, y: male)
 
 ### PointMark
 
-Instances of the [PointMark](<https://developer.apple.com/documentation/charts/pointmark?v=1.1.1>)
+Instances of the [PointMark](https://developer.apple.com/documentation/charts/pointmark)
 struct are used to display scatter plots or to add points to line charts.
 
 To assign a different color to each corresponding `PointMark`,
@@ -252,7 +252,7 @@ These values could come of the data objects rather than being literal values.
 
 ### AreaMark
 
-Instances of the [AreaMark](<https://developer.apple.com/documentation/charts/areamark?v=1.1.1>)
+Instances of the [AreaMark](https://developer.apple.com/documentation/charts/areamark)
 struct are used to display area charts which
 shade the area below single values in a data series
 (by specifying the `y` argument) or
@@ -273,16 +273,16 @@ due to this restriction.
 
 ### RectangleMark
 
-Instances of the [RectangleMark](<https://developer.apple.com/documentation/charts/rectanglemark?v=1.1.1>)
+Instances of the [RectangleMark](https://developer.apple.com/documentation/charts/rectanglemark)
 struct are used to display heat maps.
 
 The following code demonstrates using this to display a heat map
 that represents hourly temperature forecasts over the 5-day period.
 For a full implementation that uses [WeatherKit](/blog/swift/weatherkit)
-to get real temperature forecasts, see [WeatherKitDemo](<https://github.com/mvolkmann/WeatherKitDemo?v=1.1.1>).
+to get real temperature forecasts, see [WeatherKitDemo](https://github.com/mvolkmann/WeatherKitDemo).
 
 <img alt="Swift Charts heat map" style="width: 45%"
-  src="/blog/assets/swift-charts-heat-map.png?v=1.1.1"
+  src="/blog/assets/swift-charts-heat-map.png"
   title="Swift Charts heat map">
 
 ```swift
@@ -457,7 +457,7 @@ struct ContentView: View {
 
 ### RuleMark
 
-Instances of the [RuleMark](<https://developer.apple.com/documentation/charts/rulemark?v=1.1.1>)
+Instances of the [RuleMark](https://developer.apple.com/documentation/charts/rulemark)
 struct are used to add a vertical line (when only the `x` value is set)
 or a horizontal line (when only the `y` value is set).
 
@@ -486,7 +486,7 @@ at the top of the line, above the chart.
 
 ### SectorMark
 
-Instances of the [SectorMark](<https://developer.apple.com/documentation/charts/sectormark?v=1.1.1>)
+Instances of the [SectorMark](https://developer.apple.com/documentation/charts/sectormark)
 struct are used to add slices to pie and donut charts.
 This was added in iOS 17.
 
@@ -519,26 +519,26 @@ for `innerRadius` and/or `outerRadius`, but this is also not typical.
 
 TODO: Is there a way to place text in each `SectorMark`?
 
-For an example, see the app in the GitHub repository [SwiftChartsPieDonut](<https://github.com/mvolkmann/SwiftChartsPieDonut?v=1.1.1>).
+For an example, see the app in the GitHub repository [SwiftChartsPieDonut](https://github.com/mvolkmann/SwiftChartsPieDonut).
 
 <img alt="Swift Charts donut" style="width: 45%"
-  src="/blog/assets/swift-charts-donut.png?v=1.1.1"
+  src="/blog/assets/swift-charts-donut.png"
   title="Swift Charts donut">
 <img alt="Swift Charts donut selected" style="width: 45%"
-  src="/blog/assets/swift-charts-donut-selected.png?v=1.1.1"
+  src="/blog/assets/swift-charts-donut-selected.png"
   title="Swift Charts donut selected">
 
 ## Selection
 
-iOS 17 added the [chartXSelection](<https://developer.apple.com/documentation/swiftui/view/chartxselection(value:)?v=1.1.1>), [chartYSelection](<https://developer.apple.com/documentation/swiftui/view/chartyselection(value:)?v=1.1.1>), and [chartAngleSelection](<https://developer.apple.com/documentation/swiftui/view/chartangleselection(_:)?v=1.1.1>) methods to the `Chart` struct.
+iOS 17 added the [chartXSelection](<https://developer.apple.com/documentation/swiftui/view/chartxselection(value:)>), [chartYSelection](<https://developer.apple.com/documentation/swiftui/view/chartyselection(value:)>), and [chartAngleSelection](<https://developer.apple.com/documentation/swiftui/view/chartangleselection(_:)>) methods to the `Chart` struct.
 These are useful for allowing users to swipe over a chart
 trigger changes to the way a chart is rendered
 such as triggering the display of annotations.
 
-For an example, see the app in the GitHub repository [SwiftChartsSelection](<https://github.com/mvolkmann/SwiftChartsSelection?v=1.1.1>).
+For an example, see the app in the GitHub repository [SwiftChartsSelection](https://github.com/mvolkmann/SwiftChartsSelection).
 
 <img alt="Swift Charts selection" style="width: 45%"
-  src="/blog/assets/swift-charts-selection.png?v=1.1.1"
+  src="/blog/assets/swift-charts-selection.png"
   title="Swift Charts selection">
 
 ## Scrolling
@@ -548,28 +548,28 @@ it is convenient to all the chart to be wider than the screen
 and scroll when the user drags past its ends.
 This is enabled by calling `.chartScrollableAxes(.horizontal)` on the`Chart`.
 
-For an example, see the app in the GitHub repository [SwiftChartsScrollable](<https://github.com/mvolkmann/SwiftChartsScrollable?v=1.1.1>).
+For an example, see the app in the GitHub repository [SwiftChartsScrollable](https://github.com/mvolkmann/SwiftChartsScrollable).
 
 It seems that when scrolling is enabled, selection is disabled.
 I haven't found a way to enable both.
-See the issue [here](<https://feedbackassistant.apple.com/feedback/12348843?v=1.1.1>).
+See the issue [here](https://feedbackassistant.apple.com/feedback/12348843).
 
 ## Example Charts
 
 This example plots hourly temperature forecasts from hard-coded data.
 It could of course come from WeatherKit.
 
-The code can be found at [SwiftChartsBasic](<https://github.com/mvolkmann/SwiftChartsBasic?v=1.1.1>).
+The code can be found at [SwiftChartsBasic](https://github.com/mvolkmann/SwiftChartsBasic).
 
 There is a segmented `Picker` at the top that enables switching between
 two chart representations. The first is the bar chart and the second
 is a combination of a line chart, area chart, and point chart.
 
 <img alt="Swift Charts bar chart" style="width: 45%"
-  src="/blog/assets/swift-charts-bar.png?v=1.1.1"
+  src="/blog/assets/swift-charts-bar.png"
   title="Swift Charts bar chart">
 <img alt="Swift Charts line/area/point chart" style="width: 45%"
-  src="/blog/assets/swift-charts-line-area-point.png?v=1.1.1"
+  src="/blog/assets/swift-charts-line-area-point.png"
   title="Swift Charts line/area/point chart">
 
 The bars and points are assigned a color that selected from
@@ -819,7 +819,7 @@ Chart {
 
 By default, a legend is displayed below each chart.
 
-To hide the legend, apply the [chartLegend](<https://developer.apple.com/documentation/charts/chart/chartlegend(_:)?v=1.1.1>) view modifier to the `Chart`, passing a value of `.hidden`.
+To hide the legend, apply the [chartLegend](<https://developer.apple.com/documentation/charts/chart/chartlegend(_:)>) view modifier to the `Chart`, passing a value of `.hidden`.
 For example:
 
 ```swift
@@ -842,7 +842,7 @@ Chart { ... }.chartLegend(position: .top)
 Swift Charts automatically determines the minimum and maximum
 quantitative values to be plotted and
 selects appropriate x-axis and y-axis scales.
-The default axis scales can be overridden by applying the [chartXScale](<https://developer.apple.com/documentation/swiftui/view/chartxscale(domain:range:type:)?v=1.1.1>) and [chartYScale](<https://developer.apple.com/documentation/swiftui/view/chartyscale(domain:range:type:)?v=1.1.1>) view modifiers to the `Chart`.
+The default axis scales can be overridden by applying the [chartXScale](<https://developer.apple.com/documentation/swiftui/view/chartxscale(domain:range:type:)>) and [chartYScale](<https://developer.apple.com/documentation/swiftui/view/chartyscale(domain:range:type:)>) view modifiers to the `Chart`.
 For example:
 
 ```swift
@@ -889,7 +889,7 @@ and set the `ScrollView` height instead of the width.
 
 ## Background and Overlay
 
-The [chartBackground](<https://developer.apple.com/documentation/swiftui/view/chartbackground(alignment:content:)?changes=latest_minor&v=1.1.1>) view modifier can be applied to a `Chart`
+The [chartBackground](<https://developer.apple.com/documentation/swiftui/view/chartbackground(alignment:content:)?changes=latest_minor>) view modifier can be applied to a `Chart`
 to specify any view that should be rendered behind the chart marks.
 
 The `chartOverlay` view modifier can be applied to a `Chart`
@@ -910,7 +910,7 @@ Chart {
 
 ## Event Handling
 
-To listen for tap and drag gestures on a chart, apply the [chartOverlay](<https://developer.apple.com/documentation/swiftui/view/chartoverlay(alignment:content:)?changes=latest_minor&v=1.1.1>) view modifier to the `Chart`.
+To listen for tap and drag gestures on a chart, apply the [chartOverlay](<https://developer.apple.com/documentation/swiftui/view/chartoverlay(alignment:content:)?changes=latest_minor>) view modifier to the `Chart`.
 Note that drag gestures will not be captured
 if the `Chart` is inside a `ScrollView`.
 

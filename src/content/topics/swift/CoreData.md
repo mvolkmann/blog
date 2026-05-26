@@ -402,7 +402,7 @@ Optionally specify how the fetched entity instances should be sorted.
 Also, optionally specify filtering to be applied
 so that only a subset of the the entity instances will be fetched.
 
-For details on the syntax used to specify filtering, see [Predicate Format String Syntax](<https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html?v=1.1.1>).
+For details on the syntax used to specify filtering, see [Predicate Format String Syntax](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html).
 
 ```swift
 let request = NSFetchRequest<PersonEntity>(entityName: "PersonEntity")
@@ -445,7 +445,7 @@ shared between all users and all devices.
 When the database is "shared", the data is
 shared only with specific users.
 
-For a working example, see this [GitHub project](<https://github.com/mvolkmann/swiftui-cloudkit-core-data?v=1.1.1>).
+For a working example, see this [GitHub project](https://github.com/mvolkmann/swiftui-cloudkit-core-data).
 
 Both Core Data and CloudKit support storing structured data,
 but they use different terminology.

@@ -17,4 +17,4 @@ remote machines where network communication can fail.
 Both maintain the state of sessions so the user can pick up where
 they left off by reconnecting and reattaching to the session.
 
-See my Object Computing (OCI) article [tmux](<https://objectcomputing.com/resources/publications/sett/january-2013-tmux?v=1.1.1>).
+See my Object Computing (OCI) article [tmux](https://objectcomputing.com/resources/publications/sett/january-2013-tmux).

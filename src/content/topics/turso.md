@@ -6,12 +6,12 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Turso logo" style="border: 0"
-    src="/blog/assets/turso-logo.png?v=1.1.1">
+    src="/blog/assets/turso-logo.png">
 </figure>
 
 ## Overview
 
-[Turso](<https://turso.tech?v=1.1.1>) is a cloud database
+[Turso](https://turso.tech) is a cloud database
 that uses a fork of SQLite called
 <a href="https://github.com/tursodatabase/libsql" target="_blank">libSQL</a>.
 

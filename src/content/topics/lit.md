@@ -12,24 +12,24 @@ layout: topic-layout.njk
 
 <figure style="width: 50%">
   <img alt="Lit logo" style="border: 0"
-    src="/blog/assets/lit-logo.png?v=1.1.1">
+    src="/blog/assets/lit-logo.png">
 </figure>
 
 ## Overview
 
-[Lit](<https://lit.dev?v=1.1.1>)
-is library that simplifies developing [web components](</blog/topics/#/blog/web-components/?v=1.1.1>)
+[Lit](https://lit.dev)
+is library that simplifies developing [web components](/blog/topics/#/blog/web-components/)
 compared to using only standard browser APIs.
 
 Other popular options include:
 
-- [Stencil](<https://stenciljs.com?v=1.1.1>),
+- [Stencil](https://stenciljs.com),
 
-- [Enhance](<https://enhance.dev?v=1.1.1>), and
+- [Enhance](https://enhance.dev), and
 
-- [WebC](<https://github.com/11ty/webc?v=1.1.1>).
+- [WebC](https://github.com/11ty/webc).
 
-- [hybrids](<https://hybrids.js.org/?v=1.1.1>)
+- [hybrids](https://hybrids.js.org/)
 
   "It's based on plain objects and pure functions."
 
@@ -52,13 +52,13 @@ Whether using Lit in this way is a good idea is debatable.
 
 ## Resources
 
-- [Lit home page](<https://lit.dev?v=1.1.1>)
+- [Lit home page](https://lit.dev)
 
-- [Build With Lit](<https://www.youtube.com/@buildWithLit?v=1.1.1>) YouTube channel
+- [Build With Lit](https://www.youtube.com/@buildWithLit) YouTube channel
 
   See the playlists "Build it with Lit", "Lit University", and "Talks"
 
-- [HTML with Superpowers](<https://htmlwithsuperpowers.netlify.app?v=1.1.1>) introduction to web components from Dave Rupert
+- [HTML with Superpowers](https://htmlwithsuperpowers.netlify.app) introduction to web components from Dave Rupert
 
   See examples on the "Using" page that include "details-utils" and "two-up".
 
@@ -75,11 +75,11 @@ Google uses Lit for Chrome DevTools.
 ## Installing
 
 The easiest way to get started using Lit is to
-get the library from this [CDN](<https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js?v=1.1.1>).
+get the library from this [CDN](https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js).
 This single file can be saved locally to avoid depending on the CDN.
 The minimized, compressed file is only 5.8 KB.
 
-Another approach is to use [Vite](<https://vitejs.dev/?v=1.1.1>).
+Another approach is to use [Vite](https://vitejs.dev/).
 This has many advantages including:
 
 - configuration to use TypeScript
@@ -89,7 +89,7 @@ This has many advantages including:
 The following steps create a new project that uses Vite and Lit.
 
 1. Enter `npm create vite@latest`.
-1. If prompted with "OK to proceed?", press the return key.
+1. If prompted with "OK to proceed", press the return key.
 1. After the "Project name" prompt, enter a project name.
 1. For the "Select a framework" prompt, select "Lit".
 1. For the "Select a variant" prompt, select "TypeScript".
@@ -107,7 +107,7 @@ The following steps create a new project that uses Vite and Lit.
 
 ## Tooling
 
-ESLint has a plugin for Lit at [eslint-plugin-lit](<https://github.com/43081j/eslint-plugin-lit#readme?v=1.1.1>).
+ESLint has a plugin for Lit at [eslint-plugin-lit](https://github.com/43081j/eslint-plugin-lit#readme).
 To use this, enter `npm install -D *` where \* each of the following:
 
 - `eslint`
@@ -142,7 +142,7 @@ Add the line `.eslintcache` in `.gitignore`.
 
 VS Code has an extension for Lit that provides syntax highlighting,
 type checking, code completion, and checks for improperly closed tags.
-See [lit-plugin](<https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin&v=1.1.1>).
+See [lit-plugin](https://marketplace.visualstudio.com/items?itemName=runem.lit-plugin).
 
 To use Emmet expansions in Lit `html` tagged template literals inside VS Code,
 add the following in `settings.json`.
@@ -268,14 +268,14 @@ export class GreetMessage extends HTMLElement {
 customElements.define('greet-message', GreetMessage);
 ```
 
-The value of `this.shadowRoot`, when set, is a [ShadowRoot](<https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot?v=1.1.1>) object.
+The value of `this.shadowRoot`, when set, is a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) object.
 This can be accessed in other lifecycle methods such as `connectedCallback`.
 One use is to register listeners for `slotchange` events.
 
 The following HTML renders the custom element defined above.
 
 <img alt="Lit greet-message" style="width: 20%"
-  src="/blog/assets/lit-greet-message.png?v=1.1.1">
+  src="/blog/assets/lit-greet-message.png">
 
 ```html
 <!DOCTYPE html>
@@ -297,7 +297,7 @@ A common web component example is to implement a counter component.
 The following code shows one way to implement this using Lit.
 
 <img alt="Lit counter" style="width: 30%"
-  src="/blog/assets/lit-counter.png?v=1.1.1">
+  src="/blog/assets/lit-counter.png">
 
 ```ts
 import {css, html, LitElement} from 'lit';
@@ -390,7 +390,7 @@ The following custom Lit element demonstrates the reactivity
 of `@property` and `@state` variables.
 
 <img alt="Lit reactivity" style="width: 30%"
-  src="/blog/assets/lit-reactivity.png?v=1.1.1">
+  src="/blog/assets/lit-reactivity.png">
 
 ```ts
 import {html, LitElement} from 'lit';
@@ -453,7 +453,7 @@ Other supported decorators include:
 
   This specifies an options object to be passed to calls that Lit makes
   to `addEventListener` and `removeEventListener`.
-  The supported options are documented in [MDN](<https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options?v=1.1.1>).
+  The supported options are documented in [MDN](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#options).
   They include `capture`, `once`, `passive`, and `signal`.
 
   For example, adding `@eventOptions({once: true})`
@@ -697,7 +697,7 @@ export class SlotsDemo extends LitElement {
 The following HTML renders the custom element defined above.
 
 <img alt="Lit slots demo" style="width: 25%"
-  src="/blog/assets/lit-slots-demo.png?v=1.1.1">
+  src="/blog/assets/lit-slots-demo.png">
 
 ```html
 <!DOCTYPE html>
@@ -725,7 +725,7 @@ The following HTML renders the custom element defined above.
 
 ## Lifecycle
 
-Lit supports all the standard web component [lifecycle methods](</blog/topics/#/blog/web-components/#lifecycle-methods?v=1.1.1>).
+Lit supports all the standard web component [lifecycle methods](/blog/topics/#/blog/web-components/#lifecycle-methods).
 
 Lit also supports additional methods and properties
 that are part of its "reactive update cycle".
@@ -1000,7 +1000,7 @@ It is not passed to the content function.
 If only one function is passed, this behaves the same as `map`.
 
 There are additional directives not described here.
-See [Built-in directives](<https://lit.dev/docs/templates/directives/?v=1.1.1>) for more detail.
+See [Built-in directives](https://lit.dev/docs/templates/directives/) for more detail.
 
 The following code demonstrates the usage of many of the directives.
 
@@ -1267,7 +1267,7 @@ requires less work from users of the web component.
 
 ## Context
 
-The [@lit/context](<https://lit.dev/docs/data/context/?v=1.1.1>)
+The [@lit/context](https://lit.dev/docs/data/context/)
 package provides a way to make data available throughout a component subtree.
 It avoids "prop drilling" where data is passed
 through every layer of a component hierarchy.
@@ -1362,7 +1362,7 @@ export class MyBottom extends LitElement {
 The following HTML renders an instance of the `my-top` custom element.
 
 <img alt="Lit context demo" style="width: 25%"
-  src="/blog/assets/lit-context-demo.png?v=1.1.1">
+  src="/blog/assets/lit-context-demo.png">
 
 ```html
 <!DOCTYPE html>
@@ -1388,7 +1388,7 @@ The following example demonstrates this.
 Clicking any of the buttons increments the `count` value.
 
 <img alt="Lit context events" style="border: 0; width: 30%"
-  src="/blog/assets/lit-context-events.png?v=1.1.1">
+  src="/blog/assets/lit-context-events.png">
 
 ```ts
 import {html, LitElement} from 'lit';
@@ -1441,7 +1441,7 @@ export class MyChild extends LitElement {
 
 ## Async Tasks
 
-The [@lit/task](<https://lit.dev/docs/data/task/?v=1.1.1>) package
+The [@lit/task](https://lit.dev/docs/data/task/) package
 simplifies obtaining data to render asynchronously.
 This includes fetching data from network endpoints.
 
@@ -1553,7 +1553,7 @@ The following HTML renders an instance of the `task-demo` custom element.
 Changing the todo ID in the input triggers running the task again.
 
 <img alt="Lit context demo" style="border: 0; width: 60%"
-  src="/blog/assets/lit-task-demo.png?v=1.1.1">
+  src="/blog/assets/lit-task-demo.png">
 
 ```html
 <!DOCTYPE html>
@@ -1571,7 +1571,7 @@ Changing the todo ID in the input triggers running the task again.
 
 ## Localization
 
-The [@lit/localize](<https://lit.dev/docs/localization/overview/?v=1.1.1>) package supports language translations.
+The [@lit/localize](https://lit.dev/docs/localization/overview/) package supports language translations.
 
 To install this package, enter `npm install @lit/localize`
 and `npm install @lit/localize-tools`.
@@ -1740,7 +1740,7 @@ The following HTML renders an instance of the `localize-demo` custom element.
 Selected a different locale from the `select` updates the message.
 
 <img alt="Lit localize demo" style="border: 0; width: 60%"
-  src="/blog/assets/lit-task-demo.png?v=1.1.1">
+  src="/blog/assets/lit-task-demo.png">
 
 ```html
 <!DOCTYPE html>
@@ -1762,13 +1762,13 @@ It's unclear when it doesn't use the XLIFF 2.0 format from 2014.
 
 ## Chess Board Example
 
-[gchessboard](<https://mganjoo.github.io/gchessboard/?v=1.1.1>)
+[gchessboard](https://mganjoo.github.io/gchessboard/)
 is a web component (not using Lit) that renders a chess board.
 The pieces can be dragged to any squares, not just valid ones.
 This enables quickly setting up a position to study.
 
 <img alt="web component chess board" style="width: 50%"
-  src="/blog/assets/web-component-chess-board.png?v=1.1.1">
+  src="/blog/assets/web-component-chess-board.png">
 
 To try this, add the following to a new file, perhaps named `chess.html`.
 Then open the HTML file in any modern web browser.
@@ -1892,46 +1892,46 @@ The following subsections describe popular Lit Lab packages.
 Some have already graduated.
 These packages are under development as of February 2024.
 
-- [CLI](<https://github.com/lit/lit/tree/main/packages/labs/cli?v=1.1.1>) for generating framework wrappers for Angular, React, and Vue
+- [CLI](https://github.com/lit/lit/tree/main/packages/labs/cli) for generating framework wrappers for Angular, React, and Vue
 
-- [eleventy-plugin-lit](<https://github.com/lit/lit/tree/main/packages/labs/eleventy-plugin-lit#lit-labseleventy-plugin-lit?v=1.1.1>) for pre-rendering Lit web components at build time
+- [eleventy-plugin-lit](https://github.com/lit/lit/tree/main/packages/labs/eleventy-plugin-lit#lit-labseleventy-plugin-lit) for pre-rendering Lit web components at build time
 
-- [motion](<https://github.com/lit/lit/tree/main/packages/labs/motion?v=1.1.1>) for adding animations
+- [motion](https://github.com/lit/lit/tree/main/packages/labs/motion) for adding animations
 
-- [observers](<https://github.com/lit/lit/tree/main/packages/labs/observers?v=1.1.1>) for detecting specific kinds of changes
+- [observers](https://github.com/lit/lit/tree/main/packages/labs/observers) for detecting specific kinds of changes
   including mutation, resize, intersection, and performance
 
-- [preact-signal](<https://github.com/lit/lit/tree/main/packages/labs/preact-signals?v=1.1.1>) for making it easier to share observable state
+- [preact-signal](https://github.com/lit/lit/tree/main/packages/labs/preact-signals) for making it easier to share observable state
 
-- [router](<https://github.com/lit/lit/tree/main/packages/labs/router?v=1.1.1>) for associating URL paths with components to be rendered
+- [router](https://github.com/lit/lit/tree/main/packages/labs/router) for associating URL paths with components to be rendered
 
-- [ssr](<https://github.com/lit/lit/tree/main/packages/labs/ssr?v=1.1.1>) for server-side rendering
+- [ssr](https://github.com/lit/lit/tree/main/packages/labs/ssr) for server-side rendering
 
-- [testing](<https://github.com/lit/lit/tree/main/packages/labs/testing?v=1.1.1>) for implementing unit tests for Lit components
+- [testing](https://github.com/lit/lit/tree/main/packages/labs/testing) for implementing unit tests for Lit components
 
-- [virtualizer](<https://github.com/lit/lit/tree/main/packages/labs/virtualizer?v=1.1.1>) to avoid spending time rendering elements
+- [virtualizer](https://github.com/lit/lit/tree/main/packages/labs/virtualizer) to avoid spending time rendering elements
   that are not currently in view.
   A common example is rendering a scrolling list of items.
 
 These packages are near graduation as of February 2024.
 
-- [scoped-registry-mixin](<https://www.npmjs.com/package/@lit-labs/scoped-registry-mixin?v=1.1.1>) provides a way to
+- [scoped-registry-mixin](https://www.npmjs.com/package/@lit-labs/scoped-registry-mixin) provides a way to
   "scope custom element definitions to shadow roots,
   such that the mapping of tag names to custom element class
   doesn't rely on a single global registry".
 
 These packages have graduated.
 
-- [@lit/context](<https://lit.dev/docs/data/context/?v=1.1.1>)
+- [@lit/context](https://lit.dev/docs/data/context/)
   for making data available throughout a component subtree
 
-- [@lit/localize](<https://lit.dev/docs/localization/overview/?v=1.1.1>)
+- [@lit/localize](https://lit.dev/docs/localization/overview/)
   for supporting multiple languages
 
-- [@lit/react](<https://lit.dev/docs/frameworks/react/?v=1.1.1>)
+- [@lit/react](https://lit.dev/docs/frameworks/react/)
   to create React wrappers for web components
 
-- [@lit/task](<https://lit.dev/docs/data/task/?v=1.1.1>)
+- [@lit/task](https://lit.dev/docs/data/task/)
   for asynchronous tasks like fetching data
 
 ## Publishing Components
@@ -1952,7 +1952,7 @@ If more than one copy of the Lit library is included in a page,
 more JavaScript code that necessary will be downloaded
 and there can be conflicts between different versions of the library.
 
-For more detail, see [Publishing](<https://lit.dev/docs/tools/publishing/#publishing-best-practices?v=1.1.1>).
+For more detail, see [Publishing](https://lit.dev/docs/tools/publishing/#publishing-best-practices).
 
 ## Unorganized Content
 

@@ -33,11 +33,11 @@ The table below summarizes native mobile development options.
 
 |                            | Android                                                                                                                                                                                               | iOS                                                                                                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| imperative framework       | [XML views](<https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts#0?v=1.1.1>)                                                                                  | [UIKit](<https://developer.apple.com/documentation/uikit?v=1.1.1>)                                                                                           |
-| declarative framework      | [Jetpack Compose](<https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwgO2XBhCaARIsANrW2X26oavaAZPerKUsKB5UEmiA4Civ8OiBoZWzaOpH30MrlUFTd4jKbnQaAoAsEALw_wcB&gclsrc=aw.ds&v=1.1.1>) | [SwiftUI](<https://developer.apple.com/xcode/swiftui/?v=1.1.1>)                                                                                              |
-| older programming language | [Java](<https://www.java.com/en/?v=1.1.1>)                                                                                                                                                 | [Objective-C](<https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html?v=1.1.1>) |
-| newer programming language | [Kotlin](<https://kotlinlang.org?v=1.1.1>)                                                                                                                                                 | [Swift](<https://developer.apple.com/swift/?v=1.1.1>)                                                                                                        |
-| preferred IDE              | [Android Studio](<https://developer.android.com/studio?v=1.1.1>)                                                                                                                           | [Xcode](<https://developer.apple.com/xcode/?v=1.1.1>)                                                                                                        |
+| imperative framework       | [XML views](https://developer.android.com/codelabs/basic-android-kotlin-training-xml-layouts#0)                                                                                  | [UIKit](https://developer.apple.com/documentation/uikit)                                                                                           |
+| declarative framework      | [Jetpack Compose](https://developer.android.com/jetpack/compose?gclid=Cj0KCQjwgO2XBhCaARIsANrW2X26oavaAZPerKUsKB5UEmiA4Civ8OiBoZWzaOpH30MrlUFTd4jKbnQaAoAsEALw_wcB&gclsrc=aw.ds) | [SwiftUI](https://developer.apple.com/xcode/swiftui/)                                                                                              |
+| older programming language | [Java](https://www.java.com/en/)                                                                                                                                                 | [Objective-C](https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html) |
+| newer programming language | [Kotlin](https://kotlinlang.org)                                                                                                                                                 | [Swift](https://developer.apple.com/swift/)                                                                                                        |
+| preferred IDE              | [Android Studio](https://developer.android.com/studio)                                                                                                                           | [Xcode](https://developer.apple.com/xcode/)                                                                                                        |
 
 ### Pros
 
@@ -83,9 +83,9 @@ The table below summarizes native mobile development options.
 ## Cross-Platform
 
 The most popular cross-platform mobile frameworks are
-[React Native](<https://reactnative.dev?v=1.1.1>),
-[Flutter](<https://flutter.dev/?v=1.1.1>), and
-[Capacitor](<https://capacitorjs.com?v=1.1.1>).
+[React Native](https://reactnative.dev),
+[Flutter](https://flutter.dev/), and
+[Capacitor](https://capacitorjs.com).
 
 ### Pros
 

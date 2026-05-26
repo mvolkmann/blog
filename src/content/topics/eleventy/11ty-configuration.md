@@ -7,7 +7,7 @@ layout: topic-layout.njk
 ---
 
 Configuration options for 11ty are documented on the 11ty
-[Configuration](<https://www.11ty.dev/docs/config/?v=1.1.1>) page.
+[Configuration](https://www.11ty.dev/docs/config/) page.
 
 By default the file `.eleventy.js` is used
 to specify configuration options for 11ty.

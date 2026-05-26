@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[SQLite](<https://www.sqlite.org/?v=1.1.1>)
+[SQLite](https://www.sqlite.org/)
 claims to be "the most used database engine in the world".
 It is a relational database implemented in C.
 It runs on all common operating systems and mobile devices.
@@ -40,7 +40,7 @@ Cons of SQLite include:
 - no support for stored procedures
 - no built-in data encryption
 
-See [Appropriate Uses For SQLite](<https://www.sqlite.org/whentouse.html?v=1.1.1>).
+See [Appropriate Uses For SQLite](https://www.sqlite.org/whentouse.html).
 This contains the following advice and much more:
 
 - "Avoid using SQLite in situations where the same database
@@ -57,7 +57,7 @@ This contains the following advice and much more:
 ## Installing
 
 SQLite can be downloaded from
-[here](<https://www.sqlite.org/download.html?v=1.1.1>).
+[here](https://www.sqlite.org/download.html).
 In macOS it can be installed using Homebrew by entering `brew install sqlite`.
 
 For help, enter `sqlite3 --help`.
@@ -201,17 +201,17 @@ To enable WAL mode, start the server as follows:
 sqlite3 {name}.db 'PRAGMA journal_mode=WAL;'
 ```
 
-For more detail, see [Write-Ahead Logging](<https://www.sqlite.org/wal.html?v=1.1.1>).
+For more detail, see [Write-Ahead Logging](https://www.sqlite.org/wal.html).
 
 ## JavaScript Support
 
 There are many client libraries in npm for working with SQLite databases.
-A recommended Node library is [better-sqlite3](<https://github.com/JoshuaWise/better-sqlite3?v=1.1.1>).
+A recommended Node library is [better-sqlite3](https://github.com/JoshuaWise/better-sqlite3).
 To install this, enter `npm install better-sqlite3`.
 To use TypeScript types, enter `npm install @types/better-sqlite3`.
 
 No library is needed when using Bun instead of Node.
-Bun has [built-in support for SQLite](<https://bun.sh/docs/api/sqlite?v=1.1.1>) which claims to be
+Bun has [built-in support for SQLite](https://bun.sh/docs/api/sqlite) which claims to be
 3 to 6 times faster than better-sqlite3.
 
 The example code below demonstrates using better-sqlite3 with TypeScript.
@@ -277,14 +277,14 @@ db.exec(
 // Create prepared statements.
 
 const insertPersonPS = db.prepare(
-  'insert into people (name, month, day, year) values (?, ?, ?, ?)'
+  'insert into people (name, month, day, year) values (?, ?, ?, )'
 );
 const getAllPeoplePS = db.prepare('select * from people');
-const getPersonPS = db.prepare('select * from people where id = ?');
+const getPersonPS = db.prepare('select * from people where id = ');
 const updatePersonPS = db.prepare(
-  'update people set name=?, month=?, day=?, year=? where id = ?'
+  'update people set name=?, month=?, day=?, year=? where id = '
 );
-const deletePersonPS = db.prepare('delete from people where id = ?');
+const deletePersonPS = db.prepare('delete from people where id = ');
 
 // Execute prepared statements.
 
@@ -342,7 +342,7 @@ For details, see [here](/blog/python/sqlite-in-python/).
 
 ## VS Code Support
 
-See the VS Code extension [SQLite](<https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite&v=1.1.1>).
+See the VS Code extension [SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite).
 To use this:
 
 - Open the Command Palette and enter "SQLite: Open Database".

@@ -14,22 +14,22 @@ layout: topic-layout.njk
 
 <figure style="width: 33%">
   <img alt="Zig logo" style="border: 0"
-    src="/blog/assets/zig-logo.svg?v=1.1.1">
+    src="/blog/assets/zig-logo.svg">
 </figure>
 
 <figure style="width: 33%">
   <img alt="Ziggy, the Zig mascot" style="border: 0"
-    src="/blog/assets/zig-mascot-ziggy.svg?v=1.1.1">
+    src="/blog/assets/zig-mascot-ziggy.svg">
   <figcaption>Ziggy, Zig mascot</figcaption>
 </figure>
 
 <figure style="width: 33%">
   <img alt="Zero, the Zig mascot" style="border: 0"
-    src="/blog/assets/zig-mascot-zero.svg?v=1.1.1">
+    src="/blog/assets/zig-mascot-zero.svg">
   <figcaption>Zero, Zig mascot</figcaption>
 </figure>
 
-[Zig](<https://ziglang.org?v=1.1.1>)
+[Zig](https://ziglang.org)
 is a free, open source (under the MIT license),
 high performance, systems programming language.
 It is a modern alternative to C with similar syntax
@@ -134,25 +134,25 @@ Cons of Zig include:
 
 ## Used By
 
-- [Bun](<https://bun.sh?v=1.1.1>) - a JavaScript/TypeScript
+- [Bun](https://bun.sh) - a JavaScript/TypeScript
   run-time and toolchain, is primarily written in Zig.
   Bun has many advantages over Node.js and Deno including much better performance.
 
-- [TigerBeetle](<https://tigerbeetle.com?v=1.1.1>) is
+- [TigerBeetle](https://tigerbeetle.com) is
   "the world's fastest financial accounting database".
 
-- [Roc](<https://www.roc-lang.org?v=1.1.1>) -
+- [Roc](https://www.roc-lang.org) -
   "a fast, friendly, functional language"
   "Roc's compiler has always been written in Rust.
   Roc's standard library was briefly written in Rust,
   but was soon rewritten in Zig."
 
-- [Mach](<https://machengine.org?v=1.1.1>) -
+- [Mach](https://machengine.org) -
   a game engine and graphics toolkit, is implemented in Zig.
 
-- [Uber](<https://www.uber.com/blog/bootstrapping-ubers-infrastructure-on-arm64-with-zig/?v=1.1.1>) uses Zig to build its C++ applications for x86_64 and arm64.
+- [Uber](https://www.uber.com/blog/bootstrapping-ubers-infrastructure-on-arm64-with-zig/) uses Zig to build its C++ applications for x86_64 and arm64.
 
-- [Ghosty](<https://mitchellh.com/ghostty?v=1.1.1>) terminal emulator
+- [Ghosty](https://mitchellh.com/ghostty) terminal emulator
 
 ## Run-time Checks
 
@@ -170,26 +170,26 @@ Zig provides the following run-time checks:
 
 ## Resources
 
-- [Zig home page](<https://ziglang.org?v=1.1.1>)
-- [Zig Standard Library](<https://ziglang.org/documentation/master/std/#A;std?v=1.1.1>)
-- [Mark Volkmann](<https://github.com/mvolkmann/zig-examples?v=1.1.1>)
-- [Zig GitHub repository](<https://github.com/ziglang/zig?v=1.1.1>)
-- [Zig Showtime](<https://zig.show?v=1.1.1>) YouTube videos
-- [Getting started with the Zig programming language](<https://blog.logrocket.com/getting-started-zig-programming-language/?v=1.1.1>)
-- [Ziglings](<https://ziglings.org?v=1.1.1>) -
+- [Zig home page](https://ziglang.org)
+- [Zig Standard Library](https://ziglang.org/documentation/master/std/#A;std)
+- [Mark Volkmann](https://github.com/mvolkmann/zig-examples)
+- [Zig GitHub repository](https://github.com/ziglang/zig)
+- [Zig Showtime](https://zig.show) YouTube videos
+- [Getting started with the Zig programming language](https://blog.logrocket.com/getting-started-zig-programming-language/)
+- [Ziglings](https://ziglings.org) -
   "A series of tiny broken programs ...
   By fixing them, you'll learn how to read and write Zig code."
-- [ziglearn.org](<https://ziglearn.org?v=1.1.1>)
-- [Zig Discord server](<https://discord.com/servers/zig-programming-language-605571803288698900?v=1.1.1>)
-- [Wikipedia](<https://en.wikipedia.org/wiki/Zig_(programming_language)?v=1.1.1>)
-- [Zig News](<https://zig.news?v=1.1.1>)
-- [awesome-zig](<https://github.com/nrdmn/awesome-zig?v=1.1.1>)
+- [ziglearn.org](https://ziglearn.org)
+- [Zig Discord server](https://discord.com/servers/zig-programming-language-605571803288698900)
+- [Wikipedia](<https://en.wikipedia.org/wiki/Zig_(programming_language)>)
+- [Zig News](https://zig.news)
+- [awesome-zig](https://github.com/nrdmn/awesome-zig)
   collection of open-source Zig libraries
 
 ## Installing
 
 To install, download a platform-specific zip or tar file from the
-[Getting Started](<https://ziglang.org/getting-started/?v=1.1.1>)
+[Getting Started](https://ziglang.org/getting-started/)
 page, expand it, move the directory this creates to a desired location,
 set the environment variable `ZIG_PATH` to point to this directory, and
 add `ZIG_PATH` to the list of directories in the `PATH` environment variable.
@@ -204,7 +204,7 @@ In macOS and easier option is to install Zig
 with Homebrew by entering `brew install zig`.
 However, currently this may only work on Macs with Intel-based processors.
 
-For more detail on installation options, see [Installing Zig](<https://ziglang.org/learn/getting-started/#installing-zig?v=1.1.1>).
+For more detail on installation options, see [Installing Zig](https://ziglang.org/learn/getting-started/#installing-zig).
 
 ## Getting Started
 
@@ -265,7 +265,7 @@ typically contain multiple `.zig` source files.
 
 ## Tools
 
-For VS Code, see the extension [Zig Language](<https://github.com/ziglang/vscode-zig?v=1.1.1>).
+For VS Code, see the extension [Zig Language](https://github.com/ziglang/vscode-zig).
 This provides code formatting and intellisense.
 
 Add a trailing comma after the last field in a struct
@@ -284,7 +284,7 @@ try running it again with the `-freference-trace` command-line option.
 
 ## Style
 
-Zig has an official [Style Guide](<https://ziglang.org/documentation/0.11.0/#Style-Guide?v=1.1.1>)
+Zig has an official [Style Guide](https://ziglang.org/documentation/0.11.0/#Style-Guide)
 that is not enforced by the compiler.
 At a high level it specifies the following:
 
@@ -520,7 +520,7 @@ but not if it is the second.
 So it is typically easier to pass the actual value as the first argument
 and the expected value as the second argument.
 
-For more information about the `expect` functions, see the [std.testing documentation](<https://ziglang.org/documentation/master/std/#A;std:testing?v=1.1.1>).
+For more information about the `expect` functions, see the [std.testing documentation](https://ziglang.org/documentation/master/std/#A;std:testing).
 
 All tests in a source file are executed by running `zig test {file-name}.zig`.
 To run specific tests, add the `--test-filter {text}` option
@@ -559,7 +559,7 @@ The output includes the following:
 - a message of the form
   "Test [{m}/{n}] test.{test-description}... FAIL (TestUnexpectedResult)"
   for each failed test
-- a stack trace is output that shows the failing `expect` (only one of them?)
+- a stack trace is output that shows the failing `expect` (only one of them)
 - a summary of the form "{n1} passed; {n2} skipped; {n3} failed"
 
 To test for memory leaks, use the `std.testing.allocator`
@@ -801,7 +801,7 @@ log.info("testing", .{}); // output is "info(my_library): testing"
 
 TODO: How can you specify scope-specific logging levels?
 
-For more detail, see [A simple overview of Zig](<https://gist.github.com/kassane/a81d1ae2fa2e8c656b91afee8b949426?v=1.1.1>).
+For more detail, see [A simple overview of Zig](https://gist.github.com/kassane/a81d1ae2fa2e8c656b91afee8b949426).
 
 To write to stdout instead of stderr, do the following:
 
@@ -1090,7 +1090,7 @@ From Zigling exercise #61:
     zero-length type that has only one value (like void).
 11. Zero-bit types (like void) can be coerced into single-item pointers.
 
-For more detail, see the [Casting](<https://ziglang.org/documentation/master/#Casting?v=1.1.1>) section
+For more detail, see the [Casting](https://ziglang.org/documentation/master/#Casting) section
 in the official docs.
 
 ## Optionals (aka Nullables)
@@ -1145,7 +1145,7 @@ const String = []const u8;
 
 test "optional" {
     var a: i8 = 0; // not optional
-    // Placing "?" before a type makes it optional.
+    // Placing "" before a type makes it optional.
     // Only optional variables can be set to "null".
     var b: ?i8 = null;
 
@@ -1167,7 +1167,7 @@ test "optional" {
 
     try expectEqual(b orelse 0, 2);
 
-    // "b.?" is equivalent to "b orelse unreachable".
+    // "b." is equivalent to "b orelse unreachable".
     // It unwraps the value which is why the cast here is to i8 instead of ?i8.
     try expectEqual(b.?, 2);
 
@@ -1270,18 +1270,18 @@ Zig supports the following operators:
 - pointer dereference: `.*`
 - address of: `&`
 - merge error sets: `||`
-- many [wrapping](<https://en.wikipedia.org/wiki/Integer_overflow?v=1.1.1>) operators where overflows wrap around
+- many [wrapping](https://en.wikipedia.org/wiki/Integer_overflow) operators where overflows wrap around
   These have a `%` suffix.
   For example, `*%` multiplies with wrapping
   and `*%=` is an assignment version.
-- many [saturating](<https://en.wikipedia.org/wiki/Saturation_arithmetic#:~:text=Saturation%20arithmetic%20is%20a%20version,a%20minimum%20and%20maximum%20value.?v=1.1.1>) operators where the result is
+- many [saturating](https://en.wikipedia.org/wiki/Saturation_arithmetic#:~:text=Saturation%20arithmetic%20is%20a%20version,a%20minimum%20and%20maximum%20value.) operators where the result is
   clamped to a fixed range from a minimum to a maximum value.
   These have a `|` suffix.
   For example, `*|` multiplies with saturating
   and `*|=` is an assignment version.
 - does not support the `++` and `-—` operators found in C
 
-The precedence of Zig operators is described in the [official docs](<https://ziglang.org/documentation/0.10.0/#Precedence?v=1.1.1>).
+The precedence of Zig operators is described in the [official docs](https://ziglang.org/documentation/0.10.0/#Precedence).
 
 ## Pointers
 
@@ -1715,7 +1715,7 @@ The elements must all be of the same type which can be
 The advantage vectors have over arrays is that certain operations
 can be performed on the elements in parallel using standard operators.
 This includes many built-in functions such as `@exp` and `@sin`.
-If available in the current processor, [SIMD](<https://en.wikipedia.org/wiki/Single_instruction,_multiple_data?v=1.1.1>)
+If available in the current processor, [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
 instructions are used.
 A new vector containing the results is returned.
 
@@ -2062,8 +2062,8 @@ TODO: Finish from https://www.huy.rocks/everyday/01-04-2022-zig-strings-in-5-min
 The following code demonstrates using the zig-string library.
 
 For more functionality, including Unicode support, use a string library such as
-[zig-string](<https://github.com/JakubSzark/zig-string?v=1.1.1>) or
-[zigstr](<https://codeberg.org/dude_the_builder/zigstr?v=1.1.1>).
+[zig-string](https://github.com/JakubSzark/zig-string) or
+[zigstr](https://codeberg.org/dude_the_builder/zigstr).
 
 ```zig
 // This demonstrates using the zig-string library
@@ -3128,7 +3128,7 @@ which can optionally be followed by a label to jump to an outer loop.
 Labeled blocks turn a block into an expression with a value.
 They can be used to compute the value of a variable or a switch branch.
 
-The syntax for labeled blocks was borrowed from [Rust](<https://doc.rust-lang.org/reference/expressions/loop-expr.html#labelled-block-expressions?v=1.1.1>).
+The syntax for labeled blocks was borrowed from [Rust](https://doc.rust-lang.org/reference/expressions/loop-expr.html#labelled-block-expressions).
 
 The value of a labeled block is specified using a `break` statement
 that includes the block label.
@@ -3509,7 +3509,7 @@ test "function return type inference" {
 ```
 
 The return type of a function can be determined with a `switch` expression
-For examples of this, see this [Sourcegraph search](<https://sourcegraph.com/search?q=context:global+lang:Zig+fn.*%5C)%5C+switch&patternType=regexp&sm=1&groupBy=repo&v=1.1.1>).
+For examples of this, see this [Sourcegraph search](<https://sourcegraph.com/search?q=context:global+lang:Zig+fn.*%5C)%5C+switch&patternType=regexp&sm=1&groupBy=repo>).
 
 ### Calling Functions
 
@@ -3544,7 +3544,7 @@ TODO: Add an example of using this.
 ### Anonymous Functions
 
 Anonymous functions (lambdas) are not supported.
-For the rationale, see [issue 1717](<https://github.com/ziglang/zig/issues/1717?v=1.1.1>).
+For the rationale, see [issue 1717](https://github.com/ziglang/zig/issues/1717).
 
 A work-around for this is to wrap a function in a `struct`
 and then extract it. This makes them tedious to use.
@@ -3909,7 +3909,7 @@ pub fn main() !void {
 }
 ```
 
-The [Compiler Explorer](<https://godbolt.org/?v=1.1.1>) website
+The [Compiler Explorer](https://godbolt.org/) website
 provides an online code editor and compiler for many languages.
 The screenshot below demonstrates the effect of evaluating code at compile-time
 on the generated assembly language instructions.
@@ -3917,7 +3917,7 @@ Note that the generated code for the `demo` function just returns 150
 and doesn't need to compute it because that is already done at compile-time.
 
 <img alt="Zig in Compiler Explorer" style="width: 100%"
-  src="/blog/assets/zig-godbolt.png?v=1.1.1"
+  src="/blog/assets/zig-godbolt.png"
   title="Zig in Compiler Explorer">
 
 The built-in types `comptime_int` and `comptime_float` represent
@@ -3948,14 +3948,14 @@ The `inline` keyword can be applied to functions, for loops, and while loops.
 This screenshot shows the assembly code generated for a non-inline function.
 
 <img alt="Zig non-inline function" style="width: 100%"
-  src="/blog/assets/zig-non-inline-function.png?v=1.1.1"
+  src="/blog/assets/zig-non-inline-function.png"
   title="Zig non-inline function">
 
 This screenshot shows the assembly code generated for the same function
 when changed to be `inline`.
 
 <img alt="Zig inline function" style="width: 100%"
-  src="/blog/assets/zig-inline-function.png?v=1.1.1"
+  src="/blog/assets/zig-inline-function.png"
   title="Zig inline function">
 
 ## Polymorphism
@@ -4062,7 +4062,7 @@ The following built-in functions support reflection:
 - `std.meta.fields` returns information about the fields in a struct.
 - `std.meta.hasFn` determines if a struct contains a function with a given name.
 
-For more, see the library [zigtrait](<https://github.com/wrongnull/zigtrait?v=1.1.1>).
+For more, see the library [zigtrait](https://github.com/wrongnull/zigtrait).
 
 ```zig
 const std = @import("std");
@@ -4412,7 +4412,7 @@ The Zig standard library provides the following allocators:
   Use this in code that needs to allocate
   a large number of instances of one type.
 
-  For examples of using this, see the tests at [memory_pool.zig](<https://ziglang.org/documentation/master/std/src/std/heap/memory_pool.zig.html?v=1.1.1>).
+  For examples of using this, see the tests at [memory_pool.zig](https://ziglang.org/documentation/master/std/src/std/heap/memory_pool.zig.html).
 
 - `std.heap.page_allocator`
 
@@ -4436,7 +4436,7 @@ The Zig standard library provides the following allocators:
 - `std.heap.SbrkAllocator`
 
   This is a low-level allocator.
-  See [sbrk](<https://en.wikipedia.org/wiki/Sbrk?v=1.1.1>).
+  See [sbrk](https://en.wikipedia.org/wiki/Sbrk).
 
 - `std.heap.ScopedLoggingAllocator`
 
@@ -4556,7 +4556,7 @@ test "heap allocation" {
 
 ## Standard Library
 
-The Zig [standard library](<https://ziglang.org/documentation/master/std/?v=1.1.1>) provides many
+The Zig [standard library](https://ziglang.org/documentation/master/std/) provides many
 "commonly used algorithms, data structures, and definitions".
 
 Documentation on the standard library is somewhat sparse as of 2023.
@@ -4833,7 +4833,7 @@ However, the elements must be instances of a `struct` or `union` type.
 
 Each field is stored in a separate array (not a vector) which makes it easy
 to obtain a slice containing all the values for a given field.
-Such a slice can used to create a `Vector` which supports [SIMD](<https://en.wikipedia.org/wiki/Single_instruction,_multiple_data?v=1.1.1>)
+Such a slice can used to create a `Vector` which supports [SIMD](https://en.wikipedia.org/wiki/Single_instruction,_multiple_data)
 operations.
 
 The following code demonstrates several common operations
@@ -5049,9 +5049,9 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 
 test "StringArrayHashMap" {
@@ -5144,19 +5144,19 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 ```
 
 ### Set types
 
-A [BufSet](<https://ziglang.org/documentation/master/std/#A;std:BufSet?v=1.1.1>) is a set of string values.
+A [BufSet](https://ziglang.org/documentation/master/std/#A;std:BufSet) is a set of string values.
 
-An [EnumSet](<https://ziglang.org/documentation/master/std/#A;std:EnumSet?v=1.1.1>) is a set of enum values.
+An [EnumSet](https://ziglang.org/documentation/master/std/#A;std:EnumSet) is a set of enum values.
 
-A [DynamicBitSet](<https://ziglang.org/documentation/master/std/#A;std:DynamicBitSet?v=1.1.1>) is a set of bit values.
+A [DynamicBitSet](https://ziglang.org/documentation/master/std/#A;std:DynamicBitSet) is a set of bit values.
 
 For sets of other kinds of values, consider using a `HashMap`
 where the values have the type `void`.
@@ -5395,7 +5395,7 @@ test "DoublyLinkedList advanced" {
 
 ## Builtin Functions
 
-Zig provides over 100 (118 as of 10/23) [built-in functions](<https://ziglang.org/documentation/master/#Builtin-Functions?v=1.1.1>).
+Zig provides over 100 (118 as of 10/23) [built-in functions](https://ziglang.org/documentation/master/#Builtin-Functions).
 These are known to the compiler and
 do not require importing in order to use them.
 
@@ -5407,7 +5407,7 @@ some have behavior that normal functions cannot replicate.
 
 The official documentation at the link above does not categorize
 the built-in functions.
-The YouTube video [A Look at Zig](<https://www.youtube.com/watch?v=V0sthxzzN3U&v=1.1.1>) from Loris Cro uses the categories below:
+The YouTube video [A Look at Zig](https://www.youtube.com/watch?v=V0sthxzzN3U) from Loris Cro uses the categories below:
 
 ### Math (25)
 
@@ -5664,7 +5664,7 @@ to achieve better error handling.
 
 - `@call` - calls a given function with arguments in a tuple
 
-  The [@call](<?v=1.1.1>) function takes a [CallModifier](<https://ziglang.org/documentation/master/std/#A;std:built-in.CallModifier?v=1.1.1>) enum value, a function, and arguments in a tuple.
+  The [@call](<>) function takes a [CallModifier](https://ziglang.org/documentation/master/std/#A;std:built-in.CallModifier) enum value, a function, and arguments in a tuple.
   The CallModifier enum values are `auto` (most common), `always_inline`,
   `always_tail`, `async_kw`, `compile_time`, `never_inline`, `never_tail`,
   and `no_async`.
@@ -5870,9 +5870,9 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 
 test "StringHashMap" {
@@ -5947,17 +5947,17 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 ```
 
 ### Sets
 
-A [BufSet](<https://ziglang.org/documentation/master/std/#A;std:BufSet?v=1.1.1>) is a set of string values.
+A [BufSet](https://ziglang.org/documentation/master/std/#A;std:BufSet) is a set of string values.
 
-An [EnumSet](<https://ziglang.org/documentation/master/std/#A;std:EnumSet?v=1.1.1>) is a set of enum values.
+An [EnumSet](https://ziglang.org/documentation/master/std/#A;std:EnumSet) is a set of enum values.
 
 The following code demonstrates common operations on both of these kinds of sets.
 
@@ -6028,7 +6028,7 @@ test "EnumSet" {
 
 ### MultiArrayList
 
-The [MultiArrayList](<https://ziglang.org/documentation/master/std/#A;std:MultiArrayList?v=1.1.1>) data structure "stores a list of a struct or tagged union type".
+The [MultiArrayList](https://ziglang.org/documentation/master/std/#A;std:MultiArrayList) data structure "stores a list of a struct or tagged union type".
 "Instead of storing a single list of items, MultiArrayList stores
 separate lists for each field of the struct or lists of tags and bare unions."
 
@@ -6174,9 +6174,9 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 
 test "StringHashMap" {
@@ -6251,17 +6251,17 @@ test "ComptimeStringMap" {
     try expect(map.has("Orr"));
     try expect(map.has("Ratelle"));
 
-    try expectEqual(@as(u8, 99), map.get("Gretzky").?);
-    try expectEqual(@as(u8, 4), map.get("Orr").?);
-    try expectEqual(@as(u8, 19), map.get("Ratelle").?);
+    try expectEqual(@as(u8, 99), map.get("Gretzky").);
+    try expectEqual(@as(u8, 4), map.get("Orr").);
+    try expectEqual(@as(u8, 19), map.get("Ratelle").);
 }
 ```
 
 ### Sets
 
-A [BufSet](<https://ziglang.org/documentation/master/std/#A;std:BufSet?v=1.1.1>) is a set of string values.
+A [BufSet](https://ziglang.org/documentation/master/std/#A;std:BufSet) is a set of string values.
 
-An [EnumSet](<https://ziglang.org/documentation/master/std/#A;std:EnumSet?v=1.1.1>) is a set of enum values.
+An [EnumSet](https://ziglang.org/documentation/master/std/#A;std:EnumSet) is a set of enum values.
 
 The following code demonstrates common operations on both of these kinds of sets.
 
@@ -6332,7 +6332,7 @@ test "EnumSet" {
 
 ### MultiArrayList
 
-The [MultiArrayList](<https://ziglang.org/documentation/master/std/#A;std:MultiArrayList?v=1.1.1>) data structure "stores a list of a struct or tagged union type".
+The [MultiArrayList](https://ziglang.org/documentation/master/std/#A;std:MultiArrayList) data structure "stores a list of a struct or tagged union type".
 "Instead of storing a single list of items, MultiArrayList stores
 separate lists for each field of the struct or lists of tags and bare unions."
 
@@ -6510,7 +6510,7 @@ and run-time safety checks catch even more.
 These safety checks don't flag every possible mistake, but they come close.
 More safety checks are planned in the future.
 
-The following is a list of the current checks from the [Undefined Behavior](<https://ziglang.org/documentation/0.11.0/#Undefined-Behavior?v=1.1.1>) section of the Zig Language Reference:
+The following is a list of the current checks from the [Undefined Behavior](https://ziglang.org/documentation/0.11.0/#Undefined-Behavior) section of the Zig Language Reference:
 
 - attempt to unwrap error
 - attempt to unwrap null
@@ -6538,7 +6538,7 @@ The following is a list of the current checks from the [Undefined Behavior](<htt
 
 ## Stack Example
 
-This example is based on the Primeagen video at [Zig Data Structure Katas](<https://www.youtube.com/watch?v=xIPrwrBAU2c&v=1.1.1>).
+This example is based on the Primeagen video at [Zig Data Structure Katas](https://www.youtube.com/watch?v=xIPrwrBAU2c).
 
 ```zig
 const std = @import("std");

@@ -47,7 +47,7 @@ nine additional collection classes that must be imported to use.
 
 ### `namedtuple`
 
-A [`namedtuple`](<https://docs.python.org/3/library/collections.html#collections.namedtuple?v=1.1.1>) has all the features of a `tuple`,
+A [`namedtuple`](https://docs.python.org/3/library/collections.html#collections.namedtuple) has all the features of a `tuple`,
 but differs in that each position has an associated name.
 
 Here is an example of creating and using `namedtuple` instances:
@@ -92,7 +92,7 @@ print(dog1._fields) # ('breed', 'name')
 
 ### `deque`
 
-A [`deque`](<https://docs.python.org/3/library/collections.html#collections.deque?v=1.1.1>) (pronounced "deck") is a double-ended queue.
+A [`deque`](https://docs.python.org/3/library/collections.html#collections.deque) (pronounced "deck") is a double-ended queue.
 Unlike the `list` class, elements can be efficiently
 appended to and popped from both ends.
 
@@ -139,7 +139,7 @@ print(dogs) # deque([])
 
 ### `Chainmap`
 
-A [`ChainMap`](<https://docs.python.org/3/library/collections.html#collections.ChainMap?v=1.1.1>) provides a view over multiple dict objects.
+A [`ChainMap`](https://docs.python.org/3/library/collections.html#collections.ChainMap) provides a view over multiple dict objects.
 
 Here is an example of creating and using a `ChainMap`:
 
@@ -189,7 +189,7 @@ del cm['Reece']
 
 ### `Counter`
 
-A [`Counter`](<https://docs.python.org/3/library/collections.html#collections.Counter?v=1.1.1>) is a special `dict` that
+A [`Counter`](https://docs.python.org/3/library/collections.html#collections.Counter) is a special `dict` that
 counts occurrences of unique values in an iterable.
 
 Here is an example of creating and using a `Counter`:
@@ -233,7 +233,7 @@ print(counter.most_common())
 
 ### `OrderedDict`
 
-An [`OrderedDict`](<https://docs.python.org/3/library/collections.html#collections.OrderedDict?v=1.1.1>) is a special `dict` that
+An [`OrderedDict`](https://docs.python.org/3/library/collections.html#collections.OrderedDict) is a special `dict` that
 preserves the order in which keys were added.
 Starting in Python 3.5, the `dict` class also does this.
 One reason to continue using `OrderedDict` instead of `dict`
@@ -291,7 +291,7 @@ print(dogs)
 
 ### `defaultdict`
 
-A [`defaultdict`](<https://docs.python.org/3/library/collections.html#collections.defaultdict?v=1.1.1>) is a special `dict` that can
+A [`defaultdict`](https://docs.python.org/3/library/collections.html#collections.defaultdict) is a special `dict` that can
 provide a value for missing keys rather than raise a `KeyError`.
 This is useful because it enables writing code
 that doesn't need to check for missing values.

@@ -7,14 +7,14 @@ layout: topic-layout.njk
 ---
 
 <img alt="Swift logo" style="width: 30%"
-  src="/blog/assets/swift-logo.png?v=1.1.1"
+  src="/blog/assets/swift-logo.png"
   title="Swift logo">
 
 # What makes Swift a great programming language?
 
-This article highlights many features of the [Swift](<https://developer.apple.com/swift/?v=1.1.1>) programming language
+This article highlights many features of the [Swift](https://developer.apple.com/swift/) programming language
 that make it an attractive alternative to other programming languages.
-For a more complete introduction to Swift, see [A Swift Tour](<https://docs.swift.org/swift-book/documentation/the-swift-programming-language/guidedtour/?v=1.1.1>).
+For a more complete introduction to Swift, see [A Swift Tour](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/guidedtour/).
 
 My goal is to provide clear, concise descriptions of a large number
 of fundamental Swift concepts along with short, illustrative code snippets.
@@ -23,22 +23,22 @@ that supports object-oriented concepts, I'm confident this will be
 enough to get you started reading and writing Swift code.
 
 Swift is supported in macOS, Linux, and Windows.
-For details, see [Platform Support](<https://www.swift.org/platform-support/?v=1.1.1>).
+For details, see [Platform Support](https://www.swift.org/platform-support/).
 
 Today Swift is primarily used for implementing applications that
 run on iPhones, iPads, Apple Watches, and Mac computers.
 However, it can also be used to implement server-side code,
 such as REST services. One way to do this is to utilize the
-[Vapor](<https://vapor.codes?v=1.1.1>) framework.
+[Vapor](https://vapor.codes) framework.
 
 It is also possible to develop Android apps using Swift
 with the Swift Compiler for Android Development Environment
-([SCADE](<https://www.scade.io/10-scade2beta/?v=1.1.1>)).
+([SCADE](https://www.scade.io/10-scade2beta/)).
 
 There are many open source examples of apps developed using Swift and the
-[SwiftUI](<https://developer.apple.com/xcode/swiftui/?v=1.1.1>)
+[SwiftUI](https://developer.apple.com/xcode/swiftui/)
 framework. For a basic example,
-see my Running Calculator app for watchOS in [GitHub](<https://github.com/mvolkmann/swiftui-running-calculator/blob/main/RunningCalculator%20WatchKit%20Extension/RunningCalculatorApp.swift?v=1.1.1>).
+see my Running Calculator app for watchOS in [GitHub](https://github.com/mvolkmann/swiftui-running-calculator/blob/main/RunningCalculator%20WatchKit%20Extension/RunningCalculatorApp.swift).
 
 ## Functions
 
@@ -330,7 +330,7 @@ languageCreators["Swift"] = "Chris Lattner"
 // Getting the value for a key in a Dictionary returns an "optional"
 // because it is possible that the key does not exist.
 // Optionals are described in the next section.
-// The nil-coalescing operator (??) is used here to handle a missing key.
+// The nil-coalescing operator (?) is used here to handle a missing key.
 print("Swift was created by \(languageCreators["Swift"] ?? "unknown").")
 
 // A for loop can iterate over tuples of key/value pairs in a Dictionary.
@@ -369,7 +369,7 @@ calling the function, and using the return value.
 // Gets the minimum, maximum, and average of the numbers in an Array,
 // returned as a tuple of optional Double values
 // which will be nil if the Array is empty.
-func statistics(_ values: [Double]) -> (Double?, Double?, Double?) {
+func statistics(_ values: [Double]) -> (Double?, Double?, Double) {
     let sum = values.reduce(0) { $0 + $1 }
     // Dividing an Int by an Int truncates the result.
     // To get a Double result, at least one of the operands must be a Double.
@@ -386,7 +386,7 @@ if let average = results.2 { print("average is \(average)") } // 3.75
 
 // Type aliases give a name to type and
 // are useful to avoid repeating long type descriptions.
-typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double?)
+typealias StatisticsTuple = (min: Double?, max: Double?, avg: Double)
 
 // This function is similar to the previous one but returns a "named tuple".
 // An alternative to consider is using a struct.
@@ -820,7 +820,7 @@ Guards are typically used at or near the beginning of functions.
 
 ```swift
 // Returns the number of items in a array that contain a given String.
-func countOccurrences(in items: [String], of target: String?) -> Int {
+func countOccurrences(in items: [String], of target: String) -> Int {
     // If the items Array is empty, there can be no occurrences.
     guard items.count > 0 else { return 0 }
 

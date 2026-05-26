@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-The [`operator`](<https://docs.python.org/3/library/operator.html?v=1.1.1>) module in the Python standard library
+The [`operator`](https://docs.python.org/3/library/operator.html) module in the Python standard library
 that provides that implement standard Python operators.
 These are useful for passing to higher-order functions.
 For example, ..

@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Vapor](<https://vapor.codes?v=1.1.1>) is a web server framework
+[Vapor](https://vapor.codes) is a web server framework
 for macOS that is written in Swift.
 It is under active development as of March 11, 2023.
 
@@ -15,12 +15,12 @@ It is under active development as of March 11, 2023.
 
 Alternatives to Vapor include:
 
-- [Kitura](<https://www.kitura.dev?v=1.1.1>) (last commit on Oct. 7, 2022)
-- [Perfect](<https://perfect.org?v=1.1.1>) (last commit on Feb. 8, 2021)
+- [Kitura](https://www.kitura.dev) (last commit on Oct. 7, 2022)
+- [Perfect](https://perfect.org) (last commit on Feb. 8, 2021)
 
 ## Installing
 
-1. Install [Homebrew](<https://brew.sh?v=1.1.1>).
+1. Install [Homebrew](https://brew.sh).
 1. Enter `brew install vapor`
 1. Add a package dependency to the Xcode project.
    1. Click the top entry in the Navigator.
@@ -36,9 +36,9 @@ Alternatives to Vapor include:
 
 To create a Vapor project, enter `vapor new {project-name}`
 
-If not using a database, enter "N" for "use Fluent?".
+If not using a database, enter "N" for "use Fluent".
 
-If not generating HTML, enter "N" for "use Leaf?".
+If not generating HTML, enter "N" for "use Leaf".
 
 To edit code in the project, cd to the newly created project directory
 and enter `vapor xcode` to open the project in Xcode.
@@ -113,7 +113,7 @@ func routes(_ app: Application) throws {
     // constant (like "greet") or variable (like ":name").
     // "*" matches any value.
     // "**" matches any number of path parts with any values.
-    // (Can "**" only be used as the last argument?)
+    // (Can "**" only be used as the last argument)
     app.get("greet", ":name") { req -> String in
         // This demonstrates getting the String value
         // of a variable path parameter.
@@ -166,11 +166,11 @@ func routes(_ app: Application) throws {
 
 ## Error Types
 
-Errors thrown from Vapor routes can use the [HTTPResponseStatus](<https://apple.github.io/swift-nio/docs/current/NIOHTTP1/Enums/HTTPResponseStatus.html?v=1.1.1>) enumeration defined by the [SwiftNIO](<https://apple.github.io/swift-nio/docs/current/NIOCore/?v=1.1.1>) library (see the NIOHTTP1 module).
+Errors thrown from Vapor routes can use the [HTTPResponseStatus](https://apple.github.io/swift-nio/docs/current/NIOHTTP1/Enums/HTTPResponseStatus.html) enumeration defined by the [SwiftNIO](https://apple.github.io/swift-nio/docs/current/NIOCore/) library (see the NIOHTTP1 module).
 
 ## JSON Support
 
-The [Content](<https://docs.vapor.codes/basics/content/?v=1.1.1>)
+The [Content](https://docs.vapor.codes/basics/content/)
 API supports parsing JSON in request bodies
 and generating JSON for response bodies.
 
@@ -223,18 +223,18 @@ Routes can perform CRUD operations on databases.
 The supported databases are MongoDB, MySQL, PostgreSQL, and SQLite.
 
 Object Relational Mapper (ORM) support is provided by the
-[Fluent](<https://docs.vapor.codes/fluent/overview/?v=1.1.1>)
+[Fluent](https://docs.vapor.codes/fluent/overview/)
 framework.
 
 ## HTML Generation
 
 Routes can return server-rendered HTML using the
-[Leaf](<https://docs.vapor.codes/leaf/getting-started/?v=1.1.1>)
+[Leaf](https://docs.vapor.codes/leaf/getting-started/)
 templating language.
 
 ## Request Validation
 
-Routes can validate the HTTP requests sent to them using the [Validation](<https://docs.vapor.codes/basics/validation/?v=1.1.1>) API.
+Routes can validate the HTTP requests sent to them using the [Validation](https://docs.vapor.codes/basics/validation/) API.
 It can validate query parameters and request bodies.
 
 One motivation for using this is that it provides human-readable error messages.
@@ -242,13 +242,13 @@ One motivation for using this is that it provides human-readable error messages.
 ## Sending HTTP Requests
 
 Routes can send HTTP requests to endpoints on other servers using the
-[Client](<https://docs.vapor.codes/basics/client/?v=1.1.1>) API.
-This is built on the [AsyncHTTPClient](<https://swift-server.github.io/async-http-client/docs/current/AsyncHTTPClient/index.html?v=1.1.1>) package which can also be used in Swift client apps.
-However, the code is not any simpler than using [URLSession](<https://developer.apple.com/documentation/foundation/urlsession?v=1.1.1>).
+[Client](https://docs.vapor.codes/basics/client/) API.
+This is built on the [AsyncHTTPClient](https://swift-server.github.io/async-http-client/docs/current/AsyncHTTPClient/index.html) package which can also be used in Swift client apps.
+However, the code is not any simpler than using [URLSession](https://developer.apple.com/documentation/foundation/urlsession).
 
 ## Environments
 
-Routes can use the [Environment](<https://docs.vapor.codes/basics/environment/?v=1.1.1>) API
+Routes can use the [Environment](https://docs.vapor.codes/basics/environment/) API
 to modifier their behavior based on the current environment
 such as production, development, or testing.
 One use is to select the database instance that is accessed.

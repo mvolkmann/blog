@@ -6,7 +6,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Spring logo"
-    src="/blog/assets/spring-logo.png?v=1.1.1">
+    src="/blog/assets/spring-logo.png">
 </figure>
 
 ## Overview

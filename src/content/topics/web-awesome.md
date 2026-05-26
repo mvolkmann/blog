@@ -459,7 +459,7 @@ is start, center, end, baseline, or stretch.
 The following example lays out child elements
 using flexbox with a gap of `1rem`.
 
-<img alt="Web Awesome flexbox" src="/blog/assets/web-awesome-flexbox.png?v=1.1.1">
+<img alt="Web Awesome flexbox" src="/blog/assets/web-awesome-flexbox.png">
 
 ```html
 <div
@@ -474,7 +474,7 @@ using flexbox with a gap of `1rem`.
 
 The following example lays out child elements using `wa-grid`:
 
-<img alt="Web Awesome wa-grid" src="/blog/assets/web-awesome-wa-grid.png?v=1.1.1">
+<img alt="Web Awesome wa-grid" src="/blog/assets/web-awesome-wa-grid.png">
 
 ```html
 <div class="wa-grid wa-gap-m" style="grid-template-columns: repeat(2, 1fr)">
@@ -567,7 +567,7 @@ All the code for this project can be found in the GitHub repository at
 Let's add radio buttons that can be selected
 to change the color of the page heading.
 
-<img alt="Web Awesome radio group" src="/blog/assets/web-awesome-radio-group.png?v=1.1.1">
+<img alt="Web Awesome radio group" src="/blog/assets/web-awesome-radio-group.png">
 
 Add the following in `index.html` at the bottom of the `body` element:
 
@@ -606,8 +606,8 @@ Let's add a date input for your next dentist appointment.
 After a date is entered/selected, the difference from now to that date
 will be displayed with text like "tomorrow" or "in 2 weeks".
 
-<img alt="Web Awesome date input" src="/blog/assets/web-awesome-date-input.png?v=1.1.1">
-<img alt="Web Awesome relative time" src="/blog/assets/web-awesome-relative-time.png?v=1.1.1">
+<img alt="Web Awesome date input" src="/blog/assets/web-awesome-date-input.png">
+<img alt="Web Awesome relative time" src="/blog/assets/web-awesome-relative-time.png">
 
 Add the following in `index.html` at the bottom of the `body` element:
 
@@ -679,7 +679,7 @@ the button will have a badge on its upper-right corner
 that shows the number of unread messages.
 There will also be a switch that toggles whether the badge is shown.
 
-<img alt="Web Awesome button and switch" src="/blog/assets/web-awesome-button-and-switch.png?v=1.1.1">
+<img alt="Web Awesome button and switch" src="/blog/assets/web-awesome-button-and-switch.png">
 
 Add the following in `index.html` at the bottom of the `body` element.
 
@@ -777,7 +777,7 @@ But clicking the button doesn't yet display the messages.
 Let's add a dialog that displays the messages
 when the "View Messages" button is clicked.
 
-<img alt="Web Awesome dialog" src="/blog/assets/web-awesome-dialog.png?v=1.1.1">
+<img alt="Web Awesome dialog" src="/blog/assets/web-awesome-dialog.png">
 
 Add the following in `index.html` at the bottom of the `body` element.
 
@@ -836,7 +836,7 @@ it automatically gains a scrollbar for viewing all the messages.
 
 Let's also add support for displaying the messages in a drawer.
 
-<img alt="Web Awesome drawer" src="/blog/assets/web-awesome-drawer.png?v=1.1.1">
+<img alt="Web Awesome drawer" src="/blog/assets/web-awesome-drawer.png">
 
 Add the following in `index.html` at the bottom of the `body` element.
 
@@ -901,7 +901,7 @@ Let's add components that indicate the progress in receiving messages.
 We can use a progress bar or a progress ring.
 Both are included for demonstration purposes.
 
-<img alt="Web Awesome progress bar and ring" src="/blog/assets/web-awesome-progress.png?v=1.1.1">
+<img alt="Web Awesome progress bar and ring" src="/blog/assets/web-awesome-progress.png">
 
 Add the following in `index.html` at the bottom of the `body` element.
 
@@ -963,7 +963,7 @@ show the percent complete toward receiving `MAX_MESSAGES`.
 Let's add rating hearts that users can click
 to express how much they like Web Awesome.
 
-<img alt="Web Awesome rating" src="/blog/assets/web-awesome-rating.png?v=1.1.1">
+<img alt="Web Awesome rating" src="/blog/assets/web-awesome-rating.png">
 
 Add the following in `index.html` at the bottom of the `body` element.
 

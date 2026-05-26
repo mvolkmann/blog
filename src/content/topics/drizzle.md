@@ -13,14 +13,14 @@ layout: topic-layout.njk
 ## Overview
 
 <img alt="Drizzle logo" style="border: 0; width: 20%"
-  src="/blog/assets/drizzle-logo.png?v=1.1.1">
+  src="/blog/assets/drizzle-logo.png">
 <img alt="Drizzle mascot" style="border: 0; width: 20%"
-  src="/blog/assets/drizzle-mascot.png?v=1.1.1">
+  src="/blog/assets/drizzle-mascot.png">
 
-[Drizzle](<https://orm.drizzle.team?v=1.1.1>) is a TypeScript-based
+[Drizzle](https://orm.drizzle.team) is a TypeScript-based
 Object Relational Mapper (ORM) library that is free and open-source.
 It competes with other popular ORMs such as
-[Prisma](<https://www.prisma.io?v=1.1.1>).
+[Prisma](https://www.prisma.io).
 
 Drizzle is designed "to be a thin layer on top of SQL
 and introduce minimal runtime overhead".
@@ -56,13 +56,13 @@ Drizzle supports schema migrations.
 
 Drizzle supports many edge platforms. These include:
 
-- [Bun](<https://bun.sh?v=1.1.1>)
-- [Cloudflare Workers](<https://developers.cloudflare.com/workers/?v=1.1.1>)
-- [Deno Deploy](<https://deno.com/deploy?v=1.1.1>)
-- [Electron](<https://www.electronjs.org?v=1.1.1>)
-- [Fly.io](<https://fly.io?v=1.1.1>)
-- [Supabase functions](<https://supabase.com/docs/guides/functions?v=1.1.1>)
-- [Vercel functions](<https://vercel.com/docs/functions/serverless-functions?v=1.1.1>)
+- [Bun](https://bun.sh)
+- [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+- [Deno Deploy](https://deno.com/deploy)
+- [Electron](https://www.electronjs.org)
+- [Fly.io](https://fly.io)
+- [Supabase functions](https://supabase.com/docs/guides/functions)
+- [Vercel functions](https://vercel.com/docs/functions/serverless-functions)
 
 ## Cons
 
@@ -88,11 +88,11 @@ to switch from one database/driver combination to another.
 All the example code in this page assumes the use of a PostgreSQL database.
 
 Two npm packages that can be used to connect to the database are
-[pg](<https://github.com/brianc/node-postgres?v=1.1.1>)
-(aka node-postgres) and [postgres](<https://github.com/porsager/postgres#connection?v=1.1.1>).
+[pg](https://github.com/brianc/node-postgres)
+(aka node-postgres) and [postgres](https://github.com/porsager/postgres#connection).
 
 When I tried to call Drizzle methods with a database connection
-that was created with "pg", I got the error [TypeError: client.unsafe is not a function](<https://github.com/brianc/node-postgres/issues/3120?v=1.1.1>).
+that was created with "pg", I got the error [TypeError: client.unsafe is not a function](https://github.com/brianc/node-postgres/issues/3120).
 But they work with the "postgres" package.
 
 When I tried to run drizzle-kit commands using the package "postgres",

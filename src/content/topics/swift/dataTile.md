@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[dataTile](<https://underplot.com/dataTile/?v=1.1.1>) is a
+[dataTile](https://underplot.com/dataTile/) is a
 developer tool that integrates with the Simulator
 to display debugging data in tiles.
 These are easier to see than searching for output in the debug console
@@ -19,7 +19,7 @@ The "Pro" version costs $7.99 per month and removes these limitations.
 
 ## Installing
 
-dataTile can be downloaded from the [Mac App Store](<https://apps.apple.com/app/datatile-for-simulator/id6444231603?l=en&mt=12&v=1.1.1>).
+dataTile can be downloaded from the [Mac App Store](https://apps.apple.com/app/datatile-for-simulator/id6444231603?l=en&mt=12).
 Once installed it will appear as an app in your Applications directory.
 Double-click it to launch.
 

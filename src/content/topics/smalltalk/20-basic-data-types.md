@@ -650,7 +650,7 @@ sub := s copyFrom: 4 to: s size. "bar"
 ```
 
 The `at:put:` method is the only one
-that modifies a `String` in place (TODO: true?).
+that modifies a `String` in place (TODO: true).
 All other methods return a new `String`
 that is a modified version of the receiver.
 

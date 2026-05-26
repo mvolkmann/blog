@@ -57,7 +57,7 @@ father(mark, jeremy).
 Queries (aka questions) perform "unification" which basically means
 finding values for variables that cause a relationship to hold.
 This requires pattern matching search and backtracking.
-Unification relies on the properties of [Horn clauses](<https://en.wikipedia.org/wiki/Horn_clause?v=1.1.1>).
+Unification relies on the properties of [Horn clauses](https://en.wikipedia.org/wiki/Horn_clause).
 A related term is "ground" which refers to an expression
 that contains no uninstantiated variables.
 
@@ -121,42 +121,42 @@ These take considerable time to learn and master.
 
 ## Resources
 
-- [SWI Prolog Discourse group](<https://swi-prolog.discourse.group/?v=1.1.1>)
+- [SWI Prolog Discourse group](https://swi-prolog.discourse.group/)
 
-- [The Art of Prolog](<https://mitpress.mit.edu/9780262691635/the-art-of-prolog/?v=1.1.1>) Second Edition book by Sterling and Shapiro
+- [The Art of Prolog](https://mitpress.mit.edu/9780262691635/the-art-of-prolog/) Second Edition book by Sterling and Shapiro
 
-- [A Brief Introduction to Prolog](<https://www.youtube.com/watch?v=dKn-BbS_zQQ&v=1.1.1>) YouTube video by Erik Schierboom
+- [A Brief Introduction to Prolog](https://www.youtube.com/watch?v=dKn-BbS_zQQ) YouTube video by Erik Schierboom
 
-- [Clause and Effect](<https://link.springer.com/book/10.1007/978-3-642-58274-5?v=1.1.1>) book by Clocksin
+- [Clause and Effect](https://link.springer.com/book/10.1007/978-3-642-58274-5) book by Clocksin
 
-- [Coding guidelines for Prolog](<https://www.covingtoninnovations.com/mc/plcoding.pdf?v=1.1.1>)
+- [Coding guidelines for Prolog](https://www.covingtoninnovations.com/mc/plcoding.pdf)
 
-- [GNU Prolog](<http://www.gprolog.org?v=1.1.1>)
+- [GNU Prolog](http://www.gprolog.org)
 
-- [ISO Standard for Prolog](<https://www.iso.org/standard/21413.html?v=1.1.1>)
+- [ISO Standard for Prolog](https://www.iso.org/standard/21413.html)
 
-- [Learn Prolog Now!](<http://lpn.swi-prolog.org/lpnpage.php?pageid=online&v=1.1.1>)
+- [Learn Prolog Now!](http://lpn.swi-prolog.org/lpnpage.php?pageid=online)
 
-- [The Power of Prolog](<https://www.metalevel.at/prolog?v=1.1.1>)
+- [The Power of Prolog](https://www.metalevel.at/prolog)
   free, online book with accompanying videos by
-  [Dr. Markus Triska](<https://www.metalevel.at?v=1.1.1>)
+  [Dr. Markus Triska](https://www.metalevel.at)
   from the University of Technology in Austria
 
-- [Programming in Prolog](<https://link.springer.com/book/10.1007/978-3-642-55481-0?v=1.1.1>) Fifth edition book by Clocksin and Mellish
+- [Programming in Prolog](https://link.springer.com/book/10.1007/978-3-642-55481-0) Fifth edition book by Clocksin and Mellish
 
-- [Prolog and Logic Programming Historical Sources Archive](<https://www.softwarepreservation.org/projects/prolog?v=1.1.1>)
+- [Prolog and Logic Programming Historical Sources Archive](https://www.softwarepreservation.org/projects/prolog)
 
-- [Scryer Prolog](<https://www.scryer.pl?v=1.1.1>)
+- [Scryer Prolog](https://www.scryer.pl)
 
-- [SWI-Prolog](<https://www.swi-prolog.org?v=1.1.1>)
+- [SWI-Prolog](https://www.swi-prolog.org)
 
-- [13 Excellent Free Books to Learn Prolog](<https://www.linuxlinks.com/excellent-free-books-learn-prolog/?v=1.1.1>)
+- [13 Excellent Free Books to Learn Prolog](https://www.linuxlinks.com/excellent-free-books-learn-prolog/)
 
-- [Wikipedia](<https://en.wikipedia.org/wiki/Prolog?v=1.1.1>)
+- [Wikipedia](https://en.wikipedia.org/wiki/Prolog)
 
 ## Implementations
 
-There are many [implementations of the Prolog programming language](<https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations?v=1.1.1>).
+There are many [implementations of the Prolog programming language](https://en.wikipedia.org/wiki/Comparison_of_Prolog_implementations).
 The first Prolog implementation was Marseilles Prolog
 (also referred to as Prolog 0 to Prolog IV)
 developed at Marseilles University.
@@ -164,7 +164,7 @@ The second Prolog implementation was DEC-10 Prolog
 developed at Edinburgh University,
 and commonly referred to as Edinburgh Prolog.
 
-Many current Prolog implementations conform to the [ISO Standard for Prolog](<https://www.iso.org/standard/21413.html?v=1.1.1>).
+Many current Prolog implementations conform to the [ISO Standard for Prolog](https://www.iso.org/standard/21413.html).
 This defines the minimum requirements for conforming implementations.
 Most implementations also add features beyond the ISO standard.
 
@@ -179,7 +179,7 @@ abstract machine code for the Warren Abstract Machine (WAM).
 David Warren pioneered efficient Prolog implementation in 1977.
 Searches in WAM use an efficient hash-based approach.
 
-The table at [Conforming Testing](<http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing?v=1.1.1>)
+The table at [Conforming Testing](http://www.complang.tuwien.ac.at/ulrich/iso-prolog/conformity_testing)
 describes the degree to which each implementation conforms to the ISO standard.
 One reason to select a conforming implementation is that it increases
 the likelihood that your code will run in other implementations.
@@ -190,10 +190,10 @@ The Prolog implementations that are currently popular are described below.
 ### Scryer Prolog
 
 <img alt="Scryer Prolog logo" style="width: 20%"
-  src="/blog/assets/scryer-prolog-logo.png?v=1.1.1"
+  src="/blog/assets/scryer-prolog-logo.png"
   title="Scryer Prolog logo">
 
-[Scryer Prolog](<https://www.scryer.pl?v=1.1.1>)
+[Scryer Prolog](https://www.scryer.pl)
 "is a free software ISO Prolog system intended to be an
 industrial strength production environment and
 a testbed for bleeding edge research in logic and constraint programming."
@@ -255,7 +255,7 @@ For example:
 :- use_module(library(lists)).
 ```
 
-There is currently an [issue](<https://github.com/mthom/scryer-prolog/issues/1775?v=1.1.1>)
+There is currently an [issue](https://github.com/mthom/scryer-prolog/issues/1775)
 where operators defined in modules that are loaded in `.scryerrc`
 are not available in source files passed to the Scryer interpreter.
 A workaround is to explicitly load the module in the source file
@@ -328,9 +328,9 @@ error messages that are output by Scryer Prolog.
 
 ### SICStus Prolog
 
-[SICStus Prolog](<https://sicstus.sics.se?v=1.1.1>)
+[SICStus Prolog](https://sicstus.sics.se)
 is a commercial, high-performance implementation that began in 1986.
-A 30-day [evaluation version](<https://sicstus.sics.se/eval.html?v=1.1.1>) is free of charge.
+A 30-day [evaluation version](https://sicstus.sics.se/eval.html) is free of charge.
 
 SICS is an acronym for the Swedish Institute of Computer Science
 where SICStus was created.
@@ -344,10 +344,10 @@ No other system is even remotely comparable in terms of robustness.
 ### GNU Prolog
 
 <img alt="GNU Prolog logo" style="width: 20%"
-  src="/blog/assets/gnu-prolog-logo.png?v=1.1.1"
+  src="/blog/assets/gnu-prolog-logo.png"
   title="GNU Prolog logo">
 
-[GNU Prolog](<http://www.gprolog.org?v=1.1.1>).
+[GNU Prolog](http://www.gprolog.org).
 is implemented in C (84%) and Prolog (15%).
 
 To install the terminal command `gprolog` in macOS,
@@ -358,7 +358,7 @@ To start a GNU Prolog top level from a terminal, enter `gprolog`.
 ### SWI-Prolog
 
 <img alt="SWI-Prolog logo" style="width: 20%"
-  src="/blog/assets/swipl-logo.png?v=1.1.1"
+  src="/blog/assets/swipl-logo.png"
   title="SWI-Prolog logo">
 
 > SWI-Prolog offers a comprehensive free Prolog environment.
@@ -372,7 +372,7 @@ To start a GNU Prolog top level from a terminal, enter `gprolog`.
 > ("Social Science Informatics"), the former name of the group at
 > the University of Amsterdam, where Wielemaker is employed.
 
-[SWI-Prolog](<https://www.swi-prolog.org?v=1.1.1>)
+[SWI-Prolog](https://www.swi-prolog.org)
 is implemented in C (48%) and Prolog (39%).
 
 To install the terminal command `swipl` in macOS,
@@ -398,15 +398,15 @@ but does not run in other Prolog implementations.
 In addition, some code that is valid according to the ISO standard
 does not run in SWI-Prolog.
 
-For a detailed take on this issue, see [Preparing Prolog](<https://www.youtube.com/watch?v=kGQNeeRp4sM&v=1.1.1>).
+For a detailed take on this issue, see [Preparing Prolog](https://www.youtube.com/watch?v=kGQNeeRp4sM).
 
-Also see [SWI7 and ISO Prolog](<https://www.complang.tuwien.ac.at/ulrich/iso-prolog/SWI7_and_ISO?v=1.1.1>).
+Also see [SWI7 and ISO Prolog](https://www.complang.tuwien.ac.at/ulrich/iso-prolog/SWI7_and_ISO).
 
 #### SWI-Prolog Packs
 
 Packs are add-on libraries.
 
-To see a list of known packages, browse [Packs (add-ons) for SWI-Prolog](<https://www.swi-prolog.org/pack/list?v=1.1.1>).
+To see a list of known packages, browse [Packs (add-ons) for SWI-Prolog](https://www.swi-prolog.org/pack/list).
 Alternatively, enter `pack_list(substring)` where
 substring is part of one or more pack names.
 
@@ -417,12 +417,12 @@ The "reif" pack (reified if) implements the `if_` predicate
 which is similar to the `->` operator, but has some advantages.
 See the section "Higher-order Predicates" for examples.
 
-The [gvterm](<https://www.swi-prolog.org/pack/list?p=gvterm&v=1.1.1>) pack generates a graphviz file from a Prolog term.
+The [gvterm](https://www.swi-prolog.org/pack/list?p=gvterm) pack generates a graphviz file from a Prolog term.
 This is useful for visualizing the tree structure of a term.
 
 #### SWI-Prolog Debugging
 
-For information on using the debugger in SWI-Prolog, see [Overview of the Debugger](<https://www.swi-prolog.org/pldoc/man?section=debugoverview&v=1.1.1>).
+For information on using the debugger in SWI-Prolog, see [Overview of the Debugger](https://www.swi-prolog.org/pldoc/man?section=debugoverview).
 
 The `trace` predicate enables tracing of the search to find a query solution.
 
@@ -459,7 +459,7 @@ After a solution is found, press the semicolon key or the spacebar
 to begin searching for the next solution.
 
 <img alt="SWI-Prolog trace" style="width: 60%"
-  src="/blog/assets/swi-prolog-trace.png?v=1.1.1"
+  src="/blog/assets/swi-prolog-trace.png"
   title="SWI-Prolog trace">
 
 The `trace` predicate enables both the trace and debug modes.
@@ -475,7 +475,7 @@ and loads the compiled facts and rules.
 
 ### Ciao Prolog
 
-[Ciao](<https://ciao-lang.org?v=1.1.1>)
+[Ciao](https://ciao-lang.org)
 "is a modern Prolog implementation that builds up from a
 logic-based simple kernel designed to be portable, extensible, and modular."
 
@@ -495,15 +495,15 @@ To start a Ciao top level from a terminal, enter `ciao`.
 
 ### Other Implementations
 
-- [Tau](<http://tau-prolog.org?v=1.1.1>)
+- [Tau](http://tau-prolog.org)
   is implemented in JavaScript (95%) and Prolog (5%).
-- [Trealla](<https://github.com/trealla-prolog/trealla?v=1.1.1>)
+- [Trealla](https://github.com/trealla-prolog/trealla)
   is implemented in C (82%) and Prolog (18%).
 
 ## Online Top Level
 
 To enter and run Prolog code in a web browser using SWI-Prolog,
-browse [SWISH](<https://swish.swi-prolog.org?v=1.1.1>).
+browse [SWISH](https://swish.swi-prolog.org).
 
 Enter facts and rules in the left pane.
 Enter a query in the lower-right pane.
@@ -855,7 +855,7 @@ likes(mark, x) := female(X), likes(X, cycling).
 
 Variables retain their values across query conjunctions,
 but their values are lost when a query ends.
-This is a feature of [static single-assignment](<https://en.wikipedia.org/wiki/Static_single-assignment_form?v=1.1.1>) (SSA) that is used by Prolog.
+This is a feature of [static single-assignment](https://en.wikipedia.org/wiki/Static_single-assignment_form) (SSA) that is used by Prolog.
 In SSA,
 "each variable to be assigned exactly once and defined before it is used."
 and "every definition (Prolog fact, rule, or query) gets its own version."
@@ -981,7 +981,7 @@ it is often for one of these reasons.
   a lowercase letter instead of uppercase.
 - A rule has `:=` between its head and body instead of `:-`.
 - A goal in an intended conjunction ends with a period instead of a comma.
-  Look for the error message "Full stop in clause-body?".
+  Look for the error message "Full stop in clause-body".
 - The last argument to the `format` predicate is a single value
   instead of a list of values to be inserted in the format string.
 - An attempt assign an arithmetic expression to a variable
@@ -1238,7 +1238,7 @@ When the `double_quotes` flag is set to `chars`, the following are equivalent:
 - `"a"` and `[a]`
 - `"abc"` and `[a, b, c]`
 
-[The string type and its double quoted syntax](<https://www.swi-prolog.org/pldoc/man?section=string&v=1.1.1>) section 5.2.3
+[The string type and its double quoted syntax](https://www.swi-prolog.org/pldoc/man?section=string) section 5.2.3
 discusses the pros and cons of the string options.
 
 Since a double-quoted string becomes a list of character atoms,
@@ -1375,7 +1375,7 @@ ISO Prolog supports three data structures, structures, lists, and pairs.
 Some Prolog implementations, such as SWI-Prolog, also support dicts.
 
 SWI-Prolog also supports dicts (a.k.a dictionaries).
-See [Dicts: structures with named arguments](<https://eu.swi-prolog.org/pldoc/man?section=bidicts&v=1.1.1>).
+See [Dicts: structures with named arguments](https://eu.swi-prolog.org/pldoc/man?section=bidicts).
 
 ### Structures
 
@@ -2028,7 +2028,7 @@ There are two ways to write a pair, `k-v` or `-(k, v)`.
 Searches for specific pairs in a list of pairs are sequential.
 For a more efficient key lookup see the "Dicts" section.
 
-For details on predicates that operate on pairs, see [library(pairs): Operations on key-value lists](<https://eu.swi-prolog.org/pldoc/man?section=pairs&v=1.1.1>).
+For details on predicates that operate on pairs, see [library(pairs): Operations on key-value lists](https://eu.swi-prolog.org/pldoc/man?section=pairs).
 
 To sort a list of pairs on their keys:
 
@@ -2113,7 +2113,7 @@ queen_can_attack(R1-C1, R2-C2) :- % same diagonal
 Several Prolog implementations including
 Scryer Prolog, SICStus Prolog, and SWI-Prolog
 support collections of key/value pairs using the
-[assoc library](<https://www.scryer.pl/assoc.html?v=1.1.1>).
+[assoc library](https://www.scryer.pl/assoc.html).
 
 The following code demonstrates the most commonly used
 predicates from this library, but there are more.
@@ -2264,7 +2264,7 @@ ISO Prolog provides many built-in predicates that can be used
 to assert the type of arguments.
 These are not supported in Scryer Prolog.
 Instead see the "sufficiently instantiated" (si) family of predicates in
-[Module si](<https://www.scryer.pl/si.html?v=1.1.1>).
+[Module si](https://www.scryer.pl/si.html).
 
 | Predicate                             | Meaning                                                       |
 | ------------------------------------- | ------------------------------------------------------------- |
@@ -2571,7 +2571,7 @@ writeln('Hello World!'). % SWI-Prolog only
 writeln(current_output, 'Hello World!'). % SWI-Prolog only
 ```
 
-The [format](<https://www.swi-prolog.org/pldoc/man?predicate=format/2&v=1.1.1>) predicate can also write to the current output stream.
+The [format](https://www.swi-prolog.org/pldoc/man?predicate=format/2) predicate can also write to the current output stream.
 Often it is better to use the `format_` DCG non-terminal (described later)
 instead so the result can be captured and tested.
 
@@ -2737,7 +2737,7 @@ my_goal :-
 )).
 ```
 
-Another way to write to a string is to use a [memory file](<https://www.swi-prolog.org/pldoc/man?section=memory-files&v=1.1.1>)
+Another way to write to a string is to use a [memory file](https://www.swi-prolog.org/pldoc/man?section=memory-files)
 which may be specific to SWI-Prolog.
 This has the advantage that rules can be written to accept any stream,
 allowing them to write to a file or a string.
@@ -2853,7 +2853,7 @@ For example, `dif(A, B)` is similar to `A \== B`,
 but the difference is somewhat complicated.
 The `dif/2` predicate expresses that its arguments can never become identical
 and handles cases where this is not immediately known.
-For more detail, see [About dif/2](<https://github.com/dtonhofer/prolog_notes/tree/master/swipl_notes/about_dif?v=1.1.1>).
+For more detail, see [About dif/2](https://github.com/dtonhofer/prolog_notes/tree/master/swipl_notes/about_dif).
 
 The odd syntax for "equal" and "not equal"
 was chosen because `=` is used for unification.
@@ -2932,7 +2932,7 @@ There are four supported domains:
 - <a href="https://www.swi-prolog.org/pldoc/man?section=clpqr"
   target="_blank">CLP(R)<a> for floating point numbers
 
-When using Scryer or SICStus Prolog, consider using [CLP(Z)](<https://github.com/triska/clpz?v=1.1.1>) as an alternative to CLP(FD).
+When using Scryer or SICStus Prolog, consider using [CLP(Z)](https://github.com/triska/clpz) as an alternative to CLP(FD).
 
 The atoms `inf` and `sup` represent extreme values in a given domain.
 For example, when the `clpfd` (or `clpz`) library is loaded,
@@ -3284,7 +3284,7 @@ current_op(P, F, N).
 ## Arithmetic Functions
 
 Prolog supports a large number of functions that return a number.
-See [Arithmetic Functions](<https://www.swi-prolog.org/pldoc/man?section=functions&v=1.1.1>).
+See [Arithmetic Functions](https://www.swi-prolog.org/pldoc/man?section=functions).
 These include
 
 - `abs`: absolute value
@@ -3613,7 +3613,7 @@ call(Term). % evaluates term
 Prolog provides `throw` and `catch` predicates for error handling.
 
 The following built-in error types are provided
-(copied from [SICStus Error and Exception Handling](<https://sicstus.sics.se/sicstus/docs/3.12.11/html/sicstus/Exception.html?v=1.1.1>)):
+(copied from [SICStus Error and Exception Handling](https://sicstus.sics.se/sicstus/docs/3.12.11/html/sicstus/Exception.html)):
 
 - `instantiation_error` or `instantiation_error(Goal, ArgNo)`
 
@@ -3933,7 +3933,7 @@ For example:
 
 ## Efficiency
 
-For information about the performance of Prolog, see [Efficiency of Prolog](<https://www.metalevel.at/prolog/efficiency?v=1.1.1>).
+For information about the performance of Prolog, see [Efficiency of Prolog](https://www.metalevel.at/prolog/efficiency).
 
 ## Unit Tests
 
@@ -4012,7 +4012,7 @@ TODO: Add this!
 
 ### Sudoku
 
-Prolog can be used to solve puzzles such as [Sudoku](<https://en.wikipedia.org/wiki/Sudoku?v=1.1.1>).
+Prolog can be used to solve puzzles such as [Sudoku](https://en.wikipedia.org/wiki/Sudoku).
 
 The following code is based on code from Markus Triska in the SWI-Prolog manual.
 
@@ -4108,7 +4108,7 @@ This outputs the following solution:
 
 ### Einstein's Riddle
 
-Einstein's riddle, aka [Zebra Puzzle](<https://en.wikipedia.org/wiki/Zebra_Puzzle?v=1.1.1>),
+Einstein's riddle, aka [Zebra Puzzle](https://en.wikipedia.org/wiki/Zebra_Puzzle),
 describes a set of known facts and relationships
 and asks you to find some set of unknown values.
 
@@ -4911,7 +4911,7 @@ generate :-
 ## Meta-interprers
 
 The topic of meta-interpreters is covered well at
-[A Couple of Meta-interpreters in Prolog](<https://www.metalevel.at/acomip/?v=1.1.1>).
+[A Couple of Meta-interpreters in Prolog](https://www.metalevel.at/acomip/).
 Some key quotes from this post are:
 
 - "An interpreter is a program that evaluates programs."
@@ -4933,11 +4933,11 @@ SWI-Prolog can be called from C, JavaScript, and an HTTP server.
 
 ### Calling SWI-Prolog From C
 
-For calling SWI-Prolog from C, see [Calling Prolog from C](<https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c&v=1.1.1>).
+For calling SWI-Prolog from C, see [Calling Prolog from C](https://www.swi-prolog.org/pldoc/man?section=calling-prolog-from-c).
 
 ### Calling SWI-Prolog From JavaScript
 
-The npm package [swipl](<https://github.com/rla/node-swipl#readme?v=1.1.1>) makes it easy to run Prolog queries from a Node.js application
+The npm package [swipl](https://github.com/rla/node-swipl#readme) makes it easy to run Prolog queries from a Node.js application
 which can be an Express server.
 This requires installing Node.js and SWI-Prolog.
 
@@ -5039,9 +5039,9 @@ home_page(_Request) :-
 To start the server, enter `swipl {filename}.pl`.
 Then browse localhost:{port-number}.
 
-For more detail, see [The HTTP server libraries](<https://www.swi-prolog.org/pldoc/man?section=httpserver&v=1.1.1>).
+For more detail, see [The HTTP server libraries](https://www.swi-prolog.org/pldoc/man?section=httpserver).
 
-Another way to run Prolog code in an HTTP server is to use [Pengines](<https://pengines.swi-prolog.org/docs/index.htm?v=1.1.1>).
+Another way to run Prolog code in an HTTP server is to use [Pengines](https://pengines.swi-prolog.org/docs/index.htm).
 However, the getting started page says
 "We cannot at this time guarantee the safety of the Pengines platform.
 We think it is safe, but only if you know what you are doing.
@@ -5227,6 +5227,6 @@ TODO: Can you run Prolog code inside Neovim?
 
 ## Miscellaneous Topics
 
-For multithreading, see the [spawn](<http://packs.ndrix.com/spawn/index.html?v=1.1.1>) library.
+For multithreading, see the [spawn](http://packs.ndrix.com/spawn/index.html) library.
 
 TODO: Can you create an HTTP server that returns results of a Prolog program?

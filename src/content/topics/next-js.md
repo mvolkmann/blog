@@ -6,10 +6,10 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Next.js](<https://nextjs.org?v=1.1.1>)
+[Next.js](https://nextjs.org)
 is a full-stack web framework built on React.
 
-Next.js uses [Turbopack](<https://turbo.build/pack?v=1.1.1>)
+Next.js uses [Turbopack](https://turbo.build/pack)
 rather than Vite as its module bundler.
 Turbopack bills itself as the "Rust-powered successor to Webpack".
 It claims to be 10 times faster than Vite and 700 times faster than Webpack.
@@ -112,7 +112,7 @@ When using Tailwind, consider installing the extensions
 
 ## Tailwind
 
-To configure the use of Tailwind in a Next.js project, see [Install Tailwind CSS with Next.js](<https://tailwindcss.com/docs/guides/nextjs?v=1.1.1>).
+To configure the use of Tailwind in a Next.js project, see [Install Tailwind CSS with Next.js](https://tailwindcss.com/docs/guides/nextjs).
 These steps should not be necessary if you opted into use of Tailwind
 when the project was created.
 
@@ -120,7 +120,7 @@ when the project was created.
 
 Import statements can use paths that begin with the character `@`
 to specify a path that begins at the root of the project
-rather than being relative to the current directory. See [Module Aliases](<https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases?v=1.1.1>).
+rather than being relative to the current directory. See [Module Aliases](https://nextjs.org/docs/app/building-your-application/configuring/absolute-imports-and-module-aliases#module-aliases).
 
 By default the file `tsconfig.json` contains the following:
 
@@ -209,7 +209,7 @@ it must be split into server and client components.
 Typically server component render client components,
 but the opposite is also supported.
 
-For more detail, see [React Essentials](<https://nextjs.org/docs/getting-started/react-essentials?v=1.1.1>).
+For more detail, see [React Essentials](https://nextjs.org/docs/getting-started/react-essentials).
 
 ## CSS
 
@@ -237,7 +237,7 @@ To attempt to scope CSS rules to the component:
    }
    ```
 
-Newer browser versions can use [CSS Nesting](<https://caniuse.com/css-nesting?v=1.1.1>) to
+Newer browser versions can use [CSS Nesting](https://caniuse.com/css-nesting) to
 avoid having to repeat the root element CSS class name.
 For example:
 
@@ -318,7 +318,7 @@ These are nested inside the main layout.
 
 Next.js supports four kinds of page generation.
 
-- [Client-side Rendering](<https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering?v=1.1.1>)
+- [Client-side Rendering](https://nextjs.org/docs/pages/building-your-application/rendering/client-side-rendering)
 
   CSR pages are generated on the client.
   These pages can perform data fetching in a `useEffect` hook
@@ -328,7 +328,7 @@ Next.js supports four kinds of page generation.
 
   This option is the least desirable for search engine optimization (SEO).
 
-- [Server Side Rendering (SSR)](<https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering?v=1.1.1>)
+- [Server Side Rendering (SSR)](https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering)
 
   SSR pages are dynamically generated on the server on **every** request.
   SSR is used for pages that export the function `getServerSideProps`.
@@ -350,7 +350,7 @@ Next.js supports four kinds of page generation.
   }
   ```
 
-- [Incremental Static Regeneration (ISR)](<https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration?v=1.1.1>)
+- [Incremental Static Regeneration (ISR)](https://nextjs.org/docs/pages/building-your-application/data-fetching/incremental-static-regeneration)
 
   ISR pages are statically generated when each page is requested
   instead of at build time.
@@ -376,7 +376,7 @@ Next.js supports four kinds of page generation.
   }
   ```
 
-- [Static Site Generation (SSG)](<https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation?v=1.1.1>)
+- [Static Site Generation (SSG)](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation)
 
   SSG pages do not render any dynamic data and are generated at build time.
   This is preferred when possible and is the default
@@ -465,7 +465,7 @@ export const revalidate = 60;
 ```
 
 To manually control caching, use React's `cache` function.
-See [Fetching data on the Server with third-party libraries](<https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#fetching-data-on-the-server-with-third-party-libraries?v=1.1.1>).
+See [Fetching data on the Server with third-party libraries](https://nextjs.org/docs/app/building-your-application/data-fetching/fetching-caching-and-revalidating#fetching-data-on-the-server-with-third-party-libraries).
 This is especially useful when data is fetched
 in a way that does not use the `fetch` function.
 
@@ -507,7 +507,7 @@ A common example is errors that occur when fetching data.
 
 Error pages wrap the page in a "React Error Boundary" and
 must be written in a specific way that differs from normal components.
-See [Error Handling](<https://nextjs.org/docs/app/building-your-application/routing/error-handling?v=1.1.1>).
+See [Error Handling](https://nextjs.org/docs/app/building-your-application/routing/error-handling).
 
 Source files for error pages must begin with `'use client';`.
 
@@ -551,13 +551,13 @@ import Link from 'next/link';
 <Link href="some-url">link text</Link>;
 ```
 
-To add query parameters to a URL, consider using [URLSearchParams](<https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams?v=1.1.1>).
+To add query parameters to a URL, consider using [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).
 
 To prevent prefetching of the `Link` target, add `prefetch={false}`.
 
 ## Images
 
-Next.js provides an [Image](<https://nextjs.org/docs/app/building-your-application/optimizing/images?v=1.1.1>) component that optimizes images.
+Next.js provides an [Image](https://nextjs.org/docs/app/building-your-application/optimizing/images) component that optimizes images.
 This should be used in place of the HTML `img` element.
 For example:
 
@@ -567,9 +567,9 @@ import Image from 'next/image';
 <Image src={someImageURL} alt="some description" />
 ```
 
-For other supported props, see [<Image>](<https://nextjs.org/docs/app/api-reference/components/image?v=1.1.1>).
+For other supported props, see [<Image>](https://nextjs.org/docs/app/api-reference/components/image).
 
-The npm package [sharp](<https://www.npmjs.com/package/sharp?v=1.1.1>) is used to "convert large images in common formats to smaller,
+The npm package [sharp](https://www.npmjs.com/package/sharp) is used to "convert large images in common formats to smaller,
 web-friendly JPEG, PNG, WebP, GIF and AVIF images of varying dimensions."
 TODO: Should this be used in conjunction with the `Image` component?
 
@@ -724,7 +724,7 @@ unless they are imported.
 ## Generating Static Pages
 
 To generate static pages (SSG) that use path parameters at build time,
-define and export the [generateStaticParams](<https://nextjs.org/docs/app/api-reference/functions/generate-static-params?v=1.1.1>) function.
+define and export the [generateStaticParams](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) function.
 This only works if the `dynamicParams` configuration option is set to `true`,
 which it is by default.
 
@@ -878,7 +878,7 @@ export default async function DogManager() {
 
 ## Route Handlers
 
-REST APIs can be implemented by defining [route handlers](<https://nextjs.org/docs/app/building-your-application/routing/route-handlers?v=1.1.1>).
+REST APIs can be implemented by defining [route handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers).
 These can export any of the following functions:
 `DELETE`, `GET`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, and `PUT`.
 
@@ -1020,7 +1020,7 @@ const name = searchParams.get('name');
 
 ## Authentication
 
-The [NextAuth.js](<https://next-auth.js.org?v=1.1.1>) library
+The [NextAuth.js](https://next-auth.js.org) library
 makes it very easy to add authentication
 using any of the following OAuth providers: Apple, Facebook, Google.
 Password-less email authentication is also supported.
@@ -1081,7 +1081,7 @@ useEffect(() => {
 
 To provide environment variables to a Next.js app,
 define them in the file `.env.local` in the root project directory.
-See [Environment Variables](<https://nextjs.org/docs/app/building-your-application/configuring/environment-variables?v=1.1.1>).
+See [Environment Variables](https://nextjs.org/docs/app/building-your-application/configuring/environment-variables).
 
 The default `.gitignore` file in Next.js apps includes this file,
 so it will not be committed.
@@ -1115,7 +1115,7 @@ as long as names do not begin with `NEXT_PUBLIC_`.
 
 ## Middleware
 
-Next.js supports defining [middleware](<https://nextjs.org/docs/app/building-your-application/routing/middleware?v=1.1.1>) that runs before API calls are processed.
+Next.js supports defining [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) that runs before API calls are processed.
 
 Each Next.js app can include one `middleware.ts` file in the
 project root directory which is typically the `src` directory.
@@ -1297,7 +1297,7 @@ when `limiter.ts` tries to create a `RateLimiter` object.
 
 ## Sitemaps
 
-From [Learn about sitemaps](<https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?v=1.1.1>):
+From [Learn about sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview):
 
 > A sitemap is a file where you provide information about the pages, videos,
 > and other files on your site, and the relationships between them.
@@ -1338,7 +1338,7 @@ To generate a sitemap for a Next.js application:
 Let's create a Next.js web app for managing a collection of dogs.
 
 <img alt="Dog CRUD app" style="width: 50%"
-  src="/blog/assets/htmx-dog-crud.png?v=1.1.1">
+  src="/blog/assets/htmx-dog-crud.png">
 
 All the code can be found in the GitHub repository at
 <a href="https://github.com/mvolkmann/nextjs-dogs-crud"
@@ -1583,7 +1583,7 @@ The following steps create this app from scratch.
      }
 
      async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
-       if (!confirm('Are you sure?')) return;
+       if (!confirm('Are you sure')) return;
 
        const tr = event.currentTarget.closest('tr');
        if (!tr) throw new Error('tr not found');

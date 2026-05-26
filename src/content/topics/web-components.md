@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 <figure style="width: 30%">
   <img alt="Web Components logo" style="border: 0"
-    src="/blog/assets/web-components-logo.svg?v=1.1.1">
+    src="/blog/assets/web-components-logo.svg">
 </figure>
 
 ## Overview
@@ -25,7 +25,7 @@ See my updated slides from this talk at
 <a href="https://github.com/mvolkmann/talks/blob/master/lambda-calculus.key.pdf"
 target="_blank">Lambda Calculus slides</a>.
 
-[Web components](<https://www.webcomponents.org/introduction?v=1.1.1>)
+[Web components](https://www.webcomponents.org/introduction)
 define custom HTML elements that can be used just like standard HTML elements.
 They are defined by a set of standards that include the
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements"
@@ -97,7 +97,7 @@ Some of the cons of using web components include:
 
 ## Open UI
 
-[Open UI](<https://open-ui.org?v=1.1.1>)
+[Open UI](https://open-ui.org)
 is a W3C Community Group whose goal is "to allow web developers to
 style and extend built-in web UI components and controls,
 such as select dropdowns, checkboxes, radio buttons, and date/color pickers."
@@ -199,7 +199,7 @@ element.innerHTML = `
 ```
 
 The following HTML renders an instance of the web component defined above.
-It uses [Alpine](<https://alpinejs.dev/?v=1.1.1>)
+It uses [Alpine](https://alpinejs.dev/)
 to add a bit of interactivity.
 
 ```html
@@ -252,7 +252,7 @@ the attributes and child nodes of the custom element are not yet known.
 To create a shadow DOM,
 call `this.attachShadow({mode: "open"})`
 or `this.attachShadow({mode: "closed"})`.
-The `attachShadow` method returns a [ShadowRoot](<https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot?v=1.1.1>) object.
+The `attachShadow` method returns a [ShadowRoot](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot) object.
 
 The recommended mode is "open", which causes `this.shadowRoot`
 to be set to the same `ShadowRoot` object that is returned.
@@ -276,36 +276,36 @@ regardless of the mode.
 
 ## Libraries That Simplify
 
-- [Lit](</blog/topics/#/blog/lit/?v=1.1.1>)
-- [Stencil](<https://stenciljs.com?v=1.1.1>)
-- [Microsoft FAST](<https://fast.design?v=1.1.1>)
+- [Lit](/blog/topics/#/blog/lit/)
+- [Stencil](https://stenciljs.com)
+- [Microsoft FAST](https://fast.design)
 
 ## Available Web Components
 
-- [Web Awesome](<https://backers.webawesome.com?v=1.1.1>)
+- [Web Awesome](https://backers.webawesome.com)
 
   "Make something awesome with open-source web components."
 
-- [Shoelace](<https://shoelace.style?v=1.1.1>)
+- [Shoelace](https://shoelace.style)
 
   "A forward-thinking library of web components."
 
-- [Fluent UI Web Components](<https://github.com/microsoft/fluentui/tree/master/packages/web-components?v=1.1.1>)
+- [Fluent UI Web Components](https://github.com/microsoft/fluentui/tree/master/packages/web-components)
 
   from Microsoft
 
-- [Lion](<https://lion-web.netlify.app?v=1.1.1>)
+- [Lion](https://lion-web.netlify.app)
 
   "Fundamental white label web components for building your design system."
 
-- [Awesome Standalones](<https://github.com/davatron5000/awesome-standalones?v=1.1.1>)
+- [Awesome Standalones](https://github.com/davatron5000/awesome-standalones)
   from Dave Rupert
 
   "A curated list of awesome framework-agnostic standalone web components."
 
-- [generic-components](<https://genericcomponents.netlify.app?v=1.1.1>)
+- [generic-components](https://genericcomponents.netlify.app)
 
-- [Lottie Player](<https://lottiefiles.github.io/lottie-player/?v=1.1.1>)
+- [Lottie Player](https://lottiefiles.github.io/lottie-player/)
 
   This web component enables playing Lottie animations.
   It can be included from a CDN with the following:
@@ -327,11 +327,11 @@ regardless of the mode.
   </lottie-player>
   ```
 
-For more, see [Community: Component Libraries](<https://open-wc.org/guides/community/component-libraries/?v=1.1.1>).
+For more, see [Community: Component Libraries](https://open-wc.org/guides/community/component-libraries/).
 
 ## Custom Elements
 
-[Custom Elements](<https://html.spec.whatwg.org/multipage/custom-elements.html?v=1.1.1>) provide a way to define and use custom HTML elements.
+[Custom Elements](https://html.spec.whatwg.org/multipage/custom-elements.html) provide a way to define and use custom HTML elements.
 
 A custom element is defined by a JavaScript class that extends `HTMLElement`.
 The following code in the file `hello-world.js`
@@ -364,7 +364,7 @@ and element names to use kebab-case.
 
 Often the part before the first hyphen serves as a namespace.
 For example, all the custom elements provided by
-[Shoelace](<https://shoelace.style?v=1.1.1>) begin with "sl-".
+[Shoelace](https://shoelace.style) begin with "sl-".
 
 The following HTML demonstrates using the custom element defined above.
 
@@ -383,7 +383,7 @@ The following HTML demonstrates using the custom element defined above.
 
 ## Shadow DOM
 
-The [Shadow DOM](<https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM?v=1.1.1>) provides a way to encapsulate the content and styling
+The [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) provides a way to encapsulate the content and styling
 of a custom element.
 
 Many standard HTML elements utilize a shadow DOM.
@@ -602,7 +602,7 @@ However, this can be implemented if
 the static property `formAssociated` is set to `true` and
 the component sets the form values to be contributed to the containing form
 using the `setFormValue` method
-on an object returned by the `HTMLElement` method [attachInternals](<https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals?v=1.1.1>) method.
+on an object returned by the `HTMLElement` method [attachInternals](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals) method.
 
 To demonstrate this, let's create three web components
 that render a group of radio buttons.
@@ -851,7 +851,7 @@ export class RadioGroupLit extends LitElement {
           .checked=${option === this.value}
           @change=${this.handleChange}
         />
-        <!-- Note the "." before "checked", not "?", in order to
+        <!-- Note the "." before "checked", not "", in order to
              update the "checked" property of the input element
              and not just the checked attribute. -->
         <label for="${option}">${option}</label>
@@ -897,7 +897,7 @@ this.#internals.setFormValue(data);
 
 ## JavaScript Modules
 
-The [JavaScript Modules](<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules?v=1.1.1>) support exporting and importing
+The [JavaScript Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) support exporting and importing
 functions, classes, objects, constants, and variables.
 
 To use the `export` and `import` keywords in a JavaScript source file,
@@ -917,7 +917,7 @@ rather than the order in which each download completes.
 
 ## HTML Templates
 
-The HTML [template element](<https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots?v=1.1.1>) provides a way to define an HTML fragment
+The HTML [template element](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_templates_and_slots) provides a way to define an HTML fragment
 that can be cloned and inserted multiple times into a DOM tree.
 This is fast because the content of a `template` element in parsed only once.
 The resulting DOM root element is assigned to its `content` property.
@@ -951,7 +951,7 @@ HTML does not define a mechanism for including one HTML file into another.
 So we can't define templates in a separate file that is included.
 
 <img alt="Web Components and templates" style="width: 40%"
-  src="/blog/assets/web-component-templates.png?v=1.1.1">
+  src="/blog/assets/web-component-templates.png">
 
 ```js
 class MyCard extends HTMLElement {
@@ -1087,7 +1087,7 @@ It applies to actual elements in slots, not text nodes.
 The following HTML demonstrates using the web component defined above.
 
 <img alt="Web Component slots and parts" style="border: 0; width: 60%"
-  src="/blog/assets/web-component-slots-parts.png?v=1.1.1">
+  src="/blog/assets/web-component-slots-parts.png">
 
 ```html
 <!DOCTYPE html>
@@ -1303,7 +1303,7 @@ which prevents rendering components that are not yet "defined".
 ```
 
 A more involved approach using `customElements.whenDefined`
-is described in [Waiting for Components to Load](<https://shoelace.style/getting-started/usage#waiting-for-components-to-load?v=1.1.1>).
+is described in [Waiting for Components to Load](https://shoelace.style/getting-started/usage#waiting-for-components-to-load).
 
 ## Counter Example
 
@@ -1848,11 +1848,11 @@ The steps to use it are:
 
 1. `cd` to the project root directory.
 1. Enter `npm create storybook@latest`.
-1. When prompted "What configuration should we install?", select
+1. When prompted "What configuration should we install", select
    "Recommended: Component dev, docs, test"
 1. If you see the message "We couldn't detect your project type.
    (code: UNDETECTED)", followed by the prompt
-   "Do you want to manually choose a Storybook project type to install?",
+   "Do you want to manually choose a Storybook project type to install",
    select "Y".
 1. Select "web_components".
 1. After a few minutes, Storybook will launch in your default web browser.

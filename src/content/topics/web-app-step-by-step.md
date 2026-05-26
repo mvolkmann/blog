@@ -29,8 +29,8 @@ We will cover many topics including these:
 - authentication with encrypted tokens
 - creating SSL certificates
 - React and create-react-app
-- [socket.io](<https://socket.io?v=1.1.1>)
+- [socket.io](https://socket.io)
   for server to client communication
 - nodemon
 
-See my Object Computing (OCI) article [Web App Step by Step](<https://objectcomputing.com/resources/publications/sett/april-2017-web-app-step-by-step?v=1.1.1>).
+See my Object Computing (OCI) article [Web App Step by Step](https://objectcomputing.com/resources/publications/sett/april-2017-web-app-step-by-step).

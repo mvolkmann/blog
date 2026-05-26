@@ -7,13 +7,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-iOS 16 added the [Gauge](<https://developer.apple.com/documentation/swiftui/gauge?v=1.1.1>) view
+iOS 16 added the [Gauge](https://developer.apple.com/documentation/swiftui/gauge) view
 that graphically displays a value within a range.
 
 ## Example App
 
-See the example app [GaugesDemo](<https://github.com/mvolkmann/GaugesDemo?v=1.1.1>).
-It is based on the YouTube video [Gauge View iOS 16](<https://www.youtube.com/watch?v=k38t-tjCM7g&v=1.1.1>)
+See the example app [GaugesDemo](https://github.com/mvolkmann/GaugesDemo).
+It is based on the YouTube video [Gauge View iOS 16](https://www.youtube.com/watch?v=k38t-tjCM7g)
 by Stewart Lynch.
 
 ## Gauge
@@ -106,8 +106,8 @@ Supported argument values include:
   for the background and foreground circles.
 
 <img alt="SwiftUI Linear Gauges" style="width: 45%"
-  src="/blog/assets/swiftui-gauges-linear.png?v=1.1.1"
+  src="/blog/assets/swiftui-gauges-linear.png"
   title="SwiftUI Linear Gauges">
 <img alt="SwiftUI Circular Gauges" style="width: 45%"
-  src="/blog/assets/swiftui-gauges-circular.png?v=1.1.1"
+  src="/blog/assets/swiftui-gauges-circular.png"
   title="SwiftUI Circular Gauges">

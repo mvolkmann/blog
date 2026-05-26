@@ -15,13 +15,13 @@ layout: topic-layout.njk
 
 ## UIKit Integration
 
-The [UIKit](<https://developer.apple.com/documentation/uikit?v=1.1.1>) framework predates SwiftUI which is now the preferred framework
+The [UIKit](https://developer.apple.com/documentation/uikit) framework predates SwiftUI which is now the preferred framework
 for building iOS, watchOS, macOS, and tvOS apps.
 
 UIKIt still has features not present in SwiftUI.
 When those features are needed, UIKit views can be used inside a SwiftUI app.
 This is accomplished by wrapping a UIKit view in a struct
-that conforms to the [UIViewRepresentable](<https://developer.apple.com/documentation/swiftui/uiviewrepresentable?v=1.1.1>) protocol.
+that conforms to the [UIViewRepresentable](https://developer.apple.com/documentation/swiftui/uiviewrepresentable) protocol.
 This is explained in the
 [UIViewRepresentable](#uiviewrepresentable) section below.
 
@@ -50,13 +50,13 @@ The hierarchy of a subset of the types defined by UIKit is shown below:
 ## UIView
 
 All views in the UIKit framework are classes that inherit from the
-[UIView](<https://developer.apple.com/documentation/uikit/uiview?v=1.1.1>) class, either directly or indirectly.
-For example, the [UIButton](<https://developer.apple.com/documentation/uikit/uibutton?v=1.1.1>)
-class inherits from [UIControl](<https://developer.apple.com/documentation/uikit/uicontrol?v=1.1.1>)
+[UIView](https://developer.apple.com/documentation/uikit/uiview) class, either directly or indirectly.
+For example, the [UIButton](https://developer.apple.com/documentation/uikit/uibutton)
+class inherits from [UIControl](https://developer.apple.com/documentation/uikit/uicontrol)
 class which inherits `UIView`.
 
 UIKit views typically have properties that are set after an instance is created.
-The following code creates a [UILabel](<https://developer.apple.com/documentation/uikit/uilabel?v=1.1.1>)
+The following code creates a [UILabel](https://developer.apple.com/documentation/uikit/uilabel)
 and sets some of its properties.
 
 ```swift
@@ -70,8 +70,8 @@ UIKit views that need to report on changes to their state
 or user interactions sometimes do so using a "delegate".
 This is an object that conforms to a specific protocol
 and is assigned to a `UIView` instance.
-For example, [UITextView](<https://developer.apple.com/documentation/uikit/uitextview?v=1.1.1>)
-has a `delegate` property whose type is the [UITextViewDelegate](<https://developer.apple.com/documentation/uikit/uitextviewdelegate?v=1.1.1>) protocol.
+For example, [UITextView](https://developer.apple.com/documentation/uikit/uitextview)
+has a `delegate` property whose type is the [UITextViewDelegate](https://developer.apple.com/documentation/uikit/uitextviewdelegate) protocol.
 That protocol defines several methods that are invoked when
 the user interacts with the `UITextView` such as `textViewDidChange`.
 
@@ -107,7 +107,7 @@ that correspond to UIKit concepts:
 ## UIViewRepresentable
 
 UIKit views can be used in a SwiftUI app by wrapping them
-in a struct that conforms to the [UIViewRepresentable](<https://developer.apple.com/documentation/swiftui/uiviewrepresentable?v=1.1.1>) protocol.
+in a struct that conforms to the [UIViewRepresentable](https://developer.apple.com/documentation/swiftui/uiviewrepresentable) protocol.
 However, there is enough functionality in SwiftUI
 that this is typically not necessary.
 
@@ -124,7 +124,7 @@ because SwiftUI provides the `Text` view which can be used instead.
 However, doing so provides a simple example of using `UIViewRepresentable`.
 
 <img alt="UIViewRepresentable with display-only" style="width: 40%"
-  src="/blog/assets/SwiftUI-UIViewRepresentable-DisplayOnly.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-DisplayOnly.png"
   title="UIViewRepresentable with display-only">
 
 ```swift
@@ -188,7 +188,7 @@ Changing the binding will cause the view that owns the binding to update.
 The following code demonstrates this approach.
 
 <img alt="UIViewRepresentable with Binding" style="width: 40%"
-  src="/blog/assets/SwiftUI-UIViewRepresentable-Binding.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-Binding.png"
   title="UIViewRepresentable with Binding">
 
 ```swift
@@ -345,7 +345,7 @@ The user can center the map on the device location
 by tapping the "Reset" button.
 
 <img alt="UIViewRepresentable with ViewModel" style="width: 40%"
-  src="/blog/assets/SwiftUI-UIViewRepresentable-ViewModel.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-UIViewRepresentable-ViewModel.png"
   title="UIViewRepresentable with ViewModel">
 
 ```swift

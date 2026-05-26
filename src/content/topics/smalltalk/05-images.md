@@ -39,7 +39,7 @@ If there are any unsaved changes,
 a confirmation popup will appear that says
 "Some ChangeSets for Cuis core have unsaved changes.
 If you continue, they would be lost.
-Do you really want to exit Cuis without saving the image?"
+Do you really want to exit Cuis without saving the image"
 Click "Yes" or "No".
 
 While the classes and methods provided by a base image can be modified,

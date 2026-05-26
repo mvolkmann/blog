@@ -202,8 +202,8 @@ print(stats)
 
 print('modified at', datetime.fromtimestamp(stats.st_mtime))
 mode = stats.st_mode
-print('is directory?', stat.S_ISDIR(mode))
-print('is regular file?', stat.S_ISREG(mode))
+print('is directory', stat.S_ISDIR(mode))
+print('is regular file', stat.S_ISREG(mode))
 
 def have_permission(stats, permission):
     return stat.S_IMODE(stats.st_mode) & permission == permission

@@ -28,12 +28,12 @@ GitHub stars are a measure of the number of software developers
 that find a repository interesting, and perhaps already use or plan to use it.
 
 <img alt="GitHub stars" style="border: 0; width: 100%"
-  src="/blog/assets/github-stars-history.png?v=1.1.1">
+  src="/blog/assets/github-stars-history.png">
 
 ## Alpine
 
 <img alt="Alpine logo" style="border: 0; width: 20%"
-  src="/blog/assets/alpine-logo.png?v=1.1.1">
+  src="/blog/assets/alpine-logo.png">
 
 <a href="https://alpinejs.dev" target="_blank">Alpine</a>
 is a JavaScript framework that provides custom attributes that are
@@ -60,7 +60,7 @@ The `x-on` attribute registers an event handler.
 The `x-text` attribute renders the value of a property in Alpine state.
 
 <img alt="Alpine counter" style="width: 20%"
-  src="/blog/assets/alpine-counter.png?v=1.1.1">
+  src="/blog/assets/alpine-counter.png">
 
 ```js
 <html>
@@ -92,7 +92,7 @@ For more detail, see my
 ## Astro
 
 <img alt="Astro logo" style="border: 0; width: 20%"
-  src="/blog/assets/astro-logo.svg?v=1.1.1">
+  src="/blog/assets/astro-logo.svg">
 
 <a href="https://astro.build" target="_blank">Astro</a>
 is a free, open-source (MIT license) framework that is
@@ -128,7 +128,7 @@ For more detail, see my
 ## Bun
 
 <img alt="Bun logo" style="border: 0; width: 20%"
-  src="/blog/assets/bun-logo.svg?v=1.1.1">
+  src="/blog/assets/bun-logo.svg">
 
 "<a href="https://bun.sh" target="_blank">Bun</a>
 is a fast JavaScript all-in-one toolkit."
@@ -190,7 +190,7 @@ For more detail, see my
 ## Cloudflare Workers
 
 <img alt="Cloudflare Workers logo" style="border: 0; width: 20%"
-  src="/blog/assets/cloudflare-workers-logo.svg?v=1.1.1">
+  src="/blog/assets/cloudflare-workers-logo.svg">
 
 <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>
 host edge functions.
@@ -233,7 +233,7 @@ target="_blank">Cloudflare Workers</a> blog page.
 ## Drizzle
 
 <img alt="Drizzle logo" style="border: 0; width: 20%"
-  src="/blog/assets/drizzle-logo.png?v=1.1.1">
+  src="/blog/assets/drizzle-logo.png">
 
 <a href="https://orm.drizzle.team" target="_blank">Drizzle</a> is a
 TypeScript-based Object Relational Mapper (ORM) library
@@ -288,7 +288,7 @@ For more detail, see my
 ## Hono
 
 <img alt="Hono logo" style="border: 0; width: 20%"
-  src="/blog/assets/hono-logo.png?v=1.1.1">
+  src="/blog/assets/hono-logo.png">
 
 <a href="https://hono.dev/" target="_blank">Hono</a>
 is a JavaScript HTTP server library that runs in any JavaScript runtime.
@@ -314,7 +314,7 @@ For more detail, see my
 ## htmx
 
 <img alt="htmx logo" style="border: 0; width: 20%"
-  src="/blog/assets/htmx-logo.png?v=1.1.1">
+  src="/blog/assets/htmx-logo.png">
 
 Htmx is in my 2024 list because it
 provides a fresh take on building web applications
@@ -419,7 +419,7 @@ target="_blank">Server-Sent Events</a> blog page.
 ## WebSockets
 
 <img alt="WebSocket logo" style="border: 0; width: 20%"
-  src="/blog/assets/websocket-logo.svg?v=1.1.1">
+  src="/blog/assets/websocket-logo.svg">
 
 <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications"
 target="_blank">WebSockets</a> are a standardized protocol for
@@ -436,7 +436,7 @@ target="_blank">Server-Sent Events</a> (SSE).
 WebSockets support text and binary data, whereas SSE only supports UTF-8 text.
 
 WebSockets require upgrading an existing HTTP connection.
-For details, see the MDN page [Protocal upgrade mechanism](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism?v=1.1.1>).
+For details, see the MDN page [Protocal upgrade mechanism](https://developer.mozilla.org/en-US/docs/Web/HTTP/Protocol_upgrade_mechanism).
 
 Many WebSocket libraries for server-side programming languages
 and environments exist.
@@ -447,7 +447,7 @@ target="_blank">WebSockets</a> blog page.
 ## Zig
 
 <img alt="Zig logo" style="border: 0; width: 20%"
-  src="/blog/assets/zig-logo.svg?v=1.1.1">
+  src="/blog/assets/zig-logo.svg">
 
 <a href="https://ziglang.org" target="_blank">Zig</a>
 is a free, open source (MIT license),
@@ -530,7 +530,7 @@ For more detail, see my
 ## Zod
 
 <img alt="Zod logo" style="border: 0; width: 20%"
-  src="/blog/assets/zod-logo.svg?v=1.1.1">
+  src="/blog/assets/zod-logo.svg">
 
 <a href="https://zod.dev" target="_blank">Zod</a>
 is a TypeScript library for validating JavaScript values.

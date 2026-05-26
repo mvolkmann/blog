@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 <!-- markdownlint-disable MD013 -->
 
-The [`itertools`](<https://docs.python.org/3/library/itertools.html?v=1.1.1>) module in the Python standard library
+The [`itertools`](https://docs.python.org/3/library/itertools.html) module in the Python standard library
 provides functions for creating iterators.
 The most commonly used of these functions are demonstrated below.
 

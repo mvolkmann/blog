@@ -20,4 +20,4 @@ some of which are beautiful and some not so much.
 This article presents the most valuable parts of the TypeScript language.
 At the end, it lists features that most developers should avoid.
 
-See my Object Computing (OCI) article [TypeScript: The Good Parts](<https://objectcomputing.com/resources/publications/sett/typescript-the-good-parts?v=1.1.1>).
+See my Object Computing (OCI) article [TypeScript: The Good Parts](https://objectcomputing.com/resources/publications/sett/typescript-the-good-parts).

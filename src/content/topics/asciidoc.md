@@ -7,19 +7,19 @@ layout: topic-layout.njk
 <div class="row">
   <figure style="width: 25%">
     <img alt="AsciiDoc logo" style="border: 0"
-      src="/blog/assets/asciidoc-logo.png?v=1.1.1">
+      src="/blog/assets/asciidoc-logo.png">
     <figcaption>AsciiDoc logo</figcaption>
   </figure>
   <figure style="width: 25%">
     <img alt="Asciidoctor logo" style="border: 0"
-      src="/blog/assets/asciidoctor-logo.svg?v=1.1.1">
+      src="/blog/assets/asciidoctor-logo.svg">
     <figcaption>Asciidoctor logo</figcaption>
   </figure>
 </div>
 
 ## Overview
 
-[AsciiDoc](http://asciidoc.org/?v=1.1.1)
+[AsciiDoc](http://asciidoc.org/)
 is a document creation language.
 It positions nicely between Markdown and LaTeX
 in terms learning curve and feature set.
@@ -56,7 +56,7 @@ using version control software like Git.
 
 ## Comparison to Markdown
 
-[Markdown](https://mvolkmann.github.io/blog/markdown/?v=1.1.1)
+[Markdown](https://mvolkmann.github.io/blog/markdown/)
 was created in 2004 by John Gruber and Aaron Swartz.
 Markdown:
 
@@ -90,7 +90,7 @@ TODO: Describe the difference in table syntax.
 
 ## Comparison to LaTeX
 
-[LaTeX](https://mvolkmann.github.io/blog/latex/?v=1.1.1)
+[LaTeX](https://mvolkmann.github.io/blog/latex/)
 is a typesetting system created by Leslie Lamport in 1984.
 LaTeX:
 
@@ -289,7 +289,7 @@ See my [.custom]#custom styling# defined in a CSS file.
 
 This does not work in VS Code previews or when converting to PDF and EPUB.
 To use custom roles in conversion to PDF, see
-[Roles](https://docs.asciidoctor.org/pdf-converter/latest/roles/?v=1.1.1).
+[Roles](https://docs.asciidoctor.org/pdf-converter/latest/roles/).
 This explains that the custom roles must be defined
 in a YAML theme file rather than in a CSS file.
 
@@ -398,7 +398,7 @@ The appendices are assigned the letters A, B, C, and so on.
 
 To install the `asciidoctor` command in macOS:
 
-1. Install [Homebrew](https://brew.sh?v=1.1.1).
+1. Install [Homebrew](https://brew.sh).
 1. Install the latest version of Ruby.
 
    Enter `brew install ruby` to install by the `ruby` and `gem` commands.
@@ -447,7 +447,7 @@ AsciiDoc supports system-defined (built-in) and user-defined attributes.
 There are two categories of system-defined attributes,
 document and character replacement.
 
-[Document attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/?v=1.1.1) globally affect how the document is rendered.
+[Document attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/document-attributes-ref/) globally affect how the document is rendered.
 They must follow the level 1 header with no blank lines preceding them.
 
 Examples of document attributes include:
@@ -494,7 +494,7 @@ Examples of document attributes include:
 - `:toclevels:` specifies the number of levels to include in the table of contents.
   The default is 3.
 
-References to [character replacement attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/?v=1.1.1) are replaced by a specific character.
+References to [character replacement attributes](https://docs.asciidoctor.org/asciidoc/latest/attributes/character-replacement-ref/) are replaced by a specific character.
 For example, `{deg}` is replaced by the degree symbol.
 
 Commonly used character replacement attributes include:
@@ -608,7 +608,7 @@ add the document attribute `:!author:`.
 ## Bibliographies
 
 AsciiDoc supports generate bibliography pages
-using the extension [asciidoctor-bibtex](https://github.com/asciidoctor-contrib/asciidoctor-bibtex?v=1.1.1).
+using the extension [asciidoctor-bibtex](https://github.com/asciidoctor-contrib/asciidoctor-bibtex).
 
 ## Block Quotes
 
@@ -866,7 +866,7 @@ The generated HTML will contain the following `img` element:
 
 The rendered diagram will be the following:
 
-<img alt="generated diagram" src="/blog/assets/graphviz-in-asciidoc.svg?v=1.1.1">
+<img alt="generated diagram" src="/blog/assets/graphviz-in-asciidoc.svg">
 
 ## DocBook Output
 
@@ -889,7 +889,7 @@ To render an em dash, use two dashes (`--`) surrounded by spaces.
 
 ## EPUB Output
 
-[EPUB](https://www.w3.org/TR/epub-33/?v=1.1.1)
+[EPUB](https://www.w3.org/TR/epub-33/)
 is a W3C standard data format typically used for e-books.
 It is supported by many e-readers, smartphones, and tablets.
 
@@ -1099,7 +1099,7 @@ icon:thermometer[fw] Temperature
 This renders the following:
 
 <img alt="icon bullets"
-  src="/blog/assets/asciidoc-icon-bullets.png?v=1.1.1"
+  src="/blog/assets/asciidoc-icon-bullets.png"
   style="width: 25%">
 
 The following additional icon libraries can be used for PDF output.
@@ -1129,7 +1129,7 @@ icon:youtube[]
 ```
 
 <img alt="fab icons"
-  src="/blog/assets/asciidoc-fab-icons.png?v=1.1.1"
+  src="/blog/assets/asciidoc-fab-icons.png"
   style="width: 30%">
 
 Icons from a library not specified with the `:icon-set` attribute,
@@ -2370,7 +2370,7 @@ extends: default
 
 Let's create a custom theme that overrides
 the header and footer sections of each page.
-This is documented at [Add Running Content](https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/?v=1.1.1).
+This is documented at [Add Running Content](https://docs.asciidoctor.org/pdf-converter/2.0/theme/add-running-content/).
 We will also specify heading colors.
 
 The term "verso" refers to even numbered pages
@@ -2471,7 +2471,7 @@ searching for the theme file in the current directory:
 This is not honored when PDF output is generated
 using the VS Code AsciiDoc extension, but it is honored
 when the `asciidoctor-pdf` command is run from a terminal.
-See [issue 979](https://github.com/asciidoctor/asciidoctor-vscode/issues/979?v=1.1.1).
+See [issue 979](https://github.com/asciidoctor/asciidoctor-vscode/issues/979).
 
 The second way to use a custom theme is to
 add the following option to the `asciidoctor-pdf` command.
@@ -2516,7 +2516,7 @@ video::rabbit-waking.mp4[width=240, height=135]
 To play a YouTube video, specify its id and the `youtube` attribute.
 The id can be obtained by opening the video in a web browser and
 noting the value of the `v` query parameter in the address bar.
-For example, let's enable playing the video at [Lambda Calculus iJS New York 2025](https://www.youtube.com/watch?v=gBhOg0Vriik&v=1.1.1).
+For example, let's enable playing the video at [Lambda Calculus iJS New York 2025](https://www.youtube.com/watch?v=gBhOg0Vriik).
 
 ```adoc
 .Lambda Calculus
@@ -2528,14 +2528,14 @@ but I could not get them to work.
 
 ## Resources
 
-- [AsciiDoc home page](https://asciidoc.org?v=1.1.1)
-- [AsciiDoc Language Documentation](https://docs.asciidoctor.org/asciidoc/latest/?v=1.1.1)
-- [AsciiDoc PDF Theming Guide](https://docs.asciidoctor.org/pdf-converter/latest/theme/?v=1.1.1)
-- [AsciiDoc Syntax Quick Reference](https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference?v=1.1.1)
-- [AsciiDoc Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf?v=1.1.1) from Dan Allen and Sarah White
-- [AsciiDoc Writer](https://asciidoctor.org/docs/asciidoc-writers-guide/?v=1.1.1)
-- [AsciiDoc: The Complete Guide in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla&v=1.1.1)
-- [AsciiDoctor EPUB3 Documentation](https://docs.asciidoctor.org/epub3-converter/latest/?v=1.1.1)
-- [AsciiDoctor Forum](https://asciidoctor.zulipchat.com?v=1.1.1)
-- [AsciiDoctor PDF Documentation](https://docs.asciidoctor.org/pdf-converter/latest/?v=1.1.1)
-- [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc/?v=1.1.1)
+- [AsciiDoc home page](https://asciidoc.org)
+- [AsciiDoc Language Documentation](https://docs.asciidoctor.org/asciidoc/latest/)
+- [AsciiDoc PDF Theming Guide](https://docs.asciidoctor.org/pdf-converter/latest/theme/)
+- [AsciiDoc Syntax Quick Reference](https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference)
+- [AsciiDoc Syntax Quick Reference](https://asciidoctor.org/docs/asciidoc-syntax-quick-reference.pdf) from Dan Allen and Sarah White
+- [AsciiDoc Writer](https://asciidoctor.org/docs/asciidoc-writers-guide/)
+- [AsciiDoc: The Complete Guide in 2025](https://www.adoc-studio.app/blog/asciidoc-guide?utm-source=ChrisChinchilla)
+- [AsciiDoctor EPUB3 Documentation](https://docs.asciidoctor.org/epub3-converter/latest/)
+- [AsciiDoctor Forum](https://asciidoctor.zulipchat.com)
+- [AsciiDoctor PDF Documentation](https://docs.asciidoctor.org/pdf-converter/latest/)
+- [POWERMAN AsciiDoc cheatsheet](https://powerman.name/doc/asciidoc/)

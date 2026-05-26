@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Cursor](<https://www.cursor.com.?v=1.1.1>) is an
+[Cursor](https://www.cursor.com.) is an
 "AI Code Editor" that aims to make developers "extraordinarily productive".
 It is a fork of Microsoft VS Code.
 
@@ -42,7 +42,7 @@ that leads to the original or modified code, or related documentation.
 ## Installing
 
 Click a download button on the
-[Cursor home page](<https://www.cursor.com.?v=1.1.1>).
+[Cursor home page](https://www.cursor.com.).
 Double-click the downloaded installer and follow the directions.
 
 ## Starting
@@ -83,7 +83,7 @@ On first launch it will prompt for:
 
 ## Security
 
-See [Security](<https://www.cursor.com/security?v=1.1.1>)
+See [Security](https://www.cursor.com/security)
 for details on how Cursor keeps your
 source code and development environment secure.
 
@@ -189,7 +189,7 @@ I selected the following CSS code:
 }
 ```
 
-Then I clicked "Add to Chat" and entered "What does this code do?".
+Then I clicked "Add to Chat" and entered "What does this code do".
 I received the following detailed response:
 
 ```text
@@ -280,7 +280,7 @@ replacing the empty string in the Map.svelte component.
 The application won't work without a valid API key."
 
 I asked it "How can I put the Google Maps API key in a .env file
-that is not committed to Git so I can keep it secret?"
+that is not committed to Git so I can keep it secret"
 It created a `.env` file for me and modified `Map.svelte` to use it.
 I modified the `.env` file to use a Google Maps API key from a previous project.
 
@@ -332,7 +332,7 @@ I entered the following in the chat:
   I clicked the "Allow while visiting this site" button.
   It rendered a map with the caption "Showing Mexican restaurants near you"
   and a dialog that said "This page can't load Google Maps correctly.
-  Do you own this website?"
+  Do you own this website"
   I clicked the "OK" button.
   In the DevTools console I saw the following messages:
 
@@ -699,4 +699,4 @@ to have access to it. However:
 
 ## Resources
 
-- [Cursor Tutorial for Beginners](<https://www.youtube.com/watch?v=ocMOZpuAMw4&v=1.1.1>)
+- [Cursor Tutorial for Beginners](https://www.youtube.com/watch?v=ocMOZpuAMw4)

@@ -12,7 +12,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[podman](<https://podman.io?v=1.1.1>)
+[podman](https://podman.io)
 is a tool for working with software containers and Kubernetes.
 It is a popular alternative to Docker.
 

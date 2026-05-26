@@ -13,13 +13,13 @@ This post summarizes ways to interact with GitHub Copilot in VS Code.
 To see the status of GitHub Copilot, click the button in the lower-right.
 
 <img alt="GitHub Copilot status button" style="width: 10%"
-  src="/blog/assets/github-copilot-status-button.png?v=1.1.1">
+  src="/blog/assets/github-copilot-status-button.png">
 
 Clicking this button displays a menu of options
 that begins with the current status.
 
 <img alt="GitHub Copilot status menu" style="width: 70%"
-  src="/blog/assets/github-copilot-status-menu.png?v=1.1.1">
+  src="/blog/assets/github-copilot-status-menu.png">
 
 ## Q&A Blocks
 
@@ -48,7 +48,7 @@ to open a text input at the top where a question can be entered.
 This option is better for questions that have long answers.
 
 <img alt="GitHub Copilot chat window" style="width: 80%"
-  src="/blog/assets/github-copilot-chat-window.png?v=1.1.1">
+  src="/blog/assets/github-copilot-chat-window.png">
 
 You can rate the answer by clicking the thumbs up or thumbs down icons.
 
@@ -65,7 +65,7 @@ This panel maintains a list of all previously asked questions
 and the answer provided, so you can scroll back and review them.
 
 <img alt="GitHub Copilot side window" style="width: 40%"
-  src="/blog/assets/github-copilot-side-window.png?v=1.1.1">
+  src="/blog/assets/github-copilot-side-window.png">
 
 ## Code Suggestions
 
@@ -198,8 +198,8 @@ Copilot will suggest a commit message
 that can be edited before committing the changes.
 
 <img alt="GitHub Copilot automatic commit message" style="width: 100%"
-  src="/blog/assets/github-copilot-automatic-commit-message.png?v=1.1.1">
+  src="/blog/assets/github-copilot-automatic-commit-message.png">
 
 ## Alternatives
 
-See [10 Free GitHub Copilot Alternatives for VS Code 2023](<https://bito.ai/blog/free-github-copilot-alternatives-for-vs-code/?v=1.1.1>).
+See [10 Free GitHub Copilot Alternatives for VS Code 2023](https://bito.ai/blog/free-github-copilot-alternatives-for-vs-code/).

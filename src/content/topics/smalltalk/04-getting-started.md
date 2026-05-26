@@ -156,7 +156,7 @@ There are at least three ways to start working in Smalltalk.
 The initial Cuis Smalltalk window will appear similar to the following:
 
 <img alt="Cuis Smalltalk startup" class="logo" style="width: 100%"
-  src="/blog/assets/cuis-smalltalk-startup.png?v=1.1.1">
+  src="/blog/assets/cuis-smalltalk-startup.png">
 
 ### The World
 
@@ -279,7 +279,7 @@ click the blue circle in its upper-left.
 A menu will appear that offers two ways to resize the window.
 
 <img alt="Cuis window resize" style="width: 60%"
-  src="/blog/assets/cuis-window-resize.png?v=1.1.1">
+  src="/blog/assets/cuis-window-resize.png">
 
 First, hover over the white rectangle below "resize..." until
 the area of the screen the window should occupy is highlighted in yellow
@@ -344,7 +344,7 @@ For example, enter the following and press cmd-p to get the output `6`:
 ```
 
 <img alt="Cuis Workspace window" style="width: 60%"
-  src="/blog/assets/cuis-workspace.png?v=1.1.1">
+  src="/blog/assets/cuis-workspace.png">
 
 The "Print It" output from this Workspace
 is shown in the Transcript window below.
@@ -466,7 +466,7 @@ To clear the output that has been written to stdout,
 right-click in a Transcript and select "Clear Transcript Stdout".
 
 <img alt="Cuis Transcript window" style="width: 60%"
-  src="/blog/assets/cuis-transcript.png?v=1.1.1">
+  src="/blog/assets/cuis-transcript.png">
 
 Transcript windows have the title "Transcript".
 So it seems odd that after clearing a Transcript,

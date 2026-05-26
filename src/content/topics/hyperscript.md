@@ -6,21 +6,21 @@ layout: topic-layout.njk
 
 <figure style="width: 60%">
   <img alt="_hyperscript logo" style="border: 0"
-    src="/blog/assets/hyperscript-logo.png?v=1.1.1">
+    src="/blog/assets/hyperscript-logo.png">
 </figure>
 
 ## Overview
 
-[_hyperscript](<https://hyperscript.org?v=1.1.1>) is
+[_hyperscript](https://hyperscript.org) is
 programming language that can be used in HTML files
 to implement interactive features such as event handling.
 It also supports asynchronous operations such as
 fetching data from a server by sending an HTTP request.
 
 \_hyperscript is based on the
-[HyperTalk](<https://en.wikipedia.org/wiki/HyperTalk?v=1.1.1>)
+[HyperTalk](https://en.wikipedia.org/wiki/HyperTalk)
 language which was used in Apple's
-[HyperCard](<https://en.wikipedia.org/wiki/HyperCard?v=1.1.1>).
+[HyperCard](https://en.wikipedia.org/wiki/HyperCard).
 From Wikipedia, HyperCard "is among the first successful hypermedia systems
 predating the World Wide Web."
 
@@ -28,17 +28,17 @@ Like HyperTalk, \_hyperscript uses an English-like syntax.
 It emphasizes readability, but may feel more difficult to write at first
 because the syntax is quite different from typical programming languages.
 
-\_hyperscript is similar to [Alpine](<https://alpinejs.dev?v=1.1.1>)
-and [HTMX](<https://htmx.org?v=1.1.1>)
+\_hyperscript is similar to [Alpine](https://alpinejs.dev)
+and [HTMX](https://htmx.org)
 in that they add attributes to HTML.
 But hyperscript only adds one attribute whose name is a single underscore.
 
 Placing code on HTML elements favors locality of behavior
 over separation of concerns much like
-[Tailwind](<https://tailwindcss.com?v=1.1.1>), Alpine, and HTMX.
+[Tailwind](https://tailwindcss.com), Alpine, and HTMX.
 
 \_hyperscript was created by Carson Gross who also created
-[htmx](<https://htmx.org?v=1.1.1>).
+[htmx](https://htmx.org).
 As of March 2024 it had not yet reached version 1.0.
 
 ## Installing
@@ -298,7 +298,7 @@ The following code renders a `button` that toggles whether a `div` is visible.
 Note the readability of the \_hyperscript code on the `button` element.
 
 <img alt="_hyperscript visibility toggle" style="width: 40%"
-  src="/blog/assets/alpine-visibility-toggle.png?v=1.1.1" />
+  src="/blog/assets/alpine-visibility-toggle.png" />
 
 ```html
 <html>
@@ -330,7 +330,7 @@ Note that the `if` command doesn't require the `end` keyword
 if it is the last command.
 
 <img alt="_hyperscript counter" style="width: 20%"
-  src="/blog/assets/alpine-counter.png?v=1.1.1" />
+  src="/blog/assets/alpine-counter.png" />
 
 ```html
 <html>
@@ -371,7 +371,7 @@ It also demonstrates using the `make`, `set`, and `put` commands
 to make a DOM element, set its properties, and put it into the DOM.
 
 <img alt="_hyperscript for and if" style="width: 20%"
-  src="/blog/assets/alpine-for-and-if.png?v=1.1.1" />
+  src="/blog/assets/alpine-for-and-if.png" />
 
 ```html
 <html>
@@ -421,7 +421,7 @@ This example demonstrates several more \_hyperscript features.
 The CSS is the same as in the Alpine version.
 
 <img alt="_hyperscript Score Keeper" style="width: 50%"
-  src="/blog/assets/alpine-score-keeper.png?v=1.1.1" />
+  src="/blog/assets/alpine-score-keeper.png" />
 
 Here is the HTML.
 
@@ -746,11 +746,11 @@ adds the CSS class `some-class` to all `li` elements.
 
 ## Resources
 
-- [_hyperscript home page](<https://hyperscript.org?v=1.1.1>)
-- [_hyperscript Documentation](<https://hyperscript.org/docs/?v=1.1.1>)
-- [_hyperscript Cookbook](<https://hyperscript.org/cookbook/?v=1.1.1>)
-- [_hyperscript Reference](<https://hyperscript.org/reference/?v=1.1.1>)
-- [](<?v=1.1.1>)
+- [_hyperscript home page](https://hyperscript.org)
+- [_hyperscript Documentation](https://hyperscript.org/docs/)
+- [_hyperscript Cookbook](https://hyperscript.org/cookbook/)
+- [_hyperscript Reference](https://hyperscript.org/reference/)
+- [](<>)
 
 ## TODO
 

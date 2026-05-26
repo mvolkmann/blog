@@ -127,7 +127,7 @@ The steps to create a double-clickable macOS app are:
 
 - Make the shell script executable by running `chmod a+x {app-name}`.
 - Create the file `PkgInfo` into this directory
-  containing "APPL????" with no newline character.
+  containing "APPL???" with no newline character.
 - Add an app icon.
   Copy an image onto the clipboard.
   One source for app icons is https://www.macosicongallery.com.

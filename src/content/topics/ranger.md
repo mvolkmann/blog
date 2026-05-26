@@ -6,13 +6,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Ranger](<https://ranger.github.io?v=1.1.1>)
+[Ranger](https://ranger.github.io)
 is a Vim-inspired, terminal-based file manager
 that is implemented in Python.
 But use of the Vim keybindings is not required, so it is
 useful even if you haven't internalized those keybindings.
 
-See the [Official User Guide](<https://github.com/ranger/ranger/wiki/Official-user-guide?v=1.1.1>) for tips on efficient usage.
+See the [Official User Guide](https://github.com/ranger/ranger/wiki/Official-user-guide) for tips on efficient usage.
 
 ## Installing
 

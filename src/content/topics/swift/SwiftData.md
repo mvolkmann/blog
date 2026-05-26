@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[SwiftData](<https://developer.apple.com/xcode/swiftdata/?v=1.1.1>)
+[SwiftData](https://developer.apple.com/xcode/swiftdata/)
 was added in iOS 17. From Apple,
 
 > SwiftData makes it easy to persist data using declarative code.
@@ -53,7 +53,7 @@ Optionally delete `Item.swift` if not needed.
 
 To define a model, add the `@Model` macro to a `class` definition.
 This macro cannot be applied to `struct` definitions.
-The macro causes the class to conform to the [PersistentModel](<https://developer.apple.com/documentation/SwiftData/PersistentModel?v=1.1.1>) protocol.
+The macro causes the class to conform to the [PersistentModel](https://developer.apple.com/documentation/SwiftData/PersistentModel) protocol.
 
 Declarations can be added class properties to customize how they are persisted.
 For example:
@@ -141,14 +141,14 @@ because it happens automatically.
 An alternative approach is to set `autosaveEnabled` to `false` and
 manually call the `save` method after a batch of changes are made.
 
-Also see the [transaction](<https://developer.apple.com/documentation/swiftdata/modelcontext/transaction(block:)?v=1.1.1>) and [rollback](<https://developer.apple.com/documentation/swiftdata/modelcontext/rollback()?v=1.1.1>) methods.
+Also see the [transaction](<https://developer.apple.com/documentation/swiftdata/modelcontext/transaction(block:)>) and [rollback](<https://developer.apple.com/documentation/swiftdata/modelcontext/rollback()>) methods.
 
 ## Creating Data
 
 To create and persist an object,
 create it using an initializer of a `class`
-that is decorated with the [Model](<?v=1.1.1>) macro
-and pass the object to the [ModelContext](<https://developer.apple.com/documentation/swiftdata/modelcontext?v=1.1.1>) `insert` method.
+that is decorated with the [Model](<>) macro
+and pass the object to the [ModelContext](https://developer.apple.com/documentation/swiftdata/modelcontext) `insert` method.
 For example:
 
 ```swift
@@ -158,18 +158,18 @@ context.insert(todo)
 
 ## Retrieving Data
 
-A view can specify the data it needs using the [Query](<https://developer.apple.com/documentation/swiftdata/query?v=1.1.1>)
+A view can specify the data it needs using the [Query](https://developer.apple.com/documentation/swiftdata/query)
 property wrapper.
 Any time persisted data matching the query changes, the view will update.
 
 The `Query` property wrapper supports many initializers
 that accept the following:
 
-- `filter`: a [Predicate](<https://developer.apple.com/documentation/foundation/predicate?v=1.1.1>) object that describes criteria for the objects to return
-- `sort`: a `KeyPath` or array of [SortDescriptor](<https://developer.apple.com/documentation/foundation/sortdescriptor?v=1.1.1>) objects that describe
+- `filter`: a [Predicate](https://developer.apple.com/documentation/foundation/predicate) object that describes criteria for the objects to return
+- `sort`: a `KeyPath` or array of [SortDescriptor](https://developer.apple.com/documentation/foundation/sortdescriptor) objects that describe
   how the returned objects should be sorted
-- `order`: a [SortOrder](<https://developer.apple.com/documentation/foundation/sortorder?v=1.1.1>) enum value of `.forward` or `.reverse`
-- `animation`: an [Animation](<https://developer.apple.com/documentation/SwiftUI/Animation?v=1.1.1>)
+- `order`: a [SortOrder](https://developer.apple.com/documentation/foundation/sortorder) enum value of `.forward` or `.reverse`
+- `animation`: an [Animation](https://developer.apple.com/documentation/SwiftUI/Animation)
   to apply when the data changes
 
 For example, the following query fetches `Todo` objects
@@ -185,7 +185,7 @@ sorted on their title, returning only those not completed:
 ```
 
 To fetch data outside of a `Query`, create and use
-a `Predicate` and a [FetchDescriptor](<https://developer.apple.com/documentation/swiftdata/fetchdescriptor?v=1.1.1>).
+a `Predicate` and a [FetchDescriptor](https://developer.apple.com/documentation/swiftdata/fetchdescriptor).
 For example:
 
 ```swift
@@ -212,7 +212,7 @@ with no further action on your part
 
 ## Deleting Data
 
-To delete persisted objects, pass them to the [ModelContext](<https://developer.apple.com/documentation/swiftdata/modelcontext?v=1.1.1>) `delete` method.
+To delete persisted objects, pass them to the [ModelContext](https://developer.apple.com/documentation/swiftdata/modelcontext) `delete` method.
 For example:
 
 ```swift
@@ -227,12 +227,12 @@ in order to delete multiple objects in a single call.
 When the object schema being persisted needs to change
 after data has already been persisted, migration is necessary.
 
-Define a custom `enum` that is a subtype of [VersionedSchema](<https://developer.apple.com/documentation/swiftdata/versionedschema?v=1.1.1>) for each version of the schema.
+Define a custom `enum` that is a subtype of [VersionedSchema](https://developer.apple.com/documentation/swiftdata/versionedschema) for each version of the schema.
 Each of these contain the `static` property `models`
 whose value is an array of all the supported model types.
 They also contain definitions of all these model classes.
 
-Next, define a custom `enum` that is a subtype of [SchemaMigrationPlan](<https://developer.apple.com/documentation/swiftdata/schemamigrationplan?v=1.1.1>).
+Next, define a custom `enum` that is a subtype of [SchemaMigrationPlan](https://developer.apple.com/documentation/swiftdata/schemamigrationplan).
 This should contain the following `static` properties:
 
 - `schemas`: an ordered array of the `VersionSchema` objects
@@ -275,17 +275,17 @@ When each user runs the app, it will detect
 the schema version that was in use the last time they ran the app
 and automatically perform the needed migrations to the newest version.
 
-For more detail, see the WWDC 2023 video [Model your schema with SwiftData](<https://developer.apple.com/wwdc23/10195?v=1.1.1>).
+For more detail, see the WWDC 2023 video [Model your schema with SwiftData](https://developer.apple.com/wwdc23/10195).
 
 ## @Observable and @Bindable
 
 This section is not really related to SwiftData.
 
-The [Observable](<https://developer.apple.com/documentation/observation/observable-swift.macro?v=1.1.1>) macro provides a new way to define view models.
+The [Observable](https://developer.apple.com/documentation/observation/observable-swift.macro) macro provides a new way to define view models.
 It is a useful alternative to the `Model` macro
 for sharing data between views that is not persisted.
 
-The [Bindable](<https://developer.apple.com/documentation/swiftui/bindable?v=1.1.1>)
+The [Bindable](https://developer.apple.com/documentation/swiftui/bindable)
 property wrapper provides a new way to access view models.
 It allows child views to modify `@Observable` data held in parent view.
 Both are new in iOS 17.
@@ -340,4 +340,4 @@ Greet(model: model)
 
 ## Example Project
 
-See [SwiftDataDemo](<https://github.com/mvolkmann/SwiftDataDemo?v=1.1.1>).
+See [SwiftDataDemo](https://github.com/mvolkmann/SwiftDataDemo).

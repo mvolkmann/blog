@@ -18,9 +18,9 @@ that enable using different colors for parts of the icon.
 To see the available rendering modes for a given icon,
 select the icon and click the paint brush tab in the Inspector on the right.
 Each icon has a preferred rendering mode,
-but a different rendering mode can be selected by applying the [renderingMode](<https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)?v=1.1.1>) view modifier.
+but a different rendering mode can be selected by applying the [renderingMode](<https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)>) view modifier.
 
-To specify a symbol rendering mode, apply the [symbolRenderingMode](<https://developer.apple.com/documentation/swiftui/view/symbolrenderingmode(_:)?v=1.1.1>). The supported symbol rendering modes include:
+To specify a symbol rendering mode, apply the [symbolRenderingMode](<https://developer.apple.com/documentation/swiftui/view/symbolrenderingmode(_:)>). The supported symbol rendering modes include:
 
 - `.monochrome` - single color; seems the same as hierarchical
 - `.hierarchical` - single color with multiple opacity levels
@@ -60,14 +60,14 @@ Button("Increase") {
 }
 ```
 
-See the [SFSymbolsDemo](<https://github.com/mvolkmann/SFSymbolsDemo/tree/main?v=1.1.1>)
+See the [SFSymbolsDemo](https://github.com/mvolkmann/SFSymbolsDemo/tree/main)
 app in GitHub.
 
 ## Template Mode
 
 To ignore the colors in a multicolor SF Symbol icon
 and just use it as a template for applying a single specified color,
-apply the [renderingMode](<https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)?v=1.1.1>) view modifier with the argument value `.template`.
+apply the [renderingMode](<https://developer.apple.com/documentation/swiftui/image/renderingmode(_:)>) view modifier with the argument value `.template`.
 For example:
 
 ```swift
@@ -84,8 +84,8 @@ Image(systemName: "doc.fill.badge.plus")
 iOS 17 added the ability to animate SF Symbols.
 See the folloing WWDC 2023 sessions:
 
-- [What](<https://developer.apple.com/wwdc23/10197?v=1.1.1>)
-- [Animate symbols in your app](<https://developer.apple.com/wwdc23/10258?v=1.1.1>)
+- [What](https://developer.apple.com/wwdc23/10197)
+- [Animate symbols in your app](https://developer.apple.com/wwdc23/10258)
 
 SF Symbols 5 added an Animation Inspector, shown in the screenshot below.
 This provides a way to see all the animation options available
@@ -94,7 +94,7 @@ To copy Swift code for a specified animation, click the clipboard icon
 and select "Copy Configuration for Swift".
 
 <img alt="SF Symbols Animation Inspector" style="width: 100%"
-  src="/blog/assets/SFSymbols-animation-inspector.png?v=1.1.1"
+  src="/blog/assets/SFSymbols-animation-inspector.png"
   title="SF Symbols Animation Inspector">
 
 There are four animation behaviors:

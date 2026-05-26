@@ -7,27 +7,27 @@ layout: topic-layout.njk
 
 ## Overview
 
-iOS 16 introduced the [Layout](<https://developer.apple.com/documentation/swiftui/layout?v=1.1.1>) protocol and the [AnyLayout](<https://developer.apple.com/documentation/swiftui/anylayout?v=1.1.1>) struct.
+iOS 16 introduced the [Layout](https://developer.apple.com/documentation/swiftui/layout) protocol and the [AnyLayout](https://developer.apple.com/documentation/swiftui/anylayout) struct.
 
-See the excellent YouTube videos from Stewart Lynch, [AnyLayout and Custom Layouts in iOS 16](<https://www.youtube.com/watch?v=WD7ebJZ7PaI&v=1.1.1>).
+See the excellent YouTube videos from Stewart Lynch, [AnyLayout and Custom Layouts in iOS 16](https://www.youtube.com/watch?v=WD7ebJZ7PaI).
 
 ## Example App
 
-See [AnyLayoutDemo](<https://github.com/mvolkmann/AnyLayoutDemo?v=1.1.1>) which demonstrates everything
+See [AnyLayoutDemo](https://github.com/mvolkmann/AnyLayoutDemo) which demonstrates everything
 shared in the Steward Lynch video linked above.
 
 ## Layout Protocol
 
-The [Layout](<https://developer.apple.com/documentation/swiftui/layout?v=1.1.1>) protocol "defines the geometry of a collection of views".
+The [Layout](https://developer.apple.com/documentation/swiftui/layout) protocol "defines the geometry of a collection of views".
 It is useful in apps that need view layouts that cannot be easily achieved
 using standard container views like `HStack` and `VStack`.
 
 SwiftUI provides three structs that conform to the `Layout` protocol.
 These take `alignment` and `spacing` arguments that customize the layout.
 
-- [HStackLayout](<https://developer.apple.com/documentation/swiftui/hstacklayout?v=1.1.1>)
-- [VStackLayout](<https://developer.apple.com/documentation/swiftui/vstacklayout?v=1.1.1>)
-- [ZStackLayout](<https://developer.apple.com/documentation/swiftui/zstacklayout?v=1.1.1>)
+- [HStackLayout](https://developer.apple.com/documentation/swiftui/hstacklayout)
+- [VStackLayout](https://developer.apple.com/documentation/swiftui/vstacklayout)
+- [ZStackLayout](https://developer.apple.com/documentation/swiftui/zstacklayout)
 
 Custom layouts that conform to the `Layout` protocol can also be created.
 The following code provides a heavily commented example
@@ -134,8 +134,8 @@ struct AlternateStackLayout: Layout {
 
 ## AnyLayout Struct
 
-The [AnyLayout](<https://developer.apple.com/documentation/swiftui/anylayout?v=1.1.1>)
-struct is a type-erased instance of the [Layout](<https://developer.apple.com/documentation/swiftui/layout?v=1.1.1>)
+The [AnyLayout](https://developer.apple.com/documentation/swiftui/anylayout)
+struct is a type-erased instance of the [Layout](https://developer.apple.com/documentation/swiftui/layout)
 protocol.
 `AnyLayout` is used "to enable dynamically changing the type of
 a layout container without destroying the state of the subviews".
@@ -146,16 +146,16 @@ the three provided layouts and the custom layout implemented above.
 This code is also derived from the Stewart Lynch video.
 
 <img alt="SwiftUI AnyLayout HStack" style="border: 1px solid gray; width: 24%"
-  src="/blog/assets/SwiftUI-AnyLayout-H.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-AnyLayout-H.png"
   title="Swift AnyLayout HStack">
 <img alt="SwiftUI AnyLayout VStack" style="border: 1px solid gray; width: 24%"
-  src="/blog/assets/SwiftUI-AnyLayout-V.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-AnyLayout-V.png"
   title="Swift AnyLayout VStack">
 <img alt="SwiftUI AnyLayout ZStack" style="border: 1px solid gray; width: 24%"
-  src="/blog/assets/SwiftUI-AnyLayout-H.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-AnyLayout-H.png"
   title="Swift AnyLayout ZStack">
 <img alt="SwiftUI AnyLayout Alternate" style="border: 1px solid gray; width: 24%"
-  src="/blog/assets/SwiftUI-AnyLayout-Alternate.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-AnyLayout-Alternate.png"
   title="Swift AnyLayout Alternate">
 
 ```swift
@@ -230,7 +230,7 @@ struct ContentView: View {
 ## Radial Layout
 
 Paul Hudson provided an excellent example of implementing a custom layout
-in his post [How to create a custom layout using the Layout protocol](<https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-custom-layout-using-the-layout-protocol?v=1.1.1>)
+in his post [How to create a custom layout using the Layout protocol](https://www.hackingwithswift.com/quick-start/swiftui/how-to-create-a-custom-layout-using-the-layout-protocol)
 It arranges a set of circles in a circular pattern.
 
 The following code is my modified version of his example.
@@ -238,7 +238,7 @@ It adds a random color to each of the circles and
 keeps the same color for each when the number of circles is changed.
 
 <img alt="SwiftUI Radial Layout" style="border: 1px solid gray; width: 50%"
-  src="/blog/assets/SwiftUI-Radial-Layout.png?v=1.1.1"
+  src="/blog/assets/SwiftUI-Radial-Layout.png"
   title="Swift Radial Layout">
 
 ```swift

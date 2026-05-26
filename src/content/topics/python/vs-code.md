@@ -8,7 +8,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-[Pylance](<https://github.com/microsoft/pylance-release?v=1.1.1>)
+[Pylance](https://github.com/microsoft/pylance-release)
 is an extension from Microsoft that utilized the Language Server Protocol (LSP)
 to enable IDE features such as code completion, parameter suggestions,
 auto-imports, code outline, code navigation, syntax checking, type checking,

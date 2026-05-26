@@ -7,7 +7,7 @@ layout: topic-layout.njk
 
 ## Overview
 
-The [SpriteKit](<https://developer.apple.com/documentation/spritekit/?v=1.1.1>) framework supports drawing text, shapes, images, and video.
+The [SpriteKit](https://developer.apple.com/documentation/spritekit/) framework supports drawing text, shapes, images, and video.
 It supports physics behaviors which makes it useful for creating games.
 
 ## Creating a Game
@@ -26,7 +26,7 @@ It supports physics behaviors which makes it useful for creating games.
 ## Example
 
 Here is a simple example derived from the
-"Hacking With Swift" article [How to integrate SpriteKit using SpriteView](<https://www.hackingwithswift.com/quick-start/swiftui/how-to-integrate-spritekit-using-spriteview?v=1.1.1>).
+"Hacking With Swift" article [How to integrate SpriteKit using SpriteView](https://www.hackingwithswift.com/quick-start/swiftui/how-to-integrate-spritekit-using-spriteview).
 
 Tap the black scene area to drop a box with a random fill color.
 The box will fall to the bottom and interact with previous boxes
@@ -52,7 +52,7 @@ class GameScene: SKScene {
         )
     }
 
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         guard let touch = touches.first else { return }
         let location = touch.location(in: self)
         let size = CGSize(width: boxSize, height: boxSize)
@@ -91,8 +91,8 @@ using the "Game" template. This uses UIKit rather than SwiftUI.
 
 ## Resources
 
-- [Building a SpriteKit game with physics, particles, and shaders](<https://www.youtube.com/watch?v=TJfh8wXbfEw&v=1.1.1>)
-- [Building a space shooter with SpriteKit and Codable](<https://www.youtube.com/watch?v=0-lM51yI-PA&v=1.1.1>)
+- [Building a SpriteKit game with physics, particles, and shaders](https://www.youtube.com/watch?v=TJfh8wXbfEw)
+- [Building a space shooter with SpriteKit and Codable](https://www.youtube.com/watch?v=0-lM51yI-PA)
 
 ## Random Notes
 
