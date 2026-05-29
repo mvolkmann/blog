@@ -21,15 +21,19 @@ jobs:
 
       - uses: actions/configure-pages@v5
 
+      - uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - uses: actions/setup-node@v6
         with:
           node-version: 22.x
-          cache: npm
+          cache: pnpm
 
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run format:check
-      - run: npm run build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run lint
+      - run: pnpm run format:check
+      - run: pnpm run build
 
       - uses: actions/upload-pages-artifact@v4
         with:
