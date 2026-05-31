@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/english.css'
-eleventyNavigation:
+navigation:
   key: Changes
   parent: English
 extraTitle: 'I would make to English'

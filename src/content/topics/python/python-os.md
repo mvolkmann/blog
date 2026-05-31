@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python os module
   order: 1.4
   parent: Python

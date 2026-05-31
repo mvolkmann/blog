@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Eleventy Styling
   parent: Eleventy
   title: Styling

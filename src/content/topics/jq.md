@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: jq
 layout: topic-layout.njk
 ---

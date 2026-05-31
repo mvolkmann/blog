@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Accessibility
 layout: topic-layout.njk
 ---

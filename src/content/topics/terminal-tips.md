@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Terminal Tips
 layout: topic-layout.njk
 ---

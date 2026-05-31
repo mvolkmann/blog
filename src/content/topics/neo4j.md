@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Neo4j
 layout: topic-layout.njk
 ---

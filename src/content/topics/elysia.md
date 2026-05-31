@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Elysia
 layout: topic-layout.njk
 ---

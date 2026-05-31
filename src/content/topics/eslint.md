@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ESLint
 layout: topic-layout.njk
 ---

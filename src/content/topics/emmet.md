@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Emmet Editor Plugin
 layout: topic-layout.njk
 ---

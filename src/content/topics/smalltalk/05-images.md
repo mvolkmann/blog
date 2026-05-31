@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Images
   order: 5
   parent: Smalltalk

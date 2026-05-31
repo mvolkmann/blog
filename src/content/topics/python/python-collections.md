@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python collections module
   order: 1.2
   parent: Python

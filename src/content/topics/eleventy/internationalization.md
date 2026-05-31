@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Internationalization
   parent: Eleventy
 layout: topic-layout.njk

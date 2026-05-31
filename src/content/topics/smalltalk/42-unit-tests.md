@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Unit Tests
   order: 42
   parent: Smalltalk

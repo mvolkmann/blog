@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Ghostty
 layout: topic-layout.njk
 ---

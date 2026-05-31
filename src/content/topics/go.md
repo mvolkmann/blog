@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Go
 layout: topic-layout.njk
 ---

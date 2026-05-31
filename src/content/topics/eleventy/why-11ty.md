@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Why 11ty?
   order: 2
   parent: Eleventy

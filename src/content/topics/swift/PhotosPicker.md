@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: PhotosPicker
   parent: Swift
 layout: topic-layout.njk

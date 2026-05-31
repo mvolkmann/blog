@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Object-Oriented Programming
   order: 3
   parent: Smalltalk

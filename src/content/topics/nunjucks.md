@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Nunjucks
 layout: topic-layout.njk
 ---

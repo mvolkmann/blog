@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Deploying
   order: 44
   parent: Smalltalk

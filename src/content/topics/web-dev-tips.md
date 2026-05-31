@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web Development Tips
 layout: topic-layout.njk
 ---

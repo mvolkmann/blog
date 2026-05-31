@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: SF Symbols
   parent: Swift
 layout: topic-layout.njk

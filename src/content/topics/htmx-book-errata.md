@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: htmx Book Errata
 layout: topic-layout.njk
 ---

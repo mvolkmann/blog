@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Hot Topics 2024
 layout: topic-layout.njk
 ---

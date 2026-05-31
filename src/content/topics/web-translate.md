@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: web-translate Library
 layout: topic-layout.njk
 ---

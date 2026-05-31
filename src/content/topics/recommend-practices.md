@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Recommended Practices
 layout: topic-layout.njk
 ---

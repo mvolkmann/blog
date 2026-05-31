@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Macintosh Emulators
 layout: topic-layout.njk
 ---

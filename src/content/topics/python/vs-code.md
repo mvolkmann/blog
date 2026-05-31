@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: VS Code Python support
   order: 4
   parent: Python

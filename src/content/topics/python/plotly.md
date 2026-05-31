@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Plotly library
   order: 7
   parent: Python

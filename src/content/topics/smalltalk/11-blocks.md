@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Blocks
   order: 11
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: 11ty Overview
   order: 3
   parent: Eleventy

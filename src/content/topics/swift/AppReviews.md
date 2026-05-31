@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: App Reviews
   parent: Swift
 layout: topic-layout.njk

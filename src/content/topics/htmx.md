@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: htmx
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Permalinks
   parent: Eleventy
 layout: topic-layout.njk

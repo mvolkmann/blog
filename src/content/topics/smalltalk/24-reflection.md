@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Reflection
   order: 24
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: PostgreSQL
 layout: topic-layout.njk
 ---

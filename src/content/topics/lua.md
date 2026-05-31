@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Lua
 layout: topic-layout.njk
 ---

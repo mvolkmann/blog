@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: JavaScript Signals
 layout: topic-layout.njk
 ---

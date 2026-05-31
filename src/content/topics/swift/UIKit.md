@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: UIKit
   parent: Swift
 layout: topic-layout.njk

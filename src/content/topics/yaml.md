@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: YAML
 layout: topic-layout.njk
 ---

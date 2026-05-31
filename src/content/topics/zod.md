@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Zod
 layout: topic-layout.njk
 ---

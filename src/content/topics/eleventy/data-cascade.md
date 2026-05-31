@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Data Cascade
   parent: Eleventy
 layout: topic-layout.njk

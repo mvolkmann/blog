@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Neovim Plugins
 layout: topic-layout.njk
 ---

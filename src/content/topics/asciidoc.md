@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: AsciiDoc
 layout: topic-layout.njk
 ---

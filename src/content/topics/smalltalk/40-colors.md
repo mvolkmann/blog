@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Colors
   order: 40
   parent: Smalltalk

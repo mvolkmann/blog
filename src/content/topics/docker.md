@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Docker
 layout: topic-layout.njk
 ---

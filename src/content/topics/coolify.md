@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Coolify
 layout: topic-layout.njk
 ---

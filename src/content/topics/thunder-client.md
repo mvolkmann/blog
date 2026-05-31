@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Thunder Client
 layout: topic-layout.njk
 ---

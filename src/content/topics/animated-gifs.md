@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Animated GIFs
 layout: topic-layout.njk
 ---

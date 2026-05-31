@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: HTML dialog Element
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Classes
   order: 15
   parent: Smalltalk

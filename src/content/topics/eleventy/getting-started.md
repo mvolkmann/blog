@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Getting Started
   order: 4
   parent: Eleventy

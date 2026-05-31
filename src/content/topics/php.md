@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: PHP
 layout: topic-layout.njk
 ---

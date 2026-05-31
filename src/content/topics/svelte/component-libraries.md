@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Component Libraries
   parent: Svelte
 layout: topic-layout.njk

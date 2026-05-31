@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Better Touch Tool
 layout: topic-layout.njk
 ---

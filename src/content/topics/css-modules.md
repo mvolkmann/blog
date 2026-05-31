@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: CSS Modules
 layout: topic-layout.njk
 ---

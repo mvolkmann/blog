@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: pandas library
   order: 6
   parent: Python

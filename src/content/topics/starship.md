@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Starship
 layout: topic-layout.njk
 ---

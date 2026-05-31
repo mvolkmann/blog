@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Pen
   order: 50
   parent: Smalltalk

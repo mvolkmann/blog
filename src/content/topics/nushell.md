@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Nushell
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: LÖVE
 layout: topic-layout.njk
 ---

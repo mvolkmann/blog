@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: HealthKit
   parent: Swift
 layout: topic-layout.njk

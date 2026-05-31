@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: NumPy library
   order: 5
   parent: Python

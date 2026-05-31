@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Swift Language
   parent: Swift
   order: 2

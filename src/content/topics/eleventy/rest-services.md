@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: REST Services
   parent: Eleventy
 layout: topic-layout.njk

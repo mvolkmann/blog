@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Control Flow
   order: 22
   parent: Smalltalk

@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
-eleventyNavigation:
+navigation:
   key: D3 Geo Library
   order: 15
   parent: D3

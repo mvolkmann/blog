@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: MongoDB
 layout: topic-layout.njk
 ---

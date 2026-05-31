@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Terminal IDE
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: LaTeX
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Objects
   order: 14
 

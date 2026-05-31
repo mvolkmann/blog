@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GitHub Projects
   parent: GitHub
   title: Projects

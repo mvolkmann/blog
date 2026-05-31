@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Containers
 layout: topic-layout.njk
 ---

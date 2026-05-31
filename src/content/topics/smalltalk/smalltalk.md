@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Smalltalk
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: SQLite in Python
   order: 9
   parent: Python

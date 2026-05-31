@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Gauges
   parent: Swift
 layout: topic-layout.njk

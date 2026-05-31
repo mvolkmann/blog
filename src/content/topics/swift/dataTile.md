@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: dataTile
   parent: Swift
 layout: topic-layout.njk

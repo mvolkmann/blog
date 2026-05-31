@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Realm
   parent: Swift
 layout: topic-layout.njk

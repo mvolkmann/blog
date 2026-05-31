@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Pagination
   parent: Eleventy
 layout: topic-layout.njk

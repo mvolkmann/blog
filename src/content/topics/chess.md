@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Chess
 layout: topic-layout.njk
 ---

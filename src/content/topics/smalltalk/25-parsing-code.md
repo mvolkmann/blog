@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Parsing Code
   order: 25
   parent: Smalltalk

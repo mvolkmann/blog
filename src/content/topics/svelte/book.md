@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: My Book
   parent: Svelte
   order: 1

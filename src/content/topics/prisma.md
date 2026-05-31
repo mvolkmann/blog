@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Prisma
 layout: topic-layout.njk
 ---

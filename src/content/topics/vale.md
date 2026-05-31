@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Vale
 layout: topic-layout.njk
 ---

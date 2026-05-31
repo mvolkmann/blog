@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Messages
   order: 13
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ESLint and Prettier with Svelte
   parent: Svelte
 layout: topic-layout.njk

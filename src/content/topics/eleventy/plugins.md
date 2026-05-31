@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Plugins
   parent: Eleventy
 layout: topic-layout.njk

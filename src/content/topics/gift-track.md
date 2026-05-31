@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GiftTrack
 layout: topic-layout.njk
 ---

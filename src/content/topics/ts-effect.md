@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: TypeScript Effect
 layout: topic-layout.njk
 ---

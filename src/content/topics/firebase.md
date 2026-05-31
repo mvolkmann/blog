@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Firebase
 layout: topic-layout.njk
 ---

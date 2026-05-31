@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Instruments
   parent: Swift
 layout: topic-layout.njk

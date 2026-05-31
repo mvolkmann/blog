@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Progressive Web Apps
   parent: Eleventy
 layout: topic-layout.njk

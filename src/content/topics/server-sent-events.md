@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Server-Sent Events (SSE)
 layout: topic-layout.njk
 ---

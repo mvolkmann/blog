@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Concurrency
   order: 23
   parent: Smalltalk

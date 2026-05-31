@@ -1,18 +1,10 @@
 import path from 'node:path';
 import {getCollection} from 'astro:content';
-import pkg from '../../package.json';
 
 type Heading = {
   depth: number;
   slug: string;
   text: string;
-};
-
-type NavData = {
-  key?: string;
-  order?: number;
-  parent?: string;
-  title?: string;
 };
 
 type TopicEntry = Awaited<ReturnType<typeof getCollection<'topics'>>>[number];
@@ -24,14 +16,6 @@ export type NavNode = {
   title: string;
   url: string;
 };
-
-/**
- * This appends the site version to a URL.
- */
-function appendVersion(url: string) {
-  const separator = url.includes('?') ? '&' : '?';
-  return `${url}${separator}v=${pkg.version}`;
-}
 
 /**
  * This converts rendered headings into nested HTML for the table of contents.
@@ -70,13 +54,6 @@ export function buildTocHtml(headings: Heading[]) {
 }
 
 /**
- * This determines whether a topic entry contains fenced code blocks.
- */
-export function hasCodeContent(entry: TopicEntry) {
-  return /```|~~~/.test(entry.body ?? '');
-}
-
-/**
  * This returns the path segments used to route a topic entry.
  */
 function getEntryPath(entry: TopicEntry) {
@@ -92,22 +69,14 @@ function getEntryPath(entry: TopicEntry) {
 }
 
 /**
- * This determines whether a topic entry appears to contain MathJax content.
- */
-export function hasMathContent(entry: TopicEntry) {
-  const body = entry.body ?? '';
-  return /\\\(|\\\)|\\\[|\\\]|\\begin\{|\\end\{|\$[^$\n]+\$/.test(body);
-}
-
-/**
  * This resolves the display title for a topic entry.
  */
 export function getEntryTitle(entry: TopicEntry) {
   const basename = path.posix.basename(entry.id, path.posix.extname(entry.id));
 
   return (
-    entry.data.eleventyNavigation?.title ||
-    entry.data.eleventyNavigation?.key ||
+    entry.data.navigation?.title ||
+    entry.data.navigation?.key ||
     entry.data.title ||
     basename
   );
@@ -132,28 +101,28 @@ export async function getNavTree() {
   const roots: NavNode[] = [];
 
   for (const entry of entries) {
-    const nav = entry.data.eleventyNavigation as NavData | undefined;
+    const {navigation} = entry.data;
     const url = getEntryUrl(entry);
 
-    if (!nav?.key || !url) continue;
+    if (!navigation?.key || !url) continue;
 
-    allNavItems.set(nav.key, {
-      key: nav.key,
-      order: nav.order,
-      title: nav.title || nav.key,
-      url: appendVersion(url)
+    allNavItems.set(navigation.key, {
+      key: navigation.key,
+      order: navigation.order,
+      title: navigation.title || navigation.key,
+      url
     });
   }
 
   for (const entry of entries) {
-    const nav = entry.data.eleventyNavigation as NavData | undefined;
-    if (!nav?.key) continue;
+    const {navigation} = entry.data;
+    if (!navigation?.key) continue;
 
-    const item = allNavItems.get(nav.key);
+    const item = allNavItems.get(navigation.key);
     if (!item) continue;
 
-    if (nav.parent) {
-      const parent = allNavItems.get(nav.parent);
+    if (navigation.parent) {
+      const parent = allNavItems.get(navigation.parent);
       if (parent) {
         parent.children ??= [];
         parent.children.push(item);
@@ -174,6 +143,21 @@ export async function getNavTree() {
 export async function getTopicEntries() {
   const entries = await getCollection('topics');
   return entries.filter(entry => getEntryPath(entry) !== undefined);
+}
+
+/**
+ * This determines whether a topic entry contains fenced code blocks.
+ */
+export function hasCodeContent(entry: TopicEntry) {
+  return /```|~~~/.test(entry.body ?? '');
+}
+
+/**
+ * This determines whether a topic entry appears to contain MathJax content.
+ */
+export function hasMathContent(entry: TopicEntry) {
+  const body = entry.body ?? '';
+  return /\\\(|\\\)|\\\[|\\\]|\\begin\{|\\end\{|\$[^$\n]+\$/.test(body);
 }
 
 /**

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Exception Handling
   order: 12
   parent: Smalltalk

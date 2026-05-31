@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ngrok
 layout: topic-layout.njk
 ---

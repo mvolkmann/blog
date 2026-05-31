@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: SQL
 layout: topic-layout.njk
 ---

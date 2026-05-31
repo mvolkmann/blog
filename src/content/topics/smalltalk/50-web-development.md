@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web Development
   order: 50
   parent: Smalltalk

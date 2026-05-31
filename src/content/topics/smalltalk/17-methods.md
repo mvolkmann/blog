@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Methods
   order: 17
   parent: Smalltalk

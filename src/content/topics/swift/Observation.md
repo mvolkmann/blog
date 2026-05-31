@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Observation
   parent: Swift
 layout: topic-layout.njk

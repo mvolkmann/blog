@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Punctuation
   parent: English
 extraTitle: 'in English'

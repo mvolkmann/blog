@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Kotlin
 layout: topic-layout.njk
 ---

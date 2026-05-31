@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Next.js
 layout: topic-layout.njk
 ---

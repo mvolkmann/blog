@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Mobile App Options
 layout: topic-layout.njk
 ---

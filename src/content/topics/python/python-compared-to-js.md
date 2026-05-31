@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python compared to JavaScript
   order: 1
   parent: Python

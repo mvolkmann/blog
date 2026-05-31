@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: WebSockets
 layout: topic-layout.njk
 ---

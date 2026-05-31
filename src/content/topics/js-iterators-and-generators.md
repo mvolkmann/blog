@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: JS Iterators and Generators
 layout: topic-layout.njk
 ---

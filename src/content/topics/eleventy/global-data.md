@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Global Data
   parent: Eleventy
 layout: topic-layout.njk

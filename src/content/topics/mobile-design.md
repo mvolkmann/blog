@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Mobile Design
 layout: topic-layout.njk
 ---

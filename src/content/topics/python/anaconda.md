@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Anaconda tools
   order: 2
   parent: Python

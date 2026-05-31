@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Svelte Book Errata
 layout: topic-layout.njk
 permalink: 'svelte-and-sapper-in-action/errata/'

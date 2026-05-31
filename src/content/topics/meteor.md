@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Meteor
 layout: topic-layout.njk
 ---

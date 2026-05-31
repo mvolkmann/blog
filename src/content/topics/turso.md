@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Turso
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Minify HTML
   parent: Eleventy
 layout: topic-layout.njk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Nearley
 layout: topic-layout.njk
 ---

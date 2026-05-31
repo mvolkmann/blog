@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Face ID
   parent: Swift
 layout: topic-layout.njk

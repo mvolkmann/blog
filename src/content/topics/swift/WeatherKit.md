@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: WeatherKit
   parent: Swift
 layout: topic-layout.njk

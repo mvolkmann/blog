@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python functools module
   order: 1.3
   parent: Python

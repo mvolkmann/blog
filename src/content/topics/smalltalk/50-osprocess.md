@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: OSProcess
   order: 50
   parent: Smalltalk

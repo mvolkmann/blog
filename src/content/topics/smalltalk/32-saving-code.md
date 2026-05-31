@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Saving Code
   order: 32
   parent: Smalltalk

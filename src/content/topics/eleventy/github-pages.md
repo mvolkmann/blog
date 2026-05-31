@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GitHub Pages
   order: 6
   parent: Eleventy

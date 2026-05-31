@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: TestFlight
   parent: Swift
 layout: topic-layout.njk

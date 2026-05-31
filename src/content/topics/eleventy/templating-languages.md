@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Templating Languages
   parent: Eleventy
 layout: topic-layout.njk

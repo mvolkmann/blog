@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: matplotlib library
   order: 7
   parent: Python

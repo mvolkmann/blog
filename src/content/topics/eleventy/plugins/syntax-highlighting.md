@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Syntax Highlighting
   parent: Plugins
 layout: topic-layout.njk

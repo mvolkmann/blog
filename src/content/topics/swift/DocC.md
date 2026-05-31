@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: DocC
   parent: Swift
 layout: topic-layout.njk

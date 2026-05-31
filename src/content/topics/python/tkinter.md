@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: tkinter library
   order: 8
   parent: Python

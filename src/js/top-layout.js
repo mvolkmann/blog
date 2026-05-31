@@ -13,14 +13,14 @@ var navLeftWhenClosed;
  * This computes the off-screen position used to hide the nav.
  */
 function getClosedNavOffset(nav) {
-  return '-' + nav.getBoundingClientRect().width + 'px';
+  return "-" + nav.getBoundingClientRect().width + "px";
 }
 
 /**
  * This gets the sidebar nav element in the main layout.
  */
 function getSidebarNav() {
-  return document.querySelector('body > main > nav');
+  return document.querySelector("body > main > nav");
 }
 
 /**
@@ -33,8 +33,8 @@ function initializeNav() {
   navLeftWhenClosed = getClosedNavOffset(nav);
   nav.style.left = navLeftWhenClosed;
 
-  if (location.pathname === '/blog/topics/') {
-    nav.style.left = '0px';
+  if (location.pathname === "/blog/topics/") {
+    nav.style.left = "0px";
   }
 }
 
@@ -43,11 +43,20 @@ function initializeNav() {
  */
 function isNavOpen(nav) {
   const left = nav.style.left || getComputedStyle(nav).left;
-  return left === '0' || left === '0px';
+  return left === "0" || left === "0px";
+}
+
+// eslint-disable-next-line no-unused-vars
+function closeHamburgerMenu() {
+  const nav = getSidebarNav();
+  if (nav) {
+    navLeftWhenClosed = getClosedNavOffset(nav);
+    nav.style.left = navLeftWhenClosed;
+  }
 }
 
 /**
- * This toggles the hamburger menu open and closed.
+ * This toggles the hamburger menu between open and closed.
  */
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
@@ -58,7 +67,7 @@ function toggleHamburgerMenu() {
     navLeftWhenClosed = getClosedNavOffset(nav);
     nav.style.left = navLeftWhenClosed;
   } else {
-    nav.style.left = '0px';
+    nav.style.left = "0px";
   }
 }
 
@@ -66,5 +75,5 @@ window.onload = () => {
   initializeNav();
 
   // Make "Topics" be the default page.
-  if (location.pathname === '/blog/') location.href += 'topics/';
+  if (location.pathname === "/blog/") location.href += "topics/";
 };

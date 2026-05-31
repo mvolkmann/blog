@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Cloudflare Workers
 layout: topic-layout.njk
 ---

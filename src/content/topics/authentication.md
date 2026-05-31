@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Authentication
 layout: topic-layout.njk
 ---

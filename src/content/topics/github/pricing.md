@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GitHub Pricing
   parent: GitHub
   title: Pricing

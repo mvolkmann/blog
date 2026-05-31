@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Dart
 layout: topic-layout.njk
 ---

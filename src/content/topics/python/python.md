@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Svelte Material UI (SMUI)
   parent: Svelte
 layout: topic-layout.njk

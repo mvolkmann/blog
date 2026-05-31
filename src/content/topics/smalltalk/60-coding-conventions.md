@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Coding Conventions
   order: 60
   parent: Smalltalk

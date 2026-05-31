@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Kindle
 layout: topic-layout.njk
 ---

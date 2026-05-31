@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Hyperscript
 layout: topic-layout.njk
 ---

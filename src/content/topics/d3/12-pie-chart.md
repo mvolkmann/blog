@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
-eleventyNavigation:
+navigation:
   key: D3 Pie Charts
   order: 12
   parent: D3

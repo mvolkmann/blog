@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Reality Composer
   parent: Swift
 layout: topic-layout.njk

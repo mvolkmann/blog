@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Inspectors
   parent: Swift
 layout: topic-layout.njk

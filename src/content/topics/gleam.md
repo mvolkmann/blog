@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Gleam
 layout: topic-layout.njk
 ---

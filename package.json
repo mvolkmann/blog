@@ -1,21 +1,21 @@
 {
   "name": "blog",
   "version": "1.1.1",
-  "author": "R. Mark Volkmann",
-  "bugs": {
-    "url": "https://github.com/mvolkmann/blog/issues"
-  },
   "description": "Mark Volkmann's blog using Astro",
-  "homepage": "https://github.com/mvolkmann/blog#readme",
   "keywords": [
     "blog"
   ],
+  "homepage": "https://github.com/mvolkmann/blog#readme",
+  "bugs": {
+    "url": "https://github.com/mvolkmann/blog/issues"
+  },
   "license": "MIT",
-  "main": "index.js",
+  "author": "R. Mark Volkmann",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mvolkmann/blog.git"
   },
+  "main": "index.js",
   "scripts": {
     "add": "git add .",
     "all": "run-s build add commit push deploy",
@@ -35,23 +35,24 @@
     "watch:astro": "astro dev",
     "watch:public": "node scripts/watch-public.mjs"
   },
-  "devDependencies": {
-    "@types/prismjs": "^1.26.6",
-    "gh-pages": "^4.0.0",
-    "markdown-it-anchor": "^8.6.5",
-    "markdown-it-footnote": "^3.0.3",
-    "markdown-it-mathjax": "^2.0.0",
-    "markdown-it-sub": "^1.0.0",
-    "markdown-it-sup": "^1.0.0",
-    "npm-run-all": "^4.1.5",
-    "oxlint": "^1.9.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-astro": "^0.14.1"
-  },
   "dependencies": {
-    "astro": "^6.0.7",
+    "astro": "^6.4.2",
     "gray-matter": "^4.0.3",
-    "markdown-it": "^13.0.1",
+    "markdown-it": "^14.2.0",
     "prismjs": "^1.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "@types/prismjs": "^1.26.6",
+    "gh-pages": "^6.3.0",
+    "markdown-it-anchor": "^8.6.7",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-mathjax": "^2.0.0",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "npm-run-all": "^4.1.5",
+    "oxlint": "^1.67.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1"
   }
 }

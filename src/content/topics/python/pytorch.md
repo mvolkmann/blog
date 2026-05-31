@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: PyTorch library
   order: 9
   parent: Python

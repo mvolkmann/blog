@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Agile
 layout: topic-layout.njk
 ---

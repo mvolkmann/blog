@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Texinfo
 layout: topic-layout.njk
 ---

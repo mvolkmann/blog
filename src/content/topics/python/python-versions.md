@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python versions
   order: 1.1
   parent: Python

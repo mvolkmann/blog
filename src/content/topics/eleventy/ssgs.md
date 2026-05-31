@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Static Site Generators
   order: 1
   parent: Eleventy

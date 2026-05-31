@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Astro
 layout: topic-layout.njk
 ---

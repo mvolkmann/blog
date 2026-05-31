@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: DynamoDB
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: WebAssembly
 layout: topic-layout.njk
 ---

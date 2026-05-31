@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web App Step-by-Step
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Rust
 layout: topic-layout.njk
 ---

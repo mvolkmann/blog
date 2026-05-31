@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: JSON
   order: 50
   parent: Smalltalk

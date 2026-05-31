@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Remix
 layout: topic-layout.njk
 ---

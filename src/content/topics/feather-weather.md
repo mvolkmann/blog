@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Feather Weather Forecasts
 layout: topic-layout.njk
 ---

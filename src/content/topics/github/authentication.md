@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GitHub Authentication
   parent: GitHub
   title: Authentication

@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
-eleventyNavigation:
+navigation:
   key: GitHub Upcoming Features
   parent: GitHub
   title: Coming Soon

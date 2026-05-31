@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Warp Terminal
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Editor Customization
   order: 50
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Shortcodes
   parent: Eleventy
 layout: topic-layout.njk

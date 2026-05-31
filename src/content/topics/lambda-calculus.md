@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Lambda Calculus
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: React Native
 layout: topic-layout.njk
 ---

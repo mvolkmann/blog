@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Apple Reminders App
 layout: topic-layout.njk
 ---

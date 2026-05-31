@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: iMac G3
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: AWS Lambda
 layout: topic-layout.njk
 ---

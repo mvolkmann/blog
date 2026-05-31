@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Transpiling
   order: 60
   parent: Smalltalk

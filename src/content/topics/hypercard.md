@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: HyperCard
 layout: topic-layout.njk
 ---

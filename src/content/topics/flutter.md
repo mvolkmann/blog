@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Flutter
 layout: topic-layout.njk
 ---

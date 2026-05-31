@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Shoelace
 layout: topic-layout.njk
 ---

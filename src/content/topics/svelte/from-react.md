@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Svelte from React Components
   parent: Svelte
 layout: topic-layout.njk

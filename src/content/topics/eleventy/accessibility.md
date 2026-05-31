@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Accessibility Testing
   parent: Eleventy
 layout: topic-layout.njk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: SpriteKit
   parent: Swift
 layout: topic-layout.njk

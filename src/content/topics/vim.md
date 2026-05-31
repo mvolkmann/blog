@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Vim
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Svelte and Storybook
   parent: Svelte
 layout: topic-layout.njk

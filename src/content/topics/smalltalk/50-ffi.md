@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: FFI
   order: 50
   parent: Smalltalk

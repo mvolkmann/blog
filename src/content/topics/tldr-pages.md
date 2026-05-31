@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: tldr pages
 layout: topic-layout.njk
 ---

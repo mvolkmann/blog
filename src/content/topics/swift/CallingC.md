@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Calling C
   parent: Swift
 layout: topic-layout.njk

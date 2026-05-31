@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
-eleventyNavigation:
+navigation:
   key: D3 data/enter/exit
   order: 4
   parent: D3

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Prolog
 layout: topic-layout.njk
 ---

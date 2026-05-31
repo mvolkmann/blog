@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: tmux
 layout: topic-layout.njk
 ---

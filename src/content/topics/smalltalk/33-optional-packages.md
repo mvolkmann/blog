@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Optional Packages
   order: 33
   parent: Smalltalk

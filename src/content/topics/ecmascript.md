@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ECMAScript
 layout: topic-layout.njk
 ---

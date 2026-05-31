@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Fastify
 layout: topic-layout.njk
 ---

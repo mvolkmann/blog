@@ -1,5 +1,3 @@
-/* global toggleHamburgerMenu: false */
-
 /**
  * This handles clicks on topic navigation links.
  */
@@ -7,11 +5,12 @@
 function handleLinkClick(event, link, hasChildren) {
   if (hasChildren) {
     event.preventDefault();
-    link.classList.toggle('expanded');
+    link.classList.toggle("expanded");
     return false;
   }
 
-  toggleHamburgerMenu();
+  //toggleHamburgerMenu();
+  closeHamburgerMenu();
   return true;
 }
 

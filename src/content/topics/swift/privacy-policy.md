@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Privacy Policy
   parent: Swift
 layout: topic-layout.njk

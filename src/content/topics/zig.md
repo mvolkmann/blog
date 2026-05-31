@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Zig
 layout: topic-layout.njk
 ---

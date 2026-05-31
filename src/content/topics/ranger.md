@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Ranger
 layout: topic-layout.njk
 ---

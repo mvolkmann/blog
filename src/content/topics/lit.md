@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Lit
 layout: topic-layout.njk
 ---

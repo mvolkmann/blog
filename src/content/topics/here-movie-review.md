@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Here - Movie Review
 layout: topic-layout.njk
 ---

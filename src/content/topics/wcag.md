@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: WCAG
 layout: topic-layout.njk
 ---

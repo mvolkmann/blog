@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Why Swift?
   parent: Swift
   order: 1

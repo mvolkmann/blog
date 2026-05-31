@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-extensions.css'
-eleventyNavigation:
+navigation:
   key: D3 topojson Library
   order: 14
   parent: D3

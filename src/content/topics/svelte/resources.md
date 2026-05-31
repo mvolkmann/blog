@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Svelte Resources
   parent: Svelte
   title: Resources

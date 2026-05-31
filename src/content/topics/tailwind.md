@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Tailwind
 layout: topic-layout.njk
 ---

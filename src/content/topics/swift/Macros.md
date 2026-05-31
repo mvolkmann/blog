@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Macros
   parent: Swift
 layout: topic-layout.njk

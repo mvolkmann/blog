@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: CloudKit
   parent: Swift
 layout: topic-layout.njk

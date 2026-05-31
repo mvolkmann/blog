@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python testing
   order: 4
   parent: Python

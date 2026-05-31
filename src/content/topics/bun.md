@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Bun
 layout: topic-layout.njk
 ---

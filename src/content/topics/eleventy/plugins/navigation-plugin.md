@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Navigation Plugin
   parent: Plugins
 layout: topic-layout.njk
@@ -78,7 +78,7 @@ creating a file for this in the output directory (typically `_site`).
 
 ```yaml
 ---
-eleventyNavigation:
+navigation:
   key: Eleventy
   url: https://11ty.dev/
 permalink: false

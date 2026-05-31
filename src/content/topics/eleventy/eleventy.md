@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/welcome.css'
-eleventyNavigation:
+navigation:
   key: Eleventy
 layout: topic-layout.njk
 ---

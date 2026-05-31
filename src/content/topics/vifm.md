@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Vifm
 layout: topic-layout.njk
 ---

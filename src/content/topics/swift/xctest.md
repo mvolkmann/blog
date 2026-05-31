@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: XCTest
   parent: Swift
 layout: topic-layout.njk

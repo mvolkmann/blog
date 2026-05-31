@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: REPLs
   parent: Svelte
 layout: topic-layout.njk

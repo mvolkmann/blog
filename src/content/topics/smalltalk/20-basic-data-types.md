@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Basic Data Types
   order: 20
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: watchOS
   parent: Swift
 layout: topic-layout.njk
@@ -122,7 +122,7 @@ struct TimerView: View {
 
 ---
 
-eleventyNavigation:
+navigation:
 key: Apple Watch (watchOS)
 parent: Swift
 order: 4

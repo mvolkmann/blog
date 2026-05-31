@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: MySQL
 layout: topic-layout.njk
 ---

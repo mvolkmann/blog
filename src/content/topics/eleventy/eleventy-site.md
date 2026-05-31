@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Eleventy web site
   parent: Eleventy
   url: https://11ty.dev/

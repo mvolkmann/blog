@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Vite
   parent: Svelte
 layout: topic-layout.njk

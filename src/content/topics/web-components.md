@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web Components
 layout: topic-layout.njk
 ---

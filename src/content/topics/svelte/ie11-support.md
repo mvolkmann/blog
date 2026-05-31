@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: IE11 Support
   parent: Svelte
 layout: topic-layout.njk

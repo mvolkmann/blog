@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Alpine
 layout: topic-layout.njk
 ---

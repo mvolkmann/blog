@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Does Not Understand
   order: 23
   parent: Smalltalk

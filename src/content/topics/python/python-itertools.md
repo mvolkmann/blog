@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Python itertools module
   order: 1.3
   parent: Python

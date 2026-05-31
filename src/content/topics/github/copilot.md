@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: GitHub Copilot
   parent: GitHub
   title: Copilot

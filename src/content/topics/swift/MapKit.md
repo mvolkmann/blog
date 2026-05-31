@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: MapKit
   parent: Swift
 layout: topic-layout.njk

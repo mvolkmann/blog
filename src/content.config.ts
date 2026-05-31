@@ -32,7 +32,9 @@ const topics = defineCollection({
   schema: z
     .object({
       css: z.string().optional(),
-      eleventyNavigation: z
+      extraTitle: z.string().optional(),
+      layout: z.string().optional(),
+      navigation: z
         .object({
           key: z.string().optional(),
           order: z.number().optional(),
@@ -41,8 +43,6 @@ const topics = defineCollection({
           url: z.string().optional()
         })
         .optional(),
-      extraTitle: z.string().optional(),
-      layout: z.string().optional(),
       permalink: z.union([z.literal(false), z.string()]).optional(),
       title: z.string().optional()
     })

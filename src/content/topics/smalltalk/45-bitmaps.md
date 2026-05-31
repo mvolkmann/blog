@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Bitmaps
   order: 45
   parent: Smalltalk

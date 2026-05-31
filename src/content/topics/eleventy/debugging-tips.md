@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Debugging Tips
   parent: Eleventy
 layout: topic-layout.njk

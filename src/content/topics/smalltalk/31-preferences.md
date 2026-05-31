@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Preferences
   order: 31
   parent: Smalltalk

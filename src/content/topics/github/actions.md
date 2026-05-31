@@ -1,6 +1,6 @@
 ---
 css: '/blog/assets/github-actions.css'
-eleventyNavigation:
+navigation:
   key: GitHub Actions
   parent: GitHub
   title: Actions

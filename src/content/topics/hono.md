@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Hono
 layout: topic-layout.njk
 ---

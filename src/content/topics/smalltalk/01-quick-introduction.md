@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Quick Introduction to Smalltalk
   order: 1
   parent: Smalltalk

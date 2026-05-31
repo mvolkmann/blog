@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Keynote
 layout: topic-layout.njk
 ---

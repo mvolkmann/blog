@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: 11ty Configuration
   order: 5
   parent: Eleventy

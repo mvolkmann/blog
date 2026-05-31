@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: SwiftUI
   parent: Swift
   order: 3

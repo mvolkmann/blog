@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: seaborn library
   order: 7
   parent: Python

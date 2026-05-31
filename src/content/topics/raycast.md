@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Raycast
 layout: topic-layout.njk
 ---

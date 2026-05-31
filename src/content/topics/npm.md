@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: npm
 layout: topic-layout.njk
 ---

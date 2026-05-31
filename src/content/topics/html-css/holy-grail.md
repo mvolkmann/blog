@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: HTML/CSS Holy Grail
 layout: topic-layout.njk
 ---

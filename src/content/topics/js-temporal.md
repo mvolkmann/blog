@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: JavaScript Temporal
 layout: topic-layout.njk
 ---

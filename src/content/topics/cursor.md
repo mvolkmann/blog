@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Cursor
 layout: topic-layout.njk
 ---

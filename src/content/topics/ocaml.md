@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: OCaml
 layout: topic-layout.njk
 ---

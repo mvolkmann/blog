@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Development Environment
   order: 30
   parent: Smalltalk

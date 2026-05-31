@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: sed text processing
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Simulator
   parent: Swift
 layout: topic-layout.njk

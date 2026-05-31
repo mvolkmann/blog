@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Databases
   order: 50
   parent: Smalltalk

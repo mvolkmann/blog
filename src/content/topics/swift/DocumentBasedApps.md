@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Document-based Apps
   parent: Swift
 layout: topic-layout.njk

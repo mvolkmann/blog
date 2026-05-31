@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Fastlane
   parent: Swift
 layout: topic-layout.njk

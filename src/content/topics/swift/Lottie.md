@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Lottie
   parent: Swift
 layout: topic-layout.njk

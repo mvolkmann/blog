@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Long Polling
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web Awesome
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Content Security Policy (CSP)
 layout: topic-layout.njk
 ---

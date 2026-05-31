@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: UNIX Notes
 layout: topic-layout.njk
 ---

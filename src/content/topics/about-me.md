@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: About Me
 css: '/blog/assets/about-me.css'
 layout: topic-layout.njk

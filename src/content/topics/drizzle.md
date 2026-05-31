@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Drizzle
 layout: topic-layout.njk
 ---

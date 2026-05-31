@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Core Data
   parent: Swift
 layout: topic-layout.njk

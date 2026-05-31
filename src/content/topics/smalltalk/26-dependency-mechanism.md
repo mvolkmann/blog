@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Dependency Mechanism
   order: 26
   parent: Smalltalk

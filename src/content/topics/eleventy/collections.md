@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Collections
   parent: Eleventy
 layout: topic-layout.njk

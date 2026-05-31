@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Variables
   order: 16
   parent: Smalltalk

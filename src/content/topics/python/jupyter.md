@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Jupyter tools
   order: 3
   parent: Python

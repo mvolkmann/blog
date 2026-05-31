@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Concurrency
   parent: Swift
 layout: topic-layout.njk

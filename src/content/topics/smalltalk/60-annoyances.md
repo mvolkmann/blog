@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Annoyances
   order: 60
   parent: Smalltalk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Games
   order: 50
   parent: Smalltalk

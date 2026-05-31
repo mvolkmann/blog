@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Filters
   parent: Eleventy
 layout: topic-layout.njk

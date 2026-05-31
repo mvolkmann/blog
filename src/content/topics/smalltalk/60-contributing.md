@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Contributing
   order: 60
   parent: Smalltalk

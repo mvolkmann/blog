@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Spring Boot
 layout: topic-layout.njk
 ---

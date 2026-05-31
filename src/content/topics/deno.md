@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Deno
 layout: topic-layout.njk
 ---

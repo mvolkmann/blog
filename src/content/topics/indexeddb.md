@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: IndexedDB
 layout: topic-layout.njk
 ---

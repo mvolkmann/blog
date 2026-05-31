@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Front Matter
   parent: Eleventy
 layout: topic-layout.njk

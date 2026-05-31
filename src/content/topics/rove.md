@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ROVE
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Collections
   order: 21
   parent: Smalltalk

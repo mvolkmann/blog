@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Progressive Web Apps (PWAs)
 layout: topic-layout.njk
 ---

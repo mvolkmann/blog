@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: fish Shell
 layout: topic-layout.njk
 ---

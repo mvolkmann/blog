@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: ARIA
 layout: topic-layout.njk
 ---

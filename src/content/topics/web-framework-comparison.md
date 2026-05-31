@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Web Framework Comparison
 layout: topic-layout.njk
 ---

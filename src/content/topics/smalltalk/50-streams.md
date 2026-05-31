@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Streams
   order: 50
   parent: Smalltalk

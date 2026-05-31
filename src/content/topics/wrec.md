@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: wrec
 layout: topic-layout.njk
 ---

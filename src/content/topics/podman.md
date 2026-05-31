@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Podman
 layout: topic-layout.njk
 ---

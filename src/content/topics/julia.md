@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Julia
 layout: topic-layout.njk
 ---

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Morphic
   order: 41
   parent: Smalltalk

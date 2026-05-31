@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Contacts
   parent: Swift
 layout: topic-layout.njk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Launch Screens
   parent: Swift
 layout: topic-layout.njk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: PDFs
 layout: topic-layout.njk
 ---

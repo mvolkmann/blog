@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Roy 2024
 layout: topic-layout.njk
 ---

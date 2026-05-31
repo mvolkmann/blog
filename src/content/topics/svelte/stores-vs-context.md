@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Stores vs. Context
   parent: Svelte
 layout: topic-layout.njk

@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Talks
   parent: Swift
 layout: topic-layout.njk

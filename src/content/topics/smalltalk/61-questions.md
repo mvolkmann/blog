@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Questions
   order: 61
   parent: Smalltalk

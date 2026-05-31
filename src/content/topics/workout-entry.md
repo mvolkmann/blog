@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Workout Entry
 layout: topic-layout.njk
 ---

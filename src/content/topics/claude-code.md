@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Claude Code
 layout: topic-layout.njk
 ---

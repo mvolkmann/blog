@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Startup Scripts
   order: 43
   parent: Smalltalk

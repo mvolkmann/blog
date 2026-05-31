@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Gradle
 layout: topic-layout.njk
 ---

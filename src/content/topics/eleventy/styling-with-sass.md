@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Styling with Sass
   parent: Eleventy Styling
 layout: topic-layout.njk

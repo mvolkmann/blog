@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Quotes
 css: '/blog/assets/quotes.css'
 layout: topic-layout.njk

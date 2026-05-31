@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Codeium
 layout: topic-layout.njk
 ---

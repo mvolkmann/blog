@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Syntax
   order: 10
   parent: Smalltalk

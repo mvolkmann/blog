@@ -1,5 +1,5 @@
 ---
-eleventyNavigation:
+navigation:
   key: Alfred
 layout: topic-layout.njk
 ---
