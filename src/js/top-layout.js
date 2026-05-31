@@ -7,35 +7,13 @@ if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
 }
 */
 
-var navLeftWhenClosed;
+let nav;
+let navLeftWhenClosed;
 
-/**
- * This computes the off-screen position used to hide the nav.
- */
-function getClosedNavOffset(nav) {
-  return "-" + nav.getBoundingClientRect().width + "px";
-}
-
-/**
- * This gets the sidebar nav element in the main layout.
- */
-function getSidebarNav() {
-  return document.querySelector("body > main > nav");
-}
-
-/**
- * This initializes the nav position when the page loads.
- */
-function initializeNav() {
-  const nav = getSidebarNav();
-  if (!nav) return;
-
-  navLeftWhenClosed = getClosedNavOffset(nav);
+// eslint-disable-next-line no-unused-vars
+function closeHamburgerMenu() {
+  console.log("top-layout.js closeHamburgerMenu: entered");
   nav.style.left = navLeftWhenClosed;
-
-  if (location.pathname === "/blog/topics/") {
-    nav.style.left = "0px";
-  }
 }
 
 /**
@@ -46,33 +24,23 @@ function isNavOpen(nav) {
   return left === "0" || left === "0px";
 }
 
-// eslint-disable-next-line no-unused-vars
-function closeHamburgerMenu() {
-  const nav = getSidebarNav();
-  if (nav) {
-    navLeftWhenClosed = getClosedNavOffset(nav);
-    nav.style.left = navLeftWhenClosed;
-  }
-}
-
 /**
  * This toggles the hamburger menu between open and closed.
  */
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
-  const nav = getSidebarNav();
-  if (!nav) return;
-
-  if (isNavOpen(nav)) {
-    navLeftWhenClosed = getClosedNavOffset(nav);
-    nav.style.left = navLeftWhenClosed;
-  } else {
-    nav.style.left = "0px";
-  }
+  console.log("top-layout.js toggleHamburgerMenu: entered");
+  nav.style.left = isNavOpen(nav) ? navLeftWhenClosed : "0px";
 }
 
 window.onload = () => {
-  initializeNav();
+  nav = document.querySelector("body > main > nav");
+  navLeftWhenClosed = "-" + nav.getBoundingClientRect().width + "px";
+  nav.style.left = navLeftWhenClosed;
+
+  if (location.pathname === "/blog/topics/") {
+    nav.style.left = "0px";
+  }
 
   // Make "Topics" be the default page.
   if (location.pathname === "/blog/") location.href += "topics/";
