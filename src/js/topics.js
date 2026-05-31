@@ -5,7 +5,7 @@
 function handleLinkClick(event, link, hasChildren) {
   if (hasChildren) {
     event.preventDefault();
-    link.classList.toggle("expanded");
+    link.classList.toggle('expanded');
     return false;
   }
   return true;
