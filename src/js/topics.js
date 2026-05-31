@@ -8,9 +8,6 @@ function handleLinkClick(event, link, hasChildren) {
     link.classList.toggle("expanded");
     return false;
   }
-
-  //toggleHamburgerMenu();
-  closeHamburgerMenu();
   return true;
 }
 

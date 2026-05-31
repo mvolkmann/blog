@@ -10,12 +10,6 @@ if (location.hostname !== 'localhost' && 'serviceWorker' in navigator) {
 let nav;
 let navLeftWhenClosed;
 
-// eslint-disable-next-line no-unused-vars
-function closeHamburgerMenu() {
-  console.log("top-layout.js closeHamburgerMenu: entered");
-  nav.style.left = navLeftWhenClosed;
-}
-
 /**
  * This determines whether the nav is currently visible.
  */
@@ -29,7 +23,6 @@ function isNavOpen(nav) {
  */
 // eslint-disable-next-line no-unused-vars
 function toggleHamburgerMenu() {
-  console.log("top-layout.js toggleHamburgerMenu: entered");
   nav.style.left = isNavOpen(nav) ? navLeftWhenClosed : "0px";
 }
 
