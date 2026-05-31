@@ -18,7 +18,7 @@ layout: topic-layout.njk
 <script src="/blog/js/temperature-eval.js" type="module"></script>
 <script src="/blog/js/toggle-switch.js" type="module"></script>
 <script>
-  window.onload = () => {
+  window.addEventListener('load', () => {
     const tableWired = document.querySelector('table-wired');
       // The property "properties" must be set before the property "headings"
       // because changing headings triggers the buildTh method
@@ -30,7 +30,7 @@ layout: topic-layout.njk
         {name: 'Bob', age: 25, occupation: 'Designer'},
         {name: 'Charlie', age: 35, occupation: 'Teacher'}
       ];
-  };
+  });
 </script>
 
 <style>
@@ -127,7 +127,7 @@ To define a web component using wrec:
 For example:
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class BasicWrec extends Wrec {
   static css = css`
@@ -139,7 +139,7 @@ class BasicWrec extends Wrec {
   static html = html`<span>Hello, World!</span>`;
 }
 
-BasicWrec.define('basic-wrec');
+BasicWrec.define("basic-wrec");
 ```
 
 The `css` and `html` properties above use tagged template literals.
@@ -155,7 +155,7 @@ This is an optional convenience method.
 An alternative is to use the `define` method as follows:
 
 ```js
-customElements.define('element-name', SomeClass);
+customElements.define("element-name", SomeClass);
 ```
 
 To use this in a web page or Markdown file, include the following:
@@ -221,17 +221,17 @@ Properties are automatically mapped to attributes in the custom element.
 Here's a simple example that enables specifying a name.
 
 ```js
-import {html, Wrec} from './wrec.min.js';
+import { html, Wrec } from "./wrec.min.js";
 
 class HelloWorld extends Wrec {
   static properties = {
-    name: {type: String, value: 'World'}
+    name: { type: String, value: "World" },
   };
 
   static html = html`<div>Hello, <span>this.name</span>!</div>`;
 }
 
-HelloWorld.define('hello-world');
+HelloWorld.define("hello-world");
 ```
 
 We can use this custom element as follows:
@@ -323,12 +323,12 @@ Wrec does not rerender the entire web component.
 Here's an example of a counter component that takes advantage of this feature:
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class CounterWrec extends Wrec {
   static properties = {
-    label: {type: String},
-    count: {type: Number}
+    label: { type: String },
+    count: { type: Number },
   };
 
   static css = css`
@@ -345,15 +345,13 @@ class CounterWrec extends Wrec {
 
   static html = html`
     <label>this.label</label>
-    <button onClick="this.count--" type="button" disabled="this.count === 0">
-      -
-    </button>
+    <button onClick="this.count--" type="button" disabled="this.count === 0">-</button>
     <span>this.count</span>
     <button onClick="this.count++" type="button">+</button>
   `;
 }
 
-CounterWrec.define('counter-wrec');
+CounterWrec.define("counter-wrec");
 ```
 
 When the value of an attribute is a Boolean,
@@ -414,19 +412,17 @@ The following web component demonstrates conditional generation
 using the ternary operator.
 
 ```js
-import {html, Wrec} from './wrec.min.js';
+import { html, Wrec } from "./wrec.min.js";
 
 class TemperatureEval extends Wrec {
   static properties = {
-    temperature: {type: Number}
+    temperature: { type: Number },
   };
 
-  static html = html`
-    <p>this.temperature < 32 ? "freezing" : "not freezing"</p>
-  `;
+  static html = html` <p>this.temperature < 32 ? "freezing" : "not freezing"</p> `;
 }
 
-TemperatureEval.define('temperature-eval');
+TemperatureEval.define("temperature-eval");
 ```
 
 Here it is in action.
@@ -460,27 +456,27 @@ It uses that property in the `connectedCallback` method
 to call a method (`next`) on that element.
 
 ```typescript
-import {html, Wrec} from 'wrec';
-import './traffic-light'; // register custom element
+import { html, Wrec } from "wrec";
+import "./traffic-light"; // register custom element
 
-const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 class LightController extends Wrec {
-  static properties = {tl: {type: HTMLElement}};
+  static properties = { tl: { type: HTMLElement } };
   static html = html`<traffic-light ref="tl"></traffic-light>`;
 
   async ready() {
-    const {tl} = this;
+    const { tl } = this;
     while (true) {
-      const {state} = tl;
-      const seconds = state === 'stop' ? 3 : state === 'yield' ? 1 : 2;
+      const { state } = tl;
+      const seconds = state === "stop" ? 3 : state === "yield" ? 1 : 2;
       await sleep(seconds * 1000);
       tl.next();
     }
   }
 }
 
-LightController.define('light-controller');
+LightController.define("light-controller");
 ```
 
 Overriding the `ready` lifecycle method is equivalent to the following:
@@ -523,15 +519,15 @@ the form element is automatically updated.
 The following web component demonstrates this.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class NumberSlider extends Wrec {
   static properties = {
-    label: {type: String},
-    labelWidth: {type: String},
-    max: {type: Number, value: 100},
-    min: {type: Number, value: 0},
-    value: {type: Number}
+    label: { type: String },
+    labelWidth: { type: String },
+    max: { type: Number, value: 100 },
+    min: { type: Number, value: 0 },
+    value: { type: Number },
   };
 
   static css = css`
@@ -541,7 +537,7 @@ class NumberSlider extends Wrec {
       gap: 0.5rem;
     }
 
-    input[type='number'] {
+    input[type="number"] {
       width: 6rem;
     }
 
@@ -554,17 +550,12 @@ class NumberSlider extends Wrec {
 
   static html = html`
     <label>this.label</label>
-    <input
-      type="range"
-      min="this.min"
-      max="this.max"
-      value:input="this.value"
-    />
+    <input type="range" min="this.min" max="this.max" value:input="this.value" />
     <span>this.value</span>
   `;
 }
 
-NumberSlider.define('number-slider');
+NumberSlider.define("number-slider");
 ```
 
 Here it is in action.
@@ -604,12 +595,12 @@ that compute the area of a rectangle.
 It shows three ways to accomplish this, with the first two commented out.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class RectangleArea extends Wrec {
   static properties = {
-    width: {type: Number, value: 10, usedBy: ['rectangleArea']},
-    height: {type: Number, value: 5, usedBy: ['rectangleArea']},
+    width: { type: Number, value: 10, usedBy: ["rectangleArea"] },
+    height: { type: Number, value: 5, usedBy: ["rectangleArea"] },
     /*
     area: {
       type: Number,
@@ -618,8 +609,8 @@ class RectangleArea extends Wrec {
     */
     area: {
       type: Number,
-      computed: 'this.rectangleArea()'
-    }
+      computed: "this.rectangleArea()",
+    },
   };
 
   static css = css`
@@ -639,7 +630,7 @@ class RectangleArea extends Wrec {
   }
 }
 
-RectangleArea.define('rectangle-area');
+RectangleArea.define("rectangle-area");
 ```
 
 Since the `rectangleArea` method uses properties
@@ -676,18 +667,18 @@ It also defines a computed property whose value
 can be any valid JavaScript expression.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class ColorPicker extends Wrec {
   static properties = {
-    labelWidth: {type: String, value: '3rem'},
-    red: {type: Number},
-    green: {type: Number},
-    blue: {type: Number},
+    labelWidth: { type: String, value: "3rem" },
+    red: { type: Number },
+    green: { type: Number },
+    blue: { type: Number },
     color: {
       type: String,
-      computed: '`rgb(${this.red}, ${this.green}, ${this.blue})`'
-    }
+      computed: "`rgb(${this.red}, ${this.green}, ${this.blue})`",
+    },
   };
 
   static css = css`
@@ -713,9 +704,9 @@ class ColorPicker extends Wrec {
     <div id="swatch"></div>
     <div id="sliders">
       <!-- prettier-ignore -->
-      ${this.makeSlider('Red')}
-      ${this.makeSlider('Green')}
-      ${this.makeSlider('Blue')}
+      ${this.makeSlider("Red")}
+      ${this.makeSlider("Green")}
+      ${this.makeSlider("Blue")}
     </div>
   `;
 
@@ -731,7 +722,7 @@ class ColorPicker extends Wrec {
   }
 }
 
-ColorPicker.define('color-picker');
+ColorPicker.define("color-picker");
 ```
 
 Here it is in action.
@@ -751,12 +742,12 @@ to change the color of some text.
 It also uses a `number-slider` to change the size of the text.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class ColorDemo extends Wrec {
   static properties = {
-    color: {type: String},
-    size: {type: Number, value: 18}
+    color: { type: String },
+    size: { type: Number, value: 18 },
   };
 
   static css = css`
@@ -768,23 +759,18 @@ class ColorDemo extends Wrec {
     }
     p {
       color: this.color;
-      font-size: this.size + 'px';
+      font-size: this.size + "px";
     }
   `;
 
   static html = html`
     <color-picker color="this.color"></color-picker>
-    <number-slider
-      label="Size"
-      max="48"
-      min="12"
-      value="this.size"
-    ></number-slider>
+    <number-slider label="Size" max="48" min="12" value="this.size"></number-slider>
     <p>This is a test.</p>
   `;
 }
 
-ColorDemo.define('color-demo');
+ColorDemo.define("color-demo");
 ```
 
 Here it is in action.
@@ -819,15 +805,15 @@ Note how properties that are mapped to required attributes,
 such as `values` below, specify that with `required: true`.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class RadioGroup extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    labels: {type: String, required: true},
-    values: {type: String, required: true},
-    value: {type: String}
+    labels: { type: String, required: true },
+    values: { type: String, required: true },
+    value: { type: String },
   };
 
   static css = css`
@@ -861,15 +847,15 @@ class RadioGroup extends Wrec {
 
   attributeChangedCallback(attrName, oldValue, newValue) {
     super.attributeChangedCallback(attrName, oldValue, newValue);
-    if (attrName === 'value') {
+    if (attrName === "value") {
       // Update the checked state of the radio buttons.
-      const inputs = this.shadowRoot.querySelectorAll('input');
+      const inputs = this.shadowRoot.querySelectorAll("input");
       for (const input of inputs) {
         input.checked = input.value === newValue;
       }
-    } else if (attrName === 'labels') {
-      this.#labelArray = this.labels.split(',');
-    } else if (attrName === 'values') {
+    } else if (attrName === "labels") {
+      this.#labelArray = this.labels.split(",");
+    } else if (attrName === "values") {
       this.#fixValue();
     }
   }
@@ -878,7 +864,7 @@ class RadioGroup extends Wrec {
   // is not in the list of values.
   #fixValue() {
     requestAnimationFrame(() => {
-      const values = this.values.split(',');
+      const values = this.values.split(",");
       if (this.value) {
         if (!values.includes(this.value)) this.value = values[0];
       } else {
@@ -904,7 +890,7 @@ class RadioGroup extends Wrec {
           id="${value}"
           onchange="handleChange"
           value="${value}"
-          ${value === this.value ? 'checked' : ''}
+          ${value === this.value ? "checked" : ""}
         />
         <label for="${value}">${this.#labelArray[index]}</label>
       </div>
@@ -912,21 +898,21 @@ class RadioGroup extends Wrec {
   }
 }
 
-RadioGroup.define('radio-group');
+RadioGroup.define("radio-group");
 ```
 
 Here is the class that defines the `select-list` custom element:
 
 ```js
-import {html, Wrec} from './wrec.min.js';
+import { html, Wrec } from "./wrec.min.js";
 
 class SelectList extends Wrec {
   static formAssociated = true;
 
   static properties = {
-    labels: {type: String, required: true},
-    values: {type: String, required: true},
-    value: {type: String}
+    labels: { type: String, required: true },
+    values: { type: String, required: true },
+    value: { type: String },
   };
 
   static html = html`
@@ -948,8 +934,8 @@ class SelectList extends Wrec {
 
   attributeChangedCallback(attrName, oldValue, newValue) {
     super.attributeChangedCallback(attrName, oldValue, newValue);
-    if (attrName === 'labels') {
-      this.#labelArray = this.labels.split(',');
+    if (attrName === "labels") {
+      this.#labelArray = this.labels.split(",");
     }
   }
 
@@ -957,7 +943,7 @@ class SelectList extends Wrec {
   // is not in the list of values.
   #fixValue() {
     requestAnimationFrame(() => {
-      const values = this.values.split(',');
+      const values = this.values.split(",");
       if (this.value) {
         if (!values.includes(this.value)) this.value = values[0];
       } else {
@@ -969,13 +955,11 @@ class SelectList extends Wrec {
   // This method cannot be private because it is
   // called from the expression in the html method.
   makeOption(value, index) {
-    return html`
-      <option value="${value.trim()}">${this.#labelArray[index]}</option>
-    `;
+    return html` <option value="${value.trim()}">${this.#labelArray[index]}</option> `;
   }
 }
 
-SelectList.define('select-list');
+SelectList.define("select-list");
 ```
 
 Here is the class that defines the `data-binding` custom element.
@@ -984,20 +968,19 @@ The `label` property is a computed property that
 calls a method in the class to obtain its value.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
-const capitalize = str =>
-  str ? str.charAt(0).toUpperCase() + str.slice(1) : str;
+const capitalize = (str) => (str ? str.charAt(0).toUpperCase() + str.slice(1) : str);
 
 class DataBinding extends Wrec {
   static properties = {
-    color: {type: String},
-    colors: {type: String, required: true, usedBy: ['getLabels']},
+    color: { type: String },
+    colors: { type: String, required: true, usedBy: ["getLabels"] },
     labels: {
       type: String,
-      computed: 'this.getLabels()'
+      computed: "this.getLabels()",
     },
-    size: {type: Number, value: 18}
+    size: { type: Number, value: 18 },
   };
 
   static css = css`
@@ -1009,7 +992,7 @@ class DataBinding extends Wrec {
     }
     p {
       color: this.color;
-      font-size: this.size + 'px';
+      font-size: this.size + "px";
       margin: 6px 0;
     }
   `;
@@ -1031,22 +1014,16 @@ class DataBinding extends Wrec {
       value="this.color"
       values="this.colors"
     ></select-list>
-    <number-slider
-      label="Size"
-      max="48"
-      min="12"
-      name="size"
-      value="this.size"
-    ></number-slider>
+    <number-slider label="Size" max="48" min="12" name="size" value="this.size"></number-slider>
     <p>You selected the color <span id="selected-color">this.color</span>.</p>
   `;
 
   getLabels() {
-    return this.colors.split(',').map(capitalize).join(',');
+    return this.colors.split(",").map(capitalize).join(",");
   }
 }
 
-DataBinding.define('data-binding');
+DataBinding.define("data-binding");
 ```
 
 Finally, here it is in action.
@@ -1115,16 +1092,16 @@ The properties of the `table-wired` component are set with the following code:
 
 ```js
 window.onload = () => {
-  const tableWired = document.querySelector('table-wired');
+  const tableWired = document.querySelector("table-wired");
   // The property "properties" must be set before the property "headings"
   // because changing "headings" triggers the "buildTh" method
   // which uses properties to determine the data to sort.
-  tableWired.properties = ['name', 'age', 'occupation'];
-  tableWired.headings = ['Name', 'Age', 'Occupation'];
+  tableWired.properties = ["name", "age", "occupation"];
+  tableWired.headings = ["Name", "Age", "Occupation"];
   tableWired.data = [
-    {name: 'Alice', age: 30, occupation: 'Engineer'},
-    {name: 'Bob', age: 25, occupation: 'Designer'},
-    {name: 'Charlie', age: 35, occupation: 'Teacher'}
+    { name: "Alice", age: 30, occupation: "Engineer" },
+    { name: "Bob", age: 25, occupation: "Designer" },
+    { name: "Charlie", age: 35, occupation: "Teacher" },
   ];
 };
 ```
@@ -1155,8 +1132,8 @@ and the variable `component` is set to a reference to an instance.
 To change both properties, you could use the following:
 
 ```js
-component.color = 'yellow';
-component.size = 'large';
+component.color = "yellow";
+component.size = "large";
 ```
 
 But that will cause two rounds of UI updates.
@@ -1187,11 +1164,11 @@ The event `detail` property is set to an object
 with the properties `tagName`, `property`, `oldValue`, and `value`.
 
 ```js
-import {css, html, Wrec} from './wrec.min.js';
+import { css, html, Wrec } from "./wrec.min.js";
 
 class ToggleSwitch extends Wrec {
   static properties = {
-    checked: {type: Boolean, dispatch: true}
+    checked: { type: Boolean, dispatch: true },
   };
 
   static css = css`
@@ -1257,7 +1234,7 @@ class ToggleSwitch extends Wrec {
   `;
 
   handleKey(e) {
-    if (e.code === 'Space' || e.code === 'Enter') {
+    if (e.code === "Space" || e.code === "Enter") {
       e.preventDefault();
       this.toggle();
     }
@@ -1268,7 +1245,7 @@ class ToggleSwitch extends Wrec {
   }
 }
 
-ToggleSwitch.define('toggle-switch');
+ToggleSwitch.define("toggle-switch");
 ```
 
 Here it is in action.
@@ -1329,7 +1306,7 @@ and the values for each will be included.
 To set a form value that is not mapped to a property, use the following:
 
 ```js
-this.setFormValue('someName', someValue);
+this.setFormValue("someName", someValue);
 ```
 
 Wrec automatically handles form resets.
@@ -1354,14 +1331,14 @@ First, we define the custom element `labeled-input`
 in the file `labeled-input.js`.
 
 ```js
-import {css, html, Wrec} from '../wrec';
+import { css, html, Wrec } from "../wrec";
 
 class LabeledInput extends Wrec {
   static properties = {
-    id: {type: String, required: true},
-    label: {type: String, required: true},
-    name: {type: String},
-    value: {type: String}
+    id: { type: String, required: true },
+    label: { type: String, required: true },
+    name: { type: String },
+    value: { type: String },
   };
 
   static css = css`
@@ -1380,18 +1357,18 @@ class LabeledInput extends Wrec {
   `;
 }
 
-LabeledInput.define('labeled-input');
+LabeledInput.define("labeled-input");
 ```
 
 Next, we define the custom element `hello-world`
 in the file `hello-world.js`.
 
 ```js
-import {css, html, Wrec} from '../wrec';
+import { css, html, Wrec } from "../wrec";
 
 class HelloWorld extends Wrec {
   static properties = {
-    name: {type: String, value: 'World'}
+    name: { type: String, value: "World" },
   };
 
   static css = css`
@@ -1403,7 +1380,7 @@ class HelloWorld extends Wrec {
   static html = html` <p>Hello, <span>this.name</span>!</p> `;
 }
 
-HelloWorld.define('hello-world');
+HelloWorld.define("hello-world");
 ```
 
 Finally, we use these components inside `hello-world-with-state.html`.
@@ -1414,13 +1391,13 @@ Note below how we:
   it specifies whether the data should be persisted to `sessionStorage`.
 
   ```js
-  const state = new WrecState('vault', true, {name: 'World'});
+  const state = new WrecState("vault", true, { name: "World" });
   ```
 
 - associate the `WrecState` property "name" with the `labeled-input` property "value"
 
   ```js
-  li.useState(state, {name: 'value'});
+  li.useState(state, { name: "value" });
   ```
 
 - associate the `WrecState` property "name" with the `hello-world` property "name"
@@ -1449,17 +1426,17 @@ which updates both the `labeled-input` and `hello-world` elements.
     <script src="hello-world.js" type="module"></script>
     <script src="labeled-input.js" type="module"></script>
     <script type="module">
-      import {WrecState} from '../wrec-state.js';
-      const state = new WrecState('vault', true, {name: 'World'});
+      import { WrecState } from "../wrec-state.js";
+      const state = new WrecState("vault", true, { name: "World" });
 
-      const li = document.querySelector('labeled-input');
-      li.useState(state, {name: 'value'});
-      const hw = document.querySelector('hello-world');
+      const li = document.querySelector("labeled-input");
+      li.useState(state, { name: "value" });
+      const hw = document.querySelector("hello-world");
       hw.useState(state);
 
-      const button = document.querySelector('button');
-      button.addEventListener('click', () => {
-        state.name = 'World';
+      const button = document.querySelector("button");
+      button.addEventListener("click", () => {
+        state.name = "World";
       });
 
       // This demonstrates listening for state changes
@@ -1470,7 +1447,7 @@ which updates both the `labeled-input` and `hello-world` elements.
       // When omitted, the callback function is called for all state changes.
       state.addChangeCallback((statePath, newValue, oldValue) => {
         const msg = `${statePath} changed from ${oldValue} to ${newValue}`;
-        console.log('state-demo.html:', msg);
+        console.log("state-demo.html:", msg);
       });
     </script>
   </head>
@@ -1496,10 +1473,10 @@ The optional third argument specifies initial data.
 For example:
 
 ```js
-const state = new WrecState('vault', true, {
-  color: 'red',
-  team: {leader: {name: 'World'}},
-  notUsed: 'not used'
+const state = new WrecState("vault", true, {
+  color: "red",
+  team: { leader: { name: "World" } },
+  notUsed: "not used",
 });
 ```
 
@@ -1507,10 +1484,10 @@ Nested `WrecState` properties can be mapped to component properties.
 For example:
 
 ```js
-const c1 = document.querySelector('component-one');
+const c1 = document.querySelector("component-one");
 // The second argument object keys are state property paths
 // and the values are component property names.
-c1.useState(state, {color: 'color', 'team.leader.name': 'name'});
+c1.useState(state, { color: "color", "team.leader.name": "name" });
 ```
 
 When running in development mode (`NODE_ENV` set to "development"),
@@ -1518,10 +1495,10 @@ When running in development mode (`NODE_ENV` set to "development"),
 For example:
 
 ```js
-state = WrecState.get('vault'); // gets a WrecState object by name
+state = WrecState.get("vault"); // gets a WrecState object by name
 state.log(); // outputs all the key/value pairs
-state.color = 'red'; // reactively changes a state property
-state.team.leader.name = 'Mark'; // reactively changes a state property
+state.color = "red"; // reactively changes a state property
+state.team.leader.name = "Mark"; // reactively changes a state property
 ```
 
 The data in each `WrecState` object can be persisted to `sessionStorage`
