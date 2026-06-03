@@ -269,6 +269,13 @@ Those objects support the following keys:
 - `uses`: a comma-separated list of other property names used to compute the value
 - `dispatch`: set to `true` to cause a "change" event to be dispatched
   every time the value of the property changes
+- `validate`: a function that is passed a proposed new value
+  and returns either a string describing a validation error
+  or nothing if the value is valid.
+  When an error string is returned, wrec throws a "validation" error
+  whose `detail` property is set to an object containing the properties
+  `object` (reference to the component instance),
+  `property`, `value`, and `message`.
 
 The `value` and `computed` properties should not both be specified.
 
@@ -283,6 +290,20 @@ every time the value of any of the listed properties changes.
 
 The `detail` property of the dispatched "change" events is set to an object
 with the properties `tagName`, `property`, `oldValue`, and `value`.
+
+Here's an example of using the `validate` property:
+
+```js
+static properties = {
+  count: {
+    type: Number,
+    value: 1,
+    validate(value: number) {
+      if (value < 0) return "must be at least zero";
+    },
+  },
+};
+```
 
 ## Event Listeners
 
