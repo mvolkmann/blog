@@ -322,10 +322,10 @@ The [Foundation](https://developer.apple.com/documentation/foundation) framework
 `AttributedString`, `Bundle`, `Calendar`, `CGFloat`, `Data`, `Date`,
 `DateFormatter`, `DateInterval`, `Decimal`, `Dimension`, `Error`, `FileManager`,
 `HTTPURLResponse`, `InputStream`, `Locale`, `Measurement`, `NumberFormatter`,
-`NumberFormatter`, `ObservableObject`, `OutputStream`, `Pipe`, `Port`,
-`Process`, `ProcessInfo`, `Published`, `RunLoop`, `Stream`, `Thread`,
-`TimeInterval`, `Timer`, `Timer`, `TimeZone`, `Unit`, `URL`, `URLRequest`,
-`URLResponse`, `URLSession`, `UserDefaults`, `UUID`, and many more.
+`ObservableObject`, `OutputStream`, `Pipe`, `Port`, `Process`, `ProcessInfo`,
+`Published`, `RunLoop`, `Stream`, `Thread`, `TimeInterval`, `Timer`,
+`Timer`, `TimeZone`, `Unit`, `URL`, `URLRequest`, `URLResponse`,
+`URLSession`, `UserDefaults`, `UUID`, and many more.
 
 Foundation used to be mostly implemented in Objective-C on Apple platforms
 and separately implemented for non-Apple platforms.
@@ -405,7 +405,7 @@ can be written in three ways:
 | closed range   | `a...b` (inclusive upper), `a..<b` (exclusive upper) |
 | open range     | `a...`, `...b`, `..<b`                               |
 | nil-coalescing | a `??` b (value is `a` if not nil and `b` otherwise) |
-| bit shift      | `<<`, `>>`, `&<<`, `>>`                             |
+| bit shift      | `<<`, `>>`, `&<<`, `>>`                              |
 | bitwise        | `&` (and), `\|` (or), `^` (xor)                      |
 | types          | `is` (type check), `as`, `as?`, `as!` (type cast)    |
 
@@ -426,6 +426,7 @@ When an `Int` is divided by an `Int` using the `/` operator,
 the result is truncated to an `Int`, not rounded.
 
 The nil coalescing operator in `a ?? b` is shorthand for `a != nil ? a! : b`.
+The `!` is required to unwrap the optional value of `a`.
 This is often used to provide a default value to use when `a` is `nil`.
 
 Swift supports optional chaining with the `?.` operator
@@ -530,7 +531,7 @@ follow those that do not have a default value.
 
 Calls to a function must provide all the required arguments.
 Each argument is specified by the argument label, a colon, and a value.
-These must appear in the same orders as the corresponding parameters.
+These must appear in the same order as the corresponding parameters.
 The rationale for this is that it can make some calls more expressive,
 almost like sentences.
 It is useful to think of the argument labels
@@ -739,7 +740,7 @@ even in release builds.
 
 ## Error Handling
 
-Errors in that occur in Swift code are described by
+Errors that occur in Swift code are described by
 objects that conform to the `Error` protocol.
 A protocol is like an interface in other programming languages.
 These are described in detail later in the [Protocols](#protocols) section.
