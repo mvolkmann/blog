@@ -272,10 +272,10 @@ Those objects support the following keys:
 - `validate`: a function that is passed a proposed new value
   and returns either a string describing a validation error
   or nothing if the value is valid.
-  When an error string is returned, wrec throws a "validation" error
+  When an error string is returned, wrec dispatches a "validation" event
   whose `detail` property is set to an object containing the properties
-  `object` (reference to the component instance),
-  `property`, `value`, and `message`.
+  `instance` (reference to the component instance),
+  `property`, `value`, `valid`, and `errors`.
 
 The `value` and `computed` properties should not both be specified.
 
@@ -304,6 +304,19 @@ static properties = {
   },
 };
 ```
+
+A wrec component class can define a `validate` method
+which is called when any property is modified.
+This method is passed an object containing
+all the current and proposed property values.
+It must return an array of error message strings
+which is empty when no errors are found.
+Having access to all the properties enables checking relationships between them.
+For example, for properties like `min` and `max`, the `validate` method
+can verify that `min` is less than or equal to `max`.
+See
+[src/examples/validate-demo.js](https://github.com/mvolkmann/wrec/blob/main/src/examples/validate-demo.js)
+in the wrec GitHub repository for an example.
 
 ## Event Listeners
 
