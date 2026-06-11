@@ -269,13 +269,17 @@ Those objects support the following keys:
 - `uses`: a comma-separated list of other property names used to compute the value
 - `dispatch`: set to `true` to cause a "change" event to be dispatched
   every time the value of the property changes
+- `reflect`: set to `false` to prevent reflecting the property value
+  to the corresponding attribute (defaults to `true`)
 - `validate`: a function that is passed a proposed new value
   and returns either a string describing a validation error
   or nothing if the value is valid.
   When an error string is returned, wrec dispatches a "validation" event
   whose `detail` property is set to an object containing the properties
   `instance` (reference to the component instance),
-  `property`, `value`, `valid`, and `errors`.
+  `property`, `value`, and `errors`.
+  The `errors` property holds an array of strings
+  that is empty when there are no errors.
 
 The `value` and `computed` properties should not both be specified.
 
