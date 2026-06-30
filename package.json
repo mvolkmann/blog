@@ -36,7 +36,8 @@
     "watch:public": "node scripts/watch-public.mjs"
   },
   "dependencies": {
-    "astro": "^6.4.2",
+    "@astrojs/markdown-remark": "^7.2.0",
+    "astro": "^7.0.3",
     "gray-matter": "^4.0.3",
     "markdown-it": "^14.2.0",
     "prismjs": "^1.30.0"
