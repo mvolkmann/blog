@@ -272,7 +272,7 @@ The Boolean value true is represented by:
 
 | λ-calculus  | JavaScript    |
 | ----------- | ------------- |
-| `λt. λf. t` | `t => f => t` |
+| `λx. λy. x` | `x => y => x` |
 
 This takes two arguments and returns the first.
 
@@ -283,7 +283,7 @@ The Boolean value false is represented by:
 
 | λ-calculus  | JavaScript    |
 | ----------- | ------------- |
-| `λt. λf. f` | `t => f => f` |
+| `λx. λy. y` | `x => y => y` |
 
 This takes two arguments and returns the second.
 It is the same as the function that represents the number zero (below).
