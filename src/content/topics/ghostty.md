@@ -288,6 +288,15 @@ To render images in Ghostty:
 - `brew install --cask kitty`
 - `kitten icat {file-path}`
 
+To simplify this, define the following alias in `.zshrc`:
+
+`alias icat="kitten icat"`
+
+To make the image fit in the terminal window, add the option `--fit both`.
+
+For more options, see the
+[cat documentation](https://sw.kovidgoyal.net/kitty/kittens/icat/).
+
 ## Shaders
 
 Shaders apply a graphical effect to the terminal background.
