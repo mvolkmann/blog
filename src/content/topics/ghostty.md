@@ -94,9 +94,10 @@ It seems there is currently no way to swap the positions of existing splits.
 To modify Ghostty settings, select Ghostty ... Settings... or press cmd-comma.
 This will open a text file (seems to use TOML syntax)
 in your default text editor.
-In macOS this file is
-`~/Library/Application Support/com.mitchellh.ghostty/config`.
-In Linux this file is `$HOME/.config/ghostty/config`.
+In macOS and Linux this file is `$HOME/.config/ghostty/config`.
+macOS will look in
+`~/Library/Application Support/com.mitchellh.ghostty/config`
+if the previous `config` file doesn't exist.
 See the comments in this file for instructions.
 
 To see all the available configuration options and their default values,

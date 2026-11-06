@@ -11,5 +11,5 @@ export default defineConfig({
   outDir: './_site',
   site: 'https://mvolkmann.github.io',
   base: '/blog',
-  trailingSlash: 'always'
+  trailingSlash: 'ignore'
 });
