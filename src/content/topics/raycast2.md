@@ -115,9 +115,11 @@ select "Dictation" in the left nav,
 click the toggle in the upper-right to enable,
 and add a hotkey to the "Dictate" command (such as cmd-d).
 
+Optionally change "Language" from "Auto" to a specific language (like "English")
+if you will always be speaking in that language.
+
 To dictate text to be entered in the focused text input,
-press the hotkey assigned to the "Dictate" command,
-speak the text, and press the hotkey again.
+press the hotkey, speak the text, and press the hotkey again.
 
 A period will automatically be added to the end of the text.
 To prevent this, open the Raycast settings,
@@ -126,3 +128,9 @@ click "Personalization", click "Custom Instructions", and enter
 "Transcribe speech naturally, but do not include
 a period at the end of the final sentence or phrase."
 It's ridiculous that this is so complicated!
+
+To paste a past dictation, enter "Dictation History",
+select one and press the return key.
+
+### Window Management
+
