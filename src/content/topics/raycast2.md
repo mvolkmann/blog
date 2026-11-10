@@ -38,6 +38,10 @@ The steps for first-time configuration of Raycast are:
 To launch Raycast, press its hotkey.
 A Raycast window will open on the monitor where the mouse cursor resides.
 
+Raycast displays a single stack of windows.
+To pop the current window off of the stack,
+returning to the previous window, press the esc key.
+
 ## Features
 
 ### Launch an application
@@ -84,3 +88,41 @@ Alternatively, select an entry and press cmd-. to toggle whether it is pinned.
 To edit a clipboard entry, select it, press cmd-k, and select "Edit".
 
 To edit a clipboard entry, select it, press cmd-k, and select "Delete".
+
+### Emoji search
+
+To search for an emoji,
+enter "emoji", select "Search for GIFs", and enter a topic.
+
+To paste an emoji into the current document,
+select it and press the return key.
+
+To copy an emoji to the clipboard,
+select it, press cmd-k, and select "Copy to Clipboard".
+
+### GIF search
+
+To search for a GIF image,
+enter "gif", select "Search Emoji & Symbols", and enter a topic.
+
+To copy the selected image to the clipboard, press the return key.
+
+### Dictation
+
+If dictation isn't already enabled,
+press cmd-, to open the Raycast settings,
+select "Dictation" in the left nav,
+click the toggle in the upper-right to enable,
+and add a hotkey to the "Dictate" command (such as cmd-d).
+
+To dictate text to be entered in the focused text input,
+press the hotkey assigned to the "Dictate" command,
+speak the text, and press the hotkey again.
+
+A period will automatically be added to the end of the text.
+To prevent this, open the Raycast settings,
+select "Dictation" in the left nav,
+click "Personalization", click "Custom Instructions", and enter
+"Transcribe speech naturally, but do not include
+a period at the end of the final sentence or phrase."
+It's ridiculous that this is so complicated!
