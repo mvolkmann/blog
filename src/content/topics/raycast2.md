@@ -203,6 +203,12 @@ or "1 gal in liters" which evaluates to "3.785411784 L".
 To convert between currencies, enter an expression like
 "1$ in euros" which evaluates to "€0.90".
 
+Raycast periodically fetches currency exchange rates in the background
+whenever you have an internet connection
+and caches them locally on your machine.
+Because the rates are cached, currency conversions
+still work offline using the most recently synced rates.
+
 ### Time
 
 To find the current time in another city,
