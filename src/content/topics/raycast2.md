@@ -61,7 +61,7 @@ Other actions can be displayed in a menu by pressing cmd-k.
 To execute an action, selected it and press the return key
 or double-click it.
 
-## Features
+## Basic Features
 
 ### Launch an application
 
@@ -94,10 +94,7 @@ To open a directory by name in a new Finder window,
 enter its name under the "Files" section,
 select it, and press the return key.
 
-### System Settings
-
-To open a specific section within the System Settings app,
-enter its name, select it, and press the return key.
+## More Features
 
 ### Clipboard History
 
@@ -119,25 +116,27 @@ To edit a clipboard entry, select it, press cmd-k, and select "Edit".
 
 To edit a clipboard entry, select it, press cmd-k, and select "Delete".
 
-### Emoji search
+### Color Picker
 
-To search for an emoji,
-enter "emoji", select "Search Emoji & Symbols", and enter a topic.
-I assigned the hotkey rightCmd-e to this command.
+To copy the hex code for a color from a selected pixel on the screen,
+enter "Pick Color".  The code can then be pasted anywhere.
 
-To paste an emoji into the current document,
-select it and press the return key.
+### Confetti
 
-To copy an emoji to the clipboard,
-select it, press cmd-k, and select "Copy to Clipboard".
+To sprinkle confetti all over the screen,
+enter the "confetti" command.
+I set the hotkey for this to be rightCmd-c.
 
-### GIF search
+### Currency Conversions
 
-To search for a GIF image,
-enter "gif", select "Search for GIFs", and enter a topic.
-I assigned the hotkey rightCmd-g to this command.
+To convert between currencies, enter an expression like
+"1$ in euros" which evaluates to "€0.90".
 
-To copy the selected image to the clipboard, press the return key.
+Raycast periodically fetches currency exchange rates in the background
+whenever you have an internet connection
+and caches them locally on your machine.
+Because the rates are cached, currency conversions
+still work offline using the most recently synced rates.
 
 ### Dictation
 
@@ -164,27 +163,25 @@ It's ridiculous that this is so complicated!
 To paste a past dictation, enter "Dictation History",
 select one and press the return key.
 
-### Window Management
+### Emoji search
 
-### Schedule
+To search for an emoji,
+enter "emoji", select "Search Emoji & Symbols", and enter a topic.
+I assigned the hotkey rightCmd-e to this command.
 
-To see scheduled Calendar app items, enter "My Schedule".
-Select an event and press the return key to view it in the Calendar app.
-Select an event and press cmd-k for other operations including
-Create Event (to create a new event), Edit Event, and Delete Event.
+To paste an emoji into the current document,
+select it and press the return key.
 
-### Quick Fix
+To copy an emoji to the clipboard,
+select it, press cmd-k, and select "Copy to Clipboard".
 
-The "Quick Fix" command corrects spelling and grammar errors in selected text.
-By default, it is trigger by pressing the right shift key twice.
-For example, it changes "Ths txt has meny speling erors."
-to "This text has many spelling errors."
+### GIF search
 
-### Confetti
+To search for a GIF image,
+enter "gif", select "Search for GIFs", and enter a topic.
+I assigned the hotkey rightCmd-g to this command.
 
-To sprinkle confetti all over the screen,
-enter the "confetti" command.
-I set the hotkey for this to be rightCmd-c.
+To copy the selected image to the clipboard, press the return key.
 
 ### Math
 
@@ -200,24 +197,19 @@ To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
 
-To convert between currencies, enter an expression like
-"1$ in euros" which evaluates to "€0.90".
+### Quick Fix
 
-Raycast periodically fetches currency exchange rates in the background
-whenever you have an internet connection
-and caches them locally on your machine.
-Because the rates are cached, currency conversions
-still work offline using the most recently synced rates.
+The "Quick Fix" command corrects spelling and grammar errors in selected text.
+By default, it is trigger by pressing the right shift key twice.
+For example, it changes "Ths txt has meny speling erors."
+to "This text has many spelling errors."
 
-### Time
+### Schedule
 
-To find the current time in another city,
-enter "time" followed by a city name.
-For example, "time Honolulu".
-
-### Trash
-
-To empty the trash, enter the "Empty Trash" command.
+To see scheduled Calendar app items, enter "My Schedule".
+Select an event and press the return key to view it in the Calendar app.
+Select an event and press cmd-k for other operations including
+Create Event (to create a new event), Edit Event, and Delete Event.
 
 ### Snippets
 
@@ -251,3 +243,22 @@ I created the following snippets:
 
 Snippets can contain placeholders and prompt for text to replace them.
 For an example, see my @log snippet.
+
+### System Settings
+
+To open a specific section within the System Settings app,
+enter its name, select it, and press the return key.
+
+### Time
+
+To find the current time in another city,
+enter "time" followed by a city name.
+For example, "time Honolulu".
+
+### Trash
+
+To empty the trash, enter the "Empty Trash" command.
+
+### Window Management
+
+TODO: Add detail here.
