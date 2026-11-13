@@ -50,14 +50,16 @@ select "Set Hotkey...", and press the desired hotkey combination.
 To launch Raycast, press its hotkey.
 A Raycast window will open on the monitor where the mouse cursor resides.
 
+## Basics
+
 Raycast displays a single stack of windows.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
 
-When an item is selected,
-its default action is executed by pressing the return key.
-An item can be an application, file, or directory.
-Other actions can be displayed in a menu by pressing cmd-k.
+When an item is selected, its default action is executed
+by pressing the return key, or in some cases cmd-return.
+An item can be a Raycast command, application, file, or directory.
+Other item-specific actions can be displayed in a menu by pressing cmd-k.
 To execute an action, selected it and press the return key
 or double-click it.
 
@@ -120,6 +122,8 @@ To edit a clipboard entry, select it, press cmd-k, and select "Delete".
 
 To copy the hex code for a color from a selected pixel on the screen,
 enter "Pick Color".  The code can then be pasted anywhere.
+
+Also see the Raycast commands "Color Wheel" and "Convert Color".
 
 ### Confetti
 
@@ -197,6 +201,13 @@ To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
 
+### Processes
+
+To kill the process listening on a given port,
+run the "Kill Process Listening on" command.
+Enter the port and press the return key.
+(NOTE: This doesn't work if the process was started with "node -watch".)
+
 ### Quick Fix
 
 The "Quick Fix" command corrects spelling and grammar errors in selected text.
@@ -204,12 +215,27 @@ By default, it is trigger by pressing the right shift key twice.
 For example, it changes "Ths txt has meny speling erors."
 to "This text has many spelling errors."
 
+### Reminders
+
+To create a new reminder in the Apple Reminders app,
+run the "Create Reminders" command.
+This opens a dialog where the details can be entered.
+Press cmd-return to create it.
+
 ### Schedule
 
 To see scheduled Calendar app items, enter "My Schedule".
 Select an event and press the return key to view it in the Calendar app.
 Select an event and press cmd-k for other operations including
 Create Event (to create a new event), Edit Event, and Delete Event.
+
+### Sleep
+
+To prevent the computer from sleeping
+which allows a long running process to continue,
+install the "Coffee" extension.
+Then run the "Caffeinate" command.
+To allow the compute to sleep again, run the "Decaffeinate" command.
 
 ### Snippets
 
@@ -262,3 +288,15 @@ To empty the trash, enter the "Empty Trash" command.
 ### Window Management
 
 TODO: Add detail here.
+
+## Extensions
+
+The Raycast store offers many free extensions.
+To view them, run the "Store" command.
+
+Several extensions are installed by default.
+
+To see the extensions that are already installed,
+open the Raycast settings (cmd-,).
+They are listed in the left nav below "Window Management".
+
