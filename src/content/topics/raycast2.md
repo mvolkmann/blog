@@ -29,9 +29,21 @@ The steps to install Raycast in Windows are:
 
 The steps for first-time configuration of Raycast are:
 
+- TODO: Add these.
 
- If you wish to use cmd-space, you will need to change the hotkey for Spotlight.
- To do this:
+If you wish to use cmd-space, you will need to change the hotkey for Spotlight.
+To do this, TODO.
+
+To configure a key to be the hyper key
+which can be used for global hotkeys,
+open the Raycast settings, search for "Hyper Key",
+and select a key in the "Hyper Key" dropdown.
+I chose the right command key.
+
+To assign a global hotkey to a Raycast command,
+open Raycast, search for the command, select it,
+press cmd-k, select "Configure Command...",
+select "Set Hotkey...", and press the desired hotkey combination.
 
 ## Launching
 
@@ -41,6 +53,14 @@ A Raycast window will open on the monitor where the mouse cursor resides.
 Raycast displays a single stack of windows.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
+
+When an item is selected,
+its default action is executed by pressing the return key.
+An item can be an application, file, or directory.
+Other actions can be displayed in a menu by pressing cmd-k.
+To execute an action, selected it and press the return key
+or double-click it.
+
 
 ## Features
 
@@ -134,3 +154,33 @@ select one and press the return key.
 
 ### Window Management
 
+### Schedule
+
+To see scheduled Calendar app items, enter "My Schedule".
+Select an event and press the return key to view it in the Calendar app.
+Select an event and press cmd-k for other operations including
+Create Event (to create a new event), Edit Event, and Delete Event.
+
+### Quick Fix
+
+The "Quick Fix" command corrects spelling and grammar errors in selected text.
+By default, it is trigger by pressing the right shift key twice.
+For example, it changes "Ths txt has meny speling erors."
+to "This text has many spelling errors."
+
+### Confetti
+
+To sprinkle confetti all over the screen,
+enter the "confetti" command.
+I set the hotkey for this to be rightCmd-c.
+
+### Math
+
+To evaluate a math expression, enter it.
+For example, "sin(19deg)^2 + cos(19deg)^2" evaluates to 1.
+
+To copy the answer so it can be pasted elsewhere, press the return key.
+
+To perform a unit conversion, enter an expression like
+"26.2 miles in kilometers" which evaluates to "42.1648128 km"
+or "1 gal in liters" which evaluates to "3.785411784 L".
