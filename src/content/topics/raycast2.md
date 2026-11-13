@@ -61,7 +61,6 @@ Other actions can be displayed in a menu by pressing cmd-k.
 To execute an action, selected it and press the return key
 or double-click it.
 
-
 ## Features
 
 ### Launch an application
@@ -89,6 +88,17 @@ enter "File Search", click it, scroll down, and turn on "Content Search".
 If expected files do not appear in the results,
 click the "Index Files" button in the lower-right and try again.
 
+### Folders/Directories
+
+To open a directory by name in a new Finder window,
+enter its name under the "Files" section,
+select it, and press the return key.
+
+### System Settings
+
+To open a specific section within the System Settings app,
+enter its name, select it, and press the return key.
+
 ### Clipboard History
 
 Raycast automatically saves the last ? clipboard entries.
@@ -112,7 +122,8 @@ To edit a clipboard entry, select it, press cmd-k, and select "Delete".
 ### Emoji search
 
 To search for an emoji,
-enter "emoji", select "Search for GIFs", and enter a topic.
+enter "emoji", select "Search Emoji & Symbols", and enter a topic.
+I assigned the hotkey rightCmd-e to this command.
 
 To paste an emoji into the current document,
 select it and press the return key.
@@ -123,7 +134,8 @@ select it, press cmd-k, and select "Copy to Clipboard".
 ### GIF search
 
 To search for a GIF image,
-enter "gif", select "Search Emoji & Symbols", and enter a topic.
+enter "gif", select "Search for GIFs", and enter a topic.
+I assigned the hotkey rightCmd-g to this command.
 
 To copy the selected image to the clipboard, press the return key.
 
@@ -181,6 +193,55 @@ For example, "sin(19deg)^2 + cos(19deg)^2" evaluates to 1.
 
 To copy the answer so it can be pasted elsewhere, press the return key.
 
+To compute percentage increases, enter an expression like
+"943 + 3.6%" which evaluates to "976.948".
+
 To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
+
+To convert between currencies, enter an expression like
+"1$ in euros" which evaluates to "€0.90".
+
+### Time
+
+To find the current time in another city,
+enter "time" followed by a city name.
+For example, "time Honolulu".
+
+### Trash
+
+To empty the trash, enter the "Empty Trash" command.
+
+### Snippets
+
+To enable use of snippets, open "System Settings",
+select "Privacy & Security", select "Input Monitoring",
+click the "+", and add the Raycast app.
+
+To create a new snippet, enter the "Create Snippet" command.
+In the "Snippet" field, enter the snippet text.
+In the "Name & Icon" field, enter a name for the snippet
+and optionally select an icon from a long dropdown.
+There are icons for many topics, including specific programming languages.
+In the "Keyword" field, enter the keyword text,
+typically starting with a special character
+so the keyword is unlikely to be useful literally.
+
+To expand a snippet inside another app,
+type the trigger text.
+
+To view all the defined snippets, enter the "Search Snippets" command.
+
+I created the following snippets:
+
+- @@ for my email address
+- +1 for the thumbs up emoji
+- @lambda for the lambda character
+- @log for JavaScript console.log statements
+
+  This prompts for an expression and expands to something like
+  `console.log('foo =', foo);`
+
+Snippets can contain placeholders and prompt for text to replace them.
+For an example, see my @log snippet.
