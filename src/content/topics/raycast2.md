@@ -56,6 +56,12 @@ Raycast displays a single stack of windows.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
 
+There are three ways to select an item in the Raycast window.
+You can click an item.
+You can use the down and up arrow keys to navigate to an item.
+Finally, you can hold down the command key to display a number
+on the right side of each item and then press that number.
+
 When an item is selected, its default action is executed
 by pressing the return key, or in some cases cmd-return.
 An item can be a Raycast command, application, file, or directory.
@@ -90,6 +96,8 @@ enter "File Search", click it, scroll down, and turn on "Content Search".
 If expected files do not appear in the results,
 click the "Index Files" button in the lower-right and try again.
 
+I set the hotkey for this command to rightCmd-f.
+
 ### Folders/Directories
 
 To open a directory by name in a new Finder window,
@@ -97,6 +105,14 @@ enter its name under the "Files" section,
 select it, and press the return key.
 
 ## More Features
+
+### Aliases
+
+Aliases can be assigned to items to simplify selecting them.
+For example, I assigned the alias "kn" to the Keynote application.
+To assign an alias to an item, select the item, press cmd-k,
+select "Configure {item-type}...", select "Set Alias...",
+enter an alias, and press the return key.
 
 ### Clipboard History
 
@@ -128,8 +144,8 @@ Also see the Raycast commands "Color Wheel" and "Convert Color".
 ### Confetti
 
 To sprinkle confetti all over the screen,
-enter the "confetti" command.
-I set the hotkey for this to be rightCmd-c.
+enter the "Confetti" command.
+I set the hotkey for this command to rightCmd-c.
 
 ### Currency Conversions
 
@@ -171,7 +187,7 @@ select one and press the return key.
 
 To search for an emoji,
 enter "emoji", select "Search Emoji & Symbols", and enter a topic.
-I assigned the hotkey rightCmd-e to this command.
+I assigned the hotkey for this command to rightCmd-e.
 
 To paste an emoji into the current document,
 select it and press the return key.
@@ -183,7 +199,7 @@ select it, press cmd-k, and select "Copy to Clipboard".
 
 To search for a GIF image,
 enter "gif", select "Search for GIFs", and enter a topic.
-I assigned the hotkey rightCmd-g to this command.
+I assigned the hotkey for this command to rightCmd-g.
 
 To copy the selected image to the clipboard, press the return key.
 
@@ -214,6 +230,27 @@ The "Quick Fix" command corrects spelling and grammar errors in selected text.
 By default, it is trigger by pressing the right shift key twice.
 For example, it changes "Ths txt has meny speling erors."
 to "This text has many spelling errors."
+
+### Quicklinks
+
+Quicklinks provide a fast way to open a file, folder, application, or URL.
+They can also provide a fast way to run a Raycast command.
+
+To create a quicklink, open Raycast, find and select the target,
+press cmd-k, select "Save as QuickLink",
+enter a name, optionally select an icon,
+select the application in which to open it, optionally enter tags,
+and press cmd-return to save it.
+
+To create a quicklink to a URL, open Raycast,
+run the "Create Quicklink" command, and enter or paste a URL.
+If the URL was currently being browsed, this will be filled in automatically.
+Then enter a name, optionally select an icon,
+select the web browser in which to open it, optionally enter tags
+and press cmd-return to save it.
+
+To open a quicklink, enter part of its name,
+select it, and press the return key.
 
 ### Reminders
 
