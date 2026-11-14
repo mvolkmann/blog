@@ -23,7 +23,13 @@ layout: topic-layout.njk
 
 The steps to install Raycast in macOS are:
 
+- Browse https://www.raycast.com/new (for v2).
+- Click the "Download" button.
+- Double-click the downloaded file.
+
 The steps to install Raycast in Windows are:
+
+- same as for macOS?
 
 ## Configuring
 
@@ -52,9 +58,32 @@ A Raycast window will open on the monitor where the mouse cursor resides.
 
 ## Basics
 
+To view the Raycast Manual, open the Raycast Settings and select "Manual".
+
 Raycast displays a single stack of windows.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
+
+The initial Raycast window lists items marked as favorites first,
+followed by suggestions (How are those determined?),
+and then the most recently used commands.
+
+Once you start typing, the items are filtered using fuzzy matching
+based on what has been typed so far.
+For example, typing "yt" will find the YouTube application
+because its name contains those letters in that order.
+
+Item names appear on the left side and their type appears on the right side.
+The supported types include:
+
+- AI Extension (all are Pro-only)
+- Application
+- Command (some are marked as Pro)
+- Draft
+- Menu Bar Command
+- Quicklink
+- Shortcut
+- System Setting
 
 There are three ways to select an item in the Raycast window.
 You can click an item.
@@ -105,6 +134,11 @@ enter its name under the "Files" section,
 select it, and press the return key.
 
 ## More Features
+
+### AI
+
+Raycast AI features such as "Quick AI" and "AI Chat"
+are only available in the Pro version which currently costs $8 per month.
 
 ### Aliases
 
@@ -202,6 +236,11 @@ enter "gif", select "Search for GIFs", and enter a topic.
 I assigned the hotkey for this command to rightCmd-g.
 
 To copy the selected image to the clipboard, press the return key.
+
+### Language Translation
+
+The "Translate" command is only available in the Pro version
+which currently costs $8 per month.
 
 ### Math
 
@@ -306,6 +345,14 @@ I created the following snippets:
 
 Snippets can contain placeholders and prompt for text to replace them.
 For an example, see my @log snippet.
+
+### System Info
+
+The "System Info" command provides information about your computer such as
+CPU usage across all cores, memory usage, memory pressure, top processes,
+and disk usage.
+
+Time Machine backups are each listed as separate disks in this display.
 
 ### System Settings
 
