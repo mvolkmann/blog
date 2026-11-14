@@ -9,344 +9,308 @@ layout: topic-layout.njk
 ## Overview
 
 [Nushell](https://www.nushell.sh) is "a new type of shell".
-"The goal of this project is to take the Unix philosophy of shells,
-where pipes connect simple commands together,
-and bring it to the modern style of development."
-Nushell was created by Jonathan Turner, Yehuda Katz, and Andres Robalino.
-It runs in Linux, macOS, and Windows.
+It brings the Unix philosophy of connecting small commands with pipes
+to structured data such as lists, records, and tables.
+Nushell runs on Linux, macOS, and Windows.
+
+This article was updated for
+[Nushell 0.115.1](https://github.com/nushell/nushell/releases/tag/0.115.1)
+on September 26, 2026.
+Nushell is still evolving, so check the release notes when upgrading.
 
 Nushell is implemented in Rust.
 And like Rust, Nushell produces helpful, nicely formatted error messages.
 
 Nushell includes the Nu language which excels at
-"processing streams of structured data".
+processing streams of structured data.
 This provides features that are somewhat like SQL for databases.
 It also has similarities to the Python-based
 [Pandas](https://pandas.pydata.org) data analysis library.
 These are features not typically seen in shell environments.
-It is far from a toy project and uses recursive descent parser
-that is driven by its many supported data types.
 
 Nushell continues the UNIX tradition of
 commands whose input can be piped in from a previous command
 and whose output can be piped to a subsequent command.
 A series of commands separated by the pipe character `|`
 is referred to as a "pipeline".
-Commands stream their output to the next command in the pipeline.
-A command does not have to run to completion before the next command
-in the pipeline can begin receiving that output as its input.
+Many commands stream their output, allowing the next command to start
+before the previous command has finished producing all its data.
+Other commands, such as sorting, need to collect their input first.
 
-Some commands such as `echo` and `ls` are lazy.
-This means they do not produce output unless
-something is requesting data from their output stream.
-Commands executed in the shell automatically have their output requested.
-When semicolons are used to separate multiple pipelines on the same line,
-the shell only requests output from the last pipeline.
-For example, `let a = 2; let b = 3; $a + $b` outputs `5`.
+Nushell distinguishes returning a value from printing it.
+`echo` returns its arguments as data
+whereas `print` writes to the terminal.
+In a script or custom command, only the final expression's value is returned.
+For example, `let a = 2; let b = 3; $a + $b` returns `5`.
+Use `print` for messages that should appear
+even when another expression follows.
 
-Color coding is applied to commands as they are typed.
-If a command becomes invalid, all the text changes to red.
+Commands are syntax-highlighted as they are typed,
+and the editor provides completion and command history.
 
-Because Rust is a great source for compiling to WebAssembly, it was
-possible to implement a web-based environment for experimenting with Nushell.
-This can be found at
-[Nushell demo](https://www.nushell.sh/demo/).
-
-The Nu language can be used outside Nushell, such as in Jupyter Notebooks.
-
-It costs nothing but some disk space to try Nushell (about 50 MB).
-You don't have to commit to making it your default shell.
-Just pop in periodically to try it and exit to return to your current shell.
+You don't have to commit to making Nushell your default shell.
+Just enter `nu` periodically to try it,
+and `exit` to return to your current shell.
 Over time you may decide you like it enough to make it your default shell.
 
 ## Terminology
 
 The term "pipeline" was described earlier.
-Command pipelines entered in the shell must be on a single line,
-but inside scripts lines that end with `|` continue on the next line.
-Nushell does not support using `\` as a line continuation character
-like in other shells such as Bash.
+A pipeline can span multiple lines by ending lines with `|`.
+Parentheses can also enclose a multiline pipeline.
+The interactive editor supports multiline input.
+An unfinished expression such as an unclosed parenthesis
+can be continued on the next line.
+Nushell does not use `\` as a line continuation character like Bash.
 
 Commands that take no input and produce output
-are referred to as "inputs" or "sources".
+are sometimes referred to as "inputs" or "sources".
 An example is the `open` command which loads a file.
 
 Commands that take input and transform it are referred to as "filters".
 Examples include the `where` and `sort-by` commands.
 
-Commands that take input and display it or write it somewhere such as file
+Commands that take input and display it or write it somewhere such as a file
 are referred to as "outputs" or "sinks".
 An example is the `save` command.
 
 ## Installing
 
-There are many options for installing or upgrading Nushell.
+There are many options for installing Nushell.
 
-If you have Rust installed, enter `cargo install nu`.
-This takes around seven minutes to complete.
-It installs the `nu` executable in `$HOME/.cargo/bin`
-which is in my `PATH` environment variable.
+If you have Rust and the required build tools installed,
+enter `cargo install nu --locked`.
+This compiles Nushell, which can take several minutes.
+Cargo normally installs the `nu` executable in `$HOME/.cargo/bin`;
+make sure that directory is on your `PATH`.
+Plugins are installed separately.
 
 If you are on macOS and have Homebrew installed, enter `brew install nushell`.
-Note that Homebrew may install a version
-that is several versions behind the latest.
+Prebuilt binaries for Linux, macOS, and Windows can also be downloaded
+from the [release page](https://github.com/nushell/nushell/releases).
 
-Prebuilt binaries for Linux, macOS, and Windows can also be downloaded.
+For more information, see
+[Installing Nu](https://www.nushell.sh/book/installation.html).
 
-For more information on installation options, click the Nushell link above.
+If you are interested in peeking at the source code, clone the
+[GitHub repository](https://github.com/nushell/nushell).
 
-If you are interested in peeking at the source code, clone the GitHub repo.
-To build it locally enter `cargo build --release --features=extra`.
-To see the extra features this includes, search for "extra" at
-[Cargo.toml](https://github.com/nushell/nushell/blob/main/Cargo.toml).
+To build Nushell locally, enter `cargo build --release` from that repository.
+To build the entire workspace, including its plugin packages,
+use `cargo build --release --workspace`.
 
 ## Upgrading
 
-When a new version of Nushell comes out, here are the steps to upgrade.
-These have been tested in macOS, but not in other platforms.
+Use the same installation method to upgrade:
 
-- enter `nu -v` to see the current version
+- For Homebrew, enter `brew update` and then `brew upgrade nushell`.
+- For Cargo, enter `cargo install nu --locked`.
+  If a newer Rust toolchain is required, update it with `rustup update` first.
+- For downloaded binaries,
+  replace them with the binaries for the desired release.
 
-- optionally update the Rust toolchain if tools may be out of date
-  by entering `rustup update`
-
-- enter `cargo install nu` to install the new version of Nushell
-
-  This takes a very long time, perhaps 10 minutes.
-  It installs the `nu` executable in `$HOME/.cargo/bin`.
-
-- enter `nu` to verify that a new version was installed
+Enter `nu --version` or `nu -v` to check the installed version.
+Start a new Nushell session to use the upgraded executable.
+Update separately installed plugins to compatible versions as well.
 
 ## Getting Started
 
 After installing Nushell, enter `nu` in a terminal to start a shell.
 
 For help, enter `help`.
-For a list of Nushell commands and custom commands, enter `help commands`.
-In version 0.60.0 there are 262 Nushell commands.
+For a list of available commands, enter `help commands`.
+The list depends on your Nushell build and the plugins, modules,
+and custom commands that are loaded.
 
 For help on a specific command,
-enter `help {command-name}` or {command-name} -h`.
-For more detail on supported commands, see the [Command Reference](https://www.nushell.sh/book/command_reference.html).
+enter `help {command-name}` or `{command-name} --help`.
+In Nushell version 0.115.1 there are 567 commands.
+For more detail, see the [Command Reference](https://www.nushell.sh/commands/).
 
-<aside>
-To search for commands whose name or help text contains given text,
-define the following custom command and pass the text to it.
-Later we will see how to define custom commands
-so they are automatically available in new Nushell sessions.
+To search for commands, use `help --find`, for example `help --find string`.
+You can also process help as structured data:
 
-```bash
-def contains-any-case [text: string, substring: string] {
-  $text | str contains --insensitive $substring
-}
-
-def help-text [s: string] {
-  help commands |
-    select name usage extra_usage |
-    where ((
-      contains-any-case $it.name $s) || (
-      contains-any-case $it.usage $s) || (
-      contains-any-case $it.extra_usage $s))
-}
+```nu
+help commands | select name description | where name starts-with 'str '
 ```
 
-</aside>
-
-Like in all shells, commands are executed by typing them
+Like in other shells, commands are executed by typing them
 and pressing the return key.
-Multi-line commands can be entered by pressing return before a block,
-delimited by square brackets or curly braces, until complete.
-
-Nushell has great command recall and completion like the Fish and Zsh shells.
-Command recall even supports multi-line command editing.
+Nushell has command recall and completion like the Fish and Zsh shells.
+Command recall also supports multiline command editing.
 
 When a command not defined by Nushell is encountered,
-the directories listed in the `path` configuration setting
-are searched to find a matching executable.
-To run a command in the `path` that happens to have the same name
-as a Nushell command, prefix the command name with `^`.
+the directories in `$env.PATH` are searched for a matching executable.
+To run an executable that has the same name as a Nushell command,
+prefix the command name with `^`.
+For example, `^find . -name '*.ts'` runs the external `find` executable.
+It does not invoke a command or alias from a parent shell.
 
-For example, `^find -name '*.svelte' | xargs grep import`
-uses the `find` command defined in root shell
-rather than the version defined by Nushell.
-
-
-For detailed documentation on Nushell commands, see the
-[Book](https://www.nushell.sh/book/)
-link in the top nav of the Nushell website.
-
-For more help, join the [nushell Discord channel](https://discord.gg/NtAbbGn).
+For detailed documentation, see the [Book](https://www.nushell.sh/book/).
+For more help, join the [Nushell Discord channel](https://discord.gg/NtAbbGn).
 
 ## Subcommands
 
 Subcommands provide a way of grouping commands under a common "namespace".
-Examples of such built-in namespaces include `date`, `from`,
-`into`, `math`, `path`, `random`, `str`, `to`, and `url`.
+Examples include `date`, `from`, `http`, `into`, `math`, `path`,
+`random`, `str`, `to`, and `url`.
+Use `help {namespace}` to see the available subcommands.
 
-The `date` subcommands are
-`format`, `humanize`, `list-timezone`, `now`, `to-table`, and `to-timezone`.
+The `date` subcommands include `from-human`, `humanize`, `list-timezone`,
+`now`, and `to-timezone`.
+To format a date, use `format date`.
+To examine its components, use `date now | into record`.
 
-The `from` subcommands convert data from a given format to a table.
-They are
-`csv`, `eml`, `ics`, `ini`, `json`, `ods`, `ssv`, `toml`, `tsv`,
-`url`, `vcf`, `xlsx`, `xml`, `yaml`, and `yml`.
+The `from` subcommands parse data in formats such as CSV, JSON, TOML, and YAML.
+The result may be a table, record, list, or scalar, depending on the data.
+For example, `'{"foo": 1, "bar": 2}' | from json | get bar` returns `2`.
+Additional parsers can be provided by plugins.
 
 The `into` subcommands convert values to another type.
-They are `binary`, `bool`, `datetime`, `decimal`, `duration`,
-`filesize`, `int`, and `string`.
-For example, `echo '19' | into int` gives the integer 19.
+Examples include `binary`, `bool`, `datetime`, `duration`,
+`filesize`, `float`, `int`, and `string`.
+For example, `'19' | into int` gives the integer `19`.
 
-The `math` subcommands perform math calculations.
-They are
-`abs`, `avg`, `ceil`, `eval`, `floor`, `max`, `median`, `min`, `mode`,
-`product`, `round`, `sqrt`, `stddev`, `sum`, and `variance`.
+The `math` subcommands perform calculations.
+They include `abs`, `avg`, `cbrt`, `ceil`, `cos`, `exp`, `floor`, `ln`, `log`,
+`max`, `median`, `min`, `mode`, `product`, `round`, `sin`, `sqrt`, `stddev`,
+`sum`, `tan`, `variance`, and more.
+Use ordinary expressions for arithmetic, for example `2 + 3 * 4`.
 
 The `path` subcommands operate on file paths.
 The table below describes these and shows the result of entering
 `echo ~/Documents/demo.txt | path {subcommand}`.
 
-| Subcommand    | Description                                                                                                                        |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `basename`    | returns the filename portion (`demo.txt`)                                                                                          |
-| `dirname`     | returns the directory path (`~/Documents`)                                                                                         |
-| `exists`      | returns a boolean indicating if the file exists;<br>can only return `true` for expanded paths                                      |
-| `expand`      | returns the expanded path (`/Users/mark/Documents/demo.txt`)                                                                       |
-| `join`        | returns the result of joining two partial paths<br>`echo '~/Documents' \| path join -a demo.txt`<br>returns `~/Documents/demo.txt` |
-| `parse`       | converts a path to structured data including `parent` (directory path), `stem` (filename w/o extension), and `extension`           |
-| `relative-to` | returns a path relative to another                                                                                                 |
-| `split`       | returns the parts of a path split by a separator                                                                                   |
-| `type`        | returns `Dir` or `File`                                                                                                            |
-
-TODO: RESUME UPDATES HERE!
-
-The `query` command queries various data formats.
-Currently the only supported subcommand is `json`.
-For example, `echo '{"foo": 1, "bar": 2}' | query json bar`
-gives the integer 2.
+| Subcommand    | Description                                                                                               |
+| ------------- | --------------------------------------------------------------------------------------------------------- |
+| `basename`    | returns the filename portion of a path (`demo.txt`)                                                       |
+| `dirname`     | returns the parent directory path (`~/Documents`)                                                         |
+| `exists`      | tests whether a path exists                                                                               |
+| `expand`      | expands a path to an absolute path (`/Users/mark/Documents/demo.txt`)                                     |
+| `join`        | joins path components; for example, `'Documents' \| path join demo.txt`<br>returns `~/Documents/demo.txt` |
+| `parse`       | returns a record including `parent` (directory path), `stem` (filename w/o extension), and `extension`    |
+| `relative-to` | returns a path relative to another path                                                                   |
+| `split`       | returns a list of path components                                                                         |
+| `type`        | returns a type such as `file`, `dir`, or `symlink`, or an empty string for a nonexistent path             |
 
 The `str` subcommands perform string operations.
 They are
-`camel-case`, `capitalize`, `collect`, `contains`, `downcase`, `ends-with`,
-`find-replace`, `from`, `index-of`, `kebab-case`, `length`, `lpad`, `ltrim`,
-`pascal-case`, `reverse`, `rpad`, `rtrim`, `screaming-snake-case`,
-`snake-case`, `starts-with`, `substring`, `to-datetime`, `to-decimal`,
-`to-int`, `trim`, and `upcase`.
-Also see the commands `build-string`, `char`, `format`, and `size`.
+`camel-case`, `capitalize`, `contains`, `distance`, `downcase`, `ends-with`,
+`escape-regex`, `expand`, `index-of`, `join`, `kebab-case`, `length`,
+`lowercase`, `pascal-case`, `replace`, `reverse`, `screaming-snake-case`,
+`snake-case`, `starts-with`, `substring`, `title-case`, `trim`,
+`upcase`, and `uppercase`.
+Also see the command `char` and the `format` subcommands.
 
-The `to` subcommands convert a table into a given output format and
-are commonly piped to the `save` command to write the result to a file.
-They are
-`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
+The `to` subcommands serialize data into formats such as CSV, JSON, and YAML.
+They include `csv`, `html`, `json`, `md`, `text` (or `txt`),
+`toml`, `tsv`, `xml`, and `yaml` (or `yml`).
+These are commonly piped to `save` to write the result to a file.
+The appropriate input shape depends on the format.
+For example, CSV represents rows and columns, while JSON can represent nested data.
 
-The `url` subcommands get information from a URL.
-They are `host`, `path`, `query`, and `scheme` (ex. http).
+The `url` subcommands include `build-query`, `decode`, `encode`, `join`,
+`parse`, and `split-query`.
+For example:
+
+```nu
+'https://example.com/blog?tag=nu' | url parse | get host # example.com
+```
 
 ## Configuration
 
-The configuration for Nushell is stored in a
-[TOML](https://github.com/toml-lang/toml)
-(Tom's Obvious, Minimal Language) file
-whose path can be obtained by entering `echo $nu.config-path`.
-Configuration settings can be changed by editing this file
-or using the `config` subcommands described below.
-Changes to the config file only affect new shell sessions,
-not the current one.
+Nushell configuration uses Nu scripts rather than TOML.
+`config.nu` is the main interactive configuration file.
+Its path is available as `$nu.config-path`.
+`env.nu` can set environment variables and runs before `config.nu`.
+Its path is available as `$nu.env-path`.
+Login shells can also read `login.nu`.
 
-To edit the config file with Vim, enter `vim $nu.config-path`.
-To edit the config file with VS Code, enter `code $nu.config-path`.
-When editing the config file using VS Code,
-consider installing the "TOML Language Support" extension
-which profiles syntax highlighting and formatting.
+To edit the main configuration file with Vim, enter `vim $nu.config-path`.
+To edit it with VS Code, enter `code $nu.config-path`.
+You can also set `$env.config.buffer_editor = 'code'` and use `config nu`.
+Use `config env` to edit `env.nu`.
 
-<aside>
-The syntax <code>(pipeline)</code> is referred to as an "invocation".
-This can be used to pass the result of a command pipeline
-as a argument to a command.
-</aside>
+The current settings are in the `$env.config` record.
+Enter `$env.config` to inspect them, or `config nu --doc`
+to read documented configuration examples.
+Assign a field to change a setting immediately:
 
-Some Nushell configuration settings are top-level
-and do not appear in a specific TOML section.
-Notable top-level options include:
-
-| Setting                 | Description                                                                                       |
-| ----------------------- | ------------------------------------------------------------------------------------------------- |
-| `disable_table_indexes` | when `true`, omits index column from table output                                                 |
-| `path`                  | list of directories in quotes to search for executables                                           |
-| `prompt`                | command whose output is used for the prompt                                                       |
-| `skip_welcome_message`  | when `true`, starting a shell doesn't output a<br>welcome message including the Nushell version   |
-| `startup`               | list of commands to execute when a shell starts;<br>typically defines aliases and custom commands |
-| `table_mode`            | controls the border lines drawn when tables are rendered<br>(more detail below)                   |
-
-For details on configuration options, see [Configuration](https://www.nushell.sh/book/configuration.html).
-
-The `config` command supports many subcommands that operate on the config file.
-These are summarized in the table below.
-
-| Command                                | Description                                     |
-| -------------------------------------- | ----------------------------------------------- |
-| `config`                               | outputs all the settings                        |
-| `config path`                          | outputs the file path to the configuration file |
-| `config set {name} {value}`            | sets or updates a specific setting              |
-| `{pipeline} \| config set_into {name}` | sets a specific setting to a piped-in value     |
-| `config get {name}`                    | gets a specific setting                         |
-| `config remove {name}`                 | removes a specific setting                      |
-
-For example, to change the prompt enter the following:
-
-```bash
-config set prompt "echo (ansi yellow) '🦀ν> '"
+```nu
+$env.config.show_banner = false
+$env.config.table.mode = 'rounded'
 ```
 
-This adds the line `prompt = "echo (ansi yellow) '🦀ν> '"`
-to the configuration file.
+To persist a setting, add the assignment to `config.nu`.
+Editing the file does not automatically change a running shell.
+Start a new session, or use `source $nu.config-path` to execute the file again.
+Sourcing repeats all its commands,
+so additions to lists such as `PATH` will be repeated.
+
+After modifying the `config.nu` file,
+to start a new session that uses the changes, enter `exec nu`.
+To reapply the config within the existing session,
+enter `source $nu.config-path`.
+
+To define abbreviations, which are like aliases in other shells,
+add the following in the config file:
+
+```nu
+$env.config.abbreviations = {
+  abbrev1: 'command 1'
+  abbrev2: 'command 2'
+  ...
+}
+```
+
+For details, see [Configuration](https://www.nushell.sh/book/configuration.html).
+
+### Prompt
+
+Prompt components are configured through environment variables.
+They can hold strings or closures that compute strings.
+For example, add the following to `config.nu`:
+
+```nu
+$env.PROMPT_COMMAND = {|| $"🦀ν (ansi yellow)(pwd)(ansi reset)" }
+$env.PROMPT_INDICATOR = $"(ansi green)▶ (ansi reset)"
+$env.PROMPT_COMMAND_RIGHT = ''
+```
+
 🦀 is for the Rust mascot Ferris and ν is the Greek letter nu.
+The closure is evaluated again for each prompt,
+so the working directory stays current.
 
-For a fancier prompt setting that includes
-the current working directory in yellow,
-and a green, right-pointing triangle at the end,
-add the following line in the config file:
+Another option is [Starship](/blog/starship),
+which has many more options and works with multiple shells.
+See Nushell's [third-party prompt setup](https://www.nushell.sh/book/3rdpartyprompts.html)
+for integration instructions.
 
+### Startup Commands
 
-
-```bash
-prompt =
-  "echo `🦀ν {{(ansi yellow)}}{{(pwd)}}{{(ansi green)}}{{(char prompt)}} `"
-```
-
-
-
-Another option for customizing the prompt is
-to enable the use of [Starship](/blog/starship),
-which has many more options.
-It also has the advantage that it can be used with nearly any shell,
-which is great for users that sometimes switch between shells.
-
-### `startup` Setting
-
-The `startup` setting specifies a list of commands
-to run each time a new Nushell session is started.
-Typically the commands define aliases and custom commands (using `def`).
+Define aliases, custom commands, and imports directly in `config.nu`.
 For example:
 
-```toml
-startup = [
-  "alias cls = clear",
-  "def cdjs [] { cd $nu.env.JS_DIR }",
-  "def cdrust [] { cd $nu.env.RUST_DIR }"
-]
+```nu
+alias cls = clear
+
+# Changes to the directory stored in JS_DIR.
+def --env cdjs [] { cd $env.JS_DIR }
+
+# Changes to the directory stored in RUST_DIR.
+def --env cdrust [] { cd $env.RUST_DIR }
 ```
 
-Some code formatters reformat TOML arrays to be on a single line
-which makes reading these definitions difficult.
-VS Code and the "TOML Language Support" extension does not do this.
+The `--env` flag allows these custom commands to change
+the caller's environment, including the working directory.
+Set `JS_DIR` and `RUST_DIR` to your project directories before using them.
+Aliases can also use `cd`, for example `alias cdh = cd ~`.
 
-Aliases that use the "cd" command currently causes Nushell to crash.
-See [issue 3138](https://github.com/nushell/nushell/issues/3138).
+### Table Settings
 
-### `table_mode` Setting
-
-Table borders can be customized with the `table_mode` setting.
-Supported values include:
+Table borders can be customized with `$env.config.table.mode`.
+Run `table --list` to see the supported themes.
+Supported `table.mode` values include:
 
 - basic: uses +, -, and | characters for borders
 - compact: omits outer left and right borders
@@ -359,346 +323,244 @@ Supported values include:
 - thin: border on every cell
 - with_love: heart characters for borders
 
-### `color_config` Section
+For example:
 
-The colors used to output data of each
-table element and data type can be customized
-by adding a `[color_config]` section in the config file.
-Supported colors include
-red, yellow, green, cyan, blue, purple, white, and black.
-Supported modifiers include bold, underline, italic, dimmed, and reverse.
-Colors and modifiers can be specified with their full names,
-separated by an underscore. For example, `yellow_bold`.
-They can also be abbreviated using only their first letters.
-For example, `yb`.
-The only exception is blue which uses the letter "u"
-because "b" is used for black.
+```nu
+$env.config.table.mode = 'rounded'
+$env.config.table.index_mode = 'never'
+```
 
-The header elements and styles that can be configured include
-`header_align`, `header_bold`, `header_color`, `index_color`,
-`leading_trailing_space_bg`, and `separator_color` (used for table lines).
-The data types that can be configured include
-`primitive_binary`, `primitive_boolean`, `primitive_columnpath`,
-`primitive_date`, `primitive_decimal`, `primitive_duration`,
-`primitive_filesize`, `primitive_int`, `primitive_line`, `primitive_path`,
-`primitive_pattern`, `primitive_range`, and `primitive_string`.
+The second assignment hides the index column globally.
+For one pipeline, use `ls | table --index false`.
+To override the theme for one pipeline, use `ls | table --theme compact`.
+These options affect rendering, not the underlying data.
+
+### Colors
+
+Customize colors through `$env.config.color_config`.
+Keys include `header`, `row_index`, `separator`,
+`bool`, `int`, `string`, and many more.
+Values can be color names or style records.
+For example:
+
+```nu
+$env.config.color_config.header = { fg: 'red', attr: 'b' }
+$env.config.color_config.row_index = 'dark_gray'
+$env.config.color_config.separator = 'dark_gray'
+$env.config.color_config.int = 'green'
+$env.config.color_config.string = 'white'
+```
+
+Run `ansi --list` to see available ANSI styles.
+For more options, see
+[Coloring and Theming](https://www.nushell.sh/book/coloring_and_theming.html).
+
+### Line Editor
+
+Nushell uses [Reedline](https://www.nushell.sh/book/line_editor.html)
+for line editing, history, and completion.
+
+Press the tab key for completions.
+Use the arrow keys to move to an option
+and press the return key to select the highlighted option.
 
 For example:
 
-```toml
-[color_config]
-header_align = "l" # use left or l, right or r, and center or c
-header_bold = true
-header_color = "r"
-index_color = "wd" # white dimmed
-separator_color = "wd" # white dimmed; for table lines
-
-primitive_binary = "c"
-primitive_boolean = "p"
-primitive_date = "u"
-primitive_decimal = "g"
-primitive_filesize = "g"
-primitive_int = "g"
-primitive_path = "y"
-primitive_string = "w"
+```nu
+$env.config.edit_mode = 'vi'
+$env.config.history.ignore_space_prefixed = true
+$env.config.completions.algorithm = 'fuzzy'
 ```
 
-### `line_editor` Section
+For Emacs-style editing, use `emacs` instead of `vi`.
+The history setting above excludes commands
+starting with a space from saved history.
+The completion algorithm can be `prefix` or `fuzzy`.
 
-Nushell line editing is provided by
-[rustyline](https://crates.io/crates/rustyline).
-It can be configured with the "[line_editor]" section.
-Notable settings include:
+### PATH and Environment
 
-| Setting                | Description                                                                                                                           |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `edit_mode`            | `"emacs"` or `"vi"`<br>default is to use [rustyline key bindings](https://github.com/kkawakam/rustyline#actions) |
-| `history_duplicates`   | `"alwaysadd"` or `"ignoreconsecutive"` (default)                                                                                      |
-| `history_ignore_space` | `true` (default) or `false`;<br>when true, commands with leading whitespace are not added to history                                  |
+`$env.PATH` contains the directories searched for executables as a list.
+To display them in a table, enter `$env.PATH`.
+To prepend a directory:
 
-For example:
-
-```toml
-[line_editor]
-edit_mode = "vi" # omit for default keystrokes (see rustyline link above)
-history_ignore_space = true
+```nu
+$env.PATH = ($env.PATH | prepend ($env.HOME | path join '.cargo' 'bin'))
 ```
 
-### `path` setting
+Nushell inherits environment variables from its parent process,
+which need not be another shell.
+To define an environment variable, use an assignment such as:
 
-The `path` setting lists directories to be searched for executables.
-
-To see a nicely formatted list of directories in your path,
-enter `echo $nu.path` or `config | get path`.
-
-The command `config set path $nu.path`
-sets the `path` setting to the value of `$nu.path`,
-which is the value of the `PATH` environment variable in the parent shell.
-Once set, this can be customized to be specific to Nushell.
-Note that if Nushell is your login shell then
-there is no parent shell from which to inherit a path.
-
-### `env` Section
-
-The command `config set env $nu.env` adds all the current
-environment variables in the `env` section of the config file.
-This section can also define environment variables
-that are specific to Nushell.
-Note that if Nushell is your login shell then
-there is no parent shell from which to inherit environment variables.
-
-For example:
-
-```toml
-[env]
-GITHUB_USER = "mvolkmann"
+```nu
+$env.GITHUB_USER = 'mvolkmann'
 ```
 
-### `textview` Section
-
-These settings affect operation of the `bat` crate
-which is used by the `open` command to view text files.
-
-| Setting                  | Description                                 |
-| ------------------------ | ------------------------------------------- |
-| grid                     | `true` (default) or `false`                 |
-| header                   | `true` (default) or `false`                 |
-| line_numbers             | `true` (default) or `false`                 |
-| theme                    | ex. "Coldark-Dark"                          |
-| true_color               | `true` or `false`                           |
-| vcs_modification_markers | `true` or `false` (seems to have no effect) |
-
-TODO: Setting vcs_modification_markers to true has no effect.
-See [issue 3254](https://github.com/nushell/nushell/issues/3254).
-
-To see the supported themes, install `bat` by entering `cargo install bat`
-and enter `bat --list-themes`. There are over 20.
+Put assignments in your configuration file
+to make them available in new sessions.
+When configuring Nushell as a login shell, also review the environment setup
+previously performed by your old shell's startup files.
 
 ## Data Types
 
-Unlike most shells where only strings are used for command input and output,
-Nushell supports many primitive and structured data types.
-Some types described in the Nushell documentation are purely conceptual,
-meaning that they cannot be used as the type of a custom command parameter.
-The following tables list all the real types and conceptual types.
+Unlike shells where command input and output are primarily text,
+Nushell supports primitive and structured data types.
+The following table lists commonly used types and annotations.
 
-Real Types:
+| Type        | Description or example                                        |
+| ----------- | ------------------------------------------------------------- |
+| `any`       | accepts any type; useful for untyped command parameters       |
+| `binary`    | raw bytes, for example `0x[01 FF]`                            |
+| `bool`      | `true` or `false`                                             |
+| `cell-path` | a path into structured data, for example `$.address.city`     |
+| `closure`   | executable code with parameters, for example `{\|n\| $n * 2}` |
+| `datetime`  | a date and time, for example `2026-09-26T12:00:00-05:00`      |
+| `duration`  | a time interval, for example `2hr + 30min`                    |
+| `filesize`  | a byte count, for example `10MB` or `10MiB`                   |
+| `float`     | a 64-bit floating-point number, for example `3.14`            |
+| `glob`      | a glob pattern value; convert a string with `into glob`       |
+| `int`       | a signed 64-bit integer                                       |
+| `list`      | an ordered collection, for example `[red green blue]`         |
+| `nothing`   | the type of `null`                                            |
+| `number`    | a parameter annotation accepting either `int` or `float`      |
+| `range`     | a numeric sequence, for example `1..5` or `1..<5`             |
+| `record`    | named fields, for example `{name: Mark, score: 19}`           |
+| `string`    | text                                                          |
+| `table`     | a list of records, typically with matching columns            |
 
-| Type       | Description                                                                                    |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| `any`      | any type below (default for variables and custom command parameters)                           |
-| `block`    | block of nu script code (can be executed on each row of a table)                               |
-| `duration` | number followed by a unit which can be `ms`, `sec`, `min`, `hr`, `day`, or `wk`                |
-| `filesize` | number followed by a unit which can be `b`, `kb`, `mb`, `gb`, `tb`, or `pb`                    |
-| `int`      | whole number with infinite precision                                                           |
-| `number`   | `int` or `decimal`, both with infinite precision                                               |
-| `path`     | platform-independent path to a file or directory                                               |
-| `pattern`  | glob pattern that can include `*` wildcard and `**` for traversing directories                 |
-| `range`    | `{start}..{end}` (inclusive) or `{start}..<{end}` (end is exclusive); use 2 dots, not 3        |
-| `string`   | single words need no delimiter; multiple words need single quotes, double quotes, or backticks |
-| `table`    | list of rows; returned by many Nushell commands                                                |
+A filepath is normally represented as a string.
+Parameter types such as `path` help Nushell parse command arguments.
 
-The ability to specify single-word literal strings with no delimiters
-is one of my favorite features in Nushell!
-It makes defining lists and tables that contain single-word strings
-much more compact.
-For example, the following line creates a list of color names.
+Integers do not have unlimited precision.
+Floating-point values are approximate, so arithmetic can have rounding effects.
+Duration units include `ns`, `us`, `ms`, `sec`, `min`, `hr`, `day`, and `wk`.
+Month and year durations are not supported because their lengths vary.
 
-```bash
+The ability to specify single-word strings without delimiters
+in lists and command arguments is one of my favorite features!
+For example:
+
+```nu
 let colors = [red orange yellow green blue purple]
 ```
 
-Conceptual Types:
+Bare words are context-dependent: at the start of a pipeline,
+a word is generally interpreted as a command name.
+Quote strings when an expression could otherwise be ambiguous.
 
-| Type        | Description                                                                     |
-| ----------- | ------------------------------------------------------------------------------- |
-| binary      | sequence of raw bytes                                                           |
-| boolean     | literal values are `$true` and `$false`                                         |
-| column path | dot-separated list of nested column names                                       |
-| date        | timezone-aware; defaults to UTC                                                 |
-| decimal     | number with a fractional part and infinite precision                            |
-| group       | semicolon-separated list of pipelines where only output from the last is output |
-| line        | string with an OS-dependent line ending                                         |
-| list        | sequence of values of any type                                                  |
-| row         | list where each value represents a column with an associated name               |
+Pipe a value to `describe` to inspect its type:
 
-Duration units for month and year are not supported
-because those durations vary based on the month (28 to 31)
-or year (normal or leap year).
+```nu
+42 | describe # int
+3.14 | describe # float
+date now | describe # datetime
+```
 
-To see a description of the value of an expression,
-pipe it to the `describe` command.
-This is not its real type.
-Values of type of `int` are reported as `integer`.
-This is likely a bug. See [issue 3206](https://github.com/nushell/nushell/issues/3206).
-For example, `date now | describe` outputs `date`.
-
-<aside>
-It seems like many of the conceptual types should become real types long-term.
-I would think at least these could become real types:
-boolean, date, decimal (remove number), and list.
-
-Related to this is the fact that the `describe` command
-doesn't strictly return real type names.
-One of the oddities is that if you pipe an `int` value to `describe`,
-it outputs "integer".
-See [issue 3206](https://github.com/nushell/nushell/issues/3206).
-Maybe it would be good to add a `type` command
-that returns the real type of a value.
-
-</aside>
-
-Details about Nushell data types can be found at [Types of data](https://www.nushell.sh/book/types_of_data.html).
+For full details, see [Types of Data](https://www.nushell.sh/book/types_of_data.html).
 
 ### Type Conversions
 
-The following type conversions are supported:
+Use `into` subcommands for conversions, `from` subcommands to parse formats,
+and `to` subcommands to serialize data.
 
-TODO: Fill in the ??? in this table.
+| Input                            | Desired result         | Command                                 |
+| -------------------------------- | ---------------------- | --------------------------------------- |
+| integer, float, boolean, or date | string representation  | `into string`                           |
+| list of strings                  | a single joined string | `str join`, optionally with a separator |
+| numeric string                   | integer                | `into int`                              |
+| numeric string                   | floating-point number  | `into float`                            |
+| boolean string                   | boolean                | `into bool`                             |
+| date string                      | date/time              | `into datetime`                         |
+| string with a separator          | list                   | `split row separator`                   |
+| JSON string                      | structured value       | `from json`                             |
+| structured value                 | JSON string            | `to json`                               |
+| date/time                        | component record       | `into record`                           |
 
-TODO: How can you create values with types binary, line, path, pattern, and row?
+`describe` returns a type description, not a string representation of the value.
 
-| From      | To       | Command                                            |
-| --------- | -------- | -------------------------------------------------- |
-| `any`     | `string` | pipe to `describe`                                 |
-| boolean   | `string` | pipe to `str from`                                 |
-| date      | `string` | pipe to `str from`                                 |
-| `int`     | `string` | pipe to `str from`                                 |
-| list      | `string` | pipe to `str collect` if the list contains strings |
-| `number`  | `string` | pipe to `str from`                                 |
-| `path`    | `string` | pipe to `???`                                      |
-| `pattern` | `string` | pipe to `???`                                      |
-| `range`   | `string` | pipe to `???`                                      |
-| `table`   | `string` | pipe to `???`                                      |
-| `unit`    | `string` | pipe to `str from` \*                              |
-| `string`  | boolean  | pipe to `???`                                      |
-| `string`  | date     | pipe to `str to-datetime`                          |
-| `string`  | `int`    | pipe to `str to-int`                               |
-| `string`  | list     | pipe to `split row`                                |
-| `string`  | `number` | pipe to `str to-decimal`                           |
-| `string`  | `path`   | pipe to `???`                                      |
-| `string`  | `range`  | pipe to `???`                                      |
-| `string`  | `table`  | pipe to `???`                                      |
-| `string`  | `unit`   | pipe to `???`                                      |
-
-\* TODO: This gives an error. Why?
-
-The `echo` command is often used to
-feed the initial value into a command pipeline.
-This can be a literal value or an expression such as a variable reference.
 For example:
 
-```bash
-echo "2021-3-21 14:30" |
-  str to-datetime |
-  date format -t '%B %-d, %Y' |
-  get formatted
-# This outputs the string "March 21, 2021".
+```nu
+'2021-03-21T14:30:00+00:00' | into datetime | format date '%B %-d, %Y'
+# March 21, 2021
 ```
 
-Formatting characters supported by `date format` are described
-[here](https://man7.org/linux/man-pages/man1/date.1.html).
+Use `format date --list` to see the supported formatting specifiers.
 
-This handy custom command produces a string from the items in a list
-where the value of each item is followed by a newline character.
-It is used in several examples that follow.
-Consider adding this to the startup array in your Nushell config file.
+This handy custom command joins input values with newlines.
+Consider adding it to `config.nu`:
 
-```bash
-# The `each` command iterates over list items that are piped to this command.
-# During the iteration, the special variable $it (for item)
-# is set to the current item.
+```nu
+# Converts input values to strings and joins them with newlines.
 def as-lines [] {
-  each { echo (build-string $it (char newline)) } | str collect
+  $in | each {|item| $item | into string } | str join (char newline)
 }
+
+1..3 | as-lines
+# 1
+# 2
+# 3
 ```
 
 ### Strings
 
-Strings delimited by backticks support templating (a.k.a interpolation)
-with expressions in pairs of double curly brackets.
+Strings can use single quotes, double quotes, or backticks.
+Double-quoted strings interpret escape sequences such as `\n` and `\t`.
+Single quotes and backticks are useful when those characters should remain literal.
+
+String interpolation uses `$"..."` or `$'...'`, with expressions in parentheses.
 For example:
 
+```nu
+let x = 19
+$"x is ($x)" # x is 19
 
-
-```bash
-let x = 19; echo `x is {{$x}}`
-
-let x = 3
-let y = 5
-echo `product of {{$x}} and {{$y}} is {{($x * $y)}}`
-# As discussed in the "Operators" section later,
-# operators can only be used in "math mode".
-# An expression is in math mode if it begins with `=`.
+let a = 3
+let b = 5
+$"product of ($a) and ($b) is ($a * $b)" # product of 3 and 5 is 15
 ```
 
+`is-empty` determines whether a string, list, record, or table is empty:
 
-
-The `empty?` command determines whether a string, list, or table is empty.
-It can be used with strings as follows:
-
-```bash
-let name = "Mark"
-= $name | empty? # false
-
-let name = ""
-= $name | empty? # true
+```nu
+'Mark' | is-empty # false
+'' | is-empty # true
 ```
 
-The operators `=~` and `!~` test whether
-one string contains or does not contain another.
+The `=~` and `!~` operators test whether a string matches a regular expression.
+Use `str contains` to test for a literal substring.
 
-For example:
-
-```bash
-= "foobarbaz" =~ "bar" # true
-= "foobarbaz" !~ "bar" # false
+```nu
+'foobarbaz' =~ 'b.r' # true
+'foobarbaz' !~ '^bar' # true
+'foobarbaz' | str contains 'bar' # true
 ```
 
-The `lines` command creates a list of strings
-from a string that contains newline characters.
-Nushell doesn't currently support escape characters like `\n`,
-so the `char` command must be used to insert newlines into a literal string.
-For example:
+The `lines` command splits a string at line endings:
 
-
-
-```bash
-let s = $"This(char newline)has(char newline)three lines."
-let l = (echo $s | lines) # ["This", "has", "three lines."]
+```nu
+let s = "This\nhas\nthree lines."
+$s | lines # [This has 'three lines.']
 ```
 
-
+For more examples, see
+[Working with Strings](https://www.nushell.sh/book/working_with_strings.html).
 
 ### Ranges
 
-A range represents a sequence of numbers in increments of one.
-For example, `2..4` represents the numbers 2, 3, and 4.
-Floating point numbers are supported.
-For example, `1.2..4.0` represents the numbers 1.2, 2.2, and 3.2.
-The start value can be greater than the end value
-to represent a decrementing sequence.
-For example, `4..2` represents the numbers 4, 3, and 2.
+A range describes a numeric sequence.
+`2..4` includes 2, 3, and 4, while `2..<4` excludes 4.
+`4..2` counts down, and `-2..2` includes -2 through 2.
+Floating-point bounds are supported, for example `1.2..4.0`.
+An explicit second value sets the step: `2..4..10` produces 2, 4, 6, 8, and 10.
 
-Either bound can be negative, but parentheses are required
-when the start value is negative.
-For example, `(-2)..2` represents the numbers -2, -1, 0, 1, and 2.
-and `2..-2 represents the numbers 2, 1, 0, -1, and -2.
+An omitted start defaults to zero, so `..10` is equivalent to `0..10`.
+An omitted end makes the range unbounded.
+Limit an unbounded range with a command such as `take` before collecting it.
 
-Values of the `range` type can use default values for their start or end.
-If the start value of a range is omitted, it defaults to zero.
-For example, `..10` is the same as `0..10`.
-If the end value of a range is omitted, the range has no upper bound.
-
-The get the starting and ending values of a `range`,
-pipe it to the `first` and `last` commands.
-
-For example:
-
-```bash
-echo 3..7 | first # 3
-echo 3..<7 | last # 6
-echo 1..3 | as-lines # outputs 1, 2, and 3 on separate lines
+```nu
+3..7 | first # 3
+3..<7 | last # 6
+0.. | take 3 # [0 1 2]
 ```
 
 ### Types With Units
@@ -706,168 +568,115 @@ echo 1..3 | as-lines # outputs 1, 2, and 3 on separate lines
 Duration values with different units can be added.
 For example, `2hr + 57min + 11sec` (my best marathon time).
 
-Values of the `filesize` type with different units can be added.
-For example, `2mb + 57kb + 11b`.
+File sizes also support units and arithmetic.
+`MB` uses powers of 1000; `MiB` uses powers of 1024.
+For example, `2MB + 57KB + 11B` is a file size.
+When comparing a size from `ls`, use a file-size value such as `size > 1KB`.
 
-When values of different types are combined in a coercion error occurs.
-For example, `3hr + 2mb` gives this error and clearly identifies
-that the first value is a `duration` and the 2nd is a `filesize`.
+Incompatible types cause an error.
+For example, adding a duration to a file size with `3hr + 2MB` is invalid.
 
 ### Lists
 
 A list is an ordered collection of values.
-The literal syntax for creating a `list` is to include expressions
-in square brackets separated by spaces or commas (for readability).
+Create one with expressions in square brackets separated by spaces or commas.
 For example, `[foo bar baz]` or `[foo, bar, baz]`.
 
-To iterate over the elements in a list, use the `each` command.
-The `$it` special variable holds the output of the previous command.
-When used in a block passed to the `each` command, it holds the current item.
-To change `$it` to have `$it.index` and `$it.item` values,
-add the `--numbered` (`-n`) flag.
-For example:
+To transform each item, use `each` with a closure.
+The closure declares the variable holding the current item between `|` characters.
+To also obtain each item's index, insert `enumerate`:
 
-```bash
+```nu
 let names = [Mark Tami Amanda Jeremy]
-echo $names | each { build-string "Hello, " $it "!" }
-# Outputs "Hello, Mark!" and three more similar lines.
-
-echo $names | each -n { build-string ($it.index | inc) ")" $it.item }
+$names | each {|name| $"Hello, ($name)!" }
+$names | enumerate | each {|entry| $"($entry.index + 1)) ($entry.item)" }
 ```
 
-The `split row` command creates a list from a string based on a delimiter.
-For example, `let colors = (echo "red,green,blue" | split row ",")`
-creates the list `[red green blue]`.
+The second pipeline produces the strings `1) Mark`, `2) Tami`, and so on.
+There is no implicit `$it` variable and no `each --numbered` flag.
+You can name a closure parameter `it`, but you must declare it explicitly.
 
-To access a list item at a given index, use `$name.index`
-where `$name` is a variable that holds a list.
-For example, the second element in the list above
-which is "Tami" can be accessed with `$names.1`.
+The `split row` command creates a list from a string based on a delimiter:
 
-The `length` command returns the number of items in a list.
-For example, `echo [red green blue] | length` outputs `3`.
-
-The `empty?` command determines whether a string, list, or table is empty.
-It can be used with lists as follows:
-
-```bash
-= $colors | empty? # false
-
-let colors = []
-= $colors | empty? # true
+```nu
+let colors = ('red,green,blue' | split row ',')
+$colors.1 # green
+$colors | length # 3
+$colors | is-empty # false
+'blue' in $colors # true
+'yellow' not-in $colors # true
 ```
 
-The `in` and `not in` operators are used to test whether a value is in a list.
-Operators can only be used in "math mode".
-One way to enter math mode is to begin an expression with `=`.
-For example:
+List indexes start at zero.
+Use `$name.index` or `get index` to access one item.
 
-```bash
-let colors = [red green blue]
-= blue in $colors # true
-= yellow in $colors # false
-```
+The `where` command filters a list:
 
-The `where` command can be used to create a subset of a list.
-The following example gets all the colors whose names end in "e".
-
-```bash
+```nu
 let colors = [red orange yellow green blue purple]
-echo $colors | where (echo $it | str ends-with 'e')
-# The block passed to where must evaluate to a boolean.
-# This outputs the list [orange blue purple].
+$colors | where {|color| $color | str ends-with 'e' }
+# [orange blue purple]
 
 let scores = [7 10 8 6 7]
-echo $scores | where $it > 7 # [10 8]
+$scores | where {|score| $score > 7 } # [10 8]
 ```
 
-The `any?` command determines if any item in a list
-matches a given condition.
-For example:
+`any` tests whether at least one item satisfies a condition.
+`all` tests whether every item satisfies it.
+Both take closures:
 
-```bash
-# Do any color names end with "e"?
-echo $colors | any? (echo $it | str ends-with "e") # true
-
-# Is the length of any color name less than 3?
-echo $colors | any? (echo $it | str length) < 3 # false
-
-# Are any scores greater than 7?
-echo $scores | any? $it > 7 # true
-
-# Are any scores odd?
-echo $scores | any? $it mod 2 == 1 # true
+```nu
+let scores = [7 10 8 6 7]
+$scores | any {|score| $score > 7 } # true
+$scores | any {|score| $score mod 2 == 1 } # true
+$scores | all {|score| $score >= 3 } # true
+$scores | all {|score| $score mod 2 == 0 } # false
 ```
 
-The `all?` command determines if every item in a list
-matches a given condition.
-For example:
+`append` and `prepend` return new lists.
+A list argument contributes its elements; wrap it in another list
+if you want to append a nested list as one item.
 
-```bash
-# Do all color names end with "e"?
-echo $colors | all? (echo $it | str ends-with "e") # false
-
-# Is the length of all color names greater than or equal to 3?
-echo $colors | all? (echo $it | str length) >= 3 # true
-
-# Are all scores greater than 7?
-echo $scores | all? $it > 7 # false
-
-# Are all scores even?
-echo $scores | all $it mod 2 == 0 # false
-```
-
-The `append` command appends a single value to the end of a list.
-The `prepend` command prepends a single value to the beginning of a list.
-For example:
-
-```bash
+```nu
 let colors = [yellow green]
-let colors = (echo $colors | prepend red)
-let colors = (echo $colors | append purple)
-echo $colors # [red yellow green purple]
+let colors = ($colors | prepend red | append purple)
+$colors # [red yellow green purple]
 ```
 
-The `flatten` command creates a new list from an existing list
-by adding items in nested lists to the top-level list.
-This can be called multiple times to flatten lists nested at any depth.
-For example:
+`flatten` removes a level of nesting:
 
-```bash
-echo [1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
-
-echo [[1 2] [3 [4 5 [6 7 8]]]] |
-  flatten | flatten | flatten # [1 2 3 4 5 6 7 8]
+```nu
+[1 [2 3] 4 [5 6]] | flatten # [1 2 3 4 5 6]
+[[1 2] [3 [4 5 [6 7 8]]]] | flatten | flatten | flatten
+# [1 2 3 4 5 6 7 8]
 ```
 
-The `reduce` command computes a single value from a list.
-It takes a block which can use the special variables
-`$acc` (for accumulator) and `$it` (for item).
-To specify an initial value for `$acc`, use the `--fold` (`-f`) flag.
-To change `$it` to have `$it.index` and `$it.item` values,
-add the `--numbered` (`-n`) flag.
-This also changes `$acc` to have a `$acc.item` value.
-For example:
+`reduce` combines values using a closure with item and accumulator parameters,
+in that order. `--fold` supplies the initial accumulator.
+Without it, the first item becomes the initial accumulator.
 
-```bash
+```nu
 let scores = [3 8 4]
-echo "total =" (echo $scores | reduce { = $acc + $it }) # 15
-
-echo "total =" (echo $scores | math sum) # easier approach, same result
-
-echo "product =" (echo $scores | reduce --fold 1 { = $acc * $it }) # 96
-
-echo $scores | reduce -n { = $acc.item + $it.index * $it.item }
-# This should produce 0*3 + 1*8 + 2*4 = 16.
-# But see https://github.com/nushell/nushell/issues/3298.
+$scores | reduce {|item, acc| $acc + $item } # 15
+$scores | math sum # 15, an easier approach
+$scores | reduce --fold 1 {|item, acc| $acc * $item } # 96
+$scores | enumerate | reduce --fold 0 {|entry, acc|
+  $acc + $entry.index * $entry.item
+} # 16
 ```
 
 ### Tables
 
-The literal syntax for creating a table defines each row with a list,
-starting with the header row which is followed by a semicolon.
-For example, `echo [[Name Score]; [Mark 19] [Tami 21]]`
-outputs the following table:
+A table is a list of records.
+The compact literal syntax starts with a list of column names,
+followed by a semicolon and lists of row values:
+
+```nu
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+$scores
+```
+
+This renders as a table similar to:
 
 ```text
 ╭───┬──────┬───────╮
@@ -878,42 +687,28 @@ outputs the following table:
 ╰───┴──────┴───────╯
 ```
 
-SQL-like syntax can be used to retrieve data from a table.
-For example:
+SQL-like filters retrieve data from a table:
 
-```bash
+```nu
 let scores = [[Name Score]; [Mark 19] [Tami 21]]
-echo $scores | where Name == 'Tami' | get Score # 21
+$scores | where Name == 'Tami' | get Score # [21]
+$scores | where {|row| $row.Name == 'Tami' } | get Score | first # 21
 ```
 
-The use of the `where` command above is shorthand for the expanded syntax.
-This uses the special variable `$it` which holds
-the result of the previous command or the current iteration value.
-The previous pipeline can be written as shown below using this syntax.
-The curly braces after the `where` command define a block on which it operates.
-As we have seen, the leading `=` enters "math mode"
-which enables use of operators.
+Filtering a table still returns a table, even if only one row matches.
+Getting a column returns a list. Use `first` or `get 0` when you need one value.
 
-```bash
-echo $scores | where { = $it.Name == 'Tami'} | get Score # 21
+Use a record for a single object:
+
+```nu
+let data = {color: yellow, flavor: vanilla}
+$data.color # yellow
+$data.flavor # vanilla
 ```
 
-Single-row tables can be used like objects in other languages.
-For example:
+Multiline table literals work normally:
 
-```bash
-let data = [[color flavor]; [yellow vanilla]]
-echo $data.color # outputs yellow
-echo $data.flavor # outputs vanilla
-```
-
-Nushell is currently very picky about
-splitting table data over multiple lines.
-The newlines in the table definition below break it!
-See [issue 3204](https://github.com/nushell/nushell/issues/3204).
-
-```bash
-# This way of adding newlines in a table definition is not parsed correctly.
+```nu
 let sports = [
   [name players];
   [baseball 9]
@@ -921,565 +716,418 @@ let sports = [
   [football 11]
   [hockey 6]
 ]
-# This way is parsed correctly.
-let sports = [
-  [name players
-  ]; [baseball 9
-  ] [basketball 5
-  ] [football 11
-  ] [hockey 6]
-]
-let sport = basketball
-let players = (echo $sports | where name == $sport | get players)
-echo `The number of active players in {{$sport}} is {{$players}}.`
+let sport = 'basketball'
+let players = ($sports | where name == $sport | get players | first)
+$"The number of active players in ($sport) is ($players)."
 ```
 
-Tables can contain nested tables.
-Note the placement of newlines in the example below
-which avoids the parsing issue described above.
-The `to json` command is used to generate JSON from a table.
+Records and tables can contain nested structured data.
+For example:
 
-```bash
-let person = [
-  [name address]; [
-    "Mark Volkmann", [
-      [street city state zip]; [
-        "123 Some Street" "Somewhere" "MO" 12345
-      ]
-    ]
-  ]
-]
-
-echo $person
-echo $person | get address
-echo $person | to json --pretty 2
-```
-
-Running the code above produces the following result:
-
-```text
-╭───┬───────────────┬────────────────╮
-│ # │ name          │ address        │
-├───┼───────────────┼────────────────┤
-│ 0 │ Mark Volkmann │ [table 1 rows] │
-╰───┴───────────────┴────────────────╯
-
-╭───┬─────────────────┬───────────┬───────┬───────╮
-│ # │ street          │ city      │ state │ zip   │
-├───┼─────────────────┼───────────┼───────┼───────┤
-│ 0 │ 123 Some Street │ Somewhere │ MO    │ 12345 │
-╰───┴─────────────────┴───────────┴───────┴───────╯
-
-{
-  "address": [
-    {
-      "city": "Somewhere",
-      "state": "MO",
-      "street": "123 Some Street",
-      "zip": 12345
-    }
-  ],
-  "name": "Mark Volkmann"
+```nu
+let person = {
+  name: 'Mark Volkmann'
+  address: {
+    street: '123 Some Street'
+    city: Somewhere
+    state: MO
+    zip: '12345'
+  }
 }
+$person.address.city # Somewhere
+$person | to json --indent 2
 ```
+
+This serializes to a JSON object with a nested `address` object.
+A table would serialize to an array of objects, including for a one-row table.
 
 ## Operators
 
-Nushell supports the following operators:
+Nushell supports the following operators, among others:
 
-| Operator | Description                     |
-| -------- | ------------------------------- |
-| `+`      | add                             |
-| `-`      | subtract                        |
-| `*`      | multiply                        |
-| `/`      | divide                          |
-| `**`     | exponentiation (power)          |
-| `mod`    | modulo                          |
-| `==`     | equal                           |
-| `!=`     | not equal                       |
-| `<`      | less than                       |
-| `<=`     | less than or equal              |
-| `>`      | greater than                    |
-| `>=`     | greater than or equal           |
-| `=~`     | string contains another         |
-| `!~`     | string does not contain another |
-| `in`     | value in list                   |
-| `not in` | value not in list               |
-| `&&`     | and two Boolean values          |
-| `\|\|`   | or two Boolean values           |
+| Operator                   | Description                          |
+| -------------------------- | ------------------------------------ |
+| `+`, `-`, `*`, `/`         | arithmetic                           |
+| `//`                       | floor division                       |
+| `**`                       | exponentiation                       |
+| `mod`                      | modulo                               |
+| `==`, `!=`                 | equality and inequality              |
+| `<`, `<=`, `>`, `>=`       | ordering comparisons                 |
+| `=~`, `!~`                 | regex match and non-match            |
+| `in`, `not-in`             | membership and non-membership        |
+| `and`, `or`, `xor`, `not`  | Boolean operations                   |
+| `++`                       | concatenate lists or strings         |
+| `starts-with`, `ends-with` | string prefix and suffix comparisons |
 
-Parentheses can be used for grouping to specify evaluation order.
-Operators can only be used in "math mode".
-An expression is in math mode if it begins with `=`.
-Commands that take a boolean expression, such as
-`where`, `keep while`, `keep until`, `skip while`, and `skip util`,
-are automatically evaluated in math mode.
+Parentheses group expressions and capture the result of command pipelines.
+For example, `let a = 2; let b = 3; $a * $b` returns `6`.
+There is no leading `=` to enter a separate math mode.
 
-For example, `let a = 2; let b = 3; = $a * $b` outputs `6`.
+When passing a calculation as a command argument, use parentheses:
+`print (2 + 3)`.
+In expression positions, such as after `let value =`, they are often unnecessary.
+
+See [Operators](https://www.nushell.sh/book/operators.html) for the complete list.
 
 ## Working with Numbers
 
-Many of the operators listed in the previous section operate on numbers.
+Use arithmetic to increment or decrement a value.
+Immutable `let` bindings can be shadowed, or use `mut` for a mutable variable:
 
-The `inc` command has three uses.
-
-The first use of `inc` is to
-return a value that is one higher that the piped in value.
-For example, `echo 2 | inc` gives `3`.
-Since variables are immutable,
-this cannot be used to increment the value in a variable.
-
-The second use of `inc` is to increment all the `int` values
-in a given table column if all the values are of type `int`.
-For example, `echo [[Name Size]; [Mark 33] [Tami 28]] | inc Size`
-results in a table where the values in the "Size" column are 34 and 29.
-
-The third use of `inc` is to increment
-a specify part of a semantic version number
-that includes major, minor, and patch parts.
-For example:
-
-```bash
-echo 1.2.3 | inc -M # increments major resulting in 2.0.0
-echo 1.2.3 | inc -m # increments minor resulting in 1.3.0
-echo 1.2.3 | inc -p # increments patch resulting in 1.2.4
+```nu
+mut score = 2
+$score += 1
+$score # 3
 ```
 
-There is no `dec` command for decrementing values.
+To update numbers in a table column:
+
+```nu
+[[Name Size]; [Mark 33] [Tami 28]] | update Size {|row| $row.Size + 1 }
+```
+
+For semantic version numbers, Nushell 0.115.1 has `semver bump`:
+
+```nu
+'1.2.3' | semver bump major # 2.0.0
+'1.2.3' | semver bump minor # 1.3.0
+'1.2.3' | semver bump patch # 1.2.4
+```
 
 ## Working with URLs
 
-The `fetch` command can be used to get data from a URL.
+Use `http get` to retrieve data from a URL.
+JSON responses are normally decoded into structured values automatically.
+Use `--raw` when you want the response without format conversion.
 
 The website [JSONPlaceholder](https://jsonplaceholder.typicode.com)
-provides access to free sample JSON data.
-The following example gets data about TODOs from this site.
+provides free sample JSON data.
+The following example gets three incomplete TODOs for user 5:
 
-```bash
-fetch https://jsonplaceholder.typicode.com/todos |
-  where userId == 5 && completed == $false |
-  sort-by title | keep 3
+```nu
+http get https://jsonplaceholder.typicode.com/todos |
+  where userId == 5 and completed == false |
+  sort-by title | take 3
 ```
 
-This produces output like the following:
+The `http post` command sends an HTTP POST request.
+Specify the content type when sending JSON:
 
-```text
-╭───┬────────┬─────┬─────────────────────────────────────────┬───────────╮
-│ # │ userId │ id  │ title                                   │ completed │
-├───┼────────┼─────┼─────────────────────────────────────────┼───────────┤
-│ 0 │      5 │  97 │ dolorum laboriosam eos qui iure aliquam │ false     │
-│ 1 │      5 │ 100 │ excepturi a et neque qui expedita vel   │ false     │
-│ 2 │      5 │  94 │ facilis modi saepe mollitia             │ false     │
-╰───┴────────┴─────┴─────────────────────────────────────────┴───────────╯
+For a multiline command, enclose the invocation in parentheses:
+
+```nu
+(http post --content-type application/json
+  https://jsonplaceholder.typicode.com/todos
+  {title: 'get milk', userId: 5})
 ```
 
-The `post` command sends an HTTP POST requests to a server
-and returns the response as a table.
-The following example simulates creating a TODO using the
-JSONPlaceholder site and returns the id of the newly created TODO.
-
-```bash
-let json = '{"title": "get milk", "userId": 5}"'
-post https://jsonplaceholder.typicode.com/todos $json
-```
-
-Nushell does not currently provide commands
-to send `PUT`, `PATCH`, or `DELETE` requests.
+JSONPlaceholder simulates creation without permanently storing the TODO.
+Nushell also provides `http put`, `http patch`, `http delete`,
+`http head`, and `http options`.
+See `help http` for the available subcommands.
 
 ## Common UNIX Commands
 
-Many common UNIX commands are supported by Nushell.
-These are implemented in Rust and are very fast.
-They include:
+Many common UNIX commands have Nushell implementations.
+Their options and output can differ from the external utilities with the same names.
 
-| Command    | Description                                                                           |
-| ---------- | ------------------------------------------------------------------------------------- |
-| `cal`      | displays a calendar for the current month or an entire specified year                 |
-| `cd`       | changes the current working directory                                                 |
-| `clear`    | clears the terminal                                                                   |
-| `cp`       | copies a file or directory                                                            |
-| `date now` | gets the current date (see the other `date` subcommands)                              |
-| `du`       | gets information about disk usage                                                     |
-| `echo`     | outputs the values of expressions                                                     |
-| `exit`     | exits the current shell; can specify a status code                                    |
-| `help`     | outputs help information                                                              |
-| `history`  | outputs command history (last 100 commands)                                           |
-| `kill`     | kills a process                                                                       |
-| `ls`       | lists the contents of the current directory or specified path                         |
-| `mkdir`    | makes (creates) a directory                                                           |
-| `mv`       | moves a file or directory                                                             |
-| `open`     | opens a file                                                                          |
-| `ps`       | outputs process information                                                           |
-| `pwd`      | outputs the present (current) working directory                                       |
-| `rm`       | removes (deletes) a file or directory                                                 |
-| `source`   | executes a script file in the current context                                         |
-| `which`    | outputs the path of an executable OR<br>information about aliases and custom commands |
+| Command    | Description                                    |
+| ---------- | ---------------------------------------------- |
+| `cal`      | displays a calendar                            |
+| `cd`       | changes the current working directory          |
+| `clear`    | clears the terminal                            |
+| `cp`       | copies files or directories                    |
+| `date now` | gets the current date and time                 |
+| `du`       | gets disk usage information                    |
+| `echo`     | returns values as pipeline data                |
+| `exit`     | exits Nushell, optionally with a status code   |
+| `help`     | displays help                                  |
+| `history`  | returns command history                        |
+| `kill`     | sends a signal to a process                    |
+| `ls`       | lists files and directories as a table         |
+| `mkdir`    | creates directories, including missing parents |
+| `mv`       | moves files or directories                     |
+| `open`     | reads a file, parsing supported formats        |
+| `print`    | prints values to the terminal                  |
+| `ps`       | returns process information                    |
+| `pwd`      | returns the current working directory          |
+| `rm`       | removes files or directories                   |
+| `source`   | runs a Nu script in the current context        |
+| `which`    | locates commands                               |
 
-The change to a subdirectory named "sub", enter `cd sub` or just `sub`.
+To change to a subdirectory named "sub", enter `cd sub`.
+Interactive Nushell also supports directory shortcuts such as `../`.
+The `cp`, `mv`, and `rm` commands support `--interactive` (`-i`).
 
-The `cp`, `mv`, and `rm` commands do not currently
-support the `-i` flag to prompt for confirmation.
-However, aliases for these can be defined to
-use the corresponding commands from the parent shell.
-For example, `alias rm = ^rm -i`.
+Commands such as `ls` and `ps` return tables.
+The `sys` command has subcommands such as `sys host` and `sys mem`.
+Use cell paths or `get` to access nested data.
 
-Commands such as `ls`, `ps`, and `sys` output data as a table.
-When a cell displays `[table n rows]`,
-that indicates that it contains a nested table.
-Use the `get` filter to display them (see examples below).
+Filters such as `where`, `sort-by`, and `reverse` modify the output.
+`sort-by --reverse` (`-r`) reverses the sort order;
+`--ignore-case` (`-i`) makes string sorting case-insensitive.
 
-SQL-like filters such as `where`, `sort-by`, and `reverse`
-can be used to modify the output.
-The `sort-by` command accepts
-the `--insensitive` (`-i`) flag to make the sort case-insensitive and
-the `--reverse` (`-r`) flag to reverse the sort order.
-
-Let's walk through some examples.
-
-```bash
-# List all the package.json files in and below the current directory
-# using a glob pattern.
+```nu
+# List package.json files in and below the current directory.
 ls **/package.json
 
-# List Rust files in and below the current directory
-# using a glob pattern.
+# List Rust files recursively.
 ls **/*.rs
 
-# List files in a tree layout.
-ls | tree
+# List files of at least 2 KB, largest first.
+ls | where type == file and size >= 2KB | sort-by --reverse size
 
-# List files in the current directory with a size of 2kb or more,
-# sorted on size from largest to smallest.
-ls | where type == File && size >= 2kb | sort-by size | reverse
-ls | where type == File && size >= 2kb | sort-by -r size # same
+# List directory names alphabetically.
+ls | where type == dir | sort-by name | get name
 
-# List directories in the current directory,
-# sorted on size from largest to smallest,
-# excluding the type column since all will be "Dir".
-ls | where type == Dir | sort-by -r size | reject type
+# Show processes using more than 5% of a CPU, busiest first.
+ps | where cpu > 5 | sort-by --reverse cpu
 
-# Output processes using more than 5% of a CPU
-# sorted on CPU usage in reverse order.
-ps | where cpu > 5 | sort-by -r cpu
+# Show host information.
+sys host
 
-# Output information about the current machine
-# including OS version, host name, and uptime.
-sys | get host
+# Show temperatures, where supported by the platform.
+sys temp
 
-# Output the temperature of the CPUs, GPU, and battery (tested on macOS).
-sys | get temp
-
-# Output the parts of the current date and time in a table.
-date now | date to-table
+# Show date/time components.
+date now | into record
 ```
 
-To convert a table to a specific text format, use the `to` command.
-Supported formats include csv (comma-separated), html, json,
-md (Markdown), toml, tsv (tab-separated), url (url-encoded text), xml, and yaml.
-For example, to generate JSON from the `ls` command output,
-enter `ls | to json`.
+The type strings returned by `ls` are lowercase, such as `file` and `dir`.
+Directory sizes in a plain `ls` listing are not recursive totals;
+use `du` when that is what you need.
 
-The `save` command writes the string output of a command to a file.
-This is alternative to the `>` redirect operator used in the Bash shell.
-The `to` command can be used to convert non-string data to a string.
+To serialize a table, use a `to` subcommand, for example `ls | to json`.
+`save` can also choose a serializer based on the output extension:
 
-For example:
+```nu
+ls | where type == file and size > 1KB | sort-by --reverse size |
+  to html | save big-files.html
 
-```bash
-# Create an HTML file describing the directories
-# in the current directory that are larger than 1 KB.
-ls | where type == Dir && size > 1024 | sort-by -r size | to html |
-  save big-dirs.html
-
-# The text format defaults to CSV if the file extension is .csv.
-# It does not do this for any other file extensions.
-ls | where type == Dir && size > 1024 | sort-by -r size | save big-dirs.csv
+ls | where type == file and size > 1KB | sort-by --reverse size |
+  save big-files.csv
 ```
 
-We can compute the combined size of all the executables
-installed using the Rust `cargo` command in the default location.
-This includes the `nu` executable and plugins.
+The output files must not already exist; use `save --force` to replace them.
+Automatic serialization also works for other supported extensions such as `.json`.
+`save --raw` bypasses extension-based conversion.
 
-```bash
-ls (build-string (which nu | get path) '*') | get size | math sum
+To compute the total size of files in Cargo's default binary directory:
+
+```nu
+ls ($env.HOME | path join '.cargo' 'bin') |
+  where type == file | get size | math sum
 ```
+
+This assumes Cargo uses its default installation directory.
 
 ## Aliases
 
-To create an alias for a command, enter `alias {name} = {command}`.
+To create an alias, enter `alias name = command`.
 For example, `alias cls = clear`.
+The command can be built in, external, or custom, and fixed arguments can be included.
+Additional arguments can be supplied when using the alias.
 
-The command can be a built-in command or a custom command,
-and literal arguments can be specified.
-When aliases are used, additional arguments can be specified.
-For example:
-
-```bash
-alias df = date format
-date now | df "%B %-d, %Y" # April 3, 2021
+```nu
+alias df = format date
+date now | df '%B %-d, %Y'
 ```
 
-To make aliases available in each new Nushell session,
-add them to the `startup` list in the config file
-as shown in the "Configuration" section.
+Put aliases directly in `config.nu` to make them available in new sessions.
+An alias represents a command invocation, not an entire pipeline.
+Use a custom command for a pipeline:
 
-Aliases cannot use pipelines. Custom commands must be used instead.
-For example, the following does not work:
-
-```bash
-alias top = ps | sort-by -r cpu | first 10
-```
-
-But defining it as as custom command as follows does work:
-
-```bash
-def top [] { ps | sort-by cpu -r | first 10 }
+```nu
+# Lists the ten busiest processes.
+def top [] { ps | sort-by --reverse cpu | first 10 }
 ```
 
 ## Custom Commands
 
-To define a custom command, enter `def {name} [params] { commands }`.
-Names can be in kebab-case, including hyphens for readability.
-They can end with `?` to indicate that they return a Boolean value.
-Square brackets are used to surround the parameters because
-they are treated as a list and that syntax is used for lists.
-If no parameters are required, `[]` must still be included.
+Define a custom command with `def name [parameters] { body }`.
+Names can contain hyphens.
+Use `[]` when there are no parameters.
+Parameter values are accessed with `$` before their names.
 
-The result of a custom command is
-the result of the last command pipeline
-or a string formed by the accumulation of everything it echoes.
+```nu
+# Lists processes using at least the specified CPU percentage.
+def topn [pct: number] {
+  ps | where cpu >= $pct | sort-by --reverse cpu
+}
 
-The following custom command has no parameters and outputs a table
-showing the processes that have CPU usage of 5% or more
-sorted from highest to lowest.
-
-```bash
-def top [] { ps | where cpu >= 5 | sort-by -r cpu }
+topn 5
 ```
 
-To run this, enter `top`.
+A custom command returns the value of its last expression,
+or a value explicitly supplied to `return`.
+Use `print` for terminal messages; multiple `echo` statements do not
+concatenate into the return value.
 
-Here is a version that has a CPU percentage parameter.
-Parameter values are accessed by adding `$` before their names.
-
-```bash
-def topn [pct] { ps | where cpu >= $pct | sort-by -r cpu }
-```
-
-To run this enter `top` followed by a number.
-For example, `top 5`.
-
-To make custom commands available in each new Nushell session,
-add them to the `startup` list in the config file
-as shown in the "Configuration" section.
-
-The type of each parameter can optionally be specified after a colon to
-provide better documentation and better error messages when used incorrectly.
-See the list of "real types" described in the "Data Types" section.
-For example:
-
-```bash
-def sum [n1: number, n2: number] { = $n1 + $n2 }
-
-def topn [pct: number] { ps | where cpu >= $pct | sort-by -r cpu }
-```
-
-When invoking a command, multiple arguments are separated by spaces.
-For example, entering `sum 1 2` which outputs `3`.
-
-Here are examples of custom commands whose result is defined by what they echo
-rather than the result of a command pipeline.
-
-```bash
+```nu
+# Describes whether a number is big or small.
 def evaluate [n: int] {
-  echo (build-string "The number " $n " is ")
-  if $n > 5 { echo big } { echo small }
-  echo "."
-  echo (char newline)
+  let word = if $n > 5 { 'big' } else { 'small' }
+  $"The number ($n) is ($word)."
 }
 
-echo (evaluate 1) # The number 1 is small.
-echo (evaluate 9) # The number 9 is big.
-
-def evaluate2 [n: int] {
-  let word = (if $n > 5 { echo big } { echo small })
-  echo (build-string "The number " $n " is " $word "." (char newline))
-}
-
-echo (evaluate2 1) # The number 1 is small.
-echo (evaluate2 9) # The number 9 is big.
+evaluate 1 # The number 1 is small.
+evaluate 9 # The number 9 is big.
 ```
 
-Input from other commands can be piped into a custom command
-and accessed with the `$it` special variable.
-Output from custom commands can be piped into other commands.
+Parameter types are optional but improve documentation and error messages.
+Parameters are separated by spaces when calling a command:
 
-The parameters in the examples above are positional.
-Named parameters (a.k.a. flags) can also be specified
-by adding `--` before their names.
-These are long-form names.
-To also specify short-form names, follow the long name with `(-short-name)`.
-Like positional parameters, types can be specified for flags.
+```nu
+# Computes the sum of two numbers.
+def sum [
+  n1: number # first number
+  n2: number # second number
+] {
+  $n1 + $n2
+}
+
+sum 1 2 # 3
+```
+
+Pipeline input is available as `$in`.
 For example:
 
+```nu
+# Doubles a number supplied through the pipeline.
+def double []: number -> number { $in * 2 }
 
+3 | double # 6
+```
 
-```bash
-# Prints a value followed by a newline.
-def logv [value: any] {
-  echo (build-string $value (char newline))
-  # Another way to write the line above is:
-  # echo [`{{$value}}` (char newline)] | str collect
-}
+Named parameters (flags) start with `--`.
+An optional short name follows in parentheses.
+A flag with no value type is a Boolean switch;
+a typed flag that is not provided has the value `null` unless a default is set.
 
-# Prints "name = value" followed by a newline.
-def lognv [name: string, value: any] {
-  logv (build-string $name " = " $value)
-}
-
-def logv-color [
-  text: string,
-  --color (-c): string # a flag
-] {
-  #if (echo $color | empty) { # same as next line
-  if ($color | empty) {
-    logv $text
-  } {
-    logv (build-string (ansi $color) $text (ansi reset))
+```nu
+# Prints a message, optionally in a named ANSI color.
+def log-color [text: string, --color (-c): string] {
+  if $color == null {
+    print $text
+  } else {
+    print $"(ansi $color)($text)(ansi reset)"
   }
 }
 
-logv-color "Giraffes are cool!" -c "yellow"
+log-color 'Giraffes are cool!' --color yellow
 ```
 
+Custom commands can accept closures.
+Use `do` to call a closure directly, or pass it to a command such as `each`:
 
-
-Custom commands can take arguments with a type of `block`.
-The `do` command can be used to execute the block.
-For example, this can be used to implement a `map` command
-which takes a list and a block.
-
-```bash
-def map [values: any, code: block] {
-  echo $values | each $code
+```nu
+# Applies a closure to each value in a list.
+def map [values: list, code: closure] {
+  $values | each $code
 }
 
-let names = [Mark Tami Amanda Jeremy]
-
-map $names {
-  echo (build-string "Hello, " $it (char newline))
-} | str collect
-
-# Same result using built-in "each" command instead of custom "map" command.
-echo $names | each {
-  echo (build-string "Hello, " $it ((char newline))
-} | str collect
+map [Mark Tami Amanda Jeremy] {|name| $"Hello, ($name)!" }
 ```
 
-Custom commands can take a variable number of arguments
-using the parameter syntax `...rest`.
-The parameter name must be "rest" and it must be the last parameter.
-Its value is a list.
-For example:
+A rest parameter starts with `...` and collects additional positional arguments
+into a list. It must be last, but its name does not have to be `rest`.
+The type annotation describes each additional argument:
 
-```bash
-def labelled-sum [label: string, ...rest: int] {
-  echo (build-string $label " = " (echo $rest | math sum) (char newline))
+```nu
+# Formats the sum of any number of integer arguments.
+def labelled-sum [label: string, ...values: int] {
+  $"($label) = ($values | math sum)"
 }
 
-labelled-sum "sum of scores" 3 7 19 # sum of scores = 29
+labelled-sum 'sum of scores' 3 7 19 # sum of scores = 29
 ```
 
-Help for custom commands is obtained in the same way it is for
-built-in commands, using `help {command-name}` or `{command-name} -h`.
+Help works just as it does for built-in commands: `help labelled-sum`.
+Comments immediately before a definition and after parameter declarations
+supply documentation.
 
-To add documentation to custom commands,
-add a comment before the definition and after each parameter.
-For example:
+Define a subcommand by quoting a name containing spaces:
 
-```bash
-# Computes the sum of two numbers.
-def sum [
-  n1: number, # first number
-  n2: number # second number
-] {
-  = $n1 + $n2
-}
-```
-
-Defining a custom subcommand is similar to defining a custom command,
-but the name is specified as the parent command name and the subcommand name
-separated by a space and inside quotes.
-In the following custom commands, the parent command `rmv` is my initials:
-
-```bash
-# Parent command.
-def rmv [] {}
-
-# Increments a number by 1.
-def "rmv increment" [n: number] { = $n + 1 }
+```nu
+# Parent command for the rmv examples.
+def rmv [] { help rmv }
 
 # Doubles a number.
-def "rmv double" [n: number] { = $n * 2 }
+def 'rmv double' [n: number] { $n * 2 }
 
-let score = 3
-# The "lognv" command is defined above.
-lognv 'score' (rmv double (rmv increment $score)) # 8
+# Increments a number.
+def 'rmv increment' [n: number] { $n + 1 }
+
+rmv double (rmv increment 3) # 8
 ```
+
+Put definitions in `config.nu`, or load them from another Nu file with `source`.
+Use `def --env` when a command must preserve environment changes in its caller,
+for example a command that uses `cd`.
+See [Custom Commands](https://www.nushell.sh/book/custom_commands.html).
 
 ## Variables
 
-Variables in Nushell are distinct from environment variables.
-They are immutable, so they must be set when they are declared.
-However, they can be shadowed to have different values in different scopes.
+Variables are distinct from environment variables.
+`let` creates an immutable binding; `mut` creates a mutable one.
+`const` defines a value evaluated at parse time, which can be useful
+for imports and other parser keywords.
 
-To set a variable, enter `let name = value`.
-The scope of a variable is the context or block in which it is defined.
+```nu
+let greeting = 'Hello'
+mut count = 1
+$count += 1
+$"($greeting), count is ($count)" # Hello, count is 2
+```
 
-To set a variable to the result of a command pipeline,
-which can be comprised of one or more commands,
-enter `let name = (pipeline)`.
+Variables are scoped to the block in which they are defined.
+An immutable binding can be shadowed with another `let` binding.
+To assign a pipeline result, use `let names = (ls | get name)`.
+Parentheses also allow pipeline results to be passed as command arguments.
 
-To use a variable in an expression, precede its name with `$`.
-For example, `$total`.
+To concatenate values as text, use interpolation:
 
-The `build-str` command concatenates the values of multiple expressions
-into a single string.
-For example, the following sets a variable to the result of
-concatenating two variable values as strings:
-
-```bash
-let v3 = (build-str $v1 $v2)
+```nu
+let v1 = 'Nu'
+let v2 = 'shell'
+let v3 = $"($v1)($v2)"
+$v3 # Nushell
 ```
 
 ## Environment Variables
 
-Environment variables are distinct from regular variables.
-Unlike regular variables, environment variables can be
-accessed by executables that are run from Nushell.
+Environment variables are stored in the `$env` record.
+They are passed to external programs, with values converted as needed
+for the operating system's string-based environment.
+Nushell's own configuration record is not exported as a normal environment variable.
 
-To set the value of an environment variable only in the current scope,
-not permanently, enter `let-env NAME = value`.
-This adds `NAME` to `$nu.env` which holds a map of environment variables.
+```nu
+$env.GITHUB_USER = 'mvolkmann'
+$env.GITHUB_USER
+```
 
-To set the value of an environment variable
-so it is available in subsequent Nushell sessions,
-add it to the `env` section of the Nushell configuration file
-as shown in the "Configuration" section.
+An assignment changes the environment in the current scope.
+Persist it by adding it to your startup configuration.
+Use `hide-env NAME` to remove a variable from the current environment.
 
-To get the value of an environment variable, use `$nu.env.NAME`.
-To print the value, enter  
-`echo $nu.env.NAME` or `config | get env.{name}`.
+To list variables as rows with names and values:
 
-To see a nicely formatted list of environment variables, enter  
-`echo $nu.env | pivot` or `config | get env | pivot`.
+```nu
+$env | transpose name value
+```
+
+To set a variable for just one external command, use an environment prefix,
+for example `NODE_ENV=production node app.js`.
 
 ## open Command
 
-The `open` command renders certain file types as tables.
-These file types include csv, ini, json, toml, xml, and yaml.
+The `open` command reads a file or SQLite database
+and parses recognized formats into structured data.
+No other databases are currently supported.
+For example, CSV becomes a table and a JSON object becomes a record.
+The available conversions depend on the commands loaded into the shell.
 
-Consider the file `scores.csv` containing the follow:
+Consider a file named `scores.csv` containing:
 
 ```text
 Name,Score
@@ -1489,53 +1137,25 @@ Amanda,17
 Jeremy,15
 ```
 
-The command `open scores.csv` renders this as follows:
+`open scores.csv` displays the rows as a table.
+To extract information from a JSON file:
 
-```text
-╭───┬────────┬───────╮
-│ # │ Name   │ Score │
-├───┼────────┼───────┤
-│ 0 │ Mark   │    19 │
-│ 1 │ Tami   │    21 │
-│ 2 │ Amanda │    17 │
-│ 3 │ Jeremy │    15 │
-╰───┴────────┴───────╯
+```nu
+open package.json | get scripts | transpose name command
 ```
 
-When run on a JSON file, the `open` command produces a table
-from which specific data can be extracted.
-For example, the following outputs a table of scripts in a `package.json` file.
+This returns one row per script, with the columns `name` and `command`.
 
-```bash
-open package.json | get scripts | pivot
-```
+Use `table --index false` to hide row indexes for a particular display.
+For plain output without table headings, extract and format the values instead,
+for example `open scores.csv | get Name | str join (char newline)`.
 
-The output will be similar to the following:
+Plain text is not automatically rendered with `bat` syntax highlighting.
+If you want that presentation, install and run `bat` separately.
+`open --raw` skips format parsing; for text processing,
+`open --raw file.txt | decode utf-8` explicitly decodes the bytes as text.
 
-```text
-╭───┬─────────┬────────────────────────────────╮
-│ # │ Column0 │ Column1                        │
-├───┼─────────┼────────────────────────────────┤
-│ 0 │ dev     │ svelte-kit dev                 │
-│ 1 │ build   │ svelte-kit build               │
-│ 2 │ start   │ svelte-kit start               │
-│ 3 │ lint    │ prettier --check . && eslint . │
-│ 4 │ format  │ prettier --write .             │
-│ 5 │ open    │ svelte-kit dev --open          │
-╰───┴─────────┴────────────────────────────────╯
-```
-
-There is no way to output a table without the heading row.
-The "#" column can be suppressed from all table output by setting
-the `disable_table_indexes` configuration option to `true`,
-but there is no way to do this for the output of a specific command.
-
-To see the commands in the Nushell configuration file `startup` section, enter  
-`open (config path) | get startup`.
-
-The `lines` and `split` commands can be used
-to render delimited data as a table.
-For example, consider the following file content:
+For example, suppose `languages.txt` contains:
 
 ```text
 Go|2012|Rob Pike
@@ -1547,762 +1167,500 @@ Rust|2010|Graydon Hoare
 TypeScript|2012|Anders Hejlsberg
 ```
 
-The following command renders a table where
-each row describes a programming language,
-the columns have proper names, and
-the rows are sorted on ascending year of creation:
+Parse the lines into columns, convert the year to an integer, and sort:
 
-```bash
-open languages.txt | lines | split column '|' Language Year Creator |
-  sort-by Year
+```nu
+open --raw languages.txt | decode utf-8 | lines |
+  split column '|' Language Year Creator |
+  into int Year | sort-by Year
 ```
 
-The `lines` command converts input text
-into a list of separate lines from the text.
-The command above produces the following output.
+If a file extension does not match its format,
+read the raw data and parse it explicitly:
+
+```nu
+open --raw really-json.txt | decode utf-8 | from json
+```
+
+Use `http get` instead of `open` to read a URL:
+
+```nu
+http get https://jsonplaceholder.typicode.com/todos |
+  where userId == 2 and completed == true | sort-by title
+```
+
+### SQLite support
+
+Supposes we have a SQLite database in the file `todos.db`
+which contains the table `todos`.
+Entering `open todos.db` might display the following:
 
 ```text
-╭───┬────────────┬──────┬────────────────────╮
-│ # │ Language   │ Year │ Creator            │
-├───┼────────────┼──────┼────────────────────┤
-│ 0 │ Python     │ 1991 │ Guido van Rossum   │
-│ 1 │ Java       │ 1995 │ James Gosling      │
-│ 2 │ JavaScript │ 1995 │ Brendan Eich       │
-│ 3 │ Ruby       │ 1995 │ Yukihiro Matsumoto │
-│ 4 │ Rust       │ 2010 │ Graydon Hoare      │
-│ 5 │ Go         │ 2012 │ Rob Pike           │
-│ 6 │ TypeScript │ 2012 │ Anders Hejlsberg   │
-╰───┴────────────┴──────┴────────────────────╯
+╭─────────────────┬─────────────────────────────────────────╮
+│                 │ ╭─#─┬─id──┬──description──┬─completed─╮ │
+│ todos           │ │ 0 │ 107 │ buy milk      │         1 │ │
+│                 │ │ 1 │ 121 │ cut the grass │         0 │ │
+│                 │ │ 2 │ 161 │ foo           │         1 │ │
+│                 │ │ 3 │ 162 │ bar           │         1 │ │
+│                 │ │ 4 │ 163 │ baz           │         1 │ │
+│                 │ ╰─#─┴─id──┴──description──┴─completed─╯ │
+│                 │ ╭─#─┬─name──┬─seq─╮                     │
+│ sqlite_sequence │ │ 0 │ todos │ 163 │                     │
+│                 │ ╰─#─┴─name──┴─seq─╯                     │
+╰─────────────────┴─────────────────────────────────────────╯
 ```
 
-The `open` command treats other types of files as a list of lines and
-produces a table where the first column contains line numbers.
-For known programming language file extensions,
-the `open` command uses the `bat` crate which provides syntax highlighting.
-Compare this to using the `cat` command where this does not happen.
-
-If the file extension on a file does not match its content type,
-use the `from` command to specify the actual content type.
-For example, `open really-json.txt | from json`.
-
-To prevent the `open` command from processing a file, add the `--raw` flag.
-For example, `open scores.csv --raw` outputs the following:
+open todos.db | query db "select description from todos where completed=1"
 
 ```text
-───────┬────────────
-       │ scores.csv
-───────┼────────────
-   1   │ Name,Score
-   2   │ Mark,19
-   3   │ Tami,21
-   4   │ Amanda,17
-   5   │ Jeremy,15
-───────┴───────────
-```
-
-To process data from a URL instead of a local file, use the `fetch` command.
-For example, the
-[{JSON} Placeholder](https://jsonplaceholder.typicode.com)
-site provides free data for testing and prototyping.
-Todo data from this site can be rendered as a table with the following commands:
-
-```bash
-fetch https://jsonplaceholder.typicode.com/todos | first 10
-
-fetch https://jsonplaceholder.typicode.com/todos |
-  where userId == 2 && completed == $true | sort-by title
+╭─#─┬─description─╮
+│ 0 │ buy milk    │
+│ 1 │ foo         │
+│ 2 │ bar         │
+│ 3 │ baz         │
+╰─#─┴─description─╯
 ```
 
 ## Table Commands
 
-The many Nushell commands that operate on tables
-are summarized in the table below.
-Examples of using many of them appear in the sub-sections that follow.
+The following are some useful commands for working with tables and lists.
+Use `help command-name` for their full signatures and examples.
 
-TODO: Add more commands here that have been added.
+| Command                      | Description                                                |
+| ---------------------------- | ---------------------------------------------------------- |
+| `all`                        | tests whether all rows satisfy a closure                   |
+| `any`                        | tests whether at least one row satisfies a closure         |
+| `append`, `prepend`          | adds values at the end or beginning                        |
+| `columns`                    | returns column names                                       |
+| `compact`                    | removes null values; can check specified table columns     |
+| `drop n`                     | removes the last `n` rows                                  |
+| `drop column n`              | removes the last `n` columns                               |
+| `each`                       | transforms rows with a closure                             |
+| `enumerate`                  | pairs each item with its index                             |
+| `every n`                    | returns every `n`th row; `--skip` skips those rows instead |
+| `first`, `last`              | returns one item, or a list when a count is supplied       |
+| `flatten`                    | removes a level of nesting                                 |
+| `format pattern`             | formats rows as strings using named fields                 |
+| `get`                        | extracts values by cell path                               |
+| `group-by`                   | groups rows by a column or closure                         |
+| `headers`                    | promotes the first row's values to column names            |
+| `histogram`                  | computes counts, percentages, and frequency bars           |
+| `insert`, `update`, `upsert` | adds, changes, or adds-or-changes fields                   |
+| `is-empty`                   | tests whether the input is empty                           |
+| `length`                     | counts rows or items                                       |
+| `merge`                      | combines columns from records or tables                    |
+| `move`                       | reorders columns                                           |
+| `parse`                      | extracts fields from strings using a pattern               |
+| `reject`                     | removes columns or rows                                    |
+| `rename`                     | renames columns                                            |
+| `reverse`                    | reverses row order                                         |
+| `roll up`, `roll down`       | cycles rows using `--by n`                                 |
+| `rotate`                     | rotates a table; `--ccw` selects counterclockwise rotation |
+| `select`                     | chooses columns or rows                                    |
+| `shuffle`                    | randomly reorders rows                                     |
+| `skip`                       | skips a number of rows                                     |
+| `skip until`, `skip while`   | skips rows based on a condition                            |
+| `slice`                      | selects a range of rows                                    |
+| `sort-by`                    | sorts by one or more columns                               |
+| `split column`               | splits strings into named columns                          |
+| `table`                      | renders structured data as text                            |
+| `take`                       | takes a number of rows                                     |
+| `take until`, `take while`   | takes rows based on a condition                            |
+| `transpose`                  | exchanges rows and columns                                 |
+| `uniq`                       | removes duplicate rows or items                            |
+| `where`                      | filters rows using a condition                             |
+| `wrap`                       | puts values into a named column                            |
 
-| Command                    | Description                                                                                                               |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| `all?`                     | determines if any row in a table matches a given condition                                                                |
-| `any?`                     | determines if all rows in a table match a given condition                                                                 |
-| `append`                   | creates a new table by appending a single row to an existing table                                                        |
-| `compact`                  | removes empty rows                                                                                                        |
-| `drop n`                   | removes the last `n` rows (`n` defaults to 1)                                                                             |
-| `drop column n`            | removes the last `n` columns (`n` defaults to 1)                                                                          |
-| `each`                     | runs a block of code on each row                                                                                          |
-| `empty?`                   | determines if a table contains no rows                                                                                    |
-| `every n`                  | shows (default) or skips (with `-s` option) every `n`th row                                                               |
-| `first n`                  | shows only the first `n` rows (`n` defaults to 1); alternative to `keep`                                                  |
-| `flatten`                  | flattens a table or list, turning nested values into top-level values                                                     |
-| `format`                   | formats specified columns into a single string using a pattern                                                            |
-| `from {format}`            | parses a given file format into a table                                                                                   |
-| `get {column-name}`        | gets the content of a given column                                                                                        |
-| `group-by`                 | creates multiple tables from one based on some grouping                                                                   |
-| `headers`                  | creates a table from an existing one where the first row replaces the current column headers                              |
-| `histogram`                | creates a table with "value", "count", "percentage", and "frequency"<br>columns based on a given column in an input table |
-| `insert`                   | inserts a column                                                                                                          |
-| `keep n`                   | keeps the first `n` rows (`n` defaults to 1); alternative to `first`                                                      |
-| `keep until {condition}`   | keeps rows until the condition is met                                                                                     |
-| `keep while {condition}`   | keeps rows while the condition is met                                                                                     |
-| `last n`                   | shows only the last `n` rows (`n` defaults to 1)                                                                          |
-| `length`                   | counts rows or list items                                                                                                 |
-| `match`                    | filters rows by matching the values in given column against a regular expression                                          |
-| `merge`                    | creates a new table by merging the columns of existing tables                                                             |
-| `move`                     | moves columns to another position                                                                                         |
-| `nth`                      | keeps or skips specified rows                                                                                             |
-| `parse`                    | creates a single-row table by parsing columns from a string according to a pattern                                        |
-| `pivot`                    | swaps the rows and columns of a table                                                                                     |
-| `prepend`                  | prepends a row to a table                                                                                                 |
-| `range`                    | gets a subset of rows                                                                                                     |
-| `reject`                   | removes columns by name                                                                                                   |
-| `rename`                   | renames columns                                                                                                           |
-| `reverse`                  | reverses the order of the rows                                                                                            |
-| `roll n`                   | rolls the bottom `n` rows to the top (`n` defaults to 1)                                                                  |
-| `rotate`                   | rotates the table 90 degrees clockwise; can apply multiple times                                                          |
-| `rotate counter-clockwise` | rotates the table 90 degrees counter-clockwise                                                                            |
-| `select {column-names}`    | specifies columns to be retained by name and their order                                                                  |
-| `shuffle`                  | shuffles the rows randomly                                                                                                |
-| `skip n`                   | skips the first `n` rows (`n` defaults to 1)                                                                              |
-| `skip until {condition}`   | skips rows until the condition is met                                                                                     |
-| `skip while {condition}`   | skips rows while the condition is met                                                                                     |
-| `sort-by`                  | sorts rows on given columns                                                                                               |
-| `split column`             | creates a table from a string based on a delimiter                                                                        |
-| `split-by`                 | creates a new table from one with nested tables<br>where column headings are values of a given nested table heading       |
-| `table`                    | views pipeline output as a table                                                                                          |
-| `to {format}`              | converts a table to a given format such as JSON                                                                           |
-| `uniq`                     | gets unique rows; has `duplicated` and `ignore-case` options                                                              |
-| `update`                   | updates data in a given column                                                                                            |
-| `where`                    | specifies a condition rows must meet to render                                                                            |
-| `wrap`                     | creates a table column from its data and a name                                                                           |
+For example, list the three largest TypeScript files in the current directory:
 
-Let's look at some examples using the `ls` command.
-This produces a table with the columns "name", "type", "size", and "modified".
-Here is a command that lists the files
-in the current directory with a `.ts` file extension,
-only includes the "name" and "size" columns,
-sorts the files from largest to smallest,
-and only outputs the three largest files:
-
-```bash
-ls *.ts | select name size | sort-by -r size | first 3
+```nu
+ls *.ts | select name size | sort-by --reverse size | first 3
 ```
 
-This produces output similar to the following:
+Add `| select 1` to return the second selected row as a one-row table.
+Use `| get 1` if you want the row as a record instead.
+Glob examples assume matching files exist.
 
-```text
-╭───┬────────────────────────┬──────────╮
-│ # │ name                   │ size     │
-├───┼────────────────────────┼──────────┤
-│ 0 │ lib.deno.unstable.d.ts │ 194.4 KB │
-│ 1 │ lib.deno.d.ts          │ 145.8 KB │
-│ 2 │ my_server.ts           │   2.7 KB │
-╰───┴────────────────────────┴──────────╯
+### `all` and `any` Commands
+
+These commands return Boolean results rather than filtered tables:
+
+```nu
+let scores = [[Name Score]; [Mark 19] [Tami 21]]
+$scores | all {|row| $row.Score >= 20 } # false
+$scores | any {|row| $row.Score >= 20 } # true
 ```
 
-The row indexes in the first column can be used to
-retrieve only a specific row using the `nth` command.
-For example, adding `| nth 1` to the end of the command
-causes it to only output the row for the file `lib.deno.d.ts`.
+### `append` and `prepend` Commands
 
-The following sub-sections provide more detail
-on some of the table commands described above.
+Append or prepend records or another table:
 
-### `all?` command
-
-The `all?` command determines if every row in a table
-matches a given condition.
-For example:
-
-```bash
-# Are all files in the current directory larger than 1 megabyte.
-ls | all? size > 1mb # true or false
-```
-
-### `any?` command
-
-The `any?` command determines if any row in a table
-matches a given condition.
-For example:
-
-```bash
-# Are any files in the current directory larger than 1 megabyte.
-ls | any? size > 1mb # true or false
-```
-
-# Are all scores even?
-
-echo $scores | all $it mod 2 == 0 # false
-
-````
-
-### `append` Command
-
-The `append` command creates a new table by
-appending a single row to an existing table.
-For example:
-
-```bash
-let primaryColors = [[name red green blue]; [
-  red 255 0 0] [
-  green 0 255 0] [
-  blue 0 0 255]
+```nu
+let primaryColors = [
+  [name red green blue];
+  [red 255 0 0]
+  [green 0 255 0]
+  [blue 0 0 255]
 ]
-let purple = [[name red green blue]; [purple 255 0 255]]
-let colors = (echo $primaryColors | append $purple)
-echo $colors
-````
-
-This produces the following output:
-
-```text
-╭───┬────────┬─────┬───────┬──────╮
-│ # │ name   │ red │ green │ blue │
-├───┼────────┼─────┼───────┼──────┤
-│ 0 │ red    │ 255 │     0 │    0 │
-│ 1 │ green  │   0 │   255 │    0 │
-│ 2 │ blue   │   0 │     0 │  255 │
-│ 3 │ purple │ 255 │     0 │  255 │
-╰───┴────────┴─────┴───────┴──────╯
+let purple = {name: purple, red: 255, green: 0, blue: 255}
+let white = {name: white, red: 255, green: 255, blue: 255}
+$primaryColors | append $purple | prepend $white
 ```
+
+This produces five rows. No extra `flatten` workaround is needed.
 
 ### `each` Command
 
-The `each` command runs a block of code on each row of a table.
-For example:
+`each` transforms each input item with a closure:
 
-```bash
-ls *.nu | each {
-  let name = (echo $it | get name)
-  let size = (echo $it | get size)
-  echo (build-string $name ' is ' $size '.')
-} | as-lines
+```nu
+ls *.nu | each {|file| $"($file.name) is ($file.size)." } |
+  str join (char newline)
 ```
 
-This produces output like the following:
+Use `for` when the purpose is side effects such as printing,
+rather than collecting a list of results:
 
-```text
-append-demo.nu is 670 B.
-block-param.nu is 305 B.
-chart-demo.nu is 189 B.
+```nu
+for name in [Mark Tami] {
+  print $"Hello, ($name)!"
+}
 ```
 
-### `empty?` command
+### `is-empty` Command
 
-The `empty?` command determines whether a string, list, or table is empty.
-It can be used with tables as follows:
-
-```bash
-let scores = [[Name Score]; [Mark 19] [Tami 21]]
-= $scores | empty? # false
-
-let scores = []
-= $scores | empty? # true; not empty if only header row is present
+```nu
+[[Name Score]; [Mark 19] [Tami 21]] | is-empty # false
+[] | is-empty # true
+[[Name Score]; [Mark 19]] | where Score > 30 | is-empty # true
 ```
 
 ### `flatten` Command
 
-The `flatten` command operates on both lists and tables.
-It can create a new table from an existing table,
-replacing columns that whose values are nested tables
-with the columns in those tables.
-For example, the `sys` command creates a table with the columns
-"host", "cpu", "disks", "mem" (for memory),
-"temp" (for temperature), and "net" (for network activity).
-Piping this output to the `flatten` command
-replaces the "host" and "mem" columns with the columns in their nested tables.
+`flatten` can also bring fields from nested records into the outer table:
 
-### `format` Command
-
-The `format` command formats specified columns
-into a single string using a pattern.
-For example:
-
-```bash
-ls | format '{name} is a {size} {type} and was modified {modified}.' |
-  str downcase
-# downcase is used to change the type to lowercase.
+```nu
+[{name: Mark, address: {city: Somewhere, state: MO}}] | flatten
 ```
 
-This outputs lines like the following:
+The result has columns `name`, `city`, and `state`.
 
-```text
-histogram.nu is a 233 b file and was modified 1 week ago.
+### `format pattern` Command
+
+Format each row into a string by naming its fields inside braces:
+
+```nu
+ls | format pattern '{name} is a {size} {type} and was modified {modified}.'
 ```
+
+For more control over formatting, use `each` with string interpolation.
 
 ### `from` Command
 
-The `from` command parses a given file format into a table.
+`from` subcommands parse serialized data.
 For example:
 
-```bash
-let data = (open --raw scores.csv)
-let table = echo $data | from csv
+```nu
+let data = "Name,Score\nMark,19\nTami,21\n"
+$data | from csv
 ```
 
-This can be done in a single line with `let table = (open scores.csv)`.
-
-TODO: How could you iterate over the rows of a table
-and add each one to another table? Use reduce and append?
-See `append-demo.nu`.
+For a file with a recognized extension, `open scores.csv` performs this conversion.
 
 ### `get` Command
 
-The `get` command can be used to output only the values in a single column.
-It returns a list rather than a table.
-For example, the following outputs the
-names of the three largest TypeScript files in the current directory:
+`get` extracts a value using a cell path.
+A column from a table is a list; a field from a record can be a scalar.
+For example:
 
-```bash
-ls *.ts | sort-by size | reverse | first 3 | get name
+```nu
+ls *.ts | sort-by --reverse size | first 3 | get name
 ```
 
-The `get` command is especially useful when the type of a field is "table".
-The key can be arbitrarily deep with sub-keys separated by periods.
-For example, `sys | get host.sessions | where name == 'root' | get groups`.
+Cell paths can access nested fields and list indexes, for example `$person.address.city`.
+Use `columns` to list column names.
+To select a column by its position, first look up its name:
 
-The following example demonstrates getting all the headings from a table.
-
-```bash
-echo $myTable | get
-```
-
-Table columns can be accessed by their header name
-using the `get` and `select` commands,
-but there is no command to get a table column by its index.
-However, this can be done with the following pipeline:
-
-```bash
-echo $myTable | select (echo $myTable | get | nth $columnIndex)
+```nu
+let data = [[name score]; [Mark 19] [Tami 21]]
+let columnIndex = 1
+$data | select ($data | columns | get $columnIndex)
 ```
 
 ### `group-by` Command
 
-The rows of a table can be segregated into multiple tables
-using the `group-by` command.
-For example, the output of `ls` can be split into two tables
-where one contains rows with a type of "File"
-and the other contains rows with a type of "Dir".
-The following command produces a table with the columns "File" and "Dir"
-that contains a single row whose cells are themselves tables.
+Group rows by a column or a closure.
+By default, `group-by` produces a record whose keys are group names
+and whose values are tables of matching rows:
 
-```bash
+```nu
 ls | group-by type
 ```
 
-The following code outputs the nested tables:
+The keys might include `file` and `dir`.
+A key is absent if no rows belong to that group.
+Use an optional cell path to handle that case:
 
-```bash
-let temp = (ls | group-by type)
-echo $temp | get File
-echo $temp | get Dir
+```nu
+let groups = (ls | group-by type)
+$groups.file? | default []
 ```
 
-The `group-by` command can be passed a block
-that computes the value used to group the rows.
-The following example groups files based on their file extension:
+To group by filename extension:
 
-```bash
-ls | group-by { get name | path extension }
-```
-
-To see the contents of one of the nested tables, pipe this to `get ext-name`.
-
-Another way to see only the files whose name ends with certain characters
-is the use the `where` command with a block as follows:
-
-```bash
-ls | where {= (echo $it.name | str ends-with ".rs") } | get name
+```nu
+ls | group-by {|file| $file.name | path parse | get extension }
 ```
 
 ### `histogram` Command
 
-The `histogram` command generates a histogram
-from the data in a given table row.
-For example:
+`histogram` counts occurrences and displays relative frequencies:
 
-```bash
-# The newlines need to be placed like this
-# due to a parser bug.
+```nu
 let data = [
-  [name color]; [
-  Mark yellow] [
-  Tami blue] [
-  Amanda green] [
-  Jeremy yellow] [
-  Sally blue] [
-  Sam yellow]
+  [name color];
+  [Mark yellow]
+  [Tami blue]
+  [Amanda green]
+  [Jeremy yellow]
+  [Sally blue]
+  [Sam yellow]
 ]
-echo $data | get color | histogram
+$data | get color | histogram | sort-by value | select value count percentage
 ```
 
-This produces the following table:
+The counts are blue: 2, green: 1, and yellow: 3.
+Their percentages are 33.33%, 16.67%, and 50.00% of the six observations.
+The complete output also includes `quantile` and a text `frequency` bar.
 
-```text
-╭───┬────────┬───────┬────────────┬──────────────────────────────────────────╮
-│ # │ value  │ count │ percentage │ frequency                                │
-├───┼────────┼───────┼────────────┼──────────────────────────────────────────┤
-│ 0 │ blue   │     2 │ 66.67%     │ **************************               │
-│ 1 │ green  │     1 │ 33.33%     │ *************                            │
-│ 2 │ yellow │     3 │ 100.00%    │ **************************************** │
-╰───┴────────┴───────┴────────────┴──────────────────────────────────────────╯
-```
-
-The percentage values are double what you might expect.
-This is because the value when the largest count is assigned a percentage of 100
-and all the other percentages are calculated relative to that count.
-See [issue 3215](https://github.com/nushell/nushell/issues/3215).
+Use `histogram --percentage-type relative` to calculate percentages
+relative to the largest count instead of the total.
 
 ### `split` and `headers` Commands
 
-The table in the previous example can be created from a string
-using the `split` and `headers` commands.
+Use `split row`, `split column`, and `headers` to parse delimited text:
 
-```bash
-let data =
-  "name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255|purple 255 0 255"
-let colors = (echo $data | split row "|" | split column " " | headers)
-echo $colors
+```nu
+let data = 'name red green blue|red 255 0 0|green 0 255 0|blue 0 0 255'
+$data | split row '|' | split column ' ' | headers |
+  into int red green blue
 ```
 
-The `split-by` command doesn't seem very useful.
+The conversion makes the numeric columns integers instead of strings.
 
-TODO: See `split-by-demo.nu`.
+### Matching Rows
 
-### `match` Command
+Use `where` with `=~` to filter rows with a regular expression:
 
-The `match` command filters rows by matching the
-values in given column against a regular expression.
-For example, `ls | where type == File | match name "^c.*\.nu$"`
-lists files in the current directory whose name
-begin with "c" and have a file extension of ".nu".
+```nu
+ls | where type == file | where name =~ '^c.*\.nu$'
+```
+
+This lists files whose names begin with `c` and end with `.nu`.
+Single quotes preserve the regex backslash.
+
+The `match` keyword is for pattern-matching control flow, not table filtering:
+
+```nu
+let status = 'done'
+match $status {
+  'done' => 'Finished'
+  'pending' => 'Waiting'
+  _ => 'Unknown'
+}
+```
 
 ### `merge` Command
 
-The `merge` command creates a new table
-by merging the columns of existing tables.
-For example:
+`merge` combines record fields or combines table rows by position:
 
-```bash
-let t1 = [[name score]; [Mark 19] [Tami 21]]
-echo $t1
-
-# Add a single column.
-let column = (echo [yellow blue] | wrap color)
-echo $t1 | merge { echo $column }
-
-# Add all the columns from another table.
-let t2 = [[color flavor]; [yellow vanilla] [blue chocolate]]
-echo $t1 | merge { echo $t2 }
+```nu
+let scores = [[name score]; [Mark 19] [Tami 21]]
+let colors = [[color flavor]; [yellow vanilla] [blue chocolate]]
+$scores | merge $colors
 ```
 
-The output produced by this example is:
-
-```text
-╭───┬──────┬───────╮
-│ # │ name │ score │
-├───┼──────┼───────┤
-│ 0 │ Mark │    19 │
-│ 1 │ Tami │    21 │
-╰───┴──────┴───────╯
-
-╭───┬──────┬───────┬────────╮
-│ # │ name │ score │ color  │
-├───┼──────┼───────┼────────┤
-│ 0 │ Mark │    19 │ yellow │
-│ 1 │ Tami │    21 │ blue   │
-╰───┴──────┴───────┴────────╯
-
-╭───┬──────┬───────┬────────┬───────────╮
-│ # │ name │ score │ color  │ flavor    │
-├───┼──────┼───────┼────────┼───────────┤
-│ 0 │ Mark │    19 │ yellow │ vanilla   │
-│ 1 │ Tami │    21 │ blue   │ chocolate │
-╰───┴──────┴───────┴────────┴───────────╯
-```
+The result has `name`, `score`, `color`, and `flavor` columns.
+Mark gets yellow/vanilla and Tami gets blue/chocolate.
+Use `join` when matching rows by a key instead of their positions.
 
 ### `move` Command
 
-The `move` command moves specified columns to after or before another column.
-For example, by default the `ls` command outputs a type
-with the columns "name", "type", "size", and "modified".
-The following command moves the "type" and "size" columns
-to be after the "modified" column.
-It also reorders the "size" and "type" columns to the specified order.
+Move columns before or after another column:
 
-```bash
+```nu
 ls | move size type --after modified
 ```
 
+This places `size` and then `type` after `modified`.
+
 ### `parse` Command
 
-The `parse` command creates a single-row table
-by parsing columns from a string using a pattern.
-For example:
+`parse` extracts fields from text, producing a table of matches:
 
-```bash
-echo "123 Some St., St. Charles, MO 63304" |
-  parse "{street}, {city}, {state} {zip}"
+```nu
+'123 Some St., St. Charles, MO 63304' |
+  parse '{street}, {city}, {state} {zip}'
 ```
 
-This outputs the following table:
+This returns one row with `street`, `city`, `state`, and `zip` columns.
+An input with no match produces no rows.
 
-```text
-╭───┬──────────────┬─────────────┬───────┬───────╮
-│ # │ street       │ city        │ state │ zip   │
-├───┼──────────────┼─────────────┼───────┼───────┤
-│ 0 │ 123 Some St. │ St. Charles │ MO    │ 63304 │
-╰───┴──────────────┴─────────────┴───────┴───────╯
+### `transpose` Command
+
+`transpose` exchanges rows and columns.
+It is especially useful for converting a record into name/value rows:
+
+```nu
+{name: Mark, score: 19} | transpose field value
 ```
 
-### `pivot` Command
-
-The `pivot` command swaps the rows and columns of a table.
-For example,  
-`ls *.nu | sort-by -r size | first 3 | pivot`  
-produces output like the following:
-
-```text
-╭───┬──────────┬────────────┬──────────────────┬────────────────╮
-│ # │ Column0  │ Column1    │ Column2          │ Column3        │
-├───┼──────────┼────────────┼──────────────────┼────────────────┤
-│ 0 │ name     │ rmv.nu     │ split-by-demo.nu │ append-demo.nu │
-│ 1 │ type     │ File       │ File             │ File           │
-│ 2 │ size     │     1.3 KB │            927 B │          670 B │
-│ 3 │ modified │ 1 week ago │ 1 week ago       │ 4 days ago     │
-╰───┴──────────┴────────────┴──────────────────┴────────────────╯
-```
-
-### `prepend` Command
-
-The `prepend` command creates a new table by
-prepending a single row to an existing table.
-For example:
-
-```bash
-let primaryColors = [[name red green blue]; [
-  red 255 0 0] [
-  green 0 255 0] [
-  blue 0 0 255]
-]
-let white = [[name red green blue]; [white 255 255 255]]
-let colors = (echo $primaryColors | prepend $white)
-echo $colors
-```
-
-This does not currently produce the expected output,
-but piping the output to the `flatten` command fixes it.
-See [issue 3269](https://github.com/nushell/nushell/issues/3269).
+The result has two rows: `name`/`Mark` and `score`/`19`.
+For a table, each original row becomes a column.
 
 ### `split column` Command
 
-The `split column` command creates a table from a string based on a delimiter.
-For example, `echo "red,green,blue" | split column ","`
-produces the following output:
+Split a string into columns, optionally specifying column names:
 
-```text
-╭───┬─────────┬─────────┬─────────╮
-│ # │ Column1 │ Column2 │ Column3 │
-├───┼─────────┼─────────┼─────────┤
-│ 0 │ red     │ green   │ blue    │
-╰───┴─────────┴─────────┴─────────╯
+```nu
+'red,green,blue' | split column ',' first second third
 ```
+
+This produces one row with the columns `first`, `second`, and `third`.
 
 ### `to` Command
 
-The `to` command converts a table to a given format such as JSON.
-It is followed by a format name which can be one of the following:
-`csv`, `html`, `json`, `md`, `toml`, `tsv`, `url`, `xml`, and `yaml`.
-The `toml`, `url`, and `xml` formats are only applicable on tables
-that meet specific requirements.
+Use `to` subcommands to serialize structured data.
 For example:
 
-```bash
+```nu
 let scores = [[Name Score]; [Mark 19] [Tami 21]]
-echo $scores | to csv
-echo $scores | to json
-echo $scores | to md
-echo $scores | to yaml
+$scores | to json --raw
+# [{"Name":"Mark","Score":19},{"Name":"Tami","Score":21}]
 ```
 
-This produces the following output:
-
-```text
-Name,Score
-Mark,19
-Tami,21
-
-[{"Name":"Mark","Score":19},{"Name":"Tami","Score":21}]
-
-|Name|Score|
-|-|-|
-|Mark|19|
-|Tami|21|
-
----
-- Name: Mark
-  Score: 19
-- Name: Tami
-  Score: 21
-```
+`to json` is pretty-printed by default; `--raw` produces compact output.
+Other formats include `to csv`, `to html`, `to md`, `to toml`, `to xml`, and `to yaml`.
+Each format requires an appropriate input shape.
+For example, a record is suitable for a TOML document,
+while XML conversion uses a specific tag/attribute/content structure.
 
 ## Plugins
 
-Nushell plugins add new commands.
-Supported plugins can be found in the [crates](https://github.com/nushell/nushell/tree/main/crates)
-directory of the Nushell GitHub repository.
-Look for subdirectories whose names being with "nu_plugin\_".
-All of these are installed by default if Nushell is installed
-using the command `cargo install nu --features=extra`.
+Plugins add commands to Nushell.
+They are separate executables and must be compatible with your Nu version.
+Installing Nu with Cargo does not install the plugins automatically.
 
-Additional plugins can be installed using the Rust `cargo` utility.
-Specify the directories where these plugins are installed
-in the configuration setting `plugin_dirs` which is a
-list of directories where Nushell should search for plugins.
-After installing plugins and changing this setting,
-open a new shell to gain access to the commands that they add.
+For example, to install the query plugin from Cargo
+(use a compatible `--version` if your Nu installation is older):
 
-The following sub-sections describe some commonly used plugins.
-
-### nu_plugin_start
-
-This plugin adds the `start` command that opens a given file
-using its default application.
-For example, `start demo.html` will
-open the HTML file in the default web browser.
-
-### nu_plugin_chart
-
-This plugin adds the `chart` command with the subcommands `bar` and `line`.
-
-Here is an example of creating both kinds of charts.
-
-```bash
-let data = [[name score]; [
-  Mark 19] [
-  Tami 21] [
-  Amanda 17] [
-  Jeremy 15]
-]
-
-echo $data | chart bar [name score]
-echo $data | chart line [name score]
+```sh
+cargo install nu_plugin_query --locked
 ```
 
-After each chart is rendered, press enter to go to the next chart
-or exit if the last chart has been rendered.
+Then, in Nushell, register the executable:
 
-Unfortunately these plot the frequencies of the values
-and not values themselves.
-So the bar chart shows four bars at 100% because
-the values 19, 21, 17, and 15 each occur once.
-See [issue 3096](https://github.com/nushell/nushell/issues/3096).
+```nu
+plugin add ~/.cargo/bin/nu_plugin_query
+```
+
+Adjust the path for your installation; on Windows the executable has an `.exe` suffix.
+After registration, load its commands in a separate command:
+
+```nu
+plugin use query
+```
+
+Registration persists in Nushell's plugin registry.
+`plugin use` makes a registered plugin's commands available in the current scope.
+You can put `plugin use query` in `config.nu` after registering it
+so it is available in future interactive sessions.
+Use `plugin list` to inspect registered plugins.
+
+Plugin discovery can use the `NU_PLUGIN_DIRS` constant.
+It does not use the old TOML `plugin_dirs` setting.
+See [Plugins](https://www.nushell.sh/book/plugins.html) for installation details
+and links to available plugins.
+
+The `start` command is built in; no `nu_plugin_start` is needed.
+For example, `start demo.html` opens a file using its associated application.
+The old `nu_plugin_chart` examples are not part of the current standard plugin set.
+For frequency bars, use the built-in `histogram` command described above.
 
 ## Default Shell
 
-To make Nushell your default shell in Linux or macOS, first
-add a line containing the file path to the `nu` executable in `/etc/shells`.
-For example, using macOS I entered `su vim /etc/shells`
-and added the line `/Users/mark/.cargo/bin/nu`.
-Then change the default shell by entering `chsh -s nu`.
-If using tmux, also change the value of `default-shell` in `~/.tmux.conf`.
+To make Nushell your default shell on Linux or macOS,
+first locate its executable, for example with `which nu`.
+Add the executable's absolute path to `/etc/shells` using an editor with
+administrator privileges, for example `sudo vim /etc/shells`.
+Then run `chsh -s` with that same absolute path.
+For example, if Homebrew installed Nu there:
+
+```sh
+chsh -s /opt/homebrew/bin/nu
+```
+
+Use your actual path; Cargo installations commonly use `$HOME/.cargo/bin/nu`.
+If using tmux, also review `default-shell` in `~/.tmux.conf`.
+
+Nu is not a POSIX shell and cannot source Bash or Zsh startup files.
+Translate any environment setup you still need into Nu syntax.
+See [Default Shell](https://www.nushell.sh/book/default_shell.html).
 
 ## Scripts
 
-Nushell scripts are written in files with a `.nu` extension.
-To execute a script, enter `nu {name}.nu`.
-To "source" a script so its definitions become available in the current shell,
-enter `source {name}.nu`.
+Nushell scripts use the `.nu` extension.
+Execute one with `nu script.nu`.
+To run it in the current scope and make its definitions available,
+use `source script.nu`.
+Comments begin with `#`.
 
-For examples of Nushell scripts, see [Nu_101 Scripts](https://github.com/nushell/nu_scripts/tree/main/nu_101).
+Scripts do not automatically load your interactive `config.nu`.
+Define or import their dependencies explicitly.
+A `main` command can define the script's command-line parameters:
 
-To add comments or comment-out a line of code,
-begin the comment with a `#` character.
+```nu
+# Greets the person named on the command line.
+def main [name: string] {
+  print $"Hello, ($name)!"
+}
+```
 
-Commands commonly used in Nushell scripts include
-`def`, `if`, `each`, and `seq`.
+Save this as `greet.nu` and run `nu greet.nu Mark`.
 
-As we saw in the "Custom Commands" section,
-the `def` command defines a custom command
-that can be used like a function in many programming languages.
+Conditionals use `if`, `else if`, and `else`:
 
-Conditional processing is implemented with the `if` command.
-Its syntax is `if condition { then-block } { else-block }`.
-Note that the condition is not surrounded by parentheses and
-curly braces are required around the then and else blocks.
-There are no `then` or `else` keywords.
-Nested ifs must be placed inside a then or else block.
-An `if` command can be split over multiple lines.
-For example:
-
-```bash
+```nu
 let temperature = 80
 if $temperature <= 32 {
-  echo cold
-} {
-  if $temperature >= 80 {
-    echo hot
-  } {
-    echo warm
-  }
+  'cold'
+} else if $temperature >= 80 {
+  'hot'
+} else {
+  'warm'
 }
 ```
 
-To iterate over a range of integers, use the `seq` command
-and pipe the result to the `each` command.
-The special variable `$it` holds each iteration value.
-For example:
+Use `each` to transform a sequence or `for` to perform actions for each item.
+`seq 1 4` produces integers, and `1..4` is an alternative range expression:
 
-```bash
-seq 1 4 | each { build-string $it (char newline) } | str collect
+```nu
+1..4 | each {|n| $n | into string } | str join (char newline)
 ```
 
-Let's break this down.
+This returns one string containing the numbers on separate lines.
 
-- `seq 1 4` returns the list `[1 2 3 4]`.
-- `each { build-string $it (char newline) }` returns the list
-  `["1\n" "2\n" "3\n" "4\n"]`
-- `str collect` returns a string created by concatenating the list values.
-- The output is:
+For a numbered report, combine `enumerate`, `each`, and `str join`:
 
-  ```text
-  1
-  2
-  3
-  4
-  ```
-
-The `seq` command creates a list of strings, not integers.
-An alternative is to use the `echo` command with a range
-specified with `start..end` which creates a list of integers.
-The previous example can also be written as follows:
-
-```bash
-echo 1..4 | each { build-string $it (char newline) } | str collect
-```
-
-Iteration over the elements of a list is implemented with the `each` command.
-Its syntax is `echo some-list | each { block }`.
-The block can use the special variable `$it`
-to access the current item in the iteration.
-For example:
-
-```bash
-def log-value [label, value] {
-  echo (build-string $label " = " $value (char newline))
-}
-
-def report [list] {
-  # Without the --numbered flag, $it is set to each list value.
-  # With it, $it is set to an object with the properties index and item.
-  echo $list | each --numbered {
-    build-string ($it.index + 1) ") " $it.item (char newline)
-  } | str collect # with this the result is a table instead of a string
+```nu
+# Formats a list as numbered lines.
+def report [values: list<string>] {
+  $values | enumerate | each {|entry|
+    $"($entry.index + 1)) ($entry.item)"
+  } | str join (char newline)
 }
 
 let names = [Mark Tami Amanda Jeremy]
-
-log-value "name at index 2" (echo $names | nth 2) # Amanda
-
 report $names
 # 1) Mark
 # 2) Tami
@@ -2310,110 +1668,115 @@ report $names
 # 4) Jeremy
 ```
 
+For additional examples, see [Nu Scripts](https://github.com/nushell/nu_scripts).
+
 ## VS Code
 
-There is a VS Code extension for Nushell that
-provides syntax highlighting for Nushell scripts.
-See [vscode-nushell-lang](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang).
+The [Nushell extension](https://marketplace.visualstudio.com/items?itemName=TheNuProjectContributors.vscode-nushell-lang)
+provides support for editing `.nu` files.
+Use Nu syntax in configuration files too; they no longer need TOML highlighting.
 
 ## Comparison to Bash
 
-The following table shows the Nushell equivalent of some common Bash commands.
+The following table shows Nu equivalents of some common Bash operations.
 
-| Bash                    | Nushell                             | Description                                                                                  |
-| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------- |
-| `man command`           | `help {command}`                    | outputs help for a command;<br>`help commands` lists Nushell<br>commands and custom commands |
-| `$PATH`                 | `$nu.path`                          | holds the list of directories<br>searched for executables                                    |
-| `cat {file-path}`       | `open --raw {file-path}`            | prints the contents of a file;<br>omit `--raw` to output structured data                     |
-| `command > {file-path}` | `command \| save --raw {file-path}` | saves command output to a file<br>without converting based on file extension                 |
-| `mkdir -p foo/bar/baz`  | `mkdir foo/bar/baz`                 | creates directory structure,<br>including any missing directories                            |
-| cmd1 && cmd2            | cmd1; cmd2                          | runs cmd1 and then only runs<br>cmd2 if cmd1 was successful                                  |
+| Bash                   | Nushell                | Description                                        |
+| ---------------------- | ---------------------- | -------------------------------------------------- |
+| `man command`          | `help command`         | gets help for a Nu command                         |
+| `$PATH`                | `$env.PATH`            | directories searched for executables; a list in Nu |
+| `cat file.txt`         | `open --raw file.txt`  | reads without extension-based parsing              |
+| `command > file.txt`   | `command o> file.txt`  | redirects standard output                          |
+| `command >> file.txt`  | `command o>> file.txt` | appends standard output                            |
+| `mkdir -p foo/bar/baz` | `mkdir foo/bar/baz`    | creates missing parent directories                 |
+| `export NAME=value`    | `$env.NAME = 'value'`  | sets an environment variable                       |
+| `cmd1 && cmd2`         | `cmd1; cmd2`           | sequences commands; Nu stops on an unhandled error |
 
-The command whose output is piped in the `save` command must produce a string.
-For example,  
-`date now | save --raw timestamp.txt` does not work, but  
-`date now | str from | save --raw timestamp.txt` does.
+Nu does not use `&&` and `||` as shell command separators.
+A nonzero external exit status is an error under the normal error-handling behavior.
+Use `try`/`catch` to handle errors or `complete` to inspect an external command's
+exit code and captured output explicitly.
+A command returning the Boolean value `false` is not itself an error.
+
+For structured data, `save` is often more convenient than redirection:
+`ls | save listing.json` serializes the table as JSON.
+For a timestamp text file, use `date now | into string | save timestamp.txt`.
+See [Coming from Bash](https://www.nushell.sh/book/coming_from_bash.html).
 
 ## Per Directory Environment Variables
 
-Nushell supports defining actions to happen when changing to given directories.
-To configure this, create a `.nu-env` file in each directory.
-These are TOML files with the following sections:
+Interactive Nushell supports hooks that run when environment variables change.
+These hooks do not run in noninteractive scripts.
+A hook on `$env.PWD` can update settings when you change directories.
+The old `.nu-env` files and `autoenv trust` command are no longer the mechanism.
 
-| TOML Section   | Description                                                                                                         |
-| -------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `[env]`        | sets environment variables to literal values;<br>lines have the syntax `name = "value"`                             |
-| `[scriptvars]` | sets environment variables to command output;<br>lines have the syntax `name = "command-pipeline"`                  |
-| `[scripts]`    | specifies commands to run when entering and exiting the directory<br>with `entryscripts` and `exitscripts` commands |
+For example, add this to `config.nu` to choose `NODE_ENV`
+based on two project directories:
 
-After creating the `.nu-env` file in each directory,
-enter `autoenv trust` to give Nushell permission to read the file.
-
-For example, suppose we want to set the environment variable `NODE_ENV`
-to `development` or `production` based on the current directory.
-Add the following setting in the Nushell configuration file:
-
-```toml
-nu_env_dirs = [
-  "~/projects/airline-reservations",
-  "~/projects/bank-accounts"
-]
+```nu
+$env.config.hooks.env_change.PWD = (
+  $env.config.hooks.env_change.PWD? | default [] | append {|before, after|
+    let development = ($env.HOME | path join 'projects' 'airline-reservations')
+    let production = ($env.HOME | path join 'projects' 'bank-accounts')
+    if $after == $development {
+      $env.NODE_ENV = 'development'
+    } else if $after == $production {
+      $env.NODE_ENV = 'production'
+    } else {
+      hide-env --ignore-errors NODE_ENV
+    }
+  }
+)
 ```
 
-In the `~/projects/airline-reservations` directory, create the file `.nu-env`
-containing the following and then enter `autoenv trust`:
+This example takes ownership of `NODE_ENV`: it sets it for exact directory matches
+and removes it elsewhere. It does not preserve a previously assigned value
+or match project subdirectories. The hook runs on directory changes,
+not just because the configuration was loaded.
+See [Hooks](https://www.nushell.sh/book/hooks.html) for more details.
 
-```toml
-[env]
-NODE_ENV = "development"
-```
-
-In the `~/projects/bank-accounts` directory, create the file `.nu-env`
-containing the following and then enter `autoenv trust`:
-
-```toml
-[env]
-NODE_ENV = "production"
-```
-
-Now `cd` to each of these directories and verify that
-the `NODE_ENV` environment variable is set to the expected value.
-
-Currently the `echo` command does not write to stdout when run from
-`entryscripts` or `exitscripts`.
-
-For more details on this feature, enter `help autoenv`.
+For project-specific environment files and restoration when leaving a directory,
+see the official [direnv integration recipe](https://www.nushell.sh/cookbook/direnv.html).
 
 ## Additional Shells
 
-New shells can be created from the current shell.
-This enables retaining the working directory of the current shell and
-switching back to it using the `n` (for next) and `p` (for previous) commands.
+For switching among remembered directories, use the standard library's directory stack:
 
-Here is a summary of the commands related to working with multiple shells.
+```nu
+use std/dirs
+```
 
-| Command           | Description                                                                                      |
-| ----------------- | ------------------------------------------------------------------------------------------------ |
-| `enter dir-path`  | similar to `cd`, but creates a new shell starting in the given directory                         |
-| `enter file-path` | creates a new shell whose context is the content of the given file;<br>seems like an odd feature |
-| `shells`          | lists the existing shells and indicates which one is active                                      |
-| `n`               | makes the next shell in the list active;<br>wrapping to the first if in the last                 |
-| `p`               | makes the previous shell in the list active;<br>wrapping to the last if in the first             |
-| `exit`            | exits the current shell, removing it from the list                                               |
-| `exit --now`      | exits all the shells;<br>depending on configuration the terminal window may close                |
+Add the import to `config.nu` to make these commands available in new sessions.
 
-## Issues
+| Command           | Description                                       |
+| ----------------- | ------------------------------------------------- |
+| `dirs`            | lists the directory stack and active entry        |
+| `dirs add path`   | adds a directory and switches to it               |
+| `dirs drop`       | removes the current entry and switches to another |
+| `dirs next`       | switches to the next entry, wrapping around       |
+| `dirs prev`       | switches to the previous entry, wrapping around   |
+| `dirs goto index` | switches to the entry at a given index            |
 
-- Fuzzy completion is not yet supported.
-  For example, entering `cd foo` and pressing the tab key
-  completes to names that begin with `foo`,
-  but not names that merely contain `foo`.
-- The literal syntax for tables is currently very picky
-  about the location of newline characters due to a parser bug.
-  See [issue 3204](https://github.com/nushell/nushell/issues/3204)
-- Several data types discussed in the official documentation
-  cannot be used as parameter types of custom commands.
-  These include boolean, date, decimal, duration, filesize, and list.
-  Perhaps these will become real types in the future.
-- There is no built-in `grep` command.
-  Consider using [ripgrep](https://github.com/BurntSushi/ripgrep).
+For familiar shell-style names, import the aliases instead:
+
+```nu
+use std/dirs shells-aliases *
+```
+
+These include `shells`, `enter`, `n`, `p`, `g`, and `dexit`.
+They manage a directory stack, not separate processes or file-content shells.
+`exit` exits the Nu process; it is not the directory-stack removal command.
+See [Directory Stack](https://www.nushell.sh/book/directory_stack.html).
+
+## Searching and Completion
+
+Fuzzy completion is supported:
+
+```nu
+$env.config.completions.algorithm = 'fuzzy'
+```
+
+For filtering structured data or lines of text, try the built-in `find`,
+`where`, `str contains`, and regex operators.
+For example, `open --raw notes.txt | decode utf-8 | lines | find Nushell`.
+For recursive text searches across files,
+[ripgrep](https://github.com/BurntSushi/ripgrep) also works as an external command.

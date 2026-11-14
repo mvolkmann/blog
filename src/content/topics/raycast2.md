@@ -51,6 +51,12 @@ open Raycast, search for the command, select it,
 press cmd-k, select "Configure Command...",
 select "Set Hotkey...", and press the desired hotkey combination.
 
+By default Raycast will remember the last content it was displaying
+and show that again if Raycast is reopened within 90 seconds.
+To adjust this, open the Raycast settings,
+search for "Pop to Root Search", and select a different setting.
+The "Immediately" option causes Raycast to always open at the root.
+
 ## Launching
 
 To launch Raycast, press its hotkey.
