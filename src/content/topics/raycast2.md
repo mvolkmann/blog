@@ -237,10 +237,24 @@ I assigned the hotkey for this command to rightCmd-g.
 
 To copy the selected image to the clipboard, press the return key.
 
+### Internet Speed
+
+To measure your internet connection, install the "Speedtest" extension
+and run the "Test Internet Speed" command.
+
+### Keyboard Cleaning
+
+To lock your keyboard so it can be cleaned without activating any keys,
+measure your internet connection, install the "Clean Keyboard" extension,
+run the "Lock Keyboard" command, select a duration.
+A countdown will be displayed, during which time you can clean the keyboard.
+It will automatically unlock at the end of the selected duration.
+To unlock the keyboard earlier, press ctrl-u.
+
 ### Language Translation
 
 The "Translate" command is only available in the Pro version
-which currently costs $8 per month.
+which currently costs $8 per month.G
 
 ### Math
 
@@ -255,6 +269,12 @@ To compute percentage increases, enter an expression like
 To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
+
+## MDN Documentation
+
+To view specific documentation in the Microsoft Developer Network (MDN) site,
+install the "Search MDN" extension, run the "Search Web Docs" command,
+enter search text, select a matching topic, and press the return key.
 
 ### Processes
 
@@ -369,6 +389,10 @@ For example, "time Honolulu".
 
 To empty the trash, enter the "Empty Trash" command.
 
+### Typing Practice
+
+To practice typing and measure speed, run the "Start Typing Practice" command.
+
 ### Window Management
 
 TODO: Add detail here.
@@ -384,3 +408,12 @@ To see the extensions that are already installed,
 open the Raycast settings (cmd-,).
 They are listed in the left nav below "Window Management".
 
+To install an extension from the store, select it,
+press the return key to see details about it,
+and press the return key again to install it.
+
+To uninstall an extension, run the "Store" command,
+change the Category dropdown in the upper-right
+to only show installed extensions,
+select the extension to uninstall, press cmd-k,
+select "Uninstall extension", and confirm.
