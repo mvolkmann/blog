@@ -423,11 +423,21 @@ To install an extension from the store, select it,
 press the return key to see details about it,
 and press the return key again to install it.
 
-To uninstall an extension, run the "Store" command,
-change the Category dropdown in the upper-right
+There are two ways to uninstall an extension.
+
+The first way uses the "Store" command.
+Change the Category dropdown in the upper-right
 to only show installed extensions,
 select the extension to uninstall, press cmd-k,
 select "Uninstall extension", and confirm.
+
+The second way uses the Raycast settings screen.
+All the installed extensions are listed in the left nav
+below "Window Management.
+Select an extension, click the ellipsis in the upper-right,
+and select "Uninstall Extension".
+Alternatively, you can disable the extension without uninstalling it
+by click the switch in the upper-right.
 
 When an update to an extension is available,
 Raycast will prompt you to install the update the next time it is opened.
