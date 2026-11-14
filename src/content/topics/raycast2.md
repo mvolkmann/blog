@@ -324,8 +324,10 @@ select it, and press the return key.
 
 ### Reminders
 
-To create a new reminder in the Apple Reminders app,
-run the "Create Reminders" command.
+To add Raycast commands for interaction with the Apple Reminders app,
+install the "Apple Reminders" extension.
+
+To create a new reminder, run the "Create Reminders" command.
 This opens a dialog where the details can be entered.
 Press cmd-return to create it.
 
@@ -410,10 +412,9 @@ TODO: Add detail here.
 
 ## Extensions
 
-The Raycast store offers many free extensions.
+The Raycast store offers many free extensions,
+none of which are installed by default.
 To view them, run the "Store" command.
-
-Several extensions are installed by default.
 
 To see the extensions that are already installed,
 open the Raycast settings (cmd-,).
@@ -441,3 +442,23 @@ by click the switch in the upper-right.
 
 When an update to an extension is available,
 Raycast will prompt you to install the update the next time it is opened.
+
+TODO: Briefly describe the extensions you have installed.
+TODO: Do you want to keep all of these?
+TODO: Are there any you want to add?
+
+- Apple Reminders: integrates with the Reminders app;
+  see the "Create Reminder" command
+- Clean Keyboard: locks keyboard while cleaning it;
+  see the "Lock Keyboard" command
+- Coffee: prevents computer from going to sleep;
+  see the "Caffeinate" and "Decaffeinate" commands
+- GIF Search: searches for matching GIF images;
+  see the "Search for GIFs" command
+- Port Manager: can kill the process listening on a given port, and more;
+  see the "Kill Process Listening on" command
+- Search MDN: displays MDN documentation; see the "Search Web Docs" command
+- Speedtest: measures internet speed; see the "Test Internet Speed" command
+- System Monitor: displays information related to
+  CPU usage, memory usage, power usage, network usage, and temperature;
+  see the "System Monitor" command
