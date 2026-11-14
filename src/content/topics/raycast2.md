@@ -443,8 +443,6 @@ by click the switch in the upper-right.
 When an update to an extension is available,
 Raycast will prompt you to install the update the next time it is opened.
 
-TODO: Briefly describe the extensions you have installed.
-TODO: Do you want to keep all of these?
 TODO: Are there any you want to add?
 
 - Apple Reminders: integrates with the Reminders app;
@@ -455,6 +453,8 @@ TODO: Are there any you want to add?
   see the "Caffeinate" and "Decaffeinate" commands
 - GIF Search: searches for matching GIF images;
   see the "Search for GIFs" command
+- Kill Process: displays all processes sorted on CPU percentage or memory usage,
+  and can kill a selected process; can filter on name
 - Port Manager: can kill the process listening on a given port, and more;
   see the "Kill Process Listening on" command
 - Search MDN: displays MDN documentation; see the "Search Web Docs" command
