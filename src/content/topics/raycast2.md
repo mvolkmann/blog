@@ -57,6 +57,11 @@ To adjust this, open the Raycast settings,
 search for "Pop to Root Search", and select a different setting.
 The "Immediately" option causes Raycast to always open at the root.
 
+By default Raycast opens on the screen containing the mouse.
+To change this, open the Raycast settings,
+search for "Show Raycast on", and select one of the following options:
+"Screen containing mouse", "Screen with active window", or "Primary screen".
+
 ## Launching
 
 To launch Raycast, press its hotkey.
@@ -423,3 +428,6 @@ change the Category dropdown in the upper-right
 to only show installed extensions,
 select the extension to uninstall, press cmd-k,
 select "Uninstall extension", and confirm.
+
+When an update to an extension is available,
+Raycast will prompt you to install the update the next time it is opened.
