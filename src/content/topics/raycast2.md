@@ -43,12 +43,22 @@ TODO: Try this on one of Jeremy's laptops.
 
 ## Configuring
 
-The steps for first-time configuration of Raycast are:
+To open the Raycast settings, launch Raycast and
+click the menu button in the lower-left (or press cmd-,).
 
-- TODO: Add these.
+The hotkey for launching Raycast defaults to option-space.
+The change this to cmd-space, replacing the use of Spotlight,
+open the Raycast settings, select "General" in the left nav,
+and click the "Replace Spotlight" button.
 
-If you wish to use cmd-space, you will need to change the hotkey for Spotlight.
-To do this, TODO.
+To regain the ability to launch Spotlight using a hotkey,
+open "System Settings", select "Keyboard" in the left nav,
+click the "Keyboard Shortcuts..." button, 
+select "Spotlight" in the left nav,
+check the "Show Spotlight search" button,
+double-click its hotkey (cmd-space),
+press a new hotkey combination (such as option-space),
+and click the "Done" button.
 
 To configure a key to be the hyper key
 which can be used for global hotkeys,
