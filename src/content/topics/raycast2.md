@@ -188,6 +188,8 @@ enter an alias, and press the return key.
 
 Raycast automatically saves clipboard entries.
 In the free version, this is limited to entries from the past three months.
+It defaults to 1 week and can be changed to
+5 minutes, 1 hour, 1 day, 1 week, 1 month, or 3 months.
 
 To paste a clipboard entry, launch Raycast,
 run the "Clipboard History" command, and
@@ -407,10 +409,15 @@ Press cmd-return to create it.
 
 ### Schedule
 
-To see scheduled Calendar app items, enter "My Schedule".
-Select an event and press the return key to view it in the Calendar app.
-Select an event and press cmd-k for other operations including
-Create Event (to create a new event), Edit Event, and Delete Event.
+To see scheduled Calendar app items, run the "My Schedule" command.
+This displays calendar items in groups listed in the following order:
+Today, Next Week, Rest of {current month}, and each month that follows.
+
+To view an item in the Calendar app,
+double-click it (or select it press the return key).
+
+For other operations on an item, select it and press cmd-k.
+These include "Create Event", "Edit Event", and "Delete Event".
 
 ### Sleep
 
@@ -450,8 +457,16 @@ I created the following snippets:
   This prompts for an expression and expands to something like
   `console.log('foo =', foo);`
 
-Snippets can contain placeholders and prompt for text to replace them.
+Snipprets can contain placeholders and prompt for text to replace them.
 For an example, see my @log snippet.
+
+### SVG Search
+
+The Svgl extension provides the command "Search SVG Logos"
+which finds tech-related logos for things like
+frameworks, cloud providers, developer tools, social platforms, and AI tools.
+Enter text to find matching logos.
+Press the return key to copy it to the clipboard.
 
 ### System Info
 
