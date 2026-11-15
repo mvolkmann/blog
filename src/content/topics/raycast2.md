@@ -26,10 +26,20 @@ The steps to install Raycast in macOS are:
 - Browse https://www.raycast.com/new (for v2).
 - Click the "Download" button.
 - Double-click the downloaded file.
+- Double-click the Raycast app in the Applications directory to start it.
+
+This adds a menu bar item for Raycast.
+Clicking it opens a menu containing many items including
+"Send Feedback...", "Manual" (opens in default web browser),
+"Troubleshooting" (opens in default web browser),
+"Check for updates", "Settings...", "Quit Raycast", and more.
 
 The steps to install Raycast in Windows are:
 
+TODO: Try this on one of Jeremy's laptops.
+
 - same as for macOS?
+
 
 ## Configuring
 
@@ -267,44 +277,51 @@ To unlock the keyboard earlier, press ctrl-u.
 To translate text from one language to another,
 install the "Google Translate" extension.
 
+The "Translate Form" command presents a form with fields for input text,
+source language, and target language.
+The input text defaults to text selected in the active application, if any.
+This is good for longer, multi-paragraph text or
+manually selecting the from and to languages
+without needing to create a language set.
+
 The "Translate" command translates using auto-detect or a saved "language set".
+Select a language set, then enter text to be translated.
 Select a translation and press cmd-t to hear it spoken.
 
 To create a new language set, select "Manage Language Sets..."
 from the dropdown in the upper-right.
-Then click "Add new language set...".
+Then double-click "Add new language set...".
 For example, you can create a language set where the source language in English
 and the target languages are French, German, and Spanish.
 With that language set selected, you can enter text in English
 and see its translation in all the target languages.
 
-The "Translate Form" command presents a form with fields for input text,
-source language, and target language.
-The input text defaults to text selected in the focused application, if any.
-This is good for longer, multi-paragraph text or
-manually selecting the from and to languages
-without needing to create a language set.
-
-TODO: Verify everything in this section below this line!
-
 The "Quick Translate" command translates
-the text selected in the focused application
+the text selected in the active application
 and displays the result using the "Quick Translate Results" command.
+The source language can be automatically detected
+by selecting "Auto-Detect" from the dropdown in the upper-right.
+Alternatively you can specify the source language
+by selecting it in the dropdown.
+By default, this command only translates to English.
+I don't see a way to change this.
+See https://github.com/raycast/extensions/issues/33547.
 
 The "Quick Translate Results" command
-displays the results from the last "Quick Translate" command.
-Does it show translations across multiple configured languages simultaneously?
+seems identical to the "Quick Translate" command.
 
-The "Instant Translate Copy" command
-translates whatever text is currently selected in your active app and
-copies the result directly to the clipboard without opening a Raycast window.
+All the commands whose name begins with "Instant Translate"
+translate the selected text in the active application
+to the "Primary Language" selected in the extension settings.
+None of them open a Raycast window.
 
-The "Instant Translate Paste" command translates currently selected text
-and automatically pastes it over your selection in the active application.
+The "Instant Translate Copy" command copies the result to the clipboard.
 
-The "Instant Translate View" translates currently selected text
-and displays the result in a floating Raycast HUD notification
-whose duration automatically scales with text length.
+The "Instant Translate Paste" command pastes the result over the selected text.
+
+The "Instant Translate View" displays the result in a popup
+whose display duration scales with text length.
+The result is display-only and cannot be manually copied.
 
 ### Math
 
