@@ -17,7 +17,13 @@ layout: topic-layout.njk
 
 ## Overview
 
-<a href="https://www.raycast.com/new" target="_blank">Raycast v2</a> is ...
+From the Raycast manual,
+"<a href="https://www.raycast.com/new" target="_blank">Raycast v2</a>
+is a ground-up rebuild of the keyboard-driven productivity launcher
+for macOS and Windows, designed to unify application launching,
+file search, system utilities, and AI workflows.
+Built specifically for Apple Silicon and macOS Tahoe, it replaces Raycast v1
+while migrating existing extensions, snippets, and settings."
 
 ## Installing
 
@@ -39,7 +45,6 @@ The steps to install Raycast in Windows are:
 TODO: Try this on one of Jeremy's laptops.
 
 - same as for macOS?
-
 
 ## Configuring
 
