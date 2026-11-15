@@ -186,9 +186,12 @@ enter an alias, and press the return key.
 
 ### Clipboard History
 
-Raycast automatically saves the last ? clipboard entries.
-To paste one of them, open Raycast, enter "clip" to open "Clipboard History",
-select the entry to paste, and press the return key.
+Raycast automatically saves clipboard entries.
+In the free version, this is limited to entries from the past three months.
+
+To paste a clipboard entry, launch Raycast,
+run the "Clipboard History" command, and
+double-click the entry to paste (or select it and press the return key).
 
 To instead copy the selected entry to the clipboard
 so it can be pasted in the normal way later,
