@@ -264,8 +264,47 @@ To unlock the keyboard earlier, press ctrl-u.
 
 ### Language Translation
 
-The "Translate" command is only available in the Pro version
-which currently costs $8 per month.G
+To translate text from one language to another,
+install the "Google Translate" extension.
+
+The "Translate" command translates using auto-detect or a saved "language set".
+Select a translation and press cmd-t to hear it spoken.
+
+To create a new language set, select "Manage Language Sets..."
+from the dropdown in the upper-right.
+Then click "Add new language set...".
+For example, you can create a language set where the source language in English
+and the target languages are French, German, and Spanish.
+With that language set selected, you can enter text in English
+and see its translation in all the target languages.
+
+The "Translate Form" command presents a form with fields for input text,
+source language, and target language.
+The input text defaults to text selected in the focused application, if any.
+This is good for longer, multi-paragraph text or
+manually selecting the from and to languages
+without needing to create a language set.
+
+TODO: Verify everything in this section below this line!
+
+The "Quick Translate" command translates
+the text selected in the focused application
+and displays the result using the "Quick Translate Results" command.
+
+The "Quick Translate Results" command
+displays the results from the last "Quick Translate" command.
+Does it show translations across multiple configured languages simultaneously?
+
+The "Instant Translate Copy" command
+translates whatever text is currently selected in your active app and
+copies the result directly to the clipboard without opening a Raycast window.
+
+The "Instant Translate Paste" command translates currently selected text
+and automatically pastes it over your selection in the active application.
+
+The "Instant Translate View" translates currently selected text
+and displays the result in a floating Raycast HUD notification
+whose duration automatically scales with text length.
 
 ### Math
 
@@ -443,8 +482,6 @@ by click the switch in the upper-right.
 When an update to an extension is available,
 Raycast will prompt you to install the update the next time it is opened.
 
-TODO: Are there any you want to add?
-
 - Apple Reminders: integrates with the Reminders app;
   see the "Create Reminder" command
 - Clean Keyboard: locks keyboard while cleaning it;
@@ -453,6 +490,7 @@ TODO: Are there any you want to add?
   see the "Caffeinate" and "Decaffeinate" commands
 - GIF Search: searches for matching GIF images;
   see the "Search for GIFs" command
+- Google Translate: translates text from one language to another
 - Kill Process: displays all processes sorted on CPU percentage or memory usage,
   and can kill a selected process; can filter on name
 - Port Manager: can kill the process listening on a given port, and more;
