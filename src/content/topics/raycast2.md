@@ -270,6 +270,18 @@ select it and press the return key.
 To copy an emoji to the clipboard,
 select it, press cmd-k, and select "Copy to Clipboard".
 
+### Favorites
+
+Any item can be pinned to the top of the root view
+in the "Favorites" section that only appears
+when there is at least one favorited item.
+
+To favorite an item, select it, press cmd-k, and select "Add to Favorites".
+
+Favorites are grouped by type and can only be reordered within their type.
+To move a favorite up or down, select it, press cmd-k,
+and select "Move Favorite Up" or "Move Favorite Down".
+
 ### GIF search
 
 To search for a GIF image,
