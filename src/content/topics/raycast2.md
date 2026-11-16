@@ -555,8 +555,10 @@ TODO: Add detail here.
 
 ## Dynamic Placeholders
 
-Quicklinks and snippets support dynamic placeholders
-whose values are dynamically computed and inserted into the resulting text.
+Dynamic placeholders are special text wrapped in curly braces
+that are replaced by computed content.
+They can be used in snippets, quicklinks,
+script commands, and AI commands (pro).
 
 The supported kinds of placeholders include:
 
@@ -567,10 +569,12 @@ The supported kinds of placeholders include:
 - current time (`{time}`)
 - current date & time (`{datetime}`)
 - current day of the week (`{day}`)
-- snippet value (`{snippet name="..."}`)
+- snippet value (`{snippet name="..."}`) - only used in snippets;
+  nests the result of one snippet in another
 - generated UUID (`{uuid}`)
 - result of a math expression to be entered (`{calculator}`)
-- cursor position (rarely used)
+- cursor position (`{cursor}`) - only used in snippets;
+  marks the position where the cursor will be placed after inserting the text
 - focused browser tab (rarely used)
 
 An example of using an argument placeholder is
