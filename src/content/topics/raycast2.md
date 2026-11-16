@@ -379,24 +379,49 @@ to "This text has many spelling errors."
 
 ### Quicklinks
 
-Quicklinks provide a fast way to open a file, folder, application, or URL.
-They can also provide a fast way to run a Raycast command.
+Quicklinks provide a fast way to open a file, folder, URL,
+or application (with deep linking).
+They can also provide a fast way to run a Raycast command
+with a URL starting with raycast://extensions/.
 
-To create a quicklink, open Raycast, find and select the target,
+To create a quicklink for a file or folder,
+open Raycast, find and select the file or folder,
 press cmd-k, select "Save as QuickLink",
 enter a name, optionally select an icon,
-select the application in which to open it, optionally enter tags,
-and press cmd-return to save it.
+select the application in which to open it,
+optionally enter tags, and press cmd-return to save it.
 
-To create a quicklink to a URL, open Raycast,
-run the "Create Quicklink" command, and enter or paste a URL.
-If the URL was currently being browsed, this will be filled in automatically.
+To create a quicklink to a URL,
+run the "Create Quicklink" command and enter or paste a URL.
+If the URL was currently being browsed, it will be filled in automatically.
 Then enter a name, optionally select an icon,
 select the web browser in which to open it, optionally enter tags
 and press cmd-return to save it.
 
+A quicklink URL can contain placeholders for arguments
+using the syntax `{argument name="..."}`.
+When the quicklink is activated, prompts for the arguments will appear.
+
 To open a quicklink, enter part of its name,
 select it, and press the return key.
+
+To see a list of all the quicklinks that have been created,
+run the "Search Quicklinks" command.
+The quicklinks are ordered by how frequently they have been used,
+not alphabetically.
+Select a quicklink to act on it. Then ...
+
+- to open it with its specified application, press the return key
+- to open it with a different application,
+  press cmd-k, select "Open With...", and select the application
+- to pin it to the top of the list, press cmd-k, and select "Pin Quicklink"
+- to edit it, press cmd-k, and select "Edit Quicklink"
+- to add a hotkey, press cmd-k, select "Configure QuickLink...",
+  select "Set hotkey...", press the hotkey combination,
+  and press the return key
+- to specify an alias, press cmd-k, select "Configure QuickLink...",
+  select "Set alias...", enter the alias, and press the return key
+- to delete it, press cmd-k, and select "Delete Quicklink"
 
 ### Reminders
 
@@ -457,7 +482,7 @@ I created the following snippets:
   This prompts for an expression and expands to something like
   `console.log('foo =', foo);`
 
-Snipprets can contain placeholders and prompt for text to replace them.
+Snippets can contain placeholders and prompt for text to replace them.
 For an example, see my @log snippet.
 
 ### SVG Search
