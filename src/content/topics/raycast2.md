@@ -403,8 +403,8 @@ Then enter a name, optionally select an icon (typically good by default),
 select the web browser in which to open it, optionally enter tags
 and press cmd-return to save it.
 
-A quicklink URL can contain placeholders.
-There are many kinds of supported placeholders including:
+A quicklink URL (and also snippets) can contain placeholders.
+The supported kinds of placeholders include:
 
 - argument (`{argument name="..."}`)
 - selected text (`{selected}`)
@@ -444,6 +444,9 @@ For example, `{date offset=+1d}` for tomorrow.
 A `date`, `time`, `datetime`, or `day` placeholder
 can include a locale to output the value
 in a locale other than the default.
+
+For more detail on placeholders in quicklink URLs,
+see https://manual.raycast.com/dynamic-placeholders.
 
 To open a quicklink, enter part of its name,
 select it, and press the return key.
