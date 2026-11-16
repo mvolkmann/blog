@@ -287,6 +287,9 @@ Favorites are grouped by type and can only be reordered within their type.
 To move a favorite up or down, select it, press cmd-k,
 and select "Move Favorite Up" or "Move Favorite Down".
 
+To remove an item from the Favorites list,
+select it, press cmd-k, and select "Remove from Favorites".
+
 ### GIF search
 
 To search for a GIF image,
