@@ -417,56 +417,14 @@ opens your Downloads folder in a new Finder window.
 To create a quicklink to a URL,
 run the "Create Quicklink" command and enter or paste a URL.
 If the URL was currently being browsed, it will be filled in automatically.
-There are buttons that can be clicked to add a placeholder in the URL
+There are buttons that can be clicked to add a dynamic placeholder in the URL
 or to create a URL for a file or folder.
 Then enter a name, optionally select an icon (typically good by default),
 select the web browser in which to open it, optionally enter tags
 and press cmd-return to save it.
 
-A quicklink URL (and also snippets) can contain placeholders.
-The supported kinds of placeholders include:
-
-- argument (`{argument name="..."}`)
-- selected text (`{selected}`)
-- clipboard text (`{clipboard}`)
-- current date (`{date}`)
-- current time (`{time}`)
-- current date & time (`{datetime}`)
-- current day of the week (`{day}`)
-- snippet value (`{snippet name="..."}`)
-- generated UUID (`{uuid}`)
-- result of a math expression to be entered (`{calculator}`)
-- cursor position (rarely used)
-- focused browser tab (rarely used)
-
-An example of using an argument placeholder is
-`https://www.google.com/search?q={argument name="topic"}`.
-When the quicklink is activated, prompts for the arguments will appear.
-
-An argument placeholder can specify a default value.
-For example, `{argument name="planet" default="Earth"}`.
-
-An argument placeholder can specify options
-so one can be selected from a dropdown.
-For example, `{argument name="color" options="red,green,blue"}`.
-
-Placeholders can use one or more modifiers to modify their value.
-These include `uppercase`, `lowercase`, `trim`,
-`percent-encode`, and `json-stringify`.
-
-A `date` placeholder can specify a `format`
-to use a date format other than the default.
-
-A `date`, `time`, `datetime`, or `day` placeholder
-can include an `offset` to use a value other than their current value.
-For example, `{date offset=+1d}` for tomorrow.
-
-A `date`, `time`, `datetime`, or `day` placeholder
-can include a locale to output the value
-in a locale other than the default.
-
-For more detail on placeholders in quicklink URLs,
-see https://manual.raycast.com/dynamic-placeholders.
+A quicklink URL can contain dynamic placeholders
+(see the "Dynamic Placeholder" section).
 
 To open a quicklink, enter part of its name,
 select it, and press the return key.
@@ -552,8 +510,8 @@ I created the following snippets:
   This prompts for an expression and expands to something like
   `console.log('foo =', foo);`
 
-Snippets can contain placeholders and prompt for text to replace them.
-All the supported placeholders are described in the Quicklinks section.
+A snippet can contain dynamic placeholders
+(see the "Dynamic Placeholder" section).
 For an example, see my @log snippet.
 
 ### SVG Search
@@ -594,6 +552,55 @@ To practice typing and measure speed, run the "Start Typing Practice" command.
 ### Window Management
 
 TODO: Add detail here.
+
+## Dynamic Placeholders
+
+Quicklinks and snippets support dynamic placeholders
+whose values are dynamically computed and inserted into the resulting text.
+
+The supported kinds of placeholders include:
+
+- argument (`{argument name="..."}`)
+- selected text (`{selected}`)
+- clipboard text (`{clipboard}`)
+- current date (`{date}`)
+- current time (`{time}`)
+- current date & time (`{datetime}`)
+- current day of the week (`{day}`)
+- snippet value (`{snippet name="..."}`)
+- generated UUID (`{uuid}`)
+- result of a math expression to be entered (`{calculator}`)
+- cursor position (rarely used)
+- focused browser tab (rarely used)
+
+An example of using an argument placeholder is
+`https://www.google.com/search?q={argument name="topic"}`.
+When the quicklink is activated, prompts for the arguments will appear.
+
+An argument placeholder can specify a default value.
+For example, `{argument name="planet" default="Earth"}`.
+
+An argument placeholder can specify options
+so one can be selected from a dropdown.
+For example, `{argument name="color" options="red,green,blue"}`.
+
+Placeholders can use one or more modifiers to modify their value.
+These include `uppercase`, `lowercase`, `trim`,
+`percent-encode`, and `json-stringify`.
+
+A `date` placeholder can specify a `format`
+to use a date format other than the default.
+
+A `date`, `time`, `datetime`, or `day` placeholder
+can include an `offset` to use a value other than their current value.
+For example, `{date offset=+1d}` for tomorrow.
+
+A `date`, `time`, `datetime`, or `day` placeholder
+can include a locale to output the value
+in a locale other than the default.
+
+For more detail on placeholders in quicklink URLs,
+see https://manual.raycast.com/dynamic-placeholders.
 
 ## Extensions
 
