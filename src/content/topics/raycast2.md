@@ -551,12 +551,13 @@ I created the following snippets:
   `console.log('foo =', foo);`
 
 Snippets can contain placeholders and prompt for text to replace them.
+All the supported placeholders are described in the Quicklinks section.
 For an example, see my @log snippet.
 
 ### SVG Search
 
 The Svgl extension provides the command "Search SVG Logos"
-which finds tech-related logos for things like
+which finds tech-related SVG logos for things like
 frameworks, cloud providers, developer tools, social platforms, and AI tools.
 Enter text to find matching logos.
 Press the return key to copy it to the clipboard.
@@ -640,6 +641,7 @@ Raycast will prompt you to install the update the next time it is opened.
   see the "Kill Process Listening on" command
 - Search MDN: displays MDN documentation; see the "Search Web Docs" command
 - Speedtest: measures internet speed; see the "Test Internet Speed" command
+- Svgl: finds tech-related SVG logos
 - System Monitor: displays information related to
   CPU usage, memory usage, power usage, network usage, and temperature;
   see the "System Monitor" command
