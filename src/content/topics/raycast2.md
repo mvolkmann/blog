@@ -410,6 +410,8 @@ When the quicklink is activated, prompts for the arguments will appear.
 
 To open a quicklink, enter part of its name,
 select it, and press the return key.
+Alternatively, press cmd-k and select "Open With..."
+to select the application in which to open it.
 
 To see a list of all the quicklinks that have been created,
 run the "Search Quicklinks" command.
