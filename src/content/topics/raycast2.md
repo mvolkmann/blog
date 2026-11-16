@@ -514,6 +514,8 @@ These include "Create Event", "Edit Event", and "Delete Event".
 
 ### Sleep
 
+To cause the computer to sleep now, run the "Sleep" command.
+
 To prevent the computer from sleeping
 which allows a long running process to continue,
 install the "Coffee" extension.
