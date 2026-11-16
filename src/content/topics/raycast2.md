@@ -90,7 +90,12 @@ search for "Show Raycast on", and select one of the following options:
 ## Launching
 
 To launch Raycast, press its hotkey.
-A Raycast window will open on the monitor where the mouse cursor resides.
+A Raycast window displaying the "root search" will open,
+ by default on the monitor where the mouse cursor resides.
+To change where it opens, open the Raycast settings,
+select "Launcher" in the left nav, and
+change the "Show Raycast on" dropdown to
+"Screen containing mouse", "Screen with active window", or "Primary screen".
 
 ## Basics
 
@@ -272,7 +277,7 @@ select it, press cmd-k, and select "Copy to Clipboard".
 
 ### Favorites
 
-Any item can be pinned to the top of the root view
+Any item can be pinned to the top of the root search
 in the "Favorites" section that only appears
 when there is at least one favorited item.
 
