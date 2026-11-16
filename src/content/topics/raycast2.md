@@ -390,16 +390,22 @@ press cmd-k, select "Save as QuickLink",
 enter a name, optionally select an icon,
 select the application in which to open it,
 optionally enter tags, and press cmd-return to save it.
+For example, you can create a quicklink that
+opens a frequently used spreadsheet in the Numbers app or
+opens your Downloads folder in a new Finder window.
 
 To create a quicklink to a URL,
 run the "Create Quicklink" command and enter or paste a URL.
 If the URL was currently being browsed, it will be filled in automatically.
+There are buttons that can be clicked to add a placeholder in the URL
+or to create a URL for a file or folder.
 Then enter a name, optionally select an icon,
 select the web browser in which to open it, optionally enter tags
 and press cmd-return to save it.
 
 A quicklink URL can contain placeholders for arguments
 using the syntax `{argument name="..."}`.
+For example, `https://www.google.com/search?q={argument name="topic"}`.
 When the quicklink is activated, prompts for the arguments will appear.
 
 To open a quicklink, enter part of its name,
