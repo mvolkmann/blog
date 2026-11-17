@@ -666,57 +666,63 @@ However, in most cases the Spotlight equivalents are considerably slower.
 
 The Raycast features that are also available in Spotlight include:
 
-- app launching: Find and open applications.
-- file search: Find and open files and folders.
-- calculator: Calculate the results of math expressions.
-- conversions: Convert between units and currencies.
-- clipboard history: Search and reuse previously copied
-  text, links, images, and files.
-- actions inside apps: Perform app-specific tasks such as sending messages,
+- **app launching**:
+  Find and open applications.
+- **file search**:
+  Find and open files and folders.
+- **calculator**:
+  Calculate the results of math expressions.
+- **conversions**:
+  Convert between units and currencies.
+- **clipboard history**:
+  Search and reuse previously copied text, links, images, and files.
+- **actions inside apps**:
+  Perform app-specific tasks such as sending messages,
   creating reminders, and starting timers directly from Spotlight.
   Third-party apps can expose actions through Apple's App Intents API.
-- running shortcuts: Find and execute workflows
-  created in Apple's Shortcuts app.
-- short command aliases: Spotlight's "Quick Keys" resemble Raycast aliases.
+- **running shortcuts**:
+  Find and execute workflows created in Apple's Shortcuts app.
+- **short command aliases**:
+  Spotlight's "Quick Keys" resemble Raycast aliases.
   For example, type `sm` to run the "Send Message" command.
-- menu command search: Find commands from the active app's menu bar
-  without navigating its menus.
+- **menu command search**:
+  Find commands from the active app's menu bar without navigating its menus.
 
 The Raycast features that are not available in Spotlight include:
 
-- An extensive extension store:
+- **extensive extension store**:
   Install community-built integrations and utilities
   that provide their own interfaces and commands inside Raycast.
   Spotlight supports third-party app actions,
   but doesn’t offer an equivalent extension marketplace.
-- snippets and text expansion:
+- **snippets and text expansion**:
   Save reusable text, insert it through search,
   or expand abbreviations automatically,
   with dynamic placeholders for templates.
-- custom Quicklinks:
+- **custom Quicklinks**:
   Create named links to websites, files, and folders,
   including parameterized searches.
   For example, a command that searches a particular website
   for whatever you type.
-- more extensive window management:
+- **more extensive window management**:
   Resize, position, and move windows between displays
   using commands and customizable hotkeys.
   macOS has its own window tiling, but Raycast
   supplies a broader command-driven interface.
-- global hotkeys for individual commands:
+- **global hotkeys for individual commands**:
   Assign a keyboard combination that runs a Raycast command
   immediately from any app.
   Spotlight's Quick Keys must be typed after opening Spotlight.
-- richer clipboard tools:
+- **richer clipboard tools**:
   Pin and edit entries, extract text from images,
   paste in different formats, and turn clips into snippets.
   Raycast also supports much longer retention.
-- custom script commands:
+- **custom script commands**:
   Expose your own scripts as searchable commands
   with arguments and displayed output.
   Spotlight can run automation through Shortcuts,
   but lacks Raycast’s direct script-command system.
-- an integrated, multi-model AI workspace:
+- **integrated, multi-model AI workspace**:
   Raycast Pro (paid) offers AI chat, reusable AI commands,
   model selection, and AI-powered extensions.
   This goes beyond launching an AI app or running an AI-enabled Shortcut.
