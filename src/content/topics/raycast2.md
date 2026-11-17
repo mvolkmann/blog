@@ -690,6 +690,8 @@ The Raycast features that are also available in Spotlight include:
 
 The Raycast features that are not available in Spotlight include:
 
+- **Windows support**:
+  Use the same tool across platforms (macOS and Windows).
 - **extensive extension store**:
   Install community-built integrations and utilities
   that provide their own interfaces and commands inside Raycast.
