@@ -587,6 +587,11 @@ An argument placeholder can specify options
 so one can be selected from a dropdown.
 For example, `{argument name="color" options="red,green,blue"}`.
 
+An argument placeholder can use the same value in multiple places.
+For example, `foo {argument name="text"} bar {argument name="text"} baz`.
+A snippet defined in this way will prompt for "text" once and
+insert the same value for both arguments because they have the same name.
+
 Placeholders can use one or more modifiers to modify their value.
 These include `uppercase`, `lowercase`, `trim`,
 `percent-encode`, and `json-stringify`.
@@ -652,6 +657,8 @@ Raycast will prompt you to install the update the next time it is opened.
 - Port Manager: can kill the process listening on a given port, and more;
   see the "Kill Process Listening on" command
 - Search MDN: displays MDN documentation; see the "Search Web Docs" command
+- SF Symbols Search: find and copy SF symbols
+  with the "Search SF Symbols" command
 - Speedtest: measures internet speed; see the "Test Internet Speed" command
 - Svgl: finds tech-related SVG logos
 - System Monitor: displays information related to
