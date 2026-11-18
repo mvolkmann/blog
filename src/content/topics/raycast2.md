@@ -105,7 +105,7 @@ Raycast displays a single stack of windows.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
 
-The initial Raycast window lists items marked as favorites first,
+The root search window lists items marked as favorites first,
 followed by suggestions (How are those determined?),
 and then the most recently used commands.
 
@@ -113,6 +113,9 @@ Once you start typing, the items are filtered using fuzzy matching
 based on what has been typed so far.
 For example, typing "yt" will find the YouTube application
 because its name contains those letters in that order.
+
+There are many commonly used commands whose names begin with "Search".
+Type that to see them.
 
 Item names appear on the left side and their type appears on the right side.
 The supported types include:
@@ -206,6 +209,8 @@ It defaults to 1 week and can be changed to
 To paste a clipboard entry, launch Raycast,
 run the "Clipboard History" command, and
 double-click the entry to paste (or select it and press the return key).
+Type any part of the desired clipboard text to
+filter the entries to only those containing what is typed.
 
 To instead copy the selected entry to the clipboard
 so it can be pasted in the normal way later,
