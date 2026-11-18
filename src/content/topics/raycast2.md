@@ -138,6 +138,11 @@ on the right side of each item and then press that number.
 An item can be a Raycast command, application, file, or directory.
 When an item is selected,
 its primary action is executed by pressing the return key.
+For example, the primary action for an application is to launch it.
+You may prefer launching applications this way
+rather than moving the cursor to the dock and clicking them.
+If so, most (or even all) applications can be removed from the dock.
+
 Many items also have a secondary action that is executed by pressing cmd-return.
 For example, when a file selected,
 the primary action is to open it in its default application and
