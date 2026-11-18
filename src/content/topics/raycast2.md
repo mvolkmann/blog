@@ -132,12 +132,19 @@ You can use the down and up arrow keys to navigate to an item.
 Finally, you can hold down the command key to display a number
 on the right side of each item and then press that number.
 
-When an item is selected, its default action is executed
-by pressing the return key, or in some cases cmd-return.
 An item can be a Raycast command, application, file, or directory.
-Other item-specific actions can be displayed in a menu by pressing cmd-k.
-To execute an action, selected it and press the return key
-or double-click it.
+When an item is selected,
+its primary action is executed by pressing the return key.
+Many items also have a secondary action that is executed by pressing cmd-return.
+For example, when a file selected,
+the primary action is to open it in its default application and
+the secondary action is to open it in the finder
+so you can see where the file is located.
+
+Additional item-specific actions can be selected from an "action panel"
+which is displayed by pressing cmd-k.
+To execute an action in the action panel,
+selected it and press the return key or double-click it.
 
 ## Basic Features
 
