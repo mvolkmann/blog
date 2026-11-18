@@ -432,11 +432,12 @@ If the URL was currently being browsed, it will be filled in automatically.
 There are buttons that can be clicked to
 add a [dynamic placeholder](#dynamic-placeholders) in the URL
 or to create a URL for a file or folder.
-Then enter a name, optionally select an icon (typically good by default),
+The icon will default to the favicon of the web page.
+Then enter a name, optionally select a different icon,
 select the web browser in which to open it, optionally enter tags
 and press cmd-return to save it.
 
-A quicklink URL can contain [dynamic placeholder](#dynamic-placeholders)
+A quicklink URL can contain [dynamic placeholder](#dynamic-placeholders).
 
 To open a quicklink, enter part of its name,
 select it, and press the return key.
