@@ -172,16 +172,20 @@ selected it and press the return key or double-click it.
 If not already enabled, press cmd- to open the Raycast settings,
 enter "File Search", click it, scroll down, and turn on "Content Search".
 
-1. Enter "fs" for "File Search".
-1. Enter the words to find.
-   It will find documents that contain any of the words in any order,
-   but files that contain the words in the specified order will be listed first.
+1. Run the "Search Files" command.
+1. Enter the file name text to find.  Rather than perform a true fuzzy search,
+   it tends to favor filename prefixes and word beginnings.
 1. Optionally open the file by selecting it and pressing the return key.
 
 If expected files do not appear in the results,
 click the "Index Files" button in the lower-right and try again.
 
-I set the hotkey for this command to rightCmd-f.
+I assigned the alias "sf" and the hotkey rightCmd-f
+to the "Search Files" command.
+
+The free extension "Fuzzy File Search" is an alternative
+that performs fuzzy matching of file names.
+It has its own "Search Files" command that you may prefer.
 
 ### Folders/Directories
 
@@ -196,14 +200,6 @@ select it, and press the return key.
 Raycast AI features such as "Quick AI" and "AI Chat"
 are only available in the Pro version which currently costs $8 per month.
 
-### Aliases
-
-Aliases can be assigned to items to simplify selecting them.
-For example, I assigned the alias "kn" to the Keynote application.
-To assign an alias to an item, select the item, press cmd-k,
-select "Configure {item-type}...", select "Set Alias...",
-enter an alias, and press the return key.
-
 ### Clipboard History
 
 Raycast automatically saves clipboard entries.
@@ -216,6 +212,7 @@ run the "Clipboard History" command, and
 double-click the entry to paste (or select it and press the return key).
 Type any part of the desired clipboard text to
 filter the entries to only those containing what is typed.
+I assigned the hotkey cmd-shift-v to the "Clipboard History" command.
 
 To instead copy the selected entry to the clipboard
 so it can be pasted in the normal way later,
@@ -243,6 +240,13 @@ Also see the Raycast commands "Color Wheel" and "Convert Color".
 To sprinkle confetti all over the screen,
 enter the "Confetti" command.
 I set the hotkey for this command to rightCmd-c.
+foo bar
+
+### Contacts
+
+The Contacts extension integrates with the Contacts app.
+To search for a contact, run the "Search Contacts" command.
+I assigned the alias "con" to this command.
 
 ### Currency Conversions
 
@@ -255,7 +259,7 @@ and caches them locally on your machine.
 Because the rates are cached, currency conversions
 still work offline using the most recently synced rates.
 
-### Dictation
+### Dictation (requires Pro)
 
 If dictation isn't already enabled,
 press cmd-, to open the Raycast settings,
@@ -410,7 +414,7 @@ Enter the port and press the return key.
 ### Quick Fix
 
 The "Quick Fix" command corrects spelling and grammar errors in selected text.
-By default, it is trigger by pressing the right shift key twice.
+By default, its hotkey is pressing the right shift key twice.
 For example, it changes "Ths txt has meny speling erors."
 to "This text has many spelling errors."
 
@@ -481,12 +485,56 @@ Press cmd-return to create it.
 To see scheduled Calendar app items, run the "My Schedule" command.
 This displays calendar items in groups listed in the following order:
 Today, Next Week, Rest of {current month}, and each month that follows.
+I gave this the alias "cal".
 
 To view an item in the Calendar app,
 double-click it (or select it press the return key).
 
 For other operations on an item, select it and press cmd-k.
 These include "Create Event", "Edit Event", and "Delete Event".
+
+### Shortcuts
+
+Shortcuts provide an easier way to access items.
+There are two kinds, aliases and hotkeys.
+Aliases can be typed in the Raycast root search input
+to find the associate item.
+Hotkeys activate the associated item and are global,
+which means they work regardless of the current application.
+
+Aliases can be assigned to items to simplify selecting them.
+For example, I assigned the alias "kn" to the Keynote application.
+To assign an alias to an item, select the item, press cmd-k,
+select "Configure {item-type}...", select "Set Alias...",
+enter an alias, and press the return key.
+
+The same alias can be assigned to any number of items.
+Entering the alias displays all matching items.
+
+To assign a hotkey to an item, select the item, press cmd-k,
+select "Configure {item-type}...", select "Set Hotkey...",
+press a key combination, and press the return key.
+
+The same hotkey cannot be assigned to multiple items.
+If this is attempted, the message "Already used by ..." appears.
+Press the return key to remove the previous assignment and keep this one.
+Press the escape key to keep the previous assignment.
+
+To see all the shortcuts that have been defined in Raycast,
+run the Shortcuts command associated with "Raycast Settings",
+not the Shortcuts application.
+This lists items in five alphabetical groups which are
+Applications, Extensions, Quicklinks, System, and System Settings.
+Each section can be collapsed or expanded to show its items.
+
+Extensions can have any number of associated commands
+that each can have their own shortcuts.
+
+The row for each item shows the item name,
+its alias if any, and its hotkey if any.
+The checkmark at the end of each row
+allows its shortcuts to be temporarily disabled.
+Most items will likely not have an alias or hotkey.
 
 ### Sleep
 
@@ -569,6 +617,16 @@ To practice typing and measure speed, run the "Start Typing Practice" command.
 ### Window Management
 
 TODO: Add detail here.
+
+I assigned the following hotkeys:
+
+- Center Half - cmd-shift-c
+- First Fourth - cmd-shift-left arrow
+- Last Fourth - cmd-shift-right arrow
+- Left Half - rightCmd-left arrow
+- Maximize - cmd-shift-m
+- Move to Next Display - cmd-shift-n
+- Right Half - rightCmd-right arrow
 
 ## <a name="dynamic-placeholders">Dynamic Placeholders</a>
 
