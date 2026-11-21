@@ -626,17 +626,38 @@ To practice typing and measure speed, run the "Start Typing Practice" command.
 
 ### Window Management
 
-TODO: Add detail here.
+Window Management is a built-in extension that,
+at last check in macOS, provides 70 commands for things like
+resizing and repositioning the active window.
 
-I assigned the following hotkeys:
+"Save Current Layout" is a Pro command that saves the current
+multi-application arrangement and creates a new command.
+When that command is run, it launches any applications
+associated with the saved windows that aren't already running,
+opens each of the windows, sizes them, and positions them
+as they were when the layout was created.
+Like any other command,
+an alias and a hotkey can be assigned to the new command.
 
-- Center Half - cmd-shift-c
-- First Fourth - cmd-shift-left arrow
-- Last Fourth - cmd-shift-right arrow
-- Left Half - rightCmd-left arrow
-- Maximize - cmd-shift-m
-- Move to Next Display - cmd-shift-n
-- Right Half - rightCmd-right arrow
+I assigned the following aliases and hotkeys to Window Management commands:
+
+- Left Half - lh, rightCmd-left arrow
+- Right Half - rh, rightCmd-right arrow
+
+- First Third - lt
+- Center Third - ct
+- Last Third - rt
+- First Two Thirds - l2t
+- Last Two Thirds - r2t
+
+- First Fourth - lq (q for quarter), cmd-shift-left arrow
+- Center Half - ch, cmd-shift-c
+- Last Fourth - rq, cmd-shift-right arrow
+
+- Maximize - max, cmd-shift-m
+
+- Move to Next Display - nd, cmd-shift-n
+- Move to Previous Display - pd
 
 ## <a name="dynamic-placeholders">Dynamic Placeholders</a>
 
