@@ -511,6 +511,8 @@ Hotkeys activate the associated item and are global,
 which means they work regardless of the current application.
 
 Aliases can be assigned to items to simplify selecting them.
+When part of an alias is typed in the root search,
+associated items are listed first.
 For example, I assigned the alias "kn" to the Keynote application.
 To assign an alias to an item, select the item, press cmd-k,
 select "Configure {item-type}...", select "Set Alias...",
