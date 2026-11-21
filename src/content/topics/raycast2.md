@@ -384,6 +384,14 @@ The "Instant Translate View" displays the result in a popup
 whose display duration scales with text length.
 The result is display-only and cannot be manually copied.
 
+I created a quicklink that uses the Google Translate website.
+It uses the URL
+"https://translate.google.com/?sl={argument name="from"}&tl={argument name="to"}&text={argument name="input"}&op=translate"
+and the name "My Google Translate", and the alias "translate".
+This prompts for from and to language codes and input text.
+For example, enter "en", "es", and "What time is it?"
+opens a web page the displays "¿Qué hora es?".
+
 ### Math
 
 To evaluate a math expression, enter it.
