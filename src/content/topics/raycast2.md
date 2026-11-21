@@ -626,6 +626,11 @@ Time Machine backups are each listed as separate disks in this display.
 
 To open a specific section within the System Settings app,
 enter its name, select it, and press the return key.
+Examples include Accessibility, Appearance, Audio, Battery, Desktop & Dock,
+Displays, General, Keyboard, Mouse, Network, Notifications, Passwords,
+Printers & Scanners, Privacy& Security, Sharing, Software Update, Sound,
+Spotlight, Storage, Time Machine, Touch ID & Password, Users & Groups,
+Wallet & Apple Pay, Wallpaper, and Wi-Fi.
 
 ### Time
 
