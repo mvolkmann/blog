@@ -479,6 +479,17 @@ Select a quicklink to act on it. Then ...
   select "Set alias...", enter the alias, and press the return key
 - to delete it, press cmd-k, and select "Delete Quicklink"
 
+I created the following quicklinks, some with an alias and/or hotkey:
+
+- Bank of America website, hotkey rightCmd-b
+- my Github web page, alias "mg"
+- my Google Translate, alias "translate"
+- Project Gutenberg web page (for free e-books), alias "pg"
+- Remove Background Image website, alias "bg"
+- my retirement spreadsheet, alias "retirement", hotkey rightCmd-r
+- my RunningLog spreadsheet, alias "runlog"
+- Star of Honolulu website, alias "soh"
+
 ### Reminders
 
 To add Raycast commands for interaction with the Apple Reminders app,
@@ -686,6 +697,8 @@ The supported kinds of placeholders include:
 An example of using an argument placeholder is
 `https://www.google.com/search?q={argument name="topic"}`.
 When the quicklink is activated, prompts for the arguments will appear.
+Also see the "My Google Translate" quicklink
+described at the end of the "Language Translations" section.
 
 An argument placeholder can specify a default value.
 For example, `{argument name="planet" default="Earth"}`.
