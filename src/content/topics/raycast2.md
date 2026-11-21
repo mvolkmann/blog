@@ -526,7 +526,7 @@ select "Configure {item-type}...", select "Set Hotkey...",
 press a key combination, and press the return key.
 
 The same hotkey cannot be assigned to multiple items.
-If this is attempted, the message "Already used by ..." appears.
+If this is attempted, the message "Already used by {name}" appears.
 Press the return key to remove the previous assignment and keep this one.
 Press the escape key to keep the previous assignment.
 
