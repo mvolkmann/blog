@@ -392,6 +392,12 @@ This prompts for from and to language codes and input text.
 For example, enter "en", "es", and "What time is it?"
 opens a web page the displays "¿Qué hora es?".
 
+### Light/Dark Mode
+
+The command "Toggle System Appearance"
+toggles the system between light and dark mode.
+I assigned the hotkey rightCmd-t to this command.
+
 ### Math
 
 To evaluate a math expression, enter it.
