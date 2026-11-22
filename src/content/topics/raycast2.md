@@ -426,6 +426,14 @@ To view specific documentation in the MDN site
 install the "Search MDN" extension, run the "Search Web Docs" command,
 enter search text, select a matching topic, and press the return key.
 
+### Menu Items
+
+The "Search Menu Bar Items" command searches for
+menu items in the current application and can select them.
+For example, when the Finder is the current application,
+searching for "list" reveals that
+the View menu contains the "as List" command.
+
 ### Processes
 
 To kill the process listening on a given port,
@@ -526,6 +534,34 @@ double-click it (or select it press the return key).
 
 For other operations on an item, select it and press cmd-k.
 These include "Create Event", "Edit Event", and "Delete Event".
+
+### Script Commands
+
+TODO: Describe how to create and run these.
+
+### Settings
+
+To export all your Raycast settings into an encrypted, binary file:
+
+- Run the "Export Settings & Data" command.
+- Press the return key.
+- Enter a password for encrypting the file.
+- Enter it again to confirm.
+- Select the directory where the file will be saved.
+- Click the "Export" button.
+
+This creates a file named
+`Raycast-X-{year}-{month}-{day} {hour}.{minute}.{seconds}.rayconfig`.
+
+To use those settings on another computer,
+
+- Copy the `.rayconfig` file to the computer.
+- Run the "Import Settings & Data" command.
+- Click the "Import" button.
+- Select the `.rayconfig` file.
+- Click the "Select File" button.
+
+TODO: Are there any other steps?
 
 ### Shortcuts
 
