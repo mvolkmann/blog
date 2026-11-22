@@ -559,16 +559,25 @@ To export all your Raycast settings into an encrypted, binary file:
 
 This creates a file named
 `Raycast-X-{year}-{month}-{day} {hour}.{minute}.{seconds}.rayconfig`.
+The file describes data in many categories including
+Clipboard History, Quicklinks, Raycast Notes, "Settings, Aliases & Hotkeys",
+Snippets, Store Extensions, and Window Management Layouts.
 
 To use those settings on another computer,
 
 - Copy the `.rayconfig` file to the computer.
 - Run the "Import Settings & Data" command.
+- By default, all data categories are included.
+  Uncheck the categories that should not be imported.
 - Click the "Import" button.
 - Select the `.rayconfig` file.
 - Click the "Select File" button.
 
 TODO: Are there any other steps?
+
+When the "Store Extensions" checkbox is checked,
+any store extensions (not local extensions) listed in the `.rayconfig` file
+that aren't already installed will be installed.
 
 ### Shortcuts
 
