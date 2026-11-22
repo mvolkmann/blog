@@ -18,12 +18,14 @@ layout: topic-layout.njk
 ## Overview
 
 From the Raycast manual,
-"<a href="https://www.raycast.com/new" target="_blank">Raycast v2</a>
+<a href="https://www.raycast.com/new" target="_blank">Raycast v2</a>
 is a ground-up rebuild of the keyboard-driven productivity launcher
 for macOS and Windows, designed to unify application launching,
 file search, system utilities, and AI workflows.
-Built specifically for Apple Silicon and macOS Tahoe, it replaces Raycast v1
-while migrating existing extensions, snippets, and settings."
+Built specifically for Apple Silicon and macOS Tahoe (and requiring those),
+it replaces Raycast v1 while
+migrating existing extensions, snippets, and settings.
+It also runs on Windows 10 and 11.
 
 ## Installing
 
@@ -167,18 +169,23 @@ selected it and press the return key or double-click it.
 1. Enter part of the file name.
 1. Optionally open the file by selecting it and pressing the return key.
 
+Rather than performing a true fuzzy search,
+it tends to favor filename prefixes and word beginnings.
+
 ### Find a file based on its content
 
-If not already enabled, press cmd- to open the Raycast settings,
+If not already enabled, press cmd-, to open the Raycast settings,
 enter "File Search", click it, scroll down, and turn on "Content Search".
 
 1. Run the "Search Files" command.
-1. Enter the file name text to find.  Rather than perform a true fuzzy search,
-   it tends to favor filename prefixes and word beginnings.
+1. Enter text contained in the file.
 1. Optionally open the file by selecting it and pressing the return key.
 
+In macOS this depends on Spotlight's index.
+
 If expected files do not appear in the results,
-click the "Index Files" button in the lower-right and try again.
+clicking the "Index Files" button in the lower-right
+and trying again may help.
 
 I assigned the alias "sf" and the hotkey rightCmd-f
 to the "Search Files" command.
@@ -198,7 +205,8 @@ select it, and press the return key.
 ### AI
 
 Raycast AI features such as "Quick AI" and "AI Chat"
-are only available in the Pro version which currently costs $8 per month.
+are only available in the Pro version which currently costs
+$10 per month or $8 per month when billed annually.
 
 ### Clipboard History
 
@@ -226,7 +234,7 @@ Alternatively, select an entry and press cmd-. to toggle whether it is pinned.
 
 To edit a clipboard entry, select it, press cmd-k, and select "Edit".
 
-To edit a clipboard entry, select it, press cmd-k, and select "Delete".
+To delete a clipboard entry, select it, press cmd-k, and select "Delete".
 
 ### Color Picker
 
@@ -240,7 +248,6 @@ Also see the Raycast commands "Color Wheel" and "Convert Color".
 To sprinkle confetti all over the screen,
 enter the "Confetti" command.
 I set the hotkey for this command to rightCmd-c.
-foo bar
 
 ### Contacts
 
@@ -273,7 +280,7 @@ if you will always be speaking in that language.
 To dictate text to be entered in the focused text input,
 press the hotkey, speak the text, and press the hotkey again.
 
-A period will automatically be added to the end of the text.
+It seems that a period is automatically added to the end of the text.
 To prevent this, open the Raycast settings,
 select "Dictation" in the left nav,
 click "Personalization", click "Custom Instructions", and enter
@@ -321,7 +328,7 @@ To copy the selected image to the clipboard, press the return key.
 
 ### Internet Speed
 
-To measure your internet connection, install the "Speedtest" extension
+To measure your internet connection speed, install the "Speedtest" extension
 and run the "Test Internet Speed" command.
 
 ### Keyboard Cleaning
@@ -368,8 +375,8 @@ By default, this command only translates to English.
 I don't see a way to change this.
 See https://github.com/raycast/extensions/issues/33547.
 
-The "Quick Translate Results" command
-seems identical to the "Quick Translate" command.
+The "Quick Translate Results" command display the results
+from the last run of the "Quick Translate" command.
 
 All the commands whose name begins with "Instant Translate"
 translate the selected text in the active application
@@ -414,7 +421,8 @@ or "1 gal in liters" which evaluates to "3.785411784 L".
 
 ### MDN Documentation
 
-To view specific documentation in the Microsoft Developer Network (MDN) site,
+To view specific documentation in the MDN site
+(formerly known as the Mozilla Developer Network),
 install the "Search MDN" extension, run the "Search Web Docs" command,
 enter search text, select a matching topic, and press the return key.
 
@@ -423,7 +431,8 @@ enter search text, select a matching topic, and press the return key.
 To kill the process listening on a given port,
 run the "Kill Process Listening on" command.
 Enter the port and press the return key.
-(NOTE: This doesn't work if the process was started with "node -watch".)
+(NOTE: This doesn't seem to work if
+the process was started with "node --watch".)
 
 ### Quick Fix
 
@@ -652,8 +661,9 @@ Window Management is a built-in extension that,
 at last check in macOS, provides 70 commands for things like
 resizing and repositioning the active window.
 
-"Save Current Layout" is a Pro command that saves the current
-multi-application arrangement and creates a new command.
+"Save Current Layout" is a Pro command that
+opens a prepopulated layout editor that can save the current
+multi-application arrangement and create a new command.
 When that command is run, it launches any applications
 associated with the saved windows that aren't already running,
 opens each of the windows, sizes them, and positions them
@@ -685,13 +695,12 @@ I assigned the following aliases and hotkeys to Window Management commands:
 
 Dynamic placeholders are special text wrapped in curly braces
 that are replaced by computed content.
-They can be used in snippets, quicklinks,
-script commands, and AI commands (pro).
+They can be used in snippets, quicklinks, and AI commands (pro).
 
 The supported kinds of placeholders include:
 
 - argument (`{argument name="..."}`)
-- selected text (`{selected}`)
+- selected text (`{selection}`)
 - clipboard text (`{clipboard}`)
 - current date (`{date}`)
 - current time (`{time}`)
@@ -771,8 +780,10 @@ and select "Uninstall Extension".
 Alternatively, you can disable the extension without uninstalling it
 by click the switch in the upper-right.
 
-When an update to an extension is available,
-Raycast will prompt you to install the update the next time it is opened.
+When updates to extensions installed from the Raycast Store are available,
+they are automatically updated in the background.
+You can also run the "Check for Extension Updates" command
+to manually trigger a check.
 
 - Apple Reminders: integrates with the Reminders app;
   see the "Create Reminder" command
@@ -800,7 +811,8 @@ Raycast will prompt you to install the update the next time it is opened.
 
 macOS Spotlight now covers several of Raycast’s everyday uses,
 though Raycast remains more customizable.
-However, in most cases the Spotlight equivalents are considerably slower.
+However, it seems that in most cases
+the Spotlight equivalents are considerably slower.
 
 The Raycast features that are also available in Spotlight include:
 
