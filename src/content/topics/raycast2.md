@@ -541,7 +541,7 @@ I created the following quicklinks, some with an alias and/or hotkey:
 - my Google Translate, alias "translate"
 - Project Gutenberg web page (for free e-books), alias "pg"
 - Remove Background Image website, alias "bg"
-- my retirement spreadsheet, alias "retirement", hotkey rightCmd-r
+- my retirement spreadsheet, alias "retirement"
 - my RunningLog spreadsheet, alias "runlog"
 - Star of Honolulu website, alias "soh"
 
@@ -553,6 +553,8 @@ install the "Apple Reminders" extension.
 To create a new reminder, run the "Create Reminders" command.
 This opens a dialog where the details can be entered.
 Press cmd-return to create it.
+
+I assigned the hotkey rightCmd-r to open the Apple Reminders app.
 
 ### Schedule
 
