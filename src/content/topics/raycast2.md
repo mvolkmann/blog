@@ -845,6 +845,20 @@ to manually trigger a check.
   CPU usage, memory usage, power usage, network usage, and temperature;
   see the "System Monitor" command
 
+More extensions to try:
+
+- Apple Intelligence
+- Brew
+- Claude
+- ChatGPT
+- Google Gemini
+- Messages
+- Music
+- Ollama AI
+- OpenAI GPT
+- YouTube Search
+- Wikipedia
+
 ## Comparing to macOS Spotlight
 
 macOS Spotlight now covers several of Raycast’s everyday uses,
