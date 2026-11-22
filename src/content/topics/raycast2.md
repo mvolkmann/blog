@@ -333,6 +333,28 @@ I assigned the hotkey for this command to rightCmd-g.
 
 To copy the selected image to the clipboard, press the return key.
 
+### Google Gemini
+
+The "Google Gemini" extension provides commands
+for interacting with "Google Gemini", including "AI Chat".
+
+To use this, browse https://aistudio.google.com/api-keys,
+sign in with your Google credentials, click "API Keys" in the left nav,
+click the key for the "Default Gemini Project", and click the "Copy key" button.
+Then install the "Google Gemini" extension and run its "AI Chat" command.
+The first time this is run, you'll be prompted for a Gemini API Key.
+Paste the key copied above and press cmd-return.
+Enter a prompt and press return to evaluate it.
+
+A log of past prompts is maintained in the left nav.
+Click one to recall its response.
+
+I assigned the alias "gemini" to the "AI Chat" command.
+
+A downside of the "AI Chat" command is that
+prompts must be entered on a single line.
+Long prompts scrolls horizontally, hiding the beginning of the prompt.
+
 ### Internet Speed
 
 To measure your internet connection speed, install the "Speedtest" extension
@@ -543,6 +565,13 @@ For other operations on an item, select it and press cmd-k.
 These include "Create Event", "Edit Event", and "Delete Event".
 
 ### Script Commands
+
+Script Commands are used to run scripts written in many languages including
+AppleScript, C#, Bash, Go, JavaScript, Lua, Perl, PHP, PowerShell, Python,
+Ruby, Rust, Swift, TypeScript, ZSH, and more.
+
+Raycast extension to be published in the official store
+must be implemented in JavaScript/TypeScript and can use React.
 
 TODO: Describe how to create and run these.
 
