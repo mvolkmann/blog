@@ -27,6 +27,8 @@ it replaces Raycast v1 while
 migrating existing extensions, snippets, and settings.
 It also runs on Windows 10 and 11.
 
+TODO: Look for more details to add in https://manual.raycast.com/new-in-v2.
+
 ## Installing
 
 The steps to install Raycast in macOS are:
