@@ -80,12 +80,6 @@ open Raycast, search for the command, select it,
 press cmd-k, select "Configure Command...",
 select "Set Hotkey...", and press the desired hotkey combination.
 
-By default Raycast will remember the last content it was displaying
-and show that again if Raycast is reopened within 90 seconds.
-To adjust this, open the Raycast settings,
-search for "Pop to Root Search", and select a different setting.
-The "Immediately" option causes Raycast to always open at the root.
-
 By default Raycast opens on the screen containing the mouse.
 To change this, open the Raycast settings,
 search for "Show Raycast on", and select one of the following options:
@@ -95,7 +89,7 @@ search for "Show Raycast on", and select one of the following options:
 
 To launch Raycast, press its hotkey.
 A Raycast window displaying the "root search" will open,
- by default on the monitor where the mouse cursor resides.
+by default on the monitor where the mouse cursor resides.
 To change where it opens, open the Raycast settings,
 select "Launcher" in the left nav, and
 change the "Show Raycast on" dropdown to
@@ -105,13 +99,24 @@ change the "Show Raycast on" dropdown to
 
 To view the Raycast Manual, open the Raycast Settings and select "Manual".
 
-Raycast displays a single stack of windows.
+Raycast displays a single stack of windows starting at the root search.
 To pop the current window off of the stack,
 returning to the previous window, press the esc key.
+The root search window displays the Raycast icon before the text input.
+All other windows display a left chevron before the text input.
+So you have returned to the root search when you see the Raycast icon.
+To return to the root search without needing to
+press the escape key multiple times, press cmd-esc.
 
 The root search window lists items marked as favorites first,
 followed by suggestions (How are those determined?),
 and then the most recently used commands.
+
+By default, Raycast will remember the last content it was displaying
+and show that again if Raycast is reopened within 90 seconds.
+To adjust this, open the Raycast settings,
+search for "Pop to Root Search", and select a different setting.
+The "Immediately" option causes Raycast to always open at the root.
 
 Once you start typing, the items are filtered using fuzzy matching
 based on what has been typed so far.
