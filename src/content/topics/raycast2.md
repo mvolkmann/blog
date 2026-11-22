@@ -600,10 +600,14 @@ Let's walk through the steps to create a simple script command in TypeScript.
     at a specific time interval and display a new value.
     These scripts don't require manual execution.
     They instead run automatically when Raycast is opened
-    and run repeatedly on a set @raycast.refreshTime.
-    The first line of their output is displayed at
-    the end of their row in the root search (inline).
-    An example of such a script is one that displays the current temperature.
+    and run repeatedly on a set @raycast.refreshTime
+    The value must be specified in seconds (like 30s; minimum is 10s),
+    minutes (like 1m), hours (like 1h), or days (like 1d).
+    The first line of their output is displayed
+    after the command name in the root search (inline).
+    Consider selecting "Add to Favorites" for these commands
+    so they always appear near the top of the root search.
+    See the example later in this section.
 
 - Enter a title, description, and package name (optional?).
 - Optionally check the "Needs confirmation" and "With argument" checkboxes.
@@ -630,6 +634,53 @@ enter part of its name in the root search,
 select the script command, press cmd-k,
 select "Configure Command...", and
 click "Set Hotkey..." or "Set Alias...".
+
+After modifying a script file, it may be necessary
+to run the "Reload Script Commands" command.
+
+Here's an example of a script that runs in inline mode
+and displays the current temperature at your location.
+
+```js
+#!/usr/bin/env node
+
+// Required parameters:
+// @raycast.schemaVersion 1
+// @raycast.title Current Temperature
+// @raycast.mode inline
+
+// Optional parameters:
+// @raycast.icon ☀️
+// @raycast.description This uses Open-Metio to get the current temperature at your location.
+// @raycast.refreshTime 1m
+
+// Documentation:
+// @raycast.author mvolkmann
+// @raycast.authorURL https://raycast.com/mvolkmann
+
+// Create a free ipapi.is account at https://ipapi.is/app/signup
+// and get its API key.
+const apiKey = "insert-isapi-key-here";
+
+async function getLocalTemperature() {
+   let res = await fetch(`https://api.ipapi.is/?key=${apiKey}`);
+   if (!res.ok) throw new Error("Failed to resolve location");
+
+   let json = await res.json(); 
+   const { latitude, longitude } = json.location; 
+
+   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&temperature_unit=fahrenheit`;
+   res = await fetch(url);
+   if (!res.ok) throw new Error("Failed to fetch weather data.");
+
+   json = await res.json();
+   const temp = json.current.temperature_2m;
+   const unit = json.current_units.temperature_2m;
+   console.log(`${temp}${unit}`);
+}
+
+getLocalTemperature();
+```
 
 ### Settings
 
