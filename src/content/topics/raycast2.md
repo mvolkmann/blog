@@ -355,6 +355,9 @@ A downside of the "AI Chat" command is that
 prompts must be entered on a single line.
 Long prompts scrolls horizontally, hiding the beginning of the prompt.
 
+Another issue is that it seems there is no way to issue followup prompts,
+keeping the previous context.
+
 ### Internet Speed
 
 To measure your internet connection speed, install the "Speedtest" extension
@@ -567,13 +570,66 @@ These include "Create Event", "Edit Event", and "Delete Event".
 ### Script Commands
 
 Script Commands are used to run scripts written in many languages including
-AppleScript, C#, Bash, Go, JavaScript, Lua, Perl, PHP, PowerShell, Python,
-Ruby, Rust, Swift, TypeScript, ZSH, and more.
+AppleScript (macOS-only), Bash, C#, Go, JavaScript,
+PowerShell (Windows-only), Python, Ruby, Swift, and TypeScript.
 
 Raycast extension to be published in the official store
 must be implemented in JavaScript/TypeScript and can use React.
 
-TODO: Describe how to create and run these.
+Let's walk through the steps to create a simple script command in TypeScript.
+
+- Open Raycast.
+- Run the "Create Script Command".
+- Choose a template. I chose "TypeScript".
+- Choose a mode.
+
+  - Compact:
+    This displays the last line of output in the status bar
+    in the lower-left of the root search window.
+    Press cmd-t to display options, including Copy with cmd-option-c.
+  - Silent:
+    Use this for scripts that are only run for side effects
+    rather than displaying output.
+    The last line of output is briefly flashed near the bottom of the screen.
+  - Full Output:
+    This expands into a scrollable terminal-like view
+    where all output is displayed.
+    It is ideal for scripts that produce multiple lines of output.
+  - Inline:
+    This mode is ideal for scripts that need to run repeated
+    at a specific time interval and display a new value.
+    These scripts don't require manual execution.
+    They instead run automatically when Raycast is opened
+    and run repeatedly on a set @raycast.refreshTime.
+    The first line of their output is displayed at
+    the end of their row in the root search (inline).
+    An example of such a script is one that displays the current temperature.
+
+- Enter a title, description, and package name (optional?).
+- Optionally check the "Needs confirmation" and "With argument" checkboxes.
+- Verify the "Author Name" and "Author URL".
+- Press cmd-return.
+- Verify the "Save As" file name.
+- Select the directory where it will be saved.
+- Click the "Save" button.
+
+The generated script will just output "Hello World!".
+Modify it to change its functionality.
+
+To run the script:
+
+- Run the "Search Script Commands" command.
+- Select the script in the left nav.
+- Press the return key to execute it.
+
+After a script has been run for the first time,
+it can be found by entering part of its name in the root search.
+
+To assign an alias or hotkey to a script command,
+enter part of its name in the root search,
+select the script command, press cmd-k,
+select "Configure Command...", and
+click "Set Hotkey..." or "Set Alias...".
 
 ### Settings
 
