@@ -466,6 +466,9 @@ To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
 
+There is no ability to search for previously entered math expressions,
+select one, edit it, and re-evaluate it.
+
 ### MDN Documentation
 
 To view specific documentation in the MDN site
@@ -1022,8 +1025,17 @@ to manually trigger a check.
   see the "Lock Keyboard" command
 - Coffee: prevents computer from going to sleep;
   see the "Caffeinate" and "Decaffeinate" commands
+- Color Picker: provides many commands related to colors
+  including "Pick Color" which picks a color from a clicked pixel
+- Fuzzy File Search: provides the "Search Files" command
+  which does a fuzzy file name search
 - GIF Search: searches for matching GIF images;
   see the "Search for GIFs" command
+- Google Gemini: provides many commands including
+  "AI Chat" (keeps a log of past prompts and responses),
+  "Ask AI" (a one-shot), "Chat History" (displays past prompts and responses),
+  "Ask About Selected Text", "Fix Spelling and Grammar", "Summarize",
+  "Make Shorter", and several more
 - Google Translate: translates text from one language to another
 - Kill Process: displays all processes sorted on CPU percentage or memory usage,
   and can kill a selected process; can filter on name
