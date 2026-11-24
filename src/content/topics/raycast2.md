@@ -555,6 +555,7 @@ Select a quicklink to act on it. Then ...
 I created the following quicklinks, some with an alias and/or hotkey:
 
 - Bank of America website, hotkey rightCmd-b
+- Desktop directory, alias "desktop" (for quickly finding screenshots)
 - my Github web page, alias "mg"
 - my Google Translate, alias "translate"
 - Project Gutenberg web page (for free e-books), alias "pg"
@@ -989,10 +990,18 @@ see https://manual.raycast.com/dynamic-placeholders.
 The Raycast store offers many free extensions,
 none of which are installed by default.
 To view them, run the "Store" command.
+By default, the extensions in "All Categories" are listed.
+The dropdown in the upper-right can be changed
+to view only the extensions in these categories:
+Installed, AI Extensions, Applications, Communication, Data, Documentation,
+Design Tools, Developer Tools, Finance, Fun, Media, News,
+Productivity, Security, System, Web, and Other.
 
 To see the extensions that are already installed,
 open the Raycast settings (cmd-,).
 They are listed in the left nav below "Window Management".
+Alternatively, run the "Store" command and
+select "Installed" in the upper-right dropdown.
 
 To install an extension from the store, select it,
 press the return key to see details about it,
