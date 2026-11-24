@@ -92,7 +92,8 @@ To configure a key to be the hyper key
 which can be used for global hotkeys,
 open the Raycast settings, search for "Hyper Key",
 and select a key in the "Hyper Key" dropdown.
-I chose the right command key.
+I chose the right command key which, for the purpose of hotkeys,
+is seen as distinct from the left command key.
 
 To assign a global hotkey to a Raycast command,
 open Raycast, search for the command, select it,
