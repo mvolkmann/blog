@@ -62,7 +62,7 @@ and click the "Replace Spotlight" button.
 
 To regain the ability to launch Spotlight using a hotkey,
 open "System Settings", select "Keyboard" in the left nav,
-click the "Keyboard Shortcuts..." button, 
+click the "Keyboard Shortcuts..." button,
 select "Spotlight" in the left nav,
 check the "Show Spotlight search" button,
 double-click its hotkey (cmd-space),
@@ -246,7 +246,7 @@ To delete a clipboard entry, select it, press cmd-k, and select "Delete".
 ### Color Picker
 
 To copy the hex code for a color from a selected pixel on the screen,
-enter "Pick Color".  The code can then be pasted anywhere.
+enter "Pick Color". The code can then be pasted anywhere.
 
 Also see the Raycast commands "Color Wheel" and "Convert Color".
 
@@ -610,9 +610,35 @@ Let's walk through the steps to create a simple script command in TypeScript.
     Consider selecting "Add to Favorites" for these commands
     so they always appear near the top of the root search.
     See the example later in this section.
+    Raycast only automatically refreshes the first 10 inline script commands.
+    Any beyond that must be refreshed manually by selecting them
+    and pressing the return key.
 
 - Enter a title, description, and package name (optional?).
-- Optionally check the "Needs confirmation" and "With argument" checkboxes.
+- Optionally check the "Needs confirmation" checkbox.
+
+  If checked, when the script is triggered, a confirmation dialog will appear,
+  to confirm that you really want to run it.
+  The dialog will contain the script name,
+  the text "Are you sure you want to run this script?",
+  a "Cancel" button, and a "Run Script" button.
+  This prevents accidental runs which is useful for scripts that
+  perform destructive, irreversible, or high-impact actions
+  like quitting all applications or restarting the computer.
+
+- Optionally check the "With argument" checkbox.
+
+  If checked, when the command is selected in the root search,
+  an inline input field will appear after the command name.
+  By default, it will have the placeholder text "Placeholder".
+  To change this, modify the following configuration comment
+  inside the script file:
+  `// @raycast.argument1 { "type": "text", "placeholder": "your name" }`
+
+  After entering an argument value, press the return key.
+  The script can access this value as a command-line argument.
+  In JavaScript, it can be accessed with `process.argv[2]`.
+
 - Verify the "Author Name" and "Author URL".
 - Press cmd-return.
 - Verify the "Save As" file name.
@@ -662,23 +688,23 @@ and displays the current temperature at your location.
 
 // Create a free ipapi.is account at https://ipapi.is/app/signup
 // and get its API key.
-const apiKey = "insert-isapi-key-here";
+const apiKey = 'insert-isapi-key-here';
 
 async function getLocalTemperature() {
-   let res = await fetch(`https://api.ipapi.is/?key=${apiKey}`);
-   if (!res.ok) throw new Error("Failed to resolve location");
+  let res = await fetch(`https://api.ipapi.is/?key=${apiKey}`);
+  if (!res.ok) throw new Error('Failed to resolve location');
 
-   let json = await res.json(); 
-   const { latitude, longitude } = json.location; 
+  let json = await res.json();
+  const {latitude, longitude} = json.location;
 
-   const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&temperature_unit=fahrenheit`;
-   res = await fetch(url);
-   if (!res.ok) throw new Error("Failed to fetch weather data.");
+  const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m&temperature_unit=fahrenheit`;
+  res = await fetch(url);
+  if (!res.ok) throw new Error('Failed to fetch weather data.');
 
-   json = await res.json();
-   const temp = json.current.temperature_2m;
-   const unit = json.current_units.temperature_2m;
-   console.log(`${temp}${unit}`);
+  json = await res.json();
+  const temp = json.current.temperature_2m;
+  const unit = json.current_units.temperature_2m;
+  console.log(`${temp}${unit}`);
 }
 
 getLocalTemperature();
