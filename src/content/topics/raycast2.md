@@ -69,6 +69,25 @@ double-click its hotkey (cmd-space),
 press a new hotkey combination (such as option-space),
 and click the "Done" button.
 
+By default Raycast opens on the screen containing the mouse.
+To change this, open the Raycast settings,
+search for "Show Raycast on", and select one of the following options:
+"Screen containing mouse", "Screen with active window", or "Primary screen".
+
+The "General" category within the Raycast settings
+allows setting the "Window Mode" to Compact or Expanded.
+In Expanded mode, the window opens at its full height and retains that height.
+The list below the search input,
+shows matching items in groups that appear in the following order:
+Favorites, Suggestions,
+Commands (includes AI Commands, Quicklinks, and Shortcuts),
+Applications, and System Settings.
+In Compact mode, a small window opens contain only the search input.
+As soon as typing begins, the window expands to its full height
+and matching items are listed.
+But the items aren't listed in separate groups as in Expanded mode.
+I much prefer Expanded mode!
+
 To configure a key to be the hyper key
 which can be used for global hotkeys,
 open the Raycast settings, search for "Hyper Key",
@@ -79,11 +98,6 @@ To assign a global hotkey to a Raycast command,
 open Raycast, search for the command, select it,
 press cmd-k, select "Configure Command...",
 select "Set Hotkey...", and press the desired hotkey combination.
-
-By default Raycast opens on the screen containing the mouse.
-To change this, open the Raycast settings,
-search for "Show Raycast on", and select one of the following options:
-"Screen containing mouse", "Screen with active window", or "Primary screen".
 
 ## Launching
 
