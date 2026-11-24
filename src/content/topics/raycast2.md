@@ -1062,13 +1062,12 @@ to manually trigger a check.
   CPU usage, memory usage, power usage, network usage, and temperature;
   see the "System Monitor" command
 
-More extensions to try:
+More extensions to consider:
 
-- Apple Intelligence
+- 2FA Code Finder: https://www.raycast.com/yuercl/imessage-2fa#readme
 - Brew
 - Claude
 - ChatGPT
-- Google Gemini
 - Messages
 - Music
 - Ollama AI
