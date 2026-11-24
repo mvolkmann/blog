@@ -1051,6 +1051,56 @@ to manually trigger a check.
 - Google Translate: translates text from one language to another
 - Kill Process: displays all processes sorted on CPU percentage or memory usage,
   and can kill a selected process; can filter on name
+- Music: provides many commands to control the Apple Music app
+
+  Most of the commands are disabled by default.
+  To enable them, open the Raycast settings,
+  select Music in the left nav, and check their checkboxes.
+
+  The following commands seem useful:
+  - Search Apple Music
+
+    This finds an album or track, but doesn't automatically play it.
+    Use the keyboard up and down arrows to select a track,
+    and press the return key to play it.
+
+  - Play Library Album
+
+  - Play Library Track
+
+  - Just Play: a more minimal version of "Play Library Track"
+
+  - Reveal Track
+
+    This opens the currently playing track in the Apple Music app,
+    but doesn't display its album. It's useful for viewing lyrics.
+
+  - Rate Track: Select 0 to 5 stars.
+
+  - Search Apple Music
+
+    The first time this is run, you must sign in to Apple Music.
+    Enter an artist name to see a list of their albums
+    with the year and number of tracks for each.
+    Select an album to open it in the Apple Music app.
+    Use the keyboard up and down arrows to select a track,
+    and press the return key to play it.
+
+  - Currently Playing Track
+
+    This displays the track title and artist inline
+    in the root search after the command name.
+    "Add to Favorites" to make it visible near top of root search.
+    This only updates once every minute.
+    If no track name or the wrong track name is displayed,
+    select the command and press return to refresh immediately.
+
+  - View Recommendations
+
+    This displays the contents of your Apple Music recommendations page
+    inside the Raycast window. Double-click an album to open it.
+    To play an album or track, click its play button.
+
 - Port Manager: can kill the process listening on a given port, and more;
   see the "Kill Process Listening on" command
 - Search MDN: displays MDN documentation; see the "Search Web Docs" command
