@@ -478,11 +478,14 @@ enter search text, select a matching topic, and press the return key.
 
 ### Menu Items
 
-The "Search Menu Bar Items" command searches for
-menu items in the current application and can select them.
+The "Search Menu Bar Items" command searches through
+all menu items in the current application and can select them.
 For example, when the Finder is the current application,
 searching for "list" reveals that
 the View menu contains the "as List" command.
+
+I assigned the hotkey rightCmd-p to this command
+because it is like a command palette.
 
 ### Processes
 
