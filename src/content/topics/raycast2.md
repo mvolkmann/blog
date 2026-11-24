@@ -629,7 +629,7 @@ Let's walk through the steps to create a simple script command in TypeScript.
 - Optionally check the "With argument" checkbox.
 
   If checked, when the command is selected in the root search,
-  an inline input field will appear after the command name.
+  a single, inline input field will appear after the command name.
   By default, it will have the placeholder text "Placeholder".
   To change this, modify the following configuration comment
   inside the script file:
