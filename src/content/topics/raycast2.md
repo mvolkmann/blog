@@ -829,6 +829,8 @@ Entering the alias displays all matching items.
 To assign a hotkey to an item, select the item, press cmd-k,
 select "Configure {item-type}...", select "Set Hotkey...",
 press a key combination, and press the return key.
+While it seems odd to do this, assigning a hotkey to be a double-tap
+on a modifier key (command, option, control, or shift) is supported.
 
 The same hotkey cannot be assigned to multiple items.
 If this is attempted, the message "Already used by {name}" appears.
