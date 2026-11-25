@@ -1213,3 +1213,40 @@ The Raycast features that are not available in Spotlight include:
   Raycast Pro (paid) offers AI chat, reusable AI commands,
   model selection, and AI-powered extensions.
   This goes beyond launching an AI app or running an AI-enabled Shortcut.
+
+## Comparing to the Windows Search bar
+
+The Windows Search bar is built into the Start menu.
+Like macOS Spotlight, it acts as a system-wide application launcher.
+It can also:
+
+- find files by name or content
+- perform web queries using Bing and
+  display the results in the default browser
+- launch tools like cmd, Device Manager, Disk Cleanup,
+  msconfig, powershell, and regedit.
+- jump to specific menus in Settings or Control Panel
+- evaluate basic math expressions
+- perform unit conversions (e.g. "5 km in miles")
+- perform currency conversions (e.g. "100 usd to eur")
+- execute natural language commands to adjust system settings
+  (e.g. "Turn on dark mode")
+- move the currently focused window (e.g. "Snap this window left")
+- minimize applications (e.g. "Minimize all but Excel")
+- open applications and position them
+  (e.g. "Open Notepad and Calculator snapped")
+- make a phone call (e.g. "Call {contact name or number}")
+- send a text message (e.g. "Text {contact name} {message}")
+- find your linked phone (e.g. "Find my phone")
+- open an app on your linked phone (e.g. "Launch {app name} on my phone")
+
+In Classic mode, only files in standard folders like
+Desktop, Documents, Pictures, and Music are indexed and searched.
+In Enhanced mode, additional files are indexed and searched.
+To narrow the scope of the search, add prefixes like
+`apps:`, `documents:`, `email:`, `folders:`, `music:`,
+`photos:`, `settings:`, `videos:`, and `web:`.
+Searches can also filter on metadata such as
+`kind:document`, `datemodified:today`, `size:>10MB`, or `ext:.pdf`.
+
+TODO: Can it be opened by pressing Win-s?
