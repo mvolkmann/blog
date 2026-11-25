@@ -235,6 +235,17 @@ Raycast AI features such as "Quick AI" and "AI Chat"
 are only available in the Pro version which currently costs
 $10 per month or $8 per month when billed annually.
 
+### Calculator History
+
+The "Calculator History" command displays a list of
+all the expressions that Raycast has evaluated, along with their results.
+To copy the result of an expression,
+select an expression and press the return key.
+To evaluate a new expression that is similar to a past one,
+select a past expression and
+press cmd-ctrl-return to "Put Question in Search Bar".
+The expression can then be edited to display a new result.
+
 ### Clipboard History
 
 Raycast automatically saves clipboard entries.
