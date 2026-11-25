@@ -898,8 +898,17 @@ Wallet & Apple Pay, Wallpaper, and Wi-Fi.
 ### Time
 
 To find the current time in another city,
-enter "time" followed by a city name.
+type "time" followed by a city name and do not press the return key.
 For example, "time Honolulu".
+
+To find the time difference between two cities,
+enter "time diff" followed by two city names and do not press the return key.
+For example, "time diff St. Louis Honolulu".
+For the current city, use "here".
+
+To find the time to walk, drive, and take transit between two cities,
+enter "time from {city1} to {city2}" and do not press the return key.
+For some reason this doesn't work for "St. Louis" or "Saint Louis".
 
 ### Trash
 
