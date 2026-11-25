@@ -809,6 +809,8 @@ instead of its normal functionality outside of Raycast.
 Raycast only checks for conflicts with
 hotkeys assigned to other Raycast commands.
 Avoid this issue by not assigning hotkeys that begin with the left command key.
+The right command key doesn't conflict with any macOS or application hotkeys,
+so it's a good choice.
 
 To see all the shortcuts that have been defined in Raycast,
 run the Shortcuts command associated with "Raycast Settings",
@@ -1246,6 +1248,7 @@ acts as a system-wide application launcher and does much more.
 By default, it is placed to the right of the Start button on the taskbar.
 However, it can be configured only show an icon or be hidden.
 When hidden, press Win + S to open it.
+Pressing Win + S also displays past searches.
 
 The Search bar can also:
 
