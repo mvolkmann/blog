@@ -237,8 +237,8 @@ $10 per month or $8 per month when billed annually.
 
 ### Calculator History
 
-The "Calculator History" command displays a list of
-all the expressions that Raycast has evaluated, along with their results.
+The "Calculator History" command displays a list of all the expressions that
+Raycast has evaluated in the past three months, along with their results.
 To copy the result of an expression,
 select an expression and press the return key.
 To evaluate a new expression that is similar to a past one,
@@ -504,8 +504,7 @@ To perform a unit conversion, enter an expression like
 "26.2 miles in kilometers" which evaluates to "42.1648128 km"
 or "1 gal in liters" which evaluates to "3.785411784 L".
 
-There is no ability to search for previously entered math expressions,
-select one, edit it, and re-evaluate it.
+See the "Calculator History" command.
 
 ### MDN Documentation
 
