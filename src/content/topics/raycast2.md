@@ -298,6 +298,23 @@ and caches them locally on your machine.
 Because the rates are cached, currency conversions
 still work offline using the most recently synced rates.
 
+### Date Calculations
+
+Raycast can be perform many date calculations.
+Type a query, but don't press the return key.
+Pressing the return key copies the answer to the clipboard.
+Examples include:
+
+- now - displays the current date and time
+- today - displays the current date
+- yesterday
+- tomorrow
+- days until April 16 - displays the number of days until my birthday
+- days until Christmas - displays the number of days until Christmas
+- 50 days ago - displays the date 50 days ago
+- December 25 + 50 - displays the date 50 days after December 25
+- now + 2:15 - displays the time 2 hours and 15 minutes from now
+
 ### Dictation (requires Pro)
 
 If dictation isn't already enabled,
@@ -913,15 +930,19 @@ Wallet & Apple Pay, Wallpaper, and Wi-Fi.
 
 To find the current time in another city,
 type "time" followed by a city name and do not press the return key.
+Pressing the return key copies the answer to the clipboard.
 For example, "time Honolulu".
 
+To fid the time difference between the current location and another city,
+type "time diff {city}". For example, "time diff Honolulu".
+
 To find the time difference between two cities,
-enter "time diff" followed by two city names and do not press the return key.
+type "time diff" followed by two city names.
 For example, "time diff St. Louis Honolulu".
 For the current city, use "here".
 
 To find the time to walk, drive, and take transit between two cities,
-enter "time from {city1} to {city2}" and do not press the return key.
+type "time from {city1} to {city2}".
 For some reason this doesn't work for "St. Louis" or "Saint Louis".
 
 ### Trash
