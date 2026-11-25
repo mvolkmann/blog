@@ -27,6 +27,9 @@ it replaces Raycast v1 while
 migrating existing extensions, snippets, and settings.
 It also runs on Windows 10 and 11.
 
+Most of the functionality provided by Raycast can be used for free,
+but some features (especially those related to AI) require a paid, Pro plan.
+
 TODO: Look for more details to add in https://manual.raycast.com/new-in-v2.
 
 ## Installing
@@ -243,6 +246,11 @@ double-click the entry to paste (or select it and press the return key).
 Type any part of the desired clipboard text to
 filter the entries to only those containing what is typed.
 I assigned the hotkey cmd-shift-v to the "Clipboard History" command.
+
+By default, this pastes plain text rather than
+retaining the formatting of the copied text.
+To paste formatted text, press cmd-k and
+select "Paste to {app-name}" or press cmd-ctrl-return.
 
 To instead copy the selected entry to the clipboard
 so it can be pasted in the normal way later,
