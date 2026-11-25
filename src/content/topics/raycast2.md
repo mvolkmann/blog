@@ -794,6 +794,14 @@ If this is attempted, the message "Already used by {name}" appears.
 Press the return key to remove the previous assignment and keep this one.
 Press the escape key to keep the previous assignment.
 
+If you assign a hotkey to a command that is also used in
+applications outside of Raycast (like cmd-c for copy),
+Raycast will intercept it and trigger the Raycast command
+instead of its normal functionality outside of Raycast.
+Raycast only checks for conflicts with
+hotkeys assigned to other Raycast commands.
+Avoid this issue by not assigning hotkeys that begin with the left command key.
+
 To see all the shortcuts that have been defined in Raycast,
 run the Shortcuts command associated with "Raycast Settings",
 not the Shortcuts application.
