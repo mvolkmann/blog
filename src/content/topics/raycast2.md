@@ -1069,7 +1069,16 @@ to manually trigger a check.
   - Search Apple Music
 
     This finds an album or track, but doesn't automatically play it.
-    Use the keyboard up and down arrows to select a track,
+    It is likely the most used command in the Music extension,
+    so I assigned the hotkey rightCmd-m to it.
+
+    To see the tracks on an album, select it
+    and press cmd-shift-a for "View Track List".
+
+    To play a track, select it and press the return key.
+    That opens the Music app and selects the track.
+    Once in the Music app,
+    optionally use the keyboard up and down arrows to select a track,
     and press the return key to play it.
 
   - Play Library Album
