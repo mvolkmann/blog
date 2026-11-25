@@ -97,6 +97,8 @@ open the Raycast settings, search for "Hyper Key",
 and select a key in the "Hyper Key" dropdown.
 I chose the right command key which, for the purpose of hotkeys,
 is seen as distinct from the left command key.
+When Raycast displays a hotkey that begins with the hyper key,
+it represents it with a star symbol (✦).
 
 To assign a global hotkey to a Raycast command,
 open Raycast, search for the command, select it,
@@ -580,7 +582,7 @@ I created the following quicklinks, some with an alias and/or hotkey:
 To add Raycast commands for interaction with the Apple Reminders app,
 install the "Apple Reminders" extension.
 
-To create a new reminder, run the "Create Reminders" command.
+To create a new reminder, run the "Create Reminder" command.
 This opens a dialog where the details can be entered.
 Press cmd-return to create it.
 
@@ -819,6 +821,16 @@ This lists items in five alphabetical groups which are
 Applications, Extensions, Quicklinks, System, and System Settings.
 Each section can be collapsed or expanded to show its items.
 
+The dropdown in the upper-right allows the items
+to be filtered in many ways to show only the items that:
+
+- have a hotkey assigned
+- have a hotkey conflict (I can't find a way to create a conflict!)
+- have an alias set
+- are enabled or disabled
+- are in a specific category
+  (Applications, Extensions, Quicklinks, System, or System Settings)
+
 Extensions can have any number of associated commands
 that each can have their own shortcuts.
 
@@ -919,6 +931,18 @@ To empty the trash, enter the "Empty Trash" command.
 ### Typing Practice
 
 To practice typing and measure speed, run the "Start Typing Practice" command.
+
+### Uninstalling Applications
+
+The "Uninstall Applications" command
+displays a list of all the installed applications.
+Select one to display a list containing
+the application and all its supporting files.
+It doesn't always find every supporting file
+that a dedicated uninstaller would find.
+By default, all the files are checked, but they can be unchecked.
+Press the return key to move all the checked files to the trash.
+They aren't actually deleted until the trash is emptied.
 
 ### Window Management
 
