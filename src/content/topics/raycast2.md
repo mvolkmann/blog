@@ -208,6 +208,10 @@ enter "File Search", click it, scroll down, and turn on "Content Search".
 1. Enter text contained in the file.
 1. Optionally open the file by selecting it and pressing the return key.
 
+When a directory is selected, press cmd-option-downArrow
+to see a list of directories and files inside that directory.
+To return to the parent directory, press cmd-option-upArrow.
+
 In macOS this depends on Spotlight's index.
 
 If expected files do not appear in the results,
