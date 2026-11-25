@@ -1000,6 +1000,7 @@ see https://manual.raycast.com/dynamic-placeholders.
 
 The Raycast store offers many free extensions,
 none of which are installed by default.
+Many of these integrate with popular applications.
 To view them, run the "Store" command.
 By default, the extensions in "All Categories" are listed.
 The dropdown in the upper-right can be changed
@@ -1039,6 +1040,15 @@ they are automatically updated in the background.
 You can also run the "Check for Extension Updates" command
 to manually trigger a check.
 
+The commands provided by each extension can be enabled or disabled.
+Some extensions ship with less frequently used commands disabled
+in order to avoid clutter when searching for a command.
+To enable or disable specific commands, open the Raycast settings,
+select the extension in the left nav, and
+check or uncheck the checkboxes after each listed command.
+
+Popular extensions include:
+
 - Apple Reminders: integrates with the Reminders app;
   see the "Create Reminder" command
 - Clean Keyboard: locks keyboard while cleaning it;
@@ -1062,8 +1072,6 @@ to manually trigger a check.
 - Music: provides many commands to control the Apple Music app
 
   Most of the commands are disabled by default.
-  To enable them, open the Raycast settings,
-  select Music in the left nav, and check their checkboxes.
 
   The following commands seem useful:
   - Search Apple Music
@@ -1216,9 +1224,13 @@ The Raycast features that are not available in Spotlight include:
 
 ## Comparing to the Windows Search bar
 
-The Windows Search bar is built into the Start menu.
-Like macOS Spotlight, it acts as a system-wide application launcher.
-It can also:
+Windows provides a Search bar that, like macOS Spotlight,
+acts as a system-wide application launcher and does much more.
+By default, it is placed to the right of the Start button on the taskbar.
+However, it can be configured only show an icon or be hidden.
+When hidden, press Win + S to open it.
+
+The Search bar can also:
 
 - find files by name or content
 - perform web queries using Bing and
