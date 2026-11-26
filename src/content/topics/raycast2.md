@@ -799,6 +799,8 @@ To use those settings on another computer,
 - Click the "Import" button.
 - Select the `.rayconfig` file.
 - Click the "Select File" button.
+- Enter the password that was used to export the settings.
+  It can be found in the Raycast settings under Advanced ... Export Passphrase.
 
 TODO: Are there any other steps?
 
