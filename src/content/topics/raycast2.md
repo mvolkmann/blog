@@ -30,13 +30,13 @@ It also runs on Windows 10 and 11.
 Most of the functionality provided by Raycast can be used for free,
 but some features (especially those related to AI) require a paid, Pro plan.
 
-TODO: Look for more details to add in https://manual.raycast.com/new-in-v2.
+TODO: Look for more details to add in <https://manual.raycast.com/new-in-v2>.
 
 ## Installing
 
 The steps to install Raycast in macOS are:
 
-- Browse https://www.raycast.com/new (for v2).
+- Browse <https://www.raycast.com/new> (for v2).
 - Click the "Download" button.
 - Double-click the downloaded file.
 - Double-click the Raycast app in the Applications directory to start it.
@@ -395,7 +395,7 @@ To copy the selected image to the clipboard, press the return key.
 The "Google Gemini" extension provides commands
 for interacting with "Google Gemini", including "AI Chat".
 
-To use this, browse https://aistudio.google.com/api-keys,
+To use this, browse <https://aistudio.google.com/api-keys>,
 sign in with your Google credentials, click "API Keys" in the left nav,
 click the key for the "Default Gemini Project", and click the "Copy key" button.
 Then install the "Google Gemini" extension and run its "AI Chat" command.
@@ -462,7 +462,7 @@ Alternatively you can specify the source language
 by selecting it in the dropdown.
 By default, this command only translates to English.
 I don't see a way to change this.
-See https://github.com/raycast/extensions/issues/33547.
+See <https://github.com/raycast/extensions/issues/33547>.
 
 The "Quick Translate Results" command display the results
 from the last run of the "Quick Translate" command.
@@ -482,7 +482,7 @@ The result is display-only and cannot be manually copied.
 
 I created a quicklink that uses the Google Translate website.
 It uses the URL
-"https://translate.google.com/?sl={argument name="from"}&tl={argument name="to"}&text={argument name="input"}&op=translate"
+"<https://translate.google.com/?sl={argument> name="from"}&tl={argument name="to"}&text={argument name="input"}&op=translate"
 and the name "My Google Translate", and the alias "translate".
 This prompts for from and to language codes and input text.
 For example, enter "en", "es", and "What time is it?"
@@ -1076,7 +1076,7 @@ can include a locale to output the value
 in a locale other than the default.
 
 For more detail on placeholders in quicklink URLs,
-see https://manual.raycast.com/dynamic-placeholders.
+see <https://manual.raycast.com/dynamic-placeholders>.
 
 ## Extensions
 
@@ -1221,7 +1221,7 @@ Popular extensions include:
 
 More extensions to consider:
 
-- 2FA Code Finder: https://www.raycast.com/yuercl/imessage-2fa#readme
+- 2FA Code Finder: <https://www.raycast.com/yuercl/imessage-2fa#readme>
 - Brew
 - Claude
 - ChatGPT
